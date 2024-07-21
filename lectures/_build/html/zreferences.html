@@ -1,0 +1,891 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>41. References &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.5378fd3a70a129d690fd5fc99fb75ef7.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script src="_static/quantecon-book-theme.ef2ef6c3e8da75e1e736fb5fce08cde6.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zreferences';</script>
+    <link rel="canonical" href="https://intro.quantecon.org/zreferences.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="42. Execution Statistics" href="status.html" />
+    <link rel="prev" title="40. Troubleshooting" href="troubleshooting.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="References"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="References" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro.quantecon.org/zreferences.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=zreferences>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">References</p>
+
+                    </div>
+
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="references">
+<span id="id1"></span><h1><span class="section-number">41. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id78"><span class="brackets">AR02</span></dt>
+<dd><p>Daron Acemoglu and James A. Robinson. The political economy of the Kuznets curve. <em>Review of Development Economics</em>, 6(2):183–203, 2002.</p>
+</dd>
+<dt class="label" id="id75"><span class="brackets">AKM+18</span></dt>
+<dd><p>SeHyoun Ahn, Greg Kaplan, Benjamin Moll, Thomas Winberry, and Christian Wolf. When inequality matters for macro and macro matters for inequality. <em>NBER Macroeconomics Annual</em>, 32(1):1–75, 2018.</p>
+</dd>
+<dt class="label" id="id83"><span class="brackets">Axt01</span></dt>
+<dd><p>Robert L Axtell. Zipf distribution of us firm sizes. <em>science</em>, 293(5536):1818–1820, 2001.</p>
+</dd>
+<dt class="label" id="id84"><span class="brackets">BB18</span></dt>
+<dd><p>Jess Benhabib and Alberto Bisin. Skewed wealth distributions: theory and empirics. <em>Journal of Economic Literature</em>, 56(4):1261–91, 2018.</p>
+</dd>
+<dt class="label" id="id273"><span class="brackets">BBL19</span></dt>
+<dd><p>Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. <em>American Economic Review</em>, 109(5):1623–1647, May 2019.</p>
+</dd>
+<dt class="label" id="id58"><span class="brackets">Ber97</span></dt>
+<dd><p>J. N. Bertsimas, D. &amp; Tsitsiklis. <em>Introduction to linear optimization</em>. Athena Scientific, 1997.</p>
+</dd>
+<dt class="label" id="id76"><span class="brackets">BEGS18</span></dt>
+<dd><p>Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J Sargent. Inequality, business cycles, and monetary-fiscal policy. Technical Report, National Bureau of Economic Research, 2018.</p>
+</dd>
+<dt class="label" id="id278"><span class="brackets">BEJ18</span></dt>
+<dd><p>Stephen P Borgatti, Martin G Everett, and Jeffrey C Johnson. <em>Analyzing social networks</em>. Sage, 2018.</p>
+</dd>
+<dt class="label" id="id3"><span class="brackets">Bur23</span></dt>
+<dd><p>Jennifer Burns. <em>Milton Friedman: The Last Conservative by Jennifer Burns</em>. Farrar, Straus, and Giroux, New York, 2023.</p>
+</dd>
+<dt class="label" id="id107"><span class="brackets">Cag56</span></dt>
+<dd><p>Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, <em>Studies in the Quantity Theory of Money</em>, pages 25–117. University of Chicago Press, Chicago, 1956.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">CB96</span></dt>
+<dd><p>Marcus J Chambers and Roy E Bailey. A theory of commodity price fluctuations. <em>Journal of Political Economy</em>, 104(5):924–957, 1996.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">Coc23</span></dt>
+<dd><p>John H Cochrane. <em>The Fiscal Theory of the Price Level</em>. Princeton University Press, Princeton, New Jersey, 2023.</p>
+</dd>
+<dt class="label" id="id283"><span class="brackets">Cos21</span></dt>
+<dd><p>Michele Coscia. The atlas for the aspiring network scientist. <em>arXiv preprint arXiv:2101.00863</em>, 2021.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">DL92</span></dt>
+<dd><p>Angus Deaton and Guy Laroque. On the behavior of commodity prices. <em>The Review of Economic Studies</em>, 59:1–23, 1992.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">DL96</span></dt>
+<dd><p>Angus Deaton and Guy Laroque. Competitive storage and commodity price dynamics. <em>Journal of Political Economy</em>, 104(5):896–923, 1996.</p>
+</dd>
+<dt class="label" id="id54"><span class="brackets">DSS58</span></dt>
+<dd><p>Robert Dorfman, Paul A. Samuelson, and Robert M. Solow. <em>Linear Programming and Economic Analysis: Revised Edition</em>. McGraw Hill, New York, 1958.</p>
+</dd>
+<dt class="label" id="id277"><span class="brackets">EK+10</span></dt>
+<dd><p>David Easley, Jon Kleinberg, and others. <em>Networks, crowds, and markets</em>. Volume 8. Cambridge university press Cambridge, 2010.</p>
+</dd>
+<dt class="label" id="id178"><span class="brackets">Fri56</span></dt>
+<dd><p>M. Friedman. <em>A Theory of the Consumption Function</em>. Princeton University Press, 1956.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets">FK45</span></dt>
+<dd><p>Milton Friedman and Simon Kuznets. <em>Income from Independent Professional Practice</em>. National Bureau of Economic Research, New York, 1945.</p>
+</dd>
+<dt class="label" id="id68"><span class="brackets">FDGA+04</span></dt>
+<dd><p>Yoshi Fujiwara, Corrado Di Guilmi, Hideaki Aoyama, Mauro Gallegati, and Wataru Souma. Do pareto–zipf and gibrat laws hold true? an analysis with european firms. <em>Physica A: Statistical Mechanics and its Applications</em>, 335(1-2):197–216, 2004.</p>
+</dd>
+<dt class="label" id="id82"><span class="brackets">Gab16</span></dt>
+<dd><p>Xavier Gabaix. Power laws in economics: an introduction. <em>Journal of Economic Perspectives</em>, 30(1):185–206, 2016.</p>
+</dd>
+<dt class="label" id="id77"><span class="brackets">GSS03</span></dt>
+<dd><p>Edward Glaeser, Jose Scheinkman, and Andrei Shleifer. The injustice of inequality. <em>Journal of Monetary Economics</em>, 50(1):199–222, 2003.</p>
+</dd>
+<dt class="label" id="id280"><span class="brackets">Goy23</span></dt>
+<dd><p>Sanjeev Goyal. <em>Networks: An economics approach</em>. MIT Press, 2023.</p>
+</dd>
+<dt class="label" id="id179"><span class="brackets">Hal78</span></dt>
+<dd><p>Robert E Hall. Stochastic Implications of the Life Cycle-Permanent Income Hypothesis: Theory and Evidence. <em>Journal of Political Economy</em>, 86(6):971–987, 1978.</p>
+</dd>
+<dt class="label" id="id182"><span class="brackets">Ham05</span></dt>
+<dd><p>James D Hamilton. What's real about the business cycle? <em>Federal Reserve Bank of St. Louis Review</em>, pages 435–452, 2005.</p>
+</dd>
+<dt class="label" id="id275"><span class="brackets">Har60</span></dt>
+<dd><p>Arthur A. Harlow. The hog cycle and the cobweb theorem. <em>American Journal of Agricultural Economics</em>, 42(4):842–853, 1960. <a class="reference external" href="https://doi.org/https://doi.org/10.2307/1235116">doi:https://doi.org/10.2307/1235116</a>.</p>
+</dd>
+<dt class="label" id="id59"><span class="brackets">Hu18</span></dt>
+<dd><p>Y. Hu, Y. &amp; Guo. <em>Operations research</em>. Tsinghua University Press, 5th edition, 2018.</p>
+</dd>
+<dt class="label" id="id150"><span class="brackets">Haggstrom02</span></dt>
+<dd><p>Olle Häggström. <em>Finite Markov chains and algorithmic applications</em>. Volume 52. Cambridge University Press, 2002.</p>
+</dd>
+<dt class="label" id="id284"><span class="brackets">IT23</span></dt>
+<dd><p>Patrick Imam and Jonathan RW Temple. Political institutions and output collapses. <em>IMF Working Paper</em>, 2023.</p>
+</dd>
+<dt class="label" id="id276"><span class="brackets">Jac10</span></dt>
+<dd><p>Matthew O Jackson. <em>Social and economic networks</em>. Princeton university press, 2010.</p>
+</dd>
+<dt class="label" id="id66"><span class="brackets">KLS18</span></dt>
+<dd><p>Illenin Kondo, Logan T Lewis, and Andrea Stella. On the us firm and establishment size distributions. Technical Report, SSRN, 2018.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets">KF39</span></dt>
+<dd><p>Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. <em>National Bureau of Economic Research Bulletin</em>, 1939.</p>
+</dd>
+<dt class="label" id="id81"><span class="brackets">Man63</span></dt>
+<dd><p>Benoit Mandelbrot. The variation of certain speculative prices. <em>The Journal of Business</em>, 36(4):394–419, 1963.</p>
+</dd>
+<dt class="label" id="id282"><span class="brackets">MFD20</span></dt>
+<dd><p>Filippo Menczer, Santo Fortunato, and Clayton A Davis. <em>A first course in network science</em>. Cambridge University Press, 2020.</p>
+</dd>
+<dt class="label" id="id210"><span class="brackets">MT09</span></dt>
+<dd><p>S P Meyn and R L Tweedie. <em>Markov Chains and Stochastic Stability</em>. Cambridge University Press, 2009.</p>
+</dd>
+<dt class="label" id="id281"><span class="brackets">New18</span></dt>
+<dd><p>Mark Newman. <em>Networks</em>. Oxford university press, 2018.</p>
+</dd>
+<dt class="label" id="id80"><span class="brackets">Rac03</span></dt>
+<dd><p>Svetlozar Todorov Rachev. <em>Handbook of heavy tailed distributions in finance: Handbooks in finance</em>. Volume 1. Elsevier, 2003.</p>
+</dd>
+<dt class="label" id="id79"><span class="brackets">RRGM11</span></dt>
+<dd><p>Hernán D Rozenfeld, Diego Rybski, Xavier Gabaix, and Hernán A Makse. The area and population of cities: new insights from a different perspective on cities. <em>American Economic Review</em>, 101(5):2205–25, 2011.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">Sam58</span></dt>
+<dd><p>Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. <em>Journal of political economy</em>, 66(6):467–482, 1958.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">Sam71</span></dt>
+<dd><p>Paul A Samuelson. Stochastic speculative price. <em>Proceedings of the National Academy of Sciences</em>, 68(2):335–337, 1971.</p>
+</dd>
+<dt class="label" id="id102"><span class="brackets">Sam39</span></dt>
+<dd><p>Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. <em>Review of Economic Studies</em>, 21(2):75–78, 1939.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">Sar82</span></dt>
+<dd><p>Thomas J Sargent. The ends of four big inflations. In Robert E Hall, editor, <em>Inflation: Causes and effects</em>, pages 41–98. University of Chicago Press, 1982.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">Sar13</span></dt>
+<dd><p>Thomas J Sargent. <em>Rational Expectations and Inflation</em>. Princeton University Press, Princeton, New Jersey, 2013.</p>
+</dd>
+<dt class="label" id="id279"><span class="brackets">SS22</span></dt>
+<dd><p>Thomas J Sargent and John Stachurski. Economic networks: theory and computation. <em>arXiv preprint arXiv:2203.11972</em>, 2022.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets">SS23</span></dt>
+<dd><p>Thomas J Sargent and John Stachurski. Economic networks: theory and computation. <em>arXiv preprint arXiv:2203.11972</em>, 2023.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">SV02</span></dt>
+<dd><p>Thomas J Sargent and François R Velde. <em>The Big Problem of Small Change</em>. Princeton University Press, Princeton, New Jersey, 2002.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">SS83</span></dt>
+<dd><p>Jose A Scheinkman and Jack Schechtman. A simple competitive model with production and storage. <em>The Review of Economic Studies</em>, 50(3):427–441, 1983.</p>
+</dd>
+<dt class="label" id="id226"><span class="brackets">Sch69</span></dt>
+<dd><p>Thomas C Schelling. Models of Segregation. <em>American Economic Review</em>, 59(2):488–493, 1969.</p>
+</dd>
+<dt class="label" id="id67"><span class="brackets">ST19</span></dt>
+<dd><p>Christian Schluter and Mark Trede. Size distributions reconsidered. <em>Econometric Reviews</em>, 38(6):695–710, 2019.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">Smi10</span></dt>
+<dd><p>Adam Smith. <em>The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations</em>. Harriman House Limited, 2010.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">Too14</span></dt>
+<dd><p>Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.</p>
+</dd>
+<dt class="label" id="id85"><span class="brackets">Vil96</span></dt>
+<dd><p>Pareto Vilfredo. Cours d'économie politique. <em>Rouge, Lausanne</em>, 1896.</p>
+</dd>
+<dt class="label" id="id274"><span class="brackets">Wau64</span></dt>
+<dd><p>Frederick V. Waugh. Cobweb models. <em>Journal of Farm Economics</em>, 46(4):732–750, 1964.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets">WW82</span></dt>
+<dd><p>Brian D Wright and Jeffrey C Williams. The economic role of commodity storage. <em>The Economic Journal</em>, 92(367):596–614, 1982.</p>
+</dd>
+<dt class="label" id="id272"><span class="brackets">Zha12</span></dt>
+<dd><p>Dongmei Zhao. <em>Power Distribution and Performance Analysis for Wireless Communication Networks</em>. SpringerBriefs in Computer Science. Springer US, Boston, MA, 2012. ISBN 978-1-4614-3283-8 978-1-4614-3284-5. URL: <a class="reference external" href="https://link.springer.com/10.1007/978-1-4614-3284-5">https://link.springer.com/10.1007/978-1-4614-3284-5</a> (visited on 2023-02-03), <a class="reference external" href="https://doi.org/10.1007/978-1-4614-3284-5">doi:10.1007/978-1-4614-3284-5</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. Long-Run Growth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. Business Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   5. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Essential Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   6. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   7. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   8. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   9. Introduction to Supply and Demand
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   10. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   11. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   12. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   13. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   14. A Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   15. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   16. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   17. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   18. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   19. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   20. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   21. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   22. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   23. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   24. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   25. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   26. AR1 Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   27. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   28. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   29. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   30. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   31. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   32. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   33. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   34. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   35. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   36. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   37. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   38. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   39. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   40. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   41. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   42. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/zreferences.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/master?urlpath=tree/zreferences.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/zreferences.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/zreferences.ipynb" data-branch=master>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/zreferences.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "zreferences";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/zreferences.ipynb";
+                const branch = "master"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

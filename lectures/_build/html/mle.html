@@ -1,0 +1,1311 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>39. Maximum Likelihood Estimation &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.5378fd3a70a129d690fd5fc99fb75ef7.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script src="_static/quantecon-book-theme.ef2ef6c3e8da75e1e736fb5fce08cde6.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mle';</script>
+    <link rel="canonical" href="https://intro.quantecon.org/mle.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="40. Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="38. Simple Linear Regression Model" href="simple_linear_regression.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Maximum Likelihood Estimation"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Maximum Likelihood Estimation" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro.quantecon.org/mle.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=mle>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">39.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">39.2. Maximum likelihood estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-distribution">39.3. Pareto distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-best-distribution">39.4. What is the best distribution?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lognormal-distribution-for-the-right-hand-tail">39.4.1. Lognormal distribution for the right hand tail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-distribution-for-the-right-hand-tail">39.4.2. Pareto distribution for the right hand tail</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-what-is-the-best-distribution">39.4.3. So what is the best distribution?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">39.5. Exercises</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">Maximum Likelihood Estimation</p>
+
+                    </div>
+
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="maximum-likelihood-estimation">
+<h1><span class="section-number">39. </span>Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="introduction">
+<h2><span class="section-number">39.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Consider a situation where a policymaker is trying to estimate how much revenue
+a proposed wealth tax will raise.</p>
+<p>The proposed tax is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    h(w) = 
+    \begin{cases}
+    a w                       &amp; \text{if } w \leq \bar w  \\
+    a \bar{w} + b (w-\bar{w}) &amp; \text{if } w &gt; \bar w  
+    \end{cases}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w\)</span> is wealth.</p>
+<p>For example, if <span class="math notranslate nohighlight">\(a = 0.05\)</span>, <span class="math notranslate nohighlight">\(b = 0.1\)</span>, and <span class="math notranslate nohighlight">\(\bar w = 2.5\)</span>, this means</p>
+<ul class="simple">
+<li><p>a 5% tax on wealth up to 2.5 and</p></li>
+<li><p>a 10% tax on wealth in excess of 2.5.</p></li>
+</ul>
+<p>The unit is 100,000, so <span class="math notranslate nohighlight">\(w= 2.5\)</span> means 250,000 dollars.</p>
+<p>Let’s go ahead and define <span class="math notranslate nohighlight">\(h\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">w_bar</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">w_bar</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">w</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">w_bar</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">w_bar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For a population of size <span class="math notranslate nohighlight">\(N\)</span>, where individual <span class="math notranslate nohighlight">\(i\)</span> has wealth <span class="math notranslate nohighlight">\(w_i\)</span>, total revenue raised by
+the tax will be</p>
+<div class="math notranslate nohighlight">
+\[
+    T = \sum_{i=1}^{N} h(w_i)
+\]</div>
+<p>We wish to calculate this quantity.</p>
+<p>The problem we face is that, in most countries, wealth is not observed for all individuals.</p>
+<p>Collecting and maintaining accurate wealth data for all individuals or households in a country
+is just too hard.</p>
+<p>So let’s suppose instead that we obtain a sample <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span> telling us the wealth of <span class="math notranslate nohighlight">\(n\)</span> randomly selected individuals.</p>
+<p>For our exercise we are going to use a sample of <span class="math notranslate nohighlight">\(n = 10,000\)</span> observations from wealth data in the US in 2016.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10_000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data is derived from the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances">Survey of Consumer Finances</a> (SCF).</p>
+<p>The following code imports this data  and reads it into an array called <code class="docutils literal notranslate"><span class="pre">sample</span></code>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://media.githubusercontent.com/media/QuantEcon/high_dim_data/update_scf_noweights/SCF_plus/SCF_plus_mini_no_weights.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2016</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">]</span>   <span class="c1">#restrcting data to net worth &gt; 1</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100_000</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">rv</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s histogram this sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">density</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">density</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;unit: $\$100,000$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;prob&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;net wealth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c0a2fcec2c60a3387fa96dddaa355a685f01b08a8f6ebad41fd0726e37390ec0.png"><img alt="_images/c0a2fcec2c60a3387fa96dddaa355a685f01b08a8f6ebad41fd0726e37390ec0.png" src="_images/c0a2fcec2c60a3387fa96dddaa355a685f01b08a8f6ebad41fd0726e37390ec0.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>The histogram shows that many people have very low wealth and a few people have
+very high wealth.</p>
+<p>We will take the full population size to be</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100_000_000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How can we estimate total revenue from the full population using only the sample data?</p>
+<p>Our plan is to assume that wealth of each individual is a draw from a distribution with density <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>If we obtain an estimate of <span class="math notranslate nohighlight">\(f\)</span> we can then approximate <span class="math notranslate nohighlight">\(T\)</span> as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-est-rev">
+<span class="eqno">(39.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
+    T = \sum_{i=1}^{N} h(w_i) 
+      = N \frac{1}{N} \sum_{i=1}^{N} h(w_i) 
+      \approx N \int_{0}^{\infty} h(w)f(w) dw
+\]</div>
+<p>(The sample mean should be close to the mean by the law of large numbers.)</p>
+<p>The problem now is: how do we estimate <span class="math notranslate nohighlight">\(f\)</span>?</p>
+</section>
+<section id="id1">
+<h2><span class="section-number">39.2. </span>Maximum likelihood estimation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">Maximum likelihood estimation</a>
+is a method of estimating an unknown distribution.</p>
+<p>Maximum likelihood estimation has two steps:</p>
+<ol class="arabic simple">
+<li><p>Guess what the underlying distribution is (e.g., normal with mean <span class="math notranslate nohighlight">\(\mu\)</span> and
+standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>).</p></li>
+<li><p>Estimate the parameter values (e.g., estimate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> for the
+normal distribution)</p></li>
+</ol>
+<p>One possible assumption for the wealth is that each
+<span class="math notranslate nohighlight">\(w_i\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normally distributed</a>,
+with parameters <span class="math notranslate nohighlight">\(\mu \in (-\infty,\infty)\)</span> and <span class="math notranslate nohighlight">\(\sigma \in (0,\infty)\)</span>.</p>
+<p>(This means that <span class="math notranslate nohighlight">\(\ln w_i\)</span> is normally distributed with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.)</p>
+<p>You can see that this assumption is not completely unreasonable because, if we
+histogram log wealth instead of wealth, the picture starts to look something
+like a bell-shaped curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ln_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ln_sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/69ee81800054c6c34d4a159b72965f0ed3acee79bb064b071dd858571eb1f03f.png"><img alt="_images/69ee81800054c6c34d4a159b72965f0ed3acee79bb064b071dd858571eb1f03f.png" src="_images/69ee81800054c6c34d4a159b72965f0ed3acee79bb064b071dd858571eb1f03f.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Now our job is to obtain the maximum likelihood estimates of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, which
+we denote by <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span>.</p>
+<p>These estimates can be found by maximizing the likelihood function given the
+data.</p>
+<p>The pdf of a lognormally distributed random variable <span class="math notranslate nohighlight">\(X\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+    f(x, \mu, \sigma) 
+    = \frac{1}{x}\frac{1}{\sigma \sqrt{2\pi}} 
+    \exp\left(\frac{-1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)\right)^2
+\]</div>
+<p>For our sample <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span>, the <a class="reference external" href="https://en.wikipedia.org/wiki/Likelihood_function">likelihood function</a> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+    L(\mu, \sigma | w_i) = \prod_{i=1}^{n} f(w_i, \mu, \sigma)
+\]</div>
+<p>The likelihood function can be viewed as both</p>
+<ul class="simple">
+<li><p>the joint distribution of the sample (which is assumed to be IID) and</p></li>
+<li><p>the “likelihood” of parameters <span class="math notranslate nohighlight">\((\mu, \sigma)\)</span> given the data.</p></li>
+</ul>
+<p>Taking logs on both sides gives us the log likelihood function, which is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \ell(\mu, \sigma | w_i) 
+    &amp; = \ln \left[ \prod_{i=1}^{n} f(w_i, \mu, \sigma) \right] \\
+    &amp; = -\sum_{i=1}^{n} \ln w_i 
+        - \frac{n}{2} \ln(2\pi) - \frac{n}{2} \ln \sigma^2 - \frac{1}{2\sigma^2}
+            \sum_{i=1}^n (\ln w_i - \mu)^2
+\end{aligned}
+\end{split}\]</div>
+<p>To find where this function is maximised we find its partial derivatives wrt <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma ^2\)</span> and equate them to <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>Let’s first find the maximum likelihood estimate (MLE) of <span class="math notranslate nohighlight">\(\mu\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\delta \ell}{\delta \mu} 
+    = - \frac{1}{2\sigma^2} \times 2 \sum_{i=1}^n (\ln w_i - \mu) = 0 \\
+\implies \sum_{i=1}^n \ln w_i - n \mu = 0 \\
+\implies \hat{\mu} = \frac{\sum_{i=1}^n \ln w_i}{n}
+\end{split}\]</div>
+<p>Now let’s find the MLE of <span class="math notranslate nohighlight">\(\sigma\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\delta \ell}{\delta \sigma^2} 
+    = - \frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} 
+    \sum_{i=1}^n (\ln w_i - \mu)^2 = 0 \\
+    \implies \frac{n}{2\sigma^2} = 
+    \frac{1}{2\sigma^4} \sum_{i=1}^n (\ln w_i - \mu)^2 \\
+    \implies \hat{\sigma} = 
+    \left( \frac{\sum_{i=1}^{n}(\ln w_i - \hat{\mu})^2}{n} \right)^{1/2}
+\end{split}\]</div>
+<p>Now that we have derived the expressions for <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span>,
+let’s compute them for our wealth sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ln_sample</span><span class="p">)</span>
+<span class="n">μ_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0634375526654064
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln_sample</span> <span class="o">-</span> <span class="n">μ_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">σ_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">σ_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.1507346258433424
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the log-normal pdf using the estimated parameters against our sample data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_lognorm</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">σ_hat</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">μ_hat</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal pdf&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/8a3eb8c756447dcf883c98888f7e5ff422e962960f894b6e1c9bf0dd09d5a1f1.png"><img alt="_images/8a3eb8c756447dcf883c98888f7e5ff422e962960f894b6e1c9bf0dd09d5a1f1.png" src="_images/8a3eb8c756447dcf883c98888f7e5ff422e962960f894b6e1c9bf0dd09d5a1f1.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Our estimated lognormal distribution appears to be a reasonable fit for the overall data.</p>
+<p>We now use <a class="reference internal" href="#equation-eq-est-rev">(39.1)</a> to calculate total revenue.</p>
+<p>We will compute the integral using numerical integration via SciPy’s
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a>
+function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_revenue</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
+    <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">integral</span>
+    <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_lognorm</span> <span class="o">=</span> <span class="n">total_revenue</span><span class="p">(</span><span class="n">dist_lognorm</span><span class="p">)</span>
+<span class="n">tr_lognorm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101105326.82814859
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Our unit was 100,000 dollars, so this means that actual revenue is 100,000
+times as large.)</p>
+</section>
+<section id="pareto-distribution">
+<h2><span class="section-number">39.3. </span>Pareto distribution<a class="headerlink" href="#pareto-distribution" title="Permalink to this heading">#</a></h2>
+<p>We mentioned above that using maximum likelihood estimation requires us to make
+a prior assumption of the underlying distribution.</p>
+<p>Previously we assumed that the distribution is lognormal.</p>
+<p>Suppose instead we assume that <span class="math notranslate nohighlight">\(w_i\)</span> are drawn from the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto Distribution</a>
+with parameters <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(x_m\)</span>.</p>
+<p>In this case, the maximum likelihood estimates are known to be</p>
+<div class="math notranslate nohighlight">
+\[
+    \hat{b} = \frac{n}{\sum_{i=1}^{n} \ln (w_i/\hat{x_m})}
+    \quad \text{and} \quad
+    \hat{x}_m = \min_{i} w_i
+\]</div>
+<p>Let’s calculate them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xm_hat</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="n">xm_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">den</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample</span><span class="o">/</span><span class="n">xm_hat</span><span class="p">)</span>
+<span class="n">b_hat</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>
+<span class="n">b_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10783091940803055
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s recompute total revenue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_pareto</span> <span class="o">=</span> <span class="n">pareto</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">xm_hat</span><span class="p">)</span>
+<span class="n">tr_pareto</span> <span class="o">=</span> <span class="n">total_revenue</span><span class="p">(</span><span class="n">dist_pareto</span><span class="p">)</span> 
+<span class="n">tr_pareto</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12933168365.762571
+</pre></div>
+</div>
+</div>
+</div>
+<p>The number is very different!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_pareto</span> <span class="o">/</span> <span class="n">tr_lognorm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>127.91777418162567
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that choosing the right distribution is extremely important.</p>
+<p>Let’s compare the fitted Pareto distribution to the histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.75</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_pareto</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto pdf&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/93f9db3201d31a755906296b9b8d150f0056d41f9295cc5c3c064e424b7c7851.png"><img alt="_images/93f9db3201d31a755906296b9b8d150f0056d41f9295cc5c3c064e424b7c7851.png" src="_images/93f9db3201d31a755906296b9b8d150f0056d41f9295cc5c3c064e424b7c7851.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>We observe that in this case the fit for the Pareto distribution is not very
+good, so we can probably reject it.</p>
+</section>
+<section id="what-is-the-best-distribution">
+<h2><span class="section-number">39.4. </span>What is the best distribution?<a class="headerlink" href="#what-is-the-best-distribution" title="Permalink to this heading">#</a></h2>
+<p>There is no “best” distribution — every choice we make is an assumption.</p>
+<p>All we can do is try to pick a distribution that fits the data well.</p>
+<p>The plots above suggested that the lognormal distribution is optimal.</p>
+<p>However when we inspect the upper tail (the richest people), the Pareto distribution may be a better fit.</p>
+<p>To see this, let’s now set a minimum threshold of net worth in our dataset.</p>
+<p>We set an arbitrary threshold of $500,000 and read the data into <code class="docutils literal notranslate"><span class="pre">sample_tail</span></code>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_tail</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">500_000</span> <span class="p">]</span>
+<span class="n">df_tail</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">rv_tail</span> <span class="o">=</span> <span class="n">df_tail</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4321</span><span class="p">)</span>
+<span class="n">rv_tail</span> <span class="o">=</span> <span class="n">rv_tail</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">sample_tail</span> <span class="o">=</span> <span class="n">rv_tail</span><span class="o">/</span><span class="mi">500_000</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s plot this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/76a73746bb1c5a1e0ff575171f73dd7ee964e76f9f883c8cf771570d86381eac.png"><img alt="_images/76a73746bb1c5a1e0ff575171f73dd7ee964e76f9f883c8cf771570d86381eac.png" src="_images/76a73746bb1c5a1e0ff575171f73dd7ee964e76f9f883c8cf771570d86381eac.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Now let’s try fitting some distributions to this data.</p>
+<section id="lognormal-distribution-for-the-right-hand-tail">
+<h3><span class="section-number">39.4.1. </span>Lognormal distribution for the right hand tail<a class="headerlink" href="#lognormal-distribution-for-the-right-hand-tail" title="Permalink to this heading">#</a></h3>
+<p>Let’s start with the lognormal distribution</p>
+<p>We estimate the parameters again and plot the density against our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ln_sample_tail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">)</span>
+<span class="n">μ_hat_tail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ln_sample_tail</span><span class="p">)</span>
+<span class="n">num_tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln_sample_tail</span> <span class="o">-</span> <span class="n">μ_hat_tail</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">σ_hat_tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">num_tail</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dist_lognorm_tail</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">σ_hat_tail</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">μ_hat_tail</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm_tail</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal pdf&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e2c6c1b61987865e2a182de094281b1f44ebb59c742636fda084a8b97da4fac3.png"><img alt="_images/e2c6c1b61987865e2a182de094281b1f44ebb59c742636fda084a8b97da4fac3.png" src="_images/e2c6c1b61987865e2a182de094281b1f44ebb59c742636fda084a8b97da4fac3.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>While the lognormal distribution was a good fit for the entire dataset,
+it is not a good fit for the right hand tail.</p>
+</section>
+<section id="pareto-distribution-for-the-right-hand-tail">
+<h3><span class="section-number">39.4.2. </span>Pareto distribution for the right hand tail<a class="headerlink" href="#pareto-distribution-for-the-right-hand-tail" title="Permalink to this heading">#</a></h3>
+<p>Let’s now assume the truncated dataset has a Pareto distribution.</p>
+<p>We estimate the parameters again and plot the density against our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xm_hat_tail</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">)</span>
+<span class="n">den_tail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample_tail</span><span class="o">/</span><span class="n">xm_hat_tail</span><span class="p">)</span>
+<span class="n">b_hat_tail</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">den_tail</span><span class="p">)</span>
+<span class="n">dist_pareto_tail</span> <span class="o">=</span> <span class="n">pareto</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b_hat_tail</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">xm_hat_tail</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.65</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_pareto_tail</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pareto pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/75f21b686749a286fc4798ffe151008316a426d21d24dfa0bb3065eaeaa32730.png"><img alt="_images/75f21b686749a286fc4798ffe151008316a426d21d24dfa0bb3065eaeaa32730.png" src="_images/75f21b686749a286fc4798ffe151008316a426d21d24dfa0bb3065eaeaa32730.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>The Pareto distribution is a better fit for the right hand tail of our dataset.</p>
+</section>
+<section id="so-what-is-the-best-distribution">
+<h3><span class="section-number">39.4.3. </span>So what is the best distribution?<a class="headerlink" href="#so-what-is-the-best-distribution" title="Permalink to this heading">#</a></h3>
+<p>As we said above, there is no “best” distribution — each choice is an
+assumption.</p>
+<p>We just have to test what we think are reasonable distributions.</p>
+<p>One test is to plot the data against the fitted distribution, as we did.</p>
+<p>There are other more rigorous tests, such as the <a class="reference external" href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test">Kolmogorov-Smirnov test</a>.</p>
+<p>We omit such advanced topics (but encourage readers to study them once
+they have completed these lectures).</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">39.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="mle_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 39.1 </span></p>
+<section id="exercise-content">
+<p>Suppose we assume wealth is <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">exponentially</a>
+distributed with parameter <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>.</p>
+<p>The maximum likelihood estimate of <span class="math notranslate nohighlight">\(\lambda\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\lambda} = \frac{n}{\sum_{i=1}^n w_i}
+\]</div>
+<ol class="arabic simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> for our initial sample.</p></li>
+<li><p>Use <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> to find the total revenue</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mle-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 39.1</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ_hat</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="n">λ_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15234120963403971
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_exp</span> <span class="o">=</span> <span class="n">expon</span><span class="p">(</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">λ_hat</span><span class="p">)</span>
+<span class="n">tr_expo</span> <span class="o">=</span> <span class="n">total_revenue</span><span class="p">(</span><span class="n">dist_exp</span><span class="p">)</span> 
+<span class="n">tr_expo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55246978.53427645
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="mle_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 39.2 </span></p>
+<section id="exercise-content">
+<p>Plot the exponential distribution against the sample and check if it is a good fit or not.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mle-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 39.2</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_exp</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exponential pdf&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/5d1ca7fd7861cc83d65dbae091437cc1851d0e3b5889bf76986e6693d70e90e2.png"><img alt="_images/5d1ca7fd7861cc83d65dbae091437cc1851d0e3b5889bf76986e6693d70e90e2.png" src="_images/5d1ca7fd7861cc83d65dbae091437cc1851d0e3b5889bf76986e6693d70e90e2.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Clearly, this distribution is not a good fit for our data.</p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. Long-Run Growth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. Business Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   5. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Essential Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   6. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   7. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   8. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   9. Introduction to Supply and Demand
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   10. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   11. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   12. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   13. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   14. A Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   15. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   16. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   17. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   18. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   19. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   20. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   21. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   22. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   23. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   24. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   25. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   26. AR1 Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   27. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   28. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   29. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   30. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   31. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   32. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   33. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   34. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   35. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   36. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   37. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   38. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   39. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   40. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   41. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   42. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/mle.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/master?urlpath=tree/mle.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/mle.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/mle.ipynb" data-branch=master>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/mle.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "mle";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/mle.ipynb";
+                const branch = "master"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

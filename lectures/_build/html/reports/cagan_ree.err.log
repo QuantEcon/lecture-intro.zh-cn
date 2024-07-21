@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/humphreyyang/anaconda3/envs/quantecon/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# compare foreseen vs unforeseen shock
+fig, ax = plt.subplots(5, figsize=[12,6], dpi=200)
+
+ax[0].plot(T_seq[:-1], μ_seq_2)
+ax[0].set_ylabel(r'$\mu$')
+
+ax[1].plot(T_seq, π_seq_2, 
+             label='Unforeseen')
+ax[1].plot(T_seq, π_seq_1, 
+             label='Foreseen', color='tab:green')
+ax[1].set_ylabel(r'$\pi$')
+
+ax[2].plot(T_seq,
+             m_seq_2_regime1 - p_seq_2_regime1, 
+             label='Unforeseen')
+ax[2].plot(T_seq, m_seq_1 - p_seq_1, 
+             label='Foreseen', color='tab:green')
+ax[2].set_ylabel(r'$m - p$')
+
+ax[3].plot(T_seq, m_seq_2_regime1, 
+             label=r'Unforseen (Insist on $m_{T_1}$)')
+ax[3].plot(T_seq, m_seq_2_regime2, 
+             label=r'Unforseen (Reset $m_{T_1}$)')
+ax[3].plot(T_seq, m_seq_1, 
+             label='Foreseen shock')
+ax[3].set_ylabel(r'$m$')
+
+ax[4].plot(T_seq, p_seq_2_regime1, 
+             label=r'Unforseen (Insist on $m_{T_1}$)')
+ax[4].plot(T_seq, p_seq_2_regime2, 
+             label=r'Unforseen (Reset $m_{T_1}$)')
+ax[4].plot(T_seq, p_seq_1, 
+             label='Foreseen')
+ax[4].set_ylabel(r'$p$')
+
+for i in range(5):
+    ax[i].set_xlabel(r'$t$')
+
+for i in range(5):
+    ax[i,j].legend()
+
+plt.tight_layout()
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[7], line 40[0m
+[1;32m     37[0m     ax[i][38;5;241m.[39mset_xlabel([38;5;124mr[39m[38;5;124m'[39m[38;5;124m$t$[39m[38;5;124m'[39m)
+[1;32m     39[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m([38;5;241m5[39m):
+[0;32m---> 40[0m     ax[i,[43mj[49m][38;5;241m.[39mlegend()
+[1;32m     42[0m plt[38;5;241m.[39mtight_layout()
+[1;32m     43[0m plt[38;5;241m.[39mshow()
+
+[0;31mNameError[0m: name 'j' is not defined
+NameError: name 'j' is not defined
+
