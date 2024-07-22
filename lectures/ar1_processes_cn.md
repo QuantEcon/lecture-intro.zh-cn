@@ -19,45 +19,43 @@ kernelspec:
 ```
 
 (ar1_processes)=
-# AR1 Processes
+# AR1 过程
 
-```{admonition} Migrated lecture
+```{admonition} 迁移的讲座
 :class: warning
 
-This lecture has moved from our [Intermediate Quantitative Economics with Python](https://python.quantecon.org/intro.html) lecture series and is now a part of [A First Course in Quantitative Economics](https://intro.quantecon.org/intro.html).
+本讲座已从我们的 [Intermediate Quantitative Economics with Python](https://python.quantecon.org/intro.html) 讲座系列迁移，现在是 [A First Course in Quantitative Economics](https://intro.quantecon.org/intro.html) 的一部分。
 ```
 
-```{index} single: Autoregressive processes
+```{index} single: 自回归过程
 ```
 
-## Overview
+## 概述
 
-In this lecture we are going to study a very simple class of stochastic
-models called AR(1) processes.
+在本讲座中，我们将研究一种非常简单的随机模型类，称为 AR(1) 过程。
 
-These simple models are used again and again in economic research to represent the dynamics of series such as
+这些简单模型在经济研究中反复使用，以表示诸如
 
-* labor income
-* dividends
-* productivity, etc.
+* 劳动收入
+* 股息
+* 生产力等的序列动态。
 
-AR(1) processes can take negative values but are easily converted into positive processes when necessary by a transformation such as exponentiation.
+AR(1) 过程可以取负值，但在必要时可以通过如指数运算的变换轻松转换为正过程。
 
-We are going to study AR(1) processes partly because they are useful and
-partly because they help us understand important concepts.
+我们将研究 AR(1) 过程，部分是因为它们有用，部分是因为它们帮助我们理解重要概念。
 
-Let's start with some imports:
+让我们从一些导入开始：
 
 ```{code-cell} ipython
 import numpy as np
 %matplotlib inline
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (11, 5)  #set default figure size
+plt.rcParams["figure.figsize"] = (11, 5)  # 设置默认图形大小
 ```
 
-## The AR(1) Model
+## AR(1) 模型
 
-The **AR(1) model** (autoregressive model of order 1) takes the form
+**AR(1) 模型**（一阶自回归模型）的形式是
 
 ```{math}
 :label: can_ar1
@@ -65,22 +63,21 @@ The **AR(1) model** (autoregressive model of order 1) takes the form
 X_{t+1} = a X_t + b + c W_{t+1}
 ```
 
-where $a, b, c$ are scalar-valued parameters.
+其中 $a, b, c$ 是标量值参数。
 
-This law of motion generates a time series $\{ X_t\}$ as soon as we
-specify an initial condition $X_0$.
+此运动定律在我们指定初始条件 $X_0$ 后生成一个时间序列 $\{ X_t \}$。
 
-This is called the **state process** and the state space is $\mathbb R$.
+这称为 **状态过程**，状态空间是 $\mathbb R$。
 
-To make things even simpler, we will assume that
+为了使事情更简单，我们将假设
 
-* the process $\{ W_t \}$ is IID and standard normal,
-* the initial condition $X_0$ is drawn from the normal distribution $N(\mu_0, v_0)$ and
-* the initial condition $X_0$ is independent of $\{ W_t \}$.
+* 过程 $\{ W_t \}$ 是独立同分布且标准正态，
+* 初始条件 $X_0$ 服从正态分布 $N(\mu_0, v_0)$，并且
+* 初始条件 $X_0$ 与 $\{ W_t \}$ 独立。
 
-### Moving Average Representation
+### 移动平均表示
 
-Iterating backwards from time $t$, we obtain
+从时间 $t$ 倒退迭代，我们得到
 
 $$
 X_t = a X_{t-1} + b +  c W_t
@@ -88,7 +85,7 @@ X_t = a X_{t-1} + b +  c W_t
         = \cdots
 $$
 
-If we work all the way back to time zero, we get
+如果我们一直回溯到时间零，我们得到
 
 ```{math}
 :label: ar1_ma
@@ -97,45 +94,44 @@ X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
         c \sum_{j=0}^{t-1} a^j  W_{t-j}
 ```
 
-Equation {eq}`ar1_ma` shows that $X_t$ is a well defined random variable, the value of which depends on
+方程 {eq}`ar1_ma` 表明 $X_t$ 是定义良好的随机变量，其值取决于
 
-* the parameters,
-* the initial condition $X_0$ and
-* the shocks $W_1, \ldots W_t$ from time $t=1$ to the present.
+* 参数，
+* 初始条件 $X_0$ 和
+* 从时间 $t=1$ 到当前的冲击 $W_1, \ldots W_t$。
 
-Throughout, the symbol $\psi_t$ will be used to refer to the
-density of this random variable $X_t$.
+在整个过程中，符号 $\psi_t$ 将用于指代这个随机变量 $X_t$ 的密度。
 
-### Distribution Dynamics
+### 分布动态
 
-One of the nice things about this model is that
-这样很容易跟踪与时间序列 $\{ X_t \}$ 对应的分布序列 $\{ \psi_t \}$。
+这个模型的一个好处是...很容易追踪对应于时间序列 $\{ X_t \}$ 的分布序列 $\{ \psi_t \}$。
 
-要看到这一点，我们首先注意到 $X_t$ 在任意 $t$ 时都服从正态分布。
+要看到这一点，我们首先注意到，对于每个 $t$，$X_t$ 都是正态分布的。
 
-这一点从 {eq}`ar1_ma` 即可立即得出，因为独立正态随机变量的线性组合仍然是正态分布。
+这直接来自 {eq}`ar1_ma`，因为独立正态随机变量的线性组合仍然是正态分布的。
 
-由于 $X_t$ 服从正态分布，如果我们能够确定它的前两矩，我们就能知道完整的分布 $\psi_t$。
+鉴于 $X_t$ 是正态分布的，如果我们能找到其前两个矩，我们就会知道其完整的分布
+$\psi_t$。
 
-设 $\mu_t$ 和 $v_t$ 分别表示 $X_t$ 的均值和方差。
+令 $\mu_t$ 和 $v_t$ 分别表示 $X_t$ 的均值和方差。
 
-我们可以从 {eq}`ar1_ma` 确定这些值，或者我们可以使用以下递归表达式：
+我们可以从 {eq}`ar1_ma` 中得到这些值，或者我们可以使用以下递推表达式：
 
 ```{math}
 :label: dyn_tm
 
 \mu_{t+1} = a \mu_t + b
-\quad \text{and} \quad
+\quad \text{和} \quad
 v_{t+1} = a^2 v_t + c^2
 ```
 
-这些表达式通过分别对等式两边取期望和方差从 {eq}`can_ar1` 得出。
+这些表达式是通过对等式的两边分别取期望和方差从 {eq}`can_ar1` 中得到的。
 
-在计算第二个表达式时，我们使用了 $X_t$ 和 $W_{t+1}$ 独立的事实。
+在计算第二个表达式时，我们使用 $X_t$ 和 $W_{t+1}$ 独立这一事实。
 
-（这源于我们的假设和 {eq}`ar1_ma`。）
+（这由我们的假设和 {eq}`ar1_ma` 得出。）
 
-给定 {eq}`ar1_ma` 中的动力学和初始条件 $\mu_0, v_0$，我们可以得到 $\mu_t, v_t$， 从而得到
+鉴于 {eq}`ar1_ma` 中的动态和初始条件 $\mu_0, v_0$，我们得到 $\mu_t, v_t$，因此
 
 $$
 \psi_t = N(\mu_t, v_t)
@@ -177,7 +173,7 @@ plt.show()
 
 注意，在上图中，序列 $\{ \psi_t \}$ 似乎正在收敛到一个极限分布。
 
-如果我们将时间向前推进得更远，这一点会更清楚：
+如果我们进一步向未来预测，这一点更加清楚：
 
 ```{code-cell} python3
 def plot_density_seq(ax, mu_0=-3.0, v_0=0.6, sim_length=60):
@@ -194,9 +190,9 @@ plot_density_seq(ax)
 plt.show()
 ```
 
-此外，极限不依赖于初始条件。
+而且，极限不依赖于初始条件。
 
-例如，这个替代密度序列也收敛到同一个极限。
+例如，这种替代密度序列也会收敛到相同的极限。
 
 ```{code-cell} python3
 fig, ax = plt.subplots()
@@ -204,21 +200,23 @@ plot_density_seq(ax, mu_0=3.0)
 plt.show()
 ```
 
-事实上，很容易表明，只要 $|a| < 1$，无论初始条件如何，均匀收敛都会发生。
+事实上，容易证明，只要 $|a| < 1$，无论初始条件如何，这种收敛都会发生。
 
-要看到这一点，我们只需要查看 {eq}`dyn_tm` 中前两个矩的动态。
+要看到这一点，我们只需要看 {eq}`dyn_tm` 中的前两个矩的动态。
 
-当 $|a| < 1$ 时，这些序列收敛到相应的极限
+当 $|a| < 1$ 时，这些序列收敛到各自的极限
 
 ```{math}
 :label: mu_sig_star
 
 \mu^* := \frac{b}{1-a}
-\quad \text{and} \quad
-v^* = \frac{\frac{c^2}{1 - a^2}
+\quad \text{和} \quad
+v^* = \frac{
+
+c^2}{1 - a^2}
 ```
 
-(请参阅我们的{doc}`关于一维动力学的讲座<scalar_dynam>` 了解确定性收敛的背景信息。)
+(请参阅我们的 {doc}`关于一维动态的讲座 <scalar_dynam>` 了解确定性收敛的背景。)
 
 因此
 
@@ -226,11 +224,11 @@ v^* = \frac{\frac{c^2}{1 - a^2}
 :label: ar1_psi_star
 
 \psi_t \to \psi^* = N(\mu^*, v^*)
-\quad \text{as }
+\quad \text{当 }
 t \to \infty
 ```
 
-我们可以使用以下代码确认这对于上述序列是有效的。
+我们可以使用以下代码确认这对上述序列是有效的。
 
 ```{code-cell} python3
 fig, ax = plt.subplots()
@@ -245,15 +243,15 @@ ax.legend()
 plt.show()
 ```
 
-正如所述，序列 $\{ \psi_t \}$ 收敛到 $\psi^*$。
+如所述，序列 $\{ \psi_t \}$ 收敛于 $\psi^*$。
 
 ### 平稳分布
 
-平稳分布是更新规则的定点分布。
+平稳分布是更新规则的固定点的分布。
 
-换句话说，如果 $\psi_t$ 是平稳的，那么 $\psi_{t+j} = \psi_t$ 对所有 $j$ 在 $\mathbb N$ 中成立。
+换句话说，如果 $\psi_t$ 是平稳的，那么对于所有的 $j \in \mathbb{N}$，有 $\psi_{t+j} = \psi_t$ 。
 
-另一种方式，专门针对当前设置，是这样的：如果 $\mathbb R$ 上的密度 $\psi$ 对于 AR(1) 过程是平稳的，那么
+换句话说，特化到当前设置，如果密度 $\psi$ 在 $\mathbb{R}$ 上是 AR(1) 过程的 **平稳** 分布，那么
 
 $$
 X_t \sim \psi
@@ -261,77 +259,78 @@ X_t \sim \psi
 a X_t + b + c W_{t+1} \sim \psi
 $$
 
-{eq}`ar1_psi_star` 世界中的分布 $\psi^*$ 具有这种特性 —— 检查这是一个练习。
+等式 {eq}`ar1_psi_star` 中的分布 $\psi^*$ 具有这个性质 —— 检查这一点是一个练习。
 
-（当然，我们假设 $|a| < 1$ 以确保 $\psi^*$ 的良好定义。）
+（当然，我们假设 $|a| < 1$ 以使 $\psi^*$ 定义良好。）
 
-事实上，可以证明，其他任何分布都不具有这一特性。
+实际上，可以证明没有其他分布在 $\mathbb{R}$ 上具有这个性质。
 
-因此，当 $|a| < 1$ 时，AR(1) 模型恰好有且只有一个平稳密度，该密度由 $\psi^*$ 给出。
+因此，当 $|a| < 1$ 时，AR(1) 模型有且仅有一个平稳密度，该密度由 $\psi^*$ 给出。
 
 ## 遍历性
 
-遍历性的概念因不同作者的使用而有所不同。
+遍历性的概念在不同的作者中以不同的方式使用。
 
-在当前设置中，一种理解方法是大数定律的一个版本对于 $\{X_t\}$ 是有效的，即使它不是独立同分布的。
+在当前设置中理解它的一种方法是，即使 $\{X_t\}$ 不是独立同分布，某种版本的大数法则仍然适用。
 
-特别是，时间序列的平均值收敛到平稳分布下的期望。
+特别是，时间序列的均值收敛于平稳分布下的期望。
 
-事实上，可以证明只要 $|a| < 1$，我们便有
+事实上，可以证明，只要 $|a| < 1$，我们就有
 
 ```{math}
 :label: ar1_ergo
 
 \frac{1}{m} \sum_{t = 1}^m h(X_t)  \to
 \int h(x) \psi^*(x) dx
-    \quad \text{as } m \to \infty
+    \quad \text{当 } m \to \infty
 ```
 
-只要右侧的积分是有限且定义良好的。
+只要右边的积分是有限且定义良好的。
 
 注意：
 
-* 在{eq}`ar1_ergo`中，收敛的概率为一。
-* {cite}`MeynTweedie2009`的教科书是遍历性方面的经典参考。
+* 在 {eq}`ar1_ergo` 中，收敛几乎必然成立。
+* 由 {cite}`MeynTweedie2009` 撰写的教科书是遍历性的经典参考文献。
 
 例如，如果我们考虑恒等函数 $h(x) = x$，我们得到
 
 $$
 \frac{1}{m} \sum_{t = 1}^m X_t  \to
 \int x \psi^*(x) dx
-    \quad \text{as } m \to \infty
+    \quad \text{当 } m \to \infty
 $$
 
-换句话说，时间序列样本均值收敛到平稳分布的均值。
+换句话说，时间序列样本均值收敛于平稳分布的均值。
 
-如接下来的几节课中将明确显示，遍历性是统计和模拟中的一个非常重要的概念。
+正如接下来的几节课中将会更清楚，遍历性是统计和模拟中非常重要的概念。
 
 ## 练习
 
 ```{exercise}
 :label: ar1p_ex1
 
-设 $k$ 为自然数。
+令 $k$ 为自然数。
 
-随机变量的第 $k$  阶中心矩定义为
+随机变量的第 $k$ 阶中心矩定义为
 
 $$
 M_k := \mathbb E [ (X - \mathbb E X )^k ]
 $$
 
-当随机变量是 $N(\mu, \sigma^2)$ 时，已知
+当该随机变量 $N(\mu, \sigma^2)$ 时，已知
 
 $$
 M_k =
 \begin{cases}
-    0 & \text{ if } k \text{ is odd} \\
-    \sigma^k (k-1)!! & \text{ 若 } k \text{ 为偶数}
+    0 & \text{ 如果 } k \text{ 是奇数} \\
+    \sigma^k \
+```(k-1)!! & \text{ 如果 } k 是偶数
 \end{cases}
 $$
 
-其中 $n!!$ 表示双阶乘。
+其中 $n!!$ 是双阶乘。
 
-根据 {eq}`ar1_ergo`，对于任意 $k \in \mathbb N$ ，我们需要有
+根据 {eq}`ar1_ergo`，对于任何 $k \in \mathbb N$ 应有，
 
 $$
 \frac{1}{m} \sum_{t = 1}^m
@@ -339,16 +338,16 @@ $$
     \approx M_k
 $$
 
-当 $m$ 足够大时。
+当 $m$ 很大时。
 
-使用讲座中的默认参数，通过模拟来确认在不同 $k$ 值下的结果。
+通过模拟确认在一系列 $k$ 上使用讲座中的默认参数这一点。
 ```
 
 ```{solution-start} ar1p_ex1
 :class: dropdown
 ```
 
-以下是一个解决方案：
+这是一个解决方案：
 
 ```{code-cell} python3
 from numba import njit
@@ -392,44 +391,43 @@ plt.show()
 ```{exercise}
 :label: ar1p_ex2
 
-写一个自己版本的[核密度估计器](https://en.wikipedia.org/wiki/Kernel_density_estimation)，该估计器从样本中估计密度。
+编写你自己的无维度 [核密度估计器](https://en.wikipedia.org/wiki/Kernel_density_estimation)，从一个样本中估计密度。
 
-将其写为一个类，该类在初始化时接受数据 $X$ 和带宽 $h$，并提供一个方法 $f$，使得
+将其编写为一个类，在初始化时接收数据 $X$ 和带宽 $h$，并提供一个方法 $f$ 使得
 
 $$
 f(x) = \frac{1}{hn} \sum_{i=1}^n
 K \left( \frac{x-X_i}{h} \right)
 $$
 
-对于 $K$，使用高斯核 ($K$ 是标准正态密度)。
+对于 $K$，使用高斯核（$K$是标准正态密度）。
 
-编写该类以使带宽默认为 Silverman 的规则（参见[此页面](https://en.wikipedia.org/wiki/Kernel_density_estimation)上的"经验法则"讨论）。测试你编写的类，通过以下步骤：
+编写类，使其带宽默认为 Silverman 的规则（参见
+[这个页面](https://en.wikipedia.org/wiki/Kernel_density_estimation)上的 "rule of thumb" 讨论）。测试
+你所编写的类，测试步骤为
 
-1. 从分布 $\phi$ 中模拟数据 $X_1, \ldots, X_n$
-1. 在适当的范围内绘制核密度估计
-1. 在同一个图上绘制 $\phi$ 的密度
+1. 从分布 $\phi$ 模拟数据 $X_1, \ldots, X_n$
+1. 在合适的范围内绘制核密度估计
+1. 在同一图上绘制 $\phi$ 的密度
 
-对于下列类型的分布 $\phi$：
+对于以下类型的分布 $\phi$
 
-- $\alpha = \beta = 2$ 的 [贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)
-- $\alpha = 2$ 且 $\beta = 5$ 的 [贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)
-- $\alpha = \beta = 0.5$ 的 [贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)
+* [β分布](https://en.wikipedia.org/wiki/Beta_distribution) 与 $\alpha = \beta = 2$
+* [β分布](https://en.wikipedia.org/wiki/Beta_distribution) 与 $\alpha = 2$ 和 $\beta = 5$
+* [β分布](https://en.wikipedia.org/wiki/Beta_distribution) 与 $\alpha = \beta = 0.5$
 
 使用 $n=500$。
 
 对你的结果做出评论。（你认为这是这些分布的良好估计吗？）
-
 ```
 
 ```{solution-start} ar1p_ex2
 :class: dropdown
 ```
 
-以下是一个解决方案：
+这是一个解决方案：
 
 ```{code-cell} ipython3
-from scipy.stats import norm
-
 K = norm.pdf
 
 class KDE:
@@ -470,12 +468,12 @@ def plot_kde(ϕ, x_min=-0.2, x_max=1.2):
 from scipy.stats import beta
 
 n = 500
-parameter_pairs = (2, 2), (2, 5), (0.5, 0.5)
+parameter_pairs= (2, 2), (2, 5), (0.5, 0.5)
 for α, β in parameter_pairs:
     plot_kde(beta(α, β))
 ```
 
-我们可以看到，当底层分布平滑时，核密度估计器是有效的，但在其他情况下则效果较差。
+我们看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则不然。
 
 ```{solution-end}
 ```
@@ -483,22 +481,20 @@ for α, β in parameter_pairs:
 ```{exercise}
 :label: ar1p_ex3
 
-在讲座中我们讨论了以下事实：
-
-对于 $AR(1)$ 过程
+在讲座中，我们讨论了以下事实：对于 $AR(1)$ 过程
 
 $$
 X_{t+1} = a X_t + b + c W_{t+1}
 $$
 
-其中 $\{ W_t \}$ 独立同分布且标准正态，
+其中 $\{ W_t \}$ 是 iid 标准正态，
 
 $$
 \psi_t = N(\mu, s^2) \implies \psi_{t+1}
 = N(a \mu + b, a^2 s^2 + c^2)
 $$
 
-通过仿真来确认这一点，至少近似地确认。设：
+通过模拟确认这一点，至少大致确认。让
 
 - $a = 0.9$
 - $b = 0.0$
@@ -508,20 +504,20 @@ $$
 
 首先，使用上述描述的真实分布绘制 $\psi_t$ 和 $\psi_{t+1}$。
 
-其次，通过以下步骤在同一图上（使用不同的颜色）绘制 $\psi_{t+1}$：
+其次，按以下步骤在同一图中（用不同颜色）绘制 $\psi_{t+1}$：
 
-1. 从 $N(\mu, s^2)$ 分布生成 $X_t$ 的 $n$ 个抽样值
-2. 使用规则 $X_{t+1} = a X_t + b + c W_{t+1}$ 更新所有抽样值
-3. 使用获得的 $X_{t+1}$ 值的样本来通过核密度估计生成密度估计
+1. 从 $N(\mu, s^2)$ 分布生成 $n$ 个 $X_t$ 抽样
+1. 使用规则 $X_{t+1} = a X_t + b + c W_{t+1}$ 更新所有抽样值
+1. 使用通过核密度估计获得的 $X_{t+1}$ 样本来生成密度估计。
 
-试着使用 $n=2000$ 并确认通过仿真获得的 $\psi_{t+1}$ 确实收敛到理论上的分布。
+试试 $n=2000$，确认通过模拟获得的 $\psi_{t+1}$ 收敛于理论分布。
 ```
 
 ```{solution-start} ar1p_ex3
 :class: dropdown
 ```
 
-以下是我们的解决方案：
+这是我们的解决方案
 
 ```{code-cell} ipython3
 a = 0.9
@@ -563,7 +559,7 @@ ax.legend()
 plt.show()
 ```
 
-仿真得出的分布大致与理论上的分布重合，正如预期的那样。
+通过模拟得到的分布大致与理论分布一致，正如预期的那样。
 
 ```{solution-end}
 ```

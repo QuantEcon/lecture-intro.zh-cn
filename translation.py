@@ -1,8 +1,33 @@
 import openai
 
-input_file = "lectures/ar1_processes.md"
-print(openai.beta.assistants.list())
-assistant_cn_id = 'asst_kWnZVKQEHRY1Db6ezdbKnRIy'
+
+def split_text(content, chunk_size=3000):
+    chunks = []
+    start = 0
+
+    while start < len(content):
+        end = start + chunk_size
+
+        # If we are at the end of the content, just append the rest
+        if end >= len(content):
+            chunks.append(content[start:])
+            break
+        
+        # Check if the end is in the middle of a line
+        if content[end] != '\n':
+            # Find the nearest line separator after the chunk size
+            next_line_break = content.find('\n', end)
+            if next_line_break == -1:
+                # If no further line breaks are found, just append the rest
+                chunks.append(content[start:])
+                break
+            else:
+                end = next_line_break + 1
+        
+        chunks.append(content[start:end].strip())
+        start = end
+
+    return chunks
 
 def translate_cn(input_file, assistant_id):
     # Initialize the OpenAI client
@@ -11,21 +36,20 @@ def translate_cn(input_file, assistant_id):
     # Read the content of the input markdown file
     with open(input_file, 'r', encoding='utf-8') as file:
         content = file.read()
-    
+
     # Split the content into chunks (e.g., 3000 characters each)
-    chunk_size = 3000
-    chunks = [content[i:i + chunk_size] for i in range(0, len(content), chunk_size)]
-    
+    chunks = split_text(content, chunk_size=3000)
+
     # Initialize the OpenAI client and thread
     thread = client.beta.threads.create()
-    
+
     translated_content = ""
-    
+
     for chunk in chunks:
         # Create and poll the run for each chunk
         run = client.beta.threads.runs.create_and_poll(
             thread_id=thread.id,
-            assistant_id=assistant_id,
+            assistant_id=assistant_cn_id,
             instructions="Please translate the following content into simplified Chinese. Give the results directly: " + chunk
         )
         
@@ -38,7 +62,7 @@ def translate_cn(input_file, assistant_id):
         else:
             print(f"Translation failed for chunk: {chunk[:50]}... Status: {run.status}")
             continue
-    
+
     # Create the output file name
     output_file = input_file.replace('.md', '_cn.md')
 
