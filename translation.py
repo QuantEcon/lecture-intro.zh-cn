@@ -1,10 +1,8 @@
 import openai
 
-
 def split_text(content, chunk_size=3000):
     chunks = []
     start = 0
-
     while start < len(content):
         end = start + chunk_size
 
@@ -12,20 +10,24 @@ def split_text(content, chunk_size=3000):
         if end >= len(content):
             chunks.append(content[start:])
             break
-        
-        # Check if the end is in the middle of a line
-        if content[end] != '\n':
-            # Find the nearest line separator after the chunk size
-            next_line_break = content.find('\n', end)
-            if next_line_break == -1:
-                # If no further line breaks are found, just append the rest
-                chunks.append(content[start:])
-                break
-            else:
-                end = next_line_break + 1
-        
-        chunks.append(content[start:end].strip())
-        start = end
+
+        # Find the nearest line break before the chunk size
+        next_line_break = content.rfind('\n', start, end)
+        if next_line_break == -1:
+            # If no line break is found within the chunk size, extend to the end
+            next_line_break = end
+
+        # Check if a code cell starts within the chunk
+        code_cell_start = content.find('```{code-cell}', start, next_line_break)
+        if code_cell_start != -1:
+            # If a code cell starts, find its end
+            code_cell_end = content.find('```', code_cell_start + 14)
+            if code_cell_end != -1:
+                # Move the end to the end of the code cell
+                next_line_break = content.find('\n', code_cell_end) + 1
+
+        chunks.append(content[start:next_line_break].strip())
+        start = next_line_break
 
     return chunks
 
@@ -49,15 +51,15 @@ def translate_cn(input_file, assistant_id):
         # Create and poll the run for each chunk
         run = client.beta.threads.runs.create_and_poll(
             thread_id=thread.id,
-            assistant_id=assistant_cn_id,
-            instructions="Please translate the following content into simplified Chinese. Give the results directly: " + chunk
+            assistant_id=assistant_id,
+            instructions="Please translate the following content into simplified Chinese. Maintain all the markdown syntax and directives unchanged. Only translate text and code comments Give the results directly without system messages: " + chunk
         )
         
         if run.status == 'completed': 
             messages = client.beta.threads.messages.list(
                 thread_id=thread.id
             )
-            translated_content += messages.data[0].content[0].text.value
+            translated_content += '\n\n' + messages.data[0].content[0].text.value
             print(translated_content)
         else:
             print(f"Translation failed for chunk: {chunk[:50]}... Status: {run.status}")
@@ -71,6 +73,7 @@ def translate_cn(input_file, assistant_id):
         file.write(translated_content)
 
     print(f"Translated content has been saved to {output_file}")
+
 
 if __name__ == "__main__":
     input_file = "lectures/ar1_processes.md"
