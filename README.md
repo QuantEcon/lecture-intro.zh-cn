@@ -27,6 +27,7 @@ to future workflows (ie. how to keep the english and chinese versions in sync EN
 **Schedule:**
 
 | Target Date | Milestone |
+|-------------|-----------|
 | 15th September 2024 | Jupyter Book powered version building with HTML |
 | 30th September 2024 | Version 1 to share more broadly with teams |
 | Oct - Nov 2024 | Technical refinements in editorial workflow process (identify future software development needs) |
