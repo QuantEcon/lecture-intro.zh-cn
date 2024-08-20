@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>28. Markov Chains: Irreducibility and Ergodicity &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>29. Markov Chains: Irreducibility and Ergodicity &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -122,8 +122,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="29. Univariate Time Series with Matrix Algebra" href="time_series_with_matrices.html" />
-    <link rel="prev" title="27. Markov Chains: Basic Concepts" href="markov_chains_I.html" />
+    <link rel="next" title="30. Univariate Time Series with Matrix Algebra" href="time_series_with_matrices.html" />
+    <link rel="prev" title="28. Markov Chains: Basic Concepts" href="markov_chains_I.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -171,20 +171,20 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">28.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility">28.2. Irreducibility</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility-and-stationarity">28.2.1. Irreducibility and stationarity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">29.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility">29.2. Irreducibility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility-and-stationarity">29.2.1. Irreducibility and stationarity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">28.3. Ergodicity</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">28.3.1. Example 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">28.3.2. Example 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">28.3.3. Example 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">28.3.4. Example 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectations-of-geometric-sums">28.3.5. Expectations of geometric sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">29.3. Ergodicity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">29.3.1. Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">29.3.2. Example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">29.3.3. Example 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">29.3.4. Example 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectations-of-geometric-sums">29.3.5. Expectations of geometric sums</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">28.4. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">29.4. Exercises</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -230,7 +230,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="markov-chains-irreducibility-and-ergodicity">
-<h1><span class="section-number">28. </span>Markov Chains: Irreducibility and Ergodicity<a class="headerlink" href="#markov-chains-irreducibility-and-ergodicity" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">29. </span>Markov Chains: Irreducibility and Ergodicity<a class="headerlink" href="#markov-chains-irreducibility-and-ergodicity" title="Permalink to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -262,7 +262,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/humphrey/anaconda3/envs/
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">28.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture continues on from our <a class="reference internal" href="markov_chains_I.html"><span class="doc">earlier lecture on Markov chains</span></a>.</p>
 <p>Specifically, we will introduce the concepts of irreducibility and ergodicity, and see how they connect to stationarity.</p>
 <p>Irreducibility describes the ability of a Markov chain to move between any two states in the system.</p>
@@ -287,7 +287,7 @@ law of large numbers.</p></li>
 </div>
 </section>
 <section id="irreducibility">
-<span id="mc-irreducible"></span><h2><span class="section-number">28.2. </span>Irreducibility<a class="headerlink" href="#irreducibility" title="Permalink to this heading">#</a></h2>
+<span id="mc-irreducible"></span><h2><span class="section-number">29.2. </span>Irreducibility<a class="headerlink" href="#irreducibility" title="Permalink to this heading">#</a></h2>
 <p>To explain irreducibility, let’s take <span class="math notranslate nohighlight">\(P\)</span> to be a fixed stochastic matrix.</p>
 <p>Two states <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are said to <strong>communicate</strong> with each other if
 there exist positive integers <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(k\)</span> such that</p>
@@ -366,12 +366,12 @@ in terms of long-run outcomes.</p>
 <p>For example, poverty is a life sentence in the second graph but not the first.</p>
 <p>We’ll come back to this a bit later.</p>
 <section id="irreducibility-and-stationarity">
-<h3><span class="section-number">28.2.1. </span>Irreducibility and stationarity<a class="headerlink" href="#irreducibility-and-stationarity" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.2.1. </span>Irreducibility and stationarity<a class="headerlink" href="#irreducibility-and-stationarity" title="Permalink to this heading">#</a></h3>
 <p>We discussed the uniqueness of the stationary in the <a class="reference internal" href="markov_chains_I.html#stationary"><span class="std std-ref">previous lecture</span></a> requires the transition matrix to be everywhere positive.</p>
 <p>In fact irreducibility is enough for the uniqueness of the stationary distribution to hold if the distribution exists.</p>
 <p>We can revise the <a class="reference internal" href="markov_chains_I.html#strict-stationary"><span class="std std-ref">theorem</span></a> into the following fundamental theorem:</p>
 <div class="proof theorem admonition" id="mc_conv_thm">
-<p class="admonition-title"><span class="caption-number">Theorem 28.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 29.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(P\)</span> is irreducible, then <span class="math notranslate nohighlight">\(P\)</span> has exactly one stationary
 distribution.</p>
@@ -381,16 +381,16 @@ Theorem 5.2 of <span id="id2">[<a class="reference internal" href="zreferences.h
 </section>
 </section>
 <section id="ergodicity">
-<span id="id3"></span><h2><span class="section-number">28.3. </span>Ergodicity<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
+<span id="id3"></span><h2><span class="section-number">29.3. </span>Ergodicity<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
 <p>Please note that we use <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> for a vector of ones in this lecture.</p>
 <p>Under irreducibility, yet another important result obtains:</p>
 <div class="proof theorem admonition" id="stationary">
-<p class="admonition-title"><span class="caption-number">Theorem 28.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 29.2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(P\)</span> is irreducible and <span class="math notranslate nohighlight">\(\psi^*\)</span> is the unique stationary
 distribution, then, for all <span class="math notranslate nohighlight">\(x \in S\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-llnfmc0">
-<span class="eqno">(28.1)<a class="headerlink" href="#equation-llnfmc0" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = x\}  \to \psi^*(x)
+<span class="eqno">(29.1)<a class="headerlink" href="#equation-llnfmc0" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m \mathbf{1}\{X_t = x\}  \to \psi^*(x)
     \quad \text{as } m \to \infty\]</div>
 </section>
 </div><p>Here</p>
@@ -399,7 +399,7 @@ distribution, then, for all <span class="math notranslate nohighlight">\(x \in S
 distribution <span class="math notranslate nohighlight">\(\psi_0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb{1} \{X_t = x\} = 1\)</span> if <span class="math notranslate nohighlight">\(X_t = x\)</span> and zero otherwise.</p></li>
 </ul>
-<p>The result in <a class="reference internal" href="#equation-llnfmc0">(28.1)</a> is sometimes called <strong>ergodicity</strong>.</p>
+<p>The result in <a class="reference internal" href="#equation-llnfmc0">(29.1)</a> is sometimes called <strong>ergodicity</strong>.</p>
 <p>The theorem tells us that the fraction of time the chain spends at state <span class="math notranslate nohighlight">\(x\)</span>
 converges to <span class="math notranslate nohighlight">\(\psi^*(x)\)</span> as time goes to infinity.</p>
 <p id="new-interp-sd">This gives us another way to interpret the stationary distribution (provided irreducibility holds).</p>
@@ -408,7 +408,7 @@ converges to <span class="math notranslate nohighlight">\(\psi^*(x)\)</span> as 
 <p>It tells us that, in some settings, the law of large numbers sometimes holds even when the
 sequence of random variables is <a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">not IID</span></a>.</p>
 <section id="example-1">
-<span id="mc-eg1-2"></span><h3><span class="section-number">28.3.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
+<span id="mc-eg1-2"></span><h3><span class="section-number">29.3.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
 <p>Recall our cross-sectional interpretation of the employment/unemployment model <a class="reference internal" href="markov_chains_I.html#mc-eg1-1"><span class="std std-ref">discussed above</span></a>.</p>
 <p>Assume that <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, so that irreducibility holds.</p>
 <p>We saw that the stationary distribution is <span class="math notranslate nohighlight">\((p, 1-p)\)</span>, where</p>
@@ -422,7 +422,7 @@ p = \frac{\beta}{\alpha + \beta}
 <p>This is one aspect of the concept  of ergodicity.</p>
 </section>
 <section id="example-2">
-<span id="ergo"></span><h3><span class="section-number">28.3.2. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<span id="ergo"></span><h3><span class="section-number">29.3.2. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
 <p>Another example is the Hamilton dynamics we <a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">discussed before</span></a>.</p>
 <p>The <a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">graph</span></a> of the Markov chain shows it is irreducible</p>
 <p>Therefore, we can see the sample path averages for each state (the fraction of
@@ -470,7 +470,7 @@ the starting state</p>
 <p>Note the convergence to the stationary distribution regardless of the starting point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
 </section>
 <section id="example-3">
-<h3><span class="section-number">28.3.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.3.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
 <p>Let’s look at one more example with six states <a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">discussed before</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -526,7 +526,7 @@ indicating that this chain is irreducible.</p>
 to the stationary distribution.</p>
 </section>
 <section id="example-4">
-<h3><span class="section-number">28.3.4. </span>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.3.4. </span>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h3>
 <p>Let’s look at another example with two states: 0 and 1.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -579,7 +579,7 @@ P :=
 <p>However, the distribution at each state does not.</p>
 </section>
 <section id="expectations-of-geometric-sums">
-<h3><span class="section-number">28.3.5. </span>Expectations of geometric sums<a class="headerlink" href="#expectations-of-geometric-sums" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.3.5. </span>Expectations of geometric sums<a class="headerlink" href="#expectations-of-geometric-sums" title="Permalink to this heading">#</a></h3>
 <p>Sometimes we want to compute the mathematical expectation of a geometric sum, such as
 <span class="math notranslate nohighlight">\(\sum_t \beta^t h(X_t)\)</span>.</p>
 <p>In view of the preceding discussion, this is</p>
@@ -600,10 +600,10 @@ P :=
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">28.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="mc_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 28.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 29.1 </span></p>
 <section id="exercise-content">
 <p>Benhabib el al. <span id="id4">[<a class="reference internal" href="zreferences.html#id273" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">BBL19</a>]</span> estimated that the transition matrix for social mobility as the following</p>
 <div class="math notranslate nohighlight">
@@ -650,7 +650,7 @@ P:=
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex1"> Exercise 28.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex1"> Exercise 29.1</a></p>
 <section id="solution-content">
 <p>Solution 1:</p>
 <p>Use the technique we learnt before, we can take the power of the transition matrix</p>
@@ -740,7 +740,7 @@ P:=
 </div>
 <div class="exercise admonition" id="mc_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 28.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 29.2 </span></p>
 <section id="exercise-content">
 <p>According to the discussion <a class="reference internal" href="#mc-eg1-2"><span class="std std-ref">above</span></a>, if a worker’s employment dynamics obey the stochastic matrix</p>
 <div class="math notranslate nohighlight">
@@ -774,7 +774,7 @@ condition or the values of <span class="math notranslate nohighlight">\(\alpha, 
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 28.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 29.2</a></p>
 <section id="solution-content">
 <p>We will address this exercise graphically.</p>
 <p>The plots show the time series of <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> for two initial
@@ -820,7 +820,7 @@ conditions.</p>
 </div>
 <div class="exercise admonition" id="mc_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 28.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 29.3 </span></p>
 <section id="exercise-content">
 <p>In <code class="docutils literal notranslate"><span class="pre">quantecon</span></code> library, irreducibility is tested by checking whether the chain forms a <a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html">strongly connected component</a>.</p>
 <p>However, another way to verify irreducibility is by checking whether <span class="math notranslate nohighlight">\(A\)</span> satisfies the following statement:</p>
@@ -831,7 +831,7 @@ conditions.</p>
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex3"> Exercise 28.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex3"> Exercise 29.3</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -953,18 +953,27 @@ conditions.</p>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+  <a class="reference internal" href="business_cycle_cn.html">
+   3. jupytext:
+text_representation:
+extension: .md
+format_name: myst
+format_version: 0.13
+jupytext_version: 1.14.5
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   5. Price Level Histories
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   5. Income and Wealth Inequality
+   6. Income and Wealth Inequality
   </a>
  </li>
 </ul>
@@ -976,22 +985,22 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   6. Complex Numbers and Trigonometry
+   7. Complex Numbers and Trigonometry
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   7. Linear Equations and Matrix Algebra
+   8. Linear Equations and Matrix Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   8. Eigenvalues and Eigenvectors
+   9. Eigenvalues and Eigenvectors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="intro_supply_demand.html">
-   9. Introduction to Supply and Demand
+   10. Introduction to Supply and Demand
   </a>
  </li>
 </ul>
@@ -1003,32 +1012,32 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   10. Present Values
+   11. Present Values
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   11. Consumption Smoothing
+   12. Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   12. Equalizing Difference Model
+   13. Equalizing Difference Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   13. A Monetarist Theory of Price Levels
+   14. A Monetarist Theory of Price Levels
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   14. A Monetarist Theory of Price Levels with Adaptive Expectations
+   15. A Monetarist Theory of Price Levels with Adaptive Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   15. Geometric Series for Elementary Economics
+   16. Geometric Series for Elementary Economics
   </a>
  </li>
 </ul>
@@ -1040,27 +1049,27 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   16. Distributions and Probabilities
+   17. Distributions and Probabilities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   17. LLN and CLT
+   18. LLN and CLT
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   18. Monte Carlo and Option Pricing
+   19. Monte Carlo and Option Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   19. Heavy-Tailed Distributions
+   20. Heavy-Tailed Distributions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   20. Racial Segregation
+   21. Racial Segregation
   </a>
  </li>
 </ul>
@@ -1072,27 +1081,27 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   21. The Solow-Swan Growth Model
+   22. The Solow-Swan Growth Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   22. Dynamics in One Dimension
+   23. Dynamics in One Dimension
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   23. The Cobweb Model
+   24. The Cobweb Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   24. The Overlapping Generations Model
+   25. The Overlapping Generations Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   25. Commodity Prices
+   26. Commodity Prices
   </a>
  </li>
 </ul>
@@ -1103,23 +1112,23 @@ conditions.</p>
 </p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="ar1_processes.html">
-   26. AR1 Processes
+  <a class="reference internal" href="ar1_processes_cn.html">
+   27. AR1 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   27. Markov Chains: Basic Concepts
+   28. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   28. Markov Chains: Irreducibility and Ergodicity
+   29. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   29. Univariate Time Series with Matrix Algebra
+   30. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1131,12 +1140,12 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   30. Linear Programming
+   31. Linear Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   31. Shortest Paths
+   32. Shortest Paths
   </a>
  </li>
 </ul>
@@ -1148,22 +1157,22 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   32. The Perron-Frobenius Theorem
+   33. The Perron-Frobenius Theorem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   33. Input-Output Models
+   34. Input-Output Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   34. A Lake Model of Employment
+   35. A Lake Model of Employment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   35. Networks
+   36. Networks
   </a>
  </li>
 </ul>
@@ -1175,12 +1184,12 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   36. Supply and Demand with Many Goods
+   37. Supply and Demand with Many Goods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   37. Market Equilibrium with Heterogeneity
+   38. Market Equilibrium with Heterogeneity
   </a>
  </li>
 </ul>
@@ -1192,12 +1201,12 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   38. Simple Linear Regression Model
+   39. Simple Linear Regression Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   39. Maximum Likelihood Estimation
+   40. Maximum Likelihood Estimation
   </a>
  </li>
 </ul>
@@ -1209,17 +1218,17 @@ conditions.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   40. Troubleshooting
+   41. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   41. References
+   42. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   42. Execution Statistics
+   43. Execution Statistics
   </a>
  </li>
 </ul>
@@ -1257,7 +1266,7 @@ conditions.</p>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/markov_chains_II.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/markov_chains_II.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>

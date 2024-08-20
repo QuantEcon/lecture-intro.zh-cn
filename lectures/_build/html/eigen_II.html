@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>32. The Perron-Frobenius Theorem &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>33. The Perron-Frobenius Theorem &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -122,8 +122,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="33. Input-Output Models" href="input_output.html" />
-    <link rel="prev" title="31. Shortest Paths" href="short_path.html" />
+    <link rel="next" title="34. Input-Output Models" href="input_output.html" />
+    <link rel="prev" title="32. Shortest Paths" href="short_path.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -171,21 +171,21 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonnegative-matrices">32.1. Nonnegative matrices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible-matrices">32.1.1. Irreducible matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#left-eigenvectors">32.1.2. Left eigenvectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">32.1.3. The Perron-Frobenius theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-irreducible-matrix">32.1.3.1. Example: Irreducible matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonnegative-matrices">33.1. Nonnegative matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible-matrices">33.1.1. Irreducible matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#left-eigenvectors">33.1.2. Left eigenvectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">33.1.3. The Perron-Frobenius theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-irreducible-matrix">33.1.3.1. Example: Irreducible matrix</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-matrices">32.1.4. Primitive matrices</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-primitive-matrix">32.1.4.1. Example 1: Primitive matrix</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-connection-to-markov-chains">32.1.4.2. Example 2: Connection to Markov chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-matrices">33.1.4. Primitive matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-primitive-matrix">33.1.4.1. Example 1: Primitive matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-connection-to-markov-chains">33.1.4.2. Example 2: Connection to Markov chains</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">32.2. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">33.2. Exercises</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -231,7 +231,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="the-perron-frobenius-theorem">
-<h1><span class="section-number">32. </span>The Perron-Frobenius Theorem<a class="headerlink" href="#the-perron-frobenius-theorem" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">33. </span>The Perron-Frobenius Theorem<a class="headerlink" href="#the-perron-frobenius-theorem" title="Permalink to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -276,7 +276,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/humphrey/anaconda3/envs/
 </div>
 </div>
 <section id="nonnegative-matrices">
-<h2><span class="section-number">32.1. </span>Nonnegative matrices<a class="headerlink" href="#nonnegative-matrices" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.1. </span>Nonnegative matrices<a class="headerlink" href="#nonnegative-matrices" title="Permalink to this heading">#</a></h2>
 <p>Often, in economics, the matrix that we are dealing with is nonnegative.</p>
 <p>Nonnegative matrices have several special and useful properties.</p>
 <p>In this section we will discuss some of them — in particular, the connection
@@ -285,7 +285,7 @@ between nonnegativity and eigenvalues.</p>
 is nonnegative, i.e., <span class="math notranslate nohighlight">\(a_{ij} \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i,j\)</span>.</p>
 <p>We denote this as <span class="math notranslate nohighlight">\(A \geq 0\)</span>.</p>
 <section id="irreducible-matrices">
-<span id="irreducible"></span><h3><span class="section-number">32.1.1. </span>Irreducible matrices<a class="headerlink" href="#irreducible-matrices" title="Permalink to this heading">#</a></h3>
+<span id="irreducible"></span><h3><span class="section-number">33.1.1. </span>Irreducible matrices<a class="headerlink" href="#irreducible-matrices" title="Permalink to this heading">#</a></h3>
 <p>We introduced irreducible matrices in the <a class="reference internal" href="markov_chains_II.html#mc-irreducible"><span class="std std-ref">Markov chain lecture</span></a>.</p>
 <p>Here we generalize this concept:</p>
 <p>Let <span class="math notranslate nohighlight">\(a^{k}_{ij}\)</span> be element <span class="math notranslate nohighlight">\((i,j)\)</span> of <span class="math notranslate nohighlight">\(A^k\)</span>.</p>
@@ -320,7 +320,7 @@ C = \begin{bmatrix} 1 &amp; 0 \\
 <span class="math notranslate nohighlight">\(c^{k}_{12},c^{k}_{21} = 0\)</span> for all <span class="math notranslate nohighlight">\(k \geq 0\)</span>.</p>
 </section>
 <section id="left-eigenvectors">
-<h3><span class="section-number">32.1.2. </span>Left eigenvectors<a class="headerlink" href="#left-eigenvectors" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.1.2. </span>Left eigenvectors<a class="headerlink" href="#left-eigenvectors" title="Permalink to this heading">#</a></h3>
 <p>Recall that we previously discussed eigenvectors in <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">Eigenvalues and Eigenvectors</span></a>.</p>
 <p>In particular, <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(v\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(A\)</span> if <span class="math notranslate nohighlight">\(v\)</span> is nonzero and satisfy</p>
 <div class="math notranslate nohighlight">
@@ -396,13 +396,13 @@ The corresponding left eigenvectors are:
 <p>This is a more common expression and where the name left eigenvectors originates.</p>
 </section>
 <section id="perron-frobe">
-<span id="id1"></span><h3><span class="section-number">32.1.3. </span>The Perron-Frobenius theorem<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
+<span id="id1"></span><h3><span class="section-number">33.1.3. </span>The Perron-Frobenius theorem<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
 <p>For a square nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span>, the behavior of <span class="math notranslate nohighlight">\(A^k\)</span> as <span class="math notranslate nohighlight">\(k \to \infty\)</span> is controlled by the eigenvalue with the largest
 absolute value, often called the <strong>dominant eigenvalue</strong>.</p>
 <p>For any such matrix <span class="math notranslate nohighlight">\(A\)</span>, the Perron-Frobenius Theorem characterizes certain
 properties of the dominant eigenvalue and its corresponding eigenvector.</p>
 <div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 32.1 </span> (Perron-Frobenius Theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 33.1 </span> (Perron-Frobenius Theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If a matrix <span class="math notranslate nohighlight">\(A \geq 0\)</span> then,</p>
 <ol class="arabic simple">
@@ -423,7 +423,7 @@ properties of the dominant eigenvalue and its corresponding eigenvector.</p>
 <p>Let’s build our intuition for the theorem using a simple example we have seen <a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">before</span></a>.</p>
 <p>Now let’s consider examples for each case.</p>
 <section id="example-irreducible-matrix">
-<h4><span class="section-number">32.1.3.1. </span>Example: Irreducible matrix<a class="headerlink" href="#example-irreducible-matrix" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">33.1.3.1. </span>Example: Irreducible matrix<a class="headerlink" href="#example-irreducible-matrix" title="Permalink to this heading">#</a></h4>
 <p>Consider the following irreducible matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -461,7 +461,7 @@ properties of the dominant eigenvalue and its corresponding eigenvector.</p>
 </section>
 </section>
 <section id="primitive-matrices">
-<span id="prim-matrices"></span><h3><span class="section-number">32.1.4. </span>Primitive matrices<a class="headerlink" href="#primitive-matrices" title="Permalink to this heading">#</a></h3>
+<span id="prim-matrices"></span><h3><span class="section-number">33.1.4. </span>Primitive matrices<a class="headerlink" href="#primitive-matrices" title="Permalink to this heading">#</a></h3>
 <p>We know that in real world situations it’s hard for a matrix to be everywhere positive (although they have nice properties).</p>
 <p>The primitive matrices, however, can still give us helpful properties with looser definitions.</p>
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a square nonnegative matrix and let <span class="math notranslate nohighlight">\(A^k\)</span> be the <span class="math notranslate nohighlight">\(k^{th}\)</span> power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
@@ -488,7 +488,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 <p>We can see that if a matrix is primitive, then it implies the matrix is irreducible but not vice versa.</p>
 <p>Now let’s step back to the primitive matrices part of the Perron-Frobenius Theorem</p>
 <div class="proof theorem admonition" id="con-perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 32.2 </span> (Continous of Perron-Frobenius Theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 33.2 </span> (Continous of Perron-Frobenius Theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(A\)</span> is primitive then,</p>
 <ol class="arabic simple" start="6">
@@ -498,7 +498,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </ol>
 </section>
 </div><section id="example-1-primitive-matrix">
-<h4><span class="section-number">32.1.4.1. </span>Example 1: Primitive matrix<a class="headerlink" href="#example-1-primitive-matrix" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">33.1.4.1. </span>Example 1: Primitive matrix<a class="headerlink" href="#example-1-primitive-matrix" title="Permalink to this heading">#</a></h4>
 <p>Consider the following primitive matrix <span class="math notranslate nohighlight">\(B\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -708,7 +708,7 @@ n = 10000, error = 1.0000000000
 <p>In fact we have already seen the theorem in action before in <a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">the Markov chain lecture</span></a>.</p>
 </section>
 <section id="example-2-connection-to-markov-chains">
-<span id="spec-markov"></span><h4><span class="section-number">32.1.4.2. </span>Example 2: Connection to Markov chains<a class="headerlink" href="#example-2-connection-to-markov-chains" title="Permalink to this heading">#</a></h4>
+<span id="spec-markov"></span><h4><span class="section-number">33.1.4.2. </span>Example 2: Connection to Markov chains<a class="headerlink" href="#example-2-connection-to-markov-chains" title="Permalink to this heading">#</a></h4>
 <p>We are now prepared to bridge the languages spoken in the two lectures.</p>
 <p>A primitive matrix is both irreducible and aperiodic.</p>
 <p>So Perron-Frobenius Theorem explains why both <a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">Imam and Temple matrix</span></a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">Hamilton matrix</a> converge to a stationary distribution, which is the Perron projection of the two matrices</p>
@@ -808,10 +808,10 @@ but it is out of the scope of this lecture.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">32.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="eig_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 32.1 </span> (Leontief’s Input-Output Model)</p>
+<p class="admonition-title"><span class="caption-number">Exercise 33.1 </span> (Leontief’s Input-Output Model)</p>
 <section id="exercise-content">
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">Wassily Leontief</a> developed a model of an economy with <span class="math notranslate nohighlight">\(n\)</span> sectors producing <span class="math notranslate nohighlight">\(n\)</span> different commodities representing the interdependencies of different sectors of an economy.</p>
 <p>Under this model some of the output is consumed internally by the industries and the rest is consumed by external consumers.</p>
@@ -898,7 +898,7 @@ d =
 </div>
 <div class="solution dropdown admonition" id="eigen_II-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 32.1 (Leontief’s Input-Output Model)</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 33.1 (Leontief’s Input-Output Model)</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1020,18 +1020,27 @@ d =
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+  <a class="reference internal" href="business_cycle_cn.html">
+   3. jupytext:
+text_representation:
+extension: .md
+format_name: myst
+format_version: 0.13
+jupytext_version: 1.14.5
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   5. Price Level Histories
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   5. Income and Wealth Inequality
+   6. Income and Wealth Inequality
   </a>
  </li>
 </ul>
@@ -1043,22 +1052,22 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   6. Complex Numbers and Trigonometry
+   7. Complex Numbers and Trigonometry
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   7. Linear Equations and Matrix Algebra
+   8. Linear Equations and Matrix Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   8. Eigenvalues and Eigenvectors
+   9. Eigenvalues and Eigenvectors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="intro_supply_demand.html">
-   9. Introduction to Supply and Demand
+   10. Introduction to Supply and Demand
   </a>
  </li>
 </ul>
@@ -1070,32 +1079,32 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   10. Present Values
+   11. Present Values
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   11. Consumption Smoothing
+   12. Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   12. Equalizing Difference Model
+   13. Equalizing Difference Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   13. A Monetarist Theory of Price Levels
+   14. A Monetarist Theory of Price Levels
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   14. A Monetarist Theory of Price Levels with Adaptive Expectations
+   15. A Monetarist Theory of Price Levels with Adaptive Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   15. Geometric Series for Elementary Economics
+   16. Geometric Series for Elementary Economics
   </a>
  </li>
 </ul>
@@ -1107,27 +1116,27 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   16. Distributions and Probabilities
+   17. Distributions and Probabilities
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   17. LLN and CLT
+   18. LLN and CLT
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   18. Monte Carlo and Option Pricing
+   19. Monte Carlo and Option Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   19. Heavy-Tailed Distributions
+   20. Heavy-Tailed Distributions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   20. Racial Segregation
+   21. Racial Segregation
   </a>
  </li>
 </ul>
@@ -1139,27 +1148,27 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   21. The Solow-Swan Growth Model
+   22. The Solow-Swan Growth Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   22. Dynamics in One Dimension
+   23. Dynamics in One Dimension
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   23. The Cobweb Model
+   24. The Cobweb Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   24. The Overlapping Generations Model
+   25. The Overlapping Generations Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   25. Commodity Prices
+   26. Commodity Prices
   </a>
  </li>
 </ul>
@@ -1170,23 +1179,23 @@ d =
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="ar1_processes.html">
-   26. AR1 Processes
+  <a class="reference internal" href="ar1_processes_cn.html">
+   27. AR1 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   27. Markov Chains: Basic Concepts
+   28. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   28. Markov Chains: Irreducibility and Ergodicity
+   29. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   29. Univariate Time Series with Matrix Algebra
+   30. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1198,12 +1207,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   30. Linear Programming
+   31. Linear Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   31. Shortest Paths
+   32. Shortest Paths
   </a>
  </li>
 </ul>
@@ -1215,22 +1224,22 @@ d =
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   32. The Perron-Frobenius Theorem
+   33. The Perron-Frobenius Theorem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   33. Input-Output Models
+   34. Input-Output Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   34. A Lake Model of Employment
+   35. A Lake Model of Employment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   35. Networks
+   36. Networks
   </a>
  </li>
 </ul>
@@ -1242,12 +1251,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   36. Supply and Demand with Many Goods
+   37. Supply and Demand with Many Goods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   37. Market Equilibrium with Heterogeneity
+   38. Market Equilibrium with Heterogeneity
   </a>
  </li>
 </ul>
@@ -1259,12 +1268,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   38. Simple Linear Regression Model
+   39. Simple Linear Regression Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   39. Maximum Likelihood Estimation
+   40. Maximum Likelihood Estimation
   </a>
  </li>
 </ul>
@@ -1276,17 +1285,17 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   40. Troubleshooting
+   41. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   41. References
+   42. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   42. Execution Statistics
+   43. Execution Statistics
   </a>
  </li>
 </ul>
@@ -1324,7 +1333,7 @@ d =
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/eigen_II.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/eigen_II.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>

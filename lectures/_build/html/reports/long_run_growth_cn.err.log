@@ -1,0 +1,87 @@
+Traceback (most recent call last):
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/mpd2020.xlsx"
+data = pd.read_excel(data_url, 
+                     sheet_name='Full data')
+data.head()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[2], line 2[0m
+[1;32m      1[0m data_url [38;5;241m=[39m [38;5;124m"[39m[38;5;124mhttps://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/mpd2020.xlsx[39m[38;5;124m"[39m
+[0;32m----> 2[0m data [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_excel[49m[43m([49m[43mdata_url[49m[43m,[49m[43m [49m
+[1;32m      3[0m [43m                     [49m[43msheet_name[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mFull data[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m      4[0m data[38;5;241m.[39mhead()
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/pandas/io/excel/_base.py:495[0m, in [0;36mread_excel[0;34m(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend, engine_kwargs)[0m
+[1;32m    493[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(io, ExcelFile):
+[1;32m    494[0m     should_close [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[0;32m--> 495[0m     io [38;5;241m=[39m [43mExcelFile[49m[43m([49m
+[1;32m    496[0m [43m        [49m[43mio[49m[43m,[49m
+[1;32m    497[0m [43m        [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mstorage_options[49m[43m,[49m
+[1;32m    498[0m [43m        [49m[43mengine[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m
+[1;32m    499[0m [43m        [49m[43mengine_kwargs[49m[38;5;241;43m=[39;49m[43mengine_kwargs[49m[43m,[49m
+[1;32m    500[0m [43m    [49m[43m)[49m
+[1;32m    501[0m [38;5;28;01melif[39;00m engine [38;5;129;01mand[39;00m engine [38;5;241m!=[39m io[38;5;241m.[39mengine:
+[1;32m    502[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    503[0m         [38;5;124m"[39m[38;5;124mEngine should not be specified when passing [39m[38;5;124m"[39m
+[1;32m    504[0m         [38;5;124m"[39m[38;5;124man ExcelFile - ExcelFile already has the engine set[39m[38;5;124m"[39m
+[1;32m    505[0m     )
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/pandas/io/excel/_base.py:1567[0m, in [0;36mExcelFile.__init__[0;34m(self, path_or_buffer, engine, storage_options, engine_kwargs)[0m
+[1;32m   1564[0m [38;5;28mself[39m[38;5;241m.[39mengine [38;5;241m=[39m engine
+[1;32m   1565[0m [38;5;28mself[39m[38;5;241m.[39mstorage_options [38;5;241m=[39m storage_options
+[0;32m-> 1567[0m [38;5;28mself[39m[38;5;241m.[39m_reader [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_engines[49m[43m[[49m[43mengine[49m[43m][49m[43m([49m
+[1;32m   1568[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_io[49m[43m,[49m
+[1;32m   1569[0m [43m    [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mstorage_options[49m[43m,[49m
+[1;32m   1570[0m [43m    [49m[43mengine_kwargs[49m[38;5;241;43m=[39;49m[43mengine_kwargs[49m[43m,[49m
+[1;32m   1571[0m [43m[49m[43m)[49m
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/pandas/io/excel/_openpyxl.py:552[0m, in [0;36mOpenpyxlReader.__init__[0;34m(self, filepath_or_buffer, storage_options, engine_kwargs)[0m
+[1;32m    534[0m [38;5;129m@doc[39m(storage_options[38;5;241m=[39m_shared_docs[[38;5;124m"[39m[38;5;124mstorage_options[39m[38;5;124m"[39m])
+[1;32m    535[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m(
+[1;32m    536[0m     [38;5;28mself[39m,
+[0;32m   (...)[0m
+[1;32m    539[0m     engine_kwargs: [38;5;28mdict[39m [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[1;32m    540[0m ) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
+[1;32m    541[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m    542[0m [38;5;124;03m    Reader using openpyxl engine.[39;00m
+[1;32m    543[0m 
+[0;32m   (...)[0m
+[1;32m    550[0m [38;5;124;03m        Arbitrary keyword arguments passed to excel engine.[39;00m
+[1;32m    551[0m [38;5;124;03m    """[39;00m
+[0;32m--> 552[0m     [43mimport_optional_dependency[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mopenpyxl[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m    553[0m     [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m(
+[1;32m    554[0m         filepath_or_buffer,
+[1;32m    555[0m         storage_options[38;5;241m=[39mstorage_options,
+[1;32m    556[0m         engine_kwargs[38;5;241m=[39mengine_kwargs,
+[1;32m    557[0m     )
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/pandas/compat/_optional.py:164[0m, in [0;36mimport_optional_dependency[0;34m(name, extra, errors, min_version)[0m
+[1;32m    162[0m     [38;5;28;01mreturn[39;00m [38;5;28;01mNone[39;00m
+[1;32m    163[0m [38;5;28;01melif[39;00m errors [38;5;241m==[39m [38;5;124m"[39m[38;5;124mraise[39m[38;5;124m"[39m:
+[0;32m--> 164[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(msg)
+[1;32m    165[0m [38;5;28;01melse[39;00m:
+[1;32m    166[0m     [38;5;28;01mreturn[39;00m [38;5;28;01mNone[39;00m
+
+[0;31mImportError[0m: Pandas requires version '3.1.0' or newer of 'openpyxl' (version '3.0.10' currently installed).
+ImportError: Pandas requires version '3.1.0' or newer of 'openpyxl' (version '3.0.10' currently installed).
+

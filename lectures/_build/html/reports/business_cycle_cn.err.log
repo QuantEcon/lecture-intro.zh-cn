@@ -1,0 +1,123 @@
+Traceback (most recent call last):
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+eci = wb.data.DataFrame('NE.PAT.FDEV.KD', 
+            ['USA', 'ARG', 'GBR', 'GRC', 'JPN'], 
+            labels=True)
+eci = eci.set_index('Country')
+eci.columns = eci.columns.str.replace('YR', '').astype(int)
+eci
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mJSONDecodeError[0m                           Traceback (most recent call last)
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/requests/models.py:971[0m, in [0;36mResponse.json[0;34m(self, **kwargs)[0m
+[1;32m    970[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 971[0m     [38;5;28;01mreturn[39;00m [43mcomplexjson[49m[38;5;241;43m.[39;49m[43mloads[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mtext[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    972[0m [38;5;28;01mexcept[39;00m JSONDecodeError [38;5;28;01mas[39;00m e:
+[1;32m    973[0m     [38;5;66;03m# Catch JSON-related errors and raise as requests.JSONDecodeError[39;00m
+[1;32m    974[0m     [38;5;66;03m# This aliases json.JSONDecodeError and simplejson.JSONDecodeError[39;00m
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/json/__init__.py:346[0m, in [0;36mloads[0;34m(s, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)[0m
+[1;32m    343[0m [38;5;28;01mif[39;00m ([38;5;28mcls[39m [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m object_hook [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m
+[1;32m    344[0m         parse_int [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m parse_float [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m
+[1;32m    345[0m         parse_constant [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m object_pairs_hook [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m kw):
+[0;32m--> 346[0m     [38;5;28;01mreturn[39;00m [43m_default_decoder[49m[38;5;241;43m.[39;49m[43mdecode[49m[43m([49m[43ms[49m[43m)[49m
+[1;32m    347[0m [38;5;28;01mif[39;00m [38;5;28mcls[39m [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/json/decoder.py:337[0m, in [0;36mJSONDecoder.decode[0;34m(self, s, _w)[0m
+[1;32m    333[0m [38;5;250m[39m[38;5;124;03m"""Return the Python representation of ``s`` (a ``str`` instance[39;00m
+[1;32m    334[0m [38;5;124;03mcontaining a JSON document).[39;00m
+[1;32m    335[0m 
+[1;32m    336[0m [38;5;124;03m"""[39;00m
+[0;32m--> 337[0m obj, end [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mraw_decode[49m[43m([49m[43ms[49m[43m,[49m[43m [49m[43midx[49m[38;5;241;43m=[39;49m[43m_w[49m[43m([49m[43ms[49m[43m,[49m[43m [49m[38;5;241;43m0[39;49m[43m)[49m[38;5;241;43m.[39;49m[43mend[49m[43m([49m[43m)[49m[43m)[49m
+[1;32m    338[0m end [38;5;241m=[39m _w(s, end)[38;5;241m.[39mend()
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/json/decoder.py:355[0m, in [0;36mJSONDecoder.raw_decode[0;34m(self, s, idx)[0m
+[1;32m    354[0m [38;5;28;01mexcept[39;00m [38;5;167;01mStopIteration[39;00m [38;5;28;01mas[39;00m err:
+[0;32m--> 355[0m     [38;5;28;01mraise[39;00m JSONDecodeError([38;5;124m"[39m[38;5;124mExpecting value[39m[38;5;124m"[39m, s, err[38;5;241m.[39mvalue) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m    356[0m [38;5;28;01mreturn[39;00m obj, end
+
+[0;31mJSONDecodeError[0m: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+[0;31mJSONDecodeError[0m                           Traceback (most recent call last)
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/__init__.py:533[0m, in [0;36m_queryAPI[0;34m(url)[0m
+[1;32m    532[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 533[0m     result [38;5;241m=[39m [43mresponse[49m[38;5;241;43m.[39;49m[43mjson[49m[43m([49m[43m)[49m
+[1;32m    534[0m [38;5;28;01mexcept[39;00m:
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/requests/models.py:975[0m, in [0;36mResponse.json[0;34m(self, **kwargs)[0m
+[1;32m    972[0m [38;5;28;01mexcept[39;00m JSONDecodeError [38;5;28;01mas[39;00m e:
+[1;32m    973[0m     [38;5;66;03m# Catch JSON-related errors and raise as requests.JSONDecodeError[39;00m
+[1;32m    974[0m     [38;5;66;03m# This aliases json.JSONDecodeError and simplejson.JSONDecodeError[39;00m
+[0;32m--> 975[0m     [38;5;28;01mraise[39;00m RequestsJSONDecodeError(e[38;5;241m.[39mmsg, e[38;5;241m.[39mdoc, e[38;5;241m.[39mpos)
+
+[0;31mJSONDecodeError[0m: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+[0;31mAPIResponseError[0m                          Traceback (most recent call last)
+Cell [0;32mIn[7], line 1[0m
+[0;32m----> 1[0m eci [38;5;241m=[39m [43mwb[49m[38;5;241;43m.[39;49m[43mdata[49m[38;5;241;43m.[39;49m[43mDataFrame[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mNE.PAT.FDEV.KD[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m
+[1;32m      2[0m [43m            [49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mUSA[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mARG[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mGBR[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mGRC[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mJPN[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m[43m [49m
+[1;32m      3[0m [43m            [49m[43mlabels[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
+[1;32m      4[0m eci [38;5;241m=[39m eci[38;5;241m.[39mset_index([38;5;124m'[39m[38;5;124mCountry[39m[38;5;124m'[39m)
+[1;32m      5[0m eci[38;5;241m.[39mcolumns [38;5;241m=[39m eci[38;5;241m.[39mcolumns[38;5;241m.[39mstr[38;5;241m.[39mreplace([38;5;124m'[39m[38;5;124mYR[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m'[39m)[38;5;241m.[39mastype([38;5;28mint[39m)
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/data.py:334[0m, in [0;36mDataFrame[0;34m(series, economy, time, index, columns, mrv, mrnev, skipBlanks, labels, skipAggs, numericTimeKeys, timeColumns, params, db, **dimensions)[0m
+[1;32m    330[0m [38;5;28;01mif[39;00m labels:
+[1;32m    331[0m     [38;5;66;03m# create a separate dataframe for labels so that we can control the column position below[39;00m
+[1;32m    332[0m     df2 [38;5;241m=[39m frame(index)
+[0;32m--> 334[0m [38;5;28;01mfor[39;00m row [38;5;129;01min[39;00m fetch(series, economy, time, mrv[38;5;241m=[39mmrv, mrnev[38;5;241m=[39mmrnev, skipBlanks[38;5;241m=[39mskipBlanks, labels[38;5;241m=[39m[38;5;28;01mTrue[39;00m, skipAggs[38;5;241m=[39mskipAggs, numericTimeKeys[38;5;241m=[39mnumericTimeKeys, params[38;5;241m=[39mparams, db[38;5;241m=[39mdb, [38;5;241m*[39m[38;5;241m*[39mdimensions):
+[1;32m    335[0m     column_key [38;5;241m=[39m row[columns][[38;5;124m'[39m[38;5;124mid[39m[38;5;124m'[39m]
+[1;32m    336[0m     [38;5;28;01mif[39;00m [38;5;28mlen[39m(index) [38;5;241m==[39m [38;5;241m1[39m:
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/data.py:92[0m, in [0;36mfetch[0;34m(series, economy, time, mrv, mrnev, skipBlanks, labels, skipAggs, numericTimeKeys, params, db, **dimensions)[0m
+[1;32m     88[0m     values[k] [38;5;241m=[39m w[38;5;241m.[39mqueryParam(v, concept[38;5;241m=[39mk, db[38;5;241m=[39mdb)
+[1;32m     90[0m aggs [38;5;241m=[39m w[38;5;241m.[39meconomy[38;5;241m.[39maggregates()
+[0;32m---> 92[0m [38;5;28;01mfor[39;00m row [38;5;129;01min[39;00m w[38;5;241m.[39mrefetch(url, keys, params[38;5;241m=[39mparams_, [38;5;241m*[39m[38;5;241m*[39mvalues):
+[1;32m     93[0m     [38;5;28;01mif[39;00m skipBlanks [38;5;129;01mand[39;00m row[[38;5;124m'[39m[38;5;124mvalue[39m[38;5;124m'[39m] [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m     94[0m         [38;5;28;01mcontinue[39;00m
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/__init__.py:322[0m, in [0;36mrefetch[0;34m(url, variables, **kwargs)[0m
+[1;32m    320[0m [38;5;28;01mtry[39;00m:
+[1;32m    321[0m     [38;5;28;01mfor[39;00m url2 [38;5;129;01min[39;00m _refetch_url(url, variables[[38;5;241m0[39m], variables[[38;5;241m1[39m:], [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[0;32m--> 322[0m         [38;5;28;01mfor[39;00m row [38;5;129;01min[39;00m fetch(url2, params, concepts, lang):
+[1;32m    323[0m             [38;5;28;01myield[39;00m row
+[1;32m    324[0m [38;5;28;01mexcept[39;00m URLError:
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/__init__.py:281[0m, in [0;36mfetch[0;34m(url, params, concepts, lang)[0m
+[1;32m    278[0m [38;5;28;01mwhile[39;00m totalRecords [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mor[39;00m recordsRead [38;5;241m<[39m totalRecords:
+[1;32m    280[0m     url_ [38;5;241m=[39m [38;5;124m'[39m[38;5;132;01m{}[39;00m[38;5;124m/[39m[38;5;132;01m{}[39;00m[38;5;124m/[39m[38;5;132;01m{}[39;00m[38;5;124m?[39m[38;5;132;01m{}[39;00m[38;5;124m'[39m[38;5;241m.[39mformat(endpoint, lang, url, urllib[38;5;241m.[39mparse[38;5;241m.[39murlencode(params_))
+[0;32m--> 281[0m     (hdr,result) [38;5;241m=[39m [43m_queryAPI[49m[43m([49m[43murl_[49m[43m)[49m
+[1;32m    283[0m     [38;5;28;01mif[39;00m totalRecords [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    284[0m         totalRecords [38;5;241m=[39m [38;5;28mint[39m(hdr[[38;5;124m'[39m[38;5;124mtotal[39m[38;5;124m'[39m])
+
+File [0;32m~/anaconda3/envs/quantecon/lib/python3.10/site-packages/wbgapi/__init__.py:535[0m, in [0;36m_queryAPI[0;34m(url)[0m
+[1;32m    533[0m     result [38;5;241m=[39m response[38;5;241m.[39mjson()
+[1;32m    534[0m [38;5;28;01mexcept[39;00m:
+[0;32m--> 535[0m     [38;5;28;01mraise[39;00m APIResponseError(url, [38;5;124m'[39m[38;5;124mJSON decoding error[39m[38;5;124m'[39m)
+[1;32m    537[0m hdr [38;5;241m=[39m _responseHeader(url, result)
+[1;32m    538[0m [38;5;28;01mif[39;00m hdr[38;5;241m.[39mget([38;5;124m'[39m[38;5;124mmessage[39m[38;5;124m'[39m):
+
+[0;31mAPIResponseError[0m: APIError: JSON decoding error (https://api.worldbank.org/v2/en/sources/2/series/NE.PAT.FDEV.KD/country/USA;ARG;GBR;GRC;JPN/time/all?per_page=1000&page=1&format=json)
+APIResponseError: APIError: JSON decoding error (https://api.worldbank.org/v2/en/sources/2/series/NE.PAT.FDEV.KD/country/USA;ARG;GBR;GRC;JPN/time/all?per_page=1000&page=1&format=json)
+

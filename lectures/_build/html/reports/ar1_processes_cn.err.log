@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/humphrey/anaconda3/envs/quantecon/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+K = norm.pdf
+
+class KDE:
+
+    def __init__(self, x_data, h=None):
+
+        if h is None:
+            c = x_data.std()
+            n = len(x_data)
+            h = 1.06 * c * n**(-1/5)
+        self.h =
+------------------
+
+[0;36m  Cell [0;32mIn[8], line 11[0;36m[0m
+[0;31m    self.h =[0m
+[0m            ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+SyntaxError: invalid syntax (791131993.py, line 11)
+

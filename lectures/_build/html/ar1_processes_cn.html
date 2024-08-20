@@ -1,0 +1,1273 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>27. AR1 过程 &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.5378fd3a70a129d690fd5fc99fb75ef7.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script src="_static/quantecon-book-theme.ef2ef6c3e8da75e1e736fb5fce08cde6.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ar1_processes_cn';</script>
+    <link rel="canonical" href="https://intro.quantecon.org/ar1_processes_cn.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="28. Markov Chains: Basic Concepts" href="markov_chains_I.html" />
+    <link rel="prev" title="26. Commodity Prices" href="commod_price.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="AR1 过程"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="AR1 过程" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro.quantecon.org/ar1_processes_cn.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=ar1_processes_cn>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">27.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-1">27.2. AR(1) 模型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">27.2.1. 移动平均表示</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">27.2.2. 分布动态</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">27.3. 平稳性和渐近稳定性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">27.3.1. 平稳分布</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">27.4. 遍历性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">27.5. 练习</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">AR1 过程</p>
+
+                    </div>
+
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><section class="tex2jax_ignore mathjax_ignore" id="ar1-processes">
+<span id="id1"></span><h1><span class="section-number">27. </span>AR1 过程<a class="headerlink" href="#ar1-processes" title="Permalink to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title">迁移的讲座</p>
+<p>本讲座已从我们的 <a class="reference external" href="https://python.quantecon.org/intro.html">Intermediate Quantitative Economics with Python</a> 讲座系列迁移，现在是 <a class="reference external" href="https://intro.quantecon.org/intro.html">A First Course in Quantitative Economics</a> 的一部分。</p>
+</div>
+<section id="index-0">
+<span id="id2"></span><h2><span class="section-number">27.1. </span>概述<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<p>在本讲座中，我们将研究一种非常简单的随机模型类，称为 AR(1) 过程。</p>
+<p>这些简单模型在经济研究中反复使用，以表示诸如</p>
+<ul class="simple">
+<li><p>劳动收入</p></li>
+<li><p>股息</p></li>
+<li><p>生产力等的序列动态。</p></li>
+</ul>
+<p>AR(1) 过程可以取负值，但在必要时可以通过如指数运算的变换轻松转换为正过程。</p>
+<p>我们将研究 AR(1) 过程，部分是因为它们有用，部分是因为它们帮助我们理解重要概念。</p>
+<p>让我们从一些导入开始：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 设置默认图形大小</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ar-1">
+<h2><span class="section-number">27.2. </span>AR(1) 模型<a class="headerlink" href="#ar-1" title="Permalink to this heading">#</a></h2>
+<p><strong>AR(1) 模型</strong>（一阶自回归模型）的形式是</p>
+<div class="math notranslate nohighlight" id="equation-can-ar1">
+<span class="eqno">(27.1)<a class="headerlink" href="#equation-can-ar1" title="Permalink to this equation">#</a></span>\[X_{t+1} = a X_t + b + c W_{t+1}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(a, b, c\)</span> 是标量值参数。</p>
+<p>此运动定律在我们指定初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 后生成一个时间序列 <span class="math notranslate nohighlight">\(\{ X_t \}\)</span>。</p>
+<p>这称为 <strong>状态过程</strong>，状态空间是 <span class="math notranslate nohighlight">\(\mathbb R\)</span>。</p>
+<p>为了使事情更简单，我们将假设</p>
+<ul class="simple">
+<li><p>过程 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 是独立同分布且标准正态，</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 服从正态分布 <span class="math notranslate nohighlight">\(N(\mu_0, v_0)\)</span>，并且</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 与 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 独立。</p></li>
+</ul>
+<section id="id3">
+<h3><span class="section-number">27.2.1. </span>移动平均表示<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>从时间 <span class="math notranslate nohighlight">\(t\)</span> 倒退迭代，我们得到</p>
+<div class="math notranslate nohighlight">
+\[
+X_t = a X_{t-1} + b +  c W_t
+        = a^2 X_{t-2} + a b + a c W_{t-1} + b + c W_t
+        = \cdots
+\]</div>
+<p>如果我们一直回溯到时间零，我们得到</p>
+<div class="math notranslate nohighlight" id="equation-ar1-ma">
+<span class="eqno">(27.2)<a class="headerlink" href="#equation-ar1-ma" title="Permalink to this equation">#</a></span>\[X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
+        c \sum_{j=0}^{t-1} a^j  W_{t-j}\]</div>
+<p>方程 <a class="reference internal" href="#equation-ar1-ma">(27.2)</a> 表明 <span class="math notranslate nohighlight">\(X_t\)</span> 是定义良好的随机变量，其值取决于</p>
+<ul class="simple">
+<li><p>参数，</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 和</p></li>
+<li><p>从时间 <span class="math notranslate nohighlight">\(t=1\)</span> 到当前的冲击 <span class="math notranslate nohighlight">\(W_1, \ldots W_t\)</span>。</p></li>
+</ul>
+<p>在整个过程中，符号 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将用于指代这个随机变量 <span class="math notranslate nohighlight">\(X_t\)</span> 的密度。</p>
+</section>
+<section id="id4">
+<h3><span class="section-number">27.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>这个模型的一个好处是…很容易追踪对应于时间序列 <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> 的分布序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>。</p>
+<p>要看到这一点，我们首先注意到，对于每个 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 都是正态分布的。</p>
+<p>这直接来自 <a class="reference internal" href="#equation-ar1-ma">(27.2)</a>，因为独立正态随机变量的线性组合仍然是正态分布的。</p>
+<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能找到其前两个矩，我们就会知道其完整的分布
+<span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
+<p>令 <span class="math notranslate nohighlight">\(\mu_t\)</span> 和 <span class="math notranslate nohighlight">\(v_t\)</span> 分别表示 <span class="math notranslate nohighlight">\(X_t\)</span> 的均值和方差。</p>
+<p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(27.2)</a> 中得到这些值，或者我们可以使用以下递推表达式：</p>
+<div class="math notranslate nohighlight" id="equation-dyn-tm">
+<span class="eqno">(27.3)<a class="headerlink" href="#equation-dyn-tm" title="Permalink to this equation">#</a></span>\[\mu_{t+1} = a \mu_t + b
+\quad \text{和} \quad
+v_{t+1} = a^2 v_t + c^2\]</div>
+<p>这些表达式是通过对等式的两边分别取期望和方差从 <a class="reference internal" href="#equation-can-ar1">(27.1)</a> 中得到的。</p>
+<p>在计算第二个表达式时，我们使用 <span class="math notranslate nohighlight">\(X_t\)</span> 和 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 独立这一事实。</p>
+<p>（这由我们的假设和 <a class="reference internal" href="#equation-ar1-ma">(27.2)</a> 得出。）</p>
+<p>鉴于 <a class="reference internal" href="#equation-ar1-ma">(27.2)</a> 中的动态和初始条件 <span class="math notranslate nohighlight">\(\mu_0, v_0\)</span>，我们得到 <span class="math notranslate nohighlight">\(\mu_t, v_t\)</span>，因此</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_t = N(\mu_t, v_t)
+\]</div>
+<p>以下代码使用这些事实来跟踪边际分布序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>。</p>
+<p>参数为</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span>
+
+<span class="n">mu</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.6</span>  <span class="c1"># 初始条件 mu_0, v_0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这是分布序列：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">sim_length</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sim_length</span><span class="p">):</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\psi_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">[</span><span class="mf">1.05</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">borderaxespad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6b58ec64a142bacdb9a6ef30a7c208092d98a80d3221085aa40031002acc455a.png"><img alt="_images/6b58ec64a142bacdb9a6ef30a7c208092d98a80d3221085aa40031002acc455a.png" src="_images/6b58ec64a142bacdb9a6ef30a7c208092d98a80d3221085aa40031002acc455a.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">27.3. </span>平稳性和渐近稳定性<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>注意，在上图中，序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 似乎正在收敛到一个极限分布。</p>
+<p>如果我们进一步向未来预测，这一点更加清楚：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=-</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">sim_length</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">mu_0</span><span class="p">,</span> <span class="n">v_0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sim_length</span><span class="p">):</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span>
+                <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e84b441f928e3e9d64898b00bbd20d0f1764f60f5afb95c1fcfb405375daac54.png"><img alt="_images/e84b441f928e3e9d64898b00bbd20d0f1764f60f5afb95c1fcfb405375daac54.png" src="_images/e84b441f928e3e9d64898b00bbd20d0f1764f60f5afb95c1fcfb405375daac54.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>而且，极限不依赖于初始条件。</p>
+<p>例如，这种替代密度序列也会收敛到相同的极限。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/d06b3ec2fb1018645cb499cb38d057b991566d084ac56434db53c65adb2f6b25.png"><img alt="_images/d06b3ec2fb1018645cb499cb38d057b991566d084ac56434db53c65adb2f6b25.png" src="_images/d06b3ec2fb1018645cb499cb38d057b991566d084ac56434db53c65adb2f6b25.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>事实上，容易证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，无论初始条件如何，这种收敛都会发生。</p>
+<p>要看到这一点，我们只需要看 <a class="reference internal" href="#equation-dyn-tm">(27.3)</a> 中的前两个矩的动态。</p>
+<p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，这些序列收敛到各自的极限</p>
+<div class="math notranslate nohighlight" id="equation-mu-sig-star">
+<span class="eqno">(27.4)<a class="headerlink" href="#equation-mu-sig-star" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\mu^* := \frac{b}{1-a}
+\quad \text{和} \quad
+v^* = \frac{\\c^2}{1 - a^2}\end{aligned}\end{align} \]</div>
+<p>(请参阅我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">关于一维动态的讲座</span></a> 了解确定性收敛的背景。)</p>
+<p>因此</p>
+<div class="math notranslate nohighlight" id="equation-ar1-psi-star">
+<span class="eqno">(27.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Permalink to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
+\quad \text{当 }
+t \to \infty\]</div>
+<p>我们可以使用以下代码确认这对上述序列是有效的。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="n">mu_star</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">std_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># v_star 的平方根</span>
+<span class="n">psi_star</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu_star</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_star</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">psi_star</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\psi^*$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f32c6e6f5b51b7e6b1ba433511b3358ceaeec924493fd14e9dc94645126c1891.png"><img alt="_images/f32c6e6f5b51b7e6b1ba433511b3358ceaeec924493fd14e9dc94645126c1891.png" src="_images/f32c6e6f5b51b7e6b1ba433511b3358ceaeec924493fd14e9dc94645126c1891.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>如所述，序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 收敛于 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<section id="id6">
+<h3><span class="section-number">27.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>平稳分布是更新规则的固定点的分布。</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对于所有的 <span class="math notranslate nohighlight">\(j \in \mathbb{N}\)</span>，有 <span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 。</p>
+<p>换句话说，特化到当前设置，如果密度 <span class="math notranslate nohighlight">\(\psi\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> 上是 AR(1) 过程的 <strong>平稳</strong> 分布，那么</p>
+<div class="math notranslate nohighlight">
+\[
+X_t \sim \psi
+\quad \implies \quad
+a X_t + b + c W_{t+1} \sim \psi
+\]</div>
+<p>等式 <a class="reference internal" href="#equation-ar1-psi-star">(27.5)</a> 中的分布 <span class="math notranslate nohighlight">\(\psi^*\)</span> 具有这个性质 —— 检查这一点是一个练习。</p>
+<p>（当然，我们假设 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 以使 <span class="math notranslate nohighlight">\(\psi^*\)</span> 定义良好。）</p>
+<p>实际上，可以证明没有其他分布在 <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> 上具有这个性质。</p>
+<p>因此，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，AR(1) 模型有且仅有一个平稳密度，该密度由 <span class="math notranslate nohighlight">\(\psi^*\)</span> 给出。</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">27.4. </span>遍历性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>遍历性的概念在不同的作者中以不同的方式使用。</p>
+<p>在当前设置中理解它的一种方法是，即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布，某种版本的大数法则仍然适用。</p>
+<p>特别是，时间序列的均值收敛于平稳分布下的期望。</p>
+<p>事实上，可以证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，我们就有</p>
+<div class="math notranslate nohighlight" id="equation-ar1-ergo">
+<span class="eqno">(27.6)<a class="headerlink" href="#equation-ar1-ergo" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t)  \to
+\int h(x) \psi^*(x) dx
+    \quad \text{当 } m \to \infty\]</div>
+<p>只要右边的积分是有限且定义良好的。</p>
+<p>注意：</p>
+<ul class="simple">
+<li><p>在 <a class="reference internal" href="#equation-ar1-ergo">(27.6)</a> 中，收敛几乎必然成立。</p></li>
+<li><p>由 <span id="id8">[<a class="reference internal" href="zreferences.html#id210" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">MT09</a>]</span> 撰写的教科书是遍历性的经典参考文献。</p></li>
+</ul>
+<p>例如，如果我们考虑恒等函数 <span class="math notranslate nohighlight">\(h(x) = x\)</span>，我们得到</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{m} \sum_{t = 1}^m X_t  \to
+\int x \psi^*(x) dx
+    \quad \text{当 } m \to \infty
+\]</div>
+<p>换句话说，时间序列样本均值收敛于平稳分布的均值。</p>
+<p>正如接下来的几节课中将会更清楚，遍历性是统计和模拟中非常重要的概念。</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">27.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="ar1p_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 27.1 </span></p>
+<section id="exercise-content">
+<p>令 <span class="math notranslate nohighlight">\(k\)</span> 为自然数。</p>
+<p>随机变量的第 <span class="math notranslate nohighlight">\(k\)</span> 阶中心矩定义为</p>
+<div class="math notranslate nohighlight">
+\[
+M_k := \mathbb E [ (X - \mathbb E X )^k ]
+\]</div>
+<p>当该随机变量 <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> 时，已知</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M_k =
+\begin{cases}
+    0 &amp; \text{ 如果 } k \text{ 是奇数} \\
+    \sigma^k \
+```(k-1)!! &amp; \text{ 如果 } k 是偶数
+\end{cases}
+\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(n!!\)</span> 是双阶乘。</p>
+<p>根据 <a class="reference internal" href="#equation-ar1-ergo">(27.6)</a>，对于任何 <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span> 应有，</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{m} \sum_{t = 1}^m
+    (X_t - \mu^* )^k
+    \approx M_k
+\]</div>
+<p>当 <span class="math notranslate nohighlight">\(m\)</span> 很大时。</p>
+<p>通过模拟确认在一系列 <span class="math notranslate nohighlight">\(k\)</span> 上使用讲座中的默认参数这一点。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ar1_processes_cn-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex1"> Exercise 27.1</a></p>
+<section id="solution-content">
+<p>这是一个解决方案：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial2</span>
+
+<span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">sample_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sigma_0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">sample_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">mu_0</span> <span class="o">+</span> <span class="n">sigma_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">sample_sum</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu_star</span><span class="p">)</span><span class="o">**</span><span class="n">k</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sample_sum</span> <span class="o">/</span> <span class="n">m</span>
+
+<span class="k">def</span> <span class="nf">true_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">std_star</span><span class="o">**</span><span class="n">k</span> <span class="o">*</span> <span class="n">factorial2</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">k_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">sample_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">k_vals</span><span class="p">)</span>
+<span class="n">true_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">k_vals</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k_idx</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k_vals</span><span class="p">):</span>
+    <span class="n">sample_moments</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">true_moments</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">true_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">true_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;true moments&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">sample_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample moments&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ea96ceefff042e75a602847eff5b3418deb75acd063412ea2b3dfc8e42318ff1.png"><img alt="_images/ea96ceefff042e75a602847eff5b3418deb75acd063412ea2b3dfc8e42318ff1.png" src="_images/ea96ceefff042e75a602847eff5b3418deb75acd063412ea2b3dfc8e42318ff1.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ar1p_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 27.2 </span></p>
+<section id="exercise-content">
+<p>编写你自己的无维度 <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">核密度估计器</a>，从一个样本中估计密度。</p>
+<p>将其编写为一个类，在初始化时接收数据 <span class="math notranslate nohighlight">\(X\)</span> 和带宽 <span class="math notranslate nohighlight">\(h\)</span>，并提供一个方法 <span class="math notranslate nohighlight">\(f\)</span> 使得</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{hn} \sum_{i=1}^n
+K \left( \frac{x-X_i}{h} \right)
+\]</div>
+<p>对于 <span class="math notranslate nohighlight">\(K\)</span>，使用高斯核（<span class="math notranslate nohighlight">\(K\)</span>是标准正态密度）。</p>
+<p>编写类，使其带宽默认为 Silverman 的规则（参见
+<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">这个页面</a>上的 “rule of thumb” 讨论）。测试
+你所编写的类，测试步骤为</p>
+<ol class="arabic simple">
+<li><p>从分布 <span class="math notranslate nohighlight">\(\phi\)</span> 模拟数据 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span></p></li>
+<li><p>在合适的范围内绘制核密度估计</p></li>
+<li><p>在同一图上绘制 <span class="math notranslate nohighlight">\(\phi\)</span> 的密度</p></li>
+</ol>
+<p>对于以下类型的分布 <span class="math notranslate nohighlight">\(\phi\)</span></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">β分布</a> 与 <span class="math notranslate nohighlight">\(\alpha = \beta = 2\)</span></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">β分布</a> 与 <span class="math notranslate nohighlight">\(\alpha = 2\)</span> 和 <span class="math notranslate nohighlight">\(\beta = 5\)</span></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">β分布</a> 与 <span class="math notranslate nohighlight">\(\alpha = \beta = 0.5\)</span></p></li>
+</ul>
+<p>使用 <span class="math notranslate nohighlight">\(n=500\)</span>。</p>
+<p>对你的结果做出评论。（你认为这是这些分布的良好估计吗？）</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ar1_processes_cn-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex2"> Exercise 27.2</a></p>
+<section id="solution-content">
+<p>这是一个解决方案：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span>
+
+<span class="k">class</span> <span class="nc">KDE</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">h</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="mf">1.06</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_data</span> <span class="o">=</span> <span class="n">x_data</span>
+
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_data</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">K</span><span class="p">((</span><span class="n">x_val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_data</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_kde</span><span class="p">(</span><span class="n">ϕ</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="mf">1.2</span><span class="p">):</span>
+    <span class="n">x_data</span> <span class="o">=</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">KDE</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+
+    <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">kde</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimate&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;true density&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">parameter_pairs</span><span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="ow">in</span> <span class="n">parameter_pairs</span><span class="p">:</span>
+    <span class="n">plot_kde</span><span class="p">(</span><span class="n">beta</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/087f6aad9fa7759220e907352277111ddb0f477de31f7c3e73bc65b626d7fe73.png"><img alt="_images/087f6aad9fa7759220e907352277111ddb0f477de31f7c3e73bc65b626d7fe73.png" src="_images/087f6aad9fa7759220e907352277111ddb0f477de31f7c3e73bc65b626d7fe73.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f184a52bfaecf92735f3e067bfda391a219036f16a30e35523283ff700850c01.png"><img alt="_images/f184a52bfaecf92735f3e067bfda391a219036f16a30e35523283ff700850c01.png" src="_images/f184a52bfaecf92735f3e067bfda391a219036f16a30e35523283ff700850c01.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8228050e0c4eb5f8cb4d07ab7ad17099bfd94d2febbcb6db2a51a8900b092071.png"><img alt="_images/8228050e0c4eb5f8cb4d07ab7ad17099bfd94d2febbcb6db2a51a8900b092071.png" src="_images/8228050e0c4eb5f8cb4d07ab7ad17099bfd94d2febbcb6db2a51a8900b092071.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>我们看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则不然。</p>
+</section>
+</div>
+<div class="exercise admonition" id="ar1p_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 27.3 </span></p>
+<section id="exercise-content">
+<p>在讲座中，我们讨论了以下事实：对于 <span class="math notranslate nohighlight">\(AR(1)\)</span> 过程</p>
+<div class="math notranslate nohighlight">
+\[
+X_{t+1} = a X_t + b + c W_{t+1}
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 是 iid 标准正态，</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_t = N(\mu, s^2) \implies \psi_{t+1}
+= N(a \mu + b, a^2 s^2 + c^2)
+\]</div>
+<p>通过模拟确认这一点，至少大致确认。让</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a = 0.9\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b = 0.0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c = 0.1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu = -3\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(s = 0.2\)</span></p></li>
+</ul>
+<p>首先，使用上述描述的真实分布绘制 <span class="math notranslate nohighlight">\(\psi_t\)</span> 和 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span>。</p>
+<p>其次，按以下步骤在同一图中（用不同颜色）绘制 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span>：</p>
+<ol class="arabic simple">
+<li><p>从 <span class="math notranslate nohighlight">\(N(\mu, s^2)\)</span> 分布生成 <span class="math notranslate nohighlight">\(n\)</span> 个 <span class="math notranslate nohighlight">\(X_t\)</span> 抽样</p></li>
+<li><p>使用规则 <span class="math notranslate nohighlight">\(X_{t+1} = a X_t + b + c W_{t+1}\)</span> 更新所有抽样值</p></li>
+<li><p>使用通过核密度估计获得的 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 样本来生成密度估计。</p></li>
+</ol>
+<p>试试 <span class="math notranslate nohighlight">\(n=2000\)</span>，确认通过模拟获得的 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 收敛于理论分布。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ar1_processes_cn-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex3"> Exercise 27.3</a></p>
+<section id="solution-content">
+<p>这是我们的解决方案</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">μ</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">s_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">ψ_next</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ_next</span><span class="p">)</span> <span class="o">/</span> <span class="n">s_next</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">ψ_next</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ_next</span><span class="p">,</span> <span class="n">s_next</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">x_draws</span> <span class="o">=</span> <span class="n">ψ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x_draws_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x_draws</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KDE</span><span class="p">(</span><span class="n">x_draws_next</span><span class="p">)</span>
+
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">μ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">μ</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">ψ</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\psi_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">ψ_next</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\psi_{t+1}$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">kde</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimate of $\psi_{t+1}$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ecbd3f682707ba8663ecc5db285a14230a89fa4bad723d057586f95f1410a448.png"><img alt="_images/ecbd3f682707ba8663ecc5db285a14230a89fa4bad723d057586f95f1410a448.png" src="_images/ecbd3f682707ba8663ecc5db285a14230a89fa4bad723d057586f95f1410a448.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>通过模拟得到的分布大致与理论分布一致，正如预期的那样。</p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. Long-Run Growth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle_cn.html">
+   3. jupytext:
+text_representation:
+extension: .md
+format_name: myst
+format_version: 0.13
+jupytext_version: 1.14.5
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   5. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Essential Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   7. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   9. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   10. Introduction to Supply and Demand
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   13. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. A Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   16. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   17. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   18. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   19. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   20. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   21. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   22. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   23. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   24. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   25. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   26. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   27. AR1 过程
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   28. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   29. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   30. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   31. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   32. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   33. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   34. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   35. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   36. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   37. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   38. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   39. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   40. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   41. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   42. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   43. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/ar1_processes_cn.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/master?urlpath=tree/ar1_processes_cn.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/ar1_processes_cn.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/ar1_processes_cn.ipynb" data-branch=master>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/master/ar1_processes_cn.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "ar1_processes_cn";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/ar1_processes_cn.ipynb";
+                const branch = "master"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

@@ -1,4 +1,23 @@
+"""
+Before running the file, config the environment by adding the OpenAI API key:
+
+
+echo "export OPENAI_API_KEY='yourkey'" >> ~/.zshrc
+source ~/.zshrc
+echo $OPENAI_API_KEY # Test to see if it is added
+"""
+
+
 import openai
+import os
+from concurrent.futures import ThreadPoolExecutor
+
+def process_file(filename, function, assistant_cn_id):
+    input_file = os.path.join(directory, filename)
+    print(f'processing {input_file}')
+    if os.path.isfile(input_file):
+        function(input_file, assistant_cn_id)
+
 
 def split_text(content, chunk_size=3000):
     chunks = []
@@ -39,7 +58,7 @@ def translate_cn(input_file, assistant_id):
     with open(input_file, 'r', encoding='utf-8') as file:
         content = file.read()
 
-    # Split the content into chunks (e.g., 3000 characters each)
+    # Split the content into chunks
     chunks = split_text(content, chunk_size=3000)
 
     # Initialize the OpenAI client and thread
@@ -76,7 +95,14 @@ def translate_cn(input_file, assistant_id):
 
 
 if __name__ == "__main__":
-    input_file = "lectures/ar1_processes.md"
+    directory = "lectures"
+    assistant_cn_id = 'asst_zjzyGwEZ1rVuJYWNQk6nzQTA'
+
+    files = [f for f in os.listdir(directory) if f.endswith('.md') and os.path.isfile(os.path.join(directory, f))]
     print(openai.beta.assistants.list())
-    assistant_cn_id = 'asst_kWnZVKQEHRY1Db6ezdbKnRIy'
-    translate_cn(input_file, assistant_cn_id)
+    
+    print(f'files to translate: {files}')
+    
+    file_handler = lambda file: process_file(file, translate_cn, assistant_cn_id)
+    with ThreadPoolExecutor() as executor:
+        executor.map(file_handler, files[1:])
