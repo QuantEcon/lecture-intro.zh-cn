@@ -65,7 +65,7 @@ def translate_cn(input_file, assistant_id):
     thread = client.beta.threads.create()
 
     translated_content = ""
-
+    header = ''
     for chunk in chunks:
         # Create and poll the run for each chunk
         run = client.beta.threads.runs.create_and_poll(
@@ -78,11 +78,11 @@ def translate_cn(input_file, assistant_id):
             messages = client.beta.threads.messages.list(
                 thread_id=thread.id
             )
-            translated_content += '\n\n' + messages.data[0].content[0].text.value
-            print(translated_content)
+            translated_content += header + messages.data[0].content[0].text.value
         else:
             print(f"Translation failed for chunk: {chunk[:50]}... Status: {run.status}")
             continue
+        header = '\n'
 
     # Create the output file name
     output_file = input_file.replace('.md', '_cn.md')
