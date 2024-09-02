@@ -59,7 +59,7 @@ def translate_cn(input_file, assistant_id):
         content = file.read()
 
     # Split the content into chunks
-    chunks = split_text(content, chunk_size=3000)
+    chunks = split_text(content, chunk_size=1000)
 
     # Initialize the OpenAI client and thread
     thread = client.beta.threads.create()
@@ -71,7 +71,7 @@ def translate_cn(input_file, assistant_id):
         run = client.beta.threads.runs.create_and_poll(
             thread_id=thread.id,
             assistant_id=assistant_id,
-            instructions="Please translate the following content into simplified Chinese. Maintain all the markdown syntax and directives unchanged. Only translate text and code comments Give the results directly without system messages: " + chunk
+            instructions="Give a direct translation into simplified Chinese. Maintain all the markdown syntax and directives unchanged. Give the results directly without system messages: " + chunk
         )
         
         if run.status == 'completed': 
