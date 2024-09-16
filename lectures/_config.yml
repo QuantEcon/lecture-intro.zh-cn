@@ -1,0 +1,118 @@
+title: A First Course in Quantitative Economics with Python
+author: Thomas J. Sargent & John Stachurski
+logo: _static/qe-logo.png
+description: This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.
+
+parse:
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+    - tasklist
+
+only_build_toc_files: true
+execute:
+  execute_notebooks: "cache"
+  timeout: 600 # 10 minutes
+  exclude_patterns:
+    - '_static/*'
+
+html:
+  baseurl: https://intro.quantecon.org/
+
+bibtex_bibfiles:
+  - _static/quant-econ.bib
+
+latex:
+  latex_documents:
+    targetname: quantecon-python-intro.tex
+
+sphinx:
+  extra_extensions: [sphinx_multitoc_numbering, sphinxext.rediraffe, sphinx_exercise, sphinx_togglebutton, sphinx.ext.intersphinx, sphinx_proof, sphinx_tojupyter] 
+  config:
+    # false-positive links
+    linkcheck_ignore: ['https://doi.org/https://doi.org/10.2307/1235116', 'https://math.stackexchange.com/*', 'https://stackoverflow.com/*']
+    # myst-nb config
+    nb_render_image_options:
+      width: 80%
+    nb_code_prompt_show: "Show {type}"
+    # -------------
+    html_favicon: _static/lectures-favicon.ico
+    html_theme: quantecon_book_theme
+    html_static_path: ['_static']
+    html_theme_options:
+      authors:
+        - name: Thomas J. Sargent
+          url: http://www.tomsargent.com/
+        - name: John Stachurski
+          url: https://johnstachurski.net/ 
+      dark_logo: quantecon-logo-transparent.png
+      header_organisation_url: https://quantecon.org
+      header_organisation: QuantEcon
+      repository_url: https://github.com/QuantEcon/lecture-python-intro
+      nb_repository_url: https://github.com/QuantEcon/lecture-python-intro.notebooks
+      twitter: quantecon
+      twitter_logo_url: https://assets.quantecon.org/img/qe-twitter-logo.png
+      og_logo_url: https://assets.quantecon.org/img/qe-og-logo.png
+      description: This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.
+      keywords: Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski
+      analytics:
+        google_analytics_id: G-QDS1YRJNGM
+      launch_buttons:
+        notebook_interface        : classic  # The interface interactive links will activate ["classic", "jupyterlab"]
+        binderhub_url             : https://mybinder.org  # The URL of the BinderHub (e.g., https://mybinder.org)
+        colab_url                 : https://colab.research.google.com
+        thebe                     : false  # Add a thebe button to pages (requires the repository to run on Binder)
+    intersphinx_mapping:
+      pyprog:
+        - https://python-programming.quantecon.org/
+        - null
+      intro: 
+        - https://intro.quantecon.org/
+        - null
+      dle:
+        - https://quantecon.github.io/lecture-dle/
+        - null
+      dps:
+        - https://quantecon.github.io/lecture-dps/
+        - null
+      eqm:
+        - https://quantecon.github.io/lecture-eqm/
+        - null
+      stats:
+        - https://quantecon.github.io/lecture-stats/
+        - null
+      tools:
+        - https://quantecon.github.io/lecture-tools-techniques/
+        - null
+      dynam:
+        - https://quantecon.github.io/lecture-dynamics/
+        - null
+    mathjax3_config:
+      tex:
+        macros:
+          "argmax" : "arg\\,max"
+          "argmin" : "arg\\,min"
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    rediraffe_redirects:
+      index_toc.md: intro.md
+    tojupyter_static_file_path: ["_static"]
+    tojupyter_target_html: true
+    tojupyter_urlpath: "https://intro.quantecon.org/"  #TODO: update
+    tojupyter_image_urlpath: "https://intro.quantecon.org/_static/" #TODO: update
+    tojupyter_lang_synonyms: ["ipython", "ipython3", "python"]
+    tojupyter_kernels:
+      python3:
+        kernelspec:
+          display_name: "Python"
+          language: python3
+          name: python3
+        file_extension: ".py"
+    tojupyter_images_markdown: true
