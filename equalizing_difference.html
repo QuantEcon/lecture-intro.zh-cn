@@ -1,0 +1,1338 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>13. Equalizing Difference Model &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'equalizing_difference';</script>
+    <link rel="canonical" href="https://intro-cn.quantecon.org/equalizing_difference.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="14. A Monetarist Theory of Price Levels" href="cagan_ree.html" />
+    <link rel="prev" title="12. Consumption Smoothing" href="cons_smooth.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Equalizing Difference Model"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Equalizing Difference Model" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro-cn.quantecon.org/equalizing_difference.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=equalizing_difference>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">13.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-indifference-condition">13.2. The indifference condition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-of-a-high-school-educated-worker">13.2.1. Present value of a high school educated worker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-of-a-college-bound-new-high-school-graduate">13.2.2. Present value of a college-bound new high school graduate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computations">13.3. Computations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrepreneur-worker-interpretation">13.4. Entrepreneur-worker interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-application-of-calculus">13.5. An application of calculus</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    <a href=https://quantecon.org><img src="_static/quantecon-logo-transparent.png" class="dark-logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">Equalizing Difference Model</p>
+
+                    </div>
+                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="equalizing-difference-model">
+<h1><span class="section-number">13. </span>Equalizing Difference Model<a class="headerlink" href="#equalizing-difference-model" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2><span class="section-number">13.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>This lecture presents a model of the college-high-school wage gap in which the
+“time to build” a college graduate plays a key role.</p>
+<p>Milton Friedman invented the   model  to study whether  differences in  earnings of US dentists and doctors were outcomes of  competitive labor markets or whether
+they reflected entry barriers imposed by governments working in conjunction with doctors’ professional organizations.</p>
+<p>Chapter 4 of Jennifer Burns <span id="id1">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span> describes  Milton Friedman’s joint work with Simon Kuznets that eventually  led to the publication of <span id="id2">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span> and <span id="id3">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>.</p>
+<p>To map  Friedman’s application into our model, think of our high school students as Friedman’s dentists and our college graduates as Friedman’s doctors.</p>
+<p>Our presentation is “incomplete” in the sense that it is based on  a single equation that would be part of set equilibrium conditions of a more fully articulated model.</p>
+<p>This ‘‘equalizing difference’’ equation  determines  a college-high-school wage ratio that equalizes present values of a high school educated  worker and a college educated worker.</p>
+<p>The idea  is that lifetime earnings somehow adjust to make a new high school worker indifferent between going to college and not going to college but instead going to work immediately.</p>
+<p>(The job of the “other equations” in a more complete model would be to describe what adjusts to bring about this outcome.)</p>
+<p>Our model is just one example  of an  “equalizing difference” theory of relative wage rates, a class of theories dating back at least to Adam Smith’s <strong>Wealth of Nations</strong> <span id="id4">[<a class="reference internal" href="zreferences.html#id11" title="Adam Smith. The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations. Harriman House Limited, 2010.">Smith, 2010</a>]</span>.</p>
+<p>For most of this lecture, the only mathematical tools that we’ll use are from linear algebra, in particular, matrix multiplication and matrix inversion.</p>
+<p>However, near the  end of the lecture, we’ll use calculus just in case readers want to see how computing partial derivatives could let us present some findings more concisely.</p>
+<p>And doing that will let illustrate how good Python is at doing calculus!</p>
+<p>But if you don’t know calculus, our tools from linear algebra are certainly enough.</p>
+<p>As usual, we’ll start by importing some Python modules.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-indifference-condition">
+<h2><span class="section-number">13.2. </span>The indifference condition<a class="headerlink" href="#the-indifference-condition" title="Permalink to this heading">#</a></h2>
+<p>The key idea is that the entry level college wage premium has to adjust to make a representative worker indifferent between going to college and not going to college.</p>
+<p>Let</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R &gt; 1\)</span> be the gross rate of return on a one-period bond</p></li>
+<li><p><span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots T\)</span> denote the years that a person either works or attends college</p></li>
+<li><p><span class="math notranslate nohighlight">\(0\)</span> denote the first period after high school that a person can work if he does not go to college</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> denote the last period  that a person  works</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_t^h\)</span> be the wage at time <span class="math notranslate nohighlight">\(t\)</span> of a high school graduate</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_t^c\)</span> be the wage at time <span class="math notranslate nohighlight">\(t\)</span> of a college graduate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_h &gt; 1\)</span> be the (gross) rate of growth of wages of a  high school graduate, so that
+<span class="math notranslate nohighlight">\( w_t^h = w_0^h \gamma_h^t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_c &gt; 1\)</span> be the (gross) rate of growth of wages of a  college  graduate, so that
+<span class="math notranslate nohighlight">\( w_t^c = w_0^c \gamma_c^t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> be the upfront monetary costs of going to college</p></li>
+</ul>
+<p>We now compute present values that a new high school graduate earns if</p>
+<ul class="simple">
+<li><p>he goes to work immediately and earns wages paid to someone without a college education</p></li>
+<li><p>he goes to college for four years and after graduating earns wages paid to a college graduate</p></li>
+</ul>
+<section id="present-value-of-a-high-school-educated-worker">
+<h3><span class="section-number">13.2.1. </span>Present value of a high school educated worker<a class="headerlink" href="#present-value-of-a-high-school-educated-worker" title="Permalink to this heading">#</a></h3>
+<p>If someone goes to work immediately after high school  and  works for the  <span class="math notranslate nohighlight">\(T+1\)</span> years <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots, T\)</span>, she earns present value</p>
+<div class="math notranslate nohighlight">
+\[
+h_0 = \sum_{t=0}^T R^{-t} w_t^h = w_0^h \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right] \equiv w_0^h A_h 
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
+\]</div>
+<p>The present value <span class="math notranslate nohighlight">\(h_0\)</span> is the “human wealth” at the beginning of time <span class="math notranslate nohighlight">\(0\)</span> of someone who chooses not to attend college but instead to go to work immediately at the wage of a high school graduate.</p>
+</section>
+<section id="present-value-of-a-college-bound-new-high-school-graduate">
+<h3><span class="section-number">13.2.2. </span>Present value of a college-bound new high school graduate<a class="headerlink" href="#present-value-of-a-college-bound-new-high-school-graduate" title="Permalink to this heading">#</a></h3>
+<p>If someone goes to college for the four years <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> during which she earns <span class="math notranslate nohighlight">\(0\)</span>, but then goes to work  immediately after college   and  works for the <span class="math notranslate nohighlight">\(T-3\)</span> years <span class="math notranslate nohighlight">\(t=4, 5, \ldots ,T\)</span>, she earns present value</p>
+<div class="math notranslate nohighlight">
+\[
+c_0 = \sum_{t=4}^T R^{-t} w_t^c = w_0^c (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1} \gamma_c } \right] \equiv w_0^c A_c
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+A_c = (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1} \gamma_c } \right] .
+\]</div>
+<p>The present value <span class="math notranslate nohighlight">\(c_0\)</span>  is the “human wealth” at the beginning of time <span class="math notranslate nohighlight">\(0\)</span> of someone who chooses to attend college for four years and then start to work at time <span class="math notranslate nohighlight">\(t=4\)</span> at the wage of a college graduate.</p>
+<p>Assume that college tuition plus four years of room and board amount to  <span class="math notranslate nohighlight">\(D\)</span> and must be paid at time <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>So net of monetary cost of college, the present value of attending college as of the first period after high school is</p>
+<div class="math notranslate nohighlight">
+\[ 
+c_0 - D
+\]</div>
+<p>We now formulate a pure <strong>equalizing difference</strong> model of the initial college-high school wage gap <span class="math notranslate nohighlight">\(\phi\)</span> that verifies</p>
+<div class="math notranslate nohighlight">
+\[
+w_0^c = \phi w_0^h 
+\]</div>
+<p>We suppose that <span class="math notranslate nohighlight">\(R, \gamma_h, \gamma_c, T\)</span> and also <span class="math notranslate nohighlight">\(w_0^h\)</span>  are fixed parameters.</p>
+<p>We start by noting that the pure equalizing difference model asserts that the college-high-school wage gap <span class="math notranslate nohighlight">\(\phi\)</span> solves an
+“equalizing” equation that sets the present value not going to college equal to the present value of going to college:</p>
+<div class="math notranslate nohighlight">
+\[
+h_0 = c_0 - D
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight" id="equation-eq-equalize">
+<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Permalink to this equation">#</a></span>\[ 
+w_0^h A_h  = \phi w_0^h A_c - D .
+\]</div>
+<p>This “indifference condition”  is the heart of the model.</p>
+<p>Solving equation <a class="reference internal" href="#equation-eq-equalize">(13.1)</a> for the college wage premium <span class="math notranslate nohighlight">\(\phi\)</span> we obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-wagepremium">
+<span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-wagepremium" title="Permalink to this equation">#</a></span>\[
+\phi  = \frac{A_h}{A_c} + \frac{D}{w_0^h A_c} .
+\]</div>
+<p>In a <strong>free college</strong> special case <span class="math notranslate nohighlight">\(D =0\)</span>.</p>
+<p>Here  the only cost of going to college is the forgone earnings from being  a high school educated worker.</p>
+<p>In that case,</p>
+<div class="math notranslate nohighlight">
+\[
+\phi  = \frac{A_h}{A_c} . 
+\]</div>
+<p>In the next section we’ll write Python code to compute <span class="math notranslate nohighlight">\(\phi\)</span>  and plot it as a function of its determinants.</p>
+</section>
+</section>
+<section id="computations">
+<h2><span class="section-number">13.3. </span>Computations<a class="headerlink" href="#computations" title="Permalink to this heading">#</a></h2>
+<p>We can have some fun with examples that tweak various parameters,
+prominently including <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>.</p>
+<p>Now let’s write some Python code to compute <span class="math notranslate nohighlight">\(\phi\)</span> and plot it as a function of some of its determinants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the namedtuple for the equalizing difference model</span>
+<span class="n">EqDiffModel</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;EqDiffModel&#39;</span><span class="p">,</span> <span class="s1">&#39;R T γ_h γ_c w_h0 D&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_edm</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>   <span class="c1"># gross rate of return</span>
+               <span class="n">T</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>     <span class="c1"># time horizon</span>
+               <span class="n">γ_h</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># high-school wage growth</span>
+               <span class="n">γ_c</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># college wage growth</span>
+               <span class="n">w_h0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>   <span class="c1"># initial wage (high school)</span>
+               <span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>     <span class="c1"># cost for college</span>
+              <span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">EqDiffModel</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">model</span>
+    
+    <span class="n">A_h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span>
+    <span class="n">ϕ</span> <span class="o">=</span> <span class="n">A_h</span> <span class="o">/</span> <span class="n">A_c</span> <span class="o">+</span> <span class="n">D</span> <span class="o">/</span> <span class="p">(</span><span class="n">w_h0</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">ϕ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using vectorization instead of loops,
+we  build some functions to help do comparative statics .</p>
+<p>For a given instance of the class, we want to recompute <span class="math notranslate nohighlight">\(\phi\)</span> when one parameter changes and others remain fixed.</p>
+<p>Let’s do an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span> <span class="o">=</span> <span class="n">create_edm</span><span class="p">()</span>
+<span class="n">gap1</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex1</span><span class="p">)</span>
+
+<span class="n">gap1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8041412724969135
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s not charge for college and recompute <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>The initial college wage premium should go down.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># free college</span>
+<span class="n">ex2</span> <span class="o">=</span> <span class="n">create_edm</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gap2</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex2</span><span class="p">)</span>
+<span class="n">gap2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2204649517903732
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us construct some graphs that show us how the initial college-high-school wage ratio <span class="math notranslate nohighlight">\(\phi\)</span> would change if one of its determinants were to change.</p>
+<p>Let’s start with the gross interest rate <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;wage gap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/4734e23d40fee3aa8240c2af3f7eeb8a5bdc563f7c5e2f454c93e8e26f31be91.png"><img alt="_images/4734e23d40fee3aa8240c2af3f7eeb8a5bdc563f7c5e2f454c93e8e26f31be91.png" src="_images/4734e23d40fee3aa8240c2af3f7eeb8a5bdc563f7c5e2f454c93e8e26f31be91.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Evidently, the initial wage ratio <span class="math notranslate nohighlight">\(\phi\)</span> must rise to compensate a prospective high school student for <strong>waiting</strong> to start receiving income – remember that while she is earning nothing in years <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span>, the high school worker is earning a salary.</p>
+<p>Not let’s study what happens to the initial wage ratio <span class="math notranslate nohighlight">\(\phi\)</span> if the rate of growth of college wages rises, holding constant other
+determinants of <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γc_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">γ_c</span><span class="o">=</span><span class="n">γ_c</span><span class="p">)</span> <span class="k">for</span> <span class="n">γ_c</span> <span class="ow">in</span> <span class="n">γc_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">γc_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\gamma_c$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;wage gap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/38e14d90e3be20471e1ca951eb81ad173b82225f3f7ed7fa4d0672a85bd51186.png"><img alt="_images/38e14d90e3be20471e1ca951eb81ad173b82225f3f7ed7fa4d0672a85bd51186.png" src="_images/38e14d90e3be20471e1ca951eb81ad173b82225f3f7ed7fa4d0672a85bd51186.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Notice how  the initial wage gap falls when the rate of growth <span class="math notranslate nohighlight">\(\gamma_c\)</span> of college wages rises.</p>
+<p>The wage gap falls to “equalize” the present values of the two types of career, one as a high school worker, the other as a college worker.</p>
+<p>Can you guess what happens to the initial wage ratio <span class="math notranslate nohighlight">\(\phi\)</span> when next we vary the rate of growth of high school wages, holding all other determinants of <span class="math notranslate nohighlight">\(\phi\)</span> constant?</p>
+<p>The following graph shows what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γh_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">γ_h</span><span class="o">=</span><span class="n">γ_h</span><span class="p">)</span> <span class="k">for</span> <span class="n">γ_h</span> <span class="ow">in</span> <span class="n">γh_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">γh_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\gamma_h$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;wage gap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/a8d89da7a8eb6163064a3f046f663542853a7bf01f565c8111fc0cd9a20c0f4b.png"><img alt="_images/a8d89da7a8eb6163064a3f046f663542853a7bf01f565c8111fc0cd9a20c0f4b.png" src="_images/a8d89da7a8eb6163064a3f046f663542853a7bf01f565c8111fc0cd9a20c0f4b.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="entrepreneur-worker-interpretation">
+<h2><span class="section-number">13.4. </span>Entrepreneur-worker interpretation<a class="headerlink" href="#entrepreneur-worker-interpretation" title="Permalink to this heading">#</a></h2>
+<p>We can add a parameter and reinterpret variables to get a model of entrepreneurs versus workers.</p>
+<p>We now let <span class="math notranslate nohighlight">\(h\)</span> be  the present value of a “worker”.</p>
+<p>We define the present value of an entrepreneur to be</p>
+<div class="math notranslate nohighlight">
+\[
+c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi \in (0,1) \)</span> is  the probability that an entrepreneur’s “project” succeeds.</p>
+<p>For our model of workers and firms, we’ll interpret <span class="math notranslate nohighlight">\(D\)</span> as the cost of becoming an entrepreneur.</p>
+<p>This cost might include costs of hiring workers, office space, and lawyers.</p>
+<p>What we used to call the college, high school wage gap <span class="math notranslate nohighlight">\(\phi\)</span> now becomes the ratio
+of a successful entrepreneur’s earnings to a worker’s earnings.</p>
+<p>We’ll find that as <span class="math notranslate nohighlight">\(\pi\)</span> decreases, <span class="math notranslate nohighlight">\(\phi\)</span> increases, indicating that the riskier it is to
+be an entrepreneur, the higher must be the reward for a successful project.</p>
+<p>Now let’s adopt the entrepreneur-worker interpretation of our model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a model of entrepreneur-worker interpretation</span>
+<span class="n">EqDiffModel</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;EqDiffModel&#39;</span><span class="p">,</span> <span class="s1">&#39;R T γ_h γ_c w_h0 D π&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_edm_π</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>   <span class="c1"># gross rate of return</span>
+                 <span class="n">T</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>     <span class="c1"># time horizon</span>
+                 <span class="n">γ_h</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># high-school wage growth</span>
+                 <span class="n">γ_c</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># college wage growth</span>
+                 <span class="n">w_h0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>   <span class="c1"># initial wage (high school)</span>
+                 <span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>     <span class="c1"># cost for college</span>
+                 <span class="n">π</span><span class="o">=</span><span class="mi">0</span>       <span class="c1"># chance of business success</span>
+              <span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">EqDiffModel</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">π</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="n">model</span>
+    
+    <span class="n">A_h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span>
+    
+    <span class="c1"># Incorprate chance of success</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="n">π</span> <span class="o">*</span> <span class="n">A_c</span>
+    
+    <span class="n">ϕ</span> <span class="o">=</span> <span class="n">A_h</span> <span class="o">/</span> <span class="n">A_c</span> <span class="o">+</span> <span class="n">D</span> <span class="o">/</span> <span class="p">(</span><span class="n">w_h0</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ϕ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the probability that a new business succeeds is <span class="math notranslate nohighlight">\(0.2\)</span>, let’s compute the initial wage premium for successful entrepreneurs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex3</span> <span class="o">=</span> <span class="n">create_edm_π</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">gap3</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex3</span><span class="p">)</span>
+
+<span class="n">gap3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.020706362484567
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s study how the initial wage premium for successful entrepreneurs depend on the success probability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">π_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="n">π</span><span class="p">)</span> <span class="k">for</span> <span class="n">π</span> <span class="ow">in</span> <span class="n">π_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">π_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;wage gap&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/708d171d848e1d531ebfd9f03175005bef358701daa3cc3b0364931c2735aec9.png"><img alt="_images/708d171d848e1d531ebfd9f03175005bef358701daa3cc3b0364931c2735aec9.png" src="_images/708d171d848e1d531ebfd9f03175005bef358701daa3cc3b0364931c2735aec9.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Does the graph make sense to you?</p>
+</section>
+<section id="an-application-of-calculus">
+<h2><span class="section-number">13.5. </span>An application of calculus<a class="headerlink" href="#an-application-of-calculus" title="Permalink to this heading">#</a></h2>
+<p>So far, we have used only linear algebra and it has been a good enough tool for us to  figure out how our model works.</p>
+<p>However, someone who knows calculus might want us  just to  take partial derivatives.</p>
+<p>We’ll do that now.</p>
+<p>A reader who doesn’t know calculus could read no further and feel confident that applying linear algebra has taught us the main properties of the model.</p>
+<p>But for a reader interested in how we can get Python to do all the hard work involved in computing partial derivatives, we’ll say a few things about that now.</p>
+<p>We’ll use the Python module ‘sympy’ to compute partial derivatives of <span class="math notranslate nohighlight">\(\phi\)</span> with respect to the parameters that determine it.</p>
+<p>Define symbols</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;\gamma_h, \gamma_c, w_0^h, D&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">R</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define function <span class="math notranslate nohighlight">\(A_h\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_h</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">))</span>
+<span class="n">A_h</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left( \left( \gamma_{h}, \  R, \  T\right) \mapsto \frac{1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}}{1 - \frac{\gamma_{h}}{R}} \right)\]</div>
+</div>
+</div>
+<p>Define function <span class="math notranslate nohighlight">\(A_c\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_c</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A_c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left( \left( \gamma_{c}, \  R, \  T\right) \mapsto \frac{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)}{R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right)} \right)\]</div>
+</div>
+</div>
+<p>Now, define <span class="math notranslate nohighlight">\(\phi\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">A_h</span><span class="p">(</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">A_c</span><span class="p">(</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">/</span><span class="p">(</span><span class="n">w_h0</span><span class="o">*</span><span class="n">A_c</span><span class="p">(</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left( \left( D, \  \gamma_{h}, \  \gamma_{c}, \  R, \  T, \  w^{h}_{0}\right) \mapsto \frac{D R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} \right)\]</div>
+</div>
+</div>
+<p>We begin by setting  default parameter values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_value</span> <span class="o">=</span> <span class="mf">1.05</span>
+<span class="n">T_value</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span> <span class="o">=</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">1.01</span>
+<span class="n">w_h0_value</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">D_value</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s compute <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> and then evaluate it at the default values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_D</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">ϕ_D</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical value at default parameters</span>
+<span class="n">ϕ_D_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_D</span><span class="p">)</span>
+<span class="n">ϕ_D_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0.058367632070654\]</div>
+</div>
+</div>
+<p>Thus, as with our earlier graph, we find that raising <span class="math notranslate nohighlight">\(R\)</span> increases the initial college wage premium <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>Compute <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial T}\)</span> and evaluate it at default parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_T</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">ϕ_T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \log{\left(\frac{\gamma_{c}}{R} \right)}}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} + \frac{R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \log{\left(\frac{\gamma_{c}}{R} \right)}}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \cdot \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \log{\left(\frac{\gamma_{h}}{R} \right)}}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical value at default parameters</span>
+<span class="n">ϕ_T_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_T</span><span class="p">)</span>
+<span class="n">ϕ_T_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle -0.00973478032996598\]</div>
+</div>
+</div>
+<p>We find that raising <span class="math notranslate nohighlight">\(T\)</span> decreases the initial college wage premium <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>This is because college graduates now have longer career lengths to “pay off” the time and other costs they paid to go to college</p>
+<p>Let’s compute <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial γ_h}\)</span> and evaluate it at default parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_h</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_h</span><span class="p">)</span>
+<span class="n">ϕ_γ_h</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(T + 1\right)}{\gamma_{c}^{4} \gamma_{h} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)^{2}}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical value at default parameters</span>
+<span class="n">ϕ_γ_h_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_γ_h</span><span class="p">)</span>
+<span class="n">ϕ_γ_h_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 17.8590485545256\]</div>
+</div>
+</div>
+<p>We find that raising <span class="math notranslate nohighlight">\(\gamma_h\)</span> increases the initial college wage premium <span class="math notranslate nohighlight">\(\phi\)</span>, in line with our earlier graphical analysis.</p>
+<p>Compute <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial γ_c}\)</span> and evaluate it numerically at default parameter values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_c</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_c</span><span class="p">)</span>
+<span class="n">ϕ_γ_c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(T - 3\right)}{\gamma_{c}^{5} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} - \frac{4 D R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{5} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} - \frac{D R^{3}}{\gamma_{c}^{4} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(T - 3\right)}{\gamma_{c}^{5} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \cdot \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{4 R^{4} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{5} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{3} \cdot \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical value at default parameters</span>
+<span class="n">ϕ_γ_c_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_γ_c</span><span class="p">)</span>
+<span class="n">ϕ_γ_c_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle -31.6486401973376\]</div>
+</div>
+</div>
+<p>We find that raising <span class="math notranslate nohighlight">\(\gamma_c\)</span> decreases the initial college wage premium <span class="math notranslate nohighlight">\(\phi\)</span>, in line with our earlier graphical analysis.</p>
+<p>Let’s compute <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial R}\)</span> and evaluate it numerically at default parameter values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_R</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+<span class="n">ϕ_R</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{D R^{3} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(T - 3\right)}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} + \frac{4 D R^{3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{D R^{2}}{\gamma_{c}^{3} w^{h}_{0} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} - \frac{R^{3} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(T - 3\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \cdot \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{3} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(T + 1\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{4 R^{3} \cdot \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{2} \cdot \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{3} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{2} \gamma_{h} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \cdot \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)^{2}}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical value at default parameters</span>
+<span class="n">ϕ_R_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_R</span><span class="p">)</span>
+<span class="n">ϕ_R_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 13.2642738659429\]</div>
+</div>
+</div>
+<p>We find that raising the gross interest rate <span class="math notranslate nohighlight">\(R\)</span> increases the initial college wage premium <span class="math notranslate nohighlight">\(\phi\)</span>, in line with our earlier graphical analysis.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. 长期增长
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. Business Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   5. Inflation During French Revolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   7. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   9. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   10. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Finite Horizons
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   13. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Infinite Horizons
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   16. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   17. Computing Square Roots
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   18. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   19. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   20. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   21. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   22. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   23. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   24. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   25. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   26. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   27. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Monetary-Fiscal Policy Interactions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation.html">
+   28. Money Financed Government Deficits and Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unpleasant.html">
+   29. Some Unpleasant Monetarist Arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation_nonlinear.html">
+   30. Inflation Rate Laffer Curves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laffer_adaptive.html">
+   31. Laffer Curves  with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   32. AR(1) Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   33. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   34. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   35. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   36. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   37. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   38. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   39. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   40. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   41. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   42. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   43. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   44. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   45. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   46. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   47. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   48. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/equalizing_difference.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/main?urlpath=tree/equalizing_difference.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/equalizing_difference.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/equalizing_difference.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/equalizing_difference.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "equalizing_difference";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/equalizing_difference.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

@@ -1,0 +1,2097 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. 长期增长 &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'long_run_growth';</script>
+    <link rel="canonical" href="https://intro-cn.quantecon.org/long_run_growth.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Business Cycles" href="business_cycle.html" />
+    <link rel="prev" title="1. About These Lectures" href="about.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="长期增长"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="长期增长" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro-cn.quantecon.org/long_run_growth.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=long_run_growth>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2. 准备数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.3. 人均国内生产总值</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3.1. 英国</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.3.2. 美国、英国和中国的比较</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.3.3. 聚焦于中国</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.3.4. 聚焦于美国和英国</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdp">2.4. GDP增长</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.4.1. 早期工业化（1820至1940年）</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.4.1.1. 构建类似于图兹的图</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.4.2. 现代时代（1950至2020年）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.5. 地区分析</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    <a href=https://quantecon.org><img src="_static/quantecon-logo-transparent.png" class="dark-logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">长期增长</p>
+
+                    </div>
+                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2. </span>长期增长<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>在本讲座中，我们将使用Python、<a class="reference external" href="https://python-programming.quantecon.org/pandas.html" title="(in Python)"><span class="xref std std-doc">pandas</span></a> 和 <a class="reference external" href="https://python-programming.quantecon.org/matplotlib.html" title="(in Python)"><span class="xref std std-doc">Matplotlib</span></a> 来下载、处理和可视化经济增长的历史数据。</p>
+<p>除了学习如何运用这些工具之外，我们还将使用它们来描述跨越多个世纪的多个国家的经济增长经历。</p>
+<p>这些 “增长事实 ”之所以有趣，原因是多方面的。</p>
+<p>首先解释增长事实是 “发展经济学 ”和 “经济史 ”的主要目的。</p>
+<p>其次增长事实也是历史学家研究地缘政治力量和动态的重要依据。</p>
+<p>因此，亚当-托兹在阐述第一次世界大战的地缘政治先例和前因后果时，首先描述了欧洲大国的国内生产总值（GDP）在 1914 年之前的 70 年间是如何演变的（见 <span id="id3">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span> 第 1 章）。</p>
+<p>使用与 Tooze 构建图表时相同的数据（时间线稍长），下面是我们对他的第 1 章图表的解读。</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/tooze_ch1_graph.png"><img alt="_images/tooze_ch1_graph.png" src="_images/tooze_ch1_graph.png" style="width: 100%;" /></a>
+</figure>
+<p>（这只是我们的图 <a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a> 的副本。 我们将在本讲座的稍后部分介绍如何绘制该图）。</p>
+<p><span id="id4">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。</p>
+<p>到 19 世纪末，美国的 GDP 已赶上大英帝国的 GDP，而在 20 世纪上半叶，
+美国的国内生产总值超过了大英帝国。</p>
+<p>在亚当-图兹看来，这一事实是 “美国世纪 ”的关键地缘政治基础。</p>
+<p>看了这张图，再看看它是如何为 “美国的20世纪”搭建地缘政治舞台的，自然而然地
+诱使人们想要一个与他的图表相对应的 2014 年或以后的图表。</p>
+<p>(感兴趣的读者若想找到答案的提示，现在不妨跳到前面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
+<p>正如我们将看到的，通过类比推理，这张图表或许奠定了“XXX国的21世纪”的基础，你可以自由猜测国家XXX。</p>
+<p>在我们收集数据以构建这两个图表的过程中，我们还将研究多国在尽可能长的时间范围内的增长经历。</p>
+<p>这些图表将描绘“工业革命”如何在18世纪末始于英国，然后传播到一个国家又一个国家。</p>
+<p>简而言之，本讲记录了各个国家在很长一段时间内的增长轨迹。</p>
+<p>一些国家经历了持续百年的长期快速增长，而另一些国家则没有。</p>
+<p>由于各国的人口数量不同，而且一个国家内部的人口数量也会随着时间的推移而变化。
+因此，描述一个国家的 GDP 总量和人均 GDP 的变化是非常有趣的。</p>
+<p>首先，让我们导入所需的库。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.2. </span>准备数据<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>由<a class="reference external" href="https://en.wikipedia.org/wiki/Angus_Maddison">安格斯-麦迪逊（Angus Maddison）</a>发起的一个项目收集了许多与经济增长相关的历史时间序列、
+有些可以追溯到第一个世纪。</p>
+<p>可以从<a class="reference external" href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/">Maddison Historical Statistics</a>下载数据，点击“Latest Maddison Project Release”即可获取。</p>
+<p>我们将从 QuantEcon GitHub 存储库中读取数据。</p>
+<p>本节的目的是生成一个方便的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 实例，其中包含不同国家的人均 GDP。</p>
+<p>在这里，我们将 Maddison 的数据读入一个 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/mpd2020.xlsx&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_url</span><span class="p">,</span> 
+                     <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Full data&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>countrycode</th>
+      <th>country</th>
+      <th>year</th>
+      <th>gdppc</th>
+      <th>pop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>1820</td>
+      <td>NaN</td>
+      <td>3280.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>1870</td>
+      <td>NaN</td>
+      <td>4207.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>1913</td>
+      <td>NaN</td>
+      <td>5730.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>1950</td>
+      <td>1156.0</td>
+      <td>8150.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>1951</td>
+      <td>1170.0</td>
+      <td>8284.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>我们可以看到，该数据集包含许多国家和年份的人均国内生产总值（<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>）和人口（<code class="docutils literal notranslate"><span class="pre">pop</span></code>）。</p>
+<p>让我们看看这个数据集中有多少国家和哪些国家</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>169
+</pre></div>
+</div>
+</div>
+</div>
+<p>通过运行上面的代码，我们可以找到有多少个国家的数据。</p>
+<p>下面，我们将列出这些国家。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Afghanistan&#39;, &#39;Angola&#39;, &#39;Albania&#39;, &#39;United Arab Emirates&#39;,
+       &#39;Argentina&#39;, &#39;Armenia&#39;, &#39;Australia&#39;, &#39;Austria&#39;, &#39;Azerbaijan&#39;,
+       &#39;Burundi&#39;, &#39;Belgium&#39;, &#39;Benin&#39;, &#39;Burkina Faso&#39;, &#39;Bangladesh&#39;,
+       &#39;Bulgaria&#39;, &#39;Bahrain&#39;, &#39;Bosnia and Herzegovina&#39;, &#39;Belarus&#39;,
+       &#39;Bolivia (Plurinational State of)&#39;, &#39;Brazil&#39;, &#39;Barbados&#39;,
+       &#39;Botswana&#39;, &#39;Central African Republic&#39;, &#39;Canada&#39;, &#39;Switzerland&#39;,
+       &#39;Chile&#39;, &#39;China&#39;, &quot;Côte d&#39;Ivoire&quot;, &#39;Cameroon&#39;, &#39;D.R. of the Congo&#39;,
+       &#39;Congo&#39;, &#39;Colombia&#39;, &#39;Comoros&#39;, &#39;Cabo Verde&#39;, &#39;Costa Rica&#39;,
+       &#39;Czechoslovakia&#39;, &#39;Cuba&#39;, &#39;Cyprus&#39;, &#39;Czech Republic&#39;, &#39;Germany&#39;,
+       &#39;Djibouti&#39;, &#39;Dominica&#39;, &#39;Denmark&#39;, &#39;Dominican Republic&#39;, &#39;Algeria&#39;,
+       &#39;Ecuador&#39;, &#39;Egypt&#39;, &#39;Spain&#39;, &#39;Estonia&#39;, &#39;Ethiopia&#39;, &#39;Finland&#39;,
+       &#39;France&#39;, &#39;Gabon&#39;, &#39;United Kingdom&#39;, &#39;Georgia&#39;, &#39;Ghana&#39;, &#39;Guinea&#39;,
+       &#39;Gambia&#39;, &#39;Guinea-Bissau&#39;, &#39;Equatorial Guinea&#39;, &#39;Greece&#39;,
+       &#39;Guatemala&#39;, &#39;China, Hong Kong SAR&#39;, &#39;Honduras&#39;, &#39;Croatia&#39;,
+       &#39;Haiti&#39;, &#39;Hungary&#39;, &#39;Indonesia&#39;, &#39;India&#39;, &#39;Ireland&#39;,
+       &#39;Iran (Islamic Republic of)&#39;, &#39;Iraq&#39;, &#39;Iceland&#39;, &#39;Israel&#39;, &#39;Italy&#39;,
+       &#39;Jamaica&#39;, &#39;Jordan&#39;, &#39;Japan&#39;, &#39;Kazakhstan&#39;, &#39;Kenya&#39;, &#39;Kyrgyzstan&#39;,
+       &#39;Cambodia&#39;, &#39;Republic of Korea&#39;, &#39;Kuwait&#39;, &quot;Lao People&#39;s DR&quot;,
+       &#39;Lebanon&#39;, &#39;Liberia&#39;, &#39;Libya&#39;, &#39;Saint Lucia&#39;, &#39;Sri Lanka&#39;,
+       &#39;Lesotho&#39;, &#39;Lithuania&#39;, &#39;Luxembourg&#39;, &#39;Latvia&#39;, &#39;Morocco&#39;,
+       &#39;Republic of Moldova&#39;, &#39;Madagascar&#39;, &#39;Mexico&#39;, &#39;TFYR of Macedonia&#39;,
+       &#39;Mali&#39;, &#39;Malta&#39;, &#39;Myanmar&#39;, &#39;Montenegro&#39;, &#39;Mongolia&#39;, &#39;Mozambique&#39;,
+       &#39;Mauritania&#39;, &#39;Mauritius&#39;, &#39;Malawi&#39;, &#39;Malaysia&#39;, &#39;Namibia&#39;,
+       &#39;Niger&#39;, &#39;Nigeria&#39;, &#39;Nicaragua&#39;, &#39;Netherlands&#39;, &#39;Norway&#39;, &#39;Nepal&#39;,
+       &#39;New Zealand&#39;, &#39;Oman&#39;, &#39;Pakistan&#39;, &#39;Panama&#39;, &#39;Peru&#39;, &#39;Philippines&#39;,
+       &#39;Poland&#39;, &#39;Puerto Rico&#39;, &#39;D.P.R. of Korea&#39;, &#39;Portugal&#39;, &#39;Paraguay&#39;,
+       &#39;State of Palestine&#39;, &#39;Qatar&#39;, &#39;Romania&#39;, &#39;Russian Federation&#39;,
+       &#39;Rwanda&#39;, &#39;Saudi Arabia&#39;, &#39;Sudan (Former)&#39;, &#39;Senegal&#39;, &#39;Singapore&#39;,
+       &#39;Sierra Leone&#39;, &#39;El Salvador&#39;, &#39;Serbia&#39;, &#39;Sao Tome and Principe&#39;,
+       &#39;Former USSR&#39;, &#39;Slovakia&#39;, &#39;Slovenia&#39;, &#39;Sweden&#39;, &#39;Swaziland&#39;,
+       &#39;Seychelles&#39;, &#39;Syrian Arab Republic&#39;, &#39;Chad&#39;, &#39;Togo&#39;, &#39;Thailand&#39;,
+       &#39;Tajikistan&#39;, &#39;Turkmenistan&#39;, &#39;Trinidad and Tobago&#39;, &#39;Tunisia&#39;,
+       &#39;Turkey&#39;, &#39;Taiwan, Province of China&#39;,
+       &#39;U.R. of Tanzania: Mainland&#39;, &#39;Uganda&#39;, &#39;Ukraine&#39;, &#39;Uruguay&#39;,
+       &#39;United States&#39;, &#39;Uzbekistan&#39;,
+       &#39;Venezuela (Bolivarian Republic of)&#39;, &#39;Viet Nam&#39;, &#39;Yemen&#39;,
+       &#39;Former Yugoslavia&#39;, &#39;South Africa&#39;, &#39;Zambia&#39;, &#39;Zimbabwe&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们现在可以探索一些可用的169个国家。</p>
+<p>让我们遍历每个国家，以了解每个国家可用的年份。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_years</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+    <span class="n">cy_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="n">country</span><span class="p">][</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">country_years</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">country</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+<span class="n">country_years</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">country_years</span><span class="p">,</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;min_year&#39;</span><span class="p">,</span> <span class="s1">&#39;max_year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)</span>
+<span class="n">country_years</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min_year</th>
+      <th>max_year</th>
+    </tr>
+    <tr>
+      <th>country</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Afghanistan</th>
+      <td>1820</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>Angola</th>
+      <td>1950</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>Albania</th>
+      <td>1</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>United Arab Emirates</th>
+      <td>1950</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>Argentina</th>
+      <td>1800</td>
+      <td>2018</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>现在，让我们将原始数据重塑为一些方便的变量，以便更快地访问各国的时间序列数据。</p>
+<p>我们可以在该数据集中的国家代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和国家名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_to_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;countrycode&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;countrycode&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在，我们调用人均 GDP (<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>)，并生成一个宽格式的数据</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdp_pc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;countrycode&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])[</span><span class="s1">&#39;gdppc&#39;</span><span class="p">]</span>
+<span class="n">gdp_pc</span> <span class="o">=</span> <span class="n">gdp_pc</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">&#39;countrycode&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdp_pc</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>countrycode</th>
+      <th>AFG</th>
+      <th>AGO</th>
+      <th>ALB</th>
+      <th>ARE</th>
+      <th>ARG</th>
+      <th>ARM</th>
+      <th>AUS</th>
+      <th>AUT</th>
+      <th>AZE</th>
+      <th>BDI</th>
+      <th>...</th>
+      <th>URY</th>
+      <th>USA</th>
+      <th>UZB</th>
+      <th>VEN</th>
+      <th>VNM</th>
+      <th>YEM</th>
+      <th>YUG</th>
+      <th>ZAF</th>
+      <th>ZMB</th>
+      <th>ZWE</th>
+    </tr>
+    <tr>
+      <th>year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2014</th>
+      <td>2022.0000</td>
+      <td>8673.0000</td>
+      <td>9808.0000</td>
+      <td>72601.0000</td>
+      <td>19183.0000</td>
+      <td>9735.0000</td>
+      <td>47867.0000</td>
+      <td>41338.0000</td>
+      <td>17439.0000</td>
+      <td>748.0000</td>
+      <td>...</td>
+      <td>19160.0000</td>
+      <td>51664.0000</td>
+      <td>9085.0000</td>
+      <td>20317.0000</td>
+      <td>5455.0000</td>
+      <td>4054.0000</td>
+      <td>14627.0000</td>
+      <td>12242.0000</td>
+      <td>3478.0000</td>
+      <td>1594.0000</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>1928.0000</td>
+      <td>8689.0000</td>
+      <td>10032.0000</td>
+      <td>74746.0000</td>
+      <td>19502.0000</td>
+      <td>10042.0000</td>
+      <td>48357.0000</td>
+      <td>41294.0000</td>
+      <td>17460.0000</td>
+      <td>694.0000</td>
+      <td>...</td>
+      <td>19244.0000</td>
+      <td>52591.0000</td>
+      <td>9720.0000</td>
+      <td>18802.0000</td>
+      <td>5763.0000</td>
+      <td>2844.0000</td>
+      <td>14971.0000</td>
+      <td>12246.0000</td>
+      <td>3478.0000</td>
+      <td>1560.0000</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>1929.0000</td>
+      <td>8453.0000</td>
+      <td>10342.0000</td>
+      <td>75876.0000</td>
+      <td>18875.0000</td>
+      <td>10080.0000</td>
+      <td>48845.0000</td>
+      <td>41445.0000</td>
+      <td>16645.0000</td>
+      <td>665.0000</td>
+      <td>...</td>
+      <td>19468.0000</td>
+      <td>53015.0000</td>
+      <td>10381.0000</td>
+      <td>15219.0000</td>
+      <td>6062.0000</td>
+      <td>2506.0000</td>
+      <td>15416.0000</td>
+      <td>12139.0000</td>
+      <td>3479.0000</td>
+      <td>1534.0000</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>2014.7453</td>
+      <td>8146.4354</td>
+      <td>10702.1201</td>
+      <td>76643.4984</td>
+      <td>19200.9061</td>
+      <td>10859.3783</td>
+      <td>49265.6135</td>
+      <td>42177.3706</td>
+      <td>16522.3072</td>
+      <td>671.3169</td>
+      <td>...</td>
+      <td>19918.1361</td>
+      <td>54007.7698</td>
+      <td>10743.8666</td>
+      <td>12879.1350</td>
+      <td>6422.0865</td>
+      <td>2321.9239</td>
+      <td>15960.8432</td>
+      <td>12189.3579</td>
+      <td>3497.5818</td>
+      <td>1582.3662</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>1934.5550</td>
+      <td>7771.4418</td>
+      <td>11104.1665</td>
+      <td>76397.8181</td>
+      <td>18556.3831</td>
+      <td>11454.4251</td>
+      <td>49830.7993</td>
+      <td>42988.0709</td>
+      <td>16628.0553</td>
+      <td>651.3589</td>
+      <td>...</td>
+      <td>20185.8360</td>
+      <td>55334.7394</td>
+      <td>11220.3702</td>
+      <td>10709.9506</td>
+      <td>6814.1423</td>
+      <td>2284.8899</td>
+      <td>16558.3123</td>
+      <td>12165.7948</td>
+      <td>3534.0337</td>
+      <td>1611.4052</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 169 columns</p>
+</div></div></div>
+</div>
+<p>我们创建了一个变量 <code class="docutils literal notranslate"><span class="pre">color_mapping</span></code> 来存储国家代码和颜色之间的映射，以保证接下来线条的颜色一致</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_names</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;countrycode&#39;</span><span class="p">]</span>
+
+<span class="c1"># 生成一个颜色图，颜色数量与国家数量相匹配</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">tab20</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">country_names</span><span class="p">)))</span>
+
+<span class="c1"># 创建一个字典，将每个国家映射成相应的颜色</span>
+<span class="n">color_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">country</span><span class="p">:</span> <span class="n">color</span> <span class="k">for</span> 
+                 <span class="n">country</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">country_names</span><span class="p">,</span> <span class="n">colors</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.3. </span>人均国内生产总值<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>在本节中，我们将研究几个不同国家的长期人均国内生产总值。</p>
+<section id="id7">
+<h3><span class="section-number">2.3.1. </span>英国<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>首先我们研究英国的 GDP 增长情况</p>
+<p>现在我们可以提取并绘制这些国家的 GDP 数据。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;GBR&#39;</span>
+<span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;international dollars&#39;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="gdppc-gbr1">
+<a class="reference internal image-reference" href="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png"><img alt="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png" src="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">GDP per Capita (GBR)</span><a class="headerlink" href="#gdppc-gbr1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/international_dollar">国际美元</a> 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 美元（GK 美元）。</p>
+</div>
+<p>我们可以看到，在本千年早期的 250 年中，较长时期的数据是不连续的，因此我们可以选择内插法得到连续的线图。</p>
+<p>在这里，我们用虚线表示插值趋势</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;GBR&#39;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(),</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">country</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">],</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">country</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;international dollars&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="gdppc-gbr2">
+<a class="reference internal image-reference" href="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png"><img alt="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png" src="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">GDP per Capita (GBR)</span><a class="headerlink" href="#gdppc-gbr2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">2.3.2. </span>美国、英国和中国的比较<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>在本节中，我们将比较美国、英国和中国的GDP增长。</p>
+<p>第一步，我们创建一个函数，为一组国家生成绘图</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_interp_plots</span><span class="p">(</span><span class="n">series</span><span class="p">,</span>        <span class="c1"># pandas 数据</span>
+                      <span class="n">country</span><span class="p">,</span>       <span class="c1"># 国家代码列表</span>
+                      <span class="n">ylabel</span><span class="p">,</span>        <span class="c1"># y 轴标签</span>
+                      <span class="n">xlabel</span><span class="p">,</span>        <span class="c1"># x 轴标签</span>
+                      <span class="n">color_mapping</span><span class="p">,</span> <span class="c1"># 代码-颜色映射</span>
+                      <span class="n">code_to_name</span><span class="p">,</span>  <span class="c1"># 代码-国家名映射</span>
+                      <span class="n">lw</span><span class="p">,</span>            <span class="c1"># 线宽</span>
+                      <span class="n">logscale</span><span class="p">,</span>      <span class="c1"># Y 轴是否要对数刻度</span>
+                      <span class="n">ax</span>             <span class="c1"># matplolib 轴</span>
+                     <span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+        <span class="c1"># 获取插值数据</span>
+        <span class="n">df_interpolated</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_area</span><span class="o">=</span><span class="s1">&#39;inside&#39;</span><span class="p">)</span>
+        <span class="n">interpolated_data</span> <span class="o">=</span> <span class="n">df_interpolated</span><span class="p">[</span><span class="n">series</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+
+        <span class="c1"># 用虚线绘制插值数据</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">interpolated_data</span><span class="p">,</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+
+        <span class="c1"># 用实线绘制非插值数据</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
+                <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">code_to_name</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;country&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">logscale</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 将图例绘制在图外</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>从图表中可以看出，经济增长从 18 世纪真正开始，并持续了两百年。</p>
+<p>这与其他国家的增长轨迹相比如何？</p>
+<p>让我们看看美国（USA）、英国（GBR）和中国（CHN）</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义事件的namedtuple</span>
+<span class="n">Event</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;year_range&#39;</span><span class="p">,</span> <span class="s1">&#39;y_text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;ymax&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">,</span> <span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1500</span><span class="p">:],</span> 
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;international dollars&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># 定义事件和文本的参数</span>
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">b_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">}</span>
+<span class="n">t_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> 
+            <span class="s1">&#39;va&#39;</span><span class="p">:</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="s1">&#39;ha&#39;</span><span class="p">:</span><span class="s1">&#39;center&#39;</span><span class="p">}</span>
+
+<span class="c1"># 创建要注释的事件列表</span>
+<span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1650</span><span class="p">,</span> <span class="mi">1652</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.04</span><span class="p">,</span> 
+          <span class="s1">&#39;航海法案</span><span class="se">\n</span><span class="s1">(1651)&#39;</span><span class="p">,</span>
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1655</span><span class="p">,</span> <span class="mi">1684</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.13</span><span class="p">,</span> 
+          <span class="s1">&#39;闭关锁国</span><span class="se">\n</span><span class="s1">(1655-1684)&#39;</span><span class="p">,</span> 
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">],</span> <span class="mf">1.1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1848</span><span class="p">,</span> <span class="mi">1850</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.22</span><span class="p">,</span>
+          <span class="s1">&#39;废除航海法</span><span class="se">\n</span><span class="s1">(1849)&#39;</span><span class="p">,</span> 
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">],</span> <span class="mf">1.18</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1765</span><span class="p">,</span> <span class="mi">1791</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.04</span><span class="p">,</span> 
+          <span class="s1">&#39;美国独立战争</span><span class="se">\n</span><span class="s1">(1765-1791)&#39;</span><span class="p">,</span> 
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;USA&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1760</span><span class="p">,</span> <span class="mi">1840</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.13</span><span class="p">,</span> 
+          <span class="s1">&#39;工业革命</span><span class="se">\n</span><span class="s1">(1760-1840)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1929</span><span class="p">,</span> <span class="mi">1939</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.04</span><span class="p">,</span> 
+          <span class="s1">&#39;大萧条</span><span class="se">\n</span><span class="s1">(1929–1939)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1978</span><span class="p">,</span> <span class="mi">1979</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.13</span><span class="p">,</span> 
+          <span class="s1">&#39;改革开放</span><span class="se">\n</span><span class="s1">(1978-1979)&#39;</span><span class="p">,</span> 
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">],</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">draw_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="c1"># 遍历事件并添加注释和竖线</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+        <span class="n">event_mid</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">year_range</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">event_mid</span><span class="p">,</span> 
+                <span class="n">event</span><span class="o">.</span><span class="n">y_text</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> 
+                <span class="n">color</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">t_params</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="o">*</span><span class="n">event</span><span class="o">.</span><span class="n">year_range</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">event_mid</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">ymax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">event</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+                   <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">draw_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33322 (\N{CJK UNIFIED IDEOGRAPH-822A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28023 (\N{CJK UNIFIED IDEOGRAPH-6D77}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27861 (\N{CJK UNIFIED IDEOGRAPH-6CD5}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26696 (\N{CJK UNIFIED IDEOGRAPH-6848}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38381 (\N{CJK UNIFIED IDEOGRAPH-95ED}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38145 (\N{CJK UNIFIED IDEOGRAPH-9501}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24223 (\N{CJK UNIFIED IDEOGRAPH-5E9F}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38500 (\N{CJK UNIFIED IDEOGRAPH-9664}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29420 (\N{CJK UNIFIED IDEOGRAPH-72EC}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33831 (\N{CJK UNIFIED IDEOGRAPH-8427}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26465 (\N{CJK UNIFIED IDEOGRAPH-6761}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25913 (\N{CJK UNIFIED IDEOGRAPH-6539}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24320 (\N{CJK UNIFIED IDEOGRAPH-5F00}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25918 (\N{CJK UNIFIED IDEOGRAPH-653E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="gdppc-comparison">
+<a class="reference internal image-reference" href="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png"><img alt="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png" src="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">人均 GDP，1500-（中国、英国、美国）</span><a class="headerlink" href="#gdppc-comparison" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>上图展示了工业革命的传播如何随着时间的推移逐渐提高了大量人群的生活水平</p>
+<ul class="simple">
+<li><p>大部分增长发生在工业革命之后的过去150年间。</p></li>
+<li><p>从1820年到1940年，美国和英国的人均GDP上升并与中国拉开差距。</p></li>
+<li><p>1950年后，尤其是1970年代末后，差距迅速缩小。</p></li>
+<li><p>这些结果反映了技术和经济政策因素的复杂组合，经济增长的研究者们试图理解并量化这些因素。</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3><span class="section-number">2.3.3. </span>聚焦于中国<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>下图所展示的中国从1500年到1970年的人均GDP水平非常有趣。</p>
+<p>我们可以看到，从1700年到20世纪初，中国的人均GDP经历了长期的下降。</p>
+<p>因此，图表显示了</p>
+<ul class="simple">
+<li><p>清政府闭关锁国政策后的长期经济下行和停滞。</p></li>
+<li><p>英国工业革命开始后，中国的经历与英国截然不同。</p></li>
+<li><p>自强运动似乎主要帮助了中国的增长。</p></li>
+<li><p>现代中国经济政策的惊人增长成果，最终在1970年代末进行的改革和开放政策中达到高潮。</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">]</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1600</span><span class="p">:</span><span class="mi">2000</span><span class="p">],</span> 
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1655</span><span class="p">,</span> <span class="mi">1684</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.06</span><span class="p">,</span> 
+      <span class="s1">&#39;闭关锁国政策</span><span class="se">\n</span><span class="s1">(1655-1684)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1760</span><span class="p">,</span> <span class="mi">1840</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.06</span><span class="p">,</span> 
+      <span class="s1">&#39;工业革命</span><span class="se">\n</span><span class="s1">(1760-1840)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1839</span><span class="p">,</span> <span class="mi">1842</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.2</span><span class="p">,</span> 
+      <span class="s1">&#39;第一次鸦片战争</span><span class="se">\n</span><span class="s1">(1839–1842)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="mf">1.07</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1861</span><span class="p">,</span> <span class="mi">1895</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.4</span><span class="p">,</span> 
+      <span class="s1">&#39;自强运动</span><span class="se">\n</span><span class="s1">(1861–1895)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1939</span><span class="p">,</span> <span class="mi">1945</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.06</span><span class="p">,</span> 
+      <span class="s1">&#39;第二次世界大战</span><span class="se">\n</span><span class="s1">(1939-1945)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1948</span><span class="p">,</span> <span class="mi">1950</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.23</span><span class="p">,</span> 
+      <span class="s1">&#39;中华人民共和国成立</span><span class="se">\n</span><span class="s1">(1949)&#39;</span><span class="p">,</span> 
+      <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">],</span> <span class="mf">1.08</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1958</span><span class="p">,</span> <span class="mi">1962</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> 
+      <span class="s1">&#39;大跃进</span><span class="se">\n</span><span class="s1">(1958-1962)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">),</span>
+<span class="n">Event</span><span class="p">((</span><span class="mi">1978</span><span class="p">,</span> <span class="mi">1979</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.7</span><span class="p">,</span> 
+      <span class="s1">&#39;改革开放</span><span class="se">\n</span><span class="s1">(1978-1979)&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="mf">1.24</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># 绘制事件</span>
+<span class="n">draw_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38381 (\N{CJK UNIFIED IDEOGRAPH-95ED}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38145 (\N{CJK UNIFIED IDEOGRAPH-9501}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25919 (\N{CJK UNIFIED IDEOGRAPH-653F}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31574 (\N{CJK UNIFIED IDEOGRAPH-7B56}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31532 (\N{CJK UNIFIED IDEOGRAPH-7B2C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19968 (\N{CJK UNIFIED IDEOGRAPH-4E00}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 40486 (\N{CJK UNIFIED IDEOGRAPH-9E26}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29255 (\N{CJK UNIFIED IDEOGRAPH-7247}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33258 (\N{CJK UNIFIED IDEOGRAPH-81EA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24378 (\N{CJK UNIFIED IDEOGRAPH-5F3A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36816 (\N{CJK UNIFIED IDEOGRAPH-8FD0}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21160 (\N{CJK UNIFIED IDEOGRAPH-52A8}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20108 (\N{CJK UNIFIED IDEOGRAPH-4E8C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19990 (\N{CJK UNIFIED IDEOGRAPH-4E16}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30028 (\N{CJK UNIFIED IDEOGRAPH-754C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21326 (\N{CJK UNIFIED IDEOGRAPH-534E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20154 (\N{CJK UNIFIED IDEOGRAPH-4EBA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27665 (\N{CJK UNIFIED IDEOGRAPH-6C11}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20849 (\N{CJK UNIFIED IDEOGRAPH-5171}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21644 (\N{CJK UNIFIED IDEOGRAPH-548C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36291 (\N{CJK UNIFIED IDEOGRAPH-8DC3}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36827 (\N{CJK UNIFIED IDEOGRAPH-8FDB}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25913 (\N{CJK UNIFIED IDEOGRAPH-6539}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24320 (\N{CJK UNIFIED IDEOGRAPH-5F00}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25918 (\N{CJK UNIFIED IDEOGRAPH-653E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="gdppc-china">
+<a class="reference internal image-reference" href="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png"><img alt="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png" src="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">人均GDP，1500-2000（中国）</span><a class="headerlink" href="#gdppc-china" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">2.3.4. </span>聚焦于美国和英国<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>现在我们更详细地研究美国（USA）和英国（GBR）。</p>
+<p>在以下图表中，请注意</p>
+<ul class="simple">
+<li><p>贸易政策（航海法案）的影响。</p></li>
+<li><p>工业革命带来的生产力变化。</p></li>
+<li><p>美国逐渐接近并超过英国，为“美国世纪”奠定基础。</p></li>
+<li><p>战争的意外后果。</p></li>
+<li><p><a class="reference internal" href="business_cycle.html"><span class="doc std std-doc">经济周期</span></a>衰退和萧条带来的中断和伤痕。</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1500</span><span class="p">:</span><span class="mi">2000</span><span class="p">],</span>
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 创建数据点列表</span>
+<span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1651</span><span class="p">,</span> <span class="mi">1651</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.15</span><span class="p">,</span> 
+          <span class="s1">&#39;航海法（英国）</span><span class="se">\n</span><span class="s1">(1651)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1765</span><span class="p">,</span> <span class="mi">1791</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.15</span><span class="p">,</span> 
+          <span class="s1">&#39;美国独立战争</span><span class="se">\n</span><span class="s1">(1765-1791)&#39;</span><span class="p">,</span>
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;USA&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1760</span><span class="p">,</span> <span class="mi">1840</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> 
+          <span class="s1">&#39;工业革命</span><span class="se">\n</span><span class="s1">(1760-1840)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1848</span><span class="p">,</span> <span class="mi">1850</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> 
+          <span class="s1">&#39;废除航海法（英国）</span><span class="se">\n</span><span class="s1">(1849)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1861</span><span class="p">,</span> <span class="mi">1865</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">1.8</span><span class="p">,</span> 
+          <span class="s1">&#39;美国内战</span><span class="se">\n</span><span class="s1">(1861-1865)&#39;</span><span class="p">,</span> 
+          <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;USA&#39;</span><span class="p">],</span> <span class="mf">1.21</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1914</span><span class="p">,</span> <span class="mi">1918</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.15</span><span class="p">,</span> 
+          <span class="s1">&#39;第一次世界大战</span><span class="se">\n</span><span class="s1">(1914-1918)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1929</span><span class="p">,</span> <span class="mi">1939</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> 
+          <span class="s1">&#39;大萧条</span><span class="se">\n</span><span class="s1">(1929–1939)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">),</span>
+    <span class="n">Event</span><span class="p">((</span><span class="mi">1939</span><span class="p">,</span> <span class="mi">1945</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">+</span> <span class="n">ylim</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> 
+          <span class="s1">&#39;第二次世界大战</span><span class="se">\n</span><span class="s1">(1939-1945)&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># 绘制事件</span>
+<span class="n">draw_events</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33322 (\N{CJK UNIFIED IDEOGRAPH-822A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28023 (\N{CJK UNIFIED IDEOGRAPH-6D77}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27861 (\N{CJK UNIFIED IDEOGRAPH-6CD5}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33521 (\N{CJK UNIFIED IDEOGRAPH-82F1}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29420 (\N{CJK UNIFIED IDEOGRAPH-72EC}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24223 (\N{CJK UNIFIED IDEOGRAPH-5E9F}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38500 (\N{CJK UNIFIED IDEOGRAPH-9664}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20869 (\N{CJK UNIFIED IDEOGRAPH-5185}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31532 (\N{CJK UNIFIED IDEOGRAPH-7B2C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19968 (\N{CJK UNIFIED IDEOGRAPH-4E00}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19990 (\N{CJK UNIFIED IDEOGRAPH-4E16}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30028 (\N{CJK UNIFIED IDEOGRAPH-754C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33831 (\N{CJK UNIFIED IDEOGRAPH-8427}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26465 (\N{CJK UNIFIED IDEOGRAPH-6761}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20108 (\N{CJK UNIFIED IDEOGRAPH-4E8C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="gdppc-ukus">
+<a class="reference internal image-reference" href="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png"><img alt="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png" src="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">人均GDP，1500-2000（英国和美国）</span><a class="headerlink" href="#gdppc-ukus" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="gdp">
+<h2><span class="section-number">2.4. </span>GDP增长<a class="headerlink" href="#gdp" title="Permalink to this heading">#</a></h2>
+<p>现在我们将构建一些对地缘政治历史学家如亚当·图兹感兴趣的图表。</p>
+<p>我们将关注总国内生产总值（GDP）（作为“国家地缘政治-军事力量”的代理变量），而不是人均GDP（作为生活水平的代理变量）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_url</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Full data&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;countrycode&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;gdp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gdppc&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span>
+<span class="n">gdp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gdp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">&#39;countrycode&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id11">
+<h3><span class="section-number">2.4.1. </span>早期工业化（1820至1940年）<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p>我们首先可视化中国、俄国/前苏联、日本、英国和美国的趋势。</p>
+<p>最显著的趋势是美国的崛起，在1860年代超过英国，并在1880年代超过中国。</p>
+<p>这种增长持续到1930年代的大萧条到来时出现大幅下降。</p>
+<p>与此同时，俄国在第一次世界大战期间经历了重大挫折，并在二月革命后显著恢复。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">,</span> <span class="s1">&#39;SUN&#39;</span><span class="p">,</span> <span class="s1">&#39;JPN&#39;</span><span class="p">,</span> <span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
+<span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1820</span><span class="p">,</span> <span class="mi">1945</span><span class="p">)</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="gdp1">
+<a class="reference internal image-reference" href="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png"><img alt="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png" src="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">早期工业化时代的GDP</span><a class="headerlink" href="#gdp1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<section id="id12">
+<h4><span class="section-number">2.4.1.1. </span>构建类似于图兹的图<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
+<p>在本节中，我们将介绍如何构建本讲座开始时讨论过的<span id="id13">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>第1章中引人注目的图表。</p>
+<p>首先，让我们定义一个由大英帝国（BEM）组成的国家集合，这样我们就可以用Tooze的数据中复制绘制这幅图</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BEM</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;IND&#39;</span><span class="p">,</span> <span class="s1">&#39;AUS&#39;</span><span class="p">,</span> <span class="s1">&#39;NZL&#39;</span><span class="p">,</span> <span class="s1">&#39;CAN&#39;</span><span class="p">,</span> <span class="s1">&#39;ZAF&#39;</span><span class="p">]</span>
+<span class="c1"># 插值不完全时间序列</span>
+<span class="n">gdp</span><span class="p">[</span><span class="s1">&#39;BEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdp</span><span class="p">[</span><span class="n">BEM</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">end_year</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在，让我们组装这些数据序列</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;BEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">]</span>  
+<span class="n">bem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s2">&quot;British Empire&quot;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BEM&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">])</span>
+<span class="n">bem</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;countrycode&#39;</span>
+<span class="n">code_to_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">code_to_name</span><span class="p">,</span> <span class="n">bem</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>并绘制他们</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DEU&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span> <span class="s1">&#39;SUN&#39;</span><span class="p">,</span> <span class="s1">&#39;BEM&#39;</span><span class="p">,</span> <span class="s1">&#39;FRA&#39;</span><span class="p">,</span> <span class="s1">&#39;JPN&#39;</span><span class="p">]</span>
+<span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1821</span><span class="p">,</span> <span class="mi">1945</span><span class="p">)</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;international dollars&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./_static/lecture_specific/long_run_growth/tooze_ch1_graph.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+            <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png"><img alt="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png" src="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>在本讲座的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。</p>
+<p>让我们将时间向前推移，大致从第二次世界大战后图示停止的地方开始。</p>
+<p>按照图兹第一章的分析，这样做可以提供一些有关当今地缘政治现实的信息。</p>
+</section>
+</section>
+<section id="id14">
+<h3><span class="section-number">2.4.2. </span>现代时代（1950至2020年）<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<p>下图显示了中国自二十世纪七十年代后期以来增长的迅速。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">,</span> <span class="s1">&#39;SUN&#39;</span><span class="p">,</span> <span class="s1">&#39;JPN&#39;</span><span class="p">,</span> <span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
+<span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1950</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
+                  <span class="n">country</span><span class="p">,</span>
+                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  func(*args, **kwargs)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="gdp2">
+<a class="reference internal image-reference" href="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png"><img alt="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png" src="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">现代时代的GDP</span><a class="headerlink" href="#gdp2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>很自然的我们会将这个图表与图<a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a>相比较，后者显示了美国在“美国世纪”开始时超过英国的情况。</p>
+</section>
+</section>
+<section id="id15">
+<h2><span class="section-number">2.5. </span>地区分析<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<p>我们经常要研究“世界大国”俱乐部之外的国家的历史。</p>
+<p><a class="reference external" href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/">Maddison Historical Statistics</a> 数据集还整合了地区汇总信息</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">data_url</span><span class="p">,</span> 
+                     <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Regional data&#39;</span><span class="p">,</span> 
+                     <span class="n">header</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+                     <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们可以将原始数据存储在更方便的格式中来构建地区人均GDP的单一表格</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regionalgdp_pc</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gdppc_2011&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们基于时间进行插值来填补数据集中的任何缺口，以便于绘图</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>进行更深入的研究，我们将 西方分支（<code class="docutils literal notranslate"><span class="pre">Western</span> <span class="pre">Offshoots</span></code>）和 （撒哈拉以南非洲）<code class="docutils literal notranslate"><span class="pre">Sub-Saharan</span> <span class="pre">Africa</span></code>的时间序列与世界各地多个不同地区进行比较。</p>
+<p>下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                    <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;国际美元&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span>
+           <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<figure class="align-default" id="region-gdppc">
+<a class="reference internal image-reference" href="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png"><img alt="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png" src="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">地区人均GDP</span><a class="headerlink" href="#region-gdppc" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   2. 长期增长
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. Business Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   5. Inflation During French Revolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   7. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   9. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   10. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Finite Horizons
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   13. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Infinite Horizons
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   16. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   17. Computing Square Roots
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   18. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   19. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   20. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   21. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   22. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   23. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   24. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   25. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   26. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   27. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Monetary-Fiscal Policy Interactions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation.html">
+   28. Money Financed Government Deficits and Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unpleasant.html">
+   29. Some Unpleasant Monetarist Arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation_nonlinear.html">
+   30. Inflation Rate Laffer Curves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laffer_adaptive.html">
+   31. Laffer Curves  with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   32. AR(1) Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   33. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   34. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   35. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   36. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   37. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   38. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   39. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   40. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   41. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   42. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   43. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   44. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   45. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   46. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   47. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   48. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/long_run_growth.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/main?urlpath=tree/long_run_growth.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/long_run_growth.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/long_run_growth.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/long_run_growth.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "long_run_growth";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/long_run_growth.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

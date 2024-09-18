@@ -1,0 +1,2188 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>16. Eigenvalues and Eigenvectors &#8212; A First Course in Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eigen_I';</script>
+    <link rel="canonical" href="https://intro-cn.quantecon.org/eigen_I.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="17. Computing Square Roots" href="greek_square.html" />
+    <link rel="prev" title="15. Monetarist Theory of Price Levels with Adaptive Expectations" href="cagan_adaptive.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Eigenvalues and Eigenvectors"/>
+<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Eigenvalues and Eigenvectors" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://intro-cn.quantecon.org/eigen_I.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=eigen_I>
+
+                <div class="qe-page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">16.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-as-transformations">16.2. Matrices as transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-vectors-to-vectors">16.2.1. Mapping vectors to vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrices">16.2.2. Square matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-transformations">16.3. Types of transformations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">16.3.1. Scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shearing">16.3.2. Shearing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation">16.3.3. Rotation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation">16.3.4. Permutation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication-as-composition">16.4. Matrix multiplication as composition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-compositions">16.4.1. Linear compositions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">16.4.2. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shear-then-rotate">16.4.2.1. Shear then rotate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rotate-then-shear">16.4.2.2. Rotate then shear</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-on-a-fixed-map">16.5. Iterating on a fixed map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues">16.6. Eigenvalues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">16.6.1. Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-values">16.6.2. Complex values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-mathematical-details">16.6.3. Some mathematical details</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facts">16.6.4. Facts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation">16.6.5. Computation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-neumann-series-lemma">16.7. The Neumann Series Lemma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-series">16.7.1. Scalar series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-series">16.7.2. Matrix series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">16.8. Exercises</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    <a href=https://quantecon.org><img src="_static/quantecon-logo-transparent.png" class="dark-logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+
+                        <p class="qe-page__header-subheading">Eigenvalues and Eigenvectors</p>
+
+                    </div>
+                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="eigenvalues-and-eigenvectors">
+<span id="eigen"></span><h1><span class="section-number">16. </span>Eigenvalues and Eigenvectors<a class="headerlink" href="#eigenvalues-and-eigenvectors" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<span id="index-0"></span><h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>Eigenvalues and eigenvectors are a relatively advanced topic in linear algebra.</p>
+<p>At the same time, these concepts are extremely useful for</p>
+<ul class="simple">
+<li><p>economic modeling (especially dynamics!)</p></li>
+<li><p>statistics</p></li>
+<li><p>some parts of applied mathematics</p></li>
+<li><p>machine learning</p></li>
+<li><p>and many other fields of science.</p></li>
+</ul>
+<p>In this lecture we explain the basics of eigenvalues and eigenvectors and introduce the Neumann Series Lemma.</p>
+<p>We assume in this lecture that students are familiar with matrices
+and understand <a class="reference internal" href="linear_equations.html"><span class="doc">the basics of matrix algebra</span></a>.</p>
+<p>We will use the following imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">matrix_power</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">FancyArrowPatch</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">proj3d</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrices-as-transformations">
+<span id="matrices-as-transformation"></span><h2><span class="section-number">16.2. </span>Matrices as transformations<a class="headerlink" href="#matrices-as-transformations" title="Permalink to this heading">#</a></h2>
+<p>Let’s start by discussing an important concept concerning matrices.</p>
+<section id="mapping-vectors-to-vectors">
+<h3><span class="section-number">16.2.1. </span>Mapping vectors to vectors<a class="headerlink" href="#mapping-vectors-to-vectors" title="Permalink to this heading">#</a></h3>
+<p>One way to think about a matrix is as a rectangular collection of
+numbers.</p>
+<p>Another way to think about a matrix is as a <em>map</em> (i.e., as a function) that
+transforms vectors to new vectors.</p>
+<p>To understand the second point of view, suppose we multiply an <span class="math notranslate nohighlight">\(n \times m\)</span>
+matrix <span class="math notranslate nohighlight">\(A\)</span> with an <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector <span class="math notranslate nohighlight">\(x\)</span> to obtain an <span class="math notranslate nohighlight">\(n \times 1\)</span>
+column vector <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    Ax = y
+\]</div>
+<p>If we fix <span class="math notranslate nohighlight">\(A\)</span> and consider different choices of <span class="math notranslate nohighlight">\(x\)</span>, we can understand <span class="math notranslate nohighlight">\(A\)</span> as
+a map transforming <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(Ax\)</span>.</p>
+<p>Because <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(n \times m\)</span>, it transforms <span class="math notranslate nohighlight">\(m\)</span>-vectors to <span class="math notranslate nohighlight">\(n\)</span>-vectors.</p>
+<p>We can write this formally as <span class="math notranslate nohighlight">\(A \colon \mathbb{R}^m \rightarrow \mathbb{R}^n\)</span>.</p>
+<p>You might argue that if <span class="math notranslate nohighlight">\(A\)</span> is a function then we should write
+<span class="math notranslate nohighlight">\(A(x) = y\)</span> rather than <span class="math notranslate nohighlight">\(Ax = y\)</span> but the second notation is more conventional.</p>
+</section>
+<section id="square-matrices">
+<h3><span class="section-number">16.2.2. </span>Square matrices<a class="headerlink" href="#square-matrices" title="Permalink to this heading">#</a></h3>
+<p>Let’s restrict our discussion to square matrices.</p>
+<p>In the above discussion, this means that <span class="math notranslate nohighlight">\(m=n\)</span> and <span class="math notranslate nohighlight">\(A\)</span> maps <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> to
+itself.</p>
+<p>This means <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix that maps (or “transforms”) a vector
+<span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> to a new vector <span class="math notranslate nohighlight">\(y=Ax\)</span> also in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<div class="proof example admonition" id="eigen1_ex_sq">
+<p class="admonition-title"><span class="caption-number">Example 16.1 </span></p>
+<section class="example-content" id="proof-content">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix}
+        2 &amp; 1 \\
+        -1 &amp; 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 \\
+        3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        5 \\
+        2
+    \end{bmatrix}
+\end{split}\]</div>
+<p>Here, the matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    A = \begin{bmatrix} 2 &amp; 1 \\ 
+                        -1 &amp; 1 
+        \end{bmatrix}
+\end{split}\]</div>
+<p>transforms the vector <span class="math notranslate nohighlight">\(x = \begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> to the vector
+<span class="math notranslate nohighlight">\(y = \begin{bmatrix} 5 \\ 2 \end{bmatrix}\)</span>.</p>
+</section>
+</div><p>Let’s visualize this using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="c1"># Set the axes through the origin</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">vecs</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vecs</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">shrink</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;x=$(1,3)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.2</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Ax=$(5,2)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">29</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">29</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+                            <span class="n">shrink</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;arrowstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;connectionstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;arc3,rad=-0.3&#39;</span><span class="p">},</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;θ&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png"><img alt="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png" src="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>One way to understand this transformation is that <span class="math notranslate nohighlight">\(A\)</span></p>
+<ul class="simple">
+<li><p>first rotates <span class="math notranslate nohighlight">\(x\)</span> by some angle <span class="math notranslate nohighlight">\(\theta\)</span> and</p></li>
+<li><p>then scales it by some scalar <span class="math notranslate nohighlight">\(\gamma\)</span> to obtain the image <span class="math notranslate nohighlight">\(y\)</span> of <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="types-of-transformations">
+<h2><span class="section-number">16.3. </span>Types of transformations<a class="headerlink" href="#types-of-transformations" title="Permalink to this heading">#</a></h2>
+<p>Let’s examine some standard transformations we can perform with matrices.</p>
+<p>Below we visualize transformations by thinking of vectors as points
+instead of arrows.</p>
+<p>We consider how a given matrix transforms</p>
+<ul class="simple">
+<li><p>a grid of points and</p></li>
+<li><p>a set of points located on the unit circle in <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span>.</p></li>
+</ul>
+<p>To build the transformations we will use two functions, called <code class="docutils literal notranslate"><span class="pre">grid_transform</span></code> and <code class="docutils literal notranslate"><span class="pre">circle_transform</span></code>.</p>
+<p>Each of these functions visualizes the actions of a given <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">colorizer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="mi">16</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">grid_transform</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])):</span>
+    <span class="n">xvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">yvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">xygrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">])</span>
+    <span class="n">uvgrid</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">xygrid</span>
+
+    <span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">colorizer</span><span class="p">,</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">axes</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot x-y grid points</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="c1"># ax[0].grid(True)</span>
+    <span class="c1"># ax[0].axis(&quot;equal&quot;)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot transformed grid points</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uvgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="c1"># ax[1].grid(True)</span>
+    <span class="c1"># ax[1].axis(&quot;equal&quot;)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $Ax_1, Ax_2, \cdots, Ax_k$&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">circle_transform</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])):</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">axes</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">θ_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+        <span class="n">θ_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ_1</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ_1</span><span class="p">)</span>
+    <span class="n">a_1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">b_1</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">colorizer</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">a_1</span><span class="p">,</span> <span class="n">b_1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+                  <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;unit circle in $\mathbb</span><span class="si">{R}</span><span class="s2">^2$&quot;</span><span class="p">)</span>
+
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a_1</span><span class="p">,</span> <span class="n">b_1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">transformed_ab</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">ab</span>
+    <span class="n">transformed_circle_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">transformed_circle</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">transformed_circle_input</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">transformed_circle</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span>
+               <span class="n">transformed_circle</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">transformed_ab</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">transformed_ab</span><span class="p">[</span><span class="mi">1</span><span class="p">:,],</span>
+                  <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;transformed circle&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="scaling">
+<h3><span class="section-number">16.3.1. </span>Scaling<a class="headerlink" href="#scaling" title="Permalink to this heading">#</a></h3>
+<p>A matrix of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} 
+        \alpha &amp; 0 
+        \\ 0 &amp; \beta 
+    \end{bmatrix}
+\end{split}\]</div>
+<p>scales vectors across the x-axis by a factor <span class="math notranslate nohighlight">\(\alpha\)</span> and along the y-axis by
+a factor <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>Here we illustrate a simple example where <span class="math notranslate nohighlight">\(\alpha = \beta = 3\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># scaling by 3 in both directions</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">grid_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">circle_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png"><img alt="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png" src="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/51d75c89f2d249ec5b5d3edc95c2f40bc2b3cc25497a1c3a1c661ce5e46cd758.png"><img alt="_images/51d75c89f2d249ec5b5d3edc95c2f40bc2b3cc25497a1c3a1c661ce5e46cd758.png" src="_images/51d75c89f2d249ec5b5d3edc95c2f40bc2b3cc25497a1c3a1c661ce5e46cd758.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="shearing">
+<h3><span class="section-number">16.3.2. </span>Shearing<a class="headerlink" href="#shearing" title="Permalink to this heading">#</a></h3>
+<p>A “shear” matrix of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} 
+        1 &amp; \lambda \\ 
+        0 &amp; 1 
+    \end{bmatrix}
+\end{split}\]</div>
+<p>stretches vectors along the x-axis by an amount proportional to the
+y-coordinate of a point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>     <span class="c1"># shear along x-axis</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">grid_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">circle_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png"><img alt="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png" src="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/56d101a3be98cef4649e1e60a3274996df2cea045c8569dfad221ba84ace2423.png"><img alt="_images/56d101a3be98cef4649e1e60a3274996df2cea045c8569dfad221ba84ace2423.png" src="_images/56d101a3be98cef4649e1e60a3274996df2cea045c8569dfad221ba84ace2423.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="rotation">
+<h3><span class="section-number">16.3.3. </span>Rotation<a class="headerlink" href="#rotation" title="Permalink to this heading">#</a></h3>
+<p>A matrix of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} 
+        \cos \theta &amp; \sin \theta 
+        \\ - \sin \theta &amp; \cos \theta 
+    \end{bmatrix}
+\end{split}\]</div>
+<p>is called a <em>rotation matrix</em>.</p>
+<p>This matrix rotates vectors clockwise by an angle <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>  <span class="c1"># 45 degree clockwise rotation</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)],</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)]])</span>
+<span class="n">grid_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png"><img alt="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png" src="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="permutation">
+<h3><span class="section-number">16.3.4. </span>Permutation<a class="headerlink" href="#permutation" title="Permalink to this heading">#</a></h3>
+<p>The permutation matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{bmatrix} 
+        0 &amp; 1 \\ 
+        1 &amp; 0 
+    \end{bmatrix}
+\end{split}\]</div>
+<p>interchanges the coordinates of a vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">grid_transform</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png"><img alt="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png" src="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>More examples of common transition matrices can be found <a class="reference external" href="https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions">here</a>.</p>
+</section>
+</section>
+<section id="matrix-multiplication-as-composition">
+<h2><span class="section-number">16.4. </span>Matrix multiplication as composition<a class="headerlink" href="#matrix-multiplication-as-composition" title="Permalink to this heading">#</a></h2>
+<p>Since matrices act as functions that transform one vector to another, we can
+apply the concept of function composition to matrices as well.</p>
+<section id="linear-compositions">
+<h3><span class="section-number">16.4.1. </span>Linear compositions<a class="headerlink" href="#linear-compositions" title="Permalink to this heading">#</a></h3>
+<p>Consider the two matrices</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    A = 
+        \begin{bmatrix} 
+            0 &amp; 1 \\ 
+            -1 &amp; 0 
+        \end{bmatrix}
+        \quad \text{and} \quad
+    B = 
+        \begin{bmatrix} 
+            1 &amp; 2 \\ 
+            0 &amp; 1 
+        \end{bmatrix}
+\end{split}\]</div>
+<p>What will the output be when we try to obtain <span class="math notranslate nohighlight">\(ABx\)</span> for some <span class="math notranslate nohighlight">\(2 \times 1\)</span>
+vector <span class="math notranslate nohighlight">\(x\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  0 &amp; 1 \\
+ -1 &amp; 0
+ \end{bmatrix}}
+}_{\textstyle A} }
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  1 &amp; 2 \\
+  0 &amp; 1
+ \end{bmatrix}}
+}_{\textstyle B}}
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  1 \\
+  3
+ \end{bmatrix}}
+}^{\textstyle x}}
+\rightarrow
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  0 &amp; 1 \\
+  -1 &amp; -2
+ \end{bmatrix}}
+}_{\textstyle AB}}
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  1 \\
+  3
+ \end{bmatrix}}
+}^{\textstyle x}}
+\rightarrow
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  3 \\
+  -7
+ \end{bmatrix}}
+}^{\textstyle y}}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  0 &amp; 1 \\
+ -1 &amp; 0
+ \end{bmatrix}}
+}_{\textstyle A} }
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  1 &amp; 2 \\
+  0 &amp; 1
+ \end{bmatrix}}
+}_{\textstyle B}}
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  1 \\
+  3
+ \end{bmatrix}}
+}^{\textstyle x}}
+\rightarrow
+\color{red}{\underbrace{
+ \color{black}{\begin{bmatrix}
+  0 &amp; 1 \\
+  -1 &amp; 0
+ \end{bmatrix}}
+}_{\textstyle A}}
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  7 \\
+  3
+ \end{bmatrix}}
+}^{\textstyle Bx}}
+\rightarrow
+\color{red}{\overbrace{
+ \color{black}{\begin{bmatrix}
+  3 \\
+  -7
+ \end{bmatrix}}
+}^{\textstyle y}}
+\end{split}\]</div>
+<p>We can observe that applying the transformation <span class="math notranslate nohighlight">\(AB\)</span> on the vector <span class="math notranslate nohighlight">\(x\)</span> is the
+same as first applying <span class="math notranslate nohighlight">\(B\)</span> on <span class="math notranslate nohighlight">\(x\)</span> and then applying <span class="math notranslate nohighlight">\(A\)</span> on the vector <span class="math notranslate nohighlight">\(Bx\)</span>.</p>
+<p>Thus the matrix product <span class="math notranslate nohighlight">\(AB\)</span> is the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Function_composition">composition</a> of the
+matrix transformations <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></p>
+<p>This means first apply transformation <span class="math notranslate nohighlight">\(B\)</span> and then
+transformation <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>When we matrix multiply an <span class="math notranslate nohighlight">\(n \times m\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> with an <span class="math notranslate nohighlight">\(m \times k\)</span> matrix
+<span class="math notranslate nohighlight">\(B\)</span> the obtained matrix product is an <span class="math notranslate nohighlight">\(n \times k\)</span> matrix <span class="math notranslate nohighlight">\(AB\)</span>.</p>
+<p>Thus, if <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are transformations such that <span class="math notranslate nohighlight">\(A \colon \mathbb{R}^m \to
+\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(B \colon \mathbb{R}^k \to \mathbb{R}^m\)</span>, then <span class="math notranslate nohighlight">\(AB\)</span>
+transforms <span class="math notranslate nohighlight">\(\mathbb{R}^k\)</span> to <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>Viewing matrix multiplication as composition of maps helps us
+understand why, under matrix multiplication, <span class="math notranslate nohighlight">\(AB\)</span> is generally not equal to <span class="math notranslate nohighlight">\(BA\)</span>.</p>
+<p>(After all, when we compose functions, the order usually matters.)</p>
+</section>
+<section id="examples">
+<h3><span class="section-number">16.4.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the <span class="math notranslate nohighlight">\(90^{\circ}\)</span> clockwise rotation matrix given by
+<span class="math notranslate nohighlight">\(\begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix}\)</span> and let <span class="math notranslate nohighlight">\(B\)</span> be a shear matrix
+along the x-axis given by <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>.</p>
+<p>We will visualize how a grid of points changes when we apply the
+transformation <span class="math notranslate nohighlight">\(AB\)</span> and then compare it with the transformation <span class="math notranslate nohighlight">\(BA\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grid_composition_transform</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span>
+                               <span class="n">B</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])):</span>
+    <span class="n">xvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">yvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">xygrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xvals</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yvals</span><span class="p">])</span>
+    <span class="n">uvgrid</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">xygrid</span>
+    <span class="n">abgrid</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">uvgrid</span>
+
+    <span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">colorizer</span><span class="p">,</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">axes</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+            <span class="n">axes</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot grid points</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot intermediate grid points</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uvgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $Bx_1, Bx_2, \cdots, Bx_k$&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot transformed grid points</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">abgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $ABx_1, ABx_2, \cdots, ABx_k$&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>     <span class="c1"># 90 degree clockwise rotation</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>     <span class="c1"># shear along x-axis</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="shear-then-rotate">
+<h4><span class="section-number">16.4.2.1. </span>Shear then rotate<a class="headerlink" href="#shear-then-rotate" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_composition_transform</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  <span class="c1"># transformation AB</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png"><img alt="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png" src="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="rotate-then-shear">
+<h4><span class="section-number">16.4.2.2. </span>Rotate then shear<a class="headerlink" href="#rotate-then-shear" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_composition_transform</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>         <span class="c1"># transformation BA</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png"><img alt="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png" src="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>It is evident that the transformation <span class="math notranslate nohighlight">\(AB\)</span> is not the same as the transformation <span class="math notranslate nohighlight">\(BA\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="iterating-on-a-fixed-map">
+<h2><span class="section-number">16.5. </span>Iterating on a fixed map<a class="headerlink" href="#iterating-on-a-fixed-map" title="Permalink to this heading">#</a></h2>
+<p>In economics (and especially in dynamic modeling), we are often interested in
+analyzing behavior where we repeatedly apply a fixed matrix.</p>
+<p>For example, given a vector <span class="math notranslate nohighlight">\(v\)</span> and a matrix <span class="math notranslate nohighlight">\(A\)</span>, we are interested in
+studying the sequence</p>
+<div class="math notranslate nohighlight">
+\[ 
+    v, \quad
+    Av, \quad
+    AAv = A^2v, \quad \ldots
+\]</div>
+<p>Let’s first see examples of a sequence of iterates <span class="math notranslate nohighlight">\((A^k v)_{k \geq 0}\)</span> under
+different maps <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="cell docutils container" id="plot-series">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">ellipse</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">xy</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ellipse</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">ellipse</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Initialize holder for trajectories</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">iteration</span> <span class="o">=</span> <span class="n">matrix_power</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">@</span> <span class="n">v</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">iteration</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">iteration</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v1</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$v$&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v1</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$Av$&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v1</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$A^</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">v$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span> <span class="o">*</span> <span class="n">A</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">plot_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/545651d837a38e02d571c59a8e6d76aa711e2ae3ed6d0f9a7fd0628ee7c1790d.png"><img alt="_images/545651d837a38e02d571c59a8e6d76aa711e2ae3ed6d0f9a7fd0628ee7c1790d.png" src="_images/545651d837a38e02d571c59a8e6d76aa711e2ae3ed6d0f9a7fd0628ee7c1790d.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Here with each iteration the vectors get shorter, i.e., move closer to the origin.</p>
+<p>In this case, repeatedly multiplying a vector by <span class="math notranslate nohighlight">\(A\)</span> makes the vector “spiral in”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">plot_series</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/d988b0521c8b149f68b80246e16bafa984b4456258a162dcdbb8c72b78b31096.png"><img alt="_images/d988b0521c8b149f68b80246e16bafa984b4456258a162dcdbb8c72b78b31096.png" src="_images/d988b0521c8b149f68b80246e16bafa984b4456258a162dcdbb8c72b78b31096.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Here with each iteration vectors do not tend to get longer or shorter.</p>
+<p>In this case, repeatedly multiplying a vector by <span class="math notranslate nohighlight">\(A\)</span> simply “rotates it around
+an ellipse”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">B</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="n">plot_series</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/fafd98b963ba1971c46ae6bd858214bca6a68c6d7ae082c5a409a67f60695f29.png"><img alt="_images/fafd98b963ba1971c46ae6bd858214bca6a68c6d7ae082c5a409a67f60695f29.png" src="_images/fafd98b963ba1971c46ae6bd858214bca6a68c6d7ae082c5a409a67f60695f29.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>Here with each iteration vectors tend to get longer, i.e., farther from the
+origin.</p>
+<p>In this case, repeatedly multiplying a vector by <span class="math notranslate nohighlight">\(A\)</span> makes the vector “spiral out”.</p>
+<p>We thus observe that the sequence <span class="math notranslate nohighlight">\((A^kv)_{k \geq 0}\)</span> behaves differently depending on the map <span class="math notranslate nohighlight">\(A\)</span> itself.</p>
+<p>We now discuss the property of A that determines this behavior.</p>
+</section>
+<section id="eigenvalues">
+<span id="la-eigenvalues"></span><h2><span class="section-number">16.6. </span>Eigenvalues<a class="headerlink" href="#eigenvalues" title="Permalink to this heading">#</a></h2>
+<p id="index-1">In this section we introduce the notions of eigenvalues and eigenvectors.</p>
+<section id="definitions">
+<h3><span class="section-number">16.6.1. </span>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> square matrix.</p>
+<p>If <span class="math notranslate nohighlight">\(\lambda\)</span> is scalar and <span class="math notranslate nohighlight">\(v\)</span> is a non-zero <span class="math notranslate nohighlight">\(n\)</span>-vector such that</p>
+<div class="math notranslate nohighlight">
+\[
+A v = \lambda v.
+\]</div>
+<p>Then we say that <span class="math notranslate nohighlight">\(\lambda\)</span> is an <em>eigenvalue</em> of <span class="math notranslate nohighlight">\(A\)</span>, and <span class="math notranslate nohighlight">\(v\)</span> is the corresponding <em>eigenvector</em>.</p>
+<p>Thus, an eigenvector of <span class="math notranslate nohighlight">\(A\)</span> is a nonzero vector <span class="math notranslate nohighlight">\(v\)</span> such that when the map <span class="math notranslate nohighlight">\(A\)</span> is
+applied, <span class="math notranslate nohighlight">\(v\)</span> is merely scaled.</p>
+<p>The next figure shows two eigenvectors (blue arrows) and their images under
+<span class="math notranslate nohighlight">\(A\)</span> (red arrows).</p>
+<p>As expected, the image <span class="math notranslate nohighlight">\(Av\)</span> of each <span class="math notranslate nohighlight">\(v\)</span> is just a scaled version of the original</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">eig</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">evecs</span> <span class="o">=</span> <span class="n">evecs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">evecs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Set the axes through the origin</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="c1"># ax.grid(alpha=0.4)</span>
+
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+
+<span class="c1"># Plot each eigenvector</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">evecs</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                <span class="n">shrink</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+
+<span class="c1"># Plot the image of each eigenvector</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">evecs</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">v</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                <span class="n">shrink</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+
+<span class="c1"># Plot the lines they run through</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">evecs</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png"><img alt="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png" src="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png" style="width: 80%;" /></a>
+</div>
+</div>
+</section>
+<section id="complex-values">
+<h3><span class="section-number">16.6.2. </span>Complex values<a class="headerlink" href="#complex-values" title="Permalink to this heading">#</a></h3>
+<p>So far our definition of eigenvalues and eigenvectors seems straightforward.</p>
+<p>There is one complication we haven’t mentioned yet:</p>
+<p>When solving <span class="math notranslate nohighlight">\(Av = \lambda v\)</span>,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is allowed to be a complex number and</p></li>
+<li><p><span class="math notranslate nohighlight">\(v\)</span> is allowed to be an <span class="math notranslate nohighlight">\(n\)</span>-vector of complex numbers.</p></li>
+</ul>
+<p>We will see some examples below.</p>
+</section>
+<section id="some-mathematical-details">
+<h3><span class="section-number">16.6.3. </span>Some mathematical details<a class="headerlink" href="#some-mathematical-details" title="Permalink to this heading">#</a></h3>
+<p>We note some mathematical details for more advanced readers.</p>
+<p>(Other readers can skip to the next section.)</p>
+<p>The eigenvalue equation is equivalent to <span class="math notranslate nohighlight">\((A - \lambda I) v = 0\)</span>.</p>
+<p>This equation has a nonzero solution <span class="math notranslate nohighlight">\(v\)</span> only when the columns of <span class="math notranslate nohighlight">\(A - \lambda I\)</span> are linearly dependent.</p>
+<p>This in turn is equivalent to stating the determinant is zero.</p>
+<p>Hence, to find all eigenvalues, we can look for <span class="math notranslate nohighlight">\(\lambda\)</span> such that the
+determinant of <span class="math notranslate nohighlight">\(A - \lambda I\)</span> is zero.</p>
+<p>This problem can be expressed as one of solving for the roots of a polynomial
+in <span class="math notranslate nohighlight">\(\lambda\)</span> of degree <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>This in turn implies the existence of <span class="math notranslate nohighlight">\(n\)</span> solutions in the complex
+plane, although some might be repeated.</p>
+</section>
+<section id="facts">
+<h3><span class="section-number">16.6.4. </span>Facts<a class="headerlink" href="#facts" title="Permalink to this heading">#</a></h3>
+<p>Some nice facts about the eigenvalues of a square matrix <span class="math notranslate nohighlight">\(A\)</span> are as follows:</p>
+<ol class="arabic simple">
+<li><p>the determinant of <span class="math notranslate nohighlight">\(A\)</span> equals the product of the eigenvalues</p></li>
+<li><p>the trace of <span class="math notranslate nohighlight">\(A\)</span> (the sum of the elements on the principal diagonal) equals the sum of the eigenvalues</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(A\)</span> is symmetric, then all of its eigenvalues are real</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(A\)</span> is invertible and <span class="math notranslate nohighlight">\(\lambda_1, \ldots, \lambda_n\)</span> are its eigenvalues, then the eigenvalues of <span class="math notranslate nohighlight">\(A^{-1}\)</span> are <span class="math notranslate nohighlight">\(1/\lambda_1, \ldots, 1/\lambda_n\)</span>.</p></li>
+</ol>
+<p>A corollary of the last statement is that a matrix is invertible if and only if all its eigenvalues are nonzero.</p>
+</section>
+<section id="computation">
+<h3><span class="section-number">16.6.5. </span>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h3>
+<p>Using NumPy, we can solve for the eigenvalues and eigenvectors of a matrix as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">eig</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">evals</span>  <span class="c1"># eigenvalues</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 3., -1.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evecs</span>  <span class="c1"># eigenvectors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.70710678, -0.70710678],
+       [ 0.70710678,  0.70710678]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the <em>columns</em> of <code class="docutils literal notranslate"><span class="pre">evecs</span></code> are the eigenvectors.</p>
+<p>Since any scalar multiple of an eigenvector is an eigenvector with the same
+eigenvalue (which can be verified), the <code class="docutils literal notranslate"><span class="pre">eig</span></code> routine normalizes the length of each eigenvector
+to one.</p>
+<p>The eigenvectors and eigenvalues of a map <span class="math notranslate nohighlight">\(A\)</span> determine how a vector <span class="math notranslate nohighlight">\(v\)</span> is transformed when we repeatedly multiply by <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>This is discussed further later.</p>
+</section>
+</section>
+<section id="the-neumann-series-lemma">
+<span id="la-neumann"></span><h2><span class="section-number">16.7. </span>The Neumann Series Lemma<a class="headerlink" href="#the-neumann-series-lemma" title="Permalink to this heading">#</a></h2>
+<p id="index-2">In this section we present a famous result about series of matrices that has
+many applications in economics.</p>
+<section id="scalar-series">
+<h3><span class="section-number">16.7.1. </span>Scalar series<a class="headerlink" href="#scalar-series" title="Permalink to this heading">#</a></h3>
+<p>Here’s a fundamental result about series:</p>
+<p>If <span class="math notranslate nohighlight">\(a\)</span> is a number and <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>, then</p>
+<div class="math notranslate nohighlight" id="equation-gp-sum">
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-gp-sum" title="Permalink to this equation">#</a></span>\[    \sum_{k=0}^{\infty} a^k =\frac{1}{1-a} = (1 - a)^{-1}\]</div>
+<p>For a one-dimensional linear equation <span class="math notranslate nohighlight">\(x = ax + b\)</span> where x is unknown we can thus conclude that the solution <span class="math notranslate nohighlight">\(x^{*}\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+    x^{*} = \frac{b}{1-a} = \sum_{k=0}^{\infty} a^k b
+\]</div>
+</section>
+<section id="matrix-series">
+<h3><span class="section-number">16.7.2. </span>Matrix series<a class="headerlink" href="#matrix-series" title="Permalink to this heading">#</a></h3>
+<p>A generalization of this idea exists in the matrix setting.</p>
+<p>Consider the system of equations <span class="math notranslate nohighlight">\(x = Ax + b\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(n \times n\)</span>
+square matrix and <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are both column vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>Using matrix algebra we can conclude that the solution to this system of equations will be given by:</p>
+<div class="math notranslate nohighlight" id="equation-neumann-eqn">
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-neumann-eqn" title="Permalink to this equation">#</a></span>\[    x^{*} = (I-A)^{-1}b\]</div>
+<p>What guarantees the existence of a unique vector <span class="math notranslate nohighlight">\(x^{*}\)</span> that satisfies
+<a class="reference internal" href="#equation-neumann-eqn">(16.2)</a>?</p>
+<p>The following is a fundamental result in functional analysis that generalizes
+<a class="reference internal" href="#equation-gp-sum">(16.1)</a> to a multivariate case.</p>
+<div class="proof theorem admonition" id="neumann_series_lemma">
+<span id="neumann-series-lemma"></span><p class="admonition-title"><span class="caption-number">Theorem 16.1 </span> (Neumann Series Lemma)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a square matrix and let <span class="math notranslate nohighlight">\(A^k\)</span> be the <span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(r(A)\)</span> be the <strong>spectral radius</strong> of <span class="math notranslate nohighlight">\(A\)</span>, defined as <span class="math notranslate nohighlight">\(\max_i |\lambda_i|\)</span>, where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{\lambda_i\}_i\)</span> is the set of eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> and</p></li>
+<li><p><span class="math notranslate nohighlight">\(|\lambda_i|\)</span> is the modulus of the complex number <span class="math notranslate nohighlight">\(\lambda_i\)</span></p></li>
+</ul>
+<p>Neumann’s Theorem states the following: If <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span>, then <span class="math notranslate nohighlight">\(I - A\)</span> is invertible, and</p>
+<div class="math notranslate nohighlight">
+\[
+(I - A)^{-1} = \sum_{k=0}^{\infty} A^k
+\]</div>
+</section>
+</div><p>We can see the Neumann Series Lemma in action in the following example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+
+<span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>   <span class="c1"># finding eigenvalues and eigenvectors</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">λ</span><span class="p">)</span> <span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">evals</span><span class="p">)</span>    <span class="c1"># compute spectral radius</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5828427124746189
+</pre></div>
+</div>
+</div>
+</div>
+<p>The spectral radius <span class="math notranslate nohighlight">\(r(A)\)</span> obtained is less than 1.</p>
+<p>Thus, we can apply the Neumann Series Lemma to find <span class="math notranslate nohighlight">\((I-A)^{-1}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 2 x 2 identity matrix</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B_inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>  <span class="c1"># direct inverse method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># power series sum of A</span>
+<span class="n">A_power</span> <span class="o">=</span> <span class="n">I</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">A_sum</span> <span class="o">+=</span> <span class="n">A_power</span>
+    <span class="n">A_power</span> <span class="o">=</span> <span class="n">A_power</span> <span class="o">@</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check equality between the sum and the inverse methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A_sum</span><span class="p">,</span> <span class="n">B_inverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although we truncate the infinite sum at <span class="math notranslate nohighlight">\(k = 50\)</span>, both methods give us the same
+result which illustrates the result of the Neumann Series Lemma.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">16.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="eig1_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16.1 </span></p>
+<section id="exercise-content">
+<p>Power iteration is a method for finding the greatest absolute eigenvalue of a diagonalizable matrix.</p>
+<p>The method starts with a random vector <span class="math notranslate nohighlight">\(b_0\)</span> and repeatedly applies the matrix <span class="math notranslate nohighlight">\(A\)</span> to it</p>
+<div class="math notranslate nohighlight">
+\[
+b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
+\]</div>
+<p>A thorough discussion of the method can be found <a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html">here</a>.</p>
+<p>In this exercise, first implement the power iteration method and use it to find the greatest absolute eigenvalue and its corresponding eigenvector.</p>
+<p>Then visualize the convergence.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="eigen_I-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig1_ex1"> Exercise 16.1</a></p>
+<section id="solution-content">
+<p>Here is one solution.</p>
+<p>We start by looking into the distance between the eigenvector approximation and the true eigenvector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a matrix A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">num_iters</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Define a random starting vector b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Get the leading eigenvector of matrix A</span>
+<span class="n">eigenvector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Power iteration loop</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iters</span><span class="p">):</span>
+    <span class="c1"># Multiply b by A</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">b</span>
+    <span class="c1"># Normalize b</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1"># Append b to the list of eigenvector approximations</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                         <span class="o">-</span> <span class="n">eigenvector</span><span class="p">)</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+<span class="n">greatest_eigenvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The approximated greatest absolute eigenvalue is </span><span class="se">\</span>
+<span class="s1">        </span><span class="si">{</span><span class="n">greatest_eigenvalue</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The real eigenvalue is&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Plot the eigenvector approximations for each iteration</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;iterations&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The approximated greatest absolute eigenvalue is         4.00
+The real eigenvalue is [ 4. -2.  2.]
+</pre></div>
+</div>
+<figure class="align-default" id="pow-dist">
+<a class="reference internal image-reference" href="_images/b8bbb4a1450fee495620f4e80acc6ac983e2948dfc7f30ed1117a916cf46c284.png"><img alt="_images/b8bbb4a1450fee495620f4e80acc6ac983e2948dfc7f30ed1117a916cf46c284.png" src="_images/b8bbb4a1450fee495620f4e80acc6ac983e2948dfc7f30ed1117a916cf46c284.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Power iteration</span><a class="headerlink" href="#pow-dist" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Then we can look at the trajectory of the eigenvector approximation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the figure and axis for 3D plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the eigenvectors</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">eigenvector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+           <span class="n">eigenvector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+           <span class="n">eigenvector</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+               <span class="n">alpha</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">num_iters</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+               <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;actual eigenvector&#39;</span><span class="p">,</span>
+                   <span class="sa">r</span><span class="s1">&#39;approximated eigenvector ($b_k$)&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="pow-trajectory">
+<a class="reference internal image-reference" href="_images/ae834a578a0e43ad9ab98653c217bd13b367df6a648af329a30bab67ced1add5.png"><img alt="_images/ae834a578a0e43ad9ab98653c217bd13b367df6a648af329a30bab67ced1add5.png" src="_images/ae834a578a0e43ad9ab98653c217bd13b367df6a648af329a30bab67ced1add5.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Power iteration trajectory</span><a class="headerlink" href="#pow-trajectory" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="eig1_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16.2 </span></p>
+<section id="exercise-content">
+<p>We have discussed the trajectory of the vector <span class="math notranslate nohighlight">\(v\)</span> after being transformed by <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Consider the matrix <span class="math notranslate nohighlight">\(A = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}\)</span> and the vector <span class="math notranslate nohighlight">\(v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}\)</span>.</p>
+<p>Try to compute the trajectory of <span class="math notranslate nohighlight">\(v\)</span> after being transformed by <span class="math notranslate nohighlight">\(A\)</span> for <span class="math notranslate nohighlight">\(n=4\)</span> iterations and plot the result.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="eigen_I-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig1_ex2"> Exercise 16.2</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">11</span>
+
+<span class="c1"># Compute eigenvectors and eigenvalues</span>
+<span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;eigenvalues:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;eigenvectors:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvectors</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plot_series</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eigenvalues:
+ [ 2.41421356 -0.41421356]
+eigenvectors:
+ [[ 0.81649658 -0.81649658]
+ [ 0.57735027  0.57735027]]
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/d1525934c4c289b4d365bedc4288fe917825dc88f9b7cb3a8bbeafd050371a0b.png"><img alt="_images/d1525934c4c289b4d365bedc4288fe917825dc88f9b7cb3a8bbeafd050371a0b.png" src="_images/d1525934c4c289b4d365bedc4288fe917825dc88f9b7cb3a8bbeafd050371a0b.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>The result seems to converge to the eigenvector of <span class="math notranslate nohighlight">\(A\)</span> with the largest eigenvalue.</p>
+<p>Let’s use a <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_field">vector field</a> to visualize the transformation brought by A.</p>
+<p>(This is a more advanced topic in linear algebra, please step ahead if you are comfortable with the math.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a grid of points</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+                   <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="c1"># Apply the matrix A to each point in the vector field</span>
+<span class="n">vec_field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">vec_field</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot the transformed vector field</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span>
+                   <span class="n">density</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#A23BEC&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">arrows</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Draw eigenvectors</span>
+<span class="n">origin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">)))</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">],</span> <span class="s1">&#39;angles&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;scale_units&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">origin</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+           <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">origin</span><span class="p">,</span> <span class="o">-</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+           <span class="o">-</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">]</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2.4 eigenspace&quot;</span><span class="p">,</span> <span class="s2">&quot;0.4 eigenspace&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span>
+           <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="eigen-conv">
+<a class="reference internal image-reference" href="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png"><img alt="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png" src="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.3 </span><span class="caption-text">Convergence towards eigenvectors</span><a class="headerlink" href="#eigen-conv" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Note that the vector field converges to the eigenvector of <span class="math notranslate nohighlight">\(A\)</span> with the largest eigenvalue and diverges from the eigenvector of <span class="math notranslate nohighlight">\(A\)</span> with the smallest eigenvalue.</p>
+<p>In fact, the eigenvectors are also the directions in which the matrix <span class="math notranslate nohighlight">\(A\)</span> stretches or shrinks the space.</p>
+<p>Specifically, the eigenvector with the largest eigenvalue is the direction in which the matrix <span class="math notranslate nohighlight">\(A\)</span> stretches the space the most.</p>
+<p>We will see more intriguing examples in the following exercise.</p>
+</section>
+</div>
+<div class="exercise admonition" id="eig1_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16.3 </span></p>
+<section id="exercise-content">
+<p><a class="reference internal" href="#plot-series"><span class="std std-ref">Previously</span></a>, we demonstrated the trajectory of the vector <span class="math notranslate nohighlight">\(v\)</span> after being transformed by <span class="math notranslate nohighlight">\(A\)</span> for three different matrices.</p>
+<p>Use the visualization in the previous exercise to explain the trajectory of the vector <span class="math notranslate nohighlight">\(v\)</span> after being transformed by <span class="math notranslate nohighlight">\(A\)</span> for the three different matrices.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="eigen_I-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig1_ex3"> Exercise 16.3</a></p>
+<section id="solution-content">
+<p>Here is one solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span> <span class="o">*</span> <span class="n">A</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">C</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">example</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">example</span>
+
+    <span class="c1"># Compute right eigenvectors and eigenvalues</span>
+    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Example </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;eigenvalues:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;eigenvectors:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvectors</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">eigenvalues_real</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">eigenvectors_real</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="o">.</span><span class="n">real</span>
+
+    <span class="c1"># Create a grid of points</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+    <span class="c1"># Apply the matrix A to each point in the vector field</span>
+    <span class="n">vec_field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">vec_field</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Plot the transformed vector field</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#A23BEC&#39;</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">arrows</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Draw eigenvectors</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">],</span> <span class="s1">&#39;angles&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;scale_units&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                  <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">origin</span><span class="p">,</span> <span class="n">eigenvectors_real</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="n">eigenvectors_real</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">origin</span><span class="p">,</span>
+                 <span class="o">-</span> <span class="n">eigenvectors_real</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="o">-</span> <span class="n">eigenvectors_real</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x-axis&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y-axis&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1:
+
+eigenvalues:
+ [0.61237244+0.35355339j 0.61237244-0.35355339j]
+eigenvectors:
+ [[0.81649658+0.j         0.81649658-0.j        ]
+ [0.40824829-0.40824829j 0.40824829+0.40824829j]]
+
+Example 2:
+
+eigenvalues:
+ [0.8660254+0.5j 0.8660254-0.5j]
+eigenvectors:
+ [[0.81649658+0.j         0.81649658-0.j        ]
+ [0.40824829-0.40824829j 0.40824829+0.40824829j]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 3:
+
+eigenvalues:
+ [1.22474487+0.70710678j 1.22474487-0.70710678j]
+eigenvectors:
+ [[0.81649658+0.j         0.81649658-0.j        ]
+ [0.40824829-0.40824829j 0.40824829+0.40824829j]]
+</pre></div>
+</div>
+<figure class="align-default" id="vector-field">
+<a class="reference internal image-reference" href="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png"><img alt="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png" src="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.4 </span><span class="caption-text">Vector fields of the three matrices</span><a class="headerlink" href="#vector-field" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The vector fields explain why we observed the trajectories of the vector <span class="math notranslate nohighlight">\(v\)</span> multiplied by <span class="math notranslate nohighlight">\(A\)</span> iteratively before.</p>
+<p>The pattern demonstrated here is because we have complex eigenvalues and eigenvectors.</p>
+<p>We can plot the complex plane for one of the matrices using <code class="docutils literal notranslate"><span class="pre">Arrow3D</span></code> class retrieved from <a class="reference external" href="https://stackoverflow.com/questions/22867620/putting-arrowheads-on-vectors-in-a-3d-plot">stackoverflow</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Arrow3D</span><span class="p">(</span><span class="n">FancyArrowPatch</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verts3d</span> <span class="o">=</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span>
+
+    <span class="k">def</span> <span class="nf">do_3d_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">xs3d</span><span class="p">,</span> <span class="n">ys3d</span><span class="p">,</span> <span class="n">zs3d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verts3d</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span> <span class="o">=</span> <span class="n">proj3d</span><span class="o">.</span><span class="n">proj_transform</span><span class="p">(</span><span class="n">xs3d</span><span class="p">,</span> <span class="n">ys3d</span><span class="p">,</span> <span class="n">zs3d</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_positions</span><span class="p">((</span><span class="mf">0.1</span><span class="o">*</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                           <span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">ys</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">zs</span><span class="p">)</span>
+
+
+<span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Create meshgrid for vector field</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+                   <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="c1"># Calculate vector field (real and imaginary parts)</span>
+<span class="n">u_real</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span>
+<span class="n">v_real</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span>
+<span class="n">u_imag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">v_imag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create 3D figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">vlength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u_imag</span><span class="p">,</span> <span class="n">u_real</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="n">v_real</span><span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">v_imag</span><span class="o">-</span><span class="n">u_imag</span><span class="p">,</span>
+          <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span>
+          <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">arrow_prop_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mutation_scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-|&gt;&#39;</span><span class="p">,</span> <span class="n">shrinkA</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shrinkB</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot 3D eigenvectors</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Arrow3D</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imag</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_prop_dict</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># Set axis labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Im&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="d-vector-field">
+<a class="reference internal image-reference" href="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png"><img alt="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png" src="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16.5 </span><span class="caption-text">3D plot of the vector field</span><a class="headerlink" href="#d-vector-field" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. About These Lectures
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Economic Data
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. 长期增长
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. Business Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. Price Level Histories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   5. Inflation During French Revolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. Income and Wealth Inequality
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   7. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. Linear Equations and Matrix Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   9. Complex Numbers and Trigonometry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   10. Geometric Series for Elementary Economics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Finite Horizons
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. Present Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   13. Equalizing Difference Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. A Monetarist Theory of Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. Monetarist Theory of Price Levels with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear Dynamics: Infinite Horizons
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   16. Eigenvalues and Eigenvectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   17. Computing Square Roots
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probability and Distributions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   18. Distributions and Probabilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   19. LLN and CLT
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   20. Monte Carlo and Option Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   21. Heavy-Tailed Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   22. Racial Segregation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nonlinear Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   23. Dynamics in One Dimension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   24. The Solow-Swan Growth Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   25. The Cobweb Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   26. The Overlapping Generations Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   27. Commodity Prices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Monetary-Fiscal Policy Interactions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation.html">
+   28. Money Financed Government Deficits and Price Levels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unpleasant.html">
+   29. Some Unpleasant Monetarist Arithmetic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation_nonlinear.html">
+   30. Inflation Rate Laffer Curves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laffer_adaptive.html">
+   31. Laffer Curves  with Adaptive Expectations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stochastic Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   32. AR(1) Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   33. Markov Chains: Basic Concepts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   34. Markov Chains: Irreducibility and Ergodicity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   35. Univariate Time Series with Matrix Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Optimization
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   36. Linear Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   37. Shortest Paths
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modeling in Higher Dimensions
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   38. The Perron-Frobenius Theorem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   39. Input-Output Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   40. A Lake Model of Employment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   41. Networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Markets and Competitive Equilibrium
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   42. Supply and Demand with Many Goods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   43. Market Equilibrium with Heterogeneity
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Estimation
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   44. Simple Linear Regression Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   45. Maximum Likelihood Estimation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   46. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   47. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   48. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/eigen_I.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-intro.notebooks/main?urlpath=tree/eigen_I.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/eigen_I.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-intro.notebooks" data-urlpath="tree/lecture-python-intro.notebooks/eigen_I.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-intro.notebooks/blob/main/eigen_I.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "eigen_I";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-intro.notebooks";
+                const urlPath = "tree/lecture-python-intro.notebooks/eigen_I.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>
