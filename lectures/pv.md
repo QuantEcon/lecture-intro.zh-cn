@@ -11,95 +11,90 @@ kernelspec:
   name: python3
 ---
 
-# Present Values
+# 现值
 
-## Overview 
+## 概述
 
-This lecture describes the  **present value model** that is a starting point
-of much asset pricing theory.
+本讲座描述了**现值模型**，这是许多资产定价理论的起点。
 
-Asset pricing theory is a component of theories about many economic decisions including
+资产定价理论是关于许多经济决策理论的组成部分，包括
 
-  * consumption
-  * labor supply
-  * education choice 
-  * demand for money
+  * 消费
+  * 劳动力供给
+  * 教育选择
+  * 货币需求
 
-In asset pricing theory, and in economic dynamics more generally, a basic topic is the relationship
-among different **time series**.
+在资产定价理论中，更广泛的经济动态中，一个基本主题是不同**时间序列**之间的关系。
 
-A **time series** is a **sequence** indexed by time.
+**时间序列**是按时间索引的**序列**。
 
-In this lecture, we'll represent  a sequence as a vector.
+在本讲座中，我们将把序列表示为向量。
 
-So our analysis will typically boil down to studying relationships among vectors.
+因此，我们的分析通常归结为研究向量之间的关系。
 
-Our main  tools in this lecture will be  
+本讲座中的主要工具将是
 
-  * matrix multiplication,  and
-  * matrix inversion.
+  * 矩阵乘法，和
+  * 矩阵求逆。
 
-We'll use the calculations described here in  subsequent lectures, including {doc}`consumption smoothing <cons_smooth>`, {doc}`equalizing difference model <equalizing_difference>`, and
-{doc}`monetarist theory of price levels <cagan_ree>`.
+我们将在后续讲座中使用这里描述的计算，包括{doc}`消费平滑 <cons_smooth>`，{doc}`均衡差异模型 <equalizing_difference>`，和{doc}`货币主义价格水平理论 <cagan_ree>`。
 
-Let's dive in.
-
-## Analysis 
+让我们开始吧。
 
 
+## 分析
 
-Let 
+设
 
- * $\{d_t\}_{t=0}^T $ be a sequence of dividends or "payouts"
- * $\{p_t\}_{t=0}^T $ be a sequence of prices of a claim on the continuation of
-    the asset's payout  stream from date $t$ on, namely, $\{d_s\}_{s=t}^T $ 
- * $ \delta  \in (0,1) $ be a one-period "discount factor" 
- * $p_{T+1}^*$ be a terminal price of the asset at time $T+1$
- 
-We  assume that the dividend stream $\{d_t\}_{t=0}^T $ and the terminal price 
-$p_{T+1}^*$ are both exogenous.
+ * $\{d_t\}_{t=0}^T $ 是一系列股息或“支付”
+ * $\{p_t\}_{t=0}^T $ 是从$t$日期开始的资产支付流的延续索赔价格序列，即$\{d_s\}_{s=t}^T $
+ * $ \delta  \in (0,1) $ 是一个周期的“折现因子”
+ * $p_{T+1}^*$ 是时间$T+1$时资产的终端价格
 
-This means that they are determined outside the model.
+我们假设股息流$\{d_t\}_{t=0}^T $和终端价格$p_{T+1}^*$都是外生的。
 
-Assume the sequence of asset pricing equations
+这意味着它们是在模型之外确定的。
+
+假设资产定价方程序列
 
 $$
     p_t = d_t + \delta p_{t+1}, \quad t = 0, 1, \ldots , T
 $$ (eq:Euler1)
 
-We say equation**s**, plural, because there are $T+1$ equations, one for each $t =0, 1, \ldots, T$.
+我们说方程**s**，复数，因为有$T+1$个方程，每个$t =0, 1, \ldots, T$都有一个。
 
+方程{eq}`eq:Euler1`断言在时间$t$购买资产所支付的价格等于支付$d_t$加上时间$t+1$的价格乘以时间折现因子$\delta$。
 
-Equations {eq}`eq:Euler1` assert that price paid to purchase  the asset at time $t$  equals the payout $d_t$  plus the price at time  $t+1$ multiplied by a time discount factor $\delta$.
+通过将明天的价格乘以$\delta$来折现，考虑了“等待一个周期的价值”。
 
-Discounting tomorrow's price  by multiplying it by  $\delta$ accounts for the "value of waiting one period".
+我们想要解决$T+1$个方程{eq}`eq:Euler1`的系统，以资产价格序列$\{p_t\}_{t=0}^T $作为股息序列$\{d_t\}_{t=0}^T $和外生终端价格$p_{T+1}^*$的函数。
 
-We want to solve the system of $T+1$ equations {eq}`eq:Euler1` for the asset price sequence  $\{p_t\}_{t=0}^T $ as a function of the dividend sequence $\{d_t\}_{t=0}^T $ and the exogenous terminal
-price  $p_{T+1}^*$.
+像{eq}`eq:Euler1`这样的方程系统是线性**差分方程**的一个例子。
 
-A system of equations like {eq}`eq:Euler1` is an example of a linear  **difference equation**.
+有强大的数学方法可以用来解决这样的系统，它们本身就值得研究，因为它们是分析许多有趣经济模型的基础。
 
-There are powerful mathematical  methods available for solving such systems and they are well worth
-studying in their own right, being the foundation for the analysis of many interesting economic models.  
+例如，参见{doc}`Samuelson乘数-加速器 <dynam:samuelson>`
 
-For an example, see {doc}`Samuelson multiplier-accelerator <dynam:samuelson>`
+在本讲座中，我们将使用矩阵乘法和矩阵求逆来解决系统{eq}`eq:Euler1`，这是线性代数中的基本工具，在{doc}`线性方程和矩阵代数 <linear_equations>`中介绍。
 
-In this lecture, we'll  solve system {eq}`eq:Euler1` using matrix multiplication and matrix inversion, basic tools from linear algebra introduced in  {doc}`linear equations and matrix algebra <linear_equations>`.
-
-We will use the following imports
+我们将导入以下的库
 
 +++
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
+fontP = font_manager.FontProperties()
+fontP.set_family('SimHei')
+fontP.set_size(14)
 ```
 
 +++
 
-## Representing sequences as vectors
+## 将序列表示为向量
 
-The equations in system {eq}`eq:Euler1` can be arranged as follows:
+系统{eq}`eq:Euler1`中的方程可以如下排列：
 
 $$
 \begin{aligned}
@@ -111,7 +106,7 @@ $$
 \end{aligned}
 $$ (eq:Euler_stack)
 
-Write the system {eq}`eq:Euler_stack` of $T+1$ asset pricing  equations as the single matrix equation
+将$T+1$个资产定价方程的系统{eq}`eq:Euler_stack`写成单个矩阵方程
 
 $$
     \begin{bmatrix} 1 & -\delta & 0 & 0 & \cdots & 0 & 0 \cr
@@ -130,25 +125,25 @@ $$
     \end{bmatrix}
 $$ (eq:pvpieq)
 
+
 +++
 
 ```{exercise-start} 
 :label: pv_ex_1
 ```
 
-Carry out the matrix multiplication in [](eq:pvpieq) by hand and confirm that you
-recover the equations in [](eq:Euler_stack).
+手动用矩阵乘法对[](eq:pvpieq)进行计算，然后用 [](eq:Euler_stack)确认。
 
 ```{exercise-end}
 ```
 
-In vector-matrix notation, we can write  system {eq}`eq:pvpieq` as 
+用向量-矩阵表示法，我们可以将系统{eq}`eq:pvpieq`写成
 
 $$
     A p = d + b
 $$ (eq:apdb)
 
-Here $A$ is the matrix on the left side of equation {eq}`eq:pvpieq`, while
+这里$A$是方程{eq}`eq:pvpieq`左侧的矩阵，而
 
 $$
     p = 
@@ -176,20 +171,19 @@ $$
     \end{bmatrix}
 $$
 
-The solution for the vector of  prices is  
+价格向量的解是
 
 $$
     p = A^{-1}(d + b)
 $$ (eq:apdb_sol)
 
-
-For example, suppose that  the dividend stream is 
+例如，假设股息流是
 
 $$
     d_{t+1} = 1.05 d_t, \quad t = 0, 1, \ldots , T-1.
 $$
 
-Let's write Python code to compute and plot the dividend stream.
+让我们编写Python代码来计算和绘制股息流。
 
 ```{code-cell} ipython3
 T = 6
@@ -200,21 +194,21 @@ for t in range(T+1):
     current_d = current_d * 1.05 
 
 fig, ax = plt.subplots()
-ax.plot(d, 'o', label='dividends')
+ax.plot(d, 'o', label='股息')
 ax.legend()
-ax.set_xlabel('time')
+ax.set_xlabel('时间')
 plt.show()
 ```
-Now let's compute and plot the asset price.
+现在让我们来计算和绘制资产价格。
 
-We set $\delta$ and $p_{T+1}^*$ to
+我们将 $\delta$ 和 $p_{T+1}^*$ 设定为
 
 ```{code-cell} ipython3
 δ = 0.99
 p_star = 10.0
 ```
 
-Let's build the matrix $A$
+让我们来建立矩阵 $A$
 
 ```{code-cell} ipython3
 A = np.zeros((T+1, T+1))
@@ -226,33 +220,28 @@ for i in range(T+1):
                 A[i, j+1] = -δ
 
 ```
-
-Let's inspect $A$
-
+让我们来一起检视$A$
 ```{code-cell} ipython3
 A
 ```
-
-Now let's solve for prices using {eq}`eq:apdb_sol`.
+让我们用 {eq}`eq:apdb_sol`来求解价格。
 
 ```{code-cell} ipython3
 b = np.zeros(T+1)
 b[-1] = δ * p_star
 p = np.linalg.solve(A, d + b)
 fig, ax = plt.subplots()
-ax.plot(p, 'o', label='asset price')
+ax.plot(p, 'o', label='资产价格')
 ax.legend()
-ax.set_xlabel('time')
+ax.set_xlabel('时间')
 plt.show()
 ```
 
-
-Now let's consider  a cyclically growing dividend sequence:
+现在让我们来看一个周期性增长的股息序列：
 
 $$
     d_{t+1} = 1.01 d_t + 0.1 \sin t, \quad t = 0, 1, \ldots , T-1.
 $$
-
 
 ```{code-cell} ipython3
 T = 100
@@ -263,27 +252,23 @@ for t in range(T+1):
     current_d = current_d * 1.01 + 0.1 * np.sin(t)
 
 fig, ax = plt.subplots()
-ax.plot(d, 'o-', ms=4, alpha=0.8, label='dividends')
+ax.plot(d, 'o-', ms=4, alpha=0.8, label='股息')
 ax.legend()
-ax.set_xlabel('time')
+ax.set_xlabel('时间')
 plt.show()
 ```
 
 ```{exercise-start} 
 :label: pv_ex_cyc
 ```
-
-Compute the corresponding asset price sequence when $p^*_{T+1} = 0$ and $\delta
-= 0.98$.
-
+当$p^*_{T+1} = 0$ 和 $\delta = 0.98$ 时，计算相对应的价格序列。
 ```{exercise-end}
 ```
 
 ```{solution-start} pv_ex_cyc
 :class: dropdown
 ```
-
-We proceed as above after modifying parameters and consequently the matrix $A$.
+我们改变之前的参数和矩阵$A$。
 
 ```{code-cell} ipython3
 δ = 0.98
@@ -300,26 +285,22 @@ b = np.zeros(T+1)
 b[-1] = δ * p_star
 p = np.linalg.solve(A, d + b)
 fig, ax = plt.subplots()
-ax.plot(p, 'o-', ms=4, alpha=0.8, label='asset price')
+ax.plot(p, 'o-', ms=4, alpha=0.8, label='资产价格')
 ax.legend()
-ax.set_xlabel('time')
+ax.set_xlabel('时间')
 plt.show()
 
 ```
-
-The weighted averaging associated with the present value calculation largely
-eliminates the cycles.
-
+与现值计算相关的加权平均在很大程度上消除了周期。
 
 ```{solution-end} 
 ```
 
-## Analytical expressions
+## 解析表达式
 
-By the [inverse matrix theorem](https://en.wikipedia.org/wiki/Invertible_matrix), a matrix $B$ is the inverse of $A$ whenever $A B$ is the identity.
+根据逆矩阵定理，当$A B$是单位矩阵时，矩阵$B$是$A$的逆矩阵。
 
-It can be verified that the  inverse of the matrix $A$ in {eq}`eq:pvpieq` is
-
+可以验证，{eq}`eq:pvpieq`中的矩阵$A$的逆矩阵是
 
 $$ A^{-1} = 
     \begin{bmatrix}
@@ -331,56 +312,44 @@ $$ A^{-1} =
     \end{bmatrix}
 $$ (eq:Ainv)
 
-
-
 ```{exercise-start} 
 :label: pv_ex_2
 ```
 
-Check this by showing that $A A^{-1}$ is equal to the identity matrix.
-
+通过证明$AA^{-1}$为单位矩阵来检查。
 
 
 ```{exercise-end}
 ```
 
-
-If we use the expression {eq}`eq:Ainv` in {eq}`eq:apdb_sol` and perform the indicated matrix multiplication, we shall find  that
+如果我们在 {eq}`eq:apdb_sol` 中使用表达式 {eq}`eq:Ainv` 并执行所指示的矩阵乘法，我们将发现
 
 $$
     p_t =  \sum_{s=t}^T \delta^{s-t} d_s +  \delta^{T+1-t} p_{T+1}^*
 $$ (eq:ptpveq)
 
-Pricing formula {eq}`eq:ptpveq` asserts that  two components sum to the asset price 
-$p_t$:
+定价公式 {eq}`eq:ptpveq` 断言两个组成部分相加得到资产价格 $p_t$：
 
-  * a **fundamental component** $\sum_{s=t}^T \delta^{s-t} d_s$ that equals the **discounted present value** of prospective dividends
+* 一个**基本组成部分** $\sum_{s=t}^T \delta^{s-t} d_s$，等于预期股息的**贴现现值**
   
-  * a **bubble component** $\delta^{T+1-t} p_{T+1}^*$
-  
-The fundamental component is pinned down by the discount factor $\delta$ and the
-payout of the asset (in this case,  dividends).
+* 一个**泡沫组成部分** $\delta^{T+1-t} p_{T+1}^*$
 
-The bubble component is the part of the price that is not pinned down by
-fundamentals.
-
-It is sometimes convenient to rewrite the bubble component as
-
+基本组成部分由贴现因子 $\delta$ 和资产的支付（在这种情况下为股息）确定。
+泡沫组成部分是价格中不由基本面决定的部分。
+有时将泡沫组成部分重写为
 $$ 
 c \delta^{-t}
 $$
-
-where 
-
+更为方便，其中
 $$ 
 c \equiv \delta^{T+1}p_{T+1}^*
 $$
 
 +++
 
-## More about bubbles
+## 关于泡沫的更多内容
 
-For a few moments, let's focus on  the special case of an asset that   never pays dividends, in which case
+让我们暂时关注一种特殊情况，即一种永不支付股息的资产，在这种情况下
 
 $$
 \begin{bmatrix}  
@@ -393,8 +362,7 @@ $$
 
 +++
 
-In this case  system {eq}`eq:Euler1` of our $T+1$ asset pricing  equations takes the
-form of the single matrix equation
+在这种情况下，我们的 $T+1$ 资产定价方程系统 {eq}`eq:Euler1` 采用以下单一矩阵方程的形式：
 
 $$
 \begin{bmatrix} 1 & -\delta & 0 & 0 & \cdots & 0 & 0 \cr
@@ -410,58 +378,48 @@ $$
 \end{bmatrix}
 $$ (eq:pieq2)
 
-Evidently, if $p_{T+1}^* = 0$, a price vector $p$ of all entries zero
-solves this equation and the only the **fundamental** component of our pricing 
-formula {eq}`eq:ptpveq` is present. 
+显然，如果 $p_{T+1}^* = 0$，一个所有元素为零的价格向量 $p$ 可以解这个方程，此时我们定价公式 {eq}`eq:ptpveq` 中只有**基本面**成分存在。
 
-But let's activate the **bubble**  component by setting 
+但让我们通过设置以下条件来激活**泡沫**成分：
 
 $$
 p_{T+1}^* = c \delta^{-(T+1)} 
 $$ (eq:eqbubbleterm)
 
-for some positive constant $c$.
+其中 $c$ 为某个正常数。
 
-In this case,  when we multiply both sides of {eq}`eq:pieq2` by
-the matrix $A^{-1}$ presented in equation {eq}`eq:Ainv`, we 
- find that
+在这种情况下，当我们用方程 {eq}`eq:Ainv` 中的矩阵 $A^{-1}$ 乘以 {eq}`eq:pieq2` 的两边时，我们发现：
 
 $$
 p_t = c \delta^{-t}
 $$ (eq:bubble)
 
+## 总回报率
 
-## Gross rate of return
-
-Define the gross rate of return on holding the asset from period $t$ to period $t+1$
-as 
+定义从 $t$ 期到 $t+1$ 期持有资产的总回报率为：
 
 $$
 R_t = \frac{p_{t+1}}{p_t}
 $$ (eq:rateofreturn)
 
-Substituting equation {eq}`eq:bubble` into equation {eq}`eq:rateofreturn` confirms that an asset whose  sole source of value is a bubble  earns a  gross rate of return
+将方程 {eq}`eq:bubble` 代入方程 {eq}`eq:rateofreturn` 可以确认，一个价值完全来源于泡沫的资产的总回报率为：
 
 $$
 R_t = \delta^{-1} > 1 , t = 0, 1, \ldots, T
 $$
 
-
-## Exercises
+## 练习
 
 
 ```{exercise-start} 
 :label: pv_ex_a
 ```
+给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的分析表达式：
 
-Give analytical expressions for an asset price $p_t$ under the 
-following settings for $d$ and $p_{T+1}^*$:
-
-1. $p_{T+1}^* = 0, d_t = g^t d_0$ (a modified version of the Gordon growth formula)
-1. $p_{T+1}^* = g^{T+1} d_0,  d_t = g^t d_0$ (the plain vanilla  Gordon growth formula)
-1. $p_{T+1}^* = 0, d_t = 0$ (price of a worthless stock)
-1. $p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0$ (price of a pure bubble stock)
-
+1. $p_{T+1}^* = 0, d_t = g^t d_0$（戈登增长公式的修改版）
+2. $p_{T+1}^* = g^{T+1} d_0, d_t = g^t d_0$（普通的戈登增长公式）
+3. $p_{T+1}^* = 0, d_t = 0$（一个无价值股票的价格）
+4. $p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0$（一个纯泡沫股票的价格）
 
 ```{exercise-end} 
 ```
@@ -469,14 +427,61 @@ following settings for $d$ and $p_{T+1}^*$:
 ```{solution-start} pv_ex_a
 :class: dropdown
 ```
-
-Plugging each pair of the above $p_{T+1}^*, d_t$ into Equation {eq}`eq:ptpveq` yields:
+将上述每对 $p_{T+1}^*, d_t$ 代入方程 {eq}`eq:ptpveq` 得到：
 
 1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0$
-1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \delta^{T+1-t} g^{T+1} d_0$
-1. $p_t = 0$
-1. $p_t = c \delta^{-t}$
+2. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \delta^{T+1-t} g^{T+1} d_0$
+3. $p_t = 0$
+4. $p_t = c \delta^{-t}$
 
 
 ```{solution-end}
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
