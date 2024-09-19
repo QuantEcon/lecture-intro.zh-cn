@@ -54,7 +54,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
 from matplotlib import font_manager
-plt.rcParams['font.sans-serif'] = ['SimHei'] 
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
 ```
 在我们研究供给和需求模型之前，了解一些关于（a）消费者和生产者剩余以及（b）积分的背景知识会很有帮助。
