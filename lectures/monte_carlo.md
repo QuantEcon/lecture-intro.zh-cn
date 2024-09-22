@@ -46,7 +46,6 @@ from matplotlib import font_manager
 fontP = font_manager.FontProperties()
 fontP.set_family('SimHei') 
 fontP.set_size(14) 
-
 ```
 
 ## 蒙特卡罗简介
