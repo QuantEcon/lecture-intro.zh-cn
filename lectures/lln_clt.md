@@ -11,26 +11,24 @@ kernelspec:
   name: python3
 ---
 
-# LLN and CLT
+# 大数定律与中心极限定理
 
-## Overview
+## 概述
 
-This lecture illustrates two of the most important results in probability and statistics: 
+本讲座展示了概率统计中两个最重要的结果：
 
-1. the law of large numbers (LLN) and 
-2. the central limit theorem (CLT).
+1. 大数定律（LLN）和
+2. 中心极限定理（CLT）。
 
-These beautiful theorems lie behind many of the most fundamental results in
-econometrics and quantitative economic modeling.
+这些美丽的定理是许多计量经济学和定量经济模型的基础。
 
-The lecture is based around simulations that show the LLN and CLT in action.
+本讲座围绕模拟进行，展示了大数定律和中心极限定理的实际操作。
 
-We also demonstrate how the LLN and CLT break down when the assumptions they
-are based on do not hold.
+我们还将演示当所依赖的假设不成立时，大数定律和中心极限定理如何失效。
 
-This lecture will focus on the univariate case (the multivariate case is treated [in a more advanced lecture](https://python.quantecon.org/lln_clt.html#the-multivariate-case)).
+本讲将关注单变量情况（多变量情况在[更高级的讲座中处理](https://python.quantecon.org/lln_clt.html#the-multivariate-case)）。
 
-We'll need the following imports:
+我们将需要以下导入：
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -39,33 +37,32 @@ import scipy.stats as st
 ```
 
 (lln_mr)=
-## The law of large numbers
+## 大数定律
 
 ```{index} single: Law of Large Numbers
 ```
 
-We begin with the law of large numbers, which tells us when sample averages
-will converge to their population means.
+我们从大数定律开始讲起，该定律说明在什么条件下样本平均值会收敛到它们的总体平均值。
 
-### The LLN in action
+### 大数定律的应用
 
-Let's see an example of the LLN in action before we go further.
+在我们进一步讨论之前，让我们看一个大数定律的例子。
 
 ```{prf:example}
 :label: lln_ex_ber
 
-Consider a [Bernoulli random variable](https://en.wikipedia.org/wiki/Bernoulli_distribution) $X$ with parameter $p$.
+考虑一个参数为 $p$ 的[伯努利随机变量](https://en.wikipedia.org/wiki/Bernoulli_distribution) $X$。
 
-This means that $X$ takes values in $\{0,1\}$ and $\mathbb P\{X=1\} = p$.
+这意味着 $X$ 的取值在 $\{0,1\}$ 中，且 $\mathbb P\{X=1\} = p$。
 
-We can think of drawing $X$ as tossing a biased coin where
+我们可以将抽取 $X$ 想象为抛掷一个有偏的硬币，其中
 
-* the coin falls on "heads" with probability $p$ and
-* the coin falls on "tails" with probability $1-p$
+* 硬币落在“正面”的概率为 $p$，
+* 硬币落在“反面”的概率为 $1-p$。
 
-We set $X=1$ if the coin is "heads" and zero otherwise.
+如果硬币是“正面”，我们设 $X=1$，否则为零。
 
-The (population) mean of $X$ is 
+$X$ 的（总体）均值为
 
 $$
     \mathbb E X 
@@ -73,28 +70,26 @@ $$
 $$
 ```
 
-We can generate a draw of $X$ with `scipy.stats` (imported as `st`) as follows:
+我们可以使用 `scipy.stats`（导入为 `st`）生成一个 $X$ 的抽样，如下：
 
 ```{code-cell} ipython3
 p = 0.8
 X = st.bernoulli.rvs(p)
 print(X)
 ```
+在这个场景中，大数定律告诉我们如果我们多次投掷硬币，我们看到的正面比例将接近均值 $p$。
 
-In this setting, the LLN tells us if we flip the coin many times, the fraction
-of heads that we see will be close to the mean $p$. 
+我们使用 $n$ 来表示投掷硬币的次数。
 
-We use $n$ to represent the number of times the coin is flipped.
-
-Let's check this:
+让我们检查一下：
 
 ```{code-cell} ipython3
 n = 1_000_000
 X_draws = st.bernoulli.rvs(p, size=n)
-print(X_draws.mean()) # count the number of 1's and divide by n
+print(X_draws.mean()) # 计算1的个数并除以n
 ```
 
-If we change $p$ the claim still holds:
+如果我们改变 $p$，这个说法仍然成立：
 
 ```{code-cell} ipython3
 p = 0.3
@@ -102,23 +97,21 @@ X_draws = st.bernoulli.rvs(p, size=n)
 print(X_draws.mean())
 ```
 
-Let's connect this to the discussion above, where we said the sample average
-converges to the "population mean".
+让我们将这个讨论与上面的讨论联系起来，我们说的样本平均值收敛于“群体平均值”。
 
-Think of $X_1, \ldots, X_n$ as independent flips of the coin.
+想象 $X_1, \ldots, X_n$ 是独立的投掷硬币行为。
 
-The population mean is the mean in an infinite sample, which equals the 
-expectation $\mathbb E X$.
+群体平均值是在无限样本中的平均值，等于期望 $\mathbb E X$。
 
-The sample mean of the draws $X_1, \ldots, X_n$ is
+抽样的平均值义 $X_1, \ldots, X_n$ 是
 
 $$
     \bar X_n := \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
-In this case, it is the fraction of draws that equal one (the number of heads divided by $n$).
+在这种情况下，它是等于一的抽样的比例（正面的数量除以 $n$）。
 
-Thus, the LLN tells us that for the Bernoulli trials above
+因此，大数定律告诉我们对于上述伯努利试验
 
 ```{math}
 :label: exp
@@ -126,176 +119,161 @@ Thus, the LLN tells us that for the Bernoulli trials above
     \qquad (n \to \infty)
 ```
 
-This is exactly what we illustrated in the code.
+这正是我们在代码中演示的。
 
 
 (lln_ksl)=
-### Statement of the LLN
+### 大数定律的陈述
 
-Let's state the LLN more carefully.
+让我们更仔细地阐述大数定律。
 
-Let $X_1, \ldots, X_n$ be random variables, all of which have the same
-distribution.
+设 $X_1, \ldots, X_n$ 是随机变量，它们都具有相同的分布。
 
-These random variables can be continuous or discrete.
+这些随机变量可以是连续的或离散的。
 
-For simplicity we will 
+为简单起见，我们将：
 
-* assume they are continuous and 
-* let $f$ denote their common density function
+* 假设它们是连续的，并且
+* 让 $f$ 表示它们的共同密度函数
 
-The last statement means that for any $i$ in $\{1, \ldots, n\}$ and any
-numbers $a, b$,
-
+最后这个说法意味着，对于 $\{1, \ldots, n\}$ 中的任何 $i$ 和任何数 $a, b$，
 
 $$ 
   \mathbb P\{a \leq X_i \leq b\} = \int_a^b f(x) dx
 $$
 
-(For the discrete case, we need to replace densities with probability mass
-functions and integrals with sums.)
+（对于离散情况，我们需要用概率质量函数替换密度，并用求和替换积分。）
 
-Let $\mu$ denote the common mean of this sample.
+让 $\mu$ 表示这个样本的共同平均值。
 
-Thus, for each $i$,
+因此，对于每个 $i$，
 
 $$
   \mu := \mathbb E X_i = \int_{-\infty}^{\infty} x f(x) dx
 $$
 
-The sample mean is
+样本均值是
 
 $$
     \bar X_n := \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
-The next theorem is called Kolmogorov's strong law of large numbers.
+接下来的定理称为柯尔莫哥洛夫强大数律。
 
 (iid-theorem)=
 ````{prf:theorem}
-If $X_1, \ldots, X_n$ are IID and $\mathbb E |X|$ is finite, then
+如果 $X_1, \ldots, X_n$ 是独立同分布(IID)的，且 $\mathbb E |X|$ 是有限的，则
 
 ```{math}
 :label: lln_as
 
-\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1
+\mathbb P \left\{ \overline{X}_n \to \mu \text{ 当 } n \to \infty \right\} = 1
 ```
 ````
 
-Here 
+这里
 
-* IID means independent and identically distributed and
+* IID 表示独立同分布
 * $\mathbb E |X| = \int_{-\infty}^\infty |x| f(x) dx$
 
 
+### 关于定理的评论
 
+定理中的概率为一是什么意思？
 
-### Comments on the theorem
+我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这[并非严格真实](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)）。
 
-What does the probability one statement in the theorem mean?
+同时假设我们可以生成无限序列，从而使得 $\bar X_n \to \mu$ 能够得到评估。
 
-Let's think about it from a simulation perspective, imagining for a moment that
-our computer can generate perfect random samples (although this [isn't strictly true](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)).
+在这种设置下，{eq}`lln_as` 应该被理解为计算机生成一个 $\bar X_n \to \mu$ 失败发生的概率是零。
 
-Let's also imagine that we can generate infinite sequences so that the
-statement $\bar X_n \to \mu$ can be evaluated.
-
-In this setting, {eq}`lln_as` should be interpreted as meaning that the
-probability of the computer producing a sequence where $\bar X_n \to \mu$
-fails to occur is zero.
-
-### Illustration
+### 插图
 
 ```{index} single: Law of Large Numbers; Illustration
 ```
 
-Let's illustrate the LLN using simulation.
+让我们使用模拟来说明大数定律（LLN）。
 
-When we illustrate it, we will use a key idea: the sample mean $\bar X_n$ is
-itself a random variable.
+在说明它时，我们将使用一个关键思想：样本均值 $\bar X_n$ 本身是一个随机变量。
 
-The reason $\bar X_n$ is a random variable is that it's a function of the
-random variables $X_1, \ldots, X_n$.
+$\bar X_n$ 是随机变量的原因是它是随机变量 $X_1, \ldots, X_n$ 的函数。
 
-What we are going to do now is 
+我们现在要做的是：
 
-1. pick some fixed distribution to draw each $X_i$ from  
-1. set $n$ to some large number
+1. 选择一些固定的分布来抽取每个 $X_i$
+1. 将 $n$ 设置为一个较大的数字
 
-and then repeat the following three instructions.
+然后重复以下三个步骤：
 
-1. generate the draws $X_1, \ldots, X_n$
-1. calculate the sample mean $\bar X_n$ and record its value in an array `sample_means`
-1. go to step 1.
+1. 生成抽样 $X_1, \ldots, X_n$
+1. 计算样本均值 $\bar X_n$ 并在数组 `sample_means` 中记录其值
+1. 返回步骤 1。
 
-We will loop over these three steps $m$ times, where $m$ is some large integer.
+我们将循环这三个步骤 $m$ 次，其中 $m$ 是一个较大的整数。
 
-The array `sample_means` will now contain $m$ draws of the random variable $\bar X_n$.
+数组 `sample_means` 现在将包含 $m$ 次抽取的随机变量 $\bar X_n$。
 
-If we histogram these observations of $\bar X_n$, we should see that they are clustered around the population mean $\mathbb E X$.
+如果我们对 $\bar X_n$ 的这些观测做直方图，我们应该看到它们聚集在总体平均值 $\mathbb E X$ 周围。
 
-Moreover, if we repeat the exercise with a larger value of $n$, we should see that the observations are even more tightly clustered around the population mean.
+此外，如果我们在更大的 $n$ 值下重复这个练习，我们应该看到观测结果更紧密地聚集在总体平均值周围。
 
-This is, in essence, what the LLN is telling us.
+这实质上就是 LLN 告诉我们的内容。
 
-To implement these steps, we will use functions.
+为了实现这些步骤，我们将使用函数。
 
-Our first function generates a sample mean of size $n$ given a distribution.
+我们的第一个函数生成给定分布的大小为 $n$ 的样本均值。
 
 ```{code-cell} ipython3
-def draw_means(X_distribution,  # The distribution of each X_i
-               n):              # The size of the sample mean
+def draw_means(X_distribution,  # 各个 X_i 的分布
+               n):              # 样本均值的大小
 
-    # Generate n draws: X_1, ..., X_n
+    # 生成 n 次抽样：X_1, ..., X_n
     X_samples = X_distribution.rvs(size=n)
 
-    # Return the sample mean
+    # 返回样本均值
     return np.mean(X_samples)
 ```
 
-Now we write a function to generate $m$ sample means and histogram them.
+现在我们写一个函数来生成 $m$ 个样本均值并绘制它们的直方图。
 
 ```{code-cell} ipython3
 def generate_histogram(X_distribution, n, m): 
 
-    # Compute m sample means
-
+    # 计算 m 个样本均值
     sample_means = np.empty(m)
     for j in range(m):
       sample_means[j] = draw_means(X_distribution, n) 
 
-    # Generate a histogram
-
+    # 生成一个直方图
     fig, ax = plt.subplots()
     ax.hist(sample_means, bins=30, alpha=0.5, density=True)
-    μ = X_distribution.mean()  # Get the population mean
-    σ = X_distribution.std()    # and the standard deviation
+    μ = X_distribution.mean()  # 获取总体均值
+    σ = X_distribution.std()    # 及标准偏差
     ax.axvline(x=μ, ls="--", c="k", label=fr"$\mu = {μ}$")
      
     ax.set_xlim(μ - σ, μ + σ)
     ax.set_xlabel(r'$\bar X_n$', size=12)
-    ax.set_ylabel('density', size=12)
+    ax.set_ylabel('密度', size=12)
     ax.legend()
     plt.show()
 ```
 
-Now we call the function.
+现在我们调用这个函数。
 
 ```{code-cell} ipython3
-# pick a distribution to draw each $X_i$ from
+# 选择一个分布来绘制每个 $X_i$
 X_distribution = st.norm(loc=5, scale=2) 
-# Call the function
+# 调用函数
 generate_histogram(X_distribution, n=1_000, m=1000)
 ```
 
-We can see that the distribution of $\bar X$ is clustered around $\mathbb E X$
-as expected.
+我们可以看到 $\bar X$ 的分布像预期的那样围绕 $\mathbb E X$ 聚集。
 
-Let's vary `n` to see how the distribution of the sample mean changes.
+让我们改变 `n` 来看样本均值的分布是如何变化的。
 
-We will use a [violin plot](https://intro.quantecon.org/prob_dist.html#violin-plots) to show the different distributions.
+我们将使用[小提琴图](https://intro.quantecon.org/prob_dist.html#violin-plots)来显示不同的分布。
 
-Each distribution in the violin plot represents the distribution of $X_n$ for some $n$, calculated by simulation.
+小提琴图中的每一个分布代表着某个 $n$ 的 $X_n$ 分布，通过模拟计算得到。
 
 ```{code-cell} ipython3
 def means_violin_plot(distribution,  
@@ -321,177 +299,164 @@ def means_violin_plot(distribution,
 
     plt.subplots_adjust(bottom=0.15, wspace=0.05)
 
-    ax.set_ylabel('density', size=12)
+    ax.set_ylabel('密度', size=12)
     ax.legend()
     plt.show()
 ```
 
-Let's try with a normal distribution.
+我们来试试正态分布。
 
 ```{code-cell} ipython3
 means_violin_plot(st.norm(loc=5, scale=2))
 ```
 
-As $n$ gets large, more probability mass clusters around the population mean $\mu$.
+随着 $n$ 的增大，更多的概率质量聚集在总体均值 $\mu$ 附近。
 
-Now let's try with a Beta distribution.
+现在我们试试 Beta 分布。
 
 ```{code-cell} ipython3
 means_violin_plot(st.beta(6, 6))
 ```
 
-We get a similar result.
+我们得到了类似的结果。
 
 +++
 
-## Breaking the LLN
+## 打破大数定律
 
-We have to pay attention to the assumptions in the statement of the LLN.
+我们必须关注大数定律陈述中的假设。
 
-If these assumptions do not hold, then the LLN might fail.
+如果这些假设不成立，那么大数定律可能会失败。
 
-### Infinite first moment
+### 无限的第一矩
 
-As indicated by the theorem, the LLN can break when $\mathbb E |X|$ is not finite.
+如定理所示，当 $\mathbb E |X|$ 不是有限的时候，大数定律可以失败。
 
-We can demonstrate this using the [Cauchy distribution](https://en.wikipedia.org/wiki/Cauchy_distribution).
+我们可以使用[柯西分布](https://zh.wikipedia.org/wiki/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83)来证明这一点。
 
-The Cauchy distribution has the following property:
+柯西分布具有以下性质：
 
-If $X_1, \ldots, X_n$ are IID and Cauchy, then so is $\bar X_n$.
+如果 $X_1, \ldots, X_n$ 是独立同分布且符合柯西分布，那么 $\bar X_n$ 也符合柯西分布。
 
-This means that the distribution of $\bar X_n$ does not eventually concentrate on a single number.
+这意味着 $\bar X_n$ 的分布最终不会集中在某一个数字上。
 
-Hence the LLN does not hold.
+因此大数定律不成立。
 
-The LLN fails to hold here because the assumption $\mathbb E|X| < \infty$ is violated by the Cauchy distribution.
+这里大数定律失败是因为柯西分布违反了假设 $\mathbb E|X| < \infty$。
 
 +++
 
+### IID 条件的失败
 
-### Failure of the IID condition
-
-The LLN can also fail to hold when the IID assumption is violated.
+LLN 可能因违反 IID 假设而不成立。
 
 ```{prf:example}
 :label: lln_ex_fail
 
 $$
     X_0 \sim N(0,1)
-    \quad \text{and} \quad
-    X_i = X_{i-1} \quad \text{for} \quad i = 1, ..., n
+    \quad \text{和} \quad
+    X_i = X_{i-1} \quad \text{对于} \quad i = 1, ..., n
 $$
 
-In this case,
+在这种情况下，
 
 $$
-    \bar X_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
+    \bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
 $$
 
-Therefore, the distribution of $\bar X_n$ is $N(0,1)$ for all $n$!
+因此，$\bar{X}_n$ 的分布对所有 $n$ 都是 $N(0,1)$！
 ```
 
-Does this contradict the LLN, which says that the distribution of $\bar X_n$
-collapses to the single point $\mu$?
+这是否与 LLN 相矛盾，LLN 表明 $\bar{X}_n$ 的分布将收敛至单点 $\mu$？
 
-No, the LLN is correct --- the issue is that its assumptions are not
-satisfied.
+不，LLN 是正确的——问题在于其假设未被满足。
 
-In particular, the sequence $X_1, \ldots, X_n$ is not independent.
-
+特别是，序列 $X_1, \ldots, X_n$ 不是独立的。
 
 ```{note}
 :name: iid_violation
 
-Although in this case the violation of IID breaks the LLN, there *are* situations
-where IID fails but the LLN still holds.
+尽管在这种情况下，IID 的违反破坏了 LLN，但*有*的情况下即使 IID 失败 LLN 仍然成立。
 
-We will show an example in the [exercise](lln_ex3).
+我们将在[练习](lln_ex3)中展示一个例子。
 ```
 
 +++
 
-## Central limit theorem
+## 中心极限定理
 
 ```{index} single: Central Limit Theorem
 ```
 
-Next, we turn to the central limit theorem (CLT), which tells us about the
-distribution of the deviation between sample averages and population means.
+接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
 
+### 定理的陈述
 
-### Statement of the theorem
+中心极限定理是数学中最了不起的结果之一。
 
-The central limit theorem is one of the most remarkable results in all of mathematics.
-
-In the IID setting, it tells us the following:
-
+在独立同分布（IID）的设定下，它告诉我们以下内容：
 
 ````{prf:theorem}
 :label: statement_clt
 
-If $X_1, \ldots, X_n$ is IID with common mean $\mu$ and common variance
-$\sigma^2 \in (0, \infty)$, then
+如果 $X_1, \ldots, X_n$ 是 IID，具有共同的均值 $\mu$ 和共同的方差 $\sigma^2 \in (0, \infty)$，那么
 
 ```{math}
 :label: lln_clt
 
-\sqrt{n} ( \bar X_n - \mu ) \stackrel { d } {\to} N(0, \sigma^2)
+\sqrt{n} (\bar X_n - \mu ) \stackrel { d } { \to } N(0, \sigma^2)
 \quad \text{as} \quad
 n \to \infty
 ```
 ````
 
-Here $\stackrel { d } {\to} N(0, \sigma^2)$ indicates [convergence in distribution](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution) to a centered (i.e., zero mean) normal with standard deviation $\sigma$.
+这里的 $\stackrel { d } { \to } N(0, \sigma^2)$ 表示[分布收敛](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution)到以 0 为均值且标准差为 $\sigma$ 的正态分布。
 
-
-The striking implication of the CLT is that for any distribution with
-finite [second moment](https://en.wikipedia.org/wiki/Moment_(mathematics)), the simple operation of adding independent
-copies always leads to a Gaussian(Normal) curve.
+CLT 的惊人含义是，对于任何具有有限[二阶矩](https://en.wikipedia.org/wiki/Moment_(mathematics))的分布，简单地添加独立副本总是会得到高斯（正态）曲线。
 
 
 
 
-### Simulation 1
+### 模拟 1
 
-Since the CLT seems almost magical, running simulations that verify its implications is one good way to build understanding.
+由于中心极限定理(CLT)几乎像魔法一样，运行验证其含义的模拟是构建理解的一种好方法。
 
-To this end, we now perform the following simulation
+为此，我们现在进行以下模拟：
 
-1. Choose an arbitrary distribution $F$ for the underlying observations $X_i$.
-1. Generate independent draws of $Y_n := \sqrt{n} ( \bar X_n - \mu )$.
-1. Use these draws to compute some measure of their distribution --- such as a histogram.
-1. Compare the latter to $N(0, \sigma^2)$.
+1. 为基本观察值 $X_i$ 选择一个任意分布 $F$。
+1. 生成独立的 $Y_n := \sqrt{n} (\bar{X}_n - \mu)$ 的抽取。
+1. 使用这些抽取来计算它们的分布的某些度量值——例如直方图。
+1. 将后者与 $N(0, \sigma^2)$ 进行比较。
 
-Here's some code that does exactly this for the exponential distribution
-$F(x) = 1 - e^{- \lambda x}$.
+下面的代码正是为指数分布 $F(x) = 1 - e^{- \lambda x}$ 执行了这一操作。
 
-(Please experiment with other choices of $F$, but remember that, to conform with the conditions of the CLT, the distribution must have a finite second moment.)
+（请尝试使用其他 $F$ 的选择，但请记住，为了符合CLT的条件，分布必须有有限的二阶矩。）
 
 (sim_one)=
 
 ```{code-cell} ipython3
-# Set parameters
-n = 250         # Choice of n
-k = 1_000_000        # Number of draws of Y_n
-distribution = st.expon(2) # Exponential distribution, λ = 1/2
+# 设定参数
+n = 250               # n 的选择
+k = 1_000_000         # Y_n 的抽取次数
+distribution = st.expon(2) # 指数分布，λ = 1/2
 μ, σ = distribution.mean(), distribution.std()
 
-# Draw underlying RVs. Each row contains a draw of X_1,..,X_n
+# 抽取底层随机变量。每行包含一次抽取的 X_1, ..., X_n
 data = distribution.rvs((k, n))
-# Compute mean of each row, producing k draws of \bar X_n
+# 计算每行的均值，生成 k 次抽取的 \bar{X}_n
 sample_means = data.mean(axis=1)
-# Generate observations of Y_n
+# 生成 Y_n 的观察值
 Y = np.sqrt(n) * (sample_means - μ)
 
-# Plot
+# 绘图
 fig, ax = plt.subplots(figsize=(10, 6))
 xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 xgrid = np.linspace(xmin, xmax, 200)
 ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 
-        'k-', lw=2, label='$N(0, \sigma^2)$')
+        'k-', lw=2, label='N(0, \sigma^2)')
 ax.set_xlabel(r"$Y_n$", size=12)
 ax.set_ylabel(r"$density$", size=12)
 
@@ -500,21 +465,21 @@ ax.legend()
 plt.show()
 ```
 
-(Notice the absence of for loops --- every operation is vectorized, meaning that the major calculations are all shifted to fast C code.)
+（注意这里没有 for 循环——所有的操作都是矢量化的，意味着主要计算都转移到了快速的 C 代码上。）
 
-The fit to the normal density is already tight and can be further improved by increasing `n`.
+通过增加 `n`，拟合到正态密度可以进一步改进。
 
 
-## Exercises
+## 练习
 
 
 
 ```{exercise} 
 :label: lln_ex1
 
-Repeat the simulation [above](sim_one) with the [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution).
+用[贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)重复[上面](sim_one)的模拟。
 
-You can choose any $\alpha > 0$ and $\beta > 0$.
+你可以选择任何 $\alpha > 0$ 和 $\beta > 0$。
 ```
 
 ```{solution-start} lln_ex1
@@ -522,20 +487,20 @@ You can choose any $\alpha > 0$ and $\beta > 0$.
 ```
 
 ```{code-cell} ipython3
-# Set parameters
-n = 250         # Choice of n
-k = 1_000_000        # Number of draws of Y_n
-distribution = st.beta(2,2) # We chose Beta(2, 2) as an example
+# 设置参数
+n = 250         # 选择 n 的值
+k = 1_000_000        # Y_n 的抽样次数
+distribution = st.beta(2,2) # 这里选择 Beta(2, 2) 作为示例
 μ, σ = distribution.mean(), distribution.std()
 
-# Draw underlying RVs. Each row contains a draw of X_1,..,X_n
+# 抽取底层随机变量。每行包含一次抽取的 X_1,..,X_n
 data = distribution.rvs((k, n))
-# Compute mean of each row, producing k draws of \bar X_n
+# 计算每行的均值，生成 k 次 \bar X_n 的抽样
 sample_means = data.mean(axis=1)
-# Generate observations of Y_n
+# 生成 Y_n 的观测值
 Y = np.sqrt(n) * (sample_means - μ)
 
-# Plot
+# 绘图
 fig, ax = plt.subplots(figsize=(10, 6))
 xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
@@ -555,11 +520,11 @@ plt.show()
 ````{exercise} 
 :label: lln_ex2
 
-At the start of this lecture we discussed Bernoulli random variables.
+在这次讲座开始时，我们讨论了伯努利随机变量。
 
-NumPy doesn't provide a `bernoulli` function that we can sample from.
+NumPy没有提供我们可以从中采样的`bernoulli`函数。
 
-However, we can generate a draw of Bernoulli $X$ using NumPy via
+但是，我们可以通过NumPy生成伯努利$X$的抽样，使用以下方式：
 
 ```python3
 U = np.random.rand()
@@ -567,60 +532,57 @@ X = 1 if U < p else 0
 print(X)
 ```
 
-Explain why this provides a random variable $X$ with the right distribution.
+解释为什么这能提供一个具有正确分布的随机变量$X$。
 ````
 
 ```{solution-start} lln_ex2
 :class: dropdown
 ```
 
-We can write $X$ as $X = \mathbf 1\{U < p\}$ where $\mathbf 1$ is the
-[indicator function](https://en.wikipedia.org/wiki/Indicator_function) (i.e.,
-1 if the statement is true and zero otherwise).
+我们可以将$X$写为$X = \mathbf 1\{U < p\}$，其中$\mathbf 1$是
+[指示函数](https://en.wikipedia.org/wiki/Indicator_function)（即，
+如果语句为真则为1，否则为0）。
 
-Here we generated a uniform draw $U$ on $[0,1]$ and then used the fact that
+这里我们生成了一个在$[0,1]$上均匀分布的$U$，然后使用了以下事实：
 
 $$
 \mathbb P\{0 \leq U < p\} = p - 0 = p
 $$
 
-This means that $X = \mathbf 1\{U < p\}$ has the right distribution.
+这意味着$X = \mathbf 1\{U < p\}$具有正确的分布。
 
 ```{solution-end}
 ```
 
-
-
-```{exercise} 
+```{exercise}
 :label: lln_ex3
 
-We mentioned above that LLN can still hold sometimes when IID is violated.
+我们上面提到即使违反IID条件，LLN有时仍然成立。
 
-Let's investigate this claim further.
+让我们进一步调查这个说法。
 
-Consider the AR(1) process 
+考虑AR(1)过程
 
 $$
     X_{t+1} = \alpha + \beta X_t + \sigma \epsilon _{t+1}
 $$
 
-where $\alpha, \beta, \sigma$ are constants and $\epsilon_1, \epsilon_2,
-\ldots$ are IID and standard normal.
+其中 $\alpha, \beta, \sigma$ 是常数，$\epsilon_1, \epsilon_2,
+\ldots$ 是独立同分布且标准正态。
 
-Suppose that
+假设
 
 $$
     X_0 \sim N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right)
 $$
 
-This process violates the independence assumption of the LLN
-(since $X_{t+1}$ depends on the value of $X_t$).
+这个过程违反了LLN的独立性假设
+（因为 $X_{t+1}$ 依赖于 $X_t$ 的值）。
 
-However, the next exercise teaches us that LLN type convergence of the sample
-mean to the population mean still occurs.
+然而，下一个练习告诉我们，样本均值向总体均值的LLN类型收敛仍然会发生。
 
-1. Prove that the sequence $X_1, X_2, \ldots$ is identically distributed.
-2. Show that LLN convergence holds using simulations with $\alpha = 0.8$, $\beta = 0.2$.
+1. 证明序列 $X_1, X_2, \ldots$ 是同分布的。
+2. 使用模拟证明LLN收敛成立，其中 $\alpha = 0.8$, $\beta = 0.2$。
 
 ```
 
@@ -628,16 +590,15 @@ mean to the population mean still occurs.
 :class: dropdown
 ```
 
-**Q1 Solution**
+**Q1 解答**
 
-Regarding part 1, we claim that $X_t$ has the same distribution as $X_0$ for
-all $t$.
+关于第一部分，我们认为 $X_t$ 在所有 $t$ 时刻的分布与 $X_0$ 相同。
 
-To construct a proof, we suppose that the claim is true for $X_t$.
+为了构建证明，我们假设这个命题对 $X_t$ 是正确的。
 
-Now we claim it is also true for $X_{t+1}$.
+现在我们声称它对于 $X_{t+1}$ 也是正确的。
 
-Observe that we have the correct mean:
+观察我们是否得到了正确的均值：
 
 $$
 \begin{aligned}
@@ -647,7 +608,7 @@ $$
 \end{aligned}
 $$ 
 
-We also have the correct variance:
+我们也得到了正确的方差：
 
 $$
 \begin{aligned}
@@ -657,21 +618,18 @@ $$
 \end{aligned}
 $$ 
 
-Finally, since both $X_t$ and $\epsilon_0$ are normally distributed and
-independent from each other, any linear combination of these two variables is
-also normally distributed.
+最后，由于 $X_t$ 和 $\epsilon_0$ 都是正态分布并且彼此独立，这两个变量的任何线性组合也是正态分布的。
 
-We have now shown that
+我们现在已经展示了
 
 $$
     X_{t+1} \sim 
     N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right) 
 $$ 
 
-We can conclude this AR(1) process violates the independence assumption but is
-identically distributed.
+我们可以得出结论，这个AR(1)过程违反了独立性假设，但是分布相同。
 
-**Q2 Solution**
+**Q2 解决方案**
 
 ```{code-cell} ipython3
 σ = 10
@@ -693,7 +651,7 @@ for t in range(n-1):
 ax.scatter(range(100, n), means[100:n], s=10, alpha=0.5)
 
 ax.set_xlabel(r"$n$", size=12)
-ax.set_ylabel(r"$\bar X_n$", size=12)
+ax.set_ylabel(r"$\bar{X}_n$", size=12)
 yabs_max = max(ax.get_ylim(), key=abs)
 ax.axhline(y=α/(1-β), ls="--", lw=3, 
            label=r"$\mu = \frac{\alpha}{1-\beta}$", 
@@ -703,8 +661,7 @@ plt.legend()
 plt.show()
 ```
 
-We see the convergence of $\bar x$ around $\mu$ even when the independence assumption is violated.
-
+我们看到在独立性假设被违反的情况下，$\bar{x}$ 仍然收敛于 $\mu$。
 
 ```{solution-end}
 ```
