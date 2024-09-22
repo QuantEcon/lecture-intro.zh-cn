@@ -11,138 +11,130 @@ kernelspec:
   name: python3
 ---
 
-
 (monte-carlo)=
-# Monte Carlo and Option Pricing
+# 蒙特卡罗方法与期权定价
 
-## Overview
+## 概览
 
-Simple probability calculations can be done either
+简单的概率计算可以通过以下方式完成：
 
-* with pencil and paper, or
-* by looking up facts about well known probability distributions, or
-* in our heads.
+* 用铅笔和纸，
+* 查询关于著名概率分布的事实，
+* 在我们的脑海中。
 
-For example, we can easily work out
+例如，我们可以轻松地计算出：
 
-* the probability of three heads in five flips of a fair coin
-* the expected value of a random variable that equals $-10$ with probability
-  $1/2$ and $100$ with probability $1/2$.
+* 五次公平硬币翻转中出现三次正面的概率
+* 一个随机变量的期望值，该变量以 $1/2$ 的概率等于 $-10$，以 $1/2$ 的概率等于 $100$。
 
-But some probability calculations are very complex.
+但是，有些概率计算非常复杂。
 
-Complex calculations concerning probabilities and expectations occur in many
-economic and financial problems.
+经济和金融问题中经常出现复杂的概率和期望值计算。
 
-Perhaps the most important tool for handling complicated probability
-calculations is [Monte Carlo methods](https://en.wikipedia.org/wiki/Monte_Carlo_method).
+或许处理复杂概率计算的最重要工具是[蒙特卡罗方法](https://en.wikipedia.org/wiki/Monte_Carlo_method)。
 
-In this lecture we introduce Monte Carlo methods for computing expectations,
-with some applications in finance.
+在这个讲座中，我们将介绍用于计算期望值的蒙特卡罗方法，以及在金融中的一些应用。
 
-We will use the following imports.
+我们将使用以下导入。
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.random import randn
+from matplotlib import font_manager
+
+fontP = font_manager.FontProperties()
+fontP.set_family('SimHei') 
+fontP.set_size(14) 
+
 ```
 
+## 蒙特卡罗简介
 
-## An introduction to Monte Carlo
+在本节中，我们描述如何使用蒙特卡罗计算期望值。
 
-In this section we describe how Monte Carlo can be used to compute
-expectations.
+### 已知分布的股票价格
 
-### Share price with known distribution
+假设我们正在考虑购买某公司的股票。
 
-Suppose that we are considering buying a share in some company.
+我们的计划是：
 
-Our plan is either to
+1. 现在买入股票，持有一年后再卖出，或者
+2. 用我们的钱做其他事情。
 
-1. buy the share now, hold it for one year and then sell it, or
-2. do something else with our money.
+我们首先将一年后的股票价格视为一个随机变量 $S$。
 
-We start by thinking of the share price in one year as a random variable $S$.
+在决定是否购买股票之前，我们需要知道 $S$ 分布的一些特性。
 
-Before deciding whether or not to buy the share, we need to know some features
-of the distribution of $S$.
+例如，假设 $S$ 的均值相对于购买股票的价格很高。
 
-For example, suppose the mean of $S$ is high relative to the price of buying
-the share.
+这表明我们有很好的机会以相对较高的价格卖出。
 
-This suggests we have a good chance of selling at a relatively high price.
+但是，假设 $S$ 的方差也很高。
 
-Suppose, however, that the variance of $S$ is also high.
+这表明购买股票有风险，所以我们可能应该放弃。
 
-This suggests that buying the share is risky, so perhaps we should refrain.
+无论如何，这次讨论显示了理解 $S$ 的分布的重要性。
 
-Either way, this discussion shows the importance of understanding the
-distribution of $S$.
+假设，在分析数据后，我们猜测 $S$ 很好地由参数为 $\mu, \sigma$ 的对数正态分布表示。
 
-Suppose that, after analyzing the data, we guess that $S$ is well
-represented by a lognormal distribution with parameters $\mu, \sigma$ .
+* $S$ 与 $\exp(\mu + \sigma Z)$ 分布相同，其中 $Z$ 是标准正态。
+* 我们将这个声明写为 $S \sim LN(\mu, \sigma)$。
 
-* $S$ has the same distribution as $\exp(\mu + \sigma Z)$ where $Z$ is standard normal.
-* We write this statement as $S \sim LN(\mu, \sigma)$.
-
-Any good reference on statistics (such as
-[Wikipedia](https://en.wikipedia.org/wiki/Log-normal_distribution)) will tell
-us that the mean and variance are
+任何关于统计的好参考资料（如 [维基百科](https://en.wikipedia.org/wiki/Log-normal_distribution)）都会告诉我们，其均值和方差为
 
 $$
     \mathbb E S
         = \exp \left(\mu + \frac{\sigma^2}{2} \right)
 $$
 
-and
+和
 
 $$
     \mathop{\mathrm{Var}} S
     = [\exp(\sigma^2) - 1] \exp(2\mu + \sigma^2)
 $$
 
-So far we have no need for a computer.
+到目前为止，我们还不需要使用计算机。
 
 
 
-### Share price with unknown distribution
+### 股票价格的未知分布
 
-But now suppose that we study the distribution of $S$ more carefully.
+但现在假设我们更仔细地研究股票价格 $S$ 的分布。
 
-We decide that the share price depends on three variables, $X_1$, $X_2$, and
-$X_3$ (e.g., sales, inflation, and interest rates).
+我们决定股票价格取决于三个变量，$X_1$、$X_2$ 和 $X_3$（例如，销售额、通货膨胀和利率）。
 
-In particular, our study suggests that
+具体来说，我们的研究表明：
 
 $$
     S = (X_1 + X_2 + X_3)^p
 $$
 
-where
+其中：
 
-* $p$ is a positive number, which is known to us  (i.e., has been estimated),
-* $X_i \sim LN(\mu_i, \sigma_i)$ for $i=1,2,3$,
-* the values $\mu_i, \sigma_i$ are also known, and
-* the random variables $X_1$, $X_2$ and $X_3$ are independent.
+* $p$ 是一个已知的正数（即已估计），
+* $X_i \sim LN(\mu_i, \sigma_i)$ 对于 $i=1,2,3$，
+* 值 $\mu_i, \sigma_i$ 也是已知的，
+* 随机变量 $X_1$、$X_2$ 和 $X_3$ 是相互独立的。
 
-How should we compute the mean of $S$?
+我们应该如何计算 $S$ 的均值？
 
-To do this with pencil and paper is hard (unless, say, $p=1$).
+仅用笔和纸来计算是困难的（除非比如说 $p=1$）。
 
-But fortunately there's an easy way to do this, at least approximately.
+但幸运的是，至少有一种简便的方法可以近似地做到这一点。
 
-This is the Monte Carlo method, which runs as follows:
+这就是蒙特卡洛方法，其运行步骤如下：
 
-1. Generate $n$ independent draws of $X_1$, $X_2$ and $X_3$ on a computer,
-1. use these draws to generate $n$ independent draws of $S$, and
-1. take the average value of these draws of $S$.
+1. 在计算机上生成 $n$ 次独立抽取的 $X_1$、$X_2$ 和 $X_3$，
+1. 使用这些抽取值生成 $n$ 次独立抽取的 $S$，
+1. 取这些 $S$ 的抽取值的平均值。
 
-This average will be close to the true mean when $n$ is large.
+当 $n$ 很大时，这个平均值将接近真实的平均值。
 
-This is due to the law of large numbers, which we discussed in {doc}`lln_clt`.
+这归因于大数定律，我们在 {doc}`lln_clt` 中讨论过。
 
-We use the following values for $p$ and each $\mu_i$ and $\sigma_i$.
+我们使用以下值为 $p$ 以及每个 $\mu_i$ 和 $\sigma_i$。
 
 ```{code-cell} ipython3
 n = 1_000_000
@@ -151,12 +143,9 @@ p = 0.5
 σ_1, σ_2, σ_3 = 0.1, 0.05, 0.2
 ```
 
+#### 使用循环的Python例程
 
-
-#### A routine using loops in python
-
-
-Here's a routine using native Python loops to calculate the desired mean
+这里是一个使用Python原生循环计算期望平均值的例程
 
 $$
     \frac{1}{n} \sum_{i=1}^n S_i
@@ -176,8 +165,7 @@ S / n
 ```
 
 
-
-We can also construct a function that contains these operations:
+我们还可以构建一个包含这些操作的函数：
 
 ```{code-cell} ipython3
 def compute_mean(n=1_000_000):
@@ -191,22 +179,20 @@ def compute_mean(n=1_000_000):
 ```
 
 
-
-Now let's call it.
+现在调用它。
 
 ```{code-cell} ipython3
 compute_mean()
 ```
 
 
+### 向量化例程
 
-### A vectorized routine
+如果我们想要更准确的估计，我们应该增加 $n$。
 
-If we want a more accurate estimate we should increase $n$.
+但是上面的代码运行得相当慢。
 
-But the code above runs quite slowly.
-
-To make it faster, let's implement a vectorized routine using NumPy.
+为了让它运行得更快，让我们使用 NumPy 实现一个向量化例程。
 
 ```{code-cell} ipython3
 def compute_mean_vectorized(n=1_000_000):
@@ -223,11 +209,9 @@ def compute_mean_vectorized(n=1_000_000):
 compute_mean_vectorized()
 ```
 
+请注意，这个例程运行得更快。
 
-
-Notice that this routine is much faster.
-
-We can increase $n$ to get more accuracy and still have reasonable speed:
+我们可以增加 $n$ 以提高精度，同时仍然保持合理的速度：
 
 ```{code-cell} ipython3
 %%time
@@ -235,140 +219,119 @@ We can increase $n$ to get more accuracy and still have reasonable speed:
 compute_mean_vectorized(n=10_000_000)
 ```
 
+## 以风险中性定价欧式看涨期权
 
+接下来，我们将在风险中性假设下对欧式看涨期权进行定价。
 
-## Pricing a European call option under risk neutrality
-
-Next we are going to price a European call option under risk neutrality.
-
-Let's first discuss risk neutrality and then consider European options.
+首先让我们讨论风险中性，然后考虑欧式期权。
 
 
 
-### Risk-neutral pricing
+### 风险中性定价
 
-When we use risk-neutral pricing, we determine the price of a given asset
-according to its expected payoff:
+当我们使用风险中性定价时，我们根据给定资产的预期收益来决定其价格：
 
 $$
-\text{cost } = \text{ expected benefit}
+\text{成本} = \text{预期收益}
 $$
 
-For example, suppose someone promises to pay you
+例如，假设有人承诺在抛硬币的结果为正面时支付你
 
-- 1,000,000 dollars if "heads" is the outcome of a fair coin flip
-- 0 dollars if "tails" is the outcome
+- 100万美元
+- 如果结果为反面，则支付0美元
 
-Let's denote the payoff as $G$, so that
+我们记赔付为 $G$, 使得
 
 $$
     \mathbb P\left\{G = 10^6 \right\} = \mathbb P\{G = 0\} = \frac{1}{2}
 $$
 
-Suppose in addition that you can sell this promise to anyone who wants it.
+假设此外你可以将这个承诺卖给任何希望购买的人。
 
-- First they pay you $P$, the price at which you sell it
-- Then they get $G$, which could be either 1,000,000 or 0.
+- 首先他们支付给你 $P$，即你的销售价格
+- 然后他们获得 $G$，可能是100万或者0。
 
-What's a fair price for this asset (this promise)?
+这个资产（这个承诺）的公平价格是多少？
 
-The definition of "fair" is ambiguous, but we can say that the
-**risk-neutral price** is 500,000 dollars.
+“公平”的定义是含糊的，但我们可以说
+**风险中性价格**是50万美元。
 
-This is because the risk-neutral price is just the expected payoff of the
-asset, which is
+这是因为风险中性价格仅仅是资产的预期收益，即
 
 $$
     \mathbb E G = \frac{1}{2} \times 10^6 + \frac{1}{2} \times 0 = 5 \times 10^5
 $$
 
 
+### 关于风险的评论
 
-### A comment on risk
+正如名称所示，风险中性定价忽略了风险。
 
-As suggested by the name, the risk-neutral price ignores risk.
+为了理解这一点，请考虑你是否愿意为这样一个承诺支付500,000美元。
 
-To understand this, consider whether you would pay 500,000 dollars for such a
-promise.
+你是更愿意肯定收到500,000美元，还是有50%的概率收到1,000,000美元，而另外50%的概率什么也不得？
 
-Would you prefer to receive 500,000 for sure or 1,000,000 dollars with
-50% probability and nothing with 50% probability?
+至少一些读者会严格偏好第一种选择——尽管有些人可能更喜欢第二种。
 
-At least some readers will strictly prefer the first option --- although some
-might prefer the second.
+思考这个问题让我们意识到500,000美元并不一定是“正确”的价格——或者，如果市场上有这样的承诺，我们会见到的价格。
 
-Thinking about this makes us realize that 500,000 is not necessarily the
-"right" price --- or the price that we would see if there was a market for
-these promises.
-
-Nonetheless, the risk-neutral price is an important benchmark, which economists
-and financial market participants try to calculate every day.
+尽管如此，风险中性价格是一个重要的基准，经济学家和金融市场参与者每天都试图计算它。
 
 
+### 贴现
 
-### Discounting
+在之前的讨论中，我们忽略了时间因素。
 
-Another thing we ignored in the previous discussion was time.
+一般来说，现在收到$x$美元比$n$个周期后（例如10年）收到$x$美元更可取。
 
-In general, receiving $x$ dollars now is preferable to receiving $x$ dollars
-in $n$ periods (e.g., 10 years).
+毕竟，如果我们现在就收到$x$美元，我们可以将其存入银行中，按照利率$r > 0$计算，$n$个周期后会收到$(1 + r)^n x$。
 
-After all, if we receive $x$ dollars now, we could put it in the bank at
-interest rate $r > 0$ and receive $ (1 + r)^n x $ in $n$ periods.
+因此，我们在考虑它们的现值时需要对未来的支付进行贴现。
 
-Hence future payments need to be discounted when we consider their present
-value.
+我们将通过以下方式实现贴现：
 
-We will implement discounting by
+* 将一期的支付乘以$\beta < 1$
+* 将$n$期的支付乘以$\beta^n$等。
 
-* multiplying a payment in one period by $\beta < 1$
-* multiplying a payment in $n$ periods by $\beta^n$, etc.
+对于上面描述的承诺，我们的风险中性价格也需要进行同样的调整。
 
-The same adjustment needs to be applied to our risk-neutral price for the
-promise described above.
-
-Thus, if $G$ is realized in $n$ periods, then the risk-neutral price is
+因此，如果$G$在$n$个周期后实现，那么风险中性价格为：
 
 $$
     P = \beta^n \mathbb E G
-      = \beta^n 5 \times 10^5
+      = \beta^n 5 	imes 10^5
 $$
 
 
+### 欧式看涨期权
 
-### European call options
+现在让我们来计算一个欧式看涨期权的价格。
 
-Now let's price a European call option.
+期权由三个要素描述：
 
-The option is described by three things:
+1. $n$, **到期日**，
+2. $K$, **行权价**，
+3. $S_n$, 在日期 $n$ 的**标的资产**价格。
 
-2. $n$, the **expiry date**,
-2. $K$, the **strike price**, and
-3. $S_n$, the price of the **underlying** asset at date $n$.
+例如，假设标的资产是亚马逊的一股股票。
 
-For example, suppose that the underlying is one share in Amazon.
+该期权的持有者有权在 $n$ 天后以 $K$ 价格买入亚马逊的一股股票。
 
-The owner of this option has the right to buy one share in Amazon at price $K$ after $n$ days.
+如果 $S_n > K$，那么持有者将会行使期权，以 $K$ 的价格买入，在 $S_n$ 的价格卖出，并且获得 $S_n - K$ 的利润。
 
-If $S_n > K$, then the owner will exercise the option, buy at $K$, sell at
-$S_n$, and make profit $S_n - K$.
+如果 $S_n \leq K$，那么持有者将不会行使期权，收益为零。
 
-If $S_n \leq K$, then the owner will not exercise the option and the payoff is zero.
+因此，收益为 $\max\{ S_n - K, 0 \}$。
 
-Thus, the payoff is $\max\{ S_n - K, 0 \}$.
-
-Under the assumption of risk neutrality,  the price of the option is
-the expected discounted payoff:
+在风险中性的假设下，期权的价格是期望的折现收益：
 
 $$ P = \beta^n \mathbb E \max\{ S_n - K, 0 \} $$
 
-Now all we need to do is specify the distribution of $S_n$, so the expectation
-can be calculated.
+现在我们需要指定 $S_n$ 的分布，以便可以计算期望。
 
+假设我们知道 $S_n \sim LN(\mu, \sigma)$ 且 $\mu$ 和 $\sigma$ 是已知的。
 
-Suppose we know that $S_n \sim LN(\mu, \sigma)$ and $\mu$ and $\sigma$ are known.
-
-If $S_n^1, \ldots, S_n^M$ are independent draws from this lognormal distribution then, by the law of large numbers,
+如果 $S_n^1, \ldots, S_n^M$ 是从这个对数正态分布中独立抽取的，则根据大数定律，
 
 $$
     \mathbb E \max\{ S_n - K, 0 \}
@@ -376,7 +339,7 @@ $$
     \frac{1}{M} \sum_{m=1}^M \max \{S_n^m - K, 0 \}
 $$
 
-We suppose that
+我们假设
 
 ```{code-cell} ipython3
 μ = 1.0
@@ -386,17 +349,13 @@ n = 10
 β = 0.95
 ```
 
-
-
-We set the simulation size to
+我们设置模拟次数为
 
 ```{code-cell} ipython3
 M = 10_000_000
 ```
 
-
-
-Here is our code
+这是我们的代码
 
 ```{code-cell} ipython3
 S = np.exp(μ + σ * np.random.randn(M))
@@ -405,33 +364,30 @@ P = β**n * np.mean(return_draws)
 print(f"The Monte Carlo option price is approximately {P:3f}")
 ```
 
+## 通过动态模型进行定价
 
+在这个练习中，我们将研究一个更现实的股票价格 $S_n$ 模型。
 
-## Pricing via a dynamic model
+这来自于指定股票价格的底层动力学。
 
-In this exercise we investigate a more realistic model for the share price $S_n$.
+首先我们指定动态。
 
-This comes from specifying the underlying dynamics of the share price.
+然后我们将使用蒙特卡洛方法计算期权的价格。
 
-First we specify the dynamics.
+### 简单动力学
 
-Then we'll compute the price of the option using Monte Carlo.
-
-### Simple dynamics
-
-One simple model for $\{S_t\}$ is
+一个简单的 $\{S_t\}$ 模型是
 
 $$ \ln \frac{S_{t+1}}{S_t} = \mu + \sigma \xi_{t+1} $$
 
-where
+其中
 
-* $S_0$ is lognormally distributed and
-* $\{ \xi_t \}$ is IID and standard normal.
+* $S_0$ 是对数正态分布的，
+* $\{ \xi_t \}$ 是独立同分布的标准正态分布。
 
+在所述假设下，$S_n$ 是对数正态分布的。
 
-Under the stated assumptions, $S_n$ is lognormally distributed.
-
-To see why, observe that, with $s_t := \ln S_t$, the price dynamics become
+为了看清楚为什么，注意到，设 $s_t := \ln S_t$，价格动力学变为
 
 ```{math}
 :label: s_mc_dyms
@@ -439,35 +395,32 @@ To see why, observe that, with $s_t := \ln S_t$, the price dynamics become
 s_{t+1} = s_t + \mu + \sigma \xi_{t+1}
 ```
 
-Since $s_0$ is normal and $\xi_1$ is normal and IID, we see that $s_1$ is
-normally distributed.
+由于 $s_0$ 是正态分布的且 $\xi_1$ 是独立同分布的正态分布，我们可以看到 $s_1$ 是
+正态分布的。
 
-Continuing in this way shows that $s_n$ is normally distributed.
+继续这种方式表明 $s_n$ 是正态分布的。
 
-Hence $S_n = \exp(s_n)$ is lognormal.
-
-
-### Problems with simple dynamics
-
-The simple dynamic model we studied above is convenient, since we can work out
-the distribution of $S_n$.
+因此 $S_n = \exp(s_n)$ 是对数正态的。
 
 
-However, its predictions are counterfactual because, in the real world,
-volatility (measured by $\sigma$) is not stationary.
+### 简单动态问题
 
-Instead it rather changes over time, sometimes high (like during the GFC) and sometimes low.
+我们上面研究的简单动态模型很方侈，因为我们可以计算得出$S_n$的分布。
 
-In terms of our model above, this means that $\sigma$ should not be constant.
+然而，它的预测是违反事实的，因为在现实世界中，波动率（由$\sigma$衡量）并不是稳定的。
+
+相反，它随时间而变化，有时高（如在全球金融危机期间），有时低。
+
+根据我们上面的模型，这意味着$\sigma$不应该是常数。
 
 
-### More realistic dynamics
+### 更现实的动态模型
 
-This leads us to study the improved version:
+这使我们研究了改进的版本：
 
 $$ \ln \frac{S_{t+1}}{S_t} = \mu + \sigma_t \xi_{t+1} $$
 
-where
+其中
 
 $$
     \sigma_t = \exp(h_t),
@@ -475,13 +428,12 @@ $$
         h_{t+1} = \rho h_t + \nu \eta_{t+1}
 $$
 
-Here $\{\eta_t\}$ is also IID and standard normal.
+这里$\{\eta_t\}$也是独立同分布且标准正态的。
 
 
+### 默认参数
 
-### Default parameters
-
-For the dynamic model, we adopt the following parameter values.
+对于动态模型，我们采取以下参数值。
 
 ```{code-cell} ipython3
 default_μ  = 0.0001
@@ -491,11 +443,9 @@ default_S0 = 10
 default_h0 = 0
 ```
 
+（这里`default_S0` 是 $S_0$ ，`default_h0` 是 $h_0$。）
 
-
-(Here `default_S0` is $S_0$ and `default_h0` is $h_0$.)
-
-For the option we use the following defaults.
+对于期权，我们使用以下默认值。
 
 ```{code-cell} ipython3
 default_K = 100
@@ -503,15 +453,13 @@ default_n = 10
 default_β = 0.95
 ```
 
+### 可视化
 
-
-### Visualizations
-
-With $s_t := \ln S_t$, the price dynamics become
+将 $s_t := \ln S_t$，价格动态变为
 
 $$ s_{t+1} = s_t + \mu + \exp(h_t) \xi_{t+1} $$
 
-Here is a function to simulate a path using this equation:
+以下是使用这个方程模拟路径的函数：
 
 ```{code-cell} ipython3
 def simulate_asset_price_path(μ=default_μ, S0=default_S0, h0=default_h0, n=default_n, ρ=default_ρ, ν=default_ν):
@@ -527,35 +475,30 @@ def simulate_asset_price_path(μ=default_μ, S0=default_S0, h0=default_h0, n=def
 ```
 
 
-
-Here we plot the paths and the log of the paths.
+这里我们绘制路径及其对数路径。
 
 ```{code-cell} ipython3
 fig, axes = plt.subplots(2, 1)
 
-titles = 'log paths', 'paths'
+titles = '对数路径', '路径'
 transforms = np.log, lambda x: x
 for ax, transform, title in zip(axes, transforms, titles):
     for i in range(50):
         path = simulate_asset_price_path()
         ax.plot(transform(path))
-    ax.set_title(title)
+    ax.set_title(title, fontproperties=fontP)
 
 fig.tight_layout()
 plt.show()
 ```
 
+### 计算价格
 
+现在我们的模型更加复杂，我们无法轻易确定 $S_n$ 的分布。
 
-### Computing the price
+所以为了计算期权的价格 $P$，我们使用蒙特卡洛方法。
 
-Now that our model is more complicated, we cannot easily determine the
-distribution of $S_n$.
-
-So to compute the price $P$ of the option, we use Monte Carlo.
-
-We average over realizations $S_n^1, \ldots, S_n^M$ of $S_n$ and appealing to
-the law of large numbers:
+我们对实现 $S_n^1, \ldots, S_n^M$ 的平均值 $S_n$，并呼吁大数法则：
 
 $$
     \mathbb E \max\{ S_n - K, 0 \}
@@ -563,8 +506,7 @@ $$
     \frac{1}{M} \sum_{m=1}^M \max \{S_n^m - K, 0 \}
 $$
 
-
-Here's a version using Python loops.
+下面是一个使用 Python 循环的版本。
 
 ```{code-cell} ipython3
 def compute_call_price(β=default_β,
@@ -577,15 +519,15 @@ def compute_call_price(β=default_β,
                        ν=default_ν,
                        M=10_000):
     current_sum = 0.0
-    # For each sample path
+    # 对每一个样本路径
     for m in range(M):
         s = np.log(S0)
         h = h0
-        # Simulate forward in time
+        # 模拟时间前进
         for t in range(n):
             s = s + μ + np.exp(h) * randn()
             h = ρ * h + ν * randn()
-        # And add the value max{S_n - K, 0} to current_sum
+        # 并将值 max{S_n - K, 0} 加到 current_sum
         current_sum += np.maximum(np.exp(s) - K, 0)
 
     return β**n * current_sum / M
@@ -597,18 +539,16 @@ compute_call_price()
 ```
 
 
-
-## Exercises
+## 练习
 
 ```{exercise}
 :label: monte_carlo_ex1
 
-We would like to increase $M$ in the code above to make the calculation more
-accurate.
+我们想要在上面的代码中增加 $M$ 以使计算更加精确。
 
-But this is problematic because Python loops are slow.
+但是这存在一个问题，因为Python循环运行缓慢。
 
-Your task is to write a faster version of this code using NumPy.
+你的任务是使用NumPy编写一个更快的代码版本。
 ```
 
 ```{solution-start} monte_carlo_ex1
@@ -643,10 +583,9 @@ compute_call_price_vector()
 ```
 
 
+请注意，这个版本的速度比使用Python循环的版本要快。
 
-Notice that this version is faster than the one using a Python loop.
-
-Now let's try with larger $M$ to get a more accurate calculation.
+现在让我们尝试更大的$M$以获得更准确的计算。
 
 ```{code-cell} ipython3
 %%time
@@ -661,13 +600,13 @@ compute_call_price(M=10_000_000)
 ```{exercise}
 :label: monte_carlo_ex2
 
-Consider that a European call option may be written on an underlying with spot price of \$100 and a knockout barrier of \$120.
+设想一种欧式看涨期权，该期权的标的资产现价为100美元，有一个120美元的敲出障碍。
 
-This option behaves in every way like a vanilla European call, except if the spot price ever moves above \$120, the option "knocks out" and the contract is null and void.
+这种期权在各方面都类似于普通的欧式看涨期权，但如果现价曾经超过120美元，期权便会被"敲出"，合约即刻失效。
 
-Note that the option does not reactivate if the spot price falls below \$120 again.
+注意，如果现价再次跌破120美元，期权不会重新激活。
 
-Use the dynamics defined in {eq}`s_mc_dyms` to price the European call option.
+使用{eq}`s_mc_dyms`定义的动态来定价这个欧式看涨期权。
 ```
 
 ```{solution-start} monte_carlo_ex2
@@ -686,6 +625,7 @@ default_β = 0.95
 default_bp = 120
 ```
 
+
 ```{code-cell} ipython3
 def compute_call_price_with_barrier(β=default_β,
                                     μ=default_μ,
@@ -698,13 +638,13 @@ def compute_call_price_with_barrier(β=default_β,
                                     bp=default_bp,
                                     M=50_000):
     current_sum = 0.0
-    # For each sample path
+    # 对每个样本路径进行模拟
     for m in range(M):
         s = np.log(S0)
         h = h0
         payoff = 0
         option_is_null = False
-        # Simulate forward in time
+        # 模拟前向时间发展
         for t in range(n):
             s = s + μ + np.exp(h) * randn()
             h = ρ * h + ν * randn()
@@ -715,7 +655,7 @@ def compute_call_price_with_barrier(β=default_β,
 
         if not option_is_null:
             payoff = np.maximum(np.exp(s) - K, 0)
-        # And add the payoff to current_sum
+        # 将payoff加入到current_sum中
         current_sum += payoff
 
     return β**n * current_sum / M
@@ -725,9 +665,7 @@ def compute_call_price_with_barrier(β=default_β,
 %time compute_call_price_with_barrier()
 ```
 
-
-
-Let's look at the vectorized version which is faster than using Python loops.
+来看向量化版本，这个版本比使用Python循环快。
 
 ```{code-cell} ipython3
 def compute_call_price_with_barrier_vector(β=default_β,
@@ -747,10 +685,10 @@ def compute_call_price_with_barrier_vector(β=default_β,
         Z = np.random.randn(2, M)
         s = s + μ + np.exp(h) * Z[0, :]
         h = ρ * h + ν * Z[1, :]
-        # Mark all the options null where S_n > barrier price
+        # 标记所有股价高于屏障价格的期权为无效
         option_is_null = np.where(np.exp(s) > bp, True, option_is_null)
 
-    # mark payoff as 0 in the indices where options are null
+    # 在option_is_null的索引处将payoff标记为0
     payoff = np.where(option_is_null, 0, np.maximum(np.exp(s) - K, 0))
     expectation = np.mean(payoff)
     return β**n * expectation
