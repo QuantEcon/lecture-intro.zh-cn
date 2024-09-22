@@ -32,6 +32,11 @@ import numpy as np
 import yfinance as yf
 import scipy.stats
 import seaborn as sns
+from matplotlib import font_manager
+
+fontP = font_manager.FontProperties()
+fontP.set_family('SimHei')  
+fontP.set_size(14)  
 ```
 ## 常见分布
 
@@ -757,8 +762,8 @@ x.mean(), x.var()
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.hist(x, bins=5, density=True, histtype='bar')
-ax.set_xlabel('收入')
-ax.set_ylabel('密度')
+ax.set_xlabel('收入', fontproperties=fontP)
+ax.set_ylabel('密度', fontproperties=fontP)
 plt.show()
 ```
 
@@ -790,8 +795,8 @@ x_amazon.iloc[0]
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.hist(x_amazon, bins=20)
-ax.set_xlabel('月收益率（百分比变化）')
-ax.set_ylabel('密度')
+ax.set_xlabel('月收益率（百分比变化）', fontproperties=fontP)
+ax.set_ylabel('密度', fontproperties=fontP)
 plt.show()
 ```
 
@@ -806,7 +811,7 @@ plt.show()
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax)
-ax.set_xlabel('月度回报率（百分比变化）')
+ax.set_xlabel('月度回报率（百分比变化）', fontproperties=fontP)
 ax.set_ylabel('KDE')
 plt.show()
 ```
@@ -818,7 +823,7 @@ fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.1, alpha=0.5, label="bw=0.1")
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.5, alpha=0.5, label="bw=0.5")
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=1, alpha=0.5, label="bw=1")
-ax.set_xlabel('月度回报率（百分比变化）')
+ax.set_xlabel('月度回报率（百分比变化）', fontproperties=fontP)
 ax.set_ylabel('KDE')
 plt.legend()
 plt.show()
@@ -837,7 +842,7 @@ plt.show()
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.violinplot(x_amazon)
-ax.set_ylabel('月度回报率（百分比变化）')
+ax.set_ylabel('月度回报率（百分比变化）', fontproperties=fontP)
 ax.set_xlabel('KDE')
 plt.show()
 ```
@@ -857,11 +862,11 @@ x_costco = prices.pct_change()[1:] * 100
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.violinplot([x_amazon, x_costco])
-ax.set_ylabel('月度回报率（百分比变化）')
-ax.set_xlabel('零售商')
+ax.set_ylabel('月度回报率（百分比变化）', fontproperties=fontP)
+ax.set_xlabel('零售商', fontproperties=fontP)
 
 ax.set_xticks([1, 2])
-ax.set_xticklabels(['亚马逊', 'Costco'])
+ax.set_xticklabels(['亚马逊', '开市客'], fontproperties=fontP)
 plt.show()
 ```
 
@@ -891,8 +896,8 @@ x_grid = np.linspace(-50, 65, 200)
 fig, ax = plt.subplots()  
 ax.plot(x_grid, u.pdf(x_grid))  
 ax.hist(x_amazon, density=True, bins=40)  
-ax.set_xlabel('月度回报（百分比变化）')
-ax.set_ylabel('密度')
+ax.set_xlabel('月度回报（百分比变化）', fontproperties=fontP)
+ax.set_ylabel('密度', fontproperties=fontP)
 plt.show()
 ```
 
@@ -917,7 +922,7 @@ fig, ax = plt.subplots()
 ax.plot(x_grid, u.pdf(x_grid))  
 ax.hist(x_draws, density=True, bins=40)  
 ax.set_xlabel('x')
-ax.set_ylabel('密度')
+ax.set_ylabel('密度', fontproperties=fontP)
 plt.show()
 ```
 
