@@ -35,7 +35,7 @@ import seaborn as sns
 from matplotlib import font_manager
 
 fontP = font_manager.FontProperties()
-fontP.set_family('SimHei')  
+fontP.set_family('SimHei')
 fontP.set_size(14)  
 ```
 ## 常见分布
