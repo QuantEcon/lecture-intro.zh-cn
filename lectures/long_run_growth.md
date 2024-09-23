@@ -68,7 +68,9 @@ import matplotlib.cm as cm
 import numpy as np
 from collections import namedtuple
 
-plt.rcParams['font.sans-serif'] = ['SimHei']
+import matplotlib as mpl
+mpl.font_manager.fontManager.addfont(r"../lectures/_static/SourceHanSerifSC-Regular.otf")
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 准备数据
@@ -174,7 +176,7 @@ color_mapping = {country: color for
 ---
 mystnb:
   figure:
-    caption: "人均GDP（英国）"
+    caption: "\u4EBA\u5747GDP\uFF08\u82F1\u56FD\uFF09"
     name: gdppc_gbr1
     width: 500px
 ---
@@ -200,7 +202,7 @@ gdp_pc[country].plot(
 ---
 mystnb:
   figure:
-    caption: "人均GDP（英国）"
+    caption: "\u4EBA\u5747GDP\uFF08\u82F1\u56FD\uFF09"
     name: gdppc_gbr2
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -274,7 +276,8 @@ def draw_interp_plots(series,        # pandas 数据
 ---
 mystnb:
   figure:
-    caption: 人均 GDP，1500-至今（中国、英国、美国）
+    caption: "\u4EBA\u5747 GDP\uFF0C1500-\u81F3\u4ECA\uFF08\u4E2D\u56FD\u3001\u82F1\
+      \u56FD\u3001\u7F8E\u56FD\uFF09"
     name: gdppc_comparison
 tags: [hide-input]
 ---
@@ -358,7 +361,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 人均GDP，1500-2000年（中国）
+    caption: "\u4EBA\u5747GDP\uFF0C1500-2000\u5E74\uFF08\u4E2D\u56FD\uFF09"
     name: gdppc_china
 tags: [hide-input]
 ---
@@ -419,7 +422,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 人均GDP，1500-2000（英国和美国）
+    caption: "\u4EBA\u5747GDP\uFF0C1500-2000\uFF08\u82F1\u56FD\u548C\u7F8E\u56FD\uFF09"
     name: gdppc_ukus
 tags: [hide-input]
 ---
@@ -493,7 +496,7 @@ gdp = data['gdp'].unstack('countrycode')
 ---
 mystnb:
   figure:
-    caption: 早期工业化时期的GDP
+    caption: "\u65E9\u671F\u5DE5\u4E1A\u5316\u65F6\u671F\u7684GDP"
     name: gdp1
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -553,7 +556,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 现代的GDP
+    caption: "\u73B0\u4EE3\u7684GDP"
     name: gdp2
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -604,7 +607,7 @@ regionalgdp_pc
 ---
 mystnb:
   figure:
-    caption: 地区人均GDP
+    caption: "\u5730\u533A\u4EBA\u5747GDP"
     name: region_gdppc
 ---
 fig, ax = plt.subplots(dpi=300)
