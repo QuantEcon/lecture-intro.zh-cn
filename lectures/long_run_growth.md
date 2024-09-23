@@ -69,7 +69,7 @@ import numpy as np
 from collections import namedtuple
 
 import matplotlib as mpl
-mpl.font_manager.fontManager.addfont(r"../lectures/_static/SourceHanSerifSC-Regular.otf")
+mpl.font_manager.fontManager.addfont(r"../lectures/_static/SourceHanSerifSC-SemiBold.otf")
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
