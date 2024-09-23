@@ -298,7 +298,7 @@ $$
 
 $$
     P = \beta^n \mathbb E G
-      = \beta^n 5 	imes 10^5
+      = \beta^n 5 \times 10^5
 $$
 
 
@@ -360,7 +360,7 @@ M = 10_000_000
 S = np.exp(μ + σ * np.random.randn(M))
 return_draws = np.maximum(S - K, 0)
 P = β**n * np.mean(return_draws)
-print(f"The Monte Carlo option price is approximately {P:3f}")
+print(f"蒙特卡洛期权价格约为 {P:3f}")
 ```
 
 ## 通过动态模型进行定价
