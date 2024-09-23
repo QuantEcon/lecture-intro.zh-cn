@@ -1211,12 +1211,12 @@ plt.show()
 
 这里我们将对数正态分布理解为随机变量 $\exp(\mu + \sigma Z)$，当 $Z$ 是标准正态分布时。
 
-Pareto分布 {eq}`pareto` 的均值和中位数，其中 $ar x = 1$，分别是
+Pareto分布 {eq}`pareto` 的均值和中位数，其中 $\bar x = 1$，分别是
 
 $$
-\text{均值} = rac{lpha}{lpha - 1}
+\text{均值} = \frac{\alpha}{\alpha - 1}
 \quad \text{和} \quad
-\text{中位数} = 2^{1/lpha}
+\text{中位数} = 2^{1/\alpha}
 $$
 
 使用对应的对数正态分布表达式，我们得到以下方程组
@@ -1292,6 +1292,17 @@ ax.violinplot(data)
 
 plt.show()
 ```
+最后，我们来生成均值和标准差。
+
+```{code-cell} ipython3
+tax_rev_pareto.mean(), tax_rev_pareto.std()
+```
+
+```{code-cell} ipython3
+tax_rev_lognorm.mean(), tax_rev_lognorm.std()
+```
+
+通过查看代码的输出，我们的主要结论是，帕累托分布假设会导致更低的均值和更大的离散度。
 
 ```{solution-end}
 ```
