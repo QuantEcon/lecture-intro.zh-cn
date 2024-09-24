@@ -11,7 +11,6 @@ kernelspec:
   name: python3
 ---
 
-(schelling)=
 ```{raw} html
 <div id="qe-notebook-header" align="right" style="text-align:right;">
         <a href="https://quantecon.org/" title="quantecon.org">
@@ -20,7 +19,7 @@ kernelspec:
 </div>
 ```
 
-# Racial Segregation
+# 种族隔离
 
 ```{index} single: Schelling Segregation Model
 ```
@@ -28,147 +27,132 @@ kernelspec:
 ```{index} single: Models; Schelling's Segregation Model
 ```
 
-## Outline
+## 大纲
 
-In 1969, Thomas C. Schelling developed a simple but striking model of racial
-segregation {cite}`Schelling1969`.
+1969年，托马斯·C·谢林开发了一个简单但引人注目的种族隔离模型 {cite}`Schelling1969`。
 
-His model studies the dynamics of racially mixed neighborhoods.
+他的模型研究了种族混合邻里的动态变化。
 
-Like much of Schelling's work, the model shows how local interactions can lead
-to surprising aggregate outcomes.
+就像谢林的许多工作一样，该模型显示出局部互动如何导致令人惊讶的总体结果。
 
-It studies a setting where agents (think of households) have relatively mild
-preference for neighbors of the same race.
+它研究了一个环境，其中代理（可以认为是家庭）对同种族的邻居有相对温和的偏好。
 
-For example, these agents might be comfortable with a mixed race neighborhood
-but uncomfortable when they feel "surrounded" by people from a different race.
+例如，这些代理可能对混种种族的邻里感到舒适，但当他们感觉被不同种族的人“包围”时会感到不舒服。
 
-Schelling illustrated the follow surprising result: in such a setting, mixed
-race neighborhoods are likely to be unstable, tending to collapse over time.
+谢林展示了以下令人惊讶的结果：在这样的环境中，混合种族的社区很可能是不稳定的，倾向于随时间崩溃。
 
-In fact the model predicts strongly divided neighborhoods, with high levels of
-segregation.
+事实上，该模型预测了高度分裂的社区，具有高水平的隔离。
 
-In other words, extreme segregation outcomes arise even though people's
-preferences are not particularly extreme.
+换句话说，尽管人们的偏好并不特别极端，但仍会出现极端的隔离结果。
 
-These extreme outcomes happen because of *interactions* between agents in the
-model (e.g., households in a city) that drive self-reinforcing dynamics in the
-model.
+这些极端结果是因为模型中代理之间的*互动*（例如，城市中的家庭）驱动模型中的自我加强动态。
 
-These ideas will become clearer as the lecture unfolds.
+随着讲座的展开，这些想法将变得更加清晰。
 
-In recognition of his work on segregation and other research, Schelling was
-awarded the 2005 Nobel Prize in Economic Sciences (joint with Robert Aumann).
+为了表彰他在种族隔离和其他研究方面的工作，谢林获得了2005年诺贝尔经济科学奖（与罗伯特·奥曼共享）。
 
-
-Let's start with some imports:
+让我们从一些导入开始：
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 from random import uniform, seed
 from math import sqrt
 import numpy as np
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-## The model
+## 模型
 
-In this section we will build a version of Schelling's model.
+在这一节中，我们将构建一个Schelling模型的版本。
 
-### Set-Up
+### 设置
 
-We will cover a variation of Schelling's model that is different from the
-original but also easy to program and, at the same time, captures his main
-idea.
+我们将介绍一个与原始Schelling模型不同的变种，但同样易于编程，并且同时捕捉到了他的主要思想。
 
-Suppose we have two types of people: orange people and green people.
+假设我们有两种类型的人：橙色人和绿色人。
 
-Assume there are $n$ of each type.
+假设每种类型都有$n$个人。
 
-These agents all live on a single unit square.
+这些代理人都居住在一个单位正方形上。
 
-Thus, the location (e.g, address) of an agent is just a point $(x, y)$,  where
-$0 < x, y < 1$.
+因此，一个代理人的位置（例如，地址）只是一个点$(x, y)$，其中$0 < x, y < 1$。
 
-* The set of all points $(x,y)$ satisfying $0 < x, y < 1$ is called the **unit square**
-* Below we denote the unit square by $S$
+* 所有点$(x,y)$满足$0 < x, y < 1$ 的集合称为**单位正方形**
+* 下面我们用$S$表示单位正方形
 
 +++
 
-### Preferences
+### 偏好
 
-We will say that an agent is *happy* if 5 or more of her 10 nearest neighbors are of the same type.
+我们将说一个代理人是*快乐*的，如果她最近的10个邻居中有5个或以上是同类型的。
 
-An agent who is not happy is called *unhappy*.
+一个不快乐的代理人被称为*不快乐*。
 
-For example,
+例如，
 
-*  if an agent is orange and 5 of her 10 nearest neighbors are orange, then she is happy.
-*  if an agent is green and 8 of her 10 nearest neighbors are orange, then she is unhappy.
+* 如果一个代理人是橙色的，她最近的10个邻居中有5个是橙色的，那么她是快乐的。
+* 如果一个代理人是绿色的，她最近的10个邻居中有8个是橙色的，那么她是不快乐的。
 
-'Nearest' is in terms of [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance).
+“最近”的意思是根据[欧几里得距离](https://en.wikipedia.org/wiki/Euclidean_distance)。
 
-An important point to note is that agents are **not** averse to living in mixed areas.
+一个重要的点是，代理人**不**反对居住在混合区域。
 
-They are perfectly happy if half of their neighbors are of the other color.
+如果他们的一半邻居是另一种颜色，他们完全满意。
 
-+++
+### 行为
 
-### Behavior
+最初，代理们混在一起（集成）。
 
-Initially, agents are mixed together (integrated).
+特别地，我们假设每个代理的初始位置是从单位正方形 $S$ 上的一个双变量均匀分布中独立抽取的。
 
-In particular, we assume that the initial location of each agent is an
-independent draw from a bivariate uniform distribution on the unit square $S$.
+* 首先，他们的 $x$ 坐标从 $(0,1)$ 上的均匀分布中抽取
+* 然后，独立地，他们的 $y$ 坐标从同一分布中抽取。
 
-* First their $x$ coordinate is drawn from a uniform distribution on $(0,1)$
-* Then, independently, their $y$ coordinate is drawn from the same distribution.
+现在，轮流通过所有代理，每个代理现在有机会留下或移动。
 
-Now, cycling through the set of all agents, each agent is now given the chance to stay or move.
+每个代理如果满意就留下，不满意就移动。
 
-Each agent stays if they are happy and moves if they are unhappy.
+移动的算法如下：
 
-The algorithm for moving is as follows
-
-```{prf:algorithm} Jump Chain Algorithm
+```{prf:algorithm} 跳转链算法
 :label: move_algo
 
-1. Draw a random location in $S$
-1. If happy at new location, move there
-1. Otherwise, go to step 1
+1. 在 $S$ 中随机抽取一个位置
+1. 如果在新位置上感到满意，就移动到那里
+1. 否则，回到步骤 1
 
 ```
 
-We cycle continuously through the agents, each time allowing an unhappy agent
-to move.
+我们不断地循环通过代理，每次允许不满意的代理移动。
 
-We continue to cycle until no one wishes to move.
+我们继续循环，直到没有人希望移动。
 
-+++
 
-## Results
+## 结果
 
-Let's now implement and run this simulation.
+让我们现在实现和运行这个模拟。
 
-In what follows, agents are modeled as [objects](https://python-programming.quantecon.org/python_oop.html).
+接下来，代理被模型化为[对象](https://python-programming.quantecon.org/python_oop.html)。
 
-Here's an indication of their structure:
+以下是它们的结构指示：
 
 ```{code-block} none
-* Data:
+* 数据：
 
-    * type (green or orange)
-    * location
+    * 类型（绿色或橙色）
+    * 位置
 
-* Methods:
+* 方法：
 
-    * determine whether happy or not given locations of other agents
-    * If not happy, move
-        * find a new location where happy
+    * 根据其他代理的位置确定是否快乐
+    * 如果不快乐，移动
+        * 找到一个快乐的新位置
 ```
 
-Let's build them.
+让我们构建它们。
 
 ```{code-cell} ipython3
 class Agent:
@@ -181,57 +165,48 @@ class Agent:
         self.location = uniform(0, 1), uniform(0, 1)
 
     def get_distance(self, other):
-        "Computes the euclidean distance between self and other agent."
+        "计算自己与另一代理之间的欧几里得距离。"
         a = (self.location[0] - other.location[0])**2
         b = (self.location[1] - other.location[1])**2
         return sqrt(a + b)
 
     def happy(self,
-                agents,                # List of other agents
-                num_neighbors=10,      # No. of agents viewed as neighbors
-                require_same_type=5):  # How many neighbors must be same type
+                agents,                # 其他代理的列表
+                num_neighbors=10,      # 视为邻居的代理数量
+                require_same_type=5):  # 必须是同一类型的邻居数量
         """
-            True if a sufficient number of nearest neighbors are of the same
-            type.
+            如果足够多的最近邻居是同一类型，则返回True。
         """
 
         distances = []
 
-        # Distances is a list of pairs (d, agent), where d is distance from
-        # agent to self
+        # distances是一组对(d, agent)，其中d是代理到self的距离
         for agent in agents:
             if self != agent:
                 distance = self.get_distance(agent)
                 distances.append((distance, agent))
 
-        # Sort from smallest to largest, according to distance
+        # 根据距离从小到大排序
         distances.sort()
 
-        # Extract the neighboring agents
+        # 提取邻居代理
         neighbors = [agent for d, agent in distances[:num_neighbors]]
 
-        # Count how many neighbors have the same type as self
+        # 计算有多少邻居与自己类型相同
         num_same_type = sum(self.type == agent.type for agent in neighbors)
         return num_same_type >= require_same_type
 
     def update(self, agents):
-        "If not happy, then randomly choose new locations until happy."
+        "如果不快乐，随机选择新位置直到快乐。"
         while not self.happy(agents):
             self.draw_location()
 ```
-
-Here's some code that takes a list of agents and produces a plot showing their
-locations on the unit square.
-
-Orange agents are represented by orange dots and green ones are represented by
-green dots.
-
 ```{code-cell} ipython3
 def plot_distribution(agents, cycle_num):
-    "Plot the distribution of agents after cycle_num rounds of the loop."
+    "绘制经过cycle_num轮循环后，代理分布图。"
     x_values_0, y_values_0 = [], []
     x_values_1, y_values_1 = [], []
-    # == Obtain locations of each type == #
+    # == 获取每种类型的位置 == #
     for agent in agents:
         x, y = agent.location
         if agent.type == 0:
@@ -242,154 +217,143 @@ def plot_distribution(agents, cycle_num):
             y_values_1.append(y)
     fig, ax = plt.subplots()
     plot_args = {'markersize': 8, 'alpha': 0.8}
-    ax.set_facecolor('azure')
+    ax.set_facecolor('天蓝色')
     ax.plot(x_values_0, y_values_0,
-        'o', markerfacecolor='orange', **plot_args)
+        'o', markerfacecolor='橙色', **plot_args)
     ax.plot(x_values_1, y_values_1,
-        'o', markerfacecolor='green', **plot_args)
-    ax.set_title(f'Cycle {cycle_num-1}')
+        'o', markerfacecolor='绿色', **plot_args)
+    ax.set_title(f'周期 {cycle_num-1}')
     plt.show()
-```
+```)
 
-And here's some pseudocode for the main loop, where we cycle through the
-agents until no one wishes to move.
+在这里有一段伪代码，它描述了主循环的过程，我们在这个过程中遍历每个代理，直到没有代理希望移动为止。
 
-The pseudocode is
+伪代码如下
 
 ```{code-block} none
-plot the distribution
-while agents are still moving
-    for agent in agents
-        give agent the opportunity to move
-plot the distribution
+绘制分布
+while 代理还在移动
+    for 每个代理 in 代理们
+        给予代理机会移动
+绘制分布
 ```
 
-The real code is below
+真实的代码如下
 
 ```{code-cell} ipython3
 def run_simulation(num_of_type_0=600,
                    num_of_type_1=600,
-                   max_iter=100_000,       # Maximum number of iterations
+                   max_iter=100_000,       # 最大迭代次数
                    set_seed=1234):
 
-    # Set the seed for reproducibility
+    # 设置种子以确保可重现性
     seed(set_seed)
 
-    # Create a list of agents of type 0
+    # 创建类型0代理列表
     agents = [Agent(0) for i in range(num_of_type_0)]
-    # Append a list of agents of type 1
+    # 添加类型1代理列表
     agents.extend(Agent(1) for i in range(num_of_type_1))
 
-    # Initialize a counter
+    # 初始化计数器
     count = 1
 
-    # Plot the initial distribution
+    # 绘制初始分布
     plot_distribution(agents, count)
 
-    # Loop until no agent wishes to move
+    # 循环直到没有代理希望移动
     while count < max_iter:
-        print('Entering loop ', count)
+        print('进入循环 ', count)
         count += 1
-        no_one_moved = True
+        没有人移动 = True
         for agent in agents:
             old_location = agent.location
             agent.update(agents)
             if agent.location != old_location:
-                no_one_moved = False
-        if no_one_moved:
+                没有人移动 = False
+        if 没有人移动:
             break
 
-    # Plot final distribution
+    # 绘制最终分布
     plot_distribution(agents, count)
 
     if count < max_iter:
-        print(f'Converged after {count} iterations.')
+        print(f'在 {count} 次迭代后收敛。')
     else:
-        print('Hit iteration bound and terminated.')
+        print('达到迭代上限并终止。')
 
 ```
 
-Let's have a look at the results.
+让我们看一下结果。
 
 ```{code-cell} ipython3
 run_simulation()
 ```
 
-As discussed above, agents are initially mixed randomly together.
+如上所述，代理最初是随机混合在一起的。
 
-But after several cycles, they become segregated into distinct regions.
+但经过几轮循环后，它们变得按照不同区域分离。
 
-In this instance, the program terminated after a small number of cycles
-through the set of agents, indicating that all agents had reached a state of
-happiness.
+在这个例子中，程序在经过一小部分代理集合的循环后终止，表明所有代理都已达到幸福状态。
 
-What is striking about the pictures is how rapidly racial integration breaks down.
+图片显示的令人吃惊的现象是种族融合的迅速崩溃。
 
-This is despite the fact that people in the model don't actually mind living mixed with the other type.
+尽管实际上模型中的人并不介意和其他类型的人混居。
 
-Even with these preferences, the outcome is a high degree of segregation.
+即使是在这些偏好下，结果依旧是高度的隔离。
 
-
-
-## Exercises
+## 练习
 
 ```{exercise-start}
 :label: schelling_ex1
 ```
 
-The object oriented style that we used for coding above is neat but harder to
-optimize than procedural code (i.e., code based around functions rather than
-objects and methods).
+我们之前用到的面向对象式编程虽然整洁，但相比于过程式编程（即，围绕函数而非对象和方法的编码）更难优化。
 
-Try writing a new version of the model that stores
+尝试编写一个新版本的模型，存储：
 
-* the locations of all agents as a 2D NumPy array of floats.
-* the types of all agents as a flat NumPy array of integers.
+* 所有代理的位置，作为一个二维的NumPy浮点数数组。
+* 所有代理的类型，作为一个平面的NumPy整数数组。
 
-Write functions that act on this data to update the model using the logic
-similar to that described above.
+编写函数，根据上述逻辑对这些数据进行操作以更新模型。
 
-However, implement the following two changes:
+但是，实现以下两个变化：
 
-1. Agents are offered a move at random (i.e., selected randomly and given the
-   opportunity to move).
-2. After an agent has moved, flip their type with probability 0.01
+1. 代理被随机提供移动机会（即，随机选中并给予移动的机会）。
+2. 代理移动后，以0.01的概率翻转其类型。
 
-The second change introduces extra randomness into the model.
+第二个变化为模型引入了额外的随机性。
 
-(We can imagine that, every so often, an agent moves to a different city and,
-with small probability, is replaced by an agent of the other type.)
+（我们可以想象，代理偶尔搬到不同的城市，并且小概率会被其他类型的代理替换。）
 
 ```{exercise-end}
 ```
-
 ```{solution-start} schelling_ex1
 :class: dropdown
 ```
-solution here
+解决方案如下
 
 ```{code-cell} ipython3
 from numpy.random import uniform, randint
 
-n = 1000                # number of agents (agents = 0, ..., n-1)
-k = 10                  # number of agents regarded as neighbors
-require_same_type = 5   # want >= require_same_type neighbors of the same type
+n = 1000                # 代理人数目（代理人编号从0到n-1）
+k = 10                  # 每个代理人视为邻居的代理人数
+require_same_type = 5   # 希望 >= require_same_type 的邻居是相同类型
 
 def initialize_state():
     locations = uniform(size=(n, 2))
-    types = randint(0, high=2, size=n)   # label zero or one
+    types = randint(0, high=2, size=n)   # 标签为零或一
     return locations, types
 
 
 def compute_distances_from_loc(loc, locations):
-    """ Compute distance from location loc to all other points. """
+    """ 计算位置 loc 到所有其他点的距离。 """
     return np.linalg.norm(loc - locations, axis=1)
 
 def get_neighbors(loc, locations):
-    " Get all neighbors of a given location. "
+    " 获取给定位置的所有邻居。 "
     all_distances = compute_distances_from_loc(loc, locations)
-    indices = np.argsort(all_distances)   # sort agents by distance to loc
-    neighbors = indices[:k]               # keep the k closest ones
+    indices = np.argsort(all_distances)   # 将代理人按距离 loc 的远近排序
+    neighbors = indices[:k]               # 保留最近的 k 个
     return neighbors
 
 def is_happy(i, locations, types):
@@ -403,14 +367,14 @@ def is_happy(i, locations, types):
     return happy
 
 def count_happy(locations, types):
-    " Count the number of happy agents. "
+    " 计算快乐代理人的数量。 "
     happy_sum = 0
     for i in range(n):
         happy_sum += is_happy(i, locations, types)
     return happy_sum
 
 def update_agent(i, locations, types):
-    " Move agent if unhappy. "
+    " 如果代理人不快乐，则移动代理人。 "
     moved = False
     while not is_happy(i, locations, types):
         moved = True
@@ -418,7 +382,7 @@ def update_agent(i, locations, types):
     return moved
 
 def plot_distribution(locations, types, title, savepdf=False):
-    " Plot the distribution of agents after cycle_num rounds of the loop."
+    " 绘制经过多轮循环后的代理人分布情况。"
     fig, ax = plt.subplots()
     colors = 'orange', 'green'
     for agent_type, color in zip((0, 1), colors):
@@ -434,9 +398,9 @@ def plot_distribution(locations, types, title, savepdf=False):
 
 def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
     """
-    Simulate by randomly selecting one household at each update.
+    通过随机选择一个家庭进行更新来进行模拟。
 
-    Flip the color of the household with probability `flip_prob`.
+    以概率 `flip_prob` 翻转家庭的颜色。
 
     """
 
@@ -445,39 +409,38 @@ def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
 
     while current_iter <= max_iter:
 
-        # Choose a random agent and update them
+        # 选择一个随机代理人并更新其状态
         i = randint(0, n)
         moved = update_agent(i, locations, types)
 
         if flip_prob > 0:
-            # flip agent i's type with probability epsilon
+            # 以概率 epsilon 翻转代理人 i 的类型
             U = uniform()
             if U < flip_prob:
                 current_type = types[i]
                 types[i] = 0 if current_type == 1 else 1
 
-        # Every so many updates, plot and test for convergence
+        # 每隔一定次数更新后，绘图并检查收敛情况
         if current_iter % test_freq == 0:
             cycle = current_iter / n
             plot_distribution(locations, types, f'iteration {current_iter}')
             if count_happy(locations, types) == n:
-                print(f"Converged at iteration {current_iter}")
+                print(f"在迭代 {current_iter} 时收敛")
                 break
 
         current_iter += 1
 
     if current_iter > max_iter:
-        print(f"Terminating at iteration {current_iter}")
+        print(f"在迭代 {current_iter} 时终止")
 ```
-
 ```{solution-end}
 ```
 
 +++
 
-When we run this we again find that mixed neighborhoods break down and segregation emerges.
+当我们运行这个程序时，我们再次发现混合社区会瓦解，隔离现象会出现。
 
-Here's a sample run.
+这里是一个样例运行。
 
 ```{code-cell} ipython3
 sim_random_select(max_iter=50_000, flip_prob=0.01, test_freq=10_000)
