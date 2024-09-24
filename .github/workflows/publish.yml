@@ -1,7 +1,11 @@
-name: Build HTML [using jupyter-book]
-on: [pull_request]
+name: Build & Publish to GH-PAGES
+on:
+  push:
+    tags:
+      - 'publish*'
 jobs:
-  preview:
+  publish:
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,9 +19,6 @@ jobs:
           python-version: "3.11"
           environment-file: environment.yml
           activate-environment: quantecon
-      - name: Graphics Support #TODO: Review if graphviz is needed
-        run: |
-          sudo apt-get -qq update && sudo apt-get install -y graphviz
       - name: Install latex dependencies
         run: |
           sudo apt-get -qq update
@@ -49,41 +50,65 @@ jobs:
       #   shell: bash -l {0}
       #   run: |
       #     jb build lectures --builder pdflatex --path-output ./ -n --keep-going
+      # - name: Copy LaTeX PDF for GH-PAGES
+      #   shell: bash -l {0}
+      #   run: |
       #     mkdir -p _build/html/_pdf
       #     cp -u _build/latex/*.pdf _build/html/_pdf
-      # - name: Upload Execution Reports (LaTeX)
-      #   uses: actions/upload-artifact@v4
-      #   if: failure()
-      #   with:
-      #     name: execution-reports
-      #     path: _build/latex/reports
       # - name: Build Download Notebooks (sphinx-tojupyter)
       #   shell: bash -l {0}
       #   run: |
       #     jb build lectures --path-output ./ --builder=custom --custom-builder=jupyter
+      # - name: Copy Download Notebooks for GH-PAGES
+      #   shell: bash -l {0}
+      #   run: |
       #     mkdir -p _build/html/_notebooks
       #     cp -u _build/jupyter/*.ipynb _build/html/_notebooks
       # Build HTML (Website)
       # BUG: rm .doctress to remove `sphinx` rendering issues for ipywidget mimetypes
       # and clear the sphinx cache for building final HTML documents.
-      #    rm -r _build/.doctrees
+      #    # rm -r _build/.doctrees
       - name: Build HTML
         shell: bash -l {0}
         run: |
-          jb build lectures --path-output ./ -nW --keep-going
-      - name: Upload Execution Reports (HTML)
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: execution-reports
-          path: _build/html/reports
-      - name: Preview Deploy to Netlify
+          jb build lectures --path-output ./
+      - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: '_build/html/'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Preview Deploy from GitHub Actions"
+          deploy-message: "Deploy from GitHub Actions"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - name: Deploy website to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/html/
+          # cname: intro-cn.quantecon.org
+      - name: Upload "_build" folder (publish)
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-publish
+          path: _build
+      # # Sync notebooks
+      # - name: Prepare lecture-python-intro.notebooks sync
+      #   shell: bash -l {0}
+      #   run: |
+      #     mkdir -p _build/lecture-python-intro.notebooks
+      #     cp -a _notebook_repo/. _build/lecture-python-intro.notebooks
+      #     cp _build/jupyter/*.ipynb _build/lecture-python-intro.notebooks
+      #     ls -a _build/lecture-python-intro.notebooks
+      # - name: Commit latest notebooks to lecture-python-intro.notebooks
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
+      #   with:
+      #     source-directory: '_build/lecture-python-intro.notebooks/'
+      #     destination-repository-username: 'QuantEcon'
+      #     destination-repository-name: 'lecture-python-intro.notebooks'
+      #     commit-message: 'auto publishing updates to notebooks'
+      #     destination-github-username: 'quantecon-services'
+      #     user-email: services@quantecon.org
