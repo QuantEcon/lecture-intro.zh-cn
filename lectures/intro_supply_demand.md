@@ -10,155 +10,134 @@ kernelspec:
   language: python
   name: python3
 ---
+# 供给与需求导论
 
-# Introduction to Supply and Demand
+## 概述
 
-## Overview
+本讲座涉及均衡价格和数量的一些模型，这是基础微观经济学的核心主题之一。
 
-This lecture is about some models of equilibrium prices and quantities, one of
-the core topics of elementary microeconomics.
-
-Throughout the lecture, we focus on models with one good and one price.
+在整个讲座中，我们将重点关注只有一种商品和一个价格的模型。
 
 ```{seealso}
-In a {doc}`subsequent lecture <supply_demand_multiple_goods>` we will investigate settings with
-many goods.
+在{doc}`后续讲座 <supply_demand_multiple_goods>`中，我们将研究涉及多种商品的情况。
 ```
+### 为什么这个模型很重要？
 
-### Why does this model matter?
+在15、16、17和18世纪，重商主义思想在大多数欧洲国家的统治者中占据主导地位。
 
-In the 15th, 16th, 17th and 18th centuries, mercantilist ideas held sway among most rulers of European countries.
+出口被认为是好的，因为它带来了金银（黄金流入国内）。
 
-Exports were regarded as good because they brought in bullion (gold flowed into the country).
+进口被认为是不好的，因为需要用金银来支付（黄金流出）。
 
-Imports were regarded as bad because bullion was required to pay for them (gold flowed out).
+这种[零和](https://en.wikipedia.org/wiki/Zero-sum_game)经济观最终被古典经济学家如[亚当·斯密](https://en.wikipedia.org/wiki/Adam_Smith)和[大卫·李嘉图](https://en.wikipedia.org/wiki/David_Ricardo)的工作推翻，他们展示了如何通过放开国内和国际贸易来提高福利。
 
-This [zero-sum](https://en.wikipedia.org/wiki/Zero-sum_game) view of economics was eventually overturned by the work of the classical economists such as [Adam Smith](https://en.wikipedia.org/wiki/Adam_Smith) and [David Ricardo](https://en.wikipedia.org/wiki/David_Ricardo), who showed how freeing domestic and international trade can enhance welfare.
+这一观点在经济学中有许多不同的表达方式。
 
-There are many different expressions of this idea in economics.
+本讲座讨论了其中最简单的一种：价格的自由调整如何能在单一商品市场中最大化社会福利的衡量标准。
 
-This lecture discusses one of the simplest: how free adjustment of prices can maximize a measure of social welfare in the market for a single good.
+### 主题和基础设施
 
+在本讲座中，我们将遇到的关键基础概念包括：
 
-### Topics and infrastructure
+* 反向需求曲线
+* 反向供给曲线
+* 消费者剩余
+* 生产者剩余
+* 积分
+* 社会福利作为消费者和生产者剩余的总和
+* 均衡数量与社会福利最优之间的关系
 
-Key infrastructure concepts that we will encounter in this lecture are:
-
-* inverse demand curves
-* inverse supply curves
-* consumer surplus
-* producer surplus
-* integration
-* social welfare as the sum of consumer and producer surpluses
-* the relationship between  equilibrium quantity and social welfare optimum
-
-In our exposition we will use the following Python imports.
+在我们的讲解中，我们将使用以下Python导入。
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
 ```
+在我们研究供给和需求模型之前，了解一些关于（a）消费者和生产者剩余以及（b）积分的背景知识会很有帮助。
+（如果你对这两个主题都很熟悉，可以跳到{ref}`下一节 <integration>`。）
 
-## Consumer surplus
+### 一个离散的例子
 
-Before we look at the model of supply and demand, it will be helpful to have some background on (a) consumer and producer surpluses and (b) integration.
+关于消费者剩余，假设我们有一种商品和10个消费者。
+这10个消费者有不同的偏好；特别是，他们愿意为一单位商品支付的金额各不相同。
+假设这10个消费者的支付意愿如下：
 
-(If you are comfortable with both topics you can jump to the {ref}`next section <integration>`.)
+| 消费者 | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
+|--------|----|----|----|----|----|----|----|----|----|----|
+| 愿意支付 | 98 | 72 | 41 | 38 | 29 | 21 | 17 | 12 | 11 | 10 |
 
-### A discrete example
+（我们按支付意愿从高到低排列了消费者。）
 
-```{prf:example}
-:label: isd_ex_cs
-
-Regarding consumer surplus, suppose that we have a single good and 10 consumers.
-
-These 10 consumers have different preferences; in particular, the amount they would be willing to pay for one unit of the good differs.
-
-Suppose that the willingness to pay for each of the 10 consumers is as follows:
-
-| consumer       | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10  |
-|----------------|----|----|----|----|----|----|----|----|----|-----|
-| willing to pay | 98 | 72 | 41 | 38 | 29 | 21 | 17 | 12 | 11 | 10  |
-
-(We have ordered consumers by willingness to pay, in descending order.)
-```
-
-If $p$ is the price of the good and  $w_i$ is the amount that consumer $i$ is willing to pay, then $i$ buys when $w_i \geq p$.
+如果 $p$ 是商品的价格，$w_i$ 是消费者 $i$ 愿意支付的金额，那么当 $w_i \geq p$ 时，$i$ 会购买。
 
 ```{note}
-If $p=w_i$ the consumer is indifferent between buying and not buying; we arbitrarily assume that they buy.
+如果 $p=w_i$，消费者对购买与否无差别；我们假设他们会选择购买。
 ```
+第 $i$ 个消费者的**消费者剩余**是 $\max\{w_i - p, 0\}$
 
-The **consumer surplus** of the $i$-th consumer is $\max\{w_i - p, 0\}$
+* 如果 $w_i \geq p$，那么消费者购买并获得剩余 $w_i - p$
+* 如果 $w_i < p$，那么消费者不购买并获得剩余 $0$
 
-* if $w_i \geq p$, then the consumer buys and gets surplus $w_i - p$
-* if $w_i < p$, then the consumer does not buy and gets surplus $0$
+例如，如果价格是 $p=40$，那么消费者1获得的剩余是 $98-40=58$。
 
-For example, if the price is $p=40$, then consumer 1 gets surplus $98-40=58$.
-
-The bar graph below shows the surplus of each consumer when $p=25$.
-
-The total height of each bar $i$ is willingness to pay by consumer $i$.
-
-The orange portion of some of the bars shows consumer surplus.
+下面的条形图显示了当 $p=25$ 时每个消费者的剩余。
+每个条形 $i$ 的总高度是消费者 $i$ 的支付意愿。
+一些条形的橙色部分显示了消费者剩余。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Willingness to pay (discrete)"
+    caption: "支付意愿（离散）"
     name: wpdisc
 ---
 fig, ax = plt.subplots()
-consumers = range(1, 11) # consumers 1,..., 10
-# willingness to pay for each consumer
+consumers = range(1, 11) # 消费者 1,..., 10
+# 每个消费者的支付意愿
 wtp = (98, 72, 41, 38, 29, 21, 17, 12, 11, 10)
 price = 25
-ax.bar(consumers, wtp, label="consumer surplus", color="darkorange", alpha=0.8)
-ax.plot((0, 12), (price, price), lw=2, label="price $p$")
+ax.bar(consumers, wtp, label="消费者剩余", color="darkorange", alpha=0.8)
+ax.plot((0, 12), (price, price), lw=2, label="价格 $p$")
 ax.bar(consumers, [min(w, price) for w in wtp], color="black", alpha=0.6)
 ax.set_xlim(0, 12)
 ax.set_xticks(consumers)
-ax.set_ylabel("willingness to pay, price")
-ax.set_xlabel("consumer, quantity")
+ax.set_ylabel("支付意愿, 价格")
+ax.set_xlabel("消费者, 数量")
 ax.legend()
 plt.show()
 ```
-
-The total consumer surplus in this market is 
-
+这个市场的总消费者剩余是
 $$ 
 \sum_{i=1}^{10} \max\{w_i - p, 0\}
 = \sum_{w_i \geq p} (w_i - p)
 $$
 
-Since consumer surplus $\max\{w_i-p,0\}$ of consumer $i$ is a measure of her gains from trade (i.e., extent to which the good is valued over and above the amount the consumer had to pay), it is reasonable to consider total consumer surplus as a measurement of consumer welfare.
+由于消费者 $i$ 的消费者剩余 $\max\{w_i-p,0\}$ 是衡量其贸易收益的一种方式（即，商品的价值超过消费者必须支付的金额的程度），将总消费者剩余视为衡量消费者福利的一种方法是合理的。
 
-Later we will pursue this idea further, considering how different prices lead to different welfare outcomes for consumers and producers.
+稍后我们将进一步探讨这个想法，考虑不同的价格如何导致消费者和生产者的不同福利结果。
 
-### A comment on quantity.
+### 关于数量的说明
 
-Notice that in the figure, the horizontal axis is labeled "consumer, quantity".
+注意，在图中，横轴标记为"消费者，数量"。
 
-We have added "quantity" here because we can read the number of units sold from this axis, assuming for now that there are sellers who are willing to sell as many units as the consumers demand, given the current market price $p$.
+我们在这里添加了"数量"，因为我们可以从这个轴上读取售出的单位数量，暂时假设有卖家愿意以当前市场价格 $p$ 出售消费者需求的任意数量。
 
-In this example, consumers 1 to 5 buy, and the quantity sold is 5.
+在这个例子中，消费者1到5购买，售出的数量是5。
 
-Below we drop the assumption that sellers will provide any amount at a given price and study how this changes outcomes.
+接下来，我们将放弃卖家会以给定价格提供任意数量的假设，并研究这如何改变结果。
 
-### A continuous approximation
+### 连续近似
 
-It is often convenient to assume that there is a "very large number" of consumers, so that willingness to pay becomes a continuous curve.
+假设有"非常多"的消费者通常很方便，这样支付意愿就变成了一条连续曲线。
 
-As before, the vertical axis measures willingness to pay, while the horizontal axis measures quantity.
+和之前一样，纵轴衡量支付意愿，而横轴衡量数量。
 
-This kind of curve is called an **inverse demand curve**
+这种曲线被称为**反向需求曲线**。
 
-An example is provided below, showing both an inverse demand curve and a set price.
+下面提供了一个例子，显示了反向需求曲线和一个设定价格。
 
-The inverse demand curve is given by 
-
+反向需求曲线由以下公式给出：
 $$
 p = 100 e^{-q} 
 $$
@@ -167,174 +146,147 @@ $$
 ---
 mystnb:
   figure:
-    caption: "Willingness to pay (continuous)"
+    caption: "支付意愿（连续）"
     name: wpcont
 ---
 def inverse_demand(q):
     return 100 * np.exp(- q)
 
-# build a grid to evaluate the function at different values of q
+# 建立一个网格来评估函数在不同 q 值下的结果
 q_min, q_max = 0, 5
 q_grid = np.linspace(q_min, q_max, 1000)
 
-# plot the inverse demand curve
+# 绘制反需求曲线
 fig, ax = plt.subplots()
-ax.plot((q_min, q_max), (price, price), lw=2, label="price")
+ax.plot((q_min, q_max), (price, price), lw=2, label="价格")
 ax.plot(q_grid, inverse_demand(q_grid), 
-        color="orange", label="inverse demand curve")
-ax.set_ylabel("willingness to pay, price")
-ax.set_xlabel("quantity")
+        color="orange", label="反需求曲线")
+ax.set_ylabel("支付意愿, 价格")
+ax.set_xlabel("数量")
 ax.set_xlim(q_min, q_max)
 ax.set_ylim(0, 110)
 ax.legend()
 plt.show()
 ```
+通过类比离散情况进行推理，需求曲线下方和价格上方的面积被称为**消费者剩余**，它是衡量消费者交易总收益的一个指标。
 
-Reasoning by analogy with the discrete case, the area under the demand curve and above the price is called the **consumer surplus**, and is a measure of total gains from trade on the part of consumers.
-
-The consumer surplus is shaded in the figure below.
+消费者剩余在下图中以阴影表示。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Willingness to pay (continuous) with consumer surplus"
+    caption: "支付意愿（连续）和消费者剩余"
     name: wpcont_cs
 ---
-# solve for the value of q where demand meets price
+# 求解需求与价格相遇时的 q 值
 q_star = np.log(100) - np.log(price)
 
 fig, ax = plt.subplots()
-ax.plot((q_min, q_max), (price, price), lw=2, label="price")
+ax.plot((q_min, q_max), (price, price), lw=2, label="价格")
 ax.plot(q_grid, inverse_demand(q_grid), 
-        color="orange", label="inverse demand curve")
+        color="orange", label="反需求曲线")
 small_grid = np.linspace(0, q_star, 500)
 ax.fill_between(small_grid, np.full(len(small_grid), price),
                 inverse_demand(small_grid), color="orange",
-                alpha=0.5, label="consumer surplus")
+                alpha=0.5, label="消费者剩余")
 ax.vlines(q_star, 0, price, ls="--")
-ax.set_ylabel("willingness to pay, price")
-ax.set_xlabel("quantity")
+ax.set_ylabel("支付意愿, 价格")
+ax.set_xlabel("数量")
 ax.set_xlim(q_min, q_max)
 ax.set_ylim(0, 110)
 ax.text(q_star, -10, "$q^*$")
 ax.legend()
 plt.show()
 ```
-
-The value $q^*$ is where the inverse demand curve meets price.
-
-## Producer surplus
-
-Having discussed demand, let's now switch over to the supply side of the market.
-
-### The discrete case
-
-The figure below shows the price at which a collection of producers, also numbered 1 to 10, are willing to sell one unit of the good in question
+值 $q^*$ 是反需求曲线与价格相交的点。
+## 生产者剩余
+在讨论了需求之后，让我们现在转向市场的供给方。
+### 离散情况
+下图显示了一组编号从 1 到 10 的生产者愿意出售一单位该商品的价格
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Willingness to sell (discrete)"
+    caption: "出售意愿（离散）"
     name: wsdisc
 ---
 fig, ax = plt.subplots()
-producers = range(1, 11) # producers 1,..., 10
-# willingness to sell for each producer
+producers = range(1, 11) # 生产者 1,..., 10
+# 每个生产者的出售意愿
 wts = (5, 8, 17, 22, 35, 39, 46, 57, 88, 91)
 price = 25
-ax.bar(producers, wts, label="willingness to sell", color="green", alpha=0.5)
+ax.bar(producers, wts, label="出售意愿", color="green", alpha=0.5)
 ax.set_xlim(0, 12)
 ax.set_xticks(producers)
-ax.set_ylabel("willingness to sell")
-ax.set_xlabel("producer")
+ax.set_ylabel("出售意愿")
+ax.set_xlabel("生产者")
 ax.legend()
 plt.show()
 ```
-
-Let $v_i$ be the price at which producer $i$ is willing to sell the good.
-
-When the price is $p$, producer surplus for producer $i$ is $\max\{p - v_i, 0\}$.
-
-```{prf:example}
-:label: isd_ex_dc
-
-For example, a producer willing to sell at \$10 and selling at price \$20 makes a surplus of \$10. 
-
-Total producer surplus is given by
-
+设 $v_i$ 为生产者 $i$ 愿意出售商品的价格。
+当价格为 $p$ 时，生产者 $i$ 的生产者剩余为 $\max\{p - v_i, 0\}$。
+例如，一个愿意以 10 美元价格出售且以 20 美元价格售出的生产者获得 10 美元的剩余。
+总生产者剩余由以下公式给出：
 $$
 \sum_{i=1}^{10} \max\{p - v_i, 0\}
 = \sum_{p \geq v_i} (p - v_i)
 $$
-
-As for the consumer case, it can be helpful for analysis if we approximate producer willingness to sell into a continuous curve.
-
-This curve is called the **inverse supply curve**
-
-We show an example below where the inverse supply curve is
-
+与消费者情况一样，将生产者的销售意愿近似为连续曲线对分析有帮助。
+这条曲线被称为**反供给曲线**。
+我们在下面展示了一个例子，其中反供给曲线为：
 $$
 p = 2 q^2
 $$
-
-The shaded area is the total producer surplus in this continuous model.
-```
+阴影部分是这个连续模型中的总生产者剩余。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Willingness to sell (continuous) with producer surplus"
+    caption: "出售意愿（连续）和生产者剩余"
     name: wscont
 ---
 def inverse_supply(q):
     return 2 * q**2
 
-# solve for the value of q where supply meets price
+# 求解供给与价格相遇时的 q 值
 q_star = (price / 2)**(1/2)
 
-# plot the inverse supply curve
+# 绘制反供给曲线
 fig, ax = plt.subplots()
-ax.plot((q_min, q_max), (price, price), lw=2, label="price")
+ax.plot((q_min, q_max), (price, price), lw=2, label="价格")
 ax.plot(q_grid, inverse_supply(q_grid), 
-        color="green", label="inverse supply curve")
+        color="green", label="反供给曲线")
 small_grid = np.linspace(0, q_star, 500)
 ax.fill_between(small_grid, inverse_supply(small_grid), 
                 np.full(len(small_grid), price), 
                 color="green",
-                alpha=0.5, label="producer surplus")
+                alpha=0.5, label="生产者剩余")
 ax.vlines(q_star, 0, price, ls="--")
-ax.set_ylabel("willingness to sell, price")
-ax.set_xlabel("quantity")
+ax.set_ylabel("出售意愿, 价格")
+ax.set_xlabel("数量")
 ax.set_xlim(q_min, q_max)
 ax.set_ylim(0, 60)
 ax.text(q_star, -10, "$q^*$")
 ax.legend()
 plt.show()
 ```
-
 (integration)=
-## Integration
-
-How can we calculate the consumer and producer surplus in the continuous case?
-
-The short answer is: by using [integration](https://en.wikipedia.org/wiki/Integral).
-
-Some readers will already be familiar with the basics of integration.
-
-For those who are not, here is a quick introduction.
-
-In general, for a function $f$, the **integral** of $f$ over the interval $[a, b]$ is the area under the curve $f$ between $a$ and $b$.
-
-This value is written as $\int_a^b f(x) \mathrm{d} x$ and illustrated in the figure below when $f(x) = \cos(x/2) + 1$.
+## 积分
+在连续情况下，我们如何计算消费者和生产者剩余呢？
+简短的答案是：通过使用[积分](https://en.wikipedia.org/wiki/Integral)。
+一些读者可能已经熟悉积分的基础知识。
+对于那些不熟悉的读者，这里是一个简短的介绍。
+一般来说，对于函数 $f$，$f$ 在区间 $[a, b]$ 上的**积分**是 $f$ 在 $a$ 和 $b$ 之间的曲线下面积。
+这个值写作 $\int_a^b f(x) \mathrm{d} x$，下图展示了当 $f(x) = \cos(x/2) + 1$ 时的情况。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Area under the curve"
+    caption: "曲线下面积"
     name: integrate
 ---
 def f(x):
@@ -352,73 +304,52 @@ ax.fill_between(ab_grid, [0] * len(ab_grid), f(ab_grid),
 ax.legend()
 plt.show()
 ```
-
-There are many rules for calculating integrals, with different rules applying to different choices of $f$.
-
-Many of these rules relate to one of the most beautiful and powerful results in all of mathematics: the [fundamental theorem of calculus](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus).
-
-We will not try to cover these ideas here, partly because the subject is too big, and partly because you only need to know one rule for this lecture, stated below.
-
-If $f(x) = c + dx$, then 
-
+计算积分有许多规则，不同的 $f$ 选择适用不同的规则。
+这些规则中的许多与数学中最美丽和最强大的结果之一有关：[微积分基本定理](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus)。
+我们不会在这里试图涵盖这些思想，部分原因是这个主题太大，部分原因是对于本讲座，你只需要知道下面陈述的一条规则。
+如果 $f(x) = c + \mathrm{d} x$，那么
 $$ 
 \int_a^b f(x) \mathrm{d} x = c (b - a) + \frac{d}{2}(b^2 - a^2) 
 $$
+事实上，这个规则如此简单，以至于可以通过基本几何计算得出——你可以试着绘制 $f$ 的图形并计算 $a$ 和 $b$ 之间曲线下的面积。
+在接下来的内容中，我们将反复使用这个规则。
 
-In fact this rule is so simple that it can be calculated from elementary geometry -- you might like to try by graphing $f$ and calculating the area under the curve between $a$ and $b$.
-
-We use this rule repeatedly in what follows.
-
-## Supply and demand
-
-Let's now put supply and demand together.
-
-This leads us to the all important notion of market equilibrium, and from there onto a discussion of equilibria and welfare.
-
-For most of this discussion, we'll assume that inverse demand and supply curves are **affine** functions of quantity.
-
+## 供给和需求
+现在让我们把供给和需求放在一起。
+这将引导我们到非常重要的市场均衡概念，并从那里讨论均衡和福利。
+在大部分讨论中，我们假设反需求曲线和供给曲线是数量的**仿射**函数。
 ```{note}
-"Affine" means "linear plus a constant" and [here](https://math.stackexchange.com/questions/275310/what-is-the-difference-between-linear-and-affine-function) is a nice discussion about it.
+"仿射"意味着"线性加上一个常数"，[这里](https://math.stackexchange.com/questions/275310/what-is-the-difference-between-linear-and-affine-function)有一个很好的讨论。
 ```
-
-We'll also assume affine inverse supply and demand functions when we study models with multiple consumption goods in our {doc}`subsequent lecture <supply_demand_multiple_goods>`.
-
-We do this in order to simplify the exposition and enable us to use just a few tools from linear algebra, namely, matrix multiplication and matrix inversion.
-
-We study a market for a single good in which buyers and sellers exchange a quantity $q$ for a price $p$.
-
-Quantity $q$ and price $p$ are  both scalars.
-
-We assume that inverse demand and supply curves for the good are:
-
+在我们研究{doc}`后续讲座 <supply_demand_multiple_goods>`中的多消费品模型时，我们也将假设仿射反供给和需求函数。
+我们这样做是为了简化说明，并使我们能够仅使用线性代数的几个工具，即矩阵乘法和矩阵求逆。
+我们研究一个单一商品市场，买家和卖家以价格 $p$ 交换数量 $q$。
+数量 $q$ 和价格 $p$ 都是标量。
+我们假设该商品的反需求曲线和供给曲线为：
 $$
 p = d_0 - d_1 q, \quad d_0, d_1 > 0
 $$
-
 $$
 p = s_0 + s_1 q , \quad s_0, s_1 > 0
 $$
-
-We call them inverse demand and supply curves because price is on the left side of the equation rather than on the right side as it would be in a direct demand or supply function.
-
-We can use a [namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) to store the parameters for our single good market.
+我们称它们为反需求曲线和供给曲线，因为价格在等式的左侧，而不是像直接需求或供给函数那样在右侧。
+我们可以使用 [namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) 来存储我们单一商品市场的参数。
 
 ```{code-cell} ipython3
-Market = namedtuple('Market', ['d_0', # demand intercept
-                               'd_1', # demand slope
-                               's_0', # supply intercept
-                               's_1'] # supply slope
+Market = namedtuple('Market', ['d_0', # 需求截距
+                               'd_1', # 需求斜率
+                               's_0', # 供给截距
+                               's_1'] # 供给斜率
                    )
 ```
-
-The function below creates an instance of a Market namedtuple with default values.
+下面的函数创建一个具有默认值的 Market namedtuple 实例。
 
 ```{code-cell} ipython3
 def create_market(d_0=1.0, d_1=0.6, s_0=0.1, s_1=0.4):
     return Market(d_0=d_0, d_1=d_1, s_0=s_0, s_1=s_1)
 ```
 
-This `market` can then be used by our `inverse_demand` and `inverse_supply` functions.
+这个 `market`可以用来建立 `inverse_demand` 和 `inverse_supply`。
 
 ```{code-cell} ipython3
 def inverse_demand(q, model):
@@ -427,14 +358,13 @@ def inverse_demand(q, model):
 def inverse_supply(q, model):
     return model.s_0 + model.s_1 * q
 ```
-
-Here is a plot of these two functions using `market`.
+下面是这两个函数用`market`的图像。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Supply and demand"
+    caption: "供给和需求"
     name: supply_demand
 ---
 market = create_market()
@@ -445,39 +375,34 @@ supply_curve = inverse_supply(q_grid, market)
 demand_curve = inverse_demand(q_grid, market)
 
 fig, ax = plt.subplots()
-ax.plot(q_grid, supply_curve, label='supply', color='green')
-ax.plot(q_grid, demand_curve, label='demand', color='orange')
+ax.plot(q_grid, supply_curve, label='供给', color='green')
+ax.plot(q_grid, demand_curve, label='需求', color='orange')
 ax.legend(loc='upper center', frameon=False)
 ax.set_ylim(0, 1.2)
 ax.set_xticks((0, 1))
 ax.set_yticks((0, 1))
-ax.set_xlabel('quantity')
-ax.set_ylabel('price')
+ax.set_xlabel('数量')
+ax.set_ylabel('价格')
 plt.show()
 ```
+在上图中，供给曲线和需求曲线的交点出现**均衡**价格-数量对。
 
-In the above graph, an **equilibrium** price-quantity pair occurs at the intersection of the supply and demand curves. 
-
-### Consumer surplus
-
-Let a quantity $q$ be given and let $p := d_0 - d_1 q$ be the
-corresponding price on the inverse demand curve.
-
-We define **consumer surplus** $S_c(q)$ as the area under an inverse demand
-curve minus $p q$:
+### 消费者剩余
+给定数量 $q$，设 $p := d_0 - d_1 q$ 为反需求曲线上对应的价格。
+我们将**消费者剩余** $S_c(q)$ 定义为反需求曲线下的面积减去 $p q$:
 
 $$
 S_c(q) := 
 \int_0^{q} (d_0 - d_1 x) \mathrm{d} x - p q 
 $$ (eq:cstm_spls)
 
-The next figure illustrates
+下图说明了这一点
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Supply and demand (consumer surplus)"
+    caption: "供给和需求（消费者剩余）"
     name: supply_demand_cs
 tags: [hide-input]
 ---
@@ -487,11 +412,11 @@ p = inverse_demand(q, market)
 ps = np.ones_like(q_grid) * p
 
 fig, ax = plt.subplots()
-ax.plot(q_grid, demand_curve, label='demand', color='orange')
+ax.plot(q_grid, demand_curve, label='需求', color='orange')
 ax.fill_between(q_grid[q_grid <= q],
                 demand_curve[q_grid <= q],
                 ps[q_grid <= q],
-                label='consumer surplus',
+                label='消费者剩余',
                 color="orange", 
                 alpha=0.5)
 ax.vlines(q, 0, p, linestyle="dashed", color='black', alpha=0.7)
@@ -503,47 +428,44 @@ ax.set_xticks((q,))
 ax.set_xticklabels(("$q$",))
 ax.set_yticks((p,))
 ax.set_yticklabels(("$p$",))
-ax.set_xlabel('quantity')
-ax.set_ylabel('price')
+ax.set_xlabel('数量')
+ax.set_ylabel('价格')
 plt.show()
 ```
 
-Consumer surplus provides a measure of total consumer welfare at quantity $q$.
+消费者剩余提供了在数量 $q$ 时总消费者福利的衡量。
 
-The idea is that the inverse demand curve $d_0 - d_1 q$ shows a consumer's willingness to 
-pay for an additional increment of the good at a given quantity $q$.
+这个概念是基于反向需求曲线 $d_0 - d_1 q$ 显示了消费者在给定数量 $q$ 时对额外增加的商品的支付意愿。
 
-The difference between willingness to pay and the actual price is consumer surplus.
+支付意愿与实际价格之间的差异就是消费者剩余。
 
-The value $S_c(q)$ is the "sum" (i.e., integral) of these surpluses when the total
-quantity purchased is $q$ and the purchase price is $p$.
+当总购买数量为 $q$ 且购买价格为 $p$ 时，$S_c(q)$ 值是这些剩余的"总和"（即积分）。
 
-Evaluating the integral in the definition of consumer surplus {eq}`eq:cstm_spls` gives
+评估消费者剩余定义中的积分 {eq}`eq:cstm_spls` 得到
 
 $$
 S_c(q) 
 = d_0 q - \frac{1}{2} d_1 q^2 - p q
 $$
 
-### Producer surplus
+### 生产者剩余
 
-Let a quantity $q$ be given and let $p := s_0 + s_1 q$ be the
-corresponding price on the inverse supply curve.
+给定数量 $q$，设 $p := s_0 + s_1 q$ 为反向供给曲线上对应的价格。
 
-We define **producer surplus** as $p q$ minus the area under an inverse supply curve
+我们将**生产者剩余**定义为 $p q$ 减去反向供给曲线下的面积
 
 $$
 S_p(q) 
 := p q - \int_0^q (s_0 + s_1 x) \mathrm{d} x 
 $$ (eq:pdcr_spls)
 
-The next figure illustrates
+下图对此进行了说明
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Supply and demand (producer surplus)"
+    caption: "供给和需求（生产者剩余）"
     name: supply_demand_ps
 tags: [hide-input]
 ---
@@ -553,11 +475,11 @@ p = inverse_supply(q, market)
 ps = np.ones_like(q_grid) * p
 
 fig, ax = plt.subplots()
-ax.plot(q_grid, supply_curve, label='supply', color='green')
+ax.plot(q_grid, supply_curve, label='供给', color='green')
 ax.fill_between(q_grid[q_grid <= q],
                 supply_curve[q_grid <= q],
                 ps[q_grid <= q],
-                label='producer surplus',
+                label='生产者剩余',
                 color="green",
                 alpha=0.5)
 ax.vlines(q, 0, p, linestyle="dashed", color='black', alpha=0.7)
@@ -569,170 +491,140 @@ ax.set_xticks((q,))
 ax.set_xticklabels(("$q$",))
 ax.set_yticks((p,))
 ax.set_yticklabels(("$p$",))
-ax.set_xlabel('quantity')
-ax.set_ylabel('price')
+ax.set_xlabel('数量')
+ax.set_ylabel('价格')
 plt.show()
 ```
+生产者剩余衡量在数量 $q$ 时的总生产者福利。
 
-Producer surplus measures total producer welfare at quantity $q$ 
+这个概念与消费者剩余类似。
 
-The idea is similar to that of consumer surplus.
+反向供给曲线 $s_0 + s_1 q$ 显示了在给定数量 $q$ 时，生产者愿意出售的价格。
 
-The inverse supply curve $s_0 + s_1 q$ shows the price at which producers are
-prepared to sell, given quantity $q$.
+愿意出售的价格与实际价格之间的差异就是生产者剩余。
 
-The difference between willingness to sell and the actual price is producer surplus.
+$S_p(q)$ 值是这些剩余的积分。
 
-The value $S_p(q)$ is the integral of these surpluses.
-
-Evaluating the integral in the definition of producer surplus {eq}`eq:pdcr_spls` gives
+评估生产者剩余定义中的积分 {eq}`eq:pdcr_spls` 得到
 
 $$
 S_p(q) = pq - s_0 q -  \frac{1}{2} s_1 q^2
 $$
 
+### 社会福利
 
-### Social welfare
-
-Sometimes economists measure social welfare by a **welfare criterion** that
-equals consumer surplus plus producer surplus, assuming that consumers and
-producers pay the same price:
+经济学家有时通过一个**福利准则**来衡量社会福利，该准则等于消费者剩余加上生产者剩余，假设消费者和生产者支付相同的价格：
 
 $$
 W(q)
 = \int_0^q (d_0 - d_1 x) dx - \int_0^q (s_0 + s_1 x) \mathrm{d} x  
 $$
 
-Evaluating the integrals gives
-
+计算积分得到
 $$
 W(q) = (d_0 - s_0) q -  \frac{1}{2} (d_1 + s_1) q^2
 $$
 
-Here is a Python function that evaluates this social welfare at a given
-quantity $q$ and a fixed set of parameters.
+以下是一个Python函数，用于在给定数量 $q$ 和固定参数集下评估这个社会福利。
 
 ```{code-cell} ipython3
 def W(q, market):
-    # Compute and return welfare
+    # 计算福利
     return (market.d_0 - market.s_0) * q - 0.5 * (market.d_1 + market.s_1) * q**2
 ```
-
-The next figure plots welfare as a function of $q$.
+下图绘制了福利作为 $q$ 的函数。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Welfare"
+    caption: "福利"
     name: wf
 tags: [hide-input]
 ---
 
 q_vals = np.linspace(0, 1.78, 200)
 fig, ax = plt.subplots()
-ax.plot(q_vals, W(q_vals, market), label='welfare', color='brown')
+ax.plot(q_vals, W(q_vals, market), label='福利', color='brown')
 ax.legend(frameon=False)
-ax.set_xlabel('quantity')
+ax.set_xlabel('数量')
 plt.show()
 ```
 
-Let's now give a social planner the task of maximizing social welfare.
-
-To compute a quantity that  maximizes the welfare criterion, we differentiate
-$W$ with respect to $q$ and then set the derivative to zero.
+现在让我们给社会规划者一个最大化社会福利的任务。
+为了计算使福利准则最大化的数量，我们对 $W$ 关于 $q$ 求导，然后将导数设为零。
 
 $$
 \frac{\mathrm{d} W(q)}{\mathrm{d} q} = d_0 - s_0 - (d_1 + s_1) q  = 0
 $$
 
-Solving for $q$ yields
+解出 $q$ 得到
 
 $$
 q = \frac{ d_0 - s_0}{s_1 + d_1}
 $$ (eq:old1)
 
-Let's remember the quantity $q$ given by equation {eq}`eq:old1` that a social planner would choose to maximize consumer surplus plus producer surplus.
+让我们记住方程 {eq}`eq:old1` 给出的数量 $q$，这是社会规划者为最大化消费者剩余加生产者剩余而选择的数量。
+我们将把它与在竞争均衡中出现的、使供给等于需求的数量进行比较。
 
-We'll compare it to the quantity that emerges in a competitive equilibrium that equates supply to demand.
+### 竞争均衡
 
-### Competitive equilibrium
-
-Instead of equating quantities supplied and demanded, we can accomplish the
-same thing by equating demand price to supply price:
+我们可以通过使需求价格等于供给价格来达到与使供给数量等于需求数量相同的效果：
 
 $$
 p =  d_0 - d_1 q = s_0 + s_1 q 
 $$
 
-If we solve the equation defined by the second equality in the above line for
-$q$, we obtain 
+如果我们解上面这行中第二个等式定义的方程，得到 $q$，我们得到
 
 $$
 q = \frac{ d_0 - s_0}{s_1 + d_1}
 $$ (eq:equilib_q)
 
+这就是竞争均衡数量。
+注意，均衡数量等于方程 {eq}`eq:old1` 给出的相同的 $q$。
 
-This is the competitive equilibrium quantity. 
+方程 {eq}`eq:old1` 确定的数量使供给等于需求，这带来了一个**关键发现**：
+* 竞争均衡数量最大化了我们的福利准则
 
-Observe that the equilibrium quantity equals the same $q$ given by equation  {eq}`eq:old1`.
+这是[福利经济学第一基本定理](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics)的一个版本。
+它还带来了一个有用的**竞争均衡计算策略**：
+* 在为最优数量解决福利问题后，我们可以从竞争均衡数量下的供给价格或需求价格中读取竞争均衡价格
 
-The outcome that the quantity determined by equation {eq}`eq:old1` equates
-supply to demand brings us a *key finding*:
+## 推广
 
-*  a competitive equilibrium quantity maximizes our welfare criterion
+在{doc}`后面的讲座 <supply_demand_multiple_goods>`中，我们将从其他对象推导出上述需求和供给曲线的推广。
+我们的推广将把前面对单一商品市场的分析扩展到 $n$ 种商品的 $n$ 个同时市场的分析。
+此外
+* 我们将从消费者问题中推导出**需求曲线**，该问题在**预算约束**下最大化**效用函数**。
+* 我们将从生产者问题中推导出**供给曲线**，该生产者是价格接受者，最大化其利润减去由**成本函数**描述的总成本。
 
-This is a version of the [first fundamental welfare theorem](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics), 
+## 练习
 
-It also brings a useful **competitive equilibrium computation strategy:**
-
-* after solving the welfare problem for an optimal quantity, we can read a competitive equilibrium price from either supply price or demand price at the competitive equilibrium quantity
-
-## Generalizations
-
-In a {doc}`later lecture <supply_demand_multiple_goods>`, we'll derive
-generalizations of the above demand and supply curves from other objects.
-
-Our generalizations will extend the preceding analysis of a market for a single good to the analysis of $n$ simultaneous markets in $n$ goods.
-
-In addition
-
-* we'll derive  *demand curves* from a consumer problem that maximizes a
- *utility function* subject to a *budget constraint*.
-
-* we'll derive  *supply curves* from the problem of a producer who is price
- taker and maximizes his profits minus total costs that are described by a *cost function*.
-
-## Exercises
-
-Suppose now that the inverse demand and supply curves are modified to take the
-form
+现在假设反向需求和供给曲线被修改为以下形式
 
 $$
 p = i_d(q) := d_0 - d_1 q^{0.6} 
 $$
-
 $$
 p = i_s(q) := s_0 + s_1 q^{1.8} 
 $$
 
-All parameters are positive, as before.
+和以前一样，所有参数都是正的。
 
 ```{exercise}
 :label: isd_ex1
 
-Use the same `Market` namedtuple that holds the parameter values as before but
-make new `inverse_demand` and `inverse_supply` functions to match these new definitions.
+使用与之前相同的 `Market` 命名元组来保存参数值，但创建新的 `inverse_demand` 和 `inverse_supply` 函数以匹配这些新定义。
 
-Then plot the inverse demand and supply curves $i_d$ and $i_s$.
+然后绘制反向需求曲线 $i_d$ 和反向供给曲线 $i_s$。
 
 ```
 
 ```{solution-start} isd_ex1
 :class: dropdown
 ```
-
-Let's update the `inverse_demand` and `inverse_supply` functions, as defined above.
+让我们按照上面定义的方式更新 `inverse_demand` 和 `inverse_supply` 函数。
 
 ```{code-cell} ipython3
 def inverse_demand(q, model):
@@ -741,8 +633,7 @@ def inverse_demand(q, model):
 def inverse_supply(q, model):
     return model.s_0 + model.s_1 * q**1.8
 ```
-
-Here is a plot of inverse supply and demand.
+下图绘制了反需求和反供给曲线。
 
 ```{code-cell} ipython3
 grid_min, grid_max, grid_size = 0, 1.5, 200
@@ -752,63 +643,54 @@ supply_curve = inverse_supply(q_grid, market)
 demand_curve = inverse_demand(q_grid, market)
 
 fig, ax = plt.subplots()
-ax.plot(q_grid, supply_curve, label='supply', color='green')
-ax.plot(q_grid, demand_curve, label='demand', color='orange')
+ax.plot(q_grid, supply_curve, label='供给', color='green')
+ax.plot(q_grid, demand_curve, label='需求', color='orange')
 ax.legend(loc='upper center', frameon=False)
 ax.set_ylim(0, 1.2)
 ax.set_xticks((0, 1))
 ax.set_yticks((0, 1))
-ax.set_xlabel('quantity')
-ax.set_ylabel('price')
+ax.set_xlabel('数量')
+ax.set_ylabel('价格')
 plt.show()
 ```
 
 ```{solution-end}
 ```
-
-
 ```{exercise}
 :label: isd_ex2
 
-As before, consumer surplus at $q$ is the area under the demand curve minus
-price times quantity:
+如前所述，在数量 $q$ 时的消费者剩余是需求曲线下的面积减去价格乘以数量：
 
 $$
 S_c(q) = \int_0^{q} i_d(x) dx - p q 
 $$
 
-Here $p$ is set to $i_d(q)$
+这里 $p$ 设为 $i_d(q)$。
 
-Producer surplus is price times quantity minus the area under the inverse
-supply curve:
+生产者剩余是价格乘以数量减去反向供给曲线下的面积：
 
 $$
 S_p(q) 
 = p q - \int_0^q i_s(x) \mathrm{d} x 
 $$
 
-Here $p$ is set to $i_s(q)$.
+这里 $p$ 设为 $i_s(q)$。
 
-Social welfare is the sum of consumer and producer surplus under the
-assumption that the price is the same for buyers and sellers:
+社会福利是消费者剩余和生产者剩余的总和，假设买方和卖方的价格相同：
 
 $$
 W(q)
 = \int_0^q i_d(x) dx - \int_0^q i_s(x) \mathrm{d} x  
 $$
 
-Solve the integrals and write a function to compute this quantity numerically
-at given $q$. 
-
-Plot welfare as a function of $q$.
+求解积分并编写一个函数，在给定的 $q$ 处数值计算这个量。
+绘制福利作为 $q$ 的函数的图表。
 ```
-
 
 ```{solution-start} isd_ex2
 :class: dropdown
 ```
-
-Solving the integrals gives 
+求解积分得到：
 
 $$
 W(q) 
@@ -816,23 +698,22 @@ W(q)
     - \left( s_0 q + \frac{s_1 q^{2.8}}{2.8} \right)
 $$
 
-Here's a Python function that computes this value:
+以下是一个计算这个值的 Python 函数：
 
 ```{code-cell} ipython3
 def W(q, market):
-    # Compute and return welfare
+    # 计算福利
     S_c = market.d_0 * q - market.d_1 * q**1.6 / 1.6
     S_p = market.s_0 * q + market.s_1 * q**2.8 / 2.8
     return S_c - S_p
 ```
-
-The next figure plots welfare as a function of $q$.
+下图绘制了福利作为 $q$ 的函数。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
-ax.plot(q_vals, W(q_vals, market), label='welfare', color='brown')
+ax.plot(q_vals, W(q_vals, market), label='福利', color='brown')
 ax.legend(frameon=False)
-ax.set_xlabel('quantity')
+ax.set_xlabel('数量')
 plt.show()
 ```
 
@@ -843,19 +724,14 @@ plt.show()
 ````{exercise}
 :label: isd_ex3
 
-Due to non-linearities, the new welfare function is not easy to maximize with
-pencil and paper.
-
-Maximize it using `scipy.optimize.minimize_scalar` instead.
+由于非线性性，新的福利函数不容易用纸笔最大化。
+相反，我们可以使用 `scipy.optimize.minimize_scalar` 来最大化它。
 
 ```{seealso}
-Our [SciPy](https://python-programming.quantecon.org/scipy.html) lecture has
-a section on [Optimization](https://python-programming.quantecon.org/scipy.html#optimization)
-is a useful resource to find out more. 
+我们的 [SciPy](https://python-programming.quantecon.org/scipy.html) 讲座中有一个关于[优化](https://python-programming.quantecon.org/scipy.html#optimization)的章节，这是一个了解更多信息的有用资源。
 ```
 
 ````
-
 
 ```{solution-start} isd_ex3
 :class: dropdown
@@ -879,36 +755,27 @@ print(f"{maximizing_q: .5f}")
 ```{solution-end}
 ```
 
-
 ````{exercise}
 :label: isd_ex4
 
-Now compute the equilibrium quantity by finding the price that equates supply
-and demand.
-
-You can do this numerically by finding the root of the excess demand function
+现在通过找到使供给和需求相等的价格来计算均衡数量。
+您可以通过寻找超额需求函数的根来数值计算这个价格：
 
 $$
 e_d(q) := i_d(q) - i_s(q) 
 $$
 
-You can use `scipy.optimize.newton` to compute the root.
+您可以使用 `scipy.optimize.newton` 来计算根。
 
 ```{seealso}
-Our [SciPy](https://python-programming.quantecon.org/scipy.html) lecture has
-a section on [Roots and Fixed Points](https://python-programming.quantecon.org/scipy.html#roots-and-fixed-points)
-is a useful resource to find out more. 
+我们的 [SciPy](https://python-programming.quantecon.org/scipy.html) 讲座中有一个关于[根和不动点](https://python-programming.quantecon.org/scipy.html#roots-and-fixed-points)的章节，这是一个了解更多信息的有用资源。
 ```
 
-Initialize `newton` with a starting guess somewhere close to 1.0.
-
-(Similar initial conditions will give the same result.)
-
-You should find that the equilibrium price agrees with the welfare maximizing
-price, in line with the first fundamental welfare theorem.
+使用接近 1.0 的初始猜测值来初始化 `newton`。
+（相似的初始条件将给出相同的结果。）
+您应该发现均衡价格与福利最大化价格一致，这符合第一基本福利定理。
 
 ````
-
 
 ```{solution-start} isd_ex4
 :class: dropdown
@@ -926,3 +793,27 @@ print(f"{equilibrium_q: .5f}")
 
 ```{solution-end}
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
