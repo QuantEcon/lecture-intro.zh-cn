@@ -11,11 +11,9 @@ kernelspec:
   name: python3
 ---
 
-# Input-Output Models
-
-## Overview
-
-This lecture requires the following imports and installs before we proceed.
+# 输入-输出模型
+## 概述
+在我们继续之前，本讲座需要以下导入和安装。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -40,9 +38,7 @@ quantecon_book_networks.config("matplotlib")
 mpl.rcParams.update(mpl.rcParamsDefault)
 ```
 
-The following figure illustrates a network of linkages among 15 sectors
-obtained from the US Bureau of Economic Analysis’s 2021 Input-Output Accounts
-Data.
+下图展示了从美国经济分析局2021年输入-输出账户数据中获得的15个部门之间的联系网络。
 
 
 ```{code-cell} ipython3
@@ -50,7 +46,7 @@ Data.
 
 def build_coefficient_matrices(Z, X):
     """
-    Build coefficient matrices A and F from Z and X via
+   通过以下方式从Z和X构建系数矩阵A和F：
 
         A[i, j] = Z[i, j] / X[j]
         F[i, j] = Z[i, j] / X[i]
@@ -82,7 +78,7 @@ tags: [hide-input]
 ---
 centrality = qbn_io.eigenvector_centrality(A)
 
-# Remove self-loops
+# 去掉自循环
 for i in range(A.shape[0]):
     A[i][i] = 0
 
@@ -99,52 +95,39 @@ qbn_plt.plot_graph(A, X, ax, codes,
 plt.show()
 ```
 
-|Label|     Sector    |Label|      Sector    |Label|            Sector         |
+|标签| 行业 |标签| 行业 |标签| 行业 |
 |:---:|:-------------:|:---:|:--------------:|:---:|:-------------------------:|
-| ag  |  Agriculture  | wh  |   Wholesale    | pr  |   Professional Services   |
-| mi  |    Mining     | re  |     Retail     | ed  |     Education & Health    |
-| ut  |   Utilities   | tr  | Transportation | ar  |    Arts & Entertainment   |
-| co  |  Construction | in  |  Information   | ot  | Other Services (exc govt) |
-| ma  | Manufacturing | fi  |    Finance     | go  |        Government         |
+| ag  | 农业 | wh  | 批发 | pr  | 专业服务 |
+| mi  | 采矿业 | re  | 零售 | ed  | 教育与健康 |
+| ut  | 公用事业 | tr  | 运输 | ar  | 艺术与娱乐 |
+| co  | 建筑 | in  | 信息 | ot  | 其他服务（不包括政府） |
+| ma  | 制造业 | fi  | 金融 | go  | 政府 |
 
+从$i$到$j$的箭头表示$i$行业的一些产出作为$j$行业生产的输入。
+经济的特征是存在许多这样的联系。
+分析这些联系的基本框架是[列昂惕夫](https://en.wikipedia.org/wiki/Wassily_Leontief)的投入产出模型。
+在介绍投入产出模型之后，我们将描述它与{doc}`线性规划讲座 <lp_intro>`的一些联系。
 
-An arrow from $i$ to $j$ means that some of sector $i$'s output serves as an input to production of  sector $j$.
+## 投入产出分析
 
-Economies are characterised by many such links.
+设
+ * $x_0$为单一外生生产投入的数量，例如劳动力
+ * $x_j, j = 1,\ldots n$为最终产品$j$的总产出
+ * $d_j, j = 1,\ldots n$为可用于最终消费的最终产品$j$的净产出
+ * $z_{ij}$为分配用作生产产品$j$的投入的产品$i$的数量，$i=1, \ldots n$，$j = 1, \ldots n$
+ * $z_{0j}$为分配用于生产产品$j$的劳动力数量
+ * $a_{ij}$为生产一单位产品$j$所需的产品$i$的单位数，$i=0, \ldots, n, j= 1, \ldots n$
+ * $w >0$为外生劳动力工资，以每单位劳动力的美元计
+ * $p$为$n \times 1$的生产品$i = 1, \ldots , n$价格向量
 
-A basic framework for their analysis is
-[Leontief's](https://en.wikipedia.org/wiki/Wassily_Leontief) input-output model.
-
-
-
-After  introducing the input-output model, we describe some of its connections to {doc}`linear programming lecture <lp_intro>`.
-
-
-## Input-output analysis
-
-Let
-
- * $x_0$ be the amount of a single exogenous input to production, say labor
- * $x_j, j = 1,\ldots n$ be the gross output of final good $j$
- * $d_j, j = 1,\ldots n$ be the net output of final good $j$ that is available for final consumption
- * $z_{ij} $ be the quantity of good $i$ allocated to be an input to producing good $j$ for $i=1, \ldots n$, $j = 1, \ldots n$
- * $z_{0j}$ be the quantity of labor allocated to producing good $j$.
- * $a_{ij}$ be the number of units of good $i$ required to produce one unit of good $j$, $i=0, \ldots, n, j= 1, \ldots n$.
- * $w >0$ be an exogenous wage of labor, denominated in dollars per unit of labor
- * $p$ be an $n \times 1$ vector of prices of produced goods $i = 1, \ldots , n$.
-
-
-
-The technology for producing  good $j \in \{1, \ldots , n\}$ is  described by the **Leontief** function
-
+生产产品$j \in \{1, \ldots , n\}$的技术由以下**列昂惕夫**函数描述
 $$
     x_j = \min_{i \in \{0, \ldots , n \}} \left( \frac{z_{ij}}{a_{ij}}\right)
 $$
 
-### Two goods
+### 两种产品
 
-To illustrate, we begin by setting $n =2$ and formulating
-the following network.
+为说明起见，我们首先设$n =2$并制定以下网络。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -184,8 +167,7 @@ plt.text(1.6, -0.5, r'$d_{2}$')
 plt.show()
 ```
 
-*Feasible allocations must satisfy*
-
+*可行分配必须满足*
 $$
 \begin{aligned}
 (1 - a_{11}) x_1 - a_{12} x_2 & \geq d_1 \cr
@@ -193,8 +175,7 @@ $$
 a_{01} x_1 + a_{02} x_2 & \leq x_0
 \end{aligned}
 $$
-
-This can be graphically represented as follows.
+这可以用图形表示如下。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -202,7 +183,7 @@ This can be graphically represented as follows.
 fig, ax = plt.subplots()
 ax.grid()
 
-# Draw constraint lines
+# 绘制约束线
 ax.hlines(0, -1, 400)
 ax.vlines(0, -1, 200)
 
@@ -214,14 +195,14 @@ ax.text(130, 38, "$(1-a_{11})x_1 + a_{12}x_2 \geq d_1$", size=10)
 ax.text(10, 105, "$-a_{21}x_1 + (1-a_{22})x_2 \geq d_2$", size=10)
 ax.text(150, 150, "$a_{01}x_1 +a_{02}x_2 \leq x_0$", size=10)
 
-# Draw the feasible region
+# 绘制可行区域
 feasible_set = Polygon(np.array([[301, 151],
                                  [368, 143],
                                  [250, 120]]),
                        color="cyan")
 ax.add_patch(feasible_set)
 
-# Draw the optimal solution
+# 绘制最优解
 ax.plot(250, 120, "*", color="black")
 ax.text(260, 115, "solution", size=10)
 
@@ -230,43 +211,33 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-More generally,   constraints on production are
-
+更一般地说，生产的约束条件是
 $$
 \begin{aligned}
 (I - A) x &  \geq d \cr
 a_0^\top x & \leq x_0
 \end{aligned}
 $$ (eq:inout_1)
+其中 $A$ 是一个 $n \times n$ 的矩阵，其典型元素为 $a_{ij}$，而 $a_0^\top = \begin{bmatrix} a_{01} & \cdots & a_{0n} \end{bmatrix}$。
 
-where $A$ is the $n \times n$ matrix with typical element $a_{ij}$ and $a_0^\top = \begin{bmatrix} a_{01} & \cdots & a_{0n} \end{bmatrix}$.
-
-
-
-If we solve the first block of equations of {eq}`eq:inout_1` for gross output $x$ we get
-
+如果我们解 {eq}`eq:inout_1` 的第一组方程，得到总产出 $x$，我们得到
 $$
 x = (I -A)^{-1} d \equiv L d
 $$ (eq:inout_2)
+其中矩阵 $L = (I-A)^{-1}$ 有时被称为 **列昂惕夫逆矩阵**。
 
-where the matrix $L = (I-A)^{-1}$ is sometimes called  a **Leontief Inverse**.
-
-
-
-To assure that the solution $X$ of {eq}`eq:inout_2` is a positive vector, the  following **Hawkins-Simon conditions** suffice:
-
+为确保 {eq}`eq:inout_2` 的解 $X$ 是一个正向量，以下 **霍金斯-西蒙条件** 就足够了：
 $$
 \begin{aligned}
-\det (I - A) > 0 \text{ and} \;\;\; \\
-(I-A)_{ij} > 0 \text{ for all } i=j
+\det (I - A) > 0 \text{ 且} \;\;\; \\
+(I-A)_{ij} > 0 \text{ 对所有 } i=j
 \end{aligned}
 $$
-
 
 ```{prf:example}
 :label: io_ex_tg
 
-For example a two-good economy described by
+例如，一个由以下描述的两种商品经济
 
 $$
 A =
@@ -274,7 +245,7 @@ A =
     0.1 & 40 \\
     0.01 & 0
 \end{bmatrix}
-\text{ and }
+\text{ 和 }
 d =
 \begin{bmatrix}
     50 \\
@@ -295,57 +266,49 @@ B = I - A
 B
 ```
 
-Let's check the **Hawkins-Simon conditions**
+让我们检查一下**霍金斯-西蒙条件**
 
 ```{code-cell} ipython3
-np.linalg.det(B) > 0 # checking Hawkins-Simon conditions
+np.linalg.det(B) > 0 # 检查霍金斯-西蒙条件
 ```
 
-Now, let's compute the **Leontief inverse** matrix
+现在我们计算列昂惕夫逆矩阵
 
 ```{code-cell} ipython3
-L = np.linalg.inv(B) # obtaining Leontief inverse matrix
+L = np.linalg.inv(B) # 得到列昂惕夫逆矩阵
 L
 ```
 
 ```{code-cell} ipython3
-x = L @ d   # solving for gross output
+x = L @ d   # 求解毛产出
 x
 ```
 
 +++ {"user_expressions": []}
 
-## Production possibility frontier
+## 生产可能性边界
 
-The second equation of {eq}`eq:inout_1` can be written
-
+{eq}`eq:inout_1`的第二个等式可以写成
 $$
 a_0^\top x = x_0
 $$
-
-or
-
+或
 $$
 A_0^\top d = x_0
 $$ (eq:inout_frontier)
-
-where
-
+其中
 $$
 A_0^\top = a_0^\top (I - A)^{-1}
 $$
+对于 $i \in \{1, \ldots , n\}$，$A_0$ 的第 $i$ 个分量是生产一单位第 $i$ 种商品的最终产出所需的劳动量。
 
- For $i \in \{1, \ldots , n\}$, the $i$th component  of $A_0$ is the amount of labor that is required to produce one unit of final output of good $i$.
-
-Equation {eq}`eq:inout_frontier` sweeps out a  **production possibility frontier** of final consumption bundles $d$ that can be produced with exogenous labor input $x_0$.
+等式 {eq}`eq:inout_frontier` 描绘了一个**生产可能性边界**，表示在给定外生劳动投入 $x_0$ 的情况下，可以生产的最终消费束 $d$。
 
 ```{prf:example}
 :label: io_ex_ppf
 
-Consider the example in {eq}`eq:inout_ex`.
-
-Suppose we are now given
-
+考虑{eq}`eq:inout_ex`中的例子。
+假设我们现在给出
 $$
 a_0^\top = \begin{bmatrix}
 4 & 100
@@ -353,7 +316,7 @@ a_0^\top = \begin{bmatrix}
 $$
 ```
 
-Then we can find $A_0^\top$ by
+然后我们可以通过以下方式找到 $A_0^\top$：
 
 ```{code-cell} ipython3
 a0 = np.array([4, 100])
@@ -363,7 +326,7 @@ A0
 
 +++ {"user_expressions": []}
 
-Thus, the production possibility frontier for this economy is
+因此，这个经济体的生产可能性边界是：
 
 $$
 10d_1 + 500d_2 = x_0
@@ -371,87 +334,56 @@ $$
 
 +++ {"user_expressions": []}
 
-## Prices
-
-{cite}`DoSSo` argue that relative prices of the $n$ produced goods must satisfy
-
+## 价格
+{cite}`DoSSo` 认为，$n$ 种生产商品的相对价格必须满足
 $$
 \begin{aligned}
 p_1 = a_{11}p_1 + a_{21}p_2 + a_{01}w \\
 p_2 = a_{12}p_1 + a_{22}p_2 + a_{02}w
 \end{aligned}
 $$
-
-More generally,
-
+更一般地，
 $$
 p = A^\top p + a_0 w
 $$
-
-which states that the price of each final good equals the total cost
-of production, which consists of costs of intermediate inputs $A^\top p$
-plus costs of labor $a_0 w$.
-
-This equation can be written as
-
+这表明每种最终商品的价格等于生产的总成本，包括中间投入品的成本 $A^\top p$ 和劳动力成本 $a_0 w$。
+这个方程可以写成
 $$
 (I - A^\top) p = a_0 w
 $$ (eq:inout_price)
-
-which implies
-
+这意味着
 $$
 p = (I - A^\top)^{-1} a_0 w
 $$
+注意 {eq}`eq:inout_price` 与 {eq}`eq:inout_1` 通过相互转置的算子形成了一个**共轭对**。
+这种联系在经典线性规划及其对偶问题中再次出现。
 
-Notice how  {eq}`eq:inout_price` with {eq}`eq:inout_1` forms a
-**conjugate pair**  through the appearance of operators
-that are transposes of one another.
-
-This connection surfaces again in a classic linear program and its dual.
-
-
-## Linear programs
-
-A **primal** problem is
-
+## 线性规划
+**原始问题**是
 $$
 \min_{x} w a_0^\top x
 $$
-
-subject to
-
+约束条件为
 $$
 (I - A) x \geq d
 $$
-
-
-The associated **dual** problem is
-
+相关的**对偶问题**是
 $$
 \max_{p} p^\top d
 $$
-
-subject to
-
+约束条件为
 $$
 (I -A)^\top p \leq a_0 w
 $$
-
-The primal problem chooses a feasible production plan to minimize costs for delivering a pre-assigned vector of final goods consumption $d$.
-
-The dual problem chooses prices to maximize the value of a pre-assigned vector of final goods $d$ subject to prices covering costs of production.
-
-By the [strong duality theorem](https://en.wikipedia.org/wiki/Dual_linear_program#Strong_duality),
-optimal value of the primal and dual problems coincide:
-
+原始问题选择一个可行的生产计划，以最小化交付预先指定的最终商品消费向量 $d$ 的成本。
+对偶问题选择价格，以最大化预先指定的最终商品向量 $d$ 的价值，同时受制于价格覆盖生产成本。
+根据[强对偶定理](https://en.wikipedia.org/wiki/Dual_linear_program#Strong_duality)，
+原始问题和对偶问题的最优值相同：
 $$
 w a_0^\top x^* = p^* d
 $$
-
-where $^*$'s denote optimal choices for the primal and dual problems.
-
-The dual problem can be graphically represented as follows.
+其中 $^*$ 表示原始和对偶问题的最优选择。
+对偶问题可以用图形表示如下。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -459,7 +391,7 @@ The dual problem can be graphically represented as follows.
 fig, ax = plt.subplots()
 ax.grid()
 
-# Draw constraint lines
+# 绘制约束线
 ax.hlines(0, -1, 50)
 ax.vlines(0, -1, 250)
 
@@ -469,7 +401,7 @@ ax.plot(np.linspace(0, 50, 100), (33+1.46*np.linspace(0, 50, 100))/0.83, color="
 ax.text(15, 175, "$(1-a_{11})p_1 - a_{21}p_2 \leq a_{01}w$", size=10)
 ax.text(30, 85, "$-a_{12}p_1 + (1-a_{22})p_2 \leq a_{02}w$", size=10)
 
-# Draw the feasible region
+# 绘制可行区域
 feasible_set = Polygon(np.array([[17, 69],
                                  [4, 0],
                                  [0,0],
@@ -477,7 +409,7 @@ feasible_set = Polygon(np.array([[17, 69],
                        color="cyan")
 ax.add_patch(feasible_set)
 
-# Draw the optimal solution
+# 绘制最优解
 ax.plot(17, 69, "*", color="black")
 ax.text(18, 60, "dual solution", size=10)
 
@@ -486,106 +418,71 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-## Leontief inverse
-
-We have discussed that gross output $x$ is given by {eq}`eq:inout_2`, where $L$ is called the Leontief Inverse.
-
-Recall the {doc}`Neumann Series Lemma <eigen_II>` which states that $L$ exists if the spectral radius $r(A)<1$.
-
-In fact
-
+## 列昂惕夫逆矩阵
+我们已经讨论过，总产出 $x$ 由公式 {eq}`eq:inout_2` 给出，其中 $L$ 被称为列昂惕夫逆矩阵。
+回顾 {doc}`诺伊曼级数引理 <eigen_II>`，它指出如果谱半径 $r(A)<1$，则 $L$ 存在。
+事实上
 $$
 L = \sum_{i=0}^{\infty} A^i
 $$
 
-### Demand shocks
-
-Consider the impact of a demand shock $\Delta d$ which shifts demand from $d_0$ to $d_1 = d_0 + \Delta d$.
-
-Gross output shifts from $x_0 = Ld_0$ to $x_1 = Ld_1$.
-
-If $r(A) < 1$ then a solution exists and
-
+### 需求冲击
+考虑需求冲击 $\Delta d$ 的影响，它将需求从 $d_0$ 转变为 $d_1 = d_0 + \Delta d$。
+总产出从 $x_0 = Ld_0$ 转变为 $x_1 = Ld_1$。
+如果 $r(A) < 1$，则存在解，且
 $$
 \Delta x = L \Delta d = \Delta d + A(\Delta d) + A^2 (\Delta d) + \cdots
 $$
+这说明 $L$ 的一个元素 $l_{ij}$ 显示了对商品 $j$ 的需求单位变化对部门 $i$ 的总影响。
 
-This illustrates that an element $l_{ij}$ of $L$ shows the total impact on sector $i$ of a unit change in demand of good $j$.
-
-## Applications of graph theory
-
-We can further study input-output networks through applications of {doc}`graph theory <networks>`.
-
-An input-output network can be represented by a weighted directed graph induced by the adjacency matrix $A$.
-
-The set of nodes $V = [n]$ is the list of sectors and the set of edges is given by
-
+## 图论的应用
+我们可以通过 {doc}`图论 <networks>` 的应用进一步研究投入产出网络。
+投入产出网络可以通过邻接矩阵 $A$ 诱导的加权有向图来表示。
+节点集 $V = [n]$ 是部门列表，边集由以下给出：
 $$
 E = \{(i,j) \in V \times V : a_{ij}>0\}
 $$
+在 {numref}`us_15sectors` 中，权重由箭头的宽度表示，与相应的投入产出系数成正比。
+现在我们可以使用中心性度量来对部门进行排序，并讨论它们相对于其他部门的重要性。
 
-In {numref}`us_15sectors` weights are indicated by the widths of the arrows, which are proportional to the corresponding input-output coefficients.
-
-We can now use centrality measures to rank sectors and discuss their importance relative to the other sectors.
-
-### Eigenvector centrality
-
-Eigenvector centrality of a node $i$ is measured by
-
+### 特征向量中心性
+节点 $i$ 的特征向量中心性由以下公式衡量：
 $$
 \begin{aligned}
     e_i = \frac{1}{r(A)} \sum_{1 \leq j \leq n} a_{ij} e_j
 \end{aligned}
 $$
-
-We plot a bar graph of hub-based eigenvector centrality for the sectors represented in {numref}`us_15sectors`.
+我们为 {numref}`us_15sectors` 中表示的部门绘制了基于枢纽的特征向量中心性条形图。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
 ax.bar(codes, centrality, color=color_list, alpha=0.6)
-ax.set_ylabel("eigenvector centrality", fontsize=12)
+ax.set_ylabel("特征向量中心性", fontsize=12)
 plt.show()
 ```
 
-A higher measure indicates higher importance as a supplier.
+较高的指标表示作为供应商的重要性更高。
+因此，大多数行业的需求冲击将显著影响具有高特征向量中心性的行业的活动。
+上图表明制造业是美国经济中最主导的行业。
 
-As a result demand shocks in most sectors will significantly impact activity in sectors with high eigenvector centrality.
-
-The above figure indicates that manufacturing is the most dominant sector in the US economy.
-
-### Output multipliers
-
-Another way to rank sectors in input-output networks is via output multipliers.
-
-The **output multiplier** of sector $j$ denoted by $\mu_j$ is usually defined as the
-total sector-wide impact of a unit change of demand in sector $j$.
-
-Earlier when disussing demand shocks we concluded that for $L = (l_{ij})$ the element
-$l_{ij}$ represents the impact on sector $i$ of a unit change in demand in sector $j$.
-
-Thus,
-
+### 产出乘数
+在投入产出网络中对行业进行排名的另一种方法是通过产出乘数。
+行业 $j$ 的**产出乘数**，记为 $\mu_j$，通常定义为行业 $j$ 需求单位变化所产生的整个行业范围内的总影响。
+早些时候在讨论需求冲击时，我们得出结论：对于 $L = (l_{ij})$，元素 $l_{ij}$ 表示行业 $j$ 需求单位变化对行业 $i$ 的影响。
+因此，
 $$
 \mu_j = \sum_{j=1}^n l_{ij}
 $$
-
-This can be written as $\mu^\top = \mathbb{1}^\top L$ or
-
-
+这可以写成 $\mu^\top = \mathbb{1}^\top L$ 或
 $$
 \mu^\top = \mathbb{1}^\top (I-A)^{-1}
 $$
-
-Please note that here we use $\mathbb{1}$ to represent a vector of ones.
-
-High ranking sectors within this measure are important buyers of intermediate goods.
-
-A demand shock in such sectors will cause a large impact on the whole production network.
-
-The following figure displays the output multipliers for the sectors represented
-in {numref}`us_15sectors`.
+请注意，这里我们用 $\mathbb{1}$ 表示一个全为1的向量。
+在这个指标中排名较高的行业是中间品的重要购买者。
+这些行业的需求冲击将对整个生产网络造成巨大影响。
+下图显示了 {numref}`us_15sectors` 中表示的各行业的产出乘数。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -596,34 +493,32 @@ omult = qbn_io.katz_centrality(A, authority=True)
 fig, ax = plt.subplots()
 omult_color_list = qbn_io.colorise_weights(omult,beta=False)
 ax.bar(codes, omult, color=omult_color_list, alpha=0.6)
-ax.set_ylabel("Output multipliers", fontsize=12)
+ax.set_ylabel("产出乘数", fontsize=12)
 plt.show()
 ```
 
-We observe that manufacturing and agriculture are highest ranking sectors.
+我们观察到制造业和农业是排名最高的行业。
 
-
-## Exercises
+## 练习
 
 ```{exercise-start}
 :label: io_ex1
 ```
 
-{cite}`DoSSo` Chapter 9 discusses an example with the following
-parameter settings:
+{cite}`DoSSo` 第9章讨论了一个具有以下参数设置的例子：
 
 $$
 A = \begin{bmatrix}
      0.1 & 1.46 \\
      0.16 & 0.17
     \end{bmatrix}
-\text{ and }
+\text{ 和 }
 a_0 = \begin{bmatrix} .04 & .33 \end{bmatrix}
 $$
 
 $$
 x = \begin{bmatrix} 250 \\ 120 \end{bmatrix}
-\text{ and }
+\text{ 和 }
 x_0 = 50
 $$
 
@@ -631,17 +526,16 @@ $$
 d = \begin{bmatrix} 50 \\ 60 \end{bmatrix}
 $$
 
-Describe how they infer the input-output coefficients in $A$ and $a_0$ from the following hypothetical underlying "data" on agricultural and  manufacturing industries:
+描述他们如何从以下关于农业和制造业的假设"数据"中推断出A和a_0中的投入-产出系数：
 
 $$
 z = \begin{bmatrix} 25 & 175 \\
          40 &   20 \end{bmatrix}
-\text{ and }
+\text{ 和 }
 z_0 = \begin{bmatrix} 10 & 40 \end{bmatrix}
 $$
 
-where $z_0$ is a vector of labor services used in each industry.
-
+其中z_0是每个行业使用的劳动服务的向量。
 ```{exercise-end}
 ```
 
@@ -661,7 +555,7 @@ $$
 :label: io_ex2
 ```
 
-Derive the production possibility frontier for the economy characterized in the previous exercise.
+推导上一练习中所描述经济的生产可能性边界。
 
 ```{exercise-end}
 ```
@@ -689,7 +583,7 @@ A_0
 
 +++ {"user_expressions": []}
 
-Thus the production possibility frontier is given by
+因此，生产可能性边界由以下给出
 
 $$
 0.17 d_1 + 0.69 d_2 = 50
