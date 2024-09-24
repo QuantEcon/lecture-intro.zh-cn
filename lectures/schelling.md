@@ -11,6 +11,7 @@ kernelspec:
   name: python3
 ---
 
+(schelling)=
 ```{raw} html
 <div id="qe-notebook-header" align="right" style="text-align:right;">
         <a href="https://quantecon.org/" title="quantecon.org">
@@ -102,6 +103,8 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 如果他们的一半邻居是另一种颜色，他们完全满意。
 
++++
+
 ### 行为
 
 最初，代理们混在一起（集成）。
@@ -130,6 +133,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 我们继续循环，直到没有人希望移动。
 
++++
 
 ## 结果
 
@@ -224,7 +228,7 @@ def plot_distribution(agents, cycle_num):
         'o', markerfacecolor='绿色', **plot_args)
     ax.set_title(f'周期 {cycle_num-1}')
     plt.show()
-```)
+```
 
 在这里有一段伪代码，它描述了主循环的过程，我们在这个过程中遍历每个代理，直到没有代理希望移动为止。
 
