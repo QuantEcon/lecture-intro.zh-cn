@@ -211,6 +211,7 @@ m_0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 $$ (eq:eq101_ad)
 
 将方程 {eq}`eq:eq101_ad` 的两边都乘以左侧矩阵的逆矩阵，将得到
+
 $$
 m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
 $$ (eq:mcum_ad)
