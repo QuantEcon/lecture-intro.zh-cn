@@ -482,7 +482,7 @@ plt.show()
 mystnb:
   figure:
     caption: "\u7EB8\u5E01\u4F9B\u5E94\u91CF\u4E0E\u4EF7\u683C\u6C34\u5E73"
-    name: fr_fig12
+    name: fr_fig24
 ---
 # 从Ｅxcel中读取数据
 data12 = pd.read_excel(assignat_url, sheet_name='seignor', 
@@ -832,6 +832,35 @@ plt.show()
 但是恐怖时期在1794年7月结束。这导致了大规模的通货膨胀，因为人们试图找到其他交易和储存价值的方式。
 
 下面的两个图表是关于经典恶性通货膨胀时期的。
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: "通货膨胀和实际余额"
+    name: fr_fig104e
+---
+plt.figure()
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+
+# 第一个子样本
+plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
+        color='blue', label='实票据时期')
+
+# 第二个子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
+
+# 第三个子样本
+plt.plot(bal[44:63], infl[44:63], '*', 
+    color='orange', label='经典的Cagan恶性通货膨胀')
+plt.plot(bal[44:63], a3 + bal[44:63] * b3, color='orange')
+plt.xlabel('real balances')
+plt.ylabel('inflation')
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
 
 一个是以实际余额为因素，通货膨胀为结果进行回归的，另一个是以通货膨胀为因素，实际余额为结果进行回归的。
 
