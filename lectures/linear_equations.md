@@ -686,6 +686,7 @@ $$
 
 ```{math}
 :label: la_gf
+
     A x = b
     \quad \text{where} \quad
     A = 
@@ -723,8 +724,10 @@ $$
 
 ```{math}
 :label: la_se2
-    A x = b.
+
+    A x = b
 ```
+
 我们面临的问题是找到一个向量 $x \in \mathbb R^n$，使其解决
 {eq}`la_se2`，其中 $b$ 和 $A$ 是给定的。
 我们可能并不总能找到一个唯一的向量 $x$ 来解决 {eq}`la_se2`。
@@ -797,6 +800,7 @@ $$
 
 ```{math}
 :label: many_solns
+
     A =
     \begin{bmatrix}
         1 & -2 \\
@@ -806,6 +810,7 @@ $$
 
 是线性相关的 --- 你能看出为什么吗？
 我们现在对 {eq}`la_se2` 中的 $A$ 施加条件，以排除这些问题。
+
 ### 非奇异矩阵
 对于每个方阵，我们都可以指定一个唯一的数，称为[行列式](https://en.wikipedia.org/wiki/Determinant)。
 对于 $2 \times 2$ 矩阵，行列式由以下公式给出：
@@ -827,6 +832,7 @@ $$
 
 ```{math}
 :label: la_se_inv
+
     x = A^{-1} b.
 ```
 
