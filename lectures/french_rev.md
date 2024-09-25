@@ -11,52 +11,49 @@ kernelspec:
   name: python3
 ---
 
-# Inflation During French Revolution 
+# 法国大革命期间的通货膨胀
 
 
-## Overview 
+## 概览
 
-This lecture describes some  of the monetary and fiscal  features of the French Revolution (1789-1799) described by {cite}`sargent_velde1995`.
+本讲述描述了 {cite}`sargent_velde1995` 中所述的法国大革命（1789-1799）的一些货币和财政特征。
 
-To finance public expenditures and service its debts, 
-the French government embarked on   policy experiments.
+为了筹资公共开支和偿还债务，法国政府开始了一系列政策实验。
 
-The authors of these experiments  had in mind theories about how government  monetary and fiscal policies affected economic outcomes.
+这些实验的设计者心中有关于政府货币和财政政策如何影响经济结果的理论。
 
-Some of those theories about monetary and fiscal policies still interest us today.
+其中一些关于货币和财政政策的理论至今仍然值得关注。
 
-* a **tax-smoothing** model like Robert Barro's {cite}`Barro1979`
+* 类似罗伯特·巴罗的**税收平滑**模型 {cite}`Barro1979`
 
-   * this normative (i.e., prescriptive model) advises a government to finance temporary war-time surges in expenditures mostly by issuing government debt, raising taxes by just enough to service the additional debt issued during the wary; then,   after the war,  to roll over whatever debt the government had accumulated during the war;  and  to increase taxes after the war permanently by just enough to finance interest payments on that post-war government  debt
+    * 这种规范性（即规定性）模式建议政府主要通过发行国债来为战时临时激增的支出提供资金，增加的税收也正好偿还战争期间发行的额外债务；然后，在战争结束后，将政府在战争期间积累的债务展期；并在战争结束后永久性地增加税收，增加的税收正好足够支付战后政府债务的利息。
 
-*  **unpleasant monetarist arithmetic** like that described in this quanteon lecture  {doc}`unpleasant`
+* 类似于本讲中描述的**不愉快的货币主义方程** {doc}`unpleasant`
    
-    * mathematics involving compound interest  governed French government debt dynamics in the decades preceding 1789; according to leading historians, that arithmetic set the stage for the French Revolution 
+    * 在 1789 年之前的几十年里，涉及复利的数学支配着法国政府的债务动态；据历史学家称，这种计算方式为法国大革命奠定了基础。
 
-* a *real bills* theory of the effects of government open market operations in which the government *backs* new  issues of paper money with government holdings of valuable real property or financial assets that holders of money can purchase from the government in exchange for their money.
+* 关于政府公开市场操作的影响的*真实票据*理论，其中政府用持有的有价值房地产或金融资产*支持*新发行的纸币，纸币持有者可以用他们的钱从政府购买这些资产。
+    
+    * 革命者们从亚当·斯密于1776年出版的《国富论》中了解到这一理论
+    * 它塑造了革命者在1789年到1791年之间发行的一种名为 **assignats** 的纸币方式
 
-    * The Revolutionaries learned about this theory from Adam Smith's 1776 book The Wealth of Nations
-     {cite}`smith2010wealth` and other contemporary sources
-
-    * It shaped how the Revolutionaries issued a paper money called **assignats** from 1789 to 1791 
-
-* a classical **gold**  or **silver standard**
+* 经典的 **金本位** 或 **银本位**
   
-    * Napoleon Bonaparte became head of the French government in 1799. He  used this theory to guide his monetary and fiscal policies
+    * 拿破仑·波拿巴于1799年成为法国政府首脑。他使用这一理论来指导他的货币和财政政策
 
-* a classical **inflation-tax** theory of inflation in which Philip Cagan's ({cite}`Cagan`) demand for money studied in this lecture  {doc}`cagan_ree` is a key component
+* 一个经典的 **通货膨胀税** 理论，其中Philip Cagan的需求货币研究 ({cite}`Cagan`) 是 {doc}`cagan_ree` 的一个核心
 
-   * This theory helps  explain French price level and money supply data from 1794 to 1797  
+   * 这一理论有助于解释1794年至1797年的法国价格水平和货币供应数据
 
-* a **legal restrictions**  or **financial repression** theory of the demand for real balances 
+* 需求实际余额的 **法律限制** 或 **金融抑制** 理论
  
-    * The Twelve Members comprising the Committee of Public Safety who adminstered the Terror from June 1793 to July 1794 used this theory to shape their monetary policy 
+    * 公共安全委员会的十二个成员，他们在1793年6月至1794年7月期间管理恐怖时期，使用这一理论来塑造他们的货币政策
 
-We use matplotlib to replicate several of the graphs with which  {cite}`sargent_velde1995` portrayed outcomes of these experiments 
+我们使用 `matplotlib` 复制 {cite}`sargent_velde1995` 描述这些实验结果的几个图表
 
-## Data Sources
+## 数据来源
 
-This lecture uses data from three spreadsheets assembled by {cite}`sargent_velde1995`:
+本讲使用了 {cite}`sargent_velde1995` 汇编的三个表格中的数据：
   * [datasets/fig_3.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/fig_3.xlsx)
   * [datasets/dette.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/dette.xlsx)
   * [datasets/assignat.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/assignat.xlsx)
@@ -74,37 +71,32 @@ fig_3_url = f'{base_url}fig_3.xlsx'
 dette_url = f'{base_url}dette.xlsx'
 assignat_url = f'{base_url}assignat.xlsx'
 ```
+## 政府开支与税收
 
-## Government Expenditures and Taxes Collected
+我们将使用 `matplotlib` 构建几个图表，这些图表将提供重要的历史背景。
 
+这些图表是 {cite}`sargent_velde1995` 中图表的翻版。
 
+这些图表展示了在十八世纪期间：
 
-We'll start by using `matplotlib` to construct several  graphs that will provide important historical context.
-
-These graphs are versions of ones that appear in {cite}`sargent_velde1995`.
-
-These graphs show that during the 18th century
-
- * government expenditures in France and Great Britain both surged during four big wars, and by comparable amounts
- * In Britain, tax revenues were approximately equal to government expenditures during peace times,
-  but were substantially less than government expenditures during wars
- * In France, even in peace time, tax revenues were substantially less than government expenditures
-
-
+ * 法国和大不列颠的政府开支在四次大战期间都有激增，并且增幅相当
+ * 在英国，和平时期的税收大约等于政府开支，
+   但在战争期间，税收显著少于政府开支
+ * 在法国，即使在和平时期，税收也显著少于政府开支
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Military Spending in Britain and France"
+    caption: "英法军事开支"
     name: fr_fig4
 ---
-# Read the data from Excel file
+# 从Excel文件读取数据
 data2 = pd.read_excel(dette_url, 
         sheet_name='Militspe', usecols='M:X', 
         skiprows=7, nrows=102, header=None)
 
-# French military spending, 1685-1789, in 1726 livres
+# 法国军事开支，1685-1789年，以1726年的里弗尔计
 data4 = pd.read_excel(dette_url, 
         sheet_name='Militspe', usecols='D', 
         skiprows=3, nrows=105, header=None).squeeze()
@@ -120,40 +112,39 @@ plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 plt.gca().tick_params(labelsize=12)
 plt.xlim([1689, 1790])
-plt.xlabel('*: France')
-plt.ylabel('Millions of livres')
+plt.xlabel('*：法国')
+plt.ylabel('百万里弗尔')
 plt.ylim([0, 475])
 
 plt.tight_layout()
 plt.show()
 ```
 
-During the 18th century, Britain and France fought four large wars.
+18 世纪，英国和法国进行了四次大规模战争。
 
-Britain won the first three wars and lost the fourth.
+英国赢得了前三场战争，输掉了第四场战争。
 
-Each  of those wars  produced surges in both countries' government expenditures that each country somehow had to finance.
+每次战争都导致两国政府支出激增，而每个国家都必须以某种方式为这些支出提供资金。
 
-Figure {numref}`fr_fig4` shows surges in military expenditures in France (in blue) and Great Britain.
-during those four wars.  
+图{numref}`fr_fig4`显示了法国（蓝色）和英国在这四场战争中军费开支的激增。
 
-A remarkable aspect of figure {numref}`fr_fig4` is that despite having a population less than half of France's, Britain was able to finance military expenses of about the same amounts as France's.
+图{numref}`fr_fig4`的一个显著特点是，尽管英国的人口不到法国的一半，但其军费开支却与法国差不多。
 
-This testifies to Britain's  having created state institutions that could sustain high  tax collections, government spending , and government borrowing. See  {cite}`north1989`. 
+这证明英国已经建立了能够维持高税收、政府支出和政府借贷的国家机构。参见{cite}`north1989`。
+
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Government Expenditures and Tax Revenues in Britain"
+    caption: "英国政府开支与税收"
     name: fr_fig2
 ---
-
-# Read the data from Excel file
+# 从Excel文件读取数据
 data2 = pd.read_excel(dette_url, sheet_name='Militspe', usecols='M:X', 
                       skiprows=7, nrows=102, header=None)
 
-# Plot the data
+# 绘制数据
 plt.figure()
 plt.plot(range(1689, 1791), data2.iloc[:, 5], linewidth=0.8)
 plt.plot(range(1689, 1791), data2.iloc[:, 11], linewidth=0.8, color='red')
@@ -161,80 +152,76 @@ plt.plot(range(1689, 1791), data2.iloc[:, 9], linewidth=0.8, color='orange')
 plt.plot(range(1689, 1791), data2.iloc[:, 8], 'o-', 
          markerfacecolor='none', linewidth=0.8, color='purple')
 
-# Customize the plot
+# 自定义图表
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 plt.gca().tick_params(labelsize=12)
 plt.xlim([1689, 1790])
-plt.ylabel('millions of pounds', fontsize=12)
+plt.ylabel('百万磅', fontsize=12)
 
-# Add text annotations
-plt.text(1765, 1.5, 'civil', fontsize=10)
-plt.text(1760, 4.2, 'civil plus debt service', fontsize=10)
-plt.text(1708, 15.5, 'total govt spending', fontsize=10)
-plt.text(1759, 7.3, 'revenues', fontsize=10)
+# 添加文本注释
+plt.text(1765, 1.5, '民用', fontsize=10)
+plt.text(1760, 4.2, '民用加偿债', fontsize=10)
+plt.text(1708, 15.5, '总政府开支', fontsize=10)
+plt.text(1759, 7.3, '税收', fontsize=10)
 
 plt.tight_layout()
 plt.show()
 ```
 
+图{numref}`fr_fig2`和{numref}`fr_fig3`总结了1789年法国大革命开始前一个世纪英国和法国政府的财政政策。
 
-Figures  {numref}`fr_fig2` and  {numref}`fr_fig3` summarize British and French government   fiscal policies  during the century before the start of the French Revolution in 1789.
+1789年之前，法国的进步力量非常欣赏英国为政府支出提供资金的方式，并希望重新设计法国的财政安排，使其更像英国。
 
+图{numref}`fr_fig2`显示了政府支出及其在以下各项支出中的分配情况 
 
-Before 1789, progressive forces in France  admired how  Britain had financed its government expenditures and wanted to redesign French fiscal arrangements to make them more like Britain's.
+   * 民事（非军事）活动
+   * 偿债，即支付利息 
+   * 军事支出（黄线减去红线） 
 
-Figure  {numref}`fr_fig2` shows government expenditures and how it was distributed among expenditures for 
+图{numref}`fr_fig2`还显示了政府从税收中获得的总收入（紫色圈线）
 
-   * civil (non-military) activities
-   * debt service, i.e., interest payments 
-   * military expenditures (the yellow line minus the red line) 
+请注意，在这四场战争中，政府总支出的激增与军事支出的激增相关联
+在这四场战争中
 
-Figure  {numref}`fr_fig2` also plots total government revenues from tax collections (the purple circled line)
+   * 18 世纪初反对法国国王路易十四的战争
+   * 17 世纪 40 年代的奥地利王位继承战争
+   * 17 世纪 50 年代和 60 年代的法印战争
+   * 1775 年至 1783 年的美国独立战争
 
-Notice the surges in total government expenditures associated with surges in military expenditures
-in these four wars
+图{numref}`fr_fig2`显示
 
-   * Wars against France's King Louis XIV early in the 18th century
-   * The War of the Austrian Succession in the 1740s
-   * The French and Indian War in the 1750's and 1760s
-   * The American War for Independence from 1775 to 1783
+   * 和平时期，政府支出与税收大致持平，偿债支出既不增长也不下降
+   * 战争时期，政府支出超过税收收入
+      * 政府通过发行债务来弥补收入相对于支出的赤字
+   * 战争结束后，政府的税收收入超过非利息支出的部分刚好足以偿还政府为弥补前期赤字而发行的债务
+      * 因此，在战争结束后，政府不会增加税收来偿还债务
+      * 相反，它只是将继承的债务滚动起来，增加的税收正好够偿还债务的利息支出
 
-Figure {numref}`fr_fig2` indicates that
+因此，图{numref}`fr_fig2`中描绘的18世纪英国财政政策非常像Robert Barro {cite}`Barro1979`等*税收平滑*模型的教科书例子。 
 
-   * during times of peace, government expenditures approximately equal taxes and debt service payments neither grow nor decline over time
-   * during times of wars, government expenditures exceed tax revenues
-      * the government finances the deficit of revenues relative to expenditures by issuing debt
-   * after a war is over, the government's tax revenues exceed its non-interest expenditures by just enough to service the debt that the government issued to finance earlier deficits
-      * thus, after a war, the government does *not* raise taxes by enough to pay off its debt
-      * instead, it just rolls over whatever debt it inherits, raising taxes by just enough to service the interest payments on that debt
+该图的一个显著特点是税收与政府支出之间的 “重力法则”。
 
-Eighteenth-century British fiscal policy portrayed Figure {numref}`fr_fig2` thus looks very much like a text-book example of a *tax-smoothing* model like Robert Barro's {cite}`Barro1979`.  
+   * 政府支出水平与税收水平相互吸引
+   * 虽然它们会暂时出现差异（战争期间就是如此），但当和平重现时，它们又会走到一起。
 
-A striking feature of the graph is what we'll label a *law of gravity* between tax collections and government expenditures. 
-
-   * levels of government expenditures at taxes attract each other
-   * while they can temporarily differ -- as they do during wars -- they come back together when peace returns
-
-
-
-Next we'll plot data on debt service costs as fractions of government revenues in Great Britain and France during the 18th century.
+接下来，我们将绘制 18 世纪英国和法国的偿债成本占政府收入比例的数据。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Ratio of debt service to taxes, Britain and France"
+    caption: "偿债占税收比例，英国与法国"
     name: fr_fig1
 ---
 
-# Read the data from the Excel file
+# 从Excel文件读取数据
 data1 = pd.read_excel(dette_url, sheet_name='Debt', 
             usecols='R:S', skiprows=5, nrows=99, header=None)
 data1a = pd.read_excel(dette_url, sheet_name='Debt', 
             usecols='P', skiprows=89, nrows=15, header=None)
 
-# Plot the data
+# 绘制数据
 plt.figure()
 plt.plot(range(1690, 1789), 100 * data1.iloc[:, 1], linewidth=0.8)
 
@@ -243,31 +230,28 @@ index = (date < 1774) & (data1.iloc[:, 0] > 0)
 plt.plot(date[index], 100 * data1[index].iloc[:, 0], 
          '*:', color='r', linewidth=0.8)
 
-# Plot the additional data
+# 绘制附加数据
 plt.plot(range(1774, 1789), 100 * data1a, '*:', color='orange')
 
-# Note about the data
-# The French data before 1720 don't match up with the published version
-# Set the plot properties
+# 图表属性
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 plt.gca().set_facecolor('white')
 plt.gca().set_xlim([1688, 1788])
-plt.ylabel('% of Taxes')
+plt.ylabel('税收的百分比')
 
 plt.tight_layout()
 plt.show()
 ```
 
-Figure  {numref}`fr_fig1` shows that interest payments on government debt (i.e., so-called ''debt service'') were high fractions of government tax revenues in both Great Britain and France. 
+图{numref}`fr_fig1`显示，在英国和法国，政府债务的利息支出（即所谓的 “还本付息”）占政府税收收入的比例都很高。
 
-{numref}`fr_fig2` showed us that in peace times Britain managed to balance its budget despite those large interest costs. 
+{numref}`fr_fig2`向我们展示了在和平时期，尽管利息支出巨大，英国仍然能够平衡预算。
 
-But as  we'll see in our next graph, on the eve of the French Revolution in 1788, the  fiscal  *law of gravity* that worked so well in Britain did not  working very well in  France.
-
+但正如我们在下一张图中看到的，在1788年法国大革命前夕，在英国行之有效的财政重力法则在法国并不奏效。
 
 ```{code-cell} ipython3
-# Read the data from the Excel file
+# 从 Excel 文件中读取数据
 data1 = pd.read_excel(fig_3_url, sheet_name='Sheet1', 
           usecols='C:F', skiprows=5, nrows=30, header=None)
 
@@ -278,7 +262,7 @@ data1.replace(0, np.nan, inplace=True)
 ---
 mystnb:
   figure:
-    caption: "Government Spending and Tax Revenues in France"
+    caption: "法国的政府支出和税收收入"
     name: fr_fig3
 ---
 # Plot the data
@@ -290,11 +274,11 @@ plt.plot(range(1759, 1789, 1), data1.iloc[:, 2],
          '-o', linewidth=0.8, markerfacecolor='none')
 plt.plot(range(1759, 1789, 1), data1.iloc[:, 3], '-*', linewidth=0.8)
 
-plt.text(1775, 610, 'total spending', fontsize=10)
-plt.text(1773, 325, 'military', fontsize=10)
-plt.text(1773, 220, 'civil plus debt service', fontsize=10)
-plt.text(1773, 80, 'debt service', fontsize=10)
-plt.text(1785, 500, 'revenues', fontsize=10)
+plt.text(1775, 610, '总开支', fontsize=10)
+plt.text(1773, 325, '军用', fontsize=10)
+plt.text(1773, 220, '民用加偿债', fontsize=10)
+plt.text(1773, 80, '偿债', fontsize=10)
+plt.text(1785, 500, '收入', fontsize=10)
 
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
@@ -305,139 +289,122 @@ plt.tight_layout()
 plt.show()
 ```
 
-{numref}`fr_fig3` shows that on the eve of the French Revolution in 1788, government expenditures exceeded tax revenues.   
+{numref}`fr_fig3`显示，在1788年法国大革命前夕，政府支出超过了税收收入。  
 
 
-Especially during and after France's expenditures to help the Americans in their War of Independence from Great Britain,   growing government debt service (i.e., interest payments) 
-contributed to this situation. 
+特别是在法国帮助美国人从英国独立出来的战争期间和之后，不断增长的政府还本付息（即利息支出）造成了这种情况。
 
-This was partly a consequence of the unfolding of the debt dynamics that underlies the Unpleasant Arithmetic discussed in this quantecon lecture  {doc}`unpleasant`.  
+这在一定程度上是债务动态发展的结果，而债务动态 是接下来{doc}`unpleasant`的基础。
 
+{cite}`sargent_velde1995`描述了直到1788年统治法国的古代政体的制度特征是如何使政府难以平衡预算的。
 
-{cite}`sargent_velde1995` describe how the Ancient Regime that until 1788 had  governed France  had stable institutional features that made it difficult for the government to balance its budget.
+强大的利益争夺阻碍了政府缩小其总支出与税收之间的差距。
+政府无法通过以下方式缩小总支出与税收之间的差距
 
-Powerful contending interests had prevented from the government from closing the gap between its
-total expenditures and its tax revenues by either
+ * 提高税收，或
+ * 降低政府的非偿债（即非利息）支出，或 
+ * 通过重新安排偿债期限，即拖欠部分债务来降低偿债（即利息）成本
 
- * raising taxes, or
- * lowering government's non-debt service (i.e., non-interest)   expenditures, or 
- * lowering debt service (i.e., interest) costs by rescheduling, i.e., defaulting on some  debts
+法国的先例和现行安排使三个群体有权阻止对他们特别关心的政府预算约束的组成部分进行调整
 
-Precedents and prevailing French arrangements had empowered three constituencies to block adjustments to components of the government budget constraint that they cared especially about
+* 纳税人
+* 政府支出的受益人
+* 政府债权人（即政府债券的所有者）
 
-* tax payers
-* beneficiaries of government expenditures
-* government creditors (i.e., owners of government bonds)
+1720 年左右，法国国王路易十四发动战争后，法国政府也遇到了类似的情况。
+战争导致债务危机后，法国政府在 1720 年左右面临类似情况时，牺牲了政府债权人（即政府债券所有者）的利益，即通过拖欠足够多的债务来减少利息支出，从而平衡预算。
 
-When the French government had confronted a similar situation around 1720 after King  Louis XIV's
-Wars had left it with a debt crisis, it had sacrificed the interests of  
-government creditors, i.e., by defaulting enough of its debt to bring  reduce interest payments down enough to balance the budget.
+不知何故，1789 年法国政府的债权人比 1720 年时更加强大。
 
-Somehow, in 1789, creditors of the French government were more powerful than they had been in 1720.
+因此，路易十六国王召集了全体议员，要求他们重新设计法国宪法，以降低政府开支或增加税收，从而使他既能平衡预算，又能减少债务。
 
-Therefore, King Louis XVI convened the Estates General together to ask them to redesign the French constitution in a way that would lower government expenditures or increase taxes, thereby
-allowing him to balance the budget while also honoring his promises to creditors of the French government.  
+{cite}`sargent_velde1995`描述法国大革命时期是如何实现这一目标的。
 
-The King called the Estates General together in an effort to promote the reforms that would
-would bring sustained budget balance.  
+## 国有化、私有化、减债 
 
-{cite}`sargent_velde1995` describe how the French Revolutionaries set out to accomplish that.
+1789 年，革命党人迅速将议会改组为国民议会。
 
-## Nationalization, Privatization, Debt Reduction 
+首要任务是解决财政危机，正是这种情况促使国王召开了国民议会。
 
-In 1789, the Revolutionaries quickly reorganized the Estates General  into a National Assembly.
+革命党人不是社会主义者或共产主义者。
 
-A first piece of business was to address the fiscal crisis, the situation that had motivated the King to convene the Estates General.
+相反，他们尊重私有财产，了解最先进的经济学。 
 
-The Revolutionaries were not socialists or communists.
+他们知道，要偿还政府债务，就必须增加新的收入或减少支出。
 
-To the contrary, they respected  private property and knew state-of-the-art economics.  
+巧合的是，天主教会拥有大量创收财产。 
 
-They knew that to honor government debts, they would have to raise new revenues or reduce expenditures.
+事实上，根据这些收入流的资本化价值估算，教会土地的价值相当于 
+约等于法国政府的全部债务。
 
-A coincidence was that the Catholic Church owned vast income-producing properties.  
+这一巧合促成了偿还法国政府债务的三步走计划
 
-Indeed, the capitalized value of those income streams put estimates of the value of church lands at 
-about the same amount as the entire French government debt. 
+ * 将教会土地国有化，即扣押或没收教会土地，但不支付任何费用
+ * 出售教会土地 
+ * 用出售所得偿还甚至清偿法国政府的债务
 
-This coincidence fostered a three step plan for servicing the French government debt
+亚当-斯密在 1776 年出版的《国富论》一书中分析了他所谓的 “真实票据”，并阐述了这一计划所依据的货币理论，许多革命者都读过这本书。
 
- * nationalize the church lands -- i.e., sequester or confiscate it without paying for it
- * sell the church lands 
- * use the proceeds from those sales to service or even retire French government debt
+亚当-斯密将 “真实纸币 ”定义为以生产资本或存货等真实资产为抵押的纸币。
 
-The monetary theory underlying this plan had been set out by Adam Smith in his analysis of what he called *real bills*  in his  1776 book
-**The Wealth of Nations**   {cite}`smith2010wealth`, which many of the revolutionaries had read.
+国民议会为实施这一计划做出了巧妙的制度安排。
 
-Adam Smith defined a *real bill* as a paper money note that is backed by a claims on a real asset like productive capital or inventories. 
+为了回应天主教主教塔列朗（无神论者）的动议，国民议会没收了教会的土地并将其收归国有。
 
-The National Assembly put together an ingenious institutional  arrangement to implement this plan.
+国民议会打算用教会土地的收益来偿还国债。
 
-In response to a motion by Catholic Bishop Talleyrand (an atheist),
-the National Assembly confiscated and nationalized  Church lands. 
+为此，国民议会开始实施一项 “私有化计划”，以便在偿还债务的同时不增加税收。
+不增加税收。
 
-The National Assembly intended to use earnings from  Church lands to service its national debt.
+他们的计划涉及发行名为“assignats”的纸币，持有者可以使用这些纸币购买国有土地。
 
-To do this, it  began to implement a ''privatization plan'' that would let it service its debt while
-not raising taxes.
+这些纸币在某种程度上会“和银币一样好”，因为两者都可作为支付手段用于交换那些（曾经属于教会的）土地。
 
-Their plan involved issuing paper notes called ''assignats'' that entitled bearers to use them to purchase state lands.  
+财政部长内克尔和国民议会的代表们因此计划通过创造一种新货币，来同时解决私有化问题*和*债务问题。
 
-These paper notes would be ''as good as silver coins'' in the sense that both were acceptable means of payment in exchange for those (formerly) church lands.  
+他们设计了一个通过拍卖没收的土地来筹集资金的方案，从而以政府出售土地为担保，回收已发行的纸币。
 
-Finance Minister Necker and the Constituents of the National Assembly thus  planned
-to solve the privatization problem *and* the debt problem simultaneously
-by creating a new currency. 
+这种“税收支撑的货币”方案将国民议会推进到了当时的现代货币理论领域。
 
-They devised a scheme to raise revenues by auctioning
-the confiscated lands, thereby withdrawing paper notes issued on the security of
-the lands sold by the government.
+辩论记录显示国民议会的成员们如何通过理论和证据来评估这一创新的可能影响。
 
- This ''tax-backed money'' scheme propelled the National Assembly  into the domains of then modern monetary theories.
- 
-Records of  debates show
-how members of the Assembly marshaled theory and evidence to assess the likely
-effects of their innovation. 
+  * 国民议会的成员引用了大卫·休谟和亚当·斯密的观点
+  * 他们提到了约翰·劳的1720年金融体系和十五年前美国的纸币经验，作为纸币计划可能出错的例子
+  * 知道了这些陷阱，他们开始努力避免
 
-  * Members of the National Assembly quoted David Hume and Adam Smith
-  * They  cited John Law's System of 1720 and the American experiences with paper money fifteen years
-earlier as examples of how paper money schemes can go awry
-  * Knowing pitfalls, they set out to avoid them
+他们的计划在两三年内取得了成功。
 
-They succeeded for two or three years.
+但之后，法国卷入了一场大规模的战争，战争扰乱了计划，使得法国纸币的性质发生了根本性的变化。{cite}`sargent_velde1995` 描述了发生的情况。
 
-But after that, France entered a big War that disrupted the plan in ways that completely altered the character of France's paper money. {cite}`sargent_velde1995` describe what happened.
+## 重塑税收制度与税务管理
 
-## Remaking the tax code and tax administration
+1789年，法国革命者成立了国民议会，开始着手重塑法国的财政政策。
 
-In 1789 the French Revolutionaries formed a National Assembly and set out to remake French
-fiscal policy.
+他们希望履行政府债务——法国政府的债权人在国民议会中有很强的代表性。
 
-They wanted to honor government debts -- interests of French government creditors were well represented in the National Assembly.
+但他们开始着手重塑法国的税收制度和征税的行政机器。
 
-But they set out to remake  the French tax code and the administrative machinery for collecting taxes.
+  * 他们废除了许多税种
+  * 他们废除了古老制度中的*税务承包*机制
+    * 税务承包意味着政府将税收征收私有化，雇佣私人公民——所谓的税务承包商来征收税款，而承包商则保留一部分税款作为服务报酬
+    * 伟大的化学家拉瓦锡也是一位税务承包商，这也是公共安全委员会在1794年将他送上断头台的原因之一
 
-  * they abolished many taxes
-  * they abolished the Ancient Regimes scheme for *tax farming*
-      * tax farming meant that the government had privatized tax collection by hiring private citizens -- so-called  tax farmers to collect taxes, while retaining a fraction of them as payment for their services
-      * the great chemist Lavoisier was also a tax farmer, one of the reasons that the Committee for Public Safety sent him to the guillotine in 1794
+由于这些税收改革，政府税收收入下降。
 
-As a consequence of these tax reforms, government tax revenues declined
-
-The next figure shows this
+下一幅图显示了这一情况。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Index of real per capital revenues, France"
+    caption: "法国人均实际收入指数"
     name: fr_fig5
 ---
-# Read data from Excel file
+# 从Excel文件读取数据
 data5 = pd.read_excel(dette_url, sheet_name='Debt', usecols='K', 
                     skiprows=41, nrows=120, header=None)
 
-# Plot the data
+# 绘制数据
 plt.figure()
 plt.plot(range(1726, 1846), data5.iloc[:, 0], linewidth=0.8)
 
@@ -451,43 +418,39 @@ plt.ylabel('1726 = 1', fontsize=12)
 plt.tight_layout()
 plt.show()
 ```
+根据 {numref}`fr_fig5`，人均税收收入在1789年之前的水平直到1815年后，拿破仑·波拿巴被流放到圣赫勒拿岛并且路易十八恢复法国王位后才得以回升。
 
-According to {numref}`fr_fig5`, tax revenues per capita did not rise to their pre 1789 levels
-until after 1815, when Napoleon Bonaparte was exiled to St Helena and King Louis XVIII was restored to the French Crown.
+* 从1799至1814年，拿破仑·波拿巴还有其他的收入来源——战利品和战争中打败的省份和国家支付的赔款
+* 从1789至1799年，法国革命者寻求其他来源来筹集资源，以支付政府购买的货物和服务以及偿还法国政府债务。
 
-  * from 1799 to 1814, Napoleon Bonaparte had other sources of revenues -- booty and reparations from provinces and nations that he defeated in war
-
-  * from 1789 to 1799, the French Revolutionaries turned to another source to raise resources to pay for government purchases of goods and services and to service French government debt. 
-
-And as the next figure shows, government expenditures exceeded tax revenues by substantial
-amounts during the period form 1789 to 1799.
+如下图所示，在1789至1799年期间，政府开支大幅超过税收。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Spending (blue) and Revenues (orange), (real values)"
+    caption: "开支（蓝色）和收入（橙色），（实值）"
     name: fr_fig11
 ---
-# Read data from Excel file
+# 从Excel文件读取数据
 data11 = pd.read_excel(assignat_url, sheet_name='Budgets',
         usecols='J:K', skiprows=22, nrows=52, header=None)
 
-# Prepare the x-axis data
+# 准备x轴数据
 x_data = np.concatenate([
     np.arange(1791, 1794 + 8/12, 1/12),
     np.arange(1794 + 9/12, 1795 + 3/12, 1/12)
 ])
 
-# Remove NaN values from the data
+# 移除NaN数值
 data11_clean = data11.dropna()
 
-# Plot the data
+# 绘制数据
 plt.figure()
 h = plt.plot(x_data, data11_clean.values[:, 0], linewidth=0.8)
 h = plt.plot(x_data, data11_clean.values[:, 1], '--', linewidth=0.8)
 
-# Set plot properties
+# 设置图表属性
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 plt.gca().set_facecolor('white')
@@ -496,34 +459,34 @@ plt.xlim([1791, 1795 + 3/12])
 plt.xticks(np.arange(1791, 1796))
 plt.yticks(np.arange(0, 201, 20))
 
-# Set the y-axis label
-plt.ylabel('millions of livres', fontsize=12)
+# 设置y轴标签
+plt.ylabel('百万里弗', fontsize=12)
 
 plt.tight_layout()
 plt.show()
 ```
 
-To cover the discrepancies between government expenditures and tax revenues revealed in {numref}`fr_fig11`, the French revolutionaries  printed paper money and spent it.  
+面对这种财政困境，法国革命者通过多种方式弥补收支差额，其中一种方法是印发纸币并在市场上流通使用。
 
-The next figure shows that by printing money, they were able to finance substantial purchases 
-of goods and services, including military goods and soldiers' pay.
+为了详细展示这一过程，我们下面将展示纸币的增发与各种商品和服务购买能力之间的关系，特别是军事物资和士兵的支付。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Revenues raised by printing paper money notes"
-    name: fr_fig24
+    caption: "纸币供应量与价格水平"
+    name: fr_fig12
 ---
 # Read data from Excel file
 data12 = pd.read_excel(assignat_url, sheet_name='seignor', 
          usecols='F', skiprows=6, nrows=75, header=None).squeeze()
 
-# Create a figure and plot the data
+# 创建图表并绘制
 plt.figure()
 plt.plot(pd.date_range(start='1790', periods=len(data12), freq='M'),
          data12, linewidth=0.8)
 
+# 设置图表属性
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
@@ -776,73 +739,70 @@ hyperinflations.
  to obtain the following graph.
 
 ```{code-cell} ipython3
-# Regress y on x for three periods
+# 为三个时期分别对y回归x
 a1, b1 = fit(bal[1:31], infl[1:31])
 a2, b2 = fit(bal[31:44], infl[31:44])
 a3, b3 = fit(bal[44:63], infl[44:63])
 
-# Regress x on y for three periods
+# 为三个时期分别对x回归y
 a1_rev, b1_rev = fit(infl[1:31], bal[1:31])
 a2_rev, b2_rev = fit(infl[31:44], bal[31:44])
 a3_rev, b3_rev = fit(infl[44:63], bal[44:63])
 ```
-
-```{code-cell} ipython3
+Image input capabilities: Enabled
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "通货膨胀和实际余额"
     name: fr_fig104b
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
-plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', color='blue', label='real bills period')
+# 第一个子样本
+plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', color='blue', label='真实票据时期')
 
-# Second subsample
-plt.plot(bal[34:44], infl[34:44], '+', color='red', label='terror')
+# 第二个子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 
-# Third subsample
-plt.plot(bal[44:63], infl[44:63], '*', color='orange', label='classic Cagan hyperinflation')
+# 第三个子样本
+plt.plot(bal[44:63], infl[44:63], '*', color='orange', label='经典Cagan恶性通货膨胀')
 
-plt.xlabel('real balances')
-plt.ylabel('inflation')
+plt.xlabel('实际余额')
+plt.ylabel('通货膨胀')
 plt.legend()
 
 plt.tight_layout()
 plt.show()
 ```
-
-Now let's regress inflation on real balances during the *real bills* period and plot the regression
-line.
+现在让我们在真实票据时期对通货膨胀进行回归到实际余额，并绘制回归线。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "通货膨胀与实际余额的关系"
     name: fr_fig104c
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
+# 第一个子样本
 plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='real bills period')
+        color='blue', label='真实票据时期')
 plt.plot(bal[1:31], a1 + bal[1:31] * b1, color='blue')
 
-# Second subsample
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='terror')
+# 第二个子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 
-# Third subsample
+# 第三个子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='classic Cagan hyperinflation')
+        color='orange', label='经典Cagan恶性通货膨胀')
 
-plt.xlabel('real balances')
-plt.ylabel('inflation')
+plt.xlabel('实际余额')
+plt.ylabel('通货膨胀')
 plt.legend()
 
 plt.tight_layout()
@@ -853,86 +813,77 @@ The regression line in {numref}`fr_fig104c` shows that large increases in real b
 assignats (paper money) were accompanied by only modest rises in the price level, an outcome in line
 with the *real bills* theory. 
 
-During this period, assignats were claims on church lands. 
+在这段时期内，assignats是对教堂土地的索赔。
 
-But towards the end of this period, the price level started to rise and real balances to fall
-as the government continued to print money but stopped selling church land. 
+但到了这一时期的末期，当政府继续印制货币但停止出售教堂土地时，物价水平开始上升，真实余额开始下降。
 
-To get people to hold that paper money, the government forced people to hold it by using legal restrictions.
+为了让人们持有这些纸币，政府通过法律限制强迫人们持有。
 
-Now let's regress real balances on inflation  during the terror  and plot the regression
-line.
+现在让我们对恐怖时期的真实余额对通货膨胀进行回归，并绘制回归线。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "通货膨胀与真实余额"
     name: fr_fig104d
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
+# 第一子样本
 plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='real bills period')
+        color='blue', label='真实票据时期')
 
-# Second subsample
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='terror')
+# 第二子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖')
 plt.plot(a2_rev + b2_rev * infl[31:44], infl[31:44], color='red')
 
-# Third subsample
+# 第三子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='classic Cagan hyperinflation')
+        color='orange', label='经典Cagan恶性通货膨胀')
 
-plt.xlabel('real balances')
-plt.ylabel('inflation')
+plt.xlabel('真实余额')
+plt.ylabel('通货膨胀')
 plt.legend()
 
 plt.tight_layout()
 plt.show()
 ```
+如 {numref}`fr_fig104d` 所示，恐怖时期的回归线显示，在实际余额大幅增加的情况下，价格水平上升的压力并不显著，有时甚至出现价格下降的情况。
 
-The regression line in {numref}`fr_fig104d` shows that large increases in real balances of
-assignats (paper money) were accompanied by little upward price  level pressure, even some declines in prices.  
+这反映了法律限制 — 金融抑制在恐怖时期发挥的作用，这些措施在很大程度上限制了大幅增加的实际余额对价格水平的影响。
 
-This reflects how well legal restrictions -- financial repression -- was working during the period of the Terror. 
+但是，恐怖时期结束于1794年7月，随着大量的纸币发行和对交易及储值的其他方式的寻求，通货膨胀快速升高。
 
-But the Terror ended in July 1794.  That unleashed a big inflation as people tried to find other ways to transact and store values. 
-
-The following two graphs are for the classical hyperinflation period.
-
-One regresses inflation on real balances, the other regresses real balances on inflation.
-
-Both show a prounced inverse relationship that is the hallmark of the hyperinflations studied by 
-Cagan {cite}`Cagan`.
+下图展示了经典恶性通货膨胀时期的数据，以及通货膨胀与实际余额之间的逆向关系。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "通货膨胀和实际余额"
     name: fr_fig104e
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
+# 第一子样本
 plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='real bills period')
+        color='blue', label='真实票据时期')
 
-# Second subsample
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='terror')
+# 第二子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖')
 
-# Third subsample
+# 第三子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-    color='orange', label='classic Cagan hyperinflation')
+    color='orange', label='经典Cagan恶性通货膨胀')
 plt.plot(bal[44:63], a3 + bal[44:63] * b3, color='orange')
 
-plt.xlabel('real balances')
-plt.ylabel('inflation')
+plt.xlabel('真实余额')
+plt.ylabel('通货膨胀')
 plt.legend()
 
 plt.tight_layout()
