@@ -24,7 +24,7 @@ kernelspec:
 我们使用以下的导入。
 
 ```{code-cell} ipython3
-import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy as np
 import yfinance as yf
 import pandas as pd
@@ -32,13 +32,12 @@ import statsmodels.api as sm
 
 from pandas_datareader import wb
 from scipy.stats import norm, cauchy
-from matplotlib import font_manager
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-fontP = font_manager.FontProperties()
-fontP.set_family('SimHei')
-fontP.set_size(14)
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 概览
@@ -192,8 +191,8 @@ fig, ax = plt.subplots()
 
 ax.plot(r, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(r.index, 0, r.values, lw=0.2)
-ax.set_ylabel('回报', fontsize=12, fontproperties=fontP)
-ax.set_xlabel('日期', fontsize=12, fontproperties=fontP)
+ax.set_ylabel('回报', fontsize=12)
+ax.set_xlabel('日期', fontsize=12)
 
 plt.show()
 ```
@@ -224,8 +223,8 @@ fig, ax = plt.subplots()
 
 ax.plot(r, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(r.index, 0, r.values, lw=0.2)
-ax.set_ylabel('回报', fontsize=12, fontproperties=fontP)
-ax.set_xlabel('日期', fontsize=12, fontproperties=fontP)
+ax.set_ylabel('回报', fontsize=12)
+ax.set_xlabel('日期', fontsize=12)
 
 plt.show()
 ```
@@ -249,7 +248,7 @@ x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, np.mean(r), np.std(r))
 ax.plot(x, p, linewidth=2, label='正态分布')
 
-ax.set_xlabel('回报', fontproperties=fontP, fontsize=12)
+ax.set_xlabel('回报', fontsize=12)
 ax.legend()
 
 plt.show()
@@ -335,14 +334,14 @@ for ax, s in zip(axes[:2], s_vals):
     data = np.random.randn(n) * s
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"从 $N(0, \sigma^2)$ 抽取，$\sigma = {s}$", fontsize=11, fontproperties=fontP)
+    ax.set_title(f"从 $N(0, \sigma^2)$ 抽取，$\sigma = {s}$", fontsize=11)
 
 ax = axes[2]
 distribution = cauchy()
 data = distribution.rvs(n)
 ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(list(range(n)), 0, data, lw=0.2)
-ax.set_title(f"来自柯西分布的抽取", fontsize=11, fontproperties=fontP)
+ax.set_title(f"来自柯西分布的抽取", fontsize=11)
 
 plt.subplots_adjust(hspace=0.25)
 
@@ -511,7 +510,7 @@ fig, ax = plt.subplots()
 alpha = 1.0
 ax.plot(x, np.exp(- alpha * x), label='指数分布', alpha=0.8)
 ax.plot(x, x**(- alpha), label='帕累托分布', alpha=0.8)
-ax.set_xlabel('X值', fontproperties=fontP)
+ax.set_xlabel('X值')
 ax.set_ylabel('CCDF')
 ax.legend()
 plt.show()
@@ -530,8 +529,8 @@ fig, ax = plt.subplots()
 alpha = 1.0
 ax.loglog(x, np.exp(- alpha * x), label='指数分布', alpha=0.8)
 ax.loglog(x, x**(- alpha), label='帕累托分布', alpha=0.8)
-ax.set_xlabel('对数值', fontproperties=fontP)
-ax.set_ylabel('对数概率', fontproperties=fontP)
+ax.set_xlabel('对数值')
+ax.set_ylabel('对数概率')
 ax.legend()
 plt.show()
 ```
@@ -589,8 +588,8 @@ for data, label, ax in zip(data_list, labels, axes):
 
     ax.loglog(x_grid, [eccdf(x, data) for x in x_grid], 
         'o', markersize=3.0, alpha=0.5, label=label)
-    ax.set_xlabel("对数值", fontproperties=fontP)
-    ax.set_ylabel("对数概率", fontproperties=fontP)
+    ax.set_xlabel("对数值")
+    ax.set_ylabel("对数概率")
     
     ax.legend()
     
@@ -725,8 +724,8 @@ def empirical_ccdf(data,
         ax.plot(x, x * a + b, 'k-', alpha=0.6, label=f"斜率 = ${a: 1.2f}$")
     if not xlabel:
         xlabel='对数值'
-    ax.set_xlabel(xlabel, fontsize=12, fontproperties=fontP)
-    ax.set_ylabel("对数概率", fontsize=12, fontproperties=fontP)
+    ax.set_xlabel(xlabel, fontsize=12)
+    ax.set_ylabel("对数概率", fontsize=12)
         
     if label:
         ax.legend(loc='lower left', fontsize=12)
