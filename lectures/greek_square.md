@@ -29,9 +29,11 @@ kernelspec:
 ## 完全平方数和无理数
 如果一个整数的平方根也是整数，则称该整数为**完全平方数**。
 完全平方数的有序序列从以下数字开始：
+
 $$
 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, \ldots 
 $$
+
 如果一个整数不是完全平方数，那么它的平方根就是一个无理数 -- 即它不能表示为两个整数的比值，其小数展开是无限的。
 古希腊人发明了一种算法来计算整数的平方根，包括那些不是完全平方数的整数。
 他们的方法涉及：
@@ -47,9 +49,11 @@ $$
 ## 二阶线性差分方程
 在讲述古希腊人如何计算平方根之前，我们将简要介绍二阶线性差分方程。
 我们将研究以下二阶线性差分方程：
+
 $$
 y_t = a_1 y_{t-1} + a_2 y_{t-2}, \quad t \geq 0
 $$ (eq:2diff1)
+
 其中 $(y_{-1}, y_{-2})$ 是给定的一对初始条件。
 方程 {eq}`eq:2diff1` 实际上是序列 $\{y_t\}_{t=0}^\infty$ 的无限多个线性方程。
 对于 $t = 0, 1, 2, \ldots$ 中的每一个 $t$，都有一个方程。
@@ -63,56 +67,77 @@ $$ (eq:2diff1)
 相反，我们将寻找一个时不变函数来*解决*我们的差分方程，这意味着
 它为满足方程{eq}`eq:2diff1`的$\{y_t\}_{t=0}^\infty$序列提供了一个公式，适用于每个$t \geq 0$。
 我们寻求$y_t, t \geq 0$的表达式，作为初始条件$(y_{-1}, y_{-2})$的函数：
+
 $$ 
 y_t = g((y_{-1}, y_{-2});t), \quad t \geq 0.
 $$ (eq:2diff2)
+
 我们称这样的函数$g$为差分方程{eq}`eq:2diff1`的*解*。
 发现解的一种方法是使用猜测和验证法。
 我们将从考虑一对特殊的初始条件开始，
 这对初始条件满足
+
 $$
 y_{-1} = \delta y_{-2}
 $$ (eq:2diff3)
+
 其中$\delta$是待确定的标量。
 对于满足{eq}`eq:2diff3`的初始条件，
 方程{eq}`eq:2diff1`意味着
+
 $$
 y_0 = \left(a_1 + \frac{a_2}{\delta}\right) y_{-1}.
 $$ (eq:2diff4)
+
 我们希望
+
 $$
 \left(a_1 + \frac{a_2}{\delta}\right) = \delta
 $$ (eq:2diff5)
+
 我们可以将其重写为*特征方程*
+
 $$
 \delta^2 - a_1 \delta - a_2 = 0.
 $$ (eq:2diff6)
+
 应用二次公式求解{eq}`eq:2diff6`的根，我们得到
+
 $$
 \delta = \frac{ a_1 \pm \sqrt{a_1^2 + 4 a_2}}{2}.
 $$ (eq:2diff7)
+
 对于满足方程{eq}`eq:2diff7`的两个$\delta$中的任一个，
 差分方程{eq}`eq:2diff1`的解为
+
 $$
 y_t = \delta^t y_0 , \forall t \geq 0
 $$ (eq:2diff8)
+
 前提是我们设置
+
 $$
 y_0 = \delta y_{-1} . 
 $$ 
+
 差分方程{eq}`eq:2diff1`的*一般*解形式为
+
 $$
 y_t = \eta_1 \delta_1^t + \eta_2 \delta_2^t
 $$ (eq:2diff9)
+
 其中$\delta_1, \delta_2$是特征方程{eq}`eq:2diff6`的两个解{eq}`eq:2diff7`，而$\eta_1, \eta_2$是两个常数，选择它们以满足
 
 $$ 
     \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix} = \begin{bmatrix} \delta_1^{-1} & \delta_2^{-1} \cr \delta_1^{-2} & \delta_2^{-2} \end{bmatrix} \begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} 
 $$ (eq:2diff10)
+
 或
+
 $$
 \begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} = \begin{bmatrix} \delta_1^{-1} & \delta_2^{-1} \cr \delta_1^{-2} & \delta_2^{-2} \end{bmatrix}^{-1} \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix}
 $$ (eq:2diff11)
+
 有时我们可以自由选择初始条件$(y_{-1}, y_{-2})$，在这种情况下，我们
 使用系统{eq}`eq:2diff10`来找到相关的$(\eta_1, \eta_2)$。
 如果我们选择$(y_{-1}, y_{-2})$使$(\eta_1, \eta_2) = (1, 0)$，那么对于所有$t \geq 0$，$y_t = \delta_1^t$。
@@ -434,9 +459,12 @@ print(f"根: {np.round(roots, 8)}")
 因此，我们确认了{eq}`eq:eigen_sqrt`。
 关于我们所寻求的平方根的信息也包含在两个特征向量中。
 实际上，每个特征向量只是${\mathbb R}^3$的一个二维子空间，由我们在上面方程{eq}`eq:2diff8`中遇到的以下形式的动态确定：
+
 $$
 y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2 
 $$ (eq:invariantsub101)
+
+
 在方程{eq}`eq:invariantsub101`中，第$i$个$\lambda_i$等于$V_{i, 1}/V_{i,2}$。
 下图验证了我们示例中的这一点。
 
@@ -473,56 +501,79 @@ plt.show()
 前面的计算表明，我们可以使用特征向量 $V$ 构造 2 维*不变子空间*。
 现在我们将探讨这种可能性。
 定义变换后的变量
+
 $$
 x_t^* = V^{-1} x_t
 $$
+
 显然，我们可以从 $x_t^*$ 恢复 $x_t$：
+
 $$
 x_t = V x_t^*
 $$
+
 以下符号和方程将对我们有所帮助。
 令
+
 $$
 V = \begin{bmatrix} V_{1,1} & V_{1,2} \cr 
                          V_{2,1} & V_{2,2} \end{bmatrix}, \quad
 V^{-1} = \begin{bmatrix} V^{1,1} & V^{1,2} \cr 
                          V^{2,1} & V^{2,2} \end{bmatrix}
 $$
+
 注意，从以下等式可以得出
+
+
 $$
  \begin{bmatrix} V^{1,1} & V^{1,2} \cr 
                          V^{2,1} & V^{2,2} \end{bmatrix} \begin{bmatrix} V_{1,1} & V_{1,2} \cr 
                          V_{2,1} & V_{2,2} \end{bmatrix} = \begin{bmatrix} 1  & 0 \cr 0 & 1 \end{bmatrix}
 $$
+
+
 $$
 V^{2,1} V_{1,1} + V^{2,2} V_{2,1} = 0
 $$
+
 和
+
 $$
 V^{1,1}V_{1,2} + V^{1,2} V_{2,2} = 0.
 $$
+
 这些方程很快就会非常有用。
 注意
+
 $$
 \begin{bmatrix} x_{1,t+1}^* \cr x_{2,t+1}^* \end{bmatrix} = \begin{bmatrix} \lambda_1  & 0 \cr 0 & \lambda_2 \end{bmatrix}
 \begin{bmatrix} x_{1,t}^* \cr x_{2,t}^* \end{bmatrix}
 $$
+
 要使 $\lambda_1$ 失活，我们需要设置
+
 $$
 x_{1,0}^* = 0.
 $$
+
 这可以通过设置以下内容实现
+
 $$
 x_{2,0} =  -( V^{1,2})^{-1} V^{1,1} x_{1,0} = V_{2,2} V_{1,2}^{-1} x_{1,0}.
 $$ (eq:deactivate1)
+
 要使 $\lambda_2$ 失活，我们需要设置
+
 $$
 x_{2,0}^* = 0
 $$
+
 这可以通过设置以下内容实现
+
 $$
 x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 $$ (eq:deactivate2)
+
 让我们在下面验证 {eq}`eq:deactivate1` 和 {eq}`eq:deactivate2`
 要使 $\lambda_1$ 失活，我们使用 {eq}`eq:deactivate1`
 
