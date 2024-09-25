@@ -11,19 +11,19 @@ kernelspec:
   name: python3
 ---
 
-# Business Cycles
+# 商业周期
 
-## Overview
+## 概览
 
-In this lecture we review some empirical aspects of business cycles.
+在本讲座中，我们将从实证的角度分析商业周期。
 
-Business cycles are fluctuations in economic activity over time.
+商业周期是经济活动随时间波动的现象。
 
-These include expansions (also called booms) and contractions (also called recessions).
+这包括扩张期（也称为繁荣期）和收缩期（也称为衰退期）。
 
-For our study, we will use economic indicators from the [World Bank](https://documents.worldbank.org/en/publication/documents-reports/api) and [FRED](https://fred.stlouisfed.org/).
+在本讲中，我们将使用来自[世界银行](https://documents.worldbank.org/en/publication/documents-reports/api)和[FRED](https://fred.stlouisfed.org/)的经济指标。
 
-In addition to the packages already installed by Anaconda, this lecture requires
+除了Anaconda中包含的包之外，本讲还需要以下的包：
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -32,7 +32,7 @@ In addition to the packages already installed by Anaconda, this lecture requires
 !pip install pandas-datareader
 ```
 
-We use the following imports
+接下来我们导入本讲所需的Python包。
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -40,35 +40,37 @@ import pandas as pd
 import datetime
 import wbgapi as wb
 import pandas_datareader.data as web
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-Here's some minor code to help with colors in our plots.
+下面几行代码是用来设置图形参数的。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-# Set graphical parameters
+# 设置图形参数
 cycler = plt.cycler(linestyle=['-', '-.', '--', ':'], 
         color=['#377eb8', '#ff7f00', '#4daf4a', '#ff334f'])
 plt.rc('axes', prop_cycle=cycler)
 ```
 
+## 数据获取
 
-## Data acquisition
+我们将使用世界银行的数据API `wbgapi` 和 `pandas_datareader` 来检索数据。
 
-We will use the World Bank's data API `wbgapi` and `pandas_datareader` to retrieve data.
+我们可以使用 `wb.series.info` 并使用参数 `q` 来查询来自[世界银行](https://www.worldbank.org/en/home)的可用数据。
 
-We can use `wb.series.info` with the argument `q` to query available data from
-the [World Bank](https://www.worldbank.org/en/home).
-
-For example, let's retrieve the GDP growth data ID to query GDP growth data.
+例如，我们可以试着检索GDP增长数据。
 
 ```{code-cell} ipython3
 wb.series.info(q='GDP growth')
 ```
 
-
-Now we use this series ID to obtain the data.
+我们可以使用这个数据系列的 ID 来获取数据。
 
 ```{code-cell} ipython3
 gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
@@ -77,8 +79,7 @@ gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
 gdp_growth
 ```
 
-
-We can look at the series' metadata to learn more about the series (click to expand).
+我们可以通过展开下面代码的输出来获取数据的元数据
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -86,17 +87,15 @@ We can look at the series' metadata to learn more about the series (click to exp
 wb.series.metadata.get('NY.GDP.MKTP.KD.ZG')
 ```
 
-
-
 (gdp_growth)=
-## GDP growth rate
+## GDP 增长率
 
-First we look at GDP growth. 
+首先，让我们来看看GDP增长率。
 
-Let's source our data from the World Bank and clean it.
+我们先获取世界银行的数据并进行数据清洗。
 
 ```{code-cell} ipython3
-# Use the series ID retrieved before
+# 使用ID获取数据
 gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
             ['USA', 'ARG', 'GBR', 'GRC', 'JPN'], 
             labels=True)
@@ -104,13 +103,13 @@ gdp_growth = gdp_growth.set_index('Country')
 gdp_growth.columns = gdp_growth.columns.str.replace('YR', '').astype(int)
 ```
 
-Here's a first look at the data
+我们把数据打印出来看一看
 
 ```{code-cell} ipython3
 gdp_growth
 ```
 
-We write a function to generate plots for individual countries taking into account the recessions.
+接下来我们写一个函数来绘制时间序列图并突出显示经济衰退的时期。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -119,40 +118,40 @@ def plot_series(data, country, ylabel,
                 txt_pos, ax, g_params,
                 b_params, t_params, ylim=15, baseline=0):
     """
-    Plots a time series with recessions highlighted. 
+    使用突出显示的衰退阶段绘制时间序列图。
 
-    Parameters
+    参数
     ----------
     data : pd.DataFrame
-        Data to plot
+        要绘制的数据
     country : str
-        Name of the country to plot
+        要绘制的国家名称
     ylabel : str
-        Label of the y-axis
+        y轴的标签
     txt_pos : float
-        Position of the recession labels
-    y_lim : float
-        Limit of the y-axis
+        衰退标签的位置
+    ylim : float
+        y轴的限制
     ax : matplotlib.axes._subplots.AxesSubplot
-        Axes to plot on
+        绘图的轴向
     g_params : dict
-        Parameters for the line
+        曲线的参数
     b_params : dict
-        Parameters for the recession highlights
+        衰退高亮的参数
     t_params : dict
-        Parameters for the recession labels
+        衰退标签的参数
     baseline : float, optional
-        Dashed baseline on the plot, by default 0
+        图表中的虚线基线，默认为0
     
-    Returns
+    返回
     -------
     ax : matplotlib.axes.Axes
-        Axes with the plot.
+        带有图表的轴向。
     """
 
     ax.plot(data.loc[country], label=country, **g_params)
     
-    # Highlight recessions
+    # 高亮衰退
     ax.axvspan(1973, 1975, **b_params)
     ax.axvspan(1990, 1992, **b_params)
     ax.axvspan(2007, 2009, **b_params)
@@ -161,16 +160,12 @@ def plot_series(data, country, ylabel,
         ax.set_ylim([-ylim, ylim])
     else:
         ylim = ax.get_ylim()[1]
-    ax.text(1974, ylim + ylim*txt_pos,
-            'Oil Crisis\n(1974)', **t_params) 
-    ax.text(1991, ylim + ylim*txt_pos,
-            '1990s recession\n(1991)', **t_params) 
-    ax.text(2008, ylim + ylim*txt_pos,
-            'GFC\n(2008)', **t_params) 
-    ax.text(2020, ylim + ylim*txt_pos,
-            'Covid-19\n(2020)', **t_params)
+    ax.text(1974, ylim + ylim*txt_pos, '石油危机 (1974)', **t_params) 
+    ax.text(1991, ylim + ylim*txt_pos, '90年代衰退 (1991)', **t_params) 
+    ax.text(2008, ylim + ylim*txt_pos, '金融危机 (2008)', **t_params) 
+    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19 (2020)', **t_params)
 
-    # Add a baseline for reference
+    # 添加基线
     if baseline != None:
         ax.axhline(y=baseline, 
                    color='black', 
@@ -179,144 +174,134 @@ def plot_series(data, country, ylabel,
     ax.legend()
     return ax
 
-# Define graphical parameters 
+# 定义图形参数
 g_params = {'alpha': 0.7}
 b_params = {'color':'grey', 'alpha': 0.2}
 t_params = {'color':'grey', 'fontsize': 9, 
             'va':'center', 'ha':'center'}
 ```
 
-
-Let's start with the United States.
+让我们先从美国开始
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "United States (GDP growth rate %)"
+    caption: "美国 (GDP 增长率 %)"
     name: us_gdp
 ---
 
 fig, ax = plt.subplots()
 
-country = 'United States'
-ylabel = 'GDP growth rate (%)'
+country = '美国'
+ylabel = 'GDP 增长率 (%)'
 plot_series(gdp_growth, country, 
             ylabel, 0.1, ax, 
             g_params, b_params, t_params)
 plt.show()
 ```
 
-+++ {"user_expressions": []}
+从图中我们可以看到，GDP 增长平均率呈现正值，并且随着时间的推移呈现轻微下降趋势。
 
-GDP growth is positive on average and trending slightly downward over time.
+我们也看到GDP增长平均率的波动随时间变化，其中一些波动幅度很大。
 
-We also see fluctuations over GDP growth over time, some of which are quite large.
+让我们再多看一些国家的趋势并与美国比较。
 
-Let's look at a few more countries to get a basis for comparison.
+英国 (UK) 的模式与美国类似，增长率缓慢下降，波动显著。
 
-+++
-
-The United Kingdom (UK) has a similar pattern to the US, with a slow decline
-in the growth rate and significant fluctuations.
-
-Notice the very large dip during the Covid-19 pandemic.
+我们注意到在 Covid-19 大流行期间的大幅下跌。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "United Kingdom (GDP growth rate %)"
+    caption: "英国 (GDP 增长率 %)"
     name: uk_gdp
 ---
 
 fig, ax = plt.subplots()
 
-country = 'United Kingdom'
+country = '英国'
 plot_series(gdp_growth, country, 
             ylabel, 0.1, ax, 
             g_params, b_params, t_params)
 plt.show()
 ```
 
-+++ {"user_expressions": []}
+接下来我们看看日本，它在1960年代和1970年代经历了快速增长，并在过去二十年增长放缓。
 
-Now let's consider Japan, which experienced rapid growth in the 1960s and
-1970s, followed by slowed expansion in the past two decades.
-
-Major dips in the growth rate coincided with the Oil Crisis of the 1970s, the
-Global Financial Crisis (GFC) and the Covid-19 pandemic.
+重大增长率下降与1970年代的石油危机、全球金融危机（GFC）和Covid-19大流行相一致。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Japan (GDP growth rate %)"
+    caption: "日本 (GDP 增长率 %)"
     name: jp_gdp
 ---
 
 fig, ax = plt.subplots()
 
-country = 'Japan'
+country = '日本'
 plot_series(gdp_growth, country, 
             ylabel, 0.1, ax, 
             g_params, b_params, t_params)
 plt.show()
 ```
 
-Now let's study Greece.
+现在让我们研究希腊。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Greece (GDP growth rate %)"
+    caption: "希腊 (GDP 增长率 %)"
     name: gc_gdp
 ---
 
 fig, ax = plt.subplots()
 
-country = 'Greece'
+country = '希腊'
 plot_series(gdp_growth, country, 
             ylabel, 0.1, ax, 
             g_params, b_params, t_params)
 plt.show()
 ```
 
-Greece experienced a very large drop in GDP growth around 2010-2011, during the peak
-of the Greek debt crisis.
+希腊在2010-2011年左右经历了GDP增长率的大幅下降，这正是希腊债务危机最严重的时期。
 
-Next let's consider Argentina.
+接下来我们来看看阿根廷。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Argentina (GDP growth rate %)"
+    caption: "阿根廷 (GDP 增长率 %)"
     name: arg_gdp
 ---
 
 fig, ax = plt.subplots()
 
-country = 'Argentina'
+country = '阿根廷'
 plot_series(gdp_growth, country, 
             ylabel, 0.1, ax, 
             g_params, b_params, t_params)
 plt.show()
 ```
 
-Notice that Argentina has experienced far more volatile cycles than
-the economies examined above.
+注意阿根廷经历的波动周期远比上述国家剧烈。
 
-At the same time, Argentina's growth rate did not fall during the two developed
-economy recessions in the 1970s and 1990s.
+与此同时，阿根廷的增长率在20世纪70年代和90年代两次发达经济体衰退期间并未下降。
 
+## 失业
 
-## Unemployment
+失业率是衡量商业周期的另一个重要指标。
 
 Another important measure of business cycles is the unemployment rate.
 
 We study unemployment using rate data from FRED spanning from [1929-1942](https://fred.stlouisfed.org/series/M0892AUSM156SNBR) to [1948-2022](https://fred.stlouisfed.org/series/UNRATE), combined unemployment rate data over 1942-1948 estimated by the [Census Bureau](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html).
+
+[1929-1942年](https://fred.stlouisfed.org/series/M0892AUSM156SNBR)和[1948-2022年](https://fred.stlouisfed.org/series/UNRATE)两个时期的数据来自[FRED](https://fred.stlouisfed.org/)，而1942-1948年的失业率数据由是从[人口普查局的数据估算](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html)。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -335,21 +320,18 @@ end_date = datetime.datetime(2022, 12, 31)
 unrate = web.DataReader('UNRATE', 'fred', 
                     start_date, end_date)
 ```
-
-Let's plot the unemployment rate in the US from 1929 to 2022 with recessions
-defined by the NBER.
+接下来我们绘制美国从1929年到2022年的失业率，以及由美国国家经济研究局（NBER）定义的经济衰退期。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Long-run unemployment rate, US (%)"
+    caption: "长期失业率, 美国 (%)"
     name: lrunrate
 tags: [hide-input]
 ---
 
-# We use the census bureau's estimate for the unemployment rate 
-# between 1942 and 1948
+# 使用人口普查局估计的1942年到1948年间的失业率数据
 years = [datetime.datetime(year, 6, 1) for year in range(1942, 1948)]
 unrate_census = [4.7, 1.9, 1.2, 1.9, 3.9, 3.9]
 
@@ -357,7 +339,7 @@ unrate_census = {'DATE': years, 'UNRATE': unrate_census}
 unrate_census = pd.DataFrame(unrate_census)
 unrate_census.set_index('DATE', inplace=True)
 
-# Obtain the NBER-defined recession periods
+# 获取由 NBER 定义的经济衰退期
 start_date = datetime.datetime(1929, 1, 1)
 end_date = datetime.datetime(2022, 12, 31)
 
@@ -370,100 +352,91 @@ ax.plot(unrate_history, **g_params,
         linestyle='-', linewidth=2)
 ax.plot(unrate_census, **g_params, 
         color='black', linestyle='--', 
-        label='Census estimates', linewidth=2)
+        label='人口普查估计', linewidth=2)
 ax.plot(unrate, **g_params, color='#377eb8', 
         linestyle='-', linewidth=2)
 
-# Draw gray boxes according to NBER recession indicators
+# 根据 NBER 经济衰退指标绘制灰色方框
 ax.fill_between(nber.index, 0, 1,
                 where=nber['USREC']==1, 
                 color='grey', edgecolor='none',
                 alpha=0.3, 
                 transform=ax.get_xaxis_transform(), 
-                label='NBER recession indicators')
+                label='NBER 经济衰退指标')
 ax.set_ylim([0, ax.get_ylim()[1]])
 ax.legend(loc='upper center', 
           bbox_to_anchor=(0.5, 1.1),
           ncol=3, fancybox=True, shadow=True)
-ax.set_ylabel('unemployment rate (%)')
+ax.set_ylabel('失业率 (%)')
 
 plt.show()
 ```
+图表显示：
 
+* 劳动力市场的扩张和收缩与经济衰退高度相关。
+* 周期一般是不对称的：失业率的急剧上升后面通常跟随着缓慢的恢复。
 
-The plot shows that 
+它还向我们展示了美国在疫情后复苏期间劳动力市场条件的独特性。
 
-* expansions and contractions of the labor market have been highly correlated
-  with recessions. 
-* cycles are, in general, asymmetric: sharp rises in unemployment are followed
-  by slow recoveries.
-
-It also shows us how unique labor market conditions were in the US during the
-post-pandemic recovery. 
-
-The labor market recovered at an unprecedented rate after the shock in 2020-2021.
-
+劳动力市场在2020-2021年的冲击后以前所未有的速度恢复。
 
 (synchronization)=
-## Synchronization
+## 同步化
 
-In our {ref}`previous discussion<gdp_growth>`, we found that developed economies have had
-relatively synchronized periods of recession. 
+在我们的{ref}`之前的讨论<gdp_growth>`中，我们发现发达经济体的衰退期有相对同步的时间。
 
-At the same time, this synchronization did not appear in Argentina until the 2000s. 
+同时，这种同步现象直到21世纪才在阿根廷出现。
 
-Let's examine this trend further. 
+让我们进一步研究这种趋势。
 
-With slight modifications, we can use our previous function to draw a plot
-that includes multiple countries.
+通过轻微的修改，我们可以使用我们之前的函数来绘制包括多个国家的图表。
 
 ```{code-cell} ipython3
 ---
 tags: [hide-input]
 ---
 
-
 def plot_comparison(data, countries, 
                         ylabel, txt_pos, y_lim, ax, 
                         g_params, b_params, t_params, 
                         baseline=0):
     """
-    Plot multiple series on the same graph
+    在同一图表上绘制多个系列
 
-    Parameters
+    参数
     ----------
     data : pd.DataFrame
-        Data to plot
+        要绘制的数据
     countries : list
-        List of countries to plot
+        要绘制国家的列表
     ylabel : str
-        Label of the y-axis
+        y轴的标签
     txt_pos : float
-        Position of the recession labels
+        衰退标签的位置
     y_lim : float
-        Limit of the y-axis
+        y轴的限制
     ax : matplotlib.axes._subplots.AxesSubplot
-        Axes to plot on
+        绘图的轴向
     g_params : dict
-        Parameters for the lines
+        曲线的参数
     b_params : dict
-        Parameters for the recession highlights
+        衰退高亮的参数
     t_params : dict
-        Parameters for the recession labels
+        衰退标签的参数
     baseline : float, optional
-        Dashed baseline on the plot, by default 0
+        在图表中的虚线基线，默认为0
     
-    Returns
+    返回
     -------
     ax : matplotlib.axes.Axes
-        Axes with the plot.
+        带有绘图的轴向。
     """
     
-    # Allow the function to go through more than one series
+    # 允许函数处理多个系列
     for country in countries:
         ax.plot(data.loc[country], label=country, **g_params)
     
-    # Highlight recessions
+    # 高亮衰退期
     ax.axvspan(1973, 1975, **b_params)
     ax.axvspan(1990, 1992, **b_params)
     ax.axvspan(2007, 2009, **b_params)
@@ -471,14 +444,10 @@ def plot_comparison(data, countries,
     if y_lim != None:
         ax.set_ylim([-y_lim, y_lim])
     ylim = ax.get_ylim()[1]
-    ax.text(1974, ylim + ylim*txt_pos, 
-            'Oil Crisis\n(1974)', **t_params) 
-    ax.text(1991, ylim + ylim*txt_pos, 
-            '1990s recession\n(1991)', **t_params) 
-    ax.text(2008, ylim + ylim*txt_pos, 
-            'GFC\n(2008)', **t_params) 
-    ax.text(2020, ylim + ylim*txt_pos, 
-            'Covid-19\n(2020)', **t_params) 
+    ax.text(1974, ylim + ylim*txt_pos, '石油危机 (1974)', **t_params) 
+    ax.text(1991, ylim + ylim*txt_pos, '90年代经济衰退 (1991)', **t_params) 
+    ax.text(2008, ylim + ylim*txt_pos, '全球金融危机 (2008)', **t_params) 
+    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19 (2020)', **t_params) 
     if baseline != None:
         ax.hlines(y=baseline, xmin=ax.get_xlim()[0], 
                   xmax=ax.get_xlim()[1], color='black', 
@@ -487,91 +456,68 @@ def plot_comparison(data, countries,
     ax.legend()
     return ax
 
-# Define graphical parameters 
+# 定义图形参数 
 g_params = {'alpha': 0.7}
 b_params = {'color':'grey', 'alpha': 0.2}
 t_params = {'color':'grey', 'fontsize': 9, 
             'va':'center', 'ha':'center'}
 ```
 
-Here we compare the GDP growth rate of developed economies and developing economies.
-
-```{code-cell} ipython3
----
-tags: [hide-input]
----
-
-# Obtain GDP growth rate for a list of countries
-gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
-            ['CHN', 'USA', 'DEU', 'BRA', 'ARG', 'GBR', 'JPN', 'MEX'], 
-            labels=True)
-gdp_growth = gdp_growth.set_index('Country')
-gdp_growth.columns = gdp_growth.columns.str.replace('YR', '').astype(int)
-
-```
-
-We use the United Kingdom, United States, Germany, and Japan as examples of developed economies.
+首先我们绘制发达经济体的GDP增长率
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Developed economies (GDP growth rate %)"
-    name: adv_gdp
-tags: [hide-input]
+    caption: "发达经济体（GDP增长率 %）"
+    name: global_gdp_comparison
 ---
 
-fig, ax = plt.subplots()
-countries = ['United Kingdom', 'United States', 'Germany', 'Japan']
-ylabel = 'GDP growth rate (%)'
-plot_comparison(gdp_growth.loc[countries, 1962:], 
-                countries, ylabel,
-                0.1, 20, ax, 
+fig, ax = plt.subplots(figsize=(12, 8))
+
+countries = ['美国', '英国', '德国', '日本']
+ylabel = 'GDP 增长率 (%)'
+plot_comparison(gdp_growth, countries, 
+                ylabel, 0.1, 20, ax, 
                 g_params, b_params, t_params)
+
 plt.show()
 ```
 
-We choose Brazil, China, Argentina, and Mexico as representative developing economies.
+我们选择巴西、中国、阿根廷和墨西哥作为发展中经济体的代表。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Developing economies (GDP growth rate %)"
+    caption: "发展中经济体 (GDP 增长率 %)"
     name: deve_gdp
 tags: [hide-input]
 ---
 
 fig, ax = plt.subplots()
-countries = ['Brazil', 'China', 'Argentina', 'Mexico']
+countries = ['巴西', '中国', '阿根廷', '墨西哥']
 plot_comparison(gdp_growth.loc[countries, 1962:], 
                 countries, ylabel, 
                 0.1, 20, ax, 
                 g_params, b_params, t_params)
 plt.show()
 ```
+上述GDP增长率的比较表明，21世纪衰退期的商业周期变得更加同步。
 
+然而，新兴和不发达经济体的经济周期通常经历更加剧烈的变化。
 
-The comparison of GDP growth rates above suggests that 
-business cycles are becoming more synchronized in 21st-century recessions.
+尽管GDP增长实现了同步，但在衰退期间各国的经历常常有所不同。
 
-However, emerging and less developed economies often experience more volatile
-changes throughout the economic cycles. 
+我们使用失业率和劳动市场的恢复作为另一个例子。
 
-Despite the synchronization in GDP growth, the experience of individual countries during
-the recession often differs. 
-
-We use the unemployment rate and the recovery of labor market conditions
-as another example.
-
-Here we compare the unemployment rate of the United States, 
-the United Kingdom, Japan, and France.
+这里我们比较了美国、英国、日本和法国的失业率。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Developed economies (unemployment rate %)"
+    caption: "发达经济体 (失业率 %)"
     name: adv_unemp
 tags: [hide-input]
 ---
@@ -583,47 +529,39 @@ unempl_rate.columns = unempl_rate.columns.str.replace('YR', '').astype(int)
 
 fig, ax = plt.subplots()
 
-countries = ['United Kingdom', 'United States', 'Japan', 'France']
-ylabel = 'unemployment rate (national estimate) (%)'
+countries = ['英国', '美国', '日本', '法国']
+ylabel = '失业率（国家估算）(%)'
 plot_comparison(unempl_rate, countries, 
                 ylabel, 0.05, None, ax, g_params, 
                 b_params, t_params, baseline=None)
 plt.show()
 ```
 
-We see that France, with its strong labor unions, typically experiences
-relatively slow labor market recoveries after negative shocks.
+我们看到，工会力量强大的法国在受到负面冲击后，劳动力市场的恢复通常会相对缓慢。
 
-We also notice that Japan has a history of very low and stable unemployment rates.
+我们还注意到，日本的失业率一直非常低且稳定。
 
+## 领先指标和相关因素 
 
-## Leading indicators and correlated factors 
+研究领先指标和相关因素有助于决策者了解商业周期的原因和结果。
 
-Examining leading indicators and correlated factors helps policymakers to
-understand the causes and results of business cycles. 
+我们将从消费、生产和信贷水平来讨论潜在的领先指标和相关因素。
 
-We will discuss potential leading indicators and correlated factors from three
-perspectives: consumption, production, and credit level.
+### 消费
 
+消费取决于消费者对其收入的信心以及经济的整体表现。
 
-### Consumption
+密歇根大学发布的[消费者信心指数](https://fred.stlouisfed.org/series/UMCSENT)是一个被广泛引用的消费者信心指标。
+密歇根大学。
 
-Consumption depends on consumers' confidence towards their
-income and the overall performance of the economy in the future. 
-
-One widely cited indicator for consumer confidence is the [consumer sentiment index](https://fred.stlouisfed.org/series/UMCSENT) published by the University
-of Michigan.
-
-Here we plot the University of Michigan Consumer Sentiment Index and
-year-on-year 
-[core consumer price index](https://fred.stlouisfed.org/series/CPILFESL)
-(CPI) change from 1978-2022 in the US.
+这里我们绘制了密歇根大学消费者信心指数和同比 
+[核心消费价格指数](https://fred.stlouisfed.org/series/CPILFESL) (CPI) 的变化。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Consumer sentiment index and YoY CPI change, US"
+    caption: "消费者情绪指数和年同比 CPI 变化，美国"
     name: csicpi
 tags: [hide-input]
 ---
@@ -631,7 +569,7 @@ tags: [hide-input]
 start_date = datetime.datetime(1978, 1, 1)
 end_date = datetime.datetime(2022, 12, 31)
 
-# Limit the plot to a specific range
+# 限制图表的时间范围
 start_date_graph = datetime.datetime(1977, 1, 1)
 end_date_graph = datetime.datetime(2023, 12, 31)
 
@@ -648,64 +586,57 @@ ax.fill_between(nber.index, 0, 1,
             color='grey', edgecolor='none',
             alpha=0.3, 
             transform=ax.get_xaxis_transform(), 
-            label='NBER recession indicators')
+            label='NBER 衰退指标')
 ax.set_ylim([0, ax.get_ylim()[1]])
-ax.set_ylabel('consumer sentiment index')
+ax.set_ylabel('消费者情绪指数')
 
-# Plot CPI on another y-axis
+# 在另一个y轴上绘制 CPI
 ax_t = ax.twinx()
 inflation = web.DataReader('CPILFESL', 'fred', 
                 start_date, end_date).pct_change(12)*100
 
-# Add CPI on the legend without drawing the line again
+# 在图例中添加 CPI 而不重复绘图线条
 ax_t.plot(2020, 0, **g_params, linestyle='-', 
-          linewidth=2, label='consumer sentiment index')
+          linewidth=2, label='消费者情绪指数')
 ax_t.plot(inflation, **g_params, 
           color='#ff7f00', linestyle='--', 
-          linewidth=2, label='CPI YoY change (%)')
+          linewidth=2, label='CPI 年同比变化（%）')
 
 ax_t.fill_between(nber.index, 0, 1,
                   where=nber['USREC']==1, 
                   color='grey', edgecolor='none',
                   alpha=0.3, 
                   transform=ax.get_xaxis_transform(), 
-                  label='NBER recession indicators')
+                  label='NBER 衰退指标')
 ax_t.set_ylim([0, ax_t.get_ylim()[1]])
 ax_t.set_xlim([start_date_graph, end_date_graph])
 ax_t.legend(loc='upper center',
             bbox_to_anchor=(0.5, 1.1),
             ncol=3, fontsize=9)
-ax_t.set_ylabel('CPI YoY change (%)')
+ax_t.set_ylabel('CPI 年同比变化（%）')
 plt.show()
 ```
+我们看到：
+* 消费者情绪在经济扩张期间常常保持高位，并在衰退前下降。
+* 消费者情绪和CPI之间存在明显的负相关性。
 
-We see that 
+当消费者商品的价格上涨时，消费者信心会下降。
 
-* consumer sentiment often remains high during expansions and
-drops before recessions.
-* there is a clear negative correlation between consumer sentiment and the CPI.
+这种趋势在[滞胀](https://en.wikipedia.org/wiki/Stagflation)期间更为明显。
 
-When the price of consumer commodities rises, consumer confidence diminishes.
+### 生产
 
-This trend is more significant during [stagflation](https://en.wikipedia.org/wiki/Stagflation).
+实际工业产出与经济衰退高度相关。
 
+然而，它不是一个领先指标，因为产出收缩的高峰通常比消费者信心和通货膨胀的减弱要晚。
 
-
-### Production
-
-Real industrial output is highly correlated with recessions in the economy. 
-
-However, it is not a leading indicator, as the peak of contraction in production 
-is delayed relative to consumer confidence and inflation.
-
-We plot the real industrial output change from the previous year 
-from 1919 to 2022 in the US to show this trend.
+我们绘制了1919年到2022年美国实际工业产出年变化用于展示此趋势。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "YoY real output change, US (%)"
+    caption: "美国实际产出年变化（%）"
     name: roc
 tags: [hide-input]
 ---
@@ -721,39 +652,41 @@ industrial_output = web.DataReader('INDPRO', 'fred',
 fig, ax = plt.subplots()
 ax.plot(industrial_output, **g_params, 
         color='#377eb8', linestyle='-', 
-        linewidth=2, label='Industrial production index')
+        linewidth=2, label='工业生产指数')
 ax.fill_between(nber.index, 0, 1,
                 where=nber['USREC']==1, 
                 color='grey', edgecolor='none',
                 alpha=0.3, 
                 transform=ax.get_xaxis_transform(), 
-                label='NBER recession indicators')
+                label='NBER衰退指标')
 ax.set_ylim([ax.get_ylim()[0], ax.get_ylim()[1]])
-ax.set_ylabel('YoY real output change (%)')
+ax.set_ylabel('年实际产出变化率 (%)')
 plt.show()
 ```
 
-We observe the delayed contraction in the plot across recessions.
+图表显示了实际产出变化与商业周期的密切相关性。
 
+在NBER定义的衰退期间，产出基本上都有显著下降。
 
-### Credit level
+实际产出的缩减反应了整体需求的减少，这在经济危机期间尤为显著。
 
-Credit contractions often occur during recessions, as lenders become more
-cautious and borrowers become more hesitant to take on additional debt.
+### 信贷水平
 
-This is due to factors such as a decrease in overall economic
-activity and gloomy expectations for the future.
+我们观察到的最后一个相关因素是信贷水平。
 
-One example is domestic credit to the private sector by banks in the UK.
+信贷收缩经常在经济衰退期间发生，因为出贷方变得更加谨慎，借款人也更不愿意承担额外的债务。
 
-The following graph shows the domestic credit to the private sector as a
-percentage of GDP by banks from 1970 to 2022 in the UK.
+这是由于整体经济活动的减少和对未来前景的悲观预期。
+
+一个例子是英国银行对私人部门的国内信贷。
+
+下面的图表显示了1970年到2022年英国的银行国内信贷对私人部门的百分比。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Domestic credit to private sector by banks (% of GDP)"
+    caption: "银行国内信贷对私人部门的百分比（% GDP）"
     name: dcpc
 tags: [hide-input]
 ---
@@ -766,12 +699,11 @@ private_credit.columns = private_credit.columns.str.replace('YR', '').astype(int
 fig, ax = plt.subplots()
 
 countries = 'United Kingdom'
-ylabel = 'credit level (% of GDP)'
+ylabel = '信贷水平 (% of GDP)'
 ax = plot_series(private_credit, countries, 
                  ylabel, 0.05, ax, g_params, b_params, 
                  t_params, ylim=None, baseline=None)
 plt.show()
 ```
 
-Note that the credit rises during economic expansions
-and stagnates or even contracts after recessions.
+我们可以看到信贷在经济扩张期间上升，在衰退后停滞甚至收缩。
