@@ -221,11 +221,11 @@ def plot_distribution(agents, cycle_num):
             y_values_1.append(y)
     fig, ax = plt.subplots()
     plot_args = {'markersize': 8, 'alpha': 0.8}
-    ax.set_facecolor('天蓝色')
+    ax.set_facecolor('azure')
     ax.plot(x_values_0, y_values_0,
-        'o', markerfacecolor='橙色', **plot_args)
+        'o', markerfacecolor='orange', **plot_args)
     ax.plot(x_values_1, y_values_1,
-        'o', markerfacecolor='绿色', **plot_args)
+        'o', markerfacecolor='green', **plot_args)
     ax.set_title(f'周期 {cycle_num-1}')
     plt.show()
 ```
