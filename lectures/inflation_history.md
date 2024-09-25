@@ -143,7 +143,7 @@ plt.show()
 
 尽管出现了这些暂时的中断，图中一个显著的特点是三个世纪以来价格水平大致保持恒定。
 
-在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[Irving Fisher](https://zh.wikipedia.org/wiki/%E6%84%9B%E6%96%AF%E6%96%AF%E8%B3%80%C2%B7%E8%B2%BB%E5%A3%AB%E7%89%B9)和剑桥大学的[John Maynard Keynes](https://zh.wikipedia.org/wiki/%E7%B4%84%E7%BF%B0%C2%B7%E8%84%AB%E5%84%96%E5%B0%BC%E6%96%AF)的关注。
+在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[Irving Fisher](https://en.wikipedia.org/wiki/Irving_Fisher)和剑桥大学的[John Maynard Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes)的关注。
 
 * 尽管长期锚定在相同的平均水平上，年度价格水平的波动还是很大
 * 虽然使用有价值的黄金和白银作为硬币成功地通过限制货币供给稳定了价格水平，但这需要消耗现实的资源 --
