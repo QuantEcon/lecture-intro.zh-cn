@@ -459,6 +459,8 @@ t_params = {'color':'grey', 'fontsize': 9,
 ```
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 # 获取GDP增长率数据
 gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
             ['CHN', 'USA', 'DEU', 'BRA', 'ARG', 'GBR', 'JPN', 'MEX'], 
