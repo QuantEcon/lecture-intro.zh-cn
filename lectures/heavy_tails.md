@@ -362,7 +362,7 @@ plt.show()
 
 让我们比较一些只取非负值的分布。
 
-其中一种是指数分布，我们在[概率和分布的讲座](prob_dist)中讨论过。
+其中一种是指数分布，我们在{doc}`our lecture on probability and distributions <prob_dist>`中讨论过。
 
 指数分布是一种轻尾分布。
 
@@ -564,7 +564,7 @@ def eccdf(x, data):
 ---
 mystnb:
   figure:
-    caption: 经验 CCDFs
+    caption: 实验 CCDFs
     name: ccdf-empirics
 ---
 # 参数和网格
@@ -940,7 +940,7 @@ for n in range(1, N):
     sample_mean[n] = np.mean(data[:n])
 
 # 绘图
-ax.plot(range(N), sample_mean, alpha=0.6, label='$\bar{X}_n$')
+ax.plot(range(N), sample_mean, alpha=0.6, label='$\\bar{X}_n$')
 ax.plot(range(N), np.zeros(N), 'k--', lw=0.5)
 ax.set_xlabel(r"$n$")
 ax.legend()
@@ -1004,7 +1004,7 @@ $$
 
 收入分配也是如此。
 
-例如，收入分配尾部的厚重程度有助于决定{doc}`特定税收政策将筹集多少收入 <mle>`。
+例如，收入分配尾部的厚重程度有助于决定{doc}`how much revenue a given tax policy will raise <mle>`。
 
 (cltail)=
 ## 分类尾部特性
@@ -1025,7 +1025,7 @@ $$
 ```{math}
 :label: defht
 
-\int_0^\infty \exp(tx) f(x) dx = \infty \; 	ext{ 对于所有 } t > 0.
+\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ 对于所有 } t > 0.
 ```
 
 我们说一个非负随机变量 $X$ 是**重尾**的，如果它的密度是重尾的。
@@ -1149,7 +1149,7 @@ for (a, ax) in zip(alphas, axes):
     data = pareto.rvs(size=n, scale=1, b=a)
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"Pareto draws with $\alpha = {a}$", fontsize=11)
+    ax.set_title(f"Pareto draws with $\\alpha = {a}$", fontsize=11)
 
 plt.subplots_adjust(hspace=0.4)
 
