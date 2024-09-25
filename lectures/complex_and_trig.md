@@ -389,6 +389,7 @@ $$
 $$
 \int_{-\pi}^{\pi} \sin (\omega)^2 \, d\omega = \pi
 $$
+```
 
 ```{solution-start} complex_ex1
 :class: dropdown
@@ -414,49 +415,3 @@ integrate(sin(ω)**2, (ω, -pi, pi))
 
 ```{solution-end}
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
