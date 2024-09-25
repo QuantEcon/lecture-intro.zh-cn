@@ -133,8 +133,7 @@ country_years.head()
 为了方便使用中文标签，我们导入地区代码与中文名对应的数据集
 
 ```{code-cell} ipython3
-code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('countrycode')
-code_to_name.loc['BEM']
+code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
 ```
 
 现在，我们调用人均 GDP (`gdppc`)，并生成一个宽格式的数据
@@ -256,7 +255,7 @@ def draw_interp_plots(series,        # pandas 数据
                 lw=lw,
                 color=color_mapping[c],
                 alpha=0.8,
-                label=code_to_name.loc[c]['country_chinese'])
+                label=code_to_name.loc[c]['name_chinese'])
 
         if logscale:
             ax.set_yscale('log')

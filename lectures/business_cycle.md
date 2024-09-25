@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.5
+    jupytext_version: 1.16.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -47,7 +47,7 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-下面几行代码是用来设置图形参数的。
+下面几行代码是用来设置图形参数和国家/地区名的中英文对照的。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -56,6 +56,8 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 cycler = plt.cycler(linestyle=['-', '-.', '--', ':'], 
         color=['#377eb8', '#ff7f00', '#4daf4a', '#ff334f'])
 plt.rc('axes', prop_cycle=cycler)
+
+name_cn = pd.read_csv('../lectures/datasets/country_code_cn.csv').set_index('name_chinese')
 ```
 
 ## 数据获取
@@ -148,8 +150,10 @@ def plot_series(data, country, ylabel,
     ax : matplotlib.axes.Axes
         带有图表的轴向。
     """
+    
+    country_cn = name_cn.loc[country]['name']
 
-    ax.plot(data.loc[country], label=country, **g_params)
+    ax.plot(data.loc[country_cn], label=country, **g_params)
     
     # 高亮衰退
     ax.axvspan(1973, 1975, **b_params)
@@ -160,10 +164,10 @@ def plot_series(data, country, ylabel,
         ax.set_ylim([-ylim, ylim])
     else:
         ylim = ax.get_ylim()[1]
-    ax.text(1974, ylim + ylim*txt_pos, '石油危机 (1974)', **t_params) 
-    ax.text(1991, ylim + ylim*txt_pos, '90年代衰退 (1991)', **t_params) 
-    ax.text(2008, ylim + ylim*txt_pos, '金融危机 (2008)', **t_params) 
-    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19 (2020)', **t_params)
+    ax.text(1974, ylim + ylim*txt_pos, '石油危机\n(1974)', **t_params) 
+    ax.text(1991, ylim + ylim*txt_pos, '90年代衰退\n(1991)', **t_params) 
+    ax.text(2008, ylim + ylim*txt_pos, '金融危机\n(2008)', **t_params) 
+    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19\n(2020)', **t_params)
 
     # 添加基线
     if baseline != None:
@@ -190,7 +194,6 @@ mystnb:
     caption: "美国 (GDP 增长率 %)"
     name: us_gdp
 ---
-
 fig, ax = plt.subplots()
 
 country = '美国'
@@ -218,7 +221,6 @@ mystnb:
     caption: "英国 (GDP 增长率 %)"
     name: uk_gdp
 ---
-
 fig, ax = plt.subplots()
 
 country = '英国'
@@ -239,7 +241,6 @@ mystnb:
     caption: "日本 (GDP 增长率 %)"
     name: jp_gdp
 ---
-
 fig, ax = plt.subplots()
 
 country = '日本'
@@ -258,7 +259,6 @@ mystnb:
     caption: "希腊 (GDP 增长率 %)"
     name: gc_gdp
 ---
-
 fig, ax = plt.subplots()
 
 country = '希腊'
@@ -279,7 +279,6 @@ mystnb:
     caption: "阿根廷 (GDP 增长率 %)"
     name: arg_gdp
 ---
-
 fig, ax = plt.subplots()
 
 country = '阿根廷'
@@ -296,10 +295,6 @@ plt.show()
 ## 失业
 
 失业率是衡量商业周期的另一个重要指标。
-
-Another important measure of business cycles is the unemployment rate.
-
-We study unemployment using rate data from FRED spanning from [1929-1942](https://fred.stlouisfed.org/series/M0892AUSM156SNBR) to [1948-2022](https://fred.stlouisfed.org/series/UNRATE), combined unemployment rate data over 1942-1948 estimated by the [Census Bureau](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html).
 
 [1929-1942年](https://fred.stlouisfed.org/series/M0892AUSM156SNBR)和[1948-2022年](https://fred.stlouisfed.org/series/UNRATE)两个时期的数据来自[FRED](https://fred.stlouisfed.org/)，而1942-1948年的失业率数据由是从[人口普查局的数据估算](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html)。
 
@@ -320,17 +315,17 @@ end_date = datetime.datetime(2022, 12, 31)
 unrate = web.DataReader('UNRATE', 'fred', 
                     start_date, end_date)
 ```
+
 接下来我们绘制美国从1929年到2022年的失业率，以及由美国国家经济研究局（NBER）定义的经济衰退期。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "长期失业率, 美国 (%)"
+    caption: "\u957F\u671F\u5931\u4E1A\u7387, \u7F8E\u56FD (%)"
     name: lrunrate
 tags: [hide-input]
 ---
-
 # 使用人口普查局估计的1942年到1948年间的失业率数据
 years = [datetime.datetime(year, 6, 1) for year in range(1942, 1948)]
 unrate_census = [4.7, 1.9, 1.2, 1.9, 3.9, 3.9]
@@ -371,6 +366,7 @@ ax.set_ylabel('失业率 (%)')
 
 plt.show()
 ```
+
 图表显示：
 
 * 劳动力市场的扩张和收缩与经济衰退高度相关。
@@ -392,9 +388,7 @@ plt.show()
 通过轻微的修改，我们可以使用我们之前的函数来绘制包括多个国家的图表。
 
 ```{code-cell} ipython3
----
-tags: [hide-input]
----
+:tags: [hide-input]
 
 def plot_comparison(data, countries, 
                         ylabel, txt_pos, y_lim, ax, 
@@ -434,7 +428,8 @@ def plot_comparison(data, countries,
     
     # 允许函数处理多个系列
     for country in countries:
-        ax.plot(data.loc[country], label=country, **g_params)
+        country_cn = name_cn.loc[country]['name']
+        ax.plot(data.loc[country_cn], label=country, **g_params)
     
     # 高亮衰退期
     ax.axvspan(1973, 1975, **b_params)
@@ -444,10 +439,10 @@ def plot_comparison(data, countries,
     if y_lim != None:
         ax.set_ylim([-y_lim, y_lim])
     ylim = ax.get_ylim()[1]
-    ax.text(1974, ylim + ylim*txt_pos, '石油危机 (1974)', **t_params) 
-    ax.text(1991, ylim + ylim*txt_pos, '90年代经济衰退 (1991)', **t_params) 
-    ax.text(2008, ylim + ylim*txt_pos, '全球金融危机 (2008)', **t_params) 
-    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19 (2020)', **t_params) 
+    ax.text(1974, ylim + ylim*txt_pos, '石油危机\n(1974)', **t_params) 
+    ax.text(1991, ylim + ylim*txt_pos, '90年代经济衰退\n(1991)', **t_params) 
+    ax.text(2008, ylim + ylim*txt_pos, '全球金融危机\n(2008)', **t_params) 
+    ax.text(2020, ylim + ylim*txt_pos, 'Covid-19\n(2020)', **t_params) 
     if baseline != None:
         ax.hlines(y=baseline, xmin=ax.get_xlim()[0], 
                   xmax=ax.get_xlim()[1], color='black', 
@@ -463,6 +458,15 @@ t_params = {'color':'grey', 'fontsize': 9,
             'va':'center', 'ha':'center'}
 ```
 
+```{code-cell} ipython3
+# 获取GDP增长率数据
+gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
+            ['CHN', 'USA', 'DEU', 'BRA', 'ARG', 'GBR', 'JPN', 'MEX'], 
+            labels=True)
+gdp_growth = gdp_growth.set_index('Country')
+gdp_growth.columns = gdp_growth.columns.str.replace('YR', '').astype(int)
+```
+
 首先我们绘制发达经济体的GDP增长率
 
 ```{code-cell} ipython3
@@ -472,7 +476,6 @@ mystnb:
     caption: "发达经济体（GDP增长率 %）"
     name: global_gdp_comparison
 ---
-
 fig, ax = plt.subplots(figsize=(12, 8))
 
 countries = ['美国', '英国', '德国', '日本']
@@ -494,15 +497,15 @@ mystnb:
     name: deve_gdp
 tags: [hide-input]
 ---
-
 fig, ax = plt.subplots()
 countries = ['巴西', '中国', '阿根廷', '墨西哥']
-plot_comparison(gdp_growth.loc[countries, 1962:], 
+plot_comparison(gdp_growth.loc[name_cn.loc[countries]['name'], 1962:], 
                 countries, ylabel, 
                 0.1, 20, ax, 
                 g_params, b_params, t_params)
 plt.show()
 ```
+
 上述GDP增长率的比较表明，21世纪衰退期的商业周期变得更加同步。
 
 然而，新兴和不发达经济体的经济周期通常经历更加剧烈的变化。
@@ -521,7 +524,6 @@ mystnb:
     name: adv_unemp
 tags: [hide-input]
 ---
-
 unempl_rate = wb.data.DataFrame('SL.UEM.TOTL.NE.ZS',
     ['USA', 'FRA', 'GBR', 'JPN'], labels=True)
 unempl_rate = unempl_rate.set_index('Country')
@@ -565,7 +567,6 @@ mystnb:
     name: csicpi
 tags: [hide-input]
 ---
-
 start_date = datetime.datetime(1978, 1, 1)
 end_date = datetime.datetime(2022, 12, 31)
 
@@ -616,6 +617,7 @@ ax_t.legend(loc='upper center',
 ax_t.set_ylabel('CPI 年同比变化（%）')
 plt.show()
 ```
+
 我们看到：
 * 消费者情绪在经济扩张期间常常保持高位，并在衰退前下降。
 * 消费者情绪和CPI之间存在明显的负相关性。
@@ -640,7 +642,6 @@ mystnb:
     name: roc
 tags: [hide-input]
 ---
-
 start_date = datetime.datetime(1919, 1, 1)
 end_date = datetime.datetime(2022, 12, 31)
 
@@ -690,7 +691,6 @@ mystnb:
     name: dcpc
 tags: [hide-input]
 ---
-
 private_credit = wb.data.DataFrame('FS.AST.PRVT.GD.ZS', 
                 ['GBR'], labels=True)
 private_credit = private_credit.set_index('Country')
@@ -698,7 +698,7 @@ private_credit.columns = private_credit.columns.str.replace('YR', '').astype(int
 
 fig, ax = plt.subplots()
 
-countries = 'United Kingdom'
+countries = '英国'
 ylabel = '信贷水平 (% of GDP)'
 ax = plot_series(private_credit, countries, 
                  ylabel, 0.05, ax, g_params, b_params, 
