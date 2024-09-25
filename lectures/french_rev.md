@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.2
+    jupytext_version: 1.16.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -64,6 +64,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 12})
 
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
+
 base_url = 'https://github.com/QuantEcon/lecture-python-intro/raw/'\
            + 'main/lectures/datasets/'
 
@@ -71,6 +76,7 @@ fig_3_url = f'{base_url}fig_3.xlsx'
 dette_url = f'{base_url}dette.xlsx'
 assignat_url = f'{base_url}assignat.xlsx'
 ```
+
 ## 政府开支与税收
 
 我们将使用 `matplotlib` 构建几个图表，这些图表将提供重要的历史背景。
@@ -88,7 +94,7 @@ assignat_url = f'{base_url}assignat.xlsx'
 ---
 mystnb:
   figure:
-    caption: "英法军事开支"
+    caption: "\u82F1\u6CD5\u519B\u4E8B\u5F00\u652F"
     name: fr_fig4
 ---
 # 从Excel文件读取数据
@@ -113,7 +119,7 @@ plt.gca().spines['right'].set_visible(False)
 plt.gca().tick_params(labelsize=12)
 plt.xlim([1689, 1790])
 plt.xlabel('*：法国')
-plt.ylabel('百万里弗尔')
+plt.ylabel('百万里弗')
 plt.ylim([0, 475])
 
 plt.tight_layout()
@@ -132,12 +138,11 @@ plt.show()
 
 这证明英国已经建立了能够维持高税收、政府支出和政府借贷的国家机构。参见{cite}`north1989`。
 
-
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "英国政府开支与税收"
+    caption: "\u82F1\u56FD\u653F\u5E9C\u5F00\u652F\u4E0E\u7A0E\u6536"
     name: fr_fig2
 ---
 # 从Excel文件读取数据
@@ -211,10 +216,10 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "偿债占税收比例，英国与法国"
+    caption: "\u507F\u503A\u5360\u7A0E\u6536\u6BD4\u4F8B\uFF0C\u82F1\u56FD\u4E0E\u6CD5\
+      \u56FD"
     name: fr_fig1
 ---
-
 # 从Excel文件读取数据
 data1 = pd.read_excel(dette_url, sheet_name='Debt', 
             usecols='R:S', skiprows=5, nrows=99, header=None)
@@ -262,7 +267,7 @@ data1.replace(0, np.nan, inplace=True)
 ---
 mystnb:
   figure:
-    caption: "法国的政府支出和税收收入"
+    caption: "\u6CD5\u56FD\u7684\u653F\u5E9C\u652F\u51FA\u548C\u7A0E\u6536\u6536\u5165"
     name: fr_fig3
 ---
 # Plot the data
@@ -283,7 +288,7 @@ plt.text(1785, 500, '收入', fontsize=10)
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 plt.ylim([0, 700])
-plt.ylabel('millions of livres')
+plt.ylabel('百万里弗')
 
 plt.tight_layout()
 plt.show()
@@ -397,7 +402,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "法国人均实际收入指数"
+    caption: "\u6CD5\u56FD\u4EBA\u5747\u5B9E\u9645\u6536\u5165\u6307\u6570"
     name: fr_fig5
 ---
 # 从Excel文件读取数据
@@ -418,6 +423,7 @@ plt.ylabel('1726 = 1', fontsize=12)
 plt.tight_layout()
 plt.show()
 ```
+
 根据 {numref}`fr_fig5`，人均税收收入在1789年之前的水平直到1815年后，拿破仑·波拿巴被流放到圣赫勒拿岛并且路易十八恢复法国王位后才得以回升。
 
 * 从1799至1814年，拿破仑·波拿巴还有其他的收入来源——战利品和战争中打败的省份和国家支付的赔款
@@ -429,7 +435,8 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "开支（蓝色）和收入（橙色），（实值）"
+    caption: "\u5F00\u652F\uFF08\u84DD\u8272\uFF09\u548C\u6536\u5165\uFF08\u6A59\u8272\
+      \uFF09\uFF0C\uFF08\u5B9E\u503C\uFF09"
     name: fr_fig11
 ---
 # 从Excel文件读取数据
@@ -474,10 +481,10 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "纸币供应量与价格水平"
+    caption: "\u7EB8\u5E01\u4F9B\u5E94\u91CF\u4E0E\u4EF7\u683C\u6C34\u5E73"
     name: fr_fig12
 ---
-# Read data from Excel file
+# 从Ｅxcel中读取数据
 data12 = pd.read_excel(assignat_url, sheet_name='seignor', 
          usecols='F', skiprows=6, nrows=75, header=None).squeeze()
 
@@ -495,50 +502,50 @@ plt.xticks(ticks=pd.date_range(start='1790',
            end='1796', freq='AS'), labels=range(1790, 1797))
 plt.xlim(pd.Timestamp('1791'),
          pd.Timestamp('1796-02') + pd.DateOffset(months=2))
-plt.ylabel('millions of livres', fontsize=12)
-plt.text(pd.Timestamp('1793-11'), 39.5, 'revenues in 1788', 
+plt.ylabel('百万里弗', fontsize=12)
+plt.text(pd.Timestamp('1793-11'), 39.5, '1788年收入水平', 
          verticalalignment='top', fontsize=12)
 
 plt.tight_layout()
 plt.show()
 ```
 
-{numref}`fr_fig24` compares the revenues raised by printing money from 1789 to 1796 with tax revenues that the Ancient Regime had raised in 1788.
+{numref}`fr_fig24` 将 1789 年至 1796 年印钞所得的收入与古代政权在 1788 年获得的税收收入进行了比较。
 
-Measured in goods, revenues raised at time $t$ by printing new money equal
+以商品衡量，在 $t$ 时刻通过印制新钞所获得的收入等于
 
 $$
 \frac{M_{t+1} - M_t}{p_t}
 $$
 
-where 
+其中
 
-* $M_t$ is the stock of paper money at time $t$ measured in livres
-* $p_t$ is the price level at time $t$ measured in units of goods per livre at time $t$
-* $M_{t+1} - M_t$ is the amount of new money printed at time $t$
+* $M_t$ 是以里弗为单位的 $t$ 时刻纸币存量
+* $p_t$ 是以 $t$ 时刻每里弗的商品单位为单位的 $t$ 时刻价格水平
+* $M_{t+1} - M_t$ 是 $t$ 时刻印制的新钞数量
 
-Notice the 1793-1794  surge in revenues raised by printing money. 
+请注意 1793-1794 年印钞所得收入激增。
 
-* This reflects extraordinary measures that the Committee for Public Safety adopted to force citizens to accept paper money, or else.
+* 这反映了公共安全委员会采取的强制公民接受纸币等的非常措施。
 
-Also note the abrupt fall off in revenues raised by 1797 and the absence of further observations after 1797. 
+还要注意 1797 年之前收入的急剧下降以及 1797 年之后下降的结束。
 
-* This reflects the end of using the printing press to raise revenues.
+* 这反映了使用印刷机增加收入的结束。
 
-What French paper money  entitled its holders to changed over time in interesting ways.
+法国纸币持有者的权利随着时间的推移发生了有趣的变化。
 
-These  led to outcomes  that vary over time and that illustrate the playing out in practice of  theories that guided the Revolutionaries' monetary policy decisions.
+这些导致了随时间变化的结果，并说明了指导革命者货币政策决策的理论在实践中发挥作用。
 
+下图显示了革命者使用纸币为部分支出提供资金期间法国的价格水平。
 
-The next figure shows the price level in France  during the time that the Revolutionaries used paper money to finance parts of their expenditures.
-
-Note that we use a log scale because the price level rose so much.
+请注意，我们使用对数刻度，因为价格水平上涨了很多。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Price Level and Price of Gold (log scale)"
+    caption: "\u4EF7\u683C\u6C34\u5E73\u548C\u9EC4\u91D1\u4EF7\u683C\uFF08\u5BF9\u6570\
+      \u523B\u5EA6\uFF09"
     name: fr_fig9
 ---
 # Read the data from Excel file
@@ -564,50 +571,41 @@ plt.axvline(x=1793 + 6.5/12, linestyle='-', linewidth=0.8, color='orange')
 plt.axvline(x=1794 + 6.5/12, linestyle='-', linewidth=0.8, color='purple')
 
 # Add text
-plt.text(1793.75, 120, 'Terror', fontsize=12)
-plt.text(1795, 2.8, 'price level', fontsize=12)
-plt.text(1794.9, 40, 'gold', fontsize=12)
+plt.text(1793.75, 120, '“恐怖时期”', fontsize=12)
+plt.text(1795, 2.8, '价格水平', fontsize=12)
+plt.text(1794.9, 40, '黄金', fontsize=12)
 
 
 plt.tight_layout()
 plt.show()
 ```
 
-We have partioned  {numref}`fr_fig9` that shows the log of the price level and   {numref}`fr_fig8`
-below  that plots real balances $\frac{M_t}{p_t}$ into three periods that correspond to  different monetary  experiments or *regimes*. 
+我们已经将显示价格水平对数的 {numref}`fr_fig9` 和下方绘制实际余额 $\frac{M_t}{p_t}$ 的 {numref}`fr_fig8` 划分为三个时期，分别对应不同的货币实验或 *制度*。
 
-The first period ends in the late summer of 1793, and is characterized
-by growing real balances and moderate inflation. 
+第一个时期结束于 1793 年夏末，其特点是实际余额不断增长，通货膨胀温和。
 
-The second period begins and ends
-with the Terror. It is marked by high real balances, around 2,500 million, and
-roughly stable prices. The fall of Robespierre in late July 1794 begins the third
-of our episodes, in which real balances decline and prices rise rapidly.
+第二个时期始于恐怖时期，也以恐怖时期结束。其特点是实际余额较高，约为 25 亿，价格大致稳定。1794 年 7 月下旬罗伯斯庇尔的倒台开启了我们的第三个时期，其中实际余额下降，价格迅速上涨。
 
-We interpret
-these three episodes in terms of distinct  theories
 
-*  a *backing* or *real bills* theory (the classic text for this theory is  Adam Smith  {cite}`smith2010wealth`)
-* a legal restrictions theory ( {cite}`keynes1940pay`, {cite}`bryant1984price` )
-* a classical hyperinflation theory ({cite}`Cagan`)
-* 
+我们用不同的理论来解释这三个事件
+
+* *背书*或*真实票据*理论（该理论的经典文本是亚当·斯密{cite}`smith2010wealth`）
+* 法律限制理论（{cite}`keynes1940pay`，{cite}`bryant1984price`）
+* 经典恶性通货膨胀理论（{cite}`Cagan`）
+*
 ```{note}
-According to the empirical  definition of hyperinflation adopted by {cite}`Cagan`,
-beginning in the month that inflation exceeds 50 percent
-per month and ending in the month before inflation drops below 50 percent per month
-for at least a year, the *assignat*  experienced a hyperinflation from May to December
-1795.
+根据{cite}`Cagan`采用的恶性通货膨胀的经验定义，
+从通货膨胀率超过每月 50% 的月份开始，到通货膨胀率降至每月 50% 以下的月份结束，至少持续一年，*assignat* 从 1795 年 5 月到 12 月经历了恶性通货膨胀。
 ```
-We view these
-theories not as competitors but as alternative collections of ''if-then''
-statements about government note issues, each of which finds its conditions more
-nearly met in one of these episodes than in the other two.
+
+我们并不将这些理论视为竞争对手，而是将其视为关于政府票据发行的“如果-那么”的集合，每个理论都有其更接近现实条件的地方 -- 即，更接近满足”如果“的地方。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Real balances of assignats (in gold and goods)"
+    caption: "\u6307\u5238\u5B9E\u9645\u4F59\u989D\uFF08\u4EE5\u9EC4\u91D1\u548C\u5546\
+      \u54C1\u8BA1\uFF09"
     name: fr_fig8
 ---
 # Read the data from Excel file
@@ -635,34 +633,26 @@ plt.gca().spines['right'].set_visible(False)
 plt.gca().set_facecolor('white')
 plt.gca().tick_params(labelsize=12)
 plt.xlim(pd.Timestamp('1789-11-01'), pd.Timestamp('1796-06-01'))
-plt.ylabel('millions of livres', fontsize=12)
+plt.ylabel('百万里弗', fontsize=12)
 
 # Add text annotations
-plt.text(pd.Timestamp('1793-09-01'), 200, 'Terror', fontsize=12)
-plt.text(pd.Timestamp('1791-05-01'), 750, 'gold value', fontsize=12)
-plt.text(pd.Timestamp('1794-10-01'), 2500, 'real value', fontsize=12)
-
+plt.text(pd.Timestamp('1793-09-01'), 200, '“恐怖时期”', fontsize=12)
+plt.text(pd.Timestamp('1791-05-01'), 750, '黄金水平', fontsize=12)
+plt.text(pd.Timestamp('1794-10-01'), 2500, '真实价值', fontsize=12)
 
 plt.tight_layout()
 plt.show()
 ```
 
-The three clouds of points in Figure
-{numref}`fr_fig104`
- depict different real balance-inflation relationships. 
- 
-Only the cloud for the
-third period has the inverse relationship familiar to us now from twentieth-century
-hyperinflations.
+图{numref}`fr_fig104`中的三个聚集点描绘了不同的实际余额-通货膨胀关系。
 
+只有第三个时期的点具有我们现在熟悉的二十世纪恶性通货膨胀的逆向关系。
 
+* 子时期 1：（“*实票据*时期）：1791 年 1 月至 1793 年 7 月
 
+* 子时期 2：（“恐怖”）：1793 年 8 月 - 1794 年 7 月
 
-* subperiod 1: ("*real bills* period): January 1791 to July 1793
-
-* subperiod 2: ("terror"):  August 1793 - July 1794
-
-* subperiod 3: ("classic Cagan hyperinflation"): August 1794 - March 1796
+* 子时期 3：（“经典Cagen恶性通货膨胀”）：1794 年 8 月 - 1796 年 3 月
 
 ```{code-cell} ipython3
 def fit(x, y):
@@ -674,7 +664,7 @@ def fit(x, y):
 ```
 
 ```{code-cell} ipython3
-# Load data
+# 加载数据
 caron = np.load('datasets/caron.npy')
 nom_balances = np.load('datasets/nom_balances.npy')
 
@@ -684,12 +674,12 @@ bal = nom_balances[14:77, 1] * caron[:, 1] / 1000
 ```
 
 ```{code-cell} ipython3
-# Regress y on x for three periods
+# 为三个时期回归 y 对 x
 a1, b1 = fit(bal[1:31], infl[1:31])
 a2, b2 = fit(bal[31:44], infl[31:44])
 a3, b3 = fit(bal[44:63], infl[44:63])
 
-# Regress x on y for three periods
+# 为三个时期回归 x 对 y
 a1_rev, b1_rev = fit(infl[1:31], bal[1:31])
 a2_rev, b2_rev = fit(infl[31:44], bal[31:44])
 a3_rev, b3_rev = fit(infl[44:63], bal[44:63])
@@ -699,75 +689,23 @@ a3_rev, b3_rev = fit(infl[44:63], bal[44:63])
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "\u901A\u8D27\u81A8\u80C0\u548C\u5B9E\u9645\u4F59\u989D"
     name: fr_fig104
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
-plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-         color='blue', label='real bills period')
-
-# Second subsample
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='terror')
-
-# Third subsample
-plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='classic Cagan hyperinflation')
-
-plt.xlabel('real balances')
-plt.ylabel('inflation')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-The three clouds of points in {numref}`fr_fig104` evidently 
- depict different real balance-inflation relationships. 
-
-Only the cloud for the
-third period has the inverse relationship familiar to us now from twentieth-century
-hyperinflations.
-
- To bring this out, we'll use linear regressions to draw straight lines that compress the 
- inflation-real balance relationship for our three sub-periods. 
-
- Before we do that, we'll drop some of the early observations during the terror period 
- to obtain the following graph.
-
-```{code-cell} ipython3
-# 为三个时期分别对y回归x
-a1, b1 = fit(bal[1:31], infl[1:31])
-a2, b2 = fit(bal[31:44], infl[31:44])
-a3, b3 = fit(bal[44:63], infl[44:63])
-
-# 为三个时期分别对x回归y
-a1_rev, b1_rev = fit(infl[1:31], bal[1:31])
-a2_rev, b2_rev = fit(infl[31:44], bal[31:44])
-a3_rev, b3_rev = fit(infl[44:63], bal[44:63])
-```
-Image input capabilities: Enabled
----
-mystnb:
-  figure:
-    caption: "通货膨胀和实际余额"
-    name: fr_fig104b
----
-plt.figure()
-plt.gca().spines['top'].set_visible(False)
-plt.gca().spines['right'].set_visible(False)
-
 # 第一个子样本
-plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', color='blue', label='真实票据时期')
+plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
+         color='blue', label='实票据时期')
 
 # 第二个子样本
 plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 
 # 第三个子样本
-plt.plot(bal[44:63], infl[44:63], '*', color='orange', label='经典Cagan恶性通货膨胀')
+plt.plot(bal[44:63], infl[44:63], '*', 
+        color='orange', label='经典的Cagan恶性通货膨胀')
 
 plt.xlabel('实际余额')
 plt.ylabel('通货膨胀')
@@ -776,13 +714,50 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 ```
-现在让我们在真实票据时期对通货膨胀进行回归到实际余额，并绘制回归线。
+
+在 {numref}`fr_fig104` 中三个点云明显代表了不同的实际余额-通货膨胀关系。
+
+只有第三个时期的点云显示了我们现在从二十世纪的恶性通货膨胀中熟悉的反向关系。
+
+为了突出这一点，我们将使用线性回归绘制直线来压缩我们三个子时期的通货膨胀-实际余额关系。
+
+在这样做之前，我们将删除恐怖时期早期的一些观察值，并绘制以下的图。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "通货膨胀与实际余额的关系"
+    caption: "\u901A\u8D27\u81A8\u80C0\u548C\u5B9E\u9645\u4F59\u989D"
+    name: fr_fig104b
+---
+plt.figure()
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+
+# 第一个子样本
+plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', color='blue', label='实票据时期')
+
+# 第二个子样本
+plt.plot(bal[34:44], infl[34:44], '+', color='red', label='恐怖时期')
+
+# 第三个子样本
+plt.plot(bal[44:63], infl[44:63], '*', color='orange', label='经典的Cagan恶性通货膨胀')
+
+plt.xlabel('实际余额')
+plt.ylabel('通货膨胀')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+现在让我们回归*实票据*时期的通货膨胀对实际余额，并绘制回归直线。
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: "\u901A\u8D27\u81A8\u80C0\u548C\u5B9E\u9645\u4F59\u989D"
     name: fr_fig104c
 ---
 plt.figure()
@@ -791,7 +766,7 @@ plt.gca().spines['right'].set_visible(False)
 
 # 第一个子样本
 plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='真实票据时期')
+        color='blue', label='实票据时期')
 plt.plot(bal[1:31], a1 + bal[1:31] * b1, color='blue')
 
 # 第二个子样本
@@ -799,7 +774,7 @@ plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 
 # 第三个子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='经典Cagan恶性通货膨胀')
+        color='orange', label='经典的Cagan恶性通货膨胀')
 
 plt.xlabel('实际余额')
 plt.ylabel('通货膨胀')
@@ -809,80 +784,40 @@ plt.tight_layout()
 plt.show()
 ```
 
-The regression line in {numref}`fr_fig104c` shows that large increases in real balances of
-assignats (paper money) were accompanied by only modest rises in the price level, an outcome in line
-with the *real bills* theory. 
+在 {numref}`fr_fig104c` 中的回归线显示，政府票据（纸币）的大幅增长只伴随着价格水平的适度上升，这一结果与*实票据*理论相符。
 
-在这段时期内，assignats是对教堂土地的索赔。
+在这段时期，政府票据是对教会土地的索赔。
 
-但到了这一时期的末期，当政府继续印制货币但停止出售教堂土地时，物价水平开始上升，真实余额开始下降。
+但在这段时期的末尾，随着政府继续印制货币但停止出售教会土地，价格水平开始上升和实际余额开始下降。
 
-为了让人们持有这些纸币，政府通过法律限制强迫人们持有。
+为了让民众持有这种纸币，政府使用法律限制强制民众持有。
 
-现在让我们对恐怖时期的真实余额对通货膨胀进行回归，并绘制回归线。
+现在让我们在恐怖时期对实际余额进行回归，并绘制回归线。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "通货膨胀与真实余额"
+    caption: "\u901A\u8D27\u81A8\u80C0\u548C\u5B9E\u9645\u4F59\u989D"
     name: fr_fig104d
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# 第一子样本
+# 第一个子样本
 plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='真实票据时期')
+        color='blue', label='实票据时期')
 
-# 第二子样本
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖')
+# 第二个子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 plt.plot(a2_rev + b2_rev * infl[31:44], infl[31:44], color='red')
 
-# 第三子样本
+# 第三个子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='经典Cagan恶性通货膨胀')
+        color='orange', label='经典的Cagan恶性通货膨胀')
 
-plt.xlabel('真实余额')
-plt.ylabel('通货膨胀')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-如 {numref}`fr_fig104d` 所示，恐怖时期的回归线显示，在实际余额大幅增加的情况下，价格水平上升的压力并不显著，有时甚至出现价格下降的情况。
-
-这反映了法律限制 — 金融抑制在恐怖时期发挥的作用，这些措施在很大程度上限制了大幅增加的实际余额对价格水平的影响。
-
-但是，恐怖时期结束于1794年7月，随着大量的纸币发行和对交易及储值的其他方式的寻求，通货膨胀快速升高。
-
-下图展示了经典恶性通货膨胀时期的数据，以及通货膨胀与实际余额之间的逆向关系。
-
-```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: "通货膨胀和实际余额"
-    name: fr_fig104e
----
-plt.figure()
-plt.gca().spines['top'].set_visible(False)
-plt.gca().spines['right'].set_visible(False)
-
-# 第一子样本
-plt.plot(bal[1:31], infl[1:31], 'o', markerfacecolor='none', 
-        color='blue', label='真实票据时期')
-
-# 第二子样本
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖')
-
-# 第三子样本
-plt.plot(bal[44:63], infl[44:63], '*', 
-    color='orange', label='经典Cagan恶性通货膨胀')
-plt.plot(bal[44:63], a3 + bal[44:63] * b3, color='orange')
-
-plt.xlabel('真实余额')
+plt.xlabel('实际余额')
 plt.ylabel('通货膨胀')
 plt.legend()
 
@@ -890,58 +825,67 @@ plt.tight_layout()
 plt.show()
 ```
 
-{numref}`fr_fig104e` shows the results of regressing inflation on real balances during the
-period of the hyperinflation.
+在 {numref}`fr_fig104d` 中的回归线显示，在*恐怖*时期，政府票据（纸币）的大幅增加与价格水平的少量上升甚至是价格下降相伴随。
+
+这反映出在恐怖时期，法律限制--财政压制--运作得很好。
+
+但是恐怖时期在1794年7月结束。这导致了大规模的通货膨胀，因为人们试图找到其他交易和储存价值的方式。
+
+下面的两个图表是关于经典恶性通货膨胀时期的。
+
+一个是以实际余额为因素，通货膨胀为结果进行回归的，另一个是以通货膨胀为因素，实际余额为结果进行回归的。
+
+两者都显示了一个明显的反向关系，这是Cagan {cite}`Cagan` 研究的恶性通货膨胀的特征。
+{numref}`fr_fig104e` 展示了在超通货膨胀期间，对实际余额对通货膨胀进行回归的结果。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Inflation and Real Balances"
+    caption: "\u901A\u8D27\u81A8\u80C0\u548C\u5B9E\u9645\u4F59\u989D"
     name: fr_fig104f
 ---
 plt.figure()
 plt.gca().spines['top'].set_visible(False)
 plt.gca().spines['right'].set_visible(False)
 
-# First subsample
+# 第一个子样本
 plt.plot(bal[1:31], infl[1:31], 'o', 
-    markerfacecolor='none', color='blue', label='real bills period')
+    markerfacecolor='none', color='blue', label='实票据时期')
 
-# Second subsample
-plt.plot(bal[31:44], infl[31:44], '+', color='red', label='terror')
+# 第二个子样本
+plt.plot(bal[31:44], infl[31:44], '+', color='red', label='恐怖时期')
 
-# Third subsample
+# 第三个子样本
 plt.plot(bal[44:63], infl[44:63], '*', 
-        color='orange', label='classic Cagan hyperinflation')
+        color='orange', label='经典的Cagan恶性通货膨胀')
 plt.plot(a3_rev + b3_rev * infl[44:63], infl[44:63], color='orange')
 
-plt.xlabel('real balances')
-plt.ylabel('inflation')
+plt.xlabel('实际余额')
+plt.ylabel('通货膨胀')
 plt.legend()
 
 plt.tight_layout()
 plt.show()
 ```
 
-{numref}`fr_fig104e` shows the results of regressing  real money balances on inflation during the
-period of the hyperinflation.
+{numref}`fr_fig104e` 展示了在超通货膨胀期间，对通货膨胀对实际余额进行回归的结果。
 
-## Hyperinflation Ends
+## 超通货膨胀终结
 
-{cite}`sargent_velde1995` tell how in 1797 the Revolutionary government abruptly ended the inflation by 
+{cite}`sargent_velde1995` 记载，1797年革命政府突然终止了通货膨胀，通过
 
-  * repudiating 2/3 of the national debt, and thereby
-  * eliminating the net-of-interest government defict
-  * no longer printing money, but instead
-  * using gold and silver coins as money
+  * 否认了2/3的国家债务，并因此
+  * 消除了政府的净利息赤字
+  * 停止印刷货币，而是
+  * 使用金币和银币作为货币
 
-In 1799, Napoleon Bonaparte became first consul and for the next 15 years used resources confiscated from conquered territories to help pay for French government expenditures.
+1799年，拿破仑·波拿巴成为首席执政官，并在接下来的15年使用掠夺的地区资源帮助支付法国政府的开支。
 
-## Underlying Theories
+## 理论基础
 
-This lecture  sets the stage for studying  theories of inflation and the  government monetary and fiscal policies that bring it about.
+本讲为研究通货膨胀理论以及导致其的政府货币和财政政策做了铺垫。
 
-A  *monetarist theory of the price level* is described in this quantecon lecture {doc}`cagan_ree`.
+这里描述了一个*货币主义的价格水平理论*，我们会在在 {doc}`cagan_ree` 中了解更多。
 
-That lecture sets the stage for these quantecon lectures {doc}`money_inflation` and {doc}`unpleasant`.  
+本讲也为 {doc}`money_inflation` 和 {doc}`unpleasant` 做了铺垫。
