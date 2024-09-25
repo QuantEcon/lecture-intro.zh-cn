@@ -46,6 +46,7 @@ import matplotlib.pyplot as plt
 
 ```{math}
 :label: lake_model
+
 \begin{aligned}
     u_{t+1} &= (1-d)(1-\lambda)u_t + \alpha(1-d)e_t + bn_t \\
     &= ((1-d)(1-\lambda) + b)u_t + (\alpha(1-d) + b)e_t \\
@@ -54,6 +55,7 @@ import matplotlib.pyplot as plt
 ```
 
 我们可以将{eq}`lake_model`安排为矩阵形式的线性方程组 $x_{t+1} = Ax_t$，其中
+
 $$
 x_{t+1} =
 \begin{bmatrix}
@@ -73,6 +75,7 @@ x_t =
     e_t
 \end{bmatrix}.
 $$
+
 假设在 $t=0$ 时，我们有 $x_0 = \begin{bmatrix} u_0 & e_0 \end{bmatrix}^\top$。
 那么，$x_1=Ax_0$，$x_2=Ax_1=A^2x_0$，因此 $x_t = A^tx_0$。
 因此，该系统的长期结果可能取决于初始条件 $x_0$ 和矩阵 $A$。
@@ -173,6 +176,7 @@ plt.show()
 在长期内由劳动力市场的固定退出率和进入率决定。
 具体来说，令 $\mathbb{1}=[1, 1]^\top$ 为一个全1向量。
 观察到
+
 $$
     \begin{aligned}
     n_{t+1} &= u_{t+1} + e_{t+1} \\
@@ -182,6 +186,7 @@ $$
     &= (1 + b - d) n_t.
     \end{aligned}
 $$
+
 因此，$n_t$ 的增长率固定为 $1 + b - d$。
 此外，失业和就业的时间序列似乎在长期内以某些稳定的速率增长。
 
@@ -201,23 +206,31 @@ $$
 现在我们通过展示佩龙-弗罗贝尼乌斯定理如何帮助我们分析湖泊模型来说明它的力量。
 由于 $A$ 是非负且不可约的矩阵，佩龙-弗罗贝尼乌斯定理意味着：
 - 谱半径 $r(A)$ 是 $A$ 的一个特征值，其中
+
 $$
     r(A) := \max\{|\lambda|: \lambda \text{ 是 } A \text{ 的特征值 } \}
 $$
+
 - 任何其他特征值 $\lambda$ 的绝对值都严格小于 $r(A)$：$|\lambda|< r(A)$，
 - 存在唯一且处处正的右特征向量 $\phi$（列向量）和左特征向量 $\psi$（行向量）：
+
 $$
     A \phi = r(A) \phi, \quad  \psi A = r(A) \psi
 $$
+
 - 如果进一步 $A$ 是正的，那么当 $<\psi, \phi> = \psi \phi=1$ 时，我们有
+
 $$
     r(A)^{-t} A^t \to \phi \psi
 $$
+
 最后一个陈述意味着长期来看，$A^t$ 的量级与 $r(A)^t$ 的量级相同，其中 $r(A)$ 在本讲座中可被视为主导特征值。
 因此，长期来看，$x_t = A^t x_0$ 的量级也由 $r(A)^t$ 主导。
 回想一下，谱半径受列和的约束：对于 $A \geq 0$，我们有
+
 ```{math}
 :label: PF_bounds
+
 \min_j \text{colsum}_j (A) \leq r(A) \leq \max_j \text{colsum}_j (A)
 ```
 
@@ -344,10 +357,13 @@ plot_time_paths(lm, x0=x0)
 
 由于 $A$ 的列和为 $r(A)=1$，左特征向量是 $\mathbb{1}^\top=[1, 1]$。
 佩龙-弗罗贝尼乌斯理论意味着
+
 $$
 r(A)^{-t} A^{t} \approx \bar{x} \mathbb{1}^\top = \begin{bmatrix} \bar{u} & \bar{u} \\ \bar{e} & \bar{e} \end{bmatrix}.
 $$
+
 因此，对于任何 $x_0 = (u_0, e_0)^\top$，我们有
+
 $$
 \begin{aligned}
 x_t = A^t x_0 &\approx r(A)^t \begin{bmatrix} \bar{u} & \bar{u} \\ \bar{e} & \bar{e} \end{bmatrix} \begin{bmatrix}u_0 \\ e_0 \end{bmatrix} \\
@@ -356,6 +372,7 @@ x_t = A^t x_0 &\approx r(A)^t \begin{bmatrix} \bar{u} & \bar{u} \\ \bar{e} & \ba
 &= n_t \bar{x}.
 \end{aligned}
 $$
+
 当 $t$ 足够大时。
 
 我们看到，在长期内，$u_t$ 和 $e_t$ 的增长也由 $r(A) = 1+g$ 主导：当 $r(A) > 1$ 时，$x_t$ 沿着 $D$ 增长，当 $r(A) < 1$ 时，收敛到 $(0, 0)$。
@@ -365,16 +382,20 @@ $$
 
 为了说明这些比率的动态，令 $\hat{A} := A / (1+g)$ 为 $r_t := x_t/ n_t$ 的转移矩阵。
 比率的动态遵循
+
 $$
 r_{t+1} = \frac{x_{t+1}}{n_{t+1}} = \frac{x_{t+1}}{(1+g) n_{t}} = \frac{A x_t}{(1+g)n_t} = \hat{A} \frac{x_t}{n_t}
 =\hat{A} r_t.
 $$
+
 注意到 $\hat{A}$ 的列和都为 1，因此 $r(\hat{A})=1$。
 可以验证 $\bar{x}$ 也是 $\hat{A}$ 对应于 $r(\hat{A})$ 的右特征向量，即 $\bar{x} = \hat{A} \bar{x}$。
 此外，对于任何 $r_0 = x_0 / n_0$，当 $t \to \infty$ 时，$\hat{A}^t r_0 \to \bar{x}$，因为上述讨论意味着
+
 $$
 r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix} \bar{u} & \bar{u} \\ \bar{e} & \bar{e} \end{bmatrix} r_0 = \begin{bmatrix} \bar{u} \\  \bar{e} \end{bmatrix}. 
 $$
+
 这在下面有所说明。
 
 ```{code-cell} ipython3
