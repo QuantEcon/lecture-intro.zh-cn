@@ -11,25 +11,30 @@ kernelspec:
   name: python3
 ---
 
-# Simple Linear Regression Model
+# 简单线性回归模型
 
 ```{code-cell} ipython3
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-The simple regression model estimates the relationship between two variables $x_i$ and $y_i$
+简单回归模型估计两个变量 $x_i$ 和 $y_i$ 之间的关系
 
 $$
 y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 $$
 
-where $\epsilon_i$ represents the error between the line of best fit and the sample values for $y_i$ given $x_i$.
+其中 $\epsilon_i$ 表示最佳拟合线与样本值 $y_i$ 与 $x_i$ 的误差。
 
-Our goal is to choose values for $\alpha$ and $\beta$ to build a line of "best" fit for some data that is available for variables $x_i$ and $y_i$. 
+我们的目标是为 $\alpha$ 和 $\beta$ 选择值来为一些可用的变量 $x_i$ 和 $y_i$ 的数据构建“最佳”拟合线。
 
-Let us consider a simple dataset of 10 observations for variables $x_i$ and $y_i$:
+让我们考虑一个具有10个观察值的简单数据集，变量为 $x_i$ 和 $y_i$：
 
 | | $y_i$  | $x_i$ |
 |-|---|---|
@@ -44,7 +49,7 @@ Let us consider a simple dataset of 10 observations for variables $x_i$ and $y_i
 |9| 1800 | 27 |
 |10 | 250 | 2 |
 
-Let us think about $y_i$ as sales for an ice-cream cart, while $x_i$ is a variable that records the day's temperature in Celsius.
+让我们把 $y_i$ 视为一个冰淇淋车的销售额，而 $x_i$ 是记录当天摄氏度温度的变量。
 
 ```{code-cell} ipython3
 x = [32, 21, 24, 35, 10, 11, 22, 21, 27, 2]
@@ -54,33 +59,33 @@ df.columns = ['X', 'Y']
 df
 ```
 
-We can use a scatter plot of the data to see the relationship between $y_i$ (ice-cream sales in dollars (\$\'s)) and $x_i$ (degrees Celsius).
+我们可以通过数据的散点图来观察 $y_i$（冰淇淋销售额（美元(\$\'s)）和 $x_i$（摄氏度）之间的关系。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Scatter plot"
+    caption: "散点图"
     name: sales-v-temp1
 ---
 ax = df.plot(
     x='X', 
     y='Y', 
     kind='scatter', 
-    ylabel='Ice-cream sales ($\'s)', 
-    xlabel='Degrees celcius'
+    ylabel='冰淇淋销售额（\$）', 
+    xlabel='摄氏度'
 )
 ```
 
-as you can see the data suggests that more ice-cream is typically sold on hotter days. 
+如您所见，数据表明在更热的日子里通常会卖出更多的冰淇淋。
 
-To build a linear model of the data we need to choose values for $\alpha$ and $\beta$ that represents a line of "best" fit such that
+为了建立数据的线性模型，我们需要选择代表“最佳”拟合线的 $\alpha$ 和 $\beta$ 值，使得
 
 $$
 \hat{y_i} = \hat{\alpha} + \hat{\beta} x_i
 $$
 
-Let's start with $\alpha = 5$ and $\beta = 10$
+让我们从 $\alpha = 5$ 和 $\beta = 10$ 开始
 
 ```{code-cell} ipython3
 α = 5
@@ -92,7 +97,7 @@ df['Y_hat'] = α + β * df['X']
 ---
 mystnb:
   figure:
-    caption: "Scatter plot with a line of fit"
+    caption: "带有拟合线的散点图"
     name: sales-v-temp2
 ---
 fig, ax = plt.subplots()
@@ -101,9 +106,9 @@ ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax)
 plt.show()
 ```
 
-We can see that this model does a poor job of estimating the relationship.
+我们可以看到这个模型在估计关系上做得很差。
 
-We can continue to guess and iterate towards a line of "best" fit by adjusting the parameters
+我们可以继续通过调整参数来试图迭代并逼近“最佳”拟合线。
 
 ```{code-cell} ipython3
 β = 100
@@ -114,7 +119,7 @@ df['Y_hat'] = α + β * df['X']
 ---
 mystnb:
   figure:
-    caption: "Scatter plot with a line of fit #2"
+    caption: "带拟合线的散点图 #2"
     name: sales-v-temp3
 ---
 fig, ax = plt.subplots()
@@ -132,7 +137,7 @@ df['Y_hat'] = α + β * df['X']
 ---
 mystnb:
   figure:
-    caption: "Scatter plot with a line of fit #3"
+    caption: "带拟合线的散点图 #3"
     name: sales-v-temp4
 ---
 fig, ax = plt.subplots()
@@ -141,9 +146,9 @@ ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g')
 plt.show()
 ```
 
-However we need to think about formalizing this guessing process by thinking of this problem as an optimization problem. 
+但是我们需要考虑将这个猜测过程正式化，把这个问题看作是一个优化问题。
 
-Let's consider the error $\epsilon_i$ and define the difference between the observed values $y_i$ and the estimated values $\hat{y}_i$ which we will call the residuals
+让我们考虑误差 $\epsilon_i$ 并定义观测值 $y_i$ 与估计值 $\hat{y}_i$ 之间的差异，我们将其称为残差
 
 $$
 \begin{aligned}
@@ -164,7 +169,7 @@ df
 ---
 mystnb:
   figure:
-    caption: "Plot of the residuals"
+    caption: "残差图"
     name: plt-residuals
 ---
 fig, ax = plt.subplots()
@@ -174,32 +179,32 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r')
 plt.show()
 ```
 
-The Ordinary Least Squares (OLS) method chooses $\alpha$ and $\beta$ in such a way that **minimizes** the sum of the squared residuals (SSR). 
+普通最小二乘方法 (OLS) 选择 $\alpha$ 和 $\beta$，以使残差平方和 (SSR) **最小化**。
 
 $$
 \min_{\alpha,\beta} \sum_{i=1}^{N}{\hat{e}_i^2} = \min_{\alpha,\beta} \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 $$
 
-Let's call this a cost function
+我们称之为成本函数
 
 $$
 C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 $$
 
-that we would like to minimize with parameters $\alpha$ and $\beta$.
+我们希望通过参数 $\alpha$ 和 $\beta$ 来最小化这个成本函数。
 
-## How does error change with respect to $\alpha$ and $\beta$
+## 错误相对于 $\alpha$ 和 $\beta$ 的变化
 
-Let us first look at how the total error changes with respect to $\beta$ (holding the intercept $\alpha$ constant)
+首先让我们看看总误差相对于 $\beta$ 的变化（保持截距 $\alpha$ 不变）
 
-We know from [the next section](slr:optimal-values) the optimal values for $\alpha$ and $\beta$  are:
+我们从[下一节](slr:optimal-values)知道 $\alpha$ 和 $\beta$ 的最优值是：
 
 ```{code-cell} ipython3
 β_optimal = 64.38
 α_optimal = -14.72
 ```
 
-We can then calculate the error for a range of $\beta$ values
+我们可以计算一个范围内的 $\beta$ 值的错误
 
 ```{code-cell} ipython3
 errors = {}
@@ -207,20 +212,20 @@ for β in np.arange(20,100,0.5):
     errors[β] = abs((α_optimal + β * df['X']) - df['Y']).sum()
 ```
 
-Plotting the error
+绘制错误图
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Plotting the error"
+    caption: "绘制错误图"
     name: plt-errors
 ---
 ax = pd.Series(errors).plot(xlabel='β', ylabel='error')
 plt.axvline(β_optimal, color='r');
 ```
 
-Now let us vary $\alpha$ (holding $\beta$ constant)
+现在我们改变 $\alpha$ （保持 $\beta$ 不变）
 
 ```{code-cell} ipython3
 errors = {}
@@ -228,13 +233,13 @@ for α in np.arange(-500,500,5):
     errors[α] = abs((α + β_optimal * df['X']) - df['Y']).sum()
 ```
 
-Plotting the error
+绘制错误图
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Plotting the error (2)"
+    caption: "绘制错误图 (2)"
     name: plt-errors-2
 ---
 ax = pd.Series(errors).plot(xlabel='α', ylabel='error')
@@ -242,136 +247,136 @@ plt.axvline(α_optimal, color='r');
 ```
 
 (slr:optimal-values)=
-## Calculating optimal values
+## 计算最优值
 
-Now let us use calculus to solve the optimization problem and compute the optimal values for $\alpha$ and $\beta$ to find the ordinary least squares solution.
+现在让我们使用微积分来解决优化问题，并计算出 $\alpha$ 和 $\beta$ 的最优值，以找到普通最小二乘解。
 
-First taking the partial derivative with respect to $\alpha$
+首先对 $\alpha$ 取偏导
 
 $$
 \frac{\partial C}{\partial \alpha}[\sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}]
 $$
 
-and setting it equal to $0$
+并将其设为 $0$
 
 $$
 0 = \sum_{i=1}^{N}{-2(y_i - \alpha - \beta x_i)}
 $$
 
-we can remove the constant $-2$ from the summation by dividing both sides by $-2$
+我们可以通过两边除以 $-2$ 来移除求和中的常数 $-2$
 
 $$
 0 = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)}
 $$
 
-Now we can split this equation up into the components
+现在我们可以将这个方程分解为各个组成部分
 
 $$
 0 = \sum_{i=1}^{N}{y_i} - \sum_{i=1}^{N}{\alpha} - \beta \sum_{i=1}^{N}{x_i}
 $$
 
-The middle term is a straight forward sum from $i=1,...N$ by a constant $\alpha$
+中间项是从 $i=1,...N$ 对常数 $\alpha$ 进行简单求和
 
 $$
 0 = \sum_{i=1}^{N}{y_i} - N*\alpha - \beta \sum_{i=1}^{N}{x_i}
 $$
 
-and rearranging terms 
+并重新排列各项
 
 $$
 \alpha = \frac{\sum_{i=1}^{N}{y_i} - \beta \sum_{i=1}^{N}{x_i}}{N}
 $$
 
-We observe that both fractions resolve to the means $\bar{y_i}$ and $\bar{x_i}$
+我们观察到两个分数分别归结为均值 $\bar{y_i}$ 和 $\bar{x_i}$
 
 $$
 \alpha = \bar{y_i} - \beta\bar{x_i}
 $$ (eq:optimal-alpha)
 
-Now let's take the partial derivative of the cost function $C$ with respect to $\beta$
+现在让我们对成本函数 $C$ 关于 $\beta$ 取偏导
 
 $$
 \frac{\partial C}{\partial \beta}[\sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}]
 $$
 
-and setting it equal to $0$
+并将其设为 $0$
 
 $$
 0 = \sum_{i=1}^{N}{-2 x_i (y_i - \alpha - \beta x_i)}
 $$
 
-we can again take the constant outside of the summation and divide both sides by $-2$
+我们可以再次将常数从求和中取出，并将两边除以 $-2$
 
 $$
 0 = \sum_{i=1}^{N}{x_i (y_i - \alpha - \beta x_i)}
 $$
 
-which becomes
+这变成了
 
 $$
 0 = \sum_{i=1}^{N}{(x_i y_i - \alpha x_i - \beta x_i^2)}
 $$
 
-now substituting for $\alpha$
+现在代入 $\alpha$
 
 $$
 0 = \sum_{i=1}^{N}{(x_i y_i - (\bar{y_i} - \beta \bar{x_i}) x_i - \beta x_i^2)}
 $$
 
-and rearranging terms
+并重新排列各项
 
 $$
 0 = \sum_{i=1}^{N}{(x_i y_i - \bar{y_i} x_i - \beta \bar{x_i} x_i - \beta x_i^2)}
 $$
 
-This can be split into two summations
+这可以被分成两个求和
 
 $$
 0 = \sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i) + \beta \sum_{i=1}^{N}(\bar{x_i} x_i - x_i^2)
 $$
 
-and solving for $\beta$ yields
+解$\beta$得到
 
 $$
 \beta = \frac{\sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i)}{\sum_{i=1}^{N}(x_i^2 - \bar{x_i} x_i)}
 $$ (eq:optimal-beta)
 
-We can now use {eq}`eq:optimal-alpha` and {eq}`eq:optimal-beta` to calculate the optimal values for $\alpha$ and $\beta$
+我们现在可以使用{eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta` 来计算$\alpha$和$\beta$的最优值
 
-Calculating $\beta$
+计算$\beta$
 
 ```{code-cell} ipython3
-df = df[['X','Y']].copy()  # Original Data
+df = df[['X','Y']].copy()  # 原始数据
 
-# Calculate the sample means
+# 计算样本均值
 x_bar = df['X'].mean()
 y_bar = df['Y'].mean()
 ```
 
-Now computing across the 10 observations and then summing the numerator and denominator
+现在计算10个观察值，然后求和分子和分母
 
 ```{code-cell} ipython3
-# Compute the Sums
+# 计算求和
 df['num'] = df['X'] * df['Y'] - y_bar * df['X']
 df['den'] = pow(df['X'],2) - x_bar * df['X']
 β = df['num'].sum() / df['den'].sum()
 print(β)
 ```
 
-Calculating $\alpha$
+计算$\alpha$
 
 ```{code-cell} ipython3
 α = y_bar - β * x_bar
 print(α)
 ```
 
-Now we can plot the OLS solution
+现在我们可以绘制OLS解决方案
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "OLS line of best fit"
+    caption: "OLS最佳拟合线"
     name: plt-ols
 ---
 df['Y_hat'] = α + β * df['X']
@@ -386,31 +391,31 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 :::{exercise}
 :label: slr-ex1
 
-Now that you know the equations that solve the simple linear regression model using OLS you can now run your own regressions to build a model between $y$ and $x$.
+现在您已经知道了使用OLS解决简单线性回归模型的方程，您可以开始运行自己的回归以构建$y$和$x$之间的模型了。
 
-Let's consider two economic variables GDP per capita and Life Expectancy.
+让我们考虑两个经济变量，人均GDP和预期寿命。
 
-1. What do you think their relationship would be?
-2. Gather some data [from our world in data](https://ourworldindata.org)
-3. Use `pandas` to import the `csv` formatted data and plot a few different countries of interest
-4. Use {eq}`eq:optimal-alpha` and {eq}`eq:optimal-beta` to compute optimal values for  $\alpha$ and $\beta$
-5. Plot the line of best fit found using OLS
-6. Interpret the coefficients and write a summary sentence of the relationship between GDP per capita and Life Expectancy
+1. 你认为它们之间的关系会是怎样的？
+2. 从[我们的世界数据中](https://ourworldindata.org)搜集一些数据
+3. 使用`pandas`导入`csv`格式的数据，并绘制几个不同国家的图表
+4. 使用{eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta`计算$\alpha$和$\beta$的最优值
+5. 使用OLS绘制最佳拟合线
+6. 解释系数并写出人均GDP和预期寿命之间关系的总结句子
 
 :::
 
 :::{solution-start} slr-ex1
 :::
 
-**Q2:** Gather some data [from our world in data](https://ourworldindata.org)
+**Q2:** 搜集一些数据 [来自我们的世界数据](https://ourworldindata.org)
 
 :::{raw} html
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
 :::
 
-You can download {download}`a copy of the data here <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>` if you get stuck
+如果你遇到困难，可以从这里下载{download}`数据副本 <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>`
 
-**Q3:** Use `pandas` to import the `csv` formatted data and plot a few different countries of interest
+**Q3:** 使用`pandas`导入`csv`格式的数据并绘制几个不同国家的兴趣图表
 
 ```{code-cell} ipython3
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv"
@@ -421,13 +426,13 @@ df = pd.read_csv(data_url, nrows=10)
 df
 ```
 
-You can see that the data downloaded from Our World in Data has provided a global set of countries with the GDP per capita and Life Expectancy Data.
+您可以看到从我们的世界数据下载的数据为全球各国提供了人均GDP和预期寿命数据。
 
-It is often a good idea to at first import a few lines of data from a csv to understand its structure so that you can then choose the columns that you want to read into your DataFrame.
+首先从csv文件中导入几行数据以了解其结构，以便您可以选择要读取到DataFrame中的列，这通常是一个好主意。
 
-You can observe that there are a bunch of columns we won't need to import such as `Continent`
+您可以观察到有许多我们不需要导入的列，比如`Continent`
 
-So let's built a list of the columns we want to import
+那么我们来构建一个我们想要导入的列的列表
 
 ```{code-cell} ipython3
 cols = ['Code', 'Year', 'Life expectancy at birth (historical)', 'GDP per capita']
@@ -435,14 +440,14 @@ df = pd.read_csv(data_url, usecols=cols)
 df
 ```
 
-Sometimes it can be useful to rename your columns to make it easier to work with in the DataFrame
+有时候重命名列名可以使得在DataFrame中更容易操作
 
 ```{code-cell} ipython3
 df.columns = ["cntry", "year", "life_expectancy", "gdppc"]
 df
 ```
 
-We can see there are `NaN` values which represents missing data so let us go ahead and drop those
+我们可以看到存在`NaN`值，这表示缺失数据，所以让我们继续删除这些数据
 
 ```{code-cell} ipython3
 df.dropna(inplace=True)
@@ -452,69 +457,69 @@ df.dropna(inplace=True)
 df
 ```
 
-We have now dropped the number of rows in our DataFrame from 62156 to 12445 removing a lot of empty data relationships.
+我们现在已经将我们的DataFrame的行数从62156减少到12445，删除了很多空的数据关系。
 
-Now we have a dataset containing life expectancy and GDP per capita for a range of years.
+现在我们有一个包含一系列年份的人均寿命和人均GDP的数据集。
 
-It is always a good idea to spend a bit of time understanding what data you actually have. 
+花点时间了解你实际拥有的数据总是一个好主意。
 
-For example, you may want to explore this data to see if there is consistent reporting for all countries across years
+例如，您可能想要探索这些数据，看看是否所有国家在各年之间的报告都是一致的。
 
-Let's first look at the Life Expectancy Data
+让我们首先看看寿命数据
 
 ```{code-cell} ipython3
 le_years = df[['cntry', 'year', 'life_expectancy']].set_index(['cntry', 'year']).unstack()['life_expectancy']
 le_years
 ```
 
-As you can see there are a lot of countries where data is not available for the Year 1543!
+如您所见，有很多国家在1543年的数据是不可用的！
 
-Which country does report this data?
+哪个国家报告了这些数据？
 
 ```{code-cell} ipython3
 le_years[~le_years[1543].isna()]
 ```
 
-You can see that Great Britain (GBR) is the only one available
+您可以看到，只有大不列颠（GBR）是可用的
 
-You can also take a closer look at the time series to find that it is also non-continuous, even for GBR.
+您还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。
 
 ```{code-cell} ipython3
 le_years.loc['GBR'].plot()
 ```
 
-In fact we can use pandas to quickly check how many countries are captured in each year
+实际上我们可以使用pandas快速检查每个年份涵盖了多少个国家
 
 ```{code-cell} ipython3
 le_years.stack().unstack(level=0).count(axis=1).plot(xlabel="Year", ylabel="Number of countries");
 ```
 
-So it is clear that if you are doing cross-sectional comparisons then more recent data will include a wider set of countries
+所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家集合
 
-Now let us consider the most recent year in the dataset 2018
+现在让我们考虑数据集中最近的一年2018
 
 ```{code-cell} ipython3
 df = df[df.year == 2018].reset_index(drop=True).copy()
 ```
 
 ```{code-cell} ipython3
-df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="GDP per capita", ylabel="Life expectancy (years)",);
+df.plot(x='gdppc', y='life_expectancy', kind='scatter', xlabel="GDP per capita", ylabel="Life expectancy (years)",);
 ```
 
-This data shows a couple of interesting relationships.
+这些数据显示了一些有趣的关系。
 
-1. there are a number of countries with similar GDP per capita levels but a wide range in Life Expectancy
-2. there appears to be a positive relationship between GDP per capita and life expectancy. Countries with higher GDP per capita tend to have higher life expectancy outcomes
+1. 许多国家的人均GDP相近，但寿命差别很大
+2. 人均GDP与预期寿命之间似乎存在正向关系。人均GDP较高的国家往往拥有更高的预期寿命
 
-Even though OLS is solving linear equations -- one option we have is to transform the variables, such as through a log transform, and then use OLS to estimate the transformed variables.
+尽管普通最小二乘法（OLS）是用来解线性方程的，但我们可以通过对变量进行转换（例如对数变换），然后使用OLS来估计转换后的变量。
 
-By specifying `logx` you can plot the GDP per Capita data on a log scale
+通过指定 `logx` 你可以在对数尺度上绘制人均GDP数据
 
 ```{code-cell} ipython3
-df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="GDP per capita", ylabel="Life expectancy (years)", logx=True);
+df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="人均GDP", ylabel="预期寿命（年）", logx=True);
 ```
 
-As you can see from this transformation -- a linear model fits the shape of the data more closely.
+从这次转换可以看出，线性模型更贴近数据的形状。
 
 ```{code-cell} ipython3
 df['log_gdppc'] = df['gdppc'].apply(np.log10)
@@ -524,12 +529,12 @@ df['log_gdppc'] = df['gdppc'].apply(np.log10)
 df
 ```
 
-**Q4:** Use {eq}`eq:optimal-alpha` and {eq}`eq:optimal-beta` to compute optimal values for  $\alpha$ and $\beta$
+**Q4:** 使用 {eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta` 来计算  $\alpha$ 和 $\beta$ 的最优值
 
 ```{code-cell} ipython3
-data = df[['log_gdppc', 'life_expectancy']].copy()  # Get Data from DataFrame
+data = df[['log_gdppc', 'life_expectancy']].copy()  # 从DataFrame中提取数据
 
-# Calculate the sample means
+# 计算样本均值
 x_bar = data['log_gdppc'].mean()
 y_bar = data['life_expectancy'].mean()
 ```
@@ -539,7 +544,7 @@ data
 ```
 
 ```{code-cell} ipython3
-# Compute the Sums
+# 计算求和
 data['num'] = data['log_gdppc'] * data['life_expectancy'] - y_bar * data['log_gdppc']
 data['den'] = pow(data['log_gdppc'],2) - x_bar * data['log_gdppc']
 β = data['num'].sum() / data['den'].sum()
@@ -551,7 +556,7 @@ print(β)
 print(α)
 ```
 
-**Q5:** Plot the line of best fit found using OLS
+**Q5:** 绘制使用 OLS 找到的最佳拟合线
 
 ```{code-cell} ipython3
 data['life_expectancy_hat'] = α + β * df['log_gdppc']
@@ -569,9 +574,9 @@ plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy
 :::{exercise}
 :label: slr-ex2
 
-Minimizing the sum of squares is not the **only** way to generate the line of best fit. 
+通过最小化平方和并不是生成最佳拟合线的**唯一**方法。
 
-For example, we could also consider minimizing the sum of the **absolute values**, that would give less weight to outliers. 
+例如，我们还可以考虑最小化**绝对值之和**，这样对异常值的权重会更小。
 
-Solve for $\alpha$ and $\beta$ using the least absolute values
+求解 $\alpha$ 和 $\beta$ 使用最小绝对值法
 :::
