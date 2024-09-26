@@ -745,7 +745,7 @@ def plot_competitive_equilibrium(PE):
     plt.hlines(p, 0, c, linestyle="dashed", color='black', alpha=0.7)
     plt.scatter(c, p, zorder=10, label='竞争均衡', color='#600001')
 
-    plt.legend(loc='上右')
+    plt.legend(loc='upper right')
     plt.margins(x=0, y=0)
     plt.ylim(0)
     plt.xlabel('数量')
