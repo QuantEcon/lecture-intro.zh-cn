@@ -40,12 +40,12 @@ kernelspec:
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from numpy.random import randn
-from matplotlib import font_manager
 
-fontP = font_manager.FontProperties()
-fontP.set_family('SimHei') 
-fontP.set_size(14) 
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 蒙特卡罗简介
@@ -485,7 +485,7 @@ for ax, transform, title in zip(axes, transforms, titles):
     for i in range(50):
         path = simulate_asset_price_path()
         ax.plot(transform(path))
-    ax.set_title(title, fontproperties=fontP)
+    ax.set_title(title)
 
 fig.tight_layout()
 plt.show()
