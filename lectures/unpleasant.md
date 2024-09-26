@@ -1,180 +1,150 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.14.1
-kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
-  name: python3
----
+# 一些不愉快的货币主义算术
 
-# Some Unpleasant Monetarist Arithmetic 
+## 概述
 
-## Overview
+本讲座基于 {doc}`money_inflation` 中引入的概念和问题。
 
+那个讲座描述了揭示通货膨胀税率和关联的货币收益率的静止均衡 [*拉弗曲线*](https://en.wikipedia.org/wiki/Laffer_curve)。
 
-This lecture builds on concepts and issues introduced in {doc}`money_inflation`.
+在这次讲座中，我们研究一个在日期 $T > 0$ 之后占优的静止均衡的情况，但在那之前并非如此。
 
-That lecture describes stationary equilibria that reveal a [*Laffer curve*](https://en.wikipedia.org/wiki/Laffer_curve) in the inflation tax rate and the associated  stationary rate of return 
-on currency.  
+对于 $t=0, \ldots, T-1$，货币供应、价格水平和计息政府债务沿着一个在 $t=T$ 结束的过渡路径变化。
 
-In this lecture we study  a situation  in which a stationary equilibrium prevails after  date $T > 0$, but not before then.  
+在这个过渡期间，实际余额 $\frac{m_{t+1}}{p_t}$ 与在时间 $t$ 到期的一期政府债券 $\tilde{R} B_{t-1}$ 的比率每个期间都在减少。
 
-For $t=0, \ldots, T-1$, the money supply,  price level, and interest-bearing government debt vary along a transition path that ends at $t=T$.
+这对于必须通过印制货币来融资的 **息前** 政府赤字在 $t \geq T$ 时期有影响。
 
-During this transition, the ratio of the real balances $\frac{m_{t+1}}{{p_t}}$ to indexed one-period  government bonds $\tilde R B_{t-1}$  maturing at time $t$ decreases each period. 
+关键的 **货币与债券** 比率只在时间 $T$ 及之后稳定。
 
-This has consequences for the **gross-of-interest** government deficit that must be financed by printing money for times $t \geq T$. 
+并且 $T$ 越大，在 $t \geq T$ 时期必须通过印制货币来融资的息前政府赤字就越大。
 
-The critical **money-to-bonds** ratio stabilizes only at time $T$ and afterwards.
+这些结果是 Sargent 和 Wallace 的“不愉快的货币主义算术” {cite}`sargent1981` 的基本发现。
 
-And the larger is $T$, the higher is the gross-of-interest government deficit that must be financed
-by printing money at times $t \geq T$. 
+那次讲座描述了在讲座中出现的货币供应和需求。
 
-These outcomes are the essential finding of Sargent and Wallace's "unpleasant monetarist arithmetic" {cite}`sargent1981`.
+它还描述了我们在本讲座中从中向后工作的稳态均衡。
 
-That lecture  described  supplies and demands for money that appear in lecture.
+除了学习“不愉快的货币主义算术”，在这次讲座中，我们还将学习如何实施一个用于计算初始价格水平的 [*不动点*](https://en.wikipedia.org/wiki/Fixed_point_(mathematics)) 算法。
 
-It also   characterized the steady state equilibrium from which we work backwards in this lecture. 
+## 设置
 
-In addition to learning about "unpleasant monetarist arithmetic", in this lecture we'll learn how to implement a [*fixed point*](https://en.wikipedia.org/wiki/Fixed_point_(mathematics)) algorithm for computing an initial price level.
+让我们从快速回顾一下 {doc}`money_inflation` 中提到的模型组件开始。
 
+请查阅那篇讲义以获取更多详情和我们在此讲义中也将使用的Python代码。
 
-## Setup
-
-Let's start with quick reminders of the model's components set out in {doc}`money_inflation`.
-
-Please consult that lecture for more details and Python code that we'll also use in this lecture.
-
-For $t \geq 1$, **real balances** evolve according to
-
+对于 $t \geq 1$，**实际余额** 按照以下方式变化
 
 $$
 \frac{m_{t+1}}{p_t} - \frac{m_{t}}{p_{t-1}} \frac{p_{t-1}}{p_t} = g
 $$
 
-or
+或者
 
 $$
 b_t - b_{t-1} R_{t-1} = g
 $$ (eq:up_bmotion)
 
-where
+其中
 
-* $b_t = \frac{m_{t+1}}{p_t}$ is real balances at the end of period $t$
-* $R_{t-1} = \frac{p_{t-1}}{p_t}$ is the gross rate of return on real balances held from $t-1$ to $t$
+* $b_t = \frac{m_{t+1}}{p_t}$ 是第 $t$ 期末的实际余额
+* $R_{t-1} = \frac{p_{t-1}}{p_t}$ 是从 $t-1$ 到 $t$ 期间实际余额的毛收益率
 
-The demand for real balances is 
+对实际余额的需求是
 
 $$
-b_t = \gamma_1 - \gamma_2 R_t^{-1} . 
+b_t = \gamma_1 - \gamma_2 R_t^{-1} .
 $$ (eq:up_bdemand)
 
-where $\gamma_1 > \gamma_2 > 0$.
+其中 $\gamma_1 > \gamma_2 > 0$.
 
-## Monetary-Fiscal Policy
+## 货币-财政政策
 
-To the basic model of {doc}`money_inflation`, we add inflation-indexed one-period government bonds as an additional way for the government to finance government expenditures. 
+在{doc}`money_inflation`的基本模型上，我们增加了通胀指数化的一期政府债券作为政府筹集财政支出的另一种方式。
 
-Let $\widetilde R > 1$ be a time-invariant gross real rate of return on government one-period inflation-indexed bonds.
+设 $\widetilde R > 1$ 为政府一期通胀指数化债券的恒定名义回报率。
 
-With this additional source of funds, the government's budget constraint at time $t \geq 0$ is now
+有了这个额外的资金来源，政府在时间 $t \geq 0$ 的预算约束现在是
 
 $$
 B_t + \frac{m_{t+1}}{p_t} = \widetilde R B_{t-1} + \frac{m_t}{p_t} + g
 $$ 
 
+在时间 $0$ 开始之前，公众拥有 $\check m_0$ 单位的货币（以美元计）和 $\widetilde R \check B_{-1}$ 单位的一期指数化债券（以时间 $0$ 的商品计算）；这两个数量是模型外设定的初始条件。
 
-Just before the beginning of time $0$, the  public owns  $\check m_0$ units of currency (measured in dollars)
-and $\widetilde R \check B_{-1}$ units of one-period indexed bonds (measured in time $0$ goods); these two quantities are initial conditions set outside the model.
+注意 $\check m_0$ 是一个 *名义* 数量，以美元计算，而 $\widetilde R \check B_{-1}$ 是一个 *实际* 数量，以时间 $0$ 的商品计算。
 
-Notice that $\check m_0$ is a *nominal* quantity, being measured in dollars, while
-$\widetilde R \check B_{-1}$ is a *real* quantity, being measured in time $0$ goods.
+### 公开市场操作
 
-
-### Open market operations
-
-At time $0$, government can rearrange its portfolio of debts subject to the following constraint (on open-market operations):
+在时间 $0$，政府可以重新安排其债务投资组合，并受以下约束（关于公开市场操作）：
 
 $$
 \widetilde R B_{-1} + \frac{m_0}{p_0} = \widetilde R \check B_{-1} + \frac{\check m_0}{p_0}
 $$
 
-or
+或
 
 $$
 B_{-1} - \check B_{-1} = \frac{1}{p_0 \widetilde R} \left( \check m_0 - m_0 \right)  
 $$ (eq:openmarketconstraint)
 
-This equation says that the government (e.g., the central bank) can *decrease* $m_0$ relative to 
-$\check m_0$ by *increasing* $B_{-1}$ relative to $\check B_{-1}$. 
+该方程表明，政府（例如中央银行）可以通过*增加* $B_{-1}$ 相对于 $\check B_{-1}$ 来*减少* $m_0$ 相对于 $\check m_0$。
 
-This is a version of a standard constraint on a central bank's [**open market operations**](https://www.federalreserve.gov/monetarypolicy/openmarket.htm) in which it expands the stock of money by buying government bonds from  the public. 
+这是中央银行[**公开市场操作**](https://www.federalreserve.gov/monetarypolicy/openmarket.htm)的一个标准约束版本，在此操作中，它通过从公众那里购买政府债券来扩大货币供应量。
 
-## An open market operation at $t=0$
+## 在 $t=0$ 进行公开市场操作
 
-Following Sargent and Wallace {cite}`sargent1981`, we analyze consequences of a central bank policy that 
-uses an open market operation to lower the price level in the face of a persistent fiscal
-deficit that takes the form of a positive $g$.
+遵循 Sargent 和 Wallace {cite}`sargent1981` 的分析，我们研究央行利用公开市场操作在持续的财政赤字情况下降低物价水平的政策后果，这种财政赤字形式为正的 $g$。
 
-Just before time $0$, the government chooses $(m_0, B_{-1})$  subject to constraint
-{eq}`eq:openmarketconstraint`.
+在时间 $0$ 之前，政府选择 $(m_0, B_{-1})$，受约束
+{eq}`eq:openmarketconstraint`。
 
-For $t =0, 1, \ldots, T-1$,
+对于 $t =0, 1, \ldots, T-1$，
 
 $$
 \begin{aligned}
-B_t & = \widetilde R B_{t-1} + g \cr
+B_t & = \widetilde R B_{t-1} + g \\
 m_{t+1} &  = m_0 
 \end{aligned}
 $$
 
-while for $t \geq T$,
+而对于 $t \geq T$，
 
 $$
 \begin{aligned}
-B_t & = B_{T-1} \cr
+B_t & = B_{T-1} \\
 m_{t+1} & = m_t + p_t \overline g
 \end{aligned}
 $$
 
-where 
+其中 
 
 $$
-\overline g = \left[(\tilde R -1) B_{T-1} +  g \right]
+\overline g = \left[(\widetilde R -1) B_{T-1} +  g \right]
 $$ (eq:overlineg)
 
-We want to compute an equilibrium $\{p_t,m_t,b_t, R_t\}_{t=0}$ sequence under this scheme for
-running monetary and fiscal policies.
+我们想计算在这一方案下的一个均衡 $\{p_t,m_t,b_t, R_t\}_{t=0}$ 序列，用于执行货币和财政政策。
 
-Here, by **fiscal policy** we mean the collection of actions that determine a sequence of net-of-interest government deficits $\{g_t\}_{t=0}^\infty$ that must be financed by issuing to the public  either money or interest bearing bonds.
+这里，**财政政策** 我们指的是一系列行动，决定一系列净利息政府赤字 $\{g_t\}_{t=0}^\infty$，这必须通过向公众发行货币或有息债券来融资。
 
-By **monetary policy** or **debt-management policy**, we  mean the collection of actions that determine how the government divides its  portfolio of debts to the public  between interest-bearing parts (government bonds) and non-interest-bearing parts (money).
+通过 **货币政策** 或 **债务管理政策**，我们指的是一系列行动，决定政府如何在有息部分（政府债券）和无息部分（货币）之间分配对公众的债务组合。
 
-By an **open market operation**, we mean a government monetary policy action in which the government
-(or its delegate, say, a central bank) either buys  government bonds from the public for newly issued money, or sells  bonds to the public and withdraws the money it receives from public circulation.  
+通过一个 **公开市场操作**，我们指的是政府的货币政策行动，其中政府（或其代表，比如中央银行）要么用新发行的货币从公众购买政府债券，要么向公众出售债券并收回其从公众流通中得到的货币。
 
-## Algorithm (basic idea)
+## 算法（基本思想）
 
+从 $t=T$ 向后工作，首先计算与低通胀、低通胀税率平稳状态平衡相关的 $p_T, R_u$，如 {doc}`money_inflation_nonlinear` 中所述。
 
-We work backwards from $t=T$ and first compute $p_T, R_u$ associated with the low-inflation, low-inflation-tax-rate stationary equilibrium in {doc}`money_inflation_nonlinear`.
-
-To start our description of our algorithm, it is useful to recall that a stationary rate of return
-on currency $\bar R$ solves the quadratic equation
+首先开始我们的算法描述，回忆一下货币利率 $\bar R$ 解决的二次方程很有用
 
 $$
 -\gamma_2 + (\gamma_1 + \gamma_2 - \overline g) \bar R - \gamma_1 \bar R^2 = 0
 $$ (eq:up_steadyquadratic)
 
-Quadratic equation {eq}`eq:up_steadyquadratic` has two roots, $R_l < R_u < 1$.
+二次方程 {eq}`eq:up_steadyquadratic` 有两个根，$R_l < R_u < 1$。
 
-For reasons described at the end of {doc}`money_inflation`, we select the larger root $R_u$. 
+如 {doc}`money_inflation` 末尾描述，我们选择较大的根 $R_u$。
 
-
-Next, we compute
+接下来，我们计算
 
 $$
 \begin{aligned}
@@ -184,143 +154,134 @@ p_T & = \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}
 \end{aligned}
 $$ (eq:LafferTstationary)
 
-
-We can compute continuation sequences $\{R_t, b_t\}_{t=T+1}^\infty$ of rates of return and real balances that are associated with an equilibrium by solving equation {eq}`eq:up_bmotion` and {eq}`eq:up_bdemand` sequentially  for $t \geq 1$:
+我们可以通过连续解方程 {eq}`eq:up_bmotion` 和 {eq}`eq:up_bdemand` 来计算持续序列 $\{R_t, b_t\}_{t=T+1}^\infty$ 的回报率和实际余额，这些回报率和实际余额与一个平衡状态相关，对于 $t \geq 1$：
 
 $$
 \begin{aligned}
 b_t & = b_{t-1} R_{t-1} + \overline g \cr
 R_t^{-1} & = \frac{\gamma_1}{\gamma_2} - \gamma_2^{-1} b_t \cr
 p_t & = R_t p_{t-1} \cr
-   m_t & = b_{t-1} p_t 
+m_t & = b_{t-1} p_t 
 \end{aligned}
 $$
-   
 
-## Before time $T$ 
+## 在时间 $T$ 之前
 
-Define 
+定义
 
 $$
 \lambda \equiv \frac{\gamma_2}{\gamma_1}.
 $$
 
-Our restrictions that $\gamma_1 > \gamma_2 > 0$ imply that $\lambda \in [0,1)$.
+我们的限制 $\gamma_1 > \gamma_2 > 0$ 暗示 $\lambda \in [0,1)$。
 
-We want to compute
+我们想要计算
 
 $$ 
 \begin{aligned}
-p_0 &  = \gamma_1^{-1} \left[ \sum_{j=0}^\infty \lambda^j m_{j} \right] \cr
+p_0 & = \gamma_1^{-1} \left[ \sum_{j=0}^\infty \lambda^j m_{j} \right] \cr
 & = \gamma_1^{-1} \left[ \sum_{j=0}^{T-1} \lambda^j m_{0} + \sum_{j=T}^\infty \lambda^j m_{1+j} \right]
 \end{aligned}
 $$
 
-Thus,
+因此，
 
 $$
 \begin{aligned}
-p_0 & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^T}{1-\lambda} +  \frac{\lambda^T}{R_u-\lambda}   \right\} \cr
-p_1 & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^{T-1}}{1-\lambda} +  \frac{\lambda^{T-1}}{R_u-\lambda}   \right\} \cr
-\quad \vdots  & \quad \quad \vdots \cr
-p_{T-1} & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda}{1-\lambda} +  \frac{\lambda}{R_u-\lambda}   \right\}  \cr
+p_0 & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^T}{1-\lambda} +  \frac{\lambda^T}{R_u-\lambda}    \right\} \cr
+p_1 & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^{T-1}}{1-\lambda} +  \frac{\lambda^{T-1}}{R_u-\lambda}    \right\} \cr
+\quad \dots  & \quad \quad \dots \cr
+p_{T-1} & = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda}{1-\lambda} +  \frac{\lambda}{R_u-\lambda}    \right\}  \cr
 p_T & = \gamma_1^{-1} m_0  \left\{\frac{1}{R_u-\lambda}   \right\}
 \end{aligned}
 $$ (eq:allts)
 
-We can implement  the preceding formulas by iterating on
+我们可以通过迭代以下公式来实现前述公式：
 
 $$
 p_t = \gamma_1^{-1} m_0 + \lambda p_{t+1}, \quad t = T-1, T-2, \ldots, 0
 $$
 
-starting from  
+从
 
 $$
-p_T =   \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}  = \gamma_1^{-1} m_0  \left\{\frac{1}{R_u-\lambda} \right\}
+p_T =    \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}  = \gamma_1^{-1} m_0  \left\{\frac{1}{R_u-\lambda} \right\}
 $$ (eq:pTformula)
 
 ```{prf:remark}
-We can verify the equivalence of the two formulas on the right sides of {eq}`eq:pTformula` by recalling that 
-$R_u$ is a root of the quadratic equation {eq}`eq:up_steadyquadratic` that determines steady state rates of return on currency.
+可以通过回想 $R_u$ 是二次方程 {eq}`eq:up_steadyquadratic` 的根，该方程确定了货币的稳定状态回报率，从而验证 {eq}`eq:pTformula` 右侧两个公式的等价性。
 ```
- 
-## Algorithm (pseudo code)
 
-Now let's describe a computational algorithm in more detail in the form of a description
-that constitutes pseudo code because it approaches a set of instructions we could provide to a 
-Python coder.
+## 算法（伪代码）
 
-To compute an equilibrium, we deploy the following algorithm.
+现在我们更详细地以伪代码形式描述一个计算算法，因为它接近我们可以提供给Python编程者的一组指令。
+
+为了计算一个均衡，我们使用以下算法。
 
 ```{prf:algorithm}
-Given *parameters* include $g, \check m_0, \check B_{-1}, \widetilde R >1, T $.
+给定 *参数* 包括 $g, \check m_0, \check B_{-1}, \widetilde R >1, T $。
 
-We define a mapping from $p_0$ to $\widehat p_0$ as follows.
+我们定义一个从 $p_0$ 到 $\widehat p_0$ 的映射，如下。
 
-* Set $m_0$ and then compute $B_{-1}$ to satisfy the constraint on time $0$ **open market operations**
+* 设置 $m_0$，然后计算 $B_{-1}$ 以满足时间 $0$ **公开市场操作的** 约束
 
 $$
-B_{-1}- \check B_{-1}  = \frac{\widetilde R}{p_0} \left( \check m_0 - m_0 \right)
+B_{-1}- \check B_{-1} = \frac{\widetilde R}{p_0} \left( \check m_0 - m_0 \right)
 $$
 
-* Compute $B_{T-1}$ from
+* 从以下公式计算 $B_{T-1}$
 
 $$
 B_{T-1} = \widetilde R^T B_{-1} + \left( \frac{1 - \widetilde R^T}{1-\widetilde R} \right) g
 $$
 
-* Compute 
+* 计算 
 
 $$
-\overline g = g + \left[ \tilde R - 1\right] B_{T-1}
+\overline g = g + \left[ \widetilde R - 1 \right] B_{T-1}
 $$
 
+* 从公式 {eq}`eq:up_steadyquadratic` 和 {eq}`eq:LafferTstationary` 计算 $R_u, p_T$
 
+* 从公式 {eq}`eq:allts` 计算新的 $p_0$ 估计值，称为 $\widehat p_0$
 
-* Compute $R_u, p_T$ from formulas {eq}`eq:up_steadyquadratic`  and {eq}`eq:LafferTstationary` above
-
-* Compute a new estimate of $p_0$, call it $\widehat p_0$, from equation {eq}`eq:allts` above
-
-* Note that the preceding steps define a mapping
+* 注意前面的步骤定义了一个映射
 
 $$
 \widehat p_0 = {\mathcal S}(p_0)
 $$
 
-* We seek a fixed point of ${\mathcal S}$, i.e., a solution of $p_0 = {\mathcal S}(p_0)$.
+* 我们寻找 ${\mathcal S}$ 的不动点，即解 $p_0 = {\mathcal S}(p_0)$。
 
-* Compute a fixed point by iterating to convergence on the relaxation algorithm
+* 通过迭代收敛的松弛算法计算不动点
 
 $$
 p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j}, 
 $$
 
-where $\theta \in [0,1)$ is a relaxation parameter.
+其中 $\theta \in [0,1)$ 是一个松弛参数。
 ```
 
-## Example Calculations
+## 示例计算
 
-We'll set parameters of the model so that the steady state after time $T$ is initially the same
-as in {doc}`money_inflation_nonlinear`
+我们将模型参数设置为，在时间 $T$ 后的稳态初始和 {doc}`money_inflation_nonlinear` 中的相同。
 
-In particular, we set $\gamma_1=100, \gamma_2 =50, g=3.0$.  We set $m_0 = 100$ in that lecture,
-but now the counterpart will be $M_T$, which is endogenous.  
+特别是设置 $\gamma_1=100, \gamma_2 =50, g=3.0$。在那次讲座中，我们设置 $m_0 = 100$，
+但现在相应的将是 $M_T$，它是内生的。
 
-As for new parameters, we'll set $\tilde R = 1.01, \check B_{-1} = 0, \check m_0 = 105, T = 5$.
+对于新参数，我们将设置 $\tilde R = 1.01, \check B_{-1} = 0, \check m_0 = 105, T = 5$。
 
-We'll study a "small" open market operation by setting $m_0 = 100$.
+我们将通过设置 $m_0 = 100$ 来研究一个“小型”公开市场操作。
 
-These parameter settings mean that just before time $0$, the "central bank" sells the public bonds in exchange for $\check m_0 - m_0 = 5$ units of currency.  
+这些参数设置意味着，在时间 $0$ 之前，“中央银行”以 $\check m_0 - m_0 = 5$ 货币单位换取了公众的债券。
 
-That leaves the public with less currency but more government interest-bearing bonds.
+这使得公众持有更少的货币但更多的政府有息债券。
 
-Since the public has less currency (its supply has diminished) it is plausible to anticipate that the price level at time $0$ will be driven downward.
+由于公众持有的货币较少（供应减少），可以合理预见时间 $0$ 的价格水平将受到向下推动。
 
-But that is not the end of the story, because this **open market operation** at time $0$ has consequences for future settings of $m_{t+1}$ and the gross-of-interest government deficit $\bar g_t$. 
+但这还不是故事的终点，因为时间 $0$ 的这次**公开市场操作**对未来 $m_{t+1}$ 和名义政府赤字 $\bar g_t$ 的设置产生了影响。
 
-
-Let's start with some imports:
+让我们开始一些导入：
 
 ```{code-cell} ipython3
 import numpy as np
@@ -328,10 +289,10 @@ import matplotlib.pyplot as plt
 from collections import namedtuple
 ```
 
-Now let's dive in and implement our pseudo code in Python.
+现在让我们开始实现我们的伪代码用 Python。
 
 ```{code-cell} ipython3
-# Create a namedtuple that contains parameters
+# 创建一个包含参数的命名元组
 MoneySupplyModel = namedtuple("MoneySupplyModel", 
                               ["γ1", "γ2", "g",
                                "R_tilde", "m0_check", "Bm1_check",
@@ -355,25 +316,25 @@ msm = create_model()
 ```{code-cell} ipython3
 def S(p0, m0, model):
 
-    # unpack parameters
+    # 解包参数
     γ1, γ2, g = model.γ1, model.γ2, model.g
     R_tilde = model.R_tilde
     m0_check, Bm1_check = model.m0_check, model.Bm1_check
     T = model.T
 
-    # open market operation
+    # 开放市场操作
     Bm1 = 1 / (p0 * R_tilde) * (m0_check - m0) + Bm1_check
 
-    # compute B_{T-1}
+    # 计算 B_{T-1}
     BTm1 = R_tilde ** T * Bm1 + ((1 - R_tilde ** T) / (1 - R_tilde)) * g
 
-    # compute g bar
+    # 计算 g bar
     g_bar = g + (R_tilde - 1) * BTm1
 
-    # solve the quadratic equation
+    # 解二次方程
     Ru = np.roots((-γ1, γ1 + γ2 - g_bar, -γ2)).max()
 
-    # compute p0
+    # 计算 p0
     λ = γ2 / γ1
     p0_new = (1 / γ1) * m0 * ((1 - λ ** T) / (1 - λ) + λ ** T / (Ru - λ))
 
@@ -395,44 +356,35 @@ def compute_fixed_point(m0, p0_guess, model, θ=0.5, tol=1e-6):
     return p0
 ```
 
-Let's look at how  price level $p_0$  in the stationary  $R_u$ equilibrium  depends on the initial
-money supply $m_0$.  
+让我们看看在静态$R_u$均衡中，价格水平$p_0$如何依赖于初始货币供应量$m_0$。
 
-Notice that the slope of $p_0$ as a function of $m_0$ is constant.
+注意$p_0$作为$m_0$的函数的斜率是恒定的。
 
-This outcome indicates that our model verifies a quantity theory of money outcome,
-something that Sargent and Wallace {cite}`sargent1981` purposefully built into their model to justify
-the adjective *monetarist* in their title.
-
-
-```{code-cell} ipython3
-m0_arr = np.arange(10, 110, 10)
-```
-
+这个结果表明，我们的模型验证了一种货币数量论的结果，
+这是Sargent和Wallace {cite}`sargent1981`在其模型中特意构建的，以证明其标题中“货币主义者”这一形容词。
 ```{code-cell} ipython3
 plt.plot(m0_arr, [compute_fixed_point(m0, 1, msm) for m0 in m0_arr])
 
-plt.ylabel('$p_0$')
-plt.xlabel('$m_0$')
+plt.ylabel('价格水平 $p_0$')
+plt.xlabel('初始货币供应量 $m_0$')
 
 plt.show()
 ```
 
-Now let's write and implement code that lets us experiment with the time $0$ open market operation described earlier.
+现在让我们编写并实现代码，以便我们可以试验前面描述的时刻 $0$ 的公开市场操作。
 
 ```{code-cell} ipython3
 def simulate(m0, model, length=15, p0_guess=1):
-
-    # unpack parameters
+    # 解包参数
     γ1, γ2, g = model.γ1, model.γ2, model.g
     R_tilde = model.R_tilde
     m0_check, Bm1_check = model.m0_check, model.Bm1_check
     T = model.T
 
     # (pt, mt, bt, Rt)
-    paths = np.empty((4, length))
+    路径 = np.empty((4, length))
 
-    # open market operation
+    # 开市操作
     p0 = compute_fixed_point(m0, 1, model)
     Bm1 = 1 / (p0 * R_tilde) * (m0_check - m0) + Bm1_check
     BTm1 = R_tilde ** T * Bm1 + ((1 - R_tilde ** T) / (1 - R_tilde)) * g
@@ -442,29 +394,28 @@ def simulate(m0, model, length=15, p0_guess=1):
     λ = γ2 / γ1
 
     # t = 0
-    paths[0, 0] = p0
-    paths[1, 0] = m0
+    路径[0, 0] = p0
+    路径[1, 0] = m0
 
     # 1 <= t <= T
     for t in range(1, T+1, 1):
-        paths[0, t] = (1 / γ1) * m0 * \
-                      ((1 - λ ** (T - t)) / (1 - λ)
+        路径[0, t] = (1 / γ1) * m0 *                       ((1 - λ ** (T - t)) / (1 - λ)
                        + (λ ** (T - t) / (Ru - λ)))
-        paths[1, t] = m0
+        路径[1, t] = m0
 
     # t > T
     for t in range(T+1, length):
-        paths[0, t] = paths[0, t-1] / Ru
-        paths[1, t] = paths[1, t-1] + paths[0, t] * g_bar
+        路径[0, t] = 路径[0, t-1] / Ru
+        路径[1, t] = 路径[1, t-1] + 路径[0, t] * g_bar
 
     # Rt = pt / pt+1
-    paths[3, :T] = paths[0, :T] / paths[0, 1:T+1]
-    paths[3, T:] = Ru
+    路径[3, :T] = 路径[0, :T] / 路径[0, 1:T+1]
+    路径[3, T:] = Ru
 
     # bt = γ1 - γ2 / Rt
-    paths[2, :] = γ1 - γ2 / paths[3, :]
+    路径[2, :] = γ1 - γ2 / 路径[3, :]
 
-    return paths
+    return 路径
 ```
 
 ```{code-cell} ipython3
@@ -474,9 +425,9 @@ def plot_path(m0_arr, model, length=15):
     titles = ['$p_t$', '$m_t$', '$b_t$', '$R_t$']
     
     for m0 in m0_arr:
-        paths = simulate(m0, model, length=length)
+        路径 = simulate(m0, model, length=length)
         for i, ax in enumerate(axs.flat):
-            ax.plot(paths[i])
+            ax.plot(路径[i])
             ax.set_title(titles[i])
     
     axs[0, 1].hlines(model.m0_check, 0, length, color='r', linestyle='--')
@@ -488,18 +439,18 @@ def plot_path(m0_arr, model, length=15):
 ---
 mystnb:
   figure:
-    caption: "Unpleasant Arithmetic"
+    caption: "不愉快的算术"
     name: fig:unpl1
 ---
 plot_path([80, 100], msm)
 ```
 
-{numref}`fig:unpl1` summarizes outcomes of two experiments that convey messages of Sargent and Wallace {cite}`sargent1981`.
+{numref}`fig:unpl1` 总结了两个实验结果，这些结果传达了 Sargent 和 Wallace {cite}`sargent1981` 的信息。
 
-* An open market operation that reduces the supply of money at time $t=0$ reduces  the price level at time $t=0$
+* 在时间 $t=0$ 进行的公开市场操作减少了货币供应，导致当时的价格水平下降
 
-* The lower is the post-open-market-operation money supply at time $0$, lower is the price level at time $0$.
+* 在时间 $0$ 进行的公开市场操作后货币供应量越低，价格水平越低。
 
-* An open  market operation that reduces the post open market operation money supply at time $0$ also *lowers* the rate of return on money $R_u$ at times $t \geq T$ because it brings  a higher gross of interest government deficit that must be financed by printing money (i.e., levying an inflation tax) at time $t \geq T$.
+* 在时间 $0$ 减少公开市场操作后的货币供应量的公开市场操作，也会*降低*时间 $t \geq T$ 的货币回报率 $R_u$，因为它带来了更高的政府借贷需通过印钞（即征收通货膨胀税）在时间 $t \geq T$ 来融资。
 
-* $R$ is important in the context of maintaining monetary stability and addressing the consequences of increased inflation due to government deficits. Thus, a larger $R$ might be chosen to mitigate the negative impacts on the real rate of return caused by inflation.
+* $R$ 在维持货币稳定和处理政府赤字引起的通货膨胀后果的背景下非常重要。因此，可能会选择较大的 $R$ 来减轻因通货膨胀造成的实际回报率的负面影响。
