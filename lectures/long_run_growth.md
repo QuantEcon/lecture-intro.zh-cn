@@ -21,7 +21,7 @@ kernelspec:
 
 这些 “增长事实 ”之所以有趣，原因是多方面的。 
 
-首先解释增长事实是 “发展经济学 ”和 “经济史 ”的主要目的。
+首先解释增长事实是 “发展经济学 ”和 “经济史”的主要目的。
 
 其次增长事实也是历史学家研究地缘政治力量和动态的重要依据。
 
@@ -33,7 +33,7 @@ kernelspec:
 :width: 100%
 ```
 
-（这只是我们的图 {numref}`gdp1` 的副本。 我们将在本讲座的稍后部分介绍如何绘制该图）。
+（这只是我们的图 {numref}`gdp1` 的副本。 我们将在本讲座的稍后部分介绍如何绘制{numref}`gdp1`）。
 
 {cite}`Tooze_2014`的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。
 
@@ -42,12 +42,11 @@ kernelspec:
 
 在亚当-图兹看来，这一事实是 “美国世纪 ”的关键地缘政治基础。
 
-看了这张图，再看看它是如何为 “美国的20世纪”搭建地缘政治舞台的，自然而然地 
-诱使人们想要一个与他的图表相对应的 2014 年或以后的图表。
+看了这张图，以及这些数据是如何为 “美国的20世纪” 搭建地缘政治舞台的，我们也许想知道 2014 年或以后与上图对应的图表。
 
-(感兴趣的读者若想找到答案的提示，现在不妨跳到前面看看图{numref}`gdp2`）。
+(感兴趣的读者若想找到答案的提示，现在不妨跳到后面看看图{numref}`gdp2`）。
 
-正如我们将看到的，通过类比推理，这张图表或许奠定了“XXX国的21世纪”的基础，你可以自由猜测国家XXX。
+正如我们将看到的，通过类比推理，这张图表或许奠定了“XXX国的21世纪”的基础，XXX可以替换为任何国家。
 
 在我们收集数据以构建这两个图表的过程中，我们还将研究多国在尽可能长的时间范围内的增长经历。
 
@@ -68,6 +67,11 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 from collections import namedtuple
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 准备数据
@@ -77,9 +81,9 @@ from collections import namedtuple
 
 可以从[Maddison Historical Statistics](https://www.rug.nl/ggdc/historicaldevelopment/maddison/)下载数据，点击“Latest Maddison Project Release”即可获取。
 
-我们将从 QuantEcon GitHub 存储库中读取数据。
+我们将从 QuantEcon GitHub 的库中读取数据。
 
-本节的目的是生成一个方便的 `DataFrame` 实例，其中包含不同国家的人均 GDP。
+本节的目的是生成一个方便使用的包含不同国家的人均 GDP 的 `DataFrame` 实例。
 
 在这里，我们将 Maddison 的数据读入一个 pandas `DataFrame`：
 
@@ -99,7 +103,7 @@ countries = data.country.unique()
 len(countries)
 ```
 
-通过运行上面的代码，我们可以找到有多少个国家的数据。
+通过运行上面的代码，我们可以列出这个数据集有多少个国家的数据。
 
 下面，我们将列出这些国家。
 
@@ -107,9 +111,9 @@ len(countries)
 countries
 ```
 
-我们现在可以探索一些可用的169个国家。
+我们现在可以继续探索数据集里的169个国家。
 
-让我们遍历每个国家，以了解每个国家可用的年份。
+我们可以遍历每个国家来了解每个国家可用的年份。
 
 ```{code-cell} ipython3
 country_years = []
@@ -124,11 +128,12 @@ country_years.head()
 
 现在，让我们将原始数据重塑为一些方便的变量，以便更快地访问各国的时间序列数据。
 
-我们可以在该数据集中的国家代码（`countrycode`）和国家名称（`country`）之间建立一个有用的映射关系
+我们可以在该数据集中的国家代码（`countrycode`）和国家名称（`country`）之间建立一个有用的映射关系。
+
+为了方便使用中文标签，我们导入地区代码与中文名对应的数据集
 
 ```{code-cell} ipython3
-code_to_name = data[
-    ['countrycode', 'country']].drop_duplicates().reset_index(drop=True).set_index(['countrycode'])
+code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
 ```
 
 现在，我们调用人均 GDP (`gdppc`)，并生成一个宽格式的数据
@@ -171,7 +176,7 @@ color_mapping = {country: color for
 ---
 mystnb:
   figure:
-    caption: GDP per Capita (GBR)
+    caption: "\u4EBA\u5747GDP\uFF08\u82F1\u56FD\uFF09"
     name: gdppc_gbr1
     width: 500px
 ---
@@ -179,17 +184,17 @@ fig, ax = plt.subplots(dpi=300)
 country = 'GBR'
 gdp_pc[country].plot(
         ax=ax,
-        ylabel='international dollars',
-        xlabel='year',
+        ylabel='国际元',
+        xlabel='年份',
         color=color_mapping[country]
     );
 ```
 
 :::{note}
-[国际美元](https://en.wikipedia.org/wiki/international_dollar) 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 美元（GK 美元）。
+[国际元](https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%85%83) 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 元（GK 元）。
 :::
 
-我们可以看到，在本千年早期的 250 年中，较长时期的数据是不连续的，因此我们可以选择内插法得到连续的线图。
+我们可以看到，在本千年早期的 250 年中有长一段数据是不连续的，因此我们可以选择内插法得到连续的线图。
 
 在这里，我们用虚线表示插值趋势
 
@@ -197,7 +202,7 @@ gdp_pc[country].plot(
 ---
 mystnb:
   figure:
-    caption: GDP per Capita (GBR)
+    caption: "\u4EBA\u5747GDP\uFF08\u82F1\u56FD\uFF09"
     name: gdppc_gbr2
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -210,8 +215,8 @@ ax.plot(gdp_pc[country].interpolate(),
 ax.plot(gdp_pc[country],
         lw=2,
         color=color_mapping[country])
-ax.set_ylabel('international dollars')
-ax.set_xlabel('year')
+ax.set_ylabel('国际元')
+ax.set_xlabel('年份')
 plt.show()
 ```
 
@@ -229,7 +234,7 @@ def draw_interp_plots(series,        # pandas 数据
                       color_mapping, # 代码-颜色映射
                       code_to_name,  # 代码-国家名映射
                       lw,            # 线宽
-                      logscale,      # Y 轴是否要对数刻度
+                      logscale,      # Y 轴是否要用对数刻度
                       ax             # matplolib 轴
                      ):
 
@@ -250,12 +255,12 @@ def draw_interp_plots(series,        # pandas 数据
                 lw=lw,
                 color=color_mapping[c],
                 alpha=0.8,
-                label=code_to_name.loc[c]['country'])
+                label=code_to_name.loc[c]['name_chinese'])
 
         if logscale:
             ax.set_yscale('log')
 
-    # 将图例绘制在图外
+    # 将图例绘制在图外的左上角（loc）
     ax.legend(loc='upper left', frameon=False)
     ax.set_ylabel(ylabel)
     ax.set_xlabel(xlabel)
@@ -271,7 +276,8 @@ def draw_interp_plots(series,        # pandas 数据
 ---
 mystnb:
   figure:
-    caption: 人均 GDP，1500-（中国、英国、美国）
+    caption: "\u4EBA\u5747 GDP\uFF0C1500-\u81F3\u4ECA\uFF08\u4E2D\u56FD\u3001\u82F1\
+      \u56FD\u3001\u7F8E\u56FD\uFF09"
     name: gdppc_comparison
 tags: [hide-input]
 ---
@@ -283,7 +289,7 @@ fig, ax = plt.subplots(dpi=300, figsize=(10, 6))
 country = ['CHN', 'GBR', 'USA']
 draw_interp_plots(gdp_pc[country].loc[1500:], 
                   country,
-                  'international dollars','year',
+                  '国际元', '年份',
                   color_mapping, code_to_name, 2, False, ax)
 
 # 定义事件和文本的参数
@@ -355,7 +361,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 人均GDP，1500-2000（中国）
+    caption: "\u4EBA\u5747GDP\uFF0C1500-2000\u5E74\uFF08\u4E2D\u56FD\uFF09"
     name: gdppc_china
 tags: [hide-input]
 ---
@@ -364,7 +370,7 @@ fig, ax = plt.subplots(dpi=300, figsize=(10, 6))
 country = ['CHN']
 draw_interp_plots(gdp_pc[country].loc[1600:2000], 
                   country,
-                  '国际美元','年份',
+                  '国际元','年份',
                   color_mapping, code_to_name, 2, True, ax)
 
 ylim = ax.get_ylim()[1]
@@ -416,7 +422,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 人均GDP，1500-2000（英国和美国）
+    caption: "\u4EBA\u5747GDP\uFF0C1500-2000\uFF08\u82F1\u56FD\u548C\u7F8E\u56FD\uFF09"
     name: gdppc_ukus
 tags: [hide-input]
 ---
@@ -425,7 +431,7 @@ fig, ax = plt.subplots(dpi=300, figsize=(10, 6))
 country = ['GBR', 'USA']
 draw_interp_plots(gdp_pc[country].loc[1500:2000],
                   country,
-                  '国际美元','年份',
+                  '国际元','年份',
                   color_mapping, code_to_name, 2, True, ax)
 
 ylim = ax.get_ylim()[1]
@@ -490,7 +496,7 @@ gdp = data['gdp'].unstack('countrycode')
 ---
 mystnb:
   figure:
-    caption: 早期工业化时代的GDP
+    caption: "\u65E9\u671F\u5DE5\u4E1A\u5316\u65F6\u671F\u7684GDP"
     name: gdp1
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -498,7 +504,7 @@ country = ['CHN', 'SUN', 'JPN', 'GBR', 'USA']
 start_year, end_year = (1820, 1945)
 draw_interp_plots(gdp[country].loc[start_year:end_year], 
                   country,
-                  '国际美元', '年份',
+                  '国际元', '年份',
                   color_mapping, code_to_name, 2, False, ax)
 ```
 
@@ -518,9 +524,6 @@ gdp['BEM'] = gdp[BEM].loc[start_year-1:end_year].interpolate(method='index').sum
 
 ```{code-cell} ipython3
 color_mapping['BEM'] = color_mapping['GBR']  
-bem = pd.DataFrame(["British Empire"], index=["BEM"], columns=['country'])
-bem.index.name = 'countrycode'
-code_to_name = pd.concat([code_to_name, bem])
 ```
 
 并绘制他们
@@ -531,7 +534,7 @@ country = ['DEU', 'USA', 'SUN', 'BEM', 'FRA', 'JPN']
 start_year, end_year = (1821, 1945)
 draw_interp_plots(gdp[country].loc[start_year:end_year], 
                   country,
-                  'international dollars', 'year',
+                  '国际元', '年份',
                   color_mapping, code_to_name, 2, False, ax)
 
 plt.savefig("./_static/lecture_specific/long_run_growth/tooze_ch1_graph.png", dpi=300,
@@ -539,7 +542,7 @@ plt.savefig("./_static/lecture_specific/long_run_growth/tooze_ch1_graph.png", dp
 plt.show()
 ```
 
-在本讲座的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。
+在本讲的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。
 
 让我们将时间向前推移，大致从第二次世界大战后图示停止的地方开始。
 
@@ -553,7 +556,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 现代时代的GDP
+    caption: "\u73B0\u4EE3\u7684GDP"
     name: gdp2
 ---
 fig, ax = plt.subplots(dpi=300)
@@ -561,7 +564,7 @@ country = ['CHN', 'SUN', 'JPN', 'GBR', 'USA']
 start_year, end_year = (1950, 2020)
 draw_interp_plots(gdp[country].loc[start_year:end_year], 
                   country,
-                  '国际美元', '年份',
+                  '国际元', '年份',
                   color_mapping, code_to_name, 2, False, ax)
 ```
 
@@ -592,9 +595,10 @@ regionalgdp_pc.index = pd.to_datetime(regionalgdp_pc.index, format='%Y')
 
 ```{code-cell} ipython3
 regionalgdp_pc.interpolate(method='time', inplace=True)
+regionalgdp_pc.columns = ['西欧', '东欧', '西方分支', '拉丁美洲', '东亚', '南亚和东南亚', '中东', '撒哈拉以南非洲', '世界人均GDP']
 ```
 
-进行更深入的研究，我们将 西方分支（`Western Offshoots`）和 （撒哈拉以南非洲）`Sub-Saharan Africa`的时间序列与世界各地多个不同地区进行比较。
+进行更深入的研究，我们将西方分支（`Western Offshoots`）和撒哈拉以南非洲（`Sub-Saharan Africa`）的时间序列与世界各地多个不同地区进行比较。
 
 下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同
 
@@ -602,13 +606,13 @@ regionalgdp_pc.interpolate(method='time', inplace=True)
 ---
 mystnb:
   figure:
-    caption: 地区人均GDP
+    caption: "\u5730\u533A\u4EBA\u5747GDP"
     name: region_gdppc
 ---
 fig, ax = plt.subplots(dpi=300)
 regionalgdp_pc.plot(ax=ax, xlabel='年份',
                     lw=2,
-                    ylabel='国际美元')
+                    ylabel='国际元')
 ax.set_yscale('log')
 plt.legend(loc='lower center',
            ncol=3, bbox_to_anchor=[0.5, -0.5])
