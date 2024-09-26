@@ -32,13 +32,13 @@ kernelspec:
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy as np
 import scipy.stats as st
-from matplotlib import font_manager
 
-fontP = font_manager.FontProperties()
-fontP.set_family('SimHei')
-fontP.set_size(14)
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 (lln_mr)=
@@ -258,7 +258,7 @@ def generate_histogram(X_distribution, n, m):
      
     ax.set_xlim(μ - σ, μ + σ)
     ax.set_xlabel(r'$\bar X_n$', size=12)
-    ax.set_ylabel('密度', size=12, fontproperties=fontP)
+    ax.set_ylabel('密度', size=12)
     ax.legend()
     plt.show()
 ```
@@ -304,7 +304,7 @@ def means_violin_plot(distribution,
 
     plt.subplots_adjust(bottom=0.15, wspace=0.05)
 
-    ax.set_ylabel('密度', size=12, fontproperties=fontP)
+    ax.set_ylabel('密度', size=12)
     ax.legend()
     plt.show()
 ```
@@ -463,7 +463,7 @@ xgrid = np.linspace(xmin, xmax, 200)
 ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 
         'k-', lw=2, label='N(0, \sigma^2)')
 ax.set_xlabel(r"$Y_n$", size=12)
-ax.set_ylabel(r"$density$", size=12, fontproperties=fontP)
+ax.set_ylabel(r"$density$", size=12)
 
 ax.legend()
 
@@ -511,7 +511,7 @@ xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 ax.set_xlabel(r"$Y_n$", size=12)
-ax.set_ylabel(r"$density$", size=12, fontproperties=fontP)
+ax.set_ylabel(r"$density$", size=12)
 xgrid = np.linspace(xmin, xmax, 200)
 ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 'k-', lw=2, label='$N(0, \sigma^2)$')
 ax.legend()
