@@ -375,6 +375,11 @@ def compute_fixed_point(m0, p0_guess, model, θ=0.5, tol=1e-6):
 
 这个结果表明，我们的模型验证了一种货币数量论的结果，
 这是Sargent和Wallace {cite}`sargent1981`在其模型中特意构建的，以证明其标题中“货币主义者”这一形容词。
+
+```{code-cell} ipython3
+m0_arr = np.arange(10, 110, 10)
+```
+
 ```{code-cell} ipython3
 plt.plot(m0_arr, [compute_fixed_point(m0, 1, msm) for m0 in m0_arr])
 
