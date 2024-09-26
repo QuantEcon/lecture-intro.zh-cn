@@ -141,14 +141,14 @@ $$ (eq:est_rev)
 
 ## 最大似然估计
 
-[最大似然估计](https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1) 是一种估计未知分布的方法。
+[最大似然估计](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) 是一种估计未知分布的方法。
 
 最大似然估计有两个步骤：
 
 1. 猜测潜在分布是什么（例如，正态分布，均值为 $\mu$，标准差为 $\sigma$）。
 2. 估计参数值（例如，估计正态分布的 $\mu$ 和 $\sigma$）。
 
-对于财富，一个可能的假设是每个 $w_i$ 都是[对数正态分布](https://zh.wikipedia.org/wiki/%E5%AF%B9%E6%95%B0%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83)的，参数 $\mu$ 在 $(-\infty, \infty)$ 范围内，$\sigma$ 在 $(0, \infty)$ 范围内。
+对于财富，一个可能的假设是每个 $w_i$ 都是[对数正态分布](https://en.wikipedia.org/wiki/Log-normal_distribution)的，参数 $\mu$ 在 $(-\infty, \infty)$ 范围内，$\sigma$ 在 $(0, \infty)$ 范围内。
 
 （这意味着 $\ln w_i$ 是以 $\mu$ 为均值，$\sigma$ 为标准差的正态分布。）
 
@@ -274,7 +274,7 @@ tr_lognorm  # 显示总收入
 
 之前我们假定这个分布是对数正态分布。
 
-假设我们改为假设 $w_i$ 来自具有参数 $b$ 和 $x_m$ 的[帕累托分布](https://zh.wikipedia.org/wiki/%E5%B8%95%E7%B4%8D%E6%89%98%E5%88%86%E5%B8%83)。
+假设我们改为假设 $w_i$ 来自具有参数 $b$ 和 $x_m$ 的[帕累托分布](https://en.wikipedia.org/wiki/Pareto_distribution)。
 
 在这种情况下，最大似然估计已知为
 
