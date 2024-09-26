@@ -98,7 +98,7 @@ $$
 p_0 = 4.41 \quad \text{和} \quad p_1 = 1.18.
 $$    
 
-将这些结果代入{eq}`two_eq_demand`或{eq}`two_eq_supply`中，可得均衡数量：
+将这些结果代入 {eq}`two_eq_demand` 或 {eq}`two_eq_supply` 中，可得均衡数量：
 
 $$
 q_0 = 50 \quad \text{和} \quad q_1 = 33.82.
@@ -773,8 +773,7 @@ $$
 A x = b
 ```
 
-我们面临的问题是找到一个向量 $x \in \mathbb R^n$，使其解决
-{eq}`la_se2`，其中 $b$ 和 $A$ 是给定的。
+我们面临的问题是找到一个向量 $x \in \mathbb R^n$，使其解决 {eq}`la_se2`，其中 $b$ 和 $A$ 是给定的。
 我们可能并不总能找到一个唯一的向量 $x$ 来解决 {eq}`la_se2`。
 我们在下面举例说明两种这样的情况。
 
@@ -1096,12 +1095,12 @@ $$
 ```
 
 其中$A$是一个$m \times n$矩阵，$b$是一个$m \times 1$列向量。
-对于{eq}`inconsistent`，**最小二乘解**是一个$n \times 1$列向量$\hat{x}$，使得对于所有其他向量$x \in \mathbb{R}^n$，$A\hat{x}$到$b$的距离
+对于 {eq}`inconsistent`，**最小二乘解**是一个$n \times 1$列向量$\hat{x}$，使得对于所有其他向量$x \in \mathbb{R}^n$，$A\hat{x}$到$b$的距离
 小于$Ax$到$b$的距离。
 即，
 
 $$
-    \|A\hat{x} - b\| \leq \|Ax - b\| 
+\|A\hat{x} - b\| \leq \|Ax - b\| 
 $$
 
 可以证明，对于方程组$Ax = b$，最小二乘解$\hat{x}$是
@@ -1114,7 +1113,7 @@ $$
 现在考虑一种商品的线性需求曲线的一般方程：
 
 $$
-    p = m - nq
+p = m - nq
 $$
 
 其中$p$是商品的价格，$q$是需求量。
@@ -1144,8 +1143,8 @@ $x = \begin{bmatrix} m \\ n \end{bmatrix}$，$b = \begin{bmatrix} 1 \\ 3 \\ 8 \e
 可以验证这个系统没有解。
 （问题在于我们有三个方程但只有两个未知数。）
 因此，我们将尝试找到$x$的最佳近似解。
-1. 使用{eq}`least_squares`和矩阵代数找到最小二乘解$\hat{x}$。
-2. 使用`numpy.linalg.lstsq`找到最小二乘解，并比较结果。
+1. 使用 {eq}`least_squares` 和矩阵代数找到最小二乘解 $\hat{x}$。
+2. 使用 `numpy.linalg.lstsq` 找到最小二乘解，并比较结果。
 
 
 ```{exercise-end}
