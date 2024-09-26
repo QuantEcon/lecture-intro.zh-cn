@@ -25,6 +25,7 @@ kernelspec:
 
 ```{code-cell} ipython3
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yf
 import pandas as pd
