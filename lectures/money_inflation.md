@@ -1,186 +1,164 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.1
-kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
-  name: python3
----
+# 通过货币资助的政府赤字和价格水平
 
-# Money Financed Government Deficits and Price Levels
+## 概览
 
-## Overview
+本讲座在这个讲座的模型的基础上进行了扩展和修改{doc}`cagan_ree`，通过修改控制货币供应的运动法则。
 
-This lecture extends and modifies the model in this lecture {doc}`cagan_ree` by modifying the
-law of motion that governed the supply of money.  
+本讲座的模型包括两部分：
 
-The model in this lecture consists of two components
+* 货币的需求函数
+* 货币供应的运动法则
 
-* a demand function for money 
-* a law of motion for the supply of money
- 
-The demand function describes the public's demand for "real balances", defined as the ratio of nominal money balances to the price level
+需求函数描述了公众对“实际余额”的需求，即名义货币余额与价格水平的比率：
 
-* it assumes that the demand for real balance today varies inversely with the rate of inflation that the public forecasts to prevail between today and tomorrow
-* it assumes that the public's forecast of that rate of inflation is perfect 
+* 它假设今天的实际余额需求与公众预测的今天到明天间的通货膨胀率成反比
+* 它假定公众对该通货膨胀率的预测是完美的
 
-The law of motion for the supply of money assumes that the government prints money to finance government expenditures
+货币供应的运动法则假定政府印刷货币来资助政府支出
 
-Our model equates the demand for money to the supply at each time $t \geq 0$.
+我们的模型在每个时间点 $t \geq 0$ 将货币的需求与供应相等。
 
-Equality between those demands and supply gives a *dynamic* model in which   money supply
-and  price level *sequences* are simultaneously determined by a  set of simultaneous linear  equations.
+需求与供应之间的平衡形成了一个*动态*模型，在该模型中，货币供应和价格水平*序列*通过一组同时线性方程同时决定。
 
-These equations take the form of what is often called vector linear **difference equations**.  
+这些方程通常被称为向量线性**差分方程**。
 
-In this lecture, we'll roll up our sleeves and solve those equations in two different ways.
+在本讲座中，我们将通过两种不同的方法来解决这些方程。
 
 
-(One of the methods for solving vector linear  difference equations will take advantage of a decomposition of a matrix that is studied in this lecture {doc}`eigen_I`.)
+(解决向量线性差分方程的一种方法将利用在这个讲座中研究的矩阵分解 {doc}`eigen_I`。)
 
-In this lecture we will encounter these concepts from macroeconomics:
+在本讲座中，我们将遇到以下宏观经济学概念：
 
-* an **inflation tax** that a government gathers by printing paper or electronic money
-* a dynamic **Laffer curve** in the inflation tax rate that has two stationary equilibria
-* perverse dynamics under rational expectations in which the system converges to the higher stationary inflation tax rate
-* a peculiar comparative stationary-state outcome connected with that stationary inflation rate: it asserts that inflation can be *reduced* by running *higher*  government deficits, i.e., by raising more resources by printing money. 
+* 一种**通货膨胀税**，政府通过印制纸币或电子货币来征收
+* 在通货膨胀税率中存在两个静止均衡点的动态**拉弗曲线**
+* 在理性预期下的反常动力学，系统趋向于较高的静止通货膨胀税率
+* 与该静态通货膨胀率有关的特殊比较静态结果，它声称可以通过实行*更高*的政府赤字来*降低*通货膨胀，即通过增加印钞筹集更多资源。
 
-The same qualitative outcomes prevail in this lecture {doc}`money_inflation_nonlinear` that studies a nonlinear version of the model in this lecture.  
+在这个讲座{doc}`money_inflation_nonlinear`中研究了模型的非线性版本，同样的质量结果也普遍存在。
 
-These outcomes  set the stage for the analysis to be presented in this lecture {doc}`laffer_adaptive` that studies a nonlinear version of the present model; it   assumes a version of "adaptive expectations" instead of rational expectations.
+这些结果为将在这个讲座中呈现的分析奠定了基础 {doc}`laffer_adaptive`，它研究了当前模型的非线性版本；它假定了一种“适应性预期”的版本，而不是理性预期。
 
-That lecture will show that 
+那次讲座将表明：
 
-* replacing rational expectations with adaptive expectations leaves the two stationary inflation rates unchanged, but that $\ldots$ 
-* it reverses the perverse dynamics by making the *lower* stationary inflation rate the one to which the system typically converges
-* a more plausible comparative dynamic outcome emerges in which now inflation can be *reduced* by running *lower*  government deficits
+* 用适应性预期替代理性预期，两个静止的通货膨胀率保持不变，但是 $\ldots$
+* 它通过使系统通常趋向于*较低*的静止通货膨胀率来逆转反常动力学
+* 在一个更可信的比较动态结果中，现在通过实行*较低*的政府赤字可以*降低*通货膨胀。
+这个结果将用来证明在本讲座中要研究的不愉快的货币主义算术分析中选择一个固定通胀率的合理性 {doc}`unpleasant`.
 
-This outcome will be used to justify a selection of a stationary inflation rate that underlies the analysis of unpleasant monetarist arithmetic to be studied in this lecture {doc}`unpleasant`.
+我们将使用这些线性代数工具：
 
-We'll use these tools from linear algebra:
+* 矩阵乘法
+* 矩阵求逆
+* 矩阵的特征值和特征向量
 
-* matrix multiplication
-* matrix inversion
-* eigenvalues and eigenvectors of a matrix
+## 货币的需求与供给
 
+我们之所以使用复数形式需求**们**和供给**们**，是因为每一个时刻 $t \geq 0$ 都各有一份。
 
-## Demand for and supply of money
+设定：
 
-We say demand*s* and suppl*ies* (plurals) because there is one of each for each $t \geq 0$.
+* $m_{t+1}$ 为时刻 $t$ 结束时的货币供给
+* $m_{t}$ 为从时刻 $t-1$ 带入时刻 $t$ 的货币供给
+* $g$ 为政府在时刻 $t \geq 1$ 通过印刷货币融资的赤字
+* $m_{t+1}^d$ 为时刻 $t$ 对带入时刻 $t+1$ 的货币需求
+* $p_t$ 为时刻 $t$ 的价格水平
+* $b_t = \frac{m_{t+1}}{p_t}$ 是时刻 $t$ 结束时的实际余额
+* $R_t = \frac{p_t}{p_{t+1}}$ 是从时刻 $t$ 至时刻 $t+1$ 持有货币的毛回报率
 
-Let 
+陈述单位通常有助于理解各量度数据：
 
-* $m_{t+1}$ be the supply of currency at the end of time $t \geq 0$
-* $m_{t}$ be the supply  of currency brought into time $t$ from time $t-1$
-* $g$ be the government deficit that is financed by printing currency at $t \geq 1$
-* $m_{t+1}^d$ be the demand at time $t$ for currency  to bring into time $t+1$
-* $p_t$ be  the price level at time $t$
-* $b_t = \frac{m_{t+1}}{p_t}$ is real balances at the end of time $t$ 
-* $R_t = \frac{p_t}{p_{t+1}} $ be the gross rate of return on currency held from time $t$ to time $t+1$
-  
-It is often helpful to state units in which quantities are measured:
+* $m_t$ 和 $m_t^d$ 用美元计量
+* $g$ 用时刻 $t$ 的商品计量
+* $p_t$ 用美元/时刻 $t$ 商品计量
+* $R_t$ 用时刻 $t+1$ 商品/时刻 $t$ 商品计量
+* $b_t$ 用时刻 $t$ 商品计量
+    
+现在，我们的任务是确定货币的需求和供给函数。
 
-* $m_t$ and $m_t^d$ are measured in dollars
-* $g$ is measured in time $t$ goods 
-* $p_t$ is measured in dollars per time $t$ goods
-* $R_t$ is measured in time $t+1$ goods per unit of time $t$ goods
-* $b_t$ is measured in time $t$ goods
-   
-  
-Our job now is to specify demand and supply functions for money. 
-
-We assume that the demand for  currency satisfies the Cagan-like demand function
+我们假设货币需求满足类似Cagan的需求函数
 
 $$
 \frac{m_{t+1}^d}{p_t}=\gamma_1 - \gamma_2 \frac{p_{t+1}}{p_t}, \quad t \geq 0
 $$ (eq:demandmoney)
-where $\gamma_1, \gamma_2$ are positive parameters.
+其中 $\gamma_1, \gamma_2$ 是正参数。
   
-Now we turn to the supply of money.
+现在我们转向货币供给的问题。
 
-We assume that $m_0 >0$ is an "initial condition" determined outside the model. 
+我们假设 $m_0 >0$ 是模型外部决定的“初始条件”。
 
-We set $m_0$ at some arbitrary positive value, say \$100.
+我们将 $m_0$ 设定为一个任意的正值，比如说 \$100。
   
-For $ t \geq 1$, we assume that the supply of money is determined by the government's budget constraint
+对于 $ t \geq 1$，我们假设货币供给由政府的预算约束决定
 
 $$
 m_{t+1} - m_{t} = p_t g , \quad t \geq 0
 $$ (eq:budgcontraint)
 
-According to this equation, each period, the government prints money to pay for quantity $g$ of goods. 
+根据这个方程，每个时期，政府印刷货币以支付数量 $g$ 的商品。
 
-In an **equilibrium**, the demand for currency equals the supply:
+在一种**均衡**中，货币的需求等于供给：
 
 $$
 m_{t+1}^d = m_{t+1}, \quad t \geq 0
 $$ (eq:syeqdemand)
 
-Let's take a moment to think  about what equation {eq}`eq:syeqdemand` tells us.
+让我们暂停片刻，思考方程{eq}`eq:syeqdemand`告诉我们什么。
 
-The demand for money at any time $t$ depends on the price level at time $t$ and the price level at time $t+1$.
+任何时刻 $t$ 的货币需求取决于时刻 $t$ 和时刻 $t+1$ 的价格水平。
 
-The supply of money at time $t+1$ depends on the money supply at time $t$ and the price level at time $t$.
+时刻 $t+1$ 的货币供给取决于时刻 $t$ 的货币供应和价格水平。
 
-So the infinite sequence  of equations {eq}`eq:syeqdemand` for $ t \geq 0$ imply that the *sequences* $\{p_t\}_{t=0}^\infty$ and $\{m_t\}_{t=0}^\infty$ are tied together and ultimately simulataneously determined.
+因此，从时刻 $ t \geq 0$ 开始的无限序列方程 {eq}`eq:syeqdemand` 暗示了*序列* $\{p_t\}_{t=0}^\infty$ 和 $\{m_t\}_{t=0}^\infty$ 是紧密联系并最终同时决定的。)
 
+## 均衡价格和货币供应序列
 
-## Equilibrium price and money supply sequences
-
-
-The preceding specifications imply that for $t \geq 1$, **real balances** evolve according to
-
+前述规格表明，对于 $t \geq 1$，**实际余额**依据以下公式演变：
 
 $$
 \frac{m_{t+1}}{p_t} - \frac{m_{t}}{p_{t-1}} \frac{p_{t-1}}{p_t} = g
 $$
 
-or
+或
 
 $$
 b_t - b_{t-1} R_{t-1} = g
 $$ (eq:bmotion)
 
-The demand for real balances is 
+对实际余额的需求为：
 
 $$
 b_t = \gamma_1 - \gamma_2 R_t^{-1} . 
 $$ (eq:bdemand)
-  
-We'll restrict our attention to  parameter values and  associated gross real rates of return on real balances that assure that the demand for real balances is positive, which according to {eq}`eq:bdemand` means that
+
+我们将关注参数值和 与之相关的实际余额的毛收益率，以确保实际余额的需求为正值，根据{eq}`eq:bdemand` 这意味着：
 
 $$
 b_t = \gamma_1 - \gamma_2 R_t^{-1} > 0 
 $$ 
 
-which implies that 
+这暗示了：
 
 $$
 R_t \geq \left( \frac{\gamma_2}{\gamma_1} \right) \equiv \underline R
 $$ (eq:Requation)
 
-Gross real rate of return $\underline R$ is the smallest rate of return on currency 
-that is consistent with a nonnegative demand for real balances.
+毛实际收益率 $\underline R$ 是支撑非负实际余额需求的货币回报的最小率。
 
-We shall describe two distinct but closely related ways of computing a pair   $\{p_t, m_t\}_{t=0}^\infty$ of sequences for the price level and money supply.
+我们将描述两种既紧密相关又不同的计算价格水平和货币供应的序列 $\{p_t, m_t\}_{t=0}^\infty$ 的方法。
 
-But first it is instructive to describe a special type of equilibrium known as a **steady state**.
+但首先，描述一种特殊类型的均衡状态，称为**稳态**，是有启发性的。
 
-In a  steady-state equilibrium, a subset of key variables remain constant or **invariant** over time, while remaining variables can be expressed as functions of  those constant variables.
+在稳态均衡下，一些关键变量随时间保持不变或**不变**，而其余变量可以表示为这些常数变量的函数。
 
-Finding such state variables is something of an art.  
+找到这样的状态变量在某种程度上是一门艺术。
 
-In many models, a good source of candidates for such invariant variables is a set of *ratios*.   
+在许多模型中，寻找这种不变变量的一个好的方法是一组*比率*。
 
-This is true in the present model.
+这在当前模型中也是成立的。
 
-### Steady states
+### 稳态
 
-In a steady-state equilibrium of the  model we are studying, 
+在我们所研究的模型中的稳态平衡，
 
 $$
 \begin{aligned}
@@ -189,11 +167,11 @@ b_t & = \bar b
 \end{aligned}
 $$
 
-for $t \geq 0$.  
+对于 $t \geq 0$。
 
-Notice that both $R_t = \frac{p_t}{p_{t+1}}$ and $b_t = \frac{m_{t+1}}{p_t} $ are *ratios*.
+请注意 $R_t = \frac{p_t}{p_{t+1}}$ 和 $b_t = \frac{m_{t+1}}{p_t} $ 都是*比率*。
 
-To compute a steady state, we seek gross rates of return on currency and real balances  $\bar R, \bar b$ that satisfy steady-state versions of  both the government budget constraint and the demand function for real balances:
+为了计算稳态，我们寻找满足政府预算约束和实际货币余额需求函数的稳态版本的货币和实际余额的毛收益率 $\bar R, \bar b$：
 
 $$
 \begin{aligned}
@@ -202,88 +180,92 @@ g & = \bar b ( 1 - \bar R)  \cr
 \end{aligned}
 $$
 
-Together these equations imply
+这些方程一起意味着
 
 $$
 (\gamma_1 + \gamma_2) - \frac{\gamma_2}{\bar R} - \gamma_1 \bar R = g
 $$ (eq:seignsteady)
 
+左侧是政府通过支付货币的毛收益率 $\bar R \le 1$ 收集的稳态**铸币税**或政府收入。
 
-The left side is the steady-state amount of **seigniorage** or government revenues that the government gathers by paying a gross rate of return $\bar R \le 1$ on currency. 
+右侧是政府支出。
 
-The right side is government expenditures.
-
-Define steady-state seigniorage as
+定义稳态铸币税为
 
 $$
 S(\bar R) = (\gamma_1 + \gamma_2) - \frac{\gamma_2}{\bar R} - \gamma_1 \bar R
 $$ (eq:SSsigng)
 
-Notice that $S(\bar R) \geq 0$ only when $\bar R \in [\frac{\gamma_2}{\gamma_1}, 1] 
-\equiv [\underline R, \overline R]$ and that $S(\bar R) = 0$ if $\bar R  = \underline R$
-or if $\bar R  = \overline R$.
+注意 $S(\bar R) \geq 0$ 仅当 $\bar R \in [\frac{\gamma_2}{\gamma_1}, 1] 
+\equiv [\underline R, \overline R]$，且当 $\bar R  = \underline R$
+或 $\bar R  = \overline R$ 时，$S(\bar R) = 0$。
 
-We shall study equilibrium sequences that  satisfy
+我们将研究满足
 
 $$
 R_t \in  [\underline R, \overline R],  \quad t \geq 0. 
 $$
 
-Maximizing steady-state seigniorage  {eq}`eq:SSsigng` with respect to $\bar R$, we find that the maximizing rate of return on currency is 
+的均衡序列。
+
+通过最大化稳态铸币税 {eq}`eq:SSsigng` 关于 $\bar R$，我们发现货币的最大化回报率是
 
 $$
 \bar R_{\rm max} = \sqrt{\frac{\gamma_2}{\gamma_1}}
 $$
 
-and that the associated maximum seigniorage revenue that the government can gather from printing money is
+并且与此相关的政府可以通过印钞票收集的最大铸币税收入是
 
 $$
 (\gamma_1 + \gamma_2) - \frac{\gamma_2}{\bar R_{\rm max}} - \gamma_1 \bar R_{\rm max}
 $$
 
-It is useful to rewrite  equation {eq}`eq:seignsteady` as
+将方程 {eq}`eq:seignsteady` 重新写为
 
 $$
 -\gamma_2 + (\gamma_1 + \gamma_2 - g) \bar R - \gamma_1 \bar R^2 = 0
 $$ (eq:steadyquadratic)
 
-A steady state gross rate of return  $\bar R$ solves quadratic equation {eq}`eq:steadyquadratic`.
+一个稳态毛收益率 $\bar R$ 解决了二次方程 {eq}`eq:steadyquadratic`。
 
-So two steady states typically exist. 
+所以通常存在两个稳态。
 
-## Some code
+## 一些代码
 
-Let's start with some imports:
+让我们开始一些导入:
 
 ```{code-cell} ipython3
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 plt.rcParams['figure.dpi'] = 300
 from collections import namedtuple
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
+设定参数并计算货币的可能稳态回报率 $\bar R$ 和最大化铸币税的回报率，以及我们稍后讨论的一个对象，即与货币最大稳态回报率相关联的初始价格水平 $p_0$。
 
-Let's set some parameter values and compute possible steady-state rates of return on currency $\bar R$, the  seigniorage maximizing rate of return on currency, and an object that we'll discuss later, namely, an initial price level $p_0$ associated with the maximum steady-state rate of return on currency.
-
-First, we create a `namedtuple` to store parameters so that we can reuse this `namedtuple` in our functions throughout this lecture
+我们首先创建一个 `namedtuple` 来存储参数，以便我们可以在整个讲座中的函数中重用这个 `namedtuple`。
 
 ```{code-cell} ipython3
-# Create a namedtuple that contains parameters
+# 创建一个包含参数的 namedtuple
 MoneySupplyModel = namedtuple("MoneySupplyModel", 
                         ["γ1", "γ2", "g", 
                          "M0", "R_u", "R_l"])
 
 def create_model(γ1=100, γ2=50, g=3.0, M0=100):
     
-    # Calculate the steady states for R
+    # 计算 R 的稳态
     R_steady = np.roots((-γ1, γ1 + γ2 - g, -γ2))
     R_u, R_l = R_steady
     print("[R_u, R_l] =", R_steady)
     
     return MoneySupplyModel(γ1=γ1, γ2=γ2, g=g, M0=M0, R_u=R_u, R_l=R_l)
 ```
-
-Now we compute the $\bar R_{\rm max}$ and corresponding revenue
+现在我们计算 $\bar R_{\rm max}$ 和相应的收入
 
 ```{code-cell} ipython3
 def seign(R, model):
@@ -292,54 +274,54 @@ def seign(R, model):
 
 msm = create_model()
 
-# Calculate initial guess for p0
+# 计算 p0 的初始猜测
 p0_guess = msm.M0 / (msm.γ1 - msm.g - msm.γ2 / msm.R_u)
-print(f'p0 guess = {p0_guess:.4f}')
+print(f'p0 猜测 = {p0_guess:.4f}')
 
-# Calculate seigniorage maximizing rate of return
+# 计算最大化铸币税的回报率
 R_max = np.sqrt(msm.γ2/msm.γ1)
 g_max = seign(R_max, msm)
 print(f'R_max, g_max = {R_max:.4f}, {g_max:.4f}')
 ```
 
-Now let's plot seigniorage as a function of alternative potential steady-state values of $R$.
+现在我们来绘制铸币税作为 $R$ 的潜在稳定值的函数。
 
-We'll see that there are two steady-state values of $R$ that attain seigniorage levels equal to $g$,
-one that we'll denote $R_\ell$, another that we'll denote $R_u$.
+我们将看到有两个 $R$ 的稳态值达到了等于 $g$ 的铸币税水平，
+我们将其中一个记为 $R_\ell$，另一个记为 $R_u$。
 
-They satisfy $R_\ell < R_u$ and are affiliated with a higher inflation tax rate $(1-R_\ell)$ and a lower
-inflation tax rate $1 - R_u$.
+它们满足 $R_\ell < R_u$ 并且与更高的通货膨胀税率 $(1-R_\ell)$ 和较低的
+通货膨胀税率 $1 - R_u$ 关联。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Steady state revenue from inflation tax as function of steady state gross return on currency (solid blue curve) and  real government expenditures (dotted red line) plotted against steady-state rate of return currency
+    caption: 稳态通胀税收入作为货币稳态毛收益（实线蓝色曲线）和实际政府支出（虚线红色线）与稳态回报率货币对比图
     name: infl_tax
     width: 500px
 ---
-# Generate values for R
+# 生成 R 的值
 R_values = np.linspace(msm.γ2/msm.γ1, 1, 250)
 
-# Calculate the function values
+# 计算函数值
 seign_values = seign(R_values, msm)
 
-# Visualize seign_values against R values
+# 将 seign_values 与 R 值进行可视化
 fig, ax = plt.subplots(figsize=(11, 5))
-plt.plot(R_values, seign_values, label='inflation tax revenue')
-plt.axhline(y=msm.g, color='red', linestyle='--', label='government deficit')
+plt.plot(R_values, seign_values, label='通货膨胀税收入')
+plt.axhline(y=msm.g, color='red', linestyle='--', label='政府赤字')
 plt.xlabel('$R$')
-plt.ylabel('seigniorage')
+plt.ylabel('铸币税')
 
 plt.legend()
 plt.show()
 ```
 
-Let's print the two steady-state rates of return $\bar R$ and the associated seigniorage revenues that the government collects.
+让我们打印两个稳态回报率 $\bar R$ 和政府收集的相关铸币税收入。
 
-(By construction, both steady-state rates of return should raise the same amounts real revenue.)
+（构造上，两个稳态回报率应该产生相同金额的实际收入。）
 
-We hope that the following code will  confirm this.
+我们希望接下来的代码能确认这一点。
 
 ```{code-cell} ipython3
 g1 = seign(msm.R_u, msm)
@@ -349,20 +331,20 @@ g2 = seign(msm.R_l, msm)
 print(f'R_l, g_l = {msm.R_l:.4f}, {g2:.4f}')
 ```
 
-Now let's compute the maximum steady-state amount of seigniorage that could be gathered by printing money and the state-state rate of return on money that attains it.
+现在让我们计算通过印钞票能收集到的最大稳态铸币税以及实现它的稳态货币回报率。
 
-## Two  computation strategies
+## 两种计算策略
 
-We now proceed to compute equilibria, not necessarily steady states.
+我们现在继续计算均衡，不一定是稳态。
 
-We shall  deploy two distinct computation strategies.
+我们将部署两种不同的计算策略。
 
-### Method 1 
+### 方法 1
 
-* set $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$ and compute $b_0 = \gamma_1 - \gamma_2/R_0$.
+* 设置 $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$ 并计算 $b_0 = \gamma_1 - \gamma_2/R_0$。
 
-* compute sequences $\{R_t, b_t\}_{t=1}^\infty$ of rates of return and real balances that are associated with an equilibrium by solving equation {eq}`eq:bmotion` and {eq}`eq:bdemand` sequentially  for $t \geq 1$:  
-   
+* 计算序列 $\{R_t, b_t\}_{t=1}^\infty$，这些序列是与均衡相关的回报率和实际余额，通过按顺序求解方程 {eq}`eq:bmotion` 和 {eq}`eq:bdemand` 解出 $t \geq 1$:
+
 $$
 \begin{aligned}
 b_t & = b_{t-1} R_{t-1} + g \cr
@@ -370,13 +352,13 @@ R_t^{-1} & = \frac{\gamma_1}{\gamma_2} - \gamma_2^{-1} b_t
 \end{aligned}
 $$ (eq:rtbt)
 
-* Construct the associated equilibrium $p_0$ from 
+* 从以下方式构建相应的均衡 $p_0$
 
 $$
 p_0 = \frac{m_0}{\gamma_1 - g - \gamma_2/R_0}
 $$ (eq:p0fromR0)
 
-* compute $\{p_t, m_t\}_{t=1}^\infty$  by solving the following equations sequentially
+* 通过按顺序求解以下方程计算 $\{p_t, m_t\}_{t=1}^\infty$
 
 $$
 \begin{aligned}
@@ -384,103 +366,94 @@ p_t & = R_t p_{t-1} \cr
 m_t & = b_{t-1} p_t 
 \end{aligned}
 $$ (eq:method1) 
-   
-**Remark 1:** method 1 uses an indirect approach to computing an equilibrium by first computing an equilibrium  $\{R_t, b_t\}_{t=0}^\infty$ sequence and then using it to back out an equilibrium  $\{p_t, m_t\}_{t=0}^\infty$  sequence.
+    
+**注释 1:** 方法 1 使用一个间接方法来计算均衡，首先计算一个均衡 $\{R_t, b_t\}_{t=0}^\infty$ 序列，然后使用它来推导出一个均衡 $\{p_t, m_t\}_{t=0}^\infty$ 序列。
 
+**注释 2:** 注意，方法 1 开始于从集合 $[\frac{\gamma_2}{\gamma_1}, R_u]$ 中选择一个**初始条件** $R_0$。均衡 $\{p_t, m_t\}_{t=0}^\infty$ 序列不是唯一的。实际上，有一个由 $R_0$ 的选择索引的均衡连续体。
 
-**Remark 2:** notice that  method 1 starts by picking an **initial condition** $R_0$ from a set $[\frac{\gamma_2}{\gamma_1}, R_u]$. Equilibrium $\{p_t, m_t\}_{t=0}^\infty$ sequences are not unique.  There is actually a continuum of equilibria indexed by a choice of $R_0$ from the set $[\frac{\gamma_2}{\gamma_1}, R_u]$. 
+**注释 3:** 每个 $R_0$ 的选择都有唯一的 $p_0$，由方程 {eq}`eq:p0fromR0` 描述。)
 
-**Remark 3:** associated with each selection of $R_0$ there is a unique $p_0$ described by
-equation {eq}`eq:p0fromR0`.
- 
-### Method 2
+### 方法2
 
-This method deploys a direct approach. 
-It defines a "state vector" 
+此方法采用直接方式。
+它定义了一个“状态向量”
 $y_t = \begin{bmatrix} m_t \cr p_t\end{bmatrix} $
-and formulates  equilibrium conditions {eq}`eq:demandmoney`, {eq}`eq:budgcontraint`, and
-{eq}`eq:syeqdemand`
-in terms of a first-order vector difference equation
+并根据第一阶向量差分方程来表述平衡条件{eq}`eq:demandmoney`，{eq}`eq:budgcontraint`，和{eq}`eq:syeqdemand`
 
 $$
 y_{t+1} = M y_t, \quad t \geq 0 ,
 $$
 
-where we temporarily take $y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ as an **initial condition**. 
+这里我们暂时将 $y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ 作为**初始条件**。
 
-The solution is 
+解决方案是
 
 $$
-y_t = M^t y_0 .
+y_t = M^t y_0.
 $$
 
-Now let's think about the initial condition $y_0$. 
+现在让我们思考初始条件 $y_0$。
 
-It is natural to take the initial stock of money $m_0 >0$ as an initial condition.
+自然而然地将初始货币存量 $m_0 >0$ 作为初始条件。
 
-But what about $p_0$?  
+但$p_0$怎么办？
 
-Isn't it  something that we want  to be *determined* by our model?
+这不是我们希望由我们的模型来*决定*的吗？
 
-Yes, but sometimes we want too much, because there is actually a continuum of initial $p_0$ levels that are compatible with the existence of an equilibrium.  
+是的，但有时我们要求得太多，因为实际上存在一系列与平衡存在相容的初始$p_0$水平。
 
-As we shall see soon, selecting an initial $p_0$ in method 2 is intimately tied to selecting an initial rate of return on currency $R_0$ in method 1. 
-   
-## Computation method 1  
+正如我们很快会看到的，方法2中选择初始$p_0$与方法1中选择初始货币回报率$R_0$密切相关。
 
-%We start from an arbitrary $R_0$ and  $b_t = \frac{m_{t+1}}{p_t}$, we have 
+## 计算方法1
+
+%我们从任意的 $R_0$ 和 $b_t = \frac{m_{t+1}}{p_t}$ 开始，我们有
 
 %$$
 %b_0 = \gamma_1 - \gamma_0 R_0^{-1} 
 %$$
 
-Remember that there exist  two steady-state equilibrium  values $ R_\ell <  R_u$  of the rate of return on currency  $R_t$.
+记住存在两个稳定状态均衡值 $ R_\ell <  R_u$ 对应货币回报率 $R_t$。
 
-We proceed as follows.
+我们按以下步骤进行：
 
-Start at $t=0$ 
-* select a  $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$  
-* compute   $b_0 = \gamma_1 - \gamma_0 R_0^{-1} $ 
- 
-Then  for $t \geq 1$ construct $b_t, R_t$ by
-iterating  on equation {eq}`eq:rtbt`.
+从 $t=0$ 开始
+* 选择一个 $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$  
+* 计算 $b_0 = \gamma_1 - \gamma_0 R_0^{-1}$
 
-When we implement this part of method 1, we shall discover the following  striking 
-outcome:
+然后对于 $t \geq 1$，通过迭代方程 {eq}`eq:rtbt` 构造 $b_t, R_t$。
 
-* starting from an $R_0$ in  $[\frac{\gamma_2}{\gamma_1}, R_u]$, we shall find that 
-$\{R_t\}$ always converges to a limiting "steady state" value  $\bar R$ that depends on the initial
-condition $R_0$.
+当我们实施方法1的这部分时，我们将发现以下显著的结果：
 
-* there are only two possible limit points $\{ R_\ell, R_u\}$. 
+* 从区间 $[\frac{\gamma_2}{\gamma_1}, R_u]$ 中的一个 $R_0$ 开始，我们将发现 $\{R_t\}$ 总是收敛到一个取决于初始条件 $R_0$ 的限制“稳态”值 $\bar R$。
 
-* for almost every initial condition $R_0$, $\lim_{t \rightarrow +\infty} R_t = R_\ell$.
+* 只有两个可能的极限点 $\{ R_\ell, R_u\}$。
 
-* if and only if $R_0 = R_u$, $\lim_{t \rightarrow +\infty} R_t = R_u$.
-  
-The quantity $1 - R_t$ can be interpreted as an **inflation tax rate** that the government imposes on holders of its currency.
+* 对于几乎所有初始条件 $R_0$，$\lim_{t \rightarrow +\infty} R_t = R_\ell$。
 
-We shall soon  see that the existence of two steady-state rates of return on currency
-that serve to finance the government deficit of $g$ indicates the presence of a **Laffer curve** in the inflation tax rate.  
+* 当且仅当 $R_0 = R_u$ 时，$\lim_{t \rightarrow +\infty} R_t = R_u$。
+
+量 $1 - R_t$ 可以被解释为政府对持有其货币者征收的 **通货膨胀税率**。
+
+我们不久将看到，存在两个稳定状态的货币回报率
+表明有一个 **拉弗曲线** 存在于通货膨胀税率中，这用于资助政府的 $g$ 赤字。
 
 ```{note}
-Arthur Laffer's curve plots a hump shaped curve of revenue raised from a tax against the tax rate.  
-Its hump shape indicates that there are typically two tax rates that yield the same amount of revenue. This is due to two countervailing courses, one being that raising a tax rate typically decreases the **base** of the tax as people take decisions to reduce their exposure to the tax.
+拉弗曲线绘制了税收与税率之间呈驼峰形状的曲线。其驼峰形态表明通常有两个税率产生相同的税收额。这是由两个相对作用力造成的，一是提高税率通常会减少税基，因为人们会作出决定以减少他们对税收的暴露。
 ```
 
 ```{code-cell} ipython3
 def simulate_system(R0, model, num_steps):
     γ1, γ2, g = model.γ1, model.γ2, model.g
 
-    # Initialize arrays to store results
+    # 初始化数组以存储结果
     b_values = np.empty(num_steps)
     R_values = np.empty(num_steps)
 
-    # Initial values
+    # 初始值
     b_values[0] = γ1 - γ2/R0
     R_values[0] = 1 / (γ1/γ2 - (1 / γ2) * b_values[0])
 
-    # Iterate over time steps
+    # 迭代时间步
     for t in range(1, num_steps):
         b_t = b_values[t - 1] * R_values[t - 1] + g
         R_values[t] = 1 / (γ1/γ2 - (1/γ2) * b_t)
@@ -489,7 +462,7 @@ def simulate_system(R0, model, num_steps):
     return b_values, R_values
 ```
 
-Let's write some code to plot outcomes for several possible initial values $R_0$.
+让我们写一些代码来绘制多个可能初始值 $R_0$ 的结果。
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -509,25 +482,25 @@ def draw_paths(R0_values, model, line_params, num_steps):
 
     fig, axes = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
     
-    # Pre-compute time steps
+    # 预先计算时间步
     time_steps = np.arange(num_steps) 
     
-    # Iterate over R_0s and simulate the system 
+    # 遍历 R_0s 并模拟系统 
     for R0 in R0_values:
         b_values, R_values = simulate_system(R0, model, num_steps)
         
-        # Plot R_t against time
+        # 绘制 R_t 和时间的关系
         axes[0].plot(time_steps, R_values, **line_params)
         
-        # Plot b_t against time
+        # 绘制 b_t 和时间的关系
         axes[1].plot(time_steps, b_values, **line_params)
         
-    # Add line and text annotations to the subgraph 
+    # 向子图添加线和文本注释
     annotate_graph(axes[0], model, num_steps)
     
-    # Add Labels
+    # 添加标签
     axes[0].set_ylabel('$R_t$')
-    axes[1].set_xlabel('timestep')
+    axes[1].set_xlabel('时间步')
     axes[1].set_ylabel('$b_t$')
     axes[1].xaxis.set_major_locator(MaxNLocator(integer=True))
     
@@ -535,38 +508,37 @@ def draw_paths(R0_values, model, line_params, num_steps):
     plt.show()
 ```
 
-Let's plot  distinct outcomes  associated with several  $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$.
+让我们绘制与多个 $R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]$ 相关的不同结果。
 
-Each line below shows a path associated with a different $R_0$.
+下方的每一条线代表与不同 $R_0$ 对应的路径。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Paths of $R_t$ (top panel) and $b_t$ (bottom panel) starting from different
-      initial condition $R_0$
+    caption: 从不同初始条件 $R_0$ 出发的 $R_t$（上层图面）和 $b_t$（下层图面）的路径
     name: R0_path
     width: 500px
 ---
-# Create a grid of R_0s
+# 创建 R_0 的网格
 R0s = np.linspace(msm.γ2/msm.γ1, msm.R_u, 9)
 R0s = np.append(msm.R_l, R0s)
 draw_paths(R0s, msm, line_params, num_steps=20)
 ```
 
-Notice how sequences that  start from $R_0$ in the half-open interval $[R_\ell, R_u)$ converge to the steady state  associated with  to $ R_\ell$.
+请注意，从半开区间 $[R_\ell, R_u)$ 开始的序列如何收敛到与 $R_\ell$ 相关的稳态。
 
-## Computation method 2 
+## 计算方法 2
 
-Set $m_t = m_t^d $ for all $t \geq -1$. 
+令 $m_t = m_t^d $ 对所有 $t \geq -1$. 
 
-Let 
+定义 
 
 $$
 y_t =  \begin{bmatrix} m_{t} \cr p_{t} \end{bmatrix} .
 $$
 
-Represent  equilibrium conditions {eq}`eq:demandmoney`, {eq}`eq:budgcontraint`, and    {eq}`eq:syeqdemand` as
+表示平衡条件 {eq}`eq:demandmoney`、{eq}`eq:budgcontraint` 和 {eq}`eq:syeqdemand` 如下
 
 $$
 \begin{bmatrix} 1 & \gamma_2 \cr
@@ -575,13 +547,13 @@ $$
                  1 & g \end{bmatrix} \begin{bmatrix} m_{t} \cr p_{t} \end{bmatrix} 
 $$ (eq:sytem101)
 
-or
+或
 
 $$ 
 H_1 y_t = H_2  y_{t-1} 
 $$
 
-where 
+其中 
 
 $$
 \begin{aligned} H_1 & = \begin{bmatrix} 1 & \gamma_2 \cr
@@ -598,7 +570,7 @@ H2 = np.array([[0, msm.γ1],
                [1, msm.g]]) 
 ```
 
-Define
+定义
 
 $$
 H = H_1^{-1} H_2
@@ -609,54 +581,53 @@ H = np.linalg.solve(H1, H2)
 print('H = \n', H)
 ```
 
-and write the system  {eq}`eq:sytem101` as
+将系统 {eq}`eq:sytem101` 表示为
 
 $$
 y_{t+1} = H y_t, \quad t \geq 0 
 $$ (eq:Vaughn)
 
-so that $\{y_t\}_{t=0}$ can be computed from
+这样，$\{y_t\}_{t=0}$ 可以从以下公式计算
 
 $$
 y_t = H^t y_0, t \geq 0
 $$ (eq:ytiterate)
 
-where 
+其中 
 
 $$
 y_0 = \begin{bmatrix} m_{0} \cr p_0 \end{bmatrix} .
 $$
 
-It is natural to take  $m_0$ as an initial condition determined outside the model.
+很自然地，可以将 $m_0$ 作为模型外部确定的初始条件。
 
-The mathematics seems to tell us that $p_0$ must also be determined outside the model, even though
-it is something that we actually wanted to be determined by the model.
+数学似乎告诉我们 $p_0$ 也必须在模型外部确定，尽管这是我们希望通过模型确定的东西。
 
-(As usual, we should listen when mathematics talks to us.)
+（像往常一样，当数学向我们发声时，我们应该倾听。）
 
-For now, let's just proceed mechanically on faith. 
+现在，让我们就基于信念机械式地继续前进。
 
-Compute the eigenvector decomposition 
+计算特征向量分解
 
 $$
 H =  Q \Lambda Q^{-1} 
-$$ 
+$$
 
-where $\Lambda$ is a diagonal matrix of eigenvalues and the columns of $Q$ are eigenvectors corresponding to those eigenvalues.
+其中 $\Lambda$ 是特征值的对角矩阵，$Q$ 的列是对应于这些特征值的特征向量。
 
-It turns out that  
+结果表明，
 
 $$
 \Lambda = \begin{bmatrix} {R_\ell}^{-1} & 0 \cr 
                 0 & {R_u}^{-1} \end{bmatrix}
 $$
 
-where $R_\ell$ and $R_u$ are the lower and higher steady-state rates of return on currency that we computed above.
+这里的 $R_\ell$ 和 $R_u$ 是我们上面计算出的货币的较低和较高的恒定利率回报。
 
 ```{code-cell} ipython3
 Λ, Q = np.linalg.eig(H)
-print('Λ = \n', Λ)
-print('Q = \n', Q)
+print('Λ = ', Λ)
+print('Q = ', Q)
 ```
 
 ```{code-cell} ipython3
@@ -667,52 +638,47 @@ print(f'R_l = {R_l:.4f}')
 print(f'R_u = {R_u:.4f}')
 ```
 
-Partition $Q$ as
-
-$$ 
-Q =\begin{bmatrix} Q_{11} & Q_{12} \cr
-                   Q_{21} & Q_{22} \end{bmatrix}
-$$
-
-Below we shall verify the following claims: 
-
-
-**Claims:** If we set 
+划分 $Q$ 为
 
 $$
-p_0 = \overline p_0 \equiv Q_{21} Q_{11}^{-1}  m_{0} ,
+Q = \begin{bmatrix} Q_{11} & Q_{12} \\ Q_{21} & Q_{22} \end{bmatrix}
+$$
+
+下面我们将逐步验证以下声明：
+
+**声明：**如果我们设
+
+$$
+p_0 = \overline{p}_0 \equiv Q_{21} Q_{11}^{-1}  m_{0} ,
 $$ (eq:magicp0)
 
-it turns out that 
+事实证明
 
-$$ 
+$$
 \frac{p_{t+1}}{p_t} = {R_u}^{-1}, \quad t \geq 0
 $$
 
-
-However, if we set 
-
-$$ 
-p_0 > \bar p_0
-$$
-
-then
+然而，如果我们设
 
 $$
-\lim_{t\rightarrow + \infty} \frac{p_{t+1}}{p_t} = {R_\ell}^{-1}.
+p_0 > \overline{p}_0
 $$
 
-Let's verify these claims step by step.
+那么
 
+$$
+\lim_{t \rightarrow + \infty} \frac{p_{t+1}}{p_t} = {R_l}^{-1}.
+$$
 
+让我们逐步验证这些声明。
 
-Note that
+注意到
 
 $$
 H^t = Q \Lambda^t Q^{-1}
 $$
 
-so that
+从而
 
 $$
 y_t = Q \Lambda^t Q^{-1} y_0
@@ -728,72 +694,58 @@ def iterate_H(y_0, H, num_steps):
     return y
 ```
 
-For almost all initial vectors $y_0$, the gross rate of inflation $\frac{p_{t+1}}{p_t}$ eventually converges to  the larger eigenvalue ${R_\ell}^{-1}$.
+对于几乎所有初始向量 $y_0$， 通货膨胀的总率 $\frac{p_{t+1}}{p_t}$ 最终会收敛到较大的特征值 ${R_l}^{-1}$。
 
-The only way to avoid this outcome is for  $p_0$ to take  the specific value described by {eq}`eq:magicp0`.
+避免这种结果的唯一方法是让 $p_0$ 取 {eq}`eq:magicp0` 中描述的特定值。
 
-To understand  this situation,  we  use the following
-transformation
+为了理解这种情况，我们使用下面的转换
 
 $$
 y^*_t = Q^{-1} y_t . 
 $$
 
-Dynamics of $y^*_t$ are evidently governed by 
+$y^*_t$的动力显然受制于
 
 $$
 y^*_{t+1} = \Lambda^t y^*_t .
 $$ (eq:stardynamics)
 
-This equation represents the dynamics of our system  in a way that lets us  isolate the
-force that causes  gross inflation to converge to the inverse of the lower steady-state rate
-of inflation $R_\ell$ that we discovered earlier. 
+这个方程表达了我们系统的动力，使我们可以隔离导致通货膨胀汇聚到我们之前发现的较低稳定状态通货膨胀率 $R_l$ 的逆的力量。
 
-Staring at  equation {eq}`eq:stardynamics` indicates that unless
+盯着方程 {eq}`eq:stardynamics` 表明，除非
 
 ```{math}
 :label: equation_11
 
-y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix}
+y^*_0 = \begin{bmatrix} y^*_{1,0} \\ 0 \end{bmatrix}
 ```
 
-the path of $y^*_t$,  and therefore the paths of both $m_t$ and $p_t$ given by
-$y_t = Q y^*_t$ will eventually grow at gross rates ${R_\ell}^{-1}$ as 
-$t \rightarrow +\infty$. 
+$y^*_t$ 的路径，因此 $y_t = Q y^*_t$ 给出的 $m_t$ 和 $p_t$ 的路径将最终以 $R_l^{-1}$ 的总率增长，随着 $t \rightarrow +\infty$。
 
-Equation {eq}`equation_11` also leads us to conclude that there is a unique setting
-for the initial vector $y_0$ for which both components forever grow at the lower rate ${R_u}^{-1}$. 
+方程 {eq}`equation_11` 还让我们得出结论：对于初始向量 $y_0$ 有一个唯一的设置，使得两个组件永远以较低的速率 ${R_u}^{-1}$ 增长。
 
-
-For this to occur, the required setting of $y_0$ must evidently have the property
-that
+为了使这种情况发生，$y_0$ 的所需设置显然必须具有以下属性：
 
 $$
-Q^{-1} y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} .
+Q^{-1} y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \\ 0 \end{bmatrix} .
 $$
 
-But note that since
-$y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ and $m_0$
-is given to us an initial condition,  $p_0$ has to do all the adjusting to satisfy this equation.
+但请注意，因为
+$$y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}$$ 和 $m_0$
+作为初始条件给定，$p_0$ 必须调整以满足这个方程。
 
-Sometimes this situation is described informally  by saying that while $m_0$
-is truly a **state** variable, $p_0$ is a **jump** variable that
-must adjust at $t=0$ in order to satisfy the equation.
+有时，这种情况非正式地被描述为，尽管 $m_0$
+是一个真正的**状态**变量，$p_0$ 是一个必须在 $t=0$ 时调整以满足方程的**跳跃**变量。
 
-Thus, in a nutshell the unique value of the vector $y_0$ for which
-the paths of $y_t$ *don't* eventually grow at rate ${R_\ell}^{-1}$ requires  setting the second component
-of $y^*_0$ equal to zero.
+因此，简而言之，向量 $y_0$ 的唯一值使得 $y_t$ 的路径*不*最终以 ${R_\ell}^{-1}$ 的速率增长，需要将 $y^*_0$ 的第二组分设为零。
 
-The component $p_0$ of the initial vector
-$y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ must evidently
-satisfy
+初始向量 $y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}$ 的 $p_0$ 显然必须满足
 
 $$
-Q^{\{2\}} y_0 =0
+Q^{\{2\}} y_0 = 0
 $$
 
-where $Q^{\{2\}}$ denotes the second row of $Q^{-1}$, a
-restriction that is equivalent to
+这里 $Q^{\{2\}}$ 表示 $Q^{-1}$ 的第二行，相当于
 
 ```{math}
 :label: equation_12
@@ -801,10 +753,9 @@ restriction that is equivalent to
 Q^{21} m_0 + Q^{22} p_0 = 0
 ```
 
-where $Q^{ij}$ denotes the $(i,j)$ component of
-$Q^{-1}$.
+其中 $Q^{ij}$ 表示 $Q^{-1}$ 的 $(i,j)$ 组件。
 
-Solving this equation for $p_0$, we find
+解这个方程得到 $p_0$，我们发现
 
 ```{math}
 :label: equation_13
@@ -812,41 +763,35 @@ Solving this equation for $p_0$, we find
 p_0 = - (Q^{22})^{-1} Q^{21} m_0.
 ```
 
+### 更便捷的公式
 
-### More convenient formula 
+我们可以得到一个等效但可能更便捷的 $p_0$ 公式 {eq}`eq:magicp0`，该公式是用 $Q$ 的组成部分表示的，而不是 $Q^{-1}$ 的组成部分。
 
-We can get the equivalent but perhaps more convenient formula {eq}`eq:magicp0` for $p_0$ that is cast
-in terms of components of $Q$ instead of components of
-$Q^{-1}$.
-
-To get this formula, first note that because $(Q^{21}\ Q^{22})$ is
-the second row of the inverse of $Q$ and because
-$Q^{-1} Q = I$, it follows that
+为了得到这个公式，首先注意到因为 $(Q^{21}\ Q^{22})$ 是 $Q$ 的逆的第二行，并且因为 $Q^{-1} Q = I$，所以我们有
 
 $$
-\begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  \begin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
+\begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  egin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
 $$
 
-which implies that
+这意味着
 
 $$
 Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 $$
 
-Therefore,
+因此，
 
 $$
 -(Q^{22})^{-1} Q^{21} = Q_{21} Q^{-1}_{11}.
 $$
 
-So we can write
+所以我们可以写成
 
 ```{math}
-
 p_0 = Q_{21} Q_{11}^{-1} m_0 .
 ```
 
-which is our formula {eq}`eq:magicp0`.
+这就是我们的公式 {eq}`eq:magicp0`。
 
 ```{code-cell} ipython3
 p0_bar = (Q[1, 0]/Q[0, 0]) * msm.M0
@@ -854,7 +799,7 @@ p0_bar = (Q[1, 0]/Q[0, 0]) * msm.M0
 print(f'p0_bar = {p0_bar:.4f}')
 ```
 
-It can be verified that this formula replicates itself over time in the sense  that
+可以验证这个公式会随时间自我复制，意味着
 
 ```{math}
 :label: equation_15
@@ -862,9 +807,9 @@ It can be verified that this formula replicates itself over time in the sense  t
 p_t = Q_{21} Q^{-1}_{11} m_t.
 ```
 
-Now let's visualize the dynamics of $m_t$, $p_t$, and $R_t$ starting from different $p_0$ values to verify our claims above.
+现在让我们从不同的 $p_0$ 值开始，来可视化 $m_t$、$p_t$ 和 $R_t$ 的动态，以验证我们上述的论断。
 
-We create a function `draw_iterations` to generate the plot
+我们创建一个函数 `draw_iterations` 来生成图表。
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -873,39 +818,39 @@ def draw_iterations(p0s, model, line_params, num_steps):
 
     fig, axes = plt.subplots(3, 1, figsize=(8, 10), sharex=True)
     
-    # Pre-compute time steps
+    # 预计算时间步
     time_steps = np.arange(num_steps) 
     
-    # Plot the first two y-axes in log scale
+    # 前两个y轴使用对数刻度
     for ax in axes[:2]:
         ax.set_yscale('log')
 
-    # Iterate over p_0s and calculate a series of y_t
+    # 遍历p_0s并计算一系列y_t
     for p0 in p0s:
         y0 = np.array([msm.M0, p0])
         y_series = iterate_H(y0, H, num_steps)
         M, P = y_series[0, :], y_series[1, :]
 
-        # Plot R_t against time
+        # 针对时间绘制R_t
         axes[0].plot(time_steps, M, **line_params)
 
-        # Plot b_t against time
+        # 针对时间绘制b_t
         axes[1].plot(time_steps, P, **line_params)
         
-        # Calculate R_t
+        # 计算R_t
         R = np.insert(P[:-1] / P[1:], 0, np.NAN)
         axes[2].plot(time_steps, R, **line_params)
         
-    # Add line and text annotations to the subgraph 
+    # 给子图添加线和文本标注
     annotate_graph(axes[2], model, num_steps)
     
-    # Draw labels
+    # 绘制标签
     axes[0].set_ylabel('$m_t$')
     axes[1].set_ylabel('$p_t$')
     axes[2].set_ylabel('$R_t$')
-    axes[2].set_xlabel('timestep')
+    axes[2].set_xlabel('时间步')
     
-    # Enforce integar axis label
+    # 强制整数轴标签
     axes[2].xaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.tight_layout()
@@ -916,9 +861,7 @@ def draw_iterations(p0s, model, line_params, num_steps):
 ---
 mystnb:
   figure:
-    caption: Starting from different initial values of  $p_0$, paths of $m_t$ (top
-      panel, log scale for $m$), $p_t$ (middle panel, log scale for $m$), $R_t$ (bottom
-      panel)
+    caption: 从不同的初始值 $p_0$ 出发, $m_t$ 的路径（顶部面板，$m$ 使用对数刻度）, $p_t$（中间面板，$m$ 使用对数刻度）, $R_t$（底部面板）
     name: p0_path
     width: 500px
 ---
@@ -927,52 +870,48 @@ p0s = [p0_bar, 2.34, 2.5, 3, 4, 7, 30, 100_000]
 draw_iterations(p0s, msm, line_params, num_steps=20)
 ```
 
-Please notice that for $m_t$ and $p_t$, we have used  log scales for the coordinate (i.e., vertical) axes.  
+请注意对于 $m_t$ 和 $p_t$，我们使用了对数刻度。
 
-Using log scales allows us to spot distinct constant limiting gross  rates of growth ${R_u}^{-1}$ and
-${R_\ell}^{-1}$ by eye.
+使用对数刻度可以让我们更容易地通过视觉识别两个不同的常数极限增长率 ${R_u}^{-1}$ 和
+${R_\ell}^{-1}$.
 
+## 特殊的静态结果
 
-## Peculiar stationary outcomes
+正如本讲座开始时所承诺的，我们遇到了这些宏观经济学的概念：
 
-As promised at the start of this lecture, we have encountered these concepts from macroeconomics:
+* 政府通过印制纸币或电子货币征收的**通货膨胀税**
+* 通货膨胀税率的动态**劳弗曲线**，该曲线有两个静态均衡点
 
-* an **inflation tax** that a government gathers by printing paper or electronic money
-* a dynamic **Laffer curve** in the inflation tax rate that has two stationary equilibria
+观察图 {numref}`R0_path` 中关于物价水平的回报率路径和图 {numref}`p0_path` 中的物价水平路径显示，几乎所有路径都趋向于在图 {numref}`infl_tax` 展示的劳弗曲线静态状态中显示的*较高*的通货膨胀税率。
 
-Staring at the paths of rates of return on the price level in  figure  {numref}`R0_path` and price levels in  {numref}`p0_path` show indicate that almost all paths converge to the *higher* inflation tax rate displayed in the stationary state Laffer curve displayed in figure  {numref}`infl_tax`.  
+因此，我们确实发现了我们早先称之为“反常”的动态，即在理性预期下，系统收敛于两个可能的静态通货膨胀税率中的较高者。
 
-Thus, we have indeed discovered what we earlier called "perverse" dynamics under rational expectations in which the system converges to the higher of two possible stationary inflation tax rates.
+这些动态之所以“反常”，不仅仅是因为它们意味着货币和财政当局选择通过印刷货币来筹集财政收入，最终征收的通货膨胀税超过了筹集财政支出所需的税收，还因为我们可以通过观察图 {numref}`infl_tax` 中显示的静态状态劳弗曲线得出以下“违反直觉”的情况：
 
-Those dynamics are "perverse" not only in the sense that they imply that the monetary and fiscal authorities that have chosen to finance government expenditures eventually impose a higher inflation tax than required to finance government expenditures, but because of the following "counterintuitive" situation that we can deduce by staring at the stationary state Laffer curve displayed in figure  {numref}`infl_tax`:
-
-* the figure indicates that inflation can be *reduced* by running *higher*  government deficits, i.e., by raising more resources through  printing money. 
-
+* 该图表显示，通过运行*更高*的政府赤字，即通过印制更多的货币来筹集更多资源，可以*降低*通货膨胀。
 
 ```{note}
-The same qualitative outcomes prevail in this lecture {doc}`money_inflation_nonlinear` that studies a nonlinear version of the model in this lecture.
+在本讲座 {doc}`money_inflation_nonlinear` 中研究的模型的非线性版本中，同样的定性结果仍然适用。
 ```
 
+## 均衡选择
 
-## Equilibrium selection 
+我们发现作为价格水平路径的模型或模型是**不完整的**，因为存在一系列与实际货币余额总是等于供给的“均衡”路径 $\{m_{t+1}, p_t\}_{t=0}^\infty$。
 
-We have discovered that as a model of price level paths or model is **incomplete** because there is a continuum of "equilibrium" paths for $\{m_{t+1}, p_t\}_{t=0}^\infty$ that are consistent with the demand for real balances always equaling the supply.
-  
+通过应用我们的计算方法1和2，我们已经了解到这个连续体可以通过选择以下两个标量之一来索引：
 
-Through application of our computational methods 1 and 2, we have  learned that this continuum can be indexed by choice of one of two scalars:
+* 对于计算方法1，$R_0$
+* 对于计算方法2，$p_0$
 
-* for computational method 1, $R_0$ 
-* for computational method 2, $p_0$
+为了应用我们的模型，我们必须以某种方式*完成*它，通过在可能的路径连续体中*选择*一个均衡路径。
 
-To apply our model, we have somehow to *complete* it by *selecting* an equilibrium path from among the continuum of possible paths. 
+我们发现：
 
-We discovered that 
+* 除一个外的所有均衡路径都会收敛到其中较高的两个可能的恒定通胀税率的限制
+* 存在一个独特的均衡路径，它与关于政府赤字减少如何影响恒定通胀率的“合理”声明相关联
 
- * all but one of the equilibrium paths converge to limits in which the higher of two possible stationary inflation tax prevails
- * there is a unique equilibrium path associated with "plausible" statements about how reductions in government deficits affect a stationary  inflation rate
+出于合理性的考虑，我们建议按照许多宏观经济学家的看法，选择收敛到较低恒定通胀税率的独特均衡。
 
-On grounds of plausibility, we recommend following many macroeconomists in selecting the unique equilibrium that converges to the lower stationary inflation tax rate. 
+正如我们将在讲座 {doc}`unpleasant` 中看到的，我们将接受这一建议。
 
-As we shall see, we shall accept this recommendation in  lecture {doc}`unpleasant`.
-
-In lecture, {doc}`laffer_adaptive`, we shall explore how  {cite}`bruno1990seigniorage` and others justified this in other ways.
+在讲座 {doc}`laffer_adaptive` 中，我们将探讨 {cite}`bruno1990seigniorage` 和其他人是如何以其他方式证明这一点的。
