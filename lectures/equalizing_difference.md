@@ -11,388 +11,346 @@ kernelspec:
   name: python3
 ---
 
-# Equalizing Difference Model
+# 均衡差异模型
+## 概述
+本讲座介绍了一个大学-高中工资差距模型，其中"培养"大学毕业生的时间扮演了关键角色。
 
-## Overview
+米尔顿·弗里德曼发明了这个模型，用来研究美国牙医和医生收入的差异是竞争性劳动力市场的结果，还是政府与医生专业组织合作施加的入行障碍的结果。
 
-This lecture presents a model of the college-high-school wage gap in which the
-"time to build" a college graduate plays a key role.
+詹妮弗·伯恩斯的著作{cite}`Burns_2023`第4章描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，最终导致了{cite}`kuznets1939incomes`和{cite}`friedman1954incomes`的发表。
 
+将弗里德曼的应用映射到我们的模型中，可以将我们的高中生视为弗里德曼的牙医，将我们的大学毕业生视为弗里德曼的医生。
 
-Milton Friedman invented the   model  to study whether  differences in  earnings of US dentists and doctors were outcomes of  competitive labor markets or whether
-they reflected entry barriers imposed by governments working in conjunction with doctors' professional organizations. 
+我们的呈现是"不完整的"，因为它基于一个单一方程，这个方程将是更完整模型中一组均衡条件的一部分。
 
-Chapter 4 of Jennifer Burns {cite}`Burns_2023` describes  Milton Friedman's joint work with Simon Kuznets that eventually  led to the publication of {cite}`kuznets1939incomes` and {cite}`friedman1954incomes`.
+这个"均衡差异"方程确定了一个大学-高中工资比率，使高中毕业工人和大学毕业工人的现值相等。
 
-To map  Friedman's application into our model, think of our high school students as Friedman's dentists and our college graduates as Friedman's doctors.  
+这个想法是，终身收入会以某种方式调整，使新高中毕业工人对是否上大学或立即工作无差别。
+（更完整模型中的"其他方程"的作用将是描述什么会调整以实现这个结果。）
 
+我们的模型只是相对工资率"均衡差异"理论的一个例子，这类理论至少可以追溯到亚当·斯密的《国富论》{cite}`smith2010wealth`。
 
-Our presentation is "incomplete" in the sense that it is based on  a single equation that would be part of set equilibrium conditions of a more fully articulated model.
+在本讲座的大部分内容中，我们将只使用线性代数的数学工具，特别是矩阵乘法和矩阵求逆。
 
-This ''equalizing difference'' equation  determines  a college-high-school wage ratio that equalizes present values of a high school educated  worker and a college educated worker.
+然而，在讲座接近尾声时，我们会使用微积分，以防读者想看看如何通过计算偏导数来更简洁地呈现一些发现。
 
-The idea  is that lifetime earnings somehow adjust to make a new high school worker indifferent between going to college and not going to college but instead going to work immediately.
+这样做还能让我们展示Python在进行微积分计算方面有多么出色！
 
-(The job of the "other equations" in a more complete model would be to describe what adjusts to bring about this outcome.)
+但如果你不懂微积分，我们的线性代数工具肯定足够了。
 
-Our model is just one example  of an  "equalizing difference" theory of relative wage rates, a class of theories dating back at least to Adam Smith's **Wealth of Nations** {cite}`smith2010wealth`.  
-
-For most of this lecture, the only mathematical tools that we'll use are from linear algebra, in particular, matrix multiplication and matrix inversion.
-
-However, near the  end of the lecture, we'll use calculus just in case readers want to see how computing partial derivatives could let us present some findings more concisely.  
-
-And doing that will let illustrate how good Python is at doing calculus!
-
-But if you don't know calculus, our tools from linear algebra are certainly enough.
-
-As usual, we'll start by importing some Python modules.
+像往常一样，我们先导入一些Python模块。
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
-from collections import namedtuple
-from sympy import Symbol, Lambda, symbols
 ```
 
-## The indifference condition
+## 无差异条件
 
-The key idea is that the entry level college wage premium has to adjust to make a representative worker indifferent between going to college and not going to college.
+关键思想是，大学入学级别的工资溢价必须调整，以使代表性工人对上大学和不上大学无差别。
 
-Let
+设：
 
- * $R > 1$ be the gross rate of return on a one-period bond
+* $R > 1$ 为一期债券的总回报率
 
- * $t = 0, 1, 2, \ldots T$ denote the years that a person either works or attends college
- 
- * $0$ denote the first period after high school that a person can work if he does not go to college
- 
- * $T$ denote the last period  that a person  works
- 
- * $w_t^h$ be the wage at time $t$ of a high school graduate
- 
- * $w_t^c$ be the wage at time $t$ of a college graduate
- 
- * $\gamma_h > 1$ be the (gross) rate of growth of wages of a  high school graduate, so that
- $ w_t^h = w_0^h \gamma_h^t$
- 
- * $\gamma_c > 1$ be the (gross) rate of growth of wages of a  college  graduate, so that
- $ w_t^c = w_0^c \gamma_c^t$
+* $t = 0, 1, 2, \ldots T$ 表示一个人工作或上大学的年数
 
- * $D$ be the upfront monetary costs of going to college
+* $0$ 表示一个人如果不上大学可以工作的高中毕业后的第一个时期
 
-We now compute present values that a new high school graduate earns if
+* $T$ 表示一个人工作的最后一个时期
 
-  * he goes to work immediately and earns wages paid to someone without a college education
-  * he goes to college for four years and after graduating earns wages paid to a college graduate
+* $w_t^h$ 为高中毕业生在 $t$ 时的工资
 
-### Present value of a high school educated worker
+* $w_t^c$ 为大学毕业生在 $t$ 时的工资
 
-If someone goes to work immediately after high school  and  works for the  $T+1$ years $t=0, 1, 2, \ldots, T$, she earns present value
+* $\gamma_h > 1$ 为高中毕业生工资的（总）增长率，使得
+$ w_t^h = w_0^h \gamma_h^t$
+
+* $\gamma_c > 1$ 为大学毕业生工资的（总）增长率，使得
+$ w_t^c = w_0^c \gamma_c^t$
+
+* $D$ 为上大学的前期货币成本
+
+现在我们计算新高中毕业生如果：
+
+  * 立即工作并赚取无大学教育者的工资
+  * 上大学四年，毕业后赚取大学毕业生的工资
+
+所能获得的现值
+
+### 高中教育工人的现值
+
+如果某人高中毕业后立即工作，并在 $t=0, 1, 2, \ldots, T$ 的 $T+1$ 年内工作，她赚取的现值为：
 
 $$
 h_0 = \sum_{t=0}^T R^{-t} w_t^h = w_0^h \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right] \equiv w_0^h A_h 
 $$
 
-where 
+其中
 
 $$
 A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
 $$
 
-The present value $h_0$ is the "human wealth" at the beginning of time $0$ of someone who chooses not to attend college but instead to go to work immediately at the wage of a high school graduate.
+现值 $h_0$ 是选择不上大学而是立即以高中毕业生的工资开始工作的人在时间 $0$ 开始时的"人力财富"。
 
-### Present value of a college-bound new high school graduate
+### 准备上大学的新高中毕业生的现值
 
-
-If someone goes to college for the four years $t=0, 1, 2, 3$ during which she earns $0$, but then goes to work  immediately after college   and  works for the $T-3$ years $t=4, 5, \ldots ,T$, she earns present value
+如果某人在 $t=0, 1, 2, 3$ 的四年内上大学，期间收入为 $0$，但在大学毕业后立即工作，并在 $t=4, 5, \ldots ,T$ 的 $T-3$ 年内工作，她赚取的现值为：
 
 $$
 c_0 = \sum_{t=4}^T R^{-t} w_t^c = w_0^c (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1} \gamma_c } \right] \equiv w_0^c A_c
 $$
 
-where
+其中
 
 $$
 A_c = (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1} \gamma_c } \right] .
 $$ 
 
-The present value $c_0$  is the "human wealth" at the beginning of time $0$ of someone who chooses to attend college for four years and then start to work at time $t=4$ at the wage of a college graduate.
+现值 $c_0$ 是选择上大学四年然后在 $t=4$ 时以大学毕业生的工资开始工作的人在时间 $0$ 开始时的"人力财富"。
 
+假设大学学费加上四年的食宿费用总计为 $D$，必须在时间 $0$ 支付。
 
-Assume that college tuition plus four years of room and board amount to  $D$ and must be paid at time $0$.
-
-So net of monetary cost of college, the present value of attending college as of the first period after high school is
+因此，扣除上大学的货币成本后，高中毕业后第一个时期上大学的现值为：
 
 $$ 
 c_0 - D
 $$
 
-We now formulate a pure **equalizing difference** model of the initial college-high school wage gap $\phi$ that verifies 
+现在我们制定一个纯**均衡差异**模型，用于初始大学-高中工资差距 $\phi$，其中：
 
 $$
 w_0^c = \phi w_0^h 
 $$
 
-We suppose that $R, \gamma_h, \gamma_c, T$ and also $w_0^h$  are fixed parameters. 
+我们假设 $R, \gamma_h, \gamma_c, T$ 以及 $w_0^h$ 是固定参数。
 
-We start by noting that the pure equalizing difference model asserts that the college-high-school wage gap $\phi$ solves an 
-"equalizing" equation that sets the present value not going to college equal to the present value of going to college:
-
+我们首先注意到，纯均衡差异模型断言，大学-高中工资差距 $\phi$ 满足一个"均衡"方程，该方程将不上大学的现值设置为等于上大学的现值：
 
 $$
 h_0 = c_0 - D
 $$ 
 
-or
+或
 
 $$ 
 w_0^h A_h  = \phi w_0^h A_c - D .
 $$ (eq:equalize)
 
-This "indifference condition"  is the heart of the model.
+这个"无差异条件"是模型的核心。
 
-Solving equation {eq}`eq:equalize` for the college wage premium $\phi$ we obtain
+求解方程 {eq}`eq:equalize` 得到大学工资溢价 $\phi$：
 
 $$
 \phi  = \frac{A_h}{A_c} + \frac{D}{w_0^h A_c} .
 $$ (eq:wagepremium)
 
-In a **free college** special case $D =0$.
+在**免费大学**的特殊情况下，$D =0$。
 
-Here  the only cost of going to college is the forgone earnings from being  a high school educated worker.  
+在这种情况下，上大学的唯一成本是放弃作为高中教育工人的收入。
 
-In that case,
+因此，
 
 $$
 \phi  = \frac{A_h}{A_c} . 
 $$
 
-In the next section we'll write Python code to compute $\phi$  and plot it as a function of its determinants.
+我们很快将编写 Python 代码来计算 $\phi$ 并绘制它作为其决定因素的函数图。
 
-## Computations
+但首先，我们将描述我们模型的一种替代解释，这主要只是重新标记变量。
 
+## 重新诠释模型：工人和企业家
 
-We can have some fun with examples that tweak various parameters,
-prominently including $\gamma_h, \gamma_c, R$.
+我们可以添加一个参数并重新解释变量，以得到一个企业家与工人的模型。
 
-Now let's write some Python code to compute $\phi$ and plot it as a function of some of its determinants.
-
-```{code-cell} ipython3
-# Define the namedtuple for the equalizing difference model
-EqDiffModel = namedtuple('EqDiffModel', 'R T γ_h γ_c w_h0 D')
-
-def create_edm(R=1.05,   # gross rate of return
-               T=40,     # time horizon
-               γ_h=1.01, # high-school wage growth
-               γ_c=1.01, # college wage growth
-               w_h0=1,   # initial wage (high school)
-               D=10,     # cost for college
-              ):
-    
-    return EqDiffModel(R, T, γ_h, γ_c, w_h0, D)
-
-def compute_gap(model):
-    R, T, γ_h, γ_c, w_h0, D = model
-    
-    A_h = (1 - (γ_h/R)**(T+1)) / (1 - γ_h/R)
-    A_c = (1 - (γ_c/R)**(T-3)) / (1 - γ_c/R) * (γ_c/R)**4
-    ϕ = A_h / A_c + D / (w_h0 * A_c)
-    
-    return ϕ
-```
-
-Using vectorization instead of loops,
-we  build some functions to help do comparative statics .
-
-For a given instance of the class, we want to recompute $\phi$ when one parameter changes and others remain fixed.
-
-Let's do an example.
-
-```{code-cell} ipython3
-ex1 = create_edm()
-gap1 = compute_gap(ex1)
-
-gap1
-```
-
-Let's not charge for college and recompute $\phi$.
-
-The initial college wage premium should go down.
-
-```{code-cell} ipython3
-# free college
-ex2 = create_edm(D=0)
-gap2 = compute_gap(ex2)
-gap2
-```
-
-Let us construct some graphs that show us how the initial college-high-school wage ratio $\phi$ would change if one of its determinants were to change. 
-
-Let's start with the gross interest rate $R$.
-
-```{code-cell} ipython3
-R_arr = np.linspace(1, 1.2, 50)
-models = [create_edm(R=r) for r in R_arr]
-gaps = [compute_gap(model) for model in models]
-
-plt.plot(R_arr, gaps)
-plt.xlabel(r'$R$')
-plt.ylabel(r'wage gap')
-plt.show()
-```
-
-Evidently, the initial wage ratio $\phi$ must rise to compensate a prospective high school student for **waiting** to start receiving income -- remember that while she is earning nothing in years $t=0, 1, 2, 3$, the high school worker is earning a salary.
-
-Not let's study what happens to the initial wage ratio $\phi$ if the rate of growth of college wages rises, holding constant other 
-determinants of $\phi$.
-
-```{code-cell} ipython3
-γc_arr = np.linspace(1, 1.2, 50)
-models = [create_edm(γ_c=γ_c) for γ_c in γc_arr]
-gaps = [compute_gap(model) for model in models]
-
-plt.plot(γc_arr, gaps)
-plt.xlabel(r'$\gamma_c$')
-plt.ylabel(r'wage gap')
-plt.show()
-```
-
-Notice how  the initial wage gap falls when the rate of growth $\gamma_c$ of college wages rises.  
-
-The wage gap falls to "equalize" the present values of the two types of career, one as a high school worker, the other as a college worker.
-
-Can you guess what happens to the initial wage ratio $\phi$ when next we vary the rate of growth of high school wages, holding all other determinants of $\phi$ constant?  
-
-The following graph shows what happens.
-
-```{code-cell} ipython3
-γh_arr = np.linspace(1, 1.1, 50)
-models = [create_edm(γ_h=γ_h) for γ_h in γh_arr]
-gaps = [compute_gap(model) for model in models]
-
-plt.plot(γh_arr, gaps)
-plt.xlabel(r'$\gamma_h$')
-plt.ylabel(r'wage gap')
-plt.show()
-```
-
-## Entrepreneur-worker interpretation
-
-We can add a parameter and reinterpret variables to get a model of entrepreneurs versus workers.
-
-We now let $h$ be  the present value of a "worker".
-
-We define the present value of an entrepreneur to be
+现在让 $h$ 表示"工人"的现值。
+我们将企业家的现值定义为：
 
 $$
 c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 $$
 
-where $\pi \in (0,1) $ is  the probability that an entrepreneur's "project" succeeds.
+其中 $\pi \in (0,1)$ 是企业家的"项目"成功的概率。
 
-For our model of workers and firms, we'll interpret $D$ as the cost of becoming an entrepreneur.  
+对于我们的工人和企业模型，我们将把 $D$ 解释为成为企业家的成本。
+这个成本可能包括雇佣工人、办公空间和律师的费用。
+我们过去称之为大学、高中工资差距的 $\phi$ 现在变成了
+成功企业家收入与工人收入的比率。
+我们会发现，随着 $\pi$ 的减少，$\phi$ 会增加，这表明
+成为企业家的风险越大，成功项目的回报就必须越高。
 
-This cost might include costs of hiring workers, office space, and lawyers. 
+## 计算
 
-What we used to call the college, high school wage gap $\phi$ now becomes the ratio
-of a successful entrepreneur's earnings to a worker's earnings.  
-
-We'll find that as $\pi$ decreases, $\phi$ increases, indicating that the riskier it is to
-be an entrepreneur, the higher must be the reward for a successful project. 
-
-Now let's adopt the entrepreneur-worker interpretation of our model
-
-```{code-cell} ipython3
-# Define a model of entrepreneur-worker interpretation
-EqDiffModel = namedtuple('EqDiffModel', 'R T γ_h γ_c w_h0 D π')
-
-def create_edm_π(R=1.05,   # gross rate of return
-                 T=40,     # time horizon
-                 γ_h=1.01, # high-school wage growth
-                 γ_c=1.01, # college wage growth
-                 w_h0=1,   # initial wage (high school)
-                 D=10,     # cost for college
-                 π=0       # chance of business success
-              ):
-    
-    return EqDiffModel(R, T, γ_h, γ_c, w_h0, D, π)
-
-
-def compute_gap(model):
-    R, T, γ_h, γ_c, w_h0, D, π = model
-    
-    A_h = (1 - (γ_h/R)**(T+1)) / (1 - γ_h/R)
-    A_c = (1 - (γ_c/R)**(T-3)) / (1 - γ_c/R) * (γ_c/R)**4
-    
-    # Incorprate chance of success
-    A_c = π * A_c
-    
-    ϕ = A_h / A_c + D / (w_h0 * A_c)
-    return ϕ
-```
-
-If the probability that a new business succeeds is $0.2$, let's compute the initial wage premium for successful entrepreneurs.
+我们可以通过调整各种参数来做一些有趣的例子，
+主要包括 $\gamma_h, \gamma_c, R$。
+现在让我们编写一些 Python 代码来计算 $\phi$ 并将其作为某些决定因素的函数进行绘图。
 
 ```{code-cell} ipython3
-ex3 = create_edm_π(π=0.2)
-gap3 = compute_gap(ex3)
+class equalizing_diff:
+    """
+    均等差异模型的一个类
+    """
+    
+    def __init__(self, R, T, γ_h, γ_c, w_h0, D=0, π=None):
+        # 通过设置 π 切换到弱模型
+        self.R, self.γ_h, self.γ_c, self.w_h0, self.D = R, γ_h, γ_c, w_h0, D
+        self.T, self.π = T, π
+    
+    def compute_gap(self):
+        R, γ_h, γ_c, w_h0, D = self.R, self.γ_h, self.γ_c, self.w_h0, self.D
+        T, π = self.T, self.π
+        
+        A_h = (1 - (γ_h/R)**(T+1)) / (1 - γ_h/R)
+        A_c = (1 - (γ_c/R)**(T-3)) / (1 - γ_c/R) * (γ_c/R)**4
+        
+        # 调整后的模型
+        if π!=None:
+            A_c = π*A_c 
+        
+        ϕ = A_h/A_c + D/(w_h0*A_c)
+        return ϕ
+```
+我们使用向量化而不是循环来构建一些函数，以帮助进行比较静态分析。
+对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 $\phi$。
+让我们举个例子。
 
-gap3
+```{code-cell} ipython3
+# ϕ_R
+def ϕ_R(mc, R_new):
+    mc_new = equalizing_diff(R_new, mc.T, mc.γ_h, mc.γ_c, mc.w_h0, mc.D, mc.π)
+    return mc_new.compute_gap()
+
+ϕ_R = np.vectorize(ϕ_R)
+
+# ϕ_γh
+def ϕ_γh(mc, γh_new):
+    mc_new = equalizing_diff(mc.R, mc.T, γh_new, mc.γ_c, mc.w_h0, mc.D, mc.π)
+    return mc_new.compute_gap()
+
+ϕ_γh = np.vectorize(ϕ_γh)
+
+# ϕ_γc
+def ϕ_γc(mc, γc_new):
+    mc_new = equalizing_diff(mc.R, mc.T, mc.γ_h, γc_new, mc.w_h0, mc.D, mc.π)
+    return mc_new.compute_gap()
+
+ϕ_γc = np.vectorize(ϕ_γc)
+
+# ϕ_π
+def ϕ_π(mc, π_new):
+    mc_new = equalizing_diff(mc.R, mc.T, mc.γ_h, mc.γ_c, mc.w_h0, mc.D, π_new)
+    return mc_new.compute_gap()
+
+ϕ_π = np.vectorize(ϕ_π)
 ```
 
-Now let's study how the initial wage premium for successful entrepreneurs depend on the success probability.
+```{code-cell} ipython3
+# 设定标准参数
+R = 1.05
+T = 40
+γ_h, γ_c = 1.01, 1.01
+w_h0 = 1
+D = 10
+
+# 创建一个例子
+ex1 = equalizing_diff(R=R, T=T, γ_h=γ_h, γ_c=γ_c, w_h0=w_h0, D=D)
+gap1 = ex1.compute_gap()
+
+print(gap1)
+```
+让我们设想不收取大学学费，然后重新计算 $\phi$。
+初始的大学工资溢价应该会降低。
+
+```{code-cell} ipython3
+# 免费大学
+ex2 = equalizing_diff(R, T, γ_h, γ_c, w_h0, D=0)
+gap2 = ex2.compute_gap()
+print(gap2)
+```
+让我们构建一些图表，展示如果初始大学-高中工资比率 $\phi$ 的某个决定因素发生变化，$\phi$ 将如何改变。
+我们先从总利率 $R$ 开始。
+
+```{code-cell} ipython3
+R_arr = np.linspace(1, 1.2, 50)
+plt.plot(R_arr, φ_R(ex1, R_arr))
+plt.xlabel(r'$R$')
+plt.ylabel(r'工资差距')
+plt.show()
+```
+
+注意当大学工资增长率 $\gamma_c$ 上升时，初始工资差距是如何下降的。
+工资差距下降是为了"平衡"两种职业类型的现值，一种是高中工人，另一种是大学工人。
+你能猜到当我们接下来改变高中工资的增长率时，初始工资比率 $\phi$ 会发生什么变化吗？同时保持 $\phi$ 的所有其他决定因素不变。
+下图显示了会发生什么。
+
+```{code-cell} ipython3
+γh_arr = np.linspace(1, 1.1, 50)
+plt.plot(γh_arr, φ_γh(ex1, γh_arr))
+plt.xlabel(r'$\gamma_h$')
+plt.ylabel(r'工资差距')
+plt.show()
+```
+## 企业家-工人解释
+现在让我们采用我们模型的企业家-工人解释。
+如果一个新企业成功的概率是 $0.2$，让我们计算成功企业家的初始工资溢价。
+
+```{code-cell} ipython3
+# 企业家模型
+ex3 = equalizing_diff(R, T, γ_h, γ_c, w_h0, π=0.2)
+gap3 = ex3.compute_gap()
+
+print(gap3)
+```
+
+现在让我们研究成功企业家的初始工资溢价是如何依赖于成功概率的。
 
 ```{code-cell} ipython3
 π_arr = np.linspace(0.2, 1, 50)
-models = [create_edm_π(π=π) for π in π_arr]
-gaps = [compute_gap(model) for model in models]
-
-plt.plot(π_arr, gaps)
-plt.ylabel(r'wage gap')
+plt.plot(π_arr, φ_π(ex3, π_arr))
+plt.ylabel(r'工资差距')
 plt.xlabel(r'$\pi$')
 plt.show()
 ```
 
-Does the graph make sense to you?
+这个图表对你来说有意义吗？
 
-
-
-## An application of calculus
-
-So far, we have used only linear algebra and it has been a good enough tool for us to  figure out how our model works.
-
-However, someone who knows calculus might want us  just to  take partial derivatives.
-
-We'll do that now.
-
-A reader who doesn't know calculus could read no further and feel confident that applying linear algebra has taught us the main properties of the model.
-
-But for a reader interested in how we can get Python to do all the hard work involved in computing partial derivatives, we'll say a few things about that now.  
-
-We'll use the Python module 'sympy' to compute partial derivatives of $\phi$ with respect to the parameters that determine it.
-
-Define symbols
+## 微积分的应用
+到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。
+然而，懂得微积分的人可能会希望我们直接求偏导数。
+现在我们就来做这个。
+不懂微积分的读者可以不用继续往下读，可以确信应用线性代数已经让我们了解了模型的主要特性。
+但对于那些有兴趣了解我们如何让 Python 完成计算偏导数的所有繁重工作的读者，我们现在会说一些相关的内容。
+我们将使用 Python 模块 'sympy' 来计算 $\phi$ 对决定它的参数的偏导数。
+让我们从 sympy 导入关键函数。
 
 ```{code-cell} ipython3
-γ_h, γ_c, w_h0, D = symbols('\gamma_h, \gamma_c, w_0^h, D', real=True)
+from sympy import Symbol, Lambda, symbols
+```
+
+设定符号
+
+
+```{code-cell} ipython3
+γ_h, γ_c, w_h0, D = symbols('\gamma_h, \gamma_h_c, w_0^h, D', real=True)
 R, T = Symbol('R', real=True), Symbol('T', integer=True)
 ```
 
-Define function $A_h$
+设定函数$A_h$
 
 ```{code-cell} ipython3
 A_h = Lambda((γ_h, R, T), (1 - (γ_h/R)**(T+1)) / (1 - γ_h/R))
 A_h
 ```
 
-Define function $A_c$
+设定函数 $A_c$
 
 ```{code-cell} ipython3
 A_c = Lambda((γ_c, R, T), (1 - (γ_c/R)**(T-3)) / (1 - γ_c/R) * (γ_c/R)**4)
 A_c
 ```
 
-Now, define $\phi$
+设定 $\phi$
 
 ```{code-cell} ipython3
 ϕ = Lambda((D, γ_h, γ_c, R, T, w_h0), A_h(γ_h, R, T)/A_c(γ_c, R, T) + D/(w_h0*A_c(γ_c, R, T)))
@@ -401,8 +359,8 @@ Now, define $\phi$
 ```{code-cell} ipython3
 ϕ
 ```
+我们开始设定默认的参数值。
 
-We begin by setting  default parameter values.
 
 ```{code-cell} ipython3
 R_value = 1.05
@@ -412,7 +370,7 @@ w_h0_value = 1
 D_value = 10
 ```
 
-Now let's compute $\frac{\partial \phi}{\partial D}$ and then evaluate it at the default values
+现在让我们计算 $\frac{\partial \phi}{\partial D}$然后测量其在默认值的值
 
 ```{code-cell} ipython3
 ϕ_D = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(D)
@@ -420,14 +378,14 @@ Now let's compute $\frac{\partial \phi}{\partial D}$ and then evaluate it at the
 ```
 
 ```{code-cell} ipython3
-# Numerical value at default parameters
+# 在默认值的值
 ϕ_D_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_D)
 ϕ_D_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
 
-Thus, as with our earlier graph, we find that raising $R$ increases the initial college wage premium $\phi$.
-
-Compute $\frac{\partial \phi}{\partial T}$ and evaluate it at default parameters
+因此，与我们之前的图表一样，我们发现提高 $R$ 会增加初始大学工资溢价 $\phi$。
++++
+计算 $\frac{\partial \phi}{\partial T}$ 并在默认参数下评估它
 
 ```{code-cell} ipython3
 ϕ_T = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(T)
@@ -435,16 +393,15 @@ Compute $\frac{\partial \phi}{\partial T}$ and evaluate it at default parameters
 ```
 
 ```{code-cell} ipython3
-# Numerical value at default parameters
+# 在默认值的值
 ϕ_T_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_T)
 ϕ_T_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
+我们发现提高 $T$ 会降低初始大学工资溢价 $\phi$。
+这是因为大学毕业生现在有更长的职业生涯来"收回"他们为上大学付出的时间和其他成本。
++++
+让我们计算 $\frac{\partial \phi}{\partial \gamma_h}$ 并在默认参数下评估它。
 
-We find that raising $T$ decreases the initial college wage premium $\phi$. 
-
-This is because college graduates now have longer career lengths to "pay off" the time and other costs they paid to go to college
-
-Let's compute $\frac{\partial \phi}{\partial γ_h}$ and evaluate it at default parameters.
 
 ```{code-cell} ipython3
 ϕ_γ_h = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(γ_h)
@@ -452,14 +409,13 @@ Let's compute $\frac{\partial \phi}{\partial γ_h}$ and evaluate it at default p
 ```
 
 ```{code-cell} ipython3
-# Numerical value at default parameters
+# 在默认值的值
 ϕ_γ_h_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_γ_h)
 ϕ_γ_h_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
-
-We find that raising $\gamma_h$ increases the initial college wage premium $\phi$, in line with our earlier graphical analysis.
-
-Compute $\frac{\partial \phi}{\partial γ_c}$ and evaluate it numerically at default parameter values
+我们发现提高 $\gamma_h$ 会增加初始大学工资溢价 $\phi$，这与我们之前的图形分析结果一致。
++++
+计算 $\frac{\partial \phi}{\partial \gamma_c}$ 并在默认参数值下对其进行数值评估
 
 ```{code-cell} ipython3
 ϕ_γ_c = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(γ_c)
@@ -467,14 +423,15 @@ Compute $\frac{\partial \phi}{\partial γ_c}$ and evaluate it numerically at def
 ```
 
 ```{code-cell} ipython3
-# Numerical value at default parameters
+# 在默认值的值
 ϕ_γ_c_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_γ_c)
 ϕ_γ_c_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
 
-We find that raising $\gamma_c$ decreases the initial college wage premium $\phi$, in line with our earlier graphical analysis.
+我们发现提高 $\gamma_c$ 会降低初始大学工资溢价 $\phi$，这与我们之前的图形分析结果一致。
++++
+让我们计算 $\frac{\partial \phi}{\partial R}$ 并在默认参数值下对其进行数值评估
 
-Let's compute $\frac{\partial \phi}{\partial R}$ and evaluate it numerically at default parameter values
 
 ```{code-cell} ipython3
 ϕ_R = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(R)
@@ -482,9 +439,78 @@ Let's compute $\frac{\partial \phi}{\partial R}$ and evaluate it numerically at 
 ```
 
 ```{code-cell} ipython3
-# Numerical value at default parameters
+# 在默认值的值
 ϕ_R_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_R)
 ϕ_R_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
 
-We find that raising the gross interest rate $R$ increases the initial college wage premium $\phi$, in line with our earlier graphical analysis.
+我们发现提高总利率 $R$ 会增加初始大学工资溢价 $\phi$，这与我们之前的图形分析结果一致。
+
+
+```{code-cell} ipython3
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
