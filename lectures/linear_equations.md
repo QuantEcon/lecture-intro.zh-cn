@@ -11,152 +11,144 @@ kernelspec:
   name: python3
 ---
 
-# Linear Equations and Matrix Algebra
+# 线性方程和矩阵代数
 
 ```{index} single: Linear Equations and Matrix Algebra
 ```
 
-## Overview
+## 概述
 
-Many problems in economics and finance require solving linear equations.
+经济学和金融学中的许多问题都需要解线性方程。
 
-In this lecture we discuss linear equations and their applications.
+在本讲座中，我们将讨论线性方程及其应用。
 
-To illustrate the importance of linear equations, we begin with a two good
-model of supply and demand.
+为了说明线性方程的重要性，我们从一个两种商品的供需模型开始。
 
-The two good case is so simple that solutions can be calculated by hand.
+两种商品的情况非常简单，可以手动计算解。
 
-But often we need to consider markets containing many goods.
+但我们经常需要考虑包含多种商品的市场。
 
-In the multiple goods case we face large systems of linear equations, with many equations
-and unknowns.
+在多种商品的情况下，我们面对的是大型线性方程组，有许多方程和未知数。
 
-To handle such systems we need two things:
+为了处理这样的系统，我们需要两样东西：
 
-* matrix algebra (and the knowledge of how to use it) plus
-* computer code to apply matrix algebra to the problems of interest.
+* 矩阵代数（以及如何使用它的知识）以及
+* 将矩阵代数应用于感兴趣问题的计算机代码。
 
-This lecture covers these steps.
+本讲座涵盖了这些步骤。
 
-We will use the following packages:
+我们将使用以下的库：
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 ```
+## 两种商品的例子
 
-## A two good example
+在本节中，我们将讨论一个简单的两种商品例子，并通过以下两种方法解决：
 
-In this section we discuss a simple two good example and solve it by
+1. 纸笔计算
+2. 矩阵代数
 
-1. pencil and paper
-2. matrix algebra
+正如我们将看到的，第二种方法更具普遍性。
 
-The second method is more general, as we will see.
+### 纸笔计算方法
 
+假设我们有两种相关的商品，比如：
 
-### Pencil and paper methods
+* 丙烷和乙醇，或
+* 大米和小麦等。
 
-Suppose that we have two related goods, such as 
+为了简化问题，我们将它们标记为商品0和商品1。
 
-* propane and ethanol, and
-* rice and wheat, etc. 
-
-To keep things simple, we label them as good 0 and good 1.
-
-The demand for each good depends on the price of both goods:
+每种商品的需求取决于两种商品的价格：
 
 ```{math}
 :label: two_eq_demand
+
 \begin{aligned}
     q_0^d = 100 - 10 p_0 - 5 p_1 \\
     q_1^d = 50 - p_0 - 10 p_1
 \end{aligned}
 ```
 
-(We are assuming demand decreases when the price of either good goes up, but
-other cases are also possible.)
+（我们假设当任一商品的价格上涨时需求会下降，但其他情况也是可能的。）
+让我们假设供给由以下方程给出：
 
-Let's suppose that supply is given by 
 
 ```{math}
 :label: two_eq_supply
+
 \begin{aligned}
     q_0^s = 10 p_0 + 5 p_1 \\
     q_1^s = 5 p_0 + 10 p_1
 \end{aligned}
 ```
 
-Equilibrium holds when supply equals demand ($q_0^s = q_0^d$ and $q_1^s = q_1^d$).
+当供给等于需求时（$q_0^s = q_0^d$ 和 $q_1^s = q_1^d$），市场达到均衡。
 
-This yields the linear system
+这产生了以下线性系统：
 
 ```{math}
 :label: two_equilibrium
+
 \begin{aligned}
     100 - 10 p_0 - 5 p_1 = 10 p_0 + 5 p_1 \\
     50 - p_0 - 10 p_1 = 5 p_0 + 10 p_1
 \end{aligned}
 ```
 
-We can solve this with pencil and paper to get
+我们可以用纸笔计算得到：
 
 $$
-    p_0 = 4.41 \quad \text{and} \quad p_1 = 1.18.
+    p_0 = 4.41 \quad \text{和} \quad p_1 = 1.18.
 $$    
 
-Inserting these results into either {eq}`two_eq_demand` or {eq}`two_eq_supply` yields the
-equilibrium quantities 
+将这些结果代入{eq}`two_eq_demand`或{eq}`two_eq_supply`中，可得均衡数量：
 
 $$
-    q_0 = 50 \quad \text{and} \quad q_1 = 33.82.
+    q_0 = 50 \quad \text{和} \quad q_1 = 33.82.
 $$
 
+### 展望未来
 
-### Looking forward
+在两种商品的情况下，纸笔计算方法很容易。
 
-Pencil and paper methods are easy in the two good case.
+但如果有很多种商品呢？
 
-But what if there are many goods?
+对于这样的问题，我们需要矩阵代数。
 
-For such problems we need matrix algebra.
-
-Before solving problems with matrix algebra, let's first recall the
-basics of vectors and matrices, in both theory and computation.
+在用矩阵代数解决问题之前，让我们先回顾一下向量和矩阵的基础知识，包括理论和计算。
 
 
-
-## {index}`Vectors <single: Vectors>`
+## {index}`向量 <single: Vectors>`
 
  ```{index} single: Linear Algebra; Vectors
  ```
 
-A **vector** of length $n$ is just a sequence (or array, or tuple) of $n$ numbers, which we write as $x = (x_1, \ldots, x_n)$ or $x = \begin{bmatrix}x_1, \ldots, x_n\end{bmatrix}$.
+一个长度为$n$的**向量**就是一个由$n$个数字组成的序列（或数组，或元组），我们将其写作$x = (x_1, \ldots, x_n)$或$x = \begin{bmatrix}x_1, \ldots, x_n\end{bmatrix}$。
 
-We can write these sequences either horizontally or vertically.
+我们可以将这些序列横向或纵向写出。
 
-But when we use matrix operations, our default assumption is that vectors are
-column vectors.
+但当我们使用矩阵运算时，我们默认假设向量是列向量。
 
-The set of all $n$-vectors is denoted by $\mathbb R^n$.
+所有$n$维向量的集合用$\mathbb R^n$表示。
 
 ```{prf:example}
 :label: le_ex_dim
 
-* $\mathbb R^2$ is the plane --- the set of pairs $(x_1, x_2)$.
-* $\mathbb R^3$ is 3 dimensional space --- the set of vectors $(x_1, x_2, x_3)$.
+* $\mathbb R^2$是平面 --- 即所有$(x_1, x_2)$对的集合。
+* $\mathbb R^3$是三维空间 --- 即所有$(x_1, x_2, x_3)$向量的集合。
+向量通常在视觉上表示为从原点到某点的箭头。
 ```
 
-Often vectors are represented visually as arrows from the origin to the point.
-
-Here's a visualization.
+这里是一个可视化示例。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
-# Set the axes through the origin
+# 通过原点建立坐标轴
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
 for spine in ['right', 'top']:
@@ -175,17 +167,16 @@ for v in vecs:
 plt.show()
 ```
 
-### Vector operations
+### 向量运算
 
 ```{index} single: Vectors; Operations
 ```
 
-Sometimes we want to modify vectors.
+有时我们需要修改向量。
 
-The two most common operators on vectors are addition and scalar
-multiplication, which we now describe.
+对向量最常见的两种运算是加法和标量乘法，我们现在来描述这两种运算。
 
-When we add two vectors, we add them element-by-element.
+当我们对两个向量进行加法运算时，我们是逐元素相加。
 
 ```{prf:example}
 :label: le_ex_add
@@ -213,7 +204,7 @@ $$
 $$
 ```
 
-In general,
+一般来说，
 
 $$
 x + y =
@@ -237,13 +228,13 @@ x + y =
 \end{bmatrix}.
 $$
 
-We can visualise vector addition in $\mathbb{R}^2$ as follows.
+我们可以在$\mathbb{R}^2$中将向量加法可视化如下。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
-# Set the axes through the origin
+# 通过原点建立坐标轴
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
 for spine in ['right', 'top']:
@@ -275,7 +266,7 @@ for i, v in enumerate(vecs):
 plt.show()
 ```
 
-Scalar multiplication is an operation that multiplies a vector $x$ with a scalar elementwise.
+标量乘法是一种将向量 $x$ 与一个标量进行元素级别相乘的运算。
 
 ```{prf:example}
 :label: le_ex_mul
@@ -299,7 +290,7 @@ $$
 $$
 ```
 
-More generally, it takes a number $\gamma$ and a vector $x$ and produces
+更一般地，它取一个数 $\gamma$ 和一个向量 $x$，得到
 
 $$
 \gamma x :=
@@ -311,13 +302,13 @@ $$
 \end{bmatrix}.
 $$
 
-Scalar multiplication is illustrated in the next figure.
+标量乘法在下图中进行了说明。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
-# Set the axes through the origin
+# 通过原点建立坐标轴
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
 for spine in ['right', 'top']:
@@ -346,26 +337,25 @@ for s in scalars:
 plt.show()
 ```
 
-In Python, a vector can be represented as a list or tuple, 
-such as `x = [2, 4, 6]` or `x = (2, 4, 6)`.
+在Python中，向量可以用列表或元组表示，
+例如 `x = [2, 4, 6]` 或 `x = (2, 4, 6]`。
 
-However, it is more common to represent vectors with 
-[NumPy arrays](https://python-programming.quantecon.org/numpy.html#numpy-arrays).
+然而，更常见的是用
+[NumPy数组](https://python-programming.quantecon.org/numpy.html#numpy-arrays)来表示向量。
 
-One advantage of NumPy arrays is that scalar multiplication and addition have
-very natural syntax.
+NumPy数组的一个优点是标量乘法和加法具有非常自然的语法。
 
 ```{code-cell} ipython3
-x = np.ones(3)            # Vector of three ones
-y = np.array((2, 4, 6))   # Converts tuple (2, 4, 6) into a NumPy array
-x + y                     # Add (element-by-element)
+x = np.ones(3)            # 三个元素为一的向量
+y = np.array((2, 4, 6))   # 将 (2, 4, 6) 转换为 NumPy 数组
+x + y                     # 每个元素相加
 ```
 
 ```{code-cell}
-4 * x                     # Scalar multiply
+4 * x                     # 标量乘法
 ```
 
-### Inner product and norm
+### 内积和范数
 
 ```{index} single: Vectors; Inner Product
 ```
@@ -373,7 +363,7 @@ x + y                     # Add (element-by-element)
 ```{index} single: Vectors; Norm
 ```
 
-The **inner product** of vectors $x,y \in \mathbb R^n$ is defined as
+向量 $x,y \in \mathbb R^n$ 的**内积**定义为
 
 $$
 x^\top y = 
@@ -390,50 +380,48 @@ x^\top y =
 := \sum_{i=1}^n x_i y_i.
 $$
 
-The **norm** of a vector $x$ represents its "length" (i.e., its distance from
-the zero vector) and is defined as
+向量 $x$ 的**范数**表示其"长度"（即，其与零向量的距离），定义为
 
 $$
     \| x \| := \sqrt{x^\top x} := \left( \sum_{i=1}^n x_i^2 \right)^{1/2}.
 $$
 
-The expression $\| x - y\|$ can be thought of as the "distance" between $x$ and $y$.
+表达式 $\| x - y\|$ 可以被理解为 $x$ 和 $y$ 之间的"距离"。
 
-The inner product and norm can be computed as follows
+内积和范数可以按以下方式计算
 
 ```{code-cell} ipython3
-np.sum(x*y)      # Inner product of x and y
+np.sum(x*y)      # x和y的内积
 ```
 
 ```{code-cell} ipython3
-x @ y            # Another way to compute the inner product 
+x @ y            # 另外一种计算内积的办法
 ```
 
 ```{code-cell} ipython3
-np.sqrt(np.sum(x**2))  # Norm of x, method one
+np.sqrt(np.sum(x**2))  # x的范数，方法一
 ```
 
 ```{code-cell} ipython3
-np.linalg.norm(x)      # Norm of x, method two
+np.linalg.norm(x)      # x的范数，方法二
 ```
 
-## Matrix operations
+## 矩阵运算
 
 ```{index} single: Matrix; Operations
 ```
 
-When we discussed linear price systems, we mentioned using matrix algebra.
+当我们讨论线性价格系统时，我们提到了使用矩阵代数。
 
-Matrix algebra is similar to algebra for numbers.
+矩阵代数类似于数字代数。
 
-Let's review some details.
+让我们回顾一些细节。
 
-### Addition and scalar multiplication
+### 加法和标量乘法
 
-Just as was the case for vectors, we can add, subtract and scalar multiply
-matrices.
+就像向量一样，我们可以对矩阵进行加法、减法和标量乘法。
 
-Scalar multiplication and addition are generalizations of the vector case:
+标量乘法和加法是向量情况的推广：
 
 ```{prf:example}
 :label: le_ex_asm
@@ -452,7 +440,7 @@ $$
 $$
 ```
 
-In general for a number $\gamma$ and any matrix $A$,
+一般来说，对于任意数 $\gamma$ 和任意矩阵 $A$，
 
 $$
 \gamma A =
@@ -472,8 +460,7 @@ $$
 ```{prf:example}
 :label: le_ex_ma
 
-Consider this example of matrix addition,
-
+考虑这个矩阵加法的例子，
 $$
 \begin{bmatrix}
     1 & 5 \\
@@ -492,7 +479,7 @@ $$
 $$
 ```
 
-In general,
+一般来说，
 
 $$
 A + B =
@@ -513,27 +500,22 @@ A + B =
 \end{bmatrix}.
 $$
 
-In the latter case, the matrices must have the same shape in order for the
-definition to make sense.
+在后一种情况下，矩阵必须具有相同的形状才能使定义有意义。
 
-### Matrix multiplication
+### 矩阵乘法
 
-We also have a convention for *multiplying* two matrices.
+我们还有一个*相乘*两个矩阵的约定。
 
-The rule for matrix multiplication generalizes the idea of inner products
-discussed above.
+矩阵乘法的规则推广了上面讨论的内积的概念。
 
-If $A$ and $B$ are two matrices, then their product $A B$ is formed by taking
-as its $i,j$-th element the inner product of the $i$-th row of $A$ and the
-$j$-th column of $B$.
+如果 $A$ 和 $B$ 是两个矩阵，那么它们的乘积 $A B$ 的形成是通过取 $A$ 的第 $i$ 行和 $B$ 的第 $j$ 列的内积作为其第 $i,j$ 个元素。
 
-If $A$ is $n \times k$ and $B$ is $j \times m$, then to multiply $A$ and $B$
-we require $k = j$, and the resulting matrix $A B$ is $n \times m$.
+如果 $A$ 是 $n \times k$ 的，$B$ 是 $j \times m$ 的，那么要相乘 $A$ 和 $B$，我们需要 $k = j$，而得到的矩阵 $A B$ 是 $n \times m$ 的。
 
 ```{prf:example}
 :label: le_ex_2dmul
 
-Here's an example of a $2 \times 2$ matrix multiplied by a $2 \times 1$ vector.
+这里是一个 $2 \times 2$ 矩阵乘以 $2 \times 1$ 向量的例子。
 
 $$
 Ax =
@@ -553,10 +535,9 @@ Ax =
 $$
 ```
 
-As an important special case, consider multiplying $n \times k$
-matrix $A$ and $k \times 1$ column vector $x$.
+作为一个重要的特殊情况，考虑将 $n \times k$ 矩阵 $A$ 和 $k \times 1$ 列向量 $x$ 相乘。
 
-According to the preceding rule, this gives us an $n \times 1$ column vector.
+根据前面的规则，这给我们一个 $n \times 1$ 列向量。
 
 ```{math}
 :label: la_atx
@@ -585,7 +566,7 @@ A x =
 \end{bmatrix}}_{n \times 1}
 ```
 
-Here is a simple illustration of multiplication of two matrices.
+下面展示了两个矩阵的乘法。
 
 $$
 AB =
@@ -603,17 +584,16 @@ AB =
 \end{bmatrix}
 $$
 
-There are many tutorials to help you further visualize this operation, such as 
+有许多教程可以帮助你进一步可视化这个操作，例如
 
-* [this one](http://www.mathsisfun.com/algebra/matrix-multiplying.html), or
-* the discussion on the [Wikipedia page](https://en.wikipedia.org/wiki/Matrix_multiplication).
-
+* [这个教程](http://www.mathsisfun.com/algebra/matrix-multiplying.html)，或者
+* [维基百科页面](https://en.wikipedia.org/wiki/Matrix_multiplication)上的讨论。
 
 ```{note}
-Unlike number products, $A B$ and $B A$ are not generally the same thing.
+与数字乘积不同，$A B$ 和 $B A$ 通常不是同一件事。
 ```
 
-One important special case is the [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix), which has ones on the principal diagonal and zero elsewhere:
+一个重要的特殊情况是[单位矩阵](https://en.wikipedia.org/wiki/Identity_matrix)，它在主对角线上有 1，其他地方都是 0：
 
 $$
     I = 
@@ -624,21 +604,19 @@ $$
     \end{bmatrix}
 $$
 
-It is a useful exercise to check the following:
+验证以下内容是一个有用的练习：
 
-* if $A$ is $n \times k$ and $I$ is the $k \times k$ identity matrix, then $AI = A$, and
-* if $I$ is the $n \times n$ identity matrix, then $IA = A$.
+* 如果 $A$ 是 $n \times k$ 矩阵，$I$ 是 $k \times k$ 单位矩阵，那么 $AI = A$，并且
+* 如果 $I$ 是 $n \times n$ 单位矩阵，那么 $IA = A$。
 
 
-
-### Matrices in NumPy
+###  NumPy中的矩阵
 
 ```{index} single: Matrix; Numpy
 ```
+NumPy 数组也被用作矩阵，并且对所有标准矩阵运算都有快速、高效的函数和方法。
 
-NumPy arrays are also used as matrices, and have fast, efficient functions and methods for all the standard matrix operations.
-
-You can create them manually from tuples of tuples (or lists of lists) as follows
+你可以通过以下方式从元组的元组（或列表的列表）手动创建它们
 
 ```{code-cell} ipython3
 A = ((1, 2),
@@ -657,20 +635,18 @@ type(A)
 A.shape
 ```
 
-The `shape` attribute is a tuple giving the number of rows and columns ---
-see [here](https://python-programming.quantecon.org/numpy.html#shape-and-dimension)
-for more discussion.
+`shape` 属性是一个给出行数和列数的元组 --- 
+更多讨论请参见[这里](https://python-programming.quantecon.org/numpy.html#shape-and-dimension)。
 
-To get the transpose of `A`, use `A.transpose()` or, more simply, `A.T`.
+要获得 `A` 的转置，使用 `A.transpose()` 或更简单地使用 `A.T`。
 
-There are many convenient functions for creating common matrices (matrices of zeros,
-ones, etc.) --- see [here](https://python-programming.quantecon.org/numpy.html#creating-arrays).
+有许多方便的函数用于创建常见矩阵（零矩阵、单位矩阵等） --- 请参见[这里](https://python-programming.quantecon.org/numpy.html#creating-arrays)。
 
-Since operations are performed elementwise by default, scalar multiplication and addition have very natural syntax.
+由于默认情况下操作是按元素执行的，标量乘法和加法具有非常自然的语法。
 
 ```{code-cell} ipython3
-A = np.identity(3)    # 3 x 3 identity matrix
-B = np.ones((3, 3))   # 3 x 3 matrix of ones
+A = np.identity(3)    # 3 x 3 单位矩阵
+B = np.ones((3, 3))   # 3 x 3 元素为一的矩阵
 2 * A
 ```
 
@@ -678,25 +654,23 @@ B = np.ones((3, 3))   # 3 x 3 matrix of ones
 A + B
 ```
 
-To multiply matrices we use the `@` symbol.
+我们用 `@` 来进行矩阵乘法。
 
 
 ```{note}
-In particular, `A @ B` is matrix multiplication, whereas `A * B` is element-by-element multiplication.
+其中 `A @ B` 是矩阵乘法, 但是 `A * B`是每个元素之间的运算。
 ```
 
-### Two good model in matrix form
+### 矩阵形式的两种商品模型
 
-We can now revisit the two good model and solve {eq}`two_equilibrium`
-numerically via matrix algebra.
+我们现在可以重新审视两种商品模型，并通过矩阵代数数值求解 {eq}`two_equilibrium` 方程。
 
-This involves some extra steps but the method is widely applicable --- as we
-will see when we include more goods.
-
-First we rewrite {eq}`two_eq_demand` as
+这涉及一些额外的步骤，但这种方法广泛适用 --- 正如我们在包含更多商品时将看到的那样。
+首先，我们将 {eq}`two_eq_demand` 重写为
 
 ```{math}
 :label: two_eq_demand_mat
+
     q^d = D p + h
     \quad \text{where} \quad
     q^d = 
@@ -718,14 +692,15 @@ First we rewrite {eq}`two_eq_demand` as
     \end{bmatrix}.
 ```
 
-Recall that $p \in \mathbb{R}^{2}$ is the price of two goods.
+回想一下，$p \in \mathbb{R}^{2}$ 是两种商品的价格。
 
-(Please check that $q^d = D p + h$ represents the same equations as {eq}`two_eq_demand`.)
+（请检查 $q^d = D p + h$ 是否表示与 {eq}`two_eq_demand` 相同的方程。）
 
-We rewrite {eq}`two_eq_supply` as
+我们将 {eq}`two_eq_supply` 重写为
 
 ```{math}
 :label: two_eq_supply_mat
+
     q^s = C p 
     \quad \text{where} \quad
     q^s = 
@@ -741,76 +716,71 @@ We rewrite {eq}`two_eq_supply` as
     \end{bmatrix}.
 ```
 
-Now equality of supply and demand can be expressed as $q^s = q^d$, or
+现在供给和需求的相等可以表示为 $q^s = q^d$，或
 
 $$
     C p = D p + h.
 $$
 
-We can rearrange the terms to get 
+我们可以重新排列这些项得到
 
 $$
     (C - D) p = h.
 $$
 
-If all of the terms were numbers, we could solve for prices as $p = h /
-(C-D)$.
-
-Matrix algebra allows us to do something similar: we can solve for equilibrium
-prices using the inverse of $C - D$:
+如果所有项都是数字，我们可以求解价格为 $p = h / (C-D)$。
+矩阵代数允许我们做类似的事情：我们可以使用 $C - D$ 的逆矩阵来求解均衡价格：
 
 ```{math}
 :label: two_matrix
-    p = (C - D)^{-1} h.
+
+p = (C - D)^{-1} h.
 ```
 
-Before we implement the solution let us consider a more general setting.
+在我们实施解决方案之前，让我们考虑一个更一般的设置。
 
+### 更多商品
 
+考虑有更多商品的需求系统是很自然的。
 
-### More goods
+例如，即使在能源商品中也有许多不同的商品，
+包括原油、汽油、煤炭、天然气、乙醇和铀。
 
-It is natural to think about demand systems with more goods.
+这些商品的价格是相关的，所以一起研究它们是有意义的。
 
-For example, even within energy commodities there are many different goods,
-including crude oil, gasoline, coal, natural gas, ethanol, and uranium.
+对于大型系统，纸笔方法会变得非常耗时。
 
-The prices of these goods are related, so it makes sense to study them
-together.
+但幸运的是，上面描述的矩阵方法基本上保持不变。
 
-Pencil and paper methods become very time consuming with large systems.
+一般来说，我们可以将需求方程写为 $q^d = Dp + h$，其中
 
-But fortunately the matrix methods described above are essentially unchanged.
+* $q^d$ 是一个 $n \times 1$ 的向量，表示 $n$ 种不同商品的需求量。
+* $D$ 是一个 $n \times n$ 的"系数"矩阵。
+* $h$ 是一个 $n \times 1$ 的常数值向量。
 
-In general, we can write the demand equation as $q^d = Dp + h$, where
+类似地，我们可以将供给方程写为 $q^s = Cp + e$，其中
 
-* $q^d$ is an $n \times 1$ vector of demand quantities for $n$ different goods.
-* $D$ is an $n \times n$ "coefficient" matrix.
-* $h$ is an $n \times 1$ vector of constant values.
+* $q^s$ 是一个 $n \times 1$ 的向量，表示相同商品的供给量。
+* $C$ 是一个 $n \times n$ 的"系数"矩阵。
+* $e$ 是一个 $n \times 1$ 的常数值向量。
 
-Similarly, we can write the supply equation as $q^s = Cp + e$, where
-
-* $q^s$ is an $n \times 1$ vector of supply quantities for the same goods.
-* $C$ is an $n \times n$ "coefficient" matrix.
-* $e$ is an $n \times 1$ vector of constant values.
-
-To find an equilibrium, we solve $Dp + h = Cp + e$, or
+为了找到均衡，我们求解 $Dp + h = Cp + e$，或
 
 ```{math}
 :label: n_eq_sys_la
+
     (D- C)p = e - h.
 ```
 
-Then the price vector of the n different goods is
+那么，n 种不同商品的价格向量是
 
 $$ 
     p = (D- C)^{-1}(e - h).
 $$
 
+### 一般线性系统
 
-### General linear systems
-
-A more general version of the problem described above looks as follows.
+上述问题的一个更一般版本看起来如下。
 
 ```{math}
 :label: la_se
@@ -822,22 +792,21 @@ A more general version of the problem described above looks as follows.
 \end{matrix}
 ```
 
-The objective here is to solve for the "unknowns" $x_1, \ldots, x_n$.
+这里的目标是解出"未知数" $x_1, \ldots, x_n$。
 
-We take as given the coefficients $a_{11}, \ldots, a_{nn}$ and constants $b_1, \ldots, b_n$.
+我们给定系数 $a_{11}, \ldots, a_{nn}$ 和常数 $b_1, \ldots, b_n$。
 
-Notice that we are treating a setting where the number of unknowns equals the
-number of equations.
+注意，我们处理的是未知数数量等于方程数量的情况。
 
-This is the case where we are most likely to find a well-defined solution.
+这是我们最有可能找到明确定义解的情况。
 
-(The other cases are referred to as [overdetermined](https://en.wikipedia.org/wiki/Overdetermined_system) and [underdetermined](https://en.wikipedia.org/wiki/Underdetermined_system) systems
-of equations --- we defer discussion of these cases until later lectures.)
+（其他情况被称为[超定](https://en.wikipedia.org/wiki/Overdetermined_system)和[欠定](https://en.wikipedia.org/wiki/Underdetermined_system)方程组 --- 我们将在后续讲座中讨论这些情况。）
 
-In matrix form, the system {eq}`la_se` becomes
+用矩阵形式表示，方程组 {eq}`la_se` 变为
 
 ```{math}
 :label: la_gf
+
     A x = b
     \quad \text{where} \quad
     A = 
@@ -854,50 +823,43 @@ In matrix form, the system {eq}`la_se` becomes
         b_n
     \end{bmatrix}.
 ```
+例如，{eq}`n_eq_sys_la` 具有这种形式，其中
 
-```{prf:example}
-:label: le_ex_gls
-For example, {eq}`n_eq_sys_la` has this form with 
-
-$$ 
-    A = D - C, 
+$$
+    A = D - C,
     \quad
     b = e - h
-    \quad \text{and} \quad
+    \quad \text{和} \quad
     x = p.
 $$
-```
 
-When considering problems such as {eq}`la_gf`, we need to ask at least some of
-the following questions
+当考虑诸如 {eq}`la_gf` 这样的问题时，我们至少需要问以下一些问题：
 
-* Does a solution actually exist?
-* If a solution exists, how should we compute it?
+* 解是否真的存在？
+* 如果解存在，我们应该如何计算它？
 
-
-
-## Solving systems of equations
+## 解方程组
 
 ```{index} single: Matrix; Solving Systems of Equations
 ```
 
-Recall again the system of equations {eq}`la_se`, which we write here again as
+再次回顾方程组 {eq}`la_se`，我们在此重新写为
 
 ```{math}
 :label: la_se2
-    A x = b.
+
+    A x = b
 ```
 
-The problem we face is to find a vector $x \in \mathbb R^n$ that solves
-{eq}`la_se2`, taking $b$ and $A$ as given.
+我们面临的问题是找到一个向量 $x \in \mathbb R^n$，使其解决 {eq}`la_se2` ，其中 $b$ 和 $A$ 是给定的。
 
-We may not always find a unique vector $x$ that solves {eq}`la_se2`.
+我们可能并不总能找到一个唯一的向量 $x$ 来解决 {eq}`la_se2` 。
 
-We illustrate two such cases below.
+我们在下面举例说明两种这样的情况。
 
-### No solution
+### 无解
 
-Consider the system of equations given by,
+考虑由以下给出的方程组：
 
 $$
 \begin{aligned}
@@ -906,9 +868,9 @@ $$
 \end{aligned}
 $$
 
-It can be verified manually that this system has no possible solution.
+可以手动验证这个系统没有可能的解。
 
-To illustrate why this situation arises let's plot the two lines.
+为了说明为什么会出现这种情况，让我们绘制这两条直线。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -921,15 +883,16 @@ plt.show()
 
 +++ {"tags": []}
 
-Clearly, these are parallel lines and hence we will never find a point $x \in \mathbb{R}^2$
-such that these lines intersect.
 
-Thus, this system has no possible solution.
+显然，这些是平行线，因此我们永远无法找到一个点 $x \in \mathbb{R}^2$ 使得这些线相交。
 
-We can rewrite this system in matrix form as
+因此，这个系统没有可能的解。
+
+我们可以将这个系统用矩阵形式重写为
 
 ```{math}
 :label: no_soln
+
     A x = b
     \quad \text{where} \quad
     A =
@@ -945,25 +908,21 @@ We can rewrite this system in matrix form as
     \end{bmatrix}.
 ```
 
-It can be noted that the $2^{nd}$ row of matrix $A = (2, 6)$ is just a scalar multiple of the $1^{st}$ row of matrix $A = (1, 3)$.
+可以注意到，矩阵 $A$ 的第 $2$ 行 $(2, 6)$ 只是第 $1$ 行 $(1, 3)$ 的标量倍数。
 
-The rows of matrix $A$ in this case are called **linearly dependent.**
-
-
+在这种情况下，矩阵 $A$ 的行被称为**线性相关的。**
 
 ```{note}
-Advanced readers can find a detailed explanation of linear dependence and
-independence [here](https://python.quantecon.org/linear_algebra.html#linear-independence).
+高级读者可以在[这里](https://python.quantecon.org/linear_algebra.html#linear-independence)找到关于线性相关和线性无关的详细解释。
 
-But these details are not needed in what follows.
+但在接下来的内容中不需要这些细节。
 
 ```
 
 
+### 多解
 
-### Many solutions
-
-Now consider,
+现在考虑，
 
 $$
 \begin{aligned}
@@ -972,14 +931,15 @@ $$
 \end{aligned}
 $$
 
-Any vector $v = (x,y)$ such that $x = 2y - 4$ will solve the above system.
+任何满足 $x = 2y - 4$ 的向量 $v = (x,y)$ 都将解决上述系统。
 
-Since we can find infinite such vectors this system has infinitely many solutions.
+由于我们可以找到无限多个这样的向量，这个系统有无穷多个解。
 
-This is because the rows of the corresponding matrix 
+这是因为对应矩阵的行
 
 ```{math}
 :label: many_solns
+
     A =
     \begin{bmatrix}
         1 & -2 \\
@@ -987,17 +947,15 @@ This is because the rows of the corresponding matrix
     \end{bmatrix}.
 ```
 
-are linearly dependent --- can you see why?
+是线性相关的 --- 你能看出为什么吗？
 
-We now impose conditions on $A$ in {eq}`la_se2` that rule out these problems.
+我们现在对 {eq}`la_se2` 中的 $A$ 施加条件，以排除这些问题。
 
+### 非奇异矩阵
 
-### Nonsingular matrices
+对于每个方阵，我们都可以指定一个唯一的数，称为[行列式](https://en.wikipedia.org/wiki/Determinant)。
 
-To every square matrix we can assign a unique number called the
-[determinant](https://en.wikipedia.org/wiki/Determinant).
-
-For $2 \times 2$ matrices, the determinant is given by,
+对于 $2 \times 2$ 矩阵，行列式由以下公式给出：
 
 $$
 \begin{bmatrix}
@@ -1008,56 +966,49 @@ $$
 {\color{red}{ad}} - {\color{blue}{bc}}.
 $$
 
-If the determinant of $A$ is not zero, then we say that $A$ is *nonsingular*.
+如果 $A$ 的行列式不为零，我们就说 $A$ 是*非奇异的*。
 
-A square matrix $A$ is nonsingular if and only if the rows and columns of $A$
-are linearly independent.
+当且仅当 $A$ 的行和列是线性无关的，方阵 $A$ 才是非奇异的。
 
-A more detailed explanation of matrix inverse can be found [here](https://www.mathsisfun.com/algebra/matrix-inverse.html).
+关于矩阵逆的更详细解释可以在[这里](https://www.mathsisfun.com/algebra/matrix-inverse.html)找到。
 
-You can check yourself that the in {eq}`no_soln` and {eq}`many_solns` with
-linearly dependent rows are singular matrices.
+你可以自己检查 {eq}`no_soln` 和 {eq}`many_solns` 中具有线性相关行的矩阵是奇异矩阵。
 
-This gives us a useful one-number summary of whether or not a square matrix
-can be inverted.
+这为我们提供了一个有用的单数值概括，用来判断一个方阵是否可逆。
 
-In particular, a square matrix $A$ has a nonzero determinant, if and only if
-it possesses an *inverse matrix* $A^{-1}$, with the property that $A A^{-1} =
-A^{-1} A = I$.
+特别地，方阵 $A$ 具有非零行列式，当且仅当它具有*逆矩阵* $A^{-1}$，满足 $A A^{-1} = A^{-1} A = I$。
 
-As a consequence, if we pre-multiply both sides of $Ax = b$ by $A^{-1}$, we
-get
+因此，如果我们用 $A^{-1}$ 左乘 $Ax = b$ 的两边，我们得到
 
 ```{math}
 :label: la_se_inv
+
     x = A^{-1} b.
 ```
 
-This is the solution to $Ax = b$ --- the solution we are looking for.
+这是对 $Ax = b$ 的解答 --- 这就是我们要寻找的解。
 
-
-
-### Linear equations with NumPy
+### 使用NumPy求解线性方程
 
 ```{index} single: Linear Algebra; SciPy
 ```
 
-In the two good example we obtained the matrix equation,
+在两个好的例子中，我们得到了矩阵方程：
 
 $$
 p = (C-D)^{-1} h.
 $$
 
-where $C$, $D$ and $h$ are given by {eq}`two_eq_demand_mat` and {eq}`two_eq_supply_mat`.
+其中 $C$、$D$ 和 $h$ 由 {eq}`two_eq_demand_mat` 和 {eq}`two_eq_supply_mat` 给出。
 
-This equation is analogous to {eq}`la_se_inv` with $A = (C-D)^{-1}$, $b = h$, and $x = p$.
+这个方程类似于 {eq}`la_se_inv`，其中 $A = (C-D)^{-1}$，$b = h$，且 $x = p$。
 
-We can now solve for equilibrium prices with NumPy's `linalg` submodule.
+我们现在可以使用NumPy的`linalg`子模块求解均衡价格。
 
-All of these routines are Python front ends to time-tested and highly optimized FORTRAN code.
+所有这些程序都是经过时间检验和高度优化的FORTRAN代码的Python前端。
 
 ```{code-cell} ipython3
-C = ((10, 5),      # Matrix C
+C = ((10, 5),      # 矩阵 C
      (5, 10))
 ```
 
@@ -1068,68 +1019,64 @@ C = np.array(C)
 ```
 
 ```{code-cell} ipython3
-D = ((-10, -5),     # Matrix D
+D = ((-10, -5),     # 矩阵 D
      (-1, -10))
 D = np.array(D)
 ```
 
 ```{code-cell} ipython3
-h = np.array((100, 50))   # Vector h
-h.shape = 2,1             # Transforming h to a column vector
+h = np.array((100, 50))   # 向量 h
+h.shape = 2,1             # 将h转换为列向量
 ```
 
 ```{code-cell} ipython3
 from numpy.linalg import det, inv
 A = C - D
-# Check that A is nonsingular (non-zero determinant), and hence invertible
+#检查A是否为奇异矩阵（行列式是否为零），是否可逆
 det(A)
 ```
 
 ```{code-cell} ipython3
-A_inv = inv(A)  # compute the inverse
+A_inv = inv(A)  #计算逆矩阵
 A_inv
 ```
 
 ```{code-cell} ipython3
-p = A_inv @ h  # equilibrium prices
+p = A_inv @ h  #均衡价格
 p
 ```
 
 ```{code-cell} ipython3
-q = C @ p  # equilibrium quantities
+q = C @ p  # 均衡数量
 q
 ```
 
-Notice that we get the same solutions as the pencil and paper case.
+注意，我们得到的解与纸笔计算的情况相同。
 
-We can also solve for $p$ using `solve(A, h)` as follows.
+我们还可以使用 `solve(A, h)` 来求解 $p$，如下所示。
 
 ```{code-cell} ipython3
 from numpy.linalg import solve
-p = solve(A, h)  # equilibrium prices
+p = solve(A, h)  # 均衡价格
 p
 ```
 
 ```{code-cell} ipython3
-q = C @ p  # equilibrium quantities
+q = C @ p  # 均衡数量
 q
 ```
+观察我们如何通过 `inv(A) @ y` 或使用 `solve(A, y)` 来求解 $x = A^{-1} y$。
 
-Observe how we can solve for $x = A^{-1} y$ by either via `inv(A) @ y`, or using `solve(A, y)`.
-
-The latter method uses a different algorithm that is numerically more stable and hence should be the default option.
-
+后一种方法使用了一种不同的算法，在数值上更加稳定，因此应该是默认选项。
 
 
-## Exercises
-
+## 练习
 ```{exercise-start}
 :label: lin_eqs_ex1
 ```
+让我们考虑一个有3种商品的市场 - 商品0、商品1和商品2。
 
-Let's consider a market with 3 commodities - good 0, good 1 and good 2.
-
-The demand for each good depends on the price of the other two goods and is given by:
+每种商品的需求取决于其他两种商品的价格，由以下公式给出：
 
 $$
 \begin{aligned}
@@ -1139,9 +1086,9 @@ $$
 \end{aligned}
 $$
 
-(Here demand decreases when own price increases but increases when prices of other goods increase.)
+（这里，当自身价格上涨时需求下降，但当其他商品价格上涨时需求增加。）
 
-The supply of each good is given by:
+每种商品的供给由以下公式给出：
 
 $$
 \begin{aligned}
@@ -1151,19 +1098,17 @@ $$
 \end{aligned}
 $$
 
-Equilibrium holds when supply equals demand, i.e, $q_0^d = q_0^s$, $q_1^d = q_1^s$ and $q_2^d = q_2^s$.
+当供给等于需求时，市场达到均衡，即 $q_0^d = q_0^s$，$q_1^d = q_1^s$ 和 $q_2^d = q_2^s$。
 
-1. Set up the market as a system of linear equations.
-2. Use matrix algebra to solve for equilibrium prices. Do this using both the `numpy.linalg.solve`
-   and `inv(A)` methods. Compare the solutions.
+1. 将市场设置为线性方程组。
+2. 使用矩阵代数求解均衡价格。分别使用 `numpy.linalg.solve` 和 `inv(A)` 方法来做这个。比较这两种解法。
 
 ```{exercise-end}
 ```
 ```{solution-start} lin_eqs_ex1
 :class: dropdown
 ```
-
-The generated system would be:
+生成的系统将是：
 
 $$
 \begin{aligned}
@@ -1173,11 +1118,11 @@ $$
 \end{aligned}
 $$
 
-In matrix form we will write this as:
+用矩阵形式，我们将其表示为：
 
 $$
 Ap = b
-\quad \text{where} \quad
+\quad \text{其中} \quad
 A =
 \begin{bmatrix}
     35 & -5 & -5 \\
@@ -1190,7 +1135,7 @@ A =
     p_1 \\
     p_2
 \end{bmatrix}
-\quad \text{and} \quad
+\quad \text{且} \quad
 b = 
 \begin{bmatrix}
     100 \\
@@ -1203,18 +1148,18 @@ $$
 import numpy as np
 from numpy.linalg import det
 
-A = np.array([[35, -5, -5],  # matrix A
+A = np.array([[35, -5, -5],  # 矩阵 A
               [-5, 25, -10],
               [-5, -5, 15]])
 
-b = np.array((100, 75, 55))  # column vector b
+b = np.array((100, 75, 55))  # 列向量 b
 b.shape = (3, 1)
 
-det(A)  # check if A is nonsingular
+det(A)  # 检查A是否为奇异矩阵
 ```
 
 ```{code-cell}
-# Using inverse
+# 使用inverse
 from numpy.linalg import det
 
 A_inv = inv(A)
@@ -1224,13 +1169,14 @@ p
 ```
 
 ```{code-cell}
-# Using numpy.linalg.solve
+# 使用 numpy.linalg.solve
 from numpy.linalg import solve
 p = solve(A, b)
 p
 ```
 
-The solution is given by:
+答案为：
+
 $$
 p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
 $$
@@ -1241,64 +1187,61 @@ $$
 ```{exercise-start}
 :label: lin_eqs_ex2
 ```
-Earlier in the lecture we discussed cases where the system of equations given by $Ax = b$ has no solution.
+在讲座的早些时候，我们讨论了$Ax = b$这个方程组没有解的情况。
 
-In this case $Ax = b$ is called an _inconsistent_ system of equations.
+在这种情况下，$Ax = b$被称为*不相容*方程组。
 
-When faced with an inconsistent system we try to find the best "approximate" solution.
+面对不相容系统时，我们尝试找到最佳的"近似"解。
 
-There are various methods to do this, one such method is the **method of least squares.**
+有多种方法可以做到这一点，其中一种是**最小二乘法**。
 
-Suppose we have an inconsistent system 
+假设我们有一个不相容系统
 
 ```{math}
 :label: inconsistent
+
     Ax = b
 ```
-where $A$ is an $m \times n$ matrix and $b$ is an $m \times 1$ column vector.
 
-A **least squares solution** to {eq}`inconsistent` is an $n \times 1$ column vector $\hat{x}$ such that, for all other vectors $x \in \mathbb{R}^n$, the distance from $A\hat{x}$ to $b$
-is less than the distance from $Ax$ to $b$.
+其中$A$是一个$m \times n$矩阵，$b$是一个$m \times 1$列向量。
 
-That is,
+对于{eq}`inconsistent`，**最小二乘解**是一个$n \times 1$列向量$\hat{x}$，使得对于所有其他向量$x \in \mathbb{R}^n$，$A\hat{x}$到$b$的距离小于$Ax$到$b$的距离。
+
+即，
 
 $$
     \|A\hat{x} - b\| \leq \|Ax - b\| 
 $$
 
-It can be shown that, for the system of equations $Ax = b$, the least squares
-solution $\hat{x}$ is 
+可以证明，对于方程组$Ax = b$，最小二乘解$\hat{x}$是
 
 ```{math}
 :label: least_squares
+
     \hat{x} =  (A^T A)^{-1} A^T b
 ```
 
-Now consider the general equation of a linear demand curve of a good given by:
+现在考虑一种商品的线性需求曲线的一般方程：
 
 $$
     p = m - nq
 $$
 
-where $p$ is the price of the good and $q$ is the quantity demanded.
+其中$p$是商品的价格，$q$是需求量。
 
-Suppose we are trying to *estimate* the values of $m$ and $n$.
+假设我们正试图*估计*$m$和$n$的值。
 
-We do this by repeatedly observing the price and quantity (for example, each
-month) and then choosing $m$ and $n$ to fit the relationship between $p$ and
-$q$.
+我们通过重复观察价格和数量（例如，每个月）来做到这一点，然后选择$m$和$n$来拟合$p$和$q$之间的关系。
 
-We have the following observations:
+我们有以下观察结果：
 
-| Price | Quantity Demanded |
+| 价格 | 需求量 |
 |:-----:|:-----------------:|
 |   1   |         9         |
 |   3   |         7         |
 |   8   |         3         |
 
-
-Requiring the demand curve $p = m - nq$ to pass through all these points leads to the
-following three equations:
+要求需求曲线$p = m - nq$通过所有这些点，得到以下三个方程：
 
 $$
 \begin{aligned}
@@ -1308,17 +1251,18 @@ $$
 \end{aligned}
 $$
 
-Thus we obtain a system of equations $Ax = b$ where $A = \begin{bmatrix} 1 & -9 \\ 1 & -7 \\ 1 & -3 \end{bmatrix}$,
-$x = \begin{bmatrix} m \\ n \end{bmatrix}$ and $b = \begin{bmatrix} 1 \\ 3 \\ 8 \end{bmatrix}$.
+因此，我们得到一个方程组$Ax = b$，其中$A = \begin{bmatrix} 1 & -9 \\ 1 & -7 \\ 1 & -3 \end{bmatrix}$，
+$x = \begin{bmatrix} m \\ n \end{bmatrix}$，$b = \begin{bmatrix} 1 \\ 3 \\ 8 \end{bmatrix}$。
+可以验证这个系统没有解。
 
-It can be verified that this system has no solutions.
+（问题在于我们有三个方程但只有两个未知数。）
 
-(The problem is that we have three equations and only two unknowns.)
+因此，我们将尝试找到$x$的最佳近似解。
 
-We will thus try to find the best approximate solution for $x$.
+1. 使用{eq}`least_squares`和矩阵代数找到最小二乘解$\hat{x}$。
 
-1. Use {eq}`least_squares` and matrix algebra to find the least squares solution $\hat{x}$.
-2. Find the least squares solution using `numpy.linalg.lstsq` and compare the results.
+2. 使用`numpy.linalg.lstsq`找到最小二乘解，并比较结果。
+
 
 ```{exercise-end}
 ```
@@ -1333,14 +1277,14 @@ from numpy.linalg import inv
 ```
 
 ```{code-cell} ipython3
-# Using matrix algebra
-A = np.array([[1, -9],  # matrix A
+# 运用线性代数
+A = np.array([[1, -9],  # 矩阵 A
               [1, -7],
               [1, -3]])
 
-A_T = np.transpose(A)  # transpose of matrix A
+A_T = np.transpose(A)  # 矩阵A的转置
 
-b = np.array((1, 3, 8))  # column vector b
+b = np.array((1, 3, 8))  # 列向量 b
 b.shape = (3, 1)
 
 x = inv(A_T @ A) @ A_T @ b
@@ -1348,7 +1292,7 @@ x
 ```
 
 ```{code-cell} ipython3
-# Using numpy.linalg.lstsq
+# 使用 numpy.linalg.lstsq
 x, res, _, _ = np.linalg.lstsq(A, b, rcond=None)
 ```
 
@@ -1358,10 +1302,10 @@ x, res, _, _ = np.linalg.lstsq(A, b, rcond=None)
 print(f"x\u0302 = {x}")
 print(f"\u2016Ax\u0302 - b\u2016\u00B2 = {res[0]}")
 ```
+这是一个可视化图，展示了最小二乘法如何近似一组点之间连线的方程。
 
-Here is a visualization of how the least squares method approximates the equation of a line connecting a set of points.
+我们也可以将此描述为在一组点之间"拟合"一条直线。
 
-We can also describe this as "fitting" a line between a set of points.
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -1370,10 +1314,10 @@ q = np.array((9, 7, 3))
 
 a, b = x
 
-ax.plot(q, p, 'o', label='observations', markersize=5)
-ax.plot(q, a - b*q, 'r', label='Fitted line')
-plt.xlabel('quantity demanded')
-plt.ylabel('price')
+ax.plot(q, p, 'o', label='观测点', markersize=5)
+ax.plot(q, a - b*q, 'r', label='拟合线')
+plt.xlabel('需求数量')
+plt.ylabel('价格')
 plt.legend()
 plt.show()
 ```
@@ -1381,9 +1325,8 @@ plt.show()
 ```{solution-end}
 ```
 
+### 延伸阅读
 
-### Further reading
+`numpy.linalg` 子模块的文档可以在[这里](https://numpy.org/devdocs/reference/routines.linalg.html)找到。
 
-The documentation of the `numpy.linalg` submodule can be found [here](https://numpy.org/devdocs/reference/routines.linalg.html).
-
-More advanced topics in linear algebra can be found [here](https://python.quantecon.org/linear_algebra.html#id5).
+线性代数的更高级主题可以在[这里](https://python.quantecon.org/linear_algebra.html#id5)找到。
