@@ -1,62 +1,40 @@
-# About These Lectures
+# 关于这些讲座
 
+## 简介
 
-## About
+这个讲座系列使用基础数学、统计学及[Python](https://www.python.org/)编程代码介绍数量经济学。
 
-This lecture series introduces quantitative economics using elementary
-mathematics and statistics plus computer code written in
-[Python](https://www.python.org/).  
+讲座强调通过代码进行模拟和可视化来传达思想，而不是侧重于数学细节。
 
-The lectures emphasize simulation and visualization through code as a way to
-convey ideas, rather than focusing on mathematical details.
+虽然这种呈现方式相当新颖，但讨论的观点却是基础性的。
 
-Although the presentation is quite novel, the ideas are rather foundational.
+我们强调经济理论的深刻和根本重要性，同时也重视分析数据和理解风格化事实的价值。
 
-We emphasize the deep and fundamental importance of economic theory, as well
-as the value of analyzing data and understanding stylized facts.
+这些讲座可以用于大学课程、自学、读书小组或研讨会。
 
-The lectures can be used for university courses, self-study, reading groups or
-workshops. 
+研究人员和政策专业人士也可能会发现系列中的某些部分对他们的工作有价值。
 
-Researchers and policy professionals might also find some parts of the series
-valuable for their work.  
+我们希望这些讲座对那些既想学习经济学又想学习计算的经济学学生感兴趣，以及对经济学感兴趣的计算机科学和工程领域的学生。
 
-We hope the lectures will be of interest to students of economics
-who want to learn both economics and computing, as well as students from
-fields such as computer science and engineering who are curious about
-economics.
+## 层级
 
-## Level
+这个讲座系列面向本科学生。
 
-The lecture series is aimed at undergraduate students. 
+讲座的难度从真正的入门级（适合一年级本科生甚至高中生）到更中级的内容。
 
-The level of the lectures varies from truly introductory (suitable for first
-year undergraduates or even high school students) to more intermediate.
+更中级的讲座需要对线性代数有一定的了解，并且具有一些数学成熟度（例如，平静地阅读定理并试图理解它们的含义）。
 
-The
-more intermediate lectures require comfort with linear algebra and some
-mathematical maturity (e.g., calmly reading theorems and trying to understand
-their meaning).  
+总的来说，较容易的讲座出现在讲座系列的前面，较难的讲座出现在后面。
 
-In general, easier lectures occur earlier in the lecture
-series and harder lectures occur later.
+我们假设读者已经学习了QuantEcon关于Python编程的基础部分[Python编程](https://python-programming.quantecon.org/intro.html)。
 
-We assume that readers have covered the easier parts of the QuantEcon lecture
-series [on Python
-programming](https://python-programming.quantecon.org/intro.html).  
+特别是，读者应该熟悉基本的Python语法，包括Python函数。了解类和Matplotlib会有帮助，但不是必须的。
 
-In
-particular, readers should be familiar with basic Python syntax including
-Python functions. Knowledge of classes and Matplotlib will be beneficial but
-not essential.  
+## 致谢
 
-## Credits
+在构建这个讲座系列时，我们得到了QuantEcon的研究助理以及我们QuantEcon同事的宝贵帮助。没有他们的帮助，这个系列是无法完成的。
 
-In building this lecture series, we had invaluable assistance from research
-assistants at QuantEcon, as well as our QuantEcon colleagues. Without their
-help this series would not have been possible.
-
-In particular, we sincerely thank and give credit to
+特别感谢并致谢
 
 - [Aakash Gupta](https://github.com/AakashGfude)
 - [Shu Hu](https://github.com/shlff)
@@ -66,5 +44,4 @@ In particular, we sincerely thank and give credit to
 - [Maanasee Sharma](https://github.com/maanasee)
 - [Humphrey Yang](https://github.com/HumphreyYang)
 
-We also thank Noritaka Kudoh for encouraging us to start this project and providing thoughtful suggestions.
-
+我们还感谢Noritaka Kudoh鼓励我们开始这个项目并提供了深思熟虑的建议。
