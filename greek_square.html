@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Computing Square Roots &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>17. 计算平方根 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. Distributions and Probabilities" href="prob_dist.html" />
-    <link rel="prev" title="16. Eigenvalues and Eigenvectors" href="eigen_I.html" />
+    <link rel="next" title="18. 分布和概率" href="prob_dist.html" />
+    <link rel="prev" title="16. 特征值和特征向量" href="eigen_I.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Computing Square Roots"/>
+<meta name="twitter:title" content="计算平方根"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Computing Square Roots" />
+<meta property="og:title" content="计算平方根" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/greek_square.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,15 +172,15 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">17.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perfect-squares-and-irrational-numbers">17.2. Perfect squares and irrational numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-linear-difference-equations">17.3. Second-order linear difference equations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-of-the-ancient-greeks">17.4. Algorithm of the Ancient Greeks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">17.5. Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorizing-the-difference-equation">17.6. Vectorizing the difference equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invariant-subspace-approach">17.7. Invariant subspace approach</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concluding-remarks">17.8. Concluding remarks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">17.9. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">17.1. 引言</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">17.2. 完全平方数和无理数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">17.3. 二阶线性差分方程</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">17.4. 古希腊人的算法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">17.5. 实现</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">17.6. 差分方程的向量化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">17.7. 不变子空间方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">17.8. 结束语</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">17.9. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -213,7 +213,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Computing Square Roots</p>
+                        <p class="qe-page__header-subheading">计算平方根</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -239,181 +239,174 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="computing-square-roots">
-<h1><span class="section-number">17. </span>Computing Square Roots<a class="headerlink" href="#computing-square-roots" title="Permalink to this heading">#</a></h1>
-<section id="introduction">
-<h2><span class="section-number">17.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>Chapter 24 of <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Bertrand Russell. History of western philosophy. Routledge, 2004.">Russell, 2004</a>]</span> about early Greek mathematics and astronomy contains this
-fascinating passage:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">17. </span>计算平方根<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">17.1. </span>引言<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Bertrand Russell. History of western philosophy. Routledge, 2004.">Russell, 2004</a>]</span> 第24章关于早期希腊数学和天文学的内容中包含了这段引人入胜的段落：</p>
 <blockquote class="epigraph">
-<div><p>The square root of 2, which was the first irrational to be discovered, was known to the early Pythagoreans, and ingenious methods of approximating to its value were discovered. The best was as follows: Form two columns of numbers, which we will call the <span class="math notranslate nohighlight">\(a\)</span>’s and the <span class="math notranslate nohighlight">\(b\)</span>’s; each starts with a <span class="math notranslate nohighlight">\(1\)</span>. The next <span class="math notranslate nohighlight">\(a\)</span>, at each stage, is formed by adding the last <span class="math notranslate nohighlight">\(a\)</span> and the <span class="math notranslate nohighlight">\(b\)</span> already obtained; the next <span class="math notranslate nohighlight">\(b\)</span> is formed by adding twice the previous <span class="math notranslate nohighlight">\(a\)</span> to the previous <span class="math notranslate nohighlight">\(b\)</span>. The first 6 pairs so obtained are <span class="math notranslate nohighlight">\((1,1), (2,3), (5,7), (12,17), (29,41), (70,99)\)</span>. In each pair, <span class="math notranslate nohighlight">\(2 a - b\)</span> is <span class="math notranslate nohighlight">\(1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span>. Thus <span class="math notranslate nohighlight">\(b/a\)</span> is nearly the square root of two, and at each fresh step it gets nearer. For instance, the reader may satisy himself that the square of <span class="math notranslate nohighlight">\(99/70\)</span> is very nearly equal to <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<div><p>2的平方根是第一个被发现的无理数，早期的毕达哥拉斯学派就已知晓，并发明了巧妙的方法来逼近其值。最佳方法如下：形成两列数字，我们称之为 <span class="math notranslate nohighlight">\(a\)</span> 列和 <span class="math notranslate nohighlight">\(b\)</span> 列；每列都从1开始。在每一步中，下一个 <span class="math notranslate nohighlight">\(a\)</span> 是通过加上最后一个 <span class="math notranslate nohighlight">\(a\)</span> 和已获得的 <span class="math notranslate nohighlight">\(b\)</span> 形成的；下一个 <span class="math notranslate nohighlight">\(b\)</span> 是通过加上前一个 <span class="math notranslate nohighlight">\(a\)</span> 的两倍和前一个 <span class="math notranslate nohighlight">\(b\)</span> 形成的。这样获得的前6对数是 <span class="math notranslate nohighlight">\((1,1), (2,3), (5,7), (12,17), (29,41), (70,99)\)</span>。在每一对中，<span class="math notranslate nohighlight">\(2a - b\)</span> 等于1或-1。因此，<span class="math notranslate nohighlight">\(b/a\)</span> 接近2的平方根，并且每进行一步就会更接近。例如，读者可以自己验证 <span class="math notranslate nohighlight">\(99/70\)</span> 的平方非常接近2。</p>
 </div></blockquote>
-<p>This lecture drills down and studies this ancient method for computing square roots by using some of the matrix algebra that we’ve learned in earlier quantecon lectures.</p>
-<p>In particular, this lecture can be viewed as a sequel to <a class="reference internal" href="eigen_I.html"><span class="doc">Eigenvalues and Eigenvectors</span></a>.</p>
-<p>It  provides an  example of how eigenvectors isolate  <em>invariant subspaces</em> that help construct and analyze solutions of linear difference equations.</p>
-<p>When vector <span class="math notranslate nohighlight">\(x_t\)</span> starts in an invariant subspace, iterating the different equation keeps <span class="math notranslate nohighlight">\(x_{t+j}\)</span>
-in that subspace for all <span class="math notranslate nohighlight">\(j \geq 1\)</span>.</p>
-<p>Invariant subspace methods are used throughout applied economic dynamics, for example, in the lecture <a class="reference internal" href="money_inflation.html"><span class="doc">Money Financed Government Deficits and Price Levels</span></a>.</p>
-<p>Our approach here  is to illustrate the method with an ancient example, one that ancient Greek mathematicians used to compute square roots of positive integers.</p>
+<p>本讲座深入研究了这种古老的计算平方根方法，运用了我们在之前quantecon讲座中学到的一些矩阵代数知识。
+特别地，本讲座可以被视为 <a class="reference internal" href="eigen_I.html"><span class="doc">特征值和特征向量</span></a> 的续篇。
+它提供了一个例子，说明特征向量如何分离出<em>不变子空间</em>，帮助构造和分析线性差分方程的解。
+当向量 <span class="math notranslate nohighlight">\(x_t\)</span> 从不变子空间开始时，迭代差分方程会使 <span class="math notranslate nohighlight">\(x_{t+j}\)</span> 对所有 <span class="math notranslate nohighlight">\(j \geq 1\)</span> 保持在该子空间中。
+不变子空间方法在应用经济动力学中广泛使用，例如在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 讲座中。
+我们的方法是用一个古老的例子来说明这种方法，这个例子是古希腊数学家用来计算正整数平方根的。</p>
 </section>
-<section id="perfect-squares-and-irrational-numbers">
-<h2><span class="section-number">17.2. </span>Perfect squares and irrational numbers<a class="headerlink" href="#perfect-squares-and-irrational-numbers" title="Permalink to this heading">#</a></h2>
-<p>An integer is called a <strong>perfect square</strong> if its square root is also an integer.</p>
-<p>An ordered sequence of  perfect squares starts with</p>
+<section id="id4">
+<h2><span class="section-number">17.2. </span>完全平方数和无理数<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>如果一个整数的平方根也是整数，则称该整数为<strong>完全平方数</strong>。
+完全平方数的有序序列从以下数字开始：</p>
 <div class="math notranslate nohighlight">
 \[
 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, \ldots 
 \]</div>
-<p>If an integer is not a perfect square, then its square root is an irrational number – i.e., it cannot be expressed as a ratio of two integers, and its decimal expansion is indefinite.</p>
-<p>The ancient Greeks invented an algorithm to compute square roots of integers, including integers that are not perfect squares.</p>
-<p>Their method involved</p>
+<p>如果一个整数不是完全平方数，那么它的平方根就是一个无理数 – 即它不能表示为两个整数的比值，其小数展开是无限的。
+古希腊人发明了一种算法来计算整数的平方根，包括那些不是完全平方数的整数。
+他们的方法涉及：</p>
 <ul class="simple">
-<li><p>computing a particular sequence of integers <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>;</p></li>
-<li><p>computing <span class="math notranslate nohighlight">\(\lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) = \bar r\)</span>;</p></li>
-<li><p>deducing the desired square root from <span class="math notranslate nohighlight">\(\bar r\)</span>.</p></li>
+<li><p>计算特定的整数序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>；</p></li>
+<li><p>计算 <span class="math notranslate nohighlight">\(\lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) = \bar r\)</span>；</p></li>
+<li><p>从 <span class="math notranslate nohighlight">\(\bar r\)</span> 推导出所需的平方根。</p></li>
 </ul>
-<p>In this lecture, we’ll describe this method.</p>
-<p>We’ll also use invariant subspaces to describe variations on this method that are faster.</p>
+<p>在本讲座中，我们将描述这种方法。
+我们还将使用不变子空间来描述这种方法的变体，这些变体更快。</p>
 </section>
-<section id="second-order-linear-difference-equations">
-<h2><span class="section-number">17.3. </span>Second-order linear difference equations<a class="headerlink" href="#second-order-linear-difference-equations" title="Permalink to this heading">#</a></h2>
-<p>Before telling how the ancient Greeks computed square roots, we’ll provide a quick introduction
-to second-order linear difference equations.</p>
-<p>We’ll study  the following second-order linear difference equation</p>
+<section id="id5">
+<h2><span class="section-number">17.3. </span>二阶线性差分方程<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>在讲述古希腊人如何计算平方根之前，我们将简要介绍二阶线性差分方程。
+我们将研究以下二阶线性差分方程：</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff1">
 <span class="eqno">(17.1)<a class="headerlink" href="#equation-eq-2diff1" title="Permalink to this equation">#</a></span>\[
 y_t = a_1 y_{t-1} + a_2 y_{t-2}, \quad t \geq 0
 \]</div>
-<p>where <span class="math notranslate nohighlight">\((y_{-1},  y_{-2})\)</span> is a pair of given initial conditions.</p>
-<p>Equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> is actually an infinite number of linear equations in the sequence
-<span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>.</p>
-<p>There is one equation each for <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span>.</p>
-<p>We could follow an approach taken in the lecture on <a class="reference internal" href="pv.html"><span class="doc">present values</span></a> and stack all of these equations into a single matrix equation that we would then solve by using matrix inversion.</p>
+<p>其中 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span> 是给定的一对初始条件。
+方程 <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> 实际上是序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> 的无限多个线性方程。
+对于 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span> 中的每一个 <span class="math notranslate nohighlight">\(t\)</span>，都有一个方程。
+我们可以采用 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 讲座中的方法，将所有这些方程堆叠成一个单一的矩阵方程，然后使用矩阵求逆来求解。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the present instance, the matrix equation would multiply a countably infinite dimensional square matrix by  a countably infinite dimensional vector.  With some qualifications, matrix multiplication and inversion tools apply to such an equation.</p>
+<p>在当前情况下，矩阵方程将对一个可数无穷维的方阵与一个可数无穷维的向量进行乘法运算。在一些限定条件下，矩阵乘法和求逆工具适用于这样的方程。</p>
 </div>
-<p>But we won’t pursue that approach here.</p>
-<p>Instead, we’ll seek to find a time-invariant function that <em>solves</em> our difference equation, meaning
-that it provides a formula for a <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> sequence that satisfies
-equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> for each <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
-<p>We seek an expression  for <span class="math notranslate nohighlight">\(y_t, t \geq 0\)</span> as functions of the initial conditions  <span class="math notranslate nohighlight">\((y_{-1},  y_{-2})\)</span>:</p>
+<p>但我们不会在这里采用这种方法。
+相反，我们将寻找一个时不变函数来<em>解决</em>我们的差分方程，这意味着
+它为满足方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>序列提供了一个公式，适用于每个<span class="math notranslate nohighlight">\(t \geq 0\)</span>。
+我们寻求<span class="math notranslate nohighlight">\(y_t, t \geq 0\)</span>的表达式，作为初始条件<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>的函数：</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff2">
 <span class="eqno">(17.2)<a class="headerlink" href="#equation-eq-2diff2" title="Permalink to this equation">#</a></span>\[ 
-y_t = g((y_{-1},  y_{-2});t), \quad t \geq 0.
+y_t = g((y_{-1}, y_{-2});t), \quad t \geq 0.
 \]</div>
-<p>We call such a function <span class="math notranslate nohighlight">\(g\)</span> a <em>solution</em> of the difference equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>.</p>
-<p>One way to discover a solution is to use a guess and verify method.</p>
-<p>We shall begin by considering a special initial pair of initial  conditions
-that satisfy</p>
+<p>我们称这样的函数<span class="math notranslate nohighlight">\(g\)</span>为差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<em>解</em>。
+发现解的一种方法是使用猜测和验证法。
+我们将从考虑一对特殊的初始条件开始，
+这对初始条件满足</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff3">
 <span class="eqno">(17.3)<a class="headerlink" href="#equation-eq-2diff3" title="Permalink to this equation">#</a></span>\[
 y_{-1} = \delta y_{-2}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\delta\)</span> is a scalar to be determined.</p>
-<p>For initial condition that satisfy <a class="reference internal" href="#equation-eq-2diff3">(17.3)</a>
-equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> impllies that</p>
+<p>其中<span class="math notranslate nohighlight">\(\delta\)</span>是待确定的标量。
+对于满足<a class="reference internal" href="#equation-eq-2diff3">(17.3)</a>的初始条件，
+方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>意味着</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff4">
 <span class="eqno">(17.4)<a class="headerlink" href="#equation-eq-2diff4" title="Permalink to this equation">#</a></span>\[
 y_0 = \left(a_1 + \frac{a_2}{\delta}\right) y_{-1}.
 \]</div>
-<p>We want</p>
+<p>我们希望</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff5">
 <span class="eqno">(17.5)<a class="headerlink" href="#equation-eq-2diff5" title="Permalink to this equation">#</a></span>\[
 \left(a_1 + \frac{a_2}{\delta}\right) = \delta
 \]</div>
-<p>which we can rewrite as the <em>characteristic equation</em></p>
+<p>我们可以将其重写为<em>特征方程</em></p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff6">
 <span class="eqno">(17.6)<a class="headerlink" href="#equation-eq-2diff6" title="Permalink to this equation">#</a></span>\[
 \delta^2 - a_1 \delta - a_2 = 0.
 \]</div>
-<p>Applying the quadratic formula to solve for the roots of <a class="reference internal" href="#equation-eq-2diff6">(17.6)</a> we find that</p>
+<p>应用二次公式求解<a class="reference internal" href="#equation-eq-2diff6">(17.6)</a>的根，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff7">
 <span class="eqno">(17.7)<a class="headerlink" href="#equation-eq-2diff7" title="Permalink to this equation">#</a></span>\[
 \delta = \frac{ a_1 \pm \sqrt{a_1^2 + 4 a_2}}{2}.
 \]</div>
-<p>For either of the two <span class="math notranslate nohighlight">\(\delta\)</span>’s that satisfy equation <a class="reference internal" href="#equation-eq-2diff7">(17.7)</a>,
-a solution of difference equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> is</p>
+<p>对于满足方程<a class="reference internal" href="#equation-eq-2diff7">(17.7)</a>的两个<span class="math notranslate nohighlight">\(\delta\)</span>中的任一个，
+差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的解为</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff8">
 <span class="eqno">(17.8)<a class="headerlink" href="#equation-eq-2diff8" title="Permalink to this equation">#</a></span>\[
 y_t = \delta^t y_0 , \forall t \geq 0
 \]</div>
-<p>provided that we set</p>
+<p>前提是我们设置</p>
 <div class="math notranslate nohighlight">
 \[
-y_0 = \delta  y_{-1} . 
+y_0 = \delta y_{-1} . 
 \]</div>
-<p>The <em>general</em> solution of difference equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> takes the form</p>
+<p>差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<em>一般</em>解形式为</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff9">
 <span class="eqno">(17.9)<a class="headerlink" href="#equation-eq-2diff9" title="Permalink to this equation">#</a></span>\[
 y_t = \eta_1 \delta_1^t + \eta_2 \delta_2^t
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\delta_1, \delta_2\)</span> are the two solutions <a class="reference internal" href="#equation-eq-2diff7">(17.7)</a> of the characteristic equation <a class="reference internal" href="#equation-eq-2diff6">(17.6)</a>, and  <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span> are two constants chosen to satisfy</p>
+<p>其中<span class="math notranslate nohighlight">\(\delta_1, \delta_2\)</span>是特征方程<a class="reference internal" href="#equation-eq-2diff6">(17.6)</a>的两个解<a class="reference internal" href="#equation-eq-2diff7">(17.7)</a>，而<span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span>是两个常数，选择它们以满足</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff10">
 <span class="eqno">(17.10)<a class="headerlink" href="#equation-eq-2diff10" title="Permalink to this equation">#</a></span>\[ 
-    \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix} = \begin{bmatrix} \delta_1^{-1}  &amp; \delta_2^{-1} \cr \delta_1^{-2} &amp; \delta_2^{-2} \end{bmatrix} \begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} 
+    \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix} = \begin{bmatrix} \delta_1^{-1} &amp; \delta_2^{-1} \cr \delta_1^{-2} &amp; \delta_2^{-2} \end{bmatrix} \begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} 
 \]</div>
-<p>or</p>
+<p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff11">
 <span class="eqno">(17.11)<a class="headerlink" href="#equation-eq-2diff11" title="Permalink to this equation">#</a></span>\[
-\begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} = \begin{bmatrix} \delta_1^{-1}  &amp; \delta_2^{-1} \cr \delta_1^{-2} &amp; \delta_2^{-2} \end{bmatrix}^{-1} \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix}
+\begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} = \begin{bmatrix} \delta_1^{-1} &amp; \delta_2^{-1} \cr \delta_1^{-2} &amp; \delta_2^{-2} \end{bmatrix}^{-1} \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix}
 \]</div>
-<p>Sometimes we are free to choose the initial conditions <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>, in which case we
-use system <a class="reference internal" href="#equation-eq-2diff10">(17.10)</a> to find the associated <span class="math notranslate nohighlight">\((\eta_1, \eta_2)\)</span>.</p>
-<p>If we choose <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span> to set <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span>, then <span class="math notranslate nohighlight">\(y_t = \delta_1^t\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
-<p>If we choose <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span> to set <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span>, then <span class="math notranslate nohighlight">\(y_t = \delta_2^t\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
-<p>Soon we’ll relate the preceding calculations to components an eigen decomposition of a transition matrix that represents difference equation <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> in a very convenient way.</p>
-<p>We’ll turn to that after we describe how Ancient Greeks figured out how to compute square roots of positive integers that are not perfect squares.</p>
+<p>有时我们可以自由选择初始条件<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>，在这种情况下，我们
+使用系统<a class="reference internal" href="#equation-eq-2diff10">(17.10)</a>来找到相关的<span class="math notranslate nohighlight">\((\eta_1, \eta_2)\)</span>。
+如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_1^t\)</span>。
+如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_2^t\)</span>。
+很快我们将把前面的计算与表示差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的转移矩阵的特征分解的组成部分联系起来，这种方式非常方便。
+在我们描述古希腊人如何计算不是完全平方的正整数的平方根之前，我们将先转向这个问题。</p>
 </section>
-<section id="algorithm-of-the-ancient-greeks">
-<h2><span class="section-number">17.4. </span>Algorithm of the Ancient Greeks<a class="headerlink" href="#algorithm-of-the-ancient-greeks" title="Permalink to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(\sigma\)</span> be a positive  integer greater than <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p>So <span class="math notranslate nohighlight">\(\sigma \in {\mathcal I} \equiv  \{2, 3, \ldots \}\)</span>.</p>
-<p>We want an algorithm to compute the square root of <span class="math notranslate nohighlight">\(\sigma \in {\mathcal I}\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(\sqrt{\sigma} \in {\mathcal I}\)</span>, <span class="math notranslate nohighlight">\(\sigma \)</span> is said to be a <em>perfect square</em>.</p>
-<p>If <span class="math notranslate nohighlight">\(\sqrt{\sigma} \not\in {\mathcal I}\)</span>, it turns out that it is irrational.</p>
-<p>Ancient Greeks used a recursive algorithm to compute square roots of integers that are not perfect squares.</p>
-<p>The algorithm iterates on a  second-order  linear  difference equation in the sequence <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>:</p>
+<section id="id6">
+<h2><span class="section-number">17.4. </span>古希腊人的算法<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>设 <span class="math notranslate nohighlight">\(\sigma\)</span> 为大于1的正整数。</p>
+<p>因此 <span class="math notranslate nohighlight">\(\sigma \in {\mathcal I} \equiv \{2, 3, \ldots \}\)</span>。</p>
+<p>我们想要一个算法来计算 <span class="math notranslate nohighlight">\(\sigma \in {\mathcal I}\)</span> 的平方根。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\sqrt{\sigma} \in {\mathcal I}\)</span>，则 <span class="math notranslate nohighlight">\(\sigma\)</span> 被称为<em>完全平方数</em>。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\sqrt{\sigma} \not\in {\mathcal I}\)</span>，事实证明它是无理数。</p>
+<p>古希腊人使用递归算法来计算非完全平方数的整数的平方根。</p>
+<p>该算法在序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> 的二阶线性差分方程上迭代：</p>
 <div class="math notranslate nohighlight" id="equation-eq-second-order">
 <span class="eqno">(17.12)<a class="headerlink" href="#equation-eq-second-order" title="Permalink to this equation">#</a></span>\[
 y_{t} = 2 y_{t-1} - (1 - \sigma) y_{t-2}, \quad t \geq 0
 \]</div>
-<p>together with a pair of integers that are initial conditions for <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span>.</p>
-<p>First, we’ll deploy some techniques for solving the difference equations that are also deployed in <a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a>.</p>
-<p>The characteristic equation associated with difference equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> is</p>
+<p>同时还有一对整数作为 <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span> 的初始条件。</p>
+<p>首先，我们将使用一些解差分方程的技巧，这些技巧在 <a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a> 中也有应用。</p>
+<p>与差分方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 相关的特征方程是：</p>
 <div class="math notranslate nohighlight" id="equation-eq-cha-eq0">
 <span class="eqno">(17.13)<a class="headerlink" href="#equation-eq-cha-eq0" title="Permalink to this equation">#</a></span>\[
 c(x) \equiv x^2 - 2 x + (1 - \sigma) = 0
 \]</div>
-<p>(Notice how this is an instance of equation <a class="reference internal" href="#equation-eq-2diff6">(17.6)</a> above.)</p>
-<p>Factoring the right side of   equation <a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a>, we obtain</p>
+<p>（注意这是上面方程 <a class="reference internal" href="#equation-eq-2diff6">(17.6)</a> 的一个实例。）</p>
+<p>对方程 <a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a> 右侧进行因式分解，我们得到：</p>
 <div class="math notranslate nohighlight" id="equation-eq-cha-eq">
 <span class="eqno">(17.14)<a class="headerlink" href="#equation-eq-cha-eq" title="Permalink to this equation">#</a></span>\[
 c(x)= (x - \lambda_1) (x-\lambda_2) = 0
 \]</div>
-<p>where</p>
+<p>其中</p>
 <div class="math notranslate nohighlight">
 \[ 
 c(x) = 0 
 \]</div>
-<p>for <span class="math notranslate nohighlight">\(x = \lambda_1\)</span> or <span class="math notranslate nohighlight">\(x = \lambda_2\)</span>.</p>
-<p>These two special values of <span class="math notranslate nohighlight">\(x\)</span> are sometimes called zeros or roots of <span class="math notranslate nohighlight">\(c(x)\)</span>.</p>
-<p>By applying the quadratic formula to solve for the roots  the characteristic equation
-<a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a>, we find that</p>
+<p>当 <span class="math notranslate nohighlight">\(x = \lambda_1\)</span> 或 <span class="math notranslate nohighlight">\(x = \lambda_2\)</span> 时成立。</p>
+<p>这两个特殊的 <span class="math notranslate nohighlight">\(x\)</span> 值有时被称为 <span class="math notranslate nohighlight">\(c(x)\)</span> 的零点或根。</p>
+<p>通过应用二次公式求解特征方程 <a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a> 的根，我们发现：</p>
 <div class="math notranslate nohighlight" id="equation-eq-secretweapon">
 <span class="eqno">(17.15)<a class="headerlink" href="#equation-eq-secretweapon" title="Permalink to this equation">#</a></span>\[
 \lambda_1 = 1 + \sqrt{\sigma}, \quad \lambda_2 = 1 - \sqrt{\sigma}.
 \]</div>
-<p>Formulas <a class="reference internal" href="#equation-eq-secretweapon">(17.15)</a> indicate that  <span class="math notranslate nohighlight">\(\lambda_1\)</span> and  <span class="math notranslate nohighlight">\(\lambda_2\)</span> are each functions
-of a single variable, namely,  <span class="math notranslate nohighlight">\(\sqrt{\sigma}\)</span>, the object that we along with some Ancient Greeks want to compute.</p>
-<p>Ancient Greeks had an indirect way of exploiting this fact to compute square roots of a positive integer.</p>
-<p>They did this by starting from particular initial conditions <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span> and iterating on the difference equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a>.</p>
-<p>Solutions  of  difference equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> take the form</p>
+<p>公式 <a class="reference internal" href="#equation-eq-secretweapon">(17.15)</a> 表明 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 和 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 都是单变量函数，即 <span class="math notranslate nohighlight">\(\sqrt{\sigma}\)</span>，这正是我们和一些古希腊人想要计算的对象。</p>
+<p>古希腊人有一种间接的方法来利用这个事实来计算正整数的平方根。</p>
+<p>他们通过从特定的初始条件 <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span> 开始，然后在差分方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 上迭代来实现这一点。</p>
+<p>差分方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 的解的形式为：</p>
 <div class="math notranslate nohighlight">
 \[
 y_t = \lambda_1^t \eta_1 + \lambda_2^t \eta_2
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\eta_1\)</span> and <span class="math notranslate nohighlight">\(\eta_2\)</span> are chosen to satisfy   prescribed initial conditions <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span>:</p>
+<p>其中 <span class="math notranslate nohighlight">\(\eta_1\)</span> 和 <span class="math notranslate nohighlight">\(\eta_2\)</span> 被选择以满足规定的初始条件 <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-leq-sq">
 <span class="eqno">(17.16)<a class="headerlink" href="#equation-eq-leq-sq" title="Permalink to this equation">#</a></span>\[
 \begin{aligned}
@@ -421,58 +414,58 @@ y_t = \lambda_1^t \eta_1 + \lambda_2^t \eta_2
 \lambda_1^{-2} \eta_1 + \lambda_2^{-2} \eta_2 &amp; =  y_{-2}
 \end{aligned}
 \]</div>
-<p>System <a class="reference internal" href="#equation-eq-leq-sq">(17.16)</a> of simultaneous linear equations will play a big role in the remainder of this lecture.</p>
-<p>Since <span class="math notranslate nohighlight">\(\lambda_1 = 1 + \sqrt{\sigma} &gt; 1 &gt; \lambda_2 = 1 - \sqrt{\sigma} \)</span>,
-it follows that for <em>almost all</em> (but not all) initial conditions</p>
+<p>线性方程组 <a class="reference internal" href="#equation-eq-leq-sq">(17.16)</a> 在本讲座的剩余部分将发挥重要作用。</p>
+<p>由于 <span class="math notranslate nohighlight">\(\lambda_1 = 1 + \sqrt{\sigma} &gt; 1 &gt; \lambda_2 = 1 - \sqrt{\sigma}\)</span>，
+因此对于<em>几乎所有</em>（但不是所有）初始条件，有：</p>
 <div class="math notranslate nohighlight">
 \[
 \lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) = 1 + \sqrt{\sigma}.
 \]</div>
-<p>Thus,</p>
+<p>因此，</p>
 <div class="math notranslate nohighlight">
 \[
 \sqrt{\sigma} = \lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) - 1.
 \]</div>
-<p>However, notice that if <span class="math notranslate nohighlight">\(\eta_1 = 0\)</span>, then</p>
+<p>然而，注意如果 <span class="math notranslate nohighlight">\(\eta_1 = 0\)</span>，则：</p>
 <div class="math notranslate nohighlight">
 \[
 \lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) = 1 - \sqrt{\sigma}
 \]</div>
-<p>so that</p>
+<p>所以</p>
 <div class="math notranslate nohighlight">
 \[
 \sqrt{\sigma} = 1 - \lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right).
 \]</div>
-<p>Actually, if <span class="math notranslate nohighlight">\(\eta_1 =0\)</span>, it follows that</p>
+<p>实际上，如果 <span class="math notranslate nohighlight">\(\eta_1 =0\)</span>，那么：</p>
 <div class="math notranslate nohighlight">
 \[
 \sqrt{\sigma} = 1 - \left(\frac{y_{t+1}}{y_t}\right) \quad \forall t \geq 0,
 \]</div>
-<p>so that convergence is immediate and there is no need to take limits.</p>
-<p>Symmetrically, if <span class="math notranslate nohighlight">\(\eta_2 =0\)</span>, it follows that</p>
+<p>因此收敛是立即的，无需取极限。</p>
+<p>对称地，如果 <span class="math notranslate nohighlight">\(\eta_2 =0\)</span>，那么：</p>
 <div class="math notranslate nohighlight">
 \[
 \sqrt{\sigma} =  \left(\frac{y_{t+1}}{y_t}\right) - 1 \quad \forall t \geq 0
 \]</div>
-<p>so again, convergence is immediate, and we have no need to compute a limit.</p>
-<p>System <a class="reference internal" href="#equation-eq-leq-sq">(17.16)</a> of simultaneous linear equations can be used in various ways.</p>
+<p>所以同样，收敛是立即的，我们不需要计算极限。</p>
+<p>线性方程组 <a class="reference internal" href="#equation-eq-leq-sq">(17.16)</a> 可以以多种方式使用。</p>
 <ul class="simple">
-<li><p>we can take <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span> as given initial conditions and solve for <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span>;</p></li>
-<li><p>we can instead take <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span> as given and solve for initial conditions  <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span>.</p></li>
+<li><p>我们可以将 <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span> 作为给定的初始条件，并求解 <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span>；</p></li>
+<li><p>我们也可以将 <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span> 作为给定值，并求解初始条件 <span class="math notranslate nohighlight">\(y_{-1}, y_{-2}\)</span>。</p></li>
 </ul>
-<p>Notice how we used the  second approach above when we set  <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span>  either to <span class="math notranslate nohighlight">\((0, 1)\)</span>, for example, or <span class="math notranslate nohighlight">\((1, 0)\)</span>, for example.</p>
-<p>In taking this second approach, we constructed an <em>invariant subspace</em> of <span class="math notranslate nohighlight">\({\bf R}^2\)</span>.</p>
-<p>Here is what is going on.</p>
-<p>For <span class="math notranslate nohighlight">\( t \geq 0\)</span> and for most pairs of  initial conditions <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span> for equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a>, <span class="math notranslate nohighlight">\(y_t\)</span> can be expressed as a linear combination  of <span class="math notranslate nohighlight">\(y_{t-1}\)</span> and <span class="math notranslate nohighlight">\(y_{t-2}\)</span>.</p>
-<p>But for some special initial conditions <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span>, <span class="math notranslate nohighlight">\(y_t\)</span> can be expressed as a linear function  of <span class="math notranslate nohighlight">\(y_{t-1}\)</span> only.</p>
-<p>These special initial conditions require that <span class="math notranslate nohighlight">\(y_{-1}\)</span> be a linear function of <span class="math notranslate nohighlight">\(y_{-2}\)</span>.</p>
-<p>We’ll study these special initial conditions soon.</p>
-<p>But first let’s write some Python code to iterate on equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> starting from an arbitrary <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span>.</p>
+<p>注意我们上面是如何使用第二种方法的，例如，我们将 <span class="math notranslate nohighlight">\(\eta_1, \eta_2\)</span> 设为 <span class="math notranslate nohighlight">\((0, 1)\)</span> 或 <span class="math notranslate nohighlight">\((1, 0)\)</span>。</p>
+<p>采用这种第二种方法，我们构造了 <span class="math notranslate nohighlight">\({\bf R}^2\)</span> 的一个<em>不变子空间</em>。</p>
+<p>这里发生的情况是：</p>
+<p>对于 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 和方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 的大多数初始条件对 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span>，<span class="math notranslate nohighlight">\(y_t\)</span> 可以表示为 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-2}\)</span> 的线性组合。</p>
+<p>但对于一些特殊的初始条件 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span>，<span class="math notranslate nohighlight">\(y_t\)</span> 可以仅表示为 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 的线性函数。</p>
+<p>这些特殊的初始条件要求 <span class="math notranslate nohighlight">\(y_{-1}\)</span> 是 <span class="math notranslate nohighlight">\(y_{-2}\)</span> 的线性函数。</p>
+<p>我们很快将研究这些特殊的初始条件。</p>
+<p>但首先让我们编写一些 Python 代码，从任意的 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2}) \in {\bf R}^2\)</span> 开始，在方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 上迭代。</p>
 </section>
-<section id="implementation">
-<h2><span class="section-number">17.5. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
-<p>We now implement the above algorithm to compute the square root of <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<p>In this lecture, we use the following import:</p>
+<section id="id7">
+<h2><span class="section-number">17.5. </span>实现<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>我们现在实现上述算法来计算 <span class="math notranslate nohighlight">\(\sigma\)</span> 的平方根。</p>
+<p>在本讲座中，我们使用以下导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -484,14 +477,14 @@ it follows that for <em>almost all</em> (but not all) initial conditions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_λs</span><span class="p">(</span><span class="n">coefs</span><span class="p">):</span>    
-    <span class="c1"># Calculate the roots using numpy.roots</span>
+    <span class="c1"># 用 numpy.roots来求根</span>
     <span class="n">λs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
     
-    <span class="c1"># Sort the roots for consistency</span>
+    <span class="c1"># 对根进行排序以保持一致性</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">λs</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">solve_η</span><span class="p">(</span><span class="n">λ_1</span><span class="p">,</span> <span class="n">λ_2</span><span class="p">,</span> <span class="n">y_neg1</span><span class="p">,</span> <span class="n">y_neg2</span><span class="p">):</span>
-    <span class="c1"># Solve the system of linear equation</span>
+    <span class="c1"># 对线性系统求解</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
         <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">λ_1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">λ_2</span><span class="p">],</span>
         <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">λ_1</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">λ_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
@@ -502,136 +495,136 @@ it follows that for <em>almost all</em> (but not all) initial conditions</p>
     <span class="k">return</span> <span class="n">ηs</span>
 
 <span class="k">def</span> <span class="nf">solve_sqrt</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">y_neg1</span><span class="p">,</span> <span class="n">y_neg2</span><span class="p">,</span> <span class="n">t_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-    <span class="c1"># Ensure σ is greater than 1</span>
+    <span class="c1"># 确保 σ 大于 1</span>
     <span class="k">if</span> <span class="n">σ</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;σ must be greater than 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;σ 必须大于 1&quot;</span><span class="p">)</span>
         
-    <span class="c1"># Characteristic roots</span>
+    <span class="c1"># 特征根</span>
     <span class="n">λ_1</span><span class="p">,</span> <span class="n">λ_2</span> <span class="o">=</span> <span class="n">solve_λs</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
     
-    <span class="c1"># Solve for η_1 and η_2</span>
+    <span class="c1"># 求解 η_1 和 η_2</span>
     <span class="n">η_1</span><span class="p">,</span> <span class="n">η_2</span> <span class="o">=</span> <span class="n">solve_η</span><span class="p">(</span><span class="n">λ_1</span><span class="p">,</span> <span class="n">λ_2</span><span class="p">,</span> <span class="n">y_neg1</span><span class="p">,</span> <span class="n">y_neg2</span><span class="p">)</span>
 
-    <span class="c1"># Compute the sequence up to t_max</span>
+    <span class="c1"># 计算序列直到 t_max</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ_1</span> <span class="o">**</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">η_1</span> <span class="o">+</span> <span class="p">(</span><span class="n">λ_2</span> <span class="o">**</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">η_2</span>
     
-    <span class="c1"># Compute the ratio y_{t+1} / y_t for large t</span>
+    <span class="c1"># 计算大 t 时的比率 y_{t+1} / y_t</span>
     <span class="n">sqrt_σ_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
     
     <span class="k">return</span> <span class="n">sqrt_σ_estimate</span>
 
-<span class="c1"># Use σ = 2 as an example</span>
+<span class="c1"># 用 σ = 2 做个例子</span>
 <span class="n">σ</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="c1"># Encode characteristic equation</span>
+<span class="c1"># 特征方程</span>
 <span class="n">coefs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">σ</span><span class="p">))</span>
 
-<span class="c1"># Solve for the square root of σ</span>
+<span class="c1"># 求 σ 的平方根</span>
 <span class="n">sqrt_σ</span> <span class="o">=</span> <span class="n">solve_sqrt</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">y_neg1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_neg2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Calculate the deviation</span>
+<span class="c1"># 计算误差</span>
 <span class="n">dev</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sqrt_σ</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sqrt(</span><span class="si">{</span><span class="n">σ</span><span class="si">}</span><span class="s2">) is approximately </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> (error: </span><span class="si">{</span><span class="n">dev</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sqrt(</span><span class="si">{</span><span class="n">σ</span><span class="si">}</span><span class="s2">) 大约为 </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> (error: </span><span class="si">{</span><span class="n">dev</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sqrt(2) is approximately 1.41421 (error: 0.00000)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sqrt(2) 大约为 1.41421 (error: 0.00000)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now we consider cases where <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span> and <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span></p>
+<p>现在我们考虑 <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span> 和 <span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span> 的情况</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute λ_1, λ_2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 计算 λ_1, λ_2</span>
 <span class="n">λ_1</span><span class="p">,</span> <span class="n">λ_2</span> <span class="o">=</span> <span class="n">solve_λs</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Roots for the characteristic equation are (</span><span class="si">{</span><span class="n">λ_1</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">λ_2</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">))&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;特征方程的根为 (</span><span class="si">{</span><span class="n">λ_1</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">λ_2</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">))&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Roots for the characteristic equation are (2.41421, -0.41421))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>特征方程的根为 (2.41421, -0.41421))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case 1: η_1, η_2 = (0, 1)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 情况 1: η_1, η_2 = (0, 1)</span>
 <span class="n">ηs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Compute y_{t} and y_{t-1} with t &gt;= 0</span>
+<span class="c1"># 计算 y_{t} 和 y_{t-1} 当 t &gt;= 0</span>
 <span class="n">y</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">ηs</span><span class="p">:</span> <span class="p">(</span><span class="n">λ_1</span> <span class="o">**</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">ηs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">λ_2</span> <span class="o">**</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">ηs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">sqrt_σ</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ηs</span><span class="p">)</span> <span class="o">/</span> <span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ηs</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For η_1, η_2 = (0, 1), sqrt_σ = </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;对于 η_1, η_2 = (0, 1), sqrt_σ = </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For η_1, η_2 = (0, 1), sqrt_σ = 1.41421
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>对于 η_1, η_2 = (0, 1), sqrt_σ = 1.41421
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case 2: η_1, η_2 = (1, 0)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 情况 2: η_1, η_2 = (1, 0)</span>
 <span class="n">ηs</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">sqrt_σ</span> <span class="o">=</span> <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ηs</span><span class="p">)</span> <span class="o">/</span> <span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ηs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For η_1, η_2 = (1, 0), sqrt_σ = </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;对于 η_1, η_2 = (1, 0), sqrt_σ = </span><span class="si">{</span><span class="n">sqrt_σ</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For η_1, η_2 = (1, 0), sqrt_σ = 1.41421
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>对于 η_1, η_2 = (1, 0), sqrt_σ = 1.41421
 </pre></div>
 </div>
 </div>
 </div>
-<p>We find that convergence is immediate.</p>
-<p>Next, we’ll  represent the preceding analysis by first vectorizing our second-order difference equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> and then using  eigendecompositions of an  associated  state transition matrix.</p>
+<p>我们发现收敛是立即的。
+接下来，我们将首先将我们的二阶差分方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 向量化，然后使用相关状态转移矩阵的特征分解来表示前面的分析。</p>
 </section>
-<section id="vectorizing-the-difference-equation">
-<h2><span class="section-number">17.6. </span>Vectorizing the difference equation<a class="headerlink" href="#vectorizing-the-difference-equation" title="Permalink to this heading">#</a></h2>
-<p>Represent <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> with the first-order matrix difference equation</p>
+<section id="id8">
+<h2><span class="section-number">17.6. </span>差分方程的向量化<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>用一阶矩阵差分方程表示 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a></p>
 <div class="math notranslate nohighlight">
 \[
 \begin{bmatrix} y_{t+1} \cr y_{t} \end{bmatrix}
 = \begin{bmatrix} 2 &amp; - ( 1 - \sigma) \cr 1 &amp; 0 \end{bmatrix} \begin{bmatrix} y_{t} \cr y_{t-1} \end{bmatrix}
 \]</div>
-<p>or</p>
+<p>或</p>
 <div class="math notranslate nohighlight">
 \[
 x_{t+1} = M x_t 
 \]</div>
-<p>where</p>
+<p>其中</p>
 <div class="math notranslate nohighlight">
 \[
 M = \begin{bmatrix} 2 &amp; - (1 - \sigma )  \cr 1 &amp; 0 \end{bmatrix},  \quad x_t= \begin{bmatrix} y_{t} \cr y_{t-1} \end{bmatrix}
 \]</div>
-<p>Construct an eigendecomposition of <span class="math notranslate nohighlight">\(M\)</span>:</p>
+<p>构造 <span class="math notranslate nohighlight">\(M\)</span> 的特征分解：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eigen-sqrt">
 <span class="eqno">(17.17)<a class="headerlink" href="#equation-eq-eigen-sqrt" title="Permalink to this equation">#</a></span>\[
 M = V \begin{bmatrix} \lambda_1 &amp; 0 \cr 0 &amp; \lambda_2  \end{bmatrix} V^{-1} 
 \]</div>
-<p>where columns of <span class="math notranslate nohighlight">\(V\)</span> are eigenvectors corresponding to  eigenvalues <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>.</p>
-<p>The eigenvalues can be ordered so that  <span class="math notranslate nohighlight">\(\lambda_1 &gt; 1 &gt; \lambda_2\)</span>.</p>
-<p>Write equation <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> as</p>
+<p>其中 <span class="math notranslate nohighlight">\(V\)</span> 的列是对应于特征值 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 和 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 的特征向量。
+特征值可以排序，使得 <span class="math notranslate nohighlight">\(\lambda_1 &gt; 1 &gt; \lambda_2\)</span>。</p>
+<p>将方程 <a class="reference internal" href="#equation-eq-second-order">(17.12)</a> 写为</p>
 <div class="math notranslate nohighlight">
 \[
 x_{t+1} = V \Lambda V^{-1} x_t
 \]</div>
-<p>Now we implement the algorithm above.</p>
-<p>First we write a function that iterates <span class="math notranslate nohighlight">\(M\)</span></p>
+<p>现在我们实现上述算法。
+首先，我们编写一个迭代 <span class="math notranslate nohighlight">\(M\)</span> 的函数</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iterate_M</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
     
-    <span class="c1"># Eigendecomposition of M</span>
+    <span class="c1">#  M 的特征分解</span>
     <span class="n">Λ</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">V_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
     
@@ -639,69 +632,66 @@ x_{t+1} = V \Lambda V^{-1} x_t
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
                    <span class="n">num_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     
-    <span class="c1"># Perform the iterations</span>
+    <span class="c1"># 进行迭代</span>
     <span class="n">xs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_0</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
         <span class="n">xs</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">xs</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
     
     <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">V_inv</span>
 
-<span class="c1"># Define the state transition matrix M</span>
+<span class="c1"># 定义状态转移矩阵M</span>
 <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">σ</span><span class="p">)],</span>
       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 
-<span class="c1"># Initial condition vector x_0</span>
+<span class="c1"># 初始条件向量 x_0</span>
 <span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 
-<span class="c1"># Perform the iteration</span>
+<span class="c1"># 进行迭代</span>
 <span class="n">xs</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">V_inv</span> <span class="o">=</span> <span class="n">iterate_M</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;eigenvalues:</span><span class="se">\n</span><span class="si">{</span><span class="n">Λ</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;eigenvectors:</span><span class="se">\n</span><span class="si">{</span><span class="n">V</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inverse eigenvectors:</span><span class="se">\n</span><span class="si">{</span><span class="n">V_inv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;特征值:</span><span class="se">\n</span><span class="si">{</span><span class="n">Λ</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;特征向量:</span><span class="se">\n</span><span class="si">{</span><span class="n">V</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;逆特征向量:</span><span class="se">\n</span><span class="si">{</span><span class="n">V_inv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eigenvalues:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>特征值:
 [ 2.41421356 -0.41421356]
-eigenvectors:
+特征向量:
 [[ 0.92387953 -0.38268343]
  [ 0.38268343  0.92387953]]
-inverse eigenvectors:
+逆特征向量:
 [[ 0.92387953  0.38268343]
  [-0.38268343  0.92387953]]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s compare the eigenvalues to the roots <a class="reference internal" href="#equation-eq-secretweapon">(17.15)</a> of equation
-<a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a> that  we computed above.</p>
+<p>让我们将特征值与我们在上面计算的方程<a class="reference internal" href="#equation-eq-cha-eq0">(17.13)</a>的根<a class="reference internal" href="#equation-eq-secretweapon">(17.15)</a>进行比较。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roots</span> <span class="o">=</span> <span class="n">solve_λs</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">σ</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;roots: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;根: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>roots: [ 2.41421356 -0.41421356]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>根: [ 2.41421356 -0.41421356]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Hence we confirmed <a class="reference internal" href="#equation-eq-eigen-sqrt">(17.17)</a>.</p>
-<p>Information about the square root we are after is also contained
-in the two  eigenvectors.</p>
-<p>Indeed, each  eigenvector is just a two-dimensional subspace of <span class="math notranslate nohighlight">\({\mathbb R}^3\)</span> pinned down by dynamics of the form</p>
+<p>因此，我们确认了<a class="reference internal" href="#equation-eq-eigen-sqrt">(17.17)</a>。
+关于我们所寻求的平方根的信息也包含在两个特征向量中。
+实际上，每个特征向量只是<span class="math notranslate nohighlight">\({\mathbb R}^3\)</span>的一个二维子空间，由我们在上面方程<a class="reference internal" href="#equation-eq-2diff8">(17.8)</a>中遇到的以下形式的动态确定：</p>
 <div class="math notranslate nohighlight" id="equation-eq-invariantsub101">
 <span class="eqno">(17.18)<a class="headerlink" href="#equation-eq-invariantsub101" title="Permalink to this equation">#</a></span>\[
 y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2 
 \]</div>
-<p>that we encountered above in equation <a class="reference internal" href="#equation-eq-2diff8">(17.8)</a> above.</p>
-<p>In equation <a class="reference internal" href="#equation-eq-invariantsub101">(17.18)</a>, the <span class="math notranslate nohighlight">\(i\)</span>th <span class="math notranslate nohighlight">\(\lambda_i\)</span>  equals the <span class="math notranslate nohighlight">\(V_{i, 1}/V_{i,2}\)</span>.</p>
-<p>The following graph verifies this for our example.</p>
+<p>在方程<a class="reference internal" href="#equation-eq-invariantsub101">(17.18)</a>中，第<span class="math notranslate nohighlight">\(i\)</span>个<span class="math notranslate nohighlight">\(\lambda_i\)</span>等于<span class="math notranslate nohighlight">\(V_{i, 1}/V_{i,2}\)</span>。
+下图验证了我们示例中的这一点。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -709,7 +699,7 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the eigenvectors</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制特征向量</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> 
@@ -717,7 +707,7 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> 
            <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\lambda_2=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Λ</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
 
-<span class="c1"># Annotating the slopes</span>
+<span class="c1"># 标记斜率</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">1.2</span><span class="p">,</span> 
          <span class="sa">r</span><span class="s1">&#39;slope=$\frac{V_{1,1}}{V_{1,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
          <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
@@ -725,7 +715,7 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
          <span class="sa">r</span><span class="s1">&#39;slope=$\frac{V_{2,1}}{V_{2,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
          <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
 
-<span class="c1"># Adding labels</span>
+<span class="c1"># 添加标记</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -742,81 +732,81 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 </div>
 </div>
 </section>
-<section id="invariant-subspace-approach">
-<h2><span class="section-number">17.7. </span>Invariant subspace approach<a class="headerlink" href="#invariant-subspace-approach" title="Permalink to this heading">#</a></h2>
-<p>The preceding  calculation indicates that we can use the eigenvectors <span class="math notranslate nohighlight">\(V\)</span> to construct 2-dimensional  <em>invariant subspaces</em>.</p>
-<p>We’ll pursue that possibility now.</p>
-<p>Define the transformed variables</p>
+<section id="id9">
+<h2><span class="section-number">17.7. </span>不变子空间方法<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>前面的计算表明，我们可以使用特征向量 <span class="math notranslate nohighlight">\(V\)</span> 构造 2 维<em>不变子空间</em>。
+现在我们将探讨这种可能性。
+定义变换后的变量</p>
 <div class="math notranslate nohighlight">
 \[
 x_t^* = V^{-1} x_t
 \]</div>
-<p>Evidently, we can recover <span class="math notranslate nohighlight">\(x_t\)</span> from <span class="math notranslate nohighlight">\(x_t^*\)</span>:</p>
+<p>显然，我们可以从 <span class="math notranslate nohighlight">\(x_t^*\)</span> 恢复 <span class="math notranslate nohighlight">\(x_t\)</span>：</p>
 <div class="math notranslate nohighlight">
 \[
 x_t = V x_t^*
 \]</div>
-<p>The following notations and equations will help us.</p>
-<p>Let</p>
+<p>以下符号和方程将对我们有所帮助。
+令</p>
 <div class="math notranslate nohighlight">
-\[V = \begin{bmatrix} V_{1,1} &amp; V_{1,2} \cr 
+\[
+V = \begin{bmatrix} V_{1,1} &amp; V_{1,2} \cr 
                          V_{2,1} &amp; V_{2,2} \end{bmatrix}, \quad
 V^{-1} = \begin{bmatrix} V^{1,1} &amp; V^{1,2} \cr 
                          V^{2,1} &amp; V^{2,2} \end{bmatrix}
 \]</div>
-<p>Notice that it follows from</p>
+<p>注意，从以下等式可以得出</p>
 <div class="math notranslate nohighlight">
 \[
  \begin{bmatrix} V^{1,1} &amp; V^{1,2} \cr 
                          V^{2,1} &amp; V^{2,2} \end{bmatrix} \begin{bmatrix} V_{1,1} &amp; V_{1,2} \cr 
                          V_{2,1} &amp; V_{2,2} \end{bmatrix} = \begin{bmatrix} 1  &amp; 0 \cr 0 &amp; 1 \end{bmatrix}
 \]</div>
-<p>that</p>
 <div class="math notranslate nohighlight">
 \[
 V^{2,1} V_{1,1} + V^{2,2} V_{2,1} = 0
 \]</div>
-<p>and</p>
+<p>和</p>
 <div class="math notranslate nohighlight">
 \[
 V^{1,1}V_{1,2} + V^{1,2} V_{2,2} = 0.
 \]</div>
-<p>These equations will be very useful soon.</p>
-<p>Notice that</p>
+<p>这些方程很快就会非常有用。
+注意</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{bmatrix} x_{1,t+1}^* \cr x_{2,t+1}^* \end{bmatrix} = \begin{bmatrix} \lambda_1  &amp; 0 \cr 0 &amp; \lambda_2 \end{bmatrix}
 \begin{bmatrix} x_{1,t}^* \cr x_{2,t}^* \end{bmatrix}
 \]</div>
-<p>To deactivate <span class="math notranslate nohighlight">\(\lambda_1\)</span> we want to set</p>
+<p>要使 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 失活，我们需要设置</p>
 <div class="math notranslate nohighlight">
 \[
 x_{1,0}^* = 0.
 \]</div>
-<p>This can be achieved by setting</p>
+<p>这可以通过设置以下内容实现</p>
 <div class="math notranslate nohighlight" id="equation-eq-deactivate1">
 <span class="eqno">(17.19)<a class="headerlink" href="#equation-eq-deactivate1" title="Permalink to this equation">#</a></span>\[
 x_{2,0} =  -( V^{1,2})^{-1} V^{1,1} x_{1,0} = V_{2,2} V_{1,2}^{-1} x_{1,0}.
 \]</div>
-<p>To deactivate <span class="math notranslate nohighlight">\(\lambda_2\)</span>, we want to  set</p>
+<p>要使 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 失活，我们需要设置</p>
 <div class="math notranslate nohighlight">
 \[
 x_{2,0}^* = 0
 \]</div>
-<p>This can be achieved by setting</p>
+<p>这可以通过设置以下内容实现</p>
 <div class="math notranslate nohighlight" id="equation-eq-deactivate2">
 <span class="eqno">(17.20)<a class="headerlink" href="#equation-eq-deactivate2" title="Permalink to this equation">#</a></span>\[
 x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 \]</div>
-<p>Let’s verify <a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a> and <a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a> below</p>
-<p>To deactivate <span class="math notranslate nohighlight">\(\lambda_1\)</span> we use <a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a></p>
+<p>让我们在下面验证 <a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a> 和 <a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a>
+要使 <span class="math notranslate nohighlight">\(\lambda_1\)</span> 失活，我们使用 <a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xd_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">x_0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
                  <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-<span class="c1"># Compute x_{1,0}^*</span>
+<span class="c1"># 计算 x_{1,0}^*</span>
 <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V_inv</span> <span class="o">@</span> <span class="n">xd_1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -827,15 +817,15 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 </div>
 </div>
 </div>
-<p>We find <span class="math notranslate nohighlight">\(x_{1,0}^* = 0\)</span>.</p>
-<p>Now we deactivate <span class="math notranslate nohighlight">\(\lambda_2\)</span> using <a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a></p>
+<p>我们发现 <span class="math notranslate nohighlight">\(x_{1,0}^* = 0\)</span>.</p>
+<p>现在我们用使<a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a> <span class="math notranslate nohighlight">\(\lambda_2\)</span> 失活</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xd_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">x_0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
                  <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
                  <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-<span class="c1"># Compute x_{2,0}^*</span>
+<span class="c1"># 计算 x_{2,0}^*</span>
 <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V_inv</span> <span class="o">@</span> <span class="n">xd_2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -846,23 +836,23 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 </div>
 </div>
 </div>
-<p>We find <span class="math notranslate nohighlight">\(x_{2,0}^* = 0\)</span>.</p>
+<p>我们发现 <span class="math notranslate nohighlight">\(x_{2,0}^* = 0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate with muted λ1 λ2.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模拟消音的λ1 λ2。</span>
 <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">xs_λ1</span> <span class="o">=</span> <span class="n">iterate_M</span><span class="p">(</span><span class="n">xd_1</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">xs_λ2</span> <span class="o">=</span> <span class="n">iterate_M</span><span class="p">(</span><span class="n">xd_2</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="c1"># Compute ratios y_t / y_{t-1}</span>
+<span class="c1"># 计算比率 y_t / y_{t-1}</span>
 <span class="n">ratios_λ1</span> <span class="o">=</span> <span class="n">xs_λ1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">xs_λ1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">ratios_λ2</span> <span class="o">=</span> <span class="n">xs_λ2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="n">xs_λ2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
 </pre></div>
 </div>
 </div>
 </div>
-<p>The following graph shows the ratios <span class="math notranslate nohighlight">\(y_t / y_{t-1}\)</span> for the two cases.</p>
-<p>We find that the ratios converge to <span class="math notranslate nohighlight">\(\lambda_2\)</span> in the first case and <span class="math notranslate nohighlight">\(\lambda_1\)</span> in the second case.</p>
+<p>以下图表显示了两种情况下 <span class="math notranslate nohighlight">\(y_t / y_{t-1}\)</span> 的比率。
+我们发现，在第一种情况下，比率收敛于 <span class="math notranslate nohighlight">\(\lambda_2\)</span>，而在第二种情况下，比率收敛于 <span class="math notranslate nohighlight">\(\lambda_1\)</span>。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -870,28 +860,28 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the ratios for y_t / y_{t-1}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制比率 y_t / y_{t-1}</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-<span class="c1"># First subplot</span>
+<span class="c1"># 第一子图</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ratios_λ1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> 
             <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">Λ</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\lambda_2$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ after Muting $\lambda_1$&#39;</span><span class="p">,</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在消音 $\lambda_1$之后&#39;</span><span class="p">,</span> 
                  <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
-<span class="c1"># Second subplot</span>
+<span class="c1"># 第二子图</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ratios_λ2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> 
             <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">Λ</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\lambda_1$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ after Muting $\lambda_2$&#39;</span><span class="p">,</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在消音 $\lambda_2$之后&#39;</span><span class="p">,</span> 
                  <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -902,30 +892,88 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4d3e58da2560ec8aae4b26047d534af79443f479fd78152d85ee1f417ed3fd5a.png"><img alt="_images/4d3e58da2560ec8aae4b26047d534af79443f479fd78152d85ee1f417ed3fd5a.png" src="_images/4d3e58da2560ec8aae4b26047d534af79443f479fd78152d85ee1f417ed3fd5a.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png"><img alt="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png" src="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="concluding-remarks">
-<h2><span class="section-number">17.8. </span>Concluding remarks<a class="headerlink" href="#concluding-remarks" title="Permalink to this heading">#</a></h2>
-<p>This lecture sets the stage  for many other applications of the <em>invariant subspace</em> methods.</p>
-<p>All of these exploit very similar equations based on eigen decompositions.</p>
-<p>We shall encounter equations very similar to <a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a> and <a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a>
-in <a class="reference internal" href="money_inflation.html"><span class="doc">Money Financed Government Deficits and Price Levels</span></a> and in many other places in dynamic economic theory.</p>
+<section id="id10">
+<h2><span class="section-number">17.8. </span>结束语<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>本讲为<em>不变子空间</em>方法的许多其他应用奠定了基础。
+所有这些应用都利用了基于特征分解的非常相似的方程。
+我们将在<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和动态经济理论的许多其他地方遇到与<a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a>和<a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a>非常相似的方程。</p>
 </section>
-<section id="exercise">
-<h2><span class="section-number">17.9. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
+<section id="id11">
+<h2><span class="section-number">17.9. </span>练习<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="greek_square_ex_a">
 
 <p class="admonition-title"><span class="caption-number">Exercise 17.1 </span></p>
 <section id="exercise-content">
-<p>Please use matrix algebra to formulate the method described by Bertrand Russell at the beginning of this lecture.</p>
+<p>请使用矩阵代数来表述伯特兰·罗素在本讲座开始时描述的方法。</p>
 <ol class="arabic simple">
-<li><p>Define a state vector <span class="math notranslate nohighlight">\(x_t = \begin{bmatrix} a_t \cr b_t \end{bmatrix}\)</span>.</p></li>
-<li><p>Formulate a first-order vector difference equation for <span class="math notranslate nohighlight">\(x_t\)</span> of the form <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span> and
-compute the matrix <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
-<li><p>Use the system <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span> to replicate the sequence of <span class="math notranslate nohighlight">\(a_t\)</span>’s and <span class="math notranslate nohighlight">\(b_t\)</span>’s described by Bertrand Russell.</p></li>
-<li><p>Compute the eigenvectors and eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> and compare them to corresponding objects computed in the text of this lecture.</p></li>
+<li><p>定义一个状态向量 <span class="math notranslate nohighlight">\(x_t = \begin{bmatrix} a_t \cr b_t \end{bmatrix}\)</span>。</p></li>
+<li><p>为 <span class="math notranslate nohighlight">\(x_t\)</span> 制定一个一阶向量差分方程，形式为 <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span>，并计算矩阵 <span class="math notranslate nohighlight">\(A\)</span>。</p></li>
+<li><p>使用系统 <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span> 来复制伯特兰·罗素描述的 <span class="math notranslate nohighlight">\(a_t\)</span> 和 <span class="math notranslate nohighlight">\(b_t\)</span> 序列。</p></li>
+<li><p>计算 <span class="math notranslate nohighlight">\(A\)</span> 的特征向量和特征值，并将它们与本讲座文本中计算的相应对象进行比较。</p></li>
 </ol>
 </section>
 </div>
@@ -933,8 +981,8 @@ compute the matrix <span class="math notranslate nohighlight">\(A\)</span>.</p><
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#greek_square_ex_a"> Exercise 17.1</a></p>
 <section id="solution-content">
-<p>Here is one soluition.</p>
-<p>According to the quote, we can formulate</p>
+<p>以下是一个解决方案：</p>
+<p>根据引用，我们可以表述为：</p>
 <div class="math notranslate nohighlight" id="equation-eq-gs-ex1system">
 <span class="eqno">(17.21)<a class="headerlink" href="#equation-eq-gs-ex1system" title="Permalink to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
@@ -942,38 +990,38 @@ a_{t+1} &amp;= a_t + b_t \\
 b_{t+1} &amp;= 2a_t + b_t
 \end{aligned}
 \end{split}\]</div>
-<p>with <span class="math notranslate nohighlight">\(x_0 = \begin{bmatrix}  a_0 \cr b_0 \end{bmatrix} = \begin{bmatrix}  1 \cr 1 \end{bmatrix}\)</span></p>
-<p>By <a class="reference internal" href="#equation-eq-gs-ex1system">(17.21)</a>, we can write matrix <span class="math notranslate nohighlight">\(A\)</span> as</p>
+<p>其中 <span class="math notranslate nohighlight">\(x_0 = \begin{bmatrix}  a_0 \cr b_0 \end{bmatrix} = \begin{bmatrix}  1 \cr 1 \end{bmatrix}\)</span></p>
+<p>根据<a class="reference internal" href="#equation-eq-gs-ex1system">(17.21)</a>，我们可以将矩阵 <span class="math notranslate nohighlight">\(A\)</span> 写为：</p>
 <div class="math notranslate nohighlight">
 \[
 A = \begin{bmatrix} 1 &amp; 1 \cr 
                 2 &amp; 1 \end{bmatrix}
 \]</div>
-<p>Then <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span> for <span class="math notranslate nohighlight">\(t \in \{0, \dots, 5\}\)</span></p>
+<p>然后，对于 <span class="math notranslate nohighlight">\(t \in \{0, \dots, 5\}\)</span>，有 <span class="math notranslate nohighlight">\(x_{t+1} = A x_t\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the matrix A</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义矩阵 A</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 
-<span class="c1"># Initial vector x_0</span>
+<span class="c1"># 初始向量 x_0</span>
 <span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
-<span class="c1"># Number of iterations</span>
+<span class="c1"># 迭代次数</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
 
-<span class="c1"># Generate the sequence</span>
+<span class="c1"># 生成序列</span>
 <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_0</span><span class="p">])</span>
 <span class="n">x_t</span> <span class="o">=</span> <span class="n">x_0</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">x_t</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x_t</span>
     <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">xs</span><span class="p">,</span> <span class="n">x_t</span><span class="p">])</span>
 
-<span class="c1"># Print the sequence</span>
+<span class="c1"># 打印序列</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">a_t</span><span class="p">,</span> <span class="n">b_t</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iter </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: a_t = </span><span class="si">{</span><span class="n">a_t</span><span class="si">}</span><span class="s2">, b_t = </span><span class="si">{</span><span class="n">b_t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;迭代 </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: a_t = </span><span class="si">{</span><span class="n">a_t</span><span class="si">}</span><span class="s2">, b_t = </span><span class="si">{</span><span class="n">b_t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Compute eigenvalues and eigenvectors of A</span>
+<span class="c1"># 计算 A 的特征值和特征向量</span>
 <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Eigenvalues:</span><span class="se">\n</span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -982,12 +1030,12 @@ A = \begin{bmatrix} 1 &amp; 1 \cr
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iter 0: a_t = 1, b_t = 1
-Iter 1: a_t = 2, b_t = 3
-Iter 2: a_t = 5, b_t = 7
-Iter 3: a_t = 12, b_t = 17
-Iter 4: a_t = 29, b_t = 41
-Iter 5: a_t = 70, b_t = 99
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>迭代 0: a_t = 1, b_t = 1
+迭代 1: a_t = 2, b_t = 3
+迭代 2: a_t = 5, b_t = 7
+迭代 3: a_t = 12, b_t = 17
+迭代 4: a_t = 29, b_t = 41
+迭代 5: a_t = 70, b_t = 99
 
 Eigenvalues:
 [ 2.41421356 -0.41421356]
@@ -1055,19 +1103,19 @@ Eigenvectors:
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1078,17 +1126,17 @@ Eigenvectors:
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1099,7 +1147,7 @@ Eigenvectors:
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1110,17 +1158,17 @@ Eigenvectors:
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1132,27 +1180,27 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1164,12 +1212,12 @@ Eigenvectors:
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1181,22 +1229,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1218,22 +1266,22 @@ Eigenvectors:
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1245,22 +1293,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1272,22 +1320,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1299,12 +1347,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1316,22 +1364,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1343,12 +1391,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1360,12 +1408,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1377,17 +1425,17 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

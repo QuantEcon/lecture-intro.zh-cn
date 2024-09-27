@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>18. Distributions and Probabilities &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>18. 分布和概率 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. LLN and CLT" href="lln_clt.html" />
-    <link rel="prev" title="17. Computing Square Roots" href="greek_square.html" />
+    <link rel="next" title="19. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="prev" title="17. 计算平方根" href="greek_square.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Distributions and Probabilities"/>
+<meta name="twitter:title" content="分布和概率"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Distributions and Probabilities" />
+<meta property="og:title" content="分布和概率" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/prob_dist.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,35 +172,35 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">18.1. Outline</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-distributions">18.2. Common distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-distributions">18.2.1. Discrete distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">18.2.1.1. Uniform distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">18.2.1.2. Bernoulli distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">18.2.1.3. Binomial distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-distribution">18.2.1.4. Geometric distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">18.2.1.5. Poisson distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">18.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">18.2. 常见分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">18.2.1. 离散分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">18.2.1.1. 均匀分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">18.2.1.2. 伯努利分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">18.2.1.3. 二项分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">18.2.1.4. 几何分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">18.2.1.5. 泊松分布</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-distributions">18.2.2. Continuous distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution">18.2.2.1. Normal distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lognormal-distribution">18.2.2.2. Lognormal distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-distribution">18.2.2.3. Exponential distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-distribution">18.2.2.4. Beta distribution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">18.2.2.5. Gamma distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">18.2.2. 连续分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">18.2.2.1. 正态分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">18.2.2.2. 对数正态分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">18.2.2.3. 指数分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">18.2.2.4. 贝塔分布</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">18.2.2.5. 伽马分布</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observed-distributions">18.3. Observed distributions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">18.3.1. Summary statistics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">18.3.2. Visualization</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">18.3.2.1. Histograms</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimates">18.3.2.2. Kernel density estimates</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots">18.3.2.3. Violin plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">18.3. 观察到的分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">18.3.1. 概括统计</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">18.3.2. 可视化</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">18.3.2.1. 直方图</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">18.3.2.2. 核密度估计</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">18.3.2.3. 小提琴图</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-probability-distributions">18.3.3. Connection to probability distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">18.3.3. 与概率分布的联系</a></li>
 </ul>
 </li>
 </ul>
@@ -235,7 +235,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Distributions and Probabilities</p>
+                        <p class="qe-page__header-subheading">分布和概率</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -261,11 +261,11 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="distributions-and-probabilities">
-<h1><span class="section-number">18. </span>Distributions and Probabilities<a class="headerlink" href="#distributions-and-probabilities" title="Permalink to this heading">#</a></h1>
-<section id="outline">
-<span id="index-0"></span><h2><span class="section-number">18.1. </span>Outline<a class="headerlink" href="#outline" title="Permalink to this heading">#</a></h2>
-<p>In this lecture we give a quick introduction to data and probability distributions using Python.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">18. </span>分布和概率<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="index-0">
+<span id="id2"></span><h2><span class="section-number">18.1. </span>概述<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<p>在本讲中，我们将使用 Python 快速介绍数据和概率分布。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>yfinance<span class="w">  </span>
@@ -299,7 +299,9 @@ Requirement already satisfied: webencodings in /home/runner/miniconda3/envs/quan
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2024.6.2)
@@ -311,58 +313,63 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="common-distributions">
-<h2><span class="section-number">18.2. </span>Common distributions<a class="headerlink" href="#common-distributions" title="Permalink to this heading">#</a></h2>
-<p>In this section we recall the definitions of some well-known distributions and explore how to manipulate them with SciPy.</p>
-<section id="discrete-distributions">
-<h3><span class="section-number">18.2.1. </span>Discrete distributions<a class="headerlink" href="#discrete-distributions" title="Permalink to this heading">#</a></h3>
-<p>Let’s start with discrete distributions.</p>
-<p>A discrete distribution is defined by a set of numbers <span class="math notranslate nohighlight">\(S = \{x_1, \ldots, x_n\}\)</span> and a <strong>probability mass function</strong> (PMF) on <span class="math notranslate nohighlight">\(S\)</span>, which is a function <span class="math notranslate nohighlight">\(p\)</span> from <span class="math notranslate nohighlight">\(S\)</span> to <span class="math notranslate nohighlight">\([0,1]\)</span> with the property</p>
+<section id="id3">
+<h2><span class="section-number">18.2. </span>常见分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>在本节中，我们回顾一些众所周知的分布的定义，并探讨如何使用 SciPy 来操作它们。</p>
+<section id="id4">
+<h3><span class="section-number">18.2.1. </span>离散分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>我们从离散分布开始。</p>
+<p>离散分布由一组数值 <span class="math notranslate nohighlight">\(S = \{x_1, \ldots, x_n\}\)</span> 定义，并在 <span class="math notranslate nohighlight">\(S\)</span> 上有一个<strong>概率质量函数</strong>（PMF），它是一个从 <span class="math notranslate nohighlight">\(S\)</span> 到 <span class="math notranslate nohighlight">\([0,1]\)</span> 的函数 <span class="math notranslate nohighlight">\(p\)</span>，具有属性</p>
 <div class="math notranslate nohighlight">
 \[ 
 \sum_{i=1}^n p(x_i) = 1 
 \]</div>
-<p>We say that a random variable <span class="math notranslate nohighlight">\(X\)</span> <strong>has distribution</strong> <span class="math notranslate nohighlight">\(p\)</span> if <span class="math notranslate nohighlight">\(X\)</span> takes value <span class="math notranslate nohighlight">\(x_i\)</span> with probability <span class="math notranslate nohighlight">\(p(x_i)\)</span>.</p>
-<p>That is,</p>
+<p>我们说一个随机变量 <span class="math notranslate nohighlight">\(X\)</span> <strong>具有分布</strong> <span class="math notranslate nohighlight">\(p\)</span>，如果 <span class="math notranslate nohighlight">\(X\)</span> 以概率 <span class="math notranslate nohighlight">\(p(x_i)\)</span> 取值 <span class="math notranslate nohighlight">\(x_i\)</span>。</p>
+<p>即，</p>
 <div class="math notranslate nohighlight">
 \[ 
-\mathbb P\{X = x_i\} = p(x_i) \quad \text{for } i= 1, \ldots, n 
+\mathbb P\{X = x_i\} = p(x_i) \quad \text{对于 } i= 1, \ldots, n 
 \]</div>
-<p>The <strong>mean</strong> or <strong>expected value</strong> of a random variable <span class="math notranslate nohighlight">\(X\)</span> with distribution <span class="math notranslate nohighlight">\(p\)</span> is</p>
+<p>具有分布 <span class="math notranslate nohighlight">\(p\)</span> 的随机变量 <span class="math notranslate nohighlight">\(X\)</span> 的<strong>均值</strong>或<strong>期望值</strong>是</p>
 <div class="math notranslate nohighlight">
 \[ 
 \mathbb{E}[X] = \sum_{i=1}^n x_i p(x_i)
 \]</div>
-<p>Expectation is also called the <em>first moment</em> of the distribution.</p>
-<p>We also refer to this number as the mean of the distribution (represented by) <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<p>The <strong>variance</strong> of <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<p>期望也称为分布的<em>第一矩</em>。</p>
+<p>我们也将这个数字称为分布（由 <span class="math notranslate nohighlight">\(p\)</span> 表示）的均值。</p>
+<p><span class="math notranslate nohighlight">\(X\)</span> 的<strong>方差</strong>定义为</p>
 <div class="math notranslate nohighlight">
 \[ 
 \mathbb{V}[X] = \sum_{i=1}^n (x_i - \mathbb{E}[X])^2 p(x_i)
 \]</div>
-<p>Variance is also called the <em>second central moment</em> of the distribution.</p>
-<p>The <strong>cumulative distribution function</strong> (CDF) of <span class="math notranslate nohighlight">\(X\)</span> is defined by</p>
+<p>方差也称为分布的<em>第二中心矩</em>。</p>
+<p><span class="math notranslate nohighlight">\(X\)</span> 的<strong>累积分布函数</strong>（CDF）定义为</p>
 <div class="math notranslate nohighlight">
 \[
 F(x) = \mathbb{P}\{X \leq x\}
         = \sum_{i=1}^n \mathbb 1\{x_i \leq x\} p(x_i)
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(\mathbb 1\{ \textrm{statement} \} = 1\)</span> if “statement” is true and zero otherwise.</p>
-<p>Hence the second term takes all <span class="math notranslate nohighlight">\(x_i \leq x\)</span> and sums their probabilities.</p>
-<section id="uniform-distribution">
-<h4><span class="section-number">18.2.1.1. </span>Uniform distribution<a class="headerlink" href="#uniform-distribution" title="Permalink to this heading">#</a></h4>
-<p>One simple example is the <strong>uniform distribution</strong>, where <span class="math notranslate nohighlight">\(p(x_i) = 1/n\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>We can import the uniform distribution on <span class="math notranslate nohighlight">\(S = \{1, \ldots, n\}\)</span>  from SciPy like so:</p>
+<p>这里 <span class="math notranslate nohighlight">\(\mathbb 1\{\text{statement} \} = 1\)</span> 如果 “statement” 为真，否则为零。</p>
+<p>因此第二项取所有 <span class="math notranslate nohighlight">\(x_i \leq x\)</span> 并求它们概率的和。</p>
+<section id="id5">
+<h4><span class="section-number">18.2.1.1. </span>均匀分布<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<p>一个简单的例子是<strong>均匀分布</strong>，其中 <span class="math notranslate nohighlight">\(p(x_i) = 1/n\)</span> 对于所有 <span class="math notranslate nohighlight">\(i\)</span> 都成立。</p>
+<p>我们可以这样从 SciPy 导入 <span class="math notranslate nohighlight">\(S = \{1, \ldots, n\}\)</span> 上的均匀分布：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -371,7 +378,7 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 </div>
-<p>Here’s the mean and variance:</p>
+<p>计算均值和方差：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">u</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
@@ -384,8 +391,8 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 </div>
-<p>The formula for the mean is <span class="math notranslate nohighlight">\((n+1)/2\)</span>, and the formula for the variance is <span class="math notranslate nohighlight">\((n^2 - 1)/12\)</span>.</p>
-<p>Now let’s evaluate the PMF:</p>
+<p>均值的公式是 <span class="math notranslate nohighlight">\((n+1)/2\)</span>，方差的公式是 <span class="math notranslate nohighlight">\((n^2 - 1)/12\)</span>。</p>
+<p>现在让我们评估 PMF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -410,7 +417,7 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 </div>
-<p>Here’s a plot of the probability mass function:</p>
+<p>以下是 PMF 的图：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -425,10 +432,10 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/241ed0318957be219f74e62c2288879df0a87281d1a91e64b6133cf2ec065808.png"><img alt="_images/241ed0318957be219f74e62c2288879df0a87281d1a91e64b6133cf2ec065808.png" src="_images/241ed0318957be219f74e62c2288879df0a87281d1a91e64b6133cf2ec065808.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/682fb082af771e54cbbb65874642a393e8fc30bebea47663351a5a8bb8fa8357.png"><img alt="_images/682fb082af771e54cbbb65874642a393e8fc30bebea47663351a5a8bb8fa8357.png" src="_images/682fb082af771e54cbbb65874642a393e8fc30bebea47663351a5a8bb8fa8357.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Here’s a plot of the CDF:</p>
+<p>这里是 CDF 的图：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -443,37 +450,35 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ba4ed8a90f864d5d5816ddc3d625f32da06f28a7e9f3619d60276c4343578c58.png"><img alt="_images/ba4ed8a90f864d5d5816ddc3d625f32da06f28a7e9f3619d60276c4343578c58.png" src="_images/ba4ed8a90f864d5d5816ddc3d625f32da06f28a7e9f3619d60276c4343578c58.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b1599f95effc1cd26d5a7977db1f7880f175d64b3f43db1ac96355e70b2fc083.png"><img alt="_images/b1599f95effc1cd26d5a7977db1f7880f175d64b3f43db1ac96355e70b2fc083.png" src="_images/b1599f95effc1cd26d5a7977db1f7880f175d64b3f43db1ac96355e70b2fc083.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The CDF jumps up by <span class="math notranslate nohighlight">\(p(x_i)\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>CDF 在<span class="math notranslate nohighlight">\(x_i\)</span>处跳升<span class="math notranslate nohighlight">\(p(x_i)\)</span>。</p>
 <div class="exercise admonition" id="prob_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 18.1 </span></p>
 <section id="exercise-content">
-<p>Calculate the mean and variance for this parameterization (i.e., <span class="math notranslate nohighlight">\(n=10\)</span>)
-directly from the PMF, using the expressions given above.</p>
-<p>Check that your answers agree with <code class="docutils literal notranslate"><span class="pre">u.mean()</span></code> and <code class="docutils literal notranslate"><span class="pre">u.var()</span></code>.</p>
+<p>计算这个参数化（即 <span class="math notranslate nohighlight">\(n=10\)</span>）的均值和方差，直接从 PMF 使用上面给出的公式计算。</p>
+<p>验证你的答案与 <code class="docutils literal notranslate"><span class="pre">u.mean()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">u.var()</span></code> 是否一致。</p>
 </section>
 </div>
 </section>
-<section id="bernoulli-distribution">
-<h4><span class="section-number">18.2.1.2. </span>Bernoulli distribution<a class="headerlink" href="#bernoulli-distribution" title="Permalink to this heading">#</a></h4>
-<p>Another useful distribution is the Bernoulli distribution on <span class="math notranslate nohighlight">\(S = \{0,1\}\)</span>, which has PMF:</p>
+<section id="id6">
+<h4><span class="section-number">18.2.1.2. </span>伯努利分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<p>另一个有用的分布是 <span class="math notranslate nohighlight">\(S = \{0,1\}\)</span> 上的伯努利分布，其 PMF 是：</p>
 <div class="math notranslate nohighlight">
 \[
 p(i) = \theta^i (1 - \theta)^{1-i}
 \qquad (i = 0, 1)
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> is a parameter.</p>
-<p>We can think of this distribution as modeling probabilities for a random trial with success probability <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>这里 <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数。</p>
+<p>我们可以将这个分布视为对一个随机试验进行概率建模，其成功概率是 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(p(1) = \theta\)</span> means that the trial succeeds (takes value 1) with probability <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(p(0) = 1 - \theta\)</span> means that the trial fails (takes value 0) with
-probability <span class="math notranslate nohighlight">\(1-\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(1) = \theta\)</span> 表示试验成功（取值1）的概率是 <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p(0) = 1 - \theta\)</span> 表示试验失败（取值0）的概率是 <span class="math notranslate nohighlight">\(1-\theta\)</span></p></li>
 </ul>
-<p>The formula for the mean is <span class="math notranslate nohighlight">\(\theta\)</span>, and the formula for the variance is <span class="math notranslate nohighlight">\(\theta(1-\theta)\)</span>.</p>
-<p>We can import the Bernoulli distribution on <span class="math notranslate nohighlight">\(S = \{0,1\}\)</span> from SciPy like so:</p>
+<p>均值的公式是 <span class="math notranslate nohighlight">\(\theta\)</span>，方差的公式是 <span class="math notranslate nohighlight">\(\theta(1-\theta)\)</span>。</p>
+<p>我们可以这样从 SciPy 导入 <span class="math notranslate nohighlight">\(S = \{0,1\}\)</span> 上的伯努利分布：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ</span> <span class="o">=</span> <span class="mf">0.4</span>
@@ -482,7 +487,7 @@ probability <span class="math notranslate nohighlight">\(1-\theta\)</span></p></
 </div>
 </div>
 </div>
-<p>Here’s the mean and variance at <span class="math notranslate nohighlight">\(\theta=0.4\)</span></p>
+<p>这是 <span class="math notranslate nohighlight">\(\theta=0.4\)</span> 时的均值和方差：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">u</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
@@ -495,7 +500,7 @@ probability <span class="math notranslate nohighlight">\(1-\theta\)</span></p></
 </div>
 </div>
 </div>
-<p>We can evaluate the PMF as follows</p>
+<p>我们可以评估 PMF 如下：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -509,18 +514,18 @@ probability <span class="math notranslate nohighlight">\(1-\theta\)</span></p></
 </div>
 </div>
 </section>
-<section id="binomial-distribution">
-<h4><span class="section-number">18.2.1.3. </span>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this heading">#</a></h4>
-<p>Another useful (and more interesting) distribution is the <strong>binomial distribution</strong> on <span class="math notranslate nohighlight">\(S=\{0, \ldots, n\}\)</span>, which has PMF:</p>
+<section id="id7">
+<h4><span class="section-number">18.2.1.3. </span>二项分布<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
+<p>另一个有用（而且更有趣）的分布是 <span class="math notranslate nohighlight">\(S=\{0, \ldots, n\}\)</span> 上的<strong>二项分布</strong>，其 PMF 为：</p>
 <div class="math notranslate nohighlight">
 \[ 
 p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 \]</div>
-<p>Again, <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> is a parameter.</p>
-<p>The interpretation of <span class="math notranslate nohighlight">\(p(i)\)</span> is: the probability of <span class="math notranslate nohighlight">\(i\)</span> successes in <span class="math notranslate nohighlight">\(n\)</span> independent trials with success probability <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<p>For example, if <span class="math notranslate nohighlight">\(\theta=0.5\)</span>, then <span class="math notranslate nohighlight">\(p(i)\)</span> is the probability of <span class="math notranslate nohighlight">\(i\)</span> heads in <span class="math notranslate nohighlight">\(n\)</span> flips of a fair coin.</p>
-<p>The formula for the mean is <span class="math notranslate nohighlight">\(n \theta\)</span> and the formula for the variance is <span class="math notranslate nohighlight">\(n \theta (1-\theta)\)</span>.</p>
-<p>Let’s investigate an example</p>
+<p>再次强调，<span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数。</p>
+<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：<span class="math notranslate nohighlight">\(n\)</span>次独立试验中有<span class="math notranslate nohighlight">\(i\)</span>次成功的概率，每次试验成功的概率为<span class="math notranslate nohighlight">\(\theta\)</span>。</p>
+<p>例如，如果<span class="math notranslate nohighlight">\(\theta=0.5\)</span>，那么<span class="math notranslate nohighlight">\(p(i)\)</span>就是<span class="math notranslate nohighlight">\(n\)</span>次抛掷公平硬币得到<span class="math notranslate nohighlight">\(i\)</span>次正面的概率。</p>
+<p>均值的公式是<span class="math notranslate nohighlight">\(n\theta\)</span>，方差的公式是<span class="math notranslate nohighlight">\(n\theta(1-\theta)\)</span>。</p>
+<p>现在让我们来探讨一个例子</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -530,7 +535,7 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 </div>
-<p>According to our formulas, the mean and variance are</p>
+<p>根据我们的公式，均值和方差是</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">*</span> <span class="n">θ</span><span class="p">,</span>  <span class="n">n</span> <span class="o">*</span>  <span class="n">θ</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">θ</span><span class="p">)</span>  
@@ -543,7 +548,7 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 </div>
-<p>Let’s see if SciPy gives us the same results:</p>
+<p>让我们看看SciPy是否给出了相同的结果：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">u</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
@@ -556,7 +561,7 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 </div>
-<p>Here’s the PMF:</p>
+<p>这是 PMF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -583,10 +588,10 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1743ed6860853aefa8272b8eb6348dfc73023626154f4e59e2dc6c16188528c4.png"><img alt="_images/1743ed6860853aefa8272b8eb6348dfc73023626154f4e59e2dc6c16188528c4.png" src="_images/1743ed6860853aefa8272b8eb6348dfc73023626154f4e59e2dc6c16188528c4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/45e40f84ad630018d5cff92a4956cd459971167471e35ebeabd5160ffd4015f9.png"><img alt="_images/45e40f84ad630018d5cff92a4956cd459971167471e35ebeabd5160ffd4015f9.png" src="_images/45e40f84ad630018d5cff92a4956cd459971167471e35ebeabd5160ffd4015f9.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Here’s the CDF:</p>
+<p>这是 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -601,21 +606,21 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/bae624676b807fbefa394081492be8f397bb701958764bbc50ba040bb4f92f76.png"><img alt="_images/bae624676b807fbefa394081492be8f397bb701958764bbc50ba040bb4f92f76.png" src="_images/bae624676b807fbefa394081492be8f397bb701958764bbc50ba040bb4f92f76.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/980a6dceb8e7c06630f847d4093214a06638356c2bde284a408c4db85abf3395.png"><img alt="_images/980a6dceb8e7c06630f847d4093214a06638356c2bde284a408c4db85abf3395.png" src="_images/980a6dceb8e7c06630f847d4093214a06638356c2bde284a408c4db85abf3395.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="exercise admonition" id="prob_ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 18.2 </span></p>
 <section id="exercise-content">
-<p>Using <code class="docutils literal notranslate"><span class="pre">u.pmf</span></code>, check that our definition of the CDF given above calculates the same function as <code class="docutils literal notranslate"><span class="pre">u.cdf</span></code>.</p>
+<p>使用<code class="docutils literal notranslate"><span class="pre">u.pmf</span></code>，验证我们上面给出的CDF定义是否计算出与<code class="docutils literal notranslate"><span class="pre">u.cdf</span></code>相同的函数。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="prob_dist-solution-2">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#prob_ex3"> Exercise 18.2</a></p>
 <section id="solution-content">
-<p>Here is one solution:</p>
+<p>这里是一个解决方案：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -631,26 +636,26 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6bf10fe4acb3709383deb633ab76ed760e4a85f5fc750cbc74cbb088b1cc6edd.png"><img alt="_images/6bf10fe4acb3709383deb633ab76ed760e4a85f5fc750cbc74cbb088b1cc6edd.png" src="_images/6bf10fe4acb3709383deb633ab76ed760e4a85f5fc750cbc74cbb088b1cc6edd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c369b5226e3fd59eb5cf2d7776827a6bd72131b5db61c81c5c76f61ffa4a1efa.png"><img alt="_images/c369b5226e3fd59eb5cf2d7776827a6bd72131b5db61c81c5c76f61ffa4a1efa.png" src="_images/c369b5226e3fd59eb5cf2d7776827a6bd72131b5db61c81c5c76f61ffa4a1efa.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We can see that the output graph is the same as the one above.</p>
+<p>我们可以看到输出图与上面的相同。</p>
 </section>
 </div>
 </section>
-<section id="geometric-distribution">
-<h4><span class="section-number">18.2.1.4. </span>Geometric distribution<a class="headerlink" href="#geometric-distribution" title="Permalink to this heading">#</a></h4>
-<p>The geometric distribution has infinite support <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span> and its PMF is given by</p>
+<section id="id8">
+<h4><span class="section-number">18.2.1.4. </span>几何分布<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<p>几何分布具有无限支持集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span>，其概率质量函数（PMF）为</p>
 <div class="math notranslate nohighlight">
 \[
 p(i) = (1 - \theta)^i \theta
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> is a parameter</p>
-<p>(A discrete distribution has infinite support if the set of points to which it assigns positive probability is infinite.)</p>
-<p>To understand the distribution, think of repeated independent random trials, each with success probability <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<p>The interpretation of <span class="math notranslate nohighlight">\(p(i)\)</span> is: the probability there are <span class="math notranslate nohighlight">\(i\)</span> failures before the first success occurs.</p>
-<p>It can be shown that the mean of the distribution is <span class="math notranslate nohighlight">\(1/\theta\)</span> and the variance is <span class="math notranslate nohighlight">\((1-\theta)/\theta\)</span>.</p>
-<p>Here’s an example.</p>
+<p>其中 <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数</p>
+<p>（如果一个离散分布赋予正概率的点集是无限的，则称其具有无限支持。）</p>
+<p>为了理解这个分布，可以想象重复的独立随机试验，每次试验的成功概率为 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
+<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：第一次成功之前发生了 <span class="math notranslate nohighlight">\(i\)</span> 次失败的概率。</p>
+<p>可以证明该分布的平均值是 <span class="math notranslate nohighlight">\(1/\theta\)</span>，方差是 <span class="math notranslate nohighlight">\((1-\theta)/\theta\)</span>。</p>
+<p>下面是一个例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ</span> <span class="o">=</span> <span class="mf">0.1</span>
@@ -665,7 +670,7 @@ p(i) = (1 - \theta)^i \theta
 </div>
 </div>
 </div>
-<p>Here’s part of the PMF:</p>
+<p>这里是部分PMF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -681,20 +686,20 @@ p(i) = (1 - \theta)^i \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1f85d43f1179dbbefaaa775cfee8dea17cfd0c871678a7a7e2cd86ab05004aff.png"><img alt="_images/1f85d43f1179dbbefaaa775cfee8dea17cfd0c871678a7a7e2cd86ab05004aff.png" src="_images/1f85d43f1179dbbefaaa775cfee8dea17cfd0c871678a7a7e2cd86ab05004aff.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/62e94e6214db2426b94dca0a3fa18e071ac7d8a85403e6edb700260f736172be.png"><img alt="_images/62e94e6214db2426b94dca0a3fa18e071ac7d8a85403e6edb700260f736172be.png" src="_images/62e94e6214db2426b94dca0a3fa18e071ac7d8a85403e6edb700260f736172be.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="poisson-distribution">
-<h4><span class="section-number">18.2.1.5. </span>Poisson distribution<a class="headerlink" href="#poisson-distribution" title="Permalink to this heading">#</a></h4>
-<p>The Poisson distribution on <span class="math notranslate nohighlight">\(S = \{0, 1, \ldots\}\)</span> with parameter <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> has PMF</p>
+<section id="id9">
+<h4><span class="section-number">18.2.1.5. </span>泊松分布<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
+<p>泊松分布在 <span class="math notranslate nohighlight">\(S = \{0, 1, \ldots\}\)</span> 上，参数为 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>，其概率质量函数（PMF）为</p>
 <div class="math notranslate nohighlight">
 \[
 p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 \]</div>
-<p>The interpretation of <span class="math notranslate nohighlight">\(p(i)\)</span> is: the probability of <span class="math notranslate nohighlight">\(i\)</span> events in a fixed time interval, where the events occur independently at a constant rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<p>It can be shown that the mean is <span class="math notranslate nohighlight">\(\lambda\)</span> and the variance is also <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<p>Here’s an example.</p>
+<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：在固定时间区间内事件发生 <span class="math notranslate nohighlight">\(i\)</span> 次的概率，其中事件以常数率 <span class="math notranslate nohighlight">\(\lambda\)</span> 独立发生。</p>
+<p>可以证明，其均值为 <span class="math notranslate nohighlight">\(\lambda\)</span>，方差也为 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
+<p>这里有一个例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mi">2</span>
@@ -709,7 +714,7 @@ p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 </div>
 </div>
 </div>
-<p>Here’s the PMF:</p>
+<p>这是概率质量函数：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -736,47 +741,47 @@ p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/65bfd9ee30c088a5a55d36e59a54982c34878cb1a4af48579510c90cdf46de54.png"><img alt="_images/65bfd9ee30c088a5a55d36e59a54982c34878cb1a4af48579510c90cdf46de54.png" src="_images/65bfd9ee30c088a5a55d36e59a54982c34878cb1a4af48579510c90cdf46de54.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/04603d6b60916d187d1fe8e37127aac0bc532a67159d99d2a58c6544dd4ba5b5.png"><img alt="_images/04603d6b60916d187d1fe8e37127aac0bc532a67159d99d2a58c6544dd4ba5b5.png" src="_images/04603d6b60916d187d1fe8e37127aac0bc532a67159d99d2a58c6544dd4ba5b5.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
-<section id="continuous-distributions">
-<h3><span class="section-number">18.2.2. </span>Continuous distributions<a class="headerlink" href="#continuous-distributions" title="Permalink to this heading">#</a></h3>
-<p>A continuous distribution is represented by a <strong>probability density function</strong>, which is a function <span class="math notranslate nohighlight">\(p\)</span> over <span class="math notranslate nohighlight">\(\mathbb R\)</span> (the set of all real numbers) such that <span class="math notranslate nohighlight">\(p(x) \geq 0\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> and</p>
+<section id="id10">
+<h3><span class="section-number">18.2.2. </span>连续分布<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>连续分布由一个<strong>概率密度函数</strong>表示，这是一个在全体实数集 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的函数 <span class="math notranslate nohighlight">\(p\)</span>，满足对所有的 <span class="math notranslate nohighlight">\(x\)</span> 有 <span class="math notranslate nohighlight">\(p(x) \geq 0\)</span>，并且</p>
 <div class="math notranslate nohighlight">
 \[ 
-\int_{-\infty}^\infty p(x) dx = 1 
+\int_{-\infty}^\infty p(x) \, dx = 1 
 \]</div>
-<p>We say that random variable <span class="math notranslate nohighlight">\(X\)</span> has distribution <span class="math notranslate nohighlight">\(p\)</span> if</p>
+<p>我们说随机变量 <span class="math notranslate nohighlight">\(X\)</span> 若有如下性质则服从分布 <span class="math notranslate nohighlight">\(p\)</span>：</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb P\{a &lt; X &lt; b\} = \int_a^b p(x) dx
+\mathbb P\{a &lt; X &lt; b\} = \int_a^b p(x) \, dx
 \]</div>
-<p>for all <span class="math notranslate nohighlight">\(a \leq b\)</span>.</p>
-<p>The definition of the mean and variance of a random variable <span class="math notranslate nohighlight">\(X\)</span> with distribution <span class="math notranslate nohighlight">\(p\)</span> are the same as the discrete case, after replacing the sum with an integral.</p>
-<p>For example, the mean of <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<p>对所有 <span class="math notranslate nohighlight">\(a \leq b\)</span> 都成立。</p>
+<p>随机变量 <span class="math notranslate nohighlight">\(X\)</span> 若服从分布 <span class="math notranslate nohighlight">\(p\)</span>，其均值和方差的定义与离散情况相同，只是将求和换成了积分。</p>
+<p>例如，<span class="math notranslate nohighlight">\(X\)</span> 的均值为</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) dx
+\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) \, dx
 \]</div>
-<p>The <strong>cumulative distribution function</strong> (CDF) of <span class="math notranslate nohighlight">\(X\)</span> is defined by</p>
+<p><span class="math notranslate nohighlight">\(X\)</span> 的<strong>累积分布函数</strong>（CDF）定义为</p>
 <div class="math notranslate nohighlight">
 \[
 F(x) = \mathbb P\{X \leq x\}
-        = \int_{-\infty}^x p(x) dx
+        = \int_{-\infty}^x p(x) \, dx
 \]</div>
-<section id="normal-distribution">
-<h4><span class="section-number">18.2.2.1. </span>Normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this heading">#</a></h4>
-<p>Perhaps the most famous distribution is the <strong>normal distribution</strong>, which has density</p>
+<section id="id11">
+<h4><span class="section-number">18.2.2.1. </span>正态分布<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
+<p>也许最著名的分布是<strong>正态分布</strong>，其密度为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{1}{\sqrt{2\pi}\sigma}
             \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \]</div>
-<p>This distribution has two parameters, <span class="math notranslate nohighlight">\(\mu \in \mathbb R\)</span> and <span class="math notranslate nohighlight">\(\sigma \in (0, \infty)\)</span>.</p>
-<p>Using calculus, it can be shown that, for this distribution, the mean is <span class="math notranslate nohighlight">\(\mu\)</span> and the variance is <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
-<p>We can obtain the moments, PDF and CDF of the normal density via SciPy as follows:</p>
+<p>这个分布有两个参数，<span class="math notranslate nohighlight">\(\mu \in \mathbb R\)</span> 和 <span class="math notranslate nohighlight">\(\sigma \in (0, \infty)\)</span>。</p>
+<p>使用微积分，可以证明对于这种分布，均值是 <span class="math notranslate nohighlight">\(\mu\)</span>，方差是 <span class="math notranslate nohighlight">\(\sigma^2\)</span>。</p>
+<p>我们可以通过 SciPy 获取正态分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
@@ -797,7 +802,7 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 </div>
-<p>Here’s a plot of the density — the famous “bell-shaped curve”:</p>
+<p>下面是密度的图像——著名的“钟形曲线”：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_vals</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -818,10 +823,10 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/bbcbc63b9346b6bef9aca49feea6d0c5fa6d42f7cac5d6ee5577f161963e80ca.png"><img alt="_images/bbcbc63b9346b6bef9aca49feea6d0c5fa6d42f7cac5d6ee5577f161963e80ca.png" src="_images/bbcbc63b9346b6bef9aca49feea6d0c5fa6d42f7cac5d6ee5577f161963e80ca.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/25bbff53430d1910f2131939d64442ca7f16a178c6799255e9c477e5a32261fe.png"><img alt="_images/25bbff53430d1910f2131939d64442ca7f16a178c6799255e9c477e5a32261fe.png" src="_images/25bbff53430d1910f2131939d64442ca7f16a178c6799255e9c477e5a32261fe.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Here’s a plot of the CDF:</p>
+<p>下面是 CDF 的图像：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -839,26 +844,26 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5d7d403496f7bd4d61f3a044e5b6cd24eed5f648841a5503b9963566beb30e50.png"><img alt="_images/5d7d403496f7bd4d61f3a044e5b6cd24eed5f648841a5503b9963566beb30e50.png" src="_images/5d7d403496f7bd4d61f3a044e5b6cd24eed5f648841a5503b9963566beb30e50.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/577e0a2a2369d1b35e378bdf234e856a81da5b250af078f71aa9f6ffcd2c7c85.png"><img alt="_images/577e0a2a2369d1b35e378bdf234e856a81da5b250af078f71aa9f6ffcd2c7c85.png" src="_images/577e0a2a2369d1b35e378bdf234e856a81da5b250af078f71aa9f6ffcd2c7c85.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="lognormal-distribution">
-<h4><span class="section-number">18.2.2.2. </span>Lognormal distribution<a class="headerlink" href="#lognormal-distribution" title="Permalink to this heading">#</a></h4>
-<p>The <strong>lognormal distribution</strong> is a distribution on <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> with density</p>
+<section id="id12">
+<h4><span class="section-number">18.2.2.2. </span>对数正态分布<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
+<p><strong>对数正态分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的一个分布，其密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
     \exp \left(- \frac{\left(\log x - \mu\right)^2}{2 \sigma^2} \right)
 \]</div>
-<p>This distribution has two parameters, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<p>It can be shown that, for this distribution, the mean is <span class="math notranslate nohighlight">\(\exp\left(\mu + \sigma^2/2\right)\)</span> and the variance is <span class="math notranslate nohighlight">\(\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)\)</span>.</p>
-<p>It can be proved that</p>
+<p>这个分布有两个参数，<span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>。</p>
+<p>可以证明，对于这个分布，平均值是 <span class="math notranslate nohighlight">\(\exp\left(\mu + \sigma^2/2\right)\)</span>，方差是 <span class="math notranslate nohighlight">\(\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)\)</span>。</p>
+<p>可以证明：</p>
 <ul class="simple">
-<li><p>if <span class="math notranslate nohighlight">\(X\)</span> is lognormally distributed, then <span class="math notranslate nohighlight">\(\log X\)</span> is normally distributed, and</p></li>
-<li><p>if <span class="math notranslate nohighlight">\(X\)</span> is normally distributed, then <span class="math notranslate nohighlight">\(\exp X\)</span> is lognormally distributed.</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(X\)</span> 是对数正态分布的，则 <span class="math notranslate nohighlight">\(\log X\)</span> 是正态分布的，</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(X\)</span> 是正态分布的，则 <span class="math notranslate nohighlight">\(\exp X\)</span> 是对数正态分布的。</p></li>
 </ul>
-<p>We can obtain the moments, PDF, and CDF of the lognormal density as follows:</p>
+<p>我们可以按照下面的方式获取对数正态分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
@@ -899,7 +904,7 @@ p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/95b416cc624c8aac19b6a0024a8dc94d0465506eab91b92b25bc7b5e3865a643.png"><img alt="_images/95b416cc624c8aac19b6a0024a8dc94d0465506eab91b92b25bc7b5e3865a643.png" src="_images/95b416cc624c8aac19b6a0024a8dc94d0465506eab91b92b25bc7b5e3865a643.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/adfb38004f0c441435328918b66c6de079657833401998cb24250eff678b867a.png"><img alt="_images/adfb38004f0c441435328918b66c6de079657833401998cb24250eff678b867a.png" src="_images/adfb38004f0c441435328918b66c6de079657833401998cb24250eff678b867a.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -921,22 +926,22 @@ p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1c03b2452eecfdef0b4bc8be0bcf95e88d13906e600d2ca08ad7279dc0b5e752.png"><img alt="_images/1c03b2452eecfdef0b4bc8be0bcf95e88d13906e600d2ca08ad7279dc0b5e752.png" src="_images/1c03b2452eecfdef0b4bc8be0bcf95e88d13906e600d2ca08ad7279dc0b5e752.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3089a4a4ca7fe8883cea84ce744a7287f3a2e9fb40bfc28e8704852875dbd51d.png"><img alt="_images/3089a4a4ca7fe8883cea84ce744a7287f3a2e9fb40bfc28e8704852875dbd51d.png" src="_images/3089a4a4ca7fe8883cea84ce744a7287f3a2e9fb40bfc28e8704852875dbd51d.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="exponential-distribution">
-<h4><span class="section-number">18.2.2.3. </span>Exponential distribution<a class="headerlink" href="#exponential-distribution" title="Permalink to this heading">#</a></h4>
-<p>The <strong>exponential distribution</strong> is a distribution supported on <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> with density</p>
+<section id="id13">
+<h4><span class="section-number">18.2.2.3. </span>指数分布<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h4>
+<p><strong>指数分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的分布，其密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \lambda \exp \left( - \lambda x \right)
 \qquad (x &gt; 0)
 \]</div>
-<p>This distribution has one parameter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<p>The exponential distribution can be thought of as the continuous analog of the geometric distribution.</p>
-<p>It can be shown that, for this distribution, the mean is <span class="math notranslate nohighlight">\(1/\lambda\)</span> and the variance is <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>.</p>
-<p>We can obtain the moments, PDF, and CDF of the exponential density as follows:</p>
+<p>这个分布有一个参数 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
+<p>指数分布可以被视为几何分布的连续等价物。</p>
+<p>可以证明，对于这个分布，平均值是 <span class="math notranslate nohighlight">\(1/\lambda\)</span>，方差是 <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>。</p>
+<p>我们可以按照下面的方式获取指数分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -976,7 +981,7 @@ p(x) = \lambda \exp \left( - \lambda x \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/603f914131be96d80c151e2357dc692d77f16121ce1dadea0b77271be77eea54.png"><img alt="_images/603f914131be96d80c151e2357dc692d77f16121ce1dadea0b77271be77eea54.png" src="_images/603f914131be96d80c151e2357dc692d77f16121ce1dadea0b77271be77eea54.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/53357586bef4f2a6b8937cba58a2269a3d6ef2d1f33ad4d8e4d8c386c198a895.png"><img alt="_images/53357586bef4f2a6b8937cba58a2269a3d6ef2d1f33ad4d8e4d8c386c198a895.png" src="_images/53357586bef4f2a6b8937cba58a2269a3d6ef2d1f33ad4d8e4d8c386c198a895.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -996,25 +1001,23 @@ p(x) = \lambda \exp \left( - \lambda x \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f1b49d8ae9a6a064bfae706a661bff108906dfa59b6508256e6e2854688827d9.png"><img alt="_images/f1b49d8ae9a6a064bfae706a661bff108906dfa59b6508256e6e2854688827d9.png" src="_images/f1b49d8ae9a6a064bfae706a661bff108906dfa59b6508256e6e2854688827d9.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c5ca37bdd98d31b9f1ac6e55e42c49b53b263add3f9aab488bdd9adffc4ee12d.png"><img alt="_images/c5ca37bdd98d31b9f1ac6e55e42c49b53b263add3f9aab488bdd9adffc4ee12d.png" src="_images/c5ca37bdd98d31b9f1ac6e55e42c49b53b263add3f9aab488bdd9adffc4ee12d.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="beta-distribution">
-<h4><span class="section-number">18.2.2.4. </span>Beta distribution<a class="headerlink" href="#beta-distribution" title="Permalink to this heading">#</a></h4>
-<p>The <strong>beta distribution</strong> is a distribution on <span class="math notranslate nohighlight">\((0, 1)\)</span> with density</p>
+<section id="id14">
+<h4><span class="section-number">18.2.2.4. </span>贝塔分布<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h4>
+<p><strong>贝塔分布</strong>是定义在 <span class="math notranslate nohighlight">\((0, 1)\)</span> 上的分布，其密度为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
     x^{\alpha - 1} (1 - x)^{\beta - 1}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Gamma\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_function">gamma function</a>.</p>
-<p>(The role of the gamma function is just to normalize the density, so that it
-integrates to one.)</p>
-<p>This distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>.</p>
-<p>It can be shown that, for this distribution, the mean is <span class="math notranslate nohighlight">\(\alpha / (\alpha + \beta)\)</span> and
-the variance is <span class="math notranslate nohighlight">\(\alpha \beta / (\alpha + \beta)^2 (\alpha + \beta + 1)\)</span>.</p>
-<p>We can obtain the moments, PDF, and CDF of the Beta density as follows:</p>
+<p>其中 <span class="math notranslate nohighlight">\(\Gamma\)</span> 是<a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_function">伽马函数</a>。</p>
+<p>(伽马函数的作用是使密度标准化，从而使其积分为一。)</p>
+<p>此分布有两个参数，<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
+<p>可以证明对于该分布，均值为 <span class="math notranslate nohighlight">\(\alpha / (\alpha + \beta)\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha \beta / (\alpha + \beta)^2 (\alpha + \beta + 1)\)</span>。</p>
+<p>我们可以如下获得贝塔密度的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span>
@@ -1055,7 +1058,7 @@ the variance is <span class="math notranslate nohighlight">\(\alpha \beta / (\al
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/16a5409c1756fa890377db728ecbab7a8dcef5f6bab0ab41b125b90e03846387.png"><img alt="_images/16a5409c1756fa890377db728ecbab7a8dcef5f6bab0ab41b125b90e03846387.png" src="_images/16a5409c1756fa890377db728ecbab7a8dcef5f6bab0ab41b125b90e03846387.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/04f997ca87d08e74fa047beb65407944aeadd7ec528a8d44555ac2aaf20fabac.png"><img alt="_images/04f997ca87d08e74fa047beb65407944aeadd7ec528a8d44555ac2aaf20fabac.png" src="_images/04f997ca87d08e74fa047beb65407944aeadd7ec528a8d44555ac2aaf20fabac.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1075,25 +1078,22 @@ the variance is <span class="math notranslate nohighlight">\(\alpha \beta / (\al
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a72ac4c87109f4e014bdecde5e1cfb535145abed5a4b724c0f2e3fab7e0331c4.png"><img alt="_images/a72ac4c87109f4e014bdecde5e1cfb535145abed5a4b724c0f2e3fab7e0331c4.png" src="_images/a72ac4c87109f4e014bdecde5e1cfb535145abed5a4b724c0f2e3fab7e0331c4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1a9e0afaa4233627ff11a74d9e6b1617759d487984bcf3aee9909487850de544.png"><img alt="_images/1a9e0afaa4233627ff11a74d9e6b1617759d487984bcf3aee9909487850de544.png" src="_images/1a9e0afaa4233627ff11a74d9e6b1617759d487984bcf3aee9909487850de544.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="gamma-distribution">
-<h4><span class="section-number">18.2.2.5. </span>Gamma distribution<a class="headerlink" href="#gamma-distribution" title="Permalink to this heading">#</a></h4>
-<p>The <strong>gamma distribution</strong> is a distribution on <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> with density</p>
+<section id="id15">
+<h4><span class="section-number">18.2.2.5. </span>伽马分布<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
+<p><strong>伽马分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的分布，其密度为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
     x^{\alpha - 1} \exp(-\beta x)
 \]</div>
-<p>This distribution has two parameters, <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>.</p>
-<p>It can be shown that, for this distribution, the mean is <span class="math notranslate nohighlight">\(\alpha / \beta\)</span> and
-the variance is <span class="math notranslate nohighlight">\(\alpha / \beta^2\)</span>.</p>
-<p>One interpretation is that if <span class="math notranslate nohighlight">\(X\)</span> is gamma distributed and <span class="math notranslate nohighlight">\(\alpha\)</span> is an
-integer, then <span class="math notranslate nohighlight">\(X\)</span> is the sum of <span class="math notranslate nohighlight">\(\alpha\)</span> independent exponentially distributed
-random variables with mean <span class="math notranslate nohighlight">\(1/\beta\)</span>.</p>
-<p>We can obtain the moments, PDF, and CDF of the Gamma density as follows:</p>
+<p>此分布有两个参数，<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
+<p>可以证明对于该分布，均值为 <span class="math notranslate nohighlight">\(\alpha / \beta\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha / \beta^2\)</span>。</p>
+<p>一种解释是，如果 <span class="math notranslate nohighlight">\(X\)</span> 是伽马分布并且 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个整数，那么 <span class="math notranslate nohighlight">\(X\)</span> 是 <span class="math notranslate nohighlight">\(\alpha\)</span> 个独立具有均值 <span class="math notranslate nohighlight">\(1/\beta\)</span> 的指数分布随机变量的总和。</p>
+<p>我们可以如下获得伽马密度的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span>
@@ -1134,7 +1134,7 @@ random variables with mean <span class="math notranslate nohighlight">\(1/\beta\
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/16ce09014848094a027448e9ae06f5a14ad8042518357c48371c327ab8f5b5cd.png"><img alt="_images/16ce09014848094a027448e9ae06f5a14ad8042518357c48371c327ab8f5b5cd.png" src="_images/16ce09014848094a027448e9ae06f5a14ad8042518357c48371c327ab8f5b5cd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fdc3fe7f042d9604986d28f79bcb24a7097ee2fa9234806d57ad9e2661782ba0.png"><img alt="_images/fdc3fe7f042d9604986d28f79bcb24a7097ee2fa9234806d57ad9e2661782ba0.png" src="_images/fdc3fe7f042d9604986d28f79bcb24a7097ee2fa9234806d57ad9e2661782ba0.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1154,16 +1154,16 @@ random variables with mean <span class="math notranslate nohighlight">\(1/\beta\
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/991bc142067a50138ed8709d4a2ff4babdd2f345398af95b8930c26cd467d7f8.png"><img alt="_images/991bc142067a50138ed8709d4a2ff4babdd2f345398af95b8930c26cd467d7f8.png" src="_images/991bc142067a50138ed8709d4a2ff4babdd2f345398af95b8930c26cd467d7f8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/45fc9e13089ff4bd6408cd1779901b1db2ea19ead98445c077876da2377dba4c.png"><img alt="_images/45fc9e13089ff4bd6408cd1779901b1db2ea19ead98445c077876da2377dba4c.png" src="_images/45fc9e13089ff4bd6408cd1779901b1db2ea19ead98445c077876da2377dba4c.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
 </section>
-<section id="observed-distributions">
-<h2><span class="section-number">18.3. </span>Observed distributions<a class="headerlink" href="#observed-distributions" title="Permalink to this heading">#</a></h2>
-<p>Sometimes we refer to observed data or measurements as “distributions”.</p>
-<p>For example, let’s say we observe the income of 10 people over a year:</p>
+<section id="id16">
+<h2><span class="section-number">18.3. </span>观察到的分布<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
+<p>有时候我们将观测到的数据或测量值称为“分布”。</p>
+<p>例如，假设我们观察了10个人一年的收入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Hiroshi&#39;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> 
@@ -1260,26 +1260,24 @@ random variables with mean <span class="math notranslate nohighlight">\(1/\beta\
 </table>
 </div></div></div>
 </div>
-<p>In this situation, we might refer to the set of their incomes as the “income distribution.”</p>
-<p>The terminology is confusing because this set is not a probability distribution
-— it’s just a collection of numbers.</p>
-<p>However, as we will see, there are connections between observed distributions (i.e., sets of
-numbers like the income distribution above) and probability distributions.</p>
-<p>Below we explore some observed distributions.</p>
-<section id="summary-statistics">
-<h3><span class="section-number">18.3.1. </span>Summary statistics<a class="headerlink" href="#summary-statistics" title="Permalink to this heading">#</a></h3>
-<p>Suppose we have an observed distribution with values <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span></p>
-<p>The <strong>sample mean</strong> of this distribution is defined as</p>
+<p>在这种情况下，我们可能称他们的收入集合为“收入分布”。</p>
+<p>这个术语有些令人困惑，因为这个集合不是一个概率分布——它只是一个数字的集合。</p>
+<p>然而，正如我们将看到的，观察到的分布（即，像上述收入分布那样的数字集合）和概率分布之间存在联系。</p>
+<p>下面我们探索一些观察到的分布。</p>
+<section id="id17">
+<h3><span class="section-number">18.3.1. </span>概括统计<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>假设我们有一个观察到的分布，其值为 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span></p>
+<p>这个分布的<strong>样本均值</strong>定义为</p>
 <div class="math notranslate nohighlight">
 \[
 \bar x = \frac{1}{n} \sum_{i=1}^n x_i
 \]</div>
-<p>The <strong>sample variance</strong> is defined as</p>
+<p><strong>样本方差</strong>定义为</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2
 \]</div>
-<p>For the income distribution given above, we can calculate these numbers via</p>
+<p>对于上面给出的收入分布，我们可以通过下面的方式计算这些数字：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span>
@@ -1297,44 +1295,41 @@ numbers like the income distribution above) and probability distributions.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 18.3 </span></p>
 <section id="exercise-content">
-<p>If you try to check that the formulas given above for the sample mean and sample
-variance produce the same numbers, you will see that the variance isn’t quite
-right.  This is because SciPy uses <span class="math notranslate nohighlight">\(1/(n-1)\)</span> instead of <span class="math notranslate nohighlight">\(1/n\)</span> as the term at the
-front of the variance. (Some books define the sample variance this way.)
-Confirm.</p>
+<p>如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 <span class="math notranslate nohighlight">\(1/(n-1)\)</span> 而不是 <span class="math notranslate nohighlight">\(1/n\)</span> 作为方差的前面的系数。（有些书籍就是这样定义样本方差的。）
+确认。</p>
 </section>
 </div>
 </section>
-<section id="visualization">
-<h3><span class="section-number">18.3.2. </span>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">#</a></h3>
-<p>Let’s look at different ways that we can visualize one or more observed distributions.</p>
-<p>We will cover</p>
+<section id="id18">
+<h3><span class="section-number">18.3.2. </span>可视化<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<p>让我们来看看我们可以用哪些方式来可视化一个或多个观察到的分布。</p>
+<p>我们将讲解</p>
 <ul class="simple">
-<li><p>histograms</p></li>
-<li><p>kernel density estimates and</p></li>
-<li><p>violin plots</p></li>
+<li><p>直方图</p></li>
+<li><p>核密度估计和</p></li>
+<li><p>小提琴图</p></li>
 </ul>
-<section id="histograms">
-<h4><span class="section-number">18.3.2.1. </span>Histograms<a class="headerlink" href="#histograms" title="Permalink to this heading">#</a></h4>
-<p>We can histogram the income distribution we just constructed as follows</p>
+<section id="id19">
+<h4><span class="section-number">18.3.2.1. </span>直方图<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h4>
+<p>我们可以如下制作我们刚刚建立的收入分布的直方图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;收入&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/901251b4e317409b1d885849d12e17c129ad12a83ae7b2aedb61fb636aa09a25.png"><img alt="_images/901251b4e317409b1d885849d12e17c129ad12a83ae7b2aedb61fb636aa09a25.png" src="_images/901251b4e317409b1d885849d12e17c129ad12a83ae7b2aedb61fb636aa09a25.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/275c5f28a96ec4a2d0026303cfd73d91abc4fd6ed51d710e6e2ae7db321df838.png"><img alt="_images/275c5f28a96ec4a2d0026303cfd73d91abc4fd6ed51d710e6e2ae7db321df838.png" src="_images/275c5f28a96ec4a2d0026303cfd73d91abc4fd6ed51d710e6e2ae7db321df838.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Let’s look at a distribution from real data.</p>
-<p>In particular, we will look at the monthly return on Amazon shares between 2000/1/1 and 2024/1/1.</p>
-<p>The monthly return is calculated as the percent change in the share price over each month.</p>
-<p>So we will have one observation for each month.</p>
+<p>让我们来看一个真实数据的分布。</p>
+<p>特别是，我们将看一下2000/1/1至2024/1/1之间亚马逊股票的月收益率。</p>
+<p>月收益率是每个月股价变动的百分比。</p>
+<p>因此，我们将得到每个月的一个观测。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1mo&#39;</span><span class="p">)</span>
@@ -1368,7 +1363,7 @@ Name: Adj Close, dtype: float64
 </div>
 </details>
 </div>
-<p>The first observation is the monthly return (percent change) over January 2000, which was</p>
+<p>第一个观察结果是2000年1月的月回报（百分比变化），这是</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_amazon</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1381,50 +1376,49 @@ Name: Adj Close, dtype: float64
 </div>
 </div>
 </div>
-<p>Let’s turn the return observations into an array and histogram it.</p>
+<p>让我们将回报观测值转换成数组并制作直方图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月收益率（百分比变化）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c7fd377a309508ec7729caaad78d9e8cc35d85949bd8aadd993852582b65ff96.png"><img alt="_images/c7fd377a309508ec7729caaad78d9e8cc35d85949bd8aadd993852582b65ff96.png" src="_images/c7fd377a309508ec7729caaad78d9e8cc35d85949bd8aadd993852582b65ff96.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6efd6010b0879d429a37ce3a55bef106a97b23a61dcbd049718c733877daa53e.png"><img alt="_images/6efd6010b0879d429a37ce3a55bef106a97b23a61dcbd049718c733877daa53e.png" src="_images/6efd6010b0879d429a37ce3a55bef106a97b23a61dcbd049718c733877daa53e.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="kernel-density-estimates">
-<h4><span class="section-number">18.3.2.2. </span>Kernel density estimates<a class="headerlink" href="#kernel-density-estimates" title="Permalink to this heading">#</a></h4>
-<p>Kernel density estimates (KDE) provide a simple way to estimate and visualize the density of a distribution.</p>
-<p>If you are not familiar with KDEs, you can think of them as a smoothed
-histogram.</p>
-<p>Let’s have a look at a KDE formed from the Amazon return data.</p>
+<section id="id20">
+<h4><span class="section-number">18.3.2.2. </span>核密度估计<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h4>
+<p>核密度估计（KDE）提供了一种简单的方式来估计和可视化分布的密度。</p>
+<p>如果你不熟悉核密度估计，可以将其视为平滑的直方图。</p>
+<p>让我们看看从亚马逊退货数据中形成的KDE。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5b1f4dd0b72870d59973be6f4193c87a04aeaed2c3db3d5c7497277d8458eb91.png"><img alt="_images/5b1f4dd0b72870d59973be6f4193c87a04aeaed2c3db3d5c7497277d8458eb91.png" src="_images/5b1f4dd0b72870d59973be6f4193c87a04aeaed2c3db3d5c7497277d8458eb91.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/05550d4b4513d396edb704c3c5258cfd9cce3300505cc8e94071932293a5ac04.png"><img alt="_images/05550d4b4513d396edb704c3c5258cfd9cce3300505cc8e94071932293a5ac04.png" src="_images/05550d4b4513d396edb704c3c5258cfd9cce3300505cc8e94071932293a5ac04.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The smoothness of the KDE is dependent on how we choose the bandwidth.</p>
+<p>KDE的平滑程度取决于我们选择带宽的方式。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=0.1&quot;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=0.5&quot;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=1&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1432,31 +1426,31 @@ histogram.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/721e29c12d6f4531c43192bd47025f8f16417402c1e21d155b6a2cf5d355d055.png"><img alt="_images/721e29c12d6f4531c43192bd47025f8f16417402c1e21d155b6a2cf5d355d055.png" src="_images/721e29c12d6f4531c43192bd47025f8f16417402c1e21d155b6a2cf5d355d055.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fcafccde9799adcfbd6dd58e747a29fa8e2630590e5331ea15f1064223dc474e.png"><img alt="_images/fcafccde9799adcfbd6dd58e747a29fa8e2630590e5331ea15f1064223dc474e.png" src="_images/fcafccde9799adcfbd6dd58e747a29fa8e2630590e5331ea15f1064223dc474e.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>When we use a larger bandwidth, the KDE is smoother.</p>
-<p>A suitable bandwidth is not too smooth (underfitting) or too wiggly (overfitting).</p>
+<p>当我们使用较大的带宽时，KDE更加平滑。</p>
+<p>一个合适的带宽既不应过于平滑（欠拟合），也不应过于曲折（过拟合）。</p>
 </section>
-<section id="violin-plots">
-<h4><span class="section-number">18.3.2.3. </span>Violin plots<a class="headerlink" href="#violin-plots" title="Permalink to this heading">#</a></h4>
-<p>Another way to display an observed distribution is via a violin plot.</p>
+<section id="id21">
+<h4><span class="section-number">18.3.2.3. </span>小提琴图<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h4>
+<p>通过小提琴图展示观察到的分布是另一种方式。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/51fe5b6d87ef7189101cb578f47847622b963a3bcb7c0bca052a0fb70fad9d5b.png"><img alt="_images/51fe5b6d87ef7189101cb578f47847622b963a3bcb7c0bca052a0fb70fad9d5b.png" src="_images/51fe5b6d87ef7189101cb578f47847622b963a3bcb7c0bca052a0fb70fad9d5b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d9014fd8ac9c212decb5d6e163a4a7fd4edc26024c44a55af015f1f037c6d6f5.png"><img alt="_images/d9014fd8ac9c212decb5d6e163a4a7fd4edc26024c44a55af015f1f037c6d6f5.png" src="_images/d9014fd8ac9c212decb5d6e163a4a7fd4edc26024c44a55af015f1f037c6d6f5.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Violin plots are particularly useful when we want to compare different distributions.</p>
-<p>For example, let’s compare the monthly returns on Amazon shares with the monthly return on Costco shares.</p>
+<p>小提琴图在我们想要比较不同分布时特别有用。</p>
+<p>例如，让我们比较亚马逊股份的月度回报与Costco股份的月度回报。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;COST&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1mo&#39;</span><span class="p">)</span>
@@ -1484,87 +1478,85 @@ histogram.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">([</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">x_costco</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;retailers&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;零售商&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;Amazon&#39;</span><span class="p">,</span> <span class="s1">&#39;Costco&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;亚马逊&#39;</span><span class="p">,</span> <span class="s1">&#39;开市客&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/610f82368e9e3ddb2cb2a235f05bfadf4af9ba6e3b1e4f19a5859bacd7da870b.png"><img alt="_images/610f82368e9e3ddb2cb2a235f05bfadf4af9ba6e3b1e4f19a5859bacd7da870b.png" src="_images/610f82368e9e3ddb2cb2a235f05bfadf4af9ba6e3b1e4f19a5859bacd7da870b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/831155fba1e1893139e84ef8ecfde2e7807cd1888843290e8121f316b17673d1.png"><img alt="_images/831155fba1e1893139e84ef8ecfde2e7807cd1888843290e8121f316b17673d1.png" src="_images/831155fba1e1893139e84ef8ecfde2e7807cd1888843290e8121f316b17673d1.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
-<section id="connection-to-probability-distributions">
-<h3><span class="section-number">18.3.3. </span>Connection to probability distributions<a class="headerlink" href="#connection-to-probability-distributions" title="Permalink to this heading">#</a></h3>
-<p>Let’s discuss the connection between observed distributions and probability distributions.</p>
-<p>Sometimes it’s helpful to imagine that an observed distribution is generated by a particular probability distribution.</p>
-<p>For example, we might look at the returns from Amazon above and imagine that they were generated by a normal distribution.</p>
-<p>(Even though this is not true, it <em>might</em> be a helpful way to think about the data.)</p>
-<p>Here we match a normal distribution to the Amazon monthly returns by setting the
-sample mean to the mean of the normal distribution and the sample variance equal
-to the variance.</p>
-<p>Then we plot the density and the histogram.</p>
+<section id="id22">
+<h3><span class="section-number">18.3.3. </span>与概率分布的联系<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<p>让我们讨论一下观察到的分布与概率分布之间的联系。</p>
+<p>有时候，想象一个观察到的分布是由特定的概率分布生成的会很有帮助。</p>
+<p>例如，我们可能会观察上面亚马逊的回报，并想象它们是由正态分布生成的。</p>
+<p>（尽管这不是真的，但这<em>可能</em>是一种有帮助的思考数据的方式。）</p>
+<p>这里我们通过将样本均值设为正态分布的均值，将样本方差设为方差，来匹配正态分布到亚马逊月度回报上。</p>
+<p>然后我们绘制密度和直方图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">σ_squared</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
-<span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_squared</span><span class="p">)</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  
+<span class="n">σ_squared</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>  
+<span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_squared</span><span class="p">)</span>  
+<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>  
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;monthly return (percent change)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报（百分比变化）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/87aee6219c0ef325c07f38fe8bf1d6400144b3988a95bc317ae8676877a13503.png"><img alt="_images/87aee6219c0ef325c07f38fe8bf1d6400144b3988a95bc317ae8676877a13503.png" src="_images/87aee6219c0ef325c07f38fe8bf1d6400144b3988a95bc317ae8676877a13503.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3d2f1ea031f9a8f728f583d308f653b55bad8f62d53f4b505896b6a500b5a737.png"><img alt="_images/3d2f1ea031f9a8f728f583d308f653b55bad8f62d53f4b505896b6a500b5a737.png" src="_images/3d2f1ea031f9a8f728f583d308f653b55bad8f62d53f4b505896b6a500b5a737.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The match between the histogram and the density is not bad but also not very good.</p>
-<p>One reason is that the normal distribution is not really a good fit for this observed data — we will discuss this point again when we talk about <a class="reference internal" href="heavy_tails.html#heavy-tail"><span class="std std-ref">heavy tailed distributions</span></a>.</p>
-<p>Of course, if the data really <em>is</em> generated by the normal distribution, then the fit will be better.</p>
-<p>Let’s see this in action</p>
+<p>直方图与密度的匹配不错，但也不是很好。</p>
+<p>一个原因是正态分布实际上并不真正适合这个观察数据 — 我们在讨论<a class="reference internal" href="heavy_tails.html#heavy-tail"><span class="std std-ref">重尾分布</span></a>时将再次提到这一点。</p>
+<p>当然，如果数据真的是由正态分布生成的，那么拟合效果会更好。</p>
+<p>让我们看到这一点在实际中的运用：</p>
 <ul class="simple">
-<li><p>first we generate random draws from the normal distribution</p></li>
-<li><p>then we histogram them and compare with the density.</p></li>
+<li><p>首先我们从正态分布中生成随机抽样</p></li>
+<li><p>然后我们对它们进行直方图绘制，并与密度比较。</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># Number of observations</span>
-<span class="n">x_draws</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_draws</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>  
+<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>  
+<span class="n">N</span> <span class="o">=</span> <span class="mi">2000</span>  
+<span class="n">x_draws</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_draws</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>  
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f1007e32498bd5920f7ea3492900fb66471f2130a778779546b8b63b3487bb12.png"><img alt="_images/f1007e32498bd5920f7ea3492900fb66471f2130a778779546b8b63b3487bb12.png" src="_images/f1007e32498bd5920f7ea3492900fb66471f2130a778779546b8b63b3487bb12.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b2f7cf8714a951e682e7b8587aab655aae785e3dc3aaae297eeafbd785a7e202.png"><img alt="_images/b2f7cf8714a951e682e7b8587aab655aae785e3dc3aaae297eeafbd785a7e202.png" src="_images/b2f7cf8714a951e682e7b8587aab655aae785e3dc3aaae297eeafbd785a7e202.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Note that if you keep increasing <span class="math notranslate nohighlight">\(N\)</span>, which is the number of observations, the fit will get better and better.</p>
-<p>This convergence is a version of the “law of large numbers”, which we will discuss <a class="reference internal" href="lln_clt.html#lln-mr"><span class="std std-ref">later</span></a>.</p>
+<p>请注意，如果你不断增加 <span class="math notranslate nohighlight">\(N\)</span>，即观测数量，拟合效果会越来越好。</p>
+<p>这种收敛是“大数定律”的一个版本，我们将在<a class="reference internal" href="lln_clt.html#lln-mr"><span class="std std-ref">以后</span></a>讨论。</p>
 </section>
 </section>
 </section>
@@ -1620,19 +1612,19 @@ to the variance.</p>
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1643,17 +1635,17 @@ to the variance.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1664,7 +1656,7 @@ to the variance.</p>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1675,17 +1667,17 @@ to the variance.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1697,27 +1689,27 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1729,12 +1721,12 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1746,22 +1738,22 @@ to the variance.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1783,22 +1775,22 @@ to the variance.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1810,22 +1802,22 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1837,22 +1829,22 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1864,12 +1856,12 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1881,22 +1873,22 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1908,12 +1900,12 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1925,12 +1917,12 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1942,17 +1934,17 @@ to the variance.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

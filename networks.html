@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>41. Networks &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>45. 网络 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="42. Supply and Demand with Many Goods" href="supply_demand_multiple_goods.html" />
-    <link rel="prev" title="40. A Lake Model of Employment" href="lake_model.html" />
+    <link rel="next" title="46. 多种商品的供需关系" href="supply_demand_multiple_goods.html" />
+    <link rel="prev" title="44. 就业的湖泊模型" href="lake_model.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Networks"/>
+<meta name="twitter:title" content="网络"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Networks" />
+<meta property="og:title" content="网络" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/networks.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,34 +172,35 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outline">41.1. Outline</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-and-financial-networks">41.2. Economic and financial networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-aircraft-exports">41.2.1. Example: Aircraft Exports</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-markov-chain">41.2.2. Example: A Markov Chain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">45.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">45.2. 经济和金融网络</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">45.2.1. 例子：飞机出口</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">45.2.2. 例子：马尔可夫链</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-introduction-to-graph-theory">41.3. An introduction to graph theory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-definitions">41.3.1. Key definitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digraphs-in-networkx">41.3.2. Digraphs in Networkx</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">41.3.3. Communication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">45.3. 图论简介</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">45.3.1. 关键定义</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#networkx">45.3.2. Networkx中的有向图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strongly-connected">45.3.3. 通信</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graphs">41.4. Weighted graphs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#international-private-credit-flows-by-country">41.4.1. International private credit flows by country</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">41.4.2. Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">45.4. 加权图</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">45.4.1. 按国家划分的国际私人信贷流动</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">45.4.2. 定义</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrices">41.5. Adjacency matrices</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">41.6. Properties</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-centrality">41.7. Network centrality</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-centrality">41.7.1. Degree centrality</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvector-centrality">41.7.2. Eigenvector centrality</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-centrality">41.7.3. Katz centrality</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authorities-vs-hubs">41.7.4. Authorities vs hubs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">45.5. 邻接矩阵</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">45.6. 网络中心性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">45.6.1. 度中心性</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">41.8. Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">41.9. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">45.7. 特征向量中心性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">45.7.1. 卡茨中心性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">45.7.2. 权威与枢纽</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">45.8. 进一步阅读</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">45.9. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -232,7 +233,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Networks</p>
+                        <p class="qe-page__header-subheading">网络</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -258,8 +259,8 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="networks">
-<h1><span class="section-number">41. </span>Networks<a class="headerlink" href="#networks" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">45. </span>网络<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon-book-networks<span class="w"> </span>pandas-datareader
@@ -274,7 +275,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon-book-networks in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (1.1)
 Requirement already satisfied: pandas-datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.10.0)
-Requirement already satisfied: numpy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-book-networks) (1.26.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-book-networks) (1.26.4)
 Requirement already satisfied: scipy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-book-networks) (1.13.1)
 Requirement already satisfied: pandas in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-book-networks) (2.2.2)
 Requirement already satisfied: matplotlib in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-book-networks) (3.8.4)
@@ -292,9 +295,7 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (2024.6.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contourpy&gt;=1.0.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from matplotlib-&gt;quantecon-book-networks) (1.2.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from matplotlib-&gt;quantecon-book-networks) (1.2.0)
 Requirement already satisfied: cycler&gt;=0.10 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from matplotlib-&gt;quantecon-book-networks) (0.11.0)
 Requirement already satisfied: fonttools&gt;=4.22.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from matplotlib-&gt;quantecon-book-networks) (4.51.0)
 Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from matplotlib-&gt;quantecon-book-networks) (1.4.4)
@@ -305,36 +306,30 @@ Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/runner/miniconda3/en
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-&gt;quantecon-book-networks) (0.59.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon-&gt;quantecon-book-networks) (1.12)
-Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon-&gt;quantecon-book-networks) (0.42.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;quantecon-book-networks) (1.16.0)
-Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon-&gt;quantecon-book-networks) (1.3.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon-&gt;quantecon-book-networks) (0.42.0)
+Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;quantecon-book-networks) (1.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon-&gt;quantecon-book-networks) (1.3.0)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
-<section id="outline">
-<h2><span class="section-number">41.1. </span>Outline<a class="headerlink" href="#outline" title="Permalink to this heading">#</a></h2>
-<p>In recent years there has been rapid growth in a field called <a class="reference external" href="https://en.wikipedia.org/wiki/Network_science">network science</a>.</p>
-<p>Network science studies relationships between groups of objects.</p>
-<p>One important example is the <a class="reference external" href="https://en.wikipedia.org/wiki/World_Wide_Web#Linking">world wide web</a>
-, where web pages are connected by hyperlinks.</p>
-<p>Another is the <a class="reference external" href="https://en.wikipedia.org/wiki/Neural_circuit">human brain</a>: studies of brain function emphasize the network of
-connections between nerve cells (neurons).</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">Artificial neural networks</a> are based on this idea, using data to build
-intricate connections between simple processing units.</p>
-<p>Epidemiologists studying <a class="reference external" href="https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics">transmission of diseases</a>
-like COVID-19 analyze interactions between groups of human hosts.</p>
-<p>In operations research, network analysis is used to study fundamental problems
-as on minimum cost flow, the traveling salesman, <a class="reference external" href="https://en.wikipedia.org/wiki/Shortest_path_problem">shortest paths</a>,
-and assignment.</p>
-<p>This lecture gives an introduction to economic and financial networks.</p>
-<p>Some parts of this lecture are drawn from the text
-<a class="reference external" href="https://networks.quantecon.org/">https://networks.quantecon.org/</a> but the level of this lecture is more
-introductory.</p>
-<p>We will need the following imports.</p>
+<section id="id2">
+<h2><span class="section-number">45.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>近年来，一个被称为<a class="reference external" href="https://en.wikipedia.org/wiki/Network_science">网络科学</a>的领域迅速发展。
+网络科学研究对象群体之间的关系。
+一个重要的例子是<a class="reference external" href="https://en.wikipedia.org/wiki/World_Wide_Web#Linking">万维网</a>，其中网页通过超链接相互连接。
+另一个例子是<a class="reference external" href="https://en.wikipedia.org/wiki/Neural_circuit">人脑</a>：对大脑功能的研究强调神经细胞（神经元）之间的连接网络。
+<a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">人工神经网络</a>基于这一理念，利用数据在简单处理单元之间建立复杂的连接。
+研究COVID-19等<a class="reference external" href="https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics">疾病传播</a>的流行病学家分析人类宿主群体之间的相互作用。
+在运筹学中，网络分析用于研究基本问题，如最小成本流、旅行商问题、<a class="reference external" href="https://en.wikipedia.org/wiki/Shortest_path_problem">最短路径</a>和分配问题。
+本讲座介绍了经济和金融网络。
+本讲座的部分内容来自教材 <a class="reference external" href="https://networks.quantecon.org/%EF%BC%8C%E4%BD%86%E6%9C%AC%E8%AE%B2%E5%BA%A7%E7%9A%84%E6%B0%B4%E5%B9%B3%E6%9B%B4%E4%B8%BA%E5%85%A5%E9%97%A8%E3%80%82">https://networks.quantecon.org/，但本讲座的水平更为入门。</a>
+我们需要以下导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -353,23 +348,23 @@ introductory.</p>
 </div>
 </div>
 </section>
-<section id="economic-and-financial-networks">
-<h2><span class="section-number">41.2. </span>Economic and financial networks<a class="headerlink" href="#economic-and-financial-networks" title="Permalink to this heading">#</a></h2>
-<p>Within economics, important examples of networks include</p>
+<section id="id3">
+<h2><span class="section-number">45.2. </span>经济和金融网络<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>在经济学中，网络的重要例子包括：</p>
 <ul class="simple">
-<li><p>financial networks</p></li>
-<li><p>production networks</p></li>
-<li><p>trade networks</p></li>
-<li><p>transport networks and</p></li>
-<li><p>social networks</p></li>
+<li><p>金融网络</p></li>
+<li><p>生产网络</p></li>
+<li><p>贸易网络</p></li>
+<li><p>运输网络</p></li>
+<li><p>社交网络</p></li>
 </ul>
-<p>Social networks affect trends in market sentiment and consumer decisions.</p>
-<p>The structure of financial networks helps to determine relative fragility of the financial system.</p>
-<p>The structure of production networks affects trade, innovation and the propagation of local shocks.</p>
-<p>To better understand such networks, let’s look at some examples in more depth.</p>
-<section id="example-aircraft-exports">
-<h3><span class="section-number">41.2.1. </span>Example: Aircraft Exports<a class="headerlink" href="#example-aircraft-exports" title="Permalink to this heading">#</a></h3>
-<p>The following figure shows international trade in large commercial aircraft in 2019 based on International Trade Data SITC Revision 2.</p>
+<p>社交网络影响市场情绪和消费者决策的趋势。
+金融网络的结构有助于确定金融系统的相对脆弱性。
+生产网络的结构影响贸易、创新和局部冲击的传播。
+为了更好地理解这些网络，让我们深入看一些例子。</p>
+<section id="id4">
+<h3><span class="section-number">45.2.1. </span>例子：飞机出口<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>下图显示了基于国际贸易数据SITC第2修订版的2019年大型商用飞机国际贸易情况。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -433,106 +428,94 @@ introductory.</p>
 <figure class="align-default" id="aircraft-network">
 <a class="reference internal image-reference" href="_images/4f4d46c5d1d7e0cbc5455a307e20f2c5c039bb75c21887972f2f338d5f6c4523.png"><img alt="_images/4f4d46c5d1d7e0cbc5455a307e20f2c5c039bb75c21887972f2f338d5f6c4523.png" src="_images/4f4d46c5d1d7e0cbc5455a307e20f2c5c039bb75c21887972f2f338d5f6c4523.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.1 </span><span class="caption-text">Commercial Aircraft Network</span><a class="headerlink" href="#aircraft-network" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.1 </span><span class="caption-text">商用飞机网络</span><a class="headerlink" href="#aircraft-network" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The circles in the figure are called <strong>nodes</strong> or <strong>vertices</strong> – in this case they represent countries.</p>
-<p>The arrows in the figure are called <strong>edges</strong> or <strong>links</strong>.</p>
-<p>Node size is proportional to total exports and edge width is proportional to exports to the target country.</p>
-<p>(The data is for trade in commercial aircraft weighing at least 15,000kg and was sourced from CID Dataverse.)</p>
-<p>The figure shows that the US, France and Germany are major export hubs.</p>
-<p>In the discussion below, we learn to quantify such ideas.</p>
+<p>图中的圆圈被称为<strong>节点</strong>或<strong>顶点</strong> – 在这个例子中，它们代表国家。
+图中的箭头被称为<strong>边</strong>或<strong>链接</strong>。
+节点大小与总出口成正比，边的宽度与对目标国家的出口成正比。
+（数据针对重量至少15,000公斤的商用飞机贸易，数据来源于CID Dataverse。）
+图表显示美国、法国和德国是主要的出口枢纽。
+在下面的讨论中，我们将学习如何量化这些概念。</p>
 </section>
-<section id="example-a-markov-chain">
-<h3><span class="section-number">41.2.2. </span>Example: A Markov Chain<a class="headerlink" href="#example-a-markov-chain" title="Permalink to this heading">#</a></h3>
-<p>Recall that, in our lecture on <a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">Markov chains</span></a> we studied a dynamic model of business cycles
-where the states are</p>
+<section id="id5">
+<h3><span class="section-number">45.2.2. </span>例子：马尔可夫链<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>回想一下，在我们关于<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">马尔可夫链</span></a>的讲座中，我们研究了一个商业周期的动态模型，其中的状态包括：</p>
 <ul class="simple">
-<li><p>“ng” = “normal growth”</p></li>
-<li><p>“mr” = “mild recession”</p></li>
-<li><p>“sr” = “severe recession”</p></li>
+<li><p>“ng” = “正常增长”</p></li>
+<li><p>“mr” = “轻度衰退”</p></li>
+<li><p>“sr” = “严重衰退”</p></li>
 </ul>
-<p>Let’s examine the following figure</p>
+<p>让我们来看看下面这个图表</p>
 <img alt="_images/mc.png" class="align-center" id="mc-networks" src="_images/mc.png" />
-<p>This is an example of a network, where the set of nodes <span class="math notranslate nohighlight">\(V\)</span> equals the states:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>这是一个网络的例子，其中节点集 <span class="math notranslate nohighlight">\(V\)</span> 等于状态集：
+$<span class="math notranslate nohighlight">\(
     V = \{ \text{&quot;ng&quot;, &quot;mr&quot;, &quot;sr&quot;} \}
-\]</div>
-<p>The edges between the nodes show the one month transition probabilities.</p>
+\)</span>$
+节点之间的边表示一个月的转移概率。</p>
 </section>
 </section>
-<section id="an-introduction-to-graph-theory">
-<h2><span class="section-number">41.3. </span>An introduction to graph theory<a class="headerlink" href="#an-introduction-to-graph-theory" title="Permalink to this heading">#</a></h2>
-<p>Now we’ve looked at some examples, let’s move on to theory.</p>
-<p>This theory will allow us to better organize our thoughts.</p>
-<p>The theoretical part of network science is constructed using a major branch of
-mathematics called <a class="reference external" href="https://en.wikipedia.org/wiki/Graph_theory">graph theory</a>.</p>
-<p>Graph theory can be complicated and we will cover only the basics.</p>
-<p>However, these concepts will already be enough for us to discuss interesting and
-important ideas on economic and financial networks.</p>
-<p>We focus on “directed” graphs, where connections are, in general, asymmetric
-(arrows typically point one way, not both ways).</p>
-<p>E.g.,</p>
+<section id="id6">
+<h2><span class="section-number">45.3. </span>图论简介<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>现在我们已经看过一些例子，让我们转向理论部分。
+这个理论将帮助我们更好地组织我们的思路。
+网络科学的理论部分是使用数学的一个主要分支——<a class="reference external" href="https://en.wikipedia.org/wiki/Graph_theory">图论</a>构建的。
+图论可能很复杂，我们只会涉及基础部分。
+但是，这些概念已经足以让我们讨论有关经济和金融网络的有趣且重要的想法。
+我们关注”有向”图，其中连接通常是不对称的（箭头通常只指向一个方向，而不是双向）。
+例如，</p>
 <ul class="simple">
-<li><p>bank <span class="math notranslate nohighlight">\(A\)</span> lends money to bank <span class="math notranslate nohighlight">\(B\)</span></p></li>
-<li><p>firm <span class="math notranslate nohighlight">\(A\)</span> supplies goods to firm <span class="math notranslate nohighlight">\(B\)</span></p></li>
-<li><p>individual <span class="math notranslate nohighlight">\(A\)</span> “follows” individual <span class="math notranslate nohighlight">\(B\)</span> on a given social network</p></li>
+<li><p>银行 <span class="math notranslate nohighlight">\(A\)</span> 向银行 <span class="math notranslate nohighlight">\(B\)</span> 贷款</p></li>
+<li><p>公司 <span class="math notranslate nohighlight">\(A\)</span> 向公司 <span class="math notranslate nohighlight">\(B\)</span> 供应商品</p></li>
+<li><p>个人 <span class="math notranslate nohighlight">\(A\)</span> 在特定社交网络上”关注”个人 <span class="math notranslate nohighlight">\(B\)</span>
+（”无向”图，即连接是对称的，是有向图的一种特殊情况——我们只需要坚持每个从 <span class="math notranslate nohighlight">\(A\)</span> 指向 <span class="math notranslate nohighlight">\(B\)</span> 的箭头都配对一个从 <span class="math notranslate nohighlight">\(B\)</span> 指向 <span class="math notranslate nohighlight">\(A\)</span> 的箭头。）</p></li>
 </ul>
-<p>(“Undirected” graphs, where connections are symmetric, are a special
-case of directed graphs — we just need to insist that each arrow pointing
-from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(B\)</span> is paired with another arrow pointing from <span class="math notranslate nohighlight">\(B\)</span> to <span class="math notranslate nohighlight">\(A\)</span>.)</p>
-<section id="key-definitions">
-<h3><span class="section-number">41.3.1. </span>Key definitions<a class="headerlink" href="#key-definitions" title="Permalink to this heading">#</a></h3>
-<p>A <strong>directed graph</strong> consists of two things:</p>
+<section id="id7">
+<h3><span class="section-number">45.3.1. </span>关键定义<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>一个<strong>有向图</strong>由两个部分组成：</p>
 <ol class="arabic simple">
-<li><p>a finite set <span class="math notranslate nohighlight">\(V\)</span> and</p></li>
-<li><p>a collection of pairs <span class="math notranslate nohighlight">\((u, v)\)</span> where <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> are elements of <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+<li><p>一个有限集 <span class="math notranslate nohighlight">\(V\)</span> 和</p></li>
+<li><p>一组元素为 <span class="math notranslate nohighlight">\(V\)</span> 中的元素的对 <span class="math notranslate nohighlight">\((u, v)\)</span>。</p></li>
 </ol>
-<p>The elements of <span class="math notranslate nohighlight">\(V\)</span> are called the <strong>vertices</strong> or <strong>nodes</strong> of the graph.</p>
-<p>The pairs <span class="math notranslate nohighlight">\((u,v)\)</span> are called the <strong>edges</strong> of the graph and the set of all edges will usually be denoted by <span class="math notranslate nohighlight">\(E\)</span></p>
-<p>Intuitively and visually, an edge <span class="math notranslate nohighlight">\((u,v)\)</span> is understood as an arrow from node <span class="math notranslate nohighlight">\(u\)</span> to node <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<p>(A neat way to represent an arrow is to record the location of the tail and
-head of the arrow, and that’s exactly what an edge does.)</p>
-<p>In the aircraft export example shown in <a class="reference internal" href="#aircraft-network"><span class="std std-numref">Fig. 41.1</span></a></p>
+<p><span class="math notranslate nohighlight">\(V\)</span> 的元素被称为图的<strong>顶点</strong>或<strong>节点</strong>。
+对 <span class="math notranslate nohighlight">\((u,v)\)</span> 被称为图的<strong>边</strong>，所有边的集合通常用 <span class="math notranslate nohighlight">\(E\)</span> 表示。
+直观和视觉上，边 <span class="math notranslate nohighlight">\((u,v)\)</span> 被理解为从节点 <span class="math notranslate nohighlight">\(u\)</span> 到节点 <span class="math notranslate nohighlight">\(v\)</span> 的一个箭头。
+（表示箭头的一个巧妙方法是记录箭头的尾部和头部的位置，这正是边所做的。）</p>
+<p>在 <a class="reference internal" href="#aircraft-network"><span class="std std-numref">Fig. 45.1</span></a> 所示的飞机出口例子中</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(V\)</span> is all countries included in the data set.</p></li>
-<li><p><span class="math notranslate nohighlight">\(E\)</span> is all the arrows in the figure, each indicating some positive amount of aircraft exports from one country to another.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V\)</span> 是数据集中包含的所有国家。</p></li>
+<li><p><span class="math notranslate nohighlight">\(E\)</span> 是图中的所有箭头，每个箭头表示从一个国家到另一个国家的某个正数量的飞机出口。</p></li>
 </ul>
-<p>Let’s look at more examples.</p>
-<p>Two graphs are shown below, each with three nodes.</p>
+<p>让我们看更多的例子。
+下面显示了两个图，每个图都有三个节点。</p>
 <figure class="align-default" id="poverty-trap-1">
 <img alt="_images/poverty_trap_1.png" src="_images/poverty_trap_1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.2 </span><span class="caption-text">Poverty Trap</span><a class="headerlink" href="#poverty-trap-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.2 </span><span class="caption-text">Poverty Trap</span><a class="headerlink" href="#poverty-trap-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>We now construct a graph with the same nodes but different edges.</p>
+<p>现在，我们构造一个具有相同节点但具有不同边的图。</p>
 <figure class="align-default" id="poverty-trap-2">
 <img alt="_images/poverty_trap_2.png" src="_images/poverty_trap_2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.3 </span><span class="caption-text">Poverty Trap</span><a class="headerlink" href="#poverty-trap-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.3 </span><span class="caption-text">贫困陷阱</span><a class="headerlink" href="#poverty-trap-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For these graphs, the arrows (edges) can be thought of as representing
-positive transition probabilities over a given unit of time.</p>
-<p>In general, if an edge <span class="math notranslate nohighlight">\((u, v)\)</span> exists, then the node <span class="math notranslate nohighlight">\(u\)</span> is called a
-<strong>direct predecessor</strong> of <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(v\)</span> is called a <strong>direct successor</strong> of <span class="math notranslate nohighlight">\(u\)</span>.</p>
-<p>Also,  for <span class="math notranslate nohighlight">\(v \in V\)</span>,</p>
+<p>对于这些图，箭头（边）可以被视为表示给定时间单位内的正向转移概率。
+通常，如果存在边 <span class="math notranslate nohighlight">\((u, v)\)</span>，则称节点 <span class="math notranslate nohighlight">\(u\)</span> 为 <span class="math notranslate nohighlight">\(v\)</span> 的<strong>直接前驱</strong>，<span class="math notranslate nohighlight">\(v\)</span> 为 <span class="math notranslate nohighlight">\(u\)</span> 的<strong>直接后继</strong>。
+此外，对于 <span class="math notranslate nohighlight">\(v \in V\)</span>，</p>
 <ul class="simple">
-<li><p>the <strong>in-degree</strong> is <span class="math notranslate nohighlight">\(i_d(v) = \)</span> the number of direct predecessors of <span class="math notranslate nohighlight">\(v\)</span> and</p></li>
-<li><p>the <strong>out-degree</strong> is <span class="math notranslate nohighlight">\(o_d(v) = \)</span> the number of direct successors of <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
+<li><p><strong>入度</strong>是 <span class="math notranslate nohighlight">\(i_d(v) = \)</span> <span class="math notranslate nohighlight">\(v\)</span> 的直接前驱数，以及</p></li>
+<li><p><strong>出度</strong>是 <span class="math notranslate nohighlight">\(o_d(v) = \)</span> <span class="math notranslate nohighlight">\(v\)</span> 的直接后继数。</p></li>
 </ul>
 </section>
-<section id="digraphs-in-networkx">
-<h3><span class="section-number">41.3.2. </span>Digraphs in Networkx<a class="headerlink" href="#digraphs-in-networkx" title="Permalink to this heading">#</a></h3>
-<p>The Python package <a class="reference external" href="https://networkx.org/">Networkx</a> provides a convenient
-data structure for representing directed graphs and implements many common
-routines for analyzing them.</p>
-<p>As an example, let us recreate <a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 41.3</span></a> using Networkx.</p>
-<p>To do so, we first create an empty <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> object:</p>
+<section id="networkx">
+<h3><span class="section-number">45.3.2. </span>Networkx中的有向图<a class="headerlink" href="#networkx" title="Permalink to this heading">#</a></h3>
+<p>Python包 <a class="reference external" href="https://networkx.org/">Networkx</a> 为表示有向图提供了一个便捷的数据结构，并实现了许多用于分析它们的常见例程。
+作为示例，让我们使用Networkx重新创建 <a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 45.3</span></a>。
+为此，我们首先创建一个空的 <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> 对象：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_p</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -540,9 +523,8 @@ routines for analyzing them.</p>
 </div>
 </div>
 </div>
-<p>Next we populate it with nodes and edges.</p>
-<p>To do this we write down a list of
-all edges, with <em>poor</em> represented by <em>p</em> and so on:</p>
+<p>接下来，我们用节点和边来填充它。
+为此，我们列出所有边的列表，其中<em>贫穷</em>用<em>p</em>表示，以此类推：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edge_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">),</span>
@@ -552,7 +534,7 @@ all edges, with <em>poor</em> represented by <em>p</em> and so on:</p>
 </div>
 </div>
 </div>
-<p>Finally, we add the edges to our <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> object:</p>
+<p>最后，我们将边添加到我们的 <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> 对象中：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edge_list</span><span class="p">:</span>
@@ -562,7 +544,7 @@ all edges, with <em>poor</em> represented by <em>p</em> and so on:</p>
 </div>
 </div>
 </div>
-<p>Alternatively, we can use the method <code class="docutils literal notranslate"><span class="pre">add_edges_from</span></code>.</p>
+<p>或者，我们可以使用 <code class="docutils literal notranslate"><span class="pre">add_edges_from</span></code> 方法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_p</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edge_list</span><span class="p">)</span>
@@ -570,9 +552,8 @@ all edges, with <em>poor</em> represented by <em>p</em> and so on:</p>
 </div>
 </div>
 </div>
-<p>Adding the edges automatically adds the nodes, so <code class="docutils literal notranslate"><span class="pre">G_p</span></code> is now a
-correct representation of our graph.</p>
-<p>We can verify this by plotting the graph via Networkx with the following code:</p>
+<p>添加边会自动添加节点，所以 <code class="docutils literal notranslate"><span class="pre">G_p</span></code> 现在是我们图的正确表示。
+我们可以通过使用以下代码通过Networkx绘制图来验证这一点：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -584,13 +565,12 @@ correct representation of our graph.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ee8b0f5966b171e44167d28ab04515bb61217ad9c32a23d56523c67167eba13c.png"><img alt="_images/ee8b0f5966b171e44167d28ab04515bb61217ad9c32a23d56523c67167eba13c.png" src="_images/ee8b0f5966b171e44167d28ab04515bb61217ad9c32a23d56523c67167eba13c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/559698b5b96cdcd67f9eb7839803702259568eac9c9da1e7a6b135e8521918ab.png"><img alt="_images/559698b5b96cdcd67f9eb7839803702259568eac9c9da1e7a6b135e8521918ab.png" src="_images/559698b5b96cdcd67f9eb7839803702259568eac9c9da1e7a6b135e8521918ab.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The figure obtained above matches the original directed graph in <a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 41.3</span></a>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> objects have methods that calculate in-degree and out-degree
-of nodes.</p>
-<p>For example,</p>
+<p>上面得到的图形与<a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 45.3</span></a>中的原始有向图相匹配。
+<code class="docutils literal notranslate"><span class="pre">DiGraph</span></code>对象有计算节点入度和出度的方法。
+例如，</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_p</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
@@ -604,27 +584,25 @@ of nodes.</p>
 </div>
 </div>
 </section>
-<section id="communication">
-<span id="strongly-connected"></span><h3><span class="section-number">41.3.3. </span>Communication<a class="headerlink" href="#communication" title="Permalink to this heading">#</a></h3>
-<p>Next, we study communication and connectedness, which have important
-implications for economic networks.</p>
-<p>Node <span class="math notranslate nohighlight">\(v\)</span> is called <strong>accessible</strong> from node <span class="math notranslate nohighlight">\(u\)</span> if either <span class="math notranslate nohighlight">\(u=v\)</span> or there
-exists a sequence of edges that lead from <span class="math notranslate nohighlight">\(u\)</span> to <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<section id="strongly-connected">
+<span id="id8"></span><h3><span class="section-number">45.3.3. </span>通信<a class="headerlink" href="#strongly-connected" title="Permalink to this heading">#</a></h3>
+<p>接下来，我们研究通信和连通性，这对经济网络有重要影响。</p>
+<p>如果<span class="math notranslate nohighlight">\(u=v\)</span>或存在一系列从<span class="math notranslate nohighlight">\(u\)</span>到<span class="math notranslate nohighlight">\(v\)</span>的边，则称节点<span class="math notranslate nohighlight">\(v\)</span>从节点<span class="math notranslate nohighlight">\(u\)</span><strong>可达</strong>。</p>
 <ul class="simple">
-<li><p>in this case, we write <span class="math notranslate nohighlight">\(u \to v\)</span></p></li>
+<li><p>在这种情况下，我们写作<span class="math notranslate nohighlight">\(u \to v\)</span>
+（从视觉上看，有一系列箭头从<span class="math notranslate nohighlight">\(u\)</span>指向<span class="math notranslate nohighlight">\(v\)</span>。）</p></li>
 </ul>
-<p>(Visually, there is a sequence of arrows leading from <span class="math notranslate nohighlight">\(u\)</span> to <span class="math notranslate nohighlight">\(v\)</span>.)</p>
-<p>For example, suppose we have a directed graph representing a production network, where</p>
+<p>例如，假设我们有一个表示生产网络的有向图，其中</p>
 <ul class="simple">
-<li><p>elements of <span class="math notranslate nohighlight">\(V\)</span> are industrial sectors and</p></li>
-<li><p>existence of an edge <span class="math notranslate nohighlight">\((i, j)\)</span> means that <span class="math notranslate nohighlight">\(i\)</span> supplies products or services to <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V\)</span>的元素是工业部门</p></li>
+<li><p>边<span class="math notranslate nohighlight">\((i, j)\)</span>的存在意味着<span class="math notranslate nohighlight">\(i\)</span>向<span class="math notranslate nohighlight">\(j\)</span>供应产品或服务。</p></li>
 </ul>
-<p>Then <span class="math notranslate nohighlight">\(m \to \ell\)</span> means that sector <span class="math notranslate nohighlight">\(m\)</span> is an upstream supplier of sector <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
-<p>Two nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> are said to <strong>communicate</strong> if both <span class="math notranslate nohighlight">\(u \to v\)</span> and <span class="math notranslate nohighlight">\(v \to u\)</span>.</p>
-<p>A graph is called <strong>strongly connected</strong> if all nodes communicate.</p>
-<p>For example, <a class="reference internal" href="#poverty-trap-1"><span class="std std-numref">Fig. 41.2</span></a> is strongly connected
-however in <a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 41.3</span></a> rich is not accessible from poor, thus it is not strongly connected.</p>
-<p>We can verify this by first constructing the graphs using Networkx and then using <code class="docutils literal notranslate"><span class="pre">nx.is_strongly_connected</span></code>.</p>
+<p>那么<span class="math notranslate nohighlight">\(m \to \ell\)</span>意味着部门<span class="math notranslate nohighlight">\(m\)</span>是部门<span class="math notranslate nohighlight">\(\ell\)</span>的上游供应商。</p>
+<p>如果<span class="math notranslate nohighlight">\(u \to v\)</span>且<span class="math notranslate nohighlight">\(v \to u\)</span>，则称两个节点<span class="math notranslate nohighlight">\(u\)</span>和<span class="math notranslate nohighlight">\(v\)</span><strong>相通</strong>。</p>
+<p>如果所有节点都相通，则称图是<strong>强连通的</strong>。</p>
+<p>例如，<a class="reference internal" href="#poverty-trap-1"><span class="std std-numref">Fig. 45.2</span></a>是强连通的，
+然而在<a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 45.3</span></a>中，富人节点从穷人节点不可达，因此它不是强连通的。</p>
+<p>我们可以通过首先使用Networkx构建图，然后使用<code class="docutils literal notranslate"><span class="pre">nx.is_strongly_connected</span></code>来验证这一点。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -639,12 +617,12 @@ however in <a class="reference internal" href="#poverty-trap-2"><span class="std
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/dc6bd11be04cecf0174f77b2ff0a166d0cf0be49e51256569ac95434ae5b667e.png"><img alt="_images/dc6bd11be04cecf0174f77b2ff0a166d0cf0be49e51256569ac95434ae5b667e.png" src="_images/dc6bd11be04cecf0174f77b2ff0a166d0cf0be49e51256569ac95434ae5b667e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/83d05f5b04c66077b916cf82bfc5eaf27a6849866b234594a6b2ceac4074897a.png"><img alt="_images/83d05f5b04c66077b916cf82bfc5eaf27a6849866b234594a6b2ceac4074897a.png" src="_images/83d05f5b04c66077b916cf82bfc5eaf27a6849866b234594a6b2ceac4074897a.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>    <span class="c1">#checking if above graph is strongly connected</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>    <span class="c1">#检查上面的图是否强关联</span>
 </pre></div>
 </div>
 </div>
@@ -668,12 +646,12 @@ however in <a class="reference internal" href="#poverty-trap-2"><span class="std
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b2c1aafd6e04cf8cc3ae3668437be177c6f10076f621ddbc0cbcffc3d4e3fae9.png"><img alt="_images/b2c1aafd6e04cf8cc3ae3668437be177c6f10076f621ddbc0cbcffc3d4e3fae9.png" src="_images/b2c1aafd6e04cf8cc3ae3668437be177c6f10076f621ddbc0cbcffc3d4e3fae9.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/48cec1ab6e8eaf0423fed4fa64193fad3ca56b3622cb5494edabeabd0c5ef6e8.png"><img alt="_images/48cec1ab6e8eaf0423fed4fa64193fad3ca56b3622cb5494edabeabd0c5ef6e8.png" src="_images/48cec1ab6e8eaf0423fed4fa64193fad3ca56b3622cb5494edabeabd0c5ef6e8.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>    <span class="c1">#checking if above graph is strongly connected</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>    <span class="c1">#检查上面的图是否强关联</span>
 </pre></div>
 </div>
 </div>
@@ -685,14 +663,12 @@ however in <a class="reference internal" href="#poverty-trap-2"><span class="std
 </div>
 </section>
 </section>
-<section id="weighted-graphs">
-<h2><span class="section-number">41.4. </span>Weighted graphs<a class="headerlink" href="#weighted-graphs" title="Permalink to this heading">#</a></h2>
-<p>We now introduce weighted graphs, where weights (numbers) are attached to each
-edge.</p>
-<section id="international-private-credit-flows-by-country">
-<h3><span class="section-number">41.4.1. </span>International private credit flows by country<a class="headerlink" href="#international-private-credit-flows-by-country" title="Permalink to this heading">#</a></h3>
-<p>To motivate the idea, consider the following figure which shows flows of funds (i.e.,
-loans) between private banks, grouped by country of origin.</p>
+<section id="id9">
+<h2><span class="section-number">45.4. </span>加权图<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>我们现在介绍加权图，其中每条边都附有权重（数字）。</p>
+<section id="id10">
+<h3><span class="section-number">45.4.1. </span>按国家划分的国际私人信贷流动<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>为了说明这个概念，请看下图，它展示了私人银行之间的资金流动（即贷款），按原始国家分组。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -760,120 +736,109 @@ loans) between private banks, grouped by country of origin.</p>
 <figure class="align-default" id="financial-network">
 <a class="reference internal image-reference" href="_images/9f65d969876eb9d14c13b773bee584923c351ecf76194adc1bf6f6e2ac8f59f5.png"><img alt="_images/9f65d969876eb9d14c13b773bee584923c351ecf76194adc1bf6f6e2ac8f59f5.png" src="_images/9f65d969876eb9d14c13b773bee584923c351ecf76194adc1bf6f6e2ac8f59f5.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.4 </span><span class="caption-text">International Credit Network</span><a class="headerlink" href="#financial-network" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.4 </span><span class="caption-text">国际信贷网络</span><a class="headerlink" href="#financial-network" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The country codes are given in the following table</p>
+<p>国家代码在下表中给出</p>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="text-center head"><p>Code</p></th>
-<th class="text-left head"><p>Country</p></th>
-<th class="text-center head"><p>Code</p></th>
-<th class="text-center head"><p>Country</p></th>
-<th class="text-center head"><p>Code</p></th>
-<th class="text-center head"><p>Country</p></th>
-<th class="text-center head"><p>Code</p></th>
-<th class="text-center head"><p>Country</p></th>
+<tr class="row-odd"><th class="text-center head"><p>代码</p></th>
+<th class="text-left head"><p>国家</p></th>
+<th class="text-center head"><p>代码</p></th>
+<th class="text-center head"><p>国家</p></th>
+<th class="text-center head"><p>代码</p></th>
+<th class="text-center head"><p>国家</p></th>
+<th class="text-center head"><p>代码</p></th>
+<th class="text-center head"><p>国家</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>AU</p></td>
-<td class="text-left"><p>Australia</p></td>
+<td class="text-left"><p>澳大利亚</p></td>
 <td class="text-center"><p>DE</p></td>
-<td class="text-center"><p>Germany</p></td>
+<td class="text-center"><p>德国</p></td>
 <td class="text-center"><p>CL</p></td>
-<td class="text-center"><p>Chile</p></td>
+<td class="text-center"><p>智利</p></td>
 <td class="text-center"><p>ES</p></td>
-<td class="text-center"><p>Spain</p></td>
+<td class="text-center"><p>西班牙</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>PT</p></td>
-<td class="text-left"><p>Portugal</p></td>
+<td class="text-left"><p>葡萄牙</p></td>
 <td class="text-center"><p>FR</p></td>
-<td class="text-center"><p>France</p></td>
+<td class="text-center"><p>法国</p></td>
 <td class="text-center"><p>TR</p></td>
-<td class="text-center"><p>Turkey</p></td>
+<td class="text-center"><p>土耳其</p></td>
 <td class="text-center"><p>GB</p></td>
-<td class="text-center"><p>United Kingdom</p></td>
+<td class="text-center"><p>英国</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>US</p></td>
-<td class="text-left"><p>United States</p></td>
+<td class="text-left"><p>美国</p></td>
 <td class="text-center"><p>IE</p></td>
-<td class="text-center"><p>Ireland</p></td>
+<td class="text-center"><p>爱尔兰</p></td>
 <td class="text-center"><p>AT</p></td>
-<td class="text-center"><p>Austria</p></td>
+<td class="text-center"><p>奥地利</p></td>
 <td class="text-center"><p>IT</p></td>
-<td class="text-center"><p>Italy</p></td>
+<td class="text-center"><p>意大利</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>BE</p></td>
-<td class="text-left"><p>Belgium</p></td>
+<td class="text-left"><p>比利时</p></td>
 <td class="text-center"><p>JP</p></td>
-<td class="text-center"><p>Japan</p></td>
+<td class="text-center"><p>日本</p></td>
 <td class="text-center"><p>SW</p></td>
-<td class="text-center"><p>Switzerland</p></td>
+<td class="text-center"><p>瑞士</p></td>
 <td class="text-center"><p>SE</p></td>
-<td class="text-center"><p>Sweden</p></td>
+<td class="text-center"><p>瑞典</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>An arrow from Japan to the US indicates aggregate claims held by Japanese
-banks on all US-registered banks, as collected by the Bank of International
-Settlements (BIS).</p>
-<p>The size of each node in the figure is increasing in the
-total foreign claims of all other nodes on this node.</p>
-<p>The widths of the arrows are proportional to the foreign claims they represent.</p>
-<p>Notice that, in this network, an edge <span class="math notranslate nohighlight">\((u, v)\)</span> exists for almost every choice
-of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> (i.e., almost every country in the network).</p>
-<p>(In fact, there are even more small arrows, which we have dropped for clarity.)</p>
-<p>Hence the existence of an edge from one node to another is not particularly informative.</p>
-<p>To understand the network, we need to record not just the existence or absence
-of a credit flow, but also the size of the flow.</p>
-<p>The correct data structure for recording this information is a “weighted
-directed graph”.</p>
+<p>从日本到美国的箭头表示日本银行对所有在美国注册的银行的总体债权，这些数据由国际清算银行（BIS）收集。</p>
+<p>图中每个节点的大小与所有其他节点对该节点的外国债权总额成正比。</p>
+<p>箭头的宽度与它们所代表的外国债权成正比。</p>
+<p>请注意，在这个网络中，几乎对于每一对节点<span class="math notranslate nohighlight">\(u\)</span>和<span class="math notranslate nohighlight">\(v\)</span>都存在一条边<span class="math notranslate nohighlight">\((u, v)\)</span>（即网络中几乎每个国家之间都有联系）。</p>
+<p>（事实上，还有更多的小箭头，为了清晰起见我们省略了。）</p>
+<p>因此，仅仅一个节点到另一个节点边的存在与否并不特别有信息量。</p>
+<p>为了理解这个网络，我们需要记录的不仅是信贷流动的存在或缺失，还要记录流动的规模。</p>
+<p>记录这些信息的正确数据结构是”加权有向图”。</p>
 </section>
-<section id="definitions">
-<h3><span class="section-number">41.4.2. </span>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h3>
-<p>A <strong>weighted directed graph</strong> is a directed graph to which we have added a
-<strong>weight function</strong> <span class="math notranslate nohighlight">\(w\)</span> that assigns a positive number to each edge.</p>
-<p>The figure above shows one weighted directed graph, where the weights are the size of fund flows.</p>
-<p>The following figure shows a weighted directed graph, with arrows
-representing edges of the induced directed graph.</p>
+<section id="id11">
+<h3><span class="section-number">45.4.2. </span>定义<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p><strong>加权有向图</strong>是一种有向图，我们为其添加了一个<strong>权重函数</strong><span class="math notranslate nohighlight">\(w\)</span>，该函数为每条边分配一个正数。</p>
+<p>上图显示了一个加权有向图，其中权重是资金流动的大小。</p>
+<p>下图显示了一个加权有向图，箭头表示诱导有向图的边。</p>
 <figure class="align-default" id="poverty-trap-weighted">
 <img alt="_images/weighted.png" src="_images/weighted.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.5 </span><span class="caption-text">Weighted Poverty Trap</span><a class="headerlink" href="#poverty-trap-weighted" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.5 </span><span class="caption-text">加权贫困陷阱</span><a class="headerlink" href="#poverty-trap-weighted" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The numbers next to the edges are the weights.</p>
-<p>In this case, you can think of the numbers on the arrows as transition
-probabilities for a household over, say, one year.</p>
-<p>We see that a rich household has a 10% chance of becoming poor in one year.</p>
+<p>边旁边的数字是权重。</p>
+<p>在这个例子中，你可以把箭头上的数字看作是一个家庭在一年内的转移概率。</p>
+<p>我们可以看到，一个富裕家庭在一年内有10%的机会变成贫困。</p>
 </section>
 </section>
-<section id="adjacency-matrices">
-<h2><span class="section-number">41.5. </span>Adjacency matrices<a class="headerlink" href="#adjacency-matrices" title="Permalink to this heading">#</a></h2>
-<p>Another way that we can represent weights, which turns out to be very
-convenient for numerical work, is via a matrix.</p>
-<p>The <strong>adjacency matrix</strong> of a weighted directed graph with nodes <span class="math notranslate nohighlight">\(\{v_1, \ldots, v_n\}\)</span>, edges <span class="math notranslate nohighlight">\(E\)</span> and weight function <span class="math notranslate nohighlight">\(w\)</span> is the matrix</p>
+<section id="id12">
+<h2><span class="section-number">45.5. </span>邻接矩阵<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<p>另一种表示权重的方法是通过矩阵，这种方法在数值计算中非常方便。</p>
+<p>对于一个有节点集 <span class="math notranslate nohighlight">\(\{v_1, \ldots, v_n\}\)</span>、边集 <span class="math notranslate nohighlight">\(E\)</span> 和权重函数 <span class="math notranslate nohighlight">\(w\)</span> 的加权有向图，其<strong>邻接矩阵</strong>是一个矩阵</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 A = (a_{ij})_{1 \leq i,j \leq n}
-\quad \text{with} \quad
+\quad \text{其中} \quad
 a_{ij} =
 %
 \begin{cases}
-    w(v_i, v_j) &amp; \text{ if } (v_i, v_j) \in E
+    w(v_i, v_j) &amp; \text{如果} (v_i, v_j) \in E
     \\
-    0           &amp; \text{ otherwise}.
+    0           &amp; \text{其他情况}
 \end{cases}
 %
 \end{split}\]</div>
-<p>Once the nodes in <span class="math notranslate nohighlight">\(V\)</span> are enumerated, the weight function and
-adjacency matrix provide essentially the same information.</p>
-<p>For example, with <span class="math notranslate nohighlight">\(\{\)</span>poor, middle, rich<span class="math notranslate nohighlight">\(\}\)</span> mapped to <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span> respectively,
-the adjacency matrix corresponding to the weighted directed graph in <a class="reference internal" href="#poverty-trap-weighted"><span class="std std-numref">Fig. 41.5</span></a> is</p>
+<p>一旦 <span class="math notranslate nohighlight">\(V\)</span> 中的节点被列举出来，权重函数和邻接矩阵本质上提供相同的信息。</p>
+<p>例如，将 <span class="math notranslate nohighlight">\(\{\)</span>贫困, 中产, 富裕<span class="math notranslate nohighlight">\(\}\)</span> 分别映射到 <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span>，
+<a class="reference internal" href="#poverty-trap-weighted"><span class="std std-numref">Fig. 45.5</span></a> 中加权有向图对应的邻接矩阵是</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{pmatrix}
@@ -882,24 +847,21 @@ the adjacency matrix corresponding to the weighted directed graph in <a class="r
     0.1 &amp; 0.1 &amp; 0.8
 \end{pmatrix}.
 \end{split}\]</div>
-<p>In QuantEcon’s <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> implementation, weights are recorded via the
-keyword <code class="docutils literal notranslate"><span class="pre">weighted</span></code>:</p>
+<p>在 QuantEcon 的 <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> 实现中，权重通过关键字 <code class="docutils literal notranslate"><span class="pre">weighted</span></code> 记录：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">((</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
      <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
      <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">))</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">G</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># store weights</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># 储存权重</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>One of the key points to remember about adjacency matrices is that taking the
-transpose <em>reverses all the arrows</em> in the associated directed graph.</p>
-<p>For example, the following directed graph can be
-interpreted as a stylized version of a financial network, with nodes as banks
-and edges showing the flow of funds.</p>
+<p>关于邻接矩阵的一个关键点是，对其进行转置操作会<em>反转相关有向图中的所有箭头</em>。
+例如，以下有向图可以被解释为一个金融网络的简化版本，其中节点代表银行，
+边表示资金流动。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G4</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -930,104 +892,80 @@ and edges showing the flow of funds.</p>
 <a class="reference internal image-reference" href="_images/eac05fc1324689a63814c99a4ee79415ddf4e08d49b0eeec234efff88a872cf7.png"><img alt="_images/eac05fc1324689a63814c99a4ee79415ddf4e08d49b0eeec234efff88a872cf7.png" src="_images/eac05fc1324689a63814c99a4ee79415ddf4e08d49b0eeec234efff88a872cf7.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We see that bank 2 extends a loan of size 200 to bank 3.</p>
-<p>The corresponding adjacency matrix is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-A =
-\begin{pmatrix}
+<p>我们看到银行2向银行3发放了200的贷款。
+对应的邻接矩阵是
+$$
+A =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-64fb273f-9a2c-47e9-825b-329bd22d45e9">
+<span class="eqno">(45.1)<a class="headerlink" href="#equation-64fb273f-9a2c-47e9-825b-329bd22d45e9" title="Permalink to this equation">#</a></span>\[\begin{pmatrix}
     0 &amp; 100 &amp; 0 &amp; 0 &amp; 0 \\
     50 &amp; 0 &amp; 200 &amp; 0 &amp; 0 \\
     0 &amp; 0 &amp; 0 &amp; 100 &amp; 0 \\
     0 &amp; 500 &amp; 0 &amp; 0 &amp; 50 \\
     150 &amp; 0 &amp; 250 &amp; 300 &amp; 0
-\end{pmatrix}.
-\end{split}\]</div>
-<p>The transpose is</p>
+\end{pmatrix}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-A^\top =
-\begin{pmatrix}
+\[
+其转置是
+\]</div>
+<p>A^\top =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-984f7ca1-9be2-435e-b7c9-67b375d6fdec">
+<span class="eqno">(45.2)<a class="headerlink" href="#equation-984f7ca1-9be2-435e-b7c9-67b375d6fdec" title="Permalink to this equation">#</a></span>\[\begin{pmatrix}
     0   &amp; 50  &amp; 0   &amp; 0   &amp; 150 \\
     100 &amp; 0   &amp; 0   &amp; 500 &amp; 0 \\
     0   &amp; 200 &amp; 0   &amp; 0   &amp; 250 \\
     0   &amp; 0   &amp; 100 &amp; 0   &amp; 300 \\
     0   &amp; 0   &amp; 0   &amp; 50  &amp; 0
-\end{pmatrix}.
-\end{split}\]</div>
-<p>The corresponding network is visualized in the following figure which shows the network of liabilities after the loans have been granted.</p>
-<p>Both of these networks (original and transpose) are useful for analyzing financial markets.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G5</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+\end{pmatrix}\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+相应的网络在下图中可视化，显示了贷款发放后的负债网络。
+这两个网络（原始和转置）对于分析金融市场都很有用。\\```{code-cell} ipython3
+G5 = nx.DiGraph()\\G5.add_edges_from([('1','2'),('1','5'),
+                   ('2','1'),('2','4'),
+                   ('3','2'),('3','5'),
+                   ('4','3'),('4','5'),
+                   ('5','4')])\\edge_labels={('1','2'): '50', ('1','5'): '150',
+             ('2','1'): '100', ('2','4'): '500',
+             ('3','2'): '200', ('3','5'): '250',
+             ('4','3'): '100', ('4','5'): '300',
+             ('5','4'): '50'}\\nx.draw_networkx(G5, pos, node_color = 'none',node_size = 500)
+nx.draw_networkx_edge_labels(G5, pos, edge_labels=edge_labels)
+nx.draw_networkx_nodes(G5, pos, linewidths= 0.5, edgecolors = 'black',
+                       node_color = 'none',node_size = 500)\\plt.show()
+```\\一般来说，每个非负的 $n \times n$ 矩阵 $A = (a_{ij})$ 都可以被视为加权有向图的邻接矩阵。
+要构建图，我们设 $V = 1, \ldots, n$，并将边集 $E$ 取为所有满足 $a_{ij} &gt; 0$ 的 $(i,j)$。
+对于权重函数，我们对所有边 $(i,j)$ 设置 $w(i, j) = a_{ij}$。
+我们称这个图为 $A$ 诱导的加权有向图。\\## 性质
+考虑一个加权有向图，其邻接矩阵为 $A$。
+令 $a^k_{ij}$ 为 $A^k$（$A$ 的 $k$ 次方）中的第 $i,j$ 个元素。
+以下结果在许多应用中很有用：\\````{prf:theorem}
+:label: graph_theory_property1\\对于 $V$ 中的不同节点 $i, j$ 和任意整数 $k$，我们有
+\end{aligned}\end{align} \]</div>
+<p>a^k_{i j} &gt; 0
+\quad \text{当且仅当} \quad
+\text{<span class="math notranslate nohighlight">\(j\)</span> 可从 <span class="math notranslate nohighlight">\(i\)</span> 到达}。
+$$</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
++++
 
-<span class="n">G5</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">),(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">),</span>
-                   <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">),(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">),</span>
-                   <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">),(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">),</span>
-                   <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">),(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">),</span>
-                   <span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">)])</span>
+当 $k=1$ 时，上述结果是显而易见的，对于一般情况的证明可以在 {cite}`sargent2022economic` 中找到。
+现在回想特征值讲座中提到，一个非负矩阵 $A$ 被称为{ref}`不可约的&lt;irreducible&gt;`，如果对于每个 $(i,j)$，存在一个整数 $k \geq 0$，使得 $a^{k}_{ij} &gt; 0$。
+根据前面的定理，不难得出下一个结果（详见 {cite}`sargent2022economic`）。
 
-<span class="n">edge_labels</span><span class="o">=</span><span class="p">{(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">):</span> <span class="s1">&#39;50&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">):</span> <span class="s1">&#39;150&#39;</span><span class="p">,</span>
-             <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">):</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">):</span> <span class="s1">&#39;500&#39;</span><span class="p">,</span>
-             <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">):</span> <span class="s1">&#39;200&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">):</span> <span class="s1">&#39;250&#39;</span><span class="p">,</span>
-             <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">):</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">):</span> <span class="s1">&#39;300&#39;</span><span class="p">,</span>
-             <span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">):</span> <span class="s1">&#39;50&#39;</span><span class="p">}</span>
+````{prf:theorem}
+:label: graph_theory_property2
 
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G5</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">node_size</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G5</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G5</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-                       <span class="n">node_color</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">node_size</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
+对于一个加权有向图，以下陈述是等价的：
+1. 该有向图是强连通的。
+2. 该图的邻接矩阵是不可约的。
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ec21bdbc9095ecaed478218cded3a58112d0337e0a360247668e4ce0f5e6905b.png"><img alt="_images/ec21bdbc9095ecaed478218cded3a58112d0337e0a360247668e4ce0f5e6905b.png" src="_images/ec21bdbc9095ecaed478218cded3a58112d0337e0a360247668e4ce0f5e6905b.png" style="width: 80%;" /></a>
-</div>
-</div>
-<p>In general, every nonnegative <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> can be
-viewed as the adjacency matrix of a weighted directed graph.</p>
-<p>To build the graph we set <span class="math notranslate nohighlight">\(V = 1, \ldots, n\)</span> and take the edge set <span class="math notranslate nohighlight">\(E\)</span> to be
-all <span class="math notranslate nohighlight">\((i,j)\)</span> such that <span class="math notranslate nohighlight">\(a_{ij} &gt; 0\)</span>.</p>
-<p>For the weight function we set <span class="math notranslate nohighlight">\(w(i, j) = a_{ij}\)</span>  for all edges <span class="math notranslate nohighlight">\((i,j)\)</span>.</p>
-<p>We call this graph the weighted directed graph induced by <span class="math notranslate nohighlight">\(A\)</span>.</p>
-</section>
-<section id="properties">
-<h2><span class="section-number">41.6. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h2>
-<p>Consider a weighted directed graph with adjacency matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(a^k_{ij}\)</span> be element <span class="math notranslate nohighlight">\(i,j\)</span> of <span class="math notranslate nohighlight">\(A^k\)</span>, the <span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>The following result is useful in many applications:</p>
-<div class="proof theorem admonition" id="graph_theory_property1">
-<p class="admonition-title"><span class="caption-number">Theorem 41.1 </span></p>
-<section class="theorem-content" id="proof-content">
-<p>For distinct nodes <span class="math notranslate nohighlight">\(i, j\)</span> in <span class="math notranslate nohighlight">\(V\)</span> and any integer <span class="math notranslate nohighlight">\(k\)</span>, we have</p>
-<div class="math notranslate nohighlight">
-\[
-a^k_{i j} &gt; 0
-\quad \text{if and only if} \quad
-\text{ $j$ is accessible from $i$}.
-\]</div>
-</section>
-</div><p>The above result is obvious when <span class="math notranslate nohighlight">\(k=1\)</span> and a proof of the general case can be
-found in <span id="id1">[<a class="reference internal" href="zreferences.html#id284" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2022.">Sargent and Stachurski, 2022</a>]</span>.</p>
-<p>Now recall from the eigenvalues lecture that a
-nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is called <a class="reference internal" href="eigen_II.html#irreducible"><span class="std std-ref">irreducible</span></a> if for each <span class="math notranslate nohighlight">\((i,j)\)</span> there is an integer <span class="math notranslate nohighlight">\(k \geq 0\)</span> such that <span class="math notranslate nohighlight">\(a^{k}_{ij} &gt; 0\)</span>.</p>
-<p>From the preceding theorem, it is not too difficult (see
-<span id="id2">[<a class="reference internal" href="zreferences.html#id284" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2022.">Sargent and Stachurski, 2022</a>]</span> for details) to get the next result.</p>
-<div class="proof theorem admonition" id="graph_theory_property2">
-<p class="admonition-title"><span class="caption-number">Theorem 41.2 </span></p>
-<section class="theorem-content" id="proof-content">
-<p>For a weighted directed graph the following statements are equivalent:</p>
-<ol class="arabic simple">
-<li><p>The directed graph is strongly connected.</p></li>
-<li><p>The adjacency matrix of the graph is irreducible.</p></li>
-</ol>
-</section>
-</div><p>We illustrate the above theorem with a simple example.</p>
-<p>Consider the following weighted directed graph.</p>
+<p>我们用一个简单的例子来说明上述定理。
+考虑以下加权有向图。</p>
 <img alt="_images/properties.png" id="properties-graph" src="_images/properties.png" />
-<p>We first create the above network as a Networkx <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> object.</p>
+<p>我们首先将上述网络创建为 Networkx <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> 对象。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G6</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -1039,10 +977,10 @@ nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is ca
 </div>
 </div>
 </div>
-<p>Then we construct the associated adjacency matrix A.</p>
+<p>然后我们构建相关的邻接矩阵A。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.3</span><span class="p">],</span>    <span class="c1"># adjacency matrix A</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.3</span><span class="p">],</span>    <span class="c1"># 邻接矩阵A。</span>
               <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
               <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
 </pre></div>
@@ -1069,7 +1007,7 @@ nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is ca
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_irreducible</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>      <span class="c1"># check irreducibility of A</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_irreducible</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>      <span class="c1">#检查A的不可约性</span>
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1019,7 @@ nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is ca
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G6</span><span class="p">)</span>      <span class="c1"># check connectedness of graph</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">G6</span><span class="p">)</span>      <span class="c1"># 检查图的连接性</span>
 </pre></div>
 </div>
 </div>
@@ -1092,28 +1030,22 @@ nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is ca
 </div>
 </div>
 </section>
-<section id="network-centrality">
-<h2><span class="section-number">41.7. </span>Network centrality<a class="headerlink" href="#network-centrality" title="Permalink to this heading">#</a></h2>
-<p>When studying networks of all varieties, a recurring topic is the relative
-“centrality” or “importance” of different nodes.</p>
-<p>Examples include</p>
+<section id="id13">
+<h2><span class="section-number">45.6. </span>网络中心性<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<p>在研究各种网络时，一个反复出现的话题是不同节点的相对”中心性”或”重要性”。
+例子包括：</p>
 <ul class="simple">
-<li><p>ranking of web pages by search engines</p></li>
-<li><p>determining the most important bank in a financial network (which one a
-central bank should rescue if there is a financial crisis)</p></li>
-<li><p>determining the most important industrial sector in an economy.</p></li>
+<li><p>搜索引擎对网页的排名</p></li>
+<li><p>确定金融网络中最重要的银行（在金融危机时中央银行应该救助哪一家）</p></li>
+<li><p>确定经济中最重要的工业部门</p></li>
 </ul>
-<p>In what follows, a <strong>centrality measure</strong> associates to each weighted directed
-graph a vector <span class="math notranslate nohighlight">\(m\)</span> where the <span class="math notranslate nohighlight">\(m_i\)</span> is interpreted as the centrality (or rank)
-of node <span class="math notranslate nohighlight">\(v_i\)</span>.</p>
-<section id="degree-centrality">
-<h3><span class="section-number">41.7.1. </span>Degree centrality<a class="headerlink" href="#degree-centrality" title="Permalink to this heading">#</a></h3>
-<p>Two elementary measures of “importance” of a node in a given directed
-graph are its in-degree and out-degree.</p>
-<p>Both of these provide a centrality measure.</p>
-<p>In-degree centrality is a vector containing the in-degree of each node in
-the graph.</p>
-<p>Consider the following simple example.</p>
+<p>在接下来的内容中，<strong>中心性度量</strong>将每个加权有向图与一个向量<span class="math notranslate nohighlight">\(m\)</span>关联起来，其中<span class="math notranslate nohighlight">\(m_i\)</span>被解释为节点<span class="math notranslate nohighlight">\(v_i\)</span>的中心性（或排名）。</p>
+<section id="id14">
+<h3><span class="section-number">45.6.1. </span>度中心性<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<p>在给定的有向图中，衡量节点”重要性”的两个基本指标是其入度和出度。
+这两者都提供了一种中心性度量。
+入度中心性是一个包含图中每个节点入度的向量。
+考虑以下简单例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G7</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -1141,16 +1073,15 @@ the graph.</p>
 <figure class="align-default" id="sample-gph-1">
 <a class="reference internal image-reference" href="_images/a727c405d8eba6cb137fa128f534304a277e7bfd5b30c1083b91b745530b9e00.png"><img alt="_images/a727c405d8eba6cb137fa128f534304a277e7bfd5b30c1083b91b745530b9e00.png" src="_images/a727c405d8eba6cb137fa128f534304a277e7bfd5b30c1083b91b745530b9e00.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.6 </span><span class="caption-text">Sample Graph</span><a class="headerlink" href="#sample-gph-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.6 </span><span class="caption-text">样本图</span><a class="headerlink" href="#sample-gph-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The following code displays the in-degree centrality of all nodes.</p>
+<p>以下代码显示了所有节点的入度中心性。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iG7</span> <span class="o">=</span> <span class="p">[</span><span class="n">G7</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G7</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>   <span class="c1"># computing in-degree centrality</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iG7</span> <span class="o">=</span> <span class="p">[</span><span class="n">G7</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G7</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>   <span class="c1">#计算入度中心性</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iG7</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 </pre></div>
@@ -1168,8 +1099,8 @@ the graph.</p>
 </div>
 </div>
 </div>
-<p>Consider the international credit network displayed in <a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 41.4</span></a>.</p>
-<p>The following plot displays the in-degree centrality of each country.</p>
+<p>考虑<a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 45.4</span></a>中显示的国际信贷网络。
+以下图表显示了每个国家的入度中心性。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">qbn_io</span><span class="o">.</span><span class="n">build_unweighted_matrix</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
@@ -1211,74 +1142,67 @@ the graph.</p>
 <a class="reference internal image-reference" href="_images/972b8b130ff43e02a06a99e401f4342286523e2f107ea8970ebe7bb580f666f5.png"><img alt="_images/972b8b130ff43e02a06a99e401f4342286523e2f107ea8970ebe7bb580f666f5.png" src="_images/972b8b130ff43e02a06a99e401f4342286523e2f107ea8970ebe7bb580f666f5.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Unfortunately, while in-degree and out-degree centrality are simple to
-calculate, they are not always informative.</p>
-<p>In <a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 41.4</span></a>, an edge exists between almost every node,
-so the in- or out-degree based centrality ranking fails to effectively separate the countries.</p>
-<p>This can be seen in the above graph as well.</p>
-<p>Another example is the task of a web search engine, which ranks pages
-by relevance whenever a user enters a search.</p>
-<p>Suppose web page A has twice as many inbound links as page B.</p>
-<p>In-degree centrality tells us that page A deserves a higher rank.</p>
-<p>But in fact, page A might be less important than page B.</p>
-<p>To see why, suppose that the links to A are from pages that receive almost no traffic,
-while the links to B are from pages that receive very heavy traffic.</p>
-<p>In this case, page B probably receives more visitors, which in turn suggests
-that page B contains more valuable (or entertaining) content.</p>
-<p>Thinking about this point suggests that importance might be <em>recursive</em>.</p>
-<p>This means that the importance of a given node depends on the importance of
-other nodes that link to it.</p>
-<p>As another example, we can imagine a production network where the importance of a
-given sector depends on the importance of the sectors that it supplies.</p>
-<p>This reverses the order of the previous example: now the importance of a given
-node depends on the importance of other nodes that <em>it links to</em>.</p>
-<p>The next centrality measures will have these recursive features.</p>
+<p>虽然入度和出度中心性计算简单，但它们并不总是有用。
+在<a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 45.4</span></a>中，几乎每个节点之间都存在边，
+所以基于入度或出度的中心性排名无法有效区分国家。
+这在上图中也可以看到。
+另一个例子是网络搜索引擎的任务，它在用户输入搜索时按相关性对页面进行排名。
+假设网页A的入站链接是网页B的两倍。
+入度中心性告诉我们页面A应该获得更高的排名。
+但实际上，页面A可能不如页面B重要。
+原因是，假设指向A的链接来自几乎没有流量的页面，
+而指向B的链接来自流量非常大的页面。
+在这种情况下，页面B可能会收到更多访问者，这反过来表明
+页面B包含更有价值（或更有趣）的内容。
+思考这一点suggests重要性可能是<em>递归的</em>。
+这意味着给定节点的重要性取决于
+链接到它的其他节点的重要性。
+作为另一个例子，我们可以想象一个生产网络，其中一个
+给定部门的重要性取决于它供应的部门的重要性。
+这reverses了前面例子的顺序：现在给定节点的重要性
+取决于它<em>链接到的</em>其他节点的重要性。
+下面的中心性度量将具有这些递归特征。</p>
 </section>
-<section id="eigenvector-centrality">
-<h3><span class="section-number">41.7.2. </span>Eigenvector centrality<a class="headerlink" href="#eigenvector-centrality" title="Permalink to this heading">#</a></h3>
-<p>Suppose we have a weighted directed graph with adjacency matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>For simplicity, we will suppose that the nodes <span class="math notranslate nohighlight">\(V\)</span> of the graph are just the
-integers <span class="math notranslate nohighlight">\(1, \ldots, n\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(r(A)\)</span> denote the <a class="reference internal" href="eigen_I.html#neumann-series-lemma"><span class="std std-ref">spectral radius</span></a> of <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>The <strong>eigenvector centrality</strong> of the graph is defined as the <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(e\)</span> that solves</p>
-<div class="math notranslate nohighlight" id="equation-ev-central">
-<span class="eqno">(41.1)<a class="headerlink" href="#equation-ev-central" title="Permalink to this equation">#</a></span>\[ 
+</section>
+<section id="id15">
+<h2><span class="section-number">45.7. </span>特征向量中心性<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<p>假设我们有一个带有邻接矩阵<span class="math notranslate nohighlight">\(A\)</span>的加权有向图。
+为简单起见，我们假设图的节点<span class="math notranslate nohighlight">\(V\)</span>就是
+整数<span class="math notranslate nohighlight">\(1, \ldots, n\)</span>。
+让<span class="math notranslate nohighlight">\(r(A)\)</span>表示<span class="math notranslate nohighlight">\(A\)</span>的<a class="reference internal" href="eigen_I.html#neumann-series-lemma"><span class="std std-ref">谱半径</span></a>。
+图的<strong>特征向量中心性</strong>被定义为解决以下方程的<span class="math notranslate nohighlight">\(n\)</span>维向量<span class="math notranslate nohighlight">\(e\)</span>
+$<span class="math notranslate nohighlight">\( 
 \begin{aligned}
     e = \frac{1}{r(A)} A e.
 \end{aligned}
-\]</div>
-<p>In other words, <span class="math notranslate nohighlight">\(e\)</span> is the dominant eigenvector of <span class="math notranslate nohighlight">\(A\)</span> (the eigenvector of the
-largest eigenvalue — see the discussion of the <a class="reference internal" href="eigen_II.html#perron-frobe"><span class="std std-ref">Perron-Frobenius theorem</span></a> in the eigenvalue lecture.</p>
-<p>To better understand <a class="reference internal" href="#equation-ev-central">(41.1)</a>, we write out the full expression
-for some element <span class="math notranslate nohighlight">\(e_i\)</span></p>
-<div class="math notranslate nohighlight" id="equation-eq-eicen">
-<span class="eqno">(41.2)<a class="headerlink" href="#equation-eq-eicen" title="Permalink to this equation">#</a></span>\[
+\)</span><span class="math notranslate nohighlight">\( (ev_central)
+换句话说，\)</span>e<span class="math notranslate nohighlight">\(是\)</span>A<span class="math notranslate nohighlight">\(的主特征向量（最大特征值的特征向量 --- 
+请看特征值lecture中关于{ref}`Perron-Frobenius定理&lt;perron-frobe&gt;`的讨论。
+为了更好地理解{eq}`ev_central`，我们写出某个元素\)</span>e_i<span class="math notranslate nohighlight">\(的完整表达式
+\)</span><span class="math notranslate nohighlight">\(
 \begin{aligned}
     e_i = \frac{1}{r(A)} \sum_{1 \leq j \leq n} a_{ij} e_j
 \end{aligned}
-\]</div>
-<p>Note the recursive nature of the definition: the centrality obtained by node
-<span class="math notranslate nohighlight">\(i\)</span> is proportional to a sum of the centrality of all nodes, weighted by
-the <em>rates of flow</em> from <span class="math notranslate nohighlight">\(i\)</span> into these nodes.</p>
-<p>A node <span class="math notranslate nohighlight">\(i\)</span> is highly ranked if</p>
+\)</span><span class="math notranslate nohighlight">\( (eq_eicen)
+注意定义的递归性质：节点\)</span>i<span class="math notranslate nohighlight">\(获得的中心性
+与所有节点中心性的加权和成正比，权重为
+从\)</span>i<span class="math notranslate nohighlight">\(到这些节点的*流量率*。
+如果节点\)</span>i$满足以下条件，则它的排名很高：</p>
 <ol class="arabic simple">
-<li><p>there are many edges leaving <span class="math notranslate nohighlight">\(i\)</span>,</p></li>
-<li><p>these edges have large weights, and</p></li>
-<li><p>the edges point to other highly ranked nodes.</p></li>
+<li><p>从<span class="math notranslate nohighlight">\(i\)</span>出发的边很多，</p></li>
+<li><p>这些边的权重很大，以及</p></li>
+<li><p>这些边指向其他排名很高的节点。
+稍后，当我们研究生产网络中的需求冲击时，特征向量中心性将有
+更具体的解释。
+我们将看到，在生产网络中，具有高特征向量中心性的部门是重要的<em>供应商</em>。
+特别是，一旦订单通过网络向后流动，它们就会被各种需求冲击激活。
+要计算特征向量中心性，我们可以使用以下函数。</p></li>
 </ol>
-<p>Later, when we study demand shocks  in production networks, there will be a more
-concrete interpretation of eigenvector centrality.</p>
-<p>We will see that, in production networks, sectors with high eigenvector
-centrality are important <em>suppliers</em>.</p>
-<p>In particular, they are activated by a wide array of demand shocks once orders
-flow backwards through the network.</p>
-<p>To compute eigenvector centrality we can use the following function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eigenvector_centrality</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">authority</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes the dominant eigenvector of A. Assumes A is</span>
-<span class="sd">    primitive and uses the power method.</span>
+<span class="sd">   计算矩阵A的主特征向量。假设A是本原矩阵，并使用幂法。</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A_temp</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="k">if</span> <span class="n">authority</span> <span class="k">else</span> <span class="n">A</span>
@@ -1290,10 +1214,10 @@ flow backwards through the network.</p>
 </div>
 </div>
 </div>
-<p>Let’s compute eigenvector centrality for the graph generated in <a class="reference internal" href="#sample-gph-1"><span class="std std-numref">Fig. 41.6</span></a>.</p>
+<p>让我们为<a class="reference internal" href="#sample-gph-1"><span class="std std-numref">Fig. 45.6</span></a>中生成的图计算特征向量中心性。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G7</span><span class="p">)</span>         <span class="c1"># compute adjacency matrix of graph</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G7</span><span class="p">)</span>         <span class="c1">#计算图的邻接矩阵</span>
 </pre></div>
 </div>
 </div>
@@ -1320,9 +1244,8 @@ flow backwards through the network.</p>
 </div>
 </div>
 </div>
-<p>While nodes <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(4\)</span> had the highest in-degree centrality, we can see that nodes <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span> have the
-highest eigenvector centrality.</p>
-<p>Let’s revisit the international credit network in <a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 41.4</span></a>.</p>
+<p>虽然节点 <span class="math notranslate nohighlight">\(2\)</span> 和 <span class="math notranslate nohighlight">\(4\)</span> 具有最高的入度中心性，但我们可以看到节点 <span class="math notranslate nohighlight">\(1\)</span> 和 <span class="math notranslate nohighlight">\(2\)</span> 具有最高的特征向量中心性。
+让我们重新审视<a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 45.4</span></a>中的国际信贷网络。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eig_central</span> <span class="o">=</span> <span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
@@ -1349,91 +1272,69 @@ highest eigenvector centrality.</p>
 <figure class="align-default" id="eigenvctr-centrality">
 <a class="reference internal image-reference" href="_images/f137b5c9578e4f513d89da43e4180f961ae8163ded65b481ba599f21e7f09619.png"><img alt="_images/f137b5c9578e4f513d89da43e4180f961ae8163ded65b481ba599f21e7f09619.png" src="_images/f137b5c9578e4f513d89da43e4180f961ae8163ded65b481ba599f21e7f09619.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.7 </span><span class="caption-text">Eigenvector centrality</span><a class="headerlink" href="#eigenvctr-centrality" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.7 </span><span class="caption-text">特征向量中心性</span><a class="headerlink" href="#eigenvctr-centrality" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Countries that are rated highly according to this rank tend to be important
-players in terms of supply of credit.</p>
-<p>Japan takes the highest rank according to this measure, although
-countries with large financial sectors such as Great Britain and France are
-not far behind.</p>
-<p>The advantage of eigenvector centrality is that it measures a node’s importance while considering the importance of its neighbours.</p>
-<p>A variant of eigenvector centrality is at the core of Google’s PageRank algorithm, which is used to rank web pages.</p>
-<p>The main principle is that links from important nodes (as measured by degree centrality) are worth more than links from unimportant nodes.</p>
-</section>
-<section id="katz-centrality">
-<h3><span class="section-number">41.7.3. </span>Katz centrality<a class="headerlink" href="#katz-centrality" title="Permalink to this heading">#</a></h3>
-<p>One problem with eigenvector centrality is that <span class="math notranslate nohighlight">\(r(A)\)</span> might be zero, in which
-case <span class="math notranslate nohighlight">\(1/r(A)\)</span> is not defined.</p>
-<p>For this and other reasons, some researchers prefer another measure of
-centrality for networks called Katz centrality.</p>
-<p>Fixing <span class="math notranslate nohighlight">\(\beta\)</span> in <span class="math notranslate nohighlight">\((0, 1/r(A))\)</span>, the <strong>Katz centrality</strong> of a weighted
-directed graph with adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> is defined as the vector <span class="math notranslate nohighlight">\(\kappa\)</span>
-that solves</p>
+<p>根据这个排名评分较高的国家往往在信贷供应方面扮演重要角色。
+日本在这项指标中排名最高，尽管像英国和法国这样拥有大型金融部门的国家也紧随其后。
+特征向量中心性的优势在于它在衡量节点重要性的同时考虑了其邻居的重要性。
+谷歌的PageRank算法的核心就是特征向量中心性的一个变体，用于对网页进行排名。
+其主要原理是来自重要节点（以度中心性衡量）的链接比来自不重要节点的链接更有价值。</p>
+<section id="id16">
+<h3><span class="section-number">45.7.1. </span>卡茨中心性<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<p>特征向量中心性的一个问题是<span class="math notranslate nohighlight">\(r(A)\)</span>可能为零，这种情况下<span class="math notranslate nohighlight">\(1/r(A)\)</span>是未定义的。
+出于这个和其他原因，一些研究者更倾向于使用另一种称为卡茨中心性的网络中心性度量。
+固定<span class="math notranslate nohighlight">\(\beta\)</span>在<span class="math notranslate nohighlight">\((0, 1/r(A))\)</span>区间内，带权有向图的<strong>卡茨中心性</strong>定义为解决以下方程的向量<span class="math notranslate nohighlight">\(\kappa\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-katz-central">
-<span class="eqno">(41.3)<a class="headerlink" href="#equation-katz-central" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.3)<a class="headerlink" href="#equation-katz-central" title="Permalink to this equation">#</a></span>\[
 \kappa_i =  \beta \sum_{1 \leq j 1} a_{ij} \kappa_j + 1
-\qquad  \text{for all } i \in \{0, \ldots, n-1\}.
+\qquad  \text{对所有 } i \in \{0, \ldots, n-1\}。
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(\beta\)</span> is a parameter that we can choose.</p>
-<p>In vector form we can write</p>
+<p>这里<span class="math notranslate nohighlight">\(\beta\)</span>是我们可以选择的参数。
+用向量形式我们可以写成：</p>
 <div class="math notranslate nohighlight" id="equation-katz-central-vec">
-<span class="eqno">(41.4)<a class="headerlink" href="#equation-katz-central-vec" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.4)<a class="headerlink" href="#equation-katz-central-vec" title="Permalink to this equation">#</a></span>\[
 \kappa = \mathbf 1 + \beta A \kappa
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf 1\)</span> is a column vector of ones.</p>
-<p>The intuition behind this centrality measure is similar to that provided for
-eigenvector centrality: high centrality is conferred on <span class="math notranslate nohighlight">\(i\)</span> when it is linked
-to by nodes that themselves have high centrality.</p>
-<p>Provided that <span class="math notranslate nohighlight">\(0 &lt; \beta &lt; 1/r(A)\)</span>, Katz centrality is always finite and well-defined
-because then <span class="math notranslate nohighlight">\(r(\beta A) &lt; 1\)</span>.</p>
-<p>This means that <a class="reference internal" href="#equation-katz-central-vec">(41.4)</a> has the unique solution</p>
+<p>其中<span class="math notranslate nohighlight">\(\mathbf 1\)</span>是一个全为1的列向量。
+这种中心性度量背后的直觉与特征向量中心性提供的类似：当节点<span class="math notranslate nohighlight">\(i\)</span>被本身具有高中心性的节点链接时，它就会获得高中心性。
+只要<span class="math notranslate nohighlight">\(0 &lt; \beta &lt; 1/r(A)\)</span>，卡茨中心性总是有限且定义明确的，因为这时<span class="math notranslate nohighlight">\(r(\beta A) &lt; 1\)</span>。
+这意味着方程<a class="reference internal" href="#equation-katz-central-vec">(45.4)</a>有唯一解：</p>
 <div class="math notranslate nohighlight">
 \[
 \kappa = (I - \beta A)^{-1} \mathbf{1}
 \]</div>
-<p>This follows from the <a class="reference internal" href="eigen_I.html#neumann-series-lemma"><span class="std std-ref">Neumann series theorem</span></a>.</p>
-<p>The parameter <span class="math notranslate nohighlight">\(\beta\)</span> is used to ensure that <span class="math notranslate nohighlight">\(\kappa\)</span> is finite</p>
-<p>When <span class="math notranslate nohighlight">\(r(A)&lt;1\)</span>, we use <span class="math notranslate nohighlight">\(\beta=1\)</span> as the default for Katz centrality computations.</p>
+<p>这是由<a class="reference internal" href="eigen_I.html#neumann-series-lemma"><span class="std std-ref">诺伊曼级数定理</span></a>得出的。
+参数<span class="math notranslate nohighlight">\(\beta\)</span>用于确保<span class="math notranslate nohighlight">\(\kappa\)</span>是有限的。
+当<span class="math notranslate nohighlight">\(r(A)&lt;1\)</span>时，我们使用<span class="math notranslate nohighlight">\(\beta=1\)</span>作为卡茨中心性计算的默认值。</p>
 </section>
-<section id="authorities-vs-hubs">
-<h3><span class="section-number">41.7.4. </span>Authorities vs hubs<a class="headerlink" href="#authorities-vs-hubs" title="Permalink to this heading">#</a></h3>
-<p>Search engine designers recognize that web pages can be important in two
-different ways.</p>
-<p>Some pages have high <strong>hub centrality</strong>, meaning that they link to valuable
-sources of information (e.g., news aggregation sites).</p>
-<p>Other pages have high <strong>authority centrality</strong>, meaning that they contain
-valuable information, as indicated by the number and significance of incoming
-links (e.g., websites of respected news organizations).</p>
-<p>Similar ideas can and have been applied to economic networks (often using
-different terminology).</p>
-<p>The eigenvector centrality and Katz centrality measures we discussed above
-measure hub centrality.</p>
-<p>(Nodes have high centrality if they point to other nodes with high centrality.)</p>
-<p>If we care more about authority centrality, we can use the same definitions
-except that we take the transpose of the adjacency matrix.</p>
-<p>This works because taking the transpose reverses the direction of the arrows.</p>
-<p>(Now nodes will have high centrality if they receive links from other nodes
-with high centrality.)</p>
-<p>For example, the <strong>authority-based eigenvector centrality</strong> of a weighted
-directed graph with adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> is the vector <span class="math notranslate nohighlight">\(e\)</span> solving</p>
+<section id="id17">
+<h3><span class="section-number">45.7.2. </span>权威与枢纽<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>搜索引擎设计者认识到网页可以通过两种不同的方式变得重要。</p>
+<p>一些页面具有高<strong>枢纽中心性</strong>，意味着它们链接到有价值的信息来源（例如，新闻聚合网站）。</p>
+<p>其他页面具有高<strong>权威中心性</strong>，意味着它们包含有价值的信息，这一点通过指向它们的链接的数量和重要性来体现（例如，受人尊敬的新闻机构的网站）。</p>
+<p>类似的概念也已经应用于经济网络（通常使用不同的术语）。</p>
+<p>我们之前讨论的特征向量中心性和Katz中心性衡量的是枢纽中心性。
+（如果节点指向其他具有高中心性的节点，则它们具有高中心性。）</p>
+<p>如果我们更关心权威中心性，我们可以使用相同的定义，只是取邻接矩阵的转置。
+这之所以有效，是因为取转置会反转箭头的方向。
+（现在，如果节点接收来自其他具有高中心性的节点的链接，它们将具有高中心性。）</p>
+<p>例如，具有邻接矩阵<span class="math notranslate nohighlight">\(A\)</span>的加权有向图的<strong>基于权威的特征向量中心性</strong>是解决以下方程的向量<span class="math notranslate nohighlight">\(e\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eicena0">
-<span class="eqno">(41.5)<a class="headerlink" href="#equation-eicena0" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.5)<a class="headerlink" href="#equation-eicena0" title="Permalink to this equation">#</a></span>\[
 e = \frac{1}{r(A)} A^\top e.
 \]</div>
-<p>The only difference from the original definition is that <span class="math notranslate nohighlight">\(A\)</span> is replaced by
-its transpose.</p>
-<p>(Transposes do not affect the spectral radius of a matrix so we wrote <span class="math notranslate nohighlight">\(r(A)\)</span> instead of <span class="math notranslate nohighlight">\(r(A^\top)\)</span>.)</p>
-<p>Element-by-element, this is given by</p>
+<p>与原始定义的唯一区别是<span class="math notranslate nohighlight">\(A\)</span>被其转置替代。
+（转置不影响矩阵的谱半径，所以我们写成<span class="math notranslate nohighlight">\(r(A)\)</span>而不是<span class="math notranslate nohighlight">\(r(A^\top)\)</span>。）</p>
+<p>按元素逐个表示，这可以写成：</p>
 <div class="math notranslate nohighlight" id="equation-eicena">
-<span class="eqno">(41.6)<a class="headerlink" href="#equation-eicena" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.6)<a class="headerlink" href="#equation-eicena" title="Permalink to this equation">#</a></span>\[
 e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 \]</div>
-<p>We see <span class="math notranslate nohighlight">\(e_j\)</span> will be high if many nodes with high authority rankings link to <span class="math notranslate nohighlight">\(j\)</span>.</p>
-<p>The following figurenshows the authority-based eigenvector centrality ranking for the international
-credit network shown in <a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 41.4</span></a>.</p>
+<p>我们可以看到，如果许多具有高权威排名的节点链接到<span class="math notranslate nohighlight">\(j\)</span>，则<span class="math notranslate nohighlight">\(e_j\)</span>将会很高。</p>
+<p>下图显示了<a class="reference internal" href="#financial-network"><span class="std std-numref">Fig. 45.4</span></a>中所示的国际信贷网络的基于权威的特征向量中心性排名。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ecentral_authority</span> <span class="o">=</span> <span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">authority</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1457,93 +1358,88 @@ credit network shown in <a class="reference internal" href="#financial-network">
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id3">
+<figure class="align-default" id="eigenvector-centrality">
 <a class="reference internal image-reference" href="_images/0466667e0e15caa796518ad5dbf4b1db07a872cc88c5460a0ced33cd23112b49.png"><img alt="_images/0466667e0e15caa796518ad5dbf4b1db07a872cc88c5460a0ced33cd23112b49.png" src="_images/0466667e0e15caa796518ad5dbf4b1db07a872cc88c5460a0ced33cd23112b49.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.8 </span><span class="caption-text">Eigenvector authority</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45.8 </span><span class="caption-text">特征向量权威度</span><a class="headerlink" href="#eigenvector-centrality" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Highly ranked countries are those that attract large inflows of credit, or
-credit inflows from other major players.</p>
-<p>In this case the US clearly dominates the rankings as a target of interbank credit.</p>
+<p>排名靠前的国家是那些吸引大量信贷流入或从其他主要参与者获得信贷流入的国家。
+在这种情况下，美国作为银行间信贷的目标显然主导了排名。</p>
 </section>
 </section>
-<section id="further-reading">
-<h2><span class="section-number">41.8. </span>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
-<p>We apply the ideas discussed in this lecture to:</p>
-<p>Textbooks on economic and social networks include <span id="id4">[<a class="reference internal" href="zreferences.html#id281" title="Matthew O Jackson. Social and economic networks. Princeton university press, 2010.">Jackson, 2010</a>]</span>,
-<span id="id5">[<a class="reference internal" href="zreferences.html#id282" title="David Easley, Jon Kleinberg, and others. Networks, crowds, and markets. Volume 8. Cambridge university press Cambridge, 2010.">Easley <em>et al.</em>, 2010</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id283" title="Stephen P Borgatti, Martin G Everett, and Jeffrey C Johnson. Analyzing social networks. Sage, 2018.">Borgatti <em>et al.</em>, 2018</a>]</span>,
-<span id="id7">[<a class="reference internal" href="zreferences.html#id284" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2022.">Sargent and Stachurski, 2022</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id285" title="Sanjeev Goyal. Networks: An economics approach. MIT Press, 2023.">Goyal, 2023</a>]</span>.</p>
-<p>Within the realm of network science, the texts
-by <span id="id9">[<a class="reference internal" href="zreferences.html#id286" title="Mark Newman. Networks. Oxford university press, 2018.">Newman, 2018</a>]</span>, <span id="id10">[<a class="reference internal" href="zreferences.html#id287" title="Filippo Menczer, Santo Fortunato, and Clayton A Davis. A first course in network science. Cambridge University Press, 2020.">Menczer <em>et al.</em>, 2020</a>]</span> and
-<span id="id11">[<a class="reference internal" href="zreferences.html#id288" title="Michele Coscia. The atlas for the aspiring network scientist. arXiv preprint arXiv:2101.00863, 2021.">Coscia, 2021</a>]</span> are excellent.</p>
+<section id="id18">
+<h2><span class="section-number">45.8. </span>进一步阅读<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h2>
+<p>我们将本讲座中讨论的观点应用于：</p>
+<p>关于经济和社会网络的教科书包括 <span id="id19">[<a class="reference internal" href="zreferences.html#id281" title="Matthew O Jackson. Social and economic networks. Princeton university press, 2010.">Jackson, 2010</a>]</span>、
+<span id="id20">[<a class="reference internal" href="zreferences.html#id282" title="David Easley, Jon Kleinberg, and others. Networks, crowds, and markets. Volume 8. Cambridge university press Cambridge, 2010.">Easley <em>et al.</em>, 2010</a>]</span>、<span id="id21">[<a class="reference internal" href="zreferences.html#id283" title="Stephen P Borgatti, Martin G Everett, and Jeffrey C Johnson. Analyzing social networks. Sage, 2018.">Borgatti <em>et al.</em>, 2018</a>]</span>、
+<span id="id22">[<a class="reference internal" href="zreferences.html#id284" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2022.">Sargent and Stachurski, 2022</a>]</span> 和 <span id="id23">[<a class="reference internal" href="zreferences.html#id285" title="Sanjeev Goyal. Networks: An economics approach. MIT Press, 2023.">Goyal, 2023</a>]</span>。</p>
+<p>在网络科学领域，<span id="id24">[<a class="reference internal" href="zreferences.html#id286" title="Mark Newman. Networks. Oxford university press, 2018.">Newman, 2018</a>]</span>、<span id="id25">[<a class="reference internal" href="zreferences.html#id287" title="Filippo Menczer, Santo Fortunato, and Clayton A Davis. A first course in network science. Cambridge University Press, 2020.">Menczer <em>et al.</em>, 2020</a>]</span> 和
+<span id="id26">[<a class="reference internal" href="zreferences.html#id288" title="Michele Coscia. The atlas for the aspiring network scientist. arXiv preprint arXiv:2101.00863, 2021.">Coscia, 2021</a>]</span> 的著作都非常出色。</p>
 </section>
-<section id="exercises">
-<h2><span class="section-number">41.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id27">
+<h2><span class="section-number">45.9. </span>练习<a class="headerlink" href="#id27" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="networks_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 41.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 45.1 </span></p>
 <section id="exercise-content">
-<p>Here is a mathematical exercise for those who like proofs.</p>
-<p>Let <span class="math notranslate nohighlight">\((V, E)\)</span> be a directed graph and write <span class="math notranslate nohighlight">\(u \sim v\)</span> if <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> communicate.</p>
-<p>Show that <span class="math notranslate nohighlight">\(\sim\)</span> is an <a class="reference external" href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a> on <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<p>这是一个适合喜欢证明的人的数学练习。
+设 <span class="math notranslate nohighlight">\((V, E)\)</span> 是一个有向图，若 <span class="math notranslate nohighlight">\(u\)</span> 和 <span class="math notranslate nohighlight">\(v\)</span> 互通，则记作 <span class="math notranslate nohighlight">\(u \sim v\)</span>。
+证明 <span class="math notranslate nohighlight">\(\sim\)</span> 是 <span class="math notranslate nohighlight">\(V\)</span> 上的<a class="reference external" href="https://en.wikipedia.org/wiki/Equivalence_relation">等价关系</a>。</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="networks-solution-3">
+<div class="solution dropdown admonition" id="networks-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex1"> Exercise 41.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex1"> Exercise 45.1</a></p>
 <section id="solution-content">
-<p><strong>Reflexivity:</strong></p>
-<p>Trivially, <span class="math notranslate nohighlight">\(u = v \Rightarrow u \rightarrow v\)</span>.</p>
-<p>Thus, <span class="math notranslate nohighlight">\(u \sim u\)</span>.</p>
-<p><strong>Symmetry:</strong>
-Suppose, <span class="math notranslate nohighlight">\(u \sim v\)</span></p>
-<p><span class="math notranslate nohighlight">\(\Rightarrow u \rightarrow v\)</span> and <span class="math notranslate nohighlight">\(v \rightarrow u\)</span>.</p>
-<p>By definition, this implies <span class="math notranslate nohighlight">\(v \sim u\)</span>.</p>
-<p><strong>Transitivity:</strong></p>
-<p>Suppose, <span class="math notranslate nohighlight">\(u \sim v\)</span> and <span class="math notranslate nohighlight">\(v \sim w\)</span></p>
-<p>This implies, <span class="math notranslate nohighlight">\(u \rightarrow v\)</span> and <span class="math notranslate nohighlight">\(v \rightarrow u\)</span> and also <span class="math notranslate nohighlight">\(v \rightarrow w\)</span> and <span class="math notranslate nohighlight">\(w \rightarrow v\)</span>.</p>
-<p>Thus, we can conclude <span class="math notranslate nohighlight">\(u \rightarrow v \rightarrow w\)</span> and <span class="math notranslate nohighlight">\(w \rightarrow v \rightarrow u\)</span>.</p>
-<p>Which means <span class="math notranslate nohighlight">\(u \sim w\)</span>.</p>
+<p><strong>自反性：</strong>
+显然，<span class="math notranslate nohighlight">\(u = v \Rightarrow u \rightarrow v\)</span>。
+因此，<span class="math notranslate nohighlight">\(u \sim u\)</span>。</p>
+<p><strong>对称性：</strong>
+假设 <span class="math notranslate nohighlight">\(u \sim v\)</span>
+<span class="math notranslate nohighlight">\(\Rightarrow u \rightarrow v\)</span> 且 <span class="math notranslate nohighlight">\(v \rightarrow u\)</span>。
+根据定义，这意味着 <span class="math notranslate nohighlight">\(v \sim u\)</span>。</p>
+<p><strong>传递性：</strong>
+假设 <span class="math notranslate nohighlight">\(u \sim v\)</span> 且 <span class="math notranslate nohighlight">\(v \sim w\)</span>
+这意味着，<span class="math notranslate nohighlight">\(u \rightarrow v\)</span> 且 <span class="math notranslate nohighlight">\(v \rightarrow u\)</span>，同时 <span class="math notranslate nohighlight">\(v \rightarrow w\)</span> 且 <span class="math notranslate nohighlight">\(w \rightarrow v\)</span>。
+因此，我们可以得出 <span class="math notranslate nohighlight">\(u \rightarrow v \rightarrow w\)</span> 且 <span class="math notranslate nohighlight">\(w \rightarrow v \rightarrow u\)</span>。
+这意味着 <span class="math notranslate nohighlight">\(u \sim w\)</span>。</p>
 </section>
 </div>
 <div class="exercise admonition" id="networks_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 41.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 45.2 </span></p>
 <section id="exercise-content">
-<p>Consider a directed graph <span class="math notranslate nohighlight">\(G\)</span> with the set of nodes</p>
-<div class="math notranslate nohighlight">
-\[
+<p>考虑一个有向图 <span class="math notranslate nohighlight">\(G\)</span>，其节点集为
+$<span class="math notranslate nohighlight">\(
 V = \{0,1,2,3,4,5,6,7\}
-\]</div>
-<p>and the set of edges</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span><span class="math notranslate nohighlight">\(
+边集为
+\)</span><span class="math notranslate nohighlight">\(
 E = \{(0, 1), (0, 3), (1, 0), (2, 4), (3, 2), (3, 4), (3, 7), (4, 3), (5, 4), (5, 6), (6, 3), (6, 5), (7, 0)\}
-\]</div>
+\)</span>$</p>
 <ol class="arabic simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">Networkx</span></code> to draw graph <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
-<li><p>Find the associated adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> for <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
-<li><p>Use the functions defined above to compute in-degree centrality, out-degree centrality and eigenvector centrality
-of G.</p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">Networkx</span></code> 绘制图 <span class="math notranslate nohighlight">\(G\)</span>。</p></li>
+<li><p>找出 <span class="math notranslate nohighlight">\(G\)</span> 的相关邻接矩阵 <span class="math notranslate nohighlight">\(A\)</span>。</p></li>
+<li><p>使用上面定义的函数计算 <span class="math notranslate nohighlight">\(G\)</span> 的入度中心性、出度中心性和特征向量中心性。</p></li>
 </ol>
 </section>
 </div>
-<div class="solution dropdown admonition" id="networks-solution-5">
+<div class="solution dropdown admonition" id="networks-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex2"> Exercise 41.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex2"> Exercise 45.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, let&#39;s plot the given graph</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 首先，让我们绘制给定的图</span>
 
 <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
 
-<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>  <span class="c1"># adding nodes</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>  <span class="c1"># 添加节点</span>
 
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>       <span class="c1"># adding edges</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>       <span class="c1"># 添加边</span>
                   <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
                   <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
                   <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>
@@ -1564,7 +1460,7 @@ of G.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>      <span class="c1">#find adjacency matrix associated with G</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>      <span class="c1">#求G的邻接矩阵</span>
 
 <span class="n">A</span>
 </pre></div>
@@ -1585,7 +1481,7 @@ of G.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">oG</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>   <span class="c1"># computing in-degree centrality</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">oG</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>   <span class="c1"># 计算入度中心性</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">oG</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
@@ -1607,7 +1503,7 @@ of G.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>   <span class="c1"># computing eigenvector centrality</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>   <span class="c1"># 计算特征向量中心性</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1632,23 +1528,22 @@ of G.</p></li>
 </div>
 <div class="exercise admonition" id="networks_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 41.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 45.3 </span></p>
 <section id="exercise-content">
-<p>Consider a graph <span class="math notranslate nohighlight">\(G\)</span> with <span class="math notranslate nohighlight">\(n\)</span> nodes and <span class="math notranslate nohighlight">\(n \times n\)</span> adjacency matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(S = \sum_{k=0}^{n-1} A^k\)</span></p>
-<p>We can say for any two nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, <span class="math notranslate nohighlight">\(j\)</span> is accessible from <span class="math notranslate nohighlight">\(i\)</span> if and only if
-<span class="math notranslate nohighlight">\(S_{ij} &gt; 0\)</span>.</p>
-<p>Devise a function <code class="docutils literal notranslate"><span class="pre">is_accessible</span></code> that checks if any two nodes of a given graph are accessible.</p>
-<p>Consider the graph in <a class="reference internal" href="#networks_ex2"><span class="std std-numref">Exercise 41.2</span></a> and use this function to check if</p>
+<p>考虑一个有 <span class="math notranslate nohighlight">\(n\)</span> 个节点和 <span class="math notranslate nohighlight">\(n \times n\)</span> 邻接矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的图 <span class="math notranslate nohighlight">\(G\)</span>。
+令 <span class="math notranslate nohighlight">\(S = \sum_{k=0}^{n-1} A^k\)</span>
+我们可以说对于任意两个节点 <span class="math notranslate nohighlight">\(i\)</span> 和 <span class="math notranslate nohighlight">\(j\)</span>，当且仅当 <span class="math notranslate nohighlight">\(S_{ij} &gt; 0\)</span> 时，<span class="math notranslate nohighlight">\(j\)</span> 可从 <span class="math notranslate nohighlight">\(i\)</span> 到达。
+设计一个函数 <code class="docutils literal notranslate"><span class="pre">is_accessible</span></code>，用于检查给定图中的任意两个节点是否可达。
+考虑 <a class="reference internal" href="#networks_ex2"><span class="std std-numref">Exercise 45.2</span></a> 中的图，并使用此函数检查</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(1\)</span> is accessible from <span class="math notranslate nohighlight">\(2\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(6\)</span> is accessible from <span class="math notranslate nohighlight">\(3\)</span></p></li>
+<li><p>从 <span class="math notranslate nohighlight">\(2\)</span> 是否可以到达 <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p>从 <span class="math notranslate nohighlight">\(3\)</span> 是否可以到达 <span class="math notranslate nohighlight">\(6\)</span></p></li>
 </ol>
 </section>
 </div>
-<div class="solution dropdown admonition" id="networks-solution-7">
+<div class="solution dropdown admonition" id="networks-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex3"> Exercise 41.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#networks_ex3"> Exercise 45.3</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1670,9 +1565,9 @@ of G.</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
 
-<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>  <span class="c1"># adding nodes</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>  <span class="c1"># 添加节点</span>
 
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>       <span class="c1"># adding edges</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>       <span class="c1"># 添加边</span>
                   <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
                   <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
                   <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>
@@ -1764,19 +1659,19 @@ of G.</p></li>
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1787,17 +1682,17 @@ of G.</p></li>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1808,7 +1703,7 @@ of G.</p></li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1819,17 +1714,17 @@ of G.</p></li>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1841,27 +1736,27 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1873,12 +1768,12 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1890,22 +1785,22 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1927,22 +1822,22 @@ of G.</p></li>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1954,22 +1849,22 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1981,22 +1876,22 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -2008,12 +1903,12 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -2025,22 +1920,22 @@ of G.</p></li>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -2052,12 +1947,12 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -2069,12 +1964,12 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -2086,17 +1981,17 @@ of G.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

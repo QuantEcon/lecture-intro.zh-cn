@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>43. Market Equilibrium with Heterogeneity &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>47. 市场均衡与异质性 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="44. Simple Linear Regression Model" href="simple_linear_regression.html" />
-    <link rel="prev" title="42. Supply and Demand with Many Goods" href="supply_demand_multiple_goods.html" />
+    <link rel="next" title="48. 简单线性回归模型" href="simple_linear_regression.html" />
+    <link rel="prev" title="46. 多种商品的供需关系" href="supply_demand_multiple_goods.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Market Equilibrium with Heterogeneity"/>
+<meta name="twitter:title" content="市场均衡与异质性"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Market Equilibrium with Heterogeneity" />
+<meta property="og:title" content="市场均衡与异质性" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/supply_demand_heterogeneity.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,20 +172,20 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">43.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-simple-example">43.2. An simple example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-exchange-economy">43.3. Pure exchange economy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#competitive-equilibrium">43.3.1. Competitive equilibrium</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-some-python-code">43.3.2. Designing some Python code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">47.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">47.2. 一个简单的例子</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">47.3. 纯交换经济</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">47.3.1. 竞争均衡</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">47.3.2. 设计一些 Python 代码</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">43.4. Implementation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-person-economy-without-production">43.4.1. Two-person economy without production</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dynamic-economy">43.4.2. A dynamic economy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-economy-with-arrow-securities">43.4.3. Risk economy with arrow securities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">47.4. 实施</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">47.4.1. 没有生产的两人经济体</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">47.4.2. 动态经济</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">47.4.3. 带箭头证券的风险经济</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deducing-a-representative-consumer">43.5. Deducing a representative consumer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">47.5. 推导代表性消费者</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -218,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Market Equilibrium with Heterogeneity</p>
+                        <p class="qe-page__header-subheading">市场均衡与异质性</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -244,17 +244,17 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="market-equilibrium-with-heterogeneity">
-<span id="supply-demand-heterogeneity"></span><h1><span class="section-number">43. </span>Market Equilibrium with Heterogeneity<a class="headerlink" href="#market-equilibrium-with-heterogeneity" title="Permalink to this heading">#</a></h1>
-<section id="overview">
-<h2><span class="section-number">43.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>In the <a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">previous lecture</span></a>, we studied competitive equilibria in an economy with many goods.</p>
-<p>While the results of the study were informative, we used a strong simplifying assumption: all of the agents in the economy are identical.</p>
-<p>In the real world, households, firms and other economic agents differ from one another along many dimensions.</p>
-<p>In this lecture, we introduce heterogeneity across consumers by allowing their preferences and endowments to differ.</p>
-<p>We will examine competitive equilibrium in this setting.</p>
-<p>We will also show how a “representative consumer” can be constructed.</p>
-<p>Here are some imports:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="supply-demand-heterogeneity">
+<span id="id1"></span><h1><span class="section-number">47. </span>市场均衡与异质性<a class="headerlink" href="#supply-demand-heterogeneity" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">47.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>在<a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">前一讲座</span></a>中，我们研究了具有多种商品的经济环境中的竞争均衡。</p>
+<p>虽然研究结果具有启发性，但我们使用了一个强化的简化假设：经济中的所有代理人都是相同的。</p>
+<p>实际上，家庭、公司及其他经济主体在许多方面都不相同。</p>
+<p>在这次讲座中，我们通过允许消费者的偏好和禀赋不同，引入了消费者间的异质性。</p>
+<p>我们将在这种设定下检验竞争均衡。</p>
+<p>我们还将展示如何构建一个“代表性消费者”。</p>
+<p>以下是一些导入内容：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -264,53 +264,53 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </section>
-<section id="an-simple-example">
-<h2><span class="section-number">43.2. </span>An simple example<a class="headerlink" href="#an-simple-example" title="Permalink to this heading">#</a></h2>
-<p>Let’s study a simple example of <strong>pure exchange</strong> economy without production.</p>
-<p>There are two consumers who differ in their endowment vectors <span class="math notranslate nohighlight">\(e_i\)</span> and their bliss-point vectors <span class="math notranslate nohighlight">\(b_i\)</span> for <span class="math notranslate nohighlight">\(i=1,2\)</span>.</p>
-<p>The total endowment is <span class="math notranslate nohighlight">\(e_1 + e_2\)</span>.</p>
-<p>A competitive equilibrium requires that</p>
+<section id="id3">
+<h2><span class="section-number">47.2. </span>一个简单的例子<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>让我们学习一个没有生产的<strong>纯交换</strong>经济的简单例子。</p>
+<p>有两个消费者，他们在禀赋向量 <span class="math notranslate nohighlight">\(e_i\)</span> 和极乐点向量 <span class="math notranslate nohighlight">\(b_i\)</span> 上有所不同，其中 <span class="math notranslate nohighlight">\(i=1,2\)</span>。</p>
+<p>总的禀赋是 <span class="math notranslate nohighlight">\(e_1 + e_2\)</span>。</p>
+<p>竞争均衡要求</p>
 <div class="math notranslate nohighlight">
 \[
 c_1 + c_2 = e_1 + e_2
 \]</div>
-<p>Assume the demand curves</p>
+<p>假设需求曲线为</p>
 <div class="math notranslate nohighlight">
 \[
-    c_i = (\Pi^\top \Pi )^{-1}(\Pi^\top b_i -  \mu_i p )
+    c_i = (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} b_i -  \mu_i p )
 \]</div>
-<p>Competitive equilibrium then requires that</p>
+<p>那么竞争均衡还需要满足</p>
 <div class="math notranslate nohighlight">
 \[
 e_1 + e_2 =
-    (\Pi^\top \Pi)^{-1}(\Pi^\top (b_1 + b_2) - (\mu_1 + \mu_2) p )
+    (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} (b_1 + b_2) - (\mu_1 + \mu_2) p )
 \]</div>
-<p>which, after a line or two of linear algebra, implies that</p>
+<p>通过一两行线性代数计算，可以推出</p>
 <div class="math notranslate nohighlight" id="equation-eq-old6">
-<span class="eqno">(43.1)<a class="headerlink" href="#equation-eq-old6" title="Permalink to this equation">#</a></span>\[
-(\mu_1 + \mu_2) p = \Pi^\top(b_1+ b_2) - \Pi^\top \Pi (e_1 + e_2)
+<span class="eqno">(47.1)<a class="headerlink" href="#equation-eq-old6" title="Permalink to this equation">#</a></span>\[
+(\mu_1 + \mu_2) p = \Pi^{\top}(b_1+ b_2) - \Pi^{\top} \Pi (e_1 + e_2)
 \]</div>
-<p>We can normalize prices by setting <span class="math notranslate nohighlight">\(\mu_1 + \mu_2 =1\)</span> and then solving</p>
+<p>我们可以通过设定 <span class="math notranslate nohighlight">\(\mu_1 + \mu_2 =1\)</span> 来规范价格，然后解方程</p>
 <div class="math notranslate nohighlight" id="equation-eq-old7">
-<span class="eqno">(43.2)<a class="headerlink" href="#equation-eq-old7" title="Permalink to this equation">#</a></span>\[
-\mu_i(p,e) = \frac{p^\top (\Pi^{-1} b_i - e_i)}{p^\top (\Pi^\top \Pi )^{-1} p}
+<span class="eqno">(47.2)<a class="headerlink" href="#equation-eq-old7" title="Permalink to this equation">#</a></span>\[
+\mu_i(p,e) = \frac{p^{\top} (\Pi^{-1} b_i - e_i)}{p^{\top} (\Pi^{\top} \Pi)^{-1} p}
 \]</div>
-<p>for <span class="math notranslate nohighlight">\(\mu_i, i = 1,2\)</span>.</p>
+<p>求得 <span class="math notranslate nohighlight">\(\mu_i, i = 1,2\)</span>。</p>
 <div class="exercise admonition" id="sdh_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 43.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.1 </span></p>
 <section id="exercise-content">
-<p>Show that, up to normalization by a positive scalar, the same competitive equilibrium price vector that you computed in the preceding two-consumer economy would prevail in a single-consumer economy in which a single <strong>representative consumer</strong> has utility function</p>
+<p>证明，在正标量的归一化下，你在前面两消费者经济中计算出的同一竞争均衡价格向量，在只有一个代表性消费者的单一消费者经济中依旧适用，其中这个<strong>代表性消费者</strong>的效用函数为：</p>
 <div class="math notranslate nohighlight">
 \[
--.5 (\Pi c -b) ^\top (\Pi c -b )
+-.5 (\Pi c -b) ^2 (\Pi c -b )
 \]</div>
-<p>and endowment vector <span class="math notranslate nohighlight">\(e\)</span>,  where</p>
+<p>其初始禀赋向量为 <span class="math notranslate nohighlight">\(e\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[
 b = b_1 + b_2
 \]</div>
-<p>and</p>
+<p>以及</p>
 <div class="math notranslate nohighlight">
 \[
 e = e_1 + e_2 .
@@ -318,71 +318,71 @@ e = e_1 + e_2 .
 </section>
 </div>
 </section>
-<section id="pure-exchange-economy">
-<h2><span class="section-number">43.3. </span>Pure exchange economy<a class="headerlink" href="#pure-exchange-economy" title="Permalink to this heading">#</a></h2>
-<p>Let’s further explore a pure exchange economy with <span class="math notranslate nohighlight">\(n\)</span> goods and <span class="math notranslate nohighlight">\(m\)</span> people.</p>
-<section id="competitive-equilibrium">
-<h3><span class="section-number">43.3.1. </span>Competitive equilibrium<a class="headerlink" href="#competitive-equilibrium" title="Permalink to this heading">#</a></h3>
-<p>We’ll compute a competitive equilibrium.</p>
-<p>To compute a competitive equilibrium of a pure exchange economy, we use the fact that</p>
+<section id="id4">
+<h2><span class="section-number">47.3. </span>纯交换经济<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>让我们进一步探讨一个有 <span class="math notranslate nohighlight">\(n\)</span> 种商品和 <span class="math notranslate nohighlight">\(m\)</span> 个人的纯交换经济。</p>
+<section id="id5">
+<h3><span class="section-number">47.3.1. </span>竞争均衡<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>我们将计算一个竞争均衡。</p>
+<p>为了计算纯交换经济的竞争均衡，我们使用以下事实：</p>
 <ul class="simple">
-<li><p>Relative prices in a competitive equilibrium are the same as those in a special single person or  representative consumer economy with preference <span class="math notranslate nohighlight">\(\Pi\)</span> and <span class="math notranslate nohighlight">\(b=\sum_i b_i\)</span>, and endowment <span class="math notranslate nohighlight">\(e = \sum_i e_{i}\)</span>.</p></li>
+<li><p>竞争均衡中的相对价格与在特定单一人或代表性消费者经济中的相对价格相同，其中偏好为 <span class="math notranslate nohighlight">\(\Pi\)</span>，<span class="math notranslate nohighlight">\(b=\sum_i b_i\)</span>，并且禀赋 <span class="math notranslate nohighlight">\(e = \sum_i e_{i}\)</span>。</p></li>
 </ul>
-<p>We can use the following steps to compute a competitive equilibrium:</p>
+<p>我们可以使用以下步骤来计算竞争均衡：</p>
 <ul class="simple">
-<li><p>First we solve the single representative consumer economy by normalizing <span class="math notranslate nohighlight">\(\mu = 1\)</span>. Then, we renormalize the price vector by using the first consumption good as a numeraire.</p></li>
-<li><p>Next we use the competitive equilibrium prices to compute each consumer’s marginal utility of wealth:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}\]</div>
-<ul class="simple">
-<li><p>Finally we compute a competitive equilibrium allocation by using the demand curves:</p></li>
+<li><p>首先我们通过规范化 <span class="math notranslate nohighlight">\(\mu = 1\)</span> 来解决单一代表性消费者经济问题。然后，我们使用第一个消费品作为计价单位来重新规范化价格向量。</p></li>
+<li><p>接下来我们使用竞争均衡价格来计算每个消费者的财富边际效用：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p 
+\mu_{i}=\frac{-W_{i}+p^{T}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
+\]</div>
+<ul class="simple">
+<li><p>最后我们使用需求曲线来计算竞争均衡分配：</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
 \]</div>
 </section>
-<section id="designing-some-python-code">
-<h3><span class="section-number">43.3.2. </span>Designing some Python code<a class="headerlink" href="#designing-some-python-code" title="Permalink to this heading">#</a></h3>
-<p>Below we shall construct a Python class with the following attributes:</p>
+<section id="python">
+<h3><span class="section-number">47.3.2. </span>设计一些 Python 代码<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h3>
+<p>以下我们将构建一个 Python 类，具有以下属性：</p>
 <ul class="simple">
-<li><p><strong>Preferences</strong> in the form of</p>
+<li><p><strong>偏好</strong> 以以下形式：</p>
 <ul>
-<li><p>an <span class="math notranslate nohighlight">\(n \times n\)</span>  positive definite matrix <span class="math notranslate nohighlight">\(\Pi\)</span></p></li>
-<li><p>an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of bliss points <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的正定矩阵 <span class="math notranslate nohighlight">\(\Pi\)</span></p></li>
+<li><p>一个 <span class="math notranslate nohighlight">\(n \times 1\)</span> 的幸福点向量 <span class="math notranslate nohighlight">\(b\)</span></p></li>
 </ul>
 </li>
-<li><p><strong>Endowments</strong> in the form of</p>
+<li><p><strong>禀赋</strong> 以以下形式：</p>
 <ul>
-<li><p>an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector <span class="math notranslate nohighlight">\(e\)</span></p></li>
-<li><p>a scalar “wealth” <span class="math notranslate nohighlight">\(W\)</span> with default value <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p>一个 <span class="math notranslate nohighlight">\(n \times 1\)</span> 的向量 <span class="math notranslate nohighlight">\(e\)</span></p></li>
+<li><p>一个默认值为 <span class="math notranslate nohighlight">\(0\)</span> 的标量 “财富” <span class="math notranslate nohighlight">\(W\)</span></p></li>
 </ul>
 </li>
 </ul>
-<p>The class will include a test to make sure that <span class="math notranslate nohighlight">\(b \gg \Pi e \)</span> and raise an exception if it is violated
-(at some threshold level we’d have to specify).</p>
+<p>这个类将包括一个测试，确保 <span class="math notranslate nohighlight">\(b \gg \Pi e \)</span>，如果违反了这一规则（在我们需要指定的某一阈值水平上），则会引发一个异常。</p>
 <ul class="simple">
-<li><p><strong>A Person</strong> in the form of a pair that consists of</p>
+<li><p><strong>一个人</strong> 以以下形式：</p>
 <ul>
-<li><p><strong>Preferences</strong> and <strong>Endowments</strong></p></li>
+<li><p><strong>偏好</strong> 和 <strong>禀赋</strong></p></li>
 </ul>
 </li>
-<li><p><strong>A Pure Exchange Economy</strong> will consist of</p>
+<li><p><strong>纯交换经济</strong> 将包括：</p>
 <ul>
-<li><p>a collection of <span class="math notranslate nohighlight">\(m\)</span> <strong>persons</strong></p>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> 个 <strong>人</strong> 的集合</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(m=1\)</span> for our single-agent economy</p></li>
-<li><p><span class="math notranslate nohighlight">\(m=2\)</span> for our illustrations of a pure exchange economy</p></li>
+<li><p><span class="math notranslate nohighlight">\(m=1\)</span> 对于我们的单代理经济</p></li>
+<li><p><span class="math notranslate nohighlight">\(m=2\)</span> 对于我们描绘纯交换经济的示例</p></li>
 </ul>
 </li>
-<li><p>an equilibrium price vector <span class="math notranslate nohighlight">\(p\)</span> (normalized somehow)</p></li>
-<li><p>an equilibrium allocation <span class="math notranslate nohighlight">\(c_1, c_2, \ldots, c_m\)</span> – a collection of <span class="math notranslate nohighlight">\(m\)</span> vectors of dimension <span class="math notranslate nohighlight">\(n \times 1\)</span></p></li>
+<li><p>一个平衡价格向量 <span class="math notranslate nohighlight">\(p\)</span>（以某种方式标准化）</p></li>
+<li><p>一个平衡配置 <span class="math notranslate nohighlight">\(c_1, c_2, \ldots, c_m\)</span> – <span class="math notranslate nohighlight">\(m\)</span> 个维度为 <span class="math notranslate nohighlight">\(n \times 1\)</span> 的向量的集合</p></li>
 </ul>
 </li>
 </ul>
-<p>Now let’s proceed to code.</p>
+<p>现在让我们开始编码。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExchangeEconomy</span><span class="p">:</span>
@@ -393,48 +393,48 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p
                  <span class="n">Ws</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                  <span class="n">thres</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set up the environment for an exchange economy</span>
+<span class="sd">        为交换经济设置环境</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            Π (np.array): shared matrix of substitution</span>
-<span class="sd">            bs (list): all consumers&#39; bliss points</span>
-<span class="sd">            es (list): all consumers&#39; endowments</span>
-<span class="sd">            Ws (list): all consumers&#39; wealth</span>
-<span class="sd">            thres (float): a threshold set to test b &gt;&gt; Pi e violated</span>
+<span class="sd">        参数:</span>
+<span class="sd">            Π (np.array): 共用的替代矩阵</span>
+<span class="sd">            bs (list): 所有消费者的幸福点</span>
+<span class="sd">            es (list): 所有消费者的初始物资</span>
+<span class="sd">            Ws (list): 所有消费者的财富</span>
+<span class="sd">            thres (float): 设定一个阈值来测试 b &gt;&gt; Pi e 是否被违反</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Π</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
 
-        <span class="c1"># check non-satiation</span>
+        <span class="c1"># 检查不饱和条件</span>
         <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Π</span> <span class="o">@</span> <span class="n">e</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">thres</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;set bliss points further away&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;设置更远的幸福点&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">Ws</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">Ws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Ws</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;invalid wealth distribution&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;无效的财富分配&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">Π</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">es</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">Ws</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span>
 
     <span class="k">def</span> <span class="nf">competitive_equilibrium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the competitive equilibrium prices and allocation</span>
+<span class="sd">        计算竞争均衡的价格和分配</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">Ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Π</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">es</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
         <span class="n">slope_dc</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">Π</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Π</span><span class="p">)</span>
         <span class="n">Π_inv</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">Π</span><span class="p">)</span>
 
-        <span class="c1"># aggregate</span>
+        <span class="c1"># 合计</span>
         <span class="n">b</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
         <span class="n">e</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
 
-        <span class="c1"># compute price vector with mu=1 and renormalize</span>
+        <span class="c1"># 以 mu=1 计算价格向量并重新标准化</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">Π</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span> <span class="o">-</span> <span class="n">Π</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Π</span> <span class="o">@</span> <span class="n">e</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># compute marginal utility of wealth</span>
+        <span class="c1"># 计算财富的边际效用</span>
         <span class="n">μ_s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">c_s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">slope_dc</span> <span class="o">@</span> <span class="n">p</span>
@@ -447,8 +447,8 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p
 
         <span class="k">for</span> <span class="n">c_i</span> <span class="ow">in</span> <span class="n">c_s</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c_i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;allocation: &#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;negative allocation: equilibrium does not exist&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;分配: &#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;负分配：不存在平衡&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span>
 </pre></div>
@@ -457,135 +457,135 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p
 </div>
 </section>
 </section>
-<section id="implementation">
-<h2><span class="section-number">43.4. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
-<p>Next we use the class <code class="docutils literal notranslate"><span class="pre">ExchangeEconomy</span></code> defined above to study</p>
+<section id="id6">
+<h2><span class="section-number">47.4. </span>实施<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>接下来我们使用上面定义的类 <code class="docutils literal notranslate"><span class="pre">ExchangeEconomy</span></code> 来研究</p>
 <ul class="simple">
-<li><p>a two-person economy without production,</p></li>
-<li><p>a dynamic economy, and</p></li>
-<li><p>an economy with risk and arrow securities.</p></li>
+<li><p>一个没有生产的两人经济体,</p></li>
+<li><p>一个动态经济体, 和</p></li>
+<li><p>一个有风险和箭头证券的经济体。</p></li>
 </ul>
-<section id="two-person-economy-without-production">
-<h3><span class="section-number">43.4.1. </span>Two-person economy without production<a class="headerlink" href="#two-person-economy-without-production" title="Permalink to this heading">#</a></h3>
-<p>Here we study how competitive equilibrium <span class="math notranslate nohighlight">\(p, c_1, c_2\)</span> respond to different <span class="math notranslate nohighlight">\(b_i\)</span> and <span class="math notranslate nohighlight">\(e_i\)</span>, <span class="math notranslate nohighlight">\(i \in \{1, 2\}\)</span>.</p>
+<section id="id7">
+<h3><span class="section-number">47.4.1. </span>没有生产的两人经济体<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>在这里我们研究竞争均衡 <span class="math notranslate nohighlight">\(p, c_1, c_2\)</span> 如何响应不同的 <span class="math notranslate nohighlight">\(b_i\)</span> 和 <span class="math notranslate nohighlight">\(e_i\)</span>, <span class="math notranslate nohighlight">\(i \in \{1, 2\}\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 
-<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s bliss points</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s bliss points</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的幸福点</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的幸福点</span>
 
-<span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s endowment</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s endowment</span>
+<span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的禀赋</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的禀赋</span>
 
 <span class="n">EE</span> <span class="o">=</span> <span class="n">ExchangeEconomy</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">)</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1. 1.]
-Competitive equilibrium allocation: [array([1., 1.]), array([1., 1.])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1. 1.]
+竞争均衡配置: [array([1., 1.]), array([1., 1.])]
 </pre></div>
 </div>
 </div>
 </div>
-<p>What happens if the first consumer likes the first good more and the second consumer likes the second good more?</p>
+<p>如果第一个消费者更喜欢第一种商品，而第二个消费者更喜欢第二种商品会怎样？</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s bliss points</span>
-         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s bliss points</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的幸福点</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的幸福点</span>
 
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1. 1.]
-Competitive equilibrium allocation: [array([1.5, 0.5]), array([0.5, 1.5])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1. 1.]
+竞争均衡配置: [array([1.5, 0.5]), array([0.5, 1.5])]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let the first consumer be poorer.</p>
+<p>让第一个消费者变得更穷。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s endowment</span>
-         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s endowment</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的禀赋</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的禀赋</span>
 
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1. 1.]
-Competitive equilibrium allocation: [array([1., 0.]), array([0.5, 1.5])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1. 1.]
+竞争均衡配置: [array([1., 0.]), array([0.5, 1.5])]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let’s construct an autarky (i.e., no-trade) equilibrium.</p>
+<p>现在让我们构建一个自给自足（即无贸易）均衡。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s bliss points</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s bliss points</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EE</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的幸福点</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的幸福点</span>
 
-<span class="n">EE</span><span class="o">.</span><span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s endowment</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s endowment</span>
+<span class="n">EE</span><span class="o">.</span><span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的禀赋</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的禀赋</span>
 
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1. 1.]
-Competitive equilibrium allocation: [array([0., 2.]), array([2., 0.])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1. 1.]
+竞争均衡配置: [array([0., 2.]), array([2., 0.])]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let’s redistribute endowments before trade.</p>
+<p>现在让我们在贸易之前重新分配禀赋。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s bliss points</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s bliss points</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的幸福点</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的幸福点</span>
 
-<span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>  <span class="c1"># first consumer&#39;s endowment</span>
-      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>  <span class="c1"># second consumer&#39;s endowment</span>
+<span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>  <span class="c1"># 第一个消费者的禀赋</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>  <span class="c1"># 第二个消费者的禀赋</span>
 
 <span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]</span>
 <span class="n">EE_new</span> <span class="o">=</span> <span class="n">ExchangeEconomy</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">Ws</span><span class="p">)</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE_new</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1. 1.]
-Competitive equilibrium allocation: [array([1.25, 1.25]), array([0.75, 0.75])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1. 1.]
+竞争均衡配置: [array([1.25, 1.25]), array([0.75, 0.75])]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="a-dynamic-economy">
-<h3><span class="section-number">43.4.2. </span>A dynamic economy<a class="headerlink" href="#a-dynamic-economy" title="Permalink to this heading">#</a></h3>
-<p>Now let’s use the tricks described above to study a dynamic economy, one with two periods.</p>
+<section id="id8">
+<h3><span class="section-number">47.4.2. </span>动态经济<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>现在我们利用上述技巧来研究一个动态经济，这里涉及两个时期。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.95</span>
@@ -600,22 +600,22 @@ Competitive equilibrium allocation: [array([1.25, 1.25]), array([0.75, 0.75])]
 <span class="n">EE_DE</span> <span class="o">=</span> <span class="n">ExchangeEconomy</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">)</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE_DE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡的价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1.   0.95]
-Competitive equilibrium allocation: [array([1., 1.])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡的价格向量: [1.   0.95]
+竞争均衡配置: [array([1., 1.])]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="risk-economy-with-arrow-securities">
-<h3><span class="section-number">43.4.3. </span>Risk economy with arrow securities<a class="headerlink" href="#risk-economy-with-arrow-securities" title="Permalink to this heading">#</a></h3>
-<p>We use the tricks described above to interpret  <span class="math notranslate nohighlight">\(c_1, c_2\)</span> as “Arrow securities” that are state-contingent claims to consumption goods.</p>
+<section id="id9">
+<h3><span class="section-number">47.4.3. </span>带箭头证券的风险经济<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>我们使用上述技巧来解释 <span class="math notranslate nohighlight">\(c_1, c_2\)</span> 为“箭头证券”，这些证券是对消费品的状态或情况下的索赔。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="mf">0.7</span>
@@ -632,83 +632,81 @@ Competitive equilibrium allocation: [array([1., 1.])]
 <span class="n">EE_AS</span> <span class="o">=</span> <span class="n">ExchangeEconomy</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">)</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE_AS</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium price vector:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Competitive equilibrium allocation:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡配置:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Competitive equilibrium price vector: [1.         0.42857143]
-Competitive equilibrium allocation: [array([0.7, 0.7]), array([0.3, 0.3])]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1.         0.42857143]
+竞争均衡配置: [array([0.7, 0.7]), array([0.3, 0.3])]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="deducing-a-representative-consumer">
-<h2><span class="section-number">43.5. </span>Deducing a representative consumer<a class="headerlink" href="#deducing-a-representative-consumer" title="Permalink to this heading">#</a></h2>
-<p>In the class of multiple consumer economies that we are studying here, it turns out that there
-exists a single <strong>representative consumer</strong> whose preferences and endowments can be deduced from lists of preferences and endowments for separate individual consumers.</p>
-<p>Consider a multiple consumer economy with initial distribution of wealth <span class="math notranslate nohighlight">\(W_i\)</span> satisfying <span class="math notranslate nohighlight">\(\sum_i W_{i}=0\)</span></p>
-<p>We allow an initial redistribution of wealth.</p>
-<p>We have the following objects</p>
+<section id="id10">
+<h2><span class="section-number">47.5. </span>推导代表性消费者<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>在我们这里研究的多消费者经济类中，事实上存在一个单一的<strong>代表性消费者</strong>，其偏好和禀赋可以从单独个体消费者的偏好和禀赋列表中推断出来。</p>
+<p>考虑一个具有初始财富分配 <span class="math notranslate nohighlight">\(W_i\)</span> 的多消费者经济，满足 <span class="math notranslate nohighlight">\(\sum_i W_{i}=0\)</span></p>
+<p>我们允许初始财富的重新分配。</p>
+<p>我们有以下对象</p>
 <ul class="simple">
-<li><p>The demand curve:</p></li>
+<li><p>需求曲线：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
-c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p 
+c_{i}=\Pi^{-1}b_{i}-(\Pi^T\Pi)^{-1}\mu_{i}p 
 \]</div>
 <ul class="simple">
-<li><p>The marginal utility of wealth:</p></li>
+<li><p>财富的边际效用：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
-\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
+\mu_{i}=\frac{-W_{i}+p^T\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^T(\Pi^T\Pi)^{-1}p}
 \]</div>
 <ul class="simple">
-<li><p>Market clearing:</p></li>
+<li><p>市场清算：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
 \sum c_{i}=\sum e_{i}
 \]</div>
-<p>Denote aggregate consumption <span class="math notranslate nohighlight">\(\sum_i c_{i}=c\)</span> and <span class="math notranslate nohighlight">\(\sum_i \mu_i = \mu\)</span>.</p>
-<p>Market clearing requires</p>
+<p>表示总消费 <span class="math notranslate nohighlight">\(\sum_i c_{i}=c\)</span> 和 <span class="math notranslate nohighlight">\(\sum_i \mu_i = \mu\)</span>.</p>
+<p>市场清算需要</p>
 <div class="math notranslate nohighlight">
 \[ 
-\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{\top}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
+\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{T}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
 \]</div>
-<p>which, after a few steps, leads to</p>
+<p>这经过几步计算后得到</p>
 <div class="math notranslate nohighlight">
 \[
-p=\mu^{-1}\left(\Pi^{\top}b-\Pi^{\top}\Pi e\right)
+p=\mu^{-1}\left(\Pi^{T}b-\Pi^{T}\Pi e\right)
 \]</div>
-<p>where</p>
+<p>其中</p>
 <div class="math notranslate nohighlight">
 \[ 
-\mu = \sum_i\mu_{i}=\frac{0 + p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}.
+\mu = \sum_i\mu_{i}=\frac{0 + p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}.
 \]</div>
-<p>Now consider the representative consumer economy specified above.</p>
-<p>Denote the marginal utility of wealth of the representative consumer by <span class="math notranslate nohighlight">\(\tilde{\mu}\)</span>.</p>
-<p>The demand function is</p>
+<p>现在考虑上述指定的代表性消费者经济。</p>
+<p>用 <span class="math notranslate nohighlight">\(\tilde{\mu}\)</span> 表示代表性消费者的财富边际效用。</p>
+<p>需求函数是</p>
 <div class="math notranslate nohighlight">
 \[
-c=\Pi^{-1}b-(\Pi^{\top}\Pi)^{-1}\tilde{\mu} p
+c=\Pi^{-1}b-(\Pi^{T}\Pi)^{-1}\tilde{\mu} p
 \]</div>
-<p>Substituting this into the budget constraint gives</p>
+<p>将这个代入预算约束得到</p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{\mu}=\frac{p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
+\tilde{\mu}=\frac{p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
 \]</div>
-<p>In an equilibrium <span class="math notranslate nohighlight">\(c=e\)</span>, so</p>
+<p>在平衡状态下 <span class="math notranslate nohighlight">\(c=e\)</span>，所以</p>
 <div class="math notranslate nohighlight">
 \[
-p=\tilde{\mu}^{-1}(\Pi^{\top}b-\Pi^{\top}\Pi e)
+p=\tilde{\mu}^{-1}(\Pi^{T}b-\Pi^{T}\Pi e)
 \]</div>
-<p>Thus, we have  verified that, up to the choice of a numeraire in which to express absolute prices, the price
-vector in our representative consumer economy is the same as that in an underlying  economy with multiple consumers.</p>
+<p>因此，我们已经验证了，直到选择一个基准物来表达绝对价格为止，我们代表性消费者经济中的价格向量与具有多个消费者的基本经济中的价格向量相同。</p>
 </section>
 </section>
 
@@ -763,19 +761,19 @@ vector in our representative consumer economy is the same as that in an underlyi
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -786,17 +784,17 @@ vector in our representative consumer economy is the same as that in an underlyi
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -807,7 +805,7 @@ vector in our representative consumer economy is the same as that in an underlyi
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -818,17 +816,17 @@ vector in our representative consumer economy is the same as that in an underlyi
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -840,27 +838,27 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -872,12 +870,12 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -889,22 +887,22 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -926,22 +924,22 @@ vector in our representative consumer economy is the same as that in an underlyi
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -953,22 +951,22 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -980,22 +978,22 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1007,12 +1005,12 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1024,22 +1022,22 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1051,12 +1049,12 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1068,12 +1066,12 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1085,17 +1083,17 @@ vector in our representative consumer economy is the same as that in an underlyi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

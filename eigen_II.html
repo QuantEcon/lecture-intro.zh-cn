@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>38. The Perron-Frobenius Theorem &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>41. 佩龙-弗罗贝尼乌斯定理 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="39. Input-Output Models" href="input_output.html" />
-    <link rel="prev" title="37. Shortest Paths" href="short_path.html" />
+    <link rel="next" title="43. 输入-输出模型" href="input_output.html" />
+    <link rel="prev" title="38. 最短路径" href="short_path.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="The Perron-Frobenius Theorem"/>
+<meta name="twitter:title" content="佩龙-弗罗贝尼乌斯定理"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="The Perron-Frobenius Theorem" />
+<meta property="og:title" content="佩龙-弗罗贝尼乌斯定理" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/eigen_II.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,22 +172,27 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonnegative-matrices">38.1. Nonnegative matrices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible-matrices">38.1.1. Irreducible matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#left-eigenvectors">38.1.2. Left eigenvectors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">38.1.3. The Perron-Frobenius theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-irreducible-matrix">38.1.3.1. Example: irreducible matrix</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">41. 佩龙-弗罗贝尼乌斯定理</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">42. 除了Anaconda中已有的库之外，本讲座还需要以下库：</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">42.1. 非负矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible">42.1.1. 不可约矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">42.1.2. 左特征向量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">42.1.3. 佩龙-弗罗贝尼乌斯定理</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">42.1.3.1. 示例：不可约矩阵</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-matrices">38.1.4. Primitive matrices</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-primitive-matrix">38.1.4.1. Example 1: primitive matrix</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-connection-to-markov-chains">38.1.4.2. Example 2: connection to Markov chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prim-matrices">42.1.4. 原始矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">42.1.4.1. 示例1：原始矩阵</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spec-markov">42.1.4.2. 示例2：与马尔可夫链的联系</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">38.2. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">42.2. 练习</a></li>
 </ul>
+</li>
+</ul>
+
                             <p class="logo">
                                 
                                     
@@ -219,7 +224,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">The Perron-Frobenius Theorem</p>
+                        <p class="qe-page__header-subheading">佩龙-弗罗贝尼乌斯定理</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -245,9 +250,11 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="the-perron-frobenius-theorem">
-<h1><span class="section-number">38. </span>The Perron-Frobenius Theorem<a class="headerlink" href="#the-perron-frobenius-theorem" title="Permalink to this heading">#</a></h1>
-<p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">41. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="anaconda">
+<span id="index-0"></span><h1><span class="section-number">42. </span>除了Anaconda中已有的库之外，本讲座还需要以下库：<a class="headerlink" href="#anaconda" title="Permalink to this heading">#</a></h1>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -269,9 +276,7 @@ Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.32.2)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
+Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.2.2)
@@ -281,7 +286,9 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/215.4 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">215.4/215.4 kB</span> <span class=" -Color -Color-Red">9.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">215.4/215.4 kB</span> <span class=" -Color -Color-Red">7.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -294,9 +301,9 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 </details>
 </div>
-<p>In this lecture we will begin with the foundational concepts in spectral theory.</p>
-<p>Then we will explore the Perron-Frobenius theorem and connect it to applications in Markov chains and networks.</p>
-<p>We will use the following imports:</p>
+<p>在本讲座中，我们将从谱理论的基本概念开始。</p>
+<p>然后，我们将探讨佩龙-弗罗贝尼乌斯定理，并将其与马尔可夫链和网络的应用联系起来。</p>
+<p>我们将使用以下导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -307,33 +314,27 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 </div>
 </div>
-<section id="nonnegative-matrices">
-<h2><span class="section-number">38.1. </span>Nonnegative matrices<a class="headerlink" href="#nonnegative-matrices" title="Permalink to this heading">#</a></h2>
-<p>Often, in economics, the matrix that we are dealing with is nonnegative.</p>
-<p>Nonnegative matrices have several special and useful properties.</p>
-<p>In this section we will discuss some of them — in particular, the connection
-between nonnegativity and eigenvalues.</p>
-<p>An <span class="math notranslate nohighlight">\(n \times m\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is called <strong>nonnegative</strong> if every element of <span class="math notranslate nohighlight">\(A\)</span>
-is nonnegative, i.e., <span class="math notranslate nohighlight">\(a_{ij} \geq 0\)</span> for every <span class="math notranslate nohighlight">\(i,j\)</span>.</p>
-<p>We denote this as <span class="math notranslate nohighlight">\(A \geq 0\)</span>.</p>
-<section id="irreducible-matrices">
-<span id="irreducible"></span><h3><span class="section-number">38.1.1. </span>Irreducible matrices<a class="headerlink" href="#irreducible-matrices" title="Permalink to this heading">#</a></h3>
-<p>We introduced irreducible matrices in the <a class="reference internal" href="markov_chains_II.html#mc-irreducible"><span class="std std-ref">Markov chain lecture</span></a>.</p>
-<p>Here we generalize this concept:</p>
-<p>Let <span class="math notranslate nohighlight">\(a^{k}_{ij}\)</span> be element <span class="math notranslate nohighlight">\((i,j)\)</span> of <span class="math notranslate nohighlight">\(A^k\)</span>.</p>
-<p>An <span class="math notranslate nohighlight">\(n \times n\)</span> nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span> is called irreducible if <span class="math notranslate nohighlight">\(A + A^2 + A^3 + \cdots \gg 0\)</span>, where <span class="math notranslate nohighlight">\(\gg 0\)</span> indicates that every element in <span class="math notranslate nohighlight">\(A\)</span> is strictly positive.</p>
-<p>In other words, for each <span class="math notranslate nohighlight">\(i,j\)</span> with <span class="math notranslate nohighlight">\(1 \leq i, j \leq n\)</span>, there exists a <span class="math notranslate nohighlight">\(k \geq 0\)</span> such that <span class="math notranslate nohighlight">\(a^{k}_{ij} &gt; 0\)</span>.</p>
+<section id="id2">
+<h2><span class="section-number">42.1. </span>非负矩阵<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>在经济学中，我们经常处理的矩阵是非负的。非负矩阵具有几个特殊且有用的性质。在本节中，我们将讨论其中的一些性质——特别是非负性与特征值之间的联系。</p>
+<p>一个 <span class="math notranslate nohighlight">\(n \times m\)</span> 的矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为<strong>非负</strong>，如果 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都是非负的，即对于每个 <span class="math notranslate nohighlight">\(i,j\)</span>，都有 <span class="math notranslate nohighlight">\(a_{ij} \geq 0\)</span>。我们将此表示为 <span class="math notranslate nohighlight">\(A \geq 0\)</span>。</p>
+<section id="irreducible">
+<span id="id3"></span><h3><span class="section-number">42.1.1. </span>不可约矩阵<a class="headerlink" href="#irreducible" title="Permalink to this heading">#</a></h3>
+<p>我们在<a class="reference internal" href="markov_chains_II.html#mc-irreducible"><span class="std std-ref">马尔可夫链讲座</span></a>中介绍了不可约矩阵。这里我们将推广这个概念：</p>
+<p>令 <span class="math notranslate nohighlight">\(a^{k}_{ij}\)</span> 为 <span class="math notranslate nohighlight">\(A^k\)</span> 的第 <span class="math notranslate nohighlight">\((i,j)\)</span> 个元素。</p>
+<p>一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的非负矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为不可约的，如果 <span class="math notranslate nohighlight">\(A + A^2 + A^3 + \cdots \gg 0\)</span>，其中 <span class="math notranslate nohighlight">\(\gg 0\)</span> 表示 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都严格为正。</p>
+<p>换句话说，对于每个 <span class="math notranslate nohighlight">\(1 \leq i, j \leq n\)</span>，存在一个 <span class="math notranslate nohighlight">\(k \geq 0\)</span> 使得 <span class="math notranslate nohighlight">\(a^{k}_{ij} &gt; 0\)</span>。</p>
 <div class="proof example admonition" id="eigen2_ex_irr">
-<p class="admonition-title"><span class="caption-number">Example 38.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 42.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>Here are some examples to illustrate this further:</p>
+<p>以下是一些进一步说明的例子：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 A = \begin{bmatrix} 0.5 &amp; 0.1 \\ 
                     0.2 &amp; 0.2 
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(A\)</span> is irreducible since <span class="math notranslate nohighlight">\(a_{ij}&gt;0\)</span> for all <span class="math notranslate nohighlight">\((i,j)\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(A\)</span> 是不可约的，因为对于所有的 <span class="math notranslate nohighlight">\((i,j)\)</span>，<span class="math notranslate nohighlight">\(a_{ij}&gt;0\)</span>。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 B = \begin{bmatrix} 0 &amp; 1 \\ 
@@ -344,123 +345,118 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
                       0 &amp; 1
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(B\)</span> is irreducible since <span class="math notranslate nohighlight">\(B + B^2\)</span> is a matrix of ones.</p>
+<p><span class="math notranslate nohighlight">\(B\)</span> 是不可约的，因为 <span class="math notranslate nohighlight">\(B + B^2\)</span> 是一个全为 1 的矩阵。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 C = \begin{bmatrix} 1 &amp; 0 \\ 
                     0 &amp; 1 
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(C\)</span> is not irreducible since <span class="math notranslate nohighlight">\(C^k = C\)</span> for all <span class="math notranslate nohighlight">\(k \geq 0\)</span> and thus
-<span class="math notranslate nohighlight">\(c^{k}_{12},c^{k}_{21} = 0\)</span> for all <span class="math notranslate nohighlight">\(k \geq 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(C\)</span> 不是不可约的，因为对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(C^k = C\)</span>，因此
+对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(c^{k}_{12},c^{k}_{21} = 0\)</span>。</p>
 </section>
 </div></section>
-<section id="left-eigenvectors">
-<h3><span class="section-number">38.1.2. </span>Left eigenvectors<a class="headerlink" href="#left-eigenvectors" title="Permalink to this heading">#</a></h3>
-<p>Recall that we previously discussed eigenvectors in <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">Eigenvalues and Eigenvectors</span></a>.</p>
-<p>In particular, <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(v\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(A\)</span> if <span class="math notranslate nohighlight">\(v\)</span> is nonzero and satisfy</p>
-<div class="math notranslate nohighlight">
-\[
-Av = \lambda v.
-\]</div>
-<p>In this section we introduce left eigenvectors.</p>
-<p>To avoid confusion, what we previously referred to as “eigenvectors” will be called “right eigenvectors”.</p>
-<p>Left eigenvectors will play important roles in what follows, including that of stochastic steady states for dynamic models under a Markov assumption.</p>
-<p>A vector <span class="math notranslate nohighlight">\(w\)</span> is called a left eigenvector of <span class="math notranslate nohighlight">\(A\)</span> if <span class="math notranslate nohighlight">\(w\)</span> is a right eigenvector of <span class="math notranslate nohighlight">\(A^\top\)</span>.</p>
-<p>In other words, if <span class="math notranslate nohighlight">\(w\)</span> is a left eigenvector of matrix <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span>, where <span class="math notranslate nohighlight">\(\lambda\)</span> is the eigenvalue associated with the left eigenvector <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<p>This hints at how to compute left eigenvectors</p>
+<section id="id4">
+<h3><span class="section-number">42.1.2. </span>左特征向量<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>回想一下，我们之前在 <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">特征值和特征向量</span></a> 中讨论过特征向量。
+特别地，如果 <span class="math notranslate nohighlight">\(v\)</span> 是非零向量，且满足
+$<span class="math notranslate nohighlight">\(
+Av = \lambda v
+\)</span><span class="math notranslate nohighlight">\(
+那么 \)</span>\lambda<span class="math notranslate nohighlight">\( 是 \)</span>A<span class="math notranslate nohighlight">\( 的一个特征值，而 \)</span>v<span class="math notranslate nohighlight">\( 是 \)</span>A$ 的一个特征向量。</p>
+<p>在本节中，我们将介绍左特征向量。
+为避免混淆，我们之前称为”特征向量”的将被称为”右特征向量”。
+左特征向量在接下来的内容中将扮演重要角色，包括在马尔可夫假设下动态模型的随机稳态。</p>
+<p>如果 <span class="math notranslate nohighlight">\(w\)</span> 是 <span class="math notranslate nohighlight">\(A^\top\)</span> 的右特征向量，那么 <span class="math notranslate nohighlight">\(w\)</span> 被称为 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量。
+换句话说，如果 <span class="math notranslate nohighlight">\(w\)</span> 是矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量，那么 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span>，其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是与左特征向量 <span class="math notranslate nohighlight">\(v\)</span> 相关的特征值。
+这暗示了如何计算左特征向量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 
-<span class="c1"># Compute eigenvalues and right eigenvectors</span>
+<span class="c1"># 计算特征值和右特征向量</span>
 <span class="n">λ</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
-<span class="c1"># Compute eigenvalues and left eigenvectors</span>
+<span class="c1"># 计算特征值和左特征向量</span>
 <span class="n">λ</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
-<span class="c1"># Keep 5 decimals</span>
+<span class="c1"># 保留5位小数</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The eigenvalues of A are:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The corresponding right eigenvectors are: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">v</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The corresponding left eigenvectors are: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">w</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">w</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A的特征值为:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;右特征向量为: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">v</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;左特征向量为: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">w</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">w</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The eigenvalues of A are:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A的特征值为:
  [2. 5.]
 
-The corresponding right eigenvectors are: 
+右特征向量为: 
  [-0.89443  0.44721] and [0.70711 0.70711]
 
-The corresponding left eigenvectors are: 
+左特征向量为: 
  [-0.70711  0.70711] and [0.44721 0.89443]
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can also use <code class="docutils literal notranslate"><span class="pre">scipy.linalg.eig</span></code> with argument <code class="docutils literal notranslate"><span class="pre">left=True</span></code> to find left eigenvectors directly</p>
+<p>我们还可以使用 <code class="docutils literal notranslate"><span class="pre">scipy.linalg.eig</span></code> 函数并设置参数 <code class="docutils literal notranslate"><span class="pre">left=True</span></code> 来直接找到左特征向量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvals</span><span class="p">,</span> <span class="n">ε</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The eigenvalues of A are:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">eigenvals</span><span class="o">.</span><span class="n">real</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The corresponding right eigenvectors are: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">e</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The corresponding left eigenvectors are: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">ε</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">ε</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A的特征值为:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">eigenvals</span><span class="o">.</span><span class="n">real</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;右特征向量为: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">e</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;左特征向量为: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">ε</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="o">-</span><span class="n">ε</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The eigenvalues of A are:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A的特征值为:
  [2. 5.]
 
-The corresponding right eigenvectors are: 
+右特征向量为: 
  [-0.89443  0.44721] and [0.70711 0.70711]
 
-The corresponding left eigenvectors are: 
+左特征向量为: 
  [-0.70711  0.70711] and [0.44721 0.89443]
 </pre></div>
 </div>
 </div>
 </div>
-<p>The eigenvalues are the same while the eigenvectors themselves are different.</p>
-<p>(Also note that we are taking the nonnegative value of the eigenvector of <a class="reference internal" href="#perron-frobe"><span class="std std-ref">dominant eigenvalue</span></a>, this is because <code class="docutils literal notranslate"><span class="pre">eig</span></code> automatically normalizes the eigenvectors.)</p>
-<p>We can then take transpose to obtain <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span> and obtain <span class="math notranslate nohighlight">\(w^\top A= \lambda w^\top\)</span>.</p>
-<p>This is a more common expression and where the name left eigenvectors originates.</p>
+<p>特征值是相同的，而特征向量本身是不同的。
+（还要注意，我们取的是 <a class="reference internal" href="#perron-frobe"><span class="std std-ref">主特征值</span></a> 的特征向量的非负值，这是因为 <code class="docutils literal notranslate"><span class="pre">eig</span></code> 函数会自动对特征向量进行归一化。）
+然后我们可以对 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span> 进行转置，得到 <span class="math notranslate nohighlight">\(w^\top A= \lambda w^\top\)</span>。
+这是一个更常见的表达式，也是左特征向量这个名称的由来。</p>
 </section>
 <section id="perron-frobe">
-<span id="id1"></span><h3><span class="section-number">38.1.3. </span>The Perron-Frobenius theorem<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
-<p>For a square nonnegative matrix <span class="math notranslate nohighlight">\(A\)</span>, the behavior of <span class="math notranslate nohighlight">\(A^k\)</span> as <span class="math notranslate nohighlight">\(k \to \infty\)</span> is controlled by the eigenvalue with the largest
-absolute value, often called the <strong>dominant eigenvalue</strong>.</p>
-<p>For any such matrix <span class="math notranslate nohighlight">\(A\)</span>, the Perron-Frobenius theorem characterizes certain
-properties of the dominant eigenvalue and its corresponding eigenvector.</p>
+<span id="id5"></span><h3><span class="section-number">42.1.3. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
+<p>对于一个非负方阵<span class="math notranslate nohighlight">\(A\)</span>，当<span class="math notranslate nohighlight">\(k \to \infty\)</span>时，<span class="math notranslate nohighlight">\(A^k\)</span>的行为由绝对值最大的特征值控制，通常称为<strong>主特征值</strong>。
+对于任何这样的矩阵<span class="math notranslate nohighlight">\(A\)</span>，佩龙-弗罗贝尼乌斯定理描述了主特征值及其对应特征向量的某些特性。</p>
 <div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 38.1 </span> (Perron-Frobenius Theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 42.1 </span> (佩龙-弗罗贝尼乌斯定理)</p>
 <section class="theorem-content" id="proof-content">
-<p>If a matrix <span class="math notranslate nohighlight">\(A \geq 0\)</span> then,</p>
+<p>如果矩阵<span class="math notranslate nohighlight">\(A \geq 0\)</span>，那么：</p>
 <ol class="arabic simple">
-<li><p>the dominant eigenvalue of <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(r(A)\)</span>, is real-valued and nonnegative.</p></li>
-<li><p>for any other eigenvalue (possibly complex) <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span>.</p></li>
-<li><p>we can find a nonnegative and nonzero eigenvector <span class="math notranslate nohighlight">\(v\)</span> such that <span class="math notranslate nohighlight">\(Av = r(A)v\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span>的主特征值<span class="math notranslate nohighlight">\(r(A)\)</span>是实数且非负的。</p></li>
+<li><p>对于<span class="math notranslate nohighlight">\(A\)</span>的任何其他特征值（可能是复数）<span class="math notranslate nohighlight">\(\lambda\)</span>，有<span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span>。</p></li>
+<li><p>我们可以找到一个非负且非零的特征向量<span class="math notranslate nohighlight">\(v\)</span>，使得<span class="math notranslate nohighlight">\(Av = r(A)v\)</span>。</p></li>
 </ol>
-<p>Moreover if <span class="math notranslate nohighlight">\(A\)</span> is also irreducible then,</p>
-<ol class="arabic simple" start="4">
-<li><p>the eigenvector <span class="math notranslate nohighlight">\(v\)</span> associated with the eigenvalue <span class="math notranslate nohighlight">\(r(A)\)</span> is strictly positive.</p></li>
-<li><p>there exists no other positive eigenvector <span class="math notranslate nohighlight">\(v\)</span> (except scalar multiples of <span class="math notranslate nohighlight">\(v\)</span>) associated with <span class="math notranslate nohighlight">\(r(A)\)</span>.</p></li>
-</ol>
-<p>(More of the Perron-Frobenius theorem about primitive matrices will be introduced <a class="reference internal" href="#prim-matrices"><span class="std std-ref">below</span></a>.)</p>
+<p>此外，如果<span class="math notranslate nohighlight">\(A\)</span>还是不可约的，那么：
+4. 与特征值<span class="math notranslate nohighlight">\(r(A)\)</span>相关的特征向量<span class="math notranslate nohighlight">\(v\)</span>是严格正的。
+5. 不存在其他与<span class="math notranslate nohighlight">\(r(A)\)</span>相关的正特征向量<span class="math notranslate nohighlight">\(v\)</span>（除了<span class="math notranslate nohighlight">\(v\)</span>的标量倍数）。</p>
+<p>（关于原始矩阵的佩龙-弗罗贝尼乌斯定理的更多内容将在<a class="reference internal" href="#prim-matrices"><span class="std std-ref">下文</span></a>中介绍。）</p>
 </section>
-</div><p>(This is a relatively simple version of the theorem — for more details see
-<a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">here</a>).</p>
-<p>We will see applications of the theorem below.</p>
-<p>Let’s build our intuition for the theorem using a simple example we have seen <a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">before</span></a>.</p>
-<p>Now let’s consider examples for each case.</p>
-<section id="example-irreducible-matrix">
-<h4><span class="section-number">38.1.3.1. </span>Example: irreducible matrix<a class="headerlink" href="#example-irreducible-matrix" title="Permalink to this heading">#</a></h4>
-<p>Consider the following irreducible matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
+</div><p>（这是该定理的一个相对简单的版本——更多详细信息请参见<a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">这里</a>）。
+我们将在下面看到该定理的应用。
+让我们使用我们之前见过的一个简单<a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">例子</span></a>来建立对这个定理的直觉。
+现在让我们考虑每种情况的例子。</p>
+<section id="id6">
+<h4><span class="section-number">42.1.3.1. </span>示例：不可约矩阵<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<p>考虑以下不可约矩阵<span class="math notranslate nohighlight">\(A\)</span>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -470,7 +466,7 @@ properties of the dominant eigenvalue and its corresponding eigenvector.</p>
 </div>
 </div>
 </div>
-<p>We can compute the dominant eigenvalue and the corresponding eigenvector</p>
+<p>我们可以计算主特征值和相应的特征向量</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -485,33 +481,33 @@ properties of the dominant eigenvalue and its corresponding eigenvector.</p>
 </div>
 </div>
 </div>
-<p>Now we can see the claims of the Perron-Frobenius theorem holds for the irreducible matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<p>现在我们可以看到佩龙-弗罗贝尼乌斯定理对不可约矩阵<span class="math notranslate nohighlight">\(A\)</span>的声明成立：</p>
 <ol class="arabic simple">
-<li><p>The dominant eigenvalue is real-valued and non-negative.</p></li>
-<li><p>All other eigenvalues have absolute values less than or equal to the dominant eigenvalue.</p></li>
-<li><p>A non-negative and nonzero eigenvector is associated with the dominant eigenvalue.</p></li>
-<li><p>As the matrix is irreducible, the eigenvector associated with the dominant eigenvalue is strictly positive.</p></li>
-<li><p>There exists no other positive eigenvector associated with the dominant eigenvalue.</p></li>
+<li><p>主特征值是实数且非负的。</p></li>
+<li><p>所有其他特征值的绝对值小于或等于主特征值。</p></li>
+<li><p>存在与主特征值相关的非负且非零的特征向量。</p></li>
+<li><p>由于矩阵是不可约的，与主特征值相关的特征向量是严格正的。</p></li>
+<li><p>不存在其他与主特征值相关的正特征向量。</p></li>
 </ol>
 </section>
 </section>
-<section id="primitive-matrices">
-<span id="prim-matrices"></span><h3><span class="section-number">38.1.4. </span>Primitive matrices<a class="headerlink" href="#primitive-matrices" title="Permalink to this heading">#</a></h3>
-<p>We know that in real world situations it’s hard for a matrix to be everywhere positive (although they have nice properties).</p>
-<p>The primitive matrices, however, can still give us helpful properties with looser definitions.</p>
-<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a square nonnegative matrix and let <span class="math notranslate nohighlight">\(A^k\)</span> be the <span class="math notranslate nohighlight">\(k^{th}\)</span> power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>A matrix is called <strong>primitive</strong> if there exists a <span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span> such that <span class="math notranslate nohighlight">\(A^k\)</span> is everywhere positive.</p>
+<section id="prim-matrices">
+<span id="id7"></span><h3><span class="section-number">42.1.4. </span>原始矩阵<a class="headerlink" href="#prim-matrices" title="Permalink to this heading">#</a></h3>
+<p>我们知道，在现实世界的情况下，很难让一个矩阵处处为正（尽管它们具有良好的性质）。
+然而，原始矩阵仍然可以在更宽松的定义下给我们提供有用的性质。</p>
+<p>设<span class="math notranslate nohighlight">\(A\)</span>是一个非负方阵，<span class="math notranslate nohighlight">\(A^k\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的<span class="math notranslate nohighlight">\(k\)</span>次幂。
+如果存在一个<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，使得<span class="math notranslate nohighlight">\(A^k\)</span>处处为正，则称该矩阵为<strong>原始矩阵</strong>。</p>
 <div class="proof example admonition" id="eigen2_ex_prim">
-<p class="admonition-title"><span class="caption-number">Example 38.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 42.2 </span></p>
 <section class="example-content" id="proof-content">
-<p>Recall the examples given in irreducible matrices:</p>
+<p>回顾一下在不可约矩阵中给出的例子：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 A = \begin{bmatrix} 0.5 &amp; 0.1 \\ 
                     0.2 &amp; 0.2 
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(A\)</span> here is also a primitive matrix since <span class="math notranslate nohighlight">\(A^k\)</span> is everywhere nonnegative for <span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>.</p>
+<p>这里的<span class="math notranslate nohighlight">\(A\)</span>也是一个原始矩阵，因为对于<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，<span class="math notranslate nohighlight">\(A^k\)</span>处处非负。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 B = \begin{bmatrix} 0 &amp; 1 \\ 
@@ -522,23 +518,24 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
                       0 &amp; 1
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(B\)</span> is irreducible but not primitive since there are always zeros in either principal diagonal or secondary diagonal.</p>
+<p><span class="math notranslate nohighlight">\(B\)</span>是不可约的，但不是原始矩阵，因为在主对角线或次对角线上总是有零。</p>
 </section>
-</div><p>We can see that if a matrix is primitive, then it implies the matrix is irreducible but not vice versa.</p>
-<p>Now let’s step back to the primitive matrices part of the Perron-Frobenius theorem</p>
+</div><p>我们可以看到，如果一个矩阵是原始的，那么它意味着该矩阵是不可约的，但反之则不然。</p>
+<p>现在让我们回到佩龙-弗罗贝尼乌斯定理中关于原始矩阵的部分</p>
 <div class="proof theorem admonition" id="con-perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 38.2 </span> (Continous of Perron-Frobenius Theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 42.2 </span> (佩龙-弗罗贝尼乌斯定理)</p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(A\)</span> is primitive then,</p>
-<ol class="arabic simple" start="6">
-<li><p>the inequality <span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span> is <strong>strict</strong> for all eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(A\)</span> distinct from <span class="math notranslate nohighlight">\(r(A)\)</span>, and</p></li>
-<li><p>with <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> normalized so that the inner product of <span class="math notranslate nohighlight">\(w\)</span> and  <span class="math notranslate nohighlight">\(v = 1\)</span>, we have
-<span class="math notranslate nohighlight">\( r(A)^{-m} A^m\)</span> converges to <span class="math notranslate nohighlight">\(v w^{\top}\)</span> when <span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span>. The matrix <span class="math notranslate nohighlight">\(v w^{\top}\)</span> is called the <strong>Perron projection</strong> of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<p>如果<span class="math notranslate nohighlight">\(A\)</span>是原始矩阵，那么：</p>
+<ol class="arabic" start="6">
+<li><p>对于<span class="math notranslate nohighlight">\(A\)</span>的所有不同于<span class="math notranslate nohighlight">\(r(A)\)</span>的特征值<span class="math notranslate nohighlight">\(\lambda\)</span>，不等式<span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span>是<strong>严格的</strong>，并且</p></li>
+<li><p>当<span class="math notranslate nohighlight">\(v\)</span>和<span class="math notranslate nohighlight">\(w\)</span>被归一化使得<span class="math notranslate nohighlight">\(w\)</span>和<span class="math notranslate nohighlight">\(v\)</span>的内积等于1时，我们有：</p>
+<p>当<span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span>时，<span class="math notranslate nohighlight">\(r(A)^{-m} A^m\)</span>收敛于<span class="math notranslate nohighlight">\(v w^{\top}\)</span>。矩阵<span class="math notranslate nohighlight">\(v w^{\top}\)</span>被称为<span class="math notranslate nohighlight">\(A\)</span>的<strong>佩龙投影</strong>。</p>
+</li>
 </ol>
 </section>
-</div><section id="example-1-primitive-matrix">
-<h4><span class="section-number">38.1.4.1. </span>Example 1: primitive matrix<a class="headerlink" href="#example-1-primitive-matrix" title="Permalink to this heading">#</a></h4>
-<p>Consider the following primitive matrix <span class="math notranslate nohighlight">\(B\)</span>:</p>
+</div><section id="id8">
+<h4><span class="section-number">42.1.4.1. </span>示例1：原始矩阵<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<p>考虑以下原始矩阵<span class="math notranslate nohighlight">\(B\)</span>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
@@ -557,7 +554,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </div>
 </div>
 </div>
-<p>We compute the dominant eigenvalue and the corresponding eigenvector</p>
+<p>我们计算主特征值和相应的特征向量</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eig</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
@@ -572,16 +569,16 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </div>
 </div>
 </div>
-<p>Now let’s give some examples to see if the claims of the Perron-Frobenius theorem hold for the primitive matrix <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<p>现在让我们给出一些例子，看看佩龙-弗罗贝尼乌斯定理的声明是否对原始矩阵<span class="math notranslate nohighlight">\(B\)</span>成立：</p>
 <ol class="arabic simple">
-<li><p>The dominant eigenvalue is real-valued and non-negative.</p></li>
-<li><p>All other eigenvalues have absolute values strictly less than the dominant eigenvalue.</p></li>
-<li><p>A non-negative and nonzero eigenvector is associated with the dominant eigenvalue.</p></li>
-<li><p>The eigenvector associated with the dominant eigenvalue is strictly positive.</p></li>
-<li><p>There exists no other positive eigenvector associated with the dominant eigenvalue.</p></li>
-<li><p>The inequality <span class="math notranslate nohighlight">\(|\lambda| &lt; r(B)\)</span> holds for all eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(B\)</span> distinct from the dominant eigenvalue.</p></li>
+<li><p>主特征值是实数且非负的。</p></li>
+<li><p>所有其他特征值的绝对值严格小于主特征值。</p></li>
+<li><p>存在与主特征值相关的非负且非零的特征向量。</p></li>
+<li><p>与主特征值相关的特征向量是严格正的。</p></li>
+<li><p>不存在其他与主特征值相关的正特征向量。</p></li>
+<li><p>对于<span class="math notranslate nohighlight">\(B\)</span>的所有不同于主特征值的特征值<span class="math notranslate nohighlight">\(\lambda\)</span>，不等式<span class="math notranslate nohighlight">\(|\lambda| &lt; r(B)\)</span>成立。</p></li>
 </ol>
-<p>Furthermore, we can verify the convergence property (7) of the theorem on the following examples:</p>
+<p>此外，我们可以在以下例子中验证定理的收敛性质（7）：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_perron_projection</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
@@ -591,38 +588,38 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigval</span><span class="p">)</span>
 
-    <span class="c1"># Find the index of the dominant (Perron) eigenvalue</span>
+    <span class="c1"># 找出主要（佩龙）特征值的指数</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">eigval</span><span class="p">)</span>
 
-    <span class="c1"># Get the Perron eigenvectors</span>
+    <span class="c1"># 获取佩龙特征向量</span>
     <span class="n">v_P</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">w_P</span> <span class="o">=</span> <span class="n">w</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># Normalize the left and right eigenvectors</span>
+    <span class="c1"># 归一化左右特征向量</span>
     <span class="n">norm_factor</span> <span class="o">=</span> <span class="n">w_P</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">v_P</span>
     <span class="n">v_norm</span> <span class="o">=</span> <span class="n">v_P</span> <span class="o">/</span> <span class="n">norm_factor</span>
 
-    <span class="c1"># Compute the Perron projection matrix</span>
+    <span class="c1"># 计算佩龙投影矩阵</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">v_norm</span> <span class="o">@</span> <span class="n">w_P</span><span class="o">.</span><span class="n">T</span>
     <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">r</span>
 
 <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="n">P</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">compute_perron_projection</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perron projection:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;佩龙投影:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 
-    <span class="c1"># Define a list of values for n</span>
+    <span class="c1"># 定义n的值列表</span>
     <span class="n">n_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_list</span><span class="p">:</span>
 
-        <span class="c1"># Compute (A/r)^n</span>
+        <span class="c1"># 计算 (A/r)^n</span>
         <span class="n">M_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-        <span class="c1"># Compute the difference between A^n / r^n and the Perron projection</span>
+        <span class="c1"># 计算A^n / r^n与佩龙投影之间的差异</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">M_n</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span>
 
-        <span class="c1"># Calculate the norm of the difference matrix</span>
+        <span class="c1"># 计算差异矩阵的范数</span>
         <span class="n">diff_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="s1">&#39;fro&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, error = </span><span class="si">{</span><span class="n">diff_norm</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -640,7 +637,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
                <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">]])</span>
 
 <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">A3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;矩阵:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">check_convergence</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
@@ -650,10 +647,10 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>矩阵:
 [[1 2]
  [1 4]]
-Perron projection:
+佩龙投影:
 [[0.1362  0.48507]
  [0.24254 0.8638 ]]
 n = 1, error = 0.0989045731
@@ -664,11 +661,11 @@ n = 10000, error = 0.0000000000
 
 ------------------------------------
 
-Matrix:
+矩阵:
 [[0 1 1]
  [1 0 1]
  [1 1 0]]
-Perron projection:
+佩龙投影:
 [[0.33333 0.33333 0.33333]
  [0.33333 0.33333 0.33333]
  [0.33333 0.33333 0.33333]]
@@ -680,12 +677,12 @@ n = 10000, error = 0.0000000000
 
 ------------------------------------
 
-Matrix:
+矩阵:
 [[0.971 0.029 0.1   1.   ]
  [0.145 0.778 0.077 0.59 ]
  [0.1   0.508 0.492 1.12 ]
  [0.2   0.8   0.71  0.95 ]]
-Perron projection:
+佩龙投影:
 [[0.12506 0.31949 0.20233 0.43341]
  [0.07714 0.19707 0.1248  0.26735]
  [0.12158 0.31058 0.19669 0.42133]
@@ -701,18 +698,18 @@ n = 10000, error = 0.0000000000
 </div>
 </div>
 </div>
-<p>The convergence is not observed in cases of non-primitive matrices.</p>
-<p>Let’s go through an example</p>
+<p>在非原始矩阵的情况下，不会观察到收敛。
+让我们通过一个例子来说明</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 
-<span class="c1"># This shows that the matrix is not primitive</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix:&quot;</span><span class="p">)</span>
+<span class="c1"># 这表明该矩阵不是原始矩阵</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;矩阵:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;100th power of matrix B:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B矩阵的100次方:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 
 <span class="n">check_convergence</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
@@ -720,15 +717,15 @@ n = 10000, error = 0.0000000000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>矩阵:
 [[0 1 1]
  [1 0 0]
  [1 0 0]]
-100th power of matrix B:
+B矩阵的100次方:
 [[1125899906842624                0                0]
  [               0  562949953421312  562949953421312]
  [               0  562949953421312  562949953421312]]
-Perron projection:
+佩龙投影:
 [[0.5     0.35355 0.35355]
  [0.35355 0.25    0.25   ]
  [0.35355 0.25    0.25   ]]
@@ -741,15 +738,15 @@ n = 10000, error = 1.0000000000
 </div>
 </div>
 </div>
-<p>The result shows that the matrix is not primitive as it is not everywhere positive.</p>
-<p>These examples show how the Perron-Frobenius theorem relates to the eigenvalues and eigenvectors of positive matrices and the convergence of the power of matrices.</p>
-<p>In fact we have already seen the theorem in action before in <a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">the Markov chain lecture</span></a>.</p>
+<p>结果表明该矩阵不是原始矩阵，因为它并非处处为正。
+这些例子展示了佩龙-弗罗贝尼乌斯定理如何与正矩阵的特征值和特征向量以及矩阵幂的收敛性相关。
+事实上，我们在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">马尔可夫链讲座</span></a>中已经看到了该定理的应用。</p>
 </section>
-<section id="example-2-connection-to-markov-chains">
-<span id="spec-markov"></span><h4><span class="section-number">38.1.4.2. </span>Example 2: connection to Markov chains<a class="headerlink" href="#example-2-connection-to-markov-chains" title="Permalink to this heading">#</a></h4>
-<p>We are now prepared to bridge the languages spoken in the two lectures.</p>
-<p>A primitive matrix is both irreducible and aperiodic.</p>
-<p>So Perron-Frobenius theorem explains why both <a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">Imam and Temple matrix</span></a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">Hamilton matrix</a> converge to a stationary distribution, which is the Perron projection of the two matrices</p>
+<section id="spec-markov">
+<span id="id9"></span><h4><span class="section-number">42.1.4.2. </span>示例2：与马尔可夫链的联系<a class="headerlink" href="#spec-markov" title="Permalink to this heading">#</a></h4>
+<p>我们现在准备好将这两节课中使用的语言联系起来。
+原始矩阵既是不可约的，又是非周期的。
+因此，佩龙-弗罗贝尼乌斯定理解释了为什么<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">伊玛目和寺庙矩阵</span></a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">哈密顿矩阵</a>都收敛到一个平稳分布，这就是这两个矩阵的佩龙投影。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">],</span>
@@ -814,130 +811,133 @@ n = 10000, error = 1.0000000000
 </div>
 </div>
 </div>
-<p>We can also verify other properties hinted by Perron-Frobenius in these stochastic matrices.</p>
-<p>Another example is the relationship between convergence gap and convergence rate.</p>
-<p>In the <a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">exercise</span></a>, we stated that the convergence rate is determined by the spectral gap, the difference between the largest and the second largest eigenvalue.</p>
-<p>This can be proven using what we have learned here.</p>
-<p>Please note that we use <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> for a vector of ones in this lecture.</p>
-<p>With Markov model <span class="math notranslate nohighlight">\(M\)</span> with state space <span class="math notranslate nohighlight">\(S\)</span> and transition matrix <span class="math notranslate nohighlight">\(P\)</span>, we can write <span class="math notranslate nohighlight">\(P^t\)</span> as</p>
-<div class="math notranslate nohighlight">
-\[
+<p>我们还可以验证 Perron-Frobenius 定理暗示的这些随机矩阵的其他性质。</p>
+<p>另一个例子是收敛间隙和收敛速率之间的关系。
+在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">练习</span></a>中，我们指出收敛速率由谱间隙决定，即最大特征值和第二大特征值之间的差异。
+利用我们在这里学到的知识，可以证明这一点。
+请注意，在本讲中我们使用 <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> 表示全1向量。
+对于具有状态空间 <span class="math notranslate nohighlight">\(S\)</span> 和转移矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔可夫模型，我们可以将 <span class="math notranslate nohighlight">\(P^t\)</span> 写成
+$<span class="math notranslate nohighlight">\(
 P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
-\]</div>
-<p>This is proven in <span id="id2">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> and a nice discussion can be found <a class="reference external" href="https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector">here</a>.</p>
-<p>In this formula <span class="math notranslate nohighlight">\(\lambda_i\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(P\)</span> with corresponding right and left eigenvectors <span class="math notranslate nohighlight">\(v_i\)</span> and <span class="math notranslate nohighlight">\(w_i\)</span> .</p>
-<p>Premultiplying <span class="math notranslate nohighlight">\(P^t\)</span> by arbitrary <span class="math notranslate nohighlight">\(\psi \in \mathscr{D}(S)\)</span> and rearranging now gives</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span><span class="math notranslate nohighlight">\(
+这在{cite}`sargent2023economic`中得到证明，[这里](https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector)有一个很好的讨论。
+在这个公式中，\)</span>\lambda_i<span class="math notranslate nohighlight">\( 是 \)</span>P<span class="math notranslate nohighlight">\( 的特征值，\)</span>v_i<span class="math notranslate nohighlight">\( 和 \)</span>w_i<span class="math notranslate nohighlight">\( 分别是对应的右特征向量和左特征向量。
+现在用任意 \)</span>\psi \in \mathscr{D}(S)<span class="math notranslate nohighlight">\( 左乘 \)</span>P^t<span class="math notranslate nohighlight">\( 并重新排列，得到
+\)</span><span class="math notranslate nohighlight">\(
 \psi P^t-\psi^*=\sum_{i=1}^{n-1} \lambda_i^t \psi v_i w_i^{\top}
-\]</div>
-<p>Recall that eigenvalues are ordered from smallest to largest from <span class="math notranslate nohighlight">\(i = 1 ... n\)</span>.</p>
-<p>As we have seen, the largest eigenvalue for a primitive stochastic matrix is one.</p>
-<p>This can be proven using <a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin Circle Theorem</a>,
-but it is out of the scope of this lecture.</p>
-<p>So by the statement (6) of Perron-Frobenius theorem, <span class="math notranslate nohighlight">\(\lambda_i&lt;1\)</span> for all <span class="math notranslate nohighlight">\(i&lt;n\)</span>, and <span class="math notranslate nohighlight">\(\lambda_n=1\)</span> when <span class="math notranslate nohighlight">\(P\)</span> is primitive.</p>
-<p>Hence, after taking the Euclidean norm deviation, we obtain</p>
-<div class="math notranslate nohighlight">
-\[
-\left\|\psi P^t-\psi^*\right\|=O\left(\eta^t\right) \quad \text { where } \quad \eta:=\left|\lambda_{n-1}\right|&lt;1
-\]</div>
-<p>Thus, the rate of convergence is governed by the modulus of the second largest eigenvalue.</p>
+\)</span><span class="math notranslate nohighlight">\(
+回想一下，特征值从 \)</span>i = 1 … n<span class="math notranslate nohighlight">\( 从小到大排序。
+正如我们所见，原始随机矩阵的最大特征值是1。
+这可以用[Gershgorin圆盘定理](https://en.wikipedia.org/wiki/Gershgorin_circle_theorem)来证明，
+但这超出了本讲的范围。
+因此，根据 Perron-Frobenius 定理的第(6)条陈述，当 \)</span>P<span class="math notranslate nohighlight">\( 是原始的时候，对所有 \)</span>i&lt;n<span class="math notranslate nohighlight">\(，有 \)</span>\lambda_i&lt;1<span class="math notranslate nohighlight">\(，且 \)</span>\lambda_n=1<span class="math notranslate nohighlight">\(。
+因此，在取欧几里得范数偏差后，我们得到
+\)</span><span class="math notranslate nohighlight">\(
+\left\|\psi P^t-\psi^*\right\|=O\left(\eta^t\right) \quad \text { 其中 } \quad \eta:=\left|\lambda_{n-1}\right|&lt;1
+\)</span>$
+因此，收敛速率由第二大特征值的模决定。</p>
 </section>
 </section>
 </section>
-<section id="exercises">
-<h2><span class="section-number">38.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h2><span class="section-number">42.2. </span>练习<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="eig_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 38.1 </span> (Leontief’s Input-Output Model)</p>
+<p class="admonition-title"><span class="caption-number">Exercise 42.1 </span> (列昂惕夫投入产出模型)</p>
 <section id="exercise-content">
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">Wassily Leontief</a> developed a model of an economy with <span class="math notranslate nohighlight">\(n\)</span> sectors producing <span class="math notranslate nohighlight">\(n\)</span> different commodities representing the interdependencies of different sectors of an economy.</p>
-<p>Under this model some of the output is consumed internally by the industries and the rest is consumed by external consumers.</p>
-<p>We define a simple model with 3 sectors - agriculture, industry, and service.</p>
-<p>The following table describes how output is distributed within the economy:</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">瓦西里·列昂惕夫</a>开发了一个具有<span class="math notranslate nohighlight">\(n\)</span>个部门生产<span class="math notranslate nohighlight">\(n\)</span>种不同商品的经济模型，代表了经济不同部门之间的相互依存关系。
+在这个模型中，一部分产出在行业内部消耗，其余部分由外部消费者消费。
+我们定义一个简单的三部门模型 - 农业、工业和服务业。
+下表描述了产出如何在经济中分配：</p>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-center head"><p></p></th>
-<th class="text-center head"><p>Total output</p></th>
-<th class="text-center head"><p>Agriculture</p></th>
-<th class="text-center head"><p>Industry</p></th>
-<th class="text-center head"><p>Service</p></th>
-<th class="text-center head"><p>Consumer</p></th>
+<th class="text-center head"><p>总产出</p></th>
+<th class="text-center head"><p>农业</p></th>
+<th class="text-center head"><p>工业</p></th>
+<th class="text-center head"><p>服务业</p></th>
+<th class="text-center head"><p>消费者</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>Agriculture</p></td>
+<tr class="row-even"><td class="text-center"><p>农业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_1\)</span></p></td>
 <td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
 <td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
 <td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>4</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>Industry</p></td>
+<tr class="row-odd"><td class="text-center"><p>工业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_2\)</span></p></td>
 <td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
 <td class="text-center"><p>0.4<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
 <td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>5</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>Service</p></td>
+<tr class="row-even"><td class="text-center"><p>服务业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
 <td class="text-center"><p>0.5<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
 <td class="text-center"><p>0.1<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>12</p></td>
 </tr>
+<tr class="row-odd"><td class="text-center"><p>第一行描述了农业的总产出<span class="math notranslate nohighlight">\(x_1\)</span>是如何分配的</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
 </tbody>
 </table>
 </div>
-<p>The first row depicts how agriculture’s total output <span class="math notranslate nohighlight">\(x_1\)</span> is distributed</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(0.3x_1\)</span> is used as inputs within agriculture itself,</p></li>
-<li><p><span class="math notranslate nohighlight">\(0.2x_2\)</span> is used as inputs by the industry sector to produce <span class="math notranslate nohighlight">\(x_2\)</span> units,</p></li>
-<li><p><span class="math notranslate nohighlight">\(0.3x_3\)</span> is used as inputs by the service sector to produce <span class="math notranslate nohighlight">\(x_3\)</span> units and</p></li>
-<li><p>4 units is the external demand by consumers.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0.3x_1\)</span>在农业内部用作投入，</p></li>
+<li><p><span class="math notranslate nohighlight">\(0.2x_2\)</span>被工业部门用作投入以生产<span class="math notranslate nohighlight">\(x_2\)</span>单位，</p></li>
+<li><p><span class="math notranslate nohighlight">\(0.3x_3\)</span>被服务业部门用作投入以生产<span class="math notranslate nohighlight">\(x_3\)</span>单位，</p></li>
+<li><p>4单位是消费者的外部需求。
+我们可以将其转化为三个部门的线性方程组系统，如下所示：
+$<span class="math notranslate nohighlight">\(
+  x_1 = 0.3x_1 + 0.2x_2 + 0.3x_3 + 4 \\
+  x_2 = 0.2x_1 + 0.4x_2 + 0.3x_3 + 5 \\
+  x_3 = 0.2x_1 + 0.5x_2 + 0.1x_3 + 12
+\)</span><span class="math notranslate nohighlight">\(
+这可以转化为矩阵方程\)</span>x = Ax + d<span class="math notranslate nohighlight">\(，其中
+\)</span>$
+x =</p></li>
 </ul>
-<p>We can transform this into a system of linear equations for the 3 sectors as
-given below:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    x_1 = 0.3x_1 + 0.2x_2 + 0.3x_3 + 4 \\
-    x_2 = 0.2x_1 + 0.4x_2 + 0.3x_3 + 5 \\
-    x_3 = 0.2x_1 + 0.5x_2 + 0.1x_3 + 12
-\end{split}\]</div>
-<p>This can be transformed into the matrix equation <span class="math notranslate nohighlight">\(x = Ax + d\)</span> where</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-x =
-\begin{bmatrix}
+<div class="amsmath math notranslate nohighlight" id="equation-ba6e12c9-0915-4e1b-a76d-6d98f3ae81b0">
+<span class="eqno">(41.1)<a class="headerlink" href="#equation-ba6e12c9-0915-4e1b-a76d-6d98f3ae81b0" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
     x_1 \\
     x_2 \\
     x_3
-\end{bmatrix}
-, \; A =
-\begin{bmatrix}
+\end{bmatrix}\]</div>
+<p>, ; A =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c0418169-a2f4-4c51-9408-48663b0d5967">
+<span class="eqno">(41.2)<a class="headerlink" href="#equation-c0418169-a2f4-4c51-9408-48663b0d5967" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
     0.3 &amp; 0.2 &amp; 0.3 \\
     0.2 &amp; 0.4 &amp; 0.3 \\
     0.2 &amp; 0.5 &amp; 0.1
-\end{bmatrix}
-\; \text{and} \;
-d =
-\begin{bmatrix}
+\end{bmatrix}\]</div>
+<p>; \text{和} ;
+d =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f646ab10-f1ea-4b80-8853-91b21eb30ada">
+<span class="eqno">(41.3)<a class="headerlink" href="#equation-f646ab10-f1ea-4b80-8853-91b21eb30ada" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
     4 \\
     5 \\
     12
-\end{bmatrix}
-\end{split}\]</div>
-<p>The solution <span class="math notranslate nohighlight">\(x^{*}\)</span> is given by the equation <span class="math notranslate nohighlight">\(x^{*} = (I-A)^{-1} d\)</span></p>
+\end{bmatrix}\]</div>
+<p>$<span class="math notranslate nohighlight">\(
+解\)</span>x^{<em>}<span class="math notranslate nohighlight">\(由方程\)</span>x^{</em>} = (I-A)^{-1} d$给出</p>
 <ol class="arabic simple">
-<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is a nonnegative irreducible matrix, find the Perron-Frobenius eigenvalue of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
-<li><p>Use the <a class="reference internal" href="eigen_I.html#la-neumann"><span class="std std-ref">Neumann Series Lemma</span></a> to find the solution <span class="math notranslate nohighlight">\(x^{*}\)</span> if it exists.</p></li>
+<li><p>由于<span class="math notranslate nohighlight">\(A\)</span>是一个非负不可约矩阵，求<span class="math notranslate nohighlight">\(A\)</span>的Perron-Frobenius特征值。</p></li>
+<li><p>使用<a class="reference internal" href="eigen_I.html#la-neumann"><span class="std std-ref">诺伊曼级数引理</span></a>求解<span class="math notranslate nohighlight">\(x^{*}\)</span>（如果存在）。</p></li>
 </ol>
 </section>
 </div>
 <div class="solution dropdown admonition" id="eigen_II-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 38.1 (Leontief’s Input-Output Model)</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 42.1 (列昂惕夫投入产出模型)</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,7 +947,7 @@ d =
 
 <span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">λ</span><span class="p">)</span> <span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">evals</span><span class="p">)</span>   <span class="c1">#dominant eigenvalue/spectral radius</span>
+<span class="n">r</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">λ</span><span class="p">)</span> <span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">evals</span><span class="p">)</span>   <span class="c1"># 主特征值/谱半径</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -958,7 +958,7 @@ d =
 </div>
 </div>
 </div>
-<p>Since we have <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span> we can thus find the solution using the Neumann Series Lemma.</p>
+<p>由于 <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span>，我们因此可以使用诺伊曼级数引理来找到解。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1037,19 +1037,19 @@ d =
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1060,17 +1060,17 @@ d =
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1081,7 +1081,7 @@ d =
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1092,17 +1092,17 @@ d =
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1114,27 +1114,27 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1146,12 +1146,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1163,22 +1163,22 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1200,22 +1200,22 @@ d =
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1227,22 +1227,22 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1254,22 +1254,22 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1281,12 +1281,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1298,22 +1298,22 @@ d =
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1325,12 +1325,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1342,12 +1342,12 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1359,17 +1359,17 @@ d =
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

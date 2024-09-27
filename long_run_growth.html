@@ -121,8 +121,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Business Cycles" href="business_cycle.html" />
-    <link rel="prev" title="1. About These Lectures" href="about.html" />
+    <link rel="next" title="3. 商业周期" href="business_cycle.html" />
+    <link rel="prev" title="1. 关于这些讲座" href="about.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -253,22 +253,21 @@ const thebe_selector_output = ".output, .cell_output"
 <p>在本讲座中，我们将使用Python、<a class="reference external" href="https://python-programming.quantecon.org/pandas.html" title="(in Python)"><span class="xref std std-doc">pandas</span></a> 和 <a class="reference external" href="https://python-programming.quantecon.org/matplotlib.html" title="(in Python)"><span class="xref std std-doc">Matplotlib</span></a> 来下载、处理和可视化经济增长的历史数据。</p>
 <p>除了学习如何运用这些工具之外，我们还将使用它们来描述跨越多个世纪的多个国家的经济增长经历。</p>
 <p>这些 “增长事实 ”之所以有趣，原因是多方面的。</p>
-<p>首先解释增长事实是 “发展经济学 ”和 “经济史 ”的主要目的。</p>
+<p>首先解释增长事实是 “发展经济学 ”和 “经济史”的主要目的。</p>
 <p>其次增长事实也是历史学家研究地缘政治力量和动态的重要依据。</p>
 <p>因此，亚当-托兹在阐述第一次世界大战的地缘政治先例和前因后果时，首先描述了欧洲大国的国内生产总值（GDP）在 1914 年之前的 70 年间是如何演变的（见 <span id="id3">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span> 第 1 章）。</p>
 <p>使用与 Tooze 构建图表时相同的数据（时间线稍长），下面是我们对他的第 1 章图表的解读。</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/tooze_ch1_graph.png"><img alt="_images/tooze_ch1_graph.png" src="_images/tooze_ch1_graph.png" style="width: 100%;" /></a>
 </figure>
-<p>（这只是我们的图 <a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a> 的副本。 我们将在本讲座的稍后部分介绍如何绘制该图）。</p>
+<p>（这只是我们的图 <a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a> 的副本。 我们将在本讲座的稍后部分介绍如何绘制<a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a>）。</p>
 <p><span id="id4">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。</p>
 <p>到 19 世纪末，美国的 GDP 已赶上大英帝国的 GDP，而在 20 世纪上半叶，
 美国的国内生产总值超过了大英帝国。</p>
 <p>在亚当-图兹看来，这一事实是 “美国世纪 ”的关键地缘政治基础。</p>
-<p>看了这张图，再看看它是如何为 “美国的20世纪”搭建地缘政治舞台的，自然而然地
-诱使人们想要一个与他的图表相对应的 2014 年或以后的图表。</p>
-<p>(感兴趣的读者若想找到答案的提示，现在不妨跳到前面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
-<p>正如我们将看到的，通过类比推理，这张图表或许奠定了“XXX国的21世纪”的基础，你可以自由猜测国家XXX。</p>
+<p>看了这张图，以及这些数据是如何为 “美国的20世纪” 搭建地缘政治舞台的，我们也许想知道 2014 年或以后与上图对应的图表。</p>
+<p>(感兴趣的读者若想找到答案的提示，现在不妨跳到后面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
+<p>正如我们将看到的，通过类比推理，这张图表或许奠定了“XXX国的21世纪”的基础，XXX可以替换为任何国家。</p>
 <p>在我们收集数据以构建这两个图表的过程中，我们还将研究多国在尽可能长的时间范围内的增长经历。</p>
 <p>这些图表将描绘“工业革命”如何在18世纪末始于英国，然后传播到一个国家又一个国家。</p>
 <p>简而言之，本讲记录了各个国家在很长一段时间内的增长轨迹。</p>
@@ -283,6 +282,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -293,8 +297,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>由<a class="reference external" href="https://en.wikipedia.org/wiki/Angus_Maddison">安格斯-麦迪逊（Angus Maddison）</a>发起的一个项目收集了许多与经济增长相关的历史时间序列、
 有些可以追溯到第一个世纪。</p>
 <p>可以从<a class="reference external" href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/">Maddison Historical Statistics</a>下载数据，点击“Latest Maddison Project Release”即可获取。</p>
-<p>我们将从 QuantEcon GitHub 存储库中读取数据。</p>
-<p>本节的目的是生成一个方便的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 实例，其中包含不同国家的人均 GDP。</p>
+<p>我们将从 QuantEcon GitHub 的库中读取数据。</p>
+<p>本节的目的是生成一个方便使用的包含不同国家的人均 GDP 的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 实例。</p>
 <p>在这里，我们将 Maddison 的数据读入一个 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -391,7 +395,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>通过运行上面的代码，我们可以找到有多少个国家的数据。</p>
+<p>通过运行上面的代码，我们可以列出这个数据集有多少个国家的数据。</p>
 <p>下面，我们将列出这些国家。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -442,8 +446,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>我们现在可以探索一些可用的169个国家。</p>
-<p>让我们遍历每个国家，以了解每个国家可用的年份。</p>
+<p>我们现在可以继续探索数据集里的169个国家。</p>
+<p>我们可以遍历每个国家来了解每个国家可用的年份。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_years</span> <span class="o">=</span> <span class="p">[]</span>
@@ -516,11 +520,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div></div></div>
 </div>
 <p>现在，让我们将原始数据重塑为一些方便的变量，以便更快地访问各国的时间序列数据。</p>
-<p>我们可以在该数据集中的国家代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和国家名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系</p>
+<p>我们可以在该数据集中的国家代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和国家名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系。</p>
+<p>为了方便使用中文标签，我们导入地区代码与中文名对应的数据集</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_to_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span>
-    <span class="p">[</span><span class="s1">&#39;countrycode&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;countrycode&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_to_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../lectures/datasets/country_code_cn.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -767,8 +771,8 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;GBR&#39;</span>
 <span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
         <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-        <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;international dollars&#39;</span><span class="p">,</span>
-        <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;国际元&#39;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
     <span class="p">);</span>
 </pre></div>
@@ -776,18 +780,18 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="gdppc-gbr1">
-<a class="reference internal image-reference" href="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png"><img alt="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png" src="_images/03d1732b7e0e4cc0fda97f92e9d15f1f8a2e3d0ba88e3f515dde6ac0dc864ee2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d1fb929e79da10066b62b032b6be75136c94775645a4e907d0928067c5603b06.png"><img alt="_images/d1fb929e79da10066b62b032b6be75136c94775645a4e907d0928067c5603b06.png" src="_images/d1fb929e79da10066b62b032b6be75136c94775645a4e907d0928067c5603b06.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">GDP per Capita (GBR)</span><a class="headerlink" href="#gdppc-gbr1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">人均GDP（英国）</span><a class="headerlink" href="#gdppc-gbr1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/international_dollar">国际美元</a> 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 美元（GK 美元）。</p>
+<p><a class="reference external" href="https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%85%83">国际元</a> 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 元（GK 元）。</p>
 </div>
-<p>我们可以看到，在本千年早期的 250 年中，较长时期的数据是不连续的，因此我们可以选择内插法得到连续的线图。</p>
+<p>我们可以看到，在本千年早期的 250 年中有长一段数据是不连续的，因此我们可以选择内插法得到连续的线图。</p>
 <p>在这里，我们用虚线表示插值趋势</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -801,17 +805,17 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">],</span>
         <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">country</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;international dollars&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;国际元&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;年份&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="gdppc-gbr2">
-<a class="reference internal image-reference" href="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png"><img alt="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png" src="_images/ba1a3508f66982f5418f835b5d8acc22c7b80c8cdf3223e8b502035100721c6a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c99a1a750b33b7326ed210ff1a2666d00560787802635800d9d9aa73d949b983.png"><img alt="_images/c99a1a750b33b7326ed210ff1a2666d00560787802635800d9d9aa73d949b983.png" src="_images/c99a1a750b33b7326ed210ff1a2666d00560787802635800d9d9aa73d949b983.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">GDP per Capita (GBR)</span><a class="headerlink" href="#gdppc-gbr2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">人均GDP（英国）</span><a class="headerlink" href="#gdppc-gbr2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -830,7 +834,7 @@ const thebe_selector_output = ".output, .cell_output"
                       <span class="n">color_mapping</span><span class="p">,</span> <span class="c1"># 代码-颜色映射</span>
                       <span class="n">code_to_name</span><span class="p">,</span>  <span class="c1"># 代码-国家名映射</span>
                       <span class="n">lw</span><span class="p">,</span>            <span class="c1"># 线宽</span>
-                      <span class="n">logscale</span><span class="p">,</span>      <span class="c1"># Y 轴是否要对数刻度</span>
+                      <span class="n">logscale</span><span class="p">,</span>      <span class="c1"># Y 轴是否要用对数刻度</span>
                       <span class="n">ax</span>             <span class="c1"># matplolib 轴</span>
                      <span class="p">):</span>
 
@@ -851,12 +855,12 @@ const thebe_selector_output = ".output, .cell_output"
                 <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
                 <span class="n">color</span><span class="o">=</span><span class="n">color_mapping</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-                <span class="n">label</span><span class="o">=</span><span class="n">code_to_name</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;country&#39;</span><span class="p">])</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">code_to_name</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;name_chinese&#39;</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">logscale</span><span class="p">:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 
-    <span class="c1"># 将图例绘制在图外</span>
+    <span class="c1"># 将图例绘制在图外的左上角（loc）</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
@@ -882,7 +886,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">,</span> <span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1500</span><span class="p">:],</span> 
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;international dollars&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 
 <span class="c1"># 定义事件和文本的参数</span>
@@ -933,62 +937,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33322 (\N{CJK UNIFIED IDEOGRAPH-822A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28023 (\N{CJK UNIFIED IDEOGRAPH-6D77}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27861 (\N{CJK UNIFIED IDEOGRAPH-6CD5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26696 (\N{CJK UNIFIED IDEOGRAPH-6848}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38381 (\N{CJK UNIFIED IDEOGRAPH-95ED}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38145 (\N{CJK UNIFIED IDEOGRAPH-9501}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24223 (\N{CJK UNIFIED IDEOGRAPH-5E9F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38500 (\N{CJK UNIFIED IDEOGRAPH-9664}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29420 (\N{CJK UNIFIED IDEOGRAPH-72EC}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33831 (\N{CJK UNIFIED IDEOGRAPH-8427}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26465 (\N{CJK UNIFIED IDEOGRAPH-6761}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25913 (\N{CJK UNIFIED IDEOGRAPH-6539}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24320 (\N{CJK UNIFIED IDEOGRAPH-5F00}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25918 (\N{CJK UNIFIED IDEOGRAPH-653E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="gdppc-comparison">
-<a class="reference internal image-reference" href="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png"><img alt="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png" src="_images/aad172aed7183cc853caa56bdd2d6ce9c4dc2ab35e8902a674f893ed7d0e8531.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ef0da6f290500da7d8ee985a46b457ccd94e515abe266c5112c416d8499fd44a.png"><img alt="_images/ef0da6f290500da7d8ee985a46b457ccd94e515abe266c5112c416d8499fd44a.png" src="_images/ef0da6f290500da7d8ee985a46b457ccd94e515abe266c5112c416d8499fd44a.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">人均 GDP，1500-（中国、英国、美国）</span><a class="headerlink" href="#gdppc-comparison" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">人均 GDP，1500-至今（中国、英国、美国）</span><a class="headerlink" href="#gdppc-comparison" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1024,7 +976,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CHN&#39;</span><span class="p">]</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1600</span><span class="p">:</span><span class="mi">2000</span><span class="p">],</span> 
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 
 <span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -1064,98 +1016,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38381 (\N{CJK UNIFIED IDEOGRAPH-95ED}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20851 (\N{CJK UNIFIED IDEOGRAPH-5173}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38145 (\N{CJK UNIFIED IDEOGRAPH-9501}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25919 (\N{CJK UNIFIED IDEOGRAPH-653F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31574 (\N{CJK UNIFIED IDEOGRAPH-7B56}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31532 (\N{CJK UNIFIED IDEOGRAPH-7B2C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19968 (\N{CJK UNIFIED IDEOGRAPH-4E00}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 40486 (\N{CJK UNIFIED IDEOGRAPH-9E26}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29255 (\N{CJK UNIFIED IDEOGRAPH-7247}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33258 (\N{CJK UNIFIED IDEOGRAPH-81EA}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24378 (\N{CJK UNIFIED IDEOGRAPH-5F3A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36816 (\N{CJK UNIFIED IDEOGRAPH-8FD0}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21160 (\N{CJK UNIFIED IDEOGRAPH-52A8}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20108 (\N{CJK UNIFIED IDEOGRAPH-4E8C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19990 (\N{CJK UNIFIED IDEOGRAPH-4E16}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30028 (\N{CJK UNIFIED IDEOGRAPH-754C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21326 (\N{CJK UNIFIED IDEOGRAPH-534E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20154 (\N{CJK UNIFIED IDEOGRAPH-4EBA}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27665 (\N{CJK UNIFIED IDEOGRAPH-6C11}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20849 (\N{CJK UNIFIED IDEOGRAPH-5171}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21644 (\N{CJK UNIFIED IDEOGRAPH-548C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36291 (\N{CJK UNIFIED IDEOGRAPH-8DC3}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36827 (\N{CJK UNIFIED IDEOGRAPH-8FDB}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25913 (\N{CJK UNIFIED IDEOGRAPH-6539}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24320 (\N{CJK UNIFIED IDEOGRAPH-5F00}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25918 (\N{CJK UNIFIED IDEOGRAPH-653E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="gdppc-china">
-<a class="reference internal image-reference" href="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png"><img alt="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png" src="_images/5bbbfb41ef1cefe8a4574dfacabe6157071c406e5599e75f871b4c2fb84e43f4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cb79b8c23db4a4bcebf75dfc7e1c281d0f5ed83b3ebbe445afda8f65027bbf6a.png"><img alt="_images/cb79b8c23db4a4bcebf75dfc7e1c281d0f5ed83b3ebbe445afda8f65027bbf6a.png" src="_images/cb79b8c23db4a4bcebf75dfc7e1c281d0f5ed83b3ebbe445afda8f65027bbf6a.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">人均GDP，1500-2000（中国）</span><a class="headerlink" href="#gdppc-china" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">人均GDP，1500-2000年（中国）</span><a class="headerlink" href="#gdppc-china" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1184,7 +1048,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp_pc</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1500</span><span class="p">:</span><span class="mi">2000</span><span class="p">],</span>
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 
 <span class="n">ylim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -1225,74 +1089,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33322 (\N{CJK UNIFIED IDEOGRAPH-822A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28023 (\N{CJK UNIFIED IDEOGRAPH-6D77}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27861 (\N{CJK UNIFIED IDEOGRAPH-6CD5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33521 (\N{CJK UNIFIED IDEOGRAPH-82F1}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29420 (\N{CJK UNIFIED IDEOGRAPH-72EC}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31435 (\N{CJK UNIFIED IDEOGRAPH-7ACB}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25112 (\N{CJK UNIFIED IDEOGRAPH-6218}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20105 (\N{CJK UNIFIED IDEOGRAPH-4E89}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19994 (\N{CJK UNIFIED IDEOGRAPH-4E1A}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38761 (\N{CJK UNIFIED IDEOGRAPH-9769}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21629 (\N{CJK UNIFIED IDEOGRAPH-547D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24223 (\N{CJK UNIFIED IDEOGRAPH-5E9F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38500 (\N{CJK UNIFIED IDEOGRAPH-9664}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20869 (\N{CJK UNIFIED IDEOGRAPH-5185}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31532 (\N{CJK UNIFIED IDEOGRAPH-7B2C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19968 (\N{CJK UNIFIED IDEOGRAPH-4E00}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19990 (\N{CJK UNIFIED IDEOGRAPH-4E16}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30028 (\N{CJK UNIFIED IDEOGRAPH-754C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22823 (\N{CJK UNIFIED IDEOGRAPH-5927}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33831 (\N{CJK UNIFIED IDEOGRAPH-8427}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26465 (\N{CJK UNIFIED IDEOGRAPH-6761}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20108 (\N{CJK UNIFIED IDEOGRAPH-4E8C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="gdppc-ukus">
-<a class="reference internal image-reference" href="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png"><img alt="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png" src="_images/1ef3e1e3958518a8e5b2bffcd1cad613c9b52b0e4af495fec157ae7fdbd0dd46.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ea5f569ccb09859a73f44004c8515eddff12c926c2e384e7ec9c77eba4ca4716.png"><img alt="_images/ea5f569ccb09859a73f44004c8515eddff12c926c2e384e7ec9c77eba4ca4716.png" src="_images/ea5f569ccb09859a73f44004c8515eddff12c926c2e384e7ec9c77eba4ca4716.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">人均GDP，1500-2000（英国和美国）</span><a class="headerlink" href="#gdppc-ukus" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1328,42 +1126,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1820</span><span class="p">,</span> <span class="mi">1945</span><span class="p">)</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="gdp1">
-<a class="reference internal image-reference" href="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png"><img alt="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png" src="_images/77d4e9672497a7d93b197578f33b2dc3eeb6ac8059fd187fa7b622a795ffb4f5.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/302b7bd593d75a10dce8778172cff75e7ca730e7296c57b104d8b980849b5093.png"><img alt="_images/302b7bd593d75a10dce8778172cff75e7ca730e7296c57b104d8b980849b5093.png" src="_images/302b7bd593d75a10dce8778172cff75e7ca730e7296c57b104d8b980849b5093.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">早期工业化时代的GDP</span><a class="headerlink" href="#gdp1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">早期工业化时期的GDP</span><a class="headerlink" href="#gdp1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1385,9 +1157,6 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;BEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">]</span>  
-<span class="n">bem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s2">&quot;British Empire&quot;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BEM&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">])</span>
-<span class="n">bem</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;countrycode&#39;</span>
-<span class="n">code_to_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">code_to_name</span><span class="p">,</span> <span class="n">bem</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1400,7 +1169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1821</span><span class="p">,</span> <span class="mi">1945</span><span class="p">)</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;international dollars&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./_static/lecture_specific/long_run_growth/tooze_ch1_graph.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
@@ -1410,10 +1179,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png"><img alt="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png" src="_images/eede852899ca2c1aee04a320de2c04c792d3c7bea7d77bd2f381c7daf036e175.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ad330e721968320ccf18b07b5d8de737991166a3f2d5ee501060b5f24f90eba6.png"><img alt="_images/ad330e721968320ccf18b07b5d8de737991166a3f2d5ee501060b5f24f90eba6.png" src="_images/ad330e721968320ccf18b07b5d8de737991166a3f2d5ee501060b5f24f90eba6.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>在本讲座的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。</p>
+<p>在本讲的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。</p>
 <p>让我们将时间向前推移，大致从第二次世界大战后图示停止的地方开始。</p>
 <p>按照图兹第一章的分析，这样做可以提供一些有关当今地缘政治现实的信息。</p>
 </section>
@@ -1428,42 +1197,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1950</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
 <span class="n">draw_interp_plots</span><span class="p">(</span><span class="n">gdp</span><span class="p">[</span><span class="n">country</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_year</span><span class="p">:</span><span class="n">end_year</span><span class="p">],</span> 
                   <span class="n">country</span><span class="p">,</span>
-                  <span class="s1">&#39;国际美元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;国际元&#39;</span><span class="p">,</span> <span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                   <span class="n">color_mapping</span><span class="p">,</span> <span class="n">code_to_name</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="gdp2">
-<a class="reference internal image-reference" href="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png"><img alt="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png" src="_images/a270037638e75639a42011001a714a2d1d1b0b347951681981fdcc939c593192.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/530c54c0883ba35c1833d68ad4e3bc005f2bc720faeaeb5025f54f58ae359014.png"><img alt="_images/530c54c0883ba35c1833d68ad4e3bc005f2bc720faeaeb5025f54f58ae359014.png" src="_images/530c54c0883ba35c1833d68ad4e3bc005f2bc720faeaeb5025f54f58ae359014.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">现代时代的GDP</span><a class="headerlink" href="#gdp2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">现代的GDP</span><a class="headerlink" href="#gdp2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1499,18 +1242,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;西欧&#39;</span><span class="p">,</span> <span class="s1">&#39;东欧&#39;</span><span class="p">,</span> <span class="s1">&#39;西方分支&#39;</span><span class="p">,</span> <span class="s1">&#39;拉丁美洲&#39;</span><span class="p">,</span> <span class="s1">&#39;东亚&#39;</span><span class="p">,</span> <span class="s1">&#39;南亚和东南亚&#39;</span><span class="p">,</span> <span class="s1">&#39;中东&#39;</span><span class="p">,</span> <span class="s1">&#39;撒哈拉以南非洲&#39;</span><span class="p">,</span> <span class="s1">&#39;世界人均GDP&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>进行更深入的研究，我们将 西方分支（<code class="docutils literal notranslate"><span class="pre">Western</span> <span class="pre">Offshoots</span></code>）和 （撒哈拉以南非洲）<code class="docutils literal notranslate"><span class="pre">Sub-Saharan</span> <span class="pre">Africa</span></code>的时间序列与世界各地多个不同地区进行比较。</p>
+<p>进行更深入的研究，我们将西方分支（<code class="docutils literal notranslate"><span class="pre">Western</span> <span class="pre">Offshoots</span></code>）和撒哈拉以南非洲（<code class="docutils literal notranslate"><span class="pre">Sub-Saharan</span> <span class="pre">Africa</span></code>）的时间序列与世界各地多个不同地区进行比较。</p>
 <p>下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;年份&#39;</span><span class="p">,</span>
                     <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;国际美元&#39;</span><span class="p">)</span>
+                    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;国际元&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span>
            <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
@@ -1519,22 +1263,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20221 (\N{CJK UNIFIED IDEOGRAPH-4EFD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22269 (\N{CJK UNIFIED IDEOGRAPH-56FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="region-gdppc">
-<a class="reference internal image-reference" href="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png"><img alt="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png" src="_images/ff2ccb5104ebb9ebbf91197f09543c6dd0afb7f1b2dd1179efb61c6ae1e6e423.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/26a2bd910e064fd51770849c62762f493a1e9e1aeda63c08c8fe2041dc4d9d2c.png"><img alt="_images/26a2bd910e064fd51770849c62762f493a1e9e1aeda63c08c8fe2041dc4d9d2c.png" src="_images/26a2bd910e064fd51770849c62762f493a1e9e1aeda63c08c8fe2041dc4d9d2c.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">地区人均GDP</span><a class="headerlink" href="#region-gdppc" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1595,19 +1325,19 @@ const thebe_selector_output = ".output, .cell_output"
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
@@ -1618,17 +1348,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1639,7 +1369,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1650,17 +1380,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1672,27 +1402,27 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1704,12 +1434,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1721,22 +1451,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1758,22 +1488,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1785,22 +1515,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1812,22 +1542,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1839,12 +1569,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1856,22 +1586,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1883,12 +1613,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1900,12 +1630,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1917,17 +1647,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

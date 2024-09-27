@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>25. The Cobweb Model &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>26. 蛛网模型 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="26. The Overlapping Generations Model" href="olg.html" />
-    <link rel="prev" title="24. The Solow-Swan Growth Model" href="solow.html" />
+    <link rel="next" title="27. 世代交叠模型" href="olg.html" />
+    <link rel="prev" title="24. 索洛-斯旺增长模型" href="solow.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="The Cobweb Model"/>
+<meta name="twitter:title" content="蛛网模型"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="The Cobweb Model" />
+<meta property="og:title" content="蛛网模型" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/cobweb.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,12 +172,12 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">25.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">25.2. History</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">25.3. The model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-expectations">25.4. Naive expectations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-expectations">25.5. Adaptive expectations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">25.6. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">26.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">26.2. 历史</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">26.3. 模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">26.4. 简单预期</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">26.5. 适应性预期</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">26.6. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -210,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">The Cobweb Model</p>
+                        <p class="qe-page__header-subheading">蛛网模型</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -236,35 +236,21 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="the-cobweb-model">
-<span id="cobweb"></span><h1><span class="section-number">25. </span>The Cobweb Model<a class="headerlink" href="#the-cobweb-model" title="Permalink to this heading">#</a></h1>
-<p>The cobweb model is a model of prices and quantities in a given market, and how they evolve over time.</p>
-<section id="overview">
-<h2><span class="section-number">25.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>The cobweb model dates back to the 1930s and, while simple, it remains significant
-because it shows the fundamental importance of <em>expectations</em>.</p>
-<p>To give some idea of how the model operates, and why expectations matter, imagine the following scenario.</p>
-<p>There is a market for soybeans, say, where prices and traded quantities
-depend on the choices of buyers and sellers.</p>
-<p>The buyers are represented by a demand curve — they buy more at low prices
-and less at high prices.</p>
-<p>The sellers have a supply curve — they wish to sell more at high prices and
-less at low prices.</p>
-<p>However, the sellers (who are farmers) need time to grow their crops.</p>
-<p>Suppose now that the price is currently high.</p>
-<p>Seeing this high price, and perhaps expecting that the high price will remain
-for some time, the farmers plant many fields with soybeans.</p>
-<p>Next period the resulting high supply floods the market, causing the price to drop.</p>
-<p>Seeing this low price, the farmers now shift out of soybeans, restricting
-supply and causing the price to climb again.</p>
-<p>You can imagine how these dynamics could cause cycles in prices and quantities
-that persist over time.</p>
-<p>The cobweb model puts these ideas into equations so we can try to quantify
-them, and to study conditions under which cycles persist (or disappear).</p>
-<p>In this lecture, we investigate and simulate the basic model under different
-assumptions regarding the way that producers form expectations.</p>
-<p>Our discussion and simulations draw on <a class="reference external" href="https://comp-econ.org/CEF_2013/downloads/Complex%20Econ%20Systems%20Lecture%20II.pdf">high quality lectures</a> by <a class="reference external" href="https://www.uva.nl/en/profile/h/o/c.h.hommes/c.h.hommes.html">Cars Hommes</a>.</p>
-<p>We will use the following imports.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="cobweb">
+<span id="id1"></span><h1><span class="section-number">26. </span>蛛网模型<a class="headerlink" href="#cobweb" title="Permalink to this heading">#</a></h1>
+<p>蛛网模型是一个描述特定市场中价格和数量及其随时间演变的模型。</p>
+<section id="id2">
+<h2><span class="section-number">26.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>蛛网模型可以追溯到20世纪30年代，虽然简单，但它仍然具有重要意义，因为它展示了<em>预期</em>的根本重要性。</p>
+<p>为了说明模型如何运作以及为什么预期很重要，想象以下场景：</p>
+<p>有一个大豆市场，价格和交易数量取决于买家和卖家的选择。买家由需求曲线表示——在低价时购买更多，高价时购买更少。卖家有一条供应曲线——他们希望在高价时卖出更多，低价时卖出更少。</p>
+<p>然而，卖家（农民）需要时间来种植作物。假设现在价格很高。看到这个高价，可能预期高价会持续一段时间，农民在许多田地里种植大豆。</p>
+<p>下一个周期，由此产生的高供应量充斥市场，导致价格下跌。看到这个低价，农民现在减少大豆种植，限制供应，导致价格再次上涨。</p>
+<p>你可以想象这种动态如何导致价格和数量的周期性波动持续一段时间。</p>
+<p>蛛网模型将这些想法转化为方程，这样我们就可以尝试量化它们，并研究周期持续（或消失）的条件。</p>
+<p>在本讲座中，我们将在不同的生产者形成预期的假设下调查和模拟基本模型。</p>
+<p>我们的讨论和模拟借鉴了<a class="reference external" href="https://www.uva.nl/en/profile/h/o/c.h.hommes/c.h.hommes.html">Cars Hommes</a>的<a class="reference external" href="https://comp-econ.org/CEF_2013/downloads/Complex%20Econ%20Systems%20Lecture%20II.pdf">高质量讲座</a>。</p>
+<p>我们将使用以下导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -274,12 +260,12 @@ assumptions regarding the way that producers form expectations.</p>
 </div>
 </div>
 </section>
-<section id="history">
-<h2><span class="section-number">25.2. </span>History<a class="headerlink" href="#history" title="Permalink to this heading">#</a></h2>
-<p>Early papers on the cobweb cycle include <span id="id1">[<a class="reference internal" href="zreferences.html#id279" title="Frederick V. Waugh. Cobweb models. Journal of Farm Economics, 46(4):732–750, 1964.">Waugh, 1964</a>]</span> and <span id="id2">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span>.</p>
-<p>The paper <span id="id3">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span> uses the cobweb theorem to explain the prices of hog in the US over 1920–1950.</p>
-<p>The next plot replicates part of Figure 2 from that paper, which plots the price of hogs at yearly frequency.</p>
-<p>Notice the cyclical price dynamics, which match the kind of cyclical soybean price dynamics discussed above.</p>
+<section id="id3">
+<h2><span class="section-number">26.2. </span>历史<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>关于蛛网循环的早期论文包括<span id="id4">[<a class="reference internal" href="zreferences.html#id279" title="Frederick V. Waugh. Cobweb models. Journal of Farm Economics, 46(4):732–750, 1964.">Waugh, 1964</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span>。
+论文<span id="id6">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span>使用蛛网定理解释了1920年至1950年间美国猪肉价格的变化。
+下一个图表复制了该论文中图2的一部分，展示了年度猪肉价格。
+注意价格动态的周期性变化，这与上文讨论的大豆价格动态的周期性变化相匹配。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hog_prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span>
@@ -287,9 +273,9 @@ assumptions regarding the way that producers form expectations.</p>
               <span class="mi">69</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">62</span><span class="p">]</span>
 <span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1924</span><span class="p">,</span> <span class="mi">1960</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">hog_prices</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;hog price&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;dollars&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">hog_prices</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;猪肉价格&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;年&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;美元&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -297,39 +283,55 @@ assumptions regarding the way that producers form expectations.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/673513764b4661a5ec91693f94fb36eeed4a3ffd57e8fe6e806b5693d40b9e76.png"><img alt="_images/673513764b4661a5ec91693f94fb36eeed4a3ffd57e8fe6e806b5693d40b9e76.png" src="_images/673513764b4661a5ec91693f94fb36eeed4a3ffd57e8fe6e806b5693d40b9e76.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24180 (\N{CJK UNIFIED IDEOGRAPH-5E74}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32654 (\N{CJK UNIFIED IDEOGRAPH-7F8E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20803 (\N{CJK UNIFIED IDEOGRAPH-5143}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29482 (\N{CJK UNIFIED IDEOGRAPH-732A}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32905 (\N{CJK UNIFIED IDEOGRAPH-8089}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/b58ac438d05aa805d255e1fd14d21a06b12804a96567320063923f43ce8f7374.png"><img alt="_images/b58ac438d05aa805d255e1fd14d21a06b12804a96567320063923f43ce8f7374.png" src="_images/b58ac438d05aa805d255e1fd14d21a06b12804a96567320063923f43ce8f7374.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
-<section id="the-model">
-<h2><span class="section-number">25.3. </span>The model<a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
-<p>Let’s return to our discussion of a hypothetical soybean market, where price is determined by supply and demand.</p>
-<p>We suppose that demand for soybeans is given by</p>
+<section id="id7">
+<h2><span class="section-number">26.3. </span>模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>让我们回到讨论假设的大豆市场，其中价格由供需决定。</p>
+<p>我们假设大豆的需求由以下公式给出：</p>
 <div class="math notranslate nohighlight">
 \[
     D(p_t) = a - b p_t
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(a, b\)</span> are nonnegative constants and <span class="math notranslate nohighlight">\(p_t\)</span> is the spot (i.e, current market) price at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>(<span class="math notranslate nohighlight">\(D(p_t)\)</span> is the quantity demanded in some fixed unit, such as thousands of tons.)</p>
-<p>Because the crop of soybeans for time <span class="math notranslate nohighlight">\(t\)</span> is planted at <span class="math notranslate nohighlight">\(t-1\)</span>, supply of soybeans at time <span class="math notranslate nohighlight">\(t\)</span> depends on <em>expected</em> prices at time <span class="math notranslate nohighlight">\(t\)</span>, which we denote <span class="math notranslate nohighlight">\(p^e_t\)</span>.</p>
-<p>We suppose that supply is nonlinear in expected prices, and takes the form</p>
+<p>其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是非负常数，<span class="math notranslate nohighlight">\(p_t\)</span> 是 <span class="math notranslate nohighlight">\(t\)</span> 时刻的现货（即当前市场）价格。
+（<span class="math notranslate nohighlight">\(D(p_t)\)</span> 是以某个固定单位表示的需求量，如千吨。）</p>
+<p>由于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆作物是在 <span class="math notranslate nohighlight">\(t-1\)</span> 时种植的，<span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆供应取决于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的<em>预期</em>价格，我们用 <span class="math notranslate nohighlight">\(p^e_t\)</span> 表示。</p>
+<p>我们假设供应对预期价格是非线性的，并采用以下形式：</p>
 <div class="math notranslate nohighlight">
 \[
     S(p^e_t) = \tanh(\lambda(p^e_t - c)) + d
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is a positive constant, <span class="math notranslate nohighlight">\(c, d\)</span> are nonnegative constants and <span class="math notranslate nohighlight">\(\tanh\)</span> is a type of <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_functions">hyperbolic function</a>.</p>
-<p>Let’s make a plot of supply and demand for particular choices of the parameter values.</p>
-<p>First we store the parameters in a class and define the functions above as methods.</p>
+<p>其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是正常数，<span class="math notranslate nohighlight">\(c, d\)</span> 是非负常数，<span class="math notranslate nohighlight">\(\tanh\)</span> 是一种<a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_functions">双曲函数</a>。</p>
+<p>让我们为特定参数值选择绘制供需图。</p>
+<p>首先，我们将参数存储在一个类中，并将上述函数定义为方法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Market</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">a</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>      <span class="c1"># demand parameter</span>
-                 <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># demand parameter</span>
-                 <span class="n">c</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>      <span class="c1"># supply parameter</span>
-                 <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># supply parameter</span>
-                 <span class="n">λ</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>   <span class="c1"># supply parameter</span>
+                 <span class="n">a</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>      <span class="c1"># 需求参数</span>
+                 <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># 需求参数</span>
+                 <span class="n">c</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>      <span class="c1"># 供给参数</span>
+                 <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># 供给参数</span>
+                 <span class="n">λ</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>   <span class="c1"># 供给参数</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">λ</span> <span class="o">=</span> <span class="n">λ</span>
 
@@ -344,7 +346,7 @@ assumptions regarding the way that producers form expectations.</p>
 </div>
 </div>
 </div>
-<p>Now let’s plot.</p>
+<p>现在让我们来绘制。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -353,8 +355,8 @@ assumptions regarding the way that producers form expectations.</p>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">demand</span><span class="p">(</span><span class="n">p_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$D$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">p_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$S$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;quantity&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;价格&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;数量&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -362,61 +364,64 @@ assumptions regarding the way that producers form expectations.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2aee4a23f0e13207475854ef6f61df21591bc3501572459cd8b6499f28ee133a.png"><img alt="_images/2aee4a23f0e13207475854ef6f61df21591bc3501572459cd8b6499f28ee133a.png" src="_images/2aee4a23f0e13207475854ef6f61df21591bc3501572459cd8b6499f28ee133a.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/37f0a061b35bdb01efcea5c0e1856f0ea0ba6c78929f0f7ff54a9075fee6a79a.png"><img alt="_images/37f0a061b35bdb01efcea5c0e1856f0ea0ba6c78929f0f7ff54a9075fee6a79a.png" src="_images/37f0a061b35bdb01efcea5c0e1856f0ea0ba6c78929f0f7ff54a9075fee6a79a.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Market equilibrium requires that supply equals demand, or</p>
-<div class="math notranslate nohighlight">
-\[
+<p>市场均衡要求供给等于需求，即
+$<span class="math notranslate nohighlight">\(
     a - b p_t = S(p^e_t)
-\]</div>
-<p>Rewriting in terms of <span class="math notranslate nohighlight">\(p_t\)</span> gives</p>
-<div class="math notranslate nohighlight">
-\[
+\)</span><span class="math notranslate nohighlight">\(
+用\)</span>p_t<span class="math notranslate nohighlight">\(重写可得
+\)</span><span class="math notranslate nohighlight">\(
     p_t = - \frac{1}{b} [S(p^e_t) - a]
-\]</div>
-<p>Finally, to complete the model, we need to describe how price expectations are formed.</p>
-<p>We will assume that expected prices at time <span class="math notranslate nohighlight">\(t\)</span> depend on past prices.</p>
-<p>In particular, we suppose that</p>
+\)</span>$
+最后，为了完成这个模型，我们需要描述价格预期是如何形成的。
+我们假设t时刻的预期价格取决于过去的价格。
+特别地，我们假设</p>
 <div class="math notranslate nohighlight" id="equation-p-et">
-<span class="eqno">(25.1)<a class="headerlink" href="#equation-p-et" title="Permalink to this equation">#</a></span>\[    p^e_t = f(p_{t-1}, p_{t-2})\]</div>
-<p>where <span class="math notranslate nohighlight">\(f\)</span> is some function.</p>
-<p>Thus, we are assuming that producers expect the time-<span class="math notranslate nohighlight">\(t\)</span> price to be some function of lagged prices, up to <span class="math notranslate nohighlight">\(2\)</span> lags.</p>
-<p>(We could of course add additional lags and readers are encouraged to experiment with such cases.)</p>
-<p>Combining the last two equations gives the dynamics for prices:</p>
+<span class="eqno">(26.1)<a class="headerlink" href="#equation-p-et" title="Permalink to this equation">#</a></span>\[    p^e_t = f(p_{t-1}, p_{t-2})\]</div>
+<p>其中<span class="math notranslate nohighlight">\(f\)</span>是某个函数。
+因此，我们假设生产者预期t时刻的价格是滞后价格的某个函数，最多滞后2期。
+（当然，我们可以添加更多的滞后期，鼓励读者尝试这样的情况。）
+结合最后两个等式，我们得到价格的动态方程：</p>
 <div class="math notranslate nohighlight" id="equation-price-t">
-<span class="eqno">(25.2)<a class="headerlink" href="#equation-price-t" title="Permalink to this equation">#</a></span>\[    p_t = - \frac{1}{b} [ S(f(p_{t-1}, p_{t-2})) - a]\]</div>
-<p>The price dynamics depend on the parameter values and also on the function <span class="math notranslate nohighlight">\(f\)</span> that determines how producers form expectations.</p>
+<span class="eqno">(26.2)<a class="headerlink" href="#equation-price-t" title="Permalink to this equation">#</a></span>\[    p_t = - \frac{1}{b} [ S(f(p_{t-1}, p_{t-2})) - a]\]</div>
+<p>价格动态取决于参数值以及决定生产者如何形成预期的函数 <span class="math notranslate nohighlight">\(f\)</span>。</p>
 </section>
-<section id="naive-expectations">
-<h2><span class="section-number">25.4. </span>Naive expectations<a class="headerlink" href="#naive-expectations" title="Permalink to this heading">#</a></h2>
-<p>To go further in our analysis we need to specify the function <span class="math notranslate nohighlight">\(f\)</span>; that is, how expectations are formed.</p>
-<p>Let’s start with naive expectations, which refers to the case where producers expect the next period spot price to be whatever the price is in the current period.</p>
-<p>In other words,</p>
+<section id="id8">
+<h2><span class="section-number">26.4. </span>简单预期<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>为了进一步分析，我们需要指定函数 <span class="math notranslate nohighlight">\(f\)</span>；也就是说，预期是如何形成的。</p>
+<p>让我们从简单预期开始，它指的是生产者预期下一期的现货价格将是当前期的价格。</p>
+<p>换句话说，</p>
 <div class="math notranslate nohighlight">
 \[ 
 p_t^e = p_{t-1} 
 \]</div>
-<p>Using <a class="reference internal" href="#equation-price-t">(25.2)</a>, we then have</p>
+<p>使用方程 <a class="reference internal" href="#equation-price-t">(26.2)</a>，我们得到</p>
 <div class="math notranslate nohighlight">
 \[
     p_t = - \frac{1}{b} [ S(p_{t-1}) - a]
 \]</div>
-<p>We can write this as</p>
+<p>我们可以将其写为</p>
 <div class="math notranslate nohighlight">
 \[
     p_t = g(p_{t-1})
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(g\)</span> is the function defined by</p>
+<p>其中 <span class="math notranslate nohighlight">\(g\)</span> 是由以下定义的函数</p>
 <div class="math notranslate nohighlight" id="equation-def-g">
-<span class="eqno">(25.3)<a class="headerlink" href="#equation-def-g" title="Permalink to this equation">#</a></span>\[    g(p) = - \frac{1}{b} [ S(p) - a]\]</div>
-<p>Here we represent the function <span class="math notranslate nohighlight">\(g\)</span></p>
+<span class="eqno">(26.3)<a class="headerlink" href="#equation-def-g" title="Permalink to this equation">#</a></span>\[    g(p) = - \frac{1}{b} [ S(p) - a]\]</div>
+<p>这里我们来表示函数<span class="math notranslate nohighlight">\(g\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_price</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to find the next price given the current price</span>
-<span class="sd">    and Market model</span>
+<span class="sd">  给定当前价格和市场模型，用于找到下一个价格的函数</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
     <span class="n">next_price</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">current_price</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span>
@@ -425,8 +430,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 </div>
-<p>Let’s try to understand how prices will evolve using a 45-degree diagram, which is a tool for studying one-dimensional dynamics.</p>
-<p>The function <code class="docutils literal notranslate"><span class="pre">plot45</span></code> defined below helps us draw the 45-degree diagram.</p>
+<p>让我们尝试使用 45 度图来理解价格将如何演变，这是研究一维动态的工具。
+下面定义的函数 <code class="docutils literal notranslate"><span class="pre">plot45</span></code> 帮助我们绘制 45 度图。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -436,20 +441,14 @@ p_t^e = p_{t-1}
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot45</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to plot a 45 degree plot</span>
-
-<span class="sd">    Parameters</span>
+<span class="sd">    绘制 45 度图的函数</span>
+<span class="sd">    参数</span>
 <span class="sd">    ==========</span>
-
-<span class="sd">    model: Market model</span>
-
-<span class="sd">    pmin: Lower price limit</span>
-
-<span class="sd">    pmax: Upper price limit</span>
-
-<span class="sd">    p0: Initial value of price (needed to simulate prices)</span>
-
-<span class="sd">    num_arrows: Number of simulations to plot</span>
+<span class="sd">    model: 市场模型</span>
+<span class="sd">    pmin: 价格下限</span>
+<span class="sd">    pmax: 价格上限</span>
+<span class="sd">    p0: 价格初始值（用于模拟价格）</span>
+<span class="sd">    num_arrows: 要绘制的模拟次数</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
@@ -509,7 +508,7 @@ p_t^e = p_{t-1}
 </div>
 </details>
 </div>
-<p>Now we can set up a market and plot the 45-degree diagram.</p>
+<p>现在我们可以设置一个市场并绘制 45 度图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Market</span><span class="p">()</span>
@@ -527,28 +526,28 @@ p_t^e = p_{t-1}
 <a class="reference internal image-reference" href="_images/ff788d2a0cefea7ea11c3be6da09ba6b815e818e1bce649bcaf3789d15f3b89c.png"><img alt="_images/ff788d2a0cefea7ea11c3be6da09ba6b815e818e1bce649bcaf3789d15f3b89c.png" src="_images/ff788d2a0cefea7ea11c3be6da09ba6b815e818e1bce649bcaf3789d15f3b89c.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The plot shows the function <span class="math notranslate nohighlight">\(g\)</span> defined in <a class="reference internal" href="#equation-def-g">(25.3)</a> and the 45-degree line.</p>
-<p>Think of <span class="math notranslate nohighlight">\( p_t \)</span> as a value on the horizontal axis.</p>
-<p>Since <span class="math notranslate nohighlight">\(p_{t+1} = g(p_t)\)</span>, we use the graph of <span class="math notranslate nohighlight">\(g\)</span> to see <span class="math notranslate nohighlight">\(p_{t+1}\)</span> on the vertical axis.</p>
-<p>Clearly,</p>
+<p>图表显示了方程 <a class="reference internal" href="#equation-def-g">(26.3)</a> 中定义的函数 <span class="math notranslate nohighlight">\(g\)</span> 和 45 度线。</p>
+<p>将 <span class="math notranslate nohighlight">\(p_t\)</span> 视为横轴上的值。</p>
+<p>由于 <span class="math notranslate nohighlight">\(p_{t+1} = g(p_t)\)</span>，我们使用 <span class="math notranslate nohighlight">\(g\)</span> 的图形在纵轴上看到 <span class="math notranslate nohighlight">\(p_{t+1}\)</span>。</p>
+<p>显然，</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\( g \)</span> lies above the 45-degree line at <span class="math notranslate nohighlight">\(p_t\)</span>, then we have <span class="math notranslate nohighlight">\( p_{t+1} &gt; p_t \)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\( g \)</span> lies below the 45-degree line at <span class="math notranslate nohighlight">\(p_t\)</span>, then we have <span class="math notranslate nohighlight">\( p_{t+1} &lt; p_t \)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\( g \)</span> hits the 45-degree line at <span class="math notranslate nohighlight">\(p_t\)</span>, then we have <span class="math notranslate nohighlight">\( p_{t+1} = p_t \)</span>, so <span class="math notranslate nohighlight">\( p_t \)</span> is a steady state.</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处位于 45 度线上方，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} &gt; p_t\)</span>。</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处位于 45 度线下方，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} &lt; p_t\)</span>。</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处与 45 度线相交，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} = p_t\)</span>，所以 <span class="math notranslate nohighlight">\(p_t\)</span> 是一个稳态。</p></li>
 </ul>
-<p>Consider the sequence of prices starting at <span class="math notranslate nohighlight">\(p_0\)</span>, as shown in the figure.</p>
-<p>We find <span class="math notranslate nohighlight">\(p_1\)</span> on the vertical axis and then shift it to the horizontal axis using the 45-degree line (where values on the two axes are equal).</p>
-<p>Then from <span class="math notranslate nohighlight">\(p_1\)</span> we obtain <span class="math notranslate nohighlight">\(p_2\)</span> and continue.</p>
-<p>We can see the start of a cycle.</p>
-<p>To confirm this, let’s plot a time series.</p>
+<p>考虑从 <span class="math notranslate nohighlight">\(p_0\)</span> 开始的价格序列，如图所示。</p>
+<p>我们在纵轴上找到 <span class="math notranslate nohighlight">\(p_1\)</span>，然后使用 45 度线（两个轴上的值相等）将其移到横轴上。</p>
+<p>然后从 <span class="math notranslate nohighlight">\(p_1\)</span> 得到 <span class="math notranslate nohighlight">\(p_2\)</span> 并继续。</p>
+<p>我们可以看到一个循环的开始。</p>
+<p>为了确认这一点，让我们绘制一个时间序列图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_price</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>             <span class="c1"># Market model</span>
-                  <span class="n">p0</span><span class="p">,</span>                <span class="c1"># Initial price</span>
-                  <span class="n">y_a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y_b</span><span class="o">=</span> <span class="mi">12</span><span class="p">,</span>    <span class="c1"># Controls y-axis</span>
-                  <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>     <span class="c1"># Length of time series</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_price</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>             <span class="c1"># 市场模型</span>
+                  <span class="n">p0</span><span class="p">,</span>                <span class="c1"># 初始价格</span>
+                  <span class="n">y_a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y_b</span><span class="o">=</span> <span class="mi">12</span><span class="p">,</span>    <span class="c1"># 控制 y-轴</span>
+                  <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>     <span class="c1"># 时间序列的长度</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to simulate and plot the time series of price.</span>
+<span class="sd">    用来模拟和绘制价格时间序列的函数</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -582,10 +581,10 @@ p_t^e = p_{t-1}
 <a class="reference internal image-reference" href="_images/fe2fff3941b80a24f351f80d2bc2bf01c22986dfdcbd7a55af6c7aa0d1083e57.png"><img alt="_images/fe2fff3941b80a24f351f80d2bc2bf01c22986dfdcbd7a55af6c7aa0d1083e57.png" src="_images/fe2fff3941b80a24f351f80d2bc2bf01c22986dfdcbd7a55af6c7aa0d1083e57.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We see that a cycle has formed and the cycle is persistent.</p>
-<p>(You can confirm this by plotting over a longer time horizon.)</p>
-<p>The cycle is “stable”, in the sense that prices converge to it from most starting conditions.</p>
-<p>For example,</p>
+<p>我们看到一个循环已经形成，而且这个循环是持续的。
+（您可以通过绘制更长时间范围的图表来确认这一点。）
+这个循环是”稳定的”，意味着从大多数起始条件开始，价格都会收敛到这个循环。
+例如，</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_plot_price</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -597,45 +596,42 @@ p_t^e = p_{t-1}
 </div>
 </div>
 </section>
-<section id="adaptive-expectations">
-<h2><span class="section-number">25.5. </span>Adaptive expectations<a class="headerlink" href="#adaptive-expectations" title="Permalink to this heading">#</a></h2>
-<p>Naive expectations are quite simple and also important in driving the cycle that we found.</p>
-<p>What if expectations are formed in a different way?</p>
-<p>Next we consider adaptive expectations.</p>
-<p>This refers to the case where producers form expectations for
-the next period price as a weighted average of their last guess and the
-current spot price.</p>
-<p>That is,</p>
+<section id="id9">
+<h2><span class="section-number">26.5. </span>适应性预期<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>朴素预期相当简单，也在我们发现的周期中起着重要的驱动作用。
+如果预期以不同的方式形成会怎样？
+接下来我们考虑适应性预期。
+这指的是生产者对下一期价格的预期形成是基于他们上一次猜测和当前现货价格的加权平均。
+也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-adaptive">
-<span class="eqno">(25.4)<a class="headerlink" href="#equation-pe-adaptive" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p^e_{t-1}
+<span class="eqno">(26.4)<a class="headerlink" href="#equation-pe-adaptive" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p^e_{t-1}
 \qquad (0 \leq \alpha \leq 1)\]</div>
-<p>Another way to write this is</p>
+<p>另一种写法为</p>
 <div class="math notranslate nohighlight" id="equation-pe-adaptive-2">
-<span class="eqno">(25.5)<a class="headerlink" href="#equation-pe-adaptive-2" title="Permalink to this equation">#</a></span>\[p_t^e = p^e_{t-1} + \alpha (p_{t-1} - p_{t-1}^e)\]</div>
-<p>This equation helps to show that expectations shift</p>
+<span class="eqno">(26.5)<a class="headerlink" href="#equation-pe-adaptive-2" title="Permalink to this equation">#</a></span>\[p_t^e = p^e_{t-1} + \alpha (p_{t-1} - p_{t-1}^e)\]</div>
+<p>这个方程有助于说明预期会在以下情况下发生变化：</p>
 <ol class="arabic simple">
-<li><p>up when prices last period were above expectations</p></li>
-<li><p>down when prices last period were below expectations</p></li>
+<li><p>当上一期价格高于预期时，预期上调</p></li>
+<li><p>当上一期价格低于预期时，预期下调</p></li>
 </ol>
-<p>Using <a class="reference internal" href="#equation-pe-adaptive">(25.4)</a>, we obtain the dynamics</p>
+<p>使用<a class="reference internal" href="#equation-pe-adaptive">(26.4)</a>，我们得到以下动态方程：</p>
 <div class="math notranslate nohighlight">
 \[
     p_t = - \frac{1}{b} [ S(\alpha p_{t-1} + (1-\alpha) p^e_{t-1}) - a]
 \]</div>
-<p>Let’s try to simulate the price and observe the dynamics using different values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>让我们尝试模拟价格，并观察在不同<span class="math notranslate nohighlight">\(\alpha\)</span>值下的动态变化。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_next_price_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to find the next price given the current price expectation</span>
-<span class="sd">    and Market model</span>
+<span class="sd">   给定当前价格预期和市场模型，计算下一个价格的函数</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">curr_price_exp</span><span class="p">)</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The function below plots price dynamics under adaptive expectations for different values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p>下面的函数将在不同的<span class="math notranslate nohighlight">\(\alpha\)</span>值下绘制适应性预期下的价格动态。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_price_plot_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]):</span>
@@ -651,13 +647,13 @@ current spot price.</p>
         <span class="n">axs</span><span class="p">[</span><span class="n">i_plot</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">p_values</span><span class="p">)</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i_plot</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i_plot</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i_plot</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i_plot</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;价格&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s call the function with prices starting at <span class="math notranslate nohighlight">\(p_0 = 5\)</span>.</p>
+<p>让我们调用这个函数，初始价格设为<span class="math notranslate nohighlight">\(p_0 = 5\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_price_plot_adaptive</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -665,41 +661,45 @@ current spot price.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/764627a5c42d6930e303c274acde3bc3d2a1f9ac60a0642fd437256d847cff46.png"><img alt="_images/764627a5c42d6930e303c274acde3bc3d2a1f9ac60a0642fd437256d847cff46.png" src="_images/764627a5c42d6930e303c274acde3bc3d2a1f9ac60a0642fd437256d847cff46.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/dcbab8ceca9432cb61e0d09d472ad864c811805bba0b2448e5c9124d54acc084.png"><img alt="_images/dcbab8ceca9432cb61e0d09d472ad864c811805bba0b2448e5c9124d54acc084.png" src="_images/dcbab8ceca9432cb61e0d09d472ad864c811805bba0b2448e5c9124d54acc084.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Note that if <span class="math notranslate nohighlight">\(\alpha=1\)</span>, then adaptive expectations are just naive expectation.</p>
-<p>Decreasing the value of <span class="math notranslate nohighlight">\(\alpha\)</span> shifts more weight to the previous
-expectations, which stabilizes expected prices.</p>
-<p>This increased stability can be seen in the figures.</p>
+<p>请注意，如果<span class="math notranslate nohighlight">\(\alpha=1\)</span>，那么适应性预期就等同于朴素预期。
+减小<span class="math notranslate nohighlight">\(\alpha\)</span>的值会使更多权重转移到先前的预期上，这会稳定预期价格。
+这种增加的稳定性可以在图表中看出。</p>
 </section>
-<section id="exercises">
-<h2><span class="section-number">25.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h2><span class="section-number">26.6. </span>练习<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="cobweb_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 25.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 26.1 </span></p>
 <section id="exercise-content">
-<p>Using the default <code class="docutils literal notranslate"><span class="pre">Market</span></code> class and naive expectations, plot a time series simulation of supply (rather than the price).</p>
-<p>Show, in particular, that supply also cycles.</p>
+<p>使用默认的<code class="docutils literal notranslate"><span class="pre">Market</span></code>类和简单的预期，绘制一个供给（而不是价格）的时间序列模拟。
+特别展示供给也会循环变化。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="cobweb-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#cobweb_ex1"> Exercise 25.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#cobweb_ex1"> Exercise 26.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_supply</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to simulate and plot the supply function</span>
-<span class="sd">    given the initial price.</span>
+<span class="sd">    给定初始价格，模拟和绘制供给函数的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pe_last</span> <span class="o">=</span> <span class="n">p0</span>
     <span class="n">s_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">ts_length</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">):</span>
-        <span class="c1"># store quantity</span>
+        <span class="c1"># 库存数量</span>
         <span class="n">s_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">pe_last</span><span class="p">)</span>
-        <span class="c1"># update price</span>
+        <span class="c1"># 更新价格</span>
         <span class="n">pe_last</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">s_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
 
 
@@ -713,8 +713,8 @@ expectations, which stabilizes expected prices.</p>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_length</span><span class="p">))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;quantity&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;时间&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;数量&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -728,35 +728,42 @@ expectations, which stabilizes expected prices.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/3d7f53ce2b3c10262a6d68c17a8099491583a35c5decc34f1123902fd241afd3.png"><img alt="_images/3d7f53ce2b3c10262a6d68c17a8099491583a35c5decc34f1123902fd241afd3.png" src="_images/3d7f53ce2b3c10262a6d68c17a8099491583a35c5decc34f1123902fd241afd3.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/8099006acf7b0ceccc48511550417cea318cf64fdace127a2e779ebdf10e31f2.png"><img alt="_images/8099006acf7b0ceccc48511550417cea318cf64fdace127a2e779ebdf10e31f2.png" src="_images/8099006acf7b0ceccc48511550417cea318cf64fdace127a2e779ebdf10e31f2.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </div>
 <div class="exercise admonition" id="cobweb_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 25.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 26.2 </span></p>
 <section id="exercise-content">
-<p><strong>Backward looking average expectations</strong></p>
-<p>Backward looking average expectations refers to the case where producers form
-expectations for the next period price as a linear combination of their last
-guess and the second last guess.</p>
-<p>That is,</p>
+<p><strong>回顾性平均预期</strong></p>
+<p>回顾性平均预期是指生产者对下一期价格的预期形成为他们最后一次猜测和倒数第二次猜测的线性组合。</p>
+<p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-blae">
-<span class="eqno">(25.6)<a class="headerlink" href="#equation-pe-blae" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p_{t-2}\]</div>
-<p>Simulate and plot the price dynamics for <span class="math notranslate nohighlight">\(\alpha \in \{0.1, 0.3, 0.5, 0.8\}\)</span> where <span class="math notranslate nohighlight">\(p_0=1\)</span> and <span class="math notranslate nohighlight">\(p_1=2.5\)</span>.</p>
+<span class="eqno">(26.6)<a class="headerlink" href="#equation-pe-blae" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p_{t-2}\]</div>
+<p>模拟并绘制 <span class="math notranslate nohighlight">\(\alpha \in \{0.1, 0.3, 0.5, 0.8\}\)</span> 时的价格动态，其中 <span class="math notranslate nohighlight">\(p_0=1\)</span> 且 <span class="math notranslate nohighlight">\(p_1=2.5\)</span>。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="cobweb-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#cobweb_ex2"> Exercise 25.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#cobweb_ex2"> Exercise 26.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_next_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to find the next price given the current price expectation</span>
-<span class="sd">    and Market model</span>
+<span class="sd">    给定当前价格预期和市场模型，找出下一个价格的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">curr_price_exp</span><span class="p">)</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
 </pre></div>
@@ -767,8 +774,7 @@ guess and the second last guess.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to simulate and plot the time series of price</span>
-<span class="sd">    using backward looking average expectations.</span>
+<span class="sd">   使用回顾性平均预期模拟并绘制价格时间序列的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 
@@ -863,19 +869,19 @@ guess and the second last guess.</p>
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -886,17 +892,17 @@ guess and the second last guess.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -907,7 +913,7 @@ guess and the second last guess.</p>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -918,17 +924,17 @@ guess and the second last guess.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -940,27 +946,27 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -972,12 +978,12 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -989,22 +995,22 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1026,22 +1032,22 @@ guess and the second last guess.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1053,22 +1059,22 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1080,22 +1086,22 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1107,12 +1113,12 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1124,22 +1130,22 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1151,12 +1157,12 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1168,12 +1174,12 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1185,17 +1191,17 @@ guess and the second last guess.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

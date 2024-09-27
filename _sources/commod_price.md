@@ -12,36 +12,34 @@ kernelspec:
 
 
 
-# Commodity Prices
+# 商品价格
 
-## Outline
+## 大纲
 
-For more than half of all countries around the globe, [commodities](https://en.wikipedia.org/wiki/Commodity) account for [the majority of total exports](https://unctad.org/publication/commodities-and-development-report-2019).
+在全球超过一半的国家中，[商品](https://en.wikipedia.org/wiki/Commodity) 占 [总出口的大部分](https://unctad.org/publication/commodities-and-development-report-2019)。
 
-Examples of commodities include copper, diamonds, iron ore, lithium, cotton
-and coffee beans.
+商品的例子包括铜、钻石、铁矿石、锂、棉花和咖啡豆。
 
-In this lecture we give an introduction to the theory of commodity prices.
+在本讲中，我们将介绍商品价格理论。
 
-The lecture is quite advanced relative to other lectures in this series.
+相对于本系列的其他讲座，这一讲座内容较为高级。
 
-We need to compute an equilibrium, and that equilibrium is described by a
-price function.
+我们需要计算一个均衡，该均衡由价格函数描述。
 
-We will solve an equation where the price function is the unknown.
+我们将解一个方程，其中价格函数是未知量。
 
-This is harder than solving an equation for an unknown number, or vector.
+这比解一个未知数或向量的方程更难。
 
-The lecture will discuss one way to solve a [functional equation](https://en.wikipedia.org/wiki/Functional_equation) (an equation where the unknown object is a function).
+讲座将讨论一种解 [函数方程](https://en.wikipedia.org/wiki/Functional_equation)（未知对象是函数的方程）的方法。
 
-For this lecture we need the `yfinance` library.
+对于本讲座，我们需要使用 `yfinance` 库。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 !pip install yfinance
 ```
 
-We will use the following imports
+我们将使用以下导入
 
 
 ```{code-cell} ipython3
@@ -53,9 +51,10 @@ from scipy.optimize import brentq
 from scipy.stats import beta
 ```
 
-## Data
+## 数据
 
-The figure below shows the price of cotton in USD since the start of 2016.
+下图显示了自 2016 年初以来以美元计价的棉花价格。
+
 
 ```{code-cell} ipython3
 :tags: [hide-input, hide-output]
@@ -75,167 +74,136 @@ ax.set_xlabel('date', fontsize=12)
 plt.show()
 ```
 
-The figure shows surprisingly large movements in the price of cotton.
+该图显示了棉花价格的巨大波动，令人惊讶。
 
-What causes these movements?
+是什么导致了这些波动？
 
-In general, prices depend on the choices and actions of 
+一般来说，价格取决于以下各方的选择和行为：
 
-1. suppliers, 
-2. consumers, and
-3. speculators.
+1. 供应商，
+2. 消费者，以及
+3. 投机者。
 
-Our focus will be on the interaction between these parties. 
+我们的重点将是这些方之间的互动。
 
-We will connect them together in a dynamic model of supply and demand, called
-the *competitive storage model*.
+我们将通过一个动态的供需模型将它们联系在一起，称为 *竞争性储存模型*。
 
-This model was developed by
-{cite}`samuelson1971stochastic`,
-{cite}`wright1982economic`, {cite}`scheinkman1983simple`,
-{cite}`deaton1992on`, {cite}`deaton1996competitive`, and
-{cite}`chambers1996theory`.
+该模型由 {cite}`samuelson1971stochastic`、{cite}`wright1982economic`、{cite}`scheinkman1983simple`、{cite}`deaton1992on`、{cite}`deaton1996competitive` 和 {cite}`chambers1996theory` 开发。
 
+## 竞争性储存模型
 
+在竞争性储存模型中，商品是一种资产，它们：
 
+1. 可以被投机者交易，并且
+2. 对消费者有内在价值。
 
-## The competitive storage model
+总需求是消费者需求和投机者需求的总和。
 
-In the competitive storage model, commodities are assets that
-
-1. can be traded by speculators and
-1. have intrinsic value to consumers.
-
-Total demand is the sum of consumer demand and demand by speculators.
-
-Supply is exogenous, depending on "harvests".
+供应是外生的，取决于“收成”。
 
 ```{note}
-These days, goods such as basic computer chips and integrated circuits are
-often treated as commodities in financial markets, being highly standardized,
-and, for these kinds of commodities, the word "harvest" is not
-appropriate.
+如今，像基本的计算机芯片和集成电路这样的商品在金融市场上通常被视为商品，因为它们高度标准化。对于这些类型的商品，使用“收成”一词并不合适。
 
-Nonetheless, we maintain it for simplicity.
+尽管如此，为了简化问题，我们仍然保留了这个术语。
 ```
 
-The equilibrium price is determined competitively.
+均衡价格是通过竞争决定的。
 
-It is a function of the current state (which determines
-current harvests and predicts future harvests).
-
+它是当前状态的一个函数（决定当前的收成并预测未来的收成）。
 
 
-## The model
 
-Consider a market for a single commodity, whose price is given at $t$ by
-$p_t$.
+## 模型
 
-The harvest of the commodity at time $t$ is $Z_t$.
+考虑一个单一商品的市场，其价格在时间 $t$ 为 $p_t$。
 
-We assume that the sequence $\{ Z_t \}_{t \geq 1}$ is IID with common density function $\phi$, where $\phi$ is nonnegative.
+该商品在时间 $t$ 的收成为 $Z_t$。
 
-Speculators can store the commodity between periods, with $I_t$ units
-purchased in the current period yielding $\alpha I_t$ units in the next.
+我们假设序列 $\{ Z_t \}_{t \geq 1}$ 是独立同分布（IID）的，具有共同的密度函数 $\phi$，其中 $\phi$ 为非负。
 
-Here the parameter $\alpha \in (0,1)$ is a depreciation rate for the commodity.
+投机者可以在各期之间储存该商品，当前期购买的 $I_t$ 单位在下一期将产生 $\alpha I_t$ 单位。
 
-For simplicity, the risk free interest rate is taken to be
-zero, so expected profit on purchasing $I_t$ units is
+这里的参数 $\alpha \in (0,1)$ 是该商品的贬值率。
+
+为了简化问题，风险自由利率取为零，因此购买 $I_t$ 单位的预期利润为
 
 $$
   \mathbb{E}_t \, p_{t+1} \cdot \alpha I_t - p_t I_t
    = (\alpha \mathbb{E}_t \, p_{t+1} - p_t) I_t
 $$
 
-
-Here $\mathbb{E}_t \, p_{t+1}$ is the expectation of $p_{t+1}$ taken at time
-$t$.
+其中 $\mathbb{E}_t \, p_{t+1}$ 是在时间 $t$ 对 $p_{t+1}$ 的期望。
 
 
+## 均衡
 
-## Equilibrium
+在本节中，我们定义均衡并讨论如何计算它。
 
-In this section we define the equilibrium and discuss how to compute it.
+### 均衡条件
 
-### Equilibrium conditions
+假设投机者是风险中性的，这意味着他们在预期利润为正时会购买商品。
 
-Speculators are assumed to be risk neutral, which means that they buy the
-commodity whenever expected profits are positive.
+因此，如果预期利润为正，则市场不处于均衡状态。
 
-As a consequence, if expected profits are positive, then the market is not in
-equilibrium.
-
-Hence, to be in equilibrium, prices must satisfy the "no-arbitrage"
-condition
+因此，要达到均衡，价格必须满足“无套利”条件
 
 $$
   \alpha \mathbb{E}_t \, p_{t+1}  - p_t \leq 0
 $$ (eq:arbi)
 
-This means that if the expected price is lower than the current price, there is no room for arbitrage.
+这意味着如果预期价格低于当前价格，则没有套利空间。
 
-Profit maximization gives the additional condition
+利润最大化给出了额外条件
 
 $$
-  \alpha \mathbb{E}_t \, p_{t+1}  - p_t  < 0 \text{ implies } I_t = 0
+  \alpha \mathbb{E}_t \, p_{t+1}  - p_t  < 0 \text{ 意味着 } I_t = 0
 $$ (eq:pmco)
 
+我们还要求市场清算，即每期供应等于需求。
 
-We also require that the market clears, with supply equaling demand in each period.
+我们假设消费者根据价格 $p$ 生成需求量 $D(p)$。
 
-We assume that consumers generate demand quantity $D(p)$ corresponding to
-price $p$.
+令 $P := D^{-1}$ 为逆需求函数。
 
-Let $P := D^{-1}$ be the inverse demand function.
+关于数量，
 
+* 供应是投机者的持有量和当前收成的总和，且
+* 需求是消费者购买和投机者购买的总和。
 
-Regarding quantities,
+在数学上，
 
-* supply is the sum of carryover by speculators and the current harvest, and
-* demand is the sum of purchases by consumers and purchases by speculators.
+* 供应由 $X_t = \alpha I_{t-1} + Z_t$ 给出，其取值在 $S := \mathbb R_+$ 中，而
+* 需求为 $D(p_t) + I_t$
 
-Mathematically,
-
-* supply is given by $X_t = \alpha I_{t-1} + Z_t$, which takes values in $S := \mathbb R_+$, while
-* demand $ = D(p_t) + I_t$
-
-Thus, the market equilibrium condition is
+因此，市场均衡条件为
 
 $$
   \alpha I_{t-1} + Z_t =  D(p_t) + I_t
 $$ (eq:mkeq)
 
-
-The initial condition $X_0 \in S$ is treated as given.
-
+初始条件 $X_0 \in S$ 被视为给定。
 
 
 
-### An equilibrium function
+### 一个均衡函数
 
-How can we find an equilibrium?
+我们如何找到均衡？
 
-Our path of attack will be to seek a system of prices that depend only on the
-current state.
+我们的攻击路径将是寻找一个仅依赖于当前状态的价格系统。
 
-(Our solution method involves using an [ansatz](https://en.wikipedia.org/wiki/Ansatz), which is an educated guess --- in this case for the price function.)
+（我们的解法涉及使用 [ansatz](https://en.wikipedia.org/wiki/Ansatz)，这是一种经过推测的猜测——在这种情况下是针对价格函数的猜测。）
 
-In other words, we take a function $p$ on $S$ and set $p_t = p(X_t)$ for every $t$.
+换句话说，我们在 $S$ 上取一个函数 $p$，并为每个 $t$ 设置 $p_t = p(X_t)$。
 
-Prices and quantities then follow
+价格和数量随后遵循
 
 $$
   p_t = p(X_t), \quad I_t = X_t - D(p_t), \quad X_{t+1} = \alpha I_t + Z_{t+1}
 $$ (eq:eosy)
 
+我们选择 $p$ 使得这些价格和数量满足上述均衡条件。
 
-We choose $p$ so that these prices and quantities satisfy the equilibrium
-conditions above.
-
-More precisely, we seek a $p$ such that [](eq:arbi) and [](eq:pmco) hold for
-the corresponding system [](eq:eosy).
-
+更准确地说，我们寻找一个 $p$，使得 [](eq:arbi) 和 [](eq:pmco) 对应的系统 [](eq:eosy) 成立。
 
 $$
   p^*(x) = \max
@@ -245,17 +213,16 @@ $$
     \qquad (x \in S)
 $$ (eq:dopf)
 
-where
+其中
 
 $$
   I(x) := x - D(p^*(x))
     \qquad (x \in S)
 $$ (eq:einvf)
 
-It turns out that such a $p^*$ will suffice, in the sense that [](eq:arbi)
-and [](eq:pmco) hold for the corresponding system [](eq:eosy).
+事实证明，这样的 $p^*$ 是足够的，因为 [](eq:arbi) 和 [](eq:pmco) 对应的系统 [](eq:eosy) 成立。
 
-To see this, observe first that
+要看到这一点，首先观察
 
 $$
   \mathbb{E}_t \, p_{t+1}
@@ -264,53 +231,48 @@ $$
    = \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz
 $$
 
-Thus [](eq:arbi) requires that
+因此，条件 [](eq:arbi) 要求
 
 $$
    \alpha \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz \leq p^*(X_t)
 $$
 
-This inequality is immediate from [](eq:dopf).
+这个不等式是从 [](eq:dopf) 直接得到的。
 
-Second, regarding [](eq:pmco), suppose that
+其次，关于 [](eq:pmco)，假设
 
 $$
    \alpha \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz < p^*(X_t)
 $$
 
-Then by [](eq:dopf) we have $p^*(X_t) = P(X_t)$
+那么根据 [](eq:dopf)，我们有 $p^*(X_t) = P(X_t)$。
 
-But then $D(p^*(X_t)) = X_t$ and $I_t = I(X_t) = 0$.
+但这时 $D(p^*(X_t)) = X_t$，并且 $I_t = I(X_t) = 0$。
 
-As a consequence, both [](eq:arbi) and [](eq:pmco) hold.
+因此，条件 [](eq:arbi) 和 [](eq:pmco) 都成立。
 
-We have found an equilibrium, which verifies the ansatz.
+我们找到了一个均衡，验证了 ansatz。
 
 
-### Computing the equilibrium
+### 计算均衡
 
-We now know that an equilibrium can be obtained by finding a function $p^*$
-that satisfies [](eq:dopf).
+我们现在知道，均衡可以通过找到一个满足 [](eq:dopf) 的函数 $p^*$ 来获得。
 
-It can be shown that, under mild conditions there is exactly one function on
-$S$ satisfying [](eq:dopf).
+可以证明，在温和的条件下，$S$ 上恰好存在一个满足 [](eq:dopf) 的函数。
 
-Moreover, we can compute this function using successive approximation.
+此外，我们可以通过逐次逼近来计算这个函数。
 
-This means that we start with a guess of the function and then update it using
-[](eq:dopf).
+这意味着我们从对函数的一个猜测开始，然后使用 [](eq:dopf) 更新它。
 
-This generates a sequence of functions $p_1, p_2, \ldots$
+这会生成一系列函数 $p_1, p_2, \ldots$
 
-We continue until this process converges, in the sense that $p_k$ and
-$p_{k+1}$ are very close together.
+我们继续这个过程，直到它收敛，即 $p_k$ 和 $p_{k+1}$ 非常接近。
 
-Then we take the final $p_k$ that we computed as our approximation of $p^*$.
+然后，我们将计算得到的最终 $p_k$ 作为 $p^*$ 的近似值。
 
-To implement our update step, it is helpful if we put [](eq:dopf) and
-[](eq:einvf) together.
+为了实现我们的更新步骤，将 [](eq:dopf) 和 [](eq:einvf) 放在一起是有帮助的。
 
-This leads us to the update rule
+这使我们得到了更新规则
 
 $$
   p_{k+1}(x) = \max
@@ -319,7 +281,7 @@ $$
     \right\}
 $$ (eq:dopf2)
 
-In other words, we take $p_k$ as given and, at each $x$, solve for $q$ in
+换句话说，我们将 $p_k$ 视为给定，并在每个 $x$ 处求解 $q$
 
 $$
   q = \max
@@ -328,25 +290,22 @@ $$
     \right\}
 $$ (eq:dopf3)
 
-Actually we can't do this at every $x$, so instead we do it on a grid of
-points $x_1, \ldots, x_n$.
+实际上，我们无法在每个 $x$ 处进行此操作，因此我们在一系列点 $x_1, \ldots, x_n$ 上进行。
 
-Then we get the corresponding values $q_1, \ldots, q_n$.
+然后我们得到对应的值 $q_1, \ldots, q_n$。
 
-Then we compute $p_{k+1}$ as the linear interpolation of
-the values $q_1, \ldots, q_n$ over the grid $x_1, \ldots, x_n$.
+接着，我们将 $p_{k+1}$ 计算为在网格 $x_1, \ldots, x_n$ 上对值 $q_1, \ldots, q_n$ 的线性插值。
 
-Then we repeat, seeking convergence.
+然后我们重复这个过程，寻求收敛。
 
+## 代码
 
-## Code
+下面的代码实现了这个迭代过程，从 $p_0 = P$ 开始。
 
-The code below implements this iterative process, starting from $p_0 = P$.
+分布 $\phi$ 被设定为一个偏移的贝塔分布（尽管可以选择许多其他的分布）。
 
-The distribution $\phi$ is set to a shifted Beta distribution (although many
-other choices are possible).
+在 [](eq:dopf3) 中的积分通过 {ref}`Monte Carlo <monte-carlo>` 方法计算。
 
-The integral in [](eq:dopf3) is computed via {ref}`Monte Carlo <monte-carlo>`.
 
 
 ```{code-cell} ipython3
@@ -358,7 +317,7 @@ grid_max = 35
 grid = np.linspace(a, grid_max, gridsize)
 
 beta_dist = beta(5, 5)
-Z = a + beta_dist.rvs(mc_draw_size) * c    # Shock observations
+Z = a + beta_dist.rvs(mc_draw_size) * c    # 冲击观察
 D = P = lambda x: 1.0 / x
 tol = 1e-4
 
@@ -367,13 +326,14 @@ def T(p_array):
 
     new_p = np.empty_like(p_array)
 
-    # Interpolate to obtain p as a function.
+    # 插值以获得p 作为函数。
+
     p = interp1d(grid,
                  p_array,
                  fill_value=(p_array[0], p_array[-1]),
                  bounds_error=False)
 
-    # Update
+    # 更新
     for i, x in enumerate(grid):
 
         h = lambda q: q - max(α * np.mean(p(α * (x - D(q)) + Z)), P(x))
@@ -385,7 +345,7 @@ def T(p_array):
 fig, ax = plt.subplots()
 
 price = P(grid)
-ax.plot(grid, price, alpha=0.5, lw=1, label="inverse demand curve")
+ax.plot(grid, price, alpha=0.5, lw=1, label="反需求曲线")
 error = tol + 1
 while error > tol:
     new_price = T(price)
@@ -395,20 +355,18 @@ while error > tol:
 ax.plot(grid, price, 'k-', alpha=0.5, lw=2, label=r'$p^*$')
 ax.legend()
 ax.set_xlabel('$x$')
-ax.set_ylabel("prices")
+ax.set_ylabel("价格")
 
 plt.show()
 ```
 
-The figure above shows the inverse demand curve $P$, which is also $p_0$, as
-well as our approximation of $p^*$.
+上图显示了逆需求曲线 $P$，也就是 $p_0$，以及我们对 $p^*$ 的近似。
 
-Once we have an approximation of $p^*$, we can simulate a time series of
-prices.
+一旦我们得到了 $p^*$ 的近似值，就可以模拟价格的时间序列。
 
 
 ```{code-cell} ipython3
-# Turn the price array into a price function
+# 将价格数组转化为价格函数。
 p_star = interp1d(grid,
                   price,
                   fill_value=(price[0], price[-1]),
@@ -426,8 +384,8 @@ def generate_cp_ts(init=1, n=50):
     return p_star(X)
 
 fig, ax = plt.subplots()
-ax.plot(generate_cp_ts(), label="price")
-ax.set_xlabel("time")
+ax.plot(generate_cp_ts(), label="价格")
+ax.set_xlabel("时间")
 ax.legend()
 plt.show()
 ```

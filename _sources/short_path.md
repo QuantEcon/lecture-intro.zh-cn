@@ -18,91 +18,78 @@ kernelspec:
 </div>
 ```
 
-# Shortest Paths
+# 最短路径
 
 ```{index} single: Dynamic Programming; Shortest Paths
 ```
 
-## Overview
+## 概述
 
-The shortest path problem is a [classic problem](https://en.wikipedia.org/wiki/Shortest_path) in mathematics and computer science with applications in
+最短路径问题是数学和计算机科学中的一个经典问题，其应用包括：
 
-* Economics (sequential decision making, analysis of social networks, etc.)
-* Operations research and transportation
-* Robotics and artificial intelligence
-* Telecommunication network design and routing
-* etc., etc.
+* 经济学（顺序决策、社会网络分析等）
+* 运筹学和交通运输
+* 机器人技术和人工智能
+* 电信网络设计和路由
+* 等等
 
-Variations of the methods we discuss in this lecture are used millions of times every day, in applications such as
+我们在本讲座中讨论的方法的变体每天在许多应用中使用数百万次，例如：
 
-* Google Maps
-* routing packets on the internet
+* 谷歌地图
+* 互联网数据包路由
 
-For us, the shortest path problem also provides a nice introduction to the logic of **dynamic programming**.
+对于我们来说，最短路径问题也为**动态规划**的逻辑提供了一个很好的介绍。
 
-Dynamic programming is an extremely powerful optimization technique that we apply in many lectures on this site.
+动态规划是一种非常强大的优化技术，我们在本网站的许多讲座中都会应用它。
 
-The only scientific library we'll need in what follows is NumPy:
+接下来我们唯一需要的科学库是NumPy：
 
 ```{code-cell} python3
 import numpy as np
 ```
 
-## Outline of the problem
-
-The shortest path problem is one of finding how to traverse a [graph](https://en.wikipedia.org/wiki/Graph_%28mathematics%29) from one specified node to another at minimum cost.
-
-Consider the following graph
+## 问题概述
+最短路径问题是寻找如何以最小成本从[图](https://en.wikipedia.org/wiki/Graph_%28mathematics%29)中的一个指定节点遍历到另一个节点。
+考虑下面这个图
 
 ```{figure} /_static/lecture_specific/short_path/graph.png
 
 ```
 
-We wish to travel from node (vertex) A to node G at minimum cost
-
-* Arrows (edges) indicate the movements we can take.
-* Numbers on edges indicate the cost of traveling that edge.
-
-(Graphs such as the one above are called weighted [directed graphs](https://en.wikipedia.org/wiki/Directed_graph).)
-
-Possible interpretations of the graph include
-
-* Minimum cost for supplier to reach a destination.
-* Routing of packets on the internet (minimize time).
-* etc., etc.
-
-For this simple graph, a quick scan of the edges shows that the optimal paths are
-
-* A, C, F, G at cost 8
+我们希望以最小成本从节点（顶点）A到达节点G
+* 箭头（边）表示我们可以采取的移动。
+* 边上的数字表示沿该边行进的成本。
+（像上面这样的图被称为加权[有向图](https://en.wikipedia.org/wiki/Directed_graph)。）
+图的可能解释包括
+* 供应商到达目的地的最小成本。
+* 互联网上的数据包路由（最小化时间）。
+* 等等。
+对于这个简单的图，快速扫描边可以看出最优路径是
+* A, C, F, G，成本为8
 
 ```{figure} /_static/lecture_specific/short_path/graph4.png
 
 ```
 
-* A, D, F, G at cost 8
+* A, D, F, G， 成本为8
 
 ```{figure} /_static/lecture_specific/short_path/graph3.png
 
 ```
 
-## Finding least-cost paths
-
-For large graphs, we need a systematic solution.
-
-Let $J(v)$ denote the minimum cost-to-go from node $v$, understood as the total cost from $v$ if we take the best route.
-
-Suppose that we know $J(v)$ for each node $v$, as shown below for the graph from the preceding example.
+## 寻找最低成本路径
+对于大型图，我们需要一个系统的解决方案。
+让 $J(v)$ 表示从节点 $v$ 出发的最小成本，理解为如果我们选择最佳路线，从 $v$ 出发的总成本。
+假设我们知道每个节点 $v$ 的 $J(v)$，如下图所示（基于前面示例中的图）。
 
 ```{figure} /_static/lecture_specific/short_path/graph2.png
 
 ```
 
-Note that $J(G) = 0$.
-
-The best path can now be found as follows
-
-1. Start at node $v = A$
-1. From current node $v$, move to any node that solves
+注意 $J(G) = 0$。
+现在可以通过以下步骤找到最佳路径：
+1. 从节点 $v = A$ 开始
+1. 从当前节点 $v$，移动到解决以下问题的任何节点
 
 ```{math}
 :label: spprebell
@@ -110,17 +97,13 @@ The best path can now be found as follows
 \min_{w \in F_v} \{ c(v, w) + J(w) \}
 ```
 
-where
-
-* $F_v$ is the set of nodes that can be reached from $v$ in one step.
-* $c(v, w)$ is the cost of traveling from $v$ to $w$.
-
-Hence, if we know the function $J$, then finding the best path is almost trivial.
-
-But how can we find the cost-to-go function $J$?
-
-Some thought will convince you that, for every node $v$,
-the function $J$ satisfies
+其中
+* $F_v$ 是可以从 $v$ 一步到达的节点集合。
+* $c(v, w)$ 是从 $v$ 到 $w$ 的旅行成本。
+因此，如果我们知道函数 $J$，那么找到最佳路径几乎就是微不足道的事。
+但是我们如何找到成本函数 $J$ 呢？
+经过一些思考，你会确信对于每个节点 $v$，
+函数 $J$ 满足
 
 ```{math}
 :label: spbell
@@ -128,26 +111,23 @@ the function $J$ satisfies
 J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}
 ```
 
-This is known as the **Bellman equation**, after the mathematician [Richard Bellman](https://en.wikipedia.org/wiki/Richard_E._Bellman).
+这被称为**贝尔曼方程**，以数学家[理查德·贝尔曼](https://en.wikipedia.org/wiki/Richard_E._Bellman)的名字命名。
 
-The Bellman equation can be thought of as a restriction that $J$ must
-satisfy.
+贝尔曼方程可以被理解为$J$必须满足的一个限制条件。
 
-What we want to do now is use this restriction to compute $J$.
+我们现在想要做的是利用这个限制条件来计算$J$。
 
-## Solving for minimum cost-to-go
+## 求解最小代价-到-目标
 
-Let's look at an algorithm for computing $J$ and then think about how to
-implement it.
+让我们来看一个计算$J$的算法，然后思考如何实现它。
 
-### The algorithm
+### 算法
 
-The standard algorithm for finding $J$ is to start an initial guess and then iterate.
+找到$J$的标准算法是从一个初始猜测开始，然后进行迭代。
 
-This is a standard approach to solving nonlinear equations, often called
-the method of **successive approximations**.
+这是解决非线性方程的标准方法，通常被称为**连续近似法**。
 
-Our initial guess will be
+我们的初始猜测将是
 
 ```{math}
 :label: spguess
@@ -155,45 +135,34 @@ Our initial guess will be
 J_0(v) = 0 \text{ for all } v
 ```
 
-Now
+现在
+1. 设 $n = 0$
+2. 对所有 $v$，设 $J_{n+1} (v) = \min_{w \in F_v} \{ c(v, w) + J_n(w) \}$
+3. 如果 $J_{n+1}$ 和 $J_n$ 不相等，则将 $n$ 加 1，返回步骤 2
+这个序列收敛于 $J$。
+虽然我们在此省略了证明，但我们将在其他动态规划讲座中证明类似的结论。
 
-1. Set $n = 0$
-1. Set $J_{n+1} (v) = \min_{w \in F_v} \{ c(v, w) + J_n(w) \}$ for all $v$
-1. If $J_{n+1}$ and $J_n$ are not equal then increment $n$, go to 2
+### 实现
+有了算法是一个好的开始，但我们还需要考虑如何在计算机上实现它。
 
-This sequence converges to $J$.
-
-Although we omit the proof, we'll prove similar claims in our other lectures
-on dynamic programming.
-
-### Implementation
-
-Having an algorithm is a good start, but we also need to think about how to
-implement it on a computer.
-
-First, for the cost function $c$, we'll implement it as a matrix
-$Q$, where a typical element is
-
+首先，对于成本函数 $c$，我们将其实现为矩阵 $Q$，其中典型元素为
 $$
 Q(v, w)
 =
 \begin{cases}
-   & c(v, w) \text{ if } w \in F_v \\
-   & +\infty \text{ otherwise }
+   & c(v, w) \text{ 如果 } w \in F_v \\
+   & +\infty \text{ 否则 }
 \end{cases}
 $$
+在这种情况下，$Q$ 通常被称为**距离矩阵**。
 
-In this context $Q$ is usually called the **distance matrix**.
-
-We're also numbering the nodes now, with $A = 0$, so, for example
-
+我们现在也对节点进行编号，其中 $A = 0$，所以，例如
 $$
 Q(1, 2)
 =
-\text{ the cost of traveling from B to C }
+\text{ 从 B 到 C 的旅行成本 }
 $$
-
-For example, for the simple graph above, we set
+例如，对于上面的简单图，我们设置
 
 ```{code-cell} python3
 from numpy import inf
@@ -207,65 +176,55 @@ Q = np.array([[inf, 1,   5,   3,   inf, inf, inf],
               [inf, inf, inf, inf, inf, inf, 0]])
 ```
 
-Notice that the cost of staying still (on the principle diagonal) is set to
-
-* `np.inf` for non-destination nodes --- moving on is required.
-* 0 for the destination node --- here is where we stop.
-
-For the sequence of approximations $\{J_n\}$ of the cost-to-go functions, we can use NumPy arrays.
-
-Let's try with this example and see how we go:
+请注意，保持不动（在主对角线上）的成本设置为：
+* 对于非目的地节点，设为 `np.inf` --- 必须继续移动。
+* 对于目的地节点，设为 0 --- 这是我们停止的地方。
+对于到达成本函数的近似序列 $\{J_n\}$，我们可以使用 NumPy 数组。
+让我们尝试这个例子，看看效果如何：
 
 ```{code-cell} python3
-nodes = range(7)                              # Nodes = 0, 1, ..., 6
-J = np.zeros_like(nodes, dtype=int)        # Initial guess
-next_J = np.empty_like(nodes, dtype=int)   # Stores updated guess
+nodes = range(7)                              # 节点 = 0, 1, ..., 6
+J = np.zeros_like(nodes, dtype=int)        # 初始猜测
+next_J = np.empty_like(nodes, dtype=int)   # 储存更新的猜测
 
 max_iter = 500
 i = 0
 
 while i < max_iter:
     for v in nodes:
-        # Minimize Q[v, w] + J[w] over all choices of w
+        # 最小化所有 w 选择中的 Q[v, w] + J[w]
         next_J[v] = np.min(Q[v, :] + J)
     
     if np.array_equal(next_J, J):                
         break
     
-    J[:] = next_J                                # Copy contents of next_J to J
+    J[:] = next_J                                # 将 next_J 的内容复制到 J
     i += 1
 
-print("The cost-to-go function is", J)
+print("到达成本函数是", J)
 ```
 
-This matches with the numbers we obtained by inspection above.
-
-But, importantly, we now have a methodology for tackling large graphs.
-
-## Exercises
-
+这与我们上面通过观察得到的数字相符。
+但更重要的是，我们现在有了一种处理大型图的方法。
+## 练习
 
 ```{exercise-start}
 :label: short_path_ex1
 ```
 
-The text below describes a weighted directed graph.
+以下文本描述了一个加权有向图。
 
-The line `node0, node1 0.04, node8 11.11, node14 72.21` means that from node0 we can go to
+行 `node0, node1 0.04, node8 11.11, node14 72.21` 表示从node0我们可以到达：
+* node1，代价为0.04
+* node8，代价为11.11
+* node14，代价为72.21
+从node0无法直接到达其他节点。
+其他行具有类似的解释。
+你的任务是使用上面给出的算法来找到最优路径及其代价。
 
-* node1 at cost 0.04
-* node8 at cost 11.11
-* node14 at cost 72.21
-
-No other nodes can be reached directly from node0.
-
-Other lines have a similar interpretation.
-
-Your task is to use the algorithm given above to find the optimal path and its cost.
 
 ```{note}
-You will be dealing with floating point numbers now, rather than
-integers, so consider replacing `np.equal()` with `np.allclose()`.
+现在你将处理浮点数而不是整数，所以考虑用 `np.allclose()` 替换 `np.equal()`。
 ```
 
 ```{code-cell} python3
@@ -379,7 +338,7 @@ node99,
 :class: dropdown
 ```
 
-First let's write a function that reads in the graph data above and builds a distance matrix.
+首先，让我们编写一个函数，读取上面的图数据并构建一个距离矩阵。
 
 ```{code-cell} python3
 num_nodes = 100
@@ -387,15 +346,15 @@ destination_node = 99
 
 def map_graph_to_distance_matrix(in_file):
 
-    # First let's set of the distance matrix Q with inf everywhere
+    # 首先，让我们用无穷大初始化距离矩阵Q
     Q = np.full((num_nodes, num_nodes), np.inf)
 
-    # Now we read in the data and modify Q
+    # 现在我们读取数据并修改Q
     with open(in_file) as infile:
         for line in infile:
             elements = line.split(',')
             node = elements.pop(0)
-            node = int(node[4:])    # convert node description to integer
+            node = int(node[4:])    # 将节点描述转换为整数
             if node != destination_node:
                 for element in elements:
                     destination, cost = element.split()
@@ -405,14 +364,11 @@ def map_graph_to_distance_matrix(in_file):
     return Q
 ```
 
-In addition, let's write
-
-1. a "Bellman operator" function that takes a distance matrix and current guess of J and returns an updated guess of J, and
-1. a function that takes a distance matrix and returns a cost-to-go function.
-
-We'll use the algorithm described above.
-
-The minimization step is vectorized to make it faster.
+此外，让我们编写
+1. 一个"贝尔曼算子"函数，该函数接受距离矩阵和当前的J估计值，并返回更新后的J估计值，以及
+2. 一个函数，该函数接受距离矩阵并返回一个代价函数。
+我们将使用上述算法。
+最小化步骤被向量化以提高速度。
 
 ```{code-cell} python3
 def bellman(J, Q):
@@ -421,7 +377,7 @@ def bellman(J, Q):
 
 def compute_cost_to_go(Q):
     num_nodes = Q.shape[0]
-    J = np.zeros(num_nodes)      # Initial guess
+    J = np.zeros(num_nodes)      # 初始猜测
     max_iter = 500
     i = 0
 
@@ -430,17 +386,15 @@ def compute_cost_to_go(Q):
         if np.allclose(next_J, J):
             break
         else:
-            J[:] = next_J   # Copy contents of next_J to J
+            J[:] = next_J    # 将 next_J 的内容复制到 J
             i += 1
 
     return(J)
 ```
 
-We used np.allclose() rather than testing exact equality because we are
-dealing with floating point numbers now.
+我们使用了 np.allclose() 而不是测试精确相等，因为我们现在处理的是浮点数。
 
-Finally, here's a function that uses the cost-to-go function to obtain the
-optimal path (and its cost).
+最后，这里有一个函数，它使用代价函数来获取最优路径（及其成本）。
 
 ```{code-cell} python3
 def print_best_path(J, Q):
@@ -448,16 +402,16 @@ def print_best_path(J, Q):
     current_node = 0
     while current_node != destination_node:
         print(current_node)
-        # Move to the next node and increment costs
+       # 移动到下一个节点并增加成本
         next_node = np.argmin(Q[current_node, :] + J)
         sum_costs += Q[current_node, next_node]
         current_node = next_node
 
     print(destination_node)
-    print('Cost: ', sum_costs)
+    print('成本: ', sum_costs)
 ```
 
-Okay, now we have the necessary functions, let's call them to do the job we were assigned.
+好了，现在我们已经有了必要的函数，让我们调用它们来完成我们被分配的任务。
 
 ```{code-cell} python3
 Q = map_graph_to_distance_matrix('graph.txt')
@@ -465,7 +419,7 @@ J = compute_cost_to_go(Q)
 print_best_path(J, Q)
 ```
 
-The total cost of the path should agree with $J[0]$ so let's check this.
+路径的总成本应该与 $J[0]$ 一致，所以让我们来验证一下。
 
 ```{code-cell} python3
 J[0]

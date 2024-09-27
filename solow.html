@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>24. The Solow-Swan Growth Model &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>24. 索洛-斯旺增长模型 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,7 +123,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="25. The Cobweb Model" href="cobweb.html" />
+    <link rel="next" title="26. 蛛网模型" href="cobweb.html" />
     <link rel="prev" title="23. Dynamics in One Dimension" href="scalar_dynam.html" />
 
 <!-- Normal Meta Tags -->
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="The Solow-Swan Growth Model"/>
+<meta name="twitter:title" content="索洛-斯旺增长模型"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="The Solow-Swan Growth Model" />
+<meta property="og:title" content="索洛-斯旺增长模型" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/solow.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,11 +172,18 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">24.1. The model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graphical-perspective">24.2. A graphical perspective</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#growth-in-continuous-time">24.3. Growth in continuous time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">24.4. Exercises</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">24. 索洛-斯旺增长模型</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">24.1. 模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">24.2. 图形化视角</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#k">25. 如预期，图中的所有时间路径都收敛于 <span class="math notranslate nohighlight">\(k^*\)</span>。</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">25.1. 连续时间的增长</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">25.2. 练习</a></li>
+</ul>
+</li>
+</ul>
+
                             <p class="logo">
                                 
                                     
@@ -208,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">The Solow-Swan Growth Model</p>
+                        <p class="qe-page__header-subheading">索洛-斯旺增长模型</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -234,13 +241,12 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="the-solow-swan-growth-model">
-<span id="solow"></span><h1><span class="section-number">24. </span>The Solow-Swan Growth Model<a class="headerlink" href="#the-solow-swan-growth-model" title="Permalink to this heading">#</a></h1>
-<p>In this lecture we review a famous model due
-to <a class="reference external" href="https://en.wikipedia.org/wiki/Robert_Solow">Robert Solow (1925–2023)</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Trevor_Swan">Trevor Swan (1918–1989)</a>.</p>
-<p>The model is used to study growth over the long run.</p>
-<p>Although the model is simple, it contains some interesting lessons.</p>
-<p>We will use the following imports.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="solow">
+<span id="id1"></span><h1><span class="section-number">24. </span>索洛-斯旺增长模型<a class="headerlink" href="#solow" title="Permalink to this heading">#</a></h1>
+<p>在本讲座中，我们将回顾一个由<a class="reference external" href="https://en.wikipedia.org/wiki/Robert_Solow">罗伯特·索洛（1925–2023）</a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Trevor_Swan">特雷弗·斯旺（1918–1989）</a>提出的著名模型。</p>
+<p>这个模型用于研究长期经济增长。</p>
+<p>尽管模型简单，但它包含一些有趣的教训。</p>
+<p>我们将使用以下导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -249,46 +255,35 @@ to <a class="reference external" href="https://en.wikipedia.org/wiki/Robert_Solo
 </div>
 </div>
 </div>
-<section id="the-model">
-<h2><span class="section-number">24.1. </span>The model<a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
-<p>In a Solow–Swan economy, agents save a fixed fraction of their current
-incomes.</p>
-<p>Savings sustain or increase the stock of capital.</p>
-<p>Capital is combined with labor to produce output, which in turn is paid out to
-workers and owners of capital.</p>
-<p>To keep things simple, we ignore population and productivity growth.</p>
-<p>For each integer <span class="math notranslate nohighlight">\(t \geq 0\)</span>, output <span class="math notranslate nohighlight">\(Y_t\)</span> in period <span class="math notranslate nohighlight">\(t\)</span> is given by <span class="math notranslate nohighlight">\(Y_t =
-F(K_t, L_t)\)</span>, where <span class="math notranslate nohighlight">\(K_t\)</span> is capital, <span class="math notranslate nohighlight">\(L_t\)</span> is labor and <span class="math notranslate nohighlight">\(F\)</span> is an aggregate
-production function.</p>
-<p>The function <span class="math notranslate nohighlight">\(F\)</span> is assumed to be nonnegative and
-<strong>homogeneous of degree one</strong>, meaning
-that</p>
+<section id="id2">
+<h2><span class="section-number">24.1. </span>模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>在索洛-斯旺经济中，经济主体将其当前收入的固定比例用于储蓄。
+储蓄维持或增加资本存量。
+资本与劳动力相结合生产产出，产出又支付给工人和资本所有者。
+为了简化问题，我们忽略人口和生产力增长。</p>
+<p>对于每个整数 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，第 <span class="math notranslate nohighlight">\(t\)</span> 期的产出 <span class="math notranslate nohighlight">\(Y_t\)</span> 由 <span class="math notranslate nohighlight">\(Y_t = F(K_t, L_t)\)</span> 给出，其中 <span class="math notranslate nohighlight">\(K_t\)</span> 是资本，<span class="math notranslate nohighlight">\(L_t\)</span> 是劳动力，<span class="math notranslate nohighlight">\(F\)</span> 是总生产函数。</p>
+<p>假设函数 <span class="math notranslate nohighlight">\(F\)</span> 是非负的，且是<strong>一阶齐次的</strong>，意味着</p>
 <div class="math notranslate nohighlight">
 \[
     F(\lambda K, \lambda L) = \lambda F(K, L)
-    \quad \text{for all } \lambda \geq 0
+    \quad \text{对于所有 } \lambda \geq 0
 \]</div>
-<p>Production functions with this property include</p>
+<p>具有这种特性的生产函数包括：</p>
 <ul class="simple">
-<li><p>the <strong>Cobb-Douglas</strong> function <span class="math notranslate nohighlight">\(F(K, L) = A K^{\alpha}
-L^{1-\alpha}\)</span> with <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span>.</p></li>
-<li><p>the <strong>CES</strong> function <span class="math notranslate nohighlight">\(F(K, L) = \left\{ a K^\rho + b L^\rho \right\}^{1/\rho}\)</span>
-with <span class="math notranslate nohighlight">\(a, b, \rho &gt; 0\)</span>.</p></li>
+<li><p><strong>科布-道格拉斯</strong>函数 <span class="math notranslate nohighlight">\(F(K, L) = A K^{\alpha} L^{1-\alpha}\)</span>，其中 <span class="math notranslate nohighlight">\(0 \leq \alpha \leq 1\)</span>。</p></li>
+<li><p><strong>CES</strong>函数 <span class="math notranslate nohighlight">\(F(K, L) = \left\{ a K^\rho + b L^\rho \right\}^{1/\rho}\)</span>，其中 <span class="math notranslate nohighlight">\(a, b, \rho &gt; 0\)</span>。</p></li>
 </ul>
-<p>Here, <span class="math notranslate nohighlight">\(\alpha\)</span> is the output elasticity of capital and <span class="math notranslate nohighlight">\(\rho\)</span> is a parameter that determines the elasticity of substitution between capital and labor.</p>
-<p>We assume a closed economy, so aggregate domestic investment equals aggregate domestic
-saving.</p>
-<p>The saving rate is a constant <span class="math notranslate nohighlight">\(s\)</span> satisfying <span class="math notranslate nohighlight">\(0 \leq s \leq 1\)</span>, so that aggregate
-investment and saving both equal  <span class="math notranslate nohighlight">\(s Y_t\)</span>.</p>
-<p>Capital depreciates: without replenishing through investment, one unit of capital today
-becomes <span class="math notranslate nohighlight">\(1-\delta\)</span> units tomorrow.</p>
-<p>Thus,</p>
+<p>这里，<span class="math notranslate nohighlight">\(\alpha\)</span> 是资本的产出弹性，<span class="math notranslate nohighlight">\(\rho\)</span> 是决定资本和劳动力之间替代弹性的参数。</p>
+<p>我们假设是封闭经济，因此总国内投资等于总国内储蓄。
+储蓄率是一个常数 <span class="math notranslate nohighlight">\(s\)</span>，满足 <span class="math notranslate nohighlight">\(0 \leq s \leq 1\)</span>，所以总投资和储蓄都等于 <span class="math notranslate nohighlight">\(s Y_t\)</span>。</p>
+<p>资本会贬值：如果不通过投资补充，今天的一单位资本明天会变成 <span class="math notranslate nohighlight">\(1-\delta\)</span> 单位。
+因此，</p>
 <div class="math notranslate nohighlight">
 \[
     K_{t+1} = s F(K_t, L_t) + (1 - \delta) K_t
 \]</div>
-<p>Without population growth, <span class="math notranslate nohighlight">\(L_t\)</span> equals some constant <span class="math notranslate nohighlight">\(L\)</span>.</p>
-<p>Setting <span class="math notranslate nohighlight">\(k_t := K_t / L\)</span> and using homogeneity of degree one now yields</p>
+<p>没有人口增长，<span class="math notranslate nohighlight">\(L_t\)</span> 等于某个常数 <span class="math notranslate nohighlight">\(L\)</span>。
+令 <span class="math notranslate nohighlight">\(k_t := K_t / L\)</span>，并使用一阶齐次性，现在得到</p>
 <div class="math notranslate nohighlight">
 \[
     k_{t+1}
@@ -296,22 +291,19 @@ becomes <span class="math notranslate nohighlight">\(1-\delta\)</span> units tom
     = s \frac{F(K_t, L)}{L} + (1 - \delta) k_t
     = s F(k_t, 1) + (1 - \delta) k_t
 \]</div>
-<p>With  <span class="math notranslate nohighlight">\(f(k) := F(k, 1)\)</span>, the final expression for capital dynamics is</p>
+<p>令 <span class="math notranslate nohighlight">\(f(k) := F(k, 1)\)</span>，资本动态的最终表达式为</p>
 <div class="math notranslate nohighlight" id="equation-solow">
 <span class="eqno">(24.1)<a class="headerlink" href="#equation-solow" title="Permalink to this equation">#</a></span>\[    k_{t+1} = g(k_t)
     \text{ where } g(k) := s f(k) + (1 - \delta) k\]</div>
-<p>Our aim is to learn about the evolution of <span class="math notranslate nohighlight">\(k_t\)</span> over time,
-given an exogenous initial capital stock  <span class="math notranslate nohighlight">\(k_0\)</span>.</p>
+<p>我们的目标是了解随时间变化的 <span class="math notranslate nohighlight">\(k_t\)</span> 的演变，给定一个外生的初始资本存量 <span class="math notranslate nohighlight">\(k_0\)</span>。</p>
 </section>
-<section id="a-graphical-perspective">
-<h2><span class="section-number">24.2. </span>A graphical perspective<a class="headerlink" href="#a-graphical-perspective" title="Permalink to this heading">#</a></h2>
-<p>To understand the dynamics of the sequence <span class="math notranslate nohighlight">\((k_t)_{t \geq 0}\)</span> we use a 45-degree diagram.</p>
-<p>To do so, we first
-need to specify the functional form for <span class="math notranslate nohighlight">\(f\)</span> and assign values to the parameters.</p>
-<p>We choose the Cobb–Douglas specification <span class="math notranslate nohighlight">\(f(k) = A k^\alpha\)</span> and set <span class="math notranslate nohighlight">\(A=2.0\)</span>,
-<span class="math notranslate nohighlight">\(\alpha=0.3\)</span>, <span class="math notranslate nohighlight">\(s=0.3\)</span> and <span class="math notranslate nohighlight">\(\delta=0.4\)</span>.</p>
-<p>The function <span class="math notranslate nohighlight">\(g\)</span> from <a class="reference internal" href="#equation-solow">(24.1)</a> is then plotted, along with the 45-degree line.</p>
-<p>Let’s define the constants.</p>
+<section id="id3">
+<h2><span class="section-number">24.2. </span>图形化视角<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>为了理解序列 <span class="math notranslate nohighlight">\((k_t)_{t \geq 0}\)</span> 的动态，我们使用45度图。</p>
+<p>为此，我们首先需要为 <span class="math notranslate nohighlight">\(f\)</span> 指定函数形式并为参数赋值。</p>
+<p>我们选择科布-道格拉斯规格 <span class="math notranslate nohighlight">\(f(k) = A k^\alpha\)</span>，并设定 <span class="math notranslate nohighlight">\(A=2.0\)</span>，<span class="math notranslate nohighlight">\(\alpha=0.3\)</span>，<span class="math notranslate nohighlight">\(s=0.3\)</span> 和 <span class="math notranslate nohighlight">\(\delta=0.4\)</span>。</p>
+<p>然后绘制方程 <a class="reference internal" href="#equation-solow">(24.1)</a> 中的函数 <span class="math notranslate nohighlight">\(g\)</span>，以及45度线。</p>
+<p>让我们定义这些常数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
@@ -321,7 +313,7 @@ need to specify the functional form for <span class="math notranslate nohighligh
 </div>
 </div>
 </div>
-<p>Now, we define the function <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>现在我们来定义函数<span class="math notranslate nohighlight">\(g\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -330,7 +322,7 @@ need to specify the functional form for <span class="math notranslate nohighligh
 </div>
 </div>
 </div>
-<p>Let’s plot the 45-degree diagram of <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>让我们来绘制函数<span class="math notranslate nohighlight">\(g\)</span>的45度图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot45</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -385,19 +377,18 @@ need to specify the functional form for <span class="math notranslate nohighligh
 <a class="reference internal image-reference" href="_images/29aac6e46728eb41e1791c647e00dc027f198d8db6c85c5ad11238e5216af6eb.png"><img alt="_images/29aac6e46728eb41e1791c647e00dc027f198d8db6c85c5ad11238e5216af6eb.png" src="_images/29aac6e46728eb41e1791c647e00dc027f198d8db6c85c5ad11238e5216af6eb.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Suppose, at some <span class="math notranslate nohighlight">\(k_t\)</span>, the value <span class="math notranslate nohighlight">\(g(k_t)\)</span> lies strictly above the 45-degree line.</p>
-<p>Then we have <span class="math notranslate nohighlight">\(k_{t+1} = g(k_t) &gt; k_t\)</span> and capital per worker rises.</p>
-<p>If <span class="math notranslate nohighlight">\(g(k_t) &lt; k_t\)</span> then capital per worker falls.</p>
-<p>If <span class="math notranslate nohighlight">\(g(k_t) = k_t\)</span>, then we are at a <strong>steady state</strong> and <span class="math notranslate nohighlight">\(k_t\)</span> remains constant.</p>
-<p>(A <a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">steady state</span></a> of the model is a <a class="reference external" href="https://en.wikipedia.org/wiki/Fixed_point_(mathematics)">fixed point</a> of the mapping <span class="math notranslate nohighlight">\(g\)</span>.)</p>
-<p>From the shape of the function <span class="math notranslate nohighlight">\(g\)</span> in the figure, we see that
-there is a unique steady state in <span class="math notranslate nohighlight">\((0, \infty)\)</span>.</p>
-<p>It solves <span class="math notranslate nohighlight">\(k = s Ak^{\alpha} + (1-\delta)k\)</span> and hence is given by</p>
+<p>假设在某个 <span class="math notranslate nohighlight">\(k_t\)</span> 处，<span class="math notranslate nohighlight">\(g(k_t)\)</span> 的值严格高于45度线。
+那么我们有 <span class="math notranslate nohighlight">\(k_{t+1} = g(k_t) &gt; k_t\)</span>，人均资本增加。
+如果 <span class="math notranslate nohighlight">\(g(k_t) &lt; k_t\)</span>，则人均资本下降。
+如果 <span class="math notranslate nohighlight">\(g(k_t) = k_t\)</span>，那么我们就处于<strong>稳态</strong>，<span class="math notranslate nohighlight">\(k_t\)</span> 保持不变。
+（模型的<a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">稳态</span></a>是映射 <span class="math notranslate nohighlight">\(g\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Fixed_point_(mathematics)">不动点</a>。）</p>
+<p>从图中 <span class="math notranslate nohighlight">\(g\)</span> 函数的形状可以看出，在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 内存在唯一的稳态。
+它满足方程 <span class="math notranslate nohighlight">\(k = s Ak^{\alpha} + (1-\delta)k\)</span>，因此可以表示为</p>
 <div class="math notranslate nohighlight" id="equation-kstarss">
 <span class="eqno">(24.2)<a class="headerlink" href="#equation-kstarss" title="Permalink to this equation">#</a></span>\[    k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}\]</div>
-<p>If initial capital is below <span class="math notranslate nohighlight">\(k^*\)</span>, then capital increases over time.</p>
-<p>If initial capital is above this level, then the reverse is true.</p>
-<p>Let’s plot the 45-degree diagram to show the <span class="math notranslate nohighlight">\(k^*\)</span> in the plot.</p>
+<p>如果初始资本低于 <span class="math notranslate nohighlight">\(k^*\)</span>，那么资本会随时间增加。
+如果初始资本高于这个水平，则相反。
+让我们绘制45度图来在图中显示 <span class="math notranslate nohighlight">\(k^*\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kstar</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
@@ -409,13 +400,11 @@ there is a unique steady state in <span class="math notranslate nohighlight">\((
 <a class="reference internal image-reference" href="_images/d59f53d05a92f44345f9055dd1f69ddd433789dd352f41776852489c632b26f0.png"><img alt="_images/d59f53d05a92f44345f9055dd1f69ddd433789dd352f41776852489c632b26f0.png" src="_images/d59f53d05a92f44345f9055dd1f69ddd433789dd352f41776852489c632b26f0.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>From our graphical analysis, it appears that <span class="math notranslate nohighlight">\((k_t)\)</span> converges to <span class="math notranslate nohighlight">\(k^*\)</span>, regardless of initial capital
-<span class="math notranslate nohighlight">\(k_0\)</span>.</p>
-<p>This is a form of <a class="reference internal" href="scalar_dynam.html#scalar-dynam-global-stability"><span class="std std-ref">global stability</span></a>.</p>
-<p>The next figure shows three time paths for capital, from
-three distinct initial conditions, under the parameterization listed above.</p>
-<p>At this parameterization, <span class="math notranslate nohighlight">\(k^* \approx 1.78\)</span>.</p>
-<p>Let’s define the constants and three distinct initial conditions</p>
+<p>根据我们的图形分析，似乎无论初始资本 <span class="math notranslate nohighlight">\(k_0\)</span> 如何，<span class="math notranslate nohighlight">\((k_t)\)</span> 都会收敛到 <span class="math notranslate nohighlight">\(k^*\)</span>。
+这是一种<a class="reference internal" href="scalar_dynam.html#scalar-dynam-global-stability"><span class="std std-ref">全局稳定性</span></a>的形式。
+下图显示了在上述参数化条件下，从三个不同的初始条件出发的资本时间路径。
+在这种参数化下，<span class="math notranslate nohighlight">\(k^* \approx 1.78\)</span>。
+让我们定义常数和三个不同的初始条件</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
@@ -439,7 +428,7 @@ three distinct initial conditions, under the parameterization listed above.</p>
 
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ts_length</span><span class="p">)</span>
 
-    <span class="c1"># simulate and plot time series</span>
+    <span class="c1"># 模拟和绘制时间序列</span>
     <span class="k">for</span> <span class="n">x_init</span> <span class="ow">in</span> <span class="n">x0_values</span><span class="p">:</span>
         <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_init</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
@@ -468,47 +457,34 @@ three distinct initial conditions, under the parameterization listed above.</p>
 <a class="reference internal image-reference" href="_images/19aef9591a7f697fca8620ef19dd285059365410cf597a028c2d3293740af82b.png"><img alt="_images/19aef9591a7f697fca8620ef19dd285059365410cf597a028c2d3293740af82b.png" src="_images/19aef9591a7f697fca8620ef19dd285059365410cf597a028c2d3293740af82b.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>As expected, the time paths in the figure all converge to <span class="math notranslate nohighlight">\(k^*\)</span>.</p>
 </section>
-<section id="growth-in-continuous-time">
-<h2><span class="section-number">24.3. </span>Growth in continuous time<a class="headerlink" href="#growth-in-continuous-time" title="Permalink to this heading">#</a></h2>
-<p>In this section, we investigate a continuous time version of the Solow–Swan
-growth model.</p>
-<p>We will see how the smoothing provided by continuous time can
-simplify our analysis.</p>
-<p>Recall  that the discrete time dynamics for capital are
-given by <span class="math notranslate nohighlight">\(k_{t+1} = s f(k_t) + (1 - \delta) k_t\)</span>.</p>
-<p>A simple rearrangement gives the rate of change per unit of time:</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="k">
+<h1><span class="section-number">25. </span>如预期，图中的所有时间路径都收敛于 <span class="math notranslate nohighlight">\(k^*\)</span>。<a class="headerlink" href="#k" title="Permalink to this heading">#</a></h1>
+<section id="id4">
+<h2><span class="section-number">25.1. </span>连续时间的增长<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>在本节中，我们将研究 Solow–Swan 增长模型的连续时间版本。我们将看到连续时间提供的平滑如何能简化我们的分析。</p>
+<p>回顾一下，资本的离散时间动态由以下公式给出：<span class="math notranslate nohighlight">\(k_{t+1} = s f(k_t) + (1 - \delta) k_t\)</span>。</p>
+<p>简单重新排列可得到单位时间的变化率：</p>
 <div class="math notranslate nohighlight">
 \[
     \Delta k_t = s f(k_t) - \delta k_t
-    \quad \text{where} \quad
+    \quad \text{其中} \quad
     \Delta k_t := k_{t+1}  - k_t
 \]</div>
-<p>Taking the time step to zero gives the continuous time limit</p>
+<p>将时间步长趋近于零得到连续时间极限</p>
 <div class="math notranslate nohighlight" id="equation-solowc">
-<span class="eqno">(24.3)<a class="headerlink" href="#equation-solowc" title="Permalink to this equation">#</a></span>\[    k'_t = s f(k_t) - \delta k_t
+<span class="eqno">(25.1)<a class="headerlink" href="#equation-solowc" title="Permalink to this equation">#</a></span>\[    k'_t = s f(k_t) - \delta k_t
     \qquad \text{with} \qquad
     k'_t := \frac{d}{dt} k_t\]</div>
-<p>Our aim is to learn about the evolution of <span class="math notranslate nohighlight">\(k_t\)</span> over time,
-given an initial stock  <span class="math notranslate nohighlight">\(k_0\)</span>.</p>
-<p>A <strong>steady state</strong> for <a class="reference internal" href="#equation-solowc">(24.3)</a> is a value <span class="math notranslate nohighlight">\(k^*\)</span>
-at which capital is unchanging, meaning <span class="math notranslate nohighlight">\(k'_t = 0\)</span> or, equivalently,
-<span class="math notranslate nohighlight">\(s f(k^*) = \delta k^*\)</span>.</p>
-<p>We assume
-<span class="math notranslate nohighlight">\(f(k) = Ak^\alpha\)</span>, so <span class="math notranslate nohighlight">\(k^*\)</span> solves
-<span class="math notranslate nohighlight">\(s A k^\alpha = \delta k\)</span>.</p>
-<p>The solution is the same as the discrete time case—see <a class="reference internal" href="#equation-kstarss">(24.2)</a>.</p>
-<p>The dynamics are represented in
-the next figure, maintaining the parameterization we used
-above.</p>
-<p>Writing <span class="math notranslate nohighlight">\(k'_t = g(k_t)\)</span> with <span class="math notranslate nohighlight">\(g(k) =
-s Ak^\alpha - \delta k\)</span>, values of <span class="math notranslate nohighlight">\(k\)</span> with <span class="math notranslate nohighlight">\(g(k) &gt; 0\)</span> imply <span class="math notranslate nohighlight">\(k'_t &gt; 0\)</span>, so
-capital is increasing.</p>
-<p>When <span class="math notranslate nohighlight">\(g(k) &lt; 0\)</span>, the opposite occurs.  Once again, high marginal returns to
-savings at low levels of capital combined with low rates of return at high
-levels of capital combine to yield global stability.</p>
-<p>To see this in a figure, let’s define the constants</p>
+<p>我们的目标是了解 <span class="math notranslate nohighlight">\(k_t\)</span> 随时间的演变，给定初始存量 <span class="math notranslate nohighlight">\(k_0\)</span>。</p>
+<p><a class="reference internal" href="#equation-solowc">(25.1)</a> 的<strong>稳态</strong>是一个值 <span class="math notranslate nohighlight">\(k^*\)</span>，在该值处资本保持不变，即 <span class="math notranslate nohighlight">\(k'_t = 0\)</span> 或等价地，<span class="math notranslate nohighlight">\(s f(k^*) = \delta k^*\)</span>。</p>
+<p>我们假设 <span class="math notranslate nohighlight">\(f(k) = Ak^\alpha\)</span>，所以 <span class="math notranslate nohighlight">\(k^*\)</span> 满足 <span class="math notranslate nohighlight">\(s A k^\alpha = \delta k\)</span>。</p>
+<p>解决方案与离散时间情况相同——参见 <a class="reference internal" href="#equation-kstarss">(24.2)</a>。</p>
+<p>动态在下一个图中表示，保持我们上面使用的参数化。</p>
+<p>写作 <span class="math notranslate nohighlight">\(k'_t = g(k_t)\)</span>，其中 <span class="math notranslate nohighlight">\(g(k) = s Ak^\alpha - \delta k\)</span>，<span class="math notranslate nohighlight">\(g(k) &gt; 0\)</span> 的 <span class="math notranslate nohighlight">\(k\)</span> 值意味着 <span class="math notranslate nohighlight">\(k'_t &gt; 0\)</span>，所以资本在增加。</p>
+<p>当 <span class="math notranslate nohighlight">\(g(k) &lt; 0\)</span> 时，相反的情况发生。再一次，低水平资本时储蓄的高边际回报与高水平资本时的低回报率相结合，产生了全局稳定性。</p>
+<p>为了在图中看到这一点，让我们定义以下常数</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
@@ -516,7 +492,7 @@ levels of capital combine to yield global stability.</p>
 </div>
 </div>
 </div>
-<p>Next we define the function <span class="math notranslate nohighlight">\(g\)</span> for growth in continuous time</p>
+<p>接下来，我们为连续时间的增长定义函数 <span class="math notranslate nohighlight">\(g\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
@@ -573,33 +549,27 @@ levels of capital combine to yield global stability.</p>
 <a class="reference internal image-reference" href="_images/ae787b1bb05f84ff7d1be77e2ec3d0a610c665e517ffbbb10135b7528569a113.png"><img alt="_images/ae787b1bb05f84ff7d1be77e2ec3d0a610c665e517ffbbb10135b7528569a113.png" src="_images/ae787b1bb05f84ff7d1be77e2ec3d0a610c665e517ffbbb10135b7528569a113.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>This shows global stability heuristically for a fixed parameterization, but
-how would we show the same thing formally for a continuum of plausible parameters?</p>
-<p>In the discrete time case, a neat expression for <span class="math notranslate nohighlight">\(k_t\)</span> is hard to obtain.</p>
-<p>In continuous time the process is easier: we can obtain a relatively simple
-expression for <span class="math notranslate nohighlight">\(k_t\)</span> that specifies the entire path.</p>
-<p>The first step is
-to set <span class="math notranslate nohighlight">\(x_t := k_t^{1-\alpha}\)</span>, so that <span class="math notranslate nohighlight">\(x'_t = (1-\alpha) k_t^{-\alpha}
-k'_t\)</span>.</p>
-<p>Substituting into <span class="math notranslate nohighlight">\(k'_t = sAk_t^\alpha - \delta k_t\)</span> leads to the
-linear differential equation</p>
+<p>这从启发式的角度展示了固定参数化的全局稳定性，但我们如何为一系列合理的参数形式地证明同样的结论呢？
+在离散时间的情况下，很难得到<span class="math notranslate nohighlight">\(k_t\)</span>的简洁表达式。
+在连续时间中，这个过程更加简单：我们可以得到一个相对简单的<span class="math notranslate nohighlight">\(k_t\)</span>表达式，它可以指定整个路径。
+第一步是
+设<span class="math notranslate nohighlight">\(x_t := k_t^{1-\alpha}\)</span>，这样<span class="math notranslate nohighlight">\(x'_t = (1-\alpha) k_t^{-\alpha} k'_t\)</span>。
+将其代入<span class="math notranslate nohighlight">\(k'_t = sAk_t^\alpha - \delta k_t\)</span>，得到以下线性微分方程</p>
 <div class="math notranslate nohighlight" id="equation-xsolow">
-<span class="eqno">(24.4)<a class="headerlink" href="#equation-xsolow" title="Permalink to this equation">#</a></span>\[    x'_t = (1-\alpha) (sA - \delta x_t)\]</div>
-<p>This equation, which is a <a class="reference external" href="https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)/17%3A_Differential_Equations/17.01%3A_First_Order_Differential_Equations">linear ordinary differential equation</a>, has the solution</p>
-<div class="math notranslate nohighlight">
-\[
+<span class="eqno">(25.2)<a class="headerlink" href="#equation-xsolow" title="Permalink to this equation">#</a></span>\[    x'_t = (1-\alpha) (sA - \delta x_t)\]</div>
+<p>这个方程是一个<a class="reference external" href="https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)/17%3A_Differential_Equations/17.01%3A_First_Order_Differential_Equations">线性常微分方程</a>，其解为
+$<span class="math notranslate nohighlight">\(
     x_t
     = \left(
         k_0^{1-\alpha} - \frac{sA}{\delta}
       \right)
       \mathrm{e}^{-\delta (1-\alpha) t} +
     \frac{sA}{\delta}
-\]</div>
-<p>(You can confirm that this function <span class="math notranslate nohighlight">\(x_t\)</span> satisfies <a class="reference internal" href="#equation-xsolow">(24.4)</a> by
-differentiating it with respect to <span class="math notranslate nohighlight">\(t\)</span>.)</p>
-<p>Converting back to <span class="math notranslate nohighlight">\(k_t\)</span> yields</p>
+\)</span><span class="math notranslate nohighlight">\(
+（你可以通过对\)</span>t<span class="math notranslate nohighlight">\(求导来确认这个函数\)</span>x_t<span class="math notranslate nohighlight">\(满足{eq}`xsolow`方程。）
+转换回\)</span>k_t$得到</p>
 <div class="math notranslate nohighlight" id="equation-ssivs">
-<span class="eqno">(24.5)<a class="headerlink" href="#equation-ssivs" title="Permalink to this equation">#</a></span>\[    k_t
+<span class="eqno">(25.3)<a class="headerlink" href="#equation-ssivs" title="Permalink to this equation">#</a></span>\[    k_t
     =
     \left[
         \left(
@@ -608,27 +578,26 @@ differentiating it with respect to <span class="math notranslate nohighlight">\(
       \mathrm{e}^{-\delta (1-\alpha) t} +
     \frac{sA}{\delta}
     \right]^{1/(1-\alpha)}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span>, we see immediately that <span class="math notranslate nohighlight">\(k_t \to
-k^*\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</span> independent of <span class="math notranslate nohighlight">\(k_0\)</span>.</p>
-<p>Thus, global stability holds.</p>
+<p>由于 <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> 且 <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span>，我们立即可以看出，当 <span class="math notranslate nohighlight">\(t \to \infty\)</span> 时，<span class="math notranslate nohighlight">\(k_t \to k^*\)</span>，且与 <span class="math notranslate nohighlight">\(k_0\)</span> 无关。
+因此，全局稳定性成立。</p>
 </section>
-<section id="exercises">
-<h2><span class="section-number">24.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2><span class="section-number">25.2. </span>练习<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="solow_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 24.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 25.1 </span></p>
 <section id="exercise-content">
-<p>Plot per capita consumption <span class="math notranslate nohighlight">\(c\)</span> at the steady state, as a function of the savings rate <span class="math notranslate nohighlight">\(s\)</span>, where <span class="math notranslate nohighlight">\(0 \leq s \leq 1\)</span>.</p>
-<p>Use the Cobb–Douglas specification <span class="math notranslate nohighlight">\(f(k) = A k^\alpha\)</span>.</p>
-<p>Set <span class="math notranslate nohighlight">\(A=2.0, \alpha=0.3,\)</span> and <span class="math notranslate nohighlight">\(\delta=0.5\)</span></p>
-<p>Also, find the approximate value of <span class="math notranslate nohighlight">\(s\)</span> that maximizes the <span class="math notranslate nohighlight">\(c^*(s)\)</span> and show it in the plot.</p>
+<p>绘制稳态下人均消费 <span class="math notranslate nohighlight">\(c\)</span> 作为储蓄率 <span class="math notranslate nohighlight">\(s\)</span> 的函数图，其中 <span class="math notranslate nohighlight">\(0 \leq s \leq 1\)</span>。
+使用柯布-道格拉斯生产函数 <span class="math notranslate nohighlight">\(f(k) = A k^\alpha\)</span>。
+设定 <span class="math notranslate nohighlight">\(A=2.0, \alpha=0.3,\)</span> 且 <span class="math notranslate nohighlight">\(\delta=0.5\)</span>。
+此外，找出大约能使 <span class="math notranslate nohighlight">\(c^*(s)\)</span> 最大化的 <span class="math notranslate nohighlight">\(s\)</span> 值，并在图中显示。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="solow-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#solow_ex1"> Exercise 24.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#solow_ex1"> Exercise 25.1</a></p>
 <section id="solution-content">
-<p>Steady state consumption at savings rate <span class="math notranslate nohighlight">\(s\)</span> is given by</p>
+<p>在储蓄率 <span class="math notranslate nohighlight">\(s\)</span> 下的稳态消费由以下公式给出：</p>
 <div class="math notranslate nohighlight">
 \[
     c^*(s) = (1-s)f(k^*) = (1-s)A(k^*)^\alpha
@@ -651,8 +620,8 @@ k^*\)</span> as <span class="math notranslate nohighlight">\(t \to \infty\)</spa
 </div>
 </div>
 </div>
-<p>Let’s find the value of <span class="math notranslate nohighlight">\(s\)</span> that maximizes <span class="math notranslate nohighlight">\(c^*\)</span> using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar">scipy.optimize.minimize_scalar</a>.
-We will use <span class="math notranslate nohighlight">\(-c^*(s)\)</span> since <code class="docutils literal notranslate"><span class="pre">minimize_scalar</span></code> finds the minimum value.</p>
+<p>让我们使用 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar">scipy.optimize.minimize_scalar</a> 来找出使 <span class="math notranslate nohighlight">\(c^*\)</span> 最大化的 <span class="math notranslate nohighlight">\(s\)</span> 值。
+我们将使用 <span class="math notranslate nohighlight">\(-c^*(s)\)</span>，因为 <code class="docutils literal notranslate"><span class="pre">minimize_scalar</span></code> 函数是用来寻找最小值的。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize_scalar</span>
@@ -717,7 +686,7 @@ We will use <span class="math notranslate nohighlight">\(-c^*(s)\)</span> since 
 <a class="reference internal image-reference" href="_images/91fe418d907e33338ef5003f77f97f2b78ae1cc67e7beefe09638cff2e5b3a7e.png"><img alt="_images/91fe418d907e33338ef5003f77f97f2b78ae1cc67e7beefe09638cff2e5b3a7e.png" src="_images/91fe418d907e33338ef5003f77f97f2b78ae1cc67e7beefe09638cff2e5b3a7e.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>One can also try to solve this mathematically by differentiating <span class="math notranslate nohighlight">\(c^*(s)\)</span> and solve for <span class="math notranslate nohighlight">\(\frac{d}{ds}c^*(s)=0\)</span> using <a class="reference external" href="https://www.sympy.org/en/index.html">sympy</a>.</p>
+<p>也可以尝试用数学方法解决这个问题，即对 <span class="math notranslate nohighlight">\(c^*(s)\)</span> 进行微分，并使用 <a class="reference external" href="https://www.sympy.org/en/index.html">sympy</a> 求解 <span class="math notranslate nohighlight">\(\frac{d}{ds}c^*(s)=0\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Symbol</span>
@@ -734,10 +703,10 @@ We will use <span class="math notranslate nohighlight">\(-c^*(s)\)</span> since 
 </div>
 </div>
 </div>
-<p>Let’s differentiate <span class="math notranslate nohighlight">\(c\)</span> and solve using <a class="reference external" href="https://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.solve">sympy.solve</a></p>
+<p>让我们对 <span class="math notranslate nohighlight">\(c\)</span> 进行微分，并使用 <a class="reference external" href="https://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.solve">sympy.solve</a> 求解。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve using sympy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用 sympy 求解</span>
 <span class="n">s_star</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">diff</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s_star = </span><span class="si">{</span><span class="n">s_star</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -749,52 +718,47 @@ We will use <span class="math notranslate nohighlight">\(-c^*(s)\)</span> since 
 </div>
 </div>
 </div>
-<p>Incidentally, the rate of savings which maximizes steady state level of per capita consumption is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Golden_Rule_savings_rate">Golden Rule savings rate</a>.</p>
+<p>顺便说一下，使人均消费的稳态水平最大化的储蓄率被称为<a class="reference external" href="https://en.wikipedia.org/wiki/Golden_Rule_savings_rate">黄金法则储蓄率</a>。</p>
 </section>
 </div>
 <div class="exercise admonition" id="solow_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 24.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 25.2 </span></p>
 <section id="exercise-content">
-<p><strong>Stochastic Productivity</strong></p>
-<p>To bring the Solow–Swan model closer to data, we need to think about handling
-random fluctuations in aggregate quantities.</p>
-<p>Among other things, this will
-eliminate the unrealistic prediction that per-capita output <span class="math notranslate nohighlight">\(y_t = A
-k^\alpha_t\)</span> converges to a constant <span class="math notranslate nohighlight">\(y^* := A (k^*)^\alpha\)</span>.</p>
-<p>We shift to discrete time for the following discussion.</p>
-<p>One approach is to replace constant productivity with some
-stochastic sequence <span class="math notranslate nohighlight">\((A_t)_{t \geq 1}\)</span>.</p>
-<p>Dynamics are now</p>
+<p><strong>随机生产率</strong></p>
+<p>为了使索洛-斯旺模型更贴近实际数据，我们需要考虑如何处理总量中的随机波动。
+这样做会带来多方面的影响，其中之一是消除了人均产出 <span class="math notranslate nohighlight">\(y_t = A k^\alpha_t\)</span> 收敛到常数 <span class="math notranslate nohighlight">\(y^* := A (k^*)^\alpha\)</span> 这一不切实际的预测。
+在接下来的讨论中，我们将转向离散时间模型。</p>
+<p>一种方法是用某个随机序列 <span class="math notranslate nohighlight">\((A_t)_{t \geq 1}\)</span> 替代常数生产率。
+现在的动态方程变为</p>
 <div class="math notranslate nohighlight" id="equation-solowran">
-<span class="eqno">(24.6)<a class="headerlink" href="#equation-solowran" title="Permalink to this equation">#</a></span>\[    k_{t+1} = s A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
-<p>We suppose <span class="math notranslate nohighlight">\(f\)</span> is Cobb–Douglas and <span class="math notranslate nohighlight">\((A_t)\)</span> is IID and lognormal.</p>
-<p>Now the long run convergence obtained in the deterministic case breaks
-down, since the system is hit with new shocks at each point in time.</p>
-<p>Consider <span class="math notranslate nohighlight">\(A=2.0, s=0.6, \alpha=0.3,\)</span> and <span class="math notranslate nohighlight">\(\delta=0.5\)</span></p>
-<p>Generate and plot the time series <span class="math notranslate nohighlight">\(k_t\)</span>.</p>
+<span class="eqno">(24.3)<a class="headerlink" href="#equation-solowran" title="Permalink to this equation">#</a></span>\[    k_{t+1} = s A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
+<p>我们假设 <span class="math notranslate nohighlight">\(f\)</span> 是柯布-道格拉斯生产函数，且 <span class="math notranslate nohighlight">\((A_t)\)</span> 是独立同分布的对数正态分布。
+现在，在确定性情况下获得的长期收敛性不再成立，因为系统在每个时间点都会受到新的冲击。
+考虑 <span class="math notranslate nohighlight">\(A=2.0, s=0.6, \alpha=0.3,\)</span> 且 <span class="math notranslate nohighlight">\(\delta=0.5\)</span>。
+生成并绘制时间序列 <span class="math notranslate nohighlight">\(k_t\)</span> 的图表。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="solow-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#solow_ex2"> Exercise 24.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#solow_ex2"> Exercise 25.2</a></p>
 <section id="solution-content">
-<p>Let’s define the constants for lognormal distribution and initial values used for simulation</p>
+<p>让我们定义用于模拟的对数正态分布的常数和初始值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the constants</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义一下常数</span>
 <span class="n">sig</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">sig</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">A</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">s</span> <span class="o">=</span> <span class="mf">0.6</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">]</span> <span class="c1"># list of initial values used for simulation</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">]</span> <span class="c1"># 用于模拟的初始值列表</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s define the function <em>k_next</em> to find the next value of <span class="math notranslate nohighlight">\(k\)</span></p>
+<p>让我们定义函数 <em>k_next</em> 来找出 <span class="math notranslate nohighlight">\(k\)</span> 的下一个值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lgnorm</span><span class="p">():</span>
@@ -812,7 +776,7 @@ down, since the system is hit with new shocks at each point in time.</p>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ts_length</span><span class="p">)</span>
 
-    <span class="c1"># simulate and plot time series</span>
+    <span class="c1"># 模拟并且绘制时间序列</span>
     <span class="k">for</span> <span class="n">x_init</span> <span class="ow">in</span> <span class="n">x_values</span><span class="p">:</span>
         <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_init</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
@@ -838,7 +802,7 @@ down, since the system is hit with new shocks at each point in time.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a416744ab675c39d404f425e1c956e1ce70cc152ca5bda197185faeada96fec2.png"><img alt="_images/a416744ab675c39d404f425e1c956e1ce70cc152ca5bda197185faeada96fec2.png" src="_images/a416744ab675c39d404f425e1c956e1ce70cc152ca5bda197185faeada96fec2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/eff3fe729313b889352ecb5536bbae75e2f15357e3f6e4f7e7a604026a2f5553.png"><img alt="_images/eff3fe729313b889352ecb5536bbae75e2f15357e3f6e4f7e7a604026a2f5553.png" src="_images/eff3fe729313b889352ecb5536bbae75e2f15357e3f6e4f7e7a604026a2f5553.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -897,19 +861,19 @@ down, since the system is hit with new shocks at each point in time.</p>
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -920,17 +884,17 @@ down, since the system is hit with new shocks at each point in time.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -941,7 +905,7 @@ down, since the system is hit with new shocks at each point in time.</p>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -952,17 +916,17 @@ down, since the system is hit with new shocks at each point in time.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -974,27 +938,27 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1006,12 +970,12 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1023,22 +987,22 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1060,22 +1024,22 @@ down, since the system is hit with new shocks at each point in time.</p>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1087,22 +1051,22 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1114,22 +1078,22 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1141,12 +1105,12 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1158,22 +1122,22 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1185,12 +1149,12 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1202,12 +1166,12 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1219,17 +1183,17 @@ down, since the system is hit with new shocks at each point in time.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

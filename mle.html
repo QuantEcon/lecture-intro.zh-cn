@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>45. Maximum Likelihood Estimation &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>49. 最大似然估计 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="46. Troubleshooting" href="troubleshooting.html" />
-    <link rel="prev" title="44. Simple Linear Regression Model" href="simple_linear_regression.html" />
+    <link rel="next" title="50. Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="48. 简单线性回归模型" href="simple_linear_regression.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Maximum Likelihood Estimation"/>
+<meta name="twitter:title" content="最大似然估计"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Maximum Likelihood Estimation" />
+<meta property="og:title" content="最大似然估计" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/mle.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,16 +172,16 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">45.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">45.2. Maximum likelihood estimation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-distribution">45.3. Pareto distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-best-distribution">45.4. What is the best distribution?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lognormal-distribution-for-the-right-hand-tail">45.4.1. Lognormal distribution for the right hand tail</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-distribution-for-the-right-hand-tail">45.4.2. Pareto distribution for the right hand tail</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-what-is-the-best-distribution">45.4.3. So what is the best distribution?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">49.1. 介绍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">49.2. 最大似然估计</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">49.3. 帕累托分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">49.4. 什么是最好的分布？</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">49.4.1. 对数正态分布和右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">49.4.2. 帕累托分布用于右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">49.4.3. 那么什么是最佳分布？</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">45.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">49.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Maximum Likelihood Estimation</p>
+                        <p class="qe-page__header-subheading">最大似然估计</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -240,25 +240,29 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="maximum-likelihood-estimation">
-<h1><span class="section-number">45. </span>Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">49. </span>最大似然估计<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
+
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="introduction">
-<h2><span class="section-number">45.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>Consider a situation where a policymaker is trying to estimate how much revenue
-a proposed wealth tax will raise.</p>
-<p>The proposed tax is</p>
+<section id="id2">
+<h2><span class="section-number">49.1. </span>介绍<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>考虑一个政策制定者试图估算提议中的财富税将带来多少收入的情况。</p>
+<p>提议的税务公式为：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     h(w) = 
@@ -267,18 +271,18 @@ a proposed wealth tax will raise.</p>
     a \bar{w} + b (w-\bar{w}) &amp; \text{if } w &gt; \bar w  
     \end{cases}
 \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(w\)</span> is wealth.</p>
+<p>其中 <span class="math notranslate nohighlight">\(w\)</span> 代表财富。</p>
 <div class="proof example admonition" id="mle_ex_wt">
-<p class="admonition-title"><span class="caption-number">Example 45.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 49.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>For example, if <span class="math notranslate nohighlight">\(a = 0.05\)</span>, <span class="math notranslate nohighlight">\(b = 0.1\)</span>, and <span class="math notranslate nohighlight">\(\bar w = 2.5\)</span>, this means</p>
+<p>例如，如果 <span class="math notranslate nohighlight">\(a = 0.05\)</span>，<span class="math notranslate nohighlight">\(b = 0.1\)</span>，且 <span class="math notranslate nohighlight">\(\bar w = 2.5\)</span>，意味着：</p>
 <ul class="simple">
-<li><p>a 5% tax on wealth up to 2.5 and</p></li>
-<li><p>a 10% tax on wealth in excess of 2.5.</p></li>
+<li><p>对于2.5及以下的财富征收5%的税，</p></li>
+<li><p>对超过2.5的部分财富征收10%的税。</p></li>
 </ul>
-<p>The unit is 100,000, so <span class="math notranslate nohighlight">\(w= 2.5\)</span> means 250,000 dollars.</p>
+<p>单位是100,000，所以 <span class="math notranslate nohighlight">\(w= 2.5\)</span> 的意思是 250,000 美元。</p>
 </section>
-</div><p>Let’s go ahead and define <span class="math notranslate nohighlight">\(h\)</span>:</p>
+</div><p>让我们来定义函数 <span class="math notranslate nohighlight">\(h\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">w_bar</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>
@@ -290,18 +294,16 @@ a proposed wealth tax will raise.</p>
 </div>
 </div>
 </div>
-<p>For a population of size <span class="math notranslate nohighlight">\(N\)</span>, where individual <span class="math notranslate nohighlight">\(i\)</span> has wealth <span class="math notranslate nohighlight">\(w_i\)</span>, total revenue raised by
-the tax will be</p>
+<p>对于一个人口数量为 <span class="math notranslate nohighlight">\(N\)</span> 的社区，每个人 <span class="math notranslate nohighlight">\(i\)</span> 拥有财富 <span class="math notranslate nohighlight">\(w_i\)</span>，通过税收收入总额为</p>
 <div class="math notranslate nohighlight">
 \[
     T = \sum_{i=1}^{N} h(w_i)
 \]</div>
-<p>We wish to calculate this quantity.</p>
-<p>The problem we face is that, in most countries, wealth is not observed for all individuals.</p>
-<p>Collecting and maintaining accurate wealth data for all individuals or households in a country
-is just too hard.</p>
-<p>So let’s suppose instead that we obtain a sample <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span> telling us the wealth of <span class="math notranslate nohighlight">\(n\)</span> randomly selected individuals.</p>
-<p>For our exercise we are going to use a sample of <span class="math notranslate nohighlight">\(n = 10,000\)</span> observations from wealth data in the US in 2016.</p>
+<p>我们希望计算这个总量。</p>
+<p>我们面对的问题是，在大多数国家中，并不是所有个人的财富都能被观测到。</p>
+<p>为一个国家的所有个人或家庭收集并维持准确的财富数据是非常困难的。</p>
+<p>因此，假设我们得到了一个样本 <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span>，它告诉我们 <span class="math notranslate nohighlight">\(n\)</span> 个随机选定个人的财富。</p>
+<p>在这个练习中，我们将使用 <span class="math notranslate nohighlight">\(n = 10,000\)</span> 来自2016年美国的财富数据样本。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10_000</span>
@@ -309,9 +311,8 @@ is just too hard.</p>
 </div>
 </div>
 </div>
-<p>The data is derived from the
-<a class="reference external" href="https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances">Survey of Consumer Finances</a> (SCF).</p>
-<p>The following code imports this data  and reads it into an array called <code class="docutils literal notranslate"><span class="pre">sample</span></code>.</p>
+<p>这些数据来源于<a class="reference external" href="https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances">消费者财务调查</a> (SCF)。</p>
+<p>以下代码导入了数据并将其读入名为 <code class="docutils literal notranslate"><span class="pre">sample</span></code> 的数组。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -323,7 +324,7 @@ is just too hard.</p>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2016</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">]</span>   <span class="c1">#restrcting data to net worth &gt; 1</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">]</span>   <span class="c1"># 限制数据为净值大于 1 的数据</span>
 <span class="n">rv</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;n_wealth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
 <span class="n">rv</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100_000</span>
 <span class="n">sample</span> <span class="o">=</span> <span class="n">rv</span>
@@ -332,28 +333,27 @@ is just too hard.</p>
 </div>
 </details>
 </div>
-<p>Let’s histogram this sample.</p>
+<p>让我们来做一个这个样本的直方图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">density</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">prob</span> <span class="o">=</span> <span class="n">density</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;unit: $\$100,000$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;prob&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;net wealth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;单位：$100,000$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;概率&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;净资产&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1fdb65f239fd92b6cf47faf72fc7f09e749190d6ce9026a6045b1be4a5ad2b21.png"><img alt="_images/1fdb65f239fd92b6cf47faf72fc7f09e749190d6ce9026a6045b1be4a5ad2b21.png" src="_images/1fdb65f239fd92b6cf47faf72fc7f09e749190d6ce9026a6045b1be4a5ad2b21.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/abbee4f4ca05b17ec692632cc2f1457e3d0427cb08a4ce9b6ae514a35e8d4eb9.png"><img alt="_images/abbee4f4ca05b17ec692632cc2f1457e3d0427cb08a4ce9b6ae514a35e8d4eb9.png" src="_images/abbee4f4ca05b17ec692632cc2f1457e3d0427cb08a4ce9b6ae514a35e8d4eb9.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The histogram shows that many people have very low wealth and a few people have
-very high wealth.</p>
-<p>We will take the full population size to be</p>
+<p>直方图显示许多人的财富非常低，少数人的财富非常高。</p>
+<p>我们将假定全体人口规模为</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100_000_000</span>
@@ -361,36 +361,29 @@ very high wealth.</p>
 </div>
 </div>
 </div>
-<p>How can we estimate total revenue from the full population using only the sample data?</p>
-<p>Our plan is to assume that wealth of each individual is a draw from a distribution with density <span class="math notranslate nohighlight">\(f\)</span>.</p>
-<p>If we obtain an estimate of <span class="math notranslate nohighlight">\(f\)</span> we can then approximate <span class="math notranslate nohighlight">\(T\)</span> as follows:</p>
+<p>我们如何仅使用样本数据来估计全体人口的总收入呢？</p>
+<p>我们的计划是假设每个人的财富是从密度为 <span class="math notranslate nohighlight">\(f\)</span> 的分布中抽取的。</p>
+<p>如果我们获得 <span class="math notranslate nohighlight">\(f\)</span> 的估计，那么我们可以按照下面的方式近似 <span class="math notranslate nohighlight">\(T\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-est-rev">
-<span class="eqno">(45.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(49.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
     T = \sum_{i=1}^{N} h(w_i) 
       = N \frac{1}{N} \sum_{i=1}^{N} h(w_i) 
       \approx N \int_{0}^{\infty} h(w)f(w) dw
 \]</div>
-<p>(The sample mean should be close to the mean by the law of large numbers.)</p>
-<p>The problem now is: how do we estimate <span class="math notranslate nohighlight">\(f\)</span>?</p>
+<p>（样本均值应该靠近平均值，根据大数定律。）</p>
+<p>现在的问题是：我们如何估计 <span class="math notranslate nohighlight">\(f\)</span>？</p>
 </section>
-<section id="id1">
-<h2><span class="section-number">45.2. </span>Maximum likelihood estimation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">Maximum likelihood estimation</a>
-is a method of estimating an unknown distribution.</p>
-<p>Maximum likelihood estimation has two steps:</p>
+<section id="id3">
+<h2><span class="section-number">49.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">最大似然估计</a> 是一种估计未知分布的方法。</p>
+<p>最大似然估计有两个步骤：</p>
 <ol class="arabic simple">
-<li><p>Guess what the underlying distribution is (e.g., normal with mean <span class="math notranslate nohighlight">\(\mu\)</span> and
-standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>).</p></li>
-<li><p>Estimate the parameter values (e.g., estimate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> for the
-normal distribution)</p></li>
+<li><p>猜测潜在分布是什么（例如，正态分布，均值为 <span class="math notranslate nohighlight">\(\mu\)</span>，标准差为 <span class="math notranslate nohighlight">\(\sigma\)</span>）。</p></li>
+<li><p>估计参数值（例如，估计正态分布的 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>）。</p></li>
 </ol>
-<p>One possible assumption for the wealth is that each
-<span class="math notranslate nohighlight">\(w_i\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normally distributed</a>,
-with parameters <span class="math notranslate nohighlight">\(\mu \in (-\infty,\infty)\)</span> and <span class="math notranslate nohighlight">\(\sigma \in (0,\infty)\)</span>.</p>
-<p>(This means that <span class="math notranslate nohighlight">\(\ln w_i\)</span> is normally distributed with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.)</p>
-<p>You can see that this assumption is not completely unreasonable because, if we
-histogram log wealth instead of wealth, the picture starts to look something
-like a bell-shaped curve.</p>
+<p>对于财富，一个可能的假设是每个 <span class="math notranslate nohighlight">\(w_i\)</span> 都是<a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>的，参数 <span class="math notranslate nohighlight">\(\mu\)</span> 在 <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> 范围内，<span class="math notranslate nohighlight">\(\sigma\)</span> 在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 范围内。</p>
+<p>（这意味着 <span class="math notranslate nohighlight">\(\ln w_i\)</span> 是以 <span class="math notranslate nohighlight">\(\mu\)</span> 为均值，<span class="math notranslate nohighlight">\(\sigma\)</span> 为标准差的正态分布。）</p>
+<p>你可以看到这个假设不是完全没有道理，因为如果我们对财富的对数进行直方图表示而不是财富本身，图片开始看起来像一个钟形曲线。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ln_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -401,31 +394,29 @@ like a bell-shaped curve.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f586131cb9680c65338eb37995fcfd78dcaedd8dda32ce19e7a106aac26793d8.png"><img alt="_images/f586131cb9680c65338eb37995fcfd78dcaedd8dda32ce19e7a106aac26793d8.png" src="_images/f586131cb9680c65338eb37995fcfd78dcaedd8dda32ce19e7a106aac26793d8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0ebb48d333255823f33b0bbdf865ac73d7895dddfefd87e07d9a2d4ac86eed0e.png"><img alt="_images/0ebb48d333255823f33b0bbdf865ac73d7895dddfefd87e07d9a2d4ac86eed0e.png" src="_images/0ebb48d333255823f33b0bbdf865ac73d7895dddfefd87e07d9a2d4ac86eed0e.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Now our job is to obtain the maximum likelihood estimates of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, which
-we denote by <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span>.</p>
-<p>These estimates can be found by maximizing the likelihood function given the
-data.</p>
-<p>The pdf of a lognormally distributed random variable <span class="math notranslate nohighlight">\(X\)</span> is given by:</p>
+<p>现在我们的任务是获取 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span> 的最大似然估计，我们用 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> 和 <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> 表示。</p>
+<p>这些估计值可以通过最大化给定数据的似然函数找到。</p>
+<p>对数正态分布随机变量 <span class="math notranslate nohighlight">\(X\)</span> 的概率密度函数 (pdf) 如下：</p>
 <div class="math notranslate nohighlight">
 \[
     f(x, \mu, \sigma) 
     = \frac{1}{x}\frac{1}{\sigma \sqrt{2\pi}} 
-    \exp\left(\frac{-1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)\right)^2
+    \exp\left(-\frac{1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)^2\right)
 \]</div>
-<p>For our sample <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span>, the <a class="reference external" href="https://en.wikipedia.org/wiki/Likelihood_function">likelihood function</a> is given by</p>
+<p>对于我们的样本 <span class="math notranslate nohighlight">\(w_1, w_2, \cdots, w_n\)</span>，<a class="reference external" href="https://en.wikipedia.org/wiki/Likelihood_function">似然函数</a>定义为：</p>
 <div class="math notranslate nohighlight">
 \[
     L(\mu, \sigma | w_i) = \prod_{i=1}^{n} f(w_i, \mu, \sigma)
 \]</div>
-<p>The likelihood function can be viewed as both</p>
+<p>似然函数可以被视为：</p>
 <ul class="simple">
-<li><p>the joint distribution of the sample (which is assumed to be IID) and</p></li>
-<li><p>the “likelihood” of parameters <span class="math notranslate nohighlight">\((\mu, \sigma)\)</span> given the data.</p></li>
+<li><p>样本的联合分布（假设是独立同分布）和</p></li>
+<li><p>给定数据的参数 <span class="math notranslate nohighlight">\((\mu, \sigma)\)</span> 的“似然性”。</p></li>
 </ul>
-<p>Taking logs on both sides gives us the log likelihood function, which is</p>
+<p>对两边取对数，我们得到对数似然函数，如下所示：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -436,8 +427,8 @@ data.</p>
             \sum_{i=1}^n (\ln w_i - \mu)^2
 \end{aligned}
 \end{split}\]</div>
-<p>To find where this function is maximised we find its partial derivatives wrt <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma ^2\)</span> and equate them to <span class="math notranslate nohighlight">\(0\)</span>.</p>
-<p>Let’s first find the maximum likelihood estimate (MLE) of <span class="math notranslate nohighlight">\(\mu\)</span></p>
+<p>为了找到这个函数的最大值，我们计算关于 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma ^2\)</span> 的偏导数，并将它们设为 <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>让我们首先找到 <span class="math notranslate nohighlight">\(\mu\)</span> 的最大似然估计（MLE）</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \frac{\delta \ell}{\delta \mu} 
@@ -445,7 +436,7 @@ data.</p>
 \implies \sum_{i=1}^n \ln w_i - n \mu = 0 \\
 \implies \hat{\mu} = \frac{\sum_{i=1}^n \ln w_i}{n}
 \end{split}\]</div>
-<p>Now let’s find the MLE of <span class="math notranslate nohighlight">\(\sigma\)</span></p>
+<p>现在让我们找到 <span class="math notranslate nohighlight">\(\sigma\)</span> 的MLE</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \frac{\delta \ell}{\delta \sigma^2} 
@@ -456,11 +447,11 @@ data.</p>
     \implies \hat{\sigma} = 
     \left( \frac{\sum_{i=1}^{n}(\ln w_i - \hat{\mu})^2}{n} \right)^{1/2}
 \end{split}\]</div>
-<p>Now that we have derived the expressions for <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span>,
-let’s compute them for our wealth sample.</p>
+<p>现在我们已经推导出 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> 和 <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> 的表达式，
+让我们为我们的财富样本计算它们。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ln_sample</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ln_sample</span><span class="p">)</span> <span class="c1"># 计算 μ 的估计值</span>
 <span class="n">μ_hat</span>
 </pre></div>
 </div>
@@ -473,8 +464,8 @@ let’s compute them for our wealth sample.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln_sample</span> <span class="o">-</span> <span class="n">μ_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">σ_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">ln_sample</span> <span class="o">-</span> <span class="n">μ_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># 计算方差的分子部分</span>
+<span class="n">σ_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 计算 σ 的估计值</span>
 <span class="n">σ_hat</span>
 </pre></div>
 </div>
@@ -485,45 +476,43 @@ let’s compute them for our wealth sample.</p>
 </div>
 </div>
 </div>
-<p>Let’s plot the lognormal pdf using the estimated parameters against our sample data.</p>
+<p>我们来绘制使用估计参数的对数正态分布概率密度函数，并与我们的样本数据进行对比。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_lognorm</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">σ_hat</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">μ_hat</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_lognorm</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">σ_hat</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">μ_hat</span><span class="p">))</span>  <span class="c1"># 初始化对数正态分布</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>  <span class="c1"># 产生数据点</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># 创建图形和轴</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># 设置x轴的范围</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal pdf&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 绘制样本的直方图</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal pdf&#39;</span><span class="p">)</span>  <span class="c1"># 绘制对数正态分布的PDF</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>  <span class="c1"># 显示图例</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># 展示图形</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/581e822530ad114871607c44e9e7a02e35706680a689d393ddc44370b3d4311c.png"><img alt="_images/581e822530ad114871607c44e9e7a02e35706680a689d393ddc44370b3d4311c.png" src="_images/581e822530ad114871607c44e9e7a02e35706680a689d393ddc44370b3d4311c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/78f1a265594b3471b07ac8015d35d849619653bae67ff9fc3c7d3138ddc84dcc.png"><img alt="_images/78f1a265594b3471b07ac8015d35d849619653bae67ff9fc3c7d3138ddc84dcc.png" src="_images/78f1a265594b3471b07ac8015d35d849619653bae67ff9fc3c7d3138ddc84dcc.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Our estimated lognormal distribution appears to be a reasonable fit for the overall data.</p>
-<p>We now use <a class="reference internal" href="#equation-eq-est-rev">(45.1)</a> to calculate total revenue.</p>
-<p>We will compute the integral using numerical integration via SciPy’s
-<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a>
-function</p>
+<p>我们的估计的对数正态分布看起来很适合整体数据。</p>
+<p>我们现在使用方程<a class="reference internal" href="#equation-eq-est-rev">(49.1)</a>来计算总收入。</p>
+<p>我们将通过 <strong>SciPy</strong> 的 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a> 函数使用数值积分计算</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_revenue</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
-    <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">integral</span>
-    <span class="k">return</span> <span class="n">T</span>
+    <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span>  <span class="c1"># 计算积分</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">integral</span>  <span class="c1"># 总收入 = 人数 * 单个收入</span>
+    <span class="k">return</span> <span class="n">T</span>  <span class="c1"># 返回总收入</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_lognorm</span> <span class="o">=</span> <span class="n">total_revenue</span><span class="p">(</span><span class="n">dist_lognorm</span><span class="p">)</span>
-<span class="n">tr_lognorm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_lognorm</span> <span class="o">=</span> <span class="n">total_revenue</span><span class="p">(</span><span class="n">dist_lognorm</span><span class="p">)</span>  <span class="c1"># 使用对数正态分布计算总收入</span>
+<span class="n">tr_lognorm</span>  <span class="c1"># 显示总收入</span>
 </pre></div>
 </div>
 </div>
@@ -533,25 +522,21 @@ function</p>
 </div>
 </div>
 </div>
-<p>(Our unit was 100,000 dollars, so this means that actual revenue is 100,000
-times as large.)</p>
+<p>（我们的单位是10万美元，所以这意味着实际收入是10万倍。）</p>
 </section>
-<section id="pareto-distribution">
-<h2><span class="section-number">45.3. </span>Pareto distribution<a class="headerlink" href="#pareto-distribution" title="Permalink to this heading">#</a></h2>
-<p>We mentioned above that using maximum likelihood estimation requires us to make
-a prior assumption of the underlying distribution.</p>
-<p>Previously we assumed that the distribution is lognormal.</p>
-<p>Suppose instead we assume that <span class="math notranslate nohighlight">\(w_i\)</span> are drawn from the
-<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto Distribution</a>
-with parameters <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(x_m\)</span>.</p>
-<p>In this case, the maximum likelihood estimates are known to be</p>
+<section id="id4">
+<h2><span class="section-number">49.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>如上所述，使用最大似然估计时需要我们假定一个先验的底层分布。</p>
+<p>之前我们假定这个分布是对数正态分布。</p>
+<p>假设我们改为假设 <span class="math notranslate nohighlight">\(w_i\)</span> 来自具有参数 <span class="math notranslate nohighlight">\(b\)</span> 和 <span class="math notranslate nohighlight">\(x_m\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">帕累托分布</a>。</p>
+<p>在这种情况下，最大似然估计已知为</p>
 <div class="math notranslate nohighlight">
 \[
     \hat{b} = \frac{n}{\sum_{i=1}^{n} \ln (w_i/\hat{x_m})}
-    \quad \text{and} \quad
+    \quad \text{和} \quad
     \hat{x}_m = \min_{i} w_i
 \]</div>
-<p>Let’s calculate them.</p>
+<p>我们来计算它们。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xm_hat</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -579,7 +564,7 @@ with parameters <span class="math notranslate nohighlight">\(b\)</span> and <spa
 </div>
 </div>
 </div>
-<p>Now let’s recompute total revenue.</p>
+<p>现在让我们重新计算总收入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist_pareto</span> <span class="o">=</span> <span class="n">pareto</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">xm_hat</span><span class="p">)</span>
@@ -594,7 +579,7 @@ with parameters <span class="math notranslate nohighlight">\(b\)</span> and <spa
 </div>
 </div>
 </div>
-<p>The number is very different!</p>
+<p>这个数字差距很大！</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_pareto</span> <span class="o">/</span> <span class="n">tr_lognorm</span>
@@ -607,8 +592,8 @@ with parameters <span class="math notranslate nohighlight">\(b\)</span> and <spa
 </div>
 </div>
 </div>
-<p>We see that choosing the right distribution is extremely important.</p>
-<p>Let’s compare the fitted Pareto distribution to the histogram:</p>
+<p>我们看到选择正确的分布非常重要。</p>
+<p>让我们将拟合的帕累托分布与直方图进行比较：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -624,20 +609,19 @@ with parameters <span class="math notranslate nohighlight">\(b\)</span> and <spa
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e38bce7d172081089778d305c2d9439b4c5c4b25202fd52a95cf65d66ef4da83.png"><img alt="_images/e38bce7d172081089778d305c2d9439b4c5c4b25202fd52a95cf65d66ef4da83.png" src="_images/e38bce7d172081089778d305c2d9439b4c5c4b25202fd52a95cf65d66ef4da83.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/23431ace6561f1dcf465a238328443205d427a9751e6c1a461bca2ec60f843e0.png"><img alt="_images/23431ace6561f1dcf465a238328443205d427a9751e6c1a461bca2ec60f843e0.png" src="_images/23431ace6561f1dcf465a238328443205d427a9751e6c1a461bca2ec60f843e0.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We observe that in this case the fit for the Pareto distribution is not very
-good, so we can probably reject it.</p>
+<p>我们观察到在这种情况下，帕累托分布的拟合效果并不好，所以我们可能会拒绝它。</p>
 </section>
-<section id="what-is-the-best-distribution">
-<h2><span class="section-number">45.4. </span>What is the best distribution?<a class="headerlink" href="#what-is-the-best-distribution" title="Permalink to this heading">#</a></h2>
-<p>There is no “best” distribution — every choice we make is an assumption.</p>
-<p>All we can do is try to pick a distribution that fits the data well.</p>
-<p>The plots above suggested that the lognormal distribution is optimal.</p>
-<p>However when we inspect the upper tail (the richest people), the Pareto distribution may be a better fit.</p>
-<p>To see this, let’s now set a minimum threshold of net worth in our dataset.</p>
-<p>We set an arbitrary threshold of $500,000 and read the data into <code class="docutils literal notranslate"><span class="pre">sample_tail</span></code>.</p>
+<section id="id5">
+<h2><span class="section-number">49.4. </span>什么是最好的分布？<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>没有“最好”的分布——我们做出的每一个选择都是一种假设。</p>
+<p>我们能做的就是尝试选择一个能很好地拟合数据的分布。</p>
+<p>上面的图表表明，对数正态分布是最佳的。</p>
+<p>然而，当我们检查上尾部（最富有的人）时，帕累托分布可能是一个更好的选择。</p>
+<p>为了查看这一点，现在让我们设定一个数据集中的净资产最低阈值。</p>
+<p>我们设定一个任意阈值为 $500,000，并将数据读入 <code class="docutils literal notranslate"><span class="pre">sample_tail</span></code>。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -655,7 +639,7 @@ good, so we can probably reject it.</p>
 </div>
 </details>
 </div>
-<p>Let’s plot this data.</p>
+<p>让我们绘制这些数据。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -666,14 +650,14 @@ good, so we can probably reject it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eb7abb2b76018ebd979940e830d5faaf9afb742ea6ea55ddd65f3620f30f7070.png"><img alt="_images/eb7abb2b76018ebd979940e830d5faaf9afb742ea6ea55ddd65f3620f30f7070.png" src="_images/eb7abb2b76018ebd979940e830d5faaf9afb742ea6ea55ddd65f3620f30f7070.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/89156d5327336c67913a89f6447e240ef0fd4f6a8381fa3d8e05dac08976e589.png"><img alt="_images/89156d5327336c67913a89f6447e240ef0fd4f6a8381fa3d8e05dac08976e589.png" src="_images/89156d5327336c67913a89f6447e240ef0fd4f6a8381fa3d8e05dac08976e589.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Now let’s try fitting some distributions to this data.</p>
-<section id="lognormal-distribution-for-the-right-hand-tail">
-<h3><span class="section-number">45.4.1. </span>Lognormal distribution for the right hand tail<a class="headerlink" href="#lognormal-distribution-for-the-right-hand-tail" title="Permalink to this heading">#</a></h3>
-<p>Let’s start with the lognormal distribution</p>
-<p>We estimate the parameters again and plot the density against our data.</p>
+<p>现在让我们尝试对这些数据拟合一些分布。</p>
+<section id="id6">
+<h3><span class="section-number">49.4.1. </span>对数正态分布和右尾部<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>让我们从对数正态分布开始</p>
+<p>我们再次估计参数并将密度与我们的数据进行对比。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ln_sample_tail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">)</span>
@@ -685,23 +669,23 @@ good, so we can probably reject it.</p>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm_tail</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;lognormal pdf&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist_lognorm_tail</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;对数正态 pdf&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7bf5fe21e169d182fdcc44258f794b23f1499ae7ab07060562717509207e294a.png"><img alt="_images/7bf5fe21e169d182fdcc44258f794b23f1499ae7ab07060562717509207e294a.png" src="_images/7bf5fe21e169d182fdcc44258f794b23f1499ae7ab07060562717509207e294a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/24e788d5375be415d7f3ee47d812369e30ddaed4b9e7f768e33df20da4404a9a.png"><img alt="_images/24e788d5375be415d7f3ee47d812369e30ddaed4b9e7f768e33df20da4404a9a.png" src="_images/24e788d5375be415d7f3ee47d812369e30ddaed4b9e7f768e33df20da4404a9a.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>While the lognormal distribution was a good fit for the entire dataset,
-it is not a good fit for the right hand tail.</p>
+<p>虽然对数正态分布对整个数据集拟合良好，
+但它并不适合右尾部。</p>
 </section>
-<section id="pareto-distribution-for-the-right-hand-tail">
-<h3><span class="section-number">45.4.2. </span>Pareto distribution for the right hand tail<a class="headerlink" href="#pareto-distribution-for-the-right-hand-tail" title="Permalink to this heading">#</a></h3>
-<p>Let’s now assume the truncated dataset has a Pareto distribution.</p>
-<p>We estimate the parameters again and plot the density against our data.</p>
+<section id="id7">
+<h3><span class="section-number">49.4.2. </span>帕累托分布用于右尾部<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>现在假设截断数据集符合帕累托分布。</p>
+<p>我们再次估计参数，并将密度与我们的数据进行对比。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xm_hat_tail</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">sample_tail</span><span class="p">)</span>
@@ -719,44 +703,41 @@ it is not a good fit for the right hand tail.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/bed1c0fcd58f3232625a039eb2aaecda908c7b634690ab84ba360599c0dbf713.png"><img alt="_images/bed1c0fcd58f3232625a039eb2aaecda908c7b634690ab84ba360599c0dbf713.png" src="_images/bed1c0fcd58f3232625a039eb2aaecda908c7b634690ab84ba360599c0dbf713.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b3808d98baaa2c9346ef6e067790778effeacb595c667a9b148286bb9e8d3085.png"><img alt="_images/b3808d98baaa2c9346ef6e067790778effeacb595c667a9b148286bb9e8d3085.png" src="_images/b3808d98baaa2c9346ef6e067790778effeacb595c667a9b148286bb9e8d3085.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>The Pareto distribution is a better fit for the right hand tail of our dataset.</p>
+<p>帕累托分布更适合我们数据集的右尾部。</p>
 </section>
-<section id="so-what-is-the-best-distribution">
-<h3><span class="section-number">45.4.3. </span>So what is the best distribution?<a class="headerlink" href="#so-what-is-the-best-distribution" title="Permalink to this heading">#</a></h3>
-<p>As we said above, there is no “best” distribution — each choice is an
-assumption.</p>
-<p>We just have to test what we think are reasonable distributions.</p>
-<p>One test is to plot the data against the fitted distribution, as we did.</p>
-<p>There are other more rigorous tests, such as the <a class="reference external" href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test">Kolmogorov-Smirnov test</a>.</p>
-<p>We omit such advanced topics (but encourage readers to study them once
-they have completed these lectures).</p>
+<section id="id8">
+<h3><span class="section-number">49.4.3. </span>那么什么是最佳分布？<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>如上所述，没有“最佳”分布——每个选择都是一个假设。</p>
+<p>我们只需要测试我们认为合理的分布。</p>
+<p>一种测试方法是将数据与拟合分布进行绘图，正如我们所做的。</p>
+<p>还有其他更严格的测试方法，比如<a class="reference external" href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test">科尔莫哥洛夫-斯米尔诺夫检验</a>。</p>
+<p>我们忽略了这些高级主题（但鼓励读者在完成这些讲座后研究它们）。</p>
 </section>
 </section>
-<section id="exercises">
-<h2><span class="section-number">45.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h2><span class="section-number">49.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="mle_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 45.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 49.1 </span></p>
 <section id="exercise-content">
-<p>Suppose we assume wealth is <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">exponentially</a>
-distributed with parameter <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>.</p>
-<p>The maximum likelihood estimate of <span class="math notranslate nohighlight">\(\lambda\)</span> is given by</p>
+<p>假设我们假设财富是以参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">指数</a>分布。</p>
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> 的最大似然估计为</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{\lambda} = \frac{n}{\sum_{i=1}^n w_i}
 \]</div>
 <ol class="arabic simple">
-<li><p>Compute <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> for our initial sample.</p></li>
-<li><p>Use <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> to find the total revenue</p></li>
+<li><p>计算我们初始样本的 <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span>。</p></li>
+<li><p>使用 <span class="math notranslate nohighlight">\(\hat{\lambda}\)</span> 来找到总收入</p></li>
 </ol>
 </section>
 </div>
 <div class="solution dropdown admonition" id="mle-solution-2">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 45.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 49.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -789,14 +770,14 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 </div>
 <div class="exercise admonition" id="mle_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 45.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 49.2 </span></p>
 <section id="exercise-content">
-<p>Plot the exponential distribution against the sample and check if it is a good fit or not.</p>
+<p>绘制指数分布与样本的比较，并检查它是否适合。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="mle-solution-4">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 45.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 49.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -812,10 +793,10 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5491e5afda0cfdca0c7e65662c04e36cc10bbe4645eb3fc2980cd12f0dcc0835.png"><img alt="_images/5491e5afda0cfdca0c7e65662c04e36cc10bbe4645eb3fc2980cd12f0dcc0835.png" src="_images/5491e5afda0cfdca0c7e65662c04e36cc10bbe4645eb3fc2980cd12f0dcc0835.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9908a5c8323bbf6934ad6e15c718e67bb4cbdf08dd1bb6bc14b9021976027e0a.png"><img alt="_images/9908a5c8323bbf6934ad6e15c718e67bb4cbdf08dd1bb6bc14b9021976027e0a.png" src="_images/9908a5c8323bbf6934ad6e15c718e67bb4cbdf08dd1bb6bc14b9021976027e0a.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Clearly, this distribution is not a good fit for our data.</p>
+<p>很明显，这个分布不适合我们的数据。</p>
 </section>
 </div>
 </section>
@@ -872,19 +853,19 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -895,17 +876,17 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -916,7 +897,7 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -927,17 +908,17 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -949,27 +930,27 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -981,12 +962,12 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -998,22 +979,22 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1035,22 +1016,22 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1062,22 +1043,22 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1089,22 +1070,22 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -1116,12 +1097,12 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -1133,22 +1114,22 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -1160,12 +1141,12 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1177,12 +1158,12 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1194,17 +1175,17 @@ distributed with parameter <span class="math notranslate nohighlight">\(\lambda 
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

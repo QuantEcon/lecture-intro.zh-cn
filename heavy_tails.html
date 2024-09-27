@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>21. Heavy-Tailed Distributions &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>21. 重尾分布 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -124,7 +124,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="22. Racial Segregation" href="schelling.html" />
-    <link rel="prev" title="20. Monte Carlo and Option Pricing" href="monte_carlo.html" />
+    <link rel="prev" title="20. 蒙特卡罗方法与期权定价" href="monte_carlo.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Heavy-Tailed Distributions"/>
+<meta name="twitter:title" content="重尾分布"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Heavy-Tailed Distributions" />
+<meta property="og:title" content="重尾分布" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/heavy_tails.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,44 +172,44 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">21.1. Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-light-tails">21.1.1. Introduction: light tails</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-are-light-tails-valid">21.1.2. When are light tails valid?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-on-assets">21.1.3. Returns on assets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-data">21.1.4. Other data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-care">21.1.5. Why should we care?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">21.1. 概览</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">21.1.1. 引言：轻尾分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">21.1.2. 何时适用于轻尾分布？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">21.1.3. 资产回报</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">21.1.4. 其他数据</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">21.1.5. 为什么我们应该关心？</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-comparisons">21.2. Visual comparisons</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulations">21.2.1. Simulations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonnegative-distributions">21.2.2. Nonnegative distributions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counter-cdfs">21.2.3. Counter CDFs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-ccdfs">21.2.4. Empirical CCDFs</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-q-plots">21.2.4.1. Q-Q Plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">21.2. 视觉比较</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">21.2.1. 模拟</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">21.2.2. 非负分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">21.2.3. 对立累积分布函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ccdfs">21.2.4. 实验 CCDFs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-q">21.2.4.1. Q-Q图</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-laws">21.2.5. Power laws</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">21.2.5. 幂律</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tails-in-economic-cross-sections">21.3. Heavy tails in economic cross-sections</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#firm-size">21.3.1. Firm size</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#city-size">21.3.2. City size</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wealth">21.3.3. Wealth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">21.3. 经济横截面中的重尾现象</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">21.3.1. 公司规模</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">21.3.2. 城市规模</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">21.3.3. 财富</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gdp">21.3.4. GDP</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-of-the-lln">21.4. Failure of the LLN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-heavy-tails-matter">21.5. Why do heavy tails matter?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diversification">21.5.1. Diversification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fiscal-policy">21.5.2. Fiscal policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">21.4. 大数定律的失败</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tail-application">21.5. 为什么重尾分布很重要？</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">21.5.1. 分散化投资</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">21.5.2. 财政政策</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-tail-properties">21.6. Classifying tail properties</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#light-and-heavy-tails">21.6.1. Light and heavy tails</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cltail">21.6. 分类尾部特性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heavy-tail-formal-definition">21.6.1. 轻尾和重尾</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">21.7. Further reading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">21.8. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">21.7. 延伸阅读</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">21.8. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -242,7 +242,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Heavy-Tailed Distributions</p>
+                        <p class="qe-page__header-subheading">重尾分布</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -268,9 +268,9 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="heavy-tailed-distributions">
-<span id="heavy-tail"></span><h1><span class="section-number">21. </span>Heavy-Tailed Distributions<a class="headerlink" href="#heavy-tailed-distributions" title="Permalink to this heading">#</a></h1>
-<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="heavy-tail">
+<span id="id1"></span><h1><span class="section-number">21. </span>重尾分布<a class="headerlink" href="#heavy-tail" title="Permalink to this heading">#</a></h1>
+<p>除了Anaconda中的内容，本讲还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>yfinance<span class="w"> </span>pandas_datareader
@@ -288,7 +288,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas_datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.10.0)
 Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (2.2.2)
-Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (1.26.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (1.26.4)
 Requirement already satisfied: requests&gt;=2.31 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (2.32.2)
 Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (0.0.11)
 Requirement already satisfied: lxml&gt;=4.9.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from yfinance) (5.2.1)
@@ -305,9 +307,7 @@ Requirement already satisfied: webencodings in /home/runner/miniconda3/envs/quan
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.0.4)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2024.6.2)
@@ -316,10 +316,11 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/
 </div>
 </details>
 </div>
-<p>We use the following imports.</p>
+<p>我们使用以下的导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -329,27 +330,29 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">cauchy</span>
 <span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
 <span class="n">register_matplotlib_converters</span><span class="p">()</span>
+
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="overview">
-<h2><span class="section-number">21.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>Heavy-tailed distributions are a class of distributions that generate “extreme” outcomes.</p>
-<p>In the natural sciences (and in more traditional economics courses), heavy-tailed distributions are seen as quite exotic and non-standard.</p>
-<p>However, it turns out that heavy-tailed distributions play a crucial role in economics.</p>
-<p>In fact many – if not most – of the important distributions in economics are heavy-tailed.</p>
-<p>In this lecture we explain what heavy tails are and why they are – or at least
-why they should be – central to economic analysis.</p>
-<section id="introduction-light-tails">
-<h3><span class="section-number">21.1.1. </span>Introduction: light tails<a class="headerlink" href="#introduction-light-tails" title="Permalink to this heading">#</a></h3>
-<p>Most <a class="reference internal" href="prob_dist.html"><span class="doc">commonly used probability distributions</span></a> in classical statistics and
-the natural sciences have “light tails.”</p>
-<p>To explain this concept, let’s look first at examples.</p>
+<section id="id2">
+<h2><span class="section-number">21.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>重尾分布是一类能产生“极端”结果的分布。</p>
+<p>在自然科学（以及更多传统的经济学课程）中，重尾分布常被视为相当异乎寻常和非标准的。</p>
+<p>然而，事实证明，重尾分布在经济学中扮演着至关重要的角色。</p>
+<p>实际上，经济学中许多 – 如果不是大部分 – 重要的分布都是重尾的。</p>
+<p>在这次讲座中，我们将解释什么是重尾，以及为什么它们是 – 或者至少应该是 – 经济分析的核心。</p>
+<section id="id3">
+<h3><span class="section-number">21.1.1. </span>引言：轻尾分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>大多数<a class="reference internal" href="prob_dist.html"><span class="doc">常用概率分布</span></a>在经典统计学和自然科学中都具有“轻尾”。</p>
+<p>为了解释这个概念，让我们先看一些例子。</p>
 <div class="proof example admonition" id="ht_ex_nd">
 <p class="admonition-title"><span class="caption-number">Example 21.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>The classic example is the <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a>, which has density</p>
+<p>经典的例子是<a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">正态分布</a>，其密度公式为</p>
 <div class="math notranslate nohighlight">
 \[ 
 f(x) = \frac{1}{\sqrt{2\pi}\sigma} 
@@ -357,20 +360,17 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 \qquad
 (-\infty &lt; x &lt; \infty)
 \]</div>
-<p>The two parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are the mean and standard deviation
-respectively.</p>
-<p>As <span class="math notranslate nohighlight">\(x\)</span> deviates from <span class="math notranslate nohighlight">\(\mu\)</span>, the value of <span class="math notranslate nohighlight">\(f(x)\)</span> goes to zero extremely
-quickly.</p>
+<p>这里的两个参数 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span> 分别代表均值和标准差。</p>
+<p>随着 <span class="math notranslate nohighlight">\(x\)</span> 从 <span class="math notranslate nohighlight">\(\mu\)</span> 偏离，<span class="math notranslate nohighlight">\(f(x)\)</span> 的值会非常快地趋向于零。</p>
 </section>
-</div><p>We can see this when we plot the density and show a histogram of observations,
-as with the following code (which assumes <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>).</p>
+</div><p>我们可以通过绘制密度图和展示观测值的直方图来看到这一点，如下代码所示（假设 <span class="math notranslate nohighlight">\(\mu=0\)</span> 和 <span class="math notranslate nohighlight">\(\sigma=1\)</span>）。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1_000_000</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;histogram&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;直方图&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -378,19 +378,19 @@ as with the following code (which assumes <span class="math notranslate nohighli
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-obs">
-<a class="reference internal image-reference" href="_images/4ca63ea26fb7b7afad162eccca28c5515813dce5f6165e114d143e8a42e5ed8f.png"><img alt="_images/4ca63ea26fb7b7afad162eccca28c5515813dce5f6165e114d143e8a42e5ed8f.png" src="_images/4ca63ea26fb7b7afad162eccca28c5515813dce5f6165e114d143e8a42e5ed8f.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/53fb6705df431348156e10f2e48c9332790b2ae67b17702eb47ca2235b025aa2.png"><img alt="_images/53fb6705df431348156e10f2e48c9332790b2ae67b17702eb47ca2235b025aa2.png" src="_images/53fb6705df431348156e10f2e48c9332790b2ae67b17702eb47ca2235b025aa2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.1 </span><span class="caption-text">Histogram of observations</span><a class="headerlink" href="#hist-obs" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.1 </span><span class="caption-text">观测值直方图</span><a class="headerlink" href="#hist-obs" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Notice how</p>
+<p>请注意：</p>
 <ul class="simple">
-<li><p>the density’s tails converge quickly to zero in both directions and</p></li>
-<li><p>even with 1,000,000 draws, we get no very large or very small observations.</p></li>
+<li><p>密度的尾部在两个方向上迅速趋于零</p></li>
+<li><p>即使是1,000,000次抽样，我们也没有观察到非常大或非常小的值。</p></li>
 </ul>
-<p>We can see the last point more clearly by executing</p>
+<p>我们可以通过执行以下代码更清楚地看到最后一点：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
@@ -398,12 +398,12 @@ as with the following code (which assumes <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.717123578839745, 5.0552262369288234)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.740986678658176, 4.947854108828867)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s another view of draws from the same distribution:</p>
+<p>这里是从同一分布中抽取的另一种视图：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
@@ -420,49 +420,42 @@ as with the following code (which assumes <span class="math notranslate nohighli
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-obs2">
-<a class="reference internal image-reference" href="_images/fbca737e4f2fafa8c8c3e2aa329c1405d9b04ff3e871999235f1adb6689982a4.png"><img alt="_images/fbca737e4f2fafa8c8c3e2aa329c1405d9b04ff3e871999235f1adb6689982a4.png" src="_images/fbca737e4f2fafa8c8c3e2aa329c1405d9b04ff3e871999235f1adb6689982a4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fecdc00be228e725554b3ece4f3350d11cf0865aa1488db0ac4a0f1def23456e.png"><img alt="_images/fecdc00be228e725554b3ece4f3350d11cf0865aa1488db0ac4a0f1def23456e.png" src="_images/fecdc00be228e725554b3ece4f3350d11cf0865aa1488db0ac4a0f1def23456e.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.2 </span><span class="caption-text">Histogram of observations</span><a class="headerlink" href="#hist-obs2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.2 </span><span class="caption-text">观测值的直方图</span><a class="headerlink" href="#hist-obs2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>We have plotted each individual draw <span class="math notranslate nohighlight">\(X_i\)</span> against <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>None are very large or very small.</p>
-<p>In other words, extreme observations are rare and draws tend not to deviate
-too much from the mean.</p>
-<p>Putting this another way, light-tailed distributions are those that
-rarely generate extreme values.</p>
-<p>(A more formal definition is given <a class="reference internal" href="#heavy-tail-formal-definition"><span class="std std-ref">below</span></a>.)</p>
-<p>Many statisticians and econometricians
-use rules of thumb such as “outcomes more than four or five
-standard deviations from the mean can safely be ignored.”</p>
-<p>But this is only true when distributions have light tails.</p>
+<p>我们已经绘制了每个单独的抽样 <span class="math notranslate nohighlight">\(X_i\)</span> 与 <span class="math notranslate nohighlight">\(i\)</span> 的对应关系。</p>
+<p>没有一个非常大或非常小。</p>
+<p>换句话说，极端的观测值很少，抽样倾向于不会太偏离均值。</p>
+<p>换种说法，轻尾分布是那些很少产生极端值的分布。</p>
+<p>（更正式的定义见<a class="reference internal" href="#heavy-tail-formal-definition"><span class="std std-ref">下面</span></a>。）</p>
+<p>许多统计学家和计量经济学家使用经验法则，如“结果超出均值四到五个标准差可以安全忽略。”</p>
+<p>但这只有在分布具有轻尾的时候才成立。</p>
 </section>
-<section id="when-are-light-tails-valid">
-<h3><span class="section-number">21.1.2. </span>When are light tails valid?<a class="headerlink" href="#when-are-light-tails-valid" title="Permalink to this heading">#</a></h3>
-<p>In probability theory and in the real world, many distributions are
-light-tailed.</p>
-<p>For example, human height is light-tailed.</p>
-<p>Yes, it’s true that we see some very tall people.</p>
+<section id="id4">
+<h3><span class="section-number">21.1.2. </span>何时适用于轻尾分布？<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>在概率理论和现实世界中，许多分布都是轻尾的。</p>
+<p>例如，人类身高就是轻尾分布。</p>
+<p>是的，我们确实看到了一些非常高的人。</p>
 <ul class="simple">
-<li><p>For example, basketballer <a class="reference external" href="https://en.wikipedia.org/wiki/Sun_Mingming">Sun Mingming</a> is 2.32 meters tall</p></li>
+<li><p>例如，篮球运动员<a class="reference external" href="https://en.wikipedia.org/wiki/Sun_Mingming">孙明明</a>身高2.32米</p></li>
 </ul>
-<p>But have you ever heard of someone who is 20 meters tall?  Or 200?  Or 2000?</p>
-<p>Have you ever wondered why not?</p>
-<p>After all, there are 8 billion people in the world!</p>
-<p>In essence, the reason we don’t see such draws is that the distribution of
-human height has very light tails.</p>
-<p>In fact the distribution of human height obeys a bell-shaped curve similar to the normal distribution.</p>
+<p>但是你有没有听说过有人身高达20米、200米或2000米的吗？</p>
+<p>你有没有想过为什么没有？</p>
+<p>毕竟，全世界有80亿人！</p>
+<p>本质上，我们看不到这样的数据是因为人类身高的分布具有非常轻的尾部。</p>
+<p>事实上，人类身高的分布符合类似正态分布的钟形曲线。</p>
 </section>
-<section id="returns-on-assets">
-<h3><span class="section-number">21.1.3. </span>Returns on assets<a class="headerlink" href="#returns-on-assets" title="Permalink to this heading">#</a></h3>
-<p>But what about economic data?</p>
-<p>Let’s look at some financial data first.</p>
-<p>Our aim is to plot the daily change in the price of Amazon (AMZN) stock for
-the period from 1st January 2015 to 1st July 2022.</p>
-<p>This equates to daily returns if we set dividends aside.</p>
-<p>The code below produces the desired plot using Yahoo financial data via the <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> library.</p>
+<section id="id5">
+<h3><span class="section-number">21.1.3. </span>资产回报<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>但经济数据呢？</p>
+<p>我们首先来看一些金融数据。</p>
+<p>我们的目标是绘制自2015年1月1日至2022年7月1日期间亚马逊（AMZN）股价的每日变化。</p>
+<p>如果我们不考虑股息，这相当于每日回报。</p>
+<p>以下代码通过 <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> 库使用雅虎财经数据生成所需的图表。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022-7-1&#39;</span><span class="p">)</span>
@@ -493,8 +486,8 @@ the period from 1st January 2015 to 1st July 2022.</p>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;returns&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;回报&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;日期&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -502,16 +495,16 @@ the period from 1st January 2015 to 1st July 2022.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="dailyreturns-amzn">
-<a class="reference internal image-reference" href="_images/5f800714fb4ff3c49898495050105d392212183357aa98df638647362d9f857a.png"><img alt="_images/5f800714fb4ff3c49898495050105d392212183357aa98df638647362d9f857a.png" src="_images/5f800714fb4ff3c49898495050105d392212183357aa98df638647362d9f857a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/20f05e482518985254b744b29a649c068ee82cb960d98ba3e35cce9991e7d649.png"><img alt="_images/20f05e482518985254b744b29a649c068ee82cb960d98ba3e35cce9991e7d649.png" src="_images/20f05e482518985254b744b29a649c068ee82cb960d98ba3e35cce9991e7d649.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.3 </span><span class="caption-text">Daily Amazon returns</span><a class="headerlink" href="#dailyreturns-amzn" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.3 </span><span class="caption-text">每日亚马逊回报</span><a class="headerlink" href="#dailyreturns-amzn" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>This data looks different to the draws from the normal distribution we saw above.</p>
-<p>Several of observations are quite extreme.</p>
-<p>We get a similar picture if we look at other assets, such as Bitcoin</p>
+<p>这些数据看起来与我们上面看到的正态分布的抽样有所不同。</p>
+<p>有几个观测值非常极端。</p>
+<p>如果我们查看其他资产，比如比特币，我们会得到类似的图像。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;BTC-USD&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2022-7-1&#39;</span><span class="p">)</span>
@@ -542,8 +535,8 @@ the period from 1st January 2015 to 1st July 2022.</p>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;returns&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;回报&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;日期&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -551,28 +544,27 @@ the period from 1st January 2015 to 1st July 2022.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="dailyreturns-btc">
-<a class="reference internal image-reference" href="_images/15cce2080915daa9eb019dcc4695f7bb458857135f344ceefbae6798aed680e8.png"><img alt="_images/15cce2080915daa9eb019dcc4695f7bb458857135f344ceefbae6798aed680e8.png" src="_images/15cce2080915daa9eb019dcc4695f7bb458857135f344ceefbae6798aed680e8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2cfefcdf8f4eb49a8fe8c1014d18fabcf97b8c62c2921680779195c2fc51b24f.png"><img alt="_images/2cfefcdf8f4eb49a8fe8c1014d18fabcf97b8c62c2921680779195c2fc51b24f.png" src="_images/2cfefcdf8f4eb49a8fe8c1014d18fabcf97b8c62c2921680779195c2fc51b24f.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.4 </span><span class="caption-text">Daily Bitcoin returns</span><a class="headerlink" href="#dailyreturns-btc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.4 </span><span class="caption-text">比特币每日回报</span><a class="headerlink" href="#dailyreturns-btc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The histogram also looks different to the histogram of the normal
-distribution:</p>
+<p>这个直方图也与正态分布的直方图不同:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bitcoin returns&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;比特币回报&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;normal distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;正态分布&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;returns&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;回报&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -581,72 +573,62 @@ distribution:</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-normal-btc">
-<a class="reference internal image-reference" href="_images/e87c72321e7638479afc51e8fca037db746584040594e9945469a5863973452a.png"><img alt="_images/e87c72321e7638479afc51e8fca037db746584040594e9945469a5863973452a.png" src="_images/e87c72321e7638479afc51e8fca037db746584040594e9945469a5863973452a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9605a6e1bf680bec2bc97f33b6d2fffcc2fc08f18e7d8c8117e9e36f3b9cbce9.png"><img alt="_images/9605a6e1bf680bec2bc97f33b6d2fffcc2fc08f18e7d8c8117e9e36f3b9cbce9.png" src="_images/9605a6e1bf680bec2bc97f33b6d2fffcc2fc08f18e7d8c8117e9e36f3b9cbce9.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.5 </span><span class="caption-text">Histogram (normal vs bitcoin returns)</span><a class="headerlink" href="#hist-normal-btc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.5 </span><span class="caption-text">直方图（正常与比特币回报对比）</span><a class="headerlink" href="#hist-normal-btc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>If we look at higher frequency returns data (e.g., tick-by-tick), we often see
-even more extreme observations.</p>
-<p>See, for example, <span id="id1">[<a class="reference internal" href="zreferences.html#id86" title="Benoit Mandelbrot. The variation of certain speculative prices. The Journal of Business, 36(4):394–419, 1963.">Mandelbrot, 1963</a>]</span> or <span id="id2">[<a class="reference internal" href="zreferences.html#id85" title="Svetlozar Todorov Rachev. Handbook of heavy tailed distributions in finance: Handbooks in finance. Volume 1. Elsevier, 2003.">Rachev, 2003</a>]</span>.</p>
+<p>如果我们查看更高频率的回报数据（例如，逐笔交易），我们经常会看到更极端的观测。</p>
+<p>例如，参见 <span id="id6">[<a class="reference internal" href="zreferences.html#id86" title="Benoit Mandelbrot. The variation of certain speculative prices. The Journal of Business, 36(4):394–419, 1963.">Mandelbrot, 1963</a>]</span> 或 <span id="id7">[<a class="reference internal" href="zreferences.html#id85" title="Svetlozar Todorov Rachev. Handbook of heavy tailed distributions in finance: Handbooks in finance. Volume 1. Elsevier, 2003.">Rachev, 2003</a>]</span>。</p>
 </section>
-<section id="other-data">
-<h3><span class="section-number">21.1.4. </span>Other data<a class="headerlink" href="#other-data" title="Permalink to this heading">#</a></h3>
-<p>The data we have just seen is said to be “heavy-tailed”.</p>
-<p>With heavy-tailed distributions, extreme outcomes occur relatively
-frequently.</p>
+<section id="id8">
+<h3><span class="section-number">21.1.4. </span>其他数据<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>我们刚刚看到的数据被称为“重尾”。</p>
+<p>在重尾分布中，极端结果相对频繁地发生。</p>
 <div class="proof example admonition" id="ht_ex_od">
 <p class="admonition-title"><span class="caption-number">Example 21.2 </span></p>
 <section class="example-content" id="proof-content">
-<p>Importantly, there are many examples of heavy-tailed distributions
-observed in economic and financial settings!</p>
-<p>For example, the income and the wealth distributions are heavy-tailed</p>
+<p>重要的是，在经济和金融环境中观察到了许多重尾分布的例子！</p>
+<p>例如，收入和财富分布是重尾的</p>
 <ul class="simple">
-<li><p>You can imagine this: most people have low or modest wealth but some people
-are extremely rich.</p></li>
+<li><p>你可以想象这样的情景：大多数人的财富较低或适中，但有些人非常富有。</p></li>
 </ul>
-<p>The firm size distribution is also heavy-tailed</p>
+<p>公司规模分布也是重尾的</p>
 <ul class="simple">
-<li><p>You can imagine this too: most firms are small but some firms are enormous.</p></li>
+<li><p>你也可以想象这样的情景：大多数公司都很小，但有些公司非常庞大。</p></li>
 </ul>
-<p>The distribution of town and city sizes is heavy-tailed</p>
+<p>城镇和城市大小的分布是重尾的</p>
 <ul class="simple">
-<li><p>Most towns and cities are small but some are very large.</p></li>
+<li><p>大多数城镇和城市都很小，但有些非常大。</p></li>
 </ul>
 </section>
-</div><p>Later in this lecture, we examine heavy tails in these distributions.</p>
+</div><p>在本讲座的后面部分，我们将研究这些分布中的重尾现象。</p>
 </section>
-<section id="why-should-we-care">
-<h3><span class="section-number">21.1.5. </span>Why should we care?<a class="headerlink" href="#why-should-we-care" title="Permalink to this heading">#</a></h3>
-<p>Heavy tails are common in economic data but does that mean they are important?</p>
-<p>The answer to this question is affirmative!</p>
-<p>When distributions are heavy-tailed, we need to think carefully about issues
-like</p>
+<section id="id9">
+<h3><span class="section-number">21.1.5. </span>为什么我们应该关心？<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>重尾在经济数据中很常见，但这是否意味着它们很重要？</p>
+<p>对这个问题的回答是肯定的！</p>
+<p>当分布是重尾的，我们需要仔细考虑一些问题，如</p>
 <ul class="simple">
-<li><p>diversification and risk</p></li>
-<li><p>forecasting</p></li>
-<li><p>taxation (across a heavy-tailed income distribution), etc.</p></li>
+<li><p>多样化和风险</p></li>
+<li><p>预测</p></li>
+<li><p>税收（针对重尾收入分布），等等。</p></li>
 </ul>
-<p>We return to these points <a class="reference internal" href="#heavy-tail-application"><span class="std std-ref">below</span></a>.</p>
+<p>我们将回到这些点 <a class="reference internal" href="#heavy-tail-application"><span class="std std-ref">下面</span></a>。</p>
 </section>
 </section>
-<section id="visual-comparisons">
-<h2><span class="section-number">21.2. </span>Visual comparisons<a class="headerlink" href="#visual-comparisons" title="Permalink to this heading">#</a></h2>
-<p>In this section, we will introduce important concepts such as the Pareto distribution, Counter CDFs, and Power laws, which aid in recognizing heavy-tailed distributions.</p>
-<p>Later we will provide a mathematical definition of the difference between
-light and heavy tails.</p>
-<p>But for now let’s do some visual comparisons to help us build intuition on the
-difference between these two types of distributions.</p>
-<section id="simulations">
-<h3><span class="section-number">21.2.1. </span>Simulations<a class="headerlink" href="#simulations" title="Permalink to this heading">#</a></h3>
-<p>The figure below shows a simulation.</p>
-<p>The top two subfigures each show 120 independent draws from the normal
-distribution, which is light-tailed.</p>
-<p>The bottom subfigure shows 120 independent draws from <a class="reference external" href="https://en.wikipedia.org/wiki/Cauchy_distribution">the Cauchy
-distribution</a>, which is
-heavy-tailed.</p>
+<section id="id10">
+<h2><span class="section-number">21.2. </span>视觉比较<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>在本节中，我们将介绍帕雷托分布、计数器累积分布函数和幂律等重要概念，这些概念有助于识别重尾分布。</p>
+<p>稍后我们将提供有关轻尾和重尾差异的数学定义。</p>
+<p>但现在让我们先进行一些视觉比较，以帮助我们建立对这两种类型分布差异的直觉。</p>
+<section id="id11">
+<h3><span class="section-number">21.2.1. </span>模拟<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p>下图显示了一次模拟。</p>
+<p>上面两个子图各显示来自正态分布的120个独立抽取，这是轻尾分布。</p>
+<p>下面的子图显示来自<a class="reference external" href="https://en.wikipedia.org/wiki/Cauchy_distribution">柯西分布</a>的120个独立抽取，这是重尾分布。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">120</span>
@@ -663,14 +645,14 @@ heavy-tailed.</p>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">data</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;draws from $N(0, \sigma^2)$ with $\sigma = </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;从 $N(0, \sigma^2)$ 抽取，$\sigma = </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">distribution</span> <span class="o">=</span> <span class="n">cauchy</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">data</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;draws from the Cauchy distribution&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;来自柯西分布的抽取&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
@@ -680,28 +662,24 @@ heavy-tailed.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-normal-cauchy">
-<a class="reference internal image-reference" href="_images/4e35344903106e36743b96bb25cddab5ddbe6d9ecc3ff81242f3872a619f9931.png"><img alt="_images/4e35344903106e36743b96bb25cddab5ddbe6d9ecc3ff81242f3872a619f9931.png" src="_images/4e35344903106e36743b96bb25cddab5ddbe6d9ecc3ff81242f3872a619f9931.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e2485a9788293e45c7995a616200f18412b5d0df5127c5c20f7a5e08f32453b9.png"><img alt="_images/e2485a9788293e45c7995a616200f18412b5d0df5127c5c20f7a5e08f32453b9.png" src="_images/e2485a9788293e45c7995a616200f18412b5d0df5127c5c20f7a5e08f32453b9.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.6 </span><span class="caption-text">Draws from normal and Cauchy distributions</span><a class="headerlink" href="#draws-normal-cauchy" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.6 </span><span class="caption-text">来自正态分布和柯西分布的抽取</span><a class="headerlink" href="#draws-normal-cauchy" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>In the top subfigure, the standard deviation of the normal distribution is 2,
-and the draws are clustered around the mean.</p>
-<p>In the middle subfigure, the standard deviation is increased to 12 and, as
-expected, the amount of dispersion rises.</p>
-<p>The bottom subfigure, with the Cauchy draws, shows a different pattern: tight
-clustering around the mean for the great majority of observations, combined
-with a few sudden large deviations from the mean.</p>
-<p>This is typical of a heavy-tailed distribution.</p>
+<p>在顶部的子图中，正态分布的标准偏差为2，抽取值围绕均值聚集。</p>
+<p>在中间的子图中，标准偏差增加到12，如预期的那样，分散度增加。</p>
+<p>底部的子图中，柯西的抽取显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。</p>
+<p>这是典型的重尾分布特征。</p>
 </section>
-<section id="nonnegative-distributions">
-<h3><span class="section-number">21.2.2. </span>Nonnegative distributions<a class="headerlink" href="#nonnegative-distributions" title="Permalink to this heading">#</a></h3>
-<p>Let’s compare some distributions that only take nonnegative values.</p>
-<p>One is the exponential distribution, which we discussed in <a class="reference internal" href="prob_dist.html"><span class="doc">our lecture on probability and distributions</span></a>.</p>
-<p>The exponential distribution is a light-tailed distribution.</p>
-<p>Here are some draws from the exponential distribution.</p>
+<section id="id12">
+<h3><span class="section-number">21.2.2. </span>非负分布<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<p>让我们比较一些只取非负值的分布。</p>
+<p>其中一种是指数分布，我们在<a class="reference internal" href="prob_dist.html"><span class="doc">our lecture on probability and distributions</span></a>中讨论过。</p>
+<p>指数分布是一种轻尾分布。</p>
+<p>这里有一些来自指数分布的抽样。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">120</span>
@@ -720,38 +698,34 @@ with a few sudden large deviations from the mean.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-exponential">
-<a class="reference internal image-reference" href="_images/fc3d5804b1dda5b1c6794d3bd7939ae86ecc0a1c2d34a5f37602f94d163df2fb.png"><img alt="_images/fc3d5804b1dda5b1c6794d3bd7939ae86ecc0a1c2d34a5f37602f94d163df2fb.png" src="_images/fc3d5804b1dda5b1c6794d3bd7939ae86ecc0a1c2d34a5f37602f94d163df2fb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c7f6836edb41256cf6a99878f408095d606d20a0e85c9bb284abf5e2d78c80b3.png"><img alt="_images/c7f6836edb41256cf6a99878f408095d606d20a0e85c9bb284abf5e2d78c80b3.png" src="_images/c7f6836edb41256cf6a99878f408095d606d20a0e85c9bb284abf5e2d78c80b3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.7 </span><span class="caption-text">Draws of exponential distribution</span><a class="headerlink" href="#draws-exponential" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.7 </span><span class="caption-text">指数分布的抽样</span><a class="headerlink" href="#draws-exponential" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Another nonnegative distribution is the <a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto distribution</a>.</p>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> has the Pareto distribution, then there are positive constants <span class="math notranslate nohighlight">\(\bar x\)</span>
-and <span class="math notranslate nohighlight">\(\alpha\)</span> such that</p>
+<p>另一个非负分布是<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">帕累托分布</a>。</p>
+<p>如果 <span class="math notranslate nohighlight">\(X\)</span> 遵循帕累托分布，那么存在正常数 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(\alpha\)</span>，使得</p>
 <div class="math notranslate nohighlight" id="equation-pareto">
 <span class="eqno">(21.1)<a class="headerlink" href="#equation-pareto" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbb P\{X &gt; x\} =
 \begin{cases}
-    \left( \bar x/x \right)^{\alpha}
-        &amp; \text{ if } x \geq \bar x
+    \left( \frac{\bar x}{x} \right)^{\alpha}
+        &amp; \text{ 如果 } x \geq \bar x
     \\
     1
-        &amp; \text{ if } x &lt; \bar x
+        &amp; \text{ 如果 } x &lt; \bar x
 \end{cases}\end{split}\]</div>
-<p>The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is called the <strong>tail index</strong> and <span class="math notranslate nohighlight">\(\bar x\)</span> is called the
-<strong>minimum</strong>.</p>
-<p>The Pareto distribution is a heavy-tailed distribution.</p>
-<p>One way that the Pareto distribution arises is as the exponential of an
-exponential random variable.</p>
-<p>In particular, if <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with rate parameter <span class="math notranslate nohighlight">\(\alpha\)</span>, then</p>
+<p>参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 被称为<strong>尾指数</strong>，<span class="math notranslate nohighlight">\(\bar x\)</span> 被称为<strong>最小值</strong>。</p>
+<p>帕累托分布是一个重尾分布。</p>
+<p>帕累托分布产生的一个方式是指数随机变量的指数。</p>
+<p>特别地，如果 <span class="math notranslate nohighlight">\(X\)</span> 是以率参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 指数分布的，那么</p>
 <div class="math notranslate nohighlight">
 \[
 Y = \bar x \exp(X) 
 \]</div>
-<p>is Pareto-distributed with minimum <span class="math notranslate nohighlight">\(\bar x\)</span> and tail index <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>Here are some draws from the Pareto distribution with tail index <span class="math notranslate nohighlight">\(1\)</span> and minimum
-<span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>具有最小值 <span class="math notranslate nohighlight">\(\bar x\)</span> 和尾指数 <span class="math notranslate nohighlight">\(\alpha\)</span> 的帕累托分布。</p>
+<p>这里是一些从帕累托分布中抽取的数据，尾指数为 <span class="math notranslate nohighlight">\(1\)</span>，最小值为 <span class="math notranslate nohighlight">\(1\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">120</span>
@@ -770,52 +744,49 @@ Y = \bar x \exp(X)
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-pareto">
-<a class="reference internal image-reference" href="_images/05de27994f8ecc8d8c4d03c72c750ea0c691cde37f0150c795004e866b30ae8f.png"><img alt="_images/05de27994f8ecc8d8c4d03c72c750ea0c691cde37f0150c795004e866b30ae8f.png" src="_images/05de27994f8ecc8d8c4d03c72c750ea0c691cde37f0150c795004e866b30ae8f.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5ef7a85fd078f83ca7a9ad002733d0f7879c14db601fe82fd6285924f3638032.png"><img alt="_images/5ef7a85fd078f83ca7a9ad002733d0f7879c14db601fe82fd6285924f3638032.png" src="_images/5ef7a85fd078f83ca7a9ad002733d0f7879c14db601fe82fd6285924f3638032.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.8 </span><span class="caption-text">Draws from Pareto distribution</span><a class="headerlink" href="#draws-pareto" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.8 </span><span class="caption-text">从帕累托分布中抽取的数据</span><a class="headerlink" href="#draws-pareto" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Notice how extreme outcomes are more common.</p>
+<p>注意极端结果更常见。</p>
 </section>
-<section id="counter-cdfs">
-<h3><span class="section-number">21.2.3. </span>Counter CDFs<a class="headerlink" href="#counter-cdfs" title="Permalink to this heading">#</a></h3>
-<p>For nonnegative random variables, one way to visualize the difference between
-light and heavy tails is to look at the
-<strong>counter CDF</strong> (CCDF).</p>
-<p>For a random variable <span class="math notranslate nohighlight">\(X\)</span> with CDF <span class="math notranslate nohighlight">\(F\)</span>, the CCDF is the function</p>
+<section id="id13">
+<h3><span class="section-number">21.2.3. </span>对立累积分布函数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<p>对于非负随机变量，视觉上区分轻尾和重尾的一种方法是查看<strong>对立累积分布函数</strong>（CCDF）。</p>
+<p>对于一个具有CDF <span class="math notranslate nohighlight">\(F\)</span> 的随机变量 <span class="math notranslate nohighlight">\(X\)</span>，CCDF定义为函数</p>
 <div class="math notranslate nohighlight">
 \[
-G(x) := 1 - F(x) = \mathbb P\{X &gt; x\} 
+G(x) := 1 - F(x) = \mathbb P\{X &gt; x\}
 \]</div>
-<p>(Some authors call <span class="math notranslate nohighlight">\(G\)</span> the “survival” function.)</p>
-<p>The CCDF shows how fast the upper tail goes to zero as <span class="math notranslate nohighlight">\(x \to \infty\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(X\)</span> is exponentially distributed with rate parameter <span class="math notranslate nohighlight">\(\alpha\)</span>, then the CCDF is</p>
+<p>（有些作者称<span class="math notranslate nohighlight">\(G\)</span>为“生存”函数。）</p>
+<p>CCDF显示随着 <span class="math notranslate nohighlight">\(x \to \infty\)</span>，上尾速度减少到零的快慢。</p>
+<p>如果<span class="math notranslate nohighlight">\(X\)</span>是具有速率参数<span class="math notranslate nohighlight">\(\alpha\)</span>的指数分布，则其CCDF为</p>
 <div class="math notranslate nohighlight">
 \[
 G_E(x) = \exp(- \alpha x)
 \]</div>
-<p>This function goes to zero relatively quickly as <span class="math notranslate nohighlight">\(x\)</span> gets large.</p>
-<p>The standard Pareto distribution, where <span class="math notranslate nohighlight">\(\bar x = 1\)</span>, has CCDF</p>
+<p>随着 <span class="math notranslate nohighlight">\(x\)</span> 增大，这个函数相对快速地趋于零。</p>
+<p>标准帕雷托分布，其中 <span class="math notranslate nohighlight">\(\beta x = 1\)</span>，具有CCDF</p>
 <div class="math notranslate nohighlight">
 \[
 G_P(x) = x^{- \alpha}
 \]</div>
-<p>This function goes to zero as <span class="math notranslate nohighlight">\(x \to \infty\)</span>, but much slower than <span class="math notranslate nohighlight">\(G_E\)</span>.</p>
+<p>这个函数在 <span class="math notranslate nohighlight">\(x \to \infty\)</span> 时趋于零，但比 <span class="math notranslate nohighlight">\(G_E\)</span> 更慢。</p>
 <div class="exercise admonition" id="ht_ex_x1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.1 </span></p>
 <section id="exercise-content">
-<p>Show how the CCDF of the standard Pareto distribution can be derived from the CCDF of the exponential distribution.</p>
+<p>展示如何从指数分布的CCDF推导出标准帕雷托分布的CCDF。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="heavy_tails-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ht_ex_x1"> Exercise 21.1</a></p>
 <section id="solution-content">
-<p>Letting <span class="math notranslate nohighlight">\(G_E\)</span> and <span class="math notranslate nohighlight">\(G_P\)</span> be defined as above, letting <span class="math notranslate nohighlight">\(X\)</span> be exponentially
-distributed with rate parameter <span class="math notranslate nohighlight">\(\alpha\)</span>, and letting <span class="math notranslate nohighlight">\(Y = \exp(X)\)</span>, we have</p>
+<p>设 <span class="math notranslate nohighlight">\(G_E\)</span> 和 <span class="math notranslate nohighlight">\(G_P\)</span> 如上定义，设 <span class="math notranslate nohighlight">\(X\)</span> 是具有速率参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 的指数分布，并设 <span class="math notranslate nohighlight">\(Y = \exp(X)\)</span>，我们有</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -823,21 +794,21 @@ distributed with rate parameter <span class="math notranslate nohighlight">\(\al
          &amp; = \mathbb P\{\exp(X) &gt; y\} \\
          &amp; = \mathbb P\{X &gt; \ln y\} \\
          &amp; = G_E(\ln y) \\
-         &amp; = \exp( - \alpha \ln y) \\
+         &amp; = \exp(- \alpha \ln y) \\
         &amp; = y^{-\alpha}
 \end{aligned}
 \end{split}\]</div>
 </section>
 </div>
-<p>Here’s a plot that illustrates how <span class="math notranslate nohighlight">\(G_E\)</span> goes to zero faster than <span class="math notranslate nohighlight">\(G_P\)</span>.</p>
+<p>这是一个图示，展示了<span class="math notranslate nohighlight">\(G_E\)</span>比<span class="math notranslate nohighlight">\(G_P\)</span>衰减得更快。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exponential&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;指数分布&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;帕累托分布&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X值&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;CCDF&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -846,23 +817,22 @@ distributed with rate parameter <span class="math notranslate nohighlight">\(\al
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="compare-pareto-exponential">
-<a class="reference internal image-reference" href="_images/37ada8622f408650cfb145e487421c74c14b31cac1d0f02dc3120f01a7b80db3.png"><img alt="_images/37ada8622f408650cfb145e487421c74c14b31cac1d0f02dc3120f01a7b80db3.png" src="_images/37ada8622f408650cfb145e487421c74c14b31cac1d0f02dc3120f01a7b80db3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/968eb59a1e14fbdaa4a5fc57cc6158e9a766abb194e1b382b9166c7225e28da2.png"><img alt="_images/968eb59a1e14fbdaa4a5fc57cc6158e9a766abb194e1b382b9166c7225e28da2.png" src="_images/968eb59a1e14fbdaa4a5fc57cc6158e9a766abb194e1b382b9166c7225e28da2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.9 </span><span class="caption-text">Pareto and exponential distribution comparison</span><a class="headerlink" href="#compare-pareto-exponential" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.9 </span><span class="caption-text">帕累托分布与指数分布对比</span><a class="headerlink" href="#compare-pareto-exponential" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>Here’s a log-log plot of the same functions, which makes visual comparison
-easier.</p>
+<p>下面是同一函数的对数对数图，便于视觉比较。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exponential&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;log value&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log prob&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;指数分布&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">alpha</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;帕累托分布&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;对数值&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;对数概率&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -870,40 +840,38 @@ easier.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="compare-pareto-exponential-log-log">
-<a class="reference internal image-reference" href="_images/ab9feb3215bbfcada25da504aaf0271278bdc560b41e5480138ee6c380bceb44.png"><img alt="_images/ab9feb3215bbfcada25da504aaf0271278bdc560b41e5480138ee6c380bceb44.png" src="_images/ab9feb3215bbfcada25da504aaf0271278bdc560b41e5480138ee6c380bceb44.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/62853b5417dbb948414738c5779108558686228f4fa99459e0247b4b9b660a23.png"><img alt="_images/62853b5417dbb948414738c5779108558686228f4fa99459e0247b4b9b660a23.png" src="_images/62853b5417dbb948414738c5779108558686228f4fa99459e0247b4b9b660a23.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">Pareto and exponential distribution comparison (log-log)</span><a class="headerlink" href="#compare-pareto-exponential-log-log" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">帕累托与指数分布对比（对数对数图）</span><a class="headerlink" href="#compare-pareto-exponential-log-log" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>In the log-log plot, the Pareto CCDF is linear, while the exponential one is
-concave.</p>
-<p>This idea is often used to separate light- and heavy-tailed distributions in
-visualisations — we return to this point below.</p>
+<p>在对数对数图中，帕累托的互补累积分布函数是线性的，而指数的则是凹的。</p>
+<p>这个观点常用于在视觉化中区分轻尾分布和重尾分布——我们下面会再次讨论这一点。</p>
 </section>
-<section id="empirical-ccdfs">
-<h3><span class="section-number">21.2.4. </span>Empirical CCDFs<a class="headerlink" href="#empirical-ccdfs" title="Permalink to this heading">#</a></h3>
-<p>The sample counterpart of the CCDF function is the <strong>empirical CCDF</strong>.</p>
-<p>Given a sample <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, the empirical CCDF is given by</p>
+<section id="ccdfs">
+<h3><span class="section-number">21.2.4. </span>实验 CCDFs<a class="headerlink" href="#ccdfs" title="Permalink to this heading">#</a></h3>
+<p>样本对应的 CCDF 函数是<strong>经验 CCDF</strong>。</p>
+<p>给定一个样本 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>，经验 CCDF 定义为</p>
 <div class="math notranslate nohighlight">
 \[
 \hat G(x) = \frac{1}{n} \sum_{i=1}^n \mathbb 1\{x_i &gt; x\}
 \]</div>
-<p>Thus, <span class="math notranslate nohighlight">\(\hat G(x)\)</span> shows the fraction of the sample that exceeds <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>因此，<span class="math notranslate nohighlight">\(\hat G(x)\)</span> 显示样本中超过 <span class="math notranslate nohighlight">\(x\)</span> 的比例。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="s2">&quot;Simple empirical CCDF function.&quot;</span>
+    <span class="s2">&quot;简单的经验 CCDF 函数。&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s a figure containing some empirical CCDFs from simulated data.</p>
+<p>下面是一些从模拟数据得到的经验 CCDFs 的图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters and grid</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 参数和网格</span>
 <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
@@ -916,7 +884,7 @@ visualisations — we return to this point below.</p>
 
 <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_exp</span><span class="p">,</span> <span class="n">data_logn</span><span class="p">,</span> <span class="n">data_pareto</span><span class="p">]</span>
 
-<span class="c1"># Build figure</span>
+<span class="c1"># 构建图形</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exponential&#39;</span><span class="p">,</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Pareto&#39;</span><span class="p">]</span>
@@ -925,8 +893,8 @@ visualisations — we return to this point below.</p>
 
     <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="p">[</span><span class="n">eccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_grid</span><span class="p">],</span> 
         <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;log value&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;log prob&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;对数值&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;对数概率&quot;</span><span class="p">)</span>
     
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     
@@ -939,21 +907,20 @@ visualisations — we return to this point below.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="ccdf-empirics">
-<a class="reference internal image-reference" href="_images/60b9d4c91958ea9491b10d90e2d94e3c55b01f8dc84ed9e552c58c71ceb1d910.png"><img alt="_images/60b9d4c91958ea9491b10d90e2d94e3c55b01f8dc84ed9e552c58c71ceb1d910.png" src="_images/60b9d4c91958ea9491b10d90e2d94e3c55b01f8dc84ed9e552c58c71ceb1d910.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/35ea3527f94ca1b39b8dfcefbf71265e6f6d36a009823315059ec5bcecfb417f.png"><img alt="_images/35ea3527f94ca1b39b8dfcefbf71265e6f6d36a009823315059ec5bcecfb417f.png" src="_images/35ea3527f94ca1b39b8dfcefbf71265e6f6d36a009823315059ec5bcecfb417f.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">Empirical CCDFs</span><a class="headerlink" href="#ccdf-empirics" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">实验 CCDFs</span><a class="headerlink" href="#ccdf-empirics" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>As with the CCDF, the empirical CCDF from the Pareto distributions is
-approximately linear in a log-log plot.</p>
-<p>We will use this idea <a class="reference external" href="https://intro.quantecon.org/heavy_tails.html#heavy-tails-in-economic-cross-sections">below</a> when we look at real data.</p>
-<section id="q-q-plots">
-<h4><span class="section-number">21.2.4.1. </span>Q-Q Plots<a class="headerlink" href="#q-q-plots" title="Permalink to this heading">#</a></h4>
-<p>We can also use a <a class="reference external" href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">qq plot</a> to do a visual comparison between two probability distributions.</p>
-<p>The <a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> package provides a convenient <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html">qqplot</a> function that, by default, compares sample data to the quintiles of the normal distribution.</p>
-<p>If the data is drawn from a normal distribution, the plot would look like:</p>
+<p>与 CCDF 一样，帕累托分布的经验 CCDF 在对数-对数图中大致呈线性。</p>
+<p>我们将在下面使用这个想法 <a class="reference external" href="https://intro.quantecon.org/heavy_tails.html#heavy-tails-in-economic-cross-sections">here</a> 当我们查看真实数据时。</p>
+<section id="q-q">
+<h4><span class="section-number">21.2.4.1. </span>Q-Q图<a class="headerlink" href="#q-q" title="Permalink to this heading">#</a></h4>
+<p>我们也可以使用<a class="reference external" href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">qq图</a>来可视化比较两个概率分布。</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a>包提供了一个方便的<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html">qqplot</a>函数，该函数默认将样本数据与正态分布的分位数进行比较。</p>
+<p>如果数据来自正态分布，该图看起来会像：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
@@ -963,18 +930,18 @@ approximately linear in a log-log plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/940c786a8d066e2ba8a59fa2cf6d60deb5b2c5f16be9306c6e29a0485946139e.png"><img alt="_images/940c786a8d066e2ba8a59fa2cf6d60deb5b2c5f16be9306c6e29a0485946139e.png" src="_images/940c786a8d066e2ba8a59fa2cf6d60deb5b2c5f16be9306c6e29a0485946139e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c6d9c665630202a1d0baebc629dafcbc450d60960beeb31bfd2fde6fb666e099.png"><img alt="_images/c6d9c665630202a1d0baebc629dafcbc450d60960beeb31bfd2fde6fb666e099.png" src="_images/c6d9c665630202a1d0baebc629dafcbc450d60960beeb31bfd2fde6fb666e099.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We can now compare this with the exponential, log-normal, and Pareto distributions</p>
+<p>我们现在可以将其与指数分布、对数正态分布和帕累托分布进行比较</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build figure</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构建图形</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exponential&#39;</span><span class="p">,</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">,</span> <span class="s1">&#39;Pareto&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
-    <span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -982,43 +949,38 @@ approximately linear in a log-log plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cdd1b06b7ce0ba86e218dfdc8d7c9eb74d5d335c85833bfc2c27049b5088dbdb.png"><img alt="_images/cdd1b06b7ce0ba86e218dfdc8d7c9eb74d5d335c85833bfc2c27049b5088dbdb.png" src="_images/cdd1b06b7ce0ba86e218dfdc8d7c9eb74d5d335c85833bfc2c27049b5088dbdb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f6620aba1b6809ce3992ee42276f11a82391b5e448dc7ebfdea0b5d227f244b7.png"><img alt="_images/f6620aba1b6809ce3992ee42276f11a82391b5e448dc7ebfdea0b5d227f244b7.png" src="_images/f6620aba1b6809ce3992ee42276f11a82391b5e448dc7ebfdea0b5d227f244b7.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
-<section id="power-laws">
-<h3><span class="section-number">21.2.5. </span>Power laws<a class="headerlink" href="#power-laws" title="Permalink to this heading">#</a></h3>
-<p>One specific class of heavy-tailed distributions has been found repeatedly in
-economic and social phenomena: the class of so-called power laws.</p>
-<p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to have a <strong>power law</strong> if, for some <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,</p>
+<section id="id14">
+<h3><span class="section-number">21.2.5. </span>幂律<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<p>在经济和社会现象中，一类特定的重尾分布被反复发现：所谓的幂律。</p>
+<p>若随机变量 <span class="math notranslate nohighlight">\(X\)</span> 满足<strong>幂律</strong>，则存在某个 <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>，</p>
 <div class="math notranslate nohighlight">
 \[\mathbb P\{X &gt; x\} \approx  x^{-\alpha}
-\quad \text{when $x$ is large}\]</div>
-<p>We can write this more mathematically as</p>
+\quad \text{当 $x$ 很大}\]</div>
+<p>我们可以更数学化地写成</p>
 <div class="math notranslate nohighlight" id="equation-plrt">
 <span class="eqno">(21.2)<a class="headerlink" href="#equation-plrt" title="Permalink to this equation">#</a></span>\[\lim_{x \to \infty} x^\alpha \, \mathbb P\{X &gt; x\} = c
-\quad \text{for some $c &gt; 0$}\]</div>
-<p>It is also common to say that a random variable <span class="math notranslate nohighlight">\(X\)</span> with this property
-has a <strong>Pareto tail</strong> with <strong>tail index</strong> <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>Notice that every Pareto distribution with tail index <span class="math notranslate nohighlight">\(\alpha\)</span>
-has a <strong>Pareto tail</strong> with <strong>tail index</strong> <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>We can think of power laws as a generalization of Pareto distributions.</p>
-<p>They are distributions that resemble Pareto distributions in their upper right
-tail.</p>
-<p>Another way to think of power laws is a set of distributions with a specific
-kind of (very) heavy tail.</p>
+\quad \text{对某个 $c &gt; 0$}\]</div>
+<p>通常说随机变量 <span class="math notranslate nohighlight">\(X\)</span> 有这样的性质，
+具有<strong>帕累托尾</strong>和<strong>尾指数</strong> <span class="math notranslate nohighlight">\(\alpha\)</span>。</p>
+<p>注意，每个具有尾指数 <span class="math notranslate nohighlight">\(\alpha\)</span> 的帕累托分布
+都具有<strong>帕累托尾</strong>和<strong>尾指数</strong> <span class="math notranslate nohighlight">\(\alpha\)</span>。</p>
+<p>我们可以将幂律视为帕累托分布的一种概括。</p>
+<p>这些分布在它们的右上尾部类似于帕累托分布。</p>
+<p>另一种考虑幂律的方式是将其视为一组分布，具有特定类型的（非常）重尾。</p>
 </section>
 </section>
-<section id="heavy-tails-in-economic-cross-sections">
-<h2><span class="section-number">21.3. </span>Heavy tails in economic cross-sections<a class="headerlink" href="#heavy-tails-in-economic-cross-sections" title="Permalink to this heading">#</a></h2>
-<p>As mentioned above, heavy tails are pervasive in economic data.</p>
-<p>In fact power laws seem to be very common as well.</p>
-<p>We now illustrate this by showing the empirical CCDF of heavy tails.</p>
-<p>All plots are in log-log, so that a power law shows up as a linear log-log
-plot, at least in the upper tail.</p>
-<p>We hide the code that generates the figures, which is somewhat complex, but
-readers are of course welcome to explore the code (perhaps after examining the figures).</p>
+<section id="id15">
+<h2><span class="section-number">21.3. </span>经济横截面中的重尾现象<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<p>如上所述，重尾在经济数据中非常普遍。</p>
+<p>实际上，幂律分布似乎也十分常见。</p>
+<p>我们现在通过展示重尾的经验互补累积分布函数（CCDF）来说明这一点。</p>
+<p>所有的图都是以对数-对数坐标绘制的，因此幂律在对数-对数图中表现为直线，至少在上尾部分是这样。</p>
+<p>我们隐藏了生成图形的代码，该代码有些复杂，但读者当然可以探索代码（也许可以在查看图形后进行）。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1028,21 +990,21 @@ readers are of course welcome to explore the code (perhaps after examining the f
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">empirical_ccdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
                    <span class="n">ax</span><span class="p">,</span> 
-                   <span class="n">aw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>   <span class="c1"># weights</span>
+                   <span class="n">aw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>   <span class="c1"># 权重</span>
                    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">xlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">add_reg_line</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
                    <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Take data vector and return prob values for plotting.</span>
-<span class="sd">    Upgraded empirical_ccdf</span>
+<span class="sd">    接受数据向量并返回用于绘图的概率值。</span>
+<span class="sd">    升级版的 empirical_ccdf</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
     <span class="n">p_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">aw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-            <span class="c1"># record fraction of sample above d</span>
+            <span class="c1"># 记录样本中大于 d 的分数</span>
             <span class="n">y_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
             <span class="n">p_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1068,11 +1030,11 @@ readers are of course welcome to explore the code (perhaps after examining the f
 
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">add_reg_line</span><span class="p">:</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;slope = $</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2"> 1.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;斜率 = $</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2"> 1.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">xlabel</span><span class="p">:</span>
-        <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;log value&#39;</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;对数值&#39;</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;log prob&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;对数概率&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
         
     <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
@@ -1099,7 +1061,7 @@ readers are of course welcome to explore the code (perhaps after examining the f
                <span class="n">e</span><span class="o">=</span><span class="mi">2021</span><span class="p">,</span> 
                <span class="n">varnames</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;all_countries&quot;</span><span class="p">:</span>
-        <span class="c1"># Keep countries only (no aggregated regions)</span>
+        <span class="c1"># 仅保留国家（不包括汇总区域）</span>
         <span class="n">countries</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">get_countries</span><span class="p">()</span>
         <span class="n">countries_name</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Aggregates&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
         <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
@@ -1117,9 +1079,9 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </div>
 </details>
 </div>
-<section id="firm-size">
-<h3><span class="section-number">21.3.1. </span>Firm size<a class="headerlink" href="#firm-size" title="Permalink to this heading">#</a></h3>
-<p>Here is a plot of the firm size distribution for the largest 500 firms in 2020 taken from Forbes Global 2000.</p>
+<section id="id16">
+<h3><span class="section-number">21.3.1. </span>公司规模<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<p>以下是2020年来自福布斯全球2000强的最大500家公司的公司规模分布图。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1131,8 +1093,8 @@ readers are of course welcome to explore the code (perhaps after examining the f
 <span class="n">df_fs</span> <span class="o">=</span> <span class="n">df_fs</span><span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Profits&#39;</span><span class="p">,</span> <span class="s1">&#39;Assets&#39;</span><span class="p">,</span> <span class="s1">&#39;Market Value&#39;</span><span class="p">]]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
 
-<span class="n">label</span><span class="o">=</span><span class="s2">&quot;firm size (market value)&quot;</span>
-<span class="n">top</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># set the cutting for top</span>
+<span class="n">label</span><span class="o">=</span><span class="s2">&quot;公司规模（市值）&quot;</span>
+<span class="n">top</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># 设置排名前500的切断点</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">df_fs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Market Value&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">empirical_ccdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Market Value&#39;</span><span class="p">])[:</span><span class="n">top</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">add_reg_line</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1143,18 +1105,18 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="firm-size-dist">
-<a class="reference internal image-reference" href="_images/82173f0ad03ed990e1677b961a6f5a20e6f57284900125672a64aece73e43fcc.png"><img alt="_images/82173f0ad03ed990e1677b961a6f5a20e6f57284900125672a64aece73e43fcc.png" src="_images/82173f0ad03ed990e1677b961a6f5a20e6f57284900125672a64aece73e43fcc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/77902cf03a8781fe128a4a962a0c38d713f6a8f05c89fe119d0dfd9bbd0bb551.png"><img alt="_images/77902cf03a8781fe128a4a962a0c38d713f6a8f05c89fe119d0dfd9bbd0bb551.png" src="_images/77902cf03a8781fe128a4a962a0c38d713f6a8f05c89fe119d0dfd9bbd0bb551.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.12 </span><span class="caption-text">Firm size distribution</span><a class="headerlink" href="#firm-size-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.12 </span><span class="caption-text">公司规模分布</span><a class="headerlink" href="#firm-size-dist" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
-<section id="city-size">
-<h3><span class="section-number">21.3.2. </span>City size<a class="headerlink" href="#city-size" title="Permalink to this heading">#</a></h3>
-<p>Here are plots of the city size distribution for the US and Brazil in 2023 from the World Population Review.</p>
-<p>The size is measured by population.</p>
+<section id="id17">
+<h3><span class="section-number">21.3.2. </span>城市规模<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>以下是2023年来自世界人口审查的美国和巴西城市规模分布图。</p>
+<p>大小由人口衡量。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1162,7 +1124,7 @@ readers are of course welcome to explore the code (perhaps after examining the f
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import population data of cities in 2023 United States and 2023 Brazil from world population review</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 导入2023年美国和2023年巴西城市的人口数据</span>
 <span class="n">df_cs_us</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_us.csv&#39;</span><span class="p">)</span>
 <span class="n">df_cs_br</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_brazil.csv&#39;</span><span class="p">)</span>
 
@@ -1178,18 +1140,18 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="city-size-dist">
-<a class="reference internal image-reference" href="_images/bf451b860f235c7456e85cacbfd5aaa7961ecc2c266bc858cdb061fb980f2f01.png"><img alt="_images/bf451b860f235c7456e85cacbfd5aaa7961ecc2c266bc858cdb061fb980f2f01.png" src="_images/bf451b860f235c7456e85cacbfd5aaa7961ecc2c266bc858cdb061fb980f2f01.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/af234ca7f63a512614362a700abac628a6cc99aa44cca87b6d697431451323de.png"><img alt="_images/af234ca7f63a512614362a700abac628a6cc99aa44cca87b6d697431451323de.png" src="_images/af234ca7f63a512614362a700abac628a6cc99aa44cca87b6d697431451323de.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">City size distribution</span><a class="headerlink" href="#city-size-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">城市规模分布</span><a class="headerlink" href="#city-size-dist" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
-<section id="wealth">
-<h3><span class="section-number">21.3.3. </span>Wealth<a class="headerlink" href="#wealth" title="Permalink to this heading">#</a></h3>
-<p>Here is a plot of the upper tail (top 500) of the wealth distribution.</p>
-<p>The data is from the Forbes Billionaires list in 2020.</p>
+<section id="id18">
+<h3><span class="section-number">21.3.3. </span>财富<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<p>这里是财富分布上尾部（前500名）的图表示。</p>
+<p>数据来源于2020年的《福布斯亿万富翁》名单。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1210,12 +1172,12 @@ readers are of course welcome to explore the code (perhaps after examining the f
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">countries</span><span class="p">):</span>
     <span class="n">df_w_c</span> <span class="o">=</span> <span class="n">df_w</span><span class="p">[</span><span class="n">df_w</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">df_w_c</span><span class="p">[</span><span class="s1">&#39;realTimeWorth&#39;</span><span class="p">])</span>
-    <span class="c1"># print(&#39;number of the global richest 2000 from &#39;+ c, len(z))</span>
-    <span class="n">top</span> <span class="o">=</span> <span class="mi">500</span>           <span class="c1"># cut-off number: top 500</span>
+    <span class="c1"># 打印来自该国的全球前2000位富豪的人数</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="mi">500</span>           <span class="c1"># 截止数：前500名</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>    
         <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span>
 
-    <span class="n">empirical_ccdf</span><span class="p">(</span><span class="n">z</span><span class="p">[:</span><span class="n">top</span><span class="p">],</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;log wealth&#39;</span><span class="p">,</span> <span class="n">add_reg_line</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">empirical_ccdf</span><span class="p">(</span><span class="n">z</span><span class="p">[:</span><span class="n">top</span><span class="p">],</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;对数财富&#39;</span><span class="p">,</span> <span class="n">add_reg_line</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
@@ -1226,9 +1188,9 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="wealth-dist">
-<a class="reference internal image-reference" href="_images/f6bc7b0d5728a9114fa971b36e33d7becaa55b654adab3a6d0a5a5db239ef548.png"><img alt="_images/f6bc7b0d5728a9114fa971b36e33d7becaa55b654adab3a6d0a5a5db239ef548.png" src="_images/f6bc7b0d5728a9114fa971b36e33d7becaa55b654adab3a6d0a5a5db239ef548.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/beee01df3d60e578a99318115a1043780d4044c551854d5e3f8f6898dfbd61d3.png"><img alt="_images/beee01df3d60e578a99318115a1043780d4044c551854d5e3f8f6898dfbd61d3.png" src="_images/beee01df3d60e578a99318115a1043780d4044c551854d5e3f8f6898dfbd61d3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">Wealth distribution (Forbes billionaires in 2020)</span><a class="headerlink" href="#wealth-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">财富分布（2020年福布斯亿万富翁）</span><a class="headerlink" href="#wealth-dist" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1236,8 +1198,8 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </section>
 <section id="gdp">
 <h3><span class="section-number">21.3.4. </span>GDP<a class="headerlink" href="#gdp" title="Permalink to this heading">#</a></h3>
-<p>Of course, not all cross-sectional distributions are heavy-tailed.</p>
-<p>Here we show cross-country per capita GDP.</p>
+<p>当然，并非所有的横截面分布都是重尾的。</p>
+<p>这里我们展示的是各国人均GDP。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1245,10 +1207,10 @@ readers are of course welcome to explore the code (perhaps after examining the f
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get gdp and gdp per capita for all regions and countries in 2021</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 获取2021年所有地区和国家的GDP及人均GDP</span>
 
 <span class="n">variable_code</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NY.GDP.MKTP.CD&#39;</span><span class="p">,</span> <span class="s1">&#39;NY.GDP.PCAP.CD&#39;</span><span class="p">]</span>
-<span class="n">variable_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GDP&#39;</span><span class="p">,</span> <span class="s1">&#39;GDP per capita&#39;</span><span class="p">]</span>
+<span class="n">variable_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GDP&#39;</span><span class="p">,</span> <span class="s1">&#39;人均GDP&#39;</span><span class="p">]</span>
 
 <span class="n">df_gdp1</span> <span class="o">=</span> <span class="n">extract_wb</span><span class="p">(</span><span class="n">varlist</span><span class="o">=</span><span class="n">variable_code</span><span class="p">,</span> 
                      <span class="n">c</span><span class="o">=</span><span class="s2">&quot;all_countries&quot;</span><span class="p">,</span> 
@@ -1261,7 +1223,7 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5534/3215967216.py:12: FutureWarning: errors=&#39;ignore&#39; is deprecated and will raise in a future version. Use to_numeric without passing `errors` and catch exceptions explicitly instead
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5536/140199782.py:12: FutureWarning: errors=&#39;ignore&#39; is deprecated and will raise in a future version. Use to_numeric without passing `errors` and catch exceptions explicitly instead
   df = wb.download(indicator=varlist, country=c, start=s, end=e).stack().unstack(0).reset_index()
 </pre></div>
 </div>
@@ -1286,35 +1248,29 @@ readers are of course welcome to explore the code (perhaps after examining the f
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="gdppc-dist">
-<a class="reference internal image-reference" href="_images/9df8d81516615e485682540863794cbe12199b505bac98cbd65a9215e794d3a8.png"><img alt="_images/9df8d81516615e485682540863794cbe12199b505bac98cbd65a9215e794d3a8.png" src="_images/9df8d81516615e485682540863794cbe12199b505bac98cbd65a9215e794d3a8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/bfd83e904a34a4a20c41d6febadc2130424d7a2c3687db85c51215a4dae9758b.png"><img alt="_images/bfd83e904a34a4a20c41d6febadc2130424d7a2c3687db85c51215a4dae9758b.png" src="_images/bfd83e904a34a4a20c41d6febadc2130424d7a2c3687db85c51215a4dae9758b.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.15 </span><span class="caption-text">GDP per capita distribution</span><a class="headerlink" href="#gdppc-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.15 </span><span class="caption-text">人均GDP分布</span><a class="headerlink" href="#gdppc-dist" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The plot is concave rather than linear, so the distribution has light tails.</p>
-<p>One reason is that this is data on an aggregate variable, which involves some
-averaging in its definition.</p>
-<p>Averaging tends to eliminate extreme outcomes.</p>
+<p>图形是凹形的而不是线形的，因此分布具有轻尾。</p>
+<p>这其中一个原因是这是关于一个综合变量的数据，其定义中涉及了一些平均处理。</p>
+<p>平均处理往往会消除极端结果。</p>
 </section>
 </section>
-<section id="failure-of-the-lln">
-<h2><span class="section-number">21.4. </span>Failure of the LLN<a class="headerlink" href="#failure-of-the-lln" title="Permalink to this heading">#</a></h2>
-<p>One impact of heavy tails is that sample averages can be poor estimators of
-the underlying mean of the distribution.</p>
-<p>To understand this point better, recall <a class="reference internal" href="lln_clt.html"><span class="doc">our earlier discussion</span></a>
-of the law of large numbers, which considered IID <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> with common distribution <span class="math notranslate nohighlight">\(F\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(\mathbb E |X_i|\)</span> is finite, then
-the sample mean <span class="math notranslate nohighlight">\(\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i\)</span> satisfies</p>
+<section id="id19">
+<h2><span class="section-number">21.4. </span>大数定律的失败<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h2>
+<p>重尾分布的一个影响是样本平均值可能是底层均值的糟糕估计。</p>
+<p>为了更好地理解这一点，请回想一下<a class="reference internal" href="lln_clt.html"><span class="doc">我们早期关于大数定律的讨论</span></a>，它考虑了具有共同分布<span class="math notranslate nohighlight">\(F\)</span>的独立同分布的<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span></p>
+<p>如果<span class="math notranslate nohighlight">\(\mathbb E |X_i|\)</span>是有限的，那么样本平均值<span class="math notranslate nohighlight">\(\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i\)</span>满足</p>
 <div class="math notranslate nohighlight" id="equation-lln-as2">
 <span class="eqno">(21.3)<a class="headerlink" href="#equation-lln-as2" title="Permalink to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mu := \mathbb E X_i = \int x F(dx)\)</span> is the common mean of the sample.</p>
-<p>The condition <span class="math notranslate nohighlight">\(\mathbb E | X_i | = \int |x| F(dx) &lt; \infty\)</span> holds
-in most cases but can fail if the distribution <span class="math notranslate nohighlight">\(F\)</span> is very heavy-tailed.</p>
-<p>For example, it fails for the Cauchy distribution.</p>
-<p>Let’s have a look at the behavior of the sample mean in this case, and see
-whether or not the LLN is still valid.</p>
+<p>其中<span class="math notranslate nohighlight">\(\mu := \mathbb E X_i = \int x F(dx)\)</span>是样本的共同均值。</p>
+<p>在大多数情况下，条件<span class="math notranslate nohighlight">\(\mathbb E | X_i | = \int |x| F(dx) &lt; \infty\)</span>成立，但如果分布<span class="math notranslate nohighlight">\(F\)</span>是非常重尾的，则可能不成立。</p>
+<p>例如，柯西分布就是不成立的。</p>
+<p>让我们来看看这种情况下样本平均值的行为，看是否大数定律仍然有效。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">cauchy</span>
@@ -1327,12 +1283,12 @@ whether or not the LLN is still valid.</p>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-<span class="c1"># Compute sample mean at each n</span>
+<span class="c1"># 计算每个n的样本平均值</span>
 <span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="n">sample_mean</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span>
 
-<span class="c1"># Plot</span>
+<span class="c1"># 绘图</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">bar</span><span class="si">{X}</span><span class="s1">_n$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$n$&quot;</span><span class="p">)</span>
@@ -1344,133 +1300,118 @@ whether or not the LLN is still valid.</p>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="fail-lln">
-<a class="reference internal image-reference" href="_images/faf6685be7099a836e45c03e75fceff8317fac2846ed6f3f09fbcd4948f901c5.png"><img alt="_images/faf6685be7099a836e45c03e75fceff8317fac2846ed6f3f09fbcd4948f901c5.png" src="_images/faf6685be7099a836e45c03e75fceff8317fac2846ed6f3f09fbcd4948f901c5.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/625220de8e86d3470e707ac724cb17eb32046ca62734887e26dcc1e95c0baaf5.png"><img alt="_images/625220de8e86d3470e707ac724cb17eb32046ca62734887e26dcc1e95c0baaf5.png" src="_images/625220de8e86d3470e707ac724cb17eb32046ca62734887e26dcc1e95c0baaf5.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 21.16 </span><span class="caption-text">LLN failure</span><a class="headerlink" href="#fail-lln" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The sequence shows no sign of converging.</p>
-<p>We return to this point in the exercises.</p>
+<p>序列显示没有收敛的迹象。</p>
+<p>我们在练习中会回到这一点。</p>
 </section>
-<section id="why-do-heavy-tails-matter">
-<span id="heavy-tail-application"></span><h2><span class="section-number">21.5. </span>Why do heavy tails matter?<a class="headerlink" href="#why-do-heavy-tails-matter" title="Permalink to this heading">#</a></h2>
-<p>We have now seen that</p>
+<section id="heavy-tail-application">
+<span id="id20"></span><h2><span class="section-number">21.5. </span>为什么重尾分布很重要？<a class="headerlink" href="#heavy-tail-application" title="Permalink to this heading">#</a></h2>
+<p>我们已经看到</p>
 <ol class="arabic simple">
-<li><p>heavy tails are frequent in economics and</p></li>
-<li><p>the law of large numbers fails when tails are very heavy.</p></li>
+<li><p>在经济学中，重尾分布非常常见；</p></li>
+<li><p>当尾部非常重时，大数定律失效。</p></li>
 </ol>
-<p>But what about in the real world?  Do heavy tails matter?</p>
-<p>Let’s briefly discuss why they do.</p>
-<section id="diversification">
-<h3><span class="section-number">21.5.1. </span>Diversification<a class="headerlink" href="#diversification" title="Permalink to this heading">#</a></h3>
-<p>One of the most important ideas in investing is using diversification to
-reduce risk.</p>
-<p>This is a very old idea — consider, for example, the expression “don’t put all your eggs in one basket”.</p>
-<p>To illustrate, consider an investor with one dollar of wealth and a choice over
-<span class="math notranslate nohighlight">\(n\)</span> assets with payoffs <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>.</p>
-<p>Suppose that returns on distinct  assets are
-independent and each return has  mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
-<p>If the investor puts all wealth in one asset, say, then the expected payoff of the
-portfolio is <span class="math notranslate nohighlight">\(\mu\)</span> and the variance is <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
-<p>If instead the investor puts share <span class="math notranslate nohighlight">\(1/n\)</span> of her wealth in each asset, then the portfolio payoff is</p>
+<p>但是在现实世界中，重尾分布重要吗？让我们简要讨论一下它们为什么重要。</p>
+<section id="id21">
+<h3><span class="section-number">21.5.1. </span>分散化投资<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<p>投资中一个最重要的概念是使用分散化来降低风险。</p>
+<p>这是一个非常古老的想法——例如，考虑这个表达式“不要把所有的鸡蛋放在一个篮子里”。</p>
+<p>为了说明这一点，设想一个拥有一美元财富的投资者，在<span class="math notranslate nohighlight">\(n\)</span>种资产中进行选择，这些资产的回报为<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>。</p>
+<p>假设不同资产的回报是独立的，每个回报有均值<span class="math notranslate nohighlight">\(\mu\)</span>和方差<span class="math notranslate nohighlight">\(\sigma^2\)</span>。</p>
+<p>如果投资者将所有财富投资在一个资产上，那么该投资组合的预期收益为<span class="math notranslate nohighlight">\(\mu\)</span>，方差为<span class="math notranslate nohighlight">\(\sigma^2\)</span>。</p>
+<p>如果投资者将她的财富均分到每一个资产上，即每个资产的份额为<span class="math notranslate nohighlight">\(1/n\)</span>，那么投资组合的收益为</p>
 <div class="math notranslate nohighlight">
 \[
-Y_n = \sum_{i=1}^n \frac{X_i}{n} = \frac{1}{n} \sum_{i=1}^n X_i. 
+Y_n = \sum_{i=1}^n \frac{X_i}{n} = \frac{1}{n} \sum_{i=1}^n X_i.
 \]</div>
-<p>Try computing the mean and variance.</p>
-<p>You will find that</p>
+<p>试着计算均值和方差。</p>
+<p>你会发现：</p>
 <ul class="simple">
-<li><p>The mean is unchanged at <span class="math notranslate nohighlight">\(\mu\)</span>, while</p></li>
-<li><p>the variance of the portfolio has fallen to <span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>.</p></li>
+<li><p>均值保持不变，依旧是<span class="math notranslate nohighlight">\(\mu\)</span>，</p></li>
+<li><p>投资组合的方差降低到了<span class="math notranslate nohighlight">\(\sigma^2 / n\)</span>。</p></li>
 </ul>
-<p>Diversification reduces risk, as expected.</p>
-<p>But there is a hidden assumption here: the variance of returns is finite.</p>
-<p>If the distribution is heavy-tailed and the variance is infinite, then this
-logic is incorrect.</p>
-<p>For example, we saw above that if every <span class="math notranslate nohighlight">\(X_i\)</span> is Cauchy, then so is <span class="math notranslate nohighlight">\(Y_n\)</span>.</p>
-<p>This means that diversification doesn’t help at all!</p>
+<p>正如预期的那样，分散化减少了风险。</p>
+<p>但是这里有一个隐藏的假设：回报的方差是有限的。</p>
+<p>如果分布是重尾的并且方差是无限的，那么这种逻辑就是不正确的。</p>
+<p>例如，我们上面看到，如果每个<span class="math notranslate nohighlight">\(X_i\)</span>都是柯西分布，那么<span class="math notranslate nohighlight">\(Y_n\)</span>也是。</p>
+<p>这意味着分散化根本没有帮助！</p>
 </section>
-<section id="fiscal-policy">
-<h3><span class="section-number">21.5.2. </span>Fiscal policy<a class="headerlink" href="#fiscal-policy" title="Permalink to this heading">#</a></h3>
-<p>The heaviness of the tail in the wealth distribution matters for taxation and redistribution policies.</p>
-<p>The same is true for the income distribution.</p>
-<p>For example, the heaviness of the tail of the income distribution helps
-determine <a class="reference internal" href="mle.html"><span class="doc">how much revenue a given tax policy will raise</span></a>.</p>
+<section id="id22">
+<h3><span class="section-number">21.5.2. </span>财政政策<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<p>财富分配中尾部的厚重程度对税收和再分配政策至关重要。</p>
+<p>收入分配也是如此。</p>
+<p>例如，收入分配尾部的厚重程度有助于决定<a class="reference internal" href="mle.html"><span class="doc">how much revenue a given tax policy will raise</span></a>。</p>
 </section>
 </section>
-<section id="classifying-tail-properties">
-<span id="cltail"></span><h2><span class="section-number">21.6. </span>Classifying tail properties<a class="headerlink" href="#classifying-tail-properties" title="Permalink to this heading">#</a></h2>
-<p>Up until now we have discussed light and heavy tails without any mathematical
-definitions.</p>
-<p>Let’s now rectify this.</p>
-<p>We will focus our attention on the right hand tails of
-nonnegative random variables and their distributions.</p>
-<p>The definitions for
-left hand tails are very similar and we omit them to simplify the exposition.</p>
-<section id="light-and-heavy-tails">
-<span id="heavy-tail-formal-definition"></span><h3><span class="section-number">21.6.1. </span>Light and heavy tails<a class="headerlink" href="#light-and-heavy-tails" title="Permalink to this heading">#</a></h3>
-<p>A distribution <span class="math notranslate nohighlight">\(F\)</span> with density <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\(\mathbb R_+\)</span> is called <a class="reference external" href="https://en.wikipedia.org/wiki/Heavy-tailed_distribution">heavy-tailed</a> if</p>
+<section id="cltail">
+<span id="id23"></span><h2><span class="section-number">21.6. </span>分类尾部特性<a class="headerlink" href="#cltail" title="Permalink to this heading">#</a></h2>
+<p>到目前为止，我们讨论了轻尾和重尾，但没有任何数学定义。</p>
+<p>现在让我们来纠正这一点。</p>
+<p>我们将关注非负随机变量及其分布的右侧尾部。</p>
+<p>左侧尾部的定义非常相似，为了简化论述，我们省略它们。</p>
+<section id="heavy-tail-formal-definition">
+<span id="id24"></span><h3><span class="section-number">21.6.1. </span>轻尾和重尾<a class="headerlink" href="#heavy-tail-formal-definition" title="Permalink to this heading">#</a></h3>
+<p>一个在 <span class="math notranslate nohighlight">\(\mathbb R_+\)</span> 上有密度 <span class="math notranslate nohighlight">\(f\)</span> 的分布 <span class="math notranslate nohighlight">\(F\)</span> 被称为<a class="reference external" href="https://en.wikipedia.org/wiki/Heavy-tailed_distribution">重尾</a>的，如果</p>
 <div class="math notranslate nohighlight" id="equation-defht">
-<span class="eqno">(21.4)<a class="headerlink" href="#equation-defht" title="Permalink to this equation">#</a></span>\[\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ for all } t &gt; 0.\]</div>
-<p>We say that a nonnegative random variable <span class="math notranslate nohighlight">\(X\)</span> is <strong>heavy-tailed</strong> if its density is heavy-tailed.</p>
-<p>This is equivalent to stating that its <strong>moment generating function</strong> <span class="math notranslate nohighlight">\(m(t) :=
-\mathbb E \exp(t X)\)</span> is infinite for all <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
-<p>For example, the <a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal
-distribution</a> is
-heavy-tailed because its moment generating function is infinite everywhere on
-<span class="math notranslate nohighlight">\((0, \infty)\)</span>.</p>
-<p>The Pareto distribution is also heavy-tailed.</p>
-<p>Less formally, a heavy-tailed distribution is one that is not exponentially bounded (i.e. the tails are heavier than the exponential distribution).</p>
-<p>A distribution <span class="math notranslate nohighlight">\(F\)</span> on <span class="math notranslate nohighlight">\(\mathbb R_+\)</span> is called <strong>light-tailed</strong> if it is not heavy-tailed.</p>
-<p>A nonnegative random variable <span class="math notranslate nohighlight">\(X\)</span> is <strong>light-tailed</strong> if its distribution <span class="math notranslate nohighlight">\(F\)</span> is light-tailed.</p>
-<p>For example, every random variable with bounded support is light-tailed. (Why?)</p>
-<p>As another example, if <span class="math notranslate nohighlight">\(X\)</span> has the <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential distribution</a>, with cdf <span class="math notranslate nohighlight">\(F(x) = 1 - \exp(-\lambda x)\)</span> for some <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, then its moment generating function is</p>
+<span class="eqno">(21.4)<a class="headerlink" href="#equation-defht" title="Permalink to this equation">#</a></span>\[\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ 对于所有 } t &gt; 0.\]</div>
+<p>我们说一个非负随机变量 <span class="math notranslate nohighlight">\(X\)</span> 是<strong>重尾</strong>的，如果它的密度是重尾的。</p>
+<p>这等同于说它的<strong>矩生成函数</strong> <span class="math notranslate nohighlight">\(m(t) := \mathbb E \exp(t X)\)</span> 对于所有 <span class="math notranslate nohighlight">\(t &gt; 0\)</span> 都是无限的。</p>
+<p>例如，<a class="reference external" href="https://en.wikipedia.org/wiki/Log-normal_distribution">对数正态分布</a>是重尾的，因为它的矩生成函数在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上无限。</p>
+<p>帕累托分布也是重尾分布。</p>
+<p>非正式地说，重尾分布是指不受指数型界限约束的分布（即尾部比指数分布更重）。</p>
+<p>如果一个在 <span class="math notranslate nohighlight">\(\mathbb R_+\)</span> 上的分布 <span class="math notranslate nohighlight">\(F\)</span> 不是重尾的，则称它为<strong>轻尾</strong>。</p>
+<p>一个非负随机变量 <span class="math notranslate nohighlight">\(X\)</span> 是<strong>轻尾的</strong>，如果它的分布 <span class="math notranslate nohighlight">\(F\)</span> 是轻尾的。</p>
+<p>例如，所有有界支撑的随机变量都是轻尾的。（为什么？）</p>
+<p>再举一个例子，如果 <span class="math notranslate nohighlight">\(X\)</span> 有<a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">指数分布</a>，累积分布函数 <span class="math notranslate nohighlight">\(F(x) = 1 - \exp(-\lambda x)\)</span> 对某个 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>，则其矩生成函数为</p>
 <div class="math notranslate nohighlight">
 \[
-m(t) = \frac{\lambda}{\lambda - t} \quad \text{when } t &lt; \lambda 
+m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t &lt; \lambda 
 \]</div>
-<p>In particular, <span class="math notranslate nohighlight">\(m(t)\)</span> is finite whenever <span class="math notranslate nohighlight">\(t &lt; \lambda\)</span>, so <span class="math notranslate nohighlight">\(X\)</span> is light-tailed.</p>
-<p>One can show that if <span class="math notranslate nohighlight">\(X\)</span> is light-tailed, then all of its
-<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">moments</a> are finite.</p>
-<p>Conversely, if some moment is infinite, then <span class="math notranslate nohighlight">\(X\)</span> is heavy-tailed.</p>
-<p>The latter condition is not necessary, however.</p>
-<p>For example, the lognormal distribution is heavy-tailed but every moment is finite.</p>
+<p>特别地，只要 <span class="math notranslate nohighlight">\(t &lt; \lambda\)</span>，<span class="math notranslate nohighlight">\(m(t)\)</span> 就是有限的，因此 <span class="math notranslate nohighlight">\(X\)</span> 是轻尾的。</p>
+<p>可以证明，如果 <span class="math notranslate nohighlight">\(X\)</span> 是轻尾的，则它的所有
+<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">矩</a>都是有限的。</p>
+<p>反之，如果某个矩是无限的，则 <span class="math notranslate nohighlight">\(X\)</span> 是重尾的。</p>
+<p>但后者条件不是必需的。</p>
+<p>例如，对数正态分布是重尾的，但每个矩都是有限的。</p>
 </section>
 </section>
-<section id="further-reading">
-<h2><span class="section-number">21.7. </span>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
-<p>For more on heavy tails in the wealth distribution, see e.g., <span id="id3">[<a class="reference internal" href="zreferences.html#id90" title="Pareto Vilfredo. Cours d'économie politique. Rouge, Lausanne, 1896.">Vilfredo, 1896</a>]</span> and <span id="id4">[<a class="reference internal" href="zreferences.html#id89" title="Jess Benhabib and Alberto Bisin. Skewed wealth distributions: theory and empirics. Journal of Economic Literature, 56(4):1261–91, 2018.">Benhabib and Bisin, 2018</a>]</span>.</p>
-<p>For more on heavy tails in the firm size distribution, see e.g., <span id="id5">[<a class="reference internal" href="zreferences.html#id88" title="Robert L Axtell. Zipf distribution of us firm sizes. science, 293(5536):1818–1820, 2001.">Axtell, 2001</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>.</p>
-<p>For more on heavy tails in the city size distribution, see e.g., <span id="id7">[<a class="reference internal" href="zreferences.html#id84" title="Hernán D Rozenfeld, Diego Rybski, Xavier Gabaix, and Hernán A Makse. The area and population of cities: new insights from a different perspective on cities. American Economic Review, 101(5):2205–25, 2011.">Rozenfeld <em>et al.</em>, 2011</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>.</p>
-<p>There are other important implications of heavy tails, aside from those
-discussed above.</p>
-<p>For example, heavy tails in income and wealth affect productivity growth, business cycles, and political economy.</p>
-<p>For further reading, see, for example, <span id="id9">[<a class="reference internal" href="zreferences.html#id83" title="Daron Acemoglu and James A. Robinson. The political economy of the Kuznets curve. Review of Development Economics, 6(2):183–203, 2002.">Acemoglu and Robinson, 2002</a>]</span>, <span id="id10">[<a class="reference internal" href="zreferences.html#id82" title="Edward Glaeser, Jose Scheinkman, and Andrei Shleifer. The injustice of inequality. Journal of Monetary Economics, 50(1):199–222, 2003.">Glaeser <em>et al.</em>, 2003</a>]</span>, <span id="id11">[<a class="reference internal" href="zreferences.html#id81" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J Sargent. Inequality, business cycles, and monetary-fiscal policy. Technical Report, National Bureau of Economic Research, 2018.">Bhandari <em>et al.</em>, 2018</a>]</span> or <span id="id12">[<a class="reference internal" href="zreferences.html#id80" title="SeHyoun Ahn, Greg Kaplan, Benjamin Moll, Thomas Winberry, and Christian Wolf. When inequality matters for macro and macro matters for inequality. NBER Macroeconomics Annual, 32(1):1–75, 2018.">Ahn <em>et al.</em>, 2018</a>]</span>.</p>
+<section id="id25">
+<h2><span class="section-number">21.7. </span>延伸阅读<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h2>
+<p>想了解更多关于财富分布中的重尾，可以参考文献 <span id="id26">[<a class="reference internal" href="zreferences.html#id90" title="Pareto Vilfredo. Cours d'économie politique. Rouge, Lausanne, 1896.">Vilfredo, 1896</a>]</span> 和 <span id="id27">[<a class="reference internal" href="zreferences.html#id89" title="Jess Benhabib and Alberto Bisin. Skewed wealth distributions: theory and empirics. Journal of Economic Literature, 56(4):1261–91, 2018.">Benhabib and Bisin, 2018</a>]</span>。</p>
+<p>想了解更多关于公司规模分布中的重尾，可以参考文献 <span id="id28">[<a class="reference internal" href="zreferences.html#id88" title="Robert L Axtell. Zipf distribution of us firm sizes. science, 293(5536):1818–1820, 2001.">Axtell, 2001</a>]</span>, <span id="id29">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>。</p>
+<p>想了解更多关于城市规模分布中的重尾，可以参考文献 <span id="id30">[<a class="reference internal" href="zreferences.html#id84" title="Hernán D Rozenfeld, Diego Rybski, Xavier Gabaix, and Hernán A Makse. The area and population of cities: new insights from a different perspective on cities. American Economic Review, 101(5):2205–25, 2011.">Rozenfeld <em>et al.</em>, 2011</a>]</span>, <span id="id31">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>。</p>
+<p>重尾的其他重要影响，除了上述讨论之外，还有不少。</p>
+<p>例如，收入和财富中的重尾会影响生产力增长、商业周期和政治经济学。</p>
+<p>欲了解更多，请参阅 <span id="id32">[<a class="reference internal" href="zreferences.html#id83" title="Daron Acemoglu and James A. Robinson. The political economy of the Kuznets curve. Review of Development Economics, 6(2):183–203, 2002.">Acemoglu and Robinson, 2002</a>]</span>, <span id="id33">[<a class="reference internal" href="zreferences.html#id82" title="Edward Glaeser, Jose Scheinkman, and Andrei Shleifer. The injustice of inequality. Journal of Monetary Economics, 50(1):199–222, 2003.">Glaeser <em>et al.</em>, 2003</a>]</span>, <span id="id34">[<a class="reference internal" href="zreferences.html#id81" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J Sargent. Inequality, business cycles, and monetary-fiscal policy. Technical Report, National Bureau of Economic Research, 2018.">Bhandari <em>et al.</em>, 2018</a>]</span> 或 <span id="id35">[<a class="reference internal" href="zreferences.html#id80" title="SeHyoun Ahn, Greg Kaplan, Benjamin Moll, Thomas Winberry, and Christian Wolf. When inequality matters for macro and macro matters for inequality. NBER Macroeconomics Annual, 32(1):1–75, 2018.">Ahn <em>et al.</em>, 2018</a>]</span>。</p>
 </section>
-<section id="exercises">
-<h2><span class="section-number">21.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id36">
+<h2><span class="section-number">21.8. </span>练习<a class="headerlink" href="#id36" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="ht_ex2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.2 </span></p>
 <section id="exercise-content">
-<p>Prove: If <span class="math notranslate nohighlight">\(X\)</span> has a Pareto tail with tail index <span class="math notranslate nohighlight">\(\alpha\)</span>, then
-<span class="math notranslate nohighlight">\(\mathbb E[X^r] = \infty\)</span> for all <span class="math notranslate nohighlight">\(r \geq \alpha\)</span>.</p>
+<p>证明：如果 <span class="math notranslate nohighlight">\(X\)</span> 拥有尾指数为 <span class="math notranslate nohighlight">\(\alpha\)</span> 的帕累托尾，则
+<span class="math notranslate nohighlight">\(\mathbb E[X^r] = \infty\)</span> 对所有的 <span class="math notranslate nohighlight">\(r \geq \alpha\)</span> 都成立。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="heavy_tails-solution-5">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ht_ex2"> Exercise 21.2</a></p>
 <section id="solution-content">
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> have a Pareto tail with tail index <span class="math notranslate nohighlight">\(\alpha\)</span> and let <span class="math notranslate nohighlight">\(F\)</span> be its cdf.</p>
-<p>Fix <span class="math notranslate nohighlight">\(r \geq \alpha\)</span>.</p>
-<p>In view of <a class="reference internal" href="#equation-plrt">(21.2)</a>, we can take positive constants <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\bar x\)</span> such that</p>
+<p>设 <span class="math notranslate nohighlight">\(X\)</span> 拥有尾指数为 <span class="math notranslate nohighlight">\(\alpha\)</span> 的帕累托尾，并且设 <span class="math notranslate nohighlight">\(F\)</span> 为其累积分布函数。</p>
+<p>固定 <span class="math notranslate nohighlight">\(r \geq \alpha\)</span>。</p>
+<p>根据公式 <a class="reference internal" href="#equation-plrt">(21.2)</a>，我们可以取正常数 <span class="math notranslate nohighlight">\(b\)</span> 和 <span class="math notranslate nohighlight">\(\bar x\)</span>，使得</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb P\{X &gt; x\} \geq b x^{- \alpha} \text{ whenever } x \geq \bar x
+\mathbb P\{X &gt; x\} \geq b x^{-\alpha} \text{ 当 } x \geq \bar x
 \]</div>
-<p>But then</p>
+<p>但是</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb E X^r = r \int_0^\infty x^{r-1} \mathbb P\{ X &gt; x \} dx
@@ -1478,19 +1419,17 @@ discussed above.</p>
 r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 + r \int_{\bar x}^\infty  x^{r-1} b x^{-\alpha} dx.
 \]</div>
-<p>We know that <span class="math notranslate nohighlight">\(\int_{\bar x}^\infty x^{r-\alpha-1} dx = \infty\)</span> whenever <span class="math notranslate nohighlight">\(r - \alpha - 1 \geq -1\)</span>.</p>
-<p>Since <span class="math notranslate nohighlight">\(r \geq \alpha\)</span>, we have <span class="math notranslate nohighlight">\(\mathbb E X^r = \infty\)</span>.</p>
+<p>我们知道 <span class="math notranslate nohighlight">\(\int_{\bar x}^\infty x^{r-\alpha-1} dx = \infty\)</span> 当 <span class="math notranslate nohighlight">\(r - \alpha - 1 \geq -1\)</span> 时。</p>
+<p>由于 <span class="math notranslate nohighlight">\(r \geq \alpha\)</span>，我们得到 <span class="math notranslate nohighlight">\(\mathbb E X^r = \infty\)</span>。</p>
 </section>
 </div>
 <div class="exercise admonition" id="ht_ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.3 </span></p>
 <section id="exercise-content">
-<p>Repeat exercise 1, but replace the three distributions (two normal, one
-Cauchy) with three Pareto distributions using different choices of
-<span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
-<p>For <span class="math notranslate nohighlight">\(\alpha\)</span>, try 1.15, 1.5 and 1.75.</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">np.random.seed(11)</span></code> to set the seed.</p>
+<p>重复练习1，但将三个分布（两个正态，一个柯西）替换为三个帕累托分布，并使用不同的 <span class="math notranslate nohighlight">\(lpha\)</span> 值。</p>
+<p>对于 <span class="math notranslate nohighlight">\(\alpha\)</span>，尝试1.15、1.5和1.75。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">np.random.seed(11)</span></code> 来设置种子。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="heavy_tails-solution-7">
@@ -1522,7 +1461,7 @@ Cauchy) with three Pareto distributions using different choices of
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6592733d1712be04ad55f8cf8dfa5959c81cd8d31dd9a4101da9258ea85a530b.png"><img alt="_images/6592733d1712be04ad55f8cf8dfa5959c81cd8d31dd9a4101da9258ea85a530b.png" src="_images/6592733d1712be04ad55f8cf8dfa5959c81cd8d31dd9a4101da9258ea85a530b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/def4729d28a3a044a5fd19750cd91ae6395fa68c4131b82eeef64b403b51b281.png"><img alt="_images/def4729d28a3a044a5fd19750cd91ae6395fa68c4131b82eeef64b403b51b281.png" src="_images/def4729d28a3a044a5fd19750cd91ae6395fa68c4131b82eeef64b403b51b281.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -1531,75 +1470,58 @@ Cauchy) with three Pareto distributions using different choices of
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.4 </span></p>
 <section id="exercise-content">
-<p>There is an ongoing argument about whether the firm size distribution should
-be modeled as a Pareto distribution or a lognormal distribution (see, e.g.,
-<span id="id13">[<a class="reference internal" href="zreferences.html#id73" title="Yoshi Fujiwara, Corrado Di Guilmi, Hideaki Aoyama, Mauro Gallegati, and Wataru Souma. Do pareto–zipf and gibrat laws hold true? an analysis with european firms. Physica A: Statistical Mechanics and its Applications, 335(1-2):197–216, 2004.">Fujiwara <em>et al.</em>, 2004</a>]</span>, <span id="id14">[<a class="reference internal" href="zreferences.html#id71" title="Illenin Kondo, Logan T Lewis, and Andrea Stella. On the us firm and establishment size distributions. Technical Report, SSRN, 2018.">Kondo <em>et al.</em>, 2018</a>]</span> or <span id="id15">[<a class="reference internal" href="zreferences.html#id72" title="Christian Schluter and Mark Trede. Size distributions reconsidered. Econometric Reviews, 38(6):695–710, 2019.">Schluter and Trede, 2019</a>]</span>).</p>
-<p>This sounds esoteric but has real implications for a variety of economic
-phenomena.</p>
-<p>To illustrate this fact in a simple way, let us consider an economy with
-100,000 firms, an interest rate of <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.05</span></code> and a corporate tax rate of
-15%.</p>
-<p>Your task is to estimate the present discounted value of projected corporate
-tax revenue over the next 10 years.</p>
-<p>Because we are forecasting, we need a model.</p>
-<p>We will suppose that</p>
+<p>关于企业规模分布应该用帕累托分布还是对数正态分布进行建模的争论一直持续不断（参见例如 <span id="id37">[<a class="reference internal" href="zreferences.html#id73" title="Yoshi Fujiwara, Corrado Di Guilmi, Hideaki Aoyama, Mauro Gallegati, and Wataru Souma. Do pareto–zipf and gibrat laws hold true? an analysis with european firms. Physica A: Statistical Mechanics and its Applications, 335(1-2):197–216, 2004.">Fujiwara <em>et al.</em>, 2004</a>]</span>、<span id="id38">[<a class="reference internal" href="zreferences.html#id71" title="Illenin Kondo, Logan T Lewis, and Andrea Stella. On the us firm and establishment size distributions. Technical Report, SSRN, 2018.">Kondo <em>et al.</em>, 2018</a>]</span> 或 <span id="id39">[<a class="reference internal" href="zreferences.html#id72" title="Christian Schluter and Mark Trede. Size distributions reconsidered. Econometric Reviews, 38(6):695–710, 2019.">Schluter and Trede, 2019</a>]</span>）。</p>
+<p>这听起来很深奥，但对各种经济现象都有实际影响。</p>
+<p>为了简单说明这个事实，我们考虑一个拥有100,000家企业的经济体，利率为 <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.05</span></code> 并且企业税率为15%。</p>
+<p>你的任务是估计未来10年企业税收的现值折现。</p>
+<p>因为我们在进行预测，我们需要一个模型。</p>
+<p>我们将假设：</p>
 <ol class="arabic simple">
-<li><p>the number of firms and the firm size distribution (measured in profits) remain fixed and</p></li>
-<li><p>the firm size distribution is either lognormal or Pareto.</p></li>
+<li><p>企业数量和企业规模分布（以利润计）保持不变，并且</p></li>
+<li><p>企业规模分布要么是对数正态分布，要么是帕累托分布。</p></li>
 </ol>
-<p>Present discounted value of tax revenue will be estimated by</p>
+<p>税收的现值折现将通过以下步骤估算：</p>
 <ol class="arabic simple">
-<li><p>generating 100,000 draws of firm profit from the firm size distribution,</p></li>
-<li><p>multiplying by the tax rate, and</p></li>
-<li><p>summing the results with discounting to obtain present value.</p></li>
+<li><p>从企业规模分布生成100,000次企业利润的抽样，</p></li>
+<li><p>将其乘以税率，并且</p></li>
+<li><p>通过折现将结果求和以获得现值。</p></li>
 </ol>
-<p>The Pareto distribution is assumed to take the form <a class="reference internal" href="#equation-pareto">(21.1)</a> with <span class="math notranslate nohighlight">\(\bar x = 1\)</span> and <span class="math notranslate nohighlight">\(\alpha = 1.05\)</span>.</p>
-<p>(The value of the tail index <span class="math notranslate nohighlight">\(\alpha\)</span> is plausible given the data <span id="id16">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>.)</p>
-<p>To make the lognormal option as similar as possible to the Pareto option, choose
-its parameters such that the mean and median of both distributions are the same.</p>
-<p>Note that, for each distribution, your estimate of tax revenue will be random
-because it is based on a finite number of draws.</p>
-<p>To take this into account, generate 100 replications (evaluations of tax revenue)
-for each of the two distributions and compare the two samples by</p>
+<p>帕累托分布假设采用 <a class="reference internal" href="#equation-pareto">(21.1)</a> 形式，其中 <span class="math notranslate nohighlight">\(\bar x = 1\)</span> 且 <span class="math notranslate nohighlight">\(\alpha = 1.05\)</span>。</p>
+<p>（尾指数 <span class="math notranslate nohighlight">\(\alpha\)</span> 的值是合理的，鉴于数据 <span id="id40">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>。）</p>
+<p>为了使对数正态选项尽可能类似于帕累托选项，请选择其参数使得两个分布的均值和中位数相同。</p>
+<p>注意，对于每个分布，你的税收估算都是随机的，因为它基于有限的抽样。</p>
+<p>为了考虑到这一点，对两种分布各产生100次重复（税收收入的估计），并通过以下方式比较两个样本：</p>
 <ul class="simple">
-<li><p>producing a <a class="reference external" href="https://en.wikipedia.org/wiki/Violin_plot">violin plot</a> visualizing the two samples side-by-side and</p></li>
-<li><p>printing the mean and standard deviation of both samples.</p></li>
+<li><p>制作一张将两个样本并排显示的<a class="reference external" href="https://en.wikipedia.org/wiki/Violin_plot">小提琴图</a>，并且</p></li>
+<li><p>输出两个样本的均值和标准差。</p></li>
 </ul>
-<p>For the seed use <code class="docutils literal notranslate"><span class="pre">np.random.seed(1234)</span></code>.</p>
-<p>What differences do you observe?</p>
-<p>(Note: a better approach to this problem would be to model firm dynamics and
-try to track individual firms given the current distribution.  We will discuss
-firm dynamics in later lectures.)</p>
+<p>对种子使用 <code class="docutils literal notranslate"><span class="pre">np.random.seed(1234)</span></code>。</p>
+<p>你观察到了哪些差异？</p>
+<p>（注：解决这个问题的更好方法将是建模企业动态并尝试给定当前分布追踪个别企业。我们将在后续讲座中讨论企业动态。）</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="heavy_tails-solution-9">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ht_ex5"> Exercise 21.4</a></p>
 <section id="solution-content">
-<p>To do the exercise, we need to choose the parameters <span class="math notranslate nohighlight">\(\mu\)</span>
-and <span class="math notranslate nohighlight">\(\sigma\)</span> of the lognormal distribution to match the mean and median
-of the Pareto distribution.</p>
-<p>Here we understand the lognormal distribution as that of the random variable
-<span class="math notranslate nohighlight">\(\exp(\mu + \sigma Z)\)</span> when <span class="math notranslate nohighlight">\(Z\)</span> is standard normal.</p>
-<p>The mean and median of the Pareto distribution <a class="reference internal" href="#equation-pareto">(21.1)</a> with
-<span class="math notranslate nohighlight">\(\bar x = 1\)</span> are</p>
+<p>为了完成这个练习，我们需要选择对数正态分布的参数 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>，使其匹配Pareto分布的均值和中位数。</p>
+<p>这里我们将对数正态分布理解为随机变量 <span class="math notranslate nohighlight">\(\exp(\mu + \sigma Z)\)</span>，当 <span class="math notranslate nohighlight">\(Z\)</span> 是标准正态分布时。</p>
+<p>Pareto分布 <a class="reference internal" href="#equation-pareto">(21.1)</a> 的均值和中位数，其中 <span class="math notranslate nohighlight">\(\bar x = 1\)</span>，分别是</p>
 <div class="math notranslate nohighlight">
 \[
-\text{mean } = \frac{\alpha}{\alpha - 1}
-\quad \text{and} \quad
-\text{median } = 2^{1/\alpha}
+\text{均值} = \frac{\alpha}{\alpha - 1}
+\quad \text{和} \quad
+\text{中位数} = 2^{1/\alpha}
 \]</div>
-<p>Using the corresponding expressions for the lognormal distribution leads us to
-the equations</p>
+<p>使用对应的对数正态分布表达式，我们得到以下方程组</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\alpha}{\alpha - 1} = \exp(\mu + \sigma^2/2)
-\quad \text{and} \quad
+\quad \text{和} \quad
 2^{1/\alpha} = \exp(\mu)
 \]</div>
-<p>which we solve for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> given <span class="math notranslate nohighlight">\(\alpha = 1.05\)</span>.</p>
-<p>Here is the code that generates the two samples, produces the violin plot and
-prints the mean and standard deviation of the two samples.</p>
+<p>我们用 <span class="math notranslate nohighlight">\(\alpha = 1.05\)</span> 来解这些方程得到 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>。</p>
+<p>以下是生成两个样本、制作小提琴图并打印两个样本的均值和标准差的代码。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_firms</span> <span class="o">=</span> <span class="mi">100_000</span>
@@ -1607,13 +1529,13 @@ prints the mean and standard deviation of the two samples.</p>
 <span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.15</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mf">0.05</span>
 
-<span class="n">β</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>    <span class="c1"># discount factor</span>
+<span class="n">β</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>    <span class="c1"># 折现因子</span>
 
 <span class="n">x_bar</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">α</span> <span class="o">=</span> <span class="mf">1.05</span>
 
 <span class="k">def</span> <span class="nf">pareto_rvs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="s2">&quot;Uses a standard method to generate Pareto draws.&quot;</span>
+    <span class="s2">&quot;使用标准方法生成Pareto抽样。&quot;</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">x_bar</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">α</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">y</span>
@@ -1621,7 +1543,7 @@ prints the mean and standard deviation of the two samples.</p>
 </div>
 </div>
 </div>
-<p>Let’s compute the lognormal parameters:</p>
+<p>我们来计算对数正态分布的参数：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">α</span>
@@ -1631,8 +1553,7 @@ prints the mean and standard deviation of the two samples.</p>
 </div>
 </div>
 </div>
-<p>Here’s a function to compute a single estimate of tax revenue for a particular
-choice of distribution <code class="docutils literal notranslate"><span class="pre">dist</span></code>.</p>
+<p>这是一个计算特定分布 <code class="docutils literal notranslate"><span class="pre">dist</span></code> 的单一税收估计的函数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tax_rev</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
@@ -1648,7 +1569,7 @@ choice of distribution <code class="docutils literal notranslate"><span class="p
 </div>
 </div>
 </div>
-<p>Now let’s generate the violin plot.</p>
+<p>现在让我们生成小提琴图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_reps</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1672,10 +1593,10 @@ choice of distribution <code class="docutils literal notranslate"><span class="p
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9beda163e0474122c707f11a2e52dd7b0d08814933c74d83b78ab489ba23ec3a.png"><img alt="_images/9beda163e0474122c707f11a2e52dd7b0d08814933c74d83b78ab489ba23ec3a.png" src="_images/9beda163e0474122c707f11a2e52dd7b0d08814933c74d83b78ab489ba23ec3a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7c0dfe26452a165a15c653956c8c8095eb978f9a0337ef7991b75f612c0b7b3d.png"><img alt="_images/7c0dfe26452a165a15c653956c8c8095eb978f9a0337ef7991b75f612c0b7b3d.png" src="_images/7c0dfe26452a165a15c653956c8c8095eb978f9a0337ef7991b75f612c0b7b3d.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Finally, let’s print the means and standard deviations.</p>
+<p>最后，我们来生成均值和标准差。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tax_rev_pareto</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">tax_rev_pareto</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
@@ -1700,30 +1621,27 @@ choice of distribution <code class="docutils literal notranslate"><span class="p
 </div>
 </div>
 </div>
-<p>Looking at the output of the code, our main conclusion is that the Pareto
-assumption leads to a lower mean and greater dispersion.</p>
+<p>通过查看代码的输出，我们的主要结论是，帕累托分布假设会导致更低的均值和更大的离散度。</p>
 </section>
 </div>
 <div class="exercise admonition" id="ht_ex_cauchy">
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.5 </span></p>
 <section id="exercise-content">
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Characteristic_function_%28probability_theory%29">characteristic function</a> of the Cauchy distribution is</p>
+<p>柯西分布的<a class="reference external" href="https://en.wikipedia.org/wiki/Characteristic_function_%28probability_theory%29">特征函数</a>为</p>
 <div class="math notranslate nohighlight" id="equation-lln-cch">
 <span class="eqno">(21.5)<a class="headerlink" href="#equation-lln-cch" title="Permalink to this equation">#</a></span>\[
 \phi(t) = \mathbb E e^{itX} = \int e^{i t x} f(x) dx = e^{-|t|}
 \]</div>
-<p>Prove that the sample mean <span class="math notranslate nohighlight">\(\bar X_n\)</span> of <span class="math notranslate nohighlight">\(n\)</span> independent draws <span class="math notranslate nohighlight">\(X_1, \ldots,
-X_n\)</span> from the Cauchy distribution has the same characteristic function as
-<span class="math notranslate nohighlight">\(X_1\)</span>.</p>
-<p>(This means that the sample mean never converges.)</p>
+<p>证明 <span class="math notranslate nohighlight">\(n\)</span> 次独立抽样 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 从柯西分布得来的样本均值 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 具有与 <span class="math notranslate nohighlight">\(X_1\)</span> 相同的特征函数。</p>
+<p>（这意味着样本均值永远不会收敛。）</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="heavy_tails-solution-11">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ht_ex_cauchy"> Exercise 21.5</a></p>
 <section id="solution-content">
-<p>By independence, the characteristic function of the sample mean becomes</p>
+<p>由独立性，样本均值的特征函数变为</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1736,8 +1654,8 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
     = [\phi(t/n)]^n
 \end{aligned}
 \end{split}\]</div>
-<p>In view of <a class="reference internal" href="#equation-lln-cch">(21.5)</a>, this is just <span class="math notranslate nohighlight">\(e^{-|t|}\)</span>.</p>
-<p>Thus, in the case of the Cauchy distribution, the sample mean itself has the very same Cauchy distribution, regardless of <span class="math notranslate nohighlight">\(n\)</span>!</p>
+<p>根据 <a class="reference internal" href="#equation-lln-cch">(21.5)</a>，这就是 <span class="math notranslate nohighlight">\(e^{-|t|}\)</span>。</p>
+<p>因此，在柯西分布的情况下，样本均值本身具有完全相同的柯西分布，无论 <span class="math notranslate nohighlight">\(n\)</span> 是多少！</p>
 </section>
 </div>
 </section>
@@ -1794,19 +1712,19 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
                 <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  导言
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   1. About These Lectures
+   1. 关于这些讲座
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Economic Data
+  经济数据
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1817,17 +1735,17 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business_cycle.html">
-   3. Business Cycles
+   3. 商业周期
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. Price Level Histories
+   4. 价格水平历史
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="french_rev.html">
-   5. Inflation During French Revolution
+   5. 法国大革命期间的通货膨胀
   </a>
  </li>
  <li class="toctree-l1">
@@ -1838,7 +1756,7 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Foundations
+  基础工具
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1849,17 +1767,17 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linear_equations.html">
-   8. Linear Equations and Matrix Algebra
+   8. 线性方程和矩阵代数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="complex_and_trig.html">
-   9. Complex Numbers and Trigonometry
+   9. 复数和三角函数
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="geom_series.html">
-   10. Geometric Series for Elementary Economics
+   10. 基础经济学中的几何级数
   </a>
  </li>
 </ul>
@@ -1871,27 +1789,27 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="pv.html">
-   11. Present Values
+   11. 现值
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cons_smooth.html">
-   12. Consumption Smoothing
+   12. 消费平滑
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="equalizing_difference.html">
-   13. Equalizing Difference Model
+   13. 均衡差异模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. A Monetarist Theory of Price Levels
+   14. 价格水平的货币主义理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. Monetarist Theory of Price Levels with Adaptive Expectations
+   15. 具有自适应预期的价格水平货币主义理论
   </a>
  </li>
 </ul>
@@ -1903,12 +1821,12 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_I.html">
-   16. Eigenvalues and Eigenvectors
+   16. 特征值和特征向量
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. Computing Square Roots
+   17. 计算平方根
   </a>
  </li>
 </ul>
@@ -1920,22 +1838,22 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. Distributions and Probabilities
+   18. 分布和概率
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. LLN and CLT
+   19. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. Monte Carlo and Option Pricing
+   20. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   21. Heavy-Tailed Distributions
+   21. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
@@ -1957,22 +1875,22 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. The Solow-Swan Growth Model
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. The Cobweb Model
+   26. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. The Overlapping Generations Model
+   27. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. Commodity Prices
+   28. 商品价格
   </a>
  </li>
 </ul>
@@ -1984,22 +1902,22 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. Money Financed Government Deficits and Price Levels
+   29. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. Some Unpleasant Monetarist Arithmetic
+   30. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. Inflation Rate Laffer Curves
+   31. 通货膨胀税Laffer曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. Laffer Curves  with Adaptive Expectations
+   32. Laffer曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -2011,22 +1929,22 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) Processes
+   33. AR(1) Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. Markov Chains: Basic Concepts
+   34. Markov Chains: Basic Concepts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. Markov Chains: Irreducibility and Ergodicity
+   35. Markov Chains: Irreducibility and Ergodicity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. Univariate Time Series with Matrix Algebra
+   36. Univariate Time Series with Matrix Algebra
   </a>
  </li>
 </ul>
@@ -2038,12 +1956,12 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. Linear Programming
+   37. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. Shortest Paths
+   38. 最短路径
   </a>
  </li>
 </ul>
@@ -2055,22 +1973,22 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. The Perron-Frobenius Theorem
+   41. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. Input-Output Models
+   43. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. A Lake Model of Employment
+   44. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. Networks
+   45. 网络
   </a>
  </li>
 </ul>
@@ -2082,12 +2000,12 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. Supply and Demand with Many Goods
+   46. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. Market Equilibrium with Heterogeneity
+   47. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -2099,12 +2017,12 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. Simple Linear Regression Model
+   48. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. Maximum Likelihood Estimation
+   49. 最大似然估计
   </a>
  </li>
 </ul>
@@ -2116,17 +2034,17 @@ X_n\)</span> from the Cauchy distribution has the same characteristic function a
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>
