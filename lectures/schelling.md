@@ -427,7 +427,7 @@ def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
         # 每隔一定次数更新后，绘图并检查收敛情况
         if current_iter % test_freq == 0:
             cycle = current_iter / n
-            plot_distribution(locations, types, f'周期 {current_iter}')
+            plot_distribution(locations, types, f'迭代 {current_iter}')
             if count_happy(locations, types) == n:
                 print(f"在迭代 {current_iter} 时收敛")
                 break
