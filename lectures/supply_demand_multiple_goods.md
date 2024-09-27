@@ -12,33 +12,31 @@ kernelspec:
 ---
 
 (supply_demand_multiple_goods)=
-# Supply and Demand with Many Goods
+# 多种商品的供需关系
 
-## Overview
+## 概览
 
-In a {doc}`previous lecture <intro_supply_demand>` we studied supply, demand
-and welfare in a market with a single consumption good.
+在{doc}`previous lecture <intro_supply_demand>`中我们研究了一个只有单一消费商品市场的供给、需求和福利。
 
-In this lecture, we study a setting with $n$ goods and $n$ corresponding prices.
+在这个讲座中，我们将研究有$n$种商品和$n$对应价格的情景。
 
-Key infrastructure concepts that we'll encounter in this lecture are
+我们将在这次讲座中遇到的关键基础概念包括：
 
-* inverse demand curves
-* marginal utilities of wealth
-* inverse supply curves
-* consumer surplus
-* producer surplus
-* social welfare as a sum of consumer and producer surpluses
-* competitive equilibrium
+* 反向需求曲线
+* 财富的边际效用
+* 反向供给曲线
+* 消费者剩余
+* 生产者剩余
+* 社会福利作为消费者剩余和生产者剩余之和
+* 竞争均衡
 
-
-We will provide a version of the [first fundamental welfare theorem](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics), which was formulated by 
+我们将提供[第一福利基本定理](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics)的一个版本，这个定理是由下列经济学家提出的：
 
 * [Leon Walras](https://en.wikipedia.org/wiki/L%C3%A9on_Walras)
 * [Francis Ysidro Edgeworth](https://en.wikipedia.org/wiki/Francis_Ysidro_Edgeworth)
 * [Vilfredo Pareto](https://en.wikipedia.org/wiki/Vilfredo_Pareto)
 
-Important extensions to the key ideas were obtained by
+对这些关键想法的重要扩展是由以下学者获得的：
 
 * [Abba Lerner](https://en.wikipedia.org/wiki/Abba_P._Lerner)
 * [Harold Hotelling](https://en.wikipedia.org/wiki/Harold_Hotelling)
@@ -46,31 +44,34 @@ Important extensions to the key ideas were obtained by
 * [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow) 
 * [Gerard Debreu](https://en.wikipedia.org/wiki/G%C3%A9rard_Debreu)
 
+我们将描述两个经典的福利定理：
 
-We shall describe two classic welfare theorems:
+* **第一福利定理：** 对于消费者之间给定的财富分配，竞争均衡下的商品分配方案解决了一个社会规划问题。
+* **第二福利定理：** 解决社会规划问题的商品分配可以通过适当初始财富分配的竞争均衡来支持。
 
-* **first welfare theorem:** for a given distribution of wealth among consumers, a competitive  equilibrium  allocation of goods solves a  social planning problem.
-
-* **second welfare theorem:** An allocation of goods to consumers that solves a social planning problem can be supported by a competitive equilibrium with an appropriate initial distribution of  wealth.
-
-As usual, we start by importing some Python modules.
+如往常一样，我们首先导入一些Python模块。
 
 ```{code-cell} ipython3
-# import some packages
+# 导入一些包
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from scipy.linalg import inv
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-## Formulas from linear algebra
+## 来自线性代数的公式
 
-We shall apply formulas from linear algebra that
+我们将应用线性代数中的公式，这些公式：
 
-* differentiate an inner product with respect to each vector
-* differentiate a product of a matrix and a vector with respect to the vector
-* differentiate a quadratic form in a vector with respect to the vector
+* 将内积关于每个向量进行区分
+* 将矩阵与向量的乘积关于向量进行区分
+* 将向量的二次型关于向量进行区分
 
-Where $a$ is an $n \times 1$ vector, $A$ is an $n \times n$ matrix, and $x$ is an $n \times 1$ vector:
+这里 $a$ 为一个 $n \times 1$ 向量，$A$ 为一个 $n \times n$ 矩阵, 且 $x$ 为一个 $n \times 1$ 向量:
 
 $$
 \frac{\partial a^\top x }{\partial x} = \frac{\partial x^\top a }{\partial x} = a
@@ -84,166 +85,165 @@ $$
 \frac{\partial x^\top A x}{\partial x} = (A + A^\top)x
 $$
 
-## From utility function to demand curve
+## 从效用函数到需求曲线
 
-Our study of consumers will use the following primitives
+我们对消费者的研究将使用以下基本元素：
 
-* $\Pi$ be an $m \times n$ matrix,
-* $b$ be an $m \times 1$ vector of bliss points,
-* $e$ be an $n \times 1$ vector of endowments, and
-
-+++
-
-We will analyze endogenous objects $c$ and $p$, where
-
-* $c$ is an $n \times 1$ vector of consumptions of various goods,
-* $p$ is an $n \times 1$ vector of prices
+* $\Pi$ 是一个 $m \times n$ 矩阵，
+* $b$ 是一个 $m \times 1$ 的幸福点向量，
+* $e$ 是一个 $n \times 1$ 的禀赋向量，
 
 +++
 
-The matrix $\Pi$ describes a consumer's willingness to substitute one good for every other good.
+我们将分析内生对象 $c$ 和 $p$，其中：
 
-We assume that $\Pi$ has linearly independent columns, which implies that $\Pi^\top \Pi$ is a positive definite matrix.
+* $c$ 是一个 $n \times 1$ 各种商品的消费向量，
+* $p$ 是一个 $n \times 1$ 价格向量
 
-* it follows that $\Pi^\top \Pi$ has an inverse.
++++
 
-We shall see below that $(\Pi^\top \Pi)^{-1}$ is a matrix of slopes of (compensated) demand curves for $c$ with respect to a vector of prices:
+矩阵 $\Pi$ 描述了消费者愿意如何替换一个商品以换取其他每一个商品。
+
+我们假设 $\Pi$ 的列线性独立，这意味着 $\Pi^\top \Pi$ 是一个正定矩阵。
+
+* 这意味着 $\Pi^\top \Pi$ 有一个逆矩阵。
+
+我们将在下面看到，$(\Pi^\top \Pi)^{-1}$ 是一个对价格向量来说的 $c$ 的（补偿的）需求曲线斜率矩阵：
 
 $$
     \frac{\partial c } {\partial p} = (\Pi^\top \Pi)^{-1}
 $$
 
-A consumer faces $p$ as a price taker and chooses $c$ to maximize the utility function
+消费者面对价格 $p$ 作为价格接受者，并选择 $c$ 来最大化效用函数
 
 $$
-    - \frac{1}{2} (\Pi c -b) ^\top (\Pi c -b )
+    -\frac{1}{2} (\Pi c -b)^\top (\Pi c -b)
 $$ (eq:old0)
 
-subject to the budget constraint
+受到预算约束的限制
 
 $$
-    p^\top (c -e ) = 0
+    p^\top (c -e) = 0
 $$ (eq:old2)
 
-We shall specify examples in which $\Pi$ and $b$ are such that it typically happens that
+我们将指定一些例子，其中 $\Pi$ 和 $b$ 是这样的，通常会发生
 
 $$
     \Pi c \ll b
 $$ (eq:bversusc)
 
-This means that the consumer has much less of each good than he wants.
+这意味着消费者得到的每种商品都远少于他希望的数量。
 
-The deviation in {eq}`eq:bversusc` will ultimately assure us that competitive equilibrium prices are positive.
+在 {eq}`eq:bversusc` 中的偏差最终将保证我们竞争性均衡价格是正的。
 
 +++
 
-### Demand curve implied by constrained utility maximization
+### 被约束的效用最大化所暗示的需求曲线
 
-For now, we assume that the budget constraint is {eq}`eq:old2`.
+目前，我们假设预算约束是 {eq}`eq:old2`。
 
-So we'll be deriving what is known as  a **Marshallian** demand curve.
+因此，我们将导出所谓的**马歇尔**需求曲线。
 
-Our aim is to maximize [](eq:old0) subject to [](eq:old2).
+我们的目标是在约束 [](eq:old2) 下最大化 [](eq:old0)。
 
-Form a Lagrangian
+构建一个拉格朗日方法
 
-$$ L = - \frac{1}{2} (\Pi c -b)^\top (\Pi c -b ) + \mu [p^\top (e-c)] $$
+$$ L = - \frac{1}{2} (\Pi c -b)^T (\Pi c -b ) + \mu [p^T (e-c)] $$
 
-where $\mu$ is a Lagrange multiplier that is often called a **marginal utility of wealth**.
+其中 $\mu$ 是一个拉格朗日乘数，通常称为**财富的边际效用**。
 
-The consumer chooses $c$ to maximize $L$ and $\mu$ to minimize it.
+消费者选择 $c$ 来最大化 $L$，选 $\mu$ 来最小化它。
 
-First-order conditions for $c$ are
+$c$ 的一阶条件是
 
 $$
     \frac{\partial L} {\partial c}
-    = - \Pi^\top \Pi c + \Pi^\top b - \mu p = 0
+    = - \Pi^T \Pi c + \Pi^T b - \mu p = 0
 $$
 
-so that, given $\mu$, the consumer chooses
+因此，给定 $\mu$，消费者选择
 
 $$
-    c = (\Pi^\top \Pi )^{-1}(\Pi^\top b -  \mu p )
+    c = (\Pi^T \Pi )^{-1}(\Pi^T b -  \mu p )
 $$ (eq:old3)
 
-Substituting {eq}`eq:old3` into budget constraint {eq}`eq:old2` and solving for $\mu$ gives
+将 {eq}`eq:old3` 代入预算约束 {eq}`eq:old2` 并解出 $\mu$ 得
 
 $$
-    \mu(p,e) = \frac{p^\top ( \Pi^\top \Pi )^{-1} \Pi^\top b - p^\top e}{p^\top (\Pi^\top \Pi )^{-1} p}.
+    \mu(p,e) = \frac{p^T ( \Pi^T \Pi )^{-1} \Pi^T b - p^T e}{p^T (\Pi^T \Pi )^{-1} p}.
 $$ (eq:old4)
 
-Equation {eq}`eq:old4` tells how marginal utility of wealth depends on the endowment vector $e$ and the price vector $p$.
+方程 {eq}`eq:old4` 描述了财富的边际效用如何依赖于禀赋向量 $e$ 和价格向量 $p$。
 
 ```{note}
-Equation {eq}`eq:old4` is a consequence of imposing that $p^\top (c - e) = 0$.  
+方程 {eq}`eq:old4` 是基于约束 $p^T (c - e) = 0$ 得到的结果。
 
-We could instead take $\mu$ as a parameter and use {eq}`eq:old3` and the budget constraint {eq}`eq:old2p` to solve for wealth. 
+我们也可以将 $\mu$ 视为一个参数，并使用 {eq}`eq:old3` 和预算约束 {eq}`eq:old2p` 来解算财富。
 
-Which way we proceed determines whether we are constructing a **Marshallian** or **Hicksian** demand curve.
+我们如何进行取决于我们是构建**马歇尔**需求曲线还是**希克斯**需求曲线。
 ```
 
-## Endowment economy
+## 禀赋经济
 
-We now study a pure-exchange economy, or what is sometimes called an endowment economy.
+我们现在研究一个纯交换经济，或者有时被称为禀赋经济。
 
-Consider a single-consumer, multiple-goods economy without production.
+考虑一个单一消费者，多种商品的经济体，没有生产。
 
-The only source of goods is the single consumer's endowment vector $e$.
+商品的唯一来源是单一消费者的禀赋向量 $e$。
 
-A competitive equilibrium price vector induces the consumer to choose $c=e$.
+一个竞争性均衡价格向量促使消费者选择 $c=e$。
 
-This implies that the equilibrium price vector satisfies
+这意味着均衡价格向量满足
 
 $$
-p = \mu^{-1} (\Pi^\top b - \Pi^\top \Pi e)
+p = \mu^{-1} (\Pi^	T b - \Pi^	T \Pi e)
 $$
 
-In the present case where we have imposed budget constraint in the form {eq}`eq:old2`, we are free to normalize the price vector by setting the marginal utility of wealth $\mu =1$ (or any other value for that matter).
+在我们施加了形式为 {eq}`eq:old2` 的预算约束的当前情况下，我们可以通过设置财富边际效用 $\mu =1$（或其他任何值）来规范化价格向量。
 
-This amounts to choosing a common unit (or numeraire) in which prices of all goods are expressed.
+这相当于选择一个通用单位（或计价单位），在该单位中表达所有货物的价格。
 
-(Doubling all prices will affect neither quantities nor relative prices.)
+（价格翻倍既不会影响数量也不会影响相对价格。）
 
-We'll set $\mu=1$.
+我们将设置 $\mu=1$。
 
 ```{exercise}
 :label: sdm_ex1
 
-Verify that setting $\mu=1$ in {eq}`eq:old3` implies that formula {eq}`eq:old4` is satisfied.
+验证在 {eq}`eq:old3` 中设置 $\mu=1$ 意味着满足公式 {eq}`eq:old4`。
 
 ```
 
 ```{exercise}
 :label: sdm_ex2
 
-Verify that setting  $\mu=2$ in {eq}`eq:old3` also implies that formula
-{eq}`eq:old4` is satisfied.
+验证在 {eq}`eq:old3` 中设置 $\mu=2` 也意味着满足公式 {eq}`eq:old4`。
 
 ```
 
-Here is a class that computes competitive equilibria for our economy.
+以下是一个计算我们经济体竞争性均衡的类。
 
 ```{code-cell} ipython3
 class ExchangeEconomy:
     
-    def __init__(self, 
-                 Π, 
+    def __init__(self,
+                 Π,
                  b, 
                  e,
                  thres=1.5):
         """
-        Set up the environment for an exchange economy
+        设置交换经济的环境
 
-        Args:
-            Π (np.array): shared matrix of substitution
-            b (list):  the consumer's bliss point
-            e (list):  the consumer's endowment
-            thres (float): a threshold to check p >> Π e condition
+        参数:
+            Π (np.array): 替代共享矩阵
+            b (list): 消费者的极乐点
+            e (list): 消费者的禀赋
+            thres (float): 检查 p >> Π e 条件的阈值
         """
 
-        # check non-satiation
+        # 检查非饱和性
         if np.min(b / np.max(Π @ e)) <= thres:
-            raise Exception('set bliss points further away')
+            raise Exception('将极乐点设置得更远一些')
 
 
         self.Π, self.b, self.e = Π, b, e
@@ -251,80 +251,80 @@ class ExchangeEconomy:
     
     def competitive_equilibrium(self):
         """
-        Compute the competitive equilibrium prices and allocation
+        计算竞争性均衡价格和配置
         """
         Π, b, e = self.Π, self.b, self.e
 
-        # compute price vector with μ=1
+        # 计算价格向量，μ=1
         p = Π.T @ b - Π.T @ Π @ e
         
-        # compute consumption vector
+        # 计算消费向量
         slope_dc = inv(Π.T @ Π)
         Π_inv = inv(Π)
         c = Π_inv @ b - slope_dc @ p
 
         if any(c < 0):
             print('allocation: ', c)
-            raise Exception('negative allocation: equilibrium does not exist')
+            raise Exception('负配给：均衡不存在')
 
         return p, c
 ```
 
-## Digression: Marshallian and Hicksian demand curves
+## 题外话：马歇尔需求曲线与希克斯需求曲线
 
-Sometimes we'll use budget constraint {eq}`eq:old2` in situations in which a consumer's endowment vector $e$ is his **only** source of income.
+有时我们会在消费者的禀赋向量 $e$ 是其**唯一**收入来源的情况下使用预算限制 {eq}`eq:old2`。
 
-Other times we'll instead assume that the consumer has another source of income (positive or negative) and write his budget constraint as
+其他时候，我们假设消费者有另一来源的收入（正或负），并把他的预算限制写作
 
 $$
-p ^\top (c -e ) = w
+p ^\top (c -e) = w
 $$ (eq:old2p)
 
-where $w$ is measured in "dollars" (or some other **numeraire**) and component $p_i$ of the price vector is measured in dollars per unit of good $i$.
+其中 $w$ 以“美元”（或其他**计价单位**）计量，价格向量的组成 $p_i$ 则以每单位商品 $i$ 的美元计量。
 
-Whether the consumer's budget constraint is {eq}`eq:old2` or {eq}`eq:old2p` and whether we take $w$ as a free parameter or instead as an endogenous variable will affect the consumer's marginal utility of wealth.
+无论消费者的预算限制是 {eq}`eq:old2` 还是 {eq}`eq:old2p`，以及我们将 $w$ 视为一个自由参数还是一个内生变量，都会影响消费者的财富边际效用。
 
-Consequently, how we set $\mu$ determines whether we are constructing
+因此，我们如何设置 $\mu$ 决定我们是在构建
 
-* a **Marshallian** demand curve, as when we use {eq}`eq:old2` and solve for $\mu$ using equation {eq}`eq:old4` above, or
-* a **Hicksian** demand curve, as when we treat $\mu$ as a fixed parameter and solve for $w$ from {eq}`eq:old2p`.
+* **马歇尔** 需求曲线，如当我们使用 {eq}`eq:old2` 并使用上述方程 {eq}`eq:old4` 解 $\mu$ 时，或
+* **希克斯** 需求曲线，如当我们将 $\mu$ 视为一个固定参数并从 {eq}`eq:old2p` 解 $w$ 时。
 
-Marshallian and Hicksian demand curves contemplate different mental experiments:
+马歇尔和希克斯需求曲线考虑的是不同的心理实验：
 
-For a Marshallian demand curve, hypothetical changes in a price vector have both **substitution** and **income** effects
+对于马歇尔需求曲线，假设的价格向量变化有**替代**效应和**收入**效应
 
-* income effects are consequences of changes in $p^\top e$ associated with the change in the price vector
+* 收入效应是价格向量变化所引起的 $p^\top e$ 变动的后果
 
-For a Hicksian demand curve, hypothetical price vector changes have only **substitution** effects
+对于希克斯需求曲线，假设的价格向量变化只有**替代**效应
 
-* changes in the price vector leave the $p^\top e + w$ unaltered because we freeze $\mu$ and solve for $w$
+* 价格向量的变化不会改变 $p^\top e + w$，因为我们固定 $\mu$ 并解出 $w$
 
-Sometimes a Hicksian demand curve is called a **compensated** demand curve in order to emphasize that, to disarm the income (or wealth) effect associated with a price change, the consumer's wealth $w$ is adjusted.
+有时希克斯需求曲线被称为**补偿**需求曲线，以强调为了消除与价格变化相关的收入（或财富）效应，消费者的财富 $w$ 被调整。
 
-We'll discuss these distinct demand curves more below.
+接下来我们将更多地讨论这些不同的需求曲线。
 
 +++
 
-## Dynamics and risk as special cases
+## 动态与风险作为特殊情况
 
-Special cases of our $n$-good pure exchange model can be created to represent
+通过在不同商品上标注不同日期，或者将商品的交付解释为取决于状态的世界（这些状态的实现由*已知概率分布*描述），我们可以创建$n$物品纯交换模型的特殊案例来代表：
 
-* **dynamics** --- by putting different dates on different commodities
-* **risk** --- by interpreting delivery of goods as being contingent on states of the world whose realizations are described by a *known probability distribution*
+* **动态** —— 通过将不同的商品放在不同的日期
+* **风险** —— 通过解释商品的交付依赖于世界的状态，这些状态的实现由一个已知的概率分布描述
 
-Let's illustrate how.
+让我们来说明一下。
 
-### Dynamics
+### 动态
 
-Suppose that we want to represent a utility function
+假设我们想要表示一个效用函数
 
 $$
   - \frac{1}{2} [(c_1 - b_1)^2 + \beta (c_2 - b_2)^2]
 $$
 
-where $\beta \in (0,1)$ is a discount factor, $c_1$ is consumption at time $1$ and $c_2$ is consumption at time 2.
+这里 $\beta \in (0,1)$ 是一个贴现因子，$c_1$ 是时间1的消费，$c_2$ 是时间2的消费。
 
-To capture this with our quadratic utility function {eq}`eq:old0`, set
+要用我们的二次效用函数{eq}`eq:old0`来表示这一点，设置
 
 $$
 \Pi = \begin{bmatrix} 1 & 0 \cr
@@ -335,34 +335,33 @@ $$
 e = \begin{bmatrix} e_1 \cr e_2 \end{bmatrix}
 $$
 
-and
+以及
 
 $$
-b = \begin{bmatrix} b_1 \cr \sqrt{\beta} b_2
-\end{bmatrix}
+b = \begin{bmatrix} b_1 \cr \sqrt{\beta} b_2 \end{bmatrix}
 $$
 
-The budget constraint {eq}`eq:old2` becomes
+预算约束{eq}`eq:old2`变为
 
 $$
 p_1 c_1 + p_2 c_2 = p_1 e_1 + p_2 e_2
 $$
 
-The left side is the **discounted present value** of consumption.
+左侧是消费的**贴现现值**。
 
-The right side is the **discounted present value** of the consumer's endowment.
+右侧是消费者禀赋的**贴现现值**。
 
-The relative price  $\frac{p_1}{p_2}$ has units of time $2$ goods per unit of time $1$ goods.
+相对价格 $\frac{p_1}{p_2}$ 的单位是时间2商品每时间1商品单位。
 
-Consequently, 
+因此，
 
 $$
     (1+r) := R := \frac{p_1}{p_2}
 $$ 
 
-is the **gross interest rate** and $r$ is the **net interest rate**.
+是**毛利率**，$r$ 是**净利率**。
 
-Here is an example.
+这里是一个例子。
 
 ```{code-cell} ipython3
 beta = 0.95
@@ -381,32 +380,32 @@ print('Competitive equilibrium price vector:', p)
 print('Competitive equilibrium allocation:', c)
 ```
 
-### Risk and state-contingent claims
+### 风险与状态相关权益
 
-We study risk in the context of a **static** environment, meaning that there is only one period.
+我们在**静态**环境中研究风险，这意味着只有一个时期。
 
-By **risk** we mean that an outcome is not known in advance, but that it is governed by a known probability distribution.
+所谓**风险**，是指结果事先未知，但受已知概率分布的制约。
 
-As an example, our consumer confronts **risk** means in particular that
+例如，我们的消费者面对的**风险**特别体现在：
 
-  * there are two states of nature, $1$ and $2$.
+  * 有两种自然状态，$1$ 和 $2$。
 
-  * the consumer knows that the probability that state $1$ occurs is $\lambda$.
+  * 消费者知道状态 $1$ 发生的概率是 $\lambda$。
 
-  * the consumer knows that the probability that state $2$ occurs is $(1-\lambda)$.
+  * 消费者知道状态 $2$ 发生的概率是 $(1-\lambda)$。
 
-Before the outcome is realized, the consumer's **expected utility** is
+在结果实现之前，消费者的**预期效用**是
 
 $$
-- \frac{1}{2} [\lambda (c_1 - b_1)^2 + (1-\lambda)(c_2 - b_2)^2]
+-\frac{1}{2} [\lambda (c_1 - b_1)^2 + (1-\lambda)(c_2 - b_2)^2]
 $$
 
-where
+其中：
 
-* $c_1$ is consumption in state $1$
-* $c_2$ is consumption in state $2$
+* $c_1$ 是状态 $1$ 中的消费
+* $c_2$ 是状态 $2$ 中的消费
 
-To capture these preferences we set
+为了描述这些偏好，我们设置
 
 $$
 \Pi = \begin{bmatrix} \sqrt{\lambda} & 0 \cr
@@ -423,33 +422,33 @@ $$
 b = \begin{bmatrix} \sqrt{\lambda}b_1 \cr \sqrt{1-\lambda}b_2 \end{bmatrix}
 $$
 
-A consumer's endowment vector is
+消费者的禀赋向量是
 
 $$
 c = \begin{bmatrix} c_1 \cr c_2 \end{bmatrix}
 $$
 
-A price vector is
+一个价格向量是
 
 $$
 p = \begin{bmatrix} p_1 \cr p_2 \end{bmatrix}
 $$
 
-where $p_i$ is the price of one unit of consumption in state $i \in \{1, 2\}$.
+其中 $p_i$ 是状态 $i \in \{1, 2\}$ 下的一单位消费的价格。
 
-The state-contingent goods being traded are often called **Arrow securities**.
+交易中的状态相关商品常被称为**箭头证券**。
 
-Before the random state of the world $i$ is realized, the consumer sells his/her state-contingent endowment bundle and purchases a state-contingent consumption bundle.
+在世界的随机状态 $i$ 实现之前，消费者卖掉他/她的状态相关的禀赋组合，并购买一个状态相关的消费组合。
 
-Trading such state-contingent goods is one way economists often model **insurance**.
-
-+++
-
-We use the tricks described above to interpret  $c_1, c_2$ as "Arrow securities" that are state-contingent claims to consumption goods.
+交易此类状态相关商品是经济学家常用来模拟**保险**的方式之一。
 
 +++
 
-Here is an instance of the risk economy:
+我们使用上述技巧来解释 $c_1, c_2$ 作为“箭证券”，它们是对消费品的状态条件索赔。
+
++++
+
+这里是一个风险经济的实例：
 
 ```{code-cell} ipython3
 prob = 0.2
@@ -464,22 +463,22 @@ e = np.array([1, 1])
 risk = ExchangeEconomy(Π, b, e)
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 ```{exercise}
 :label: sdm_ex3
 
-Consider the instance above.
+考虑上面的实例。
 
-Please numerically study how each of the following cases affects the equilibrium prices and allocations:
+请数值研究以下每种情况如何影响均衡价格和分配：
 
-* the consumer gets poorer,
-* they like the first good more, or
-* the probability that state $1$ occurs is higher.
+* 消费者变得更穷，
+* 他们更喜欢第一种商品，或者
+* 状态 $1$ 发生的概率更高。
 
-Hints. For each case choose some parameter $e, b, \text{ or } \lambda$ different from the instance.
+提示：对于每种情况，选择与实例不同的一些参数 $e, b, \text{或} \lambda$。
 
 ```
 
@@ -489,30 +488,30 @@ Hints. For each case choose some parameter $e, b, \text{ or } \lambda$ different
 :class: dropdown
 ```
 
-First consider when the consumer is poorer.
+首先考虑当消费者更穷时。
 
-Here we just decrease the endowment.
+这里我们只是减少了禀赋。
 
 ```{code-cell} ipython3
 risk.e = np.array([0.5, 0.5])
 
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
-If the consumer likes the first (or second) good more, then we can set a larger bliss value for good 1.
+如果消费者更喜欢第一（或第二）种商品，那么我们可以为商品1设置更大的极乐值。
 
 ```{code-cell} ipython3
 risk.b = np.array([np.sqrt(prob) * 6, np.sqrt(1 - prob) * 5])
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
-Increase the probability that state $1$ occurs.
+增加状态 $1$ 发生的概率。
 
 ```{code-cell} ipython3
 prob = 0.8
@@ -527,8 +526,8 @@ e = np.array([1, 1])
 risk = ExchangeEconomy(Π, b, e)
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 ```{solution-end}
@@ -536,120 +535,109 @@ print('Competitive equilibrium allocation:', c)
 
 +++
 
-## Economies with endogenous supplies of goods
+## 具有内生供应的经济体
 
-Up to now we have described a pure exchange economy in which endowments of goods are exogenous, meaning that they are taken as given from outside the model.
+迄今为止，我们描述的是一个纯粹的交换经济，其中商品的禀赋是外生的，意味着它们是从模型外部给定的。
 
-### Supply curve of a competitive firm
+### 竞争性公司的供应曲线
 
-A competitive firm that can produce goods takes a price vector $p$ as given and chooses a quantity $q$
-to maximize total revenue minus total costs.
+能够生产商品的竞争公司将价格向量 $p$ 视为既定，并选择数量 $q$
+以最大化总收入减去总成本。
 
-The firm's total revenue equals $p^\top q$ and its total cost equals $C(q)$ where $C(q)$ is a total cost function
-
-$$
-C(q) = h ^\top q +  \frac{1}{2} q^\top J q
-$$
-
-
-and $J$ is a positive definite matrix.
-
-
-So the firm's profits are
+公司的总收入等于 $p^T q$，其总成本等于 $C(q)$，其中 $C(q)$ 是总成本函数
 
 $$
-p^\top q - C(q)
+C(q) = h^T q + \frac{1}{2} q^T J q
+$$
+
+其中 $J$ 是一个正定矩阵。
+
+因此公司的利润是
+
+$$
+p^T q - C(q)
 $$ (eq:compprofits)
 
-
-
-An $n\times 1$ vector of **marginal costs** is
+一个 $n \times 1$ 向量的**边际成本**是
 
 $$
 \frac{\partial C(q)}{\partial q} = h + H q
 $$
 
-where
+其中
 
 $$
-H =  \frac{1}{2} (J + J^\top)
+H = \frac{1}{2} (J + J^T)
 $$
 
-The firm maximizes total profits by setting **marginal revenue to marginal costs**.
+公司通过将**边际收入等于边际成本**来最大化总利润。
 
-An $n \times 1$ vector of marginal revenues for the price-taking firm is $\frac{\partial p^\top q}
-{\partial q} = p $.
+对于收取定价的公司，一个 $n \times 1$ 向量的边际收入是 $\frac{\partial p^T q}
+{\partial q} = p $。
 
-So **price equals marginal revenue** for our price-taking competitive firm.
+因此对于我们这个收取定价的竞争公司 **价格等于边际收入**。
 
-This leads to the following **inverse supply curve** for the competitive firm:
-
+这导致以下竞争公司的**反向供应曲线**：
 
 $$
 p = h + H q
 $$
 
+### 竞争均衡
 
+为了计算一个以需求曲线由财富边际效用 $\mu$ 确定的生产经济的竞争均衡，我们首先通过解决规划问题来计算分配。
 
+然后，我们使用逆需求曲线或供应曲线计算均衡价格向量。
 
-### Competitive equilibrium
+#### $\mu=1$ 的热身
 
+作为一个特殊情况，通过设置财富的边际效用 $\mu =1$ 来确定一个需求曲线。
 
-To compute a competitive equilibrium for a production economy where demand curve is pinned down by the marginal utility of wealth $\mu$, we first compute an allocation by solving a planning problem.
-
-Then we compute the equilibrium price vector using the inverse demand or supply curve.
-
-#### $\mu=1$ warmup
-
-As a special case, let's pin down a demand curve by setting the marginal utility of wealth $\mu =1$.
-
-Equating supply price to demand price and letting $q=c$ we get
+使供应价格等于需求价格并让 $q=c$，我们得到
 
 $$
-p = h + H c = \Pi^\top b - \Pi^\top \Pi c ,
+p = h + H c = \Pi^{\top} b - \Pi^{\top} \Pi c,
 $$
 
-which implies the equilibrium quantity vector
+这意味着均衡数量向量
 
 $$
-c = (\Pi^\top \Pi + H )^{-1} ( \Pi^\top b - h)
+c = (\Pi^{\top} \Pi + H )^{-1} ( \Pi^{\top} b - h)
 $$ (eq:old5)
 
-This equation is the counterpart of equilibrium quantity {eq}`eq:old1` for the scalar $n=1$ model with which we began.
+这个方程是我们开始时的标量 $n=1$ 模型均衡数量 {eq}`eq:old1` 的对应物。
 
-#### General $\mu\neq 1$ case
+#### 通用 $\mu \neq 1$ 情况
 
-Now let's extend the preceding analysis to a more
-general case by allowing $\mu \neq 1$.
+现在让我们通过允许 $\mu \neq 1$ 来扩展之前的分析。
 
-Then the inverse demand curve is
+然后，逆需求曲线为
 
 $$
-p = \mu^{-1} [\Pi^\top b - \Pi^\top \Pi c]
+p = \mu^{-1} [\Pi^{\top} b - \Pi^{\top} \Pi c]
 $$ (eq:old5pa)
 
-Equating this to the inverse supply curve, letting $q=c$ and solving
-for $c$ gives
+使这个等于逆供应曲线，让 $q=c$ 并解出 $c$ 得
 
 $$
-c = [\Pi^\top \Pi + \mu H]^{-1} [ \Pi^\top b - \mu h]
+c = [\Pi^{\top} \Pi + \mu H]^{-1} [ \Pi^{\top} b - \mu h]
 $$ (eq:old5p)
 
 +++
 
-### Implementation
+### 实现
 
-A Production Economy will consist of
+生产型经济将包括：
 
-* a single **person** that we'll interpret as a representative consumer
-* a single set of **production costs**
-* a multiplier $\mu$ that weights "consumers" versus "producers" in a planner's welfare function, as described above in the main text
-* an $n \times 1$ vector $p$ of competitive equilibrium prices
-* an $n \times 1$ vector $c$ of competitive equilibrium quantities
-* **consumer surplus**
-* **producer surplus**
+* 一个我们将解释为代表性消费者的**个人**
+* 一组**生产成本**
+* 一个加权“消费者”与“生产者”在规划者福利函数中的乘数 $\mu$，如上文所述
+* 一个 $n \times 1$ 向量 $p$，代表竞争均衡价格
+* 一个 $n \times 1$ 向量 $c$，代表竞争均衡数量
+* **消费者剩余**
+* **生产者剩余**
 
-Here we define a class ``ProductionEconomy``.
+这里我们定义一个类 `ProductionEconomy`。
 
 ```{code-cell} ipython3
 class ProductionEconomy:
@@ -661,82 +649,82 @@ class ProductionEconomy:
                  J, 
                  μ):
         """
-        Set up the environment for a production economy
+        设置生产型经济环境
 
-        Args:
-            Π (np.ndarray): matrix of substitution
-            b (np.array): bliss points
-            h (np.array): h in cost func
-            J (np.ndarray): J in cost func
-            μ (float): welfare weight of the corresponding planning problem
+        参数:
+            Π (np.ndarray): 替代矩阵
+            b (np.array): 极乐点
+            h (np.array): 成本函数中的 h
+            J (np.ndarray): 成本函数中的 J
+            μ (float): 对应规划问题的福利权重
         """
         self.n = len(b)
         self.Π, self.b, self.h, self.J, self.μ = Π, b, h, J, μ
         
     def competitive_equilibrium(self):
         """
-        Compute a competitive equilibrium of the production economy
+        计算生产型经济的竞争均衡
         """
         Π, b, h, μ, J = self.Π, self.b, self.h, self.μ, self.J
         H = .5 * (J + J.T)
 
-        # allocation
+        # 配置分配
         c = inv(Π.T @ Π + μ * H) @ (Π.T @ b - μ * h)
 
-        # price
+        # 计算价格
         p = 1 / μ * (Π.T @ b - Π.T @ Π @ c)
 
-        # check non-satiation
+        # 检查非饱和
         if any(Π @ c - b >= 0):
-            raise Exception('invalid result: set bliss points further away')
+            raise Exception('无效结果：将极乐点设置得更远一些')
 
         return c, p
 
     def compute_surplus(self):
         """
-        Compute consumer and producer surplus for single good case
+        计算单一商品情况下的消费者和生产者剩余
         """
         if self.n != 1:
-            raise Exception('not single good')
+            raise Exception('非单一商品')
         h, J, Π, b, μ = self.h.item(), self.J.item(), self.Π.item(), self.b.item(), self.μ
         H = J
 
-        # supply/demand curve coefficients
+        # 供需曲线系数
         s0, s1 = h, H
         d0, d1 = 1 / μ * Π * b, 1 / μ * Π**2
 
-        # competitive equilibrium
+        # 竞争均衡
         c, p = self.competitive_equilibrium()
 
-        # calculate surplus
+        # 计算剩余
         c_surplus = d0 * c - .5 * d1 * c**2 - p * c
         p_surplus = p * c - s0 * c - .5 * s1 * c**2
 
         return c_surplus, p_surplus
 ```
 
-Then define a function that plots demand and supply curves and labels surpluses and equilibrium.
+然后定义一个函数，用于绘制需求曲线和供给曲线，并标注剩余和均衡点。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 def plot_competitive_equilibrium(PE):
     """
-    Plot demand and supply curves, producer/consumer surpluses, and equilibrium for
-    a single good production economy
+    绘制需求和供应曲线，生产者/消费者剩余以及均衡点
+    单一商品生产型经济
 
-    Args:
-        PE (class): A initialized production economy class
+    参数:
+        PE (class): 初始化的生产经济类
     """
-    # get singleton value
+    # 获取单值
     J, h, Π, b, μ = PE.J.item(), PE.h.item(), PE.Π.item(), PE.b.item(), PE.μ
     H = J
 
-    # compute competitive equilibrium
+    # 计算竞争均衡
     c, p = PE.competitive_equilibrium()
     c, p = c.item(), p.item()
 
-    # inverse supply/demand curve
+    # 反转供需曲线
     supply_inv = lambda x: h + H * x
     demand_inv = lambda x: 1 / μ * (Π * b - Π * Π * x)
 
@@ -745,42 +733,42 @@ def plot_competitive_equilibrium(PE):
     supply_curve = supply_inv(xs)
     demand_curve = demand_inv(xs)
 
-    # plot
+    # 绘图
     plt.figure()
-    plt.plot(xs, supply_curve, label='Supply', color='#020060')
-    plt.plot(xs, demand_curve, label='Demand', color='#600001')
+    plt.plot(xs, supply_curve, label='供给曲线', color='#020060')
+    plt.plot(xs, demand_curve, label='需求曲线', color='#600001')
 
-    plt.fill_between(xs[xs <= c], demand_curve[xs <= c], ps[xs <= c], label='Consumer surplus', color='#EED1CF')
-    plt.fill_between(xs[xs <= c], supply_curve[xs <= c], ps[xs <= c], label='Producer surplus', color='#E6E6F5')
+    plt.fill_between(xs[xs <= c], demand_curve[xs <= c], ps[xs <= c], label='消费者剩余', color='#EED1CF')
+    plt.fill_between(xs[xs <= c], supply_curve[xs <= c], ps[xs <= c], label='生产者剩余', color='#E6E6F5')
 
     plt.vlines(c, 0, p, linestyle="dashed", color='black', alpha=0.7)
     plt.hlines(p, 0, c, linestyle="dashed", color='black', alpha=0.7)
-    plt.scatter(c, p, zorder=10, label='Competitive equilibrium', color='#600001')
+    plt.scatter(c, p, zorder=10, label='竞争均衡', color='#600001')
 
     plt.legend(loc='upper right')
     plt.margins(x=0, y=0)
     plt.ylim(0)
-    plt.xlabel('Quantity')
-    plt.ylabel('Price')
+    plt.xlabel('数量')
+    plt.ylabel('价格')
     plt.show()
 ```
 
-#### Example: single agent with one good and production
+#### 示例：单一经济体与单一商品和生产
 
-Now let's construct an example of a production economy with one good.
+现在我们来构建一个包含单一商品的生产经济示例。
 
-To do this we
+为此我们需要：
 
-  * specify a single **person** and a **cost curve** in a way that let's us replicate the simple single-good supply demand example with which we started
+  * 指定一个**个人**和一个**成本曲线**，以复现我们开始时用到的简单单商品供求示例
 
-  * compute equilibrium $p$ and $c$ and consumer and producer surpluses
+  * 计算均衡 $p$ 和 $c$，以及消费者和生产者剩余
 
-  * draw graphs of both surpluses
+  * 绘制这两种剩余的图表
 
-  * do experiments in which we shift $b$ and watch what happens to $p, c$.
+  * 通过改变 $b$ 并观察 $p, c$ 的变化来进行实验
 
 ```{code-cell} ipython3
-Π = np.array([[1]])  # the matrix now is a singleton
+Π = np.array([[1]])  # 矩阵现在是一个单元素
 b = np.array([10])
 h = np.array([0.5])
 J = np.array([[1]])
@@ -789,62 +777,58 @@ J = np.array([[1]])
 PE = ProductionEconomy(Π, b, h, J, μ)
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p.item())
-print('Competitive equilibrium allocation:', c.item())
+print('竞争均衡价格:', p.item())
+print('竞争均衡分配:', c.item())
 
-# plot
 plot_competitive_equilibrium(PE)
 ```
 
 ```{code-cell} ipython3
 c_surplus, p_surplus = PE.compute_surplus()
 
-print('Consumer surplus:', c_surplus.item())
-print('Producer surplus:', p_surplus.item())
+print('消费者剩余:', c_surplus.item())
+print('生产者剩余:', p_surplus.item())
 ```
 
-Let's give the consumer a lower welfare weight by raising $\mu$.
+通过提高 $\mu$ 降低消费者福利权重。
 
 ```{code-cell} ipython3
 PE.μ = 2
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p.item())
-print('Competitive equilibrium allocation:', c.item())
+print('竞争均衡价格:', p.item())
+print('竞争均衡配置:', c.item())
 
-# plot
 plot_competitive_equilibrium(PE)
 ```
 
 ```{code-cell} ipython3
 c_surplus, p_surplus = PE.compute_surplus()
 
-print('Consumer surplus:', c_surplus.item())
-print('Producer surplus:', p_surplus.item())
+print('消费者剩余:', c_surplus.item())
+print('生产者剩余:', p_surplus.item())
 ```
 
-Now we change the bliss point so that the consumer derives more utility from consumption.
+现在我们改变极乐点，使消费者从消费中获得更多的效用。
 
 ```{code-cell} ipython3
 PE.μ = 1
 PE.b = PE.b * 1.5
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p.item())
-print('Competitive equilibrium allocation:', c.item())
+print('竞争均衡价格:', p.item())
+print('竞争均衡配置:', c.item())
 
-# plot
 plot_competitive_equilibrium(PE)
 ```
 
-This raises both the equilibrium price and quantity.
+这将提高均衡价格和数量。
 
+#### 示例：单一代理双商品经济与生产
 
-#### Example: single agent two-good economy with production
+  * 我们将进行一些类似上面的实验
 
-  * we'll do some experiments like those above
-
-  * we can do experiments with a **diagonal** $\Pi$ and also with a **non-diagonal** $\Pi$ matrices to study how cross-slopes affect responses of $p$ and $c$ to various shifts in $b$ (TODO)
+  * 我们可以使用**对角线** $\Pi$ 和**非对角线** $\Pi$ 矩阵来做实验，以研究交叉斜率如何影响 $p$ 和 $c$ 对 $b$ 的各种变化的反应（待办）
 
 ```{code-cell} ipython3
 Π = np.array([[1, 0],
@@ -861,8 +845,8 @@ J = np.array([[1, 0.5],
 PE = ProductionEconomy(Π, b, h, J, μ)
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争性均衡价格:', p)
+print('竞争性均衡配置:', c)
 ```
 
 ```{code-cell} ipython3
@@ -870,8 +854,8 @@ PE.b = np.array([12, 10])
 
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争性均衡价格:', p)
+print('竞争性均衡配置:', c)
 ```
 
 ```{code-cell} ipython3
@@ -882,91 +866,89 @@ PE.b = np.array([10, 10])
 
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争性均衡价格:', p)
+print('竞争性均衡配置:', c)
 ```
 
 ```{code-cell} ipython3
 PE.b = np.array([12, 10])
 c, p = PE.competitive_equilibrium()
 
-print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争性均衡价格:', p)
+print('竞争性均衡配置:', c)
 ```
 
-### Digression: a supplier who is a monopolist
+### 题外话：垄断的供应商
 
-A competitive firm is a **price-taker** who regards the price and therefore its marginal revenue as being beyond its control.
+一个有竞争的公司是一个**价格接受者**，它认为价格因此其边际收益是无法由自己控制的。
 
-A monopolist knows that it has no competition and can influence the price and its marginal revenue by
-setting quantity.
+垄断者知道他们没有竞争对手，可以通过设定产量来影响价格及其边际收益。
 
-A monopolist takes a **demand curve** and not the **price** as beyond its control.
+垄断者将**需求曲线**而不是**价格**视为无法控制的。
 
-Thus, instead of being a price-taker, a monopolist sets prices to maximize profits subject to the inverse demand curve
-{eq}`eq:old5pa`.
+因此，垄断者不是价格接受者，而是设定价格以最大化利润，受逆需求曲线的约束
+{eq}`eq:old5pa`。
 
-So the monopolist's total profits as a function of its output $q$ is
+所以垄断者的总利润作为其产量$q$的函数是
 
 $$
-[\mu^{-1} \Pi^\top (b - \Pi q)]^\top  q - h^\top q -  \frac{1}{2} q^\top J q
+[\mu^{-1} \Pi^{\text{top}} (b - \Pi q)]^{\text{top}} q - h^{\text{top}} q - \frac{1}{2} q^{\text{top}} J q
 $$ (eq:monopprof)
 
-After finding
-first-order necessary conditions for maximizing monopoly profits with respect to $q$
-and solving them for $q$, we find that the monopolist sets
+在找到使垄断利润最大化关于$q$的
+一阶必要条件并求解它们后，我们发现垄断者设置
 
 $$
-q = (H + 2 \mu^{-1} \Pi^\top \Pi)^{-1} (\mu^{-1} \Pi^\top b - h)
+q = (H + 2 \mu^{-1} \Pi^{\text{top}} \Pi)^{-1} (\mu^{-1} \Pi^{\text{top}} b - h)
 $$ (eq:qmonop)
 
-We'll soon see that a monopolist sets a **lower output** $q$ than does either a
+我们很快会看到，一个垄断者设置的**产量**$q$比以下任何一个都要低：
 
- * planner who chooses $q$ to maximize social welfare
+ * 计划者选择$q$来最大化社会福利
 
- * a competitive equilibrium
+ * 一个有竞争的均衡
 
 
 
 ```{exercise}
 :label: sdm_ex4
 
-Please  verify the monopolist's supply curve {eq}`eq:qmonop`.
+请验证垄断者的供应曲线 {eq}`eq:qmonop`。
 
 ```
 
 +++
 
-### A monopolist
+### 垄断者
 
-Let's consider a monopolist supplier.
+让我们考虑一个垄断供应商。
 
-We have included a method in our `ProductionEconomy` class to compute an equilibrium price and allocation when the supplier is a monopolist.
+我们在我们的 `ProductionEconomy` 类中加入了一个方法，以计算在供应商为垄断者时的均衡价格和配置。
 
-Since the supplier now has the price-setting power
+由于供应商现在拥有设定价格的权力：
 
-- we first compute the optimal quantity that solves the monopolist's profit maximization problem.
-- Then we back out an equilibrium price from the consumer's inverse demand curve.
+- 我们首先计算解决垄断者利润最大化问题的最佳产量。
+- 然后我们从消费者的逆需求曲线中推导出一个均衡价格。
 
-Next, we use a graph for the single good case to illustrate the difference between a competitive equilibrium and an equilibrium with a monopolist supplier.
+接下来，我们用图表来展示单一商品情况下，竞争性均衡和垄断供应商均衡之间的区别。
 
-Recall that in a competitive equilibrium, a price-taking supplier equates marginal revenue $p$ to marginal cost $h + Hq$.
+回忆一下，在竞争性均衡中，一个接受价格的供应商使得边际收入 $p$ 等于边际成本 $h + Hq$。
 
-This yields a competitive producer's inverse supply curve.
+这给出了竞争生产者的逆供应曲线。
 
-A monopolist's marginal revenue is not constant but instead is a non-trivial function of the quantity it sets.
+垄断者的边际收入不是常数，而是依赖于它设定的数量的一个非平凡函数。
 
-The monopolist's marginal revenue is
+垄断者的边际收入为
 
 $$
-MR(q) = -2\mu^{-1}\Pi^{\top}\Pi q+\mu^{-1}\Pi^{\top}b,
+MR(q) = -2\mu^{-1}\Pi^{\text{top}}\Pi q+\mu^{-1}\Pi^{\text{top}}b,
 $$
 
-which the monopolist equates to its marginal cost.
+垄断者将此等于其边际成本。
 
-The plot indicates that the monopolist's sets output  lower than either the competitive equilibrium quantity.
+该图表显示，垄断者设定的产量比竞争均衡量更低。
 
-In a single good case, this equilibrium is associated with a higher price of the good.
+在单一商品情况下，这种均衡与商品的更高价格相关。
 
 ```{code-cell} ipython3
 class Monopoly(ProductionEconomy):
@@ -978,58 +960,54 @@ class Monopoly(ProductionEconomy):
                  J, 
                  μ):
         """
-        Inherit all properties and methods from class ProductionEconomy
+        继承ProductionEconomy类的所有属性和方法
         """
         super().__init__(Π, b, h, J, μ)
         
 
     def equilibrium_with_monopoly(self):
         """
-        Compute the equilibrium price and allocation when there is a monopolist supplier
+        在有垄断供应商的情况下计算均衡价格和配置
         """
         Π, b, h, μ, J = self.Π, self.b, self.h, self.μ, self.J
         H = .5 * (J + J.T)
 
-        # allocation
+        # 配置
         q = inv(μ * H + 2 * Π.T @ Π) @ (Π.T @ b - μ * h)
 
-        # price
+        # 价格
         p = 1 / μ * (Π.T @ b - Π.T @ Π @ q)
 
         if any(Π @ q - b >= 0):
-            raise Exception('invalid result: set bliss points further away')
+            raise Exception('无效结果：将幸福点设置得更远')
 
         return q, p
 ```
-
-Define a function that plots the demand, marginal cost and marginal revenue curves with surpluses and equilibrium labelled.
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 def plot_monopoly(M):
     """
-    Plot demand curve, marginal production cost and revenue, surpluses and the
-    equilibrium in a monopolist supplier economy with a single good
+    绘制需求曲线、边际生产成本和收益、剩余以及标记的均衡情况，在具有垄断供应商的单一商品经济情形下
 
-    Args:
-        M (class): A class inherits class ProductionEconomy with monopoly
+    参数：
+        M (class): 继承单一商品垄断经济类ProductionEconomy的类
     """
-    # get singleton value
+    # 获取单值
     J, h, Π, b, μ = M.J.item(), M.h.item(), M.Π.item(), M.b.item(), M.μ
     H = J
 
-    # compute competitive equilibrium
+    # 计算竞争均衡
     c, p = M.competitive_equilibrium()
     q, pm = M.equilibrium_with_monopoly()
     c, p, q, pm = c.item(), p.item(), q.item(), pm.item()
 
-    # compute
+    # 计算
 
-    # inverse supply/demand curve
-    marg_cost = lambda x: h + H * x
-    marg_rev = lambda x: -2 * 1 / μ * Π * Π * x + 1 / μ * Π * b
-    demand_inv = lambda x: 1 / μ * (Π * b - Π * Π * x)
+    # 供需曲线反函数
+    marg_cost = lambda x: h + H * x  # 边际成本
+    marg_rev = lambda x: -2 * 1 / μ * Π * Π * x + 1 / μ * Π * b  # 边际收益
+    demand_inv = lambda x: 1 / μ * (Π * b - Π * Π * x)  # 需求曲线
 
     xs = np.linspace(0, 2 * c, 100)
     pms = np.ones(100) * pm
@@ -1037,34 +1015,34 @@ def plot_monopoly(M):
     marg_rev_curve = marg_rev(xs)
     demand_curve = demand_inv(xs)
 
-    # plot
+    # 绘图
     plt.figure()
-    plt.plot(xs, marg_cost_curve, label='Marginal cost', color='#020060')
-    plt.plot(xs, marg_rev_curve, label='Marginal revenue', color='#E55B13')
-    plt.plot(xs, demand_curve, label='Demand', color='#600001')
+    plt.plot(xs, marg_cost_curve, label='边际成本', color='#020060')
+    plt.plot(xs, marg_rev_curve, label='边际收益', color='#E55B13')
+    plt.plot(xs, demand_curve, label='需求', color='#600001')
 
-    plt.fill_between(xs[xs <= q], demand_curve[xs <= q], pms[xs <= q], label='Consumer surplus', color='#EED1CF')
-    plt.fill_between(xs[xs <= q], marg_cost_curve[xs <= q], pms[xs <= q], label='Producer surplus', color='#E6E6F5')
+    plt.fill_between(xs[xs <= q], demand_curve[xs <= q], pms[xs <= q], label='消费者剩余', color='#EED1CF')
+    plt.fill_between(xs[xs <= q], marg_cost_curve[xs <= q], pms[xs <= q], label='生产者剩余', color='#E6E6F5')
 
     plt.vlines(c, 0, p, linestyle="dashed", color='black', alpha=0.7)
     plt.hlines(p, 0, c, linestyle="dashed", color='black', alpha=0.7)
-    plt.scatter(c, p, zorder=10, label='Competitive equilibrium', color='#600001')
+    plt.scatter(c, p, zorder=10, label='竞争均衡', color='#600001')
 
     plt.vlines(q, 0, pm, linestyle="dashed", color='black', alpha=0.7)
     plt.hlines(pm, 0, q, linestyle="dashed", color='black', alpha=0.7)
-    plt.scatter(q, pm, zorder=10, label='Equilibrium with monopoly', color='#E55B13')
+    plt.scatter(q, pm, zorder=10, label='垄断均衡', color='#E55B13')
 
     plt.legend(loc='upper right')
     plt.margins(x=0, y=0)
     plt.ylim(0)
-    plt.xlabel('Quantity')
-    plt.ylabel('Price')
+    plt.xlabel('数量')
+    plt.ylabel('价格')
     plt.show()
 ```
 
-#### A multiple good example
+#### 一个多种商品的例子
 
-Let's compare competitive equilibrium and monopoly outcomes in a multiple goods economy.
+让我们在一个多种商品的经济中比较竞争均衡和垄断结果。
 
 ```{code-cell} ipython3
 Π = np.array([[1, 0],
@@ -1082,17 +1060,17 @@ M = Monopoly(Π, b, h, J, μ)
 c, p = M.competitive_equilibrium()
 q, pm = M.equilibrium_with_monopoly()
 
-print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格:', p)
+print('竞争均衡分配:', c)
 
-print('Equilibrium with monopolist supplier price:', pm)
-print('Equilibrium with monopolist supplier allocation:', q)
+print('具有垄断供应商的均衡价格:', pm)
+print('具有垄断供应商的均衡分配:', q)
 ```
 
-#### A single-good example
+#### 单一商品示例
 
 ```{code-cell} ipython3
-Π = np.array([[1]])  # the matrix now is a singleton
+Π = np.array([[1]])  # 现在矩阵是一个单元素
 b = np.array([10])
 h = np.array([0.5])
 J = np.array([[1]])
@@ -1102,53 +1080,52 @@ M = Monopoly(Π, b, h, J, μ)
 c, p = M.competitive_equilibrium()
 q, pm = M.equilibrium_with_monopoly()
 
-print('Competitive equilibrium price:', p.item())
-print('Competitive equilibrium allocation:', c.item())
+print('竞争均衡价格:', p.item())
+print('竞争均衡配置:', c.item())
 
-print('Equilibrium with monopolist supplier price:', pm.item())
-print('Equilibrium with monopolist supplier allocation:', q.item())
+print('垄断供应商均衡价格:', pm.item())
+print('垄断供应商均衡配置:', q.item())
 
-# plot
 plot_monopoly(M)
 ```
 
-## Multi-good welfare maximization problem
+## 多商品福利最大化问题
 
-Our welfare maximization problem -- also sometimes called a social planning problem  -- is to choose $c$ to maximize
-
-$$
-    - \frac{1}{2} \mu^{-1}(\Pi c -b) ^\top (\Pi c -b )
-$$
-
-minus the area under the inverse supply curve, namely,
+我们的福利最大化问题 -- 有时也被称为社会规划问题 -- 是选择 $c$ 来最大化
 
 $$
-    h c +  \frac{1}{2} c^\top J c  
+    - \frac{1}{2} \mu^{-1}(\Pi c -b)^\top (\Pi c -b)
 $$
 
-So the welfare criterion is
+减去逆供给曲线下的面积，即，
 
 $$
-    - \frac{1}{2} \mu^{-1}(\Pi c -b)^\top (\Pi c -b ) -h c 
-        -  \frac{1}{2} c^\top J c
+    h c + \frac{1}{2} c^\top J c  
 $$
 
-In this formulation, $\mu$ is a parameter that describes how the planner weighs interests of outside suppliers and our representative consumer.
-
-The first-order condition with respect to $c$ is
+所以福利标准是
 
 $$
-- \mu^{-1} \Pi^\top \Pi c + \mu^{-1}\Pi^\top b - h -  H c = 0
+    - \frac{1}{2} \mu^{-1}(\Pi c -b)^\top (\Pi c -b) -h c 
+        - \frac{1}{2} c^\top J c
 $$
 
-which implies {eq}`eq:old5p`.
+在这个公式中，$\mu$ 是一个参数，描述了规划者如何权衡外部供应商和我们代表性消费者的利益。
 
-Thus, as for the single-good case, with multiple goods a competitive equilibrium quantity vector solves a planning problem.
+对 $c$ 的一阶条件是
 
-(This is another version of the first welfare theorem.)
+$$
+- \mu^{-1} \Pi^\top \Pi c + \mu^{-1}\Pi^\top b - h -  J c = 0
+$$
 
-We can deduce a competitive equilibrium price vector from either
+这意味着 {eq}`eq:old5p` 被满足。
 
-  * the inverse demand curve, or
+因此，与单一商品情形一样，对于多商品情况，一个竞争均衡的数量向量解决了一个规划问题。
 
-  * the inverse supply curve
+（这是第一福利定理的另一个版本。）
+
+我们可以从以下两个地方推导出竞争均衡的价格向量：
+
+  * 逆需求曲线，或
+
+  * 逆供给曲线
