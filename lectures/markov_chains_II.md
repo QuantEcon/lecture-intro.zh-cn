@@ -11,12 +11,12 @@ kernelspec:
   name: python3
 ---
 
-# Markov Chains: Irreducibility and Ergodicity
+# 马尔科夫链：不可约性与遍历性
 
-```{index} single: Markov Chains: Irreducibility and Ergodicity
+```{index} single: 马尔科夫链: 不可约性与遍历性
 ```
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+除了 Anaconda 中的库外，这个讲座还需要以下库：
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -24,27 +24,24 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 !pip install quantecon
 ```
 
-## Overview
+## 概述
 
-This lecture continues on from our {doc}`earlier lecture on Markov chains
-<markov_chains_I>`.
+本讲座是我们{doc}`早期关于马尔科夫链的讲座 <markov_chains_I>`的延续。
 
+具体来说，我们将介绍不可约性和遍历性的概念，并了解它们与平稳性的联系。
 
-Specifically, we will introduce the concepts of irreducibility and ergodicity, and see how they connect to stationarity.
+不可约性描述了马尔科夫链在系统中移动任意两个状态之间的能力。
 
-Irreducibility describes the ability of a Markov chain to move between any two states in the system.
+遍历性是一种样本路径属性，描述了系统在长时间内的行为。
 
-Ergodicity is a sample path property that describes the behavior of the system over long periods of time. 
+正如我们将看到的：
 
-As we will see, 
+* 不可约的马尔科夫链保证存在唯一的平稳分布，而
+* 遍历的马尔科夫链生成满足大数定律版本的时间序列。
 
-* an irreducible Markov chain guarantees the existence of a unique stationary distribution, while 
-* an ergodic Markov chain generates time series that satisfy a version of the
-  law of large numbers. 
+这些概念一起为理解马尔科夫链的长期行为提供了基础。
 
-Together, these concepts provide a foundation for understanding the long-term behavior of Markov chains.
-
-Let's start with some standard imports:
+让我们从一些标准导入开始：
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -53,38 +50,31 @@ import numpy as np
 ```
 
 (mc_irreducible)=
-## Irreducibility
+## 不可约性
 
+为了解释不可约性，让我们设 $P$ 为一个固定的随机矩阵。
 
-To explain irreducibility, let's take $P$ to be a fixed stochastic matrix.
+如果对于某个整数 $t\ge 0$，$P^t(x,y)>0$，则称状态 $x$ 对状态 $y$ 是**可达的**。
 
-State $x$ is called **accessible** (or **reachable**) from state $y$ if $P^t(x,y)>0$ for some integer $t\ge 0$. 
+当状态 $x$ 和 $y$ 彼此可达时，称它们**相互沟通**。
 
-Two states, $x$ and $y$, are said to **communicate** if $x$ and $y$ are accessible from each other.
+根据我们{ref}`前面讨论的 <finite_mc_mstp>`，这正意味着
 
-In view of our discussion {ref}`above <finite_mc_mstp>`, this means precisely
-that
+* 状态 $x$ 最终可以从状态 $y$ 到达，且
+* 状态 $y$ 最终可以从状态 $x$ 到达。
 
-* state $x$ can eventually be reached from state $y$, and
-* state $y$ can eventually be reached from state $x$
-
-The stochastic matrix $P$ is called **irreducible** if all states communicate;
-that is, if $x$ and $y$ communicate for all $(x, y)$ in $S \times S$.
+如果所有状态都相互沟通，则称随机矩阵 $P$ 是**不可约的**，即对于所有 $(x, y)$ 在 $S \times S$ 中，$x$ 和 $y$ 相互沟通。
 
 ```{prf:example}
 :label: mc2_ex_ir
-For example, consider the following transition probabilities for wealth of a
-fictitious set of households
+例如，考虑以下一组虚构家庭的财富转移概率。
 
 ```{image} /_static/lecture_specific/markov_chains_II/Irre_1.png
 :name: mc_irre1
 :align: center
 ```
 
-
-
-We can translate this into a stochastic matrix, putting zeros where
-there's no edge between nodes
+我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。
 
 $$
 P :=
@@ -95,11 +85,10 @@ P :=
 \end{bmatrix} 
 $$
 
-It's clear from the graph that this stochastic matrix is irreducible: we can  eventually
-reach any state from any other state.
+从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。
 ```
 
-We can also test this using [QuantEcon.py](http://quantecon.org/quantecon-py)'s MarkovChain class
+我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` 类来测试这一点：
 
 ```{code-cell} ipython3
 P = [[0.9, 0.1, 0.0],
@@ -113,18 +102,17 @@ mc.is_irreducible
 ```{prf:example}
 :label: mc2_ex_pf
 
-Here's a more pessimistic scenario in which  poor people remain poor forever
+这是一个更加悲观的情景，贫困者永远保持贫困。
 
 ```{image} /_static/lecture_specific/markov_chains_II/Irre_2.png
 :name: mc_irre2
 :align: center
 ```
 
-This stochastic matrix is not irreducible since, for example, rich is not
-accessible from poor.
+这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。
 ```
 
-Let's confirm this
+让我们确认这一点：
 
 ```{code-cell} ipython3
 P = [[1.0, 0.0, 0.0],
@@ -135,120 +123,106 @@ mc = qe.MarkovChain(P, ('poor', 'middle', 'rich'))
 mc.is_irreducible
 ```
 
-It might be clear to you already that irreducibility is going to be important
-in terms of long-run outcomes.
+你可能已经明白，不可约性在长期结果中非常重要。
 
-For example, poverty is a life sentence in the second graph but not the first.
+例如，在第二个图中，贫困是一种终身的困境，但在第一个图中不是。
 
-We'll come back to this a bit later.
+我们稍后会回到这个问题。
 
-### Irreducibility and stationarity
+### 不可约性与平稳性
 
-We discussed uniqueness of stationary distributions in our earlier lecture {doc}`markov_chains_I`.
+我们在之前的讲座 {doc}`markov_chains_I` 中讨论了平稳分布的唯一性。
 
-There we {prf:ref}`stated <mc_po_conv_thm>` that uniqueness holds when the transition matrix is everywhere positive.
+我们{prf:ref}`指出 <mc_po_conv_thm>`，当转移矩阵处处为正时，唯一性成立。
 
-In fact irreducibility is sufficient:
+事实上，不可约性就足够了：
 
 ```{prf:theorem}
 :label: mc_conv_thm
 
-If $P$ is irreducible, then $P$ has exactly one stationary
-distribution.
+如果 $P$ 是不可约的，那么 $P$ 只有一个平稳分布。
 ```
 
-For proof, see Chapter 4 of {cite}`sargent2023economic` or
-Theorem 5.2 of {cite}`haggstrom2002finite`.
-
+有关证明，请参见 {cite}`sargent2023economic` 的第4章或 {cite}`haggstrom2002finite` 的定理5.2。
 
 (ergodicity)=
-## Ergodicity
+## 遍历性
 
-
-Under irreducibility, yet another important result obtains:
+在不可约性下，还可以得到另一个重要结果：
 
 ````{prf:theorem}
 :label: stationary
 
-If $P$ is irreducible and $\psi^*$ is the unique stationary
-distribution, then, for all $x \in S$,
+如果 $P$ 是不可约的，并且 $\psi^*$ 是唯一的平稳分布，那么对于所有 $x \in S$，
 
 ```{math}
 :label: llnfmc0
 
 \frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = x\}  \to \psi^*(x)
-    \quad \text{as } m \to \infty
+    \quad \text{当 } m \to \infty
 ```
 
 ````
 
-Here
+这里
 
-* $\{X_t\}$ is a Markov chain with stochastic matrix $P$ and initial distribution $\psi_0$
+* $\{X_t\}$ 是具有随机矩阵 $P$ 和初始分布 $\psi_0$ 的马尔科夫链。
 
-* $\mathbb{1} \{X_t = x\} = 1$ if $X_t = x$ and zero otherwise.
+* $\mathbb{1} \{X_t = x\} = 1$ 当且仅当 $X_t = x$，否则为0。
 
-The result in [theorem 4.3](llnfmc0) is sometimes called **ergodicity**.
+定理[4.3](llnfmc0)中的结果有时称为**遍历性**。
 
-The theorem tells us that the fraction of time the chain spends at state $x$
-converges to $\psi^*(x)$ as time goes to infinity.
+该定理告诉我们，随着时间趋于无穷大，链花费在状态 $x$ 的时间比例收敛到 $\psi^*(x)$。
 
 (new_interp_sd)=
-This gives us another way to interpret the stationary distribution (provided irreducibility holds).
+这为我们提供了另一种解释平稳分布的方法（假设不可约性成立）。
 
-Importantly, the result is valid for any choice of $\psi_0$.
+重要的是，这一结果对于任何 $\psi_0$ 都有效。
 
-The theorem is related to {doc}`the law of large numbers <lln_clt>`.
+该定理与{doc}`大数定律 <lln_clt>`相关。
 
-It tells us that, in some settings, the law of large numbers sometimes holds even when the
-sequence of random variables is [not IID](iid_violation).
-
+它告诉我们，在某些设置中，即使随机变量序列[不是独立同分布](iid_violation)，大数定律有时也成立。
 
 (mc_eg1-2)=
-### Example: ergodicity and unemployment
+### 示例：遍历性与失业
 
-Recall our cross-sectional interpretation of the employment/unemployment model {ref}`discussed before <mc_eg1-1>`.
+回顾我们关于就业/失业模型的截面解释{ref}`之前讨论过 <mc_eg1-1>`。
 
-Assume that $\alpha \in (0,1)$ and $\beta \in (0,1)$, so that irreducibility holds.
+假设 $\alpha \in (0,1)$ 且 $\beta \in (0,1)$，因此不可约性成立。
 
-We saw that the stationary distribution is $(p, 1-p)$, where
+我们看到平稳分布是 $(p, 1-p)$，其中
 
 $$
 p = \frac{\beta}{\alpha + \beta}
 $$
 
-In the cross-sectional interpretation, this is the fraction of people unemployed.
+在截面解释中，这是失业人员的比例。
 
-In view of our latest (ergodicity) result, it is also the fraction of time that a single worker can expect to spend unemployed.
+根据我们最新的遍历性结果，这也是单个工人预期花费在失业状态的时间比例。
 
-Thus, in the long run, cross-sectional averages for a population and time-series averages for a given person coincide.
+因此，从长远来看，人口的截面平均值和单个个体的时间序列平均值是一致的。
 
-This is one aspect of the concept  of ergodicity.
-
+这是遍历性概念的一个方面。
 
 (ergo)=
-### Example: Hamilton dynamics
+### 示例：汉密尔顿动力学
 
-Another example is the Hamilton dynamics we {ref}`discussed before <mc_eg2>`.
+另一个示例是我们{ref}`之前讨论过的 <mc_eg2>`汉密尔顿动力学。
 
-Let $\{X_t\}$ be a sample path generated by these dynamics.
+让 $\{X_t\}$ 是由这些动力学生成的样本路径。
 
-Let's denote the fraction of time spent in state $x$ over the period $t=1,
-\ldots, n$ by $\hat p_n(x)$, so that 
+令在时间段 $t=1, \ldots, n$ 内花费在状态 $x$ 上的时间比例为 $\hat p_n(x)$，则有
 
 $$
     \hat p_n(x) := \frac{1}{n} \sum_{t = 1}^n \mathbb{1}\{X_t = x\}
     \qquad (x \in \{0, 1, 2\})
 $$
 
+马尔科夫链的{ref}`图 <mc_eg2>`表明它是不可约的，因此遍历性成立。
 
-The {ref}`graph <mc_eg2>` of the Markov chain shows it is irreducible, so
-ergodicity holds.
+因此，我们期望当 $n$ 较大时，$\hat p_n(x) \approx \psi^*(x)$。
 
-Hence we expect that $\hat p_n(x) \approx \psi^*(x)$ when $n$ is large.
-
-The next figure shows convergence of $\hat p_n(x)$ to $\psi^*(x)$ when $x=1$ and
-$X_0$ is either $0, 1$ or $2$.
+下图显示了当 $x=1$ 并且 $X_0$ 分别为 $0, 1$ 或 $2$ 时，$\hat p_n(x)$ 向 $\psi^*(x)$ 的收敛情况。
 
 ```{code-cell} ipython3
 P = np.array([[0.971, 0.029, 0.000],
@@ -257,32 +231,32 @@ P = np.array([[0.971, 0.029, 0.000],
 ts_length = 10_000
 mc = qe.MarkovChain(P)
 ψ_star = mc.stationary_distributions[0]
-x = 1  # We study convergence to psi^*(x) 
+x = 1  # 我们研究 psi^*(x) 的收敛情况
 
 fig, ax = plt.subplots()
 ax.axhline(ψ_star[x], linestyle='dashed', color='black', 
                 label = fr'$\psi^*({x})$')
-# Compute the fraction of time spent in state 0, starting from different x_0s
+# 计算花费在状态0的时间比例，从不同的x_0开始
 for x0 in range(len(P)):
     X = mc.simulate(ts_length, init=x0)
     p_hat = (X == x).cumsum() / np.arange(1, ts_length+1)
-    ax.plot(p_hat, label=fr'$\hat p_n({x})$ when $X_0 = \, {x0}$')
+    ax.plot(p_hat, label=fr'$\hat p_n({x})$ 当 $X_0 = \, {x0}$')
 ax.set_xlabel('t')
 ax.set_ylabel(fr'$\hat p_n({x})$')
 ax.legend()
 plt.show()
 ```
 
-You might like to try changing $x=1$ to either $x=0$ or $x=2$.
+你可能想尝试将 $x=1$ 改为 $x=0$ 或 $x=2$。
 
-In any of these cases, ergodicity will hold.
+在这些情况下，遍历性都会成立。
 
-### Example: a periodic chain
+### 示例：一个周期链
 
-```{prf:example}
+````{prf:example}
 :label: mc2_ex_pc
 
-Let's look at the following example with states 0 and 1:
+让我们来看以下状态0和1的例子：
 
 $$
 P :=
@@ -292,22 +266,21 @@ P :=
 \end{bmatrix} 
 $$
 
-
-The transition graph shows that this model is irreducible.
+转移图表明该模型是不可约的。
 
 ```{image} /_static/lecture_specific/markov_chains_II/example4.png
 :name: mc_example4
 :align: center
 ```
 
-Notice that there is a periodic cycle --- the state cycles between the two states in a regular way.
-```
-Not surprisingly, this property 
-is called [periodicity](https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains).
+请注意，这里有一个周期循环——状态以规则的方式在两个状态之间循环。
+````
 
-Nonetheless, the model is irreducible, so ergodicity holds.
+毫不奇怪，这种属性被称为[周期性](https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains)。
 
-The following figure illustrates
+尽管如此，该模型是不可约的，因此遍历性成立。
+
+以下图表进行了说明：
 
 ```{code-cell} ipython3
 P = np.array([[0, 1],
@@ -324,9 +297,9 @@ for i in range(n):
     axes[i].set_xlabel('t')
     axes[i].set_ylabel(fr'$\hat p_n({i})$')
 
-    # Compute the fraction of time spent, for each x
+    # 计算每个 x 花费的时间比例
     for x0 in range(n):
-        # Generate time series starting at different x_0
+        # 从不同的 x_0 生成时间序列
         X = mc.simulate(ts_length, init=x0)
         p_hat = (X == i).cumsum() / np.arange(1, ts_length+1)
         axes[i].plot(p_hat, label=f'$x_0 = \, {x0} $')
@@ -336,18 +309,15 @@ plt.tight_layout()
 plt.show()
 ```
 
-This example helps to emphasize that asymptotic stationarity is about the distribution, while ergodicity is about the sample path.
+该示例帮助强调了渐近平稳性是关于分布的，而遍历性是关于样本路径的。
 
-The proportion of time spent in a state can converge to the stationary distribution with periodic chains.
+在周期性链中，花费在某个状态的时间比例可以收敛到平稳分布。然而，每个状态的分布却不会收敛。
 
-However, the distribution at each state does not.
+### 示例：政治制度
 
-### Example:  political institutions
+让我们回到{ref}`前一讲中讨论的 <mc_eg3>`具有六个状态的政治制度模型，并研究其遍历性。
 
-Let's go back to the political institutions model with six states discussed {ref}`in a previous lecture <mc_eg3>` and study ergodicity.
-
-
-Here's the transition matrix.
+以下是转移矩阵：
 
 $$
     P :=
@@ -361,13 +331,11 @@ $$
     \end{bmatrix} 
 $$
 
+链的{ref}`图 <mc_eg3>`显示所有状态都是可达的，表明该链是不可约的。
 
-The {ref}`graph <mc_eg3>` for the chain shows all states are reachable,
-indicating that this chain is irreducible.
+在下图中，我们可视化了每个状态 $x$ 的 $\hat p_n(x) - \psi^* (x)$ 差异。
 
-In the next figure, we visualize the difference $\hat p_n(x) - \psi^* (x)$ for each state $x$.
-
-Unlike the previous figure, $X_0$ is held fixed.
+与前一个图不同，$X_0$ 是固定的。
 
 ```{code-cell} ipython3
 P = [[0.86, 0.11, 0.03, 0.00, 0.00, 0.00],
@@ -382,12 +350,11 @@ mc = qe.MarkovChain(P)
 ψ_star = mc.stationary_distributions[0]
 fig, ax = plt.subplots()
 X = mc.simulate(ts_length, random_state=1)
-# Center the plot at 0
+# 将图中心对准0
 ax.axhline(linestyle='dashed', lw=2, color='black')
 
-
 for x0 in range(len(P)):
-    # Calculate the fraction of time for each state
+    # 计算每个状态的时间比例
     p_hat = (X == x0).cumsum() / np.arange(1, ts_length+1)
     ax.plot(p_hat - ψ_star[x0], label=f'$x = {x0+1} $')
     ax.set_xlabel('t')
@@ -397,12 +364,12 @@ ax.legend()
 plt.show()
 ```
 
-## Exercises
+## 练习
 
 ````{exercise}
 :label: mc_ex1
 
-Benhabib et al. {cite}`benhabib_wealth_2019` estimated that the transition matrix for social mobility as the following
+Benhabib 等人 {cite}`benhabib_wealth_2019` 估计了如下的社会流动性转移矩阵：
 
 $$
 P:=
@@ -418,13 +385,13 @@ P:=
 \end{bmatrix} 
 $$
 
-where each state 1 to 8 corresponds to a  percentile of wealth shares
+其中每个状态1到8对应于财富份额的百分位数：
 
 $$
 0-20 \%, 20-40 \%, 40-60 \%, 60-80 \%, 80-90 \%, 90-95 \%, 95-99 \%, 99-100 \%
 $$
 
-The matrix is recorded as `P` below
+矩阵记录为 `P`，如下：
 
 ```python
 P = [
@@ -442,18 +409,18 @@ P = np.array(P)
 codes_B = ('1','2','3','4','5','6','7','8')
 ```
 
-1. Show this process is asymptotically stationary and calculate an approximation to the stationary distribution.
+1. 展示该过程是渐近平稳的，并计算平稳分布的近似值。
 
-1. Use simulations to illustrate ergodicity.
+2. 使用模拟来说明遍历性。
 
-````
+```` 
 
 ```{solution-start} mc_ex1
 :class: dropdown
 ```
-Part 1:
+第1部分：
 
-One option is to take the power of the transition matrix.
+一种选择是对转移矩阵取幂。
 
 ```{code-cell} ipython3
 P = [[0.222, 0.222, 0.215, 0.187, 0.081, 0.038, 0.029, 0.006],
@@ -471,8 +438,7 @@ codes_B = ('1','2','3','4','5','6','7','8')
 np.linalg.matrix_power(P, 10)
 ```
 
-For this model, rows of $P^n$ converge to the stationary distribution as $n \to
-\infty$:
+对于此模型，当 $n \to \infty$ 时，$P^n$ 的行收敛到平稳分布：
 
 ```{code-cell} ipython3
 mc = qe.MarkovChain(P)
@@ -480,7 +446,7 @@ mc = qe.MarkovChain(P)
 ψ_star
 ```
 
-Part 2:
+第2部分：
 
 ```{code-cell} ipython3
 ts_length = 1000
@@ -490,7 +456,7 @@ X = mc.simulate(ts_length, random_state=1)
 ax.axhline(linestyle='dashed', lw=2, color='black')
 
 for x0 in range(len(P)):
-    # Calculate the fraction of time for each worker
+    # 计算每个工人的时间比例
     p_hat = (X == x0).cumsum() / np.arange(1, ts_length+1)
     ax.plot(p_hat - ψ_star[x0], label=f'$x = {x0+1} $')
     ax.set_xlabel('t')
@@ -500,17 +466,15 @@ ax.legend()
 plt.show()
 ```
 
-Note that the fraction of time spent at each state converges to the probability
-assigned to that state by the stationary distribution.
+注意，花费在每个状态的时间比例收敛到平稳分布为该状态分配的概率。
 
 ```{solution-end}
 ```
 
-
 ```{exercise}
 :label: mc_ex2
 
-According to the discussion {ref}`above <mc_eg1-2>`, if a worker's employment dynamics obey the stochastic matrix
+根据{ref}`上述讨论 <mc_eg1-2>`，如果一个工人的就业动态遵循以下随机矩阵
 
 $$
 P := 
@@ -520,48 +484,41 @@ P :=
 \end{bmatrix} 
 $$
 
-with $\alpha \in (0,1)$ and $\beta \in (0,1)$, then, in the long run, the fraction
-of time spent unemployed will be
+其中 $\alpha \in (0,1)$ 且 $\beta \in (0,1)$，那么，从长远来看，失业的时间比例将为
 
 $$
 p := \frac{\beta}{\alpha + \beta}
 $$
 
-In other words, if $\{X_t\}$ represents the Markov chain for
-employment, then $\bar X_m \to p$ as $m \to \infty$, where
+换句话说，如果 $\{X_t\}$ 表示工人的马尔科夫链，那么 $\bar X_m \to p$ 当 $m \to \infty$，其中
 
 $$
 \bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = 0\}
 $$
 
-This exercise asks you to illustrate convergence by computing
-$\bar X_m$ for large $m$ and checking that
-it is close to $p$.
+本练习要求您通过计算大 $m$ 时的 $\bar X_m$ 来说明收敛性，并检查其是否接近 $p$。
 
-You will see that this statement is true regardless of the choice of initial
-condition or the values of $\alpha, \beta$, provided both lie in
-$(0, 1)$.
+您会看到无论初始条件或 $\alpha, \beta$ 的选择如何，只要它们都位于 $(0,1)$ 区间内，此结论都成立。
 
-The result should be similar to the plot we plotted [here](ergo)
+结果应与我们在[这里](ergo)绘制的图类似。
 ```
 
 ```{solution-start} mc_ex2
 :class: dropdown
 ```
 
-We will address this exercise graphically.
+我们将以图形方式解决此练习。
 
-The plots show the time series of $\bar X_m - p$ for two initial
-conditions.
+图显示了 $\bar X_m - p$ 的时间序列，对于两个初始条件。
 
-As $m$ gets large, both series converge to zero.
+当 $m$ 变大时，两个序列都收敛到零。
 
 ```{code-cell} ipython3
 α = β = 0.1
 ts_length = 3000
 p = β / (α + β)
 
-P = ((1 - α,       α),               # Careful: P and p are distinct
+P = ((1 - α,       α),               # 注意：P 和 p 是不同的
      (    β,   1 - β))
 mc = qe.MarkovChain(P)
 
@@ -569,11 +526,11 @@ fig, ax = plt.subplots()
 ax.axhline(linestyle='dashed', lw=2, color='black')
 
 for x0 in range(len(P)):
-    # Generate time series for worker that starts at x0
+    # 为每个从 x0 开始的工人生成时间序列
     X = mc.simulate(ts_length, init=x0)
-    # Compute fraction of time spent unemployed, for each n
+    # 计算每个 n 的失业时间比例
     X_bar = (X == 0).cumsum() / np.arange(1, ts_length+1)
-    # Plot
+    # 绘图
     ax.plot(X_bar - p, label=f'$x_0 = \, {x0} $')
     ax.set_xlabel('t')
     ax.set_ylabel(r'$\bar X_m - \psi^* (x)$')
@@ -588,18 +545,17 @@ plt.show()
 ```{exercise}
 :label: mc_ex3
 
-In `quantecon` library, irreducibility is tested by checking whether the chain forms a [strongly connected component](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html).
+在 `quantecon` 库中，通过检查链是否形成[强连通分量](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html)来测试不可约性。
 
-Another way to test irreducibility is via the following statement:
+另一种测试不可约性的方法是通过以下陈述：
 
-The $n \times n$ matrix $A$ is irreducible if and only if $\sum_{k=0}^{n-1}A^k$
-is a strictly positive matrix.
+当且仅当 $\sum_{k=0}^{n-1}A^k$ 是严格正矩阵时，$n \times n$ 矩阵 $A$ 是不可约的。
 
-(see, e.g., {cite}`zhao_power_2012` and [this StackExchange post](https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix))
+（参见{cite}`zhao_power_2012` 和 [此 StackExchange 讨论](https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix)）
 
-Based on this claim, write a function to test irreducibility.
+根据此断言，编写一个函数来测试不可约性。
 
-```
+``` 
 
 ```{solution-start} mc_ex3
 :class: dropdown
@@ -614,7 +570,7 @@ def is_irreducible(P):
     return np.all(result > 0)
 ```
 
-Let's try it.
+让我们尝试一下。
 
 ```{code-cell} ipython3
 P1 = np.array([[0, 1],
@@ -627,9 +583,9 @@ P3 = np.array([[0.971, 0.029, 0.000],
                [0.000, 0.508, 0.492]])
 
 for P in (P1, P2, P3):
-    result = lambda P: 'irreducible' if is_irreducible(P) else 'reducible'
+    result = lambda P: '不可约' if is_irreducible(P) else '可约'
     print(f'{P}: {result(P)}')
 ```
 
 ```{solution-end}
-```
+``` 
