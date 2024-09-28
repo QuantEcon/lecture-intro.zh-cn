@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.15.1
+    jupytext_version: 1.16.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -85,6 +85,11 @@ import matplotlib.pyplot as plt
 import random as rd
 import wbgapi as wb
 import plotly.express as px
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 洛伦兹曲线
@@ -193,12 +198,11 @@ def lorenz_curve(y):
 
 例如，如果我们将这些样本看作是家庭财富的观测值，那么虚线表明，底部 80\% 的家庭仅拥有总财富的 40\% 多一点。
 
-
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: 模拟财富数据的洛伦兹曲线
+    caption: "\u6A21\u62DF\u8D22\u5BCC\u6570\u636E\u7684\u6D1B\u4F26\u5179\u66F2\u7EBF"
     name: lorenz_simulated
 ---
 n = 2000
@@ -282,6 +286,7 @@ for var in varlist:
 f_vals_nw, f_vals_ti, f_vals_li = F_vals
 l_vals_nw, l_vals_ti, l_vals_li = L_vals
 ```
+
 现在我们绘制2016年美国的净财富、总收入和劳动收入的洛伦兹曲线。
 
 总收入是家庭所有收入来源的总和，包括劳动收入但不包括资本收益。
@@ -292,7 +297,7 @@ l_vals_nw, l_vals_ti, l_vals_li = L_vals
 ---
 mystnb:
   figure:
-    caption: 2016年美国洛伦兹曲线
+    caption: "2016\u5E74\u7F8E\u56FD\u6D1B\u4F26\u5179\u66F2\u7EBF"
     name: lorenz_us
   image:
     alt: lorenz_us
@@ -307,7 +312,6 @@ ax.set_ylabel("收入/财富份额")
 ax.legend()
 plt.show()
 ```
-
 
 一个关键发现是，财富不平等比收入不平等更为极端。
 
@@ -345,7 +349,7 @@ $$
 ---
 mystnb:
   figure:
-    caption: 基尼系数（模拟财富数据）
+    caption: "\u57FA\u5C3C\u7CFB\u6570\uFF08\u6A21\u62DF\u8D22\u5BCC\u6570\u636E\uFF09"
     name: lorenz_gini
 ---
 fig, ax = plt.subplots()
@@ -360,7 +364,6 @@ ax.set_xlabel("家庭比例 (%)")
 ax.set_ylabel("财富比例 (%)")
 ax.legend()
 plt.show()
-
 ```
 
 事实上，基尼系数还可以表示为
@@ -375,7 +378,7 @@ $$
 ---
 mystnb:
   figure:
-    caption: 洛伦兹曲线和基尼系数
+    caption: "\u6D1B\u4F26\u5179\u66F2\u7EBF\u548C\u57FA\u5C3C\u7CFB\u6570"
     name: lorenz_gini2
 ---
 fig, ax = plt.subplots()
@@ -393,6 +396,7 @@ ax.set_ylabel("财富份额")
 ax.legend()
 plt.show()
 ```
+
 ```{seealso}
 在全球数据网站上有一个很有趣的用图表阐述[洛伦兹曲线的网页](https://ourworldindata.org/what-is-the-gini-coefficient)
 ```
@@ -407,7 +411,6 @@ plt.show()
 (code:gini-coefficient)=
 
 ```{code-cell} ipython3
-
 def gini_coefficient(y):
     r"""
     实现基尼不平等指数
@@ -478,7 +481,7 @@ def plot_inequality_measures(x, y, legend, xlabel, ylabel):
 ---
 mystnb:
   figure:
-    caption: 模拟数据的基尼系数
+    caption: "\u6A21\u62DF\u6570\u636E\u7684\u57FA\u5C3C\u7CFB\u6570"
     name: gini_simulated
 ---
 fix, ax = plot_inequality_measures(σ_vals, 
@@ -502,6 +505,7 @@ plt.show()
 ```{code-cell} ipython3
 wb.search("gini")
 ```
+
 我们现在知道系列 ID 是 `SI.POV.GINI`。
 
 (另一种找到系列 ID 的方法是使用 [世界银行数据门户](https://data.worldbank.org) 并使用 `wbgapi` 提取数据。)
@@ -512,7 +516,7 @@ wb.search("gini")
 ---
 mystnb:
   figure:
-    caption: 各国基尼系数直方图
+    caption: "\u5404\u56FD\u57FA\u5C3C\u7CFB\u6570\u76F4\u65B9\u56FE"
     name: gini_histogram
 ---
 # 获取所有国家的基尼数据
@@ -529,10 +533,9 @@ ax.set_xlabel("基尼系数")
 ax.set_ylabel("频率")
 plt.show()
 ```
+
 我们可以在 {numref}`gini_histogram` 中看到，根据50年的数据和所有国家的数据，该指标在20到65之间变化。
 现在，我们来看看美国在过去几十年的基尼系数变化。
-
-
 
 ```{code-cell} ipython3
 data = wb.data.DataFrame("SI.POV.GINI", "USA")
@@ -547,14 +550,14 @@ data.columns = data.columns.map(lambda x: int(x.replace('YR','')))
 data = data.T           # 将年份作为行
 data_usa = data['USA']  # 获取美国数据的 pd.Series
 ```
-让我们来看一下美国的数据。
 
+让我们来看一下美国的数据。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: 美国收入分布的基尼系数
+    caption: "\u7F8E\u56FD\u6536\u5165\u5206\u5E03\u7684\u57FA\u5C3C\u7CFB\u6570"
     name: gini_usa1
 ---
 fig, ax = plt.subplots()
@@ -564,7 +567,6 @@ ax.set_ylabel("基尼系数（收入）")
 ax.set_xlabel("年份")
 plt.show()
 ```
-
 
 如 {numref}`gini_usa1` 所示，从1980年到2020年，美国的收入基尼系数呈上升趋势，然后在COVID疫情初期下降。
 
@@ -595,7 +597,7 @@ ginis.head(n=5)
 ---
 mystnb:
   figure:
-    caption: 美国净财富的基尼系数
+    caption: "\u7F8E\u56FD\u51C0\u8D22\u5BCC\u7684\u57FA\u5C3C\u7CFB\u6570"
     name: gini_wealth_us
 ---
 fig, ax = plt.subplots()
@@ -604,7 +606,6 @@ ax.set_xlabel("年份")
 ax.set_ylabel("基尼系数")
 plt.show()
 ```
-
 
 财富基尼系数的时间序列呈现出 U 形走势，在20世纪80年代初之前下降，然后迅速上升。
 
@@ -631,16 +632,16 @@ data.columns
 ---
 mystnb:
   figure:
-    caption: 收入基尼系数（美国、英国和挪威）
+    caption: "\u6536\u5165\u57FA\u5C3C\u7CFB\u6570\uFF08\u7F8E\u56FD\u3001\u82F1\u56FD\
+      \u548C\u632A\u5A01\uFF09"
     name: gini_usa_gbr_nor1
 ---
 ax = data[['USA','GBR', 'NOR']].plot()
 ax.set_xlabel('年份')
 ax.set_ylabel('基尼系数')
-ax.legend(title="")
+ax.legend(labels=["美国", "英国", "挪威"], title="") 
 plt.show()
 ```
-
 
 我们看到挪威的数据时间序列较短。
 
@@ -658,17 +659,17 @@ data[['NOR']].dropna().head(n=5)
 ---
 mystnb:
   figure:
-    caption: 收入基尼系数（美国、英国和挪威）
+    caption: "\u6536\u5165\u57FA\u5C3C\u7CFB\u6570\uFF08\u7F8E\u56FD\u3001\u82F1\u56FD\
+      \u548C\u632A\u5A01\uFF09"
     name: gini_usa_gbr_nor2
 ---
 data['NOR'] = data['NOR'].ffill()
 ax = data[['USA','GBR', 'NOR']].plot()
 ax.set_xlabel('年份')
 ax.set_ylabel('基尼系数')
-ax.legend(title="")
+ax.legend(labels=["美国", "英国", "挪威"], title="") 
 plt.show()
 ```
-
 
 从该图中我们可以观察到，与英国和挪威相比，美国的基尼系数更高（即收入不平等程度更高）。
 
@@ -732,8 +733,10 @@ fig = px.line(plot_data,
               color = "country", 
               text = "year", 
               height = 800,
-              labels = {"gini" : "Gini coefficient", "gdppc" : "GDP per capita"}
+              labels = {"gini" : "基尼系数", "gdppc" : "人均GDP"}
              )
+fig.for_each_trace(lambda t: t.update(name={'USA': '美国', 'GBR': '英国', 'NOR': '挪威'}[t.name]))
+
 fig.update_traces(textposition="bottom right")
 fig.show()
 ```
@@ -823,7 +826,7 @@ df_topshares = df5[['year', 'topshare_n_wealth',
 ---
 mystnb:
   figure:
-    caption: 美国前10%比例
+    caption: "\u7F8E\u56FD\u524D10%\u6BD4\u4F8B"
     name: top_shares_us
 ---
 fig, ax = plt.subplots()
@@ -868,22 +871,23 @@ def calculate_top_share(s, p=0.1):
     index = int(n * (1 - p))
     return s[index:].sum() / s.sum()
 ```
+
 继续使用上面定义的 `calculate_top_share` 函数和之前定义的 `lorenz_curve` 以及 `gini_coefficient` 函数，我们可以为各个 σ 值生成统计数据，并绘制变化趋势。
 
 ```{code-cell} ipython3
 k = 5
-sigmas = np.linspace(0.2, 4, k)
-n = 2000
+σ_vals = np.linspace(0.2, 4, k)
+n = 2_000
 
-top_shares = []
+topshares = []
 ginis = []
 f_vals = []
 l_vals = []
 
-for sigma in sigmas:
-    mu = -sigma ** 2 / 2
-    w_sigma = np.exp(mu + sigma * np.random.randn(n))
-    f_val, l_val = lorenz_curve(w_sigma)
+for σ in σ_vals:
+    μ = -σ ** 2 / 2
+    y = np.exp(μ + σ * np.random.randn(n))
+    f_val, l_val = lorenz_curve(y)
     f_vals.append(f_val)
     l_vals.append(l_val)
     ginis.append(gini_coefficient(y))
@@ -894,7 +898,7 @@ for sigma in sigmas:
 ---
 mystnb:
   figure:
-    caption: 模拟数据的前10%比例
+    caption: "\u6A21\u62DF\u6570\u636E\u7684\u524D10%\u6BD4\u4F8B"
     name: top_shares_simulated
   image:
     alt: top_shares_simulated
@@ -911,7 +915,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 模拟数据的基尼系数
+    caption: "\u6A21\u62DF\u6570\u636E\u7684\u57FA\u5C3C\u7CFB\u6570"
     name: gini_coef_simulated
   image:
     alt: gini_coef_simulated
@@ -928,7 +932,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: 模拟数据的洛伦兹曲线
+    caption: "\u6A21\u62DF\u6570\u636E\u7684\u6D1B\u4F26\u5179\u66F2\u7EBF"
     name: lorenz_curve_simulated
   image:
     alt: lorenz_curve_simulated
@@ -972,11 +976,13 @@ top_shares_nw = []
 for f_val, l_val in zip(f_vals_nw, l_vals_nw):
     top_shares_nw.append(lorenz2top(f_val, l_val))
 ```
+
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: '美国前10%比例：近似值 vs 洛伦兹曲线'
+    caption: "\u7F8E\u56FD\u524D10%\u6BD4\u4F8B\uFF1A\u8FD1\u4F3C\u503C vs \u6D1B\u4F26\
+      \u5179\u66F2\u7EBF"
     name: top_shares_us_al
   image:
     alt: top_shares_us_al
@@ -1018,11 +1024,12 @@ plt.show()
 ```{code-cell} ipython3
 df_income_wealth.describe()
 ```
+
 ```{code-cell} ipython3
 df_income_wealth.head(n=4)
 ```
-我们将重点关注财富变量 `n_wealth` 来计算2016年的基尼系数。
 
+我们将重点关注财富变量 `n_wealth` 来计算2016年的基尼系数。
 
 ```{code-cell} ipython3
 data = df_income_wealth[df_income_wealth.year == 2016].sample(3000, random_state=1)
@@ -1034,13 +1041,11 @@ data.head(n=2)
 
 我们可以首先使用上述讲义中定义的函数计算基尼系数。
 
-
 ```{code-cell} ipython3
 gini_coefficient(data.n_wealth.values)
 ```
 
 现在我们可以使用 `numpy` 编写一个向量化版本。
-
 
 ```{code-cell} ipython3
 def gini(y):
@@ -1050,12 +1055,12 @@ def gini(y):
     g_sum = np.sum(np.abs(y_1 - y_2))
     return g_sum / (2 * n * np.sum(y))
 ```
+
 ```{code-cell} ipython3
 gini(data.n_wealth.values)
 ```
 
 让我们像之前一样通过从对数正态分布中抽取样本来模拟五个总体。
-
 
 ```{code-cell} ipython3
 k = 5
@@ -1065,8 +1070,8 @@ n = 2_000
 μ_vals = -σ_vals**2/2
 y_vals = np.exp(μ_vals + σ_vals*np.random.randn(n))
 ```
-我们可以使用向量化函数计算这五个总体的基尼系数，计算时间如下所示：
 
+我们可以使用向量化函数计算这五个总体的基尼系数，计算时间如下所示：
 
 ```{code-cell} ipython3
 %%time
@@ -1082,8 +1087,6 @@ for i in range(k):
 ```{code-cell} ipython3
 gini_coefficients
 ```
+
 ```{solution-end}
 ```
-
-
-
