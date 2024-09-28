@@ -468,7 +468,7 @@ plt.plot(Σ_y.diagonal())
 plt.show()
 ```
 
-Notice how the population variance increases and asymptotes.
+注意总体方差如何增加并接近渐近值。
 
 让我们从多个实现中计算样本方差并绘制出来。
 
@@ -486,15 +486,15 @@ print("μ_y = ", μ_y)
 print("Σ_y = \n", Σ_y)
 ```
 
-Notice that  the covariance between $y_t$ and $y_{t-1}$ -- the elements on the superdiagonal -- are *not* identical.
+注意 $y_t$ 和 $y_{t-1}$ 之间的协方差——即超对角线上的元素——并*不*相同。
 
-This is an indication that the time series represented by our $y$ vector is not **stationary**.  
+这表明由 $y$ 向量表示的时间序列并非**平稳**。
 
-To make it stationary, we'd have to alter our system so that our *initial conditions* $(y_0, y_{-1})$ are not fixed numbers but instead a jointly normally distributed random vector with a particular mean and  covariance matrix.
+为了使其平稳，我们必须改变系统，使得*初始条件* $(y_0, y_{-1})$ 不再是固定的数值，而是一个具有特定均值和协方差矩阵的联合正态分布随机向量。
 
-We describe how to do that in [Linear State Space Models](https://python.quantecon.org/linear_models.html).
+我们在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中描述了如何实现这一点。
 
-But just to set the stage for that analysis, let's  print out the bottom right corner of $\Sigma_y$.
+但为了为分析做好铺垫，接下来我们打印出 $\Sigma_y$ 的右下角。
 
 ```{code-cell} ipython3
 series_process = population_moments()
@@ -575,10 +575,8 @@ $$
 
 其中 $\beta$ 是折现因子。
 
-该模型断言，在 $t$ 时股票的价格等于（完美预见的）未来股息的折现现值之和。
+该模型断言，在 $t$ 时股票的价格等于（完美预见的）未来股息的折现现值之和
 
-
-组成
 
 $$
 \underset{\equiv p}{\underbrace{\left[\begin{array}{c}
@@ -641,7 +639,7 @@ plt.show()
 
 你能解释一下为什么价格的趋势在随时间下降吗？
 
-还可以考虑当 $y_{0}$ 和 $y_{-1}$ 处于稳态时的情况。
+接下来还可以考虑当 $y_{0}$ 和 $y_{-1}$ 处于稳态时的情况。
 
 ```{code-cell} ipython3
 p_steady = B @ y_steady
