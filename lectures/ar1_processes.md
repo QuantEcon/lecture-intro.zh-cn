@@ -1,5 +1,4 @@
----
-jupytext:
+```jupytext:
   text_representation:
     extension: .md
     format_name: myst
@@ -7,7 +6,7 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
----
+```
 
 (ar1)=
 ```{raw} html
@@ -19,36 +18,34 @@ kernelspec:
 ```
 
 (ar1_processes)=
-# AR(1) Processes
+# AR(1) 过程
 
-```{index} single: Autoregressive processes
+```{index} single: 自回归过程
 ```
 
-## Overview
+## 概览
 
-In this lecture we are going to study a very simple class of stochastic
-models called AR(1) processes.
+在这个讲座中，我们将研究一类非常简单的随机模型，称为 AR(1) 过程。
 
-These simple models are used again and again in economic research to represent the dynamics of series such as
+这些简单的模型在经济研究中一次又一次地被用来表示诸如
 
-* labor income
-* dividends
-* productivity, etc.
+* 劳动收入
+* 股息
+* 生产力等序列的动态。
 
-We are going to study AR(1) processes partly because they are useful and
-partly because they help us understand important concepts. 
+我们之所以研究 AR(1) 过程，部分是因为它们很有用，部分是因为它们帮助我们理解很多非常重要的概念。
 
-Let's start with some imports:
+让我们从一些导入开始：
 
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (11, 5)  #set default figure size
+plt.rcParams["figure.figsize"] = (11, 5)  # 设置默认图像大小
 ```
 
-## The AR(1) model
+## AR(1) 模型
 
-The **AR(1) model** (autoregressive model of order 1) takes the form
+**AR(1) 模型**（一阶自回归模型）形式是：
 
 ```{math}
 :label: can_ar1
@@ -56,40 +53,34 @@ The **AR(1) model** (autoregressive model of order 1) takes the form
 X_{t+1} = a X_t + b + c W_{t+1}
 ```
 
-where $a, b, c$ are scalar-valued parameters 
+其中 $a, b, c$ 是标量参数
 
-(Equation {eq}`can_ar1` is sometimes called a **stochastic difference equation**.)
+(方程 {eq}`can_ar1` 有时被称为 **随机差分方程**。)
 
 ```{prf:example}
 :label: ar1_ex_ar
 
-For example, $X_t$ might be 
+例如，$X_t$ 可能是
 
-* the log of labor income for a given household, or
-* the log of money demand in a given economy.
+* 某个家庭的劳动收入对数，或
+* 某个经济体的货币需求对数。
 
-In either case, {eq}`can_ar1` shows that the current value evolves as a linear function
-of the previous value and an IID shock $W_{t+1}$.
+在两种情况下，{eq}`can_ar1` 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 $W_{t+1}$ 来演变的。
 
-(We use $t+1$ for the subscript of $W_{t+1}$ because this random variable is not
-observed at time $t$.)
+(我们使用 $t+1$ 作为 $W_{t+1}$ 的下标，因为在时间 $t$ 这个随机变量还未被观察到。)
 ```
 
-The specification {eq}`can_ar1` generates a time series $\{ X_t\}$ as soon as we
-specify an initial condition $X_0$.
+一旦我们指定一个初始条件 $X_0$，我们就可以用{eq}`can_ar1` 生成一个时间序列 $\{ X_t\}$。
 
-To make things even simpler, we will assume that
+为了使事情变得更简单，我们将假设
 
-* the process $\{ W_t \}$ is {ref}`IID <iid-theorem>` and standard normal,
-* the initial condition $X_0$ is drawn from the normal distribution $N(\mu_0, v_0)$ and
-* the initial condition $X_0$ is independent of $\{ W_t \}$.
+* 过程 $\{ W_t \}$ 是 {ref}`独立同分布 <iid-theorem>` 且符合标准正态分布，
+* 初始条件 $X_0$ 从正态分布 $N(\mu_0, v_0)$ 中抽取，
+* 初始条件 $X_0$ 与 $\{ W_t \}$ 独立。
 
+### 移动平均表示
 
-
-
-### Moving average representation
-
-Iterating backwards from time $t$, we obtain
+从时间 $t$ 向后迭代，我们得到
 
 $$
 X_t = a X_{t-1} + b +  c W_t
@@ -98,7 +89,7 @@ X_t = a X_{t-1} + b +  c W_t
         = \cdots
 $$
 
-If we work all the way back to time zero, we get
+如果我们一直追溯到零时，我们得到
 
 ```{math}
 :label: ar1_ma
@@ -107,66 +98,62 @@ X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
         c \sum_{j=0}^{t-1} a^j  W_{t-j}
 ```
 
-Equation {eq}`ar1_ma` shows that $X_t$ is a well defined random variable, the value of which depends on
+方程 {eq}`ar1_ma` 显示 $X_t$ 是一个明确定义的随机变量，其值取决于
 
-* the parameters,
-* the initial condition $X_0$ and
-* the shocks $W_1, \ldots W_t$ from time $t=1$ to the present.
+* 参数，
+* 初始条件 $X_0$ 和
+* 从时间 $t=1$ 到现在的冲击 $W_1, \ldots W_t$。
 
-Throughout, the symbol $\psi_t$ will be used to refer to the
-density of this random variable $X_t$.
+在整个过程中，符号 $\psi_t$ 将用来指代这个随机变量 $X_t$ 的密度。
 
-### Distribution dynamics
+### 分布动态
 
-One of the nice things about this model is that it's so easy to trace out the sequence of distributions $\{ \psi_t \}$ corresponding to the time
-series $\{ X_t\}$.
+这个模型的一个好处是很容易追踪一系列分布 $\{ \psi_t \}$，这些分布对应于时间
+序列 $\{ X_t\}$ 的现实演变。具体来说，我们可以在每个日期 $t$ 上追踪观测到的 $X_t$ 的边际分布。
 
-To see this, we first note that $X_t$ is normally distributed for each $t$.
+让我们看看我们如何做到这一点。
 
-This is immediate from {eq}`ar1_ma`, since linear combinations of independent
-normal random variables are normal.
+首先我们指出，对于每个时间 $t$，$X_t$ 是正态分布的。
 
-Given that $X_t$ is normally distributed, we will know the full distribution
-$\psi_t$ if we can pin down its first two [moments](https://en.wikipedia.org/wiki/Moment_(mathematics)).
+这是从 {eq}`ar1_ma` 显见的，因为独立正态随机变量的线性组合是正态分布的。
 
-Let $\mu_t$ and $v_t$ denote the mean and variance of $X_t$ respectively.
+鉴于 $X_t$ 是正态分布的，如果我们能确定它的前两个[矩](https://en.wikipedia.org/wiki/Moment_(mathematics))，就可以知道完整的分布 $\psi_t$。
 
-We can pin down these values from {eq}`ar1_ma` or we can use the following
-recursive expressions:
+设 $\mu_t$ 和 $v_t$ 分别表示 $X_t$ 的均值和方差。
+
+我们可以从 {eq}`ar1_ma` 确定这些值，或者我们可以使用以下递归表达式：
 
 ```{math}
 :label: dyn_tm
 
 \mu_{t+1} = a \mu_t + b
-\quad \text{and} \quad
+\quad 	ext{和} \quad
 v_{t+1} = a^2 v_t + c^2
 ```
 
-These expressions are obtained from {eq}`can_ar1` by taking, respectively, the expectation and variance of both sides of the equality.
+通过分别取等式两侧的期望和方差，从 {eq}`can_ar1` 得到这些表达式。
 
-In calculating the second expression, we are using the fact that $X_t$
-and $W_{t+1}$ are independent.
+在计算第二个表达式时，我们利用了 $X_t$ 和 $W_{t+1}$ 的独立性。
 
-(This follows from our assumptions and {eq}`ar1_ma`.)
+(这是根据我们的假设和 {eq}`ar1_ma` 得出的。)
 
-Given the dynamics in {eq}`ar1_ma` and initial conditions $\mu_0,
-v_0$, we obtain $\mu_t, v_t$ and hence
+给定 {eq}`ar1_ma` 中的动态和初始条件 $\mu_0, v_0$，我们得到 $\mu_t, v_t$，因此
 
 $$
 \psi_t = N(\mu_t, v_t)
 $$
 
-The following code uses these facts to track the sequence of marginal distributions $\{ \psi_t \}$.
+下面的代码利用这些事实来追踪边际分布序列 $\{ \psi_t \}$。
 
-The parameters are
+参数是
 
 ```{code-cell} python3
 a, b, c = 0.9, 0.1, 0.5
 
-mu, v = -3.0, 0.6  # initial conditions mu_0, v_0
+mu, v = -3.0, 0.6  # 初始条件 mu_0, v_0
 ```
 
-Here's the sequence of distributions:
+以下是分布序列：
 
 ```{code-cell} python3
 from scipy.stats import norm
@@ -188,23 +175,19 @@ ax.legend(bbox_to_anchor=[1.05,1],loc=2,borderaxespad=1)
 plt.show()
 ```
 
+## 平稳性和渐近稳定性
 
+当我们使用模型来研究现实世界时，通常希望我们的模型具有清晰准确的预测。
 
-## Stationarity and asymptotic stability
+对于动态问题，清晰的预测与稳定性有关。
 
-When we use models to study the real world, it is generally preferable that our
-models have clear, sharp predictions.
+例如，如果一个动态模型预测通货膨胀总是收敛到某种稳态，那么这个模型提供了一个明确的预测。
 
-For dynamic problems, sharp predictions are related to stability.
+（预测可能是错误的，但即便如此，它也是有帮助的，因为我们可以判断模型的质量。）
 
-For example, if a dynamic model predicts that inflation always converges to some
-kind of steady state, then the model gives a sharp prediction.
+注意，在上图中，序列 $\{ \psi_t \}$ 似乎正在收敛到一个极限分布，这表明存在某种稳定性。
 
-(The prediction might be wrong, but even this is helpful, because we can judge the quality of the model.)
-
-Notice that, in the figure above, the sequence $\{ \psi_t \}$ seems to be converging to a limiting distribution, suggesting some kind of stability.
-
-This is even clearer if we project forward further into the future:
+如果我们进一步向未来进行投影，这一点就更加明显：
 
 ```{code-cell} python3
 def plot_density_seq(ax, mu_0=-3.0, v_0=0.6, sim_length=40):
@@ -221,75 +204,69 @@ plot_density_seq(ax)
 plt.show()
 ```
 
-Moreover, the limit does not depend on the initial condition.
+此外，极限不依赖于初始条件。
 
-For example, this alternative density sequence also converges to the same limit.
+例如，另一个密度序列也会收敛到相同的极限。
 
 ```{code-cell} python3
 fig, ax = plt.subplots()
 plot_density_seq(ax, mu_0=4.0)
 plt.show()
 ```
+事实上，可以很容易地证明，只要 $|a| < 1$，不管初始条件如何，都会发生这种收敛。
 
-In fact it's easy to show that such convergence will occur, regardless of the initial condition, whenever $|a| < 1$.
+为了看到这一点，我们只需查看前两个矩的动态，
+如 {eq}`dyn_tm` 中所给出的。
 
-To see this, we just have to look at the dynamics of the first two moments, as
-given in {eq}`dyn_tm`.
-
-When $|a| < 1$, these sequences converge to the respective limits
+当 $|a| < 1$ 时，这些序列会收敛到各自的极限
 
 ```{math}
 :label: mu_sig_star
 
 \mu^* := \frac{b}{1-a}
-\quad \text{and} \quad
+\quad 和 \quad
 v^* = \frac{c^2}{1 - a^2}
 ```
 
-(See our {doc}`lecture on one dimensional dynamics <scalar_dynam>` for background on deterministic convergence.)
+（请参阅我们的 {doc}`一维动力学讲座 <scalar_dynam>`，了解确定性收敛的背景。）
 
-Hence
+因此
 
 ```{math}
 :label: ar1_psi_star
 
 \psi_t \to \psi^* = N(\mu^*, v^*)
-\quad \text{as }
+\quad 当
 t \to \infty
 ```
 
-We can confirm this is valid for the sequence above using the following code.
+我们可以使用以下代码确认这对于上面的序列是有效的。
 
 ```{code-cell} python3
 fig, ax = plt.subplots()
 plot_density_seq(ax, mu_0=4.0)
 
 mu_star = b / (1 - a)
-std_star = np.sqrt(c**2 / (1 - a**2))  # square root of v_star
+std_star = np.sqrt(c**2 / (1 - a**2))  # v_star的平方根
 psi_star = norm.pdf(grid, loc=mu_star, scale=std_star)
 ax.plot(grid, psi_star, 'k-', lw=2, label="$\psi^*$")
 ax.legend()
 
 plt.show()
 ```
+请注意，根据上述参数，我们看到序列 $\{ \psi_t \}$ 收敛到 $\psi^*$。
 
-As claimed, the sequence $\{ \psi_t \}$ converges to $\psi^*$.
+我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。
 
-We see that, at least for these parameters, the AR(1) model has strong stability
-properties.
+### 平稳分布
 
+让我们更好地理解极限分布 $\psi^*$。
 
+平稳分布是 AR(1) 过程更新规则的一个“固定点”。
 
+换句话说，如果 $\psi_t$ 是平稳的，那么对所有 $j$，$\psi_{t+j} = \psi_t$ 在 $\mathbb N$ 中成立。
 
-### Stationary distributions
-
-Let's try to better understand the limiting distribution $\psi^*$.
-
-A stationary distribution is a distribution that is a "fixed point" of the update rule for the AR(1) process.
-
-In other words, if $\psi_t$ is stationary, then $\psi_{t+j} = \psi_t$ for all $j$ in $\mathbb N$.
-
-A different way to put this, specialized to the current setting, is as follows: a density $\psi$ on $\mathbb R$ is **stationary** for the AR(1) process if
+另一种针对当前设置的说法是：如果一个在 $\mathbb R$ 上的密度 $\psi$ 对 AR(1) 过程是**平稳的**，则有
 
 $$
 X_t \sim \psi
@@ -297,96 +274,91 @@ X_t \sim \psi
 a X_t + b + c W_{t+1} \sim \psi
 $$
 
-The distribution $\psi^*$ in {eq}`ar1_psi_star` has this property ---
-checking this is an exercise.
+$\psi^*$ 在 {eq}`ar1_psi_star` 中具有这一性质——检查这一点是一个练习。
 
-(Of course, we are assuming that $|a| < 1$ so that $\psi^*$ is
-well defined.)
+（当然，我们假设 $|a| < 1$ 从而 $\psi^*$ 是
+良定义的。）
 
-In fact, it can be shown that no other distribution on $\mathbb R$ has this property.
+事实上，可以证明 $\mathbb R$ 上没有其他分布具有这一性质。
 
-Thus, when $|a| < 1$, the AR(1) model has exactly one stationary density and that density is given by $\psi^*$.
+因此，当 $|a| < 1$ 时，AR(1) 模型恰好有一个平稳密度，那就是 $\psi^*$。
 
-## Ergodicity
+## 遍历性
 
-The concept of ergodicity is used in different ways by different authors.
+不同的作者使用遍历性这一概念有不同的方式。
 
-One way to understand it in the present setting is that a version of the law
-of large numbers is valid for $\{X_t\}$, even though it is not IID.
+在当前设定中理解它的一种方式是，即使 $\{X_t\}$ 不是独立同分布的，大数定律也是有效的。
 
-In particular, averages over time series converge to expectations under the
-stationary distribution.
+特别是，时间序列的平均值收敛于平稳分布下的期望值。
 
-Indeed, it can be proved that, whenever $|a| < 1$, we have
+实际上，可以证明，只要 $|a| < 1$，我们就有
 
 ```{math}
 :label: ar1_ergo
 
-\frac{1}{m} \sum_{t = 1}^m h(X_t)  \to
+\frac{1}{m} \sum_{t = 1}^m h(X_t) \to
 \int h(x) \psi^*(x) dx
-    \quad \text{as } m \to \infty
+    \quad 当 m \to \infty
 ```
 
-whenever the integral on the right hand side is finite and well defined.
+只要右侧的积分是有限且良定义的。
 
-Notes:
+注意：
 
-* In {eq}`ar1_ergo`, convergence holds with probability one.
-* The textbook by {cite}`MeynTweedie2009` is a classic reference on ergodicity.
+* 在 {eq}`ar1_ergo` 中，收敛性以概率1成立。
+* 由 {cite}`MeynTweedie2009` 编写的教科书是关于遍历性的经典参考。
 
 ```{prf:example}
 :label: ar1_ex_id
 
-If we consider the identity function $h(x) = x$, we get
+如果我们考虑恒等函数 $h(x) = x$，我们得到
 
 $$
-\frac{1}{m} \sum_{t = 1}^m X_t  \to
+\frac{1}{m} \sum_{t = 1}^m X_t \to
 \int x \psi^*(x) dx
-    \quad \text{as } m \to \infty
+    \quad \text{当 } m \to \infty
 $$
 
-In other words, the time series sample mean converges to the mean of the stationary distribution.
+即，时间序列样本均值收敛于平稳分布的均值。
 ```
 
-Ergodicity is important for a range of reasons.
+出于多种原因，遍历性非常重要。
 
-For example, {eq}`ar1_ergo` can be used to test theory.
+例如，{eq}`ar1_ergo` 可用来测试理论。
 
-In this equation, we can use observed data to evaluate the left hand side of {eq}`ar1_ergo`.
+在这个方程中，我们可以使用观测数据来评估 {eq}`ar1_ergo` 的左侧。
 
-And we can use a theoretical AR(1) model to calculate the right hand side.
+我们可以使用理论的 AR(1) 模型来计算右侧。
 
-If $\frac{1}{m} \sum_{t = 1}^m X_t$ is not close to $\psi^(x)$, even for many
-observations, then our theory seems to be incorrect and we will need to revise
-it.
+如果 $\frac{1}{m} \sum_{t = 1}^m X_t$ 即使在很多观测下也不接近 $\psi^*(x)$，那么我们的理论似乎是错误的，我们将需要修订它。
 
 
-## Exercises
+## 练习
 
 ```{exercise}
 :label: ar1p_ex1
 
-Let $k$ be a natural number.
+假设 $k$ 是一个自然数。
 
-The $k$-th central moment of a  random variable is defined as
+随机变量的 $k$ 阶中心矩定义为
 
 $$
 M_k := \mathbb E [ (X - \mathbb E X )^k ]
 $$
 
-When that random variable is $N(\mu, \sigma^2)$, it is known that
+当这个随机变量是 $N(\mu, \sigma^2)$ 时，已知
 
 $$
 M_k =
 \begin{cases}
-    0 & \text{ if } k \text{ is odd} \\
-    \sigma^k (k-1)!! & \text{ if } k \text{ is even}
+    0 & 如果 k 是奇数 \\
+    \sigma^k (k-1)!! & 如果 k 是偶数
 \end{cases}
 $$
 
-Here $n!!$ is the [double factorial](https://en.wikipedia.org/wiki/Double_factorial).
+这里 $n!!$ 是[双阶乘](https://en.wikipedia.org/wiki/Double_factorial)。
 
-According to {eq}`ar1_ergo`, we should have, for any $k \in \mathbb N$,
+根据 {eq}`ar1_ergo`, 对于任何 $k \in \mathbb N$，
 
 $$
 \frac{1}{m} \sum_{t = 1}^m
@@ -394,9 +366,9 @@ $$
     \approx M_k
 $$
 
-when $m$ is large.
+当 $m$ 是较大时。
 
-Confirm this by simulation at a range of $k$ using the default parameters from the lecture.
+通过仿真验证一系列 $k$，使用讲座中的默认参数。
 ```
 
 
@@ -404,7 +376,7 @@ Confirm this by simulation at a range of $k$ using the default parameters from t
 :class: dropdown
 ```
 
-Here is one solution:
+这是一个解法：
 
 ```{code-cell} python3
 from numba import njit
@@ -435,8 +407,8 @@ for k_idx, k in enumerate(k_vals):
     true_moments[k_idx] = true_moments_ar1(k)
 
 fig, ax = plt.subplots()
-ax.plot(k_vals, true_moments, label="true moments")
-ax.plot(k_vals, sample_moments, label="sample moments")
+ax.plot(k_vals, true_moments, label="真实矩")
+ax.plot(k_vals, sample_moments, label="样本矩")
 ax.legend()
 
 plt.show()
@@ -445,58 +417,42 @@ plt.show()
 ```{solution-end}
 ```
 
-
 ```{exercise}
 :label: ar1p_ex2
 
-Write your own version of a one dimensional [kernel density
-estimator](https://en.wikipedia.org/wiki/Kernel_density_estimation),
-which estimates a density from a sample.
+编写一个一维[核密度估计](https://en.wikipedia.org/wiki/Kernel_density_estimation)的版本，用于从样本中估计密度。
 
-Write it as a class that takes the data $X$ and bandwidth
-$h$ when initialized and provides a method $f$ such that
+将其写为一个类，该类在初始化时接受数据 $X$ 和带宽 $h$，并提供一个方法 $f$，使得
 
 $$
 f(x) = \frac{1}{hn} \sum_{i=1}^n
 K \left( \frac{x-X_i}{h} \right)
 $$
 
-For $K$ use the Gaussian kernel ($K$ is the standard normal
-density).
+对于 $K$，使用高斯核（$K$ 是标准正态密度函数）。
 
-Write the class so that the bandwidth defaults to Silverman’s rule (see
-the “rule of thumb” discussion on [this
-page](https://en.wikipedia.org/wiki/Kernel_density_estimation)). Test
-the class you have written by going through the steps
+编写该类，使得带宽默认遵循 Silverman 的规则（参见[此页面](https://en.wikipedia.org/wiki/Kernel_density_estimation)中的“经验规则”讨论）。通过以下步骤测试你编写的类：
 
-1. simulate data $X_1, \ldots, X_n$ from distribution $\phi$
-1. plot the kernel density estimate over a suitable range
-1. plot the density of $\phi$ on the same figure
+1. 从分布 $\phi$ 中模拟数据 $X_1, \ldots, X_n$
+1. 在适当的范围内绘制核密度估计
+1. 在同一图形上绘制 $\phi$ 的密度
 
-for distributions $\phi$ of the following types
+分布 $\phi$ 类型如下：
 
-- [beta
-  distribution](https://en.wikipedia.org/wiki/Beta_distribution)
-  with $\alpha = \beta = 2$
-- [beta
-  distribution](https://en.wikipedia.org/wiki/Beta_distribution)
-  with $\alpha = 2$ and $\beta = 5$
-- [beta
-  distribution](https://en.wikipedia.org/wiki/Beta_distribution)
-  with $\alpha = \beta = 0.5$
+- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = \beta = 2$
+- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = 2$ 且 $\beta = 5$
+- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = \beta = 0.5$
 
-Use $n=500$.
+使用 $n=500$。
 
-Make a comment on your results. (Do you think this is a good estimator
-of these distributions?)
+对结果进行评论。（你认为这是这些分布的良好估计吗？）
 ```
-
 
 ```{solution-start} ar1p_ex2
 :class: dropdown
 ```
 
-Here is one solution:
+这是一个解决方案：
 
 ```{code-cell} ipython3
 K = norm.pdf
@@ -529,8 +485,8 @@ def plot_kde(ϕ, x_min=-0.2, x_max=1.2):
 
     x_grid = np.linspace(-0.2, 1.2, 100)
     fig, ax = plt.subplots()
-    ax.plot(x_grid, kde.f(x_grid), label="estimate")
-    ax.plot(x_grid, ϕ.pdf(x_grid), label="true density")
+    ax.plot(x_grid, kde.f(x_grid), label="估计值")
+    ax.plot(x_grid, ϕ.pdf(x_grid), label="真实密度")
     ax.legend()
     plt.show()
 ```
@@ -544,8 +500,7 @@ for α, β in parameter_pairs:
     plot_kde(beta(α, β))
 ```
 
-We see that the kernel density estimator is effective when the underlying
-distribution is smooth but less so otherwise.
+我们可以看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则效果不佳。
 
 ```{solution-end}
 ```
@@ -554,20 +509,20 @@ distribution is smooth but less so otherwise.
 ```{exercise}
 :label: ar1p_ex3
 
-In the lecture we discussed the following fact: for the $AR(1)$ process
+在讲座中我们讨论了以下事实：对于 $AR(1)$ 过程
 
 $$
 X_{t+1} = a X_t + b + c W_{t+1}
 $$
 
-with $\{ W_t \}$ iid and standard normal,
+其中 $\{ W_t \}$ 独立同分布且标准正态，
 
 $$
 \psi_t = N(\mu, s^2) \implies \psi_{t+1}
 = N(a \mu + b, a^2 s^2 + c^2)
 $$
 
-Confirm this, at least approximately, by simulation. Let
+通过仿真确认这一点，至少是近似的。设定
 
 - $a = 0.9$
 - $b = 0.0$
@@ -575,29 +530,22 @@ Confirm this, at least approximately, by simulation. Let
 - $\mu = -3$
 - $s = 0.2$
 
-First, plot $\psi_t$ and $\psi_{t+1}$ using the true
-distributions described above.
+首先，使用上述真实分布绘制 $\psi_t$ 和 $\psi_{t+1}$。
 
-Second, plot $\psi_{t+1}$ on the same figure (in a different
-color) as follows:
+其次，在同一个图形上（用不同的颜色），绘制 $\psi_{t+1}$ 如下：
 
-1. Generate $n$ draws of $X_t$ from the $N(\mu, s^2)$
-   distribution
-1. Update them all using the rule
-   $X_{t+1} = a X_t + b + c W_{t+1}$
-1. Use the resulting sample of $X_{t+1}$ values to produce a
-   density estimate via kernel density estimation.
+1. 从分布 $N(\mu, s^2)$ 中生成 $n$ 次 $X_t$ 抽样
+1. 使用规则 $X_{t+1} = a X_t + b + c W_{t+1}$ 更新它们所有
+1. 使用 $X_{t+1}$ 的结果样本产生通过核密度估计的密度估计。
 
-Try this for $n=2000$ and confirm that the
-simulation based estimate of $\psi_{t+1}$ does converge to the
-theoretical distribution.
+尝试 $n=2000$ 并确认基于抽样实验的 $\psi_{t+1}$ 估计会收敛到理论分布。
 ```
 
 ```{solution-start} ar1p_ex3
 :class: dropdown
 ```
 
-Here is our solution
+这是我们的解决方案
 
 ```{code-cell} ipython3
 a = 0.9
@@ -606,28 +554,25 @@ c = 0.1
 μ = -3
 s = 0.2
 ```
+```python
+n = 2000  # 样本数
 
-```{code-cell} ipython3
+# 理论上的分布
 μ_next = a * μ + b
 s_next = np.sqrt(a**2 * s**2 + c**2)
-```
 
-```{code-cell} ipython3
-ψ = lambda x: K((x - μ) / s)
-ψ_next = lambda x: K((x - μ_next) / s_next)
-```
-
-```{code-cell} ipython3
+# 理论密度
 ψ = norm(μ, s)
 ψ_next = norm(μ_next, s_next)
-```
 
-```{code-cell} ipython3
-n = 2000
-x_draws = ψ.rvs(n)
-x_draws_next = a * x_draws + b + c * np.random.randn(n)
+# 使用仿真值来估计ψ_{t+1}
+x_draws = ψ.rvs(n)  # 从ψ生成样本
+x_draws_next = a * x_draws + b + c * np.random.randn(n)  # 更新规则
+
+# 对仿真结果进行核密度估计
 kde = KDE(x_draws_next)
 
+# 绘制结果
 x_grid = np.linspace(μ - 1, μ + 1, 100)
 fig, ax = plt.subplots()
 
@@ -639,8 +584,7 @@ ax.legend()
 plt.show()
 ```
 
-The simulated distribution approximately coincides with the theoretical
-distribution, as predicted.
+正如预测的那样，模拟分布与理论分布大致吻合。
 
 ```{solution-end}
 ```
