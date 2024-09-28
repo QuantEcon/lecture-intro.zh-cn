@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -50,7 +52,7 @@ plt.rcParams["figure.figsize"] = (11, 5)
 np.set_printoptions(precision=3, suppress=True)
 ```
 
-## Samuelson's model
+## 萨缪尔森的模型
 
 设 $t = 0, \pm 1, \pm 2, \ldots$ 为时间。
 
@@ -125,7 +127,6 @@ $$
 
 我们将参数设置为与讲{doc}`intermediate:samuelson`中使用的值相同。
 
-
 ```{code-cell} ipython3
 T = 80
 
@@ -180,7 +181,6 @@ or we can use `np.linalg.solve`:
 ```{code-cell} ipython3
 y_second_method = np.linalg.solve(A, b)
 ```
-
 
 我们确保这两种方法在一定精度下给出相同的结果：
 
@@ -366,7 +366,7 @@ $$
 以及
 
 $$
-\Sigma_y = \tilde A (\sigma_u^2 I_{T \times T} ) \tilde A^T
+\Sigma_y = \tilde A (\σ_u^2 I_{T \times T} ) \tilde A^T
 $$
 
 让我们编写一个Python类来计算均值向量 $\mu_y$ 和协方差矩阵 $\Sigma_y$。
@@ -421,7 +421,7 @@ class population_moments:
         """
         计算 y 的总体矩。
         """
-        A_inv, sigma_u, b = self.A_inv, self.sigma_u, self.b
+        A_inv, σ_u, b = self.A_inv, self.σ_u, self.b
 
         # 计算 μ_y
         self.μ_y = A_inv @ b
@@ -524,7 +524,6 @@ print("bottom right corner of Σ_y = \n", Σ_y[72:,72:])
 为了研究 $A^{-1}$ 的结构，我们将只打印到小数点后三位。
 
 首先让我们打印出 $A^{-1}$ 的左上角部分。
-
 
 ```{code-cell} ipython3
 print(A_inv[0:7,0:7])
