@@ -29,7 +29,7 @@ kernelspec:
 研究COVID-19等[疾病传播](https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics)的流行病学家分析人类宿主群体之间的相互作用。
 在运筹学中，网络分析用于研究基本问题，如最小成本流、旅行商问题、[最短路径](https://en.wikipedia.org/wiki/Shortest_path_problem)和分配问题。
 本讲座介绍了经济和金融网络。
-本讲座的部分内容来自教材 https://networks.quantecon.org/，但本讲座的水平更为入门。
+本讲座的部分内容来自教材书[《经济网络》](https://networks.quantecon.org)，但本讲座的水平更为入门。
 我们需要以下导入。
 
 ```{code-cell} ipython3
