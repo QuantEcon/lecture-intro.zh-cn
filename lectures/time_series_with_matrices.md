@@ -20,48 +20,43 @@ kernelspec:
 </div>
 ```
 
-# Univariate Time Series with Matrix Algebra
+# 用矩阵代数表示的单变量时间序列
 
-## Overview
+## 概述
 
-This lecture uses matrices to solve some linear difference equations.
+本讲使用矩阵来解决一些线性差分方程。
 
-As a running example, we’ll study a **second-order linear difference
-equation** that was the key technical tool in Paul Samuelson’s 1939
-article {cite}`Samuelson1939` that introduced the *multiplier-accelerator model*.
+作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 {cite}`Samuelson1939` 中的**二阶线性差分方程**，该文章引入了**乘数加速器**模型。
 
-This model became the workhorse that powered early econometric versions of
-Keynesian macroeconomic models in the United States.
+该模型推动了早期美国凯恩斯主义宏观经济模型的计量经济版本。
 
-You can read about the details of that model in {doc}`intermediate:samuelson`.
+你可以在{doc}`intermediate:samuelson`中阅读该模型的详细信息。
 
-(That lecture also describes some technicalities about second-order linear difference equations.)
+（该讲座还描述了一些关于二阶线性差分方程的细节。）
 
-In this lecture, we'll also learn about an **autoregressive** representation and a **moving average** representation of a  non-stationary
-univariate time series $\{y_t\}_{t=0}^T$.
+在本讲座中，我们还将了解一个非平稳单变量时间序列 $\{y_t\}_{t=0}^T$ 的**自回归**表达和**移动平均**表达。
 
-We'll also study a "perfect foresight" model of stock prices that involves solving
-a "forward-looking" linear difference equation.
+我们还将研究一个涉及解“前瞻性”线性差分方程的“完美預期”股票价格模型。
 
-We will use the following imports:
+我们将使用以下导入：
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-# Custom figsize for this lecture
+# 设置默认图形大小
 plt.rcParams["figure.figsize"] = (11, 5)
 
-# Set decimal printing to 3 decimal places
+# 设置打印的浮点数精度
 np.set_printoptions(precision=3, suppress=True)
 ```
 
-## Samuelson's model
+## 萨缪尔森的模型
 
-Let $t = 0, \pm 1, \pm 2, \ldots$ index time.
+设 $t = 0, \pm 1, \pm 2, \ldots$ 为时间。
 
-For $t = 1, 2, 3, \ldots, T$ suppose that
+对于 $t=1, 2, 3, \ldots, T$，假设
 
 ```{math}
 :label: tswm_1
@@ -69,25 +64,19 @@ For $t = 1, 2, 3, \ldots, T$ suppose that
 y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2}
 ```
 
-where we assume that $y_0$ and $y_{-1}$ are given numbers
-that we take as *initial conditions*.
+我们假设 $y_0$ 和 $y_{-1}$ 是给定的数字，我们将其作为**初始条件**。
 
-In Samuelson's model, $y_t$ stood for **national income** or perhaps a different
-measure of aggregate activity called **gross domestic product** (GDP) at time $t$.
+在萨缪尔森的模型中，$y_t$ 表示 **国民收入** 或者 **国内生产总值**（GDP）在时间 $t$ 的测量值。
 
-Equation {eq}`tswm_1` is called a *second-order linear difference equation*. It is called second order because it depends on two lags.
+方程 {eq}`tswm_1` 称为 **二阶线性差分方程**，因为它包含了两个滞后值。
 
-But actually, it is a collection of $T$ simultaneous linear
-equations in the $T$ variables $y_1, y_2, \ldots, y_T$.
+实际上，它是 $T$ 个关于 $T$ 个变量 $y_1, y_2, \ldots, y_T$ 的线性方程的集合。
 
 ```{note}
-To be able to solve a second-order linear difference
-equation, we require two *boundary conditions* that can take the form
-either of two *initial conditions*, two *terminal conditions* or
-possibly one of each.
+为了能够解决一个二阶线性差分方程，我们需要两个**边界条件**，它们可以采取两种**初始条件**或两种**终端条件**或可能是每种一种的形式。
 ```
 
-Let’s write our equations as a stacked system
+我们将方程写成堆叠系统
 
 $$
 \underset{\equiv A}{\underbrace{\left[\begin{array}{cccccccc}
@@ -114,35 +103,34 @@ y_{T}
 \end{array}\right]}}
 $$
 
-or
+或者
 
 $$
 A y = b
 $$
 
-where
+其中
 
 $$
 y = \begin{bmatrix} y_1 \cr y_2 \cr \vdots \cr y_T \end{bmatrix}
 $$
 
-Evidently $y$ can be computed from
+显然，$y$ 可以由以下公式计算得出
 
 $$
 y = A^{-1} b
 $$
 
-The vector $y$ is a complete time path $\{y_t\}_{t=1}^T$.
+向量 $y$ 是完整的时间路径 $\{y_t\}_{t=1}^T$。
 
-Let’s put Python to work on an example that captures the flavor of
-Samuelson’s multiplier-accelerator model.
+我们用 Python 来实现一个例子来展现萨缪尔森乘数-加速器模型的基本思想。
 
-We'll set parameters equal to the same values we used in {doc}`intermediate:samuelson`.
+我们将参数设置为与讲{doc}`intermediate:samuelson`中使用的值相同。
 
 ```{code-cell} ipython3
 T = 80
 
-# parameters
+# 参数
 α_0 = 10.0
 α_1 = 1.53
 α_2 = -.9
@@ -151,10 +139,10 @@ y_neg1 = 28.0 # y_{-1}
 y_0 = 24.0
 ```
 
-Now we construct $A$ and $b$.
+现在我们构造 $A$ 和 $b$。
 
 ```{code-cell} ipython3
-A = np.identity(T)  # The T x T identity matrix
+A = np.identity(T)  # T x T 的单位矩阵
 
 for i in range(T):
 
@@ -169,19 +157,18 @@ b[0] = α_0 + α_1 * y_0 + α_2 * y_neg1
 b[1] = α_0 + α_2 * y_0
 ```
 
-Let’s look at the matrix $A$ and the vector $b$ for our
-example.
+让我们来看看我们的例子中的矩阵 $A$ 和向量 $b$。
 
 ```{code-cell} ipython3
 A, b
 ```
 
-Now let’s solve for the path of $y$.
+现在我们来求解 $y$ 的路径。
 
-If $y_t$ is GNP at time $t$, then we have a version of
-Samuelson’s model of the dynamics for GNP.
+如果 $y_t$ 是 $t$ 时间的国民生产总值，那么我们就有了一个版本的
+萨缪尔森的国民生产总值动态模型。
 
-To solve $y = A^{-1} b$ we can either invert $A$ directly, as in
+要求解 $y = A^{-1} b$，我们可以直接倒置 $A$
 
 ```{code-cell} ipython3
 A_inv = np.linalg.inv(A)
@@ -195,14 +182,13 @@ or we can use `np.linalg.solve`:
 y_second_method = np.linalg.solve(A, b)
 ```
 
-Here make sure the two methods give the same result, at least up to floating
-point precision:
+我们确保这两种方法在一定精度下给出相同的结果：
 
 ```{code-cell} ipython3
 np.allclose(y, y_second_method)
 ```
 
-$A$ is invertible as it is lower triangular and [its diagonal entries are non-zero](https://www.statlect.com/matrix-algebra/triangular-matrix)
+$A$ 是可逆的，因为它是下三角且[其对角线条目非零](https://www.statlect.com/matrix-algebra/triangular-matrix)
 
 ```{code-cell} ipython3
 # Check if A is lower triangular
@@ -210,11 +196,9 @@ np.allclose(A, np.tril(A))
 ```
 
 ```{note}
-In general, `np.linalg.solve` is more numerically stable than using
-`np.linalg.inv` directly. 
-However, stability is not an issue for this small example. Moreover, we will
-repeatedly use `A_inv` in what follows, so there is added value in computing
-it directly.
+
+一般来说，`np.linalg.solve`比使用`np.linalg.solve`在数值上更稳定。
+然而，对于这个小例子来说，稳定性不是问题。此外，我们将下面重复使用`A_inv`，直接计算出它来会有比较好。
 ```
 
 Now we can plot.
@@ -227,15 +211,13 @@ plt.ylabel('y')
 plt.show()
 ```
 
-The {ref}`*steady state*<scalar-dynam:steady-state>` value $y^*$ of $y_t$ is obtained by setting $y_t = y_{t-1} =
-y_{t-2} = y^*$ in {eq}`tswm_1`, which yields
+通过在{eq}`tswm_1`中设定 $y_t = y_{t-1} = y_{t-2} = y^*$，可以得到 $y_t$ 的 {ref}`*稳态*<scalar-dynam:steady-state>` 值 $y^*$。
 
 $$
 y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
 $$
 
-If we set the initial values to $y_{0} = y_{-1} = y^*$, then $y_{t}$ will be
-constant:
+如果我们将初始值设为 $y_{0} = y_{-1} = y^*$，那么 $y_{t}$ 将是恒定的：
 
 ```{code-cell} ipython3
 y_star = α_0 / (1 - α_1 - α_2)
@@ -259,12 +241,10 @@ plt.ylabel('y')
 plt.show()
 ```
 
-## Adding a random term
+## 添加随机项
 
-To generate some excitement, we'll follow in the spirit of the great economists
-[Eugen Slutsky](https://en.wikipedia.org/wiki/Eugen_Slutsky) and [Ragnar Frisch](https://en.wikipedia.org/wiki/Ragnar_Frisch) and replace our original second-order difference
-equation with the following **second-order stochastic linear difference
-equation**:
+为了让这个例子有趣一些，我们将遵循经济学家[尤金·斯卢茨基](https://en.wikipedia.org/wiki/Eugen_Slutsky)和[拉格纳·弗里希](https://en.wikipedia.org/wiki/Ragnar_Frisch)的方法，用以下**二阶随机线性差分方程**替换我们原来的二阶差分方程：
+
 
 ```{math}
 :label: tswm_2
@@ -272,13 +252,11 @@ equation**:
 y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t
 ```
 
-where $u_{t} \sim N\left(0, \sigma_{u}^{2}\right)$ and is {ref}`IID <iid-theorem>`,
-meaning independent and identically distributed.
+其中 $u_{t} \sim N\left(0, \sigma_{u}^{2}\right)$ 并且是 {ref}`独立同分布<IID-theorem>` -- 相互独立且服从相同分布。
 
-We’ll stack these $T$ equations into a system cast in terms of
-matrix algebra.
+我们将把这些 $T$ 个方程堆叠成一个以矩阵代数表示的系统。
 
-Let’s define the random vector
+让我们定义随机向量
 
 $$
 u=\left[\begin{array}{c}
@@ -289,20 +267,21 @@ u_{T}
 \end{array}\right]
 $$
 
-Where $A, b, y$ are defined as above, now assume that $y$ is
-governed by the system
+其中 $A, b, y$ 定义如上，现在假设 $y$ 由系统
 
 $$
 A y = b + u
 $$ (eq:eqar)
 
-The solution for $y$ becomes
+所支配
+
+$y$ 的解变为
 
 $$
 y = A^{-1} \left(b + u\right)
 $$ (eq:eqma)
 
-Let’s try it out in Python.
+让我们在Python中尝试一下。
 
 ```{code-cell} ipython3
 σ_u = 2.
@@ -318,16 +297,15 @@ plt.ylabel('y')
 plt.show()
 ```
 
-The above time series looks a lot like (detrended) GDP series for a
-number of advanced countries in recent decades.
+上面的时间序列在最近几十年中与很多先进国家（去趋势后的）GDP系列非常相似。
 
-We can simulate $N$ paths.
+我们可以模拟 $N$ 条路径。
 
 ```{code-cell} ipython3
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # Choose a random color from viridis
+    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
     u = np.random.normal(0, σ_u, size=T)
     y = A_inv @ (b + u)
     plt.plot(np.arange(T)+1, y, lw=0.5, color=col)
@@ -338,14 +316,13 @@ plt.ylabel('y')
 plt.show()
 ```
 
-Also consider the case when $y_{0}$ and $y_{-1}$ are at
-steady state.
+同样考虑 $y_{0}$ 和 $y_{-1}$ 处于稳态的情况。
 
 ```{code-cell} ipython3
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # Choose a random color from viridis
+    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
     u = np.random.normal(0, σ_u, size=T)
     y_steady = A_inv @ (b_steady + u)
     plt.plot(np.arange(T)+1, y_steady, lw=0.5, color=col)
@@ -356,53 +333,51 @@ plt.ylabel('y')
 plt.show()
 ```
 
-## Computing population moments
+## 计算总体矩
 
-
-We can apply standard formulas for multivariate normal distributions to compute the mean vector and covariance matrix
-for our time series model
+我们可以应用多元正态分布的标准公式来计算我们的时间序列模型
 
 $$
 y = A^{-1} (b + u) .
 $$
 
-You can read about multivariate normal distributions in this lecture [Multivariate Normal Distribution](https://python.quantecon.org/multivariate_normal.html).
+你可以在这篇讲义中阅读关于多元正态分布的内容 [多元正态分布](https://python.quantecon.org/multivariate_normal.html)。
 
-Let's write our  model as 
+让我们将我们的模型写为
 
 $$ 
 y = \tilde A (b + u)
 $$
 
-where $\tilde A = A^{-1}$.
+其中 $\tilde A = A^{-1}$。
 
-Because  linear combinations of normal random variables are normal, we know that
+因为正态随机变量的线性组合依然是正态的，我们知道
 
 $$
 y \sim {\mathcal N}(\mu_y, \Sigma_y)
 $$
 
-where
+其中
 
 $$ 
 \mu_y = \tilde A b
 $$
 
-and 
+以及
 
 $$
-\Sigma_y = \tilde A (\sigma_u^2 I_{T \times T} ) \tilde A^T
+\Sigma_y = \tilde A (\σ_u^2 I_{T \times T} ) \tilde A^T
 $$
 
-Let's write a Python  class that computes the mean vector $\mu_y$ and covariance matrix $\Sigma_y$.
+让我们编写一个Python类来计算均值向量 $\mu_y$ 和协方差矩阵 $\Sigma_y$。
 
 ```{code-cell} ipython3
 class population_moments:
     """
-    Compute population moments μ_y, Σ_y.
+    计算人群矩 mu_y, Sigma_y.
     ---------
-    Parameters:
-    α_0, α_1, α_2, T, y_neg1, y_0
+    参数:
+    alpha0, alpha1, alpha2, T, y_1, y0
     """
     def __init__(self, α_0=10.0, 
                        α_1=1.53, 
@@ -412,7 +387,7 @@ class population_moments:
                        y_0=24.0, 
                        σ_u=1):
 
-        # compute A
+        # 计算 A
         A = np.identity(T)
 
         for i in range(T):
@@ -422,19 +397,19 @@ class population_moments:
             if i-2 >= 0:
                 A[i, i-2] = -α_2
 
-        # compute b
+        # 计算 b
         b = np.full(T, α_0)
         b[0] = α_0 + α_1 * y_0 + α_2 * y_neg1
         b[1] = α_0 + α_2 * y_0
 
-        # compute A inverse
+        # 计算 A 的逆
         A_inv = np.linalg.inv(A)
 
         self.A, self.b, self.A_inv, self.σ_u, self.T = A, b, A_inv, σ_u, T
     
     def sample_y(self, n):
         """
-        Give a sample of size n of y.
+        提供一个大小为 n 的 y 样本。
         """
         A_inv, σ_u, b, T = self.A_inv, self.σ_u, self.b, self.T
         us = np.random.normal(0, σ_u, size=[n, T])
@@ -444,11 +419,11 @@ class population_moments:
 
     def get_moments(self):
         """
-        Compute the population moments of y.
+        计算 y 的总体矩。
         """
         A_inv, σ_u, b = self.A_inv, self.σ_u, self.b
 
-        # compute μ_y
+        # 计算 μ_y
         self.μ_y = A_inv @ b
         self.Σ_y = σ_u**2 * (A_inv @ A_inv.T)
         
@@ -461,18 +436,18 @@ series_process = population_moments()
 A_inv = series_process.A_inv
 ```
 
-It is enlightening  to study the $\mu_y, \Sigma_y$'s implied by  various parameter values.
+研究由各种参数值隐含的 $\mu_y, \Sigma_y$ 是非常有意义的。
 
-Among other things, we can use the class to exhibit how  **statistical stationarity** of $y$ prevails only for very special initial conditions. 
+此外，我们可以使用该类展示 $y$ 的**统计平稳性**仅在非常特殊的初始条件下成立。
 
-Let's begin by generating $N$ time realizations of $y$ plotting them together with  population  mean $\mu_y$ .
+让我们首先生成 $y$ 的 $N$ 次时间实现，并将它们与总体均值 $\mu_y$ 一起绘制出来。
 
 ```{code-cell} ipython3
-# Plot mean
+# 绘制均值
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # Choose a random color from viridis
+    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
     ys = series_process.sample_y(N)
     plt.plot(ys[i,:], lw=0.5, color=col)
     plt.plot(μ_y, color='red')
@@ -483,21 +458,19 @@ plt.ylabel('y')
 plt.show()
 ```
 
-Visually, notice how the  variance across realizations of $y_t$ decreases as $t$ increases.
+从视觉上看，注意到随着 $t$ 增加，$y_t$ 的各次实现之间的方差在减少。
 
-Let's plot the population variance of $y_t$ against $t$.
+绘制总体方差 $\Sigma_y$ 对角线。
 
 ```{code-cell} ipython3
-# Plot variance
+# 绘制方差
 plt.plot(Σ_y.diagonal())
 plt.show()
 ```
 
-Notice how the population variance increases and asymptotes.
+注意总体方差如何增加并接近渐近值。
 
-+++
-
-Let's print out the covariance matrix $\Sigma_y$ for a  time series $y$.
+让我们从多个实现中计算样本方差并绘制出来。
 
 ```{code-cell} ipython3
 series_process = population_moments(α_0=0, 
@@ -513,15 +486,15 @@ print("μ_y = ", μ_y)
 print("Σ_y = \n", Σ_y)
 ```
 
-Notice that  the covariance between $y_t$ and $y_{t-1}$ -- the elements on the superdiagonal -- are *not* identical.
+注意 $y_t$ 和 $y_{t-1}$ 之间的协方差——即超对角线上的元素——并*不*相同。
 
-This is an indication that the time series represented by our $y$ vector is not **stationary**.  
+这表明由 $y$ 向量表示的时间序列并非**平稳**。
 
-To make it stationary, we'd have to alter our system so that our *initial conditions* $(y_0, y_{-1})$ are not fixed numbers but instead a jointly normally distributed random vector with a particular mean and  covariance matrix.
+为了使其平稳，我们必须改变系统，使得*初始条件* $(y_0, y_{-1})$ 不再是固定的数值，而是一个具有特定均值和协方差矩阵的联合正态分布随机向量。
 
-We describe how to do that in [Linear State Space Models](https://python.quantecon.org/linear_models.html).
+我们在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中描述了如何实现这一点。
 
-But just to set the stage for that analysis, let's  print out the bottom right corner of $\Sigma_y$.
+但为了为分析做好铺垫，接下来我们打印出 $\Sigma_y$ 的右下角。
 
 ```{code-cell} ipython3
 series_process = population_moments()
@@ -530,84 +503,79 @@ series_process = population_moments()
 print("bottom right corner of Σ_y = \n", Σ_y[72:,72:])
 ```
 
-Please notice how the subdiagonal and superdiagonal elements seem to have converged.
+注意 $y_t$ 和 $y_{t-1}$ 之间的协方差——即超对角线上的元素——并*不*相同。
 
-This is an indication that our process is asymptotically stationary.
+这表明由 $y$ 向量表示的时间序列并非**平稳**。
 
-You can read  about stationarity of more general linear time series models in this lecture [Linear State Space Models](https://python.quantecon.org/linear_models.html).
+为了使其平稳，我们必须改变系统，使得*初始条件* $(y_0, y_{-1})$ 不再是固定的数值，而是一个具有特定均值和协方差矩阵的联合正态分布随机向量。
 
-There is a lot to be learned about the process by staring at the off diagonal elements of $\Sigma_y$ corresponding to different time periods $t$, but we resist the temptation to do so here.
+我们在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中描述了如何实现这一点。
+
+但为了为分析做好铺垫，接下来我们打印出 $\Sigma_y$ 的右下角。
 
 +++
 
-## Moving average representation
+## 移动平均表示
 
-Let's print out  $A^{-1}$ and stare at  its structure 
+让我们打印出 $A^{-1}$ 并观察其结构
 
-  *  is it triangular or almost triangular or $\ldots$ ?
+  * 它是三角形矩阵、接近三角形，还是其他形式 $\ldots$？
 
-To study the structure of $A^{-1}$, we shall print just  up to $3$ decimals.
+为了研究 $A^{-1}$ 的结构，我们将只打印到小数点后三位。
 
-Let's begin by printing out just the upper left hand corner of $A^{-1}$.
+首先让我们打印出 $A^{-1}$ 的左上角部分。
 
 ```{code-cell} ipython3
 print(A_inv[0:7,0:7])
 ```
 
-Evidently, $A^{-1}$ is a lower triangular matrix. 
+显然，$A^{-1}$ 是一个下三角矩阵。
 
-Notice how  every row ends with the previous row's pre-diagonal entries.
+注意每一行的结尾都与前一行的前对角线元素相同。
 
-Since $A^{-1}$ is lower triangular,  each  row represents  $ y_t$ for a particular $t$ as the sum of 
-- a time-dependent function $A^{-1} b$ of the initial conditions incorporated in $b$, and 
-- a weighted sum of  current and past values of the IID shocks $\{u_t\}$.
+由于 $A^{-1}$ 是下三角矩阵，每一行代表特定 $t$ 时的 $y_t$，作为以下两部分之和：
 
-Thus,  let $\tilde{A}=A^{-1}$. 
+- 与初始条件 $b$ 相关的时间依赖函数 $A^{-1} b$，以及
+- 当前和过去 IID 冲击 $\{u_t\}$ 的加权和。
 
-Evidently,  for $t\geq0$,
+因此，设 $\tilde{A}=A^{-1}$。
+
+显然，对于 $t\geq0$，
 
 $$
 y_{t+1}=\sum_{i=1}^{t+1}\tilde{A}_{t+1,i}b_{i}+\sum_{i=1}^{t}\tilde{A}_{t+1,i}u_{i}+u_{t+1}
 $$
 
-This is  a **moving average** representation with time-varying coefficients.
+这是一个具有时间变化系数的**移动平均**表示。
 
-Just as system {eq}`eq:eqma` constitutes  a 
-**moving average** representation for $y$, system  {eq}`eq:eqar` constitutes  an **autoregressive** representation for $y$.
+正如系统 {eq}`eq:eqma` 构成了 $y$ 的**移动平均**表示，系统 {eq}`eq:eqar` 构成了 $y$ 的**自回归**表示。
 
-## A forward looking model
+## 一个前瞻性模型
 
-Samuelson’s model is *backward looking* in the sense that we give it *initial conditions* and let it
-run.
+萨缪尔森的模型是*后视*的，因为我们给它*初始条件*并让它运行。
 
-Let’s now turn to model  that is *forward looking*.
+现在我们转向一个*前瞻性*模型。
 
-We apply similar linear algebra machinery to study a *perfect
-foresight* model widely used as a benchmark in macroeconomics and
-finance.
+我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的*完美预见*模型。
 
-As an example, we suppose that $p_t$ is the price of a stock and
-that $y_t$ is its dividend.
+例如，假设 $p_t$ 是股票价格，$y_t$ 是其股息。
 
-We assume that $y_t$ is determined by second-order difference
-equation that we analyzed just above, so that
+我们假设 $y_t$ 由我们刚刚分析的二阶差分方程确定，因此
 
 $$
 y = A^{-1} \left(b + u\right)
 $$
 
-Our *perfect foresight* model of stock prices is
+我们的*完美预见*股票价格模型是
 
 $$
 p_{t} = \sum_{j=0}^{T-t} \beta^{j} y_{t+j}, \quad \beta \in (0,1)
 $$
 
-where $\beta$ is a discount factor.
+其中 $\beta$ 是折现因子。
 
-The model asserts that the price of the stock at $t$ equals the
-discounted present values of the (perfectly foreseen) future dividends.
+该模型断言，在 $t$ 时股票的价格等于（完美预见的）未来股息的折现现值之和
 
-Form
 
 $$
 \underset{\equiv p}{\underbrace{\left[\begin{array}{c}
@@ -668,10 +636,9 @@ plt.legend()
 plt.show()
 ```
 
-Can you explain why the trend of the price is downward over time?
+你能解释一下为什么价格的趋势在随时间下降吗？
 
-Also consider the case when $y_{0}$ and $y_{-1}$ are at the
-steady state.
+接下来还可以考虑当 $y_{0}$ 和 $y_{-1}$ 处于稳态时的情况。
 
 ```{code-cell} ipython3
 p_steady = B @ y_steady

@@ -23,132 +23,109 @@ kernelspec:
 ```{index} single: python
 ```
 
-# Geometric Series for Elementary Economics
-
-## Overview
-
-The lecture describes important ideas in economics that use the mathematics of geometric series.
-
-Among these are
-
-- the Keynesian **multiplier**
-- the money **multiplier** that prevails in fractional reserve banking
-  systems
-- interest rates and present values of streams of payouts from assets
-
-(As we shall see below, the term **multiplier** comes down to meaning **sum of a convergent geometric series**)
-
-These and other applications prove the truth of the wise crack that
+# 基础经济学中的几何级数
+## 概述
+本讲座描述了使用几何级数数学的重要经济学概念。
+其中包括：
+- 凯恩斯主义的**乘数**
+- 在部分准备金银行系统中普遍存在的货币**乘数**
+- 资产支付流的利率和现值
+（如我们下面将看到的，术语**乘数**实际上意味着**收敛几何级数的和**）
+这些应用和其他应用证实了这句俏皮话的真实性：
 
 ```{epigraph}
-"In economics, a little knowledge of geometric series goes a long way."
+"在经济学中，一点几何级数的知识就能走很远"
 ```
 
-Below we'll use the following imports:
+以下我们将使用这些导入：
 
 ```{code-cell} ipython
+%matplotlib inline
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (11, 5)  #set default figure size
+plt.rcParams["figure.figsize"] = (11, 5)  #设置默认的图像大小
 import numpy as np
 import sympy as sym
 from sympy import init_printing
 from matplotlib import cm
 ```
 
-## Key formulas
+## 关键公式
 
-To start, let $c$ be a real number that lies strictly between
-$-1$ and $1$.
+首先，让 $c$ 是一个严格介于 $-1$ 和 $1$ 之间的实数。
 
-- We often write this as $c \in (-1,1)$.
-- Here $(-1,1)$ denotes the collection of all real numbers that
-  are strictly less than $1$ and strictly greater than $-1$.
-- The symbol $\in$ means *in* or *belongs to the set after the symbol*.
+- 我们通常写作 $c \in (-1,1)$。
+- 这里 $(-1,1)$ 表示所有严格小于 $1$ 且严格大于 $-1$ 的实数的集合。
+- 符号 $\in$ 的意思是 *属于* 或 *属于符号后面的集合*。
 
-We want to evaluate geometric series of two types -- infinite and finite.
+我们想要评估两种类型的几何级数——无限和有限。
 
-### Infinite geometric series
+### 无限几何级数
 
-The first type of geometric that interests us is the infinite series
+我们感兴趣的第一种几何级数是无限级数
 
 $$
 1 + c + c^2 + c^3 + \cdots
 $$
 
-Where $\cdots$ means that the series continues without end.
+其中 $\cdots$ 表示级数无穷无尽地继续。
 
-The key formula is
+关键公式是
 
 ```{math}
 :label: infinite
-
 1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }
 ```
 
-To prove key formula {eq}`infinite`, multiply both sides  by $(1-c)$ and verify
-that if $c \in (-1,1)$, then the outcome is the
-equation $1 = 1$.
+为了证明关键公式 {eq}`infinite`，将两边乘以 $(1-c)$ 并验证如果 $c \in (-1,1)$，则结果是
+方程 $1 = 1$。
 
-### Finite geometric series
+### 有限几何级数
 
-The second series that interests us is the finite geometric series
+我们感兴趣的第二种级数是有限几何级数
 
 $$
 1 + c + c^2 + c^3 + \cdots + c^T
 $$
 
-where $T$ is a positive integer.
+其中 $T$ 是一个正整数。
 
-The key formula here is
+关键公式是
 
 $$
 1 + c + c^2 + c^3 + \cdots + c^T  = \frac{1 - c^{T+1}}{1-c}
 $$
 
-**Remark:** The above formula works for any value of the scalar
-$c$. We don't have to restrict $c$ to be in the
-set $(-1,1)$.
+**备注：** 上述公式适用于任何标量 $c$ 的值。我们不必将 $c$ 限制在
+集合 $(-1,1)$ 中。
 
-We now move on to describe some famous economic applications of
-geometric series.
+我们现在继续描述一些几何级数的著名经济应用。
 
-## Example: The Money Multiplier in Fractional Reserve Banking
+## 示例：部分准备金银行制度中的货币乘数
 
-In a fractional reserve banking system, banks hold only a fraction
-$r \in (0,1)$ of cash behind each **deposit receipt** that they
-issue
+在部分准备金银行制度中，银行仅持有每张 **存款凭证** 背后的现金的一部分 $r \in (0,1)$
 
-* In recent times
-    - cash consists of pieces of paper issued by the government and
-      called dollars or pounds or $\ldots$
-    - a *deposit* is a balance in a checking or savings account that
-      entitles the owner to ask the bank for immediate payment in cash
-* When the UK and France and the US were on either a gold or silver
-  standard (before 1914, for example)
-    - cash was a gold or silver coin
-    - a *deposit receipt* was a *bank note* that the bank promised to
-      convert into gold or silver on demand; (sometimes it was also a
-      checking or savings account balance)
+* 近年来
+    - 现金是由政府发行的纸币，称为美元或英镑或 $\ldots$
+    - *存款* 是支票或储蓄账户中的余额，持有人有权要求银行立即支付现金
+* 当英国、法国和美国采用金本位或银本位时（例如1914年之前）
+    - 现金是金或银币
+    - *存款凭证* 是银行承诺按需兑换成金或银的 *银行票据*；（有时也是支票或储蓄账户余额）
 
-Economists and financiers often define the **supply of money** as an
-economy-wide sum of **cash** plus **deposits**.
+经济学家和金融家通常将 **货币供应量** 定义为经济范围内 **现金** 加 **存款** 的总和。
 
-In a **fractional reserve banking system** (one in which the reserve
-ratio $r$ satisfies $0 < r < 1$), **banks create money** by issuing deposits *backed* by fractional reserves plus loans that they make to their customers.
+在 **部分准备金银行制度** 中（其中准备金率 $r$ 满足 $0 < r < 1$），**银行通过发行存款**（由部分准备金加上他们向客户发放的贷款支持）**创造货币**。
 
-A geometric series is a key tool for understanding how banks create
-money (i.e., deposits) in a fractional reserve system.
+几何级数是理解银行如何在部分准备金制度中创造货币（即存款）的关键工具。
 
-The geometric series formula {eq}`infinite` is at the heart of the classic model of the money creation process -- one that leads us to the celebrated
-**money multiplier**.
+几何级数公式 {eq}`infinite` 是经典货币创造过程模型的核心——这一模型引导我们到达著名的 **货币乘数**。
 
-### A simple model
+### 一个简单的模型
 
-There is a set of banks named $i = 0, 1, 2, \ldots$.
+有一组银行，命名为 $i = 0, 1, 2, \ldots$。
 
-Bank $i$'s loans $L_i$, deposits $D_i$, and
-reserves $R_i$ must satisfy the balance sheet equation (because
-**balance sheets balance**):
+银行 $i$ 的贷款 $L_i$、存款 $D_i$ 和
+准备金 $R_i$ 必须满足资产负债表方程（因为
+**资产负债表平衡**）：
 
 ```{math}
 :label: balance
@@ -156,17 +133,17 @@ reserves $R_i$ must satisfy the balance sheet equation (because
 L_i + R_i = D_i
 ```
 
-The left side of the above equation is the sum of the bank's **assets**,
-namely, the loans $L_i$ it has outstanding plus its reserves of
-cash $R_i$.
+上面方程的左侧是银行的 **资产** 之和，
+即其未偿还贷款 $L_i$ 加上其现金准备金
+$R_i$。
 
-The right side records bank $i$'s liabilities,
-namely, the deposits $D_i$ held by its depositors; these are
-IOU's from the bank to its depositors in the form of either checking
-accounts or savings accounts (or before 1914, bank notes issued by a
-bank stating promises to redeem notes for gold or silver on demand).
+右侧记录了银行 $i$ 的负债，
+即其存款人持有的存款 $D_i$；这些是
+银行对其存款人的 IOU，以支票
+账户或储蓄账户的形式（或在1914年之前，银行发行的
+承诺按需兑换成金或银的银行票据）。
 
-Each bank $i$ sets its reserves to satisfy the equation
+每个银行 $i$ 设置其准备金以满足方程
 
 ```{math}
 :label: reserves
@@ -174,14 +151,13 @@ Each bank $i$ sets its reserves to satisfy the equation
 R_i = r D_i
 ```
 
-where $r \in (0,1)$ is its **reserve-deposit ratio** or **reserve
-ratio** for short
+其中 $r \in (0,1)$ 是其 **准备金-存款比率** 或简称 **准备金比率**
 
-- the reserve ratio is either set by a government or chosen by banks
-  for precautionary reasons
+- 准备金比率由政府设定或由银行
+  出于预防原因选择
 
-Next we add a theory stating that bank $i+1$'s deposits depend
-entirely on loans made by bank $i$, namely
+接下来我们添加一个理论，指出银行 $i+1$ 的存款完全依赖于
+银行 $i$ 发放的贷款，即
 
 ```{math}
 :label: deposits
@@ -189,25 +165,25 @@ entirely on loans made by bank $i$, namely
 D_{i+1} = L_i
 ```
 
-Thus, we can think of the banks as being arranged along a line with
-loans from bank $i$ being immediately deposited in $i+1$
+因此，我们可以认为银行按一条线排列，
+银行 $i$ 的贷款立即存入 $i+1$
 
-- in this way, the debtors to bank $i$ become creditors of
-  bank $i+1$
+- 这样，银行 $i$ 的债务人变成了
+  银行 $i+1$ 的债权人
 
-Finally, we add an *initial condition* about an exogenous level of bank
-$0$'s deposits
+最后，我们添加一个关于银行
+$0$ 存款外生水平的 *初始条件*
 
 $$
-D_0 \ \text{ is given exogenously}
+D_0 \ \text{ 是外生给定的}
 $$
 
-We can think of $D_0$ as being the amount of cash that a first
-depositor put into the first bank in the system, bank number $i=0$.
+我们可以认为 $D_0$ 是系统中第一个
+存款人存入第一个银行（即银行编号 $i=0$）的现金量。
 
-Now we do a little algebra.
+现在我们做一些代数运算。
 
-Combining equations {eq}`balance` and {eq}`reserves` tells us that
+结合方程 {eq}`balance` 和 {eq}`reserves` 告诉我们
 
 ```{math}
 :label: fraction
@@ -215,265 +191,224 @@ Combining equations {eq}`balance` and {eq}`reserves` tells us that
 L_i = (1-r) D_i
 ```
 
-This states that bank $i$ loans a fraction $(1-r)$ of its
-deposits and keeps a fraction $r$ as cash reserves.
+这表明银行 $i$ 贷款其
+存款的一部分 $(1-r)$ 并保留一部分 $r$ 作为现金准备金。
 
-Combining equation {eq}`fraction` with equation {eq}`deposits` tells us that
+结合方程 {eq}`fraction` 和方程 {eq}`deposits` 告诉我们
 
 $$
-D_{i+1} = (1-r) D_i  \ \text{ for } i \geq 0
+D_{i+1} = (1-r) D_i  \ \text{ 对 } i \geq 0
 $$
 
-which implies that
+这意味着
 
 ```{math}
 :label: geomseries
 
-D_i = (1 - r)^i D_0  \ \text{ for } i \geq 0
+D_i = (1 - r)^i D_0  \ \text{ 对 } i \geq 0
 ```
 
-Equation {eq}`geomseries` expresses $D_i$ as the $i$ th term in the
-product of $D_0$ and the geometric series
+方程 {eq}`geomseries` 表示 $D_i$ 是
+几何级数 $D_0$ 和
 
 $$
 1, (1-r), (1-r)^2, \cdots
 $$
 
-Therefore, the sum of all deposits in our banking system
-$i=0, 1, 2, \ldots$ is
+的第 $i$ 项的乘积。
+
+因此，我们银行系统中所有存款的总和
+$i=0, 1, 2, \ldots$ 是
 
 ```{math}
 :label: sumdeposits
 
 \sum_{i=0}^\infty (1-r)^i D_0 =  \frac{D_0}{1 - (1-r)} = \frac{D_0}{r}
 ```
+### 货币乘数
 
-### Money multiplier
+**货币乘数** 是一个数字，表示向银行 $0$ 注入外生现金导致银行系统总存款增加的乘数因子。
 
-The **money multiplier** is a number that tells the multiplicative
-factor by which an exogenous injection of cash into bank $0$ leads
-to an increase in the total deposits in the banking system.
+方程 {eq}`sumdeposits` 断言 **货币乘数** 是 $\frac{1}{r}$
 
-Equation {eq}`sumdeposits` asserts that the **money multiplier** is
-$\frac{1}{r}$
+- 在银行 $0$ 初始存入现金 $D_0$ 导致银行系统创造总存款 $\frac{D_0}{r}$。
+- 初始存款 $D_0$ 作为准备金持有，按照 $D_0 = \sum_{i=0}^\infty R_i$ 分布在整个银行系统中。
 
-- An initial deposit of cash of $D_0$ in bank $0$ leads
-  the banking system to create total deposits of $\frac{D_0}{r}$.
-- The initial deposit $D_0$ is held as reserves, distributed
-  throughout the banking system according to $D_0 = \sum_{i=0}^\infty R_i$.
+## 示例：凯恩斯乘数
 
-## Example: The Keynesian Multiplier
+著名经济学家约翰·梅纳德·凯恩斯及其追随者创建了一个简单模型，旨在确定国民收入 $y$ 在以下情况下：
 
-The famous economist John Maynard Keynes and his followers created a
-simple model intended to determine national income $y$ in
-circumstances in which
+- 存在大量失业资源，特别是 **劳动力和资本的过剩供给**
+- 价格和利率未能调整以使总 **供给等于需求**（例如，价格和利率被冻结）
+- 国民收入完全由总需求决定
 
-- there are substantial unemployed resources, in particular **excess
-  supply** of labor and capital
-- prices and interest rates fail to adjust to make aggregate **supply
-  equal demand** (e.g., prices and interest rates are frozen)
-- national income is entirely determined by aggregate demand
+### 静态版本
 
-### Static version
+一个基本的凯恩斯国民收入决定模型由描述 $y$ 的总需求及其组成部分的三个方程组成。
 
-An elementary Keynesian model of national income determination consists
-of three equations that describe aggregate demand for $y$ and its
-components.
-
-The first equation is a national income identity asserting that
-consumption $c$ plus investment $i$ equals national income
-$y$:
+第一个方程是一个国民收入恒等式，断言消费 $c$ 加上投资 $i$ 等于国民收入 $y$：
 
 $$
-c+ i = y
+c + i = y
 $$
 
-The second equation is a Keynesian consumption function asserting that
-people consume a fraction $b \in (0,1)$ of their income:
+第二个方程是一个凯恩斯消费函数，断言人们消费其收入的一部分 $b \in (0,1)$：
 
 $$
 c = b y
 $$
 
-The fraction $b \in (0,1)$ is called the **marginal propensity to
-consume**.
+部分 $b \in (0,1)$ 称为 **边际消费倾向**。
 
-The fraction $1-b \in (0,1)$ is called the **marginal propensity
-to save**.
+部分 $1-b \in (0,1)$ 称为 **边际储蓄倾向**。
 
-The third equation simply states that investment is exogenous at level
-$i$.
+第三个方程简单地说明投资在水平 $i$ 是外生的。
 
-- *exogenous* means *determined outside this model*.
+- *外生* 意味着 *在此模型之外确定*。
 
-Substituting the second equation into the first gives $(1-b) y = i$.
+将第二个方程代入第一个方程得到 $(1-b) y = i$。
 
-Solving this equation for $y$ gives
+求解这个方程得到
 
 $$
 y = \frac{1}{1-b} i
 $$
 
-The quantity $\frac{1}{1-b}$ is called the **investment
-multiplier** or simply the **multiplier**.
+数量 $\frac{1}{1-b}$ 称为 **投资乘数** 或简称 **乘数**。
 
-Applying the formula for the sum of an infinite geometric series, we can
-write the above equation as
+应用无限几何级数的求和公式，我们可以将上述方程写为
 
 $$
 y = i \sum_{t=0}^\infty b^t
 $$
 
-where $t$ is a nonnegative integer.
+其中 $t$ 是一个非负整数。
 
-So we arrive at the following equivalent expressions for the multiplier:
+因此，我们得出乘数的以下等效表达式：
 
 $$
-\frac{1}{1-b} =   \sum_{t=0}^\infty b^t
+\frac{1}{1-b} = \sum_{t=0}^\infty b^t
 $$
 
-The expression $\sum_{t=0}^\infty b^t$ motivates an interpretation
-of the multiplier as the outcome of a dynamic process that we describe
-next.
+表达式 $\sum_{t=0}^\infty b^t$ 激发了对乘数作为我们接下来描述的动态过程结果的解释。
 
-### Dynamic version
+### 动态版本
 
-We arrive at a dynamic version by interpreting the nonnegative integer
-$t$ as indexing time and changing our specification of the
-consumption function to take time into account
+我们通过将非负整数 $t$ 解释为时间索引并改变消费函数的规范以考虑时间因素，得出动态版本
 
-- we add a one-period lag in how income affects consumption
+- 我们增加了收入影响消费的一个时期的滞后
 
-We let $c_t$ be consumption at time $t$ and $i_t$ be
-investment at time $t$.
+我们设 $c_t$ 为时间 $t$ 的消费，$i_t$ 为
+时间 $t$ 的投资。
 
-We modify our consumption function to assume the form
+我们修改消费函数，使其形式为
 
 $$
 c_t = b y_{t-1}
 $$
 
-so that $b$ is the marginal propensity to consume (now) out of
-last period's income.
+这样 $b$ 就是上一期收入的边际消费倾向。
 
-We begin with an initial condition stating that
+我们从一个初始条件开始，说明
 
 $$
 y_{-1} = 0
 $$
 
-We also assume that
+我们还假设
 
 $$
-i_t = i \ \ \textrm {for all }  t \geq 0
+i_t = i \ \ \textrm {对所有 }  t \geq 0
 $$
 
-so that investment is constant over time.
+这样投资随时间保持不变。
 
-It follows that
+因此
 
 $$
 y_0 = i + c_0 = i + b y_{-1} =  i
 $$
 
-and
+以及
 
 $$
 y_1 = c_1 + i = b y_0 + i = (1 + b) i
 $$
 
-and
+以及
 
 $$
 y_2 = c_2 + i = b y_1 + i = (1 + b + b^2) i
 $$
 
-and more generally
+更一般地
 
 $$
 y_t = b y_{t-1} + i = (1+ b + b^2 + \cdots + b^t) i
 $$
 
-or
+或者
 
 $$
 y_t = \frac{1-b^{t+1}}{1 -b } i
 $$
 
-Evidently, as $t \rightarrow + \infty$,
+显然，当 $t \rightarrow + \infty$ 时，
 
 $$
 y_t \rightarrow \frac{1}{1-b} i
 $$
 
-**Remark 1:** The above formula is often applied to assert that an
-exogenous increase in investment of $\Delta i$ at time $0$
-ignites a dynamic process of increases in national income by successive amounts
+**备注 1：** 上述公式通常用于断言在时间 $0$ 投资增加 $\Delta i$ 引发的动态过程，使国民收入按连续金额增加
 
 $$
 \Delta i, (1 + b )\Delta i, (1+b + b^2) \Delta i , \cdots
 $$
 
-at times $0, 1, 2, \ldots$.
+在时间 $0, 1, 2, \ldots$。
 
-**Remark 2** Let $g_t$ be an exogenous sequence of government
-expenditures.
+**备注 2** 设 $g_t$ 为政府支出的外生序列。
 
-If we generalize the model so that the national income identity
-becomes
+如果我们将模型推广，使国民收入恒等式变为
 
 $$
 c_t + i_t + g_t  = y_t
 $$
 
-then a version of the preceding argument shows that the **government
-expenditures multiplier** is also $\frac{1}{1-b}$, so that a
-permanent increase in government expenditures ultimately leads to an
-increase in national income equal to the multiplier times the increase
-in government expenditures.
+那么前述论证的一个版本表明 **政府支出乘数** 也是 $\frac{1}{1-b}$，因此政府支出的永久增加最终导致国民收入增加，等于乘数乘以政府支出的增加。
 
-## Example: Interest Rates and Present Values
+## 示例：利率和现值
 
-We can apply our formula for geometric series to study how interest
-rates affect values of streams of dollar payments that extend over time.
+我们可以应用几何级数公式来研究利率如何影响延续一段时间的美元支付流的价值。
 
-We work in discrete time and assume that $t = 0, 1, 2, \ldots$
-indexes time.
+我们在离散时间工作，并假设 $t = 0, 1, 2, \ldots$ 表示时间。
 
-We let $r \in (0,1)$ be a one-period **net nominal interest rate**
+我们设 $r \in (0,1)$ 为一个时期的 **净名义利率**
 
-- if the nominal interest rate is $5$ percent,
-  then $r= .05$
+- 如果名义利率是 $5$ 百分比，
+  那么 $r= .05$
 
-A one-period **gross nominal interest rate** $R$ is defined as
+一个时期的 **总名义利率** $R$ 定义为
 
 $$
 R = 1 + r \in (1, 2)
 $$
 
-- if $r=.05$, then $R = 1.05$
+- 如果 $r=.05$，那么 $R = 1.05$
 
-**Remark:** The gross nominal interest rate $R$ is an **exchange
-rate** or **relative price** of dollars at between times $t$ and
-$t+1$. The units of $R$ are dollars at time $t+1$ per
-dollar at time $t$.
+**备注：** 总名义利率 $R$ 是一个 **汇率** 或 **相对价格**，表示在时间 $t$ 和 $t+1$ 之间的美元。$R$ 的单位是时间 $t+1$ 的美元每时间 $t$ 的美元。
 
-When people borrow and lend, they trade dollars now for dollars later or
-dollars later for dollars now.
+当人们借贷时，他们用现在的美元换取以后的美元，或者用以后的美元换取现在的美元。
 
-The price at which these exchanges occur is the gross nominal interest
-rate.
+这些交换发生的价格是总名义利率。
 
-- If I sell $x$ dollars to you today, you pay me $R x$
-  dollars tomorrow.
-- This means that you borrowed $x$ dollars for me at a gross
-  interest rate $R$ and a net interest rate $r$.
+- 如果我今天卖给你 $x$ 美元，你明天支付我 $R x$
+  美元。
+- 这意味着你以总利率 $R$ 和净利率 $r$ 向我借了 $x$ 美元。
 
-We assume that the net nominal interest rate $r$ is fixed over
-time, so that $R$ is the gross nominal interest rate at times
-$t=0, 1, 2, \ldots$.
+我们假设净名义利率 $r$ 随时间固定，因此 $R$ 是时间 $t=0, 1, 2, \ldots$ 的总名义利率。
 
-Two important geometric sequences are
+两个重要的几何序列是
 
 ```{math}
 :label: geom1
@@ -481,7 +416,7 @@ Two important geometric sequences are
 1, R, R^2, \cdots
 ```
 
-and
+和
 
 ```{math}
 :label: geom2
@@ -489,70 +424,66 @@ and
 1, R^{-1}, R^{-2}, \cdots
 ```
 
-Sequence {eq}`geom1` tells us how dollar values of an investment **accumulate**
-through time.
+序列 {eq}`geom1` 告诉我们投资的美元价值如何随时间 **累积**。
 
-Sequence {eq}`geom2` tells us how to **discount** future dollars to get their
-values in terms of today's dollars.
+序列 {eq}`geom2` 告诉我们如何 **折现** 未来的美元以获得其以今天的美元计的价值。
 
-### Accumulation
+### 累积
 
-Geometric sequence {eq}`geom1` tells us how one dollar invested and re-invested
-in a project with gross one period nominal rate of return accumulates
+几何序列 {eq}`geom1` 告诉我们一美元投资并再投资于一个项目，其总名义回报率如何累积
 
-- here we assume that net interest payments are reinvested in the
-  project
-- thus, $1$ dollar invested at time $0$ pays interest
-  $r$ dollars after one period, so we have $r+1 = R$
-  dollars at time$1$
-- at time $1$ we reinvest $1+r =R$ dollars and receive interest
-  of $r R$ dollars at time $2$ plus the *principal*
-  $R$ dollars, so we receive $r R + R = (1+r)R = R^2$
-  dollars at the end of period $2$
-- and so on
+- 这里我们假设净利息支付再投资于项目
+- 因此，时间 $0$ 投资的 $1$ 美元在一个时期后支付利息
+  $r$ 美元，所以我们在时间 $1$ 有 $r+1 = R$
+  美元
+- 在时间 $1$ 我们再投资 $1+r =R$ 美元，并在时间 $2$ 收到利息
+  $r R$ 美元加上 *本金*
+  $R$ 美元，所以我们在第 $2$ 期末收到 $r R + R = (1+r)R = R^2$
+  美元
+- 依此类推
 
-Evidently, if we invest $x$ dollars at time $0$ and
-reinvest the proceeds, then the sequence
+显然，如果我们在时间 $0$ 投资 $x$ 美元并
+再投资收益，那么序列
 
 $$
 x , xR , x R^2, \cdots
 $$
 
-tells how our account accumulates at dates $t=0, 1, 2, \ldots$.
+告诉我们账户在时间 $t=0, 1, 2, \ldots$ 的累积情况。
 
-### Discounting
+### 折现
 
-Geometric sequence {eq}`geom2` tells us how much future dollars are worth in terms of today's dollars.
+几何序列 {eq}`geom2` 告诉我们未来的美元在今天的美元中的价值。
 
-Remember that the units of $R$ are dollars at $t+1$ per
-dollar at $t$.
+记住 $R$ 的单位是时间 $t+1$ 的美元每
+时间 $t$ 的美元。
 
-It follows that
+因此
 
-- the units of $R^{-1}$ are dollars at $t$ per dollar at $t+1$
-- the units of $R^{-2}$ are dollars at $t$ per dollar at $t+2$
-- and so on; the units of $R^{-j}$ are dollars at $t$ per
-  dollar at $t+j$
+- $R^{-1}$ 的单位是时间 $t$ 的美元每时间 $t+1$ 的美元
+- $R^{-2}$ 的单位是时间 $t$ 的美元每时间 $t+2$ 的美元
+- 依此类推；$R^{-j}$ 的单位是时间 $t$ 的美元每
+  时间 $t+j$ 的美元
 
-So if someone has a claim on $x$ dollars at time $t+j$, it
-is worth $x R^{-j}$ dollars at time $t$ (e.g., today).
+所以如果某人在时间 $t+j$ 拥有 $x$ 美元的债权，
+那么它在时间 $t$（例如今天）值 $x R^{-j}$ 美元。
 
-### Application to asset pricing
+### 资产定价的应用
 
-A **lease** requires a payments stream of $x_t$ dollars at
-times $t = 0, 1, 2, \ldots$ where
+一个 **租赁** 需要在时间 $t = 0, 1, 2, \ldots$ 支付
+$x_t$ 美元，其中
 
 $$
 x_t = G^t x_0
 $$
 
-where $G = (1+g)$ and $g \in (0,1)$.
+其中 $G = (1+g)$ 且 $g \in (0,1)$。
 
-Thus, lease payments increase at $g$ percent per period.
+因此，租赁支付每期增加 $g$ 百分比。
 
-For a reason soon to be revealed, we assume that $G < R$.
+由于一个即将揭示的原因，我们假设 $G < R$。
 
-The **present value** of the lease is
+租赁的 **现值** 是
 
 $$
 \begin{aligned} p_0  & = x_0 + x_1/R + x_2/(R^2) + \cdots \\
@@ -560,23 +491,23 @@ $$
                  & = x_0 \frac{1}{1 - G R^{-1}} \end{aligned}
 $$
 
-where the last line uses the formula for an infinite geometric series.
+最后一行使用了无限几何级数的公式。
 
-Recall that $R = 1+r$ and $G = 1+g$ and that $R > G$
-and $r > g$ and that $r$ and $g$ are typically small
-numbers, e.g., .05 or .03.
+回想一下 $R = 1+r$ 和 $G = 1+g$ 并且 $R > G$
+和 $r > g$ 并且 $r$ 和 $g$ 通常是小
+数，例如 .05 或 .03。
 
-Use the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series) of $\frac{1}{1+r}$ about $r=0$,
-namely,
+使用 $r=0$ 附近的 $\frac{1}{1+r}$ 的泰勒级数，
+即，
 
 $$
 \frac{1}{1+r} = 1 - r + r^2 - r^3 + \cdots
 $$
 
-and the fact that $r$ is small to approximate
-$\frac{1}{1+r} \approx 1 - r$.
+并且 $r$ 很小以近似
+$\frac{1}{1+r} \approx 1 - r$。
 
-Use this approximation to write $p_0$ as
+使用此近似来写 $p_0$ 为
 
 $$
 \begin{aligned}
@@ -587,99 +518,93 @@ $$
 \end{aligned}
 $$
 
-where the last step uses the approximation $r g \approx 0$.
+最后一步使用了近似 $r g \approx 0$。
 
-The approximation
+近似
 
 $$
 p_0 = \frac{x_0 }{r -g }
 $$
 
-is known as the **Gordon formula** for the present value or current
-price of an infinite payment stream $x_0 G^t$ when the nominal
-one-period interest rate is $r$ and when $r > g$.
+被称为 **戈登公式**，用于当名义
+单期利率为 $r$ 且 $r > g$ 时无限支付流 $x_0 G^t$ 的现值或当前价格。
 
-We can also extend the asset pricing formula so that it applies to finite leases.
+我们还可以扩展资产定价公式，使其适用于有限租赁。
 
-Let the payment stream on the lease now be $x_t$ for $t= 1,2, \dots,T$, where again
+现在让租赁的支付流为 $x_t$，其中 $t= 1,2, \dots,T$，再次
 
 $$
 x_t = G^t x_0
 $$
 
-The present value of this lease is:
+该租赁的现值为：
 
 $$
 \begin{aligned} \begin{split}p_0&=x_0 + x_1/R  + \dots +x_T/R^T \\ &= x_0(1+GR^{-1}+\dots +G^{T}R^{-T}) \\ &= \frac{x_0(1-G^{T+1}R^{-(T+1)})}{1-GR^{-1}}  \end{split}\end{aligned}
 $$
 
-Applying the Taylor series to $R^{-(T+1)}$ about $r=0$ we get:
+将泰勒级数应用于 $R^{-(T+1)}$ 关于 $r=0$ 我们得到：
 
 $$
 \frac{1}{(1+r)^{T+1}}= 1-r(T+1)+\frac{1}{2}r^2(T+1)(T+2)+\dots \approx 1-r(T+1)
 $$
 
-Similarly, applying the Taylor series to $G^{T+1}$ about $g=0$:
+类似地，将泰勒级数应用于 $G^{T+1}$ 关于 $g=0$：
 
 $$
 (1+g)^{T+1} = 1+(T+1)g+\frac{T(T+1)}{2!}g^2+\frac{(T-1)T(T+1)}{3!}g^3+\dots \approx 1+ (T+1)g
 $$
 
-Thus, we get the following approximation:
+因此，我们得到以下近似值：
 
 $$
 p_0 =\frac{x_0(1-(1+(T+1)g)(1-r(T+1)))}{1-(1-r)(1+g) }
 $$
 
-Expanding:
+展开：
 
 $$
-\begin{aligned} p_0 &=\frac{x_0(1-1+(T+1)^2 rg +r(T+1)-g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &= \frac{x_0(T+1)(r-g)}{r-g + rg}+\frac{x_0rg(T+1)^2}{r-g+rg}\\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\  &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{aligned}
+\begin{aligned} p_0 &=\frac{x_0(1-1+(T+1)^2 rg -r(T+1)+g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\ &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{aligned}
 $$
 
-We could have also approximated by removing the second term
-$rgx_0(T+1)$ when $T$ is relatively small compared to
-$1/(rg)$ to get $x_0(T+1)$ as in the finite stream
-approximation.
+当 $T$ 相对于 $1/(rg)$ 较小时，我们也可以通过去除第二项 $rgx_0(T+1)$ 来近似，以获得有限流近似中的 $x_0(T+1)$。
 
-We will plot the true finite stream present-value and the two
-approximations, under different values of $T$, and $g$ and $r$ in Python.
+我们将在 Python 中绘制不同 $T$、$g$ 和 $r$ 值下的真实有限流现值和两个近似值。
 
-First we plot the true finite stream present-value after computing it
-below
+首先，我们在下面计算后绘制真实的有限流现值。
 
 ```{code-cell} ipython3
-# True present value of a finite lease
+# 有限租赁的真实现值
 def finite_lease_pv_true(T, g, r, x_0):
     G = (1 + g)
     R = (1 + r)
     return (x_0 * (1 - G**(T + 1) * R**(-T - 1))) / (1 - G * R**(-1))
-# First approximation for our finite lease
+# 有限租赁的第一次近似
 
 def finite_lease_pv_approx_1(T, g, r, x_0):
     p = x_0 * (T + 1) + x_0 * r * g * (T + 1) / (r - g)
     return p
 
-# Second approximation for our finite lease
+# 有限租赁的第二次近似
 def finite_lease_pv_approx_2(T, g, r, x_0):
     return (x_0 * (T + 1))
 
-# Infinite lease
+# 无限期租赁
 def infinite_lease(g, r, x_0):
     G = (1 + g)
     R = (1 + r)
     return x_0 / (1 - G * R**(-1))
 ```
 
-Now that we have defined our functions, we can plot some outcomes.
+现在我们已经定义了我们的函数，我们可以绘制一些结果。
 
-First we study the quality of our approximations
+首先，我们研究我们的近似质量。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Finite lease present value $T$ periods ahead"
+    caption: "有限租赁的现值 $T$ 期前"
     name: finite_lease_present_value
 ---
 def plot_function(axes, x_vals, func, args):
@@ -696,64 +621,59 @@ our_args = (T, g, r, x_0)
 funcs = [finite_lease_pv_true,
         finite_lease_pv_approx_1,
         finite_lease_pv_approx_2]
-        # the three functions we want to compare
+        # 三个我们想要比较的函数
 
 fig, ax = plt.subplots()
 for f in funcs:
     plot_function(ax, T, f, our_args)
 ax.legend()
-ax.set_xlabel('$T$ Periods Ahead')
-ax.set_ylabel('Present Value, $p_0$')
+ax.set_xlabel('$T$ 期之后')
+ax.set_ylabel('现值, $p_0$')
 plt.show()
 ```
+显然，我们的近似在 $T$ 的小值时表现良好。
 
-Evidently our approximations perform well for small values of $T$.
+然而，保持 $g$ 和 $r$ 不变，我们的近似在 $T$ 增加时会恶化。
 
-However, holding $g$ and r fixed, our approximations deteriorate as $T$ increases.
-
-Next we compare the infinite and finite duration lease present values
-over different lease lengths $T$.
+接下来，我们比较不同租赁期限 $T$ 的无限期和有限期租赁现值。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Infinite and finite lease present value $T$ periods ahead"
+    caption: "无限期和有限期租赁的现值 $T$ 期前"
     name: infinite_and_finite_lease_present_value
 ---
-# Convergence of infinite and finite
+# 无限和有限的收敛性
 T_max = 1000
 T = np.arange(0, T_max+1)
 fig, ax = plt.subplots()
 f_1 = finite_lease_pv_true(T, g, r, x_0)
 f_2 = np.full(T_max+1, infinite_lease(g, r, x_0))
-ax.plot(T, f_1, label='T-period lease PV')
-ax.plot(T, f_2, '--', label='Infinite lease PV')
-ax.set_xlabel('$T$ Periods Ahead')
-ax.set_ylabel('Present Value, $p_0$')
+ax.plot(T, f_1, label='T-期租赁现值')
+ax.plot(T, f_2, '--', label='无限期租赁现值')
+ax.set_xlabel('$T$ 期之后')
+ax.set_ylabel('现值, $p_0$')
 ax.legend()
 plt.show()
 ```
+上图显示了当期限 $T \rightarrow +\infty$ 时，期限为 $T$ 的租赁价值接近永久租赁的价值。
 
-The graph above shows how as duration $T \rightarrow +\infty$,
-the value of a lease of duration $T$ approaches the value of a
-perpetual lease.
+现在我们考虑 $r$ 和 $g$ 协变时的两种不同情况。
 
-Now we consider two different views of what happens as $r$ and
-$g$ covary
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Value of lease of length $T$"
+    caption: "$T$-期租赁的价值"
     name: value_of_lease
 ---
-# First view
-# Changing r and g
+# 第一种情况
+# 改变 r 和 g
 fig, ax = plt.subplots()
-ax.set_ylabel('Present Value, $p_0$')
-ax.set_xlabel('$T$ periods ahead')
+ax.set_ylabel('现值, $p_0$')
+ax.set_xlabel('$T$-期之后')
 T_max = 10
 T=np.arange(0, T_max+1)
 
@@ -765,25 +685,20 @@ for r, g, comp in zip(rs, gs, comparisons):
 ax.legend()
 plt.show()
 ```
+此图为为什么条件 $r > g$ 是必要的提供了一个重要提示，如果期限为 $T = +\infty$ 的租赁要有有限的价值。
 
-This graph gives a big hint for why the condition $r > g$ is
-necessary if a lease of length $T = +\infty$ is to have finite
-value.
+对于喜欢 3D 图表的粉丝来说，以下图表也能说明同样的观点。
 
-For fans of 3-d graphs the same point comes through in the following
-graph.
-
-If you aren't enamored of 3-d graphs, feel free to skip the next
-visualization!
+如果你不喜欢 3D 图表，可以跳过下一个可视化！
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Three period lease PV with varying $g$ and $r$"
+    caption: "三期租赁现值，$g$ 和 $r$ 变化"
     name: three_period_lease_PV
 ---
-# Second view
+# 第二种情况
 fig = plt.figure(figsize = [16, 5])
 T = 3
 ax = plt.subplot(projection='3d')
@@ -793,7 +708,7 @@ g = np.arange(0.011, 0.991, 0.005)
 rr, gg = np.meshgrid(r, g)
 z = finite_lease_pv_true(T, gg, rr, x_0)
 
-# Removes points where undefined
+# 移除未定义的点
 same = (rr == gg)
 z[same] = np.nan
 surf = ax.plot_surface(rr, gg, z, cmap=cm.coolwarm,
@@ -801,68 +716,58 @@ surf = ax.plot_surface(rr, gg, z, cmap=cm.coolwarm,
 fig.colorbar(surf, shrink=0.5, aspect=5)
 ax.set_xlabel('$r$')
 ax.set_ylabel('$g$')
-ax.set_zlabel('Present Value, $p_0$')
+ax.set_zlabel('现值, $p_0$')
 ax.view_init(20, 8)
 plt.show()
 ```
+我们可以用一些微积分来研究租赁现值 $p_0$ 如何随 $r$ 和 $g$ 变化。
 
-We can use a little calculus to study how the present value $p_0$
-of a lease varies with $r$ and $g$.
+我们将使用一个名为 SymPy 的库。
 
-We will use a library called [SymPy](https://www.sympy.org/).
+SymPy 使我们能够进行符号数学计算，包括计算代数方程的导数。
 
-SymPy enables us to do symbolic math calculations including
-computing derivatives of algebraic equations.
+我们将通过创建一个符号表达式来说明它的工作原理，该表达式表示我们无限期租赁的现值公式。
 
-We will illustrate how it works by creating a symbolic expression that
-represents our present value formula for an infinite lease.
-
-After that, we'll use SymPy to compute derivatives
+之后，我们将使用 SymPy 来计算导数。
 
 ```{code-cell} ipython3
-# Creates algebraic symbols that can be used in an algebraic expression
+# 创建可用于代数表达式的代数符号
 g, r, x0 = sym.symbols('g, r, x0')
 G = (1 + g)
 R = (1 + r)
 p0 = x0 / (1 - G * R**(-1))
 init_printing(use_latex='mathjax')
-print('Our formula is:')
+print('我们的公式是：')
 p0
 ```
 
 ```{code-cell} ipython3
-print('dp0 / dg is:')
+print('dp0 / dg 为：')
 dp_dg = sym.diff(p0, g)
 dp_dg
 ```
 
 ```{code-cell} ipython3
-print('dp0 / dr is:')
+print('dp0 / dr 为：')
 dp_dr = sym.diff(p0, r)
 dp_dr
 ```
+我们可以看到，只要 $r>g$，$r>0$ 且 $g>0$ 并且 $x_0$ 为正，$\frac{\partial p_0}{\partial r}<0$，所以 $\frac{\partial p_0}{\partial r}$ 将始终为负。
 
-We can see that for $\frac{\partial p_0}{\partial r}<0$ as long as
-$r>g$, $r>0$ and $g>0$ and $x_0$ is positive,
-so $\frac{\partial p_0}{\partial r}$ will always be negative.
+同样地，只要 $r>g$，$r>0$ 且 $g>0$ 并且 $x_0$ 为正，$\frac{\partial p_0}{\partial g}>0$，所以 $\frac{\partial p_0}{\partial g}$ 将始终为正。
 
-Similarly, $\frac{\partial p_0}{\partial g}>0$ as long as $r>g$, $r>0$ and $g>0$ and $x_0$ is positive, so $\frac{\partial p_0}{\partial g}$
-will always be positive.
+## 回到凯恩斯乘数
 
-## Back to the Keynesian multiplier
-
-We will now go back to the case of the Keynesian multiplier and plot the
-time path of $y_t$, given that consumption is a constant fraction
-of national income, and investment is fixed.
+现在我们将回到凯恩斯乘数的情况，并绘制 $y_t$ 的时间路径，假设消费是国民收入的一个常数比例，投资是固定的。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Path of aggregate output tver time"
+    caption: "总产出的时间路径"
     name: path_of_aggregate_output_over_time
 ---
-# Function that calculates a path of y
+# 计算 $y$ 路径的函数
 def calculate_y(i, b, g, T, y_init):
     y = np.zeros(T+1)
     y[0] = i + b * y_init + g
@@ -870,10 +775,10 @@ def calculate_y(i, b, g, T, y_init):
         y[t] = b * y[t-1] + i + g
     return y
 
-# Initial values
+# 初始值
 i_0 = 0.3
 g_0 = 0.3
-# 2/3 of income goes towards consumption
+# 2/3 的收入为消费
 b = 2/3
 y_init = 0
 T = 100
@@ -886,19 +791,15 @@ ax.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init))
 ax.hlines(i_0 / (1 - b) + g_0 / (1 - b), xmin=-1, xmax=101, linestyles='--')
 plt.show()
 ```
+在这个模型中，收入随着时间的推移而增长，直到逐渐收敛到收入的无限几何级数和。
 
-In this model, income grows over time, until it gradually converges to
-the infinite geometric series sum of income.
-
-We now examine what will
-happen if we vary the so-called **marginal propensity to consume**,
-i.e., the fraction of income that is consumed
+现在我们来研究如果我们改变所谓的**边际消费倾向**，即消费的收入比例，会发生什么。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Changing consumption as a fraction of income"
+    caption: "将消费作为收入的一部分进行变化"
     name: changing_consumption_as_fraction_of_income
 ---
 bs = (1/3, 2/3, 5/6, 0.9)
@@ -914,16 +815,15 @@ ax.legend()
 plt.show()
 ```
 
-Increasing the marginal propensity to consume $b$ increases the
-path of output over time.
+增加边际消费倾向 $b$ 会增加随时间推移的产出路径。
 
-Now we will compare the effects on output of increases in investment and government spending.
+现在我们将比较投资和政府支出增加对产出的影响。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Different increase on output"
+    caption: "对产出的不同增加"
     name: different_increase_on_output
 ---
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 10))
@@ -940,15 +840,63 @@ for g in values:
     ax2.plot(x, y, label=f"g={g}")
 
 axes = ax1, ax2
-param_labels = "Investment", "Government Spending"
+param_labels = "投资", "政府支出"
 for ax, param in zip(axes, param_labels):
-    ax.set_title(f'An Increase in {param} on Output')
+    ax.set_title(f'产出增加了 {param}')
     ax.legend(loc ="lower right")
     ax.set_ylabel('$y_t$')
     ax.set_xlabel('$t$')
 plt.show()
 ```
+请注意，无论政府支出从 0.3 增加到 0.4，还是投资从 0.3 增加到 0.4，图表中的变化都是相同的。
 
-Notice here, whether government spending increases from 0.3 to 0.4 or
-investment increases from 0.3 to 0.4, the shifts in the graphs are
-identical.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
