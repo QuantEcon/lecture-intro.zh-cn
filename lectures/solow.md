@@ -10,76 +10,55 @@ kernelspec:
 ---
 
 (solow)=
-# The Solow-Swan Growth Model
+# 索洛-斯旺增长模型
 
-In this lecture we review a famous model due
-to [Robert Solow (1925--2023)](https://en.wikipedia.org/wiki/Robert_Solow) and [Trevor Swan (1918--1989)](https://en.wikipedia.org/wiki/Trevor_Swan).
+在本讲座中，我们将回顾一个由[罗伯特·索洛（1925--2023）](https://en.wikipedia.org/wiki/Robert_Solow)和[特雷弗·斯旺（1918--1989）](https://en.wikipedia.org/wiki/Trevor_Swan)提出的著名模型。
 
-The model is used to study growth over the long run.
+这个模型用于研究长期经济增长。
 
-Although the model is simple, it contains some interesting lessons.
+尽管模型简单，但它包含一些有趣的教训。
 
-
-We will use the following imports.
+我们将使用以下导入。
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import numpy as np
 ```
 
-## The model
+## 模型
 
-In a Solow--Swan economy, agents save a fixed fraction of their current
-incomes.
+在索洛-斯旺经济中，经济主体将其当前收入的固定比例用于储蓄。
+储蓄维持或增加资本存量。
+资本与劳动力相结合生产产出，产出又支付给工人和资本所有者。
+为了简化问题，我们忽略人口和生产力增长。
 
-Savings sustain or increase the stock of capital.
+对于每个整数 $t \geq 0$，第 $t$ 期的产出 $Y_t$ 由 $Y_t = F(K_t, L_t)$ 给出，其中 $K_t$ 是资本，$L_t$ 是劳动力，$F$ 是总生产函数。
 
-Capital is combined with labor to produce output, which in turn is paid out to
-workers and owners of capital.
-
-To keep things simple, we ignore population and productivity growth.
-
-For each integer $t \geq 0$, output $Y_t$ in period $t$ is given by $Y_t =
-F(K_t, L_t)$, where $K_t$ is capital, $L_t$ is labor and $F$ is an aggregate
-production function.
-
-The function $F$ is assumed to be nonnegative and
-**homogeneous of degree one**, meaning
-that
+假设函数 $F$ 是非负的，且是**一阶齐次的**，意味着
 
 $$
     F(\lambda K, \lambda L) = \lambda F(K, L)
-    \quad \text{for all } \lambda \geq 0
+    \quad \text{对于所有 } \lambda \geq 0
 $$
 
-Production functions with this property include
+具有这种特性的生产函数包括：
+* **科布-道格拉斯**函数 $F(K, L) = A K^{\alpha} L^{1-\alpha}$，其中 $0 \leq \alpha \leq 1$。
+* **CES**函数 $F(K, L) = \left\{ a K^\rho + b L^\rho \right\}^{1/\rho}$，其中 $a, b, \rho > 0$。
 
-* the **Cobb-Douglas** function $F(K, L) = A K^{\alpha}
-  L^{1-\alpha}$ with $0 \leq \alpha \leq 1$. 
-* the **CES** function $F(K, L) = \left\{ a K^\rho + b L^\rho \right\}^{1/\rho}$
-        with $a, b, \rho > 0$. 
-        
-Here, $\alpha$ is the output elasticity of capital and $\rho$ is a parameter that determines the elasticity of substitution between capital and labor.
+这里，$\alpha$ 是资本的产出弹性，$\rho$ 是决定资本和劳动力之间替代弹性的参数。
 
-We assume a closed economy, so aggregate domestic investment equals aggregate domestic
-saving.
+我们假设是封闭经济，因此总国内投资等于总国内储蓄。
+储蓄率是一个常数 $s$，满足 $0 \leq s \leq 1$，所以总投资和储蓄都等于 $s Y_t$。
 
-The saving rate is a constant $s$ satisfying $0 \leq s \leq 1$, so that aggregate
-investment and saving both equal  $s Y_t$.
-
-Capital depreciates: without replenishing through investment, one unit of capital today
-becomes $1-\delta$ units tomorrow.
-
-Thus,
+资本会贬值：如果不通过投资补充，今天的一单位资本明天会变成 $1-\delta$ 单位。
+因此，
 
 $$
     K_{t+1} = s F(K_t, L_t) + (1 - \delta) K_t
 $$
 
-
-Without population growth, $L_t$ equals some constant $L$.
-
-Setting $k_t := K_t / L$ and using homogeneity of degree one now yields
+没有人口增长，$L_t$ 等于某个常数 $L$。
+令 $k_t := K_t / L$，并使用一阶齐次性，现在得到
 
 $$
     k_{t+1}
@@ -88,8 +67,7 @@ $$
     = s F(k_t, 1) + (1 - \delta) k_t
 $$
 
-
-With  $f(k) := F(k, 1)$, the final expression for capital dynamics is
+令 $f(k) := F(k, 1)$，资本动态的最终表达式为
 
 ```{math}
 :label: solow
@@ -97,24 +75,19 @@ With  $f(k) := F(k, 1)$, the final expression for capital dynamics is
     \text{ where } g(k) := s f(k) + (1 - \delta) k
 ```
 
-Our aim is to learn about the evolution of $k_t$ over time,
-given an exogenous initial capital stock  $k_0$.
+我们的目标是了解随时间变化的 $k_t$ 的演变，给定一个外生的初始资本存量 $k_0$。
 
+## 图形化视角
 
-## A graphical perspective
+为了理解序列 $(k_t)_{t \geq 0}$ 的动态，我们使用45度图。
 
-To understand the dynamics of the sequence $(k_t)_{t \geq 0}$ we use a 45-degree diagram.
+为此，我们首先需要为 $f$ 指定函数形式并为参数赋值。
 
-To do so, we first
-need to specify the functional form for $f$ and assign values to the parameters.
+我们选择科布-道格拉斯规格 $f(k) = A k^\alpha$，并设定 $A=2.0$，$\alpha=0.3$，$s=0.3$ 和 $\delta=0.4$。
 
-We choose the Cobb--Douglas specification $f(k) = A k^\alpha$ and set $A=2.0$,
-$\alpha=0.3$, $s=0.3$ and $\delta=0.4$.
+然后绘制方程 {eq}`solow` 中的函数 $g$，以及45度线。
 
-The function $g$ from {eq}`solow` is then plotted, along with the 45-degree line.
-
-
-Let's define the constants.
+让我们定义这些常数。
 
 ```{code-cell} ipython3
 A, s, alpha, delta = 2, 0.3, 0.3, 0.4
@@ -122,14 +95,14 @@ x0 = 0.25
 xmin, xmax = 0, 3
 ```
 
-Now, we define the function $g$.
+现在我们来定义函数$g$。
 
 ```{code-cell} ipython3
 def g(A, s, alpha, delta, k):
     return A * s * k**alpha + (1 - delta) * k
 ```
 
-Let's plot the 45-degree diagram of $g$.
+让我们来绘制函数$g$的45度图。
 
 ```{code-cell} ipython3
 def plot45(kstar=None):
@@ -176,30 +149,23 @@ def plot45(kstar=None):
 plot45()
 ```
 
-Suppose, at some $k_t$, the value $g(k_t)$ lies strictly above the 45-degree line.
+假设在某个 $k_t$ 处，$g(k_t)$ 的值严格高于45度线。
+那么我们有 $k_{t+1} = g(k_t) > k_t$，人均资本增加。
+如果 $g(k_t) < k_t$，则人均资本下降。
+如果 $g(k_t) = k_t$，那么我们就处于**稳态**，$k_t$ 保持不变。
+（模型的{ref}`稳态<scalar-dynam:steady-state>`是映射 $g$ 的[不动点](https://en.wikipedia.org/wiki/Fixed_point_(mathematics))。）
 
-Then we have $k_{t+1} = g(k_t) > k_t$ and capital per worker rises.
-
-If $g(k_t) < k_t$ then capital per worker falls.
-
-If $g(k_t) = k_t$, then we are at a **steady state** and $k_t$ remains constant.
-
-(A {ref}`steady state <scalar-dynam:steady-state>` of the model is a [fixed point](https://en.wikipedia.org/wiki/Fixed_point_(mathematics)) of the mapping $g$.)
-
-From the shape of the function $g$ in the figure, we see that
-there is a unique steady state in $(0, \infty)$.
-
-It solves $k = s Ak^{\alpha} + (1-\delta)k$ and hence is given by
+从图中 $g$ 函数的形状可以看出，在 $(0, \infty)$ 内存在唯一的稳态。
+它满足方程 $k = s Ak^{\alpha} + (1-\delta)k$，因此可以表示为
 
 ```{math}
 :label: kstarss
     k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}
 ```
-If initial capital is below $k^*$, then capital increases over time.
 
-If initial capital is above this level, then the reverse is true.
-
-Let's plot the 45-degree diagram to show the $k^*$ in the plot.
+如果初始资本低于 $k^*$，那么资本会随时间增加。
+如果初始资本高于这个水平，则相反。
+让我们绘制45度图来在图中显示 $k^*$。
 
 ```{code-cell} ipython3
 kstar = ((s * A) / delta)**(1/(1 - alpha))
@@ -207,18 +173,11 @@ plot45(kstar)
 ```
 
 
-From our graphical analysis, it appears that $(k_t)$ converges to $k^*$, regardless of initial capital
-$k_0$.
-
-This is a form of {ref}`global stability <scalar-dynam:global-stability>`.
-
-
-The next figure shows three time paths for capital, from
-three distinct initial conditions, under the parameterization listed above.
-
-At this parameterization, $k^* \approx 1.78$.
-
-Let's define the constants and three distinct initial conditions
+根据我们的图形分析，似乎无论初始资本 $k_0$ 如何，$(k_t)$ 都会收敛到 $k^*$。
+这是一种{ref}`全局稳定性 <scalar-dynam:global-stability>`的形式。
+下图显示了在上述参数化条件下，从三个不同的初始条件出发的资本时间路径。
+在这种参数化下，$k^* \approx 1.78$。
+让我们定义常数和三个不同的初始条件
 
 ```{code-cell} ipython3
 A, s, alpha, delta = 2, 0.3, 0.3, 0.4
@@ -239,7 +198,7 @@ def simulate_ts(x0_values, ts_length):
 
     ts = np.zeros(ts_length)
 
-    # simulate and plot time series
+    # 模拟和绘制时间序列
     for x_init in x0_values:
         ts[0] = x_init
         for t in range(1, ts_length):
@@ -260,29 +219,23 @@ def simulate_ts(x0_values, ts_length):
 simulate_ts(x0, ts_length)
 ```
 
-As expected, the time paths in the figure all converge to $k^*$.
+# 如预期，图中的所有时间路径都收敛于 $k^*$。
 
-## Growth in continuous time
+## 连续时间的增长
 
-In this section, we investigate a continuous time version of the Solow--Swan
-growth model.
+在本节中，我们将研究 Solow--Swan 增长模型的连续时间版本。我们将看到连续时间提供的平滑如何能简化我们的分析。
 
-We will see how the smoothing provided by continuous time can
-simplify our analysis.
+回顾一下，资本的离散时间动态由以下公式给出：$k_{t+1} = s f(k_t) + (1 - \delta) k_t$。
 
-
-Recall  that the discrete time dynamics for capital are
-given by $k_{t+1} = s f(k_t) + (1 - \delta) k_t$.
-
-A simple rearrangement gives the rate of change per unit of time:
+简单重新排列可得到单位时间的变化率：
 
 $$
     \Delta k_t = s f(k_t) - \delta k_t
-    \quad \text{where} \quad
+    \quad \text{其中} \quad
     \Delta k_t := k_{t+1}  - k_t
 $$
 
-Taking the time step to zero gives the continuous time limit
+将时间步长趋近于零得到连续时间极限
 
 ```{math}
 :label: solowc
@@ -291,38 +244,27 @@ Taking the time step to zero gives the continuous time limit
     k'_t := \frac{d}{dt} k_t
 ```
 
-Our aim is to learn about the evolution of $k_t$ over time,
-given an initial stock  $k_0$.
+我们的目标是了解 $k_t$ 随时间的演变，给定初始存量 $k_0$。
 
-A **steady state** for {eq}`solowc` is a value $k^*$
-at which capital is unchanging, meaning $k'_t = 0$ or, equivalently,
-$s f(k^*) = \delta k^*$.
+{eq}`solowc` 的**稳态**是一个值 $k^*$，在该值处资本保持不变，即 $k'_t = 0$ 或等价地，$s f(k^*) = \delta k^*$。
 
-We assume
-$f(k) = Ak^\alpha$, so $k^*$ solves
-$s A k^\alpha = \delta k$.
+我们假设 $f(k) = Ak^\alpha$，所以 $k^*$ 满足 $s A k^\alpha = \delta k$。
 
-The solution is the same as the discrete time case---see {eq}`kstarss`.
+解决方案与离散时间情况相同——参见 {eq}`kstarss`。
 
-The dynamics are represented in
-the next figure, maintaining the parameterization we used
-above.
+动态在下一个图中表示，保持我们上面使用的参数化。
 
-Writing $k'_t = g(k_t)$ with $g(k) =
-s Ak^\alpha - \delta k$, values of $k$ with $g(k) > 0$ imply $k'_t > 0$, so
-capital is increasing.
+写作 $k'_t = g(k_t)$，其中 $g(k) = s Ak^\alpha - \delta k$，$g(k) > 0$ 的 $k$ 值意味着 $k'_t > 0$，所以资本在增加。
 
-When $g(k) < 0$, the opposite occurs.  Once again, high marginal returns to
-savings at low levels of capital combined with low rates of return at high
-levels of capital combine to yield global stability.
+当 $g(k) < 0$ 时，相反的情况发生。再一次，低水平资本时储蓄的高边际回报与高水平资本时的低回报率相结合，产生了全局稳定性。
 
-To see this in a figure, let's define the constants
+为了在图中看到这一点，让我们定义以下常数
 
 ```{code-cell} ipython3
 A, s, alpha, delta = 2, 0.3, 0.3, 0.4
 ```
 
-Next we define the function $g$ for growth in continuous time
+接下来，我们为连续时间的增长定义函数 $g$
 
 ```{code-cell} ipython3
 def g_con(A, s, alpha, delta, k):
@@ -368,28 +310,19 @@ kstar = ((s * A) / delta)**(1/(1 - alpha))
 plot_gcon(kstar)
 ```
 
-This shows global stability heuristically for a fixed parameterization, but
-how would we show the same thing formally for a continuum of plausible parameters?
-
-In the discrete time case, a neat expression for $k_t$ is hard to obtain.
-
-In continuous time the process is easier: we can obtain a relatively simple
-expression for $k_t$ that specifies the entire path.
-
-The first step is
-to set $x_t := k_t^{1-\alpha}$, so that $x'_t = (1-\alpha) k_t^{-\alpha}
-k'_t$.
-
-Substituting into $k'_t = sAk_t^\alpha - \delta k_t$ leads to the
-linear differential equation
+这从启发式的角度展示了固定参数化的全局稳定性，但我们如何为一系列合理的参数形式地证明同样的结论呢？
+在离散时间的情况下，很难得到$k_t$的简洁表达式。
+在连续时间中，这个过程更加简单：我们可以得到一个相对简单的$k_t$表达式，它可以指定整个路径。
+第一步是
+设$x_t := k_t^{1-\alpha}$，这样$x'_t = (1-\alpha) k_t^{-\alpha} k'_t$。
+将其代入$k'_t = sAk_t^\alpha - \delta k_t$，得到以下线性微分方程
 
 ```{math}
 :label: xsolow
     x'_t = (1-\alpha) (sA - \delta x_t)
 ```
 
-This equation, which is a [linear ordinary differential equation](https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)/17%3A_Differential_Equations/17.01%3A_First_Order_Differential_Equations), has the solution
-
+这个方程是一个[线性常微分方程](https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)/17%3A_Differential_Equations/17.01%3A_First_Order_Differential_Equations)，其解为
 $$
     x_t
     = \left(
@@ -398,11 +331,8 @@ $$
       \mathrm{e}^{-\delta (1-\alpha) t} +
     \frac{sA}{\delta}
 $$
-
-(You can confirm that this function $x_t$ satisfies {eq}`xsolow` by
-differentiating it with respect to $t$.)
-
-Converting back to $k_t$ yields
+（你可以通过对$t$求导来确认这个函数$x_t$满足{eq}`xsolow`方程。）
+转换回$k_t$得到
 
 ```{math}
 :label: ssivs
@@ -417,23 +347,17 @@ Converting back to $k_t$ yields
     \right]^{1/(1-\alpha)}
 ```
 
-Since $\delta > 0$ and $\alpha \in (0, 1)$, we see immediately that $k_t \to
-k^*$ as $t \to \infty$ independent of $k_0$.
-
-Thus, global stability holds.
-
-## Exercises
+由于 $\delta > 0$ 且 $\alpha \in (0, 1)$，我们立即可以看出，当 $t \to \infty$ 时，$k_t \to k^*$，且与 $k_0$ 无关。
+因此，全局稳定性成立。
+## 练习
 
 ```{exercise}
 :label: solow_ex1
 
-Plot per capita consumption $c$ at the steady state, as a function of the savings rate $s$, where $0 \leq s \leq 1$.
-
-Use the Cobb--Douglas specification $f(k) = A k^\alpha$.
-
-Set $A=2.0, \alpha=0.3,$ and $\delta=0.5$
-
-Also, find the approximate value of $s$ that maximizes the $c^*(s)$ and show it in the plot.
+绘制稳态下人均消费 $c$ 作为储蓄率 $s$ 的函数图，其中 $0 \leq s \leq 1$。
+使用柯布-道格拉斯生产函数 $f(k) = A k^\alpha$。
+设定 $A=2.0, \alpha=0.3,$ 且 $\delta=0.5$。
+此外，找出大约能使 $c^*(s)$ 最大化的 $s$ 值，并在图中显示。
 
 ```
 
@@ -441,8 +365,7 @@ Also, find the approximate value of $s$ that maximizes the $c^*(s)$ and show it 
 :class: dropdown
 ```
 
-Steady state consumption at savings rate $s$ is given by
-
+在储蓄率 $s$ 下的稳态消费由以下公式给出：
 
 $$
     c^*(s) = (1-s)f(k^*) = (1-s)A(k^*)^\alpha
@@ -460,8 +383,9 @@ k_star = ((s_grid * A) / delta)**(1/(1 - alpha))
 c_star = (1 - s_grid) * A * k_star ** alpha
 ```
 
-Let's find the value of $s$ that maximizes $c^*$ using [scipy.optimize.minimize_scalar](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar).
-We will use $-c^*(s)$ since `minimize_scalar` finds the minimum value.
+让我们使用 [scipy.optimize.minimize_scalar](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar) 来找出使 $c^*$ 最大化的 $s$ 值。
+我们将使用 $-c^*(s)$，因为 `minimize_scalar` 函数是用来寻找最小值的。
+
 
 ```{code-cell} ipython3
 from scipy.optimize import minimize_scalar
@@ -507,7 +431,7 @@ ax.legend()
 plt.show()
 ```
 
-One can also try to solve this mathematically by differentiating $c^*(s)$ and solve for $\frac{d}{ds}c^*(s)=0$ using [sympy](https://www.sympy.org/en/index.html).
+也可以尝试用数学方法解决这个问题，即对 $c^*(s)$ 进行微分，并使用 [sympy](https://www.sympy.org/en/index.html) 求解 $\frac{d}{ds}c^*(s)=0$。
 
 ```{code-cell} ipython3
 from sympy import solve, Symbol
@@ -519,15 +443,15 @@ k = ((s_symbol * A) / delta)**(1/(1 - alpha))
 c = (1 - s_symbol) * A * k ** alpha
 ```
 
-Let's differentiate $c$ and solve using [sympy.solve](https://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.solve)
+让我们对 $c$ 进行微分，并使用 [sympy.solve](https://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.solve) 求解。
 
 ```{code-cell} ipython3
-# Solve using sympy
+# 使用 sympy 求解
 s_star = solve(c.diff())[0]
 print(f"s_star = {s_star}")
 ```
 
-Incidentally, the rate of savings which maximizes steady state level of per capita consumption is called the [Golden Rule savings rate](https://en.wikipedia.org/wiki/Golden_Rule_savings_rate).
+顺便说一下，使人均消费的稳态水平最大化的储蓄率被称为[黄金法则储蓄率](https://en.wikipedia.org/wiki/Golden_Rule_savings_rate)。
 
 ```{solution-end}
 ```
@@ -535,35 +459,24 @@ Incidentally, the rate of savings which maximizes steady state level of per capi
 ```{exercise-start}
 :label: solow_ex2
 ```
-**Stochastic Productivity**
+**随机生产率**
 
-To bring the Solow--Swan model closer to data, we need to think about handling
-random fluctuations in aggregate quantities.
+为了使索洛-斯旺模型更贴近实际数据，我们需要考虑如何处理总量中的随机波动。
+这样做会带来多方面的影响，其中之一是消除了人均产出 $y_t = A k^\alpha_t$ 收敛到常数 $y^* := A (k^*)^\alpha$ 这一不切实际的预测。
+在接下来的讨论中，我们将转向离散时间模型。
 
-Among other things, this will
-eliminate the unrealistic prediction that per-capita output $y_t = A
-k^\alpha_t$ converges to a constant $y^* := A (k^*)^\alpha$.
-
-We shift to discrete time for the following discussion.
-
-One approach is to replace constant productivity with some
-stochastic sequence $(A_t)_{t \geq 1}$.
-
-Dynamics are now
+一种方法是用某个随机序列 $(A_t)_{t \geq 1}$ 替代常数生产率。
+现在的动态方程变为
 
 ```{math}
 :label: solowran
     k_{t+1} = s A_{t+1} f(k_t) + (1 - \delta) k_t
 ```
 
-We suppose $f$ is Cobb--Douglas and $(A_t)$ is IID and lognormal.
-
-Now the long run convergence obtained in the deterministic case breaks
-down, since the system is hit with new shocks at each point in time.
-
-Consider $A=2.0, s=0.6, \alpha=0.3,$ and $\delta=0.5$
-
-Generate and plot the time series $k_t$.
+我们假设 $f$ 是柯布-道格拉斯生产函数，且 $(A_t)$ 是独立同分布的对数正态分布。
+现在，在确定性情况下获得的长期收敛性不再成立，因为系统在每个时间点都会受到新的冲击。
+考虑 $A=2.0, s=0.6, \alpha=0.3,$ 且 $\delta=0.5$。
+生成并绘制时间序列 $k_t$ 的图表。
 
 ```{exercise-end}
 ```
@@ -572,20 +485,20 @@ Generate and plot the time series $k_t$.
 :class: dropdown
 ```
 
-Let's define the constants for lognormal distribution and initial values used for simulation
+让我们定义用于模拟的对数正态分布的常数和初始值
 
 ```{code-cell} ipython3
-# Define the constants
+# 定义一下常数
 sig = 0.2
 mu = np.log(2) - sig**2 / 2
 A = 2.0
 s = 0.6
 alpha = 0.3
 delta = 0.5
-x0 = [.25, 3.25] # list of initial values used for simulation
+x0 = [.25, 3.25] # 用于模拟的初始值列表
 ```
 
-Let's define the function *k_next* to find the next value of $k$
+让我们定义函数 *k_next* 来找出 $k$ 的下一个值
 
 ```{code-cell} ipython3
 def lgnorm():
@@ -600,7 +513,7 @@ def ts_plot(x_values, ts_length):
     fig, ax = plt.subplots(figsize=[11, 5])
     ts = np.zeros(ts_length)
 
-    # simulate and plot time series
+    # 模拟并且绘制时间序列
     for x_init in x_values:
         ts[0] = x_init
         for t in range(1, ts_length):
