@@ -11,91 +11,81 @@ kernelspec:
   name: python3
 ---
 
-# Monetarist Theory of Price Levels with Adaptive Expectations
+# 具有自适应预期的价格水平货币主义理论
 
-## Overview
+## 引言
 
+本讲座是另一讲座 {doc}`价格水平的货币主义理论 <cagan_ree>` 的续集或前传。
 
-This lecture is a sequel or prequel to {doc}`cagan_ree`.
+我们将使用线性代数对另一种"货币主义"或"财政"价格水平理论进行一些实验。
 
-We'll use linear algebra to do some experiments with  an alternative "monetarist" or  "fiscal" theory of  price levels.
+与 {doc}`价格水平的货币主义理论 <cagan_ree>` 讲座中的模型类似，该模型断言，当政府持续支出超过税收并通过印钞来弥补赤字时，会对价格水平产生上行压力并产生持续通货膨胀。
 
-Like the model in {doc}`cagan_ree`, the model asserts that when a government persistently spends more than it collects in taxes and prints money to finance the shortfall, it puts upward pressure on the price level and generates persistent inflation.
+与 {doc}`价格水平的货币主义理论 <cagan_ree>` 讲座中的"完美预见"或"理性预期"版本不同，本讲座中的模型是菲利普·凯根 {cite}`Cagan` 用于研究恶性通货膨胀货币动态的"自适应预期"版本。
 
-Instead of the "perfect foresight" or "rational expectations" version of the model in {doc}`cagan_ree`, our model in the present lecture is an "adaptive expectations"  version of a model that  {cite}`Cagan` used to study the monetary dynamics of hyperinflations.  
+它结合了以下组成部分：
 
-It combines these components:
+* 一个实际货币余额需求函数，断言所需实际余额对数与公众预期通货膨胀率成反比
 
-* a demand function for real money balances that asserts that the logarithm of the quantity of real balances demanded depends inversely on the public's expected rate of inflation
+* 一个**自适应预期**模型，描述公众预期通货膨胀率如何对过去实际通货膨胀值做出反应
 
-* an **adaptive expectations** model that describes how the public's anticipated rate of inflation responds to past values of actual inflation
+* 一个使货币需求等于供给的均衡条件
 
-* an equilibrium condition that equates the demand for money to the supply
+* 货币供应增长率的外生序列
 
-* an exogenous sequence of rates of growth of the money supply
+我们的模型非常接近凯根的原始规范。
 
-Our model stays quite close to Cagan's original specification.  
+与 {doc}`现值 <pv>` 和 {doc}`消费平滑 <cons_smooth>` 讲座一样，我们将使用的唯一线性代数运算是矩阵乘法和矩阵求逆。
 
-As in {doc}`pv` and {doc}`cons_smooth`, the only linear algebra operations that we'll be  using are matrix multiplication and matrix inversion.
+为了便于使用线性矩阵代数作为我们的主要数学工具，我们将使用模型的有限时域版本。
 
-To facilitate using  linear matrix algebra as our principal mathematical tool, we'll use a finite horizon version of
-the model.
+## 模型结构
 
-## Structure of the model
+令
 
-Let 
+* $ m_t $ 为名义货币余额供给的对数；
+* $\mu_t = m_{t+1} - m_t $ 为名义余额的净增长率；
+* $p_t $ 为价格水平的对数；
+* $\pi_t = p_{t+1} - p_t $ 为 $t$ 和 $ t+1$ 之间的净通货膨胀率；
+* $\pi_t^*$ 为公众预期的 $t$ 和 $t+1$ 之间的通货膨胀率；
+* $T$ 为时域 -- 即模型将确定 $p_t$ 的最后一个时期
+* $\pi_0^*$ 为公众最初预期的时间 0 和时间 1 之间的通货膨胀率。
 
-* $ m_t $ be the log of the supply of  nominal money balances;
-* $\mu_t = m_{t+1} - m_t $ be the net rate of growth of  nominal balances;
-* $p_t $ be the log of the price level;
-* $\pi_t = p_{t+1} - p_t $ be the net rate of inflation  between $t$ and $ t+1$;
-* $\pi_t^*$  be the public's expected rate of inflation between  $t$ and $t+1$;
-* $T$ the horizon -- i.e., the last period for which the model will determine $p_t$
-* $\pi_0^*$ public's initial expected rate of inflation between time $0$ and time $1$.
-  
-  
-The demand for real balances $\exp\left(m_t^d-p_t\right)$ is governed by the following  version of the Cagan demand function
-  
+实际余额 $\exp\left(\frac{m_t^d}{p_t}\right)$ 的需求由以下版本的Cagan需求函数支配
+
 $$  
 m_t^d - p_t = -\alpha \pi_t^* \: , \: \alpha > 0 ; \quad t = 0, 1, \ldots, T .
 $$ (eq:caganmd_ad)
 
+该方程断言，实际余额需求与公众预期的通货膨胀率成反比。
 
-This equation  asserts that the demand for real balances
-is inversely related to the public's expected rate of inflation with sensitivity $\alpha$.
-
-Equating the logarithm $m_t^d$ of the demand for money  to the logarithm  $m_t$ of the supply of money in equation {eq}`eq:caganmd_ad` and solving for the logarithm $p_t$
-of the price level gives
+在方程 {eq}`eq:caganmd_ad` 中将货币需求的对数 $m_t^d$ 等同于货币供给的对数 $m_t$，并求解价格水平的对数 $p_t$，得到
 
 $$
 p_t = m_t + \alpha \pi_t^*
 $$ (eq:eqfiscth1)
 
-Taking the difference between equation {eq}`eq:eqfiscth1` at time $t+1$ and at time 
-$t$ gives
+取方程 {eq}`eq:eqfiscth1` 在时间 $t+1$ 和时间 $t$ 的差，得到
 
 $$
 \pi_t = \mu_t + \alpha \pi_{t+1}^* - \alpha \pi_t^*
 $$ (eq:eqpipi)
 
-We assume that the expected rate of inflation $\pi_t^*$ is governed
-by the following adaptive expectations scheme proposed by {cite}`Friedman1956` and {cite}`Cagan`, where $\lambda\in [0,1]$ denotes the weight on expected inflation.
+我们假设预期通货膨胀率 $\pi_t^*$ 由弗里德曼-凯根自适应预期方案支配
 
 $$
 \pi_{t+1}^* = \lambda \pi_t^* + (1 -\lambda) \pi_t 
 $$ (eq:adaptexpn)
 
-As exogenous inputs into the model, we take initial conditions $m_0, \pi_0^*$
-and a money growth sequence $\mu = \{\mu_t\}_{t=0}^T$.  
+作为模型的外生输入，我们采用初始条件 $m_0, \pi_0^*$ 和货币增长序列 $\mu = \{\mu_t\}_{t=0}^T$。
 
-As endogenous outputs of our model we want to find sequences $\pi = \{\pi_t\}_{t=0}^T, p = \{p_t\}_{t=0}^T$ as functions of the exogenous inputs.
+作为模型的内生输出，我们希望找到序列 $\pi = \{\pi_t\}_{t=0}^T, p = \{p_t\}_{t=0}^T$ 作为内生输入的函数。
 
-We'll do some mental experiments by studying how the model outputs vary as we vary
-the model inputs.
+我们将通过研究模型输出如何随模型输入的变化而变化来进行一些思想实验。
 
-## Representing key equations with linear algebra
+## 用线性代数表示关键方程
 
-We begin by writing the equation {eq}`eq:adaptexpn`  adaptive expectations model for $\pi_t^*$ for $t=0, \ldots, T$ as
+我们首先将方程 {eq}`eq:adaptexpn` 自适应预期模型写成 $t=0, \ldots, T$ 的形式
 
 $$
 \begin{bmatrix} 1 & 0 & 0 & \cdots & 0 & 0 \cr
@@ -121,16 +111,15 @@ $$
   \begin{bmatrix} \pi_0^* \cr 0 \cr 0 \cr \vdots \cr 0 \end{bmatrix}
 $$
 
-Write this equation as
+将此方程写成
 
 $$
  A \pi^* = (1-\lambda) B \pi + \pi_0^*
 $$ (eq:eq1)
 
-where the $(T+2) \times (T+2) $matrix $A$, the $(T+2)\times (T+1)$ matrix $B$, and the vectors $\pi^* , \pi_0, \pi_0^*$
-are defined implicitly by aligning these two equations.
+其中 $(T+2) \times (T+2)$ 矩阵 $A$、$(T+2)\times (T+1)$ 矩阵 $B$ 以及向量 $\pi^* , \pi_0, \pi_0^*$ 通过对齐这两个方程隐式定义。
 
-Next we write the key equation {eq}`eq:eqpipi` in matrix notation as
+接下来，我们将关键方程 {eq}`eq:eqpipi` 写成矩阵形式
 
 $$ 
 \begin{bmatrix}
@@ -151,21 +140,19 @@ $$
   \end{bmatrix}
 $$
 
-Represent the previous equation system in terms of vectors and matrices as
+用向量和矩阵表示上述方程系统
 
 $$
 \pi = \mu + C \pi^*
 $$ (eq:eq2)
 
-where the $(T+1) \times (T+2)$ matrix $C$ is defined implicitly to align this equation with the preceding
-equation system.
+其中 $(T+1) \times (T+2)$ 矩阵 $C$ 隐式定义，以使此方程与前面的方程系统对齐。
 
-## Harvesting insights from our matrix formulation
+## 从矩阵表述中获得洞见
 
-We now have all of the ingredients we need to solve for $\pi$ as
-a function of $\mu, \pi_0, \pi_0^*$.  
+我们现在拥有了求解 $\pi$ 作为 $\mu, \pi_0, \pi_0^*$ 函数所需的所有要素。
 
-Combine equations {eq}`eq:eq1`and {eq}`eq:eq2`  to get
+结合方程 {eq}`eq:eq1` 和 {eq}`eq:eq2`，得到
 
 $$
 \begin{aligned}
@@ -174,43 +161,35 @@ A \pi^* & = (1-\lambda) B \pi + \pi_0^* \cr
 \end{aligned}
 $$
 
-which implies that
+这意味着
 
 $$
 \left[ A - (1-\lambda) B C \right] \pi^* = (1-\lambda) B \mu+ \pi_0^*
 $$
 
-Multiplying both sides of the above equation by the inverse of the matrix on the left side gives
+将上述方程两边乘以左侧矩阵的逆，得到
 
 $$
 \pi^* = \left[ A - (1-\lambda) B C \right]^{-1} \left[ (1-\lambda) B \mu+ \pi_0^* \right]
 $$ (eq:eq4)
 
-Having solved equation {eq}`eq:eq4` for $\pi^*$, we can use  equation {eq}`eq:eq2`  to solve for $\pi$:
+求解方程 {eq}`eq:eq4` 得到 $\pi^*$ 后，我们可以使用方程 {eq}`eq:eq2` 求解 $\pi$：
 
 $$
 \pi = \mu + C \pi^*
 $$
 
+我们因此解决了我们模型所决定的两个关键内生时间序列，即预期通货膨胀率序列 $\pi^*$ 和实际通货膨胀率序列 $\pi$。
 
-We have thus solved for two of the key endogenous time series determined by our model, namely, the sequence $\pi^*$
-of expected inflation rates and the sequence $\pi$ of actual inflation rates.  
+知道了这些，我们就可以从方程 {eq}`eq:eqfiscth1` 快速计算出相关的价格水平对数序列 $p$。
+让我们填补这一步骤的细节。
 
-Knowing these, we can then quickly calculate the associated sequence $p$  of the logarithm of the  price level
-from equation {eq}`eq:eqfiscth1`. 
-
-Let's fill in the details for this step.
-
-Since we now know $\mu$  it is easy to compute $m$.
-
-Thus, notice that we can represent the equations 
-
+既然我们现在知道了 $\mu$，计算 $m$ 就很容易了。
+因此，注意到我们可以将方程
 $$ 
 m_{t+1} = m_t + \mu_t , \quad t = 0, 1, \ldots, T
 $$
-
-as the matrix equation
-
+表示为矩阵方程
 $$
 \begin{bmatrix}
 1 & 0 & 0 & \cdots & 0 & 0 \cr
@@ -231,25 +210,19 @@ m_0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 $$ (eq:eq101_ad)
 
-Multiplying both sides of equation {eq}`eq:eq101_ad`  with the inverse of the matrix on the left will give 
+将方程 {eq}`eq:eq101_ad` 的两边都乘以左侧矩阵的逆矩阵，将得到
 
 $$
 m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
 $$ (eq:mcum_ad)
 
-Equation {eq}`eq:mcum_ad` shows that the log of the money supply at $t$ equals the log $m_0$ of the initial money supply 
-plus accumulation of rates of money growth between times $0$ and $t$.
-
-We can then compute $p_t$ for each $t$ from equation {eq}`eq:eqfiscth1`.
-
-We can write a compact formula for $p $ as
-
+方程 {eq}`eq:mcum_ad` 表明，时间 $t$ 的货币供应对数等于初始货币供应对数 $m_0$ 加上 $0$ 到 $t$ 时间之间货币增长率的累积。
+然后我们可以从方程 {eq}`eq:eqfiscth1` 计算每个 $t$ 的 $p_t$。
+我们可以为 $p$ 写一个紧凑的公式
 $$ 
 p = m + \alpha \hat \pi^*
 $$
-
-where 
-
+其中
 $$
 \hat \pi^* = \begin{bmatrix} \pi_0^* \cr
   \pi_1^* \cr
@@ -258,32 +231,26 @@ $$
   \pi_{T}^* 
   \end{bmatrix},
  $$
-
-which is just $\pi^*$ with the last element dropped.
+这只是去掉最后一个元素的 $\pi^*$。
  
-## Forecast errors and model computation
+## 预测误差
 
-Our computations will verify that 
-
+我们的计算将验证
 $$
 \hat \pi^* \neq  \pi,
 $$
-
-so that in general
-
+因此通常
 $$ 
 \pi_t^* \neq \pi_t, \quad t = 0, 1, \ldots , T
 $$ (eq:notre)
 
-This outcome is typical in models in which adaptive expectations hypothesis like equation {eq}`eq:adaptexpn` appear as a
-component.  
+这种结果在包含像方程 {eq}`eq:adaptexpn` 这样的适应性预期假设作为组成部分的模型中很典型。
 
-In {doc}`cagan_ree`, we studied a version of the model that replaces hypothesis {eq}`eq:adaptexpn` with
-a "perfect foresight" or "rational expectations" hypothesis.
+在讲座 {doc}`价格水平的货币主义理论 <cagan_ree>` 中，我们研究了用"完美预见"或"理性预期"假设替代假设 {eq}`eq:adaptexpn` 的模型版本。
 
-But now, let's dive in and do some computations with the adaptive expectations version of the model.
+但现在，让我们深入并用适应性预期版本的模型进行一些计算。
+像往常一样，我们将从导入一些 Python 模块开始。
 
-As usual, we'll start by importing some Python modules.
 
 ```{code-cell} ipython3
 import numpy as np
@@ -295,39 +262,58 @@ import matplotlib.pyplot as plt
 Cagan_Adaptive = namedtuple("Cagan_Adaptive", 
                         ["α", "m0", "Eπ0", "T", "λ"])
 
-def create_cagan_adaptive_model(α = 5, m0 = 1, Eπ0 = 0.5, T=80, λ = 0.9):
+def create_cagan_model(α, m0, Eπ0, T, λ):
     return Cagan_Adaptive(α, m0, Eπ0, T, λ)
-
-md = create_cagan_adaptive_model()
 ```
 +++ {"user_expressions": []}
 
-We solve the model and plot variables of interests using the following functions.
+这里我们定义这些参数。
 
 ```{code-cell} ipython3
-def solve_cagan_adaptive(model, μ_seq):
-    " Solve the Cagan model in finite time. "
-    α, m0, Eπ0, T, λ = model
+# 参数
+T = 80
+T1 = 60
+α = 5
+λ = 0.9   # 0.7
+m0 = 1
+
+μ0 = 0.5
+μ_star = 0
+
+md = create_cagan_model(α=α, m0=m0, Eπ0=μ0, T=T, λ=λ)
+```
++++ {"user_expressions": []}
+
+
+我们用以下的函数来求解模型并且绘制这些变量。
+
+
+```{code-cell} ipython3
+def solve(model, μ_seq):
+    " 在求解有限时间的凯根模型"
+    
+    model_params = model.α, model.m0, model.Eπ0, model.T, model.λ
+    α, m0, Eπ0, T, λ = model_params
     
     A = np.eye(T+2, T+2) - λ*np.eye(T+2, T+2, k=-1)
     B = np.eye(T+2, T+1, k=-1)
     C = -α*np.eye(T+1, T+2) + α*np.eye(T+1, T+2, k=1)
     Eπ0_seq = np.append(Eπ0, np.zeros(T+1))
 
-    # Eπ_seq is of length T+2
-    Eπ_seq = np.linalg.solve(A - (1-λ)*B @ C, (1-λ) * B @ μ_seq + Eπ0_seq)
+    # Eπ_seq 的长度为 T+2
+    Eπ_seq = np.linalg.inv(A - (1-λ)*B @ C) @ ((1-λ) * B @ μ_seq + Eπ0_seq)
 
-    # π_seq is of length T+1
+    # π_seq 的长度为 T+1
     π_seq = μ_seq + C @ Eπ_seq
 
-    D = np.eye(T+1, T+1) - np.eye(T+1, T+1, k=-1) # D is the coefficient matrix in Equation (14.8)
+    D = np.eye(T+1, T+1) - np.eye(T+1, T+1, k=-1)
     m0_seq = np.append(m0, np.zeros(T))
 
-    # m_seq is of length T+2
-    m_seq = np.linalg.solve(D, μ_seq + m0_seq)
+    # m_seq 的长度为 T+2
+    m_seq = np.linalg.inv(D) @ (μ_seq + m0_seq)
     m_seq = np.append(m0, m_seq)
 
-    # p_seq is of length T+2
+    # p_seq 的长度为 T+2
     p_seq = m_seq + α * Eπ_seq
 
     return π_seq, Eπ_seq, m_seq, p_seq
@@ -338,7 +324,7 @@ def solve_cagan_adaptive(model, μ_seq):
 ```{code-cell} ipython3
 def solve_and_plot(model, μ_seq):
     
-    π_seq, Eπ_seq, m_seq, p_seq = solve_cagan_adaptive(model, μ_seq)
+    π_seq, Eπ_seq, m_seq, p_seq = solve(model, μ_seq)
     
     T_seq = range(model.T+2)
     
@@ -351,12 +337,10 @@ def solve_and_plot(model, μ_seq):
     ax[4].plot(T_seq, p_seq)
     
     y_labs = [r'$\mu$', r'$\pi$', r'$m - p$', r'$m$', r'$p$']
-    subplot_title = [r'Money supply growth', r'Inflation', r'Real balances', r'Money supply', r'Price level']
 
     for i in range(5):
         ax[i].set_xlabel(r'$t$')
         ax[i].set_ylabel(y_labs[i])
-        ax[i].set_title(subplot_title[i])
 
     ax[1].legend()
     plt.tight_layout()
@@ -367,17 +351,15 @@ def solve_and_plot(model, μ_seq):
 
 +++ {"user_expressions": []}
 
+## 稳定性的技术条件
 
-
-## Technical condition for stability
-
-In constructing our examples, we shall assume that $(\lambda, \alpha)$ satisfy
+在构建我们的示例时，我们假设 $(\lambda, \alpha)$ 满足
 
 $$
 \Bigl| \frac{\lambda-\alpha(1-\lambda)}{1-\alpha(1-\lambda)} \Bigr| < 1
 $$ (eq:suffcond)
 
-The  source of this condition is the following string of deductions:
+这个条件的来源是以下一系列推导：
 
 $$
 \begin{aligned}
@@ -385,72 +367,64 @@ $$
 \end{aligned}
 $$
 
-By assuring that the coefficient on $\pi_t$ is less than one in absolute value, condition {eq}`eq:suffcond` assures stability of the dynamics of $\{\pi_t\}$ described by the last line of our string of deductions. 
+通过确保 $\pi_t$ 的系数绝对值小于1，条件{eq}`eq:suffcond`保证了由我们推导过程最后一行描述的 $\{\pi_t\}$ 动态的稳定性。
 
-The reader is free to study outcomes in examples that violate condition {eq}`eq:suffcond`.
+读者可以自由研究违反条件{eq}`eq:suffcond`的示例结果。
 
 ```{code-cell} ipython3
-print(np.abs((md.λ - md.α*(1-md.λ))/(1 - md.α*(1-md.λ))))
+print(np.abs((λ - α*(1-λ))/(1 - α*(1-λ))))
 ```
 
-## Experiments
+```{code-cell} ipython3
+print(λ - α*(1-λ))
+```
 
-Now we'll turn to some experiments.
+现在我们来看一些实验。
 
-### Experiment 1
+### 实验1
+我们将研究一种情况，其中货币供应量的增长率从t=0到t=T_1时为$\mu_0$，然后在t=T_1时永久下降到$\mu^*$。
 
-We'll study a situation in which the rate of growth of the money supply is $\mu_0$
-from $t=0$ to $t= T_1$ and then permanently falls to $\mu^*$ at $t=T_1$.
-
-Thus, let $T_1 \in (0, T)$. 
-
-So where $\mu_0 > \mu^*$, we assume that
+因此，设$T_1 \in (0, T)$。
+所以当$\mu_0 > \mu^*$时，我们假设
 
 $$
-\mu_{t} = \begin{cases}
+\mu_{t+1} = \begin{cases}
     \mu_0  , & t = 0, \ldots, T_1 -1 \\
      \mu^* , & t \geq T_1
      \end{cases}
 $$
 
-Notice that  we studied exactly this experiment  in a rational expectations version of the model in {doc}`cagan_ree`.
-
-So by comparing outcomes across the two lectures, we can learn about consequences of assuming adaptive expectations, as we do here, instead of  rational expectations as we assumed in that other lecture.
+注意，我们在这个讲座{doc}`货币主义价格水平理论<cagan_ree>`中的理性预期版本模型中研究了完全相同的实验。
+因此，通过比较这两个讲座的结果，我们可以了解假设适应性预期（如我们在这里所做的）而不是理性预期（如我们在另一个讲座中所假设的）的后果。
 
 ```{code-cell} ipython3
-# Parameters for the experiment 1
-T1 = 60
-μ0 = 0.5
-μ_star = 0
+μ_seq_1 = np.append(μ0*np.ones(T1), μ_star*np.ones(T+1-T1))
 
-μ_seq_1 = np.append(μ0*np.ones(T1), μ_star*np.ones(md.T+1-T1))
-
-# solve and plot
+# 求解并绘图
 π_seq_1, Eπ_seq_1, m_seq_1, p_seq_1 = solve_and_plot(md, μ_seq_1)
 ```
 
-We invite the reader to compare outcomes with those under rational expectations studied in {doc}`cagan_ree`.
+我们邀请读者将结果与在另一讲座 {doc}`货币主义价格水平理论 <cagan_ree>` 中研究的理性预期下的结果进行比较。
 
-Please note how the actual inflation rate $\pi_t$ "overshoots" its ultimate steady-state value at the time of the sudden reduction in the rate of growth of the money supply at time $T_1$.
+请注意实际通货膨胀率 $\pi_t$ 在时间 $T_1$ 货币供应增长率突然减少时如何"超调"其最终稳态值。
 
-We invite you to explain to  yourself the source of this overshooting and why it does not occur in  the rational expectations version of the model.
+我们邀请您向自己解释这种超调的来源，以及为什么在模型的理性预期版本中不会出现这种情况。
 
-### Experiment 2
+### 实验2
 
-Now we'll do a different experiment, namely, a gradual stabilization in which the rate of growth of the money supply smoothly 
-decline from a high value to a persistently low value.  
+现在我们将进行一个不同的实验，即渐进式稳定化，其中货币供应增长率从高值平稳下降到持续的低值。
 
-While price level inflation eventually falls, it falls more slowly than the driving  force that ultimately causes it to fall, namely, the falling rate of growth of the money supply.
+虽然价格水平通货膨胀最终会下降，但它下降的速度比最终导致它下降的驱动力（即货币供应增长率的下降）要慢。
 
-The sluggish fall in inflation is explained by how anticipated  inflation $\pi_t^*$ persistently exceeds actual inflation $\pi_t$ during the transition from a high inflation to a low inflation situation. 
+通货膨胀缓慢下降的原因可以解释为在从高通胀向低通胀过渡期间，预期通货膨胀率 $\pi_t^*$ 持续高于实际通货膨胀率 $\pi_t$。
 
 ```{code-cell} ipython3
-# parameters
+# 参数
 ϕ = 0.9
-μ_seq_2 = np.array([ϕ**t * μ0 + (1-ϕ**t)*μ_star for t in range(md.T)])
+μ_seq_2 = np.array([ϕ**t * μ0 + (1-ϕ**t)*μ_star for t in range(T)])
 μ_seq_2 = np.append(μ_seq_2, μ_star)
 
 
-# solve and plot
+# 求解并绘图
 π_seq_2, Eπ_seq_2, m_seq_2, p_seq_2 = solve_and_plot(md, μ_seq_2)
 ```

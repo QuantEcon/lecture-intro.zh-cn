@@ -10,9 +10,10 @@ kernelspec:
 ---
 
 (lp_intro)=
-# Linear Programming
+# 线性规划
 
-In this lecture, we will need the following library. Install [ortools](https://developers.google.com/optimization) using `pip`.
+在本讲中，我们将需要以下库。使用 `pip` 安装 [ortools](https://developers.google.com/optimization)。
+
 
 ```{code-cell} ipython3
 ---
@@ -21,31 +22,30 @@ tags: [hide-output]
 !pip install ortools
 ```
 
-## Overview
+## 概述
 
-**Linear programming** problems either maximize or minimize
-a linear objective function subject to a set of  linear equality and/or inequality constraints.
+**线性规划** 问题旨在在一组线性等式和/或不等式约束下，最大化或最小化一个线性目标函数。
 
-Linear programs come in pairs:
+线性程序成对出现：
 
-* an original  **primal** problem, and
+* 一个原始的 **原始** 问题，以及
 
-* an associated **dual** problem.
+* 一个相关的 **对偶** 问题。
 
-If a primal problem involves *maximization*, the dual problem involves *minimization*.
+如果原始问题涉及 *最大化*，则对偶问题涉及 *最小化*。
 
-If a primal problem involves  *minimization**, the dual problem involves **maximization*.
+如果原始问题涉及 *最小化*，则对偶问题涉及 *最大化*。
 
-We provide a standard form of a linear program and methods to transform other forms of linear programming problems  into a standard form.
+我们提供线性程序的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。
 
-We tell how to solve a linear programming problem using [SciPy](https://scipy.org/) and [Google OR-Tools](https://developers.google.com/optimization).
+我们将说明如何使用 [SciPy](https://scipy.org/) 和 [Google OR-Tools](https://developers.google.com/optimization) 来解决线性规划问题。
+
 
 ```{seealso}
-In another lecture, we will employ the linear programming method to solve the 
-{doc}`optimal transport problem <tools:opt_transport>`.
+在另一讲中，我们将使用线性规划方法来解决 {doc}`最优运输问题 <tools:opt_transport>`。
 ```
 
-Let's start with some standard imports.
+让我们先进行一些标准的导入。
 
 ```{code-cell} ipython3
 import numpy as np
@@ -55,55 +55,53 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 ```
 
-Let's start with some examples of linear programming problem.
+让我们从一些线性规划问题的例子开始。
 
+## 示例 1：生产问题
 
+这个例子由 {cite}`bertsimas_tsitsiklis1997` 创建。
 
-## Example 1: production problem
+假设一个工厂可以生产两种商品，称为产品 $1$ 和产品 $2$。
 
-This example was created by {cite}`bertsimas_tsitsiklis1997`
+生产每种产品都需要材料和劳动。
 
-Suppose that a factory can produce two goods called Product $1$ and Product $2$.
+销售每种产品会产生收入。
 
-To produce each product requires both material and labor.
+每单位所需的材料和劳动投入及其收入如下表所示：
 
-Selling each product generates revenue.
+|          | 产品 1 | 产品 2 |
+| :------: | :----: | :----: |
+| 材料     |   2    |   5    |
+| 劳动     |   4    |   2    |
+| 收入     |   3    |   4    |
 
-Required per unit material and labor  inputs and  revenues  are shown in table below:
+可用的材料为 30 单位，劳动为 20 单位。
 
-|          | Product 1 | Product 2 |
-| :------: | :-------: | :-------: |
-| Material |     2     |     5     |
-|  Labor   |     4     |     2     |
-| Revenue  |     3     |     4     |
+公司的问题是构建一个生产计划，利用其 30 单位的材料和 20 单位的劳动来最大化其收入。
 
-30 units of material and 20 units of labor available.
+令 $x_i$ 表示公司生产的产品 $i$ 的数量，$z$ 表示总收入。
 
-A firm's problem is to construct a  production plan that uses its  30 units of materials and 20 units of labor to maximize its revenue.
-
-Let $x_i$ denote the quantity of Product $i$ that the firm produces and $z$ denote the total revenue.
-
-This problem can be formulated as:
+该问题可以表述为：
 
 $$
 \begin{aligned}
 \max_{x_1,x_2} \ & z = 3 x_1 + 4 x_2 \\
-\mbox{subject to } \ & 2 x_1 + 5 x_2 \le 30 \\
+\mbox{受以下约束 } \ & 2 x_1 + 5 x_2 \le 30 \\
 & 4 x_1 + 2 x_2 \le 20 \\
 & x_1, x_2 \ge 0 \\
 \end{aligned}
 $$
 
-The following graph illustrates the firm's constraints and iso-revenue lines.
+下图说明了公司的约束条件和等收入线。
 
-Iso-revenue lines show all the combinations of materials and labor that produce the same revenue.
+等收入线显示了产生相同收入的材料和劳动的所有组合。
 
 ```{code-cell} ipython3
 ---
 tags: [hide-input]
 ---
 fig, ax = plt.subplots()
-# Draw constraint lines
+#绘制约束
 ax.set_xlim(0,15)
 ax.set_ylim(0,10)
 x1 = np.linspace(0, 15)
@@ -111,17 +109,17 @@ ax.plot(x1, 6-0.4*x1, label="$2x_1 + 5x_2=30$")
 ax.plot(x1, 10-2*x1, label="$4x_1 + 2x_2=20$")
 
 
-# Draw the feasible region
+# 绘制可行区域
 feasible_set = Polygon(np.array([[0, 0],[0, 6],[2.5, 5],[5, 0]]), alpha=0.1)
 ax.add_patch(feasible_set)
 
-# Draw the objective function
-ax.plot(x1, 3.875-0.75*x1, label="iso-revenue lines",color='k',linewidth=0.75)
+# 绘制目标函数
+ax.plot(x1, 3.875-0.75*x1, label="等收入线",color='k',linewidth=0.75)
 ax.plot(x1, 5.375-0.75*x1, color='k',linewidth=0.75)
 ax.plot(x1, 6.875-0.75*x1, color='k',linewidth=0.75)
 
-# Draw the optimal solution
-ax.plot(2.5, 5, ".", label="optimal solution")
+# 绘制最优解
+ax.plot(2.5, 5, ".", label="最优解")
 ax.set_xlabel("$x_1$")
 ax.set_ylabel("$x_2$")
 ax.legend()
@@ -129,138 +127,127 @@ ax.legend()
 plt.show()
 ```
 
-The blue region is the feasible set within which all constraints are satisfied.
+蓝色区域是可行集合，在该集合内所有约束都得到了满足。
 
-Parallel black lines are iso-revenue lines.
+平行的黑线是等收入线。
 
-The firm's objective is to find the  parallel black lines to the upper boundary of the feasible set.
+公司的目标是找到与可行集合上边界平行的黑线。
 
-The intersection of the feasible set and the highest black line delineates the optimal set.
+可行集合与最高黑线的交点界定了最优集合。
 
-In this example, the optimal set is the point $(2.5, 5)$.
+在这个例子中，最优集合是点 $(2.5, 5)$。
 
+### 计算：使用 OR-Tools
 
+让我们尝试使用 `ortools.linear_solver` 包来解决同样的问题。
 
-### Computation: using OR-Tools
-
-Let's try to solve the same problem using the package `ortools.linear_solver`.
-
-
-
-The following cell instantiates a solver and creates two variables specifying the range of values that they can have.
+下面的单元格实例化一个求解器，并创建两个变量，指定它们可以具有的值范围。
 
 ```{code-cell} ipython3
-# Instantiate a GLOP(Google Linear Optimization Package) solver
+# 实例化一个 GLOP（Google 线性优化包）求解器。
 solver = pywraplp.Solver.CreateSolver('GLOP')
 ```
 
-Let's create two variables $x_1$ and $x_2$ such that they can only have nonnegative values.
+让我们创建两个变量 $x_1$ 和 $x_2$，使它们只能取非负值。
 
 ```{code-cell} ipython3
-# Create the two variables and let them take on any non-negative value.
+# 创建这两个变量，并让它们可以取任何非负值。
 x1 = solver.NumVar(0, solver.infinity(), 'x1')
 x2 = solver.NumVar(0, solver.infinity(), 'x2')
 ```
 
-Add the constraints to the problem.
+向问题中添加约束条件。
 
 ```{code-cell} ipython3
-# Constraint 1: 2x_1 + 5x_2 <= 30.0
+# 约束 1: 2x_1 + 5x_2 <= 30.0
 solver.Add(2 * x1 + 5 * x2 <= 30.0)
 
-# Constraint 2: 4x_1 + 2x_2 <= 20.0
+# 约束 2: 4x_1 + 2x_2 <= 20.0
 solver.Add(4 * x1 + 2 * x2 <= 20.0)
 ```
 
-Let's specify the objective function. We use `solver.Maximize` method in the case when we want to maximize the objective function and in the case of minimization we can use `solver.Minimize`.
+让我们指定目标函数。我们在希望最大化目标函数时使用 `solver.Maximize` 方法，而在希望最小化时可以使用 `solver.Minimize`。
 
 ```{code-cell} ipython3
-# Objective function: 3x_1 + 4x_2
+# 目标函数: 3x_1 + 4x_2
 solver.Maximize(3 * x1 + 4 * x2)
 ```
 
-Once we solve the problem, we can check whether the solver was successful in solving the problem using its status. If it's successful, then the status will be equal to `pywraplp.Solver.OPTIMAL`.
+一旦我们解决了问题，就可以检查求解器是否成功解决了问题，方法是查看其状态。如果成功，则状态将等于 `pywraplp.Solver.OPTIMAL`。
 
 ```{code-cell} ipython3
-# Solve the system.
+# 求解系统
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
     print('Objective value =', solver.Objective().Value())
     print(f'(x1, x2): ({x1.solution_value():.2}, {x2.solution_value():.2})')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解。')
 ```
 
-## Example 2: investment problem
+## 示例 2：投资问题
 
-We now consider a problem posed and solved by  {cite}`hu_guo2018`.
+我们现在考虑一个由 {cite}`hu_guo2018` 提出的并解决的问题。
 
-A mutual fund has $ \$ 100,000$ to be invested over a three-year horizon.
+一个共同基金有 $100,000 美元$ 可在三年内投资。
 
-Three investment options are available:
+有三种投资选择可供选择：
 
-1. Annuity:  the fund can  pay a same amount of new capital at the beginning of each of three years and receive a payoff of 130\% of total capital invested  at the end of the third year. Once the mutual fund decides to invest in this annuity, it has to keep investing in all subsequent  years in the three year horizon.
+1. 年金：基金可以在每年的开始支付相同金额的新资本，并在第三年末获得投资总资本的130\%的收益。一旦共同基金决定投资于此年金，它必须在三年内持续投资。
 
-2. Bank account: the fund can deposit any amount  into a bank at the beginning of each year and receive its capital plus 6\% interest at the end of that year. In addition, the mutual fund is permitted to borrow no more than $20,000 at the beginning of each year and is asked to pay back the amount borrowed plus 6\% interest at the end of the year. The mutual fund can choose whether to deposit or borrow at the beginning of each year.
+2. 银行账户：基金可以在每年的开始存入任何金额，并在该年末获得其资本加上6\%的利息。此外，共同基金被允许每年在开始时借款不超过 $20,000，并被要求在年末偿还借款金额加上6\%的利息。共同基金可以选择在每年的开始存款或借款。
 
-3. Corporate bond: At the beginning of the second year, a  corporate bond becomes available.
-The fund can buy an amount
-that is no more than $ \$ $50,000 of this bond at the beginning of the second year and  at the end of the third year receive a payout of 130\% of the amount invested in the bond.
+3. 企业债券：在第二年的开始，企业债券变得可用。基金可以在第二年开始时购买不超过 $50,000 美元的债券，并在第三年末获得130\%的投资回报。
 
-The mutual fund's objective is to maximize total payout that it owns at the end of the third year.
+共同基金的目标是在第三年末最大化其拥有的总回报。
 
-We can formulate this  as a linear programming problem.
+我们可以将此表述为一个线性规划问题。
 
-Let  $x_1$ be the amount of put in the annuity, $x_2, x_3, x_4$ be  bank deposit balances at the beginning of the three years,  and $x_5$ be the amount invested  in the corporate bond.
+让 $x_1$ 表示投入年金的金额，$x_2, x_3, x_4$ 表示三年初的银行存款余额，$x_5$ 表示投资于企业债券的金额。
 
-When $x_2, x_3, x_4$ are negative, it means that  the mutual fund has borrowed from  bank.
+当 $x_2, x_3, x_4$ 为负时，意味着共同基金从银行借款。
 
-The table below shows the mutual fund's decision variables together with the timing protocol described above:
+下表展示了共同基金的决策变量以及上述时序协议：
 
-|                | Year 1 | Year 2 | Year 3 |
+|                | 第1年 | 第2年 | 第3年 |
 | :------------: | :----: | :----: | :----: |
-|    Annuity     | $x_1$  | $x_1$  | $x_1$  |
-|  Bank account  | $x_2$  | $x_3$  | $x_4$  |
-| Corporate bond |   0    | $x_5$  |   0    |
+|    年金       | $x_1$  | $x_1$  | $x_1$  |
+|  银行账户     | $x_2$  | $x_3$  | $x_4$  |
+| 企业债券      |   0    | $x_5$  |   0    |
 
-The  mutual fund's decision making proceeds according to the following timing protocol:
+共同基金的决策过程遵循以下时序协议：
 
-1. At the beginning of the first year, the mutual fund decides how much to invest in the annuity and
-   how much to deposit in the bank. This decision is subject to the constraint:
+1. 在第一年的开始，共同基金决定投资多少在年金中，存入银行多少。该决策受以下约束：
 
    $$
    x_1 + x_2 = 100,000
    $$
 
-2. At the beginning of the second year, the mutual fund has a bank balance  of $1.06 x_2$.
-   It must keep $x_1$ in the annuity. It can choose to put $x_5$ into the corporate bond,
-   and put $x_3$ in the bank. These decisions are restricted by
+2. 在第二年的开始，共同基金的银行余额为 $1.06 x_2$。它必须在年金中保留 $x_1$。它可以选择将 $x_5$ 投入企业债券，并将 $x_3$ 存入银行。这些决策受以下约束：
 
    $$
    x_1 + x_5 = 1.06 x_2 - x_3
    $$
 
-3. At the beginning of the third year, the mutual fund has a bank account balance equal
-   to $1.06 x_3$. It must again invest  $x_1$ in the annuity,
-   leaving it with  a bank account balance equal to $x_4$. This situation is summarized by the restriction:
+3. 在第三年的开始，共同基金的银行账户余额等于 $1.06 x_3$。它必须再次投资 $x_1$ 在年金中，留下银行账户余额为 $x_4$。这种情况可以用以下约束来总结：
 
    $$
    x_1 = 1.06 x_3 - x_4
    $$
 
-The mutual fund's objective function, i.e., its wealth at the end of the third year is:
+共同基金的目标函数，即其在第三年末的财富为：
 
 $$
 1.30 \cdot 3x_1 + 1.06 x_4 + 1.30 x_5
 $$
 
-Thus, the mutual fund confronts the linear program:
+因此，共同基金面临的线性规划为：
 
 $$
 \begin{aligned}
 \max_{x} \ & 1.30 \cdot 3x_1 + 1.06 x_4 + 1.30 x_5 \\
-\mbox{subject to } \ & x_1 + x_2 = 100,000\\
+\mbox{受以下约束 } \ & x_1 + x_2 = 100,000\\
  & x_1 - 1.06 x_2 + x_3 + x_5 = 0\\
  & x_1 - 1.06 x_3 + x_4 = 0\\
  & x_2 \ge -20,000\\
@@ -268,27 +255,26 @@ $$
  & x_4 \ge -20,000\\
  & x_5 \le 50,000\\
  & x_j \ge 0, \quad j = 1,5\\
- & x_j \ \text{unrestricted}, \quad j = 2,3,4\\
+ & x_j \ \text{无界}, \quad j = 2,3,4\\
 \end{aligned}
 $$
 
 
+### 计算：使用 OR-Tools
 
-### Computation: using OR-Tools
+让我们尝试使用 `ortools.linear_solver` 包来解决上述问题。
 
-Let's try to solve the above problem using the package `ortools.linear_solver`.
-
-The following cell instantiates a solver and creates two variables specifying the range of values that they can have.
+以下代码实例化一个求解器，并创建两个变量，指定它们可以拥有的值范围。
 
 ```{code-cell} ipython3
-# Instantiate a GLOP(Google Linear Optimization Package) solver
+#实例化一个 GLOP（Google 线性优化包）求解器。
 solver = pywraplp.Solver.CreateSolver('GLOP')
 ```
 
-Let's create five variables $x_1, x_2, x_3, x_4,$ and $x_5$ such that they can only have the values defined in the above constraints.
+让我们创建五个变量 $x_1, x_2, x_3, x_4$ 和 $x_5$，使它们只能取上述约束中定义的值。
 
 ```{code-cell} ipython3
-# Create the variables using the ranges available from constraints
+# 使用约束中可用的范围创建变量。
 x1 = solver.NumVar(0, solver.infinity(), 'x1')
 x2 = solver.NumVar(-20_000, solver.infinity(), 'x2')
 x3 = solver.NumVar(-20_000, solver.infinity(), 'x3')
@@ -296,30 +282,31 @@ x4 = solver.NumVar(-20_000, solver.infinity(), 'x4')
 x5 = solver.NumVar(0, 50_000, 'x5')
 ```
 
-Add the constraints to the problem.
+将约束添加到问题中。
 
 ```{code-cell} ipython3
-# Constraint 1: x_1 + x_2 = 100,000
+# 约束 1: x_1 + x_2 = 100,000
 solver.Add(x1 + x2 == 100_000.0)
 
-# Constraint 2: x_1 - 1.06 * x_2 + x_3 + x_5 = 0
+# 约束 2: x_1 - 1.06 * x_2 + x_3 + x_5 = 0
 solver.Add(x1 - 1.06 * x2 + x3 + x5 == 0.0)
 
-# Constraint 3: x_1 - 1.06 * x_3 + x_4 = 0
+# 约束 3: x_1 - 1.06 * x_3 + x_4 = 0
 solver.Add(x1 - 1.06 * x3 + x4 == 0.0)
 ```
 
-Let's specify the objective function.
+让我们指定目标函数。
+
 
 ```{code-cell} ipython3
-# Objective function: 1.30 * 3 * x_1 + 1.06 * x_4 + 1.30 * x_5
+# 目标函数: 1.30 * 3 * x_1 + 1.06 * x_4 + 1.30 * x_5
 solver.Maximize(1.30 * 3 * x1 + 1.06 * x4 + 1.30 * x5)
 ```
 
-Let's solve the problem and check the status using `pywraplp.Solver.OPTIMAL`.
+让我们解决问题，并使用 `pywraplp.Solver.OPTIMAL` 检查状态。
 
 ```{code-cell} ipython3
-# Solve the system.
+# 求解系统
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
@@ -331,37 +318,35 @@ if status == pywraplp.Solver.OPTIMAL:
     x5_sol = round(x1.solution_value(), 3)
     print(f'(x1, x2, x3, x4, x5): ({x1_sol}, {x2_sol}, {x3_sol}, {x4_sol}, {x5_sol})')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解。')
 ```
 
-OR-Tools tells us that  the best investment strategy is:
+OR-Tools 告诉我们，最佳投资策略是：
 
-1. At the beginning of the first year, the mutual fund should buy $ \$24,927.755$ of the annuity. Its bank account balance should be $ \$75,072.245$.
+1. 在第一年的开始，互助基金应该购买 $ \$24,927.755$ 的年金。其银行账户余额应为 $ \$75,072.245$。
 
-2. At the beginning of the second year, the mutual fund should buy $ \$24,927.755$ of the corporate bond and keep invest in the annuity. Its bank balance should be $ \$24,927.755$.
+2. 在第二年的开始，互助基金应该购买 $ \$24,927.755$ 的公司债券，并继续投资于年金。其银行余额应为 $ \$24,927.755$。
 
-3. At the beginning of the third year, the bank balance should be $ \$75,072.245 $.
+3. 在第三年的开始，银行余额应为 $ \$75,072.245$。
 
-4. At the end of the third year, the mutual fund will get payouts from the annuity and corporate bond and repay its loan from the bank. At the end  it will own $ \$141,018.24 $, so that it's total net  rate of return over the three periods is $ 41.02\%$.
+4. 在第三年结束时，互助基金将从年金和公司债券中获得收益，并偿还其银行贷款。最终，它将拥有 $ \$141,018.24 $，因此在这三个期间的总净收益率为 $ 41.02\%$。
 
+## 标准形式
 
+为了
 
-## Standard form
+* 统一最初以表面不同形式表述的线性规划问题，以及
 
-For purposes of
+* 拥有一种便于放入黑盒软件包的形式，
 
-* unifying linear programs that are initially stated in superficially different forms, and
+花一些精力来描述 **标准形式** 是很有用的。
 
-* having a form that is convenient to put into black-box software packages,
-
-it is useful to devote some effort to describe a **standard form**.
-
-Our standard form  is:
+我们的标准形式是：
 
 $$
 \begin{aligned}
 \min_{x} \ & c_1 x_1 + c_2 x_2 + \dots + c_n x_n  \\
-\mbox{subject to } \ & a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n = b_1 \\
+\mbox{受以下约束 } \ & a_{11} x_1 + a_{12} x_2 + \dots + a_{1n} x_n = b_1 \\
  & a_{21} x_1 + a_{22} x_2 + \dots + a_{2n} x_n = b_2 \\
  & \quad \vdots \\
  & a_{m1} x_1 + a_{m2} x_2 + \dots + a_{mn} x_n = b_m \\
@@ -369,7 +354,7 @@ $$
 \end{aligned}
 $$
 
-Let
+让
 
 $$
 A = \begin{bmatrix}
@@ -383,53 +368,53 @@ c = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \\ \end{bmatrix}, \quad
 x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 $$
 
-The standard form linear programming problem can be expressed concisely as:
+标准形式的线性规划问题可以简洁地表达为：
 
 $$
 \begin{aligned}
 \min_{x} \ & c'x \\
-\mbox{subject to } \ & Ax = b\\
+\mbox{受以下约束} \ & Ax = b\\
  & x \geq 0\\
 \end{aligned}
 $$ (lpproblem)
 
-Here, $Ax = b$ means that  the $i$-th entry of $Ax$  equals the $i$-th entry of $b$ for every $i$.
+这里，$Ax = b$ 意味着 $Ax$ 的第 $i$ 个元素等于 $b$ 的第 $i$ 个元素，对于每个 $i$ 都成立。
 
-Similarly, $x \geq 0$ means that  $x_j$ is greater than equal to $0$ for every $j$.
+同样，$x \geq 0$ 意味着 $x_j$ 对于每个 $j$ 都大于等于 $0$。
 
-### Useful transformations
+### 有用的变换
 
-It is useful to know how to transform a problem that initially is not stated in the standard form into one that is.
+知道如何将一个最初未以标准形式表述的问题转换为标准形式是很有用的。
 
-By deploying the following steps, any linear programming problem can be transformed into an  equivalent  standard form linear programming problem.
+通过以下步骤，任何线性规划问题都可以转化为一个等效的标准形式线性规划问题。
 
-1. Objective function: If a problem is originally a constrained *maximization* problem, we can construct a new objective function that  is the additive inverse of the original objective function. The transformed problem is then a *minimization* problem.
+1. 目标函数：如果一个问题最初是一个受限的 *最大化* 问题，我们可以构建一个新的目标函数，该函数是原始目标函数的加法逆。然后转换的问题是一个 *最小化* 问题。
 
-2. Decision variables: Given a variable $x_j$ satisfying $x_j \le 0$, we can introduce a new variable $x_j' = - x_j$ and substitute it into original problem. Given a free variable $x_i$ with no restriction on its sign, we can introduce two new variables $x_j^+$ and $x_j^-$ satisfying $x_j^+, x_j^- \ge 0$ and replace $x_j$ by $x_j^+ - x_j^-$.
+2. 决策变量：对于一个变量 $x_j$ 满足 $x_j \le 0$，我们可以引入一个新变量 $x_j' = - x_j$ 并将其代入原始问题。对于一个对符号没有限制的自由变量 $x_i$，我们可以引入两个新变量 $x_j^+$ 和 $x_j^-$，使得 $x_j^+, x_j^- \ge 0$，并用 $x_j^+ - x_j^-$ 替换 $x_j$。
 
-3. Inequality constraints: Given an inequality constraint $\sum_{j=1}^n a_{ij}x_j \le 0$, we can introduce a new variable $s_i$, called a **slack variable** that satisfies $s_i \ge 0$ and replace the original constraint by $\sum_{j=1}^n a_{ij}x_j + s_i = 0$.
+3. 不等式约束：对于一个不等式约束 $\sum_{j=1}^n a_{ij}x_j \le 0$，我们可以引入一个新变量 $s_i$，称为 **松弛变量**，使得 $s_i \ge 0$，并用 $\sum_{j=1}^n a_{ij}x_j + s_i = 0$ 替换原始约束。
 
-Let's apply the above steps to the two examples described above.
+让我们将上述步骤应用于上面描述的两个示例。
 
-### Example 1: production problem
+### 示例 1：生产问题
 
-The original problem is:
+原始问题是：
 
 $$
 \begin{aligned}
 \max_{x_1,x_2} \ & 3 x_1 + 4 x_2 \\
-\mbox{subject to } \ & 2 x_1 + 5 x_2 \le 30 \\
+\mbox{受以下约束 } \ & 2 x_1 + 5 x_2 \le 30 \\
 & 4 x_1 + 2 x_2 \le 20 \\
 & x_1, x_2 \ge 0 \\
 \end{aligned}
 $$
 
-This problem is equivalent to the following problem with a standard form:
+这个问题等同于以下标准形式的问题：
 
 $$
 \begin{aligned}
 \min_{x_1,x_2} \ & -(3 x_1 + 4 x_2) \\
-\mbox{subject to } \ & 2 x_1 + 5 x_2 + s_1 = 30 \\
+\mbox{受以下约束 } \ & 2 x_1 + 5 x_2 + s_1 = 30 \\
 & 4 x_1 + 2 x_2 + s_2 = 20 \\
 & x_1, x_2, s_1, s_2 \ge 0 \\
 \end{aligned}
@@ -437,78 +422,79 @@ $$
 
 
 
-### Computation: using SciPy
+### 计算：使用 SciPy
 
-The package `scipy.optimize` provides a function `linprog` to solve linear programming problems with a form below:
+包 `scipy.optimize` 提供了一个函数 `linprog` 用于求解以下形式的线性规划问题：
+
 
 $$
 \begin{aligned}
 \min_{x} \ & c' x  \\
-\mbox{subject to } \ & A_{ub}x \le b_{ub} \\
+\mbox{受以下约束} \ & A_{ub}x \le b_{ub} \\
  & A_{eq}x = b_{eq} \\
  & l \le x \le u \\
 \end{aligned}
 $$
 
-$A_{eq}, b_{eq}$ denote the equality constraint matrix and vector, and $A_{ub}, b_{ub}$ denote the inequality constraint matrix and vector.
+$A_{eq}, b_{eq}$ 表示等式约束矩阵和向量，$A_{ub}, b_{ub}$ 表示不等式约束矩阵和向量。
 
 ```{note}
-By default $l = 0$ and $u = \text{None}$ unless explicitly specified with the argument `bounds`.
+默认情况下，$l = 0$ 且 $u = \text{None}$，除非通过参数 `bounds` 明确指定。
 ```
 
-Let's now try to solve the Problem 1 using SciPy.
+现在让我们尝试使用 SciPy 解决问题 1。
 
 ```{code-cell} ipython3
-# Construct parameters
+# 构造参数
 c_ex1 = np.array([3, 4])
 
-# Inequality constraints
+# 不等式约束
 A_ex1 = np.array([[2, 5],
                   [4, 2]])
 b_ex1 = np.array([30,20])
 ```
 
-Once we solve the problem, we can check whether the solver was successful in solving the problem using the boolean attribute `success`. If it's successful, then the `success` attribute is set to `True`.
+一旦我们解决了问题，就可以使用布尔属性 `success` 检查求解器是否成功解决了该问题。如果成功，则 `success` 属性被设置为 `True`。
 
 ```{code-cell} ipython3
-# Solve the problem
-# we put a negative sign on the objective as linprog does minimization
+# 解决问题
+# 我们在目标上加上负号，因为 linprog 进行最小化
 res_ex1 = linprog(-c_ex1, A_ub=A_ex1, b_ub=b_ex1)
 
 if res_ex1.success:
-    # We use negative sign to get the optimal value (maximized value)
-    print('Optimal Value:', -res_ex1.fun)
+    # 我们使用负号来获得最优值（最大化值）
+    print('最优值:', -res_ex1.fun)
     print(f'(x1, x2): {res_ex1.x[0], res_ex1.x[1]}')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解')
 ```
 
-The optimal plan tells the  factory to produce $2.5$ units of Product 1 and $5$ units of  Product 2; that  generates a maximizing value of  revenue of $27.5$.
+最优计划告诉工厂生产 $2.5$ 单位的产品 1 和 $5$ 单位的产品 2；这将产生最大化的收入值为 $27.5$。
 
-We are using the `linprog` function as a *black box*.
+我们将 `linprog` 函数视为一个 *黑箱*。
 
-Inside it, Python first  transforms the problem into  standard form.
+在内部，Python 首先将问题转换为标准形式。
 
-To do that, for each inequality constraint it generates one slack variable.
+为此，对于每个不等式约束，它生成一个松弛变量。
 
-Here the vector of slack variables is a two-dimensional NumPy array that  equals $b_{ub} - A_{ub}x$.
+这里，松弛变量的向量是一个二维 NumPy 数组，等于 $b_{ub} - A_{ub}x$。
 
-See the [official documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog) for more details.
+有关更多详细信息，请参见 [官方文档](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog)。
 
 ```{note}
-This problem is to maximize the objective, so that we need to put a minus sign in front of parameter vector $c$.
+这个问题是为了最大化目标，因此我们需要在参数向量 $c$ 前面加上负号。
 ```
 
 
 
-### Example 2: investment problem
+### 示例 2：投资问题
 
-The original problem is:
+原始问题是：
 
 $$
 \begin{aligned}
 \max_{x} \ & 1.30 \cdot 3x_1 + 1.06 x_4 + 1.30 x_5 \\
-\mbox{subject to } \ & x_1 + x_2 = 100,000\\
+\mbox{受以下约束} \ & x_1 + x_2 = 100,000\\
  & x_1 - 1.06 x_2 + x_3 + x_5 = 0\\
  & x_1 - 1.06 x_3 + x_4 = 0\\
  & x_2 \ge -20,000\\
@@ -516,16 +502,16 @@ $$
  & x_4 \ge -20,000\\
  & x_5 \le 50,000\\
  & x_j \ge 0, \quad j = 1,5\\
- & x_j \ \text{unrestricted}, \quad j = 2,3,4\\
+ & x_j \ \text{无约束}, \quad j = 2,3,4\\
 \end{aligned}
 $$
 
-This problem is equivalent to the following problem with a standard form:
+这个问题等同于以下标准形式的问题：
 
 $$
 \begin{aligned}
 \min_{x} \ & -(1.30 \cdot 3x_1 + 1.06 x_4^+ - 1.06 x_4^- + 1.30 x_5) \\
-\mbox{subject to } \ & x_1 + x_2^+ - x_2^- = 100,000\\
+\mbox{受以下约束：} \ & x_1 + x_2^+ - x_2^- = 100,000\\
  & x_1 - 1.06 (x_2^+ - x_2^-) + x_3^+ - x_3^- + x_5 = 0\\
  & x_1 - 1.06 (x_3^+ - x_3^-) + x_4^+ - x_4^- = 0\\
  & x_2^- - x_2^+ + s_1 = 20,000\\
@@ -539,19 +525,19 @@ $$
 $$
 
 ```{code-cell} ipython3
-# Construct parameters
+# 构造参数
 rate = 1.06
 
-# Objective function parameters
+# 目标函数参数
 c_ex2 = np.array([1.30*3, 0, 0, 1.06, 1.30])
 
-# Inequality constraints
+# 不等式约束
 A_ex2 = np.array([[1,  1,  0,  0,  0],
                   [1, -rate, 1, 0, 1],
                   [1, 0, -rate, 1, 0]])
 b_ex2 = np.array([100_000, 0, 0])
 
-# Bounds on decision variables
+# 决策变量的约束
 bounds_ex2 = [(  0,    None),
               (-20_000, None),
               (-20_000, None),
@@ -559,17 +545,17 @@ bounds_ex2 = [(  0,    None),
               (  0,   50_000)]
 ```
 
-Let's solve the problem and check the status using `success` attribute.
+让我们解决这个问题并检查 `success` 属性的状态。
 
 
 ```{code-cell} ipython3
-# Solve the problem
+# 求解问题
 res_ex2 = linprog(-c_ex2, A_eq=A_ex2, b_eq=b_ex2,
                   bounds=bounds_ex2)
 
 if res_ex2.success:
-    # We use negative sign to get the optimal value (maximized value)
-    print('Optimal Value:', -res_ex2.fun)
+    # 我们使用负号来获得最优值（最大化值）
+    print('最优值:', -res_ex2.fun)
     x1_sol = round(res_ex2.x[0], 3)
     x2_sol = round(res_ex2.x[1], 3)
     x3_sol = round(res_ex2.x[2], 3)
@@ -577,34 +563,34 @@ if res_ex2.success:
     x5_sol = round(res_ex2.x[4], 3)
     print(f'(x1, x2, x3, x4, x5): {x1_sol, x2_sol, x3_sol, x4_sol, x5_sol}')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解')
 ```
 
-SciPy tells us that  the best investment strategy is:
+SciPy 告诉我们，最佳投资策略是：
 
-1. At the beginning of the first year, the mutual fund should buy $ \$24,927.75$ of the annuity. Its bank account balance should be $ \$75,072.25$.
+1. 在第一年的开始，互助基金应购买 $ \$24,927.75$ 的年金。其银行账户余额应为 $ \$75,072.25$。
 
-2. At the beginning of the second year, the mutual fund should buy $ \$50,000 $ of the corporate bond and keep invest in the annuity. Its bank account balance should be $ \$ 4,648.83$.
+2. 在第二年的开始，互助基金应购买 $ \$50,000 $ 的公司债券，并继续投资于年金。其银行账户余额应为 $ \$ 4,648.83$。
 
-3. At the beginning of the third year, the mutual fund should borrow $ \$20,000$ from the bank and invest in the annuity.
+3. 在第三年的开始，互助基金应从银行借款 $ \$20,000$ 并投资于年金。
 
-4. At the end of the third year, the mutual fund will get payouts from the annuity and corporate bond and repay its loan from the bank. At the end  it will own $ \$141,018.24 $, so that it's total net  rate of return over the three periods is $ 41.02\% $.
+4. 在第三年末，互助基金将从年金和公司债券中获得收益，并偿还银行贷款。最终将拥有 $ \$141,018.24 $，因此其在三个时期内的总净回报率为 $ 41.02\% $。
+
 
 
 
 ```{note}
-You might notice the difference in the values of optimal solution using OR-Tools and SciPy but the optimal value is the same. It is because there can be many optimal solutions for the same problem.
+你可能会注意到使用 OR-Tools 和 SciPy 得到的最优解值有所不同，但最优值是相同的。这是因为同一个问题可能有多个最优解。
 ```
 
 
 
-## Exercises
+## 练习
 
 ```{exercise-start}
 :label: lp_intro_ex1
 ```
-
-Implement a new extended solution for the Problem 1 where in the factory owner decides that number of units of Product 1 should not be less than the number of units of Product 2.
+为问题 1 实现一个新的扩展解，其中工厂所有者决定产品 1 的单位数量不得少于产品 2 的单位数量。
 
 ```{exercise-end}
 ```
@@ -614,55 +600,54 @@ Implement a new extended solution for the Problem 1 where in the factory owner d
 :class: dropdown
 ```
 
-So we can reformulate the problem as:
+因此我们可以将问题重新表述为：
 
 $$
 \begin{aligned}
 \max_{x_1,x_2} \ & z = 3 x_1 + 4 x_2 \\
-\mbox{subject to } \ & 2 x_1 + 5 x_2 \le 30 \\
+\mbox{受以下约束} \ & 2 x_1 + 5 x_2 \le 30 \\
 & 4 x_1 + 2 x_2 \le 20 \\
 & x_1 \ge x_2 \\
 & x_1, x_2 \ge 0 \\
 \end{aligned}
 $$
 
-
 ```{code-cell} ipython3
-# Instantiate a GLOP(Google Linear Optimization Package) solver
+# 实例化一个 GLOP（Google 线性优化包）求解器
 solver = pywraplp.Solver.CreateSolver('GLOP')
 
-# Create the two variables and let them take on any non-negative value.
+# 创建两个变量，并让它们取任何非负值。
 x1 = solver.NumVar(0, solver.infinity(), 'x1')
 x2 = solver.NumVar(0, solver.infinity(), 'x2')
 ```
 
 ```{code-cell} ipython3
-# Constraint 1: 2x_1 + 5x_2 <= 30.0
+# 约束 1: 2x_1 + 5x_2 <= 30.0
 solver.Add(2 * x1 + 5 * x2 <= 30.0)
 
-# Constraint 2: 4x_1 + 2x_2 <= 20.0
+# 约束 2: 4x_1 + 2x_2 <= 20.0
 solver.Add(4 * x1 + 2 * x2 <= 20.0)
 
-# Constraint 3: x_1 >= x_2
+# 约束 3: x_1 >= x_2
 solver.Add(x1 >= x2)
 ```
 
 ```{code-cell} ipython3
-# Objective function: 3x_1 + 4x_2
+# 目标函数: 3x_1 + 4x_2
 solver.Maximize(3 * x1 + 4 * x2)
 ```
 
 ```{code-cell} ipython3
-# Solve the system.
+# 求解问题
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
-    print('Objective value =', solver.Objective().Value())
+    print('目标值 =', solver.Objective().Value())
     x1_sol = round(x1.solution_value(), 2)
     x2_sol = round(x2.solution_value(), 2)
     print(f'(x1, x2): ({x1_sol}, {x2_sol})')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解。')
 ```
 
 ```{solution-end}
@@ -672,16 +657,15 @@ else:
 :label: lp_intro_ex2
 ```
 
-A carpenter manufactures $2$ products - $A$ and $B$.
+一位木匠制造两种产品 - A 和 B。
 
+产品 A 产生的利润为 23 美元，产品 B 产生的利润为 10 美元。
 
-Product $A$ generates a profit of $23$ and product $B$ generates a profit of $10$.
+生产 A 需要 2 小时，生产 B 需要 0.8 小时。
 
-It takes $2$ hours for the carpenter to produce $A$ and $0.8$ hours to produce $B$.
+此外，他每周不能花费超过 25 小时，并且 A 和 B 的总数量不能超过 20 个单位。
 
-Moreover, he can't spend more than $25$ hours per week and the total number of units of $A$ and $B$ should not be greater than $20$.
-
-Find the number of units of $A$ and product $B$ that he should manufacture in order to maximise his profit.
+找出他应该制造的 A 和 B 的数量，以最大化他的利润。
 
 ```{exercise-end}
 ```
@@ -691,54 +675,54 @@ Find the number of units of $A$ and product $B$ that he should manufacture in or
 :class: dropdown
 ```
 
-Let us assume the carpenter produces $x$ units of $A$ and $y$ units of $B$.
+假设木匠生产 $x$ 单位的 $A$ 和 $y$ 单位的 $B$。
 
-So we can formulate the problem as:
+我们可以将问题表述为：
 
 $$
 \begin{aligned}
 \max_{x,y} \ & z = 23 x + 10 y \\
-\mbox{subject to } \ & x + y \le 20 \\
+\mbox{受以下约束} \ & x + y \le 20 \\
 & 2 x + 0.8 y \le 25 \\
 \end{aligned}
 $$
 
 ```{code-cell} ipython3
-# Instantiate a GLOP(Google Linear Optimization Package) solver
+# 实例化一个GLOP（谷歌线性优化包）求解器
 solver = pywraplp.Solver.CreateSolver('GLOP')
 ```
-Let's create two variables $x_1$ and $x_2$ such that they can only have nonnegative values.
+让我们创建两个变量 $x_1$ 和 $x_2$，使它们只能取非负值。
 
 ```{code-cell} ipython3
-# Create the two variables and let them take on any non-negative value.
+# 创建这两个变量，并让它们取任何非负值。
 x = solver.NumVar(0, solver.infinity(), 'x')
 y = solver.NumVar(0, solver.infinity(), 'y')
 ```
 
 ```{code-cell} ipython3
-# Constraint 1: x + y <= 20.0
+# 约束 1: x + y <= 20.0
 solver.Add(x + y <= 20.0)
 
-# Constraint 2: 2x + 0.8y <= 25.0
+# 约束 2: 2x + 0.8y <= 25.0
 solver.Add(2 * x + 0.8 * y <= 25.0)
 ```
 
 ```{code-cell} ipython3
-# Objective function: 23x + 10y
+# 目标函数: 23x + 10y
 solver.Maximize(23 * x + 10 * y)
 ```
 
 ```{code-cell} ipython3
-# Solve the system.
+# 求解问题
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
-    print('Maximum Profit =', solver.Objective().Value())
+    print('最大利润 =', solver.Objective().Value())
     x_sol = round(x.solution_value(), 3)
     y_sol = round(y.solution_value(), 3)
     print(f'(x, y): ({x_sol}, {y_sol})')
 else:
-    print('The problem does not have an optimal solution.')
+    print('该问题没有最优解。')
 ```
 
 ```{solution-end}
