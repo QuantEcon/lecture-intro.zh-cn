@@ -783,7 +783,7 @@ p_0 = - (Q^{22})^{-1} Q^{21} m_0.
 为了得到这个公式，首先注意到因为 $(Q^{21}\ Q^{22})$ 是 $Q$ 的逆的第二行，并且因为 $Q^{-1} Q = I$，所以我们有
 
 $$
-\begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  \begin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
+\begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  egin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
 $$
 
 这意味着

@@ -18,54 +18,51 @@ kernelspec:
 </div>
 ```
 
-# Troubleshooting
+# 故障排除
 
-This page is for readers experiencing errors when running the code from the lectures.
+本页面旨在帮助读者解决执行讲座代码时遇到的错误。
 
-## Fixing your local environment
+## 修复您的本地环境
 
-The basic assumption of the lectures is that code in a lecture should execute whenever
+讲座的基本假设是：只要
 
-1. it is executed in a Jupyter notebook and
-1. the notebook is running on a machine with the latest version of Anaconda Python.
+1. 在Jupyter笔记本中执行代码，并且
+1. 笔记本在安装了最新版Anaconda Python的机器上运行。
 
-You have installed Anaconda, haven't you, following the instructions in [this lecture](https://python-programming.quantecon.org/getting_started.html)?
+你已经安装了Anaconda，是吧，按照[这节课](https://python-programming.quantecon.org/getting_started.html)中的指引？
 
-Assuming that you have, the most common source of problems for our readers is that their Anaconda distribution is not up to date.
+假设你已经安装了，我们读者最常见的问题是他们的Anaconda发行版不是最新的。
 
-[Here's a useful article](https://www.anaconda.com/blog/keeping-anaconda-date)
-on how to update Anaconda.
+[这里有一篇有用的文章](https://www.anaconda.com/blog/keeping-anaconda-date)
+讲述如何更新Anaconda。
 
-Another option is to simply remove Anaconda and reinstall.
+另一个选项是简单地卸载Anaconda并重新安装。
 
-You also need to keep the external code libraries, such as [QuantEcon.py](https://quantecon.org/quantecon-py) up to date.
+你还需要更新外部代码库，例如[QuantEcon.py](https://quantecon.org/quantecon-py)。
 
-For this task you can either
+为此，你可以
 
-* use conda install -y quantecon on the command line, or
-* execute !conda install -y quantecon within a Jupyter notebook.
+* 在命令行中使用 conda install -y quantecon，或
+* 在Jupyter笔记本中执行 !conda install -y quantecon。
 
-If your local environment is still not working you can do two things.
+如果您的本地环境依然无法工作，你可以做两件事。
 
-First, you can use a remote machine instead, by clicking on the Launch Notebook icon available for each lecture
+首先，你可以通过点击每个教程提供的启动笔记本图标改用远程机器
 
 ```{image} _static/lecture_specific/troubleshooting/launch.png
 
 ```
 
-Second, you can report an issue, so we can try to fix your local set up.
+其次，你可以报告一个问题，这样我们可以尝试修复您的本地设置。
 
-We like getting feedback on the lectures so please don't hesitate to get in
-touch.
+我们喜欢收到课程的反馈，所以请随时与我们联系。
 
-## Reporting an issue
+## 报告问题
 
-One way to give feedback is to raise an issue through our [issue tracker](https://github.com/QuantEcon/lecture-python/issues).
+一种反馈方式是通过我们的[问题跟踪器](https://github.com/QuantEcon/lecture-python/issues)提出问题。
 
-Please be as specific as possible.  Tell us where the problem is and as much
-detail about your local set up as you can provide.
+请尽可能具体。告诉我们问题所在，以及尽可能多的关于您本地设置的细节。
 
-Another feedback option is to use our [discourse forum](https://discourse.quantecon.org/).
+另一个反馈选项是使用我们的[论坛](https://discourse.quantecon.org/)。
 
-Finally, you can provide direct feedback to [contact@quantecon.org](mailto:contact@quantecon.org)
-
+最后，您可以直接向[contact@quantecon.org](mailto:contact@quantecon.org)提供反馈。
