@@ -10,8 +10,7 @@ kernelspec:
 ---
 
 (references)=
-# References
+# 参考文献
 
 ```{bibliography} _static/quant-econ.bib
 ```
-
