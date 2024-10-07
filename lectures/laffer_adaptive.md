@@ -11,193 +11,190 @@ kernelspec:
   name: python3
 ---
 
-# Laffer Curves  with Adaptive Expectations 
+# Laffer曲线与自适应预期
 
-## Overview
+## 概览
 
-This lecture studies stationary and dynamic **Laffer curves** in the inflation tax rate in a non-linear version of the model studied in this  lecture {doc}`money_inflation`.
+本讲座研究了在通货膨胀税率下的静态和动态**Laffer曲线**，其采用的模型为此讲座{doc}`money_inflation`中研究的非线性版本。
 
-As in the lecture {doc}`money_inflation`, this lecture uses the log-linear version of the demand function for money that  {cite}`Cagan` used in his classic paper in place of the linear demand function used in this  lecture {doc}`money_inflation`.
+与讲座{doc}`money_inflation`中一样，此讲座使用了{cite}`Cagan`在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座{doc}`money_inflation`中使用的线性需求函数。
 
-But now, instead of assuming  ''rational expectations'' in the form of ''perfect foresight'',
-we'll adopt the ''adaptive expectations'' assumption used by  {cite}`Cagan` and {cite}`Friedman1956`.
+但现在，我们将不采用''理性预期''的''完全预见''形式，而是采用{cite}`Cagan`和{cite}`Friedman1956`使用的''自适应预期''假设。
 
-This means that instead of assuming that expected inflation $\pi_t^*$ is described by the "perfect foresight" or "rational expectations" hypothesis 
+这意味着，我们不再假设预期通货膨胀$\pi_t^*$是由"完全预见"或"理性预期"假设描述
 
 $$
 \pi_t^* = p_{t+1} - p_t
-$$ 
+$$
 
-that we adopted in lectures {doc}`money_inflation` and lectures {doc}`money_inflation_nonlinear`, we'll now assume that $\pi_t^*$ is determined by the adaptive expectations hypothesis described in equation {eq}`eq:adaptex`  reported below. 
+我们在讲座{doc}`money_inflation`和讲座{doc}`money_inflation_nonlinear`中采用的假设，现在我们假设$\pi_t^*$由下面报告的自适应预期假设{eq}`eq:adaptex`决定。
 
-We shall discover that changing our hypothesis about expectations formation in this way will change some our findings and leave others intact.  In particular, we shall discover that
+我们将发现，以这种方式改变关于预期形成的假设会改变我们的一些发现并保持其他发现不变。特别是，我们将发现
 
-* replacing rational expectations with adaptive expectations leaves the two stationary inflation rates unchanged, but that $\ldots$ 
-* it reverses the perverse dynamics by making the **lower** stationary inflation rate the one to which the system typically converges
-* a more plausible comparative dynamic outcome emerges in which now inflation can be **reduced** by running **lower**  government deficits
+* 用自适应预期替换理性预期不改变两个静态通货膨胀率，但是$\ldots$
+* 它通过使系统通常收敛于**较低**的静态通货膨胀率来逆转不正常的动态
+* 出现了更加合理的比较动态结果，现在通过运行**更低**的政府赤字可以**降低**通货膨胀
 
-These more plausible comparative dynamics underlie the "old time religion" that states that 
-"inflation is always and everywhere caused by government deficits".
+这些更合理的比较动态是建立在“老式信仰”上的，即“通货膨胀总是且处处由政府赤字引起”。
 
-These issues were studied by {cite}`bruno1990seigniorage`.
+{cite}`bruno1990seigniorage`研究了这些问题。
 
-Their purpose was to reverse  what they thought were counter intuitive
-predictions of their model under rational expectations (i.e., perfect foresight in this context)
-by dropping rational expectations and instead assuming that people form  expectations about future inflation rates according to the "adaptive expectations"  scheme {eq}`eq:adaptex` described below.
+他们的目的是通过放弃理性预期，而假设人们根据下面描述的“自适应预期”方案{eq}`eq:adaptex`来形成对未来通货膨胀率的预期，从而逆转他们认为在理性预期（即在这种情况下的完全预见）下模型的违反直觉的预测。
 
 ```{note}
-{cite}`sargent1989least`  had studied another way of selecting stationary equilibrium that involved replacing rational expectations with a model of  learning via least squares regression.  
- {cite}`marcet2003recurrent` and  {cite}`sargent2009conquest` extended that work and applied it to study recurrent high-inflation episodes in Latin America.
-``` 
+{sargeant1989least} 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
+{sargeant2009conquest} 和 {marcet2003recurrent} 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
+```  
 
-## The model
+## 模型
 
-Let  
+设  
 
-* $m_t$ be the log of the money supply at the beginning of time $t$
-* $p_t$ be the log of the price level at time $t$
-* $\pi_t^*$ be the public's expectation of the rate of inflation between $t$ and $t+1$ 
+* $m_t$ 为时间 $t$ 初始的货币供应量对数
+* $p_t$ 为时间 $t$ 的价格水平对数
+* $\pi_t^*$ 为公众对于时间 $t$ 到 $t+1$ 之间的通胀率的预期
   
-The law of motion of the money supply is
+货币供应量的动态方程是
 
 $$ 
 \exp(m_{t+1}) - \exp(m_t) = g \exp(p_t) 
 $$ (eq:ada_msupply)
 
-where $g$ is the part of government expenditures financed by printing money.
+其中 $g$ 是政府支出中通过印制货币来融资的部分。
 
-Notice that equation {eq}`eq:ada_msupply` implies that
+注意方程 {eq}`eq:ada_msupply` 暗示
 
 $$
 m_{t+1} = \log[ \exp(m_t) + g \exp(p_t)]
 $$ (eq:ada_msupply2)
 
-The demand function for money is 
+货币需求函数是
 
 $$
 m_{t+1} - p_t = -\alpha \pi_t^* 
 $$ (eq:ada_mdemand)
 
-where $\alpha \geq 0$.  
+其中 $\alpha \geq 0$。  
 
-Expectations of inflation are governed by 
+通胀预期受控于
 
 $$
 \pi_{t}^* = (1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*
 $$ (eq:adaptex)
 
-where $\delta \in (0,1)$
+其中 $\delta \in (0,1)$
 
-## Computing an equilibrium sequence 
+## 计算平衡序列
 
-Equation the expressions for $m_{t+1}$ provided  by {eq}`eq:ada_mdemand` and {eq}`eq:ada_msupply2` and use equation {eq}`eq:adaptex` to eliminate $\pi_t^*$ to obtain
-the following equation for $p_t$:
+通过将{eq}`eq:ada_mdemand` 和 {eq}`eq:ada_msupply2` 提供的 $m_{t+1}$ 表达式与使用方程 {eq}`eq:adaptex` 消除 $\pi_t^*$，得到下列 $p_t$ 的方程：
 
 $$
 \log[ \exp(m_t) + g \exp(p_t)] - p_t = -\alpha [(1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*]
 $$ (eq:pequation)
 
-**Pseudo-code**
+**伪代码**
 
-Here is the pseudo-code for our algorithm.
+这是我们算法的伪代码。
 
-Starting at time $0$ with initial conditions $(m_0, \pi_{-1}^*, p_{-1})$, for each $t \geq 0$
-deploy the following steps in order:
+从时间 $0$ 开始，初始条件为 $(m_0, \pi_{-1}^*, p_{-1})$，对于每个 $t \geq 0$ 按顺序执行以下步骤：
 
-* solve {eq}`eq:pequation` for $p_t$
-* solve equation {eq}`eq:adaptex` for $\pi_t^*$ 
-* solve equation {eq}`eq:ada_msupply2` for $m_{t+1}$
+* 解方程 {eq}`eq:pequation` 以求得 $p_t$
+* 解方程 {eq}`eq:adaptex` 以求得 $\pi_t^*$
+* 解方程 {eq}`eq:ada_msupply2` 以求得 $m_{t+1}$
 
-This completes the algorithm.
+这完成了算法。
 
+## 声明或猜想
 
-## Claims or conjectures
+结果表明：
+
+* 如果存在，限制值 $\overline \pi$ 和 $\overline \mu$ 将是相等的
+
+* 如果存在限制值，有两种可能的限制值，一个高，一个低
+
+* 与讲座{doc}`money_inflation_nonlinear`中的结果不同，对于几乎所有初始对数价格水平和预期通货膨胀率 $p_0, \pi_{t}^*$，限制 $\overline \pi = \overline \mu$ 是**较低**的稳态值
+
+* 对于这两个可能的限制值 $\overline \pi$，有一个唯一的初始对数价格水平 $p_0$，意味着 $\pi_t = \mu_t = \overline \mu$ 对所有 $t \geq 0$
+
+  * 这个唯一的初始对数价格水平解决 $\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \overline \pi$
   
+  * 上述关于 $p_0$ 的方程来自于 $m_1 - p_0 = - \alpha \overline \pi$
   
-It will turn out that 
+## 通货膨胀率的限制值
 
-* if they exist, limiting values $\overline \pi$ and $\overline \mu$ will be equal
+正如我们在早前的讲座 {doc}`money_inflation_nonlinear` 中讨论的，我们可以通过研究稳态劳动曲线来计算 $\bar \pi$ 的两个潜在的限制值。
 
-* if  limiting values exist, there are two possible limiting values, one high, one low
-
-* unlike the outcome in lecture {doc}`money_inflation_nonlinear`, for almost all initial log price levels and expected inflation rates $p_0, \pi_{t}^*$, the limiting $\overline \pi = \overline \mu$ is  the **lower** steady state  value
-
-* for each of the two possible limiting values $\bar \pi$ ,there is a unique initial log price level $p_0$ that implies that $\pi_t = \mu_t = \bar \mu$ for all  $t \geq 0$
-
-  * this unique initial log price level solves $\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \bar \pi $
-  
-  * the preceding equation for $p_0$ comes from $m_1 - p_0 = -  \alpha \bar \pi$
-
-## Limiting values of inflation rate
-
-As in our earlier lecture {doc}`money_inflation_nonlinear`, we can compute the two prospective limiting values for $\bar \pi$ by studying the steady-state Laffer curve.
-
-Thus, in a  **steady state** 
+因此，在一个**稳态**中
 
 $$
 m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 $$
 
-where $x > 0 $ is a common rate of growth of logarithms of the money supply and price level.
+其中 $x > 0$ 是货币供应量和价格水平的对数的共同增长率。
 
-A few lines of algebra yields the following equation that $x$ satisfies
+几行代数可以得出满足 $x$ 的以下方程
 
 $$
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
 $$ (eq:ada_steadypi)
 
-where we require that
+我们要求
 
 $$
 g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,  
 $$ (eq:ada_revmax)
 
-so that it is feasible to finance $g$ by printing money.
+这样就可以通过印钞来财务支持 $g$。
 
-The left side of {eq}`eq:ada_steadypi` is steady state revenue raised by printing money.
+{eq}`eq:ada_steadypi` 的左侧是通过印钞筹集的稳定状态收入。
 
-The right side of {eq}`eq:ada_steadypi` is the quantity  of time $t$ goods  that the government raises by printing money. 
+{eq}`eq:ada_steadypi` 的右侧是政府通过印钞筹集的 $t$ 时刻的商品数量。
 
-Soon  we'll plot  the left and right sides of equation {eq}`eq:ada_steadypi`.
+很快我们将绘制方程 {eq}`eq:ada_steadypi` 的左右两侧。
 
-But first we'll write code that computes a steady-state
-$\bar \pi$.
+但首先，我们将编写代码来计算稳态的
+$\bar \pi$。
 
-Let's start by importing some  libraries
+让我们开始导入一些库
 
 ```{code-cell} ipython3
 from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from matplotlib.ticker import MaxNLocator
 from matplotlib.cm import get_cmap
 from matplotlib.colors import to_rgba
 import matplotlib
 from scipy.optimize import root, fsolve
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 +++ {"user_expressions": []}
 
-Let's create a `namedtuple` to store the parameters of the model
+让我们创建一个 `namedtuple` 来存储模型的参数
 
 ```{code-cell} ipython3
 LafferAdaptive = namedtuple('LafferAdaptive', 
-                        ["m0",  # log of the money supply at t=0
-                         "α",   # sensitivity of money demand
-                         "g",   # government expenditure
+                        ["m0",  # t=0时货币供应量的对数
+                         "α",   # 货币需求的敏感性
+                         "g",   # 政府支出
                          "δ"])
 
-# Create a Cagan Laffer model
+# 创建一个 Cagan Laffer 模型
 def create_model(α=0.5, m0=np.log(100), g=0.35, δ=0.9):
     return LafferAdaptive(α=α, m0=m0, g=g, δ=δ)
 
 model = create_model()
 ```
 
-Now we write code that computes steady-state $\bar \pi$s.
+现在我们编写计算稳态 $\bar \pi$ 的代码。
 
 ```{code-cell} ipython3
-# Define formula for π_bar
+# 定义 π_bar 的计算公式
 def solve_π(x, α, g):
     return np.exp(-α * x) - np.exp(-(1 + α) * x) - g
 
@@ -205,24 +202,23 @@ def solve_π_bar(model, x0):
     π_bar = fsolve(solve_π, x0=x0, xtol=1e-10, args=(model.α, model.g))[0]
     return π_bar
 
-# Solve for the two steady state of π
+# 解两个稳态的 π
 π_l = solve_π_bar(model, x0=0.6)
 π_u = solve_π_bar(model, x0=3.0)
-print(f'The two steady state of π are: {π_l, π_u}')
+print(f'两个稳态的π是: {π_l, π_u}')
 ```
 
-We find two steady state $\bar \pi$ values
+我们找到了两个稳态 $\bar \pi$ 值。
 
-## Steady-state Laffer curve
+## 稳态拉弗曲线
 
-The following figure plots the steady-state Laffer curve together with the two stationary inflation rates.
+下图绘制了稳态拉弗曲线以及两个稳定的通货膨胀率。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Seigniorage as function of steady-state inflation. The dashed brown lines
-      indicate $\pi_l$ and $\pi_u$.
+    caption: 稳态通胀下的铸币税函数。虚线棕色线条代表$\pi_l$和$\pi_u$。
     name: laffer_curve_adaptive
     width: 500px
 ---
@@ -232,13 +228,13 @@ def compute_seign(x, α):
 def plot_laffer(model, πs):
     α, g = model.α, model.g
     
-    # Generate π values
+    # 生成π值
     x_values = np.linspace(0, 5, 1000)
 
-    # Compute corresponding seigniorage values for the function
+    # 计算对应的铸币税值
     y_values = compute_seign(x_values, α)
 
-    # Plot the function
+    # 绘制函数图形
     plt.plot(x_values, y_values, 
             label=f'$exp((-{α})x) - exp(- (1- {α}) x)$')
     for π, label in zip(πs, ['$\pi_l$', '$\pi_u$']):
@@ -249,20 +245,20 @@ def plot_laffer(model, πs):
     plt.axhline(g, color='red', linewidth=0.5, 
                 linestyle='--', label='g')
     plt.xlabel('$\pi$')
-    plt.ylabel('seigniorage')
+    plt.ylabel('铸币税')
     plt.legend()
     plt.grid(True)
     plt.show()
 
-# Steady state Laffer curve
+# 稳态拉弗曲线
 plot_laffer(model, (π_l, π_u))
 ```
 
-## Associated initial price levels
+## 相关的初始价格水平
 
-Now that we have our hands on the two possible steady states, we can compute two initial log price levels $p_{-1}$, which as initial conditions, imply that $\pi_t = \bar \pi $ for all $t \geq 0$.
+现在我们掌握了两个可能的稳定状态，我们可以计算两个初始对数价格水平 $p_{-1}$，作为初始条件，这意味着对于所有 $t \geq 0$，$\pi_t = \bar \pi$。
 
-In particular, to initiate a fixed point of the dynamic Laffer curve dynamics, we set 
+特别是，为了启动动态劳弗曲线动态的固定点，我们设置
 
 $$
 p_{-1} = m_0 + \alpha \pi^*
@@ -273,17 +269,16 @@ def solve_p_init(model, π_star):
     m0, α = model.m0, model.α
     return m0 + α*π_star
 
-
-# Compute two initial price levels associated with π_l and π_u
+# 计算与 π_l 和 π_u 相关联的两个初始价格水平
 p_l, p_u = map(lambda π: solve_p_init(model, π), (π_l, π_u))
-print('Associated initial p_{-1}s', f'are: {p_l, p_u}')
+print('相关的初始 p_{-1}', f'为: {p_l, p_u}')
 ```
 
-### Verification 
+### 验证
 
-To start, let's write some code to verify that if we initial  $\pi_{-1}^*,p_{-1}$ appropriately, the inflation rate $\pi_t$ will be constant for all $t \geq 0$ (at either $\pi_u$ or $\pi_l$ depending on the initial condition)
+首先，我们编写一些代码来验证，如果我们适当初始化 $\pi_{-1}^*,p_{-1}$，则通货膨胀率 $\pi_t$ 对于所有 $t \geq 0$ 将保持恒定（取决于初始条件，可以是 $\pi_u$ 或 $\pi_l$）
 
-The following code verifies this.
+以下代码进行了验证。
 
 ```{code-cell} ipython3
 def solve_laffer_adapt(p_init, π_init, model, num_steps):
@@ -299,65 +294,64 @@ def solve_laffer_adapt(p_init, π_init, model, num_steps):
     p_seq[0] = p_init
         
     for t in range(1, num_steps):
-        # Solve p_t
+        # 解决 p_t
         def p_t(pt):
-            return np.log(np.exp(m_seq[t]) + g * np.exp(pt)) \
-                          - pt + α * ((1-δ)*(pt - p_seq[t-1]) + δ*π_seq[t-1])
+            return np.log(np.exp(m_seq[t]) + g * np.exp(pt)) - pt + α * ((1-δ)*(pt - p_seq[t-1]) + δ*π_seq[t-1])
         
         p_seq[t] = root(fun=p_t, x0=p_seq[t-1]).x[0]
         
-        # Solve π_t
+        # 解决 π_t
         π_seq[t] = (1-δ) * (p_seq[t]-p_seq[t-1]) + δ*π_seq[t-1]
         
-        # Solve m_t
+        # 解决 m_t
         m_seq[t+1] = np.log(np.exp(m_seq[t]) + g*np.exp(p_seq[t]))
         
-        # Solve μ_t
+        # 解决 μ_t
         μ_seq[t] = m_seq[t+1] - m_seq[t]
     
     return π_seq, μ_seq, m_seq, p_seq
 ```
 
-Compute limiting values starting from $p_{-1}$ associated with $\pi_l$
+计算从 $p_{-1}$ 开始，与 $\pi_l$ 相关联的极限值
 
 ```{code-cell} ipython3
 π_seq, μ_seq, m_seq, p_seq = solve_laffer_adapt(p_l, π_l, model, 50)
 
-# Check steady state m_{t+1} - m_t and p_{t+1} - p_t 
+# 检查稳态 m_{t+1} - m_t 和 p_{t+1} - p_t
 print('m_{t+1} - m_t:', m_seq[-1] - m_seq[-2])
 print('p_{t+1} - p_t:', p_seq[-1] - p_seq[-2])
 
-# Check if exp(-αx) - exp(-(1 + α)x) = g
+# 检查 exp(-αx) - exp(-(1 + α)x) 是否等于 g
 eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-Compute limiting values starting from $p_{-1}$ associated with $\pi_u$
+计算从 $p_{-1}$ 开始，与 $\pi_u$ 相关联的极限值
 
 ```{code-cell} ipython3
 π_seq, μ_seq, m_seq, p_seq = solve_laffer_adapt(p_u, π_u, model, 50)
 
-# Check steady state m_{t+1} - m_t and p_{t+1} - p_t 
+# 检查稳态 m_{t+1} - m_t 和 p_{t+1} - p_t
 print('m_{t+1} - m_t:', m_seq[-1] - m_seq[-2])
 print('p_{t+1} - p_t:', p_seq[-1] - p_seq[-2])
 
-# Check if exp(-αx) - exp(-(1 + α)x) = g
+# 检查 exp(-αx) - exp(-(1 + α)x) 是否等于 g
 eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-## Slippery side of Laffer curve dynamics
+## 动态拉弗曲线的滑动侧面
 
-We are now equipped  to compute  time series starting from different $p_{-1}, \pi_{-1}^*$ settings, analogous to those in this lecture  {doc}`money_inflation` and this lecture  {doc}`money_inflation_nonlinear`. 
+我们现在已经具备了从不同的 $p_{-1}, \pi_{-1}^*$ 设置开始计算时间序列的能力，类似于这个讲座中的设置 {doc}`money_inflation` 和这个讲座 {doc}`money_inflation_nonlinear`。
 
-Now we'll study how outcomes unfold when we start $p_{-1}, \pi_{-1}^*$ away from a stationary point of the dynamic Laffer curve, i.e., away from either $\pi_u$ or $ \pi_l$.
+现在我们将研究当我们从动态拉弗曲线的一个静止点开始 $p_{-1}, \pi_{-1}^*$，即远离 $\pi_u$ 或 $ \pi_l$ 时，结果如何展开。
 
-To construct a perturbation pair $\check p_{-1}, \check \pi_{-1}^*$we'll implement the following pseudo code:
+为了构建一个扰动对 $\check p_{-1}, \check \pi_{-1}^*$，我们将实现以下伪代码：
 
-* set $\check \pi_{-1}^* $ not equal to one of the stationary points $\pi_u$ or $ \pi_l$.
-* set $\check p_{-1} = m_0 + \alpha \check \pi_{-1}^*$
+* 设置 $\check \pi_{-1}^* $ 不等于静止点之一 $\pi_u$ 或 $ \pi_l$。
+* 设置 $\check p_{-1} = m_0 + \alpha \check \pi_{-1}^*$
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -388,30 +382,28 @@ def draw_iterations(π0s, model, line_params, π_bars, num_steps):
     axes[1].set_ylabel('$p_t$')
     axes[2].set_ylabel('$\pi_t$')
     axes[3].set_ylabel('$\mu_t$')
-    axes[3].set_xlabel('timestep')
+    axes[3].set_xlabel('时间步')
     axes[3].xaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.tight_layout()
     plt.show()
 ```
 
-Let's simulate the result generated by varying the initial $\pi_{-1}$ and corresponding $p_{-1}$
+让我们模拟通过改变初始 $\pi_{-1}$ 和对应的 $p_{-1}$ 生成的结果
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Starting from different initial values of $\pi_0$, paths of $m_t$ (top
-      panel, log scale for $m$), $p_t$ (second panel, log scale for $p$),  $\pi_t$ (third panel), and $\mu_t$ (bottom
-      panel)
+    caption: 从不同的 $\pi_0$ 初始值开始，$m_t$ 的路径（顶部面板，$m$ 的对数标度），$p_t$（第二面板，$p$ 的对数标度），$\pi_t$（第三面板），和 $\mu_t$（底部面板）
     name: pi0_path
     width: 500px
 ---
 πs = np.linspace(π_l, π_u, 10)
 
-line_params = {'lw': 1.5, 
-              'marker': 'o',
-              'markersize': 3}
+line_params = {'lw': 1.5,
+               'marker': 'o',
+               'markersize': 3}
               
 π_bars = (π_l, π_u)
 draw_iterations(πs, model, line_params, π_bars, num_steps=80)
