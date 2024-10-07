@@ -133,8 +133,7 @@ country_years.head()
 为了方便使用中文标签，我们导入地区代码与中文名对应的数据集
 
 ```{code-cell} ipython3
-code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('countrycode')
-code_to_name.loc['BEM']
+code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
 ```
 
 现在，我们调用人均 GDP (`gdppc`)，并生成一个宽格式的数据
@@ -256,7 +255,7 @@ def draw_interp_plots(series,        # pandas 数据
                 lw=lw,
                 color=color_mapping[c],
                 alpha=0.8,
-                label=code_to_name.loc[c]['country_chinese'])
+                label=code_to_name.loc[c]['name_chinese'])
 
         if logscale:
             ax.set_yscale('log')
@@ -543,7 +542,7 @@ plt.savefig("./_static/lecture_specific/long_run_growth/tooze_ch1_graph.png", dp
 plt.show()
 ```
 
-在本讲座的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。
+在本讲的开头，我们提到了美国的 GDP 是如何在 19 世纪初 “从无到有”，到 19 世纪末与大英帝国的 GDP 相媲美，进而超越大英帝国的 GDP，为 “美国的二十世纪”奠定了地缘政治的基础。
 
 让我们将时间向前推移，大致从第二次世界大战后图示停止的地方开始。
 
@@ -597,10 +596,9 @@ regionalgdp_pc.index = pd.to_datetime(regionalgdp_pc.index, format='%Y')
 ```{code-cell} ipython3
 regionalgdp_pc.interpolate(method='time', inplace=True)
 regionalgdp_pc.columns = ['西欧', '东欧', '西方分支', '拉丁美洲', '东亚', '南亚和东南亚', '中东', '撒哈拉以南非洲', '世界人均GDP']
-regionalgdp_pc
 ```
 
-进行更深入的研究，我们将 西方分支（`Western Offshoots`）和 （撒哈拉以南非洲）`Sub-Saharan Africa`的时间序列与世界各地多个不同地区进行比较。
+进行更深入的研究，我们将西方分支（`Western Offshoots`）和撒哈拉以南非洲（`Sub-Saharan Africa`）的时间序列与世界各地多个不同地区进行比较。
 
 下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同
 

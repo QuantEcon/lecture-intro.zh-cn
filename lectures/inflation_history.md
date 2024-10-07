@@ -11,13 +11,13 @@ kernelspec:
   name: python3
 ---
 
-# Price Level Histories 
+# 价格水平历史 
 
-This lecture offers some historical evidence about fluctuations in levels of aggregate price indexes.  
+本讲将讨论一些关于综合价格指数波动的历史数据。
 
-Let's start by installing the necessary Python packages.
+我们首先安装必要的Python包。
 
-The `xlrd` package is used by `pandas` to perform operations on Excel files.
+`xlrd` 在这里被引入是因为 `pandas` 需要它来对Excel文件执行操作。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -37,52 +37,57 @@ if Version(version("pandas")) < Version('2.1.4'):
     !pip install "pandas>=2.1.4"
 ```
 
-We can then import the Python modules we will use.
+我们现在导入本讲所需的Python库。
 
 ```{code-cell} ipython3
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-The rate of growth of the price level is called **inflation** in the popular press and in discussions among central bankers and treasury officials.
+价格水平的增长率在媒体和央行及财政官员的口中称为**通货膨胀**。
 
-The price level is measured in units of domestic currency per units of a representative bundle of consumption goods.  
+价格水平是以国内货币单位对一组代表性消费品的单位进行衡量的。
 
-Thus, in the US, the price level at $t$ is measured in dollars (month $t$ or year $t$) per unit of the consumption bundle.
+因此，在美国，$t$时期的价格水平以美元（$t$月或$t$年）每消费品单位计量。
 
-Until the early 20th century, in many western economies, price levels fluctuated from year to year but didn't have much of a trend.  
+20世纪初之前，在许多西方经济体中，价格水平虽然年复一年地波动，但趋势不明显。
 
-Often the price levels ended a century near where they started.
+通常价格水平在一个世纪结束时与其开始时相近。
 
-Things were different in the 20th century, as we shall see in this lecture.
+20世纪的情况则有所不同，我们将在本讲中看到。
 
-A widely believed explanation of this big difference is that countries' abandoning gold and silver standards in the early twentieth century. 
+一个广为接受的解释是20世纪初期各国放弃金本位和银本位制度。
 
 ```{tip}
-This lecture sets the stage for some subsequent lectures about a theory that macro economists use to think about determinants of the price level, namely, {doc}`cagan_ree` and {doc}`cagan_adaptive`
+本讲为后续几讲做好了铺垫，这些后续几讲中我们将讲述宏观经济学家用来思考价格水平决定因素的理论，即{doc}`cagan_ree` 和 {doc}`cagan_adaptive`
 ```
 
-## Four centuries of price levels
+## 四个世纪的价格水平
 
-We begin by displaying data that originally appeared on page 35 of {cite}`sargent2002big` that show price levels for four "hard currency" countries from 1600 to 1914.
+我们首先展示最初出现在 {cite}`sargent2002big` 第35页的数据，其中包含了自1600年到1914年四个“硬通货”国家的价格水平。
 
-* France 
-* Spain (Castile)
-* United Kingdom
-* United States
+* 法国
+* 西班牙（卡斯蒂利亚）
+* 英国
+* 美国
 
-In the present context, the  phrase "hard currency" means that the countries were on a commodity-money standard:  money consisted of gold and silver coins that circulated at values largely determined by the weights of their gold and silver contents.
+在当前语境中，“硬通货”一词意味着这些国家采用了商品货币标准：货币由金银币组成，这些金银币的流通价值主要由它们的金银含量决定。
 
 ```{note}
-Under a gold or silver standard, some money also consisted of "warehouse certificates" that represented paper claims on gold or silver coins. Bank notes issued by the government or private banks can be viewed as examples of such "warehouse certificates".
+在金本位或银本位制度下，一些货币也包括代表对金银币的纸质索取权的“仓库凭证”。政府或私人银行发行的银行票据可以视为此类“仓库凭证”的例子。
 ```
 
-Let us bring the data into pandas from a spreadsheet that is [hosted on github](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets).
+我们用`pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
 
 ```{code-cell} ipython3
-# Import data and clean up the index
+# 导入数据并清理索引
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/longprices.xls"
 df_fig5 = pd.read_excel(data_url, 
                         sheet_name='all', 
@@ -91,161 +96,155 @@ df_fig5 = pd.read_excel(data_url,
 df_fig5.index = df_fig5.index.astype(int)
 ```
 
-We first plot price levels over the period 1600-1914.
+我们首先绘制1600年至1914年间的价格水平。
 
-During most years in this time interval, the countries were on a gold or silver standard.
+在这段时间的大多数年份内，这些国家采用黄金或白银标准。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Long run time series of the price level
+    caption: 长期价格水平时间序列
     name: lrpl
 ---
 df_fig5_befe1914 = df_fig5[df_fig5.index <= 1914]
 
-# Create plot
+# 创建图表
 cols = ['UK', 'US', 'France', 'Castile']
+cols_cn = ['英国', '美国', '法国', '卡斯蒂利亚']
 
 fig, ax = plt.subplots(figsize=(10,6))
 
-for col in cols:
+for col, col_cn in zip(cols, cols_cn):
     ax.plot(df_fig5_befe1914.index, 
-            df_fig5_befe1914[col], label=col, lw=2)
+            df_fig5_befe1914[col], label=col_cn, lw=2)
 
 ax.legend()
-ax.set_ylabel('Index  1913 = 100')
-ax.set_xlabel('Year')
+ax.set_ylabel('指数 1913 = 100')
+ax.set_xlabel('年份')
 ax.set_xlim(xmin=1600)
 plt.tight_layout()
 plt.show()
 ```
 
-We say "most years" because there were temporary lapses from the gold or silver standard.
+我们说“大多数年份”是因为金本位或银本位制度曾经有过暂时的中断。
 
-By staring at {numref}`lrpl` carefully, you might be able to guess when these temporary lapses occurred, because they were also times during which price levels temporarily rose markedly:
+通过仔细观察 {numref}`lrpl`，你可能能猜到这些中断发生的时间，因为这些时期的价格水平出现了显著的暂时性上涨：
 
-* 1791-1797 in France (French Revolution)
-* 1776-1790 in the US (War for Independence from Great Britain)
-* 1861-1865 in the US (Civil War)
+* 1791-1797年在法国（法国大革命）
+* 1776-1790年在美国（从大不列颠独立的战争）
+* 1861-1865年在美国（南北战争）
 
-During these episodes, the gold/silver standard was temporarily abandoned when a government printed paper money to pay for war expenditures.
-
-```{note}
-This quantecon lecture {doc}`french_rev` describes circumstances leading up to and during the big inflation that occurred during the French Revolution.
-```
-
-Despite these temporary lapses, a striking thing about the figure is that price levels were roughly constant over three centuries.  
-
-In the early century, two other features of this data attracted the attention of [Irving Fisher](https://en.wikipedia.org/wiki/Irving_Fisher) of Yale University and [John Maynard Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes) of Cambridge University.
-
-* Despite being anchored to the same average level over long time spans, there were considerable year-to-year variations in price levels
-* While using valuable gold and silver as coins succeeded in anchoring the price level by limiting the supply of money, it cost real resources.
-* a country paid a high "opportunity cost" for using gold and silver coins as money -- that gold and silver could instead have been made into valuable jewelry and other durable goods. 
-
-Keynes and Fisher proposed what they claimed would be a more efficient way to achieve a price level that 
-
-*  would be at least as firmly anchored as achieved under a gold or silver standard, and
-*  would also exhibit less year-to-year short-term fluctuations.  
-
-They said that central bank could achieve price level stability by
-
-* issuing  **limited supplies** of paper currency
-* refusing to print money to finance government expenditures
-
-This logic prompted John Maynard Keynes to call a commodity standard a "barbarous relic."
-
-A paper currency or "fiat money" system disposes of all reserves behind a currency. 
-
-But adhering to a gold or silver standard had provided an automatic mechanism for limiting the supply of money, thereby anchoring the price level.
-
-To anchor the price level, a pure paper or fiat money system replaces that automatic mechanism with a central bank with the authority and determination to limit the supply of money (and to deter counterfeiters!) 
-
-Now let's see what happened to the price level in the four countries after 1914, when one after another of them left the gold/silver standard by showing the complete graph that originally appeared on page 35 of {cite}`sargent2002big`.
-
-{numref}`lrpl_lg` shows the logarithm of price levels over four "hard currency" countries from 1600 to 2000.
+在这些事件期间，当政府为了支付战争支出而印制纸币时，金银标准被暂时放弃。
 
 ```{note}
-Although we didn't have to use logarithms in our earlier graphs that had stopped in 1914, we now choose to use logarithms because we want to fit observations after 1914 in the same graph as the earlier observations.
+{doc}`french_rev` 描述了在法国大革命期间发生的大通胀前后的情况。
 ```
 
-After the outbreak of the Great War in 1914, the four countries left the gold standard and in so doing acquired the ability to print money to finance government expenditures.
+尽管出现了这些暂时的中断，图中一个显著的特点是三个世纪以来价格水平大致保持恒定。
+
+在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[Irving Fisher](https://en.wikipedia.org/wiki/Irving_Fisher)和剑桥大学的[John Maynard Keynes](https://en.wikipedia.org/wiki/John_Maynard_Keynes)的关注。
+
+* 尽管长期锚定在相同的平均水平上，年度价格水平的波动还是很大
+* 虽然使用有价值的黄金和白银作为硬币成功地通过限制货币供给稳定了价格水平，但这需要消耗现实的资源 --
+* 一个国家使用金银币作为货币支付了高昂的“机会成本”——那些金银本可以制成有价值的珠宝和其他耐用品。
+
+Keynes和Fisher提出了他们认为可以更有效地实现价格水平稳定的方式：
+
+* 既能像金银标准下一样稳固地锚定价格水平，
+* 也能减少年度短期波动。
+
+他们说，中央银行可以通过以下方式实现价格水平的稳定
+
+* 发行**有限供应**的纸币
+* 拒绝印制钞票为政府支出提供资金
+
+这种逻辑促使约翰-梅纳德-凯恩斯称商品本位制为 “野蛮的遗物”。
+
+纸币或 “法定货币 ”体系会消耗掉货币背后的所有储备。
+
+但是，坚持金本位制或银本位制提供了一种限制货币供应量的自动机制，从而锚定了价格水平。
+
+为了锚定价格水平，纯粹的纸币或法定货币体系用中央银行取代了这一自动机制，中央银行拥有限制货币供应的权力和决心（并能阻止造假者！）。
+
+现在，让我们通过展示原载于{cite}`sargent2002big`第35页的完整图表，来看看1914年之后，当四个国家相继脱离金/银本位制时，它们的物价水平发生了什么变化。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Long run time series of the price level (log)
+    caption: 长期价格水平时间序列（对数）
     name: lrpl_lg
 ---
 fig, ax = plt.subplots(dpi=200)
 
-for col in cols:
+for col, col_cn in zip(cols, cols_cn):
     ax.plot(df_fig5.index, df_fig5[col], lw=2)
     ax.text(x=df_fig5.index[-1]+2, 
-            y=df_fig5[col].iloc[-1], s=col)
+            y=df_fig5[col].iloc[-1], s=col_cn)
 
 ax.set_yscale('log')
-ax.set_ylabel('Logs of price levels (Index  1913 = 100)')
+ax.set_ylabel('价格水平对数（指数1913=100）')
 ax.set_ylim([10, 1e6])
-ax.set_xlabel('year')
+ax.set_xlabel('年份')
 ax.set_xlim(xmin=1600)
 plt.tight_layout()
 plt.show()
 ```
 
-{numref}`lrpl_lg` shows that paper-money-printing central banks didn't do as well as the gold and standard silver standard in anchoring price levels.
+{numref}`lrpl_lg`显示，印制纸币的中央银行在锚定价格水平方面的表现不如金本位和标准银本位。
 
-That would probably have surprised or disappointed Irving Fisher and John Maynard Keynes.
+这可能会让Keynes和Fisher感到惊讶或失望。
 
-Actually, earlier economists and statesmen knew about the possibility of fiat money systems long before Keynes and Fisher advocated them in the early 20th century.
+事实上，早在Keynes和Fisher在20世纪初倡导法定货币制度之前，早期的经济学家和政治家们就知道法定货币制度的可能性。
 
-Proponents of a commodity money system did not trust governments and central banks properly to manage a fiat money system.
+商品货币体系的支持者不相信政府和中央银行能够妥善管理法定货币体系。
 
-They were willing to pay the resource costs associated with setting up and maintaining a commodity money system.
+他们愿意支付与建立和维护商品货币体系相关的资源成本。
 
-In light of the high and persistent inflation that many countries experienced after they abandoned commodity monies in the twentieth century, we hesitate to criticize advocates of a gold or silver standard for their preference to stay on the pre-1914 gold/silver standard. 
+鉴于许多国家在20世纪放弃商品货币后经历了持续的高通胀，金本位制或银本位制的倡导者倾向于维持1914年前的金/银本位制也是情有可原的。
 
-The breadth and lengths of the inflationary experiences of the twentieth century under paper money fiat standards are historically unprecedented.
+二十世纪在纸币法定本位制下经历的通货膨胀的广度和长度在历史上都是前所未有的。
 
-## Four big inflations
+## 四次大通胀
 
-In the wake of World War I, which ended in November 1918, monetary and fiscal authorities struggled to achieve price level stability without being on a gold or silver standard.
+在 1918 年 11 月结束的第一次世界大战之后，货币和财政当局艰难地在尝试不实行金本位或银本位的情况下实现价格水平的稳定。
 
-We present four graphs from "The Ends of Four Big Inflations" from chapter 3 of {cite}`sargent2013rational`.
+我们展示了{cite}`sargent2013rational`第3章 “四次大通胀的结局 ”中的四幅图。
 
-The graphs depict logarithms of price levels during the early post World War I years for four countries:
+这些图表描述了第一次世界大战后初期四个国家价格水平的对数：
 
-* Figure 3.1, Retail prices Austria, 1921-1924 (page 42)
-* Figure 3.2, Wholesale prices Hungary, 1921-1924 (page 43)
-* Figure 3.3, Wholesale prices, Poland, 1921-1924 (page 44)
-* Figure 3.4, Wholesale prices, Germany, 1919-1924 (page 45)
+* 图 3.1：1921-1924 年奥地利的零售价格（第 42 页）
+* 图 3.2：1921-1924 年匈牙利的批发价格（第 43 页）
+* 图 3.3：批发价格，波兰，1921-1924 年（第 44 页）
+* 图 3.4：批发价格，德国，1919-1924 年（第 45 页）
 
-We have added logarithms of the exchange rates vis-&agrave;-vis the US dollar to each of the four graphs
-from chapter 3 of {cite}`sargent2013rational`.
 
-Data underlying our graphs appear in tables in an appendix to chapter 3 of {cite}`sargent2013rational`.
-We have transcribed all of these data into a spreadsheet {download}`chapter_3.xlsx <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx>` that we read into pandas.
+我们在四幅图中的每一幅都加上了相对美元汇率的对数。
+引自{cite}`sargent2013rational`第3章。
 
-In the code cell below we clean the data and build a `pandas.dataframe`.
+图表的基础数据载于{cite}`sargent2013rational`第3章附录中的表格。
+我们将所有这些数据转录到电子表格 {download}`chapter_3.xlsx <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx>` 中，并将其读入 pandas。
+
+在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 def process_entry(entry):
-    "Clean each entry of a dataframe."
+    "清理数据帧的每个条目"
     
     if type(entry) == str:
-        # Remove leading and trailing whitespace
+        # 删除前导和尾部空白
         entry = entry.strip()
-        # Remove comma
+        # 删除逗号
         entry = entry.replace(',', '')
     
-        # Remove HTML markers
+        # 删除 HTML 标记
         item_to_remove = ['<s>a</s>', '<s>c</s>', 
                           '<s>d</s>', '<s>e</s>']
 
-        # <s>b</s> represents a billion
+        # <s>b</s> 代表十亿
         if '<s>b</s>' in entry:
             entry = entry.replace('<s>b</s>', '')
             entry = float(entry) * 1e9
@@ -258,14 +257,14 @@ def process_entry(entry):
 def process_df(df):
     "Clean and reorganize the entire dataframe."
     
-    # Remove HTML markers from column names
+    # 删除列名中的 HTML 标记
     for item in ['<s>a</s>', '<s>c</s>', '<s>d</s>', '<s>e</s>']:
         df.columns = df.columns.str.replace(item, '')
         
-    # Convert years to int
+    # 将年份转换为整数
     df['Year'] = df['Year'].apply(lambda x: int(x))
     
-    # Set index to datetime with year and month
+    # 将索引设置为包含年月的日期时间
     df = df.set_index(
             pd.to_datetime(
                 (df['Year'].astype(str) + \
@@ -273,14 +272,14 @@ def process_df(df):
                 format='%Y%B'))
     df = df.drop(['Year', 'Month'], axis=1)
     
-    # Handle duplicates by keeping the first
+     # 处理重复数据，保留第一个数据 
     df = df[~df.index.duplicated(keep='first')]
     
-    # Convert attribute values to numeric
+   # 将属性值转换为数字
     df = df.map(lambda x: float(x) \
                 if x != '—' else np.nan)
     
-    # Finally, we only focus on data between 1919 and 1925
+    # 最后，我们只关注 1919 年到 1925 年之间的数据
     mask = (df.index >= '1919-01-01') & \
            (df.index < '1925-01-01')
     df = df.loc[mask]
@@ -288,30 +287,29 @@ def process_df(df):
     return df
 ```
 
-Now we write plotting functions `pe_plot` and `pr_plot` that will build figures that show the price level, exchange rates, 
-and inflation rates, for each country of interest.
+现在，我们编写了绘图函数 `pe_plot` 和 `pr_plot` ，它们将绘制出显示价格水平、汇率和通货膨胀率的图表、和通货膨胀率。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 def pe_plot(p_seq, e_seq, index, labs, ax):
-    "Generate plots for price and exchange rates."
+    "生成价格和汇率图"
 
     p_lab, e_lab = labs
     
-    # Plot price and exchange rates
+    # 绘制价格和汇率图
     ax.plot(index, p_seq, label=p_lab, color='tab:blue', lw=2)
     
-    # Add a new axis
+    # 添加新轴
     ax1 = ax.twinx()
     ax1.plot([None], [None], label=p_lab, color='tab:blue', lw=2)
     ax1.plot(index, e_seq, label=e_lab, color='tab:orange', lw=2)
     
-    # Set log axes
+    # 设置对数轴
     ax.set_yscale('log')
     ax1.set_yscale('log')
     
-    # Define the axis label format
+    # 定义轴标签格式
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
     ax.xaxis.set_major_formatter(
@@ -319,24 +317,24 @@ def pe_plot(p_seq, e_seq, index, labs, ax):
     for label in ax.get_xticklabels():
         label.set_rotation(45)
     
-    # Set labels
-    ax.set_ylabel('Price level')
-    ax1.set_ylabel('Exchange rate')
+    # 设置标签
+    ax.set_ylabel('价格水平')
+    ax1.set_ylabel('汇率')
   
     ax1.legend(loc='upper left')
     
     return ax1
 
 def pr_plot(p_seq, index, ax):
-    "Generate plots for inflation rates."
+    "生成通货膨胀率图"
 
-    #  Calculate the difference of log p_seq
+    # 计算对数 p_seq 的差值
     log_diff_p = np.diff(np.log(p_seq))
     
-    # Calculate and plot moving average
+    # 计算并绘制移动平均值
     diff_smooth = pd.DataFrame(log_diff_p).rolling(3, center=True).mean()
-    ax.plot(index[1:], diff_smooth, label='Moving average (3 period)', alpha=0.5, lw=2)
-    ax.set_ylabel('Inflation rate')
+    ax.plot(index[1:], diff_smooth, label='移动平均数（3 期）', alpha=0.5, lw=2)
+    ax.set_ylabel('通胀率')
     
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
@@ -347,37 +345,37 @@ def pr_plot(p_seq, index, ax):
         label.set_rotation(45)
     
     ax.legend()
-    
+
     return ax
 ```
 
-We prepare the data for each country
+接下来我们为每个国家准备数据
 
 ```{code-cell} ipython3
-# Import data
+# 导入数据
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"
 xls = pd.ExcelFile(data_url)
 
-# Select relevant sheets
+# 选择相关的数据表
 sheet_index = [(2, 3, 4), 
                (9, 10), 
                (14, 15, 16), 
                (21, 18, 19)]
 
-# Remove redundant rows
+# 删除多余的行
 remove_row = [(-2, -2, -2), 
               (-7, -10), 
               (-6, -4, -3), 
               (-19, -3, -6)]
 
-# Unpack and combine series for each country
+# 对每个国家的序列进行解包和合并
 df_list = []
 
 for i in range(4):
     
     indices, rows = sheet_index[i], remove_row[i]
     
-    # Apply process_entry on the selected sheet
+    # 在选定的工作表上应用 process_entry
     sheet_list = [
         pd.read_excel(xls, 'Table3.' + str(ind), 
             header=1).iloc[:row].map(process_entry)
@@ -389,42 +387,44 @@ for i in range(4):
 df_aus, df_hun, df_pol, df_deu = df_list
 ```
 
-Now let's construct graphs for our four countries.
+现在，让我们为四个国家绘制图表。
 
-For each country, we'll plot two graphs.
+我们将为每个国家绘制两幅图。
 
-The first graph plots logarithms of 
+第一幅图绘制的是 
 
-* price levels
-* exchange rates vis-&agrave;-vis US dollars
+* 价格水平
+* 相对于美元的汇率
 
-For each country, the scale on the right side of a graph will pertain to the price level while the scale on the left side of a graph will pertain to the exchange rate. 
+对于每个国家，图表右侧的刻度与价格水平有关，而图表左侧的刻度与汇率有关。
 
-For each country, the second graph plots a centered three-month moving average of the inflation rate defined as $\frac{p_{t-1} + p_t + p_{t+1}}{3}$.
+对于每个国家，第二张图表绘制的是通货膨胀率的三个月居中移动平均值，定义为 $\frac{p_{t-1}+p_t+p_{t+1}}{3}$。
 
-### Austria
+### 奥地利
 
-The sources of our data are:
+我们的数据来源是
 
-* Table 3.3, retail price level $\exp p$
-* Table 3.4, exchange rate with US
+* 表 3.3，零售价格水平 $\exp p$
+* 表 3.4，与美国的汇率
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Price index and exchange rate (Austria)
+    caption: 价格指数和汇率（奥地利）
     name: pi_xrate_austria
 ---
 p_seq = df_aus['Retail price index, 52 commodities']
 e_seq = df_aus['Exchange Rate']
 
-lab = ['Retail price index', 
-       'Austrian Krones (Crowns) per US cent']
+lab = ['零售价格指数', 
+       '奥地利克朗兑美分']
 
-# Create plot
+# 创建图表
 fig, ax = plt.subplots(dpi=200)
-_ = pe_plot(p_seq, e_seq, df_aus.index, lab, ax)
+ax1 = pe_plot(p_seq, e_seq, df_aus.index, lab, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
@@ -433,46 +433,50 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: Monthly inflation rate (Austria)
+    caption: 月通货膨胀率（奥地利）
     name: inflationrate_austria
 ---
-# Plot moving average
+# 绘制移动平均线
 fig, ax = plt.subplots(dpi=200)
-_ = pr_plot(p_seq, df_aus.index, ax)
+ax1 = pr_plot(p_seq, df_aus.index, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
 
-Staring at {numref}`pi_xrate_austria` and {numref}`inflationrate_austria` conveys the following impressions to the authors of this lecture at QuantEcon.
+观察 {numref}`pi_xrate_austria` 和 {numref}`inflationrate_austria` 我们可以看到：
 
-* an episode of "hyperinflation" with rapidly rising log price level and very high monthly inflation rates
-* a sudden stop of the hyperinflation as indicated by the abrupt flattening of the log price level and a marked permanent drop in the three-month average of inflation
-* a US dollar exchange rate that shadows the price level.  
-  
-We'll see similar patterns in the next three episodes that we'll study now.
+* "超级通货膨胀"的一段时期中，价格水平的对数迅速上升，月通胀率非常高
+* 超级通货膨胀的突然停止，表现为价格水平的对数的突然变平，以及三个月平均通胀率的显著永久下降
+* 美元汇率跟随价格水平走势。
 
-### Hungary
+我们将在接下来的三个案例中看到类似的模式。
 
-The source of our data for Hungary is:
+### 匈牙利
 
-* Table 3.10, price level $\exp p$ and exchange rate
+我们的数据来源为：
+
+* 表 3.10，价格水平 $\exp p$ 和汇率
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Price index and exchange rate (Hungary)
+    caption: 价格指数和汇率（匈牙利）
     name: pi_xrate_hungary
 ---
 p_seq = df_hun['Hungarian index of prices']
 e_seq = 1 / df_hun['Cents per crown in New York']
 
-lab = ['Hungarian index of prices', 
-       'Hungarian Koronas (Crowns) per US cent']
+lab = ['匈牙利价格指数', 
+       '匈牙利克朗兑美分']
 
-# Create plot
+# 创建图表
 fig, ax = plt.subplots(dpi=200)
-_ = pe_plot(p_seq, e_seq, df_hun.index, lab, ax)
+ax1 = pe_plot(p_seq, e_seq, df_hun.index, lab, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
@@ -481,33 +485,34 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: Monthly inflation rate (Hungary)
+    caption: 月通货膨胀率（匈牙利）
     name: inflationrate_hungary
 ---
-# Plot moving average
+# 绘制移动平均线
 fig, ax = plt.subplots(dpi=200)
-_ = pr_plot(p_seq, df_hun.index, ax)
-
+ax1 = pr_plot(p_seq, df_hun.index, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-### Poland
+### 波兰
 
-The sources of our data for Poland are:
+波兰的数据来源如下
 
-* Table 3.15, price level $\exp p$ 
-* Table 3.15, exchange rate
+* 表 3.15，价格水平 $\exp p$ 
+* 表 3.15，汇率
 
 ```{note}
-To construct the price level series from the data in the spreadsheet, we instructed Pandas to follow the same procedures implemented in chapter 3 of {cite}`sargent2013rational`. We spliced together three series - Wholesale price index, Wholesale Price Index: On paper currency basis, and Wholesale Price Index: On zloty basis. We adjusted the sequence based on the price level ratio at the last period of the available previous series and glued them  to construct a single series.
-We dropped the exchange rate after June 1924, when the zloty was adopted. We did this because we don't have the price measured in zloty. We used the old currency in June to compute the exchange rate adjustment.
+为了根据电子表格中的数据构建价格水平序列，我们遵循 {cite}`sargent2013rational` 第 3 章中的相同程序。我们拼接了三个系列--批发价格指数、批发价格指数： 纸币批发价格指数和兹罗提批发价格指数： 按兹罗提计算。我们根据可获得的前一序列最后一期的价格水平比率调整了序列，并将它们粘合在一起，构建了一个单一序列。
+我们放弃了 1924 年 6 月采用兹罗提后的汇率。这样做是因为我们没有以兹罗提为单位的价格。我们使用 6 月份的旧货币来计算汇率调整。
 ```
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Price index and exchange rate (Poland)
+    caption: 价格指数和汇率（波兰）
     name: pi_xrate_poland
 ---
 # Splice three price series in different units
@@ -536,13 +541,14 @@ e_seq[e_seq.index > '05-01-1924'] = np.nan
 ```
 
 ```{code-cell} ipython3
-lab = ['Wholesale price index', 
-       'Polish marks per US cent']
+lab = ['批发价格指数', 
+       '波兰马克兑美分']
 
-# Create plot
+# 创建图表
 fig, ax = plt.subplots(dpi=200)
 ax1 = pe_plot(p_seq, e_seq, df_pol.index, lab, ax)
-
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
@@ -550,40 +556,44 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: Monthly inflation rate (Poland)
+    caption: 月通货膨胀率（波兰）
     name: inflationrate_poland
 ---
-# Plot moving average
+# 绘制移动平均线
 fig, ax = plt.subplots(dpi=200)
-_ = pr_plot(p_seq, df_pol.index, ax)
+ax1 = pr_plot(p_seq, df_pol.index, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
 
-### Germany
+### 德国
 
-The sources of our data for Germany are the following tables from chapter 3 of {cite}`sargent2013rational`:
+德国的数据来源于{cite}`sargent2013rational`第 3 章中的以下表格：
 
-* Table 3.18, wholesale price level $\exp p$ 
-* Table 3.19, exchange rate
+* 表 3.18，批发价格水平 $\exp p$ 
+* 表 3.19，汇率
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Price index and exchange rate (Germany)
+    caption: 价格指数和汇率（德国）
     name: pi_xrate_germany
 ---
 p_seq = df_deu['Price index (on basis of marks before July 1924,'
                 '  reichsmarks after)'].copy()
 e_seq = 1/df_deu['Cents per mark']
 
-lab = ['Price index', 
-       'Marks per US cent']
+lab = ['价格指数', 
+       '马克兑美分']
 
-# Create plot
+# 创建图表
 fig, ax = plt.subplots(dpi=200)
 ax1 = pe_plot(p_seq, e_seq, df_deu.index, lab, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
@@ -592,25 +602,27 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: Price index (adjusted) and exchange rate (Germany)
+    caption: 价格指数（调整后）和汇率（德国）
     name: piadj_xrate_germany
 ---
 p_seq = df_deu['Price index (on basis of marks before July 1924,'
                 '  reichsmarks after)'].copy()
 e_seq = 1/df_deu['Cents per mark'].copy()
 
-# Adjust the price level/exchange rate after the currency reform
+# 货币改革后调整价格水平/汇率
 p_seq[p_seq.index > '06-01-1924'] = p_seq[p_seq.index 
                                           > '06-01-1924'] * 1e12
 e_seq[e_seq.index > '12-01-1923'] = e_seq[e_seq.index 
                                           > '12-01-1923'] * 1e12
 
-lab = ['Price index (marks or converted to marks)', 
-       'Marks per US cent(or reichsmark converted to mark)']
+lab = ['价格指数（马克或换算成马克）', 
+       '马克兑美分（或德国马克换算成马克）']
 
 # Create plot
 fig, ax = plt.subplots(dpi=200)
 ax1 = pe_plot(p_seq, e_seq, df_deu.index, lab, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 
 plt.show()
 ```
@@ -619,56 +631,55 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: Monthly inflation rate (Germany)
+    caption: 月通胀率（德国）
     name: inflationrate_germany
 ---
-# Plot moving average
+# 绘制移动平均线
 fig, ax = plt.subplots(dpi=200)
-_ = pr_plot(p_seq, df_deu.index, ax)
-
+ax1 = pr_plot(p_seq, df_deu.index, ax)
+ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=8))
+ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-## Starting and stopping big inflations
+## 大通胀的开始和停止
 
-It is striking how *quickly* (log) price levels in Austria, Hungary, Poland, and Germany leveled off after rising so quickly.
+奥地利、匈牙利、波兰和德国的价格水平在快速上升后，下降得如此之快，这一现象令人瞩目。
 
-These "sudden stops" are also revealed by the permanent drops in three-month moving averages of inflation for the four countries plotted above.
+这些“突然停止”还表现在上述四个国家的三个月移动平均通胀率的永久性下降中。
 
-In addition, the US dollar exchange rates for each of the four countries shadowed their price levels. 
-
-```{note}
-This pattern is an instance of a force featured in the [purchasing power parity](https://en.wikipedia.org/wiki/Purchasing_power_parity) theory of exchange rates. 
-```
-
-Each of these big inflations seemed to have "stopped on a dime".
-
-Chapter 3 of {cite}`sargent2002big` offers an explanation for this remarkable pattern.
-
-In a nutshell, here is the explanation offered there.
-
-After World War I, the United States was on a gold standard. 
-
-The US government stood ready to convert a dollar into a specified amount of gold on demand.
-
-Immediately after World War I, Hungary, Austria, Poland, and Germany were not on the gold standard. 
-
-Their currencies were "fiat" or "unbacked", meaning that they were not backed by credible government promises to convert them into gold or silver coins on demand.
-
-The governments printed new paper notes to pay for goods and services. 
+此外，这四个国家的美元汇率走势与其价格水平相似。
 
 ```{note}
-Technically the notes were "backed" mainly by treasury bills. But people could not expect that those treasury bills would be paid off by levying taxes, but instead by printing more notes or treasury bills.
+这种模式是汇率兑换率理论中[购买力平价理论](https://en.wikipedia.org/wiki/Purchasing_power_parity)的一个实例。
 ```
 
-This was done on such a scale that it led to a depreciation of the currencies of spectacular proportions. 
- 
-In the end, the German mark stabilized at 1 trillion ($10^{12}$) paper marks to the prewar gold mark, the Polish mark at 1.8 million paper marks to the gold zloty, the Austrian crown at 14,400 paper crowns to the prewar Austro-Hungarian crown, and the Hungarian krone at 14,500 paper crowns to the prewar Austro-Hungarian crown.
+这些大通胀似乎都“在一瞬间停止”。
 
-Chapter 3 of {cite}`sargent2002big`  described deliberate changes in policy that Hungary, Austria, Poland, and Germany made to end their hyperinflations.
+{cite}`sargent2002big` 的第3章对这一显著模式提供了解释。
 
-Each government stopped printing money to pay for goods and services once again and made its currency convertible to the US dollar or the UK pound.
+简而言之，他们提供的解释如下。
 
-The story told in {cite}`sargent2002big` is grounded in a *monetarist theory of the price level* described in {doc}`cagan_ree` and {doc}`cagan_adaptive`.
+一战后，美国实行了金本位制。
 
-Those lectures discuss theories about what owners of those rapidly depreciating currencies were thinking and how their beliefs shaped responses of inflation to government monetary and fiscal policies.
+美国政府随时准备按指定数量的金子兑换一美元。
+
+一战后，匈牙利、奥地利、波兰和德国没有立刻实行金本位制。
+
+他们的货币是“法定”或“无支持”的，意思是他们不受政府将其兑换成金银币的可信承诺的支持。
+
+政府可以印制新的纸币来支付货物和服务。
+
+```{note}
+从技术上讲，这些票据主要由国库券支持。但人们不能指望这些国库券会通过征税来偿还，而是通过印制更多的票据或国库券来偿还。
+```
+
+这种行为的规模之大，导致了各国货币的惊人贬值。 
+
+{cite}`sargent2002big`第3章描述了匈牙利、奥地利、波兰和德国为结束恶性通货膨胀而刻意改变政策的情况。
+
+每个国家的政府都停止印刷钞票来支付商品和服务，并使本国货币可兑换成美元或英镑。
+
+{cite}`sargent2002big`中讲述的故事是以{doc}`cagan_ree`和{doc}`cagan_adaptive`中描述的价格水平货币主义理论为基础的。
+
+这些章节讨论了这些快速贬值货币的持有者在想什么，以及他们的信念如何影响通货膨胀对政府货币和财政政策的反应。

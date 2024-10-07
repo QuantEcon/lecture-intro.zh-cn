@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# Networks
+# 网络
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -19,35 +19,18 @@ kernelspec:
 !pip install quantecon-book-networks pandas-datareader
 ```
 
-## Outline
+## 概述
 
-In recent years there has been rapid growth in a field called [network science](https://en.wikipedia.org/wiki/Network_science).
-
-Network science studies relationships between groups of objects.
-
-One important example is the [world wide web](https://en.wikipedia.org/wiki/World_Wide_Web#Linking)
-, where web pages are connected by hyperlinks.
-
-Another is the [human brain](https://en.wikipedia.org/wiki/Neural_circuit): studies of brain function emphasize the network of
-connections between nerve cells (neurons).
-
-[Artificial neural networks](https://en.wikipedia.org/wiki/Artificial_neural_network) are based on this idea, using data to build
-intricate connections between simple processing units.
-
-Epidemiologists studying [transmission of diseases](https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics)
-like COVID-19 analyze interactions between groups of human hosts.
-
-In operations research, network analysis is used to study fundamental problems
-as on minimum cost flow, the traveling salesman, [shortest paths](https://en.wikipedia.org/wiki/Shortest_path_problem),
-and assignment.
-
-This lecture gives an introduction to economic and financial networks.
-
-Some parts of this lecture are drawn from the text
-https://networks.quantecon.org/ but the level of this lecture is more
-introductory.
-
-We will need the following imports.
+近年来，一个被称为[网络科学](https://en.wikipedia.org/wiki/Network_science)的领域迅速发展。
+网络科学研究对象群体之间的关系。
+一个重要的例子是[万维网](https://en.wikipedia.org/wiki/World_Wide_Web#Linking)，其中网页通过超链接相互连接。
+另一个例子是[人脑](https://en.wikipedia.org/wiki/Neural_circuit)：对大脑功能的研究强调神经细胞（神经元）之间的连接网络。
+[人工神经网络](https://en.wikipedia.org/wiki/Artificial_neural_network)基于这一理念，利用数据在简单处理单元之间建立复杂的连接。
+研究COVID-19等[疾病传播](https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics)的流行病学家分析人类宿主群体之间的相互作用。
+在运筹学中，网络分析用于研究基本问题，如最小成本流、旅行商问题、[最短路径](https://en.wikipedia.org/wiki/Shortest_path_problem)和分配问题。
+本讲座介绍了经济和金融网络。
+本讲座的部分内容来自教材书[《经济网络》](https://networks.quantecon.org)，但本讲座的水平更为入门。
+我们需要以下导入。
 
 ```{code-cell} ipython3
 import numpy as np
@@ -63,34 +46,29 @@ import quantecon_book_networks.data as qbn_data
 import matplotlib.patches as mpatches
 ```
 
-## Economic and financial networks
+## 经济和金融网络
 
-Within economics, important examples of networks include
+在经济学中，网络的重要例子包括：
+* 金融网络
+* 生产网络
+* 贸易网络
+* 运输网络
+* 社交网络
 
-* financial networks
-* production networks
-* trade networks
-* transport networks and
-* social networks
+社交网络影响市场情绪和消费者决策的趋势。
+金融网络的结构有助于确定金融系统的相对脆弱性。
+生产网络的结构影响贸易、创新和局部冲击的传播。
+为了更好地理解这些网络，让我们深入看一些例子。
 
-Social networks affect trends in market sentiment and consumer decisions.
+### 例子：飞机出口
 
-The structure of financial networks helps to determine relative fragility of the financial system.
-
-The structure of production networks affects trade, innovation and the propagation of local shocks.
-
-To better understand such networks, let's look at some examples in more depth.
-
-
-### Example: Aircraft Exports
-
-The following figure shows international trade in large commercial aircraft in 2019 based on International Trade Data SITC Revision 2.
+下图显示了基于国际贸易数据SITC第2修订版的2019年大型商用飞机国际贸易情况。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "Commercial Aircraft Network \n"
+    caption: "商用飞机网络 \n"
     name: aircraft_network
 tags: [hide-input]
 ---
@@ -144,96 +122,64 @@ nx.draw_networkx_edges(DG,
 plt.show()
 ```
 
-The circles in the figure are called **nodes** or **vertices** -- in this case they represent countries.
+图中的圆圈被称为**节点**或**顶点** -- 在这个例子中，它们代表国家。
+图中的箭头被称为**边**或**链接**。
+节点大小与总出口成正比，边的宽度与对目标国家的出口成正比。
+（数据针对重量至少15,000公斤的商用飞机贸易，数据来源于CID Dataverse。）
+图表显示美国、法国和德国是主要的出口枢纽。
+在下面的讨论中，我们将学习如何量化这些概念。
 
-The arrows in the figure are called **edges** or **links**.
+### 例子：马尔可夫链
 
-Node size is proportional to total exports and edge width is proportional to exports to the target country.
+回想一下，在我们关于{ref}`马尔可夫链 <mc_eg2>`的讲座中，我们研究了一个商业周期的动态模型，其中的状态包括：
+* "ng" = "正常增长"
+* "mr" = "轻度衰退"
+* "sr" = "严重衰退"
 
-(The data is for trade in commercial aircraft weighing at least 15,000kg and was sourced from CID Dataverse.)
-
-The figure shows that the US, France and Germany are major export hubs.
-
-In the discussion below, we learn to quantify such ideas.
-
-
-### Example: A Markov Chain
-
-Recall that, in our lecture on {ref}`Markov chains <mc_eg2>` we studied a dynamic model of business cycles
-where the states are
-
-* "ng" = "normal growth"
-* "mr" = "mild recession"
-* "sr" = "severe recession"
-
-Let's examine the following figure
+让我们来看看下面这个图表
 
 ```{image} /_static/lecture_specific/networks/mc.png
 :name: mc_networks
 :align: center
 ```
 
-This is an example of a network, where the set of nodes $V$ equals the states:
-
+这是一个网络的例子，其中节点集 $V$ 等于状态集：
 $$
     V = \{ \text{"ng", "mr", "sr"} \}
 $$
+节点之间的边表示一个月的转移概率。
 
-The edges between the nodes show the one month transition probabilities.
+## 图论简介
 
+现在我们已经看过一些例子，让我们转向理论部分。
+这个理论将帮助我们更好地组织我们的思路。
+网络科学的理论部分是使用数学的一个主要分支——[图论](https://en.wikipedia.org/wiki/Graph_theory)构建的。
+图论可能很复杂，我们只会涉及基础部分。
+但是，这些概念已经足以让我们讨论有关经济和金融网络的有趣且重要的想法。
+我们关注"有向"图，其中连接通常是不对称的（箭头通常只指向一个方向，而不是双向）。
+例如，
+* 银行 $A$ 向银行 $B$ 贷款
+* 公司 $A$ 向公司 $B$ 供应商品
+* 个人 $A$ 在特定社交网络上"关注"个人 $B$
+（"无向"图，即连接是对称的，是有向图的一种特殊情况——我们只需要坚持每个从 $A$ 指向 $B$ 的箭头都配对一个从 $B$ 指向 $A$ 的箭头。）
 
-## An introduction to graph theory
+### 关键定义
 
-Now we've looked at some examples, let's move on to theory.
+一个**有向图**由两个部分组成：
+1. 一个有限集 $V$ 和
+2. 一组元素为 $V$ 中的元素的对 $(u, v)$。
 
-This theory will allow us to better organize our thoughts.
+$V$ 的元素被称为图的**顶点**或**节点**。
+对 $(u,v)$ 被称为图的**边**，所有边的集合通常用 $E$ 表示。
+直观和视觉上，边 $(u,v)$ 被理解为从节点 $u$ 到节点 $v$ 的一个箭头。
+（表示箭头的一个巧妙方法是记录箭头的尾部和头部的位置，这正是边所做的。）
 
-The theoretical part of network science is constructed using a major branch of
-mathematics called [graph theory](https://en.wikipedia.org/wiki/Graph_theory).
+在 {numref}`aircraft_network` 所示的飞机出口例子中
+* $V$ 是数据集中包含的所有国家。
+* $E$ 是图中的所有箭头，每个箭头表示从一个国家到另一个国家的某个正数量的飞机出口。
 
-Graph theory can be complicated and we will cover only the basics.
-
-However, these concepts will already be enough for us to discuss interesting and
-important ideas on economic and financial networks.
-
-We focus on "directed" graphs, where connections are, in general, asymmetric
-(arrows typically point one way, not both ways).
-
-E.g.,
-
-* bank $A$ lends money to bank $B$
-* firm $A$ supplies goods to firm $B$
-* individual $A$ "follows" individual $B$ on a given social network
-
-("Undirected" graphs, where connections are symmetric, are a special
-case of directed graphs --- we just need to insist that each arrow pointing
-from $A$ to $B$ is paired with another arrow pointing from $B$ to $A$.)
-
-
-### Key definitions
-
-A **directed graph** consists of two things:
-
-1. a finite set $V$ and
-1. a collection of pairs $(u, v)$ where $u$ and $v$ are elements of $V$.
-
-The elements of $V$ are called the **vertices** or **nodes** of the graph.
-
-The pairs $(u,v)$ are called the **edges** of the graph and the set of all edges will usually be denoted by $E$
-
-Intuitively and visually, an edge $(u,v)$ is understood as an arrow from node $u$ to node $v$.
-
-(A neat way to represent an arrow is to record the location of the tail and
-head of the arrow, and that's exactly what an edge does.)
-
-In the aircraft export example shown in {numref}`aircraft_network`
-
-* $V$ is all countries included in the data set.
-* $E$ is all the arrows in the figure, each indicating some positive amount of aircraft exports from one country to another.
-
-Let's look at more examples.
-
-Two graphs are shown below, each with three nodes.
+让我们看更多的例子。
+下面显示了两个图，每个图都有三个节点。
 
 ```{figure} /_static/lecture_specific/networks/poverty_trap_1.png
 :name: poverty_trap_1
@@ -243,46 +189,33 @@ Poverty Trap
 
 +++
 
-We now construct a graph with the same nodes but different edges.
+现在，我们构造一个具有相同节点但具有不同边的图。
 
 ```{figure} /_static/lecture_specific/networks/poverty_trap_2.png
 :name: poverty_trap_2
 
-Poverty Trap
+贫困陷阱
 ```
 
 +++
 
-For these graphs, the arrows (edges) can be thought of as representing
-positive transition probabilities over a given unit of time.
+对于这些图，箭头（边）可以被视为表示给定时间单位内的正向转移概率。
+通常，如果存在边 $(u, v)$，则称节点 $u$ 为 $v$ 的**直接前驱**，$v$ 为 $u$ 的**直接后继**。
+此外，对于 $v \in V$，
+* **入度**是 $i_d(v) = $ $v$ 的直接前驱数，以及
+* **出度**是 $o_d(v) = $ $v$ 的直接后继数。
 
-In general, if an edge $(u, v)$ exists, then the node $u$ is called a
-**direct predecessor** of $v$ and $v$ is called a **direct successor** of $u$.
-
-Also,  for $v \in V$,
-
-* the **in-degree** is $i_d(v) = $ the number of direct predecessors of $v$ and
-* the **out-degree** is $o_d(v) = $ the number of direct successors of $v$.
-
-
-### Digraphs in Networkx
-
-The Python package [Networkx](https://networkx.org/) provides a convenient
-data structure for representing directed graphs and implements many common
-routines for analyzing them.
-
-As an example, let us recreate {numref}`poverty_trap_2` using Networkx.
-
-To do so, we first create an empty `DiGraph` object:
+### Networkx中的有向图
+Python包 [Networkx](https://networkx.org/) 为表示有向图提供了一个便捷的数据结构，并实现了许多用于分析它们的常见例程。
+作为示例，让我们使用Networkx重新创建 {numref}`poverty_trap_2`。
+为此，我们首先创建一个空的 `DiGraph` 对象：
 
 ```{code-cell} ipython3
 G_p = nx.DiGraph()
 ```
 
-Next we populate it with nodes and edges.
-
-To do this we write down a list of
-all edges, with *poor* represented by *p* and so on:
+接下来，我们用节点和边来填充它。
+为此，我们列出所有边的列表，其中*贫穷*用*p*表示，以此类推：
 
 ```{code-cell} ipython3
 edge_list = [('p', 'p'),
@@ -290,7 +223,7 @@ edge_list = [('p', 'p'),
              ('r', 'p'), ('r', 'm'), ('r', 'r')]
 ```
 
-Finally, we add the edges to our `DiGraph` object:
+最后，我们将边添加到我们的 `DiGraph` 对象中：
 
 ```{code-cell} ipython3
 for e in edge_list:
@@ -298,16 +231,14 @@ for e in edge_list:
     G_p.add_edge(u, v)
 ```
 
-Alternatively, we can use the method `add_edges_from`.
+或者，我们可以使用 `add_edges_from` 方法。
 
 ```{code-cell} ipython3
 G_p.add_edges_from(edge_list)
 ```
 
-Adding the edges automatically adds the nodes, so `G_p` is now a
-correct representation of our graph.
-
-We can verify this by plotting the graph via Networkx with the following code:
+添加边会自动添加节点，所以 `G_p` 现在是我们图的正确表示。
+我们可以通过使用以下代码通过Networkx绘制图来验证这一点：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -317,45 +248,36 @@ nx.draw_spring(G_p, ax=ax, node_size=500, with_labels=True,
 plt.show()
 ```
 
-The figure obtained above matches the original directed graph in {numref}`poverty_trap_2`.
-
-
-`DiGraph` objects have methods that calculate in-degree and out-degree
-of nodes.
-
-For example,
+上面得到的图形与{numref}`poverty_trap_2`中的原始有向图相匹配。
+`DiGraph`对象有计算节点入度和出度的方法。
+例如，
 
 ```{code-cell} ipython3
 G_p.in_degree('p')
 ```
 (strongly_connected)=
-### Communication
+### 通信
 
-Next, we study communication and connectedness, which have important
-implications for economic networks.
+接下来，我们研究通信和连通性，这对经济网络有重要影响。
 
-Node $v$ is called **accessible** from node $u$ if either $u=v$ or there
-exists a sequence of edges that lead from $u$ to $v$.
+如果$u=v$或存在一系列从$u$到$v$的边，则称节点$v$从节点$u$**可达**。
+* 在这种情况下，我们写作$u \to v$
+（从视觉上看，有一系列箭头从$u$指向$v$。）
 
-* in this case, we write $u \to v$
+例如，假设我们有一个表示生产网络的有向图，其中
+* $V$的元素是工业部门
+* 边$(i, j)$的存在意味着$i$向$j$供应产品或服务。
 
-(Visually, there is a sequence of arrows leading from $u$ to $v$.)
+那么$m \to \ell$意味着部门$m$是部门$\ell$的上游供应商。
 
-For example, suppose we have a directed graph representing a production network, where
+如果$u \to v$且$v \to u$，则称两个节点$u$和$v$**相通**。
 
-* elements of $V$ are industrial sectors and
-* existence of an edge $(i, j)$ means that $i$ supplies products or services to $j$.
+如果所有节点都相通，则称图是**强连通的**。
 
-Then $m \to \ell$ means that sector $m$ is an upstream supplier of sector $\ell$.
+例如，{numref}`poverty_trap_1`是强连通的，
+然而在{numref}`poverty_trap_2`中，富人节点从穷人节点不可达，因此它不是强连通的。
 
-Two nodes $u$ and $v$ are said to **communicate** if both $u \to v$ and $v \to u$.
-
-A graph is called **strongly connected** if all nodes communicate.
-
-For example, {numref}`poverty_trap_1` is strongly connected
-however in {numref}`poverty_trap_2` rich is not accessible from poor, thus it is not strongly connected.
-
-We can verify this by first constructing the graphs using Networkx and then using `nx.is_strongly_connected`.
+我们可以通过首先使用Networkx构建图，然后使用`nx.is_strongly_connected`来验证这一点。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -369,7 +291,7 @@ nx.draw_networkx(G1, with_labels = True)
 ```
 
 ```{code-cell} ipython3
-nx.is_strongly_connected(G1)    #checking if above graph is strongly connected
+nx.is_strongly_connected(G1)    #检查上面的图是否强关联
 ```
 
 ```{code-cell} ipython3
@@ -384,25 +306,20 @@ nx.draw_networkx(G2, with_labels = True)
 ```
 
 ```{code-cell} ipython3
-nx.is_strongly_connected(G2)    #checking if above graph is strongly connected
+nx.is_strongly_connected(G2)    #检查上面的图是否强关联
 ```
 
-## Weighted graphs
+## 加权图
+我们现在介绍加权图，其中每条边都附有权重（数字）。
 
-We now introduce weighted graphs, where weights (numbers) are attached to each
-edge.
-
-
-### International private credit flows by country
-
-To motivate the idea, consider the following figure which shows flows of funds (i.e.,
-loans) between private banks, grouped by country of origin.
+### 按国家划分的国际私人信贷流动
+为了说明这个概念，请看下图，它展示了私人银行之间的资金流动（即贷款），按原始国家分组。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "International Credit Network \n"
+    caption: "国际信贷网络 \n"
     name: financial_network
 tags: [hide-input]
 ---
@@ -460,90 +377,76 @@ nx.draw_networkx_edges(G,
 plt.show()
 ```
 
-The country codes are given in the following table
+国家代码在下表中给出
+|代码|    国家    |代码| 国家 |代码|   国家   |代码|     国家    |
+|:--:|:-----------|:--:|:----:|:--:|:--------:|:--:|:-----------:|
+| AU |   澳大利亚  | DE | 德国 | CL |   智利   | ES |    西班牙   |
+| PT |   葡萄牙    | FR | 法国 | TR |   土耳其 | GB |    英国     |
+| US |   美国      | IE | 爱尔兰| AT |   奥地利 | IT |    意大利   |
+| BE |   比利时    | JP | 日本 | SW |   瑞士   | SE |    瑞典     |
 
-|Code|    Country    |Code| Country |Code|   Country   |Code|     Country    |
-|:--:|:--------------|:--:|:-------:|:--:|:-----------:|:--:|:--------------:|
-| AU |   Australia   | DE | Germany | CL |    Chile    | ES |     Spain      |
-| PT |   Portugal    | FR |  France | TR |   Turkey    | GB | United Kingdom |
-| US | United States | IE | Ireland | AT |   Austria   | IT |     Italy      |
-| BE |   Belgium     | JP |  Japan  | SW | Switzerland | SE |    Sweden      |
+从日本到美国的箭头表示日本银行对所有在美国注册的银行的总体债权，这些数据由国际清算银行（BIS）收集。
 
-An arrow from Japan to the US indicates aggregate claims held by Japanese
-banks on all US-registered banks, as collected by the Bank of International
-Settlements (BIS).
+图中每个节点的大小与所有其他节点对该节点的外国债权总额成正比。
 
-The size of each node in the figure is increasing in the
-total foreign claims of all other nodes on this node.
+箭头的宽度与它们所代表的外国债权成正比。
 
-The widths of the arrows are proportional to the foreign claims they represent.
+请注意，在这个网络中，几乎对于每一对节点$u$和$v$都存在一条边$(u, v)$（即网络中几乎每个国家之间都有联系）。
 
-Notice that, in this network, an edge $(u, v)$ exists for almost every choice
-of $u$ and $v$ (i.e., almost every country in the network).
+（事实上，还有更多的小箭头，为了清晰起见我们省略了。）
 
-(In fact, there are even more small arrows, which we have dropped for clarity.)
+因此，仅仅一个节点到另一个节点边的存在与否并不特别有信息量。
 
-Hence the existence of an edge from one node to another is not particularly informative.
+为了理解这个网络，我们需要记录的不仅是信贷流动的存在或缺失，还要记录流动的规模。
 
-To understand the network, we need to record not just the existence or absence
-of a credit flow, but also the size of the flow.
-
-The correct data structure for recording this information is a "weighted
-directed graph".
+记录这些信息的正确数据结构是"加权有向图"。
 
 +++
 
-### Definitions
+### 定义
 
-A **weighted directed graph** is a directed graph to which we have added a
-**weight function** $w$ that assigns a positive number to each edge.
+**加权有向图**是一种有向图，我们为其添加了一个**权重函数**$w$，该函数为每条边分配一个正数。
 
-The figure above shows one weighted directed graph, where the weights are the size of fund flows.
+上图显示了一个加权有向图，其中权重是资金流动的大小。
 
-The following figure shows a weighted directed graph, with arrows
-representing edges of the induced directed graph.
-
+下图显示了一个加权有向图，箭头表示诱导有向图的边。
 
 ```{figure} /_static/lecture_specific/networks/weighted.png
 :name: poverty_trap_weighted
 
-Weighted Poverty Trap
+加权贫困陷阱
 ```
 
 
-The numbers next to the edges are the weights.
+边旁边的数字是权重。
 
-In this case, you can think of the numbers on the arrows as transition
-probabilities for a household over, say, one year.
+在这个例子中，你可以把箭头上的数字看作是一个家庭在一年内的转移概率。
 
-We see that a rich household has a 10\% chance of becoming poor in one year.
+我们可以看到，一个富裕家庭在一年内有10%的机会变成贫困。
 
+## 邻接矩阵
 
-## Adjacency matrices
+另一种表示权重的方法是通过矩阵，这种方法在数值计算中非常方便。
 
-Another way that we can represent weights, which turns out to be very
-convenient for numerical work, is via a matrix.
-
-The **adjacency matrix** of a weighted directed graph with nodes $\{v_1, \ldots, v_n\}$, edges $E$ and weight function $w$ is the matrix
+对于一个有节点集 $\{v_1, \ldots, v_n\}$、边集 $E$ 和权重函数 $w$ 的加权有向图，其**邻接矩阵**是一个矩阵
 
 $$
 A = (a_{ij})_{1 \leq i,j \leq n}
-\quad \text{with} \quad
+\quad \text{其中} \quad
 a_{ij} =
 %
 \begin{cases}
-    w(v_i, v_j) & \text{ if } (v_i, v_j) \in E
+    w(v_i, v_j) & \text{如果} (v_i, v_j) \in E
     \\
-    0           & \text{ otherwise}.
+    0           & \text{其他情况}
 \end{cases}
 %
 $$
 
-Once the nodes in $V$ are enumerated, the weight function and
-adjacency matrix provide essentially the same information.
+一旦 $V$ 中的节点被列举出来，权重函数和邻接矩阵本质上提供相同的信息。
 
-For example, with $\{$poor, middle, rich$\}$ mapped to $\{1, 2, 3\}$ respectively,
-the adjacency matrix corresponding to the weighted directed graph in {numref}`poverty_trap_weighted` is
+例如，将 $\{$贫困, 中产, 富裕$\}$ 分别映射到 $\{1, 2, 3\}$，
+{numref}`poverty_trap_weighted` 中加权有向图对应的邻接矩阵是
 
 $$
 \begin{pmatrix}
@@ -553,24 +456,19 @@ $$
 \end{pmatrix}.
 $$
 
-In QuantEcon's `DiGraph` implementation, weights are recorded via the
-keyword `weighted`:
+在 QuantEcon 的 `DiGraph` 实现中，权重通过关键字 `weighted` 记录：
 
 ```{code-cell} ipython3
 A = ((0.9, 0.1, 0.0),
      (0.4, 0.4, 0.2),
      (0.1, 0.1, 0.8))
 A = np.array(A)
-G = qe.DiGraph(A, weighted=True)    # store weights
+G = qe.DiGraph(A, weighted=True)    # 储存权重
 ```
 
-One of the key points to remember about adjacency matrices is that taking the
-transpose _reverses all the arrows_ in the associated directed graph.
-
-
-For example, the following directed graph can be
-interpreted as a stylized version of a financial network, with nodes as banks
-and edges showing the flow of funds.
+关于邻接矩阵的一个关键点是，对其进行转置操作会*反转相关有向图中的所有箭头*。
+例如，以下有向图可以被解释为一个金融网络的简化版本，其中节点代表银行，
+边表示资金流动。
 
 ```{code-cell} ipython3
 G4 = nx.DiGraph()
@@ -596,10 +494,8 @@ nx.draw_networkx_nodes(G4, pos, linewidths= 0.5, edgecolors = 'black',
 plt.show()
 ```
 
-We see that bank 2 extends a loan of size 200 to bank 3.
-
-The corresponding adjacency matrix is
-
+我们看到银行2向银行3发放了200的贷款。
+对应的邻接矩阵是
 $$
 A =
 \begin{pmatrix}
@@ -610,9 +506,7 @@ A =
     150 & 0 & 250 & 300 & 0
 \end{pmatrix}.
 $$
-
-The transpose is
-
+其转置是
 $$
 A^\top =
 \begin{pmatrix}
@@ -623,10 +517,8 @@ A^\top =
     0   & 0   & 0   & 50  & 0
 \end{pmatrix}.
 $$
-
-The corresponding network is visualized in the following figure which shows the network of liabilities after the loans have been granted.
-
-Both of these networks (original and transpose) are useful for analyzing financial markets.
+相应的网络在下图中可视化，显示了贷款发放后的负债网络。
+这两个网络（原始和转置）对于分析金融市场都很有用。
 
 ```{code-cell} ipython3
 G5 = nx.DiGraph()
@@ -651,64 +543,47 @@ nx.draw_networkx_nodes(G5, pos, linewidths= 0.5, edgecolors = 'black',
 plt.show()
 ```
 
-In general, every nonnegative $n \times n$ matrix $A = (a_{ij})$ can be
-viewed as the adjacency matrix of a weighted directed graph.
+一般来说，每个非负的 $n \times n$ 矩阵 $A = (a_{ij})$ 都可以被视为加权有向图的邻接矩阵。
+要构建图，我们设 $V = 1, \ldots, n$，并将边集 $E$ 取为所有满足 $a_{ij} > 0$ 的 $(i,j)$。
+对于权重函数，我们对所有边 $(i,j)$ 设置 $w(i, j) = a_{ij}$。
+我们称这个图为 $A$ 诱导的加权有向图。
 
-To build the graph we set $V = 1, \ldots, n$ and take the edge set $E$ to be
-all $(i,j)$ such that $a_{ij} > 0$.
-
-For the weight function we set $w(i, j) = a_{ij}$  for all edges $(i,j)$.
-
-We call this graph the weighted directed graph induced by $A$.
-
-
-## Properties
-
-Consider a weighted directed graph with adjacency matrix $A$.
-
-Let $a^k_{ij}$ be element $i,j$ of $A^k$, the $k$-th power of $A$.
-
-The following result is useful in many applications:
+## 性质
+考虑一个加权有向图，其邻接矩阵为 $A$。
+令 $a^k_{ij}$ 为 $A^k$（$A$ 的 $k$ 次方）中的第 $i,j$ 个元素。
+以下结果在许多应用中很有用：
 
 ````{prf:theorem}
 :label: graph_theory_property1
 
-For distinct nodes $i, j$ in $V$ and any integer $k$, we have
-
+对于 $V$ 中的不同节点 $i, j$ 和任意整数 $k$，我们有
 $$
 a^k_{i j} > 0
-\quad \text{if and only if} \quad
-\text{ $j$ is accessible from $i$}.
+\quad \text{当且仅当} \quad
+\text{$j$ 可从 $i$ 到达}。
 $$
 
 ````
 
 +++
 
-The above result is obvious when $k=1$ and a proof of the general case can be
-found in {cite}`sargent2022economic`.
-
-Now recall from the eigenvalues lecture that a
-nonnegative matrix $A$ is called {ref}`irreducible<irreducible>` if for each $(i,j)$ there is an integer $k \geq 0$ such that $a^{k}_{ij} > 0$.
-
-From the preceding theorem, it is not too difficult (see
-{cite}`sargent2022economic` for details) to get the next result.
+当 $k=1$ 时，上述结果是显而易见的，对于一般情况的证明可以在 {cite}`sargent2022economic` 中找到。
+现在回想特征值讲座中提到，一个非负矩阵 $A$ 被称为{ref}`不可约的<irreducible>`，如果对于每个 $(i,j)$，存在一个整数 $k \geq 0$，使得 $a^{k}_{ij} > 0$。
+根据前面的定理，不难得出下一个结果（详见 {cite}`sargent2022economic`）。
 
 ````{prf:theorem}
 :label: graph_theory_property2
 
-For a weighted directed graph the following statements are equivalent:
-
-1. The directed graph is strongly connected.
-2. The adjacency matrix of the graph is irreducible.
+对于一个加权有向图，以下陈述是等价的：
+1. 该有向图是强连通的。
+2. 该图的邻接矩阵是不可约的。
 
 ````
 
 +++
 
-We illustrate the above theorem with a simple example.
-
-Consider the following weighted directed graph.
+我们用一个简单的例子来说明上述定理。
+考虑以下加权有向图。
 
 
 ```{image} /_static/lecture_specific/networks/properties.png
@@ -718,7 +593,7 @@ Consider the following weighted directed graph.
 
 +++
 
-We first create the above network as a Networkx `DiGraph` object.
+我们首先将上述网络创建为 Networkx `DiGraph` 对象。
 
 ```{code-cell} ipython3
 G6 = nx.DiGraph()
@@ -728,10 +603,10 @@ G6.add_edges_from([('1','2'),('1','3'),
                    ('3','1'),('3','2')])
 ```
 
-Then we construct the associated adjacency matrix A.
+然后我们构建相关的邻接矩阵A。
 
 ```{code-cell} ipython3
-A = np.array([[0,0.7,0.3],    # adjacency matrix A
+A = np.array([[0,0.7,0.3],    # 邻接矩阵A。
               [1,0,0],
               [0.4,0.6,0]])
 ```
@@ -748,46 +623,35 @@ def is_irreducible(P):
 ```
 
 ```{code-cell} ipython3
-is_irreducible(A)      # check irreducibility of A
+is_irreducible(A)      #检查A的不可约性
 ```
 
 ```{code-cell} ipython3
-nx.is_strongly_connected(G6)      # check connectedness of graph
+nx.is_strongly_connected(G6)      # 检查图的连接性
 ```
 
-## Network centrality
+## 网络中心性
 
-When studying networks of all varieties, a recurring topic is the relative
-"centrality" or "importance" of different nodes.
+在研究各种网络时，一个反复出现的话题是不同节点的相对"中心性"或"重要性"。
+例子包括：
+* 搜索引擎对网页的排名
+* 确定金融网络中最重要的银行（在金融危机时中央银行应该救助哪一家）
+* 确定经济中最重要的工业部门
 
-Examples include
+在接下来的内容中，**中心性度量**将每个加权有向图与一个向量$m$关联起来，其中$m_i$被解释为节点$v_i$的中心性（或排名）。
 
-* ranking of web pages by search engines
-* determining the most important bank in a financial network (which one a
-  central bank should rescue if there is a financial crisis)
-* determining the most important industrial sector in an economy.
+### 度中心性
 
-In what follows, a **centrality measure** associates to each weighted directed
-graph a vector $m$ where the $m_i$ is interpreted as the centrality (or rank)
-of node $v_i$.
-
-### Degree centrality
-
-Two elementary measures of "importance" of a node in a given directed
-graph are its in-degree and out-degree.
-
-Both of these provide a centrality measure.
-
-In-degree centrality is a vector containing the in-degree of each node in
-the graph.
-
-Consider the following simple example.
+在给定的有向图中，衡量节点"重要性"的两个基本指标是其入度和出度。
+这两者都提供了一种中心性度量。
+入度中心性是一个包含图中每个节点入度的向量。
+考虑以下简单例子。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Sample Graph
+    caption: 样本图
     name: sample_gph_1
 ---
 G7 = nx.DiGraph()
@@ -810,18 +674,16 @@ nx.draw_networkx_nodes(G7, pos, linewidths=0.5, edgecolors='black',
 plt.show()
 ```
 
-The following code displays the in-degree centrality of all nodes.
+以下代码显示了所有节点的入度中心性。
 
 ```{code-cell} ipython3
-iG7 = [G7.in_degree(v) for v in G7.nodes()]   # computing in-degree centrality
-
+iG7 = [G7.in_degree(v) for v in G7.nodes()]   #计算入度中心性
 for i, d in enumerate(iG7):
     print(i+1, d)
 ```
 
-Consider the international credit network displayed in {numref}`financial_network`.
-
-The following plot displays the in-degree centrality of each country.
+考虑{numref}`financial_network`中显示的国际信贷网络。
+以下图表显示了每个国家的入度中心性。
 
 ```{code-cell} ipython3
 D = qbn_io.build_unweighted_matrix(Z)
@@ -852,98 +714,64 @@ ax.set_ylim((0,20))
 plt.show()
 ```
 
-Unfortunately, while in-degree and out-degree centrality are simple to
-calculate, they are not always informative.
+虽然入度和出度中心性计算简单，但它们并不总是有用。
+在{numref}`financial_network`中，几乎每个节点之间都存在边，
+所以基于入度或出度的中心性排名无法有效区分国家。
+这在上图中也可以看到。
+另一个例子是网络搜索引擎的任务，它在用户输入搜索时按相关性对页面进行排名。
+假设网页A的入站链接是网页B的两倍。
+入度中心性告诉我们页面A应该获得更高的排名。
+但实际上，页面A可能不如页面B重要。
+原因是，假设指向A的链接来自几乎没有流量的页面，
+而指向B的链接来自流量非常大的页面。
+在这种情况下，页面B可能会收到更多访问者，这反过来表明
+页面B包含更有价值（或更有趣）的内容。
+思考这一点suggests重要性可能是*递归的*。
+这意味着给定节点的重要性取决于
+链接到它的其他节点的重要性。
+作为另一个例子，我们可以想象一个生产网络，其中一个
+给定部门的重要性取决于它供应的部门的重要性。
+这reverses了前面例子的顺序：现在给定节点的重要性
+取决于它*链接到的*其他节点的重要性。
+下面的中心性度量将具有这些递归特征。
 
-In {numref}`financial_network`, an edge exists between almost every node,
-so the in- or out-degree based centrality ranking fails to effectively separate the countries.
+## 特征向量中心性
 
-This can be seen in the above graph as well.
-
-Another example is the task of a web search engine, which ranks pages
-by relevance whenever a user enters a search.
-
-Suppose web page A has twice as many inbound links as page B.
-
-In-degree centrality tells us that page A deserves a higher rank.
-
-But in fact, page A might be less important than page B.
-
-To see why, suppose that the links to A are from pages that receive almost no traffic,
-while the links to B are from pages that receive very heavy traffic.
-
-In this case, page B probably receives more visitors, which in turn suggests
-that page B contains more valuable (or entertaining) content.
-
-Thinking about this point suggests that importance might be *recursive*.
-
-This means that the importance of a given node depends on the importance of
-other nodes that link to it.
-
-As another example, we can imagine a production network where the importance of a
-given sector depends on the importance of the sectors that it supplies.
-
-This reverses the order of the previous example: now the importance of a given
-node depends on the importance of other nodes that *it links to*.
-
-The next centrality measures will have these recursive features.
-
-
-### Eigenvector centrality
-
-Suppose we have a weighted directed graph with adjacency matrix $A$.
-
-For simplicity, we will suppose that the nodes $V$ of the graph are just the
-integers $1, \ldots, n$.
-
-Let $r(A)$ denote the {ref}`spectral radius<neumann_series_lemma>` of $A$.
-
-The **eigenvector centrality** of the graph is defined as the $n$-vector $e$ that solves
-
+假设我们有一个带有邻接矩阵$A$的加权有向图。
+为简单起见，我们假设图的节点$V$就是
+整数$1, \ldots, n$。
+让$r(A)$表示$A$的{ref}`谱半径<neumann_series_lemma>`。
+图的**特征向量中心性**被定义为解决以下方程的$n$维向量$e$
 $$ 
 \begin{aligned}
     e = \frac{1}{r(A)} A e.
 \end{aligned}
 $$ (ev_central)
-
-In other words, $e$ is the dominant eigenvector of $A$ (the eigenvector of the
-largest eigenvalue --- see the discussion of the {ref}`Perron-Frobenius theorem<perron-frobe>` in the eigenvalue lecture.
-
-To better understand {eq}`ev_central`, we write out the full expression
-for some element $e_i$
-
+换句话说，$e$是$A$的主特征向量（最大特征值的特征向量 --- 
+请看特征值lecture中关于{ref}`Perron-Frobenius定理<perron-frobe>`的讨论。
+为了更好地理解{eq}`ev_central`，我们写出某个元素$e_i$的完整表达式
 $$
 \begin{aligned}
     e_i = \frac{1}{r(A)} \sum_{1 \leq j \leq n} a_{ij} e_j
 \end{aligned}
 $$ (eq_eicen)
-
-
-Note the recursive nature of the definition: the centrality obtained by node
-$i$ is proportional to a sum of the centrality of all nodes, weighted by
-the *rates of flow* from $i$ into these nodes.
-
-A node $i$ is highly ranked if
-1. there are many edges leaving $i$,
-2. these edges have large weights, and
-3. the edges point to other highly ranked nodes.
-
-Later, when we study demand shocks  in production networks, there will be a more
-concrete interpretation of eigenvector centrality.
-
-We will see that, in production networks, sectors with high eigenvector
-centrality are important *suppliers*.
-
-In particular, they are activated by a wide array of demand shocks once orders
-flow backwards through the network.
-
-To compute eigenvector centrality we can use the following function.
+注意定义的递归性质：节点$i$获得的中心性
+与所有节点中心性的加权和成正比，权重为
+从$i$到这些节点的*流量率*。
+如果节点$i$满足以下条件，则它的排名很高：
+1. 从$i$出发的边很多，
+2. 这些边的权重很大，以及
+3. 这些边指向其他排名很高的节点。
+稍后，当我们研究生产网络中的需求冲击时，特征向量中心性将有
+更具体的解释。
+我们将看到，在生产网络中，具有高特征向量中心性的部门是重要的*供应商*。
+特别是，一旦订单通过网络向后流动，它们就会被各种需求冲击激活。
+要计算特征向量中心性，我们可以使用以下函数。
 
 ```{code-cell} ipython3
 def eigenvector_centrality(A, k=40, authority=False):
     """
-    Computes the dominant eigenvector of A. Assumes A is
-    primitive and uses the power method.
+   计算矩阵A的主特征向量。假设A是本原矩阵，并使用幂法。
 
     """
     A_temp = A.T if authority else A
@@ -953,10 +781,10 @@ def eigenvector_centrality(A, k=40, authority=False):
     return e / np.sum(e)
 ```
 
-Let's compute eigenvector centrality for the graph generated in {numref}`sample_gph_1`.
+让我们为{numref}`sample_gph_1`中生成的图计算特征向量中心性。
 
 ```{code-cell} ipython3
-A = nx.to_numpy_array(G7)         # compute adjacency matrix of graph
+A = nx.to_numpy_array(G7)         #计算图的邻接矩阵
 ```
 
 ```{code-cell} ipython3
@@ -967,10 +795,8 @@ for i in range(n):
     print(i+1,e[i])
 ```
 
-While nodes $2$ and $4$ had the highest in-degree centrality, we can see that nodes $1$ and $2$ have the
-highest eigenvector centrality.
-
-Let's revisit the international credit network in {numref}`financial_network`.
+虽然节点 $2$ 和 $4$ 具有最高的入度中心性，但我们可以看到节点 $1$ 和 $2$ 具有最高的特征向量中心性。
+让我们重新审视{numref}`financial_network`中的国际信贷网络。
 
 ```{code-cell} ipython3
 eig_central = eigenvector_centrality(Z)
@@ -980,7 +806,7 @@ eig_central = eigenvector_centrality(Z)
 ---
 mystnb:
   figure:
-    caption: Eigenvector centrality
+    caption: 特征向量中心性
     name: eigenvctr_centrality
 ---
 fig, ax = plt.subplots()
@@ -995,118 +821,78 @@ ax.legend(handles=[patch], fontsize=12, loc="upper left", handlelength=0, frameo
 plt.show()
 ```
 
-Countries that are rated highly according to this rank tend to be important
-players in terms of supply of credit.
+根据这个排名评分较高的国家往往在信贷供应方面扮演重要角色。
+日本在这项指标中排名最高，尽管像英国和法国这样拥有大型金融部门的国家也紧随其后。
+特征向量中心性的优势在于它在衡量节点重要性的同时考虑了其邻居的重要性。
+谷歌的PageRank算法的核心就是特征向量中心性的一个变体，用于对网页进行排名。
+其主要原理是来自重要节点（以度中心性衡量）的链接比来自不重要节点的链接更有价值。
 
-Japan takes the highest rank according to this measure, although
-countries with large financial sectors such as Great Britain and France are
-not far behind.
+### 卡茨中心性
 
-The advantage of eigenvector centrality is that it measures a node's importance while considering the importance of its neighbours.
+特征向量中心性的一个问题是$r(A)$可能为零，这种情况下$1/r(A)$是未定义的。
+出于这个和其他原因，一些研究者更倾向于使用另一种称为卡茨中心性的网络中心性度量。
+固定$\beta$在$(0, 1/r(A))$区间内，带权有向图的**卡茨中心性**定义为解决以下方程的向量$\kappa$：
 
-A variant of eigenvector centrality is at the core of Google's PageRank algorithm, which is used to rank web pages.
-
-The main principle is that links from important nodes (as measured by degree centrality) are worth more than links from unimportant nodes.
-
-
-### Katz centrality
-
-One problem with eigenvector centrality is that $r(A)$ might be zero, in which
-case $1/r(A)$ is not defined.
-
-For this and other reasons, some researchers prefer another measure of
-centrality for networks called Katz centrality.
-
-Fixing $\beta$ in $(0, 1/r(A))$, the **Katz centrality** of a weighted
-directed graph with adjacency matrix $A$ is defined as the vector $\kappa$
-that solves
- 
 $$
 \kappa_i =  \beta \sum_{1 \leq j 1} a_{ij} \kappa_j + 1
-\qquad  \text{for all } i \in \{0, \ldots, n-1\}.
+\qquad  \text{对所有 } i \in \{0, \ldots, n-1\}。
 $$ (katz_central)
 
-Here $\beta$ is a parameter that we can choose.
-
-In vector form we can write
+这里$\beta$是我们可以选择的参数。
+用向量形式我们可以写成：
 
 $$
 \kappa = \mathbf 1 + \beta A \kappa
 $$ (katz_central_vec)
 
-where $\mathbf 1$ is a column vector of ones.
-
-The intuition behind this centrality measure is similar to that provided for
-eigenvector centrality: high centrality is conferred on $i$ when it is linked
-to by nodes that themselves have high centrality.
-
-Provided that $0 < \beta < 1/r(A)$, Katz centrality is always finite and well-defined
-because then $r(\beta A) < 1$.
-
-This means that {eq}`katz_central_vec` has the unique solution
+其中$\mathbf 1$是一个全为1的列向量。
+这种中心性度量背后的直觉与特征向量中心性提供的类似：当节点$i$被本身具有高中心性的节点链接时，它就会获得高中心性。
+只要$0 < \beta < 1/r(A)$，卡茨中心性总是有限且定义明确的，因为这时$r(\beta A) < 1$。
+这意味着方程{eq}`katz_central_vec`有唯一解：
 
 $$
 \kappa = (I - \beta A)^{-1} \mathbf{1}
 $$
 
-
-This follows from the {ref}`Neumann series theorem<neumann_series_lemma>`.
-
-The parameter $\beta$ is used to ensure that $\kappa$ is finite
-
-When $r(A)<1$, we use $\beta=1$ as the default for Katz centrality computations.
+这是由{ref}`诺伊曼级数定理<neumann_series_lemma>`得出的。
+参数$\beta$用于确保$\kappa$是有限的。
+当$r(A)<1$时，我们使用$\beta=1$作为卡茨中心性计算的默认值。
 
 
-### Authorities vs hubs
+### 权威与枢纽
+搜索引擎设计者认识到网页可以通过两种不同的方式变得重要。
 
-Search engine designers recognize that web pages can be important in two
-different ways.
+一些页面具有高**枢纽中心性**，意味着它们链接到有价值的信息来源（例如，新闻聚合网站）。
 
-Some pages have high **hub centrality**, meaning that they link to valuable
-sources of information (e.g., news aggregation sites).
+其他页面具有高**权威中心性**，意味着它们包含有价值的信息，这一点通过指向它们的链接的数量和重要性来体现（例如，受人尊敬的新闻机构的网站）。
 
-Other pages have high **authority centrality**, meaning that they contain
-valuable information, as indicated by the number and significance of incoming
-links (e.g., websites of respected news organizations).
+类似的概念也已经应用于经济网络（通常使用不同的术语）。
 
-Similar ideas can and have been applied to economic networks (often using
-different terminology).
+我们之前讨论的特征向量中心性和Katz中心性衡量的是枢纽中心性。
+（如果节点指向其他具有高中心性的节点，则它们具有高中心性。）
 
-The eigenvector centrality and Katz centrality measures we discussed above
-measure hub centrality.
+如果我们更关心权威中心性，我们可以使用相同的定义，只是取邻接矩阵的转置。
+这之所以有效，是因为取转置会反转箭头的方向。
+（现在，如果节点接收来自其他具有高中心性的节点的链接，它们将具有高中心性。）
 
-(Nodes have high centrality if they point to other nodes with high centrality.)
-
-If we care more about authority centrality, we can use the same definitions
-except that we take the transpose of the adjacency matrix.
-
-This works because taking the transpose reverses the direction of the arrows.
-
-(Now nodes will have high centrality if they receive links from other nodes
-with high centrality.)
-
-For example, the **authority-based eigenvector centrality** of a weighted
-directed graph with adjacency matrix $A$ is the vector $e$ solving
+例如，具有邻接矩阵$A$的加权有向图的**基于权威的特征向量中心性**是解决以下方程的向量$e$：
 
 $$
 e = \frac{1}{r(A)} A^\top e.
 $$ (eicena0)
 
-The only difference from the original definition is that $A$ is replaced by
-its transpose.
+与原始定义的唯一区别是$A$被其转置替代。
+（转置不影响矩阵的谱半径，所以我们写成$r(A)$而不是$r(A^\top)$。）
 
-(Transposes do not affect the spectral radius of a matrix so we wrote $r(A)$ instead of $r(A^\top)$.)
-
-Element-by-element, this is given by
+按元素逐个表示，这可以写成：
 
 $$
 e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 $$ (eicena)
 
-We see $e_j$ will be high if many nodes with high authority rankings link to $j$.
+我们可以看到，如果许多具有高权威排名的节点链接到$j$，则$e_j$将会很高。
 
-The following figurenshows the authority-based eigenvector centrality ranking for the international
-credit network shown in {numref}`financial_network`.
+下图显示了{numref}`financial_network`中所示的国际信贷网络的基于权威的特征向量中心性排名。
 
 ```{code-cell} ipython3
 ecentral_authority = eigenvector_centrality(Z, authority=True)
@@ -1116,7 +902,7 @@ ecentral_authority = eigenvector_centrality(Z, authority=True)
 ---
 mystnb:
   figure:
-    caption: Eigenvector authority
+    caption: 特征向量权威度
     name: eigenvector_centrality
 ---
 fig, ax = plt.subplots()
@@ -1131,37 +917,29 @@ ax.legend(handles=[patch], fontsize=12, loc="upper left", handlelength=0, frameo
 plt.show()
 ```
 
-Highly ranked countries are those that attract large inflows of credit, or
-credit inflows from other major players.
+排名靠前的国家是那些吸引大量信贷流入或从其他主要参与者获得信贷流入的国家。
+在这种情况下，美国作为银行间信贷的目标显然主导了排名。
 
-In this case the US clearly dominates the rankings as a target of interbank credit.
+## 进一步阅读
 
+我们将本讲座中讨论的观点应用于：
 
-## Further reading
+关于经济和社会网络的教科书包括 {cite}`jackson2010social`、
+{cite}`easley2010networks`、{cite}`borgatti2018analyzing`、
+{cite}`sargent2022economic` 和 {cite}`goyal2023networks`。
 
-We apply the ideas discussed in this lecture to:
+在网络科学领域，{cite}`newman2018networks`、{cite}`menczer2020first` 和
+{cite}`coscia2021atlas` 的著作都非常出色。
 
-Textbooks on economic and social networks include {cite}`jackson2010social`,
-{cite}`easley2010networks`, {cite}`borgatti2018analyzing`,
-{cite}`sargent2022economic` and {cite}`goyal2023networks`.
-
-
-Within the realm of network science, the texts
-by {cite}`newman2018networks`, {cite}`menczer2020first` and
-{cite}`coscia2021atlas` are excellent.
-
-
-## Exercises
+## 练习
 
 ```{exercise-start}
 :label: networks_ex1
 ```
 
-Here is a mathematical exercise for those who like proofs.
-
-Let $(V, E)$ be a directed graph and write $u \sim v$ if $u$ and $v$ communicate.
-
-Show that $\sim$ is an [equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation) on $V$.
+这是一个适合喜欢证明的人的数学练习。
+设 $(V, E)$ 是一个有向图，若 $u$ 和 $v$ 互通，则记作 $u \sim v$。
+证明 $\sim$ 是 $V$ 上的[等价关系](https://en.wikipedia.org/wiki/Equivalence_relation)。
 
 ```{exercise-end}
 ```
@@ -1170,28 +948,20 @@ Show that $\sim$ is an [equivalence relation](https://en.wikipedia.org/wiki/Equi
 :class: dropdown
 ```
 
-**Reflexivity:**
+**自反性：**
+显然，$u = v \Rightarrow u \rightarrow v$。
+因此，$u \sim u$。
 
-Trivially, $u = v \Rightarrow u \rightarrow v$.
+**对称性：**
+假设 $u \sim v$
+$\Rightarrow u \rightarrow v$ 且 $v \rightarrow u$。
+根据定义，这意味着 $v \sim u$。
 
-Thus, $u \sim u$.
-
-**Symmetry:**
-Suppose, $u \sim v$
-
-$\Rightarrow u \rightarrow v$ and $v \rightarrow u$.
-
-By definition, this implies $v \sim u$.
-
-**Transitivity:**
-
-Suppose, $u \sim v$ and $v \sim w$
-
-This implies, $u \rightarrow v$ and $v \rightarrow u$ and also $v \rightarrow w$ and $w \rightarrow v$.
-
-Thus, we can conclude $u \rightarrow v \rightarrow w$ and $w \rightarrow v \rightarrow u$.
-
-Which means $u \sim w$.
+**传递性：**
+假设 $u \sim v$ 且 $v \sim w$
+这意味着，$u \rightarrow v$ 且 $v \rightarrow u$，同时 $v \rightarrow w$ 且 $w \rightarrow v$。
+因此，我们可以得出 $u \rightarrow v \rightarrow w$ 且 $w \rightarrow v \rightarrow u$。
+这意味着 $u \sim w$。
 
 ```{solution-end}
 ```
@@ -1200,24 +970,18 @@ Which means $u \sim w$.
 :label: networks_ex2
 ```
 
-Consider a directed graph $G$ with the set of nodes
-
+考虑一个有向图 $G$，其节点集为
 $$
 V = \{0,1,2,3,4,5,6,7\}
 $$
-
-and the set of edges
-
+边集为
 $$
 E = \{(0, 1), (0, 3), (1, 0), (2, 4), (3, 2), (3, 4), (3, 7), (4, 3), (5, 4), (5, 6), (6, 3), (6, 5), (7, 0)\}
 $$
 
-1. Use `Networkx` to draw graph $G$.
-
-2. Find the associated adjacency matrix $A$ for $G$.
-
-3. Use the functions defined above to compute in-degree centrality, out-degree centrality and eigenvector centrality
-   of G.
+1. 使用 `Networkx` 绘制图 $G$。
+2. 找出 $G$ 的相关邻接矩阵 $A$。
+3. 使用上面定义的函数计算 $G$ 的入度中心性、出度中心性和特征向量中心性。
 
 ```{exercise-end}
 ```
@@ -1227,13 +991,13 @@ $$
 ```
 
 ```{code-cell} ipython3
-# First, let's plot the given graph
+# 首先，让我们绘制给定的图
 
 G = nx.DiGraph()
 
-G.add_nodes_from(np.arange(8))  # adding nodes
+G.add_nodes_from(np.arange(8))  # 添加节点
 
-G.add_edges_from([(0,1),(0,3),       # adding edges
+G.add_edges_from([(0,1),(0,3),       # 添加边
                   (1,0),
                   (2,4),
                   (3,2),(3,4),(3,7),
@@ -1248,20 +1012,20 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
-A = nx.to_numpy_array(G)      #find adjacency matrix associated with G
+A = nx.to_numpy_array(G)      #求G的邻接矩阵
 
 A
 ```
 
 ```{code-cell} ipython3
-oG = [G.out_degree(v) for v in G.nodes()]   # computing in-degree centrality
+oG = [G.out_degree(v) for v in G.nodes()]   # 计算入度中心性
 
 for i, d in enumerate(oG):
     print(i, d)
 ```
 
 ```{code-cell} ipython3
-e = eigenvector_centrality(A)   # computing eigenvector centrality
+e = eigenvector_centrality(A)   # 计算特征向量中心性
 n = len(e)
 
 for i in range(n):
@@ -1275,19 +1039,13 @@ for i in range(n):
 :label: networks_ex3
 ```
 
-Consider a graph $G$ with $n$ nodes and $n \times n$ adjacency matrix $A$.
-
-Let $S = \sum_{k=0}^{n-1} A^k$
-
-We can say for any two nodes $i$ and $j$, $j$ is accessible from $i$ if and only if
-$S_{ij} > 0$.
-
-Devise a function `is_accessible` that checks if any two nodes of a given graph are accessible.
-
-Consider the graph in {ref}`networks_ex2` and use this function to check if
-
-1. $1$ is accessible from $2$
-2. $6$ is accessible from $3$
+考虑一个有 $n$ 个节点和 $n \times n$ 邻接矩阵 $A$ 的图 $G$。
+令 $S = \sum_{k=0}^{n-1} A^k$
+我们可以说对于任意两个节点 $i$ 和 $j$，当且仅当 $S_{ij} > 0$ 时，$j$ 可从 $i$ 到达。
+设计一个函数 `is_accessible`，用于检查给定图中的任意两个节点是否可达。
+考虑 {ref}`networks_ex2` 中的图，并使用此函数检查
+1. 从 $2$ 是否可以到达 $1$
+2. 从 $3$ 是否可以到达 $6$
 
 ```{exercise-end}
 ```
@@ -1312,9 +1070,9 @@ def is_accessible(G,i,j):
 ```{code-cell} ipython3
 G = nx.DiGraph()
 
-G.add_nodes_from(np.arange(8))  # adding nodes
+G.add_nodes_from(np.arange(8))  # 添加节点
 
-G.add_edges_from([(0,1),(0,3),       # adding edges
+G.add_edges_from([(0,1),(0,3),       # 添加边
                   (1,0),
                   (2,4),
                   (3,2),(3,4),(3,7),
