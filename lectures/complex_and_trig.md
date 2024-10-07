@@ -21,169 +21,118 @@ kernelspec:
 ```{index} single: python
 ```
 
-# Complex Numbers and Trigonometry
+# 复数和三角函数
+## 概述
+本讲座介绍一些基础数学和三角函数知识。
+这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时，会带来巨大回报。
+例如，这些工具是理解Paul Samuelson（1939年）{cite}`Samuelson1939`在其经典论文中关于投资加速器与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座{doc}`Samuelson乘数加速器<dynam:samuelson>`中的主题。
+除了为Samuelson的工作及其扩展提供基础外，本讲座还可以作为独立的快速回顾，回顾高中基础三角函数的关键结果。
+那么让我们开始吧。
 
-## Overview
-
-This lecture introduces some elementary mathematics and trigonometry.
-
-Useful and interesting in its own right, these concepts reap substantial rewards when studying dynamics generated
-by linear difference equations or linear differential equations.
-
-For example, these tools are keys to understanding outcomes attained by Paul
-Samuelson (1939) {cite}`Samuelson1939` in his classic paper on interactions
-between the investment accelerator and the Keynesian consumption function, our
-topic in the lecture {doc}`Samuelson Multiplier Accelerator <dynam:samuelson>`.
-
-In addition to providing foundations for Samuelson's work and extensions of
-it, this lecture can be read as a stand-alone quick reminder of key results
-from elementary high school trigonometry.
-
-So let's dive in.
-
-### Complex Numbers
-
-A complex number has a **real part** $x$ and a purely **imaginary part** $y$.
-
-The Euclidean, polar, and trigonometric forms of a complex number $z$ are:
-
+### 复数
+复数有一个**实部**$x$和一个纯**虚部**$y$。
+复数$z$的欧几里得形式、极坐标形式和三角形式是：
 $$
 z = x + iy = re^{i\theta} = r(\cos{\theta} + i \sin{\theta})
 $$
+上面的第二个等式被称为**欧拉公式**
+- [欧拉](https://en.wikipedia.org/wiki/Leonhard_Euler)还贡献了许多其他公式！
 
-The second equality above is known as **Euler's formula**
-
-- [Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) contributed many other formulas too!
-
-The complex conjugate $\bar z$ of $z$ is defined as
-
+$z$的复共轭$\bar z$定义为
 $$
 \bar z = x - iy = r e^{-i \theta} = r (\cos{\theta} - i \sin{\theta} )
 $$
+$x$是$z$的**实部**，$y$是$z$的**虚部**。
 
-The value $x$ is the **real** part of $z$ and $y$ is the
-**imaginary** part of $z$.
-
-The symbol $| z |$ = $\sqrt{\bar{z}\cdot z} = r$ represents the **modulus** of $z$.
-
-The value $r$ is the Euclidean distance of vector $(x,y)$ from the
-origin:
-
+符号$| z |$ = $\sqrt{\bar{z}\cdot z} = r$表示$z$的**模**。
+$r$是向量$(x,y)$到原点的欧几里得距离：
 $$
 r = |z| = \sqrt{x^2 + y^2}
 $$
-
-The value $\theta$ is the angle of $(x,y)$ with respect to the real axis.
-
-Evidently, the tangent of $\theta$ is $\left(\frac{y}{x}\right)$.
-
-Therefore,
-
+$\theta$是$(x,y)$相对于实轴的角度。
+显然，$\theta$的正切是$\left(\frac{y}{x}\right)$。
+因此，
 $$
 \theta = \tan^{-1} \Big( \frac{y}{x} \Big)
 $$
-
-Three elementary trigonometric functions are
-
+三个基本三角函数是
 $$
 \cos{\theta} = \frac{x}{r} = \frac{e^{i\theta} + e^{-i\theta}}{2} , \quad
 \sin{\theta} = \frac{y}{r} = \frac{e^{i\theta} - e^{-i\theta}}{2i} , \quad
 \tan{\theta} = \frac{y}{x}
 $$
-
-We'll need the following imports:
+我们需要以下导入：
 
 ```{code-cell} ipython
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (11, 5)  #set default figure size
+plt.rcParams["figure.figsize"] = (11, 5)  #设计默认的图像大小
 import numpy as np
 from sympy import (Symbol, symbols, Eq, nsolve, sqrt, cos, sin, simplify,
                   init_printing, integrate)
 ```
-
-### An Example
-
-```{prf:example}
-:label: ct_ex_com
-
-Consider the complex number $z = 1 + \sqrt{3} i$.
-
-For $z = 1 + \sqrt{3} i$, $x = 1$, $y = \sqrt{3}$.
-
-It follows that $r = 2$ and
-$\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o$.
-```
-
-Let's use Python to plot the trigonometric form of the complex number
-$z = 1 + \sqrt{3} i$.
+### 一个例子
+考虑复数 $z = 1 + \sqrt{3} i$。
+对于 $z = 1 + \sqrt{3} i$，$x = 1$，$y = \sqrt{3}$。
+由此可得 $r = 2$ 且
+$\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o$。
+让我们使用Python来绘制复数 $z = 1 + \sqrt{3} i$ 的三角形式。
 
 ```{code-cell} python3
-# Abbreviate useful values and functions
+# 将值和函数简写
 π = np.pi
 
 
-# Set parameters
+# 设置参数
 r = 2
 θ = π/3
 x = r * np.cos(θ)
 x_range = np.linspace(0, x, 1000)
 θ_range = np.linspace(0, θ, 1000)
 
-# Plot
+# 画图
 fig = plt.figure(figsize=(8, 8))
 ax = plt.subplot(111, projection='polar')
 
-ax.plot((0, θ), (0, r), marker='o', color='b')          # Plot r
-ax.plot(np.zeros(x_range.shape), x_range, color='b')       # Plot x
-ax.plot(θ_range, x / np.cos(θ_range), color='b')        # Plot y
-ax.plot(θ_range, np.full(θ_range.shape, 0.1), color='r')  # Plot θ
+ax.plot((0, θ), (0, r), marker='o', color='b')          # 绘制 r
+ax.plot(np.zeros(x_range.shape), x_range, color='b')       # 绘制 x
+ax.plot(θ_range, x / np.cos(θ_range), color='b')        # 绘制 y
+ax.plot(θ_range, np.full(θ_range.shape, 0.1), color='r')  # 绘制 θ
 
-ax.margins(0) # Let the plot starts at origin
+ax.margins(0) # 从原点开始绘制
 
-ax.set_title("Trigonometry of complex numbers", va='bottom',
+ax.set_title("复数的三角函数", va='bottom',
     fontsize='x-large')
 
 ax.set_rmax(2)
-ax.set_rticks((0.5, 1, 1.5, 2))  # Less radial ticks
-ax.set_rlabel_position(-88.5)    # Get radial labels away from plotted line
+ax.set_rticks((0.5, 1, 1.5, 2))  # 减少标记
+ax.set_rlabel_position(-88.5)    # 将标记远离图像
 
-ax.text(θ, r+0.01 , r'$z = x + iy = 1 + \sqrt{3}\, i$')   # Label z
-ax.text(θ+0.2, 1 , '$r = 2$')                             # Label r
-ax.text(0-0.2, 0.5, '$x = 1$')                            # Label x
-ax.text(0.5, 1.2, r'$y = \sqrt{3}$')                      # Label y
-ax.text(0.25, 0.15, r'$\theta = 60^o$')                   # Label θ
+ax.text(θ, r+0.01 , r'$z = x + iy = 1 + \sqrt{3}\, i$')   # 标记 z
+ax.text(θ+0.2, 1 , '$r = 2$')                             # 标记 r
+ax.text(0-0.2, 0.5, '$x = 1$')                            # 标记 x
+ax.text(0.5, 1.2, r'$y = \sqrt{3}$')                      # 标记 y
+ax.text(0.25, 0.15, r'$\theta = 60^o$')                   # 标记 θ
 
 ax.grid(True)
 plt.show()
 ```
-
-## De Moivre's Theorem
-
-de Moivre's theorem states that:
-
+## 德莫瓦定理
+德莫瓦定理指出：
 $$
 (r(\cos{\theta} + i \sin{\theta}))^n =
 r^n e^{in\theta} =
 r^n(\cos{n\theta} + i \sin{n\theta})
 $$
-
-To prove de Moivre's theorem, note that
-
+要证明德莫瓦定理，注意到
 $$
 (r(\cos{\theta} + i \sin{\theta}))^n = \big( re^{i\theta} \big)^n
 $$
+然后进行计算。
 
-and compute.
-
-## Applications of de Moivre's Theorem
-
-### Example 1
-
-We can use de Moivre's theorem to show that
-$r = \sqrt{x^2 + y^2}$.
-
-We have
-
+## 德莫瓦定理的应用
+### 例1
+我们可以使用德莫瓦定理来证明 $r = \sqrt{x^2 + y^2}$。
+我们有
 $$
 \begin{aligned}
 1 &= e^{i\theta} e^{-i\theta} \\
@@ -193,30 +142,19 @@ $$
 &= \frac{x^2}{r^2} + \frac{y^2}{r^2}
 \end{aligned}
 $$
-
-and thus
-
+因此
 $$
 x^2 + y^2 = r^2
 $$
+我们认识到这是**勾股定理**。
 
-We recognize this as a theorem of **Pythagoras**.
-
-### Example 2
-
-Let $z = re^{i\theta}$ and $\bar{z} = re^{-i\theta}$ so that $\bar{z}$ is the **complex conjugate** of $z$.
-
-$(z, \bar z)$ form a **complex conjugate pair** of complex numbers.
-
-Let $a = pe^{i\omega}$ and $\bar{a} = pe^{-i\omega}$ be
-another complex conjugate pair.
-
-For each element of a sequence of integers $n = 0, 1, 2, \ldots, $.
-
-To do so, we can apply de Moivre's formula.
-
-Thus,
-
+### 例2
+设 $z = re^{i\theta}$ 且 $\bar{z} = re^{-i\theta}$，其中 $\bar{z}$ 是 $z$ 的**复共轭**。
+$(z, \bar z)$ 构成一对**复共轭对**。
+设 $a = pe^{i\omega}$ 和 $\bar{a} = pe^{-i\omega}$ 是另一对复共轭对。
+对于整数序列 $n = 0, 1, 2, \ldots, $ 中的每个元素。
+为此，我们可以应用德莫瓦公式。
+因此，
 $$
 \begin{aligned}
 x_n &= az^n + \bar{a}\bar{z}^n \\
@@ -228,151 +166,119 @@ x_n &= az^n + \bar{a}\bar{z}^n \\
 \end{aligned}
 $$
 
-### Example 3
-
-This example provides  machinery that is at the heard of Samuelson's analysis of his multiplier-accelerator model {cite}`Samuelson1939`.
-
-Thus, consider a **second-order linear difference equation**
-
+### 例3
+这个例子提供了Samuelson在分析其乘数-加速器模型时所使用的核心机制 {cite}`Samuelson1939`。
+因此，考虑一个**二阶线性差分方程**
 $$
 x_{n+2} = c_1 x_{n+1} + c_2 x_n
 $$
-
-whose **characteristic polynomial** is
-
+其**特征多项式**为
 $$
 z^2 - c_1 z - c_2 = 0
 $$
-
-or
-
+或
 $$
 (z^2 - c_1 z - c_2 ) = (z - z_1)(z- z_2) = 0
 $$
+具有根 $z_1, z_1$。
+**解**是满足差分方程的序列 $\{x_n\}_{n=0}^\infty$。
+在以下情况下，我们可以应用例2的公式来解决差分方程
+- 差分方程特征多项式的根 $z_1, z_2$ 构成一对复共轭
+- 给定初始条件 $x_0, x_1$ 的值
 
-has roots $z_1, z_1$.
-
-A **solution**  is a sequence $\{x_n\}_{n=0}^\infty$ that satisfies
-the difference equation.
-
-Under the following circumstances, we can apply our example 2 formula to
-solve the difference equation
-
-- the roots $z_1, z_2$ of the characteristic polynomial of the
-  difference equation form a complex conjugate pair
-- the values $x_0, x_1$ are given initial conditions
-
-To solve the difference equation, recall from example 2 that
-
+要解决差分方程，回想例2中
 $$
 x_n = 2 pr^n \cos{(\omega + n\theta)}
 $$
-
-where $\omega, p$ are coefficients to be determined from
-information encoded in the initial conditions $x_1, x_0$.
-
-Since
-$x_0 = 2 p \cos{\omega}$ and $x_1 = 2 pr \cos{(\omega + \theta)}$
-the ratio of $x_1$ to $x_0$ is
-
+其中 $\omega, p$ 是需要从初始条件 $x_1, x_0$ 中编码的信息确定的系数。
+由于
+$x_0 = 2 p \cos{\omega}$ 且 $x_1 = 2 pr \cos{(\omega + \theta)}$
+$x_1$ 与 $x_0$ 的比率为
 $$
 \frac{x_1}{x_0} = \frac{r \cos{(\omega + \theta)}}{\cos{\omega}}
 $$
+我们可以解这个方程得到 $\omega$，然后用 $x_0 = 2 pr^0 \cos{(\omega + n\theta)}$ 解出 $p$。
 
-We can solve this equation for $\omega$ then solve for $p$ using $x_0 = 2 pr^0 \cos{(\omega + n\theta)}$.
+使用Python中的`sympy`包，我们能够解决并绘制给定不同 $n$ 值时 $x_n$ 的动态。
+在这个例子中，我们设置初始值：
+- $r = 0.9$
+- $\theta = \frac{1}{4}\pi$
+- $x_0 = 4$
+- $x_1 = r \cdot 2\sqrt{2} = 1.8 \sqrt{2}$
 
-With the `sympy` package in Python, we are able to solve and plot the
-dynamics of $x_n$ given different values of $n$.
-
-In this example, we set the initial values: - $r = 0.9$ -
-$\theta = \frac{1}{4}\pi$ - $x_0 = 4$ -
-$x_1 = r \cdot 2\sqrt{2} = 1.8 \sqrt{2}$.
-
-We first numerically solve for $\omega$ and $p$ using
-`nsolve` in the `sympy` package based on the above initial
-condition:
+我们首先使用`sympy`包中的`nsolve`基于上述初始条件数值求解 $\omega$ 和 $p$：
 
 ```{code-cell} python3
-# Set parameters
+# 设置参数
 r = 0.9
 θ = π/4
 x0 = 4
 x1 = 2 * r * sqrt(2)
 
-# Define symbols to be calculated
+# 定义要计算的符号
 ω, p = symbols('ω p', real=True)
 
-# Solve for ω
-## Note: we choose the solution near 0
+# 求解  ω
+## 注意：我们选择在 0 附近的解
 eq1 = Eq(x1/x0 - r * cos(ω+θ) / cos(ω), 0)
 ω = nsolve(eq1, ω, 0)
 ω = float(ω)
 print(f'ω = {ω:1.3f}')
 
-# Solve for p
+# 求解 p
 eq2 = Eq(x0 - 2 * p * cos(ω), 0)
 p = nsolve(eq2, p, 0)
 p = float(p)
 print(f'p = {p:1.3f}')
 ```
 
-Using the code above, we compute that
-$\omega = 0$ and $p = 2$.
-
-Then we plug in the values we solve for $\omega$ and $p$
-and plot the dynamic.
+使用上面的代码，我们计算得出
+$\omega = 0$ 和 $p = 2$。
+然后我们将解出的 $\omega$ 和 $p$ 的值代入
+并绘制动态图。
 
 ```{code-cell} python3
-# Define range of n
+# 设定 n 的范围
 max_n = 30
 n = np.arange(0, max_n+1, 0.01)
 
-# Define x_n
+# 设定 x_n
 x = lambda n: 2 * p * r**n * np.cos(ω + n * θ)
 
-# Plot
+# 绘图
 fig, ax = plt.subplots(figsize=(12, 8))
 
 ax.plot(n, x(n))
 ax.set(xlim=(0, max_n), ylim=(-5, 5), xlabel='$n$', ylabel='$x_n$')
 
-# Set x-axis in the middle of the plot
+# 将x轴放在图像中间
 ax.spines['bottom'].set_position('center')
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
 ax.xaxis.set_ticks_position('bottom')
 ax.yaxis.set_ticks_position('left')
 
-ticklab = ax.xaxis.get_ticklabels()[0] # Set x-label position
+ticklab = ax.xaxis.get_ticklabels()[0] # 设定x标记的位置
 trans = ticklab.get_transform()
 ax.xaxis.set_label_coords(31, 0, transform=trans)
 
-ticklab = ax.yaxis.get_ticklabels()[0] # Set y-label position
+ticklab = ax.yaxis.get_ticklabels()[0] # 设定y标记的位置
 trans = ticklab.get_transform()
 ax.yaxis.set_label_coords(0, 5, transform=trans)
 
 ax.grid()
 plt.show()
 ```
-
-### Trigonometric Identities
-
-We can obtain a complete suite of trigonometric identities by
-appropriately manipulating polar forms of complex numbers.
-
-We'll get many of them by deducing implications of the equality
-
+### 三角恒等式
+我们可以通过适当操作复数的极坐标形式来获得一套完整的三角恒等式。
+我们将通过推导等式
 $$
 e^{i(\omega + \theta)} = e^{i\omega} e^{i\theta}
 $$
+的含义来得到许多恒等式。
 
-For example, we'll calculate identities for
-
-$\cos{(\omega + \theta)}$ and $\sin{(\omega + \theta)}$.
-
-Using the sine and cosine formulas presented at the beginning of this
-lecture, we have:
-
+例如，我们将计算 $\cos{(\omega + \theta)}$ 和 $\sin{(\omega + \theta)}$ 的恒等式。
+使用本讲座开始时给出的正弦和余弦公式，我们有：
 $$
 \begin{aligned}
 \cos{(\omega + \theta)} = \frac{e^{i(\omega + \theta)} + e^{-i(\omega + \theta)}}{2} \\
@@ -380,8 +286,7 @@ $$
 \end{aligned}
 $$
 
-We can also obtain the trigonometric identities as follows:
-
+我们还可以通过以下方式获得三角恒等式：
 $$
 \begin{aligned}
 \cos{(\omega + \theta)} + i \sin{(\omega + \theta)}
@@ -393,9 +298,7 @@ i (\cos{\omega}\sin{\theta} + \sin{\omega}\cos{\theta})
 \end{aligned}
 $$
 
-Since both real and imaginary parts of the above formula should be
-equal, we get:
-
+由于上述公式的实部和虚部都应相等，我们得到：
 $$
 \begin{aligned}
 \cos{(\omega + \theta)} = \cos{\omega}\cos{\theta} - \sin{\omega}\sin{\theta} \\
@@ -403,34 +306,27 @@ $$
 \end{aligned}
 $$
 
-The equations above are also known as the **angle sum identities**. We
-can verify the equations using the `simplify` function in the
-`sympy` package:
+上述方程也被称为**角和恒等式**。我们可以使用`sympy`包中的`simplify`函数来验证这些方程：
 
 ```{code-cell} python3
-# Define symbols
+# 设定符号
 ω, θ = symbols('ω θ', real=True)
 
-# Verify
+# 检查
 print("cos(ω)cos(θ) - sin(ω)sin(θ) =",
     simplify(cos(ω)*cos(θ) - sin(ω) * sin(θ)))
 print("cos(ω)sin(θ) + sin(ω)cos(θ) =",
     simplify(cos(ω)*sin(θ) + sin(ω) * cos(θ)))
 ```
+### 三角积分
+我们也可以使用复数的极坐标形式来计算三角积分。
 
-### Trigonometric Integrals
-
-We can also compute the trigonometric integrals using polar forms of
-complex numbers.
-
-For example, we want to solve the following integral:
-
+例如，我们要解决以下积分：
 $$
 \int_{-\pi}^{\pi} \cos(\omega) \sin(\omega) \, d\omega
 $$
 
-Using Euler's formula, we have:
-
+使用欧拉公式，我们有：
 $$
 \begin{aligned}
 \int \cos(\omega) \sin(\omega) \, d\omega
@@ -458,42 +354,38 @@ e^{2i\omega} - e^{-2i\omega}
 \end{aligned}
 $$
 
-and thus:
-
+因此：
 $$
 \int_{-\pi}^{\pi} \cos(\omega) \sin(\omega) \, d\omega =
 \frac{1}{2}\sin^2(\pi) - \frac{1}{2}\sin^2(-\pi) = 0
 $$
 
-We can verify the analytical as well as numerical results using
-`integrate` in the `sympy` package:
+我们可以使用`sympy`包中的`integrate`来验证分析结果和数值结果：
 
 ```{code-cell} python3
-# Set initial printing
+# 设置初始打印
 init_printing(use_latex="mathjax")
 
 ω = Symbol('ω')
-print('The analytical solution for integral of cos(ω)sin(ω) is:')
+print('cos(ω)sin(ω)积分的解析解为：')
 integrate(cos(ω) * sin(ω), ω)
 ```
 
 ```{code-cell} python3
-print('The numerical solution for the integral of cos(ω)sin(ω) \
-from -π to π is:')
+print('cos(ω)sin(ω)从 -π 到 π 的积分的数值解为：')
 integrate(cos(ω) * sin(ω), (ω, -π, π))
 ```
+
 
 ### Exercises
 
 ```{exercise}
 :label: complex_ex1
 
-We invite the reader to verify analytically and with the `sympy` package the following two equalities:
-
+我们邀请读者通过解析方法和使用 `sympy` 包来验证以下两个等式：
 $$
 \int_{-\pi}^{\pi} \cos (\omega)^2 \, d\omega = \pi
 $$
-
 $$
 \int_{-\pi}^{\pi} \sin (\omega)^2 \, d\omega = \pi
 $$
@@ -502,24 +394,21 @@ $$
 ```{solution-start} complex_ex1
 :class: dropdown
 ```
-
-Let's import symbolic $\pi$ from `sympy`
+让我们从 `sympy` 导入符号 $\pi$
 
 ```{code-cell} ipython3
-# Import symbolic π from sympy
+# 从 sympy 导入符号 π
 from sympy import pi
 ```
 
 ```{code-cell} ipython3
-print('The analytical solution for the integral of cos(ω)**2 \
-from -π to π is:')
+print('cos(ω)**2 从 -π 到 π 的积分的解析解为：')
 
 integrate(cos(ω)**2, (ω, -pi, pi))
 ```
 
 ```{code-cell} ipython3
-print('The analytical solution for the integral of sin(ω)**2 \
-from -π to π is:')
+print('sin(ω)**2 从 -π 到 π 的积分的解析解为：')
 
 integrate(sin(ω)**2, (ω, -pi, pi))
 ```
