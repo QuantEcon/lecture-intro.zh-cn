@@ -300,6 +300,10 @@ $$
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 现在让我们开始实现我们的伪代码用 Python。
