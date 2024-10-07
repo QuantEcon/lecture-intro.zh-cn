@@ -14,29 +14,24 @@ kernelspec:
 +++ {"user_expressions": []}
 
 (eigen)=
-# Eigenvalues and Eigenvectors 
+# 特征值和特征向量
 
 ```{index} single: Eigenvalues and Eigenvectors
 ```
 
-## Overview
+## 概述
 
-Eigenvalues and eigenvectors are a relatively advanced topic in linear algebra.
+特征值和特征向量是线性代数中一个相对高级的话题。
+同时，这些概念在以下领域非常有用：
+* 经济建模（尤其是动态模型！）
+* 统计学
+* 应用数学的某些部分
+* 机器学习
+* 以及许多其他科学领域
 
-At the same time, these concepts are extremely useful for 
-
-* economic modeling (especially dynamics!)
-* statistics
-* some parts of applied mathematics
-* machine learning
-* and many other fields of science.
-
-In this lecture we explain the basics of eigenvalues and eigenvectors and introduce the Neumann Series Lemma.
-
-We assume in this lecture that students are familiar with matrices
- and understand {doc}`the basics of matrix algebra<linear_equations>`.
-
-We will use the following imports:
+在本讲座中，我们将解释特征值和特征向量的基础知识，并介绍诺伊曼级数引理。
+我们假设学生已经熟悉矩阵，并理解{doc}`矩阵代数的基础知识<linear_equations>`。
+我们将使用以下导入：
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -48,48 +43,39 @@ from mpl_toolkits.mplot3d import proj3d
 ```
 
 (matrices_as_transformation)=
-## Matrices as transformations
+## 矩阵作为变换
 
-Let's start by discussing an important concept concerning matrices.
+让我们从讨论一个关于矩阵的重要概念开始。
 
-### Mapping vectors to vectors
+### 将向量映射到向量
 
-One way to think about a matrix is as a rectangular collection of
-numbers.
+有两种思考矩阵的方式：
+1. 将矩阵视为一个矩形的数字集合。
+2. 将矩阵视为一个将向量转换为新向量的*映射*（即函数）。
 
-Another way to think about a matrix is as a *map* (i.e., as a function) that
-transforms vectors to new vectors.
-
-To understand the second point of view, suppose we multiply an $n \times m$
-matrix $A$ with an $m \times 1$ column vector $x$ to obtain an $n \times 1$
-column vector $y$:
+为了理解第二种观点，假设我们将一个 $n \times m$ 矩阵 $A$ 与一个 $m \times 1$ 列向量 $x$ 相乘，得到一个 $n \times 1$ 列向量 $y$：
 
 $$
     Ax = y
 $$
 
-If we fix $A$ and consider different choices of $x$, we can understand $A$ as
-a map transforming $x$ to $Ax$.
+如果我们固定 $A$ 并考虑不同的 $x$，我们可以将 $A$ 理解为一个将 $x$ 转换为 $Ax$ 的映射。
 
-Because $A$ is $n \times m$, it transforms $m$-vectors to $n$-vectors.
+因为 $A$ 是 $n \times m$ 的，所以它将 $m$ 维向量转换为 $n$ 维向量。
 
-We can write this formally as $A \colon \mathbb{R}^m \rightarrow \mathbb{R}^n$.
+我们可以正式地将此写作 $A \colon \mathbb{R}^m \rightarrow \mathbb{R}^n$。
 
-You might argue that if $A$ is a function then we should write 
-$A(x) = y$ rather than $Ax = y$ but the second notation is more conventional.
+你可能会说，如果 $A$ 是一个函数，那么我们应该写成 $A(x) = y$ 而不是 $Ax = y$，但后者的表示方法更为常见。
 
-### Square matrices
+### 方阵
 
-Let's restrict our discussion to square matrices.
+让我们将讨论限制在方阵上。
 
-In the above discussion, this means that $m=n$ and $A$ maps $\mathbb R^n$ to
-itself.
+在上述讨论中，这意味着 $m=n$，且 $A$ 将 $\mathbb R^n$ 映射到自身。
 
-This means $A$ is an $n \times n$ matrix that maps (or "transforms") a vector
-$x$ in $\mathbb{R}^n$ to a new vector $y=Ax$ also in $\mathbb{R}^n$.
+这表示 $A$ 是一个 $n \times n$ 矩阵，它将 $\mathbb{R}^n$ 中的向量 $x$ 映射（或"变换"）为同样在 $\mathbb{R}^n$ 中的新向量 $y=Ax$。
 
-```{prf:example}
-:label: eigen1_ex_sq
+这里有一个例子：
 
 $$
     \begin{bmatrix}
@@ -107,7 +93,7 @@ $$
     \end{bmatrix}
 $$
 
-Here, the matrix
+在这里，矩阵
 
 $$
     A = \begin{bmatrix} 2 & 1 \\ 
@@ -115,11 +101,10 @@ $$
         \end{bmatrix}
 $$
 
-transforms the vector $x = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$ to the vector
-$y = \begin{bmatrix} 5 \\ 2 \end{bmatrix}$.
-```
+将向量 $x = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$ 变换为向量 $y = \begin{bmatrix} 5 \\ 2 \end{bmatrix}$。
 
-Let's visualize this using Python:
+让我们用 Python 来可视化这个过程：
+
 
 ```{code-cell} ipython3
 A = np.array([[2,  1],
@@ -130,7 +115,7 @@ A = np.array([[2,  1],
 from math import sqrt
 
 fig, ax = plt.subplots()
-# Set the axes through the origin
+# 将坐标轴设置通过原点
 
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
@@ -168,28 +153,18 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-One way to understand this transformation is that $A$ 
+理解这种变换的一种方式是 $A$ 
+* 首先将 $x$ 旋转某个角度 $\theta$，然后
+* 将其缩放某个标量 $\gamma$ 以获得 $x$ 的像 $y$。
 
-* first rotates $x$ by some angle $\theta$ and
-* then scales it by some scalar $\gamma$ to obtain the image $y$ of $x$.
-
-
-
-## Types of transformations
-
-Let's examine some standard transformations we can perform with matrices.
-
-Below we visualize transformations by thinking of vectors as points
-instead of arrows.
-
-We consider how a given matrix transforms 
-
-* a grid of points and 
-* a set of points located on the unit circle in $\mathbb{R}^2$.
-
-To build the transformations we will use two functions, called `grid_transform` and `circle_transform`.
-
-Each of these functions visualizes the actions of a given $2 \times 2$ matrix $A$.
+## 变换类型
+让我们来检查一些可以用矩阵执行的标准变换。
+下面我们通过将向量视为点而不是箭头来可视化变换。
+我们考虑给定矩阵如何变换
+* 一个点网格和
+* 位于 $\mathbb{R}^2$ 中单位圆上的一组点。
+为了构建这些变换，我们将使用两个函数，称为 `grid_transform` 和 `circle_transform`。
+这些函数中的每一个都可视化给定 $2 \times 2$ 矩阵 $A$ 的作用。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -220,13 +195,13 @@ def grid_transform(A=np.array([[1, -1], [1, 1]])):
         for spine in ['right', 'top']:
             axes.spines[spine].set_color('none')
 
-    # Plot x-y grid points
+    # 绘制x-y格点
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
     # ax[0].grid(True)
     # ax[0].axis("equal")
     ax[0].set_title("points $x_1, x_2, \cdots, x_k$")
 
-    # Plot transformed grid points
+    # 绘制变换的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
     # ax[1].grid(True)
     # ax[1].axis("equal")
@@ -265,7 +240,7 @@ def circle_transform(A=np.array([[-1, 2], [0, 1]])):
     ax[0].plot(x, y, color='black', zorder=1)
     ax[0].scatter(a_1, b_1, c=colors, alpha=1, s=60,
                   edgecolors='black', zorder=2)
-    ax[0].set_title("unit circle in $\mathbb{R}^2$")
+    ax[0].set_title("在 $\mathbb{R}^2$的单位圆")
 
     x1 = x.reshape(1, -1)
     y1 = y.reshape(1, -1)
@@ -277,31 +252,26 @@ def circle_transform(A=np.array([[-1, 2], [0, 1]])):
                transformed_circle[1, :], color='black', zorder=1)
     ax[1].scatter(transformed_ab[0, :], transformed_ab[1:,],
                   color=colors, alpha=1, s=60, edgecolors='black', zorder=2)
-    ax[1].set_title("transformed circle")
+    ax[1].set_title("变换后的圆")
 
     plt.show()
 ```
 
 +++ {"user_expressions": []}
 
-### Scaling
-
-A matrix of the form 
-
+### 缩放
+形如
 $$
     \begin{bmatrix} 
         \alpha & 0 
         \\ 0 & \beta 
     \end{bmatrix}
 $$
-
-scales vectors across the x-axis by a factor $\alpha$ and along the y-axis by
-a factor $\beta$.
-
-Here we illustrate a simple example where $\alpha = \beta = 3$.
+的矩阵沿 x 轴将向量缩放 $\alpha$ 倍，沿 y 轴缩放 $\beta$ 倍。
+这里我们举一个简单的例子，其中 $\alpha = \beta = 3$。
 
 ```{code-cell} ipython3
-A = np.array([[3, 0],  # scaling by 3 in both directions
+A = np.array([[3, 0],  # 在两个方向放大三倍
               [0, 3]])
 grid_transform(A)
 circle_transform(A)
@@ -309,22 +279,18 @@ circle_transform(A)
 
 +++ {"user_expressions": []}
 
-### Shearing
-
-A "shear" matrix of the form 
-
+### 剪切
+形如
 $$
     \begin{bmatrix} 
         1 & \lambda \\ 
         0 & 1 
     \end{bmatrix}
 $$ 
-
-stretches vectors along the x-axis by an amount proportional to the
-y-coordinate of a point.
+的"剪切"矩阵沿 x 轴拉伸向量，拉伸量与点的 y 坐标成比例。
 
 ```{code-cell} ipython3
-A = np.array([[1, 2],     # shear along x-axis
+A = np.array([[1, 2],     # 沿x-轴进行剪切
               [0, 1]])
 grid_transform(A)
 circle_transform(A)
@@ -332,22 +298,19 @@ circle_transform(A)
 
 +++ {"user_expressions": []}
 
-### Rotation
-
-A matrix of the form 
-
+### 旋转
+形如
 $$
     \begin{bmatrix} 
         \cos \theta & \sin \theta 
         \\ - \sin \theta & \cos \theta 
     \end{bmatrix}
 $$
-is called a _rotation matrix_.
-
-This matrix rotates vectors clockwise by an angle $\theta$.
+的矩阵被称为*旋转矩阵*。
+这个矩阵将向量顺时针旋转角度 $\theta$。
 
 ```{code-cell} ipython3
-θ = np.pi/4  # 45 degree clockwise rotation
+θ = np.pi/4  # 顺时针旋转45度
 A = np.array([[np.cos(θ), np.sin(θ)],
               [-np.sin(θ), np.cos(θ)]])
 grid_transform(A)
@@ -355,17 +318,15 @@ grid_transform(A)
 
 +++ {"user_expressions": []}
 
-### Permutation
-
-The permutation matrix 
-
+### 置换
+置换矩阵
 $$
     \begin{bmatrix} 
         0 & 1 \\ 
         1 & 0 
     \end{bmatrix}
 $$ 
-interchanges the coordinates of a vector.
+交换向量的坐标。
 
 ```{code-cell} ipython3
 A = np.column_stack([[0, 1], [1, 0]])
@@ -374,34 +335,29 @@ grid_transform(A)
 
 +++ {"user_expressions": []}
 
-More examples of common transition matrices can be found [here](https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions).
+更多常见的变换矩阵示例可以在[这里](https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions)找到。
 
-## Matrix multiplication as composition
+## 矩阵乘法作为组合
 
-Since matrices act as functions that transform one vector to another, we can
-apply the concept of function composition to matrices as well. 
+由于矩阵作为将一个向量转换为另一个向量的函数，我们也可以将函数组合的概念应用于矩阵。
 
+### 线性组合
 
-### Linear compositions
-
-Consider the two matrices 
-
+考虑两个矩阵
 $$
     A = 
         \begin{bmatrix} 
             0 & 1 \\ 
             -1 & 0 
         \end{bmatrix}
-        \quad \text{and} \quad
+        \quad \text{和} \quad
     B = 
         \begin{bmatrix} 
             1 & 2 \\ 
             0 & 1 
         \end{bmatrix}
 $$ 
-
-What will the output be when we try to obtain $ABx$ for some $2 \times 1$
-vector $x$?
+当我们尝试对某个 $2 \times 1$ 向量 $x$ 求 $ABx$ 时，输出会是什么？
 
 $$
 \color{red}{\underbrace{
@@ -485,36 +441,23 @@ $$
 }^{\textstyle y}}
 $$
 
-We can observe that applying the transformation $AB$ on the vector $x$ is the
-same as first applying $B$ on $x$ and then applying $A$ on the vector $Bx$.
+我们可以观察到，对向量 $x$ 应用变换 $AB$ 与先对 $x$ 应用 $B$，然后对向量 $Bx$ 应用 $A$ 是相同的。
 
-Thus the matrix product $AB$ is the
-[composition](https://en.wikipedia.org/wiki/Function_composition) of the
-matrix transformations $A$ and $B$
+因此，矩阵乘积 $AB$ 是矩阵变换 $A$ 和 $B$ 的[组合](https://en.wikipedia.org/wiki/Function_composition)。
+这意味着先应用变换 $B$，然后应用变换 $A$。
 
-This means first apply transformation $B$ and then
-transformation $A$.
+当我们将一个 $n \times m$ 矩阵 $A$ 与一个 $m \times k$ 矩阵 $B$ 相乘时，得到的矩阵乘积是一个 $n \times k$ 矩阵 $AB$。
 
-When we matrix multiply an $n \times m$ matrix $A$ with an $m \times k$ matrix
-$B$ the obtained matrix product is an $n \times k$ matrix $AB$.
+因此，如果 $A$ 和 $B$ 是变换，使得 $A \colon \mathbb{R}^m \to \mathbb{R}^n$ 且 $B \colon \mathbb{R}^k \to \mathbb{R}^m$，那么 $AB$ 将 $\mathbb{R}^k$ 变换到 $\mathbb{R}^n$。
 
-Thus, if $A$ and $B$ are transformations such that $A \colon \mathbb{R}^m \to
-\mathbb{R}^n$ and $B \colon \mathbb{R}^k \to \mathbb{R}^m$, then $AB$
-transforms $\mathbb{R}^k$ to $\mathbb{R}^n$.
+将矩阵乘法视为映射的组合有助于我们理解为什么在矩阵乘法下，$AB$ 通常不等于 $BA$。
+（毕竟，当我们组合函数时，顺序通常很重要。）
 
-Viewing matrix multiplication as composition of maps helps us
-understand why, under matrix multiplication, $AB$ is generally not equal to $BA$.
+### 示例
 
-(After all, when we compose functions, the order usually matters.)
+设 $A$ 为顺时针旋转 $90^{\circ}$ 的矩阵，由 $\begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$ 给出，设 $B$ 为沿 x 轴的剪切矩阵，由 $\begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}$ 给出。
 
-### Examples
-
-Let $A$ be the $90^{\circ}$ clockwise rotation matrix given by
-$\begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$ and let $B$ be a shear matrix
-along the x-axis given by $\begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}$.
-
-We will visualize how a grid of points changes when we apply the
-transformation $AB$ and then compare it with the transformation $BA$.
+我们将可视化当我们应用变换 $AB$ 时点的网格如何变化，然后将其与变换 $BA$ 进行比较。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -540,15 +483,15 @@ def grid_composition_transform(A=np.array([[1, -1], [1, 1]]),
         for spine in ['right', 'top']:
             axes.spines[spine].set_color('none')
 
-    # Plot grid points
+    # 绘制格点
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
     ax[0].set_title("points $x_1, x_2, \cdots, x_k$")
 
-    # Plot intermediate grid points
+    # 绘制中间的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
     ax[1].set_title("points $Bx_1, Bx_2, \cdots, Bx_k$")
 
-    # Plot transformed grid points
+    # 绘制变换后的格点
     ax[2].scatter(abgrid[0], abgrid[1], s=36, c=colors, edgecolor="none")
     ax[2].set_title("points $ABx_1, ABx_2, \cdots, ABx_k$")
 
@@ -556,39 +499,37 @@ def grid_composition_transform(A=np.array([[1, -1], [1, 1]]),
 ```
 
 ```{code-cell} ipython3
-A = np.array([[0, 1],     # 90 degree clockwise rotation
+A = np.array([[0, 1],     # 顺时针旋转90度
               [-1, 0]])
-B = np.array([[1, 2],     # shear along x-axis
+B = np.array([[1, 2],     # 沿x-轴剪切
               [0, 1]])
 ```
 
 +++ {"user_expressions": []}
 
-#### Shear then rotate
+#### 剪切后旋转
 
 ```{code-cell} ipython3
-grid_composition_transform(A, B)  # transformation AB
+grid_composition_transform(A, B)  # 变换 AB
 ```
 
 +++ {"user_expressions": []}
 
-#### Rotate then shear
+#### 旋转后剪切
 
 ```{code-cell} ipython3
-grid_composition_transform(B,A)         # transformation BA
+grid_composition_transform(B,A)         # 变换 BA
 ```
 
 +++ {"user_expressions": []}
 
-It is evident that the transformation $AB$ is not the same as the transformation $BA$.
+很显然，变换 $AB$ 与变换 $BA$ 是不同的。
 
-## Iterating on a fixed map
+## 对固定映射进行迭代
 
-In economics (and especially in dynamic modeling), we are often interested in
-analyzing behavior where we repeatedly apply a fixed matrix.
+在经济学（尤其是动态建模）中，我们经常对重复应用固定矩阵的行为感兴趣。
 
-For example, given a vector $v$ and a matrix $A$, we are interested in
-studying the sequence
+例如，给定一个向量 $v$ 和一个矩阵 $A$，我们对研究以下序列感兴趣：
 
 $$ 
     v, \quad
@@ -596,8 +537,7 @@ $$
     AAv = A^2v, \quad \ldots
 $$
 
-Let's first see examples of a sequence of iterates $(A^k v)_{k \geq 0}$ under
-different maps $A$.
+让我们首先看一下在不同映射 $A$ 下的迭代序列 $(A^k v)_{k \geq 0}$ 的例子。
 
 (plot_series)=
 
@@ -629,7 +569,7 @@ def plot_series(A, v, n):
     ax.plot(ellipse[0, :], ellipse[1, :], color='black',
             linestyle=(0, (5, 10)), linewidth=0.5)
 
-    # Initialize holder for trajectories
+    #初始化轨迹容器
     colors = plt.cm.rainbow(np.linspace(0, 1, 20))
 
     for i in range(n):
@@ -658,9 +598,8 @@ plot_series(A, v, n)
 
 +++ {"user_expressions": []}
 
-Here with each iteration the vectors get shorter, i.e., move closer to the origin.
-
-In this case, repeatedly multiplying a vector by $A$ makes the vector "spiral in".
+每次迭代后，向量变得更短，即更靠近原点。
+在这种情况下，重复将向量乘以$A$会使向量"螺旋式地向内"。
 
 ```{code-cell} ipython3
 B = np.array([[sqrt(3) + 1, -2],
@@ -674,10 +613,8 @@ plot_series(B, v, n)
 
 +++ {"user_expressions": []}
 
-Here with each iteration vectors do not tend to get longer or shorter. 
-
-In this case, repeatedly multiplying a vector by $A$ simply "rotates it around
-an ellipse".
+在这里，每次迭代向量不会变长或变短。
+在这种情况下，重复将向量乘以$A$只会使其"围绕一个椭圆旋转"。
 
 ```{code-cell} ipython3
 B = np.array([[sqrt(3) + 1, -2],
@@ -691,43 +628,33 @@ plot_series(B, v, n)
 
 +++ {"user_expressions": []}
 
-Here with each iteration vectors tend to get longer, i.e., farther from the
-origin. 
+在这里，每次迭代向量趋向于变长，即离原点更远。
+在这种情况下，重复将向量乘以$A$会使向量"螺旋式地向外"。
+因此，我们观察到序列$(A^kv)_{k \geq 0}$的行为取决于映射$A$本身。
+现在我们讨论决定这种行为的$A$的性质。
 
-In this case, repeatedly multiplying a vector by $A$ makes the vector "spiral out".
-
-We thus observe that the sequence $(A^kv)_{k \geq 0}$ behaves differently depending on the map $A$ itself.
-
-We now discuss the property of A that determines this behavior.
 
 (la_eigenvalues)=
-## Eigenvalues 
+
+## 特征值
 
 ```{index} single: Linear Algebra; Eigenvalues
 ```
+在本节中，我们引入特征值和特征向量的概念。
 
-In this section we introduce the notions of eigenvalues and eigenvectors.
+### 定义
 
-### Definitions
-
-Let $A$ be an $n \times n$ square matrix.
-
-If $\lambda$ is scalar and $v$ is a non-zero $n$-vector such that
-
+设$A$为$n \times n$的方阵。
+如果存在标量$\lambda$和非零$n$维向量$v$，使得
 $$
 A v = \lambda v.
 $$
+则我们称$\lambda$为$A$的*特征值*，$v$为相应的*特征向量*。
 
+因此，$A$的特征向量是一个非零向量$v$，当映射$A$应用于它时，$v$仅仅被缩放。
 
-Then we say that $\lambda$ is an *eigenvalue* of $A$, and $v$ is the corresponding *eigenvector*.
-
-Thus, an eigenvector of $A$ is a nonzero vector $v$ such that when the map $A$ is
-applied, $v$ is merely scaled.
-
-The next figure shows two eigenvectors (blue arrows) and their images under
-$A$ (red arrows).
-
-As expected, the image $Av$ of each $v$ is just a scaled version of the original
+下图显示了两个特征向量（蓝色箭头）及其在$A$下的像（红色箭头）。
+如预期的那样，每个$v$的像$Av$只是原始向量的缩放版本。
 
 ```{code-cell} ipython3
 :tags: [output_scroll]
@@ -741,7 +668,7 @@ evals, evecs = eig(A)
 evecs = evecs[:, 0], evecs[:, 1]
 
 fig, ax = plt.subplots(figsize=(10, 8))
-# Set the axes through the origin
+# 将坐标轴设置为通过原点
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
 for spine in ['right', 'top']:
@@ -752,7 +679,7 @@ xmin, xmax = -3, 3
 ymin, ymax = -3, 3
 ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax))
 
-# Plot each eigenvector
+# 绘制每个特征向量
 for v in evecs:
     ax.annotate('', xy=v, xytext=(0, 0),
                 arrowprops=dict(facecolor='blue',
@@ -760,7 +687,7 @@ for v in evecs:
                 alpha=0.6,
                 width=0.5))
 
-# Plot the image of each eigenvector
+# 绘制每个特征向量
 for v in evecs:
     v = A @ v
     ax.annotate('', xy=v, xytext=(0, 0),
@@ -769,7 +696,7 @@ for v in evecs:
                 alpha=0.6,
                 width=0.5))
 
-# Plot the lines they run through
+# 绘制它们经过的直线
 x = np.linspace(xmin, xmax, 3)
 for v in evecs:
     a = v[1] / v[0]
@@ -780,54 +707,36 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-### Complex values
+### 复数值
+到目前为止，我们对特征值和特征向量的定义似乎很直观。
+但还有一个我们尚未提到的复杂情况：
+在求解 $Av = \lambda v$ 时，
+* $\lambda$ 可以是复数，并且
+* $v$ 可以是一个包含 n 个复数的向量。
+我们将在下面看到一些例子。
 
-So far our definition of eigenvalues and eigenvectors seems straightforward.
+### 一些数学细节
+我们为更高级的读者注明一些数学细节。
+（其他读者可以跳到下一节。）
+特征值方程等价于 $(A - \lambda I) v = 0$。
+只有当 $A - \lambda I$ 的列线性相关时，这个方程才有非零解 $v$。
+这反过来等价于行列式为零。
+因此，要找到所有特征值，我们可以寻找使 $A - \lambda I$ 的行列式为零的 $\lambda$。
+这个问题可以表示为求解一个 $\lambda$ 的 n 次多项式的根。
+这进而意味着在复平面上存在 n 个解，尽管有些可能是重复的。
 
-There is one complication we haven't mentioned yet:
+### 事实
+关于方阵 $A$ 的特征值，有一些很好的事实：
+1. $A$ 的行列式等于其特征值的乘积
+2. $A$ 的迹（主对角线上元素的和）等于其特征值的和
+3. 如果 $A$ 是对称的，那么它的所有特征值都是实数
+4. 如果 $A$ 可逆，且 $\lambda_1, \ldots, \lambda_n$ 是它的特征值，那么 $A^{-1}$ 的特征值是 $1/\lambda_1, \ldots, 1/\lambda_n$。
 
-When solving $Av = \lambda v$, 
+最后一个陈述的一个推论是，当且仅当矩阵的所有特征值都非零时，该矩阵才是可逆的。
 
-* $\lambda$ is allowed to be a complex number and
-* $v$ is allowed to be an $n$-vector of complex numbers.
+### 计算
+使用 NumPy，我们可以按如下方式求解矩阵的特征值和特征向量
 
-We will see some examples below.
-
-### Some mathematical details
-
-We note some mathematical details for more advanced readers.
-
-(Other readers can skip to the next section.)
-
-The eigenvalue equation is equivalent to $(A - \lambda I) v = 0$. 
-
-This equation has a nonzero solution $v$ only when the columns of $A - \lambda I$ are linearly dependent.
-
-This in turn is equivalent to stating the determinant is zero.
-
-Hence, to find all eigenvalues, we can look for $\lambda$ such that the
-determinant of $A - \lambda I$ is zero.
-
-This problem can be expressed as one of solving for the roots of a polynomial
-in $\lambda$ of degree $n$.
-
-This in turn implies the existence of $n$ solutions in the complex
-plane, although some might be repeated.
-
-### Facts 
-
-Some nice facts about the eigenvalues of a square matrix $A$ are as follows:
-
-1. the determinant of $A$ equals the product of the eigenvalues
-2. the trace of $A$ (the sum of the elements on the principal diagonal) equals the sum of the eigenvalues
-3. if $A$ is symmetric, then all of its eigenvalues are real
-4. if $A$ is invertible and $\lambda_1, \ldots, \lambda_n$ are its eigenvalues, then the eigenvalues of $A^{-1}$ are $1/\lambda_1, \ldots, 1/\lambda_n$.
-
-A corollary of the last statement is that a matrix is invertible if and only if all its eigenvalues are nonzero.
-
-### Computation
-
-Using NumPy, we can solve for the eigenvalues and eigenvectors of a matrix as follows
 
 ```{code-cell} ipython3
 from numpy.linalg import eig
@@ -837,41 +746,32 @@ A = ((1, 2),
 
 A = np.array(A)
 evals, evecs = eig(A)
-evals  # eigenvalues
+evals  # 特征值
 ```
 
 ```{code-cell} ipython3
-evecs  # eigenvectors
+evecs  # 特征向量
 ```
 
 +++ {"user_expressions": []}
 
-Note that the *columns* of `evecs` are the eigenvectors.
-
-Since any scalar multiple of an eigenvector is an eigenvector with the same
-eigenvalue (which can be verified), the `eig` routine normalizes the length of each eigenvector
-to one.
-
-The eigenvectors and eigenvalues of a map $A$ determine how a vector $v$ is transformed when we repeatedly multiply by $A$.
-
-This is discussed further later.
-
+请注意，`evecs` 的*列*是特征向量。
+由于特征向量的任何标量倍数都是具有相同特征值的特征向量（这可以被验证），`eig` 程序将每个特征向量的长度归一化为1。
+映射 $A$ 的特征向量和特征值决定了当我们反复乘以 $A$ 时，向量 $v$ 如何被变换。
+这一点将在后面进一步讨论。
 
 (la_neumann)=
-## The Neumann Series Lemma
+## 诺伊曼级数引理
 
 ```{index} single: Neumann's Lemma
 ```
 
-In this section we present a famous result about series of matrices that has
-many applications in economics.
+在本节中，我们将介绍一个关于矩阵级数的著名结果，它在经济学中有许多应用。
 
-### Scalar series
+### 标量级数
 
-Here's a fundamental result about series:
-
-If $a$ is a number and $|a| < 1$, then
-
+以下是关于级数的一个基本结果：
+如果 $a$ 是一个数，且 $|a| < 1$，那么
 ```{math}
 :label: gp_sum
 
@@ -879,122 +779,102 @@ If $a$ is a number and $|a| < 1$, then
 
 ```
 
-For a one-dimensional linear equation $x = ax + b$ where x is unknown we can thus conclude that the solution $x^{*}$ is given by:
-
+对于一维线性方程 $x = ax + b$，其中 x 未知，我们可以得出解 $x^{*}$ 由以下给出：
 $$
     x^{*} = \frac{b}{1-a} = \sum_{k=0}^{\infty} a^k b
 $$
 
-### Matrix series
+### 矩阵级数
 
-A generalization of this idea exists in the matrix setting.
-
-Consider the system of equations $x = Ax + b$ where $A$ is an $n \times n$
-square matrix and $x$ and $b$ are both column vectors in $\mathbb{R}^n$.
-
-Using matrix algebra we can conclude that the solution to this system of equations will be given by:
+这个想法在矩阵设置中也有一个推广。
+考虑方程组 $x = Ax + b$，其中 $A$ 是一个 $n \times n$ 的方阵，$x$ 和 $b$ 都是 $\mathbb{R}^n$ 中的列向量。
+使用矩阵代数，我们可以得出这个方程组的解由以下给出：
 
 ```{math}
 :label: neumann_eqn
 
     x^{*} = (I-A)^{-1}b
-
+    
 ```
 
-What guarantees the existence of a unique vector $x^{*}$ that satisfies
-{eq}`neumann_eqn`?
-
-The following is a fundamental result in functional analysis that generalizes
-{eq}`gp_sum` to a multivariate case.
+什么保证了存在唯一的向量 $x^{*}$ 满足方程 {eq}`neumann_eqn`？
+以下是泛函分析中的一个基本结果，它将 {eq}`gp_sum` 推广到多变量情况。
 
 (neumann_series_lemma)=
 ```{prf:Theorem} Neumann Series Lemma
 :label: neumann_series_lemma
 
-Let $A$ be a square matrix and let $A^k$ be the $k$-th power of $A$.
+设 $A$ 为方阵，$A^k$ 为 $A$ 的 $k$ 次幂。
+设 $r(A)$ 为 $A$ 的**谱半径**，定义为 $\max_i |\lambda_i|$，其中
+* $\{\lambda_i\}_i$ 是 $A$ 的特征值集，且
+* $|\lambda_i|$ 是复数 $\lambda_i$ 的模
 
-Let $r(A)$ be the **spectral radius** of $A$, defined as $\max_i |\lambda_i|$, where
-
-* $\{\lambda_i\}_i$ is the set of eigenvalues of $A$ and
-* $|\lambda_i|$ is the modulus of the complex number $\lambda_i$
-
-Neumann's Theorem states the following: If $r(A) < 1$, then $I - A$ is invertible, and
-
+诺伊曼定理陈述如下：如果 $r(A) < 1$，那么 $I - A$ 是可逆的，且
 $$
 (I - A)^{-1} = \sum_{k=0}^{\infty} A^k
 $$
 ```
 
-We can see the Neumann Series Lemma in action in the following example.
+我们可以在以下例子中看到诺伊曼级数引理的应用。
 
 ```{code-cell} ipython3
 A = np.array([[0.4, 0.1],
               [0.7, 0.2]])
 
-evals, evecs = eig(A)   # finding eigenvalues and eigenvectors
+evals, evecs = eig(A)   #求出特征值和特征向量
 
-r = max(abs(λ) for λ in evals)    # compute spectral radius
+r = max(abs(λ) for λ in evals)    # 计算谱半径
 print(r)
 ```
-
-The spectral radius $r(A)$ obtained is less than 1.
-
-Thus, we can apply the Neumann Series Lemma to find $(I-A)^{-1}$.
+获得的谱半径 $r(A)$ 小于1。
+因此，我们可以应用诺伊曼级数引理来求 $(I-A)^{-1}$。
 
 ```{code-cell} ipython3
-I = np.identity(2)  # 2 x 2 identity matrix
+I = np.identity(2)  # 2 x 2 单位矩阵
 B = I - A
 ```
 
 ```{code-cell} ipython3
-B_inverse = np.linalg.inv(B)  # direct inverse method
+B_inverse = np.linalg.inv(B)  # 直接求逆
 ```
 
 ```{code-cell} ipython3
-A_sum = np.zeros((2, 2))  # power series sum of A
+A_sum = np.zeros((2, 2))  # A 的幂级数和
 A_power = I
 for i in range(50):
     A_sum += A_power
     A_power = A_power @ A
 ```
+让我们检查求和方法和逆序方法的结果是否相等。
 
-Let's check equality between the sum and the inverse methods.
 
 ```{code-cell} ipython3
 np.allclose(A_sum, B_inverse)
 ```
 
-Although we truncate the infinite sum at $k = 50$, both methods give us the same
-result which illustrates the result of the Neumann Series Lemma.
+虽然我们在 $k = 50$ 时截断了无限级数，但两种方法给出了相同的结果，这说明了诺伊曼级数引理的结论。
 
-
-## Exercises
+## 练习
 
 ```{exercise}
 :label: eig1_ex1
 
-Power iteration is a method for finding the greatest absolute eigenvalue of a diagonalizable matrix.
-
-The method starts with a random vector $b_0$ and repeatedly applies the matrix $A$ to it
-
+幂迭代法是一种用于寻找可对角化矩阵最大绝对特征值的方法。
+该方法从一个随机向量 $b_0$ 开始，重复地对其应用矩阵 $A$
 $$
 b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 $$
-
-A thorough discussion of the method can be found [here](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html).
-
-In this exercise, first implement the power iteration method and use it to find the greatest absolute eigenvalue and its corresponding eigenvector.
-
-Then visualize the convergence.
+关于该方法的详细讨论可以在[这里](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html)找到。
+在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
+然后可视化收敛过程。
 ```
 
 ```{solution-start} eig1_ex1
 :class: dropdown
 ```
 
-Here is one solution.
-
-We start by looking into the distance between the eigenvector approximation and the true eigenvector.
+这里有一个解决方案。
+我们首先研究特征向量近似值与真实特征向量之间的距离。
 
 ```{code-cell} ipython3
 ---
@@ -1003,49 +883,49 @@ mystnb:
     caption: Power iteration
     name: pow-dist
 ---
-# Define a matrix A
+# 定义矩阵A
 A = np.array([[1, 0, 3],
               [0, 2, 0],
               [3, 0, 1]])
 
 num_iters = 20
 
-# Define a random starting vector b
+# 定义一个随机的初始向量 b
 b = np.random.rand(A.shape[1])
 
-# Get the leading eigenvector of matrix A
+# 获取矩阵A的主特征向量
 eigenvector = np.linalg.eig(A)[1][:, 0]
 
 errors = []
 res = []
 
-# Power iteration loop
+# 幂迭代循环
 for i in range(num_iters):
     # Multiply b by A
     b = A @ b
-    # Normalize b
+    # 归一化b
     b = b / np.linalg.norm(b)
-    # Append b to the list of eigenvector approximations
+    # 将b添加到特征向量近似值列表中
     res.append(b)
     err = np.linalg.norm(np.array(b)
                          - eigenvector)
     errors.append(err)
 
 greatest_eigenvalue = np.dot(A @ b, b) / np.dot(b, b)
-print(f'The approximated greatest absolute eigenvalue is \
+print(f'近似的最大绝对特征值是 \
         {greatest_eigenvalue:.2f}')
-print('The real eigenvalue is', np.linalg.eig(A)[0])
+print('真实的特征值是', np.linalg.eig(A)[0])
 
-# Plot the eigenvector approximations for each iteration
+# 绘制每次迭代的特征向量近似值
 plt.figure(figsize=(10, 6))
-plt.xlabel('iterations')
-plt.ylabel('error')
+plt.xlabel('次数')
+plt.ylabel('误差')
 _ = plt.plot(errors)
 ```
 
 +++ {"user_expressions": []}
 
-Then we can look at the trajectory of the eigenvector approximation.
+然后我们可以观察特征向量近似值的轨迹。
 
 ```{code-cell} ipython3
 ---
@@ -1054,11 +934,11 @@ mystnb:
     caption: Power iteration trajectory
     name: pow-trajectory
 ---
-# Set up the figure and axis for 3D plot
+# 设置3D图形和坐标轴
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-# Plot the eigenvectors
+# 绘制特征向量
 ax.scatter(eigenvector[0],
            eigenvector[1],
            eigenvector[2],
@@ -1077,8 +957,8 @@ ax.tick_params(axis='both', which='major', labelsize=7)
 
 points = [plt.Line2D([0], [0], linestyle='none',
                      c=i, marker='o') for i in ['r', 'b']]
-ax.legend(points, ['actual eigenvector',
-                   r'approximated eigenvector ($b_k$)'])
+ax.legend(points, ['真正的特征向量',
+                   r'近似的特征向量 ($b_k$)'])
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
 plt.show()
@@ -1092,11 +972,9 @@ plt.show()
 ```{exercise}
 :label: eig1_ex2
 
-We have discussed the trajectory of the vector $v$ after being transformed by $A$.
-
-Consider the matrix $A = \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix}$ and the vector $v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}$.
-
-Try to compute the trajectory of $v$ after being transformed by $A$ for $n=4$ iterations and plot the result.
+我们已经讨论了向量 $v$ 经过矩阵 $A$ 变换后的轨迹。
+考虑矩阵 $A = \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix}$ 和向量 $v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}$。
+尝试计算向量 $v$ 经过矩阵 $A$ 变换 $n=4$ 次迭代后的轨迹，并绘制结果。
 
 ```
 
@@ -1110,22 +988,20 @@ A = np.array([[1, 2],
 v = (0.4, -0.4)
 n = 11
 
-# Compute eigenvectors and eigenvalues
+# 计算特征值和特征向量
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
-print(f'eigenvalues:\n {eigenvalues}')
-print(f'eigenvectors:\n {eigenvectors}')
+print(f'特征值:\n {eigenvalues}')
+print(f'特征向量:\n {eigenvectors}')
 
 plot_series(A, v, n)
 ```
 
 +++ {"user_expressions": []}
 
-The result seems to converge to the eigenvector of $A$ with the largest eigenvalue.
-
-Let's use a [vector field](https://en.wikipedia.org/wiki/Vector_field) to visualize the transformation brought by A.
-
-(This is a more advanced topic in linear algebra, please step ahead if you are comfortable with the math.)
+结果似乎收敛于矩阵 $A$ 最大特征值对应的特征向量。
+让我们使用[向量场](https://en.wikipedia.org/wiki/Vector_field)来可视化矩阵 $A$ 带来的变换。
+（这是线性代数中的一个较高级话题，如果你对数学感到足够自在，请继续往下学习。）
 
 ```{code-cell} ipython3
 ---
@@ -1134,21 +1010,21 @@ mystnb:
     caption: Convergence towards eigenvectors
     name: eigen-conv
 ---
-# Create a grid of points
+# 创建格点
 x, y = np.meshgrid(np.linspace(-5, 5, 15),
                    np.linspace(-5, 5, 20))
 
-# Apply the matrix A to each point in the vector field
+#将矩阵A应用于向量场中的每个点
 vec_field = np.stack([x, y])
 u, v = np.tensordot(A, vec_field, axes=1)
 
-# Plot the transformed vector field
+# 绘制转换后的向量场
 c = plt.streamplot(x, y, u - x, v - y,
                    density=1, linewidth=None, color='#A23BEC')
 c.lines.set_alpha(0.5)
 c.arrows.set_alpha(0.5)
 
-# Draw eigenvectors
+# 绘制特征向量
 origin = np.zeros((2, len(eigenvectors)))
 parameters = {'color': ['b', 'g'], 'angles': 'xy',
               'scale_units': 'xy', 'scale': 0.1, 'width': 0.01}
@@ -1172,13 +1048,13 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-Note that the vector field converges to the eigenvector of $A$ with the largest eigenvalue and diverges from the eigenvector of $A$ with the smallest eigenvalue.
+请注意，向量场收敛于$A$的最大特征值对应的特征向量，并从$A$的最小特征值对应的特征向量发散。
 
-In fact, the eigenvectors are also the directions in which the matrix $A$ stretches or shrinks the space.
+实际上，特征向量也是矩阵$A$拉伸或压缩空间的方向。
 
-Specifically, the eigenvector with the largest eigenvalue is the direction in which the matrix $A$ stretches the space the most.
+具体来说，最大特征值对应的特征向量是矩阵$A$最大程度拉伸空间的方向。
 
-We will see more intriguing examples in the following exercise.
+我们将在接下来的练习中看到更多有趣的例子。
 
 ```{solution-end}
 ```
@@ -1186,9 +1062,8 @@ We will see more intriguing examples in the following exercise.
 ```{exercise}
 :label: eig1_ex3
 
-{ref}`Previously <plot_series>`, we demonstrated the trajectory of the vector $v$ after being transformed by $A$ for three different matrices.
-
-Use the visualization in the previous exercise to explain the trajectory of the vector $v$ after being transformed by $A$ for the three different matrices.
+{ref}`之前 <plot_series>`，我们展示了向量$v$被三种不同矩阵$A$变换后的轨迹。
+使用前面练习中的可视化来解释向量$v$被这三种不同矩阵$A$变换后的轨迹。
 
 ```
 
@@ -1196,8 +1071,7 @@ Use the visualization in the previous exercise to explain the trajectory of the 
 ```{solution-start} eig1_ex3
 :class: dropdown
 ```
-
-Here is one solution
+这里是一个答案。
 
 ```{code-cell} ipython3
 ---
@@ -1224,30 +1098,30 @@ examples = [A, B, C]
 for i, example in enumerate(examples):
     M = example
 
-    # Compute right eigenvectors and eigenvalues
+    # 计算特征向量和特征值
     eigenvalues, eigenvectors = np.linalg.eig(M)
     print(f'Example {i+1}:\n')
-    print(f'eigenvalues:\n {eigenvalues}')
-    print(f'eigenvectors:\n {eigenvectors}\n')
+    print(f'特征值:\n {eigenvalues}')
+    print(f'特征向量:\n {eigenvectors}\n')
 
     eigenvalues_real = eigenvalues.real
     eigenvectors_real = eigenvectors.real
 
-    # Create a grid of points
+    # 创建格点
     x, y = np.meshgrid(np.linspace(-20, 20, 15),
                        np.linspace(-20, 20, 20))
 
-    # Apply the matrix A to each point in the vector field
+    # 将矩阵A应用于向量场中的每个点
     vec_field = np.stack([x, y])
     u, v = np.tensordot(M, vec_field, axes=1)
 
-    # Plot the transformed vector field
+    # 绘制转换后的向量场
     c = ax[i].streamplot(x, y, u - x, v - y, density=1,
                          linewidth=None, color='#A23BEC')
     c.lines.set_alpha(0.5)
     c.arrows.set_alpha(0.5)
 
-    # Draw eigenvectors
+    # 绘制特征向量
     parameters = {'color': ['b', 'g'], 'angles': 'xy',
                   'scale_units': 'xy', 'scale': 1,
                   'width': 0.01, 'alpha': 0.5}
@@ -1269,11 +1143,11 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-The vector fields explain why we observed the trajectories of the vector $v$ multiplied by $A$ iteratively before.
+这些向量场解释了为什么我们之前观察到向量$v$被矩阵$A$反复相乘后的轨迹。
 
-The pattern demonstrated here is because we have complex eigenvalues and eigenvectors.
+这里展示的模式是因为我们有复数特征值和特征向量。
 
-We can plot the complex plane for one of the matrices using `Arrow3D` class retrieved from [stackoverflow](https://stackoverflow.com/questions/22867620/putting-arrowheads-on-vectors-in-a-3d-plot).
+我们可以使用从[stackoverflow](https://stackoverflow.com/questions/22867620/putting-arrowheads-on-vectors-in-a-3d-plot)获取的`Arrow3D`类来为其中一个矩阵绘制复平面。
 
 ```{code-cell} ipython3
 ---
@@ -1299,17 +1173,17 @@ class Arrow3D(FancyArrowPatch):
 
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
-# Create meshgrid for vector field
+#为向量场创建网格
 x, y = np.meshgrid(np.linspace(-2, 2, 15),
                    np.linspace(-2, 2, 15))
 
-# Calculate vector field (real and imaginary parts)
+# 计算向量场（实部和虚部）
 u_real = A[0][0] * x + A[0][1] * y
 v_real = A[1][0] * x + A[1][1] * y
 u_imag = np.zeros_like(x)
 v_imag = np.zeros_like(y)
 
-# Create 3D figure
+# 创建3D图像
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 vlength = np.linalg.norm(eigenvectors)
@@ -1320,7 +1194,7 @@ ax.quiver(x, y, u_imag, u_real-x, v_real-y, v_imag-u_imag,
 arrow_prop_dict = dict(mutation_scale=5,
                        arrowstyle='-|>', shrinkA=0, shrinkB=0)
 
-# Plot 3D eigenvectors
+# 绘制3D特征向量
 for c, i in zip(['b', 'g'], [0, 1]):
     a = Arrow3D([0, eigenvectors[0][i].real],
                 [0, eigenvectors[1][i].real],
@@ -1328,7 +1202,7 @@ for c, i in zip(['b', 'g'], [0, 1]):
                 color=c, **arrow_prop_dict)
     ax.add_artist(a)
 
-# Set axis labels and title
+# 设置坐标轴标签和标题
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('Im')

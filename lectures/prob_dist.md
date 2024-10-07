@@ -11,113 +11,114 @@ kernelspec:
   name: python3
 ---
 
-# Distributions and Probabilities
+# 分布和概率
 
 ```{index} single: Distributions and Probabilities
 ```
 
-## Outline
+## 概述
 
-In this lecture we give a quick introduction to data and probability distributions using Python.
+在本讲中，我们将使用 Python 快速介绍数据和概率分布。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 
 !pip install --upgrade yfinance  
 ```
-
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import pandas as pd
 import numpy as np
 import yfinance as yf
 import scipy.stats
 import seaborn as sns
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
+## 常见分布
 
-## Common distributions
+在本节中，我们回顾一些众所周知的分布的定义，并探讨如何使用 SciPy 来操作它们。
 
-In this section we recall the definitions of some well-known distributions and explore how to manipulate them with SciPy.
+### 离散分布
 
-### Discrete distributions
+我们从离散分布开始。
 
-Let's start with discrete distributions.
-
-A discrete distribution is defined by a set of numbers $S = \{x_1, \ldots, x_n\}$ and a **probability mass function** (PMF) on $S$, which is a function $p$ from $S$ to $[0,1]$ with the property 
+离散分布由一组数值 $S = \{x_1, \ldots, x_n\}$ 定义，并在 $S$ 上有一个**概率质量函数**（PMF），它是一个从 $S$ 到 $[0,1]$ 的函数 $p$，具有属性
 
 $$ 
 \sum_{i=1}^n p(x_i) = 1 
 $$
 
-We say that a random variable $X$ **has distribution** $p$ if $X$ takes value $x_i$ with probability $p(x_i)$.
+我们说一个随机变量 $X$ **具有分布** $p$，如果 $X$ 以概率 $p(x_i)$ 取值 $x_i$。
 
-That is,
+即，
 
 $$ 
-\mathbb P\{X = x_i\} = p(x_i) \quad \text{for } i= 1, \ldots, n 
+\mathbb P\{X = x_i\} = p(x_i) \quad \text{对于 } i= 1, \ldots, n 
 $$
 
-The **mean** or **expected value** of a random variable $X$ with distribution $p$ is 
+具有分布 $p$ 的随机变量 $X$ 的**均值**或**期望值**是
 
 $$ 
 \mathbb{E}[X] = \sum_{i=1}^n x_i p(x_i)
 $$
 
-Expectation is also called the *first moment* of the distribution.
+期望也称为分布的*第一矩*。
 
-We also refer to this number as the mean of the distribution (represented by) $p$.
+我们也将这个数字称为分布（由 $p$ 表示）的均值。
 
-The **variance** of $X$ is defined as 
+$X$ 的**方差**定义为
 
 $$ 
 \mathbb{V}[X] = \sum_{i=1}^n (x_i - \mathbb{E}[X])^2 p(x_i)
 $$
 
-Variance is also called the *second central moment* of the distribution.
+方差也称为分布的*第二中心矩*。
 
-The **cumulative distribution function** (CDF) of $X$ is defined by
+$X$ 的**累积分布函数**（CDF）定义为
 
 $$
 F(x) = \mathbb{P}\{X \leq x\}
         = \sum_{i=1}^n \mathbb 1\{x_i \leq x\} p(x_i)
 $$
 
-Here $\mathbb 1\{ \textrm{statement} \} = 1$ if "statement" is true and zero otherwise.
+这里 $\mathbb 1\{\text{statement} \} = 1$ 如果 "statement" 为真，否则为零。
 
-Hence the second term takes all $x_i \leq x$ and sums their probabilities.
+因此第二项取所有 $x_i \leq x$ 并求它们概率的和。
 
 
-#### Uniform distribution
+#### 均匀分布
 
-One simple example is the **uniform distribution**, where $p(x_i) = 1/n$ for all $i$.
+一个简单的例子是**均匀分布**，其中 $p(x_i) = 1/n$ 对于所有 $i$ 都成立。
 
-We can import the uniform distribution on $S = \{1, \ldots, n\}$  from SciPy like so:
+我们可以这样从 SciPy 导入 $S = \{1, \ldots, n\}$ 上的均匀分布：
 
 ```{code-cell} ipython3
 n = 10
 u = scipy.stats.randint(1, n+1)
 ```
 
-Here's the mean and variance:
+计算均值和方差：
 
 ```{code-cell} ipython3
 u.mean(), u.var()
 ```
 
-The formula for the mean is $(n+1)/2$, and the formula for the variance is $(n^2 - 1)/12$.
+均值的公式是 $(n+1)/2$，方差的公式是 $(n^2 - 1)/12$。
 
-
-Now let's evaluate the PMF:
+现在让我们评估 PMF：
 
 ```{code-cell} ipython3
 u.pmf(1)
 ```
-
 ```{code-cell} ipython3
 u.pmf(2)
 ```
 
-Here's a plot of the probability mass function:
+以下是 PMF 的图：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -129,8 +130,7 @@ ax.set_xlabel('S')
 ax.set_ylabel('PMF')
 plt.show()
 ```
-
-Here's a plot of the CDF:
+这里是 CDF 的图：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -143,73 +143,67 @@ ax.set_ylabel('CDF')
 plt.show()
 ```
 
-The CDF jumps up by $p(x_i)$ at $x_i$.
+CDF 在$x_i$处跳升$p(x_i)$。
 
 ```{exercise}
 :label: prob_ex1
 
-Calculate the mean and variance for this parameterization (i.e., $n=10$)
-directly from the PMF, using the expressions given above.
+计算这个参数化（即 $n=10$）的均值和方差，直接从 PMF 使用上面给出的公式计算。
 
-Check that your answers agree with `u.mean()` and `u.var()`. 
+验证你的答案与 `u.mean()` 和 `u.var()` 是否一致。
 ```
 
+#### 伯努利分布
 
-#### Bernoulli distribution
-
-Another useful distribution is the Bernoulli distribution on $S = \{0,1\}$, which has PMF:
+另一个有用的分布是 $S = \{0,1\}$ 上的伯努利分布，其 PMF 是：
 
 $$
 p(i) = \theta^i (1 - \theta)^{1-i}
 \qquad (i = 0, 1)
 $$
 
-Here $\theta \in [0,1]$ is a parameter.
+这里 $\theta \in [0,1]$ 是一个参数。
 
-We can think of this distribution as modeling probabilities for a random trial with success probability $\theta$.
+我们可以将这个分布视为对一个随机试验进行概率建模，其成功概率是 $\theta$。
 
-* $p(1) = \theta$ means that the trial succeeds (takes value 1) with probability $\theta$
-* $p(0) = 1 - \theta$ means that the trial fails (takes value 0) with
-  probability $1-\theta$
+* $p(1) = \theta$ 表示试验成功（取值1）的概率是 $\theta$
+* $p(0) = 1 - \theta$ 表示试验失败（取值0）的概率是 $1-\theta$
 
-The formula for the mean is $\theta$, and the formula for the variance is $\theta(1-\theta)$.
+均值的公式是 $\theta$，方差的公式是 $\theta(1-\theta)$。
 
-We can import the Bernoulli distribution on $S = \{0,1\}$ from SciPy like so:
+我们可以这样从 SciPy 导入 $S = \{0,1\}$ 上的伯努利分布：
 
 ```{code-cell} ipython3
 θ = 0.4
 u = scipy.stats.bernoulli(θ)
 ```
-
-Here's the mean and variance at $\theta=0.4$
+这是 $\theta=0.4$ 时的均值和方差：
 
 ```{code-cell} ipython3
 u.mean(), u.var()
 ```
-
-We can evaluate the PMF as follows
+我们可以评估 PMF 如下：
 
 ```{code-cell} ipython3
 u.pmf(0), u.pmf(1)
 ```
+#### 二项分布
 
-#### Binomial distribution
-
-Another useful (and more interesting) distribution is the **binomial distribution** on $S=\{0, \ldots, n\}$, which has PMF:
+另一个有用（而且更有趣）的分布是 $S=\{0, \ldots, n\}$ 上的**二项分布**，其 PMF 为：
 
 $$ 
 p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 $$
 
-Again, $\theta \in [0,1]$ is a parameter.
+再次强调，$\theta \in [0,1]$ 是一个参数。
 
-The interpretation of $p(i)$ is: the probability of $i$ successes in $n$ independent trials with success probability $\theta$.
+$p(i)$ 的解释是：$n$次独立试验中有$i$次成功的概率，每次试验成功的概率为$\theta$。
 
-For example, if $\theta=0.5$, then $p(i)$ is the probability of $i$ heads in $n$ flips of a fair coin.
+例如，如果$\theta=0.5$，那么$p(i)$就是$n$次抛掷公平硬币得到$i$次正面的概率。
 
-The formula for the mean is $n \theta$ and the formula for the variance is $n \theta (1-\theta)$.
+均值的公式是$n\theta$，方差的公式是$n\theta(1-\theta)$。
 
-Let's investigate an example
+现在让我们来探讨一个例子
 
 ```{code-cell} ipython3
 n = 10
@@ -217,19 +211,18 @@ n = 10
 u = scipy.stats.binom(n, θ)
 ```
 
-According to our formulas, the mean and variance are
+根据我们的公式，均值和方差是
 
 ```{code-cell} ipython3
 n * θ,  n *  θ * (1 - θ)  
 ```
-
-Let's see if SciPy gives us the same results:
+让我们看看SciPy是否给出了相同的结果：
 
 ```{code-cell} ipython3
 u.mean(), u.var()
 ```
 
-Here's the PMF:
+这是 PMF：
 
 ```{code-cell} ipython3
 u.pmf(1)
@@ -246,7 +239,7 @@ ax.set_ylabel('PMF')
 plt.show()
 ```
 
-Here's the CDF:
+这是 CDF：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -262,14 +255,14 @@ plt.show()
 ```{exercise}
 :label: prob_ex3
 
-Using `u.pmf`, check that our definition of the CDF given above calculates the same function as `u.cdf`.
+使用`u.pmf`，验证我们上面给出的CDF定义是否计算出与`u.cdf`相同的函数。
 ```
 
 ```{solution-start} prob_ex3
 :class: dropdown
 ```
 
-Here is one solution:
+这里是一个解决方案：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -283,30 +276,30 @@ ax.set_ylabel('CDF')
 plt.show()
 ```
 
-We can see that the output graph is the same as the one above.
+我们可以看到输出图与上面的相同。
 
 ```{solution-end}
 ```
 
-#### Geometric distribution
+#### 几何分布
 
-The geometric distribution has infinite support $S = \{0, 1, 2, \ldots\}$ and its PMF is given by 
+几何分布具有无限支持集 $S = \{0, 1, 2, \ldots\}$，其概率质量函数（PMF）为
 
 $$
 p(i) = (1 - \theta)^i \theta
 $$
 
-where $\theta \in [0,1]$ is a parameter
+其中 $\theta \in [0,1]$ 是一个参数
 
-(A discrete distribution has infinite support if the set of points to which it assigns positive probability is infinite.)
+（如果一个离散分布赋予正概率的点集是无限的，则称其具有无限支持。）
 
-To understand the distribution, think of repeated independent random trials, each with success probability $\theta$.
+为了理解这个分布，可以想象重复的独立随机试验，每次试验的成功概率为 $\theta$。
 
-The interpretation of $p(i)$ is: the probability there are $i$ failures before the first success occurs.
+$p(i)$ 的解释是：第一次成功之前发生了 $i$ 次失败的概率。
 
-It can be shown that the mean of the distribution is $1/\theta$ and the variance is $(1-\theta)/\theta$.
+可以证明该分布的平均值是 $1/\theta$，方差是 $(1-\theta)/\theta$。
 
-Here's an example.
+下面是一个例子。
 
 ```{code-cell} ipython3
 θ = 0.1
@@ -314,7 +307,7 @@ u = scipy.stats.geom(θ)
 u.mean(), u.var()
 ```
 
-Here's part of the PMF:
+这里是部分PMF：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -328,19 +321,19 @@ ax.set_ylabel('PMF')
 plt.show()
 ```
 
-#### Poisson distribution
+#### 泊松分布
 
-The Poisson distribution on $S = \{0, 1, \ldots\}$ with parameter $\lambda > 0$ has PMF
+泊松分布在 $S = \{0, 1, \ldots\}$ 上，参数为 $\lambda > 0$，其概率质量函数（PMF）为
 
 $$
 p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 $$
 
-The interpretation of $p(i)$ is: the probability of $i$ events in a fixed time interval, where the events occur independently at a constant rate $\lambda$.
+$p(i)$ 的解释是：在固定时间区间内事件发生 $i$ 次的概率，其中事件以常数率 $\lambda$ 独立发生。
 
-It can be shown that the mean is $\lambda$ and the variance is also $\lambda$.
+可以证明，其均值为 $\lambda$，方差也为 $\lambda$。
 
-Here's an example.
+这里有一个例子。
 
 ```{code-cell} ipython3
 λ = 2
@@ -348,7 +341,7 @@ u = scipy.stats.poisson(λ)
 u.mean(), u.var()
 ```
 
-Here's the PMF:
+这是概率质量函数：
 
 ```{code-cell} ipython3
 u.pmf(1)
@@ -365,53 +358,52 @@ ax.set_ylabel('PMF')
 plt.show()
 ```
 
-### Continuous distributions
+### 连续分布
 
-
-A continuous distribution is represented by a **probability density function**, which is a function $p$ over $\mathbb R$ (the set of all real numbers) such that $p(x) \geq 0$ for all $x$ and
+连续分布由一个**概率密度函数**表示，这是一个在全体实数集 $\mathbb R$ 上的函数 $p$，满足对所有的 $x$ 有 $p(x) \geq 0$，并且
 
 $$ 
-\int_{-\infty}^\infty p(x) dx = 1 
+\int_{-\infty}^\infty p(x) \, dx = 1 
 $$
 
-We say that random variable $X$ has distribution $p$ if
+我们说随机变量 $X$ 若有如下性质则服从分布 $p$：
 
 $$
-\mathbb P\{a < X < b\} = \int_a^b p(x) dx
+\mathbb P\{a < X < b\} = \int_a^b p(x) \, dx
 $$
 
-for all $a \leq b$.
+对所有 $a \leq b$ 都成立。
 
-The definition of the mean and variance of a random variable $X$ with distribution $p$ are the same as the discrete case, after replacing the sum with an integral.
+随机变量 $X$ 若服从分布 $p$，其均值和方差的定义与离散情况相同，只是将求和换成了积分。
 
-For example, the mean of $X$ is
+例如，$X$ 的均值为
 
 $$
-\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) dx
+\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) \, dx
 $$
 
-The **cumulative distribution function** (CDF) of $X$ is defined by
+$X$ 的**累积分布函数**（CDF）定义为
 
 $$
 F(x) = \mathbb P\{X \leq x\}
-        = \int_{-\infty}^x p(x) dx
+        = \int_{-\infty}^x p(x) \, dx
 $$
 
 
-#### Normal distribution
+#### 正态分布
 
-Perhaps the most famous distribution is the **normal distribution**, which has density
+也许最著名的分布是**正态分布**，其密度为
 
 $$
 p(x) = \frac{1}{\sqrt{2\pi}\sigma}
             \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 $$
 
-This distribution has two parameters, $\mu \in \mathbb R$ and $\sigma \in (0, \infty)$.  
+这个分布有两个参数，$\mu \in \mathbb R$ 和 $\sigma \in (0, \infty)$。
 
-Using calculus, it can be shown that, for this distribution, the mean is $\mu$ and the variance is $\sigma^2$.
+使用微积分，可以证明对于这种分布，均值是 $\mu$，方差是 $\sigma^2$。
 
-We can obtain the moments, PDF and CDF of the normal density via SciPy as follows:
+我们可以通过 SciPy 获取正态分布的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 μ, σ = 0.0, 1.0
@@ -422,7 +414,7 @@ u = scipy.stats.norm(μ, σ)
 u.mean(), u.var()
 ```
 
-Here's a plot of the density --- the famous "bell-shaped curve":
+下面是密度的图像——著名的“钟形曲线”：
 
 ```{code-cell} ipython3
 μ_vals = [-1, 0, 1]
@@ -441,7 +433,7 @@ plt.legend()
 plt.show()
 ```
 
-Here's a plot of the CDF:
+下面是 CDF 的图像：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -457,25 +449,25 @@ plt.legend()
 plt.show()
 ```
 
-#### Lognormal distribution
+#### 对数正态分布
 
-The **lognormal distribution** is a distribution on $\left(0, \infty\right)$ with density
+**对数正态分布**是定义在 $\left(0, \infty\right)$ 上的一个分布，其密度函数为
 
 $$
 p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
     \exp \left(- \frac{\left(\log x - \mu\right)^2}{2 \sigma^2} \right)
 $$
 
-This distribution has two parameters, $\mu$ and $\sigma$.
+这个分布有两个参数，$\mu$ 和 $\sigma$。
 
-It can be shown that, for this distribution, the mean is $\exp\left(\mu + \sigma^2/2\right)$ and the variance is $\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)$.
+可以证明，对于这个分布，平均值是 $\exp\left(\mu + \sigma^2/2\right)$，方差是 $\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)$。
 
-It can be proved that 
+可以证明：
 
-* if $X$ is lognormally distributed, then $\log X$ is normally distributed, and
-* if $X$ is normally distributed, then $\exp X$ is lognormally distributed.
+* 如果 $X$ 是对数正态分布的，则 $\log X$ 是正态分布的，
+* 如果 $X$ 是正态分布的，则 $\exp X$ 是对数正态分布的。
 
-We can obtain the moments, PDF, and CDF of the lognormal density as follows:
+我们可以按照下面的方式获取对数正态分布的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 μ, σ = 0.0, 1.0
@@ -519,22 +511,22 @@ plt.legend()
 plt.show()
 ```
 
-#### Exponential distribution
+#### 指数分布
 
-The **exponential distribution** is a distribution supported on $\left(0, \infty\right)$ with density
+**指数分布**是定义在 $\left(0, \infty\right)$ 上的分布，其密度函数为
 
 $$
 p(x) = \lambda \exp \left( - \lambda x \right)
 \qquad (x > 0)
 $$
 
-This distribution has one parameter $\lambda$.
+这个分布有一个参数 $\lambda$。
 
-The exponential distribution can be thought of as the continuous analog of the geometric distribution.
+指数分布可以被视为几何分布的连续等价物。
 
-It can be shown that, for this distribution, the mean is $1/\lambda$ and the variance is $1/\lambda^2$.
+可以证明，对于这个分布，平均值是 $1/\lambda$，方差是 $1/\lambda^2$。
 
-We can obtain the moments, PDF, and CDF of the exponential density as follows:
+我们可以按照下面的方式获取指数分布的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 λ = 1.0
@@ -575,26 +567,24 @@ plt.legend()
 plt.show()
 ```
 
-#### Beta distribution
+#### 贝塔分布
 
-The **beta distribution** is a distribution on $(0, 1)$ with density
+**贝塔分布**是定义在 $(0, 1)$ 上的分布，其密度为
 
 $$
 p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
     x^{\alpha - 1} (1 - x)^{\beta - 1}
 $$
 
-where $\Gamma$ is the [gamma function](https://en.wikipedia.org/wiki/Gamma_function).
+其中 $\Gamma$ 是[伽马函数](https://en.wikipedia.org/wiki/Gamma_function)。
 
-(The role of the gamma function is just to normalize the density, so that it
-integrates to one.)
+(伽马函数的作用是使密度标准化，从而使其积分为一。)
 
-This distribution has two parameters, $\alpha > 0$ and $\beta > 0$.
+此分布有两个参数，$\alpha > 0$ 和 $\beta > 0$。
 
-It can be shown that, for this distribution, the mean is $\alpha / (\alpha + \beta)$ and 
-the variance is $\alpha \beta / (\alpha + \beta)^2 (\alpha + \beta + 1)$.
+可以证明对于该分布，均值为 $\alpha / (\alpha + \beta)$，方差为 $\alpha \beta / (\alpha + \beta)^2 (\alpha + \beta + 1)$。
 
-We can obtain the moments, PDF, and CDF of the Beta density as follows:
+我们可以如下获得贝塔密度的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 α, β = 3.0, 1.0
@@ -636,25 +626,22 @@ plt.legend()
 plt.show()
 ```
 
-#### Gamma distribution
+#### 伽马分布
 
-The **gamma distribution** is a distribution on $\left(0, \infty\right)$ with density
+**伽马分布**是定义在 $\left(0, \infty\right)$ 上的分布，其密度为
 
 $$
 p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
     x^{\alpha - 1} \exp(-\beta x)
 $$
 
-This distribution has two parameters, $\alpha > 0$ and $\beta > 0$.
+此分布有两个参数，$\alpha > 0$ 和 $\beta > 0$。
 
-It can be shown that, for this distribution, the mean is $\alpha / \beta$ and
-the variance is $\alpha / \beta^2$.
+可以证明对于该分布，均值为 $\alpha / \beta$，方差为 $\alpha / \beta^2$。
 
-One interpretation is that if $X$ is gamma distributed and $\alpha$ is an
-integer, then $X$ is the sum of $\alpha$ independent exponentially distributed
-random variables with mean $1/\beta$.
+一种解释是，如果 $X$ 是伽马分布并且 $\alpha$ 是一个整数，那么 $X$ 是 $\alpha$ 个独立具有均值 $1/\beta$ 的指数分布随机变量的总和。
 
-We can obtain the moments, PDF, and CDF of the Gamma density as follows:
+我们可以如下获得伽马密度的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 α, β = 3.0, 2.0
@@ -696,12 +683,11 @@ plt.legend()
 plt.show()
 ```
 
-## Observed distributions
+## 观察到的分布
 
+有时候我们将观测到的数据或测量值称为“分布”。
 
-Sometimes we refer to observed data or measurements as "distributions".
-
-For example, let's say we observe the income of 10 people over a year:
+例如，假设我们观察了10个人一年的收入：
 
 ```{code-cell} ipython3
 data = [['Hiroshi', 1200], 
@@ -719,34 +705,32 @@ df = pd.DataFrame(data, columns=['name', 'income'])
 df
 ```
 
-In this situation, we might refer to the set of their incomes as the "income distribution."
+在这种情况下，我们可能称他们的收入集合为“收入分布”。
 
-The terminology is confusing because this set is not a probability distribution
---- it's just a collection of numbers.
+这个术语有些令人困惑，因为这个集合不是一个概率分布——它只是一个数字的集合。
 
-However, as we will see, there are connections between observed distributions (i.e., sets of
-numbers like the income distribution above) and probability distributions.
+然而，正如我们将看到的，观察到的分布（即，像上述收入分布那样的数字集合）和概率分布之间存在联系。
 
-Below we explore some observed distributions.
+下面我们探索一些观察到的分布。
 
 
-### Summary statistics
+### 概括统计
 
-Suppose we have an observed distribution with values $\{x_1, \ldots, x_n\}$
+假设我们有一个观察到的分布，其值为 $\{x_1, \ldots, x_n\}$
 
-The **sample mean** of this distribution is defined as
+这个分布的**样本均值**定义为
 
 $$
 \bar x = \frac{1}{n} \sum_{i=1}^n x_i
 $$
 
-The **sample variance** is defined as 
+**样本方差**定义为 
 
 $$
 \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2
 $$
 
-For the income distribution given above, we can calculate these numbers via
+对于上面给出的收入分布，我们可以通过下面的方式计算这些数字：
 
 ```{code-cell} ipython3
 x = df['income']
@@ -756,44 +740,40 @@ x.mean(), x.var()
 ```{exercise}
 :label: prob_ex4
 
-If you try to check that the formulas given above for the sample mean and sample
-variance produce the same numbers, you will see that the variance isn't quite
-right.  This is because SciPy uses $1/(n-1)$ instead of $1/n$ as the term at the
-front of the variance. (Some books define the sample variance this way.)
-Confirm.
+如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 $1/(n-1)$ 而不是 $1/n$ 作为方差的前面的系数。（有些书籍就是这样定义样本方差的。）
+确认。
 ```
 
+### 可视化
 
-### Visualization
+让我们来看看我们可以用哪些方式来可视化一个或多个观察到的分布。
 
-Let's look at different ways that we can visualize one or more observed distributions.
+我们将讲解
 
-We will cover
-
-- histograms
-- kernel density estimates and
-- violin plots
+- 直方图
+- 核密度估计和
+- 小提琴图
 
 
-#### Histograms
+#### 直方图
 
-We can histogram the income distribution we just constructed as follows
+我们可以如下制作我们刚刚建立的收入分布的直方图
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.hist(x, bins=5, density=True, histtype='bar')
-ax.set_xlabel('income')
-ax.set_ylabel('density')
+ax.set_xlabel('收入')
+ax.set_ylabel('密度')
 plt.show()
 ```
 
-Let's look at a distribution from real data.
+让我们来看一个真实数据的分布。
 
-In particular, we will look at the monthly return on Amazon shares between 2000/1/1 and 2024/1/1.
+特别是，我们将看一下2000/1/1至2024/1/1之间亚马逊股票的月收益率。
 
-The monthly return is calculated as the percent change in the share price over each month.
+月收益率是每个月股价变动的百分比。
 
-So we will have one observation for each month.
+因此，我们将得到每个月的一个观测。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -804,73 +784,72 @@ x_amazon = prices.pct_change()[1:] * 100
 x_amazon.head()
 ```
 
-The first observation is the monthly return (percent change) over January 2000, which was
+第一个观察结果是2000年1月的月回报（百分比变化），这是
 
 ```{code-cell} ipython3
 x_amazon.iloc[0]
 ```
 
-Let's turn the return observations into an array and histogram it.
+让我们将回报观测值转换成数组并制作直方图。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.hist(x_amazon, bins=20)
-ax.set_xlabel('monthly return (percent change)')
-ax.set_ylabel('density')
+ax.set_xlabel('月收益率（百分比变化）')
+ax.set_ylabel('密度')
 plt.show()
 ```
 
-#### Kernel density estimates
+#### 核密度估计
 
-Kernel density estimates (KDE) provide a simple way to estimate and visualize the density of a distribution.
+核密度估计（KDE）提供了一种简单的方式来估计和可视化分布的密度。
 
-If you are not familiar with KDEs, you can think of them as a smoothed
-histogram.
+如果你不熟悉核密度估计，可以将其视为平滑的直方图。
 
-Let's have a look at a KDE formed from the Amazon return data.
+让我们看看从亚马逊退货数据中形成的KDE。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax)
-ax.set_xlabel('monthly return (percent change)')
+ax.set_xlabel('月度回报率（百分比变化）')
 ax.set_ylabel('KDE')
 plt.show()
 ```
 
-The smoothness of the KDE is dependent on how we choose the bandwidth.
+KDE的平滑程度取决于我们选择带宽的方式。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.1, alpha=0.5, label="bw=0.1")
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.5, alpha=0.5, label="bw=0.5")
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=1, alpha=0.5, label="bw=1")
-ax.set_xlabel('monthly return (percent change)')
+ax.set_xlabel('月度回报率（百分比变化）')
 ax.set_ylabel('KDE')
 plt.legend()
 plt.show()
 ```
 
-When we use a larger bandwidth, the KDE is smoother.
+当我们使用较大的带宽时，KDE更加平滑。
 
-A suitable bandwidth is not too smooth (underfitting) or too wiggly (overfitting).
-
-
-#### Violin plots
+一个合适的带宽既不应过于平滑（欠拟合），也不应过于曲折（过拟合）。
 
 
-Another way to display an observed distribution is via a violin plot.
+#### 小提琴图
+
+
+通过小提琴图展示观察到的分布是另一种方式。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.violinplot(x_amazon)
-ax.set_ylabel('monthly return (percent change)')
+ax.set_ylabel('月度回报率（百分比变化）')
 ax.set_xlabel('KDE')
 plt.show()
 ```
 
-Violin plots are particularly useful when we want to compare different distributions.
+小提琴图在我们想要比较不同分布时特别有用。
 
-For example, let's compare the monthly returns on Amazon shares with the monthly return on Costco shares.
+例如，让我们比较亚马逊股份的月度回报与Costco股份的月度回报。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -883,72 +862,70 @@ x_costco = prices.pct_change()[1:] * 100
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.violinplot([x_amazon, x_costco])
-ax.set_ylabel('monthly return (percent change)')
-ax.set_xlabel('retailers')
+ax.set_ylabel('月度回报率（百分比变化）')
+ax.set_xlabel('零售商')
 
 ax.set_xticks([1, 2])
-ax.set_xticklabels(['Amazon', 'Costco'])
+ax.set_xticklabels(['亚马逊', '开市客'])
 plt.show()
 ```
 
-### Connection to probability distributions
+### 与概率分布的联系
 
-Let's discuss the connection between observed distributions and probability distributions.
+让我们讨论一下观察到的分布与概率分布之间的联系。
 
-Sometimes it's helpful to imagine that an observed distribution is generated by a particular probability distribution.
+有时候，想象一个观察到的分布是由特定的概率分布生成的会很有帮助。
 
-For example, we might look at the returns from Amazon above and imagine that they were generated by a normal distribution.
+例如，我们可能会观察上面亚马逊的回报，并想象它们是由正态分布生成的。
 
-(Even though this is not true, it *might* be a helpful way to think about the data.)
+（尽管这不是真的，但这*可能*是一种有帮助的思考数据的方式。）
 
-Here we match a normal distribution to the Amazon monthly returns by setting the
-sample mean to the mean of the normal distribution and the sample variance equal
-to the variance.
+这里我们通过将样本均值设为正态分布的均值，将样本方差设为方差，来匹配正态分布到亚马逊月度回报上。
 
-Then we plot the density and the histogram.
+然后我们绘制密度和直方图。
 
 ```{code-cell} ipython3
-μ = x_amazon.mean()
-σ_squared = x_amazon.var()
-σ = np.sqrt(σ_squared)
-u = scipy.stats.norm(μ, σ)
+μ = x_amazon.mean()  
+σ_squared = x_amazon.var()  
+σ = np.sqrt(σ_squared)  
+u = scipy.stats.norm(μ, σ)  
 ```
 
 ```{code-cell} ipython3
-x_grid = np.linspace(-50, 65, 200)
-fig, ax = plt.subplots()
-ax.plot(x_grid, u.pdf(x_grid))
-ax.hist(x_amazon, density=True, bins=40)
-ax.set_xlabel('monthly return (percent change)')
-ax.set_ylabel('density')
+x_grid = np.linspace(-50, 65, 200)  
+fig, ax = plt.subplots()  
+ax.plot(x_grid, u.pdf(x_grid))  
+ax.hist(x_amazon, density=True, bins=40)  
+ax.set_xlabel('月度回报（百分比变化）')
+ax.set_ylabel('密度')
 plt.show()
 ```
 
-The match between the histogram and the density is not bad but also not very good.
+直方图与密度的匹配不错，但也不是很好。
 
-One reason is that the normal distribution is not really a good fit for this observed data --- we will discuss this point again when we talk about {ref}`heavy tailed distributions<heavy_tail>`.
+一个原因是正态分布实际上并不真正适合这个观察数据 --- 我们在讨论{ref}`重尾分布<heavy_tail>`时将再次提到这一点。
 
-Of course, if the data really *is* generated by the normal distribution, then the fit will be better.
+当然，如果数据真的是由正态分布生成的，那么拟合效果会更好。
 
-Let's see this in action
+让我们看到这一点在实际中的运用：
 
-- first we generate random draws from the normal distribution
-- then we histogram them and compare with the density.
+- 首先我们从正态分布中生成随机抽样
+- 然后我们对它们进行直方图绘制，并与密度比较。
 
 ```{code-cell} ipython3
-μ, σ = 0, 1
-u = scipy.stats.norm(μ, σ)
-N = 2000  # Number of observations
-x_draws = u.rvs(N)
-x_grid = np.linspace(-4, 4, 200)
-fig, ax = plt.subplots()
-ax.plot(x_grid, u.pdf(x_grid))
-ax.hist(x_draws, density=True, bins=40)
+μ, σ = 0, 1  
+u = scipy.stats.norm(μ, σ)  
+N = 2000  
+x_draws = u.rvs(N)  
+x_grid = np.linspace(-4, 4, 200)  
+fig, ax = plt.subplots()  
+ax.plot(x_grid, u.pdf(x_grid))  
+ax.hist(x_draws, density=True, bins=40)  
 ax.set_xlabel('x')
-ax.set_ylabel('density')
+ax.set_ylabel('密度')
 plt.show()
 ```
 
-Note that if you keep increasing $N$, which is the number of observations, the fit will get better and better.
+请注意，如果你不断增加 $N$，即观测数量，拟合效果会越来越好。
 
-This convergence is a version of the "law of large numbers", which we will discuss {ref}`later<lln_mr>`.
+这种收敛是“大数定律”的一个版本，我们将在{ref}`以后<lln_mr>`讨论。
