@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>35. Markov Chains: Irreducibility and Ergodicity &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>35. 马尔科夫链：不可约性与遍历性 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="36. Univariate Time Series with Matrix Algebra" href="time_series_with_matrices.html" />
-    <link rel="prev" title="34. Markov Chains: Basic Concepts" href="markov_chains_I.html" />
+    <link rel="next" title="36. 用矩阵代数表示的单变量时间序列" href="time_series_with_matrices.html" />
+    <link rel="prev" title="34. 马尔科夫链：基本概念" href="markov_chains_I.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="Markov Chains: Irreducibility and Ergodicity"/>
+<meta name="twitter:title" content="马尔科夫链：不可约性与遍历性"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="Markov Chains: Irreducibility and Ergodicity" />
+<meta property="og:title" content="马尔科夫链：不可约性与遍历性" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/markov_chains_II.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,19 +172,19 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">35.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility">35.2. Irreducibility</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducibility-and-stationarity">35.2.1. Irreducibility and stationarity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">35.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-irreducible">35.2. 不可约性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">35.2.1. 不可约性与平稳性</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">35.3. Ergodicity</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-ergodicity-and-unemployment">35.3.1. Example: ergodicity and unemployment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-hamilton-dynamics">35.3.2. Example: Hamilton dynamics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-periodic-chain">35.3.3. Example: a periodic chain</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-political-institutions">35.3.4. Example:  political institutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">35.3. 遍历性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg1-2">35.3.1. 示例：遍历性与失业</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ergo">35.3.2. 示例：汉密尔顿动力学</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">35.3.3. 示例：一个周期链</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">35.3.4. 示例：政治制度</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">35.4. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">35.4. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -217,7 +217,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Markov Chains: Irreducibility and Ergodicity</p>
+                        <p class="qe-page__header-subheading">马尔科夫链：不可约性与遍历性</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -243,9 +243,9 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="markov-chains-irreducibility-and-ergodicity">
-<h1><span class="section-number">35. </span>Markov Chains: Irreducibility and Ergodicity<a class="headerlink" href="#markov-chains-irreducibility-and-ergodicity" title="Permalink to this heading">#</a></h1>
-<p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">35. </span>马尔科夫链：不可约性与遍历性<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p id="index-0">除了 Anaconda 中的库外，这个讲座还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -259,15 +259,15 @@ const thebe_selector_output = ".output, .cell_output"
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.32.2)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
 Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.6.2)
@@ -277,20 +277,19 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 </details>
 </div>
-<section id="overview">
-<h2><span class="section-number">35.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>This lecture continues on from our <a class="reference internal" href="markov_chains_I.html"><span class="doc">earlier lecture on Markov chains</span></a>.</p>
-<p>Specifically, we will introduce the concepts of irreducibility and ergodicity, and see how they connect to stationarity.</p>
-<p>Irreducibility describes the ability of a Markov chain to move between any two states in the system.</p>
-<p>Ergodicity is a sample path property that describes the behavior of the system over long periods of time.</p>
-<p>As we will see,</p>
+<section id="id2">
+<h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>本讲座是我们<a class="reference internal" href="markov_chains_I.html"><span class="doc">早期关于马尔科夫链的讲座</span></a>的延续。</p>
+<p>具体来说，我们将介绍不可约性和遍历性的概念，并了解它们与平稳性的联系。</p>
+<p>不可约性描述了马尔科夫链在系统中移动任意两个状态之间的能力。</p>
+<p>遍历性是一种样本路径属性，描述了系统在长时间内的行为。</p>
+<p>正如我们将看到的：</p>
 <ul class="simple">
-<li><p>an irreducible Markov chain guarantees the existence of a unique stationary distribution, while</p></li>
-<li><p>an ergodic Markov chain generates time series that satisfy a version of the
-law of large numbers.</p></li>
+<li><p>不可约的马尔科夫链保证存在唯一的平稳分布，而</p></li>
+<li><p>遍历的马尔科夫链生成满足大数定律版本的时间序列。</p></li>
 </ul>
-<p>Together, these concepts provide a foundation for understanding the long-term behavior of Markov chains.</p>
-<p>Let’s start with some standard imports:</p>
+<p>这些概念一起为理解马尔科夫链的长期行为提供了基础。</p>
+<p>让我们从一些标准导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -301,28 +300,24 @@ law of large numbers.</p></li>
 </div>
 </div>
 </section>
-<section id="irreducibility">
-<span id="mc-irreducible"></span><h2><span class="section-number">35.2. </span>Irreducibility<a class="headerlink" href="#irreducibility" title="Permalink to this heading">#</a></h2>
-<p>To explain irreducibility, let’s take <span class="math notranslate nohighlight">\(P\)</span> to be a fixed stochastic matrix.</p>
-<p>State <span class="math notranslate nohighlight">\(x\)</span> is called <strong>accessible</strong> (or <strong>reachable</strong>) from state <span class="math notranslate nohighlight">\(y\)</span> if <span class="math notranslate nohighlight">\(P^t(x,y)&gt;0\)</span> for some integer <span class="math notranslate nohighlight">\(t\ge 0\)</span>.</p>
-<p>Two states, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, are said to <strong>communicate</strong> if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are accessible from each other.</p>
-<p>In view of our discussion <a class="reference internal" href="markov_chains_I.html#finite-mc-mstp"><span class="std std-ref">above</span></a>, this means precisely
-that</p>
+<section id="mc-irreducible">
+<span id="id3"></span><h2><span class="section-number">35.2. </span>不可约性<a class="headerlink" href="#mc-irreducible" title="Permalink to this heading">#</a></h2>
+<p>为了解释不可约性，让我们设 <span class="math notranslate nohighlight">\(P\)</span> 为一个固定的随机矩阵。</p>
+<p>如果对于某个整数 <span class="math notranslate nohighlight">\(t\ge 0\)</span>，<span class="math notranslate nohighlight">\(P^t(x,y)&gt;0\)</span>，则称状态 <span class="math notranslate nohighlight">\(x\)</span> 对状态 <span class="math notranslate nohighlight">\(y\)</span> 是<strong>可达的</strong>。</p>
+<p>当状态 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 彼此可达时，称它们<strong>相互沟通</strong>。</p>
+<p>根据我们<a class="reference internal" href="markov_chains_I.html#finite-mc-mstp"><span class="std std-ref">前面讨论的</span></a>，这正意味着</p>
 <ul class="simple">
-<li><p>state <span class="math notranslate nohighlight">\(x\)</span> can eventually be reached from state <span class="math notranslate nohighlight">\(y\)</span>, and</p></li>
-<li><p>state <span class="math notranslate nohighlight">\(y\)</span> can eventually be reached from state <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>状态 <span class="math notranslate nohighlight">\(x\)</span> 最终可以从状态 <span class="math notranslate nohighlight">\(y\)</span> 到达，且</p></li>
+<li><p>状态 <span class="math notranslate nohighlight">\(y\)</span> 最终可以从状态 <span class="math notranslate nohighlight">\(x\)</span> 到达。</p></li>
 </ul>
-<p>The stochastic matrix <span class="math notranslate nohighlight">\(P\)</span> is called <strong>irreducible</strong> if all states communicate;
-that is, if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> communicate for all <span class="math notranslate nohighlight">\((x, y)\)</span> in <span class="math notranslate nohighlight">\(S \times S\)</span>.</p>
+<p>如果所有状态都相互沟通，则称随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 是<strong>不可约的</strong>，即对于所有 <span class="math notranslate nohighlight">\((x, y)\)</span> 在 <span class="math notranslate nohighlight">\(S \times S\)</span> 中，<span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 相互沟通。</p>
 <div class="proof example admonition" id="mc2_ex_ir">
 <p class="admonition-title"><span class="caption-number">Example 35.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>For example, consider the following transition probabilities for wealth of a
-fictitious set of households</p>
+<p>例如，考虑以下一组虚构家庭的财富转移概率。</p>
 <img alt="_images/Irre_1.png" class="align-center" id="mc-irre1" src="_images/Irre_1.png" />
 </section>
-</div><p>We can translate this into a stochastic matrix, putting zeros where
-there’s no edge between nodes</p>
+</div><p>我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P :=
@@ -332,10 +327,9 @@ P :=
      0.1 &amp; 0.1 &amp; 0.8
 \end{bmatrix} 
 \end{split}\]</div>
-<p>It’s clear from the graph that this stochastic matrix is irreducible: we can  eventually
-reach any state from any other state.</p>
+<p>从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-We can also test this using [QuantEcon.py](http://quantecon.org/quantecon-py)&#39;s MarkovChain class
+我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` 类来测试这一点：
 
 ```{code-cell} ipython3
 P = [[0.9, 0.1, 0.0],
@@ -349,13 +343,12 @@ mc.is_irreducible
 <div class="proof example admonition" id="mc2_ex_pf">
 <p class="admonition-title"><span class="caption-number">Example 35.2 </span></p>
 <section class="example-content" id="proof-content">
-<p>Here’s a more pessimistic scenario in which  poor people remain poor forever</p>
+<p>这是一个更加悲观的情景，贫困者永远保持贫困。</p>
 <img alt="_images/Irre_2.png" class="align-center" id="mc-irre2" src="_images/Irre_2.png" />
 </section>
-</div><p>This stochastic matrix is not irreducible since, for example, rich is not
-accessible from poor.</p>
+</div><p>这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-Let&#39;s confirm this
+让我们确认这一点：
 
 ```{code-cell} ipython3
 P = [[1.0, 0.0, 0.0],
@@ -366,80 +359,71 @@ mc = qe.MarkovChain(P, (&#39;poor&#39;, &#39;middle&#39;, &#39;rich&#39;))
 mc.is_irreducible
 </pre></div>
 </div>
-<p>It might be clear to you already that irreducibility is going to be important
-in terms of long-run outcomes.</p>
-<p>For example, poverty is a life sentence in the second graph but not the first.</p>
-<p>We’ll come back to this a bit later.</p>
-<section id="irreducibility-and-stationarity">
-<h3><span class="section-number">35.2.1. </span>Irreducibility and stationarity<a class="headerlink" href="#irreducibility-and-stationarity" title="Permalink to this heading">#</a></h3>
-<p>We discussed uniqueness of stationary distributions in our earlier lecture <a class="reference internal" href="markov_chains_I.html"><span class="doc">Markov Chains: Basic Concepts</span></a>.</p>
-<p>There we <a class="reference internal" href="markov_chains_I.html#mc_po_conv_thm">stated</a> that uniqueness holds when the transition matrix is everywhere positive.</p>
-<p>In fact irreducibility is sufficient:</p>
+<p>你可能已经明白，不可约性在长期结果中非常重要。</p>
+<p>例如，在第二个图中，贫困是一种终身的困境，但在第一个图中不是。</p>
+<p>我们稍后会回到这个问题。</p>
+<section id="id4">
+<h3><span class="section-number">35.2.1. </span>不可约性与平稳性<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>我们在之前的讲座 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中讨论了平稳分布的唯一性。</p>
+<p>我们<a class="reference internal" href="markov_chains_I.html#mc_po_conv_thm">指出</a>，当转移矩阵处处为正时，唯一性成立。</p>
+<p>事实上，不可约性就足够了：</p>
 <div class="proof theorem admonition" id="mc_conv_thm">
 <p class="admonition-title"><span class="caption-number">Theorem 35.1 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(P\)</span> is irreducible, then <span class="math notranslate nohighlight">\(P\)</span> has exactly one stationary
-distribution.</p>
+<p>如果 <span class="math notranslate nohighlight">\(P\)</span> 是不可约的，那么 <span class="math notranslate nohighlight">\(P\)</span> 只有一个平稳分布。</p>
 </section>
-</div><p>For proof, see Chapter 4 of <span id="id1">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> or
-Theorem 5.2 of <span id="id2">[<a class="reference internal" href="zreferences.html#id155" title="Olle Häggström. Finite Markov chains and algorithmic applications. Volume 52. Cambridge University Press, 2002.">Häggström, 2002</a>]</span>.</p>
+</div><p>有关证明，请参见 <span id="id5">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> 的第4章或 <span id="id6">[<a class="reference internal" href="zreferences.html#id155" title="Olle Häggström. Finite Markov chains and algorithmic applications. Volume 52. Cambridge University Press, 2002.">Häggström, 2002</a>]</span> 的定理5.2。</p>
 </section>
 </section>
 <section id="ergodicity">
-<span id="id3"></span><h2><span class="section-number">35.3. </span>Ergodicity<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
-<p>Under irreducibility, yet another important result obtains:</p>
+<span id="id7"></span><h2><span class="section-number">35.3. </span>遍历性<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
+<p>在不可约性下，还可以得到另一个重要结果：</p>
 <div class="proof theorem admonition" id="stationary">
 <p class="admonition-title"><span class="caption-number">Theorem 35.2 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(P\)</span> is irreducible and <span class="math notranslate nohighlight">\(\psi^*\)</span> is the unique stationary
-distribution, then, for all <span class="math notranslate nohighlight">\(x \in S\)</span>,</p>
+<p>如果 <span class="math notranslate nohighlight">\(P\)</span> 是不可约的，并且 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是唯一的平稳分布，那么对于所有 <span class="math notranslate nohighlight">\(x \in S\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-llnfmc0">
 <span class="eqno">(35.1)<a class="headerlink" href="#equation-llnfmc0" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = x\}  \to \psi^*(x)
-    \quad \text{as } m \to \infty\]</div>
+    \quad \text{当 } m \to \infty\]</div>
 </section>
-</div><p>Here</p>
+</div><p>这里</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\{X_t\}\)</span> is a Markov chain with stochastic matrix <span class="math notranslate nohighlight">\(P\)</span> and initial distribution <span class="math notranslate nohighlight">\(\psi_0\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbb{1} \{X_t = x\} = 1\)</span> if <span class="math notranslate nohighlight">\(X_t = x\)</span> and zero otherwise.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是具有随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 和初始分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 的马尔科夫链。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{1} \{X_t = x\} = 1\)</span> 当且仅当 <span class="math notranslate nohighlight">\(X_t = x\)</span>，否则为0。</p></li>
 </ul>
-<p>The result in <a class="reference internal" href="#equation-llnfmc0">(35.1)</a> is sometimes called <strong>ergodicity</strong>.</p>
-<p>The theorem tells us that the fraction of time the chain spends at state <span class="math notranslate nohighlight">\(x\)</span>
-converges to <span class="math notranslate nohighlight">\(\psi^*(x)\)</span> as time goes to infinity.</p>
-<p id="new-interp-sd">This gives us another way to interpret the stationary distribution (provided irreducibility holds).</p>
-<p>Importantly, the result is valid for any choice of <span class="math notranslate nohighlight">\(\psi_0\)</span>.</p>
-<p>The theorem is related to <a class="reference internal" href="lln_clt.html"><span class="doc">the law of large numbers</span></a>.</p>
-<p>It tells us that, in some settings, the law of large numbers sometimes holds even when the
-sequence of random variables is <a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">not IID</span></a>.</p>
-<section id="example-ergodicity-and-unemployment">
-<span id="mc-eg1-2"></span><h3><span class="section-number">35.3.1. </span>Example: ergodicity and unemployment<a class="headerlink" href="#example-ergodicity-and-unemployment" title="Permalink to this heading">#</a></h3>
-<p>Recall our cross-sectional interpretation of the employment/unemployment model <a class="reference internal" href="markov_chains_I.html#mc-eg1-1"><span class="std std-ref">discussed before</span></a>.</p>
-<p>Assume that <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, so that irreducibility holds.</p>
-<p>We saw that the stationary distribution is <span class="math notranslate nohighlight">\((p, 1-p)\)</span>, where</p>
+<p>定理<a class="reference internal" href="#equation-llnfmc0">(35.1)</a>中的结果有时称为<strong>遍历性</strong>。</p>
+<p>该定理告诉我们，随着时间趋于无穷大，链花费在状态 <span class="math notranslate nohighlight">\(x\)</span> 的时间比例收敛到 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>。</p>
+<p id="new-interp-sd">这为我们提供了另一种解释平稳分布的方法（假设不可约性成立）。</p>
+<p>重要的是，这一结果对于任何 <span class="math notranslate nohighlight">\(\psi_0\)</span> 都有效。</p>
+<p>该定理与<a class="reference internal" href="lln_clt.html"><span class="doc">大数定律</span></a>相关。</p>
+<p>它告诉我们，在某些设置中，即使随机变量序列<a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">不是独立同分布</span></a>，大数定律有时也成立。</p>
+<section id="mc-eg1-2">
+<span id="id8"></span><h3><span class="section-number">35.3.1. </span>示例：遍历性与失业<a class="headerlink" href="#mc-eg1-2" title="Permalink to this heading">#</a></h3>
+<p>回顾我们关于就业/失业模型的截面解释<a class="reference internal" href="markov_chains_I.html#mc-eg1-1"><span class="std std-ref">之前讨论过</span></a>。</p>
+<p>假设 <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>，因此不可约性成立。</p>
+<p>我们看到平稳分布是 <span class="math notranslate nohighlight">\((p, 1-p)\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[
 p = \frac{\beta}{\alpha + \beta}
 \]</div>
-<p>In the cross-sectional interpretation, this is the fraction of people unemployed.</p>
-<p>In view of our latest (ergodicity) result, it is also the fraction of time that a single worker can expect to spend unemployed.</p>
-<p>Thus, in the long run, cross-sectional averages for a population and time-series averages for a given person coincide.</p>
-<p>This is one aspect of the concept  of ergodicity.</p>
+<p>在截面解释中，这是失业人员的比例。</p>
+<p>根据我们最新的遍历性结果，这也是单个工人预期花费在失业状态的时间比例。</p>
+<p>因此，从长远来看，人口的截面平均值和单个个体的时间序列平均值是一致的。</p>
+<p>这是遍历性概念的一个方面。</p>
 </section>
-<section id="example-hamilton-dynamics">
-<span id="ergo"></span><h3><span class="section-number">35.3.2. </span>Example: Hamilton dynamics<a class="headerlink" href="#example-hamilton-dynamics" title="Permalink to this heading">#</a></h3>
-<p>Another example is the Hamilton dynamics we <a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">discussed before</span></a>.</p>
-<p>Let <span class="math notranslate nohighlight">\(\{X_t\}\)</span> be a sample path generated by these dynamics.</p>
-<p>Let’s denote the fraction of time spent in state <span class="math notranslate nohighlight">\(x\)</span> over the period <span class="math notranslate nohighlight">\(t=1,
-\ldots, n\)</span> by <span class="math notranslate nohighlight">\(\hat p_n(x)\)</span>, so that</p>
+<section id="ergo">
+<span id="id9"></span><h3><span class="section-number">35.3.2. </span>示例：汉密尔顿动力学<a class="headerlink" href="#ergo" title="Permalink to this heading">#</a></h3>
+<p>另一个示例是我们<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">之前讨论过的</span></a>汉密尔顿动力学。</p>
+<p>让 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是由这些动力学生成的样本路径。</p>
+<p>令在时间段 <span class="math notranslate nohighlight">\(t=1, \ldots, n\)</span> 内花费在状态 <span class="math notranslate nohighlight">\(x\)</span> 上的时间比例为 <span class="math notranslate nohighlight">\(\hat p_n(x)\)</span>，则有</p>
 <div class="math notranslate nohighlight">
 \[
     \hat p_n(x) := \frac{1}{n} \sum_{t = 1}^n \mathbb{1}\{X_t = x\}
     \qquad (x \in \{0, 1, 2\})
 \]</div>
-<p>The <a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">graph</span></a> of the Markov chain shows it is irreducible, so
-ergodicity holds.</p>
-<p>Hence we expect that <span class="math notranslate nohighlight">\(\hat p_n(x) \approx \psi^*(x)\)</span> when <span class="math notranslate nohighlight">\(n\)</span> is large.</p>
-<p>The next figure shows convergence of <span class="math notranslate nohighlight">\(\hat p_n(x)\)</span> to <span class="math notranslate nohighlight">\(\psi^*(x)\)</span> when <span class="math notranslate nohighlight">\(x=1\)</span> and
-<span class="math notranslate nohighlight">\(X_0\)</span> is either <span class="math notranslate nohighlight">\(0, 1\)</span> or <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>马尔科夫链的<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">图</span></a>表明它是不可约的，因此遍历性成立。</p>
+<p>因此，我们期望当 <span class="math notranslate nohighlight">\(n\)</span> 较大时，<span class="math notranslate nohighlight">\(\hat p_n(x) \approx \psi^*(x)\)</span>。</p>
+<p>下图显示了当 <span class="math notranslate nohighlight">\(x=1\)</span> 并且 <span class="math notranslate nohighlight">\(X_0\)</span> 分别为 <span class="math notranslate nohighlight">\(0, 1\)</span> 或 <span class="math notranslate nohighlight">\(2\)</span> 时，<span class="math notranslate nohighlight">\(\hat p_n(x)\)</span> 向 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span> 的收敛情况。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.971</span><span class="p">,</span> <span class="mf">0.029</span><span class="p">,</span> <span class="mf">0.000</span><span class="p">],</span>
@@ -448,16 +432,16 @@ ergodicity holds.</p>
 <span class="n">ts_length</span> <span class="o">=</span> <span class="mi">10_000</span>
 <span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 <span class="n">ψ_star</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">stationary_distributions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># We study convergence to psi^*(x) </span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 我们研究 psi^*(x) 的收敛情况</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ψ_star</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> 
                 <span class="n">label</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$\psi^*(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
-<span class="c1"># Compute the fraction of time spent in state 0, starting from different x_0s</span>
+<span class="c1"># 计算花费在状态0的时间比例，从不同的x_0开始</span>
 <span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)):</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
     <span class="n">p_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\hat p_n(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">)$ when $X_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\hat p_n(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">)$ 当 $X_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">fr</span><span class="s1">&#39;$\hat p_n(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -466,18 +450,36 @@ ergodicity holds.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1accc0cc9f58b7f2248e8a3fc8b7fc6e895087be040f3028538430b73e27599e.png"><img alt="_images/1accc0cc9f58b7f2248e8a3fc8b7fc6e895087be040f3028538430b73e27599e.png" src="_images/1accc0cc9f58b7f2248e8a3fc8b7fc6e895087be040f3028538430b73e27599e.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/8e2147ca0371507739b1e90d49c91e272723db4e7192685f420b840cc1728b98.png"><img alt="_images/8e2147ca0371507739b1e90d49c91e272723db4e7192685f420b840cc1728b98.png" src="_images/8e2147ca0371507739b1e90d49c91e272723db4e7192685f420b840cc1728b98.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>You might like to try changing <span class="math notranslate nohighlight">\(x=1\)</span> to either <span class="math notranslate nohighlight">\(x=0\)</span> or <span class="math notranslate nohighlight">\(x=2\)</span>.</p>
-<p>In any of these cases, ergodicity will hold.</p>
+<p>你可能想尝试将 <span class="math notranslate nohighlight">\(x=1\)</span> 改为 <span class="math notranslate nohighlight">\(x=0\)</span> 或 <span class="math notranslate nohighlight">\(x=2\)</span>。</p>
+<p>在这些情况下，遍历性都会成立。</p>
 </section>
-<section id="example-a-periodic-chain">
-<h3><span class="section-number">35.3.3. </span>Example: a periodic chain<a class="headerlink" href="#example-a-periodic-chain" title="Permalink to this heading">#</a></h3>
+<section id="id10">
+<h3><span class="section-number">35.3.3. </span>示例：一个周期链<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
 <div class="proof example admonition" id="mc2_ex_pc">
 <p class="admonition-title"><span class="caption-number">Example 35.3 </span></p>
 <section class="example-content" id="proof-content">
-<p>Let’s look at the following example with states 0 and 1:</p>
+<p>让我们来看以下状态0和1的例子：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P :=
@@ -486,52 +488,53 @@ P :=
      1 &amp; 0\\
 \end{bmatrix} 
 \end{split}\]</div>
-<p>The transition graph shows that this model is irreducible.</p>
+<p>转移图表明该模型是不可约的。</p>
 <img alt="_images/example4.png" class="align-center" id="mc-example4" src="_images/example4.png" />
+<p>请注意，这里有一个周期循环——状态以规则的方式在两个状态之间循环。</p>
 </section>
-</div><p>Notice that there is a periodic cycle — the state cycles between the two states in a regular way.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Not surprisingly, this property 
-is called [periodicity](https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains).
+</div><p>毫不奇怪，这种属性被称为<a class="reference external" href="https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains">周期性</a>。</p>
+<p>尽管如此，该模型是不可约的，因此遍历性成立。</p>
+<p>以下图表进行了说明：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">ts_length</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ψ_star</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">stationary_distributions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-Nonetheless, the model is irreducible, so ergodicity holds.
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ψ_star</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> 
+                    <span class="n">label</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$\psi^*(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">fr</span><span class="s1">&#39;$\hat p_n(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
 
-The following figure illustrates
+    <span class="c1"># 计算每个 x 花费的时间比例</span>
+    <span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="c1"># 从不同的 x_0 生成时间序列</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+        <span class="n">p_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
 
-```{code-cell} ipython3
-P = np.array([[0, 1],
-              [1, 0]])
-ts_length = 100
-mc = qe.MarkovChain(P)
-n = len(P)
-fig, axes = plt.subplots(nrows=1, ncols=n)
-ψ_star = mc.stationary_distributions[0]
-
-for i in range(n):
-    axes[i].axhline(ψ_star[i], linestyle=&#39;dashed&#39;, lw=2, color=&#39;black&#39;, 
-                    label = fr&#39;$\psi^*({i})$&#39;)
-    axes[i].set_xlabel(&#39;t&#39;)
-    axes[i].set_ylabel(fr&#39;$\hat p_n({i})$&#39;)
-
-    # Compute the fraction of time spent, for each x
-    for x0 in range(n):
-        # Generate time series starting at different x_0
-        X = mc.simulate(ts_length, init=x0)
-        p_hat = (X == i).cumsum() / np.arange(1, ts_length+1)
-        axes[i].plot(p_hat, label=f&#39;$x_0 = \, {x0} $&#39;)
-
-    axes[i].legend()
-plt.tight_layout()
-plt.show()
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This example helps to emphasize that asymptotic stationarity is about the distribution, while ergodicity is about the sample path.</p>
-<p>The proportion of time spent in a state can converge to the stationary distribution with periodic chains.</p>
-<p>However, the distribution at each state does not.</p>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png"><img alt="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png" src="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png" style="width: 80%;" /></a>
+</div>
+</div>
+<p>该示例帮助强调了渐近平稳性是关于分布的，而遍历性是关于样本路径的。</p>
+<p>在周期性链中，花费在某个状态的时间比例可以收敛到平稳分布。然而，每个状态的分布却不会收敛。</p>
 </section>
-<section id="example-political-institutions">
-<h3><span class="section-number">35.3.4. </span>Example:  political institutions<a class="headerlink" href="#example-political-institutions" title="Permalink to this heading">#</a></h3>
-<p>Let’s go back to the political institutions model with six states discussed <a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">in a previous lecture</span></a> and study ergodicity.</p>
-<p>Here’s the transition matrix.</p>
+<section id="id11">
+<h3><span class="section-number">35.3.4. </span>示例：政治制度<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<p>让我们回到<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">前一讲中讨论的</span></a>具有六个状态的政治制度模型，并研究其遍历性。</p>
+<p>以下是转移矩阵：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     P :=
@@ -544,10 +547,9 @@ plt.show()
         0.00 &amp; 0.00 &amp; 0.09 &amp; 0.15 &amp; 0.26 &amp; 0.50
     \end{bmatrix} 
 \end{split}\]</div>
-<p>The <a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">graph</span></a> for the chain shows all states are reachable,
-indicating that this chain is irreducible.</p>
-<p>In the next figure, we visualize the difference <span class="math notranslate nohighlight">\(\hat p_n(x) - \psi^* (x)\)</span> for each state <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>Unlike the previous figure, <span class="math notranslate nohighlight">\(X_0\)</span> is held fixed.</p>
+<p>链的<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">图</span></a>显示所有状态都是可达的，表明该链是不可约的。</p>
+<p>在下图中，我们可视化了每个状态 <span class="math notranslate nohighlight">\(x\)</span> 的 <span class="math notranslate nohighlight">\(\hat p_n(x) - \psi^* (x)\)</span> 差异。</p>
+<p>与前一个图不同，<span class="math notranslate nohighlight">\(X_0\)</span> 是固定的。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.86</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">],</span>
@@ -562,12 +564,11 @@ indicating that this chain is irreducible.</p>
 <span class="n">ψ_star</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">stationary_distributions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># Center the plot at 0</span>
+<span class="c1"># 将图中心对准0</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
-
 <span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)):</span>
-    <span class="c1"># Calculate the fraction of time for each state</span>
+    <span class="c1"># 计算每个状态的时间比例</span>
     <span class="n">p_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span> <span class="o">-</span> <span class="n">ψ_star</span><span class="p">[</span><span class="n">x0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x = </span><span class="si">{</span><span class="n">x0</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
@@ -584,13 +585,13 @@ indicating that this chain is irreducible.</p>
 </div>
 </section>
 </section>
-<section id="exercises">
-<h2><span class="section-number">35.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id12">
+<h2><span class="section-number">35.4. </span>练习<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="mc_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.1 </span></p>
 <section id="exercise-content">
-<p>Benhabib et al. <span id="id4">[<a class="reference internal" href="zreferences.html#id278" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">Benhabib <em>et al.</em>, 2019</a>]</span> estimated that the transition matrix for social mobility as the following</p>
+<p>Benhabib 等人 <span id="id13">[<a class="reference internal" href="zreferences.html#id278" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">Benhabib <em>et al.</em>, 2019</a>]</span> 估计了如下的社会流动性转移矩阵：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P:=
@@ -605,12 +606,12 @@ P:=
         0.084 &amp; 0.084 &amp; 0.142 &amp; 0.228 &amp; 0.17 &amp; 0.143 &amp; 0.121 &amp; 0.028
 \end{bmatrix} 
 \end{split}\]</div>
-<p>where each state 1 to 8 corresponds to a  percentile of wealth shares</p>
+<p>其中每个状态1到8对应于财富份额的百分位数：</p>
 <div class="math notranslate nohighlight">
 \[
 0-20 \%, 20-40 \%, 40-60 \%, 60-80 \%, 80-90 \%, 90-95 \%, 95-99 \%, 99-100 \%
 \]</div>
-<p>The matrix is recorded as <code class="docutils literal notranslate"><span class="pre">P</span></code> below</p>
+<p>矩阵记录为 <code class="docutils literal notranslate"><span class="pre">P</span></code>，如下：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.215</span><span class="p">,</span> <span class="mf">0.187</span><span class="p">,</span> <span class="mf">0.081</span><span class="p">,</span> <span class="mf">0.038</span><span class="p">,</span> <span class="mf">0.029</span><span class="p">,</span> <span class="mf">0.006</span><span class="p">],</span>
     <span class="p">[</span><span class="mf">0.221</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span>  <span class="mf">0.215</span><span class="p">,</span> <span class="mf">0.188</span><span class="p">,</span> <span class="mf">0.082</span><span class="p">,</span> <span class="mf">0.039</span><span class="p">,</span> <span class="mf">0.029</span><span class="p">,</span> <span class="mf">0.006</span><span class="p">],</span>
@@ -627,8 +628,8 @@ P:=
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>Show this process is asymptotically stationary and calculate an approximation to the stationary distribution.</p></li>
-<li><p>Use simulations to illustrate ergodicity.</p></li>
+<li><p>展示该过程是渐近平稳的，并计算平稳分布的近似值。</p></li>
+<li><p>使用模拟来说明遍历性。</p></li>
 </ol>
 </section>
 </div>
@@ -636,8 +637,8 @@ P:=
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex1"> Exercise 35.1</a></p>
 <section id="solution-content">
-<p>Part 1:</p>
-<p>One option is to take the power of the transition matrix.</p>
+<p>第1部分：</p>
+<p>一种选择是对转移矩阵取幂。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.222</span><span class="p">,</span> <span class="mf">0.215</span><span class="p">,</span> <span class="mf">0.187</span><span class="p">,</span> <span class="mf">0.081</span><span class="p">,</span> <span class="mf">0.038</span><span class="p">,</span> <span class="mf">0.029</span><span class="p">,</span> <span class="mf">0.006</span><span class="p">],</span>
@@ -677,8 +678,7 @@ P:=
 </div>
 </div>
 </div>
-<p>For this model, rows of <span class="math notranslate nohighlight">\(P^n\)</span> converge to the stationary distribution as <span class="math notranslate nohighlight">\(n \to
-\infty\)</span>:</p>
+<p>对于此模型，当 <span class="math notranslate nohighlight">\(n \to \infty\)</span> 时，<span class="math notranslate nohighlight">\(P^n\)</span> 的行收敛到平稳分布：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
@@ -694,7 +694,7 @@ P:=
 </div>
 </div>
 </div>
-<p>Part 2:</p>
+<p>第2部分：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -704,7 +704,7 @@ P:=
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)):</span>
-    <span class="c1"># Calculate the fraction of time for each worker</span>
+    <span class="c1"># 计算每个工人的时间比例</span>
     <span class="n">p_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span> <span class="o">-</span> <span class="n">ψ_star</span><span class="p">[</span><span class="n">x0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x = </span><span class="si">{</span><span class="n">x0</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
@@ -719,15 +719,14 @@ P:=
 <a class="reference internal image-reference" href="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png"><img alt="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png" src="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Note that the fraction of time spent at each state converges to the probability
-assigned to that state by the stationary distribution.</p>
+<p>注意，花费在每个状态的时间比例收敛到平稳分布为该状态分配的概率。</p>
 </section>
 </div>
 <div class="exercise admonition" id="mc_ex2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.2 </span></p>
 <section id="exercise-content">
-<p>According to the discussion <a class="reference internal" href="#mc-eg1-2"><span class="std std-ref">above</span></a>, if a worker’s employment dynamics obey the stochastic matrix</p>
+<p>根据<a class="reference internal" href="#mc-eg1-2"><span class="std std-ref">上述讨论</span></a>，如果一个工人的就业动态遵循以下随机矩阵</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P := 
@@ -736,42 +735,35 @@ P :=
 \beta &amp; 1 - \beta
 \end{bmatrix} 
 \end{split}\]</div>
-<p>with <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, then, in the long run, the fraction
-of time spent unemployed will be</p>
+<p>其中 <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>，那么，从长远来看，失业的时间比例将为</p>
 <div class="math notranslate nohighlight">
 \[
 p := \frac{\beta}{\alpha + \beta}
 \]</div>
-<p>In other words, if <span class="math notranslate nohighlight">\(\{X_t\}\)</span> represents the Markov chain for
-employment, then <span class="math notranslate nohighlight">\(\bar X_m \to p\)</span> as <span class="math notranslate nohighlight">\(m \to \infty\)</span>, where</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 表示工人的马尔科夫链，那么 <span class="math notranslate nohighlight">\(\bar X_m \to p\)</span> 当 <span class="math notranslate nohighlight">\(m \to \infty\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[
 \bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = 0\}
 \]</div>
-<p>This exercise asks you to illustrate convergence by computing
-<span class="math notranslate nohighlight">\(\bar X_m\)</span> for large <span class="math notranslate nohighlight">\(m\)</span> and checking that
-it is close to <span class="math notranslate nohighlight">\(p\)</span>.</p>
-<p>You will see that this statement is true regardless of the choice of initial
-condition or the values of <span class="math notranslate nohighlight">\(\alpha, \beta\)</span>, provided both lie in
-<span class="math notranslate nohighlight">\((0, 1)\)</span>.</p>
-<p>The result should be similar to the plot we plotted <a class="reference internal" href="#ergo"><span class="std std-ref">here</span></a></p>
+<p>本练习要求您通过计算大 <span class="math notranslate nohighlight">\(m\)</span> 时的 <span class="math notranslate nohighlight">\(\bar X_m\)</span> 来说明收敛性，并检查其是否接近 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>您会看到无论初始条件或 <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> 的选择如何，只要它们都位于 <span class="math notranslate nohighlight">\((0,1)\)</span> 区间内，此结论都成立。</p>
+<p>结果应与我们在<a class="reference internal" href="#ergo"><span class="std std-ref">这里</span></a>绘制的图类似。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-8">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 35.2</a></p>
 <section id="solution-content">
-<p>We will address this exercise graphically.</p>
-<p>The plots show the time series of <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> for two initial
-conditions.</p>
-<p>As <span class="math notranslate nohighlight">\(m\)</span> gets large, both series converge to zero.</p>
+<p>我们将以图形方式解决此练习。</p>
+<p>图显示了 <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> 的时间序列，对于两个初始条件。</p>
+<p>当 <span class="math notranslate nohighlight">\(m\)</span> 变大时，两个序列都收敛到零。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">ts_length</span> <span class="o">=</span> <span class="mi">3000</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">β</span> <span class="o">/</span> <span class="p">(</span><span class="n">α</span> <span class="o">+</span> <span class="n">β</span><span class="p">)</span>
 
-<span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">,</span>       <span class="n">α</span><span class="p">),</span>               <span class="c1"># Careful: P and p are distinct</span>
+<span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">,</span>       <span class="n">α</span><span class="p">),</span>               <span class="c1"># 注意：P 和 p 是不同的</span>
      <span class="p">(</span>    <span class="n">β</span><span class="p">,</span>   <span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">))</span>
 <span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
 
@@ -779,11 +771,11 @@ conditions.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)):</span>
-    <span class="c1"># Generate time series for worker that starts at x0</span>
+    <span class="c1"># 为每个从 x0 开始的工人生成时间序列</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
-    <span class="c1"># Compute fraction of time spent unemployed, for each n</span>
+    <span class="c1"># 计算每个 n 的失业时间比例</span>
     <span class="n">X_bar</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># Plot</span>
+    <span class="c1"># 绘图</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_bar</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\bar X_m - \psi^* (x)$&#39;</span><span class="p">)</span>
@@ -794,7 +786,7 @@ conditions.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e2bc683301503b7558a773bdcf2886b7161df1044456e7af6623bc68eaaf6e98.png"><img alt="_images/e2bc683301503b7558a773bdcf2886b7161df1044456e7af6623bc68eaaf6e98.png" src="_images/e2bc683301503b7558a773bdcf2886b7161df1044456e7af6623bc68eaaf6e98.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/de169dd3a9645f610bbbbca2a61fec6fbeffab329a8968126831d40b534034c7.png"><img alt="_images/de169dd3a9645f610bbbbca2a61fec6fbeffab329a8968126831d40b534034c7.png" src="_images/de169dd3a9645f610bbbbca2a61fec6fbeffab329a8968126831d40b534034c7.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -803,12 +795,11 @@ conditions.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.3 </span></p>
 <section id="exercise-content">
-<p>In <code class="docutils literal notranslate"><span class="pre">quantecon</span></code> library, irreducibility is tested by checking whether the chain forms a <a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html">strongly connected component</a>.</p>
-<p>Another way to test irreducibility is via the following statement:</p>
-<p>The <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is irreducible if and only if <span class="math notranslate nohighlight">\(\sum_{k=0}^{n-1}A^k\)</span>
-is a strictly positive matrix.</p>
-<p>(see, e.g., <span id="id5">[<a class="reference internal" href="zreferences.html#id277" title="Dongmei Zhao. Power Distribution and Performance Analysis for Wireless Communication Networks. SpringerBriefs in Computer Science. Springer US, Boston, MA, 2012. ISBN 978-1-4614-3283-8 978-1-4614-3284-5. URL: https://link.springer.com/10.1007/978-1-4614-3284-5 (visited on 2023-02-03), doi:10.1007/978-1-4614-3284-5.">Zhao, 2012</a>]</span> and <a class="reference external" href="https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix">this StackExchange post</a>)</p>
-<p>Based on this claim, write a function to test irreducibility.</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">quantecon</span></code> 库中，通过检查链是否形成<a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html">强连通分量</a>来测试不可约性。</p>
+<p>另一种测试不可约性的方法是通过以下陈述：</p>
+<p>当且仅当 <span class="math notranslate nohighlight">\(\sum_{k=0}^{n-1}A^k\)</span> 是严格正矩阵时，<span class="math notranslate nohighlight">\(n \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 是不可约的。</p>
+<p>（参见<span id="id14">[<a class="reference internal" href="zreferences.html#id277" title="Dongmei Zhao. Power Distribution and Performance Analysis for Wireless Communication Networks. SpringerBriefs in Computer Science. Springer US, Boston, MA, 2012. ISBN 978-1-4614-3283-8 978-1-4614-3284-5. URL: https://link.springer.com/10.1007/978-1-4614-3284-5 (visited on 2023-02-03), doi:10.1007/978-1-4614-3284-5.">Zhao, 2012</a>]</span> 和 <a class="reference external" href="https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix">此 StackExchange 讨论</a>）</p>
+<p>根据此断言，编写一个函数来测试不可约性。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-10">
@@ -827,7 +818,7 @@ is a strictly positive matrix.</p>
 </div>
 </div>
 </div>
-<p>Let’s try it.</p>
+<p>让我们尝试一下。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
@@ -840,20 +831,20 @@ is a strictly positive matrix.</p>
                <span class="p">[</span><span class="mf">0.000</span><span class="p">,</span> <span class="mf">0.508</span><span class="p">,</span> <span class="mf">0.492</span><span class="p">]])</span>
 
 <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">P</span><span class="p">:</span> <span class="s1">&#39;irreducible&#39;</span> <span class="k">if</span> <span class="n">is_irreducible</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;reducible&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">P</span><span class="p">:</span> <span class="s1">&#39;不可约&#39;</span> <span class="k">if</span> <span class="n">is_irreducible</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;可约&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">result</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 1]
- [1 0]]: irreducible
+ [1 0]]: 不可约
 [[1.  0.  0. ]
  [0.1 0.8 0.1]
- [0.  0.2 0.8]]: reducible
+ [0.  0.2 0.8]]: 可约
 [[0.971 0.029 0.   ]
  [0.145 0.778 0.077]
- [0.    0.508 0.492]]: irreducible
+ [0.    0.508 0.492]]: 不可约
 </pre></div>
 </div>
 </div>
@@ -952,7 +943,7 @@ is a strictly positive matrix.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. Income and Wealth Inequality
+   6. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -1060,7 +1051,7 @@ is a strictly positive matrix.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. Racial Segregation
+   22. 种族隔离
   </a>
  </li>
 </ul>
@@ -1131,22 +1122,22 @@ is a strictly positive matrix.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) Processes
+   33. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. Markov Chains: Basic Concepts
+   34. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   35. Markov Chains: Irreducibility and Ergodicity
+   35. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. Univariate Time Series with Matrix Algebra
+   36. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1236,17 +1227,17 @@ is a strictly positive matrix.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. Troubleshooting
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. References
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. Execution Statistics
+   52. 执行统计数据
   </a>
  </li>
 </ul>

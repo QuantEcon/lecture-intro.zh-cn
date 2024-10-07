@@ -42,6 +42,8 @@
 - [Smit Lunagariya](https://github.com/Smit-create)
 - [Matthew McKay](https://github.com/mmcky)
 - [Maanasee Sharma](https://github.com/maanasee)
+- [Longye Tian](https://github.com/longye-tian)
 - [Humphrey Yang](https://github.com/HumphreyYang)
+- [Sylvia Zhao](https://github.com/SylviaZhaooo)
 
 我们还感谢Noritaka Kudoh鼓励我们开始这个项目并提供了深思熟虑的建议。

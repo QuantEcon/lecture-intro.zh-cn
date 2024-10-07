@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>33. AR(1) Processes &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>33. AR(1) 过程 &#8212; A First Course in Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,7 +123,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="34. Markov Chains: Basic Concepts" href="markov_chains_I.html" />
+    <link rel="next" title="34. 马尔科夫链：基本概念" href="markov_chains_I.html" />
     <link rel="prev" title="32. Laffer曲线与自适应预期" href="laffer_adaptive.html" />
 
 <!-- Normal Meta Tags -->
@@ -134,13 +134,13 @@ const thebe_selector_output = ".output, .cell_output"
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="AR(1) Processes"/>
+<meta name="twitter:title" content="AR(1) 过程"/>
 <meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="AR(1) Processes" />
+<meta property="og:title" content="AR(1) 过程" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/ar1_processes.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -172,18 +172,18 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">33.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ar-1-model">33.2. The AR(1) model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moving-average-representation">33.2.1. Moving average representation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-dynamics">33.2.2. Distribution dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">33.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">33.2. AR(1) 模型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">33.2.1. 移动平均表示</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">33.2.2. 分布动态</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-and-asymptotic-stability">33.3. Stationarity and asymptotic stability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary-distributions">33.3.1. Stationary distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">33.3. 平稳性和渐近稳定性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">33.3.1. 平稳分布</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">33.4. Ergodicity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">33.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">33.4. 遍历性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">33.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -216,7 +216,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">AR(1) Processes</p>
+                        <p class="qe-page__header-subheading">AR(1) 过程</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -246,62 +246,57 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><section class="tex2jax_ignore mathjax_ignore" id="ar-1-processes">
-<span id="ar1-processes"></span><h1><span class="section-number">33. </span>AR(1) Processes<a class="headerlink" href="#ar-1-processes" title="Permalink to this heading">#</a></h1>
-<section id="overview">
-<span id="index-0"></span><h2><span class="section-number">33.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>In this lecture we are going to study a very simple class of stochastic
-models called AR(1) processes.</p>
-<p>These simple models are used again and again in economic research to represent the dynamics of series such as</p>
+</div><section class="tex2jax_ignore mathjax_ignore" id="ar-1">
+<span id="ar1-processes"></span><h1><span class="section-number">33. </span>AR(1) 过程<a class="headerlink" href="#ar-1" title="Permalink to this heading">#</a></h1>
+<section id="index-0">
+<span id="id1"></span><h2><span class="section-number">33.1. </span>概览<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<p>在这个讲座中，我们将研究一类非常简单的随机模型，称为 AR(1) 过程。</p>
+<p>这些简单的模型在经济研究中一次又一次地被用来表示诸如</p>
 <ul class="simple">
-<li><p>labor income</p></li>
-<li><p>dividends</p></li>
-<li><p>productivity, etc.</p></li>
+<li><p>劳动收入</p></li>
+<li><p>股息</p></li>
+<li><p>生产力等序列的动态。</p></li>
 </ul>
-<p>We are going to study AR(1) processes partly because they are useful and
-partly because they help us understand important concepts.</p>
-<p>Let’s start with some imports:</p>
+<p>我们之所以研究 AR(1) 过程，部分是因为它们很有用，部分是因为它们帮助我们理解很多非常重要的概念。</p>
+<p>让我们从一些导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1">#set default figure size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 设置默认图像大小</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="the-ar-1-model">
-<h2><span class="section-number">33.2. </span>The AR(1) model<a class="headerlink" href="#the-ar-1-model" title="Permalink to this heading">#</a></h2>
-<p>The <strong>AR(1) model</strong> (autoregressive model of order 1) takes the form</p>
+<section id="id2">
+<h2><span class="section-number">33.2. </span>AR(1) 模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><strong>AR(1) 模型</strong>（一阶自回归模型）形式是：</p>
 <div class="math notranslate nohighlight" id="equation-can-ar1">
 <span class="eqno">(33.1)<a class="headerlink" href="#equation-can-ar1" title="Permalink to this equation">#</a></span>\[X_{t+1} = a X_t + b + c W_{t+1}\]</div>
-<p>where <span class="math notranslate nohighlight">\(a, b, c\)</span> are scalar-valued parameters</p>
-<p>(Equation <a class="reference internal" href="#equation-can-ar1">(33.1)</a> is sometimes called a <strong>stochastic difference equation</strong>.)</p>
+<p>其中 <span class="math notranslate nohighlight">\(a, b, c\)</span> 是标量参数</p>
+<p>(方程 <a class="reference internal" href="#equation-can-ar1">(33.1)</a> 有时被称为 <strong>随机差分方程</strong>。)</p>
 <div class="proof example admonition" id="ar1_ex_ar">
 <p class="admonition-title"><span class="caption-number">Example 33.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>For example, <span class="math notranslate nohighlight">\(X_t\)</span> might be</p>
+<p>例如，<span class="math notranslate nohighlight">\(X_t\)</span> 可能是</p>
 <ul class="simple">
-<li><p>the log of labor income for a given household, or</p></li>
-<li><p>the log of money demand in a given economy.</p></li>
+<li><p>某个家庭的劳动收入对数，或</p></li>
+<li><p>某个经济体的货币需求对数。</p></li>
 </ul>
-<p>In either case, <a class="reference internal" href="#equation-can-ar1">(33.1)</a> shows that the current value evolves as a linear function
-of the previous value and an IID shock <span class="math notranslate nohighlight">\(W_{t+1}\)</span>.</p>
-<p>(We use <span class="math notranslate nohighlight">\(t+1\)</span> for the subscript of <span class="math notranslate nohighlight">\(W_{t+1}\)</span> because this random variable is not
-observed at time <span class="math notranslate nohighlight">\(t\)</span>.)</p>
+<p>在两种情况下，<a class="reference internal" href="#equation-can-ar1">(33.1)</a> 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 来演变的。</p>
+<p>(我们使用 <span class="math notranslate nohighlight">\(t+1\)</span> 作为 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的下标，因为在时间 <span class="math notranslate nohighlight">\(t\)</span> 这个随机变量还未被观察到。)</p>
 </section>
-</div><p>The specification <a class="reference internal" href="#equation-can-ar1">(33.1)</a> generates a time series <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> as soon as we
-specify an initial condition <span class="math notranslate nohighlight">\(X_0\)</span>.</p>
-<p>To make things even simpler, we will assume that</p>
+</div><p>一旦我们指定一个初始条件 <span class="math notranslate nohighlight">\(X_0\)</span>，我们就可以用<a class="reference internal" href="#equation-can-ar1">(33.1)</a> 生成一个时间序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span>。</p>
+<p>为了使事情变得更简单，我们将假设</p>
 <ul class="simple">
-<li><p>the process <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> is <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">IID</span></a> and standard normal,</p></li>
-<li><p>the initial condition <span class="math notranslate nohighlight">\(X_0\)</span> is drawn from the normal distribution <span class="math notranslate nohighlight">\(N(\mu_0, v_0)\)</span> and</p></li>
-<li><p>the initial condition <span class="math notranslate nohighlight">\(X_0\)</span> is independent of <span class="math notranslate nohighlight">\(\{ W_t \}\)</span>.</p></li>
+<li><p>过程 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> 且符合标准正态分布，</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 从正态分布 <span class="math notranslate nohighlight">\(N(\mu_0, v_0)\)</span> 中抽取，</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 与 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 独立。</p></li>
 </ul>
-<section id="moving-average-representation">
-<h3><span class="section-number">33.2.1. </span>Moving average representation<a class="headerlink" href="#moving-average-representation" title="Permalink to this heading">#</a></h3>
-<p>Iterating backwards from time <span class="math notranslate nohighlight">\(t\)</span>, we obtain</p>
+<section id="id3">
+<h3><span class="section-number">33.2.1. </span>移动平均表示<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>从时间 <span class="math notranslate nohighlight">\(t\)</span> 向后迭代，我们得到</p>
 <div class="math notranslate nohighlight">
 \[
 X_t = a X_{t-1} + b +  c W_t
@@ -309,57 +304,52 @@ X_t = a X_{t-1} + b +  c W_t
         = a^3 X_{t-3} + a^2 b + a^2 c W_{t-2} + b + c W_t
         = \cdots
 \]</div>
-<p>If we work all the way back to time zero, we get</p>
+<p>如果我们一直追溯到零时，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ma">
 <span class="eqno">(33.2)<a class="headerlink" href="#equation-ar1-ma" title="Permalink to this equation">#</a></span>\[X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
         c \sum_{j=0}^{t-1} a^j  W_{t-j}\]</div>
-<p>Equation <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> shows that <span class="math notranslate nohighlight">\(X_t\)</span> is a well defined random variable, the value of which depends on</p>
+<p>方程 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 显示 <span class="math notranslate nohighlight">\(X_t\)</span> 是一个明确定义的随机变量，其值取决于</p>
 <ul class="simple">
-<li><p>the parameters,</p></li>
-<li><p>the initial condition <span class="math notranslate nohighlight">\(X_0\)</span> and</p></li>
-<li><p>the shocks <span class="math notranslate nohighlight">\(W_1, \ldots W_t\)</span> from time <span class="math notranslate nohighlight">\(t=1\)</span> to the present.</p></li>
+<li><p>参数，</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 和</p></li>
+<li><p>从时间 <span class="math notranslate nohighlight">\(t=1\)</span> 到现在的冲击 <span class="math notranslate nohighlight">\(W_1, \ldots W_t\)</span>。</p></li>
 </ul>
-<p>Throughout, the symbol <span class="math notranslate nohighlight">\(\psi_t\)</span> will be used to refer to the
-density of this random variable <span class="math notranslate nohighlight">\(X_t\)</span>.</p>
+<p>在整个过程中，符号 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将用来指代这个随机变量 <span class="math notranslate nohighlight">\(X_t\)</span> 的密度。</p>
 </section>
-<section id="distribution-dynamics">
-<h3><span class="section-number">33.2.2. </span>Distribution dynamics<a class="headerlink" href="#distribution-dynamics" title="Permalink to this heading">#</a></h3>
-<p>One of the nice things about this model is that it’s so easy to trace out the sequence of distributions <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> corresponding to the time
-series <span class="math notranslate nohighlight">\(\{ X_t\}\)</span>.</p>
-<p>To see this, we first note that <span class="math notranslate nohighlight">\(X_t\)</span> is normally distributed for each <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>This is immediate from <a class="reference internal" href="#equation-ar1-ma">(33.2)</a>, since linear combinations of independent
-normal random variables are normal.</p>
-<p>Given that <span class="math notranslate nohighlight">\(X_t\)</span> is normally distributed, we will know the full distribution
-<span class="math notranslate nohighlight">\(\psi_t\)</span> if we can pin down its first two <a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">moments</a>.</p>
-<p>Let <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(v_t\)</span> denote the mean and variance of <span class="math notranslate nohighlight">\(X_t\)</span> respectively.</p>
-<p>We can pin down these values from <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> or we can use the following
-recursive expressions:</p>
+<section id="id4">
+<h3><span class="section-number">33.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>这个模型的一个好处是很容易追踪一系列分布 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>，这些分布对应于时间
+序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 的现实演变。具体来说，我们可以在每个日期 <span class="math notranslate nohighlight">\(t\)</span> 上追踪观测到的 <span class="math notranslate nohighlight">\(X_t\)</span> 的边际分布。</p>
+<p>让我们看看我们如何做到这一点。</p>
+<p>首先我们指出，对于每个时间 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的。</p>
+<p>这是从 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 显见的，因为独立正态随机变量的线性组合是正态分布的。</p>
+<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的前两个<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
+<p>设 <span class="math notranslate nohighlight">\(\mu_t\)</span> 和 <span class="math notranslate nohighlight">\(v_t\)</span> 分别表示 <span class="math notranslate nohighlight">\(X_t\)</span> 的均值和方差。</p>
+<p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 确定这些值，或者我们可以使用以下递归表达式：</p>
 <div class="math notranslate nohighlight" id="equation-dyn-tm">
 <span class="eqno">(33.3)<a class="headerlink" href="#equation-dyn-tm" title="Permalink to this equation">#</a></span>\[\mu_{t+1} = a \mu_t + b
-\quad \text{and} \quad
+\quad 	ext{和} \quad
 v_{t+1} = a^2 v_t + c^2\]</div>
-<p>These expressions are obtained from <a class="reference internal" href="#equation-can-ar1">(33.1)</a> by taking, respectively, the expectation and variance of both sides of the equality.</p>
-<p>In calculating the second expression, we are using the fact that <span class="math notranslate nohighlight">\(X_t\)</span>
-and <span class="math notranslate nohighlight">\(W_{t+1}\)</span> are independent.</p>
-<p>(This follows from our assumptions and <a class="reference internal" href="#equation-ar1-ma">(33.2)</a>.)</p>
-<p>Given the dynamics in <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> and initial conditions <span class="math notranslate nohighlight">\(\mu_0,
-v_0\)</span>, we obtain <span class="math notranslate nohighlight">\(\mu_t, v_t\)</span> and hence</p>
+<p>通过分别取等式两侧的期望和方差，从 <a class="reference internal" href="#equation-can-ar1">(33.1)</a> 得到这些表达式。</p>
+<p>在计算第二个表达式时，我们利用了 <span class="math notranslate nohighlight">\(X_t\)</span> 和 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的独立性。</p>
+<p>(这是根据我们的假设和 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 得出的。)</p>
+<p>给定 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 中的动态和初始条件 <span class="math notranslate nohighlight">\(\mu_0, v_0\)</span>，我们得到 <span class="math notranslate nohighlight">\(\mu_t, v_t\)</span>，因此</p>
 <div class="math notranslate nohighlight">
 \[
 \psi_t = N(\mu_t, v_t)
 \]</div>
-<p>The following code uses these facts to track the sequence of marginal distributions <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>.</p>
-<p>The parameters are</p>
+<p>下面的代码利用这些事实来追踪边际分布序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>。</p>
+<p>参数是</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span>
 
-<span class="n">mu</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.6</span>  <span class="c1"># initial conditions mu_0, v_0</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.6</span>  <span class="c1"># 初始条件 mu_0, v_0</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here’s the sequence of distributions:</p>
+<p>以下是分布序列：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -388,16 +378,14 @@ v_0\)</span>, we obtain <span class="math notranslate nohighlight">\(\mu_t, v_t\
 </div>
 </section>
 </section>
-<section id="stationarity-and-asymptotic-stability">
-<h2><span class="section-number">33.3. </span>Stationarity and asymptotic stability<a class="headerlink" href="#stationarity-and-asymptotic-stability" title="Permalink to this heading">#</a></h2>
-<p>When we use models to study the real world, it is generally preferable that our
-models have clear, sharp predictions.</p>
-<p>For dynamic problems, sharp predictions are related to stability.</p>
-<p>For example, if a dynamic model predicts that inflation always converges to some
-kind of steady state, then the model gives a sharp prediction.</p>
-<p>(The prediction might be wrong, but even this is helpful, because we can judge the quality of the model.)</p>
-<p>Notice that, in the figure above, the sequence <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> seems to be converging to a limiting distribution, suggesting some kind of stability.</p>
-<p>This is even clearer if we project forward further into the future:</p>
+<section id="id5">
+<h2><span class="section-number">33.3. </span>平稳性和渐近稳定性<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>当我们使用模型来研究现实世界时，通常希望我们的模型具有清晰准确的预测。</p>
+<p>对于动态问题，清晰的预测与稳定性有关。</p>
+<p>例如，如果一个动态模型预测通货膨胀总是收敛到某种稳态，那么这个模型提供了一个明确的预测。</p>
+<p>（预测可能是错误的，但即便如此，它也是有帮助的，因为我们可以判断模型的质量。）</p>
+<p>注意，在上图中，序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 似乎正在收敛到一个极限分布，这表明存在某种稳定性。</p>
+<p>如果我们进一步向未来进行投影，这一点就更加明显：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=-</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">sim_length</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
@@ -419,8 +407,8 @@ kind of steady state, then the model gives a sharp prediction.</p>
 <a class="reference internal image-reference" href="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png"><img alt="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png" src="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>Moreover, the limit does not depend on the initial condition.</p>
-<p>For example, this alternative density sequence also converges to the same limit.</p>
+<p>此外，极限不依赖于初始条件。</p>
+<p>例如，另一个密度序列也会收敛到相同的极限。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -433,28 +421,28 @@ kind of steady state, then the model gives a sharp prediction.</p>
 <a class="reference internal image-reference" href="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png"><img alt="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png" src="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>In fact it’s easy to show that such convergence will occur, regardless of the initial condition, whenever <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>.</p>
-<p>To see this, we just have to look at the dynamics of the first two moments, as
-given in <a class="reference internal" href="#equation-dyn-tm">(33.3)</a>.</p>
-<p>When <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>, these sequences converge to the respective limits</p>
+<p>事实上，可以很容易地证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，不管初始条件如何，都会发生这种收敛。</p>
+<p>为了看到这一点，我们只需查看前两个矩的动态，
+如 <a class="reference internal" href="#equation-dyn-tm">(33.3)</a> 中所给出的。</p>
+<p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，这些序列会收敛到各自的极限</p>
 <div class="math notranslate nohighlight" id="equation-mu-sig-star">
 <span class="eqno">(33.4)<a class="headerlink" href="#equation-mu-sig-star" title="Permalink to this equation">#</a></span>\[\mu^* := \frac{b}{1-a}
-\quad \text{and} \quad
+\quad 和 \quad
 v^* = \frac{c^2}{1 - a^2}\]</div>
-<p>(See our <a class="reference internal" href="scalar_dynam.html"><span class="doc">lecture on one dimensional dynamics</span></a> for background on deterministic convergence.)</p>
-<p>Hence</p>
+<p>（请参阅我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">一维动力学讲座</span></a>，了解确定性收敛的背景。）</p>
+<p>因此</p>
 <div class="math notranslate nohighlight" id="equation-ar1-psi-star">
 <span class="eqno">(33.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Permalink to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
-\quad \text{as }
+\quad 当
 t \to \infty\]</div>
-<p>We can confirm this is valid for the sequence above using the following code.</p>
+<p>我们可以使用以下代码确认这对于上面的序列是有效的。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
 
 <span class="n">mu_star</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">std_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># square root of v_star</span>
+<span class="n">std_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># v_star的平方根</span>
 <span class="n">psi_star</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu_star</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_star</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">psi_star</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\psi^*$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -467,105 +455,99 @@ t \to \infty\]</div>
 <a class="reference internal image-reference" href="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png"><img alt="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png" src="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>As claimed, the sequence <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> converges to <span class="math notranslate nohighlight">\(\psi^*\)</span>.</p>
-<p>We see that, at least for these parameters, the AR(1) model has strong stability
-properties.</p>
-<section id="stationary-distributions">
-<h3><span class="section-number">33.3.1. </span>Stationary distributions<a class="headerlink" href="#stationary-distributions" title="Permalink to this heading">#</a></h3>
-<p>Let’s try to better understand the limiting distribution <span class="math notranslate nohighlight">\(\psi^*\)</span>.</p>
-<p>A stationary distribution is a distribution that is a “fixed point” of the update rule for the AR(1) process.</p>
-<p>In other words, if <span class="math notranslate nohighlight">\(\psi_t\)</span> is stationary, then <span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> for all <span class="math notranslate nohighlight">\(j\)</span> in <span class="math notranslate nohighlight">\(\mathbb N\)</span>.</p>
-<p>A different way to put this, specialized to the current setting, is as follows: a density <span class="math notranslate nohighlight">\(\psi\)</span> on <span class="math notranslate nohighlight">\(\mathbb R\)</span> is <strong>stationary</strong> for the AR(1) process if</p>
+<p>请注意，根据上述参数，我们看到序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 收敛到 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p>我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。</p>
+<section id="id6">
+<h3><span class="section-number">33.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>让我们更好地理解极限分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p>平稳分布是 AR(1) 过程更新规则的一个“固定点”。</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb N\)</span> 中成立。</p>
+<p>另一种针对当前设置的说法是：如果一个在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的密度 <span class="math notranslate nohighlight">\(\psi\)</span> 对 AR(1) 过程是<strong>平稳的</strong>，则有</p>
 <div class="math notranslate nohighlight">
 \[
 X_t \sim \psi
 \quad \implies \quad
 a X_t + b + c W_{t+1} \sim \psi
 \]</div>
-<p>The distribution <span class="math notranslate nohighlight">\(\psi^*\)</span> in <a class="reference internal" href="#equation-ar1-psi-star">(33.5)</a> has this property —
-checking this is an exercise.</p>
-<p>(Of course, we are assuming that <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\psi^*\)</span> is
-well defined.)</p>
-<p>In fact, it can be shown that no other distribution on <span class="math notranslate nohighlight">\(\mathbb R\)</span> has this property.</p>
-<p>Thus, when <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>, the AR(1) model has exactly one stationary density and that density is given by <span class="math notranslate nohighlight">\(\psi^*\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\psi^*\)</span> 在 <a class="reference internal" href="#equation-ar1-psi-star">(33.5)</a> 中具有这一性质——检查这一点是一个练习。</p>
+<p>（当然，我们假设 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 从而 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是
+良定义的。）</p>
+<p>事实上，可以证明 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上没有其他分布具有这一性质。</p>
+<p>因此，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，AR(1) 模型恰好有一个平稳密度，那就是 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 </section>
 </section>
-<section id="ergodicity">
-<h2><span class="section-number">33.4. </span>Ergodicity<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
-<p>The concept of ergodicity is used in different ways by different authors.</p>
-<p>One way to understand it in the present setting is that a version of the law
-of large numbers is valid for <span class="math notranslate nohighlight">\(\{X_t\}\)</span>, even though it is not IID.</p>
-<p>In particular, averages over time series converge to expectations under the
-stationary distribution.</p>
-<p>Indeed, it can be proved that, whenever <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>, we have</p>
+<section id="id7">
+<h2><span class="section-number">33.4. </span>遍历性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>不同的作者使用遍历性这一概念有不同的方式。</p>
+<p>在当前设定中理解它的一种方式是，即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律也是有效的。</p>
+<p>特别是，时间序列的平均值收敛于平稳分布下的期望值。</p>
+<p>实际上，可以证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，我们就有</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ergo">
-<span class="eqno">(33.6)<a class="headerlink" href="#equation-ar1-ergo" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t)  \to
+<span class="eqno">(33.6)<a class="headerlink" href="#equation-ar1-ergo" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t) \to
 \int h(x) \psi^*(x) dx
-    \quad \text{as } m \to \infty\]</div>
-<p>whenever the integral on the right hand side is finite and well defined.</p>
-<p>Notes:</p>
+    \quad 当 m \to \infty\]</div>
+<p>只要右侧的积分是有限且良定义的。</p>
+<p>注意：</p>
 <ul class="simple">
-<li><p>In <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a>, convergence holds with probability one.</p></li>
-<li><p>The textbook by <span id="id1">[<a class="reference internal" href="zreferences.html#id215" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span> is a classic reference on ergodicity.</p></li>
+<li><p>在 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 中，收敛性以概率1成立。</p></li>
+<li><p>由 <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span> 编写的教科书是关于遍历性的经典参考。</p></li>
 </ul>
 <div class="proof example admonition" id="ar1_ex_id">
 <p class="admonition-title"><span class="caption-number">Example 33.2 </span></p>
 <section class="example-content" id="proof-content">
-<p>If we consider the identity function <span class="math notranslate nohighlight">\(h(x) = x\)</span>, we get</p>
+<p>如果我们考虑恒等函数 <span class="math notranslate nohighlight">\(h(x) = x\)</span>，我们得到</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{1}{m} \sum_{t = 1}^m X_t  \to
+\frac{1}{m} \sum_{t = 1}^m X_t \to
 \int x \psi^*(x) dx
-    \quad \text{as } m \to \infty
+    \quad \text{当 } m \to \infty
 \]</div>
-<p>In other words, the time series sample mean converges to the mean of the stationary distribution.</p>
+<p>即，时间序列样本均值收敛于平稳分布的均值。</p>
 </section>
-</div><p>Ergodicity is important for a range of reasons.</p>
-<p>For example, <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> can be used to test theory.</p>
-<p>In this equation, we can use observed data to evaluate the left hand side of <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a>.</p>
-<p>And we can use a theoretical AR(1) model to calculate the right hand side.</p>
-<p>If <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> is not close to <span class="math notranslate nohighlight">\(\psi^(x)\)</span>, even for many
-observations, then our theory seems to be incorrect and we will need to revise
-it.</p>
+</div><p>出于多种原因，遍历性非常重要。</p>
+<p>例如，<a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 可用来测试理论。</p>
+<p>在这个方程中，我们可以使用观测数据来评估 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 的左侧。</p>
+<p>我们可以使用理论的 AR(1) 模型来计算右侧。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> 即使在很多观测下也不接近 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>，那么我们的理论似乎是错误的，我们将需要修订它。</p>
 </section>
-<section id="exercises">
-<h2><span class="section-number">33.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h2><span class="section-number">33.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="ar1p_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 33.1 </span></p>
 <section id="exercise-content">
-<p>Let <span class="math notranslate nohighlight">\(k\)</span> be a natural number.</p>
-<p>The <span class="math notranslate nohighlight">\(k\)</span>-th central moment of a  random variable is defined as</p>
+<p>假设 <span class="math notranslate nohighlight">\(k\)</span> 是一个自然数。</p>
+<p>随机变量的 <span class="math notranslate nohighlight">\(k\)</span> 阶中心矩定义为</p>
 <div class="math notranslate nohighlight">
 \[
 M_k := \mathbb E [ (X - \mathbb E X )^k ]
 \]</div>
-<p>When that random variable is <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span>, it is known that</p>
+<p>当这个随机变量是 <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> 时，已知</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 M_k =
 \begin{cases}
-    0 &amp; \text{ if } k \text{ is odd} \\
-    \sigma^k (k-1)!! &amp; \text{ if } k \text{ is even}
+    0 &amp; 如果 k 是奇数 \\
+    \sigma^k (k-1)!! &amp; 如果 k 是偶数
 \end{cases}
 \end{split}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(n!!\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Double_factorial">double factorial</a>.</p>
-<p>According to <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a>, we should have, for any <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span>,</p>
+<p>这里 <span class="math notranslate nohighlight">\(n!!\)</span> 是<a class="reference external" href="https://en.wikipedia.org/wiki/Double_factorial">双阶乘</a>。</p>
+<p>根据 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a>, 对于任何 <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span>，</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{m} \sum_{t = 1}^m
     (X_t - \mu^* )^k
     \approx M_k
 \]</div>
-<p>when <span class="math notranslate nohighlight">\(m\)</span> is large.</p>
-<p>Confirm this by simulation at a range of <span class="math notranslate nohighlight">\(k\)</span> using the default parameters from the lecture.</p>
+<p>当 <span class="math notranslate nohighlight">\(m\)</span> 是较大时。</p>
+<p>通过仿真验证一系列 <span class="math notranslate nohighlight">\(k\)</span>，使用讲座中的默认参数。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex1"> Exercise 33.1</a></p>
 <section id="solution-content">
-<p>Here is one solution:</p>
+<p>这是一个解法：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
@@ -596,8 +578,8 @@ M_k =
     <span class="n">true_moments</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">true_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">true_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;true moments&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">sample_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample moments&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">true_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;真实矩&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_vals</span><span class="p">,</span> <span class="n">sample_moments</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;样本矩&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -605,7 +587,19 @@ M_k =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b5cc70ff5c64449c9ad655a55e2593bb61b35d4beb86222ab0dfb07e24be60af.png"><img alt="_images/b5cc70ff5c64449c9ad655a55e2593bb61b35d4beb86222ab0dfb07e24be60af.png" src="_images/b5cc70ff5c64449c9ad655a55e2593bb61b35d4beb86222ab0dfb07e24be60af.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30495 (\N{CJK UNIFIED IDEOGRAPH-771F}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30697 (\N{CJK UNIFIED IDEOGRAPH-77E9}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png"><img alt="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png" src="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -614,49 +608,35 @@ M_k =
 
 <p class="admonition-title"><span class="caption-number">Exercise 33.2 </span></p>
 <section id="exercise-content">
-<p>Write your own version of a one dimensional <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density
-estimator</a>,
-which estimates a density from a sample.</p>
-<p>Write it as a class that takes the data <span class="math notranslate nohighlight">\(X\)</span> and bandwidth
-<span class="math notranslate nohighlight">\(h\)</span> when initialized and provides a method <span class="math notranslate nohighlight">\(f\)</span> such that</p>
+<p>编写一个一维<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">核密度估计</a>的版本，用于从样本中估计密度。</p>
+<p>将其写为一个类，该类在初始化时接受数据 <span class="math notranslate nohighlight">\(X\)</span> 和带宽 <span class="math notranslate nohighlight">\(h\)</span>，并提供一个方法 <span class="math notranslate nohighlight">\(f\)</span>，使得</p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = \frac{1}{hn} \sum_{i=1}^n
 K \left( \frac{x-X_i}{h} \right)
 \]</div>
-<p>For <span class="math notranslate nohighlight">\(K\)</span> use the Gaussian kernel (<span class="math notranslate nohighlight">\(K\)</span> is the standard normal
-density).</p>
-<p>Write the class so that the bandwidth defaults to Silverman’s rule (see
-the “rule of thumb” discussion on <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">this
-page</a>). Test
-the class you have written by going through the steps</p>
+<p>对于 <span class="math notranslate nohighlight">\(K\)</span>，使用高斯核（<span class="math notranslate nohighlight">\(K\)</span> 是标准正态密度函数）。</p>
+<p>编写该类，使得带宽默认遵循 Silverman 的规则（参见<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">此页面</a>中的“经验规则”讨论）。通过以下步骤测试你编写的类：</p>
 <ol class="arabic simple">
-<li><p>simulate data <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> from distribution <span class="math notranslate nohighlight">\(\phi\)</span></p></li>
-<li><p>plot the kernel density estimate over a suitable range</p></li>
-<li><p>plot the density of <span class="math notranslate nohighlight">\(\phi\)</span> on the same figure</p></li>
+<li><p>从分布 <span class="math notranslate nohighlight">\(\phi\)</span> 中模拟数据 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span></p></li>
+<li><p>在适当的范围内绘制核密度估计</p></li>
+<li><p>在同一图形上绘制 <span class="math notranslate nohighlight">\(\phi\)</span> 的密度</p></li>
 </ol>
-<p>for distributions <span class="math notranslate nohighlight">\(\phi\)</span> of the following types</p>
+<p>分布 <span class="math notranslate nohighlight">\(\phi\)</span> 类型如下：</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta
-distribution</a>
-with <span class="math notranslate nohighlight">\(\alpha = \beta = 2\)</span></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta
-distribution</a>
-with <span class="math notranslate nohighlight">\(\alpha = 2\)</span> and <span class="math notranslate nohighlight">\(\beta = 5\)</span></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta
-distribution</a>
-with <span class="math notranslate nohighlight">\(\alpha = \beta = 0.5\)</span></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 2\)</span></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = 2\)</span> 且 <span class="math notranslate nohighlight">\(\beta = 5\)</span></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 0.5\)</span></p></li>
 </ul>
-<p>Use <span class="math notranslate nohighlight">\(n=500\)</span>.</p>
-<p>Make a comment on your results. (Do you think this is a good estimator
-of these distributions?)</p>
+<p>使用 <span class="math notranslate nohighlight">\(n=500\)</span>。</p>
+<p>对结果进行评论。（你认为这是这些分布的良好估计吗？）</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-5">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex2"> Exercise 33.2</a></p>
 <section id="solution-content">
-<p>Here is one solution:</p>
+<p>这是一个解决方案：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span>
@@ -692,8 +672,8 @@ of these distributions?)</p>
 
     <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">kde</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimate&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;true density&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">kde</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;估计值&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;真实密度&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -712,31 +692,42 @@ of these distributions?)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7c4cef3b6831deebe3c813a85edb628126b40493cddb79a78241862ea72ced96.png"><img alt="_images/7c4cef3b6831deebe3c813a85edb628126b40493cddb79a78241862ea72ced96.png" src="_images/7c4cef3b6831deebe3c813a85edb628126b40493cddb79a78241862ea72ced96.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/c918432ad84389be59d0cf44f41ff533fc5737f67602a32ef20a94f55644fca6.png"><img alt="_images/c918432ad84389be59d0cf44f41ff533fc5737f67602a32ef20a94f55644fca6.png" src="_images/c918432ad84389be59d0cf44f41ff533fc5737f67602a32ef20a94f55644fca6.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/99e189e8fcca96a0a82cc990b141935551383bbff6085d3ebfcddfa24485e5f3.png"><img alt="_images/99e189e8fcca96a0a82cc990b141935551383bbff6085d3ebfcddfa24485e5f3.png" src="_images/99e189e8fcca96a0a82cc990b141935551383bbff6085d3ebfcddfa24485e5f3.png" style="width: 80%;" /></a>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20272 (\N{CJK UNIFIED IDEOGRAPH-4F30}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 35745 (\N{CJK UNIFIED IDEOGRAPH-8BA1}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20540 (\N{CJK UNIFIED IDEOGRAPH-503C}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23494 (\N{CJK UNIFIED IDEOGRAPH-5BC6}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/209e83d3b02e838d9e28645e85220b30c367447a811c83a83fd6e9f8f07f7247.png"><img alt="_images/209e83d3b02e838d9e28645e85220b30c367447a811c83a83fd6e9f8f07f7247.png" src="_images/209e83d3b02e838d9e28645e85220b30c367447a811c83a83fd6e9f8f07f7247.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2f3894242017adec9f3d6d069c741f54862fdeedcb22e0d78d845e27d2c7d924.png"><img alt="_images/2f3894242017adec9f3d6d069c741f54862fdeedcb22e0d78d845e27d2c7d924.png" src="_images/2f3894242017adec9f3d6d069c741f54862fdeedcb22e0d78d845e27d2c7d924.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9af753aff37801be711738d37064cf3175a3df7657c446d661fdff7fa829c9ec.png"><img alt="_images/9af753aff37801be711738d37064cf3175a3df7657c446d661fdff7fa829c9ec.png" src="_images/9af753aff37801be711738d37064cf3175a3df7657c446d661fdff7fa829c9ec.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>We see that the kernel density estimator is effective when the underlying
-distribution is smooth but less so otherwise.</p>
+<p>我们可以看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则效果不佳。</p>
 </section>
 </div>
 <div class="exercise admonition" id="ar1p_ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 33.3 </span></p>
 <section id="exercise-content">
-<p>In the lecture we discussed the following fact: for the <span class="math notranslate nohighlight">\(AR(1)\)</span> process</p>
+<p>在讲座中我们讨论了以下事实：对于 <span class="math notranslate nohighlight">\(AR(1)\)</span> 过程</p>
 <div class="math notranslate nohighlight">
 \[
 X_{t+1} = a X_t + b + c W_{t+1}
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> iid and standard normal,</p>
+<p>其中 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 独立同分布且标准正态，</p>
 <div class="math notranslate nohighlight">
 \[
 \psi_t = N(\mu, s^2) \implies \psi_{t+1}
 = N(a \mu + b, a^2 s^2 + c^2)
 \]</div>
-<p>Confirm this, at least approximately, by simulation. Let</p>
+<p>通过仿真确认这一点，至少是近似的。设定</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a = 0.9\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(b = 0.0\)</span></p></li>
@@ -744,28 +735,21 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <li><p><span class="math notranslate nohighlight">\(\mu = -3\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(s = 0.2\)</span></p></li>
 </ul>
-<p>First, plot <span class="math notranslate nohighlight">\(\psi_t\)</span> and <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> using the true
-distributions described above.</p>
-<p>Second, plot <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> on the same figure (in a different
-color) as follows:</p>
+<p>首先，使用上述真实分布绘制 <span class="math notranslate nohighlight">\(\psi_t\)</span> 和 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span>。</p>
+<p>其次，在同一个图形上（用不同的颜色），绘制 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 如下：</p>
 <ol class="arabic simple">
-<li><p>Generate <span class="math notranslate nohighlight">\(n\)</span> draws of <span class="math notranslate nohighlight">\(X_t\)</span> from the <span class="math notranslate nohighlight">\(N(\mu, s^2)\)</span>
-distribution</p></li>
-<li><p>Update them all using the rule
-<span class="math notranslate nohighlight">\(X_{t+1} = a X_t + b + c W_{t+1}\)</span></p></li>
-<li><p>Use the resulting sample of <span class="math notranslate nohighlight">\(X_{t+1}\)</span> values to produce a
-density estimate via kernel density estimation.</p></li>
+<li><p>从分布 <span class="math notranslate nohighlight">\(N(\mu, s^2)\)</span> 中生成 <span class="math notranslate nohighlight">\(n\)</span> 次 <span class="math notranslate nohighlight">\(X_t\)</span> 抽样</p></li>
+<li><p>使用规则 <span class="math notranslate nohighlight">\(X_{t+1} = a X_t + b + c W_{t+1}\)</span> 更新它们所有</p></li>
+<li><p>使用 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 的结果样本产生通过核密度估计的密度估计。</p></li>
 </ol>
-<p>Try this for <span class="math notranslate nohighlight">\(n=2000\)</span> and confirm that the
-simulation based estimate of <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> does converge to the
-theoretical distribution.</p>
+<p>尝试 <span class="math notranslate nohighlight">\(n=2000\)</span> 并确认基于抽样实验的 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 估计会收敛到理论分布。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-7">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex3"> Exercise 33.3</a></p>
 <section id="solution-content">
-<p>Here is our solution</p>
+<p>这是我们的解决方案</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.9</span>
@@ -777,37 +761,24 @@ theoretical distribution.</p>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">b</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># 样本数</span>
+
+<span class="c1"># 理论上的分布</span>
+<span class="n">μ_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">b</span>
 <span class="n">s_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
-<span class="n">ψ_next</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ_next</span><span class="p">)</span> <span class="o">/</span> <span class="n">s_next</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="c1"># 理论密度</span>
+<span class="n">ψ</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 <span class="n">ψ_next</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ_next</span><span class="p">,</span> <span class="n">s_next</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
-<span class="n">x_draws</span> <span class="o">=</span> <span class="n">ψ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">x_draws_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x_draws</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># 使用仿真值来估计ψ_{t+1}</span>
+<span class="n">x_draws</span> <span class="o">=</span> <span class="n">ψ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 从ψ生成样本</span>
+<span class="n">x_draws_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x_draws</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 更新规则</span>
+
+<span class="c1"># 对仿真结果进行核密度估计</span>
 <span class="n">kde</span> <span class="o">=</span> <span class="n">KDE</span><span class="p">(</span><span class="n">x_draws_next</span><span class="p">)</span>
 
+<span class="c1"># 绘制结果</span>
 <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">μ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">μ</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
@@ -819,13 +790,7 @@ theoretical distribution.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b026c191fd643692d0c5bc5ef20c10e66c5ddd0862d4f4370efbdf0fdbac572c.png"><img alt="_images/b026c191fd643692d0c5bc5ef20c10e66c5ddd0862d4f4370efbdf0fdbac572c.png" src="_images/b026c191fd643692d0c5bc5ef20c10e66c5ddd0862d4f4370efbdf0fdbac572c.png" style="width: 80%;" /></a>
-</div>
-</div>
-<p>The simulated distribution approximately coincides with the theoretical
-distribution, as predicted.</p>
+<p>正如预测的那样，模拟分布与理论分布大致吻合。</p>
 </section>
 </div>
 </section>
@@ -920,7 +885,7 @@ distribution, as predicted.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. Income and Wealth Inequality
+   6. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -1028,7 +993,7 @@ distribution, as predicted.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. Racial Segregation
+   22. 种族隔离
   </a>
  </li>
 </ul>
@@ -1099,22 +1064,22 @@ distribution, as predicted.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   33. AR(1) Processes
+   33. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. Markov Chains: Basic Concepts
+   34. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. Markov Chains: Irreducibility and Ergodicity
+   35. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. Univariate Time Series with Matrix Algebra
+   36. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1204,17 +1169,17 @@ distribution, as predicted.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. Troubleshooting
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. References
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. Execution Statistics
+   52. 执行统计数据
   </a>
  </li>
 </ul>
