@@ -11,11 +11,11 @@ kernelspec:
   name: python3
 ---
 
-# Laffer曲线与自适应预期
+# 拉弗曲线与自适应预期
 
 ## 概览
 
-本讲座研究了在通货膨胀税率下的静态和动态**Laffer曲线**，其采用的模型为此讲座{doc}`money_inflation`中研究的非线性版本。
+本讲座研究了在通货膨胀税率下的静态和动态**拉弗曲线**，其采用的模型为此讲座{doc}`money_inflation`中研究的非线性版本。
 
 与讲座{doc}`money_inflation`中一样，此讲座使用了{cite}`Cagan`在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座{doc}`money_inflation`中使用的线性需求函数。
 
