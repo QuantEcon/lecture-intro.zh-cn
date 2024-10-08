@@ -16,7 +16,7 @@ kernelspec:
 
 ## 概览
 
-在{doc}`previous lecture <intro_supply_demand>`中我们研究了一个只有单一消费商品市场的供给、需求和福利。
+在{doc}`之前的讲座 <intro_supply_demand>`中我们研究了一个只有单一消费商品市场的供给、需求和福利。
 
 在这个讲座中，我们将研究有$n$种商品和$n$对应价格的情景。
 
@@ -32,17 +32,17 @@ kernelspec:
 
 我们将提供[第一福利基本定理](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics)的一个版本，这个定理是由下列经济学家提出的：
 
-* [Leon Walras](https://en.wikipedia.org/wiki/L%C3%A9on_Walras)
-* [Francis Ysidro Edgeworth](https://en.wikipedia.org/wiki/Francis_Ysidro_Edgeworth)
-* [Vilfredo Pareto](https://en.wikipedia.org/wiki/Vilfredo_Pareto)
+* [莱昂·瓦尔拉斯](https://en.wikipedia.org/wiki/L%C3%A9on_Walras)
+* [弗朗西斯·伊西德罗·埃奇沃思](https://en.wikipedia.org/wiki/Francis_Ysidro_Edgeworth)
+* [维尔弗雷多·帕累托](https://en.wikipedia.org/wiki/Vilfredo_Pareto)
 
 对这些关键想法的重要扩展是由以下学者获得的：
 
-* [Abba Lerner](https://en.wikipedia.org/wiki/Abba_P._Lerner)
-* [Harold Hotelling](https://en.wikipedia.org/wiki/Harold_Hotelling)
-* [Paul Samuelson](https://en.wikipedia.org/wiki/Paul_Samuelson)
-* [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow) 
-* [Gerard Debreu](https://en.wikipedia.org/wiki/G%C3%A9rard_Debreu)
+* [阿巴·勒纳](https://en.wikipedia.org/wiki/Abba_P._Lerner)
+* [哈罗德·霍特林](https://en.wikipedia.org/wiki/Harold_Hotelling)
+* [保罗·萨缪尔森](https://en.wikipedia.org/wiki/Paul_Samuelson)
+* [肯尼斯·阿罗](https://en.wikipedia.org/wiki/Kenneth_Arrow) 
+* [热拉尔·德布鲁](https://en.wikipedia.org/wiki/G%C3%A9rard_Debreu)
 
 我们将描述两个经典的福利定理：
 

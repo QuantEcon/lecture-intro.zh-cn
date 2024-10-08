@@ -617,6 +617,8 @@ plt.show()
 ```{code-cell} ipython3
 data_normal = np.random.normal(size=sample_size)
 sm.qqplot(data_normal, line='45')
+plt.xlabel("理论分位数")
+plt.ylabel("样本分位数")
 plt.show()
 ```
 
@@ -626,10 +628,12 @@ plt.show()
 # 构建图形
 fig, axes = plt.subplots(1, 3, figsize=(12, 4))
 axes = axes.flatten()
-labels = ['exponential', 'lognormal', 'Pareto']
+labels = ['指数分布', '对数正态分布', '帕累托分布']
 for data, label, ax in zip(data_list, labels, axes):
     sm.qqplot(data, line='45', ax=ax)
     ax.set_title(label)
+    ax.set_xlabel('理论分位数')
+    ax.set_ylabel('样本分位数')
 plt.tight_layout()
 plt.show()
 ```
@@ -1122,7 +1126,7 @@ $$
 ```{exercise}
 :label: ht_ex3
 
-重复练习1，但将三个分布（两个正态，一个柯西）替换为三个帕累托分布，并使用不同的 $lpha$ 值。
+重复练习1，但将三个分布（两个正态，一个柯西）替换为三个帕累托分布，并使用不同的 $\alpha$ 值。
 
 对于 $\alpha$，尝试1.15、1.5和1.75。
 
@@ -1149,7 +1153,7 @@ for (a, ax) in zip(alphas, axes):
     data = pareto.rvs(size=n, scale=1, b=a)
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"Pareto draws with $\\alpha = {a}$", fontsize=11)
+    ax.set_title(f"帕累托分布抽样 $\\alpha = {a}$", fontsize=11)
 
 plt.subplots_adjust(hspace=0.4)
 

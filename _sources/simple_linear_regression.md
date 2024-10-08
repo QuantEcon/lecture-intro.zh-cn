@@ -193,7 +193,7 @@ $$
 
 我们希望通过参数 $\alpha$ 和 $\beta$ 来最小化这个成本函数。
 
-## 错误相对于 $\alpha$ 和 $\beta$ 的变化
+## 残差相对于 $\alpha$ 和 $\beta$ 的变化
 
 首先让我们看看总误差相对于 $\beta$ 的变化（保持截距 $\alpha$ 不变）
 
@@ -204,7 +204,7 @@ $$
 α_optimal = -14.72
 ```
 
-我们可以计算一个范围内的 $\beta$ 值的错误
+我们可以计算一个范围内的 $\beta$ 值的残差
 
 ```{code-cell} ipython3
 errors = {}
@@ -212,16 +212,16 @@ for β in np.arange(20,100,0.5):
     errors[β] = abs((α_optimal + β * df['X']) - df['Y']).sum()
 ```
 
-绘制错误图
+绘制残差图
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "绘制错误图"
+    caption: "绘制残差图"
     name: plt-errors
 ---
-ax = pd.Series(errors).plot(xlabel='β', ylabel='error')
+ax = pd.Series(errors).plot(xlabel='β', ylabel='残差')
 plt.axvline(β_optimal, color='r');
 ```
 
@@ -233,16 +233,16 @@ for α in np.arange(-500,500,5):
     errors[α] = abs((α + β_optimal * df['X']) - df['Y']).sum()
 ```
 
-绘制错误图
+绘制残差图
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "绘制错误图 (2)"
+    caption: "绘制残差图 (2)"
     name: plt-errors-2
 ---
-ax = pd.Series(errors).plot(xlabel='α', ylabel='error')
+ax = pd.Series(errors).plot(xlabel='α', ylabel='残差')
 plt.axvline(α_optimal, color='r');
 ```
 

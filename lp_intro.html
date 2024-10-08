@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>37. 线性规划 &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>37. 线性规划 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -127,15 +127,15 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="36. 用矩阵代数表示的单变量时间序列" href="time_series_with_matrices.html" />
 
 <!-- Normal Meta Tags -->
-<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
 <meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
-<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+<meta name="description" content=本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
 <meta name="twitter:title" content="线性规划"/>
-<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
@@ -144,8 +144,8 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/lp_intro.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
-<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
-<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
+<meta property="og:site_name" content="Python数量经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -219,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">线性规划</p>
 
@@ -228,11 +228,11 @@ const thebe_selector_output = ".output, .cell_output"
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
-                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>托马斯·萨金特（Thomas J. Sargent）</span></a>
                                 
                             
                                 
-                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>约翰·斯塔胡斯基（John Stachurski）</span></a>
                                 
                             
                         </p>
@@ -266,19 +266,19 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ortools-9.11.4210-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
-Collecting absl-py&gt;=2.0.0 (from ortools)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting absl-py&gt;=2.0.0 (from ortools)
+  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
 Requirement already satisfied: numpy&gt;=1.13.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from ortools) (1.26.4)
 Requirement already satisfied: pandas&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from ortools) (2.2.2)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting protobuf&lt;5.27,&gt;=5.26.1 (from ortools)
-  Downloading protobuf-5.26.1-cp37-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting immutabledict&gt;=3.0.0 (from ortools)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading protobuf-5.26.1-cp37-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+Collecting immutabledict&gt;=3.0.0 (from ortools)
   Downloading immutabledict-4.2.0-py3-none-any.whl.metadata (3.4 kB)
 </pre></div>
 </div>
@@ -290,40 +290,56 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ortools-9.11.4210-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (28.1 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/28.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.1/28.1 MB</span> <span class=" -Color -Color-Red">3.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:09</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.3/28.1 MB</span> <span class=" -Color -Color-Red">7.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:04</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.5/28.1 MB</span> <span class=" -Color -Color-Red">7.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:04</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.7/28.1 MB</span> <span class=" -Color -Color-Red">9.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:03</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.1/28.1 MB</span> <span class=" -Color -Color-Red">20.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
-   ━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.4/28.1 MB</span> <span class=" -Color -Color-Red">47.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.1/28.1 MB</span> <span class=" -Color -Color-Red">11.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:03</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.0/28.1 MB</span> <span class=" -Color -Color-Red">134.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.7/28.1 MB</span> <span class=" -Color -Color-Red">12.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:03</span>
+   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.4/28.1 MB</span> <span class=" -Color -Color-Red">13.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">17.5/28.1 MB</span> <span class=" -Color -Color-Red">162.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green">23.1/28.1 MB</span> <span class=" -Color -Color-Red">162.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.2/28.1 MB</span> <span class=" -Color -Color-Red">15.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">163.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.3/28.1 MB</span> <span class=" -Color -Color-Red">17.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
+   ━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.5/28.1 MB</span> <span class=" -Color -Color-Red">19.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">163.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">79.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.0/28.1 MB</span> <span class=" -Color -Color-Red">22.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.9/28.1 MB</span> <span class=" -Color -Color-Red">25.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">11.0/28.1 MB</span> <span class=" -Color -Color-Red">34.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">13.9/28.1 MB</span> <span class=" -Color -Color-Red">52.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">17.2/28.1 MB</span> <span class=" -Color -Color-Red">73.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">21.3/28.1 MB</span> <span class=" -Color -Color-Red">99.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━ <span class=" -Color -Color-Green">26.3/28.1 MB</span> <span class=" -Color -Color-Red">125.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">133.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">133.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">28.1/28.1 MB</span> <span class=" -Color -Color-Red">74.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/133.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">46.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">41.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading immutabledict-4.2.0-py3-none-any.whl (4.7 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading protobuf-5.26.1-cp37-abi3-manylinux2014_x86_64.whl (302 kB)
+Downloading protobuf-5.26.1-cp37-abi3-manylinux2014_x86_64.whl (302 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/302.8 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">302.8/302.8 kB</span> <span class=" -Color -Color-Red">71.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">302.8/302.8 kB</span> <span class=" -Color -Color-Red">69.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -516,7 +532,7 @@ Successfully installed absl-py-2.1.0 immutabledict-4.2.0 ortools-9.11.4210 proto
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fab9de4ed30&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fb62836bfc0&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -677,7 +693,7 @@ Successfully installed absl-py-2.1.0 immutabledict-4.2.0 ortools-9.11.4210 proto
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fab9de4de30&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fb62836ab80&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1019,7 +1035,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fab9de4fc30&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fb62836a3d0&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1110,7 +1126,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fab9de4f570&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fb62836b960&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1272,7 +1288,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Finite Horizons
+  线性动态：有限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1304,7 +1320,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Infinite Horizons
+  线性动态：无限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1321,7 +1337,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Probability and Distributions
+  概率与分布
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1353,7 +1369,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Nonlinear Dynamics
+  非线性动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1385,7 +1401,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Monetary-Fiscal Policy Interactions
+  货币政策与财政政策的相互作用
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1401,18 +1417,18 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税Laffer曲线
+   31. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. Laffer曲线与自适应预期
+   32. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stochastic Dynamics
+  随机动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1439,7 +1455,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Optimization
+  优化
  </span>
 </p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
@@ -1456,7 +1472,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Modeling in Higher Dimensions
+  高维建模
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1483,7 +1499,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Markets and Competitive Equilibrium
+  市场与竞争性均衡
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1500,7 +1516,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Estimation
+  估计
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1517,7 +1533,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Other
+  其它
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">

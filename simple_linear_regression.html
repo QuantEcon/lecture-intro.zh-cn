@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>48. 简单线性回归模型 &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>48. 简单线性回归模型 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -127,15 +127,15 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="47. 市场均衡与异质性" href="supply_demand_heterogeneity.html" />
 
 <!-- Normal Meta Tags -->
-<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
 <meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
-<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+<meta name="description" content=本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
 <meta name="twitter:title" content="简单线性回归模型"/>
-<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
@@ -144,8 +144,8 @@ const thebe_selector_output = ".output, .cell_output"
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/simple_linear_regression.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
-<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
-<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
+<meta property="og:site_name" content="Python数量经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -172,7 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">48.1. 错误相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">48.1. 残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slr-optimal-values">48.2. 计算最优值</a></li>
 </ul>
                             <p class="logo">
@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">简单线性回归模型</p>
 
@@ -213,11 +213,11 @@ const thebe_selector_output = ".output, .cell_output"
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
-                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>托马斯·萨金特（Thomas J. Sargent）</span></a>
                                 
                             
                                 
-                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>约翰·斯塔胡斯基（John Stachurski）</span></a>
                                 
                             
                         </p>
@@ -659,7 +659,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
 <p>我们希望通过参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 来最小化这个成本函数。</p>
 <section id="alpha-beta">
-<h2><span class="section-number">48.1. </span>错误相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化<a class="headerlink" href="#alpha-beta" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">48.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化<a class="headerlink" href="#alpha-beta" title="Permalink to this heading">#</a></h2>
 <p>首先让我们看看总误差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
 <p>我们从<a class="reference internal" href="#slr-optimal-values"><span class="std std-ref">下一节</span></a>知道 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值是：</p>
 <div class="cell docutils container">
@@ -670,7 +670,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>我们可以计算一个范围内的 <span class="math notranslate nohighlight">\(\beta\)</span> 值的错误</p>
+<p>我们可以计算一个范围内的 <span class="math notranslate nohighlight">\(\beta\)</span> 值的残差</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
@@ -680,19 +680,19 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>绘制错误图</p>
+<p>绘制残差图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;β&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;β&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;残差&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">β_optimal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors">
-<a class="reference internal image-reference" href="_images/136b540eb15ba216095bb057af5944e3a7884d2d00b20675e7e571ef61b0bbac.png"><img alt="_images/136b540eb15ba216095bb057af5944e3a7884d2d00b20675e7e571ef61b0bbac.png" src="_images/136b540eb15ba216095bb057af5944e3a7884d2d00b20675e7e571ef61b0bbac.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a9f2c773b76890cdcc10ff6c5380acb30e3a474a9182fdcd9262f258b011137a.png"><img alt="_images/a9f2c773b76890cdcc10ff6c5380acb30e3a474a9182fdcd9262f258b011137a.png" src="_images/a9f2c773b76890cdcc10ff6c5380acb30e3a474a9182fdcd9262f258b011137a.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 48.6 </span><span class="caption-text">绘制错误图</span><a class="headerlink" href="#plt-errors" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.6 </span><span class="caption-text">绘制残差图</span><a class="headerlink" href="#plt-errors" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -707,19 +707,19 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>绘制错误图</p>
+<p>绘制残差图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;α&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;α&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;残差&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">α_optimal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors-2">
-<a class="reference internal image-reference" href="_images/2eb37e47a70cac7315d6bfc8ffae534b40ca59e69ec8fbb3c16c56162b9891d8.png"><img alt="_images/2eb37e47a70cac7315d6bfc8ffae534b40ca59e69ec8fbb3c16c56162b9891d8.png" src="_images/2eb37e47a70cac7315d6bfc8ffae534b40ca59e69ec8fbb3c16c56162b9891d8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7ad737fb52f722e1243b736281b464e8b9b04566aad211ddbe9c3a46ce053016.png"><img alt="_images/7ad737fb52f722e1243b736281b464e8b9b04566aad211ddbe9c3a46ce053016.png" src="_images/7ad737fb52f722e1243b736281b464e8b9b04566aad211ddbe9c3a46ce053016.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 48.7 </span><span class="caption-text">绘制错误图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48.7 </span><span class="caption-text">绘制残差图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2201,7 +2201,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7f8a5113a0d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7fc992137b50&gt;
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/aca30ed27417691a8549e0c99bd040ccc71be04317d30ac26c91547499be9729.png"><img alt="_images/aca30ed27417691a8549e0c99bd040ccc71be04317d30ac26c91547499be9729.png" src="_images/aca30ed27417691a8549e0c99bd040ccc71be04317d30ac26c91547499be9729.png" style="width: 80%;" /></a>
@@ -2343,7 +2343,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Finite Horizons
+  线性动态：有限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2375,7 +2375,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Infinite Horizons
+  线性动态：无限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2392,7 +2392,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Probability and Distributions
+  概率与分布
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2424,7 +2424,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Nonlinear Dynamics
+  非线性动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2456,7 +2456,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Monetary-Fiscal Policy Interactions
+  货币政策与财政政策的相互作用
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2472,18 +2472,18 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税Laffer曲线
+   31. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. Laffer曲线与自适应预期
+   32. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stochastic Dynamics
+  随机动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2510,7 +2510,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Optimization
+  优化
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2527,7 +2527,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Modeling in Higher Dimensions
+  高维建模
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2554,7 +2554,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Markets and Competitive Equilibrium
+  市场与竞争性均衡
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -2571,7 +2571,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Estimation
+  估计
  </span>
 </p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
@@ -2588,7 +2588,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Other
+  其它
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">

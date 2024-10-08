@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>31. 通货膨胀税Laffer曲线 &#8212; A First Course in Quantitative Economics with Python</title>
+    <title>31. 通货膨胀税拉弗曲线 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,29 +123,29 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="32. Laffer曲线与自适应预期" href="laffer_adaptive.html" />
+    <link rel="next" title="32. 拉弗曲线与自适应预期" href="laffer_adaptive.html" />
     <link rel="prev" title="30. 一些不愉快的货币主义算术" href="unpleasant.html" />
 
 <!-- Normal Meta Tags -->
-<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
 <meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
-<meta name="description" content=This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski. />
+<meta name="description" content=本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 />
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="通货膨胀税Laffer曲线"/>
-<meta name="twitter:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:title" content="通货膨胀税拉弗曲线"/>
+<meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="通货膨胀税Laffer曲线" />
+<meta property="og:title" content="通货膨胀税拉弗曲线" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://intro-cn.quantecon.org/money_inflation_nonlinear.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
-<meta property="og:description" content="This website presents introductory lectures on computational economics, designed and written by Thomas J. Sargent and John Stachurski." />
-<meta property="og:site_name" content="A First Course in Quantitative Economics with Python" />
+<meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
+<meta property="og:site_name" content="Python数量经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -172,16 +172,16 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">31.1. 概览</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">31.2. 模型</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">31.3. 通货膨胀率的限制值</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">31.4. 稳态拉弗曲线</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">31.5. 初始价格水平</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">31.5.1. 验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">31.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">31.2. 模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">31.3. 通货膨胀率的限制值</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">31.4. 稳态拉弗曲线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">31.5. 初始价格水平</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">31.5.1. 验证</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">31.6. 计算均衡序列</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">31.7. 拉弗曲线动态的滑动面</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">31.6. 计算均衡序列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">31.7. 拉弗曲线动态的滑动面</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -212,20 +212,20 @@ const thebe_selector_output = ".output, .cell_output"
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">A First Course in Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">通货膨胀税Laffer曲线</p>
+                        <p class="qe-page__header-subheading">通货膨胀税拉弗曲线</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
-                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>托马斯·萨金特（Thomas J. Sargent）</span></a>
                                 
                             
                                 
-                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>约翰·斯塔胡斯基（John Stachurski）</span></a>
                                 
                             
                         </p>
@@ -240,12 +240,12 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <section class="tex2jax_ignore mathjax_ignore" id="laffer">
-<h1><span class="section-number">31. </span>通货膨胀税Laffer曲线<a class="headerlink" href="#laffer" title="Permalink to this heading">#</a></h1>
-<section id="id1">
-<h2><span class="section-number">31.1. </span>概览<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>我们在非线性模型版本中研究通货膨胀税率的静态和动态<em>Laffer曲线</em>，该模型在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中进行了研究。</p>
-<p>我们使用了<span id="id2">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在他的经典论文中使用的货币需求函数的对数线性版本，而不是在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中使用的线性需求函数。</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">31. </span>通货膨胀税拉弗曲线<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">31.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>我们在非线性模型版本中研究通货膨胀税率的静态和动态<em>拉弗曲线</em>，该模型在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中进行了研究。</p>
+<p>我们使用了<span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在他的经典论文中使用的货币需求函数的对数线性版本，而不是在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中使用的线性需求函数。</p>
 <p>这一改变要求我们修改部分分析内容。</p>
 <p>特别是，我们的动态系统在状态变量上不再是线性的。</p>
 <p>然而，基于我们所谓的“方法2”的经济逻辑分析仍然没有改变。</p>
@@ -254,11 +254,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>就像在那次讲座中，我们讨论了以下主题：</p>
 <ul class="simple">
 <li><p>政府通过印制纸币或电子货币收集的<strong>通货膨胀税</strong></p></li>
-<li><p>在通货膨胀税率中有两个静态均衡的动态<strong>Laffer曲线</strong></p></li>
+<li><p>在通货膨胀税率中有两个静态均衡的动态<strong>拉弗曲线</strong></p></li>
 <li><p>在理性预期下的反常动态，系统趋向于较高的静态通货膨胀税率</p></li>
 <li><p>与该静态通货膨胀率相关的奇特的比较静态状态分析，它声称通货膨胀可以通过运行<em>更高</em>的政府赤字来<em>降低</em></p></li>
 </ul>
-<p>这些结果将为分析 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">Laffer曲线与自适应预期</span></a> 做准备，该分析研究了现有模型的一个版本，该版本使用了一种“适应性预期”而不是理性预期。</p>
+<p>这些结果将为分析 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a> 做准备，该分析研究了现有模型的一个版本，该版本使用了一种“适应性预期”而不是理性预期。</p>
 <p>该讲座将展示</p>
 <ul class="simple">
 <li><p>用适应性预期替代理性预期保持了两个静态通货膨胀率不变，但是<span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
@@ -266,8 +266,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>现在通货膨胀可以通过运行<em>较低</em>的政府赤字来<em>降低</em>，从而出现了更为合理的比较动态结果)</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2><span class="section-number">31.2. </span>模型<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2><span class="section-number">31.2. </span>模型<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>设定</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m_t\)</span> 为时间 <span class="math notranslate nohighlight">\(t\)</span> 开始时货币供应量的对数</p></li>
@@ -287,8 +287,8 @@ m_{t+1} - p_t = -\alpha (p_{t+1} - p_t)
 <p>其中 <span class="math notranslate nohighlight">\(g\)</span> 是政府支出中通过印钞方式筹资的部分。</p>
 <p><strong>备注：</strong> 请注意，虽然公式 <a class="reference internal" href="#equation-eq-mdemand">(31.1)</a> 在货币供应量和价格水平的对数上是线性的，但公式 <a class="reference internal" href="#equation-eq-msupply">(31.2)</a> 在水平上是线性的。这将需要适应我们在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中部署的均衡计算方法。</p>
 </section>
-<section id="id4">
-<h2><span class="section-number">31.3. </span>通货膨胀率的限制值<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2><span class="section-number">31.3. </span>通货膨胀率的限制值<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>我们可以通过研究稳态拉弗曲线来计算 <span class="math notranslate nohighlight">\(\overline \pi\)</span> 的两个潜在限制值。</p>
 <p>因此，在<em>稳态</em>中</p>
 <div class="math notranslate nohighlight">
@@ -372,8 +372,8 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 </div>
 <p>我们找到两个稳态<span class="math notranslate nohighlight">\(\overline \pi\)</span>的值。</p>
 </section>
-<section id="id5">
-<h2><span class="section-number">31.4. </span>稳态拉弗曲线<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">31.4. </span>稳态拉弗曲线<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>以下图形展示了稳态拉弗曲线以及两个稳态通货膨胀率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -419,8 +419,8 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 </div>
 </div>
 </section>
-<section id="id6">
-<h2><span class="section-number">31.5. </span>初始价格水平<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h2><span class="section-number">31.5. </span>初始价格水平<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>现在我们已经掌握了两个可能的稳态，我们可以计算两个函数 <span class="math notranslate nohighlight">\(\underline p(m_0)\)</span> 和
 <span class="math notranslate nohighlight">\(\overline p(m_0)\)</span>，作为时间 <span class="math notranslate nohighlight">\(t\)</span> 时 <span class="math notranslate nohighlight">\(p_t\)</span> 的初始条件，意味着对于所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 有 <span class="math notranslate nohighlight">\(\pi_t = \overline \pi\)</span>。</p>
 <p>函数 <span class="math notranslate nohighlight">\(\underline p(m_0)\)</span> 将会与较低的稳态通货膨胀率 <span class="math notranslate nohighlight">\(\pi_l\)</span> 关联。</p>
@@ -454,8 +454,8 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 </div>
 </div>
 </div>
-<section id="id7">
-<h3><span class="section-number">31.5.1. </span>验证<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<section id="id8">
+<h3><span class="section-number">31.5.1. </span>验证<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <p>首先，让我们编写一些代码来验证，如果初始对数价格水平 <span class="math notranslate nohighlight">\(p_0\)</span> 取我们刚刚计算的两个值之一，那么通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 将对所有的 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 保持恒定。</p>
 <p>下面的代码进行了验证。</p>
 <div class="cell docutils container">
@@ -507,8 +507,8 @@ eq_g == g: True
 </div>
 </section>
 </section>
-<section id="id8">
-<h2><span class="section-number">31.6. </span>计算均衡序列<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h2><span class="section-number">31.6. </span>计算均衡序列<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <p>我们将采用类似于 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中的 <em>方法2</em>。</p>
 <p>我们将时间 <span class="math notranslate nohighlight">\(t\)</span> 的状态向量视为对 <span class="math notranslate nohighlight">\((m_t, p_t)\)</span>。</p>
 <p>我们将 <span class="math notranslate nohighlight">\(m_t\)</span> 视为一个 <code class="docutils literal notranslate"><span class="pre">自然状态变量</span></code>，而 <span class="math notranslate nohighlight">\(p_t\)</span> 视为一个 <code class="docutils literal notranslate"><span class="pre">跳跃</span></code> 变量。</p>
@@ -555,8 +555,8 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </li>
 </ul>
 </section>
-<section id="id9">
-<h2><span class="section-number">31.7. </span>拉弗曲线动态的滑动面<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h2><span class="section-number">31.7. </span>拉弗曲线动态的滑动面<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <p>我们现在已装备好用不同的 <span class="math notranslate nohighlight">\(p_0\)</span> 设置来计算时间序列，就像在<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中的设置。</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
@@ -658,7 +658,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 <p>正如 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中所述，
 出于合理性的考虑，我们再次推荐选择趋向于较低固定通货膨胀税率的独特均衡。</p>
 <p>正如我们将看到的，接受这个建议是我们在 <a class="reference internal" href="unpleasant.html"><span class="doc">一些不愉快的货币主义算术</span></a> 中描述的“不愉快算术”结果的关键成分。</p>
-<p>在 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">Laffer曲线与自适应预期</span></a> 中，我们将探讨 <span id="id10">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span> 和其他人是如何以其他方式为我们的均衡选择提供理由的。</p>
+<p>在 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a> 中，我们将探讨 <span id="id11">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span> 和其他人是如何以其他方式为我们的均衡选择提供理由的。</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
@@ -787,7 +787,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Finite Horizons
+  线性动态：有限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -819,7 +819,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Linear Dynamics: Infinite Horizons
+  线性动态：无限视界
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -836,7 +836,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Probability and Distributions
+  概率与分布
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -868,7 +868,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Nonlinear Dynamics
+  非线性动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -900,7 +900,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Monetary-Fiscal Policy Interactions
+  货币政策与财政政策的相互作用
  </span>
 </p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
@@ -916,18 +916,18 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   31. 通货膨胀税Laffer曲线
+   31. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. Laffer曲线与自适应预期
+   32. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stochastic Dynamics
+  随机动态
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -954,7 +954,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Optimization
+  优化
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -971,7 +971,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Modeling in Higher Dimensions
+  高维建模
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -998,7 +998,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Markets and Competitive Equilibrium
+  市场与竞争性均衡
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1015,7 +1015,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Estimation
+  估计
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
@@ -1032,7 +1032,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Other
+  其它
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
