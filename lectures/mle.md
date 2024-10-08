@@ -243,7 +243,7 @@ fig, ax = plt.subplots()  # 创建图形和轴
 ax.set_xlim(-1,20)  # 设置x轴的范围
 
 ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)  # 绘制样本的直方图
-ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='lognormal pdf')  # 绘制对数正态分布的PDF
+ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='对数正态分布pdf')  # 绘制对数正态分布的PDF
 ax.legend()  # 显示图例
 plt.show()  # 展示图形
 ```
@@ -321,7 +321,7 @@ ax.set_xlim(-1, 20)
 ax.set_ylim(0,1.75)
 
 ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_pareto.pdf(x), 'k-', lw=0.5, label='Pareto pdf')
+ax.plot(x, dist_pareto.pdf(x), 'k-', lw=0.5, label='帕累托分布pdf')
 ax.legend()
 
 plt.show()
@@ -380,7 +380,7 @@ dist_lognorm_tail = lognorm(σ_hat_tail, scale = exp(μ_hat_tail))
 fig, ax = plt.subplots()
 ax.set_xlim(0,50)
 ax.hist(sample_tail, density=True, bins=500, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='对数正态 pdf')
+ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='对数正态分布pdf')
 ax.legend()
 plt.show()
 ```
@@ -404,7 +404,7 @@ fig, ax = plt.subplots()
 ax.set_xlim(0, 50)
 ax.set_ylim(0,0.65)
 ax.hist(sample_tail, density=True, bins= 500, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='pareto pdf')
+ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='帕累托分布pdf')
 plt.show()
 ```
 
@@ -477,7 +477,7 @@ fig, ax = plt.subplots()
 ax.set_xlim(-1, 20)
 
 ax.hist(sample, density=True, bins=5000, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_exp.pdf(x), 'k-', lw=0.5, label='exponential pdf')
+ax.plot(x, dist_exp.pdf(x), 'k-', lw=0.5, label='指数分布pdf')
 ax.legend()
 
 plt.show()
