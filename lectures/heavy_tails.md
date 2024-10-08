@@ -10,11 +10,10 @@ kernelspec:
   language: python
   name: python3
 ---
-
 (heavy_tail)=
-# Heavy-Tailed Distributions
+# 重尾分布
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+除了Anaconda中的内容，本讲还需要以下库：
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -22,9 +21,10 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 !pip install --upgrade yfinance pandas_datareader
 ```
 
-We use the following imports.
+我们使用以下的导入。
 
 ```{code-cell} ipython3
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yf
@@ -35,33 +35,35 @@ from pandas_datareader import wb
 from scipy.stats import norm, cauchy
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-## Overview
+## 概览
 
-Heavy-tailed distributions are a class of distributions that generate "extreme" outcomes.
+重尾分布是一类能产生“极端”结果的分布。
 
-In the natural sciences (and in more traditional economics courses), heavy-tailed distributions are seen as quite exotic and non-standard.
+在自然科学（以及更多传统的经济学课程）中，重尾分布常被视为相当异乎寻常和非标准的。
 
-However, it turns out that heavy-tailed distributions play a crucial role in economics.
+然而，事实证明，重尾分布在经济学中扮演着至关重要的角色。
 
-In fact many -- if not most -- of the important distributions in economics are heavy-tailed.
+实际上，经济学中许多 -- 如果不是大部分 -- 重要的分布都是重尾的。
 
-In this lecture we explain what heavy tails are and why they are -- or at least
-why they should be -- central to economic analysis.
+在这次讲座中，我们将解释什么是重尾，以及为什么它们是 -- 或者至少应该是 -- 经济分析的核心。
 
 
-### Introduction: light tails
+### 引言：轻尾分布
 
-Most {doc}`commonly used probability distributions <prob_dist>` in classical statistics and
-the natural sciences have "light tails."
+大多数{doc}`常用概率分布<prob_dist>`在经典统计学和自然科学中都具有“轻尾”。
 
-To explain this concept, let's look first at examples.
+为了解释这个概念，让我们先看一些例子。
 
 ```{prf:example}
 :label: ht_ex_nd
 
-The classic example is the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution), which has density
+经典的例子是[正态分布](https://en.wikipedia.org/wiki/Normal_distribution)，其密度公式为
 
 $$ 
 f(x) = \frac{1}{\sqrt{2\pi}\sigma} 
@@ -70,51 +72,47 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 (-\infty < x < \infty)
 $$
 
+这里的两个参数 $\mu$ 和 $\sigma$ 分别代表均值和标准差。
 
-The two parameters $\mu$ and $\sigma$ are the mean and standard deviation
-respectively.
-
-As $x$ deviates from $\mu$, the value of $f(x)$ goes to zero extremely
-quickly.
+随着 $x$ 从 $\mu$ 偏离，$f(x)$ 的值会非常快地趋向于零。
 ```
 
-We can see this when we plot the density and show a histogram of observations,
-as with the following code (which assumes $\mu=0$ and $\sigma=1$).
+我们可以通过绘制密度图和展示观测值的直方图来看到这一点，如下代码所示（假设 $\mu=0$ 和 $\sigma=1$）。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Histogram of observations
+    caption: 观测值直方图
     name: hist-obs
 ---
 fig, ax = plt.subplots()
 X = norm.rvs(size=1_000_000)
-ax.hist(X, bins=40, alpha=0.4, label='histogram', density=True)
+ax.hist(X, bins=40, alpha=0.4, label='直方图', density=True)
 x_grid = np.linspace(-4, 4, 400)
-ax.plot(x_grid, norm.pdf(x_grid), label='density')
+ax.plot(x_grid, norm.pdf(x_grid), label='密度')
 ax.legend()
 plt.show()
 ```
 
-Notice how 
+请注意：
 
-* the density's tails converge quickly to zero in both directions and
-* even with 1,000,000 draws, we get no very large or very small observations.
+* 密度的尾部在两个方向上迅速趋于零
+* 即使是1,000,000次抽样，我们也没有观察到非常大或非常小的值。
 
-We can see the last point more clearly by executing
+我们可以通过执行以下代码更清楚地看到最后一点：
 
 ```{code-cell} ipython3
 X.min(), X.max()
 ```
 
-Here's another view of draws from the same distribution:
+这里是从同一分布中抽取的另一种视图：
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Histogram of observations
+    caption: 观测值的直方图
     name: hist-obs2
 ---
 n = 2000
@@ -128,61 +126,51 @@ ax.set_ylabel('$X_i$', rotation=0)
 plt.show()
 ```
 
-We have plotted each individual draw $X_i$ against $i$.
+我们已经绘制了每个单独的抽样 $X_i$ 与 $i$ 的对应关系。
 
-None are very large or very small.
+没有一个非常大或非常小。
 
-In other words, extreme observations are rare and draws tend not to deviate
-too much from the mean.
+换句话说，极端的观测值很少，抽样倾向于不会太偏离均值。
 
-Putting this another way, light-tailed distributions are those that
-rarely generate extreme values.
+换种说法，轻尾分布是那些很少产生极端值的分布。
 
-(A more formal definition is given {ref}`below <heavy-tail:formal-definition>`.)
+（更正式的定义见{ref}`下面 <heavy-tail:formal-definition>`。）
 
-Many statisticians and econometricians 
-use rules of thumb such as "outcomes more than four or five
-standard deviations from the mean can safely be ignored."
+许多统计学家和计量经济学家使用经验法则，如“结果超出均值四到五个标准差可以安全忽略。”
 
-But this is only true when distributions have light tails.
+但这只有在分布具有轻尾的时候才成立。
 
+### 何时适用于轻尾分布？
 
-### When are light tails valid?
+在概率理论和现实世界中，许多分布都是轻尾的。
 
-In probability theory and in the real world, many distributions are
-light-tailed.
+例如，人类身高就是轻尾分布。
 
-For example, human height is light-tailed.
+是的，我们确实看到了一些非常高的人。
 
-Yes, it's true that we see some very tall people.
+* 例如，篮球运动员[孙明明](https://en.wikipedia.org/wiki/Sun_Mingming)身高2.32米
 
-* For example, basketballer [Sun Mingming](https://en.wikipedia.org/wiki/Sun_Mingming) is 2.32 meters tall
+但是你有没有听说过有人身高达20米、200米或2000米的吗？
 
-But have you ever heard of someone who is 20 meters tall?  Or 200?  Or 2000? 
+你有没有想过为什么没有？
 
-Have you ever wondered why not? 
+毕竟，全世界有80亿人！
 
-After all, there are 8 billion people in the world!
+本质上，我们看不到这样的数据是因为人类身高的分布具有非常轻的尾部。
 
-In essence, the reason we don't see such draws is that the distribution of
-human height has very light tails.
+事实上，人类身高的分布符合类似正态分布的钟形曲线。
 
-In fact the distribution of human height obeys a bell-shaped curve similar to the normal distribution.
+### 资产回报
 
+但经济数据呢？
 
-### Returns on assets
+我们首先来看一些金融数据。
 
+我们的目标是绘制自2015年1月1日至2022年7月1日期间亚马逊（AMZN）股价的每日变化。
 
-But what about economic data?
+如果我们不考虑股息，这相当于每日回报。
 
-Let's look at some financial data first.
-
-Our aim is to plot the daily change in the price of Amazon (AMZN) stock for
-the period from 1st January 2015 to 1st July 2022.
-
-This equates to daily returns if we set dividends aside.
-
-The code below produces the desired plot using Yahoo financial data via the `yfinance` library.
+以下代码通过 `yfinance` 库使用雅虎财经数据生成所需的图表。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -194,7 +182,7 @@ data = yf.download('AMZN', '2015-1-1', '2022-7-1')
 ---
 mystnb:
   figure:
-    caption: Daily Amazon returns
+    caption: 每日亚马逊回报
     name: dailyreturns-amzn
 ---
 s = data['Adj Close']
@@ -204,17 +192,17 @@ fig, ax = plt.subplots()
 
 ax.plot(r, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(r.index, 0, r.values, lw=0.2)
-ax.set_ylabel('returns', fontsize=12)
-ax.set_xlabel('date', fontsize=12)
+ax.set_ylabel('回报', fontsize=12)
+ax.set_xlabel('日期', fontsize=12)
 
 plt.show()
 ```
 
-This data looks different to the draws from the normal distribution we saw above.
+这些数据看起来与我们上面看到的正态分布的抽样有所不同。
 
-Several of observations are quite extreme.
+有几个观测值非常极端。
 
-We get a similar picture if we look at other assets, such as Bitcoin
+如果我们查看其他资产，比如比特币，我们会得到类似的图像。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -226,7 +214,7 @@ data = yf.download('BTC-USD', '2015-1-1', '2022-7-1')
 ---
 mystnb:
   figure:
-    caption: Daily Bitcoin returns
+    caption: 比特币每日回报
     name: dailyreturns-btc
 ---
 s = data['Adj Close']
@@ -236,115 +224,101 @@ fig, ax = plt.subplots()
 
 ax.plot(r, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(r.index, 0, r.values, lw=0.2)
-ax.set_ylabel('returns', fontsize=12)
-ax.set_xlabel('date', fontsize=12)
+ax.set_ylabel('回报', fontsize=12)
+ax.set_xlabel('日期', fontsize=12)
 
 plt.show()
 ```
 
-The histogram also looks different to the histogram of the normal
-distribution:
+这个直方图也与正态分布的直方图不同:
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Histogram (normal vs bitcoin returns)
+    caption: 直方图（正常与比特币回报对比）
     name: hist-normal-btc
 ---
 r = np.random.standard_t(df=5, size=1000)
 
 fig, ax = plt.subplots()
-ax.hist(r, bins=60, alpha=0.4, label='bitcoin returns', density=True)
+ax.hist(r, bins=60, alpha=0.4, label='比特币回报', density=True)
 
 xmin, xmax = plt.xlim()
 x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, np.mean(r), np.std(r))
-ax.plot(x, p, linewidth=2, label='normal distribution')
+ax.plot(x, p, linewidth=2, label='正态分布')
 
-ax.set_xlabel('returns', fontsize=12)
+ax.set_xlabel('回报', fontsize=12)
 ax.legend()
 
 plt.show()
 ```
 
-If we look at higher frequency returns data (e.g., tick-by-tick), we often see 
-even more extreme observations.
+如果我们查看更高频率的回报数据（例如，逐笔交易），我们经常会看到更极端的观测。
 
-See, for example, {cite}`mandelbrot1963variation` or {cite}`rachev2003handbook`.
+例如，参见 {cite}`mandelbrot1963variation` 或 {cite}`rachev2003handbook`。
 
+### 其他数据
 
-### Other data
+我们刚刚看到的数据被称为“重尾”。
 
-The data we have just seen is said to be "heavy-tailed".
-
-With heavy-tailed distributions, extreme outcomes occur relatively
-frequently.
+在重尾分布中，极端结果相对频繁地发生。
 
 ```{prf:example}
 :label: ht_ex_od
 
-Importantly, there are many examples of heavy-tailed distributions
-observed in economic and financial settings!
+重要的是，在经济和金融环境中观察到了许多重尾分布的例子！
 
-For example, the income and the wealth distributions are heavy-tailed 
+例如，收入和财富分布是重尾的
 
-* You can imagine this: most people have low or modest wealth but some people
-  are extremely rich.
+* 你可以想象这样的情景：大多数人的财富较低或适中，但有些人非常富有。
 
-The firm size distribution is also heavy-tailed 
+公司规模分布也是重尾的
 
-* You can imagine this too: most firms are small but some firms are enormous.
+* 你也可以想象这样的情景：大多数公司都很小，但有些公司非常庞大。
 
-The distribution of town and city sizes is heavy-tailed 
+城镇和城市大小的分布是重尾的
 
-* Most towns and cities are small but some are very large.
+* 大多数城镇和城市都很小，但有些非常大。
 ```
 
-Later in this lecture, we examine heavy tails in these distributions.
+在本讲座的后面部分，我们将研究这些分布中的重尾现象。
 
-### Why should we care?
+### 为什么我们应该关心？
 
-Heavy tails are common in economic data but does that mean they are important?
+重尾在经济数据中很常见，但这是否意味着它们很重要？
 
-The answer to this question is affirmative!
+对这个问题的回答是肯定的！
 
-When distributions are heavy-tailed, we need to think carefully about issues
-like
+当分布是重尾的，我们需要仔细考虑一些问题，如
 
-* diversification and risk
-* forecasting
-* taxation (across a heavy-tailed income distribution), etc.
+* 多样化和风险
+* 预测
+* 税收（针对重尾收入分布），等等。
 
-We return to these points {ref}`below <heavy-tail:application>`.
+我们将回到这些点 {ref}`下面 <heavy-tail:application>`。
 
+## 视觉比较
+在本节中，我们将介绍帕雷托分布、计数器累积分布函数和幂律等重要概念，这些概念有助于识别重尾分布。
 
-## Visual comparisons
-In this section, we will introduce important concepts such as the Pareto distribution, Counter CDFs, and Power laws, which aid in recognizing heavy-tailed distributions.
+稍后我们将提供有关轻尾和重尾差异的数学定义。
 
-Later we will provide a mathematical definition of the difference between
-light and heavy tails.
+但现在让我们先进行一些视觉比较，以帮助我们建立对这两种类型分布差异的直觉。
 
-But for now let's do some visual comparisons to help us build intuition on the
-difference between these two types of distributions.
+### 模拟
 
+下图显示了一次模拟。
 
-### Simulations
+上面两个子图各显示来自正态分布的120个独立抽取，这是轻尾分布。
 
-The figure below shows a simulation.  
-
-The top two subfigures each show 120 independent draws from the normal
-distribution, which is light-tailed.
-
-The bottom subfigure shows 120 independent draws from [the Cauchy
-distribution](https://en.wikipedia.org/wiki/Cauchy_distribution), which is
-heavy-tailed.
+下面的子图显示来自[柯西分布](https://en.wikipedia.org/wiki/Cauchy_distribution)的120个独立抽取，这是重尾分布。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Draws from normal and Cauchy distributions
+    caption: 来自正态分布和柯西分布的抽取
     name: draws-normal-cauchy
 ---
 n = 120
@@ -361,49 +335,44 @@ for ax, s in zip(axes[:2], s_vals):
     data = np.random.randn(n) * s
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"draws from $N(0, \sigma^2)$ with $\sigma = {s}$", fontsize=11)
+    ax.set_title(f"从 $N(0, \sigma^2)$ 抽取，$\sigma = {s}$", fontsize=11)
 
 ax = axes[2]
 distribution = cauchy()
 data = distribution.rvs(n)
 ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(list(range(n)), 0, data, lw=0.2)
-ax.set_title(f"draws from the Cauchy distribution", fontsize=11)
+ax.set_title(f"来自柯西分布的抽取", fontsize=11)
 
 plt.subplots_adjust(hspace=0.25)
 
 plt.show()
 ```
 
-In the top subfigure, the standard deviation of the normal distribution is 2,
-and the draws are clustered around the mean.
+在顶部的子图中，正态分布的标准偏差为2，抽取值围绕均值聚集。
 
-In the middle subfigure, the standard deviation is increased to 12 and, as
-expected, the amount of dispersion rises.
+在中间的子图中，标准偏差增加到12，如预期的那样，分散度增加。
 
-The bottom subfigure, with the Cauchy draws, shows a different pattern: tight
-clustering around the mean for the great majority of observations, combined
-with a few sudden large deviations from the mean.
+底部的子图中，柯西的抽取显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。
 
-This is typical of a heavy-tailed distribution.
+这是典型的重尾分布特征。
 
 
-### Nonnegative distributions
+### 非负分布
 
-Let's compare some distributions that only take nonnegative values.
+让我们比较一些只取非负值的分布。
 
-One is the exponential distribution, which we discussed in {doc}`our lecture
-on probability and distributions <prob_dist>`.
+其中一种是指数分布，我们在{doc}`our lecture on probability and distributions <prob_dist>`中讨论过。
 
-The exponential distribution is a light-tailed distribution.
+指数分布是一种轻尾分布。
 
-Here are some draws from the exponential distribution.
+这里有一些来自指数分布的抽样。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Draws of exponential distribution
+    caption: 指数分布的抽样
     name: draws-exponential
 ---
 n = 120
@@ -419,48 +388,44 @@ ax.vlines(list(range(n)), 0, data, lw=0.2)
 plt.show()
 ```
 
-Another nonnegative distribution is the [Pareto distribution](https://en.wikipedia.org/wiki/Pareto_distribution). 
+另一个非负分布是[帕累托分布](https://en.wikipedia.org/wiki/Pareto_distribution)。
 
-If $X$ has the Pareto distribution, then there are positive constants $\bar x$
-and $\alpha$ such that
+如果 $X$ 遵循帕累托分布，那么存在正常数 $x$ 和 $\alpha$，使得
 
 ```{math}
 :label: pareto
 
 \mathbb P\{X > x\} =
 \begin{cases}
-    \left( \bar x/x \right)^{\alpha}
-        & \text{ if } x \geq \bar x
+    \left( \frac{\bar x}{x} \right)^{\alpha}
+        & \text{ 如果 } x \geq \bar x
     \\
     1
-        & \text{ if } x < \bar x
+        & \text{ 如果 } x < \bar x
 \end{cases}
 ```
 
-The parameter $\alpha$ is called the **tail index** and $\bar x$ is called the
-**minimum**.
+参数 $\alpha$ 被称为**尾指数**，$\bar x$ 被称为**最小值**。
 
-The Pareto distribution is a heavy-tailed distribution.
+帕累托分布是一个重尾分布。
 
-One way that the Pareto distribution arises is as the exponential of an
-exponential random variable.
+帕累托分布产生的一个方式是指数随机变量的指数。
 
-In particular, if $X$ is exponentially distributed with rate parameter $\alpha$, then
+特别地，如果 $X$ 是以率参数 $\alpha$ 指数分布的，那么
 
 $$
 Y = \bar x \exp(X) 
 $$
 
-is Pareto-distributed with minimum $\bar x$ and tail index $\alpha$. 
+具有最小值 $\bar x$ 和尾指数 $\alpha$ 的帕累托分布。
 
-Here are some draws from the Pareto distribution with tail index $1$ and minimum
-$1$.
+这里是一些从帕累托分布中抽取的数据，尾指数为 $1$，最小值为 $1$。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Draws from Pareto distribution
+    caption: 从帕累托分布中抽取的数据
     name: draws-pareto
 ---
 n = 120
@@ -476,51 +441,48 @@ ax.vlines(list(range(n)), 0, pareto_data, lw=0.2)
 plt.show()
 ```
 
-Notice how extreme outcomes are more common.
+注意极端结果更常见。
 
-### Counter CDFs
+### 对立累积分布函数
 
-For nonnegative random variables, one way to visualize the difference between
-light and heavy tails is to look at the 
-**counter CDF** (CCDF).
+对于非负随机变量，视觉上区分轻尾和重尾的一种方法是查看**对立累积分布函数**（CCDF）。
 
-For a random variable $X$ with CDF $F$, the CCDF is the function 
+对于一个具有CDF $F$ 的随机变量 $X$，CCDF定义为函数
 
 $$
-G(x) := 1 - F(x) = \mathbb P\{X > x\} 
+G(x) := 1 - F(x) = \mathbb P\{X > x\}
 $$
 
-(Some authors call $G$ the "survival" function.)
+（有些作者称$G$为“生存”函数。）
 
-The CCDF shows how fast the upper tail goes to zero as $x \to \infty$.
+CCDF显示随着 $x \to \infty$，上尾速度减少到零的快慢。
 
-If $X$ is exponentially distributed with rate parameter $\alpha$, then the CCDF is
+如果$X$是具有速率参数$\alpha$的指数分布，则其CCDF为
 
 $$
 G_E(x) = \exp(- \alpha x)
 $$
 
-This function goes to zero relatively quickly as $x$ gets large.
+随着 $x$ 增大，这个函数相对快速地趋于零。
 
-The standard Pareto distribution, where $\bar x = 1$, has CCDF
+标准帕雷托分布，其中 $\beta x = 1$，具有CCDF
 
 $$
 G_P(x) = x^{- \alpha}
 $$
 
-This function goes to zero as $x \to \infty$, but much slower than $G_E$.
+这个函数在 $x \to \infty$ 时趋于零，但比 $G_E$ 更慢。
 
 ```{exercise}
 :label: ht_ex_x1
 
-Show how the CCDF of the standard Pareto distribution can be derived from the CCDF of the exponential distribution.
+展示如何从指数分布的CCDF推导出标准帕雷托分布的CCDF。
 ```
 
 ```{solution-start} ht_ex_x1
 :class: dropdown
 ```
-Letting $G_E$ and $G_P$ be defined as above, letting $X$ be exponentially
-distributed with rate parameter $\alpha$, and letting $Y = \exp(X)$, we have
+设 $G_E$ 和 $G_P$ 如上定义，设 $X$ 是具有速率参数 $\alpha$ 的指数分布，并设 $Y = \exp(X)$，我们有
 
 $$
 \begin{aligned}
@@ -528,88 +490,84 @@ $$
          & = \mathbb P\{\exp(X) > y\} \\
          & = \mathbb P\{X > \ln y\} \\
          & = G_E(\ln y) \\
-         & = \exp( - \alpha \ln y) \\
+         & = \exp(- \alpha \ln y) \\
         & = y^{-\alpha}
 \end{aligned}
 $$
 ```{solution-end}
 ```
 
-Here's a plot that illustrates how $G_E$ goes to zero faster than $G_P$.
+这是一个图示，展示了$G_E$比$G_P$衰减得更快。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Pareto and exponential distribution comparison
+    caption: 帕累托分布与指数分布对比
     name: compare-pareto-exponential
 ---
 x = np.linspace(1.5, 100, 1000)
 fig, ax = plt.subplots()
 alpha = 1.0
-ax.plot(x, np.exp(- alpha * x), label='exponential', alpha=0.8)
-ax.plot(x, x**(- alpha), label='Pareto', alpha=0.8)
-ax.set_xlabel('X value')
+ax.plot(x, np.exp(- alpha * x), label='指数分布', alpha=0.8)
+ax.plot(x, x**(- alpha), label='帕累托分布', alpha=0.8)
+ax.set_xlabel('X值')
 ax.set_ylabel('CCDF')
 ax.legend()
 plt.show()
 ```
 
-Here's a log-log plot of the same functions, which makes visual comparison
-easier.
+下面是同一函数的对数对数图，便于视觉比较。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Pareto and exponential distribution comparison (log-log)
+    caption: 帕累托与指数分布对比（对数对数图）
     name: compare-pareto-exponential-log-log
 ---
 fig, ax = plt.subplots()
 alpha = 1.0
-ax.loglog(x, np.exp(- alpha * x), label='exponential', alpha=0.8)
-ax.loglog(x, x**(- alpha), label='Pareto', alpha=0.8)
-ax.set_xlabel('log value')
-ax.set_ylabel('log prob')
+ax.loglog(x, np.exp(- alpha * x), label='指数分布', alpha=0.8)
+ax.loglog(x, x**(- alpha), label='帕累托分布', alpha=0.8)
+ax.set_xlabel('对数值')
+ax.set_ylabel('对数概率')
 ax.legend()
 plt.show()
 ```
 
-In the log-log plot, the Pareto CCDF is linear, while the exponential one is
-concave.
+在对数对数图中，帕累托的互补累积分布函数是线性的，而指数的则是凹的。
 
-This idea is often used to separate light- and heavy-tailed distributions in
-visualisations --- we return to this point below.
+这个观点常用于在视觉化中区分轻尾分布和重尾分布——我们下面会再次讨论这一点。
 
+### 实验 CCDFs
 
-### Empirical CCDFs
+样本对应的 CCDF 函数是**经验 CCDF**。
 
-The sample counterpart of the CCDF function is the **empirical CCDF**.
-
-Given a sample $x_1, \ldots, x_n$, the empirical CCDF is given by
+给定一个样本 $x_1, \ldots, x_n$，经验 CCDF 定义为
 
 $$
 \hat G(x) = \frac{1}{n} \sum_{i=1}^n \mathbb 1\{x_i > x\}
 $$
 
-Thus, $\hat G(x)$ shows the fraction of the sample that exceeds $x$.
+因此，$\hat G(x)$ 显示样本中超过 $x$ 的比例。
 
 ```{code-cell} ipython3
 def eccdf(x, data):
-    "Simple empirical CCDF function."
+    "简单的经验 CCDF 函数。"
     return np.mean(data > x)
 ```
 
-Here's a figure containing some empirical CCDFs from simulated data.
+下面是一些从模拟数据得到的经验 CCDFs 的图。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Empirical CCDFs
+    caption: 实验 CCDFs
     name: ccdf-empirics
 ---
-# Parameters and grid
+# 参数和网格
 x_grid = np.linspace(1, 1000, 1000)
 sample_size = 1000
 np.random.seed(13)
@@ -622,7 +580,7 @@ data_pareto = np.exp(np.random.exponential(size=sample_size))
 
 data_list = [data_exp, data_logn, data_pareto]
 
-# Build figure
+# 构建图形
 fig, axes = plt.subplots(3, 1, figsize=(6, 8))
 axes = axes.flatten()
 labels = ['exponential', 'lognormal', 'Pareto']
@@ -631,8 +589,8 @@ for data, label, ax in zip(data_list, labels, axes):
 
     ax.loglog(x_grid, [eccdf(x, data) for x in x_grid], 
         'o', markersize=3.0, alpha=0.5, label=label)
-    ax.set_xlabel("log value")
-    ax.set_ylabel("log prob")
+    ax.set_xlabel("对数值")
+    ax.set_ylabel("对数概率")
     
     ax.legend()
     
@@ -642,110 +600,107 @@ fig.subplots_adjust(hspace=0.4)
 plt.show()
 ```
 
-As with the CCDF, the empirical CCDF from the Pareto distributions is 
-approximately linear in a log-log plot.
+与 CCDF 一样，帕累托分布的经验 CCDF 在对数-对数图中大致呈线性。
 
-We will use this idea [below](https://intro.quantecon.org/heavy_tails.html#heavy-tails-in-economic-cross-sections) when we look at real data.
+我们将在下面使用这个想法 [here](https://intro.quantecon.org/heavy_tails.html#heavy-tails-in-economic-cross-sections) 当我们查看真实数据时。
 
 +++
 
-#### Q-Q Plots
+#### Q-Q图
 
-We can also use a [qq plot](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot) to do a visual comparison between two probability distributions. 
+我们也可以使用[qq图](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot)来可视化比较两个概率分布。
 
-The [statsmodels](https://www.statsmodels.org/stable/index.html) package provides a convenient [qqplot](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html) function that, by default, compares sample data to the quintiles of the normal distribution.
+[statsmodels](https://www.statsmodels.org/stable/index.html)包提供了一个方便的[qqplot](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html)函数，该函数默认将样本数据与正态分布的分位数进行比较。
 
-If the data is drawn from a normal distribution, the plot would look like:
+如果数据来自正态分布，该图看起来会像：
 
 ```{code-cell} ipython3
 data_normal = np.random.normal(size=sample_size)
 sm.qqplot(data_normal, line='45')
+plt.xlabel("理论分位数")
+plt.ylabel("样本分位数")
 plt.show()
 ```
 
-We can now compare this with the exponential, log-normal, and Pareto distributions
+我们现在可以将其与指数分布、对数正态分布和帕累托分布进行比较
 
 ```{code-cell} ipython3
-# Build figure
+# 构建图形
 fig, axes = plt.subplots(1, 3, figsize=(12, 4))
 axes = axes.flatten()
-labels = ['exponential', 'lognormal', 'Pareto']
+labels = ['指数分布', '对数正态分布', '帕累托分布']
 for data, label, ax in zip(data_list, labels, axes):
-    sm.qqplot(data, line='45', ax=ax, )
+    sm.qqplot(data, line='45', ax=ax)
     ax.set_title(label)
+    ax.set_xlabel('理论分位数')
+    ax.set_ylabel('样本分位数')
 plt.tight_layout()
 plt.show()
 ```
 
-### Power laws 
+### 幂律
 
+在经济和社会现象中，一类特定的重尾分布被反复发现：所谓的幂律。
 
-One specific class of heavy-tailed distributions has been found repeatedly in
-economic and social phenomena: the class of so-called power laws.
-
-A random variable $X$ is said to have a **power law** if, for some $\alpha > 0$,
+若随机变量 $X$ 满足**幂律**，则存在某个 $\alpha > 0$，
 
 ```{math}
 \mathbb P\{X > x\} \approx  x^{-\alpha}
-\quad \text{when $x$ is large}
+\quad \text{当 $x$ 很大}
 ```
-We can write this more mathematically as
+我们可以更数学化地写成
 
 ```{math}
 :label: plrt
 
 \lim_{x \to \infty} x^\alpha \, \mathbb P\{X > x\} = c
-\quad \text{for some $c > 0$}
+\quad \text{对某个 $c > 0$}
 ```
 
-It is also common to say that a random variable $X$ with this property
-has a **Pareto tail** with **tail index** $\alpha$.
+通常说随机变量 $X$ 有这样的性质，
+具有**帕累托尾**和**尾指数** $\alpha$。
 
-Notice that every Pareto distribution with tail index $\alpha$ 
-has a **Pareto tail** with **tail index** $\alpha$.
+注意，每个具有尾指数 $\alpha$ 的帕累托分布
+都具有**帕累托尾**和**尾指数** $\alpha$。
 
-We can think of power laws as a generalization of Pareto distributions.
+我们可以将幂律视为帕累托分布的一种概括。
 
-They are distributions that resemble Pareto distributions in their upper right
-tail.
+这些分布在它们的右上尾部类似于帕累托分布。
 
-Another way to think of power laws is a set of distributions with a specific
-kind of (very) heavy tail.
+另一种考虑幂律的方式是将其视为一组分布，具有特定类型的（非常）重尾。
 
-## Heavy tails in economic cross-sections
+## 经济横截面中的重尾现象
 
-As mentioned above, heavy tails are pervasive in economic data.
+如上所述，重尾在经济数据中非常普遍。
 
-In fact power laws seem to be very common as well.
+实际上，幂律分布似乎也十分常见。
 
-We now illustrate this by showing the empirical CCDF of heavy tails.
+我们现在通过展示重尾的经验互补累积分布函数（CCDF）来说明这一点。
 
-All plots are in log-log, so that a power law shows up as a linear log-log
-plot, at least in the upper tail.
+所有的图都是以对数-对数坐标绘制的，因此幂律在对数-对数图中表现为直线，至少在上尾部分是这样。
 
-We hide the code that generates the figures, which is somewhat complex, but
-readers are of course welcome to explore the code (perhaps after examining the figures).
+我们隐藏了生成图形的代码，该代码有些复杂，但读者当然可以探索代码（也许可以在查看图形后进行）。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
 def empirical_ccdf(data, 
                    ax, 
-                   aw=None,   # weights
+                   aw=None,   # 权重
                    label=None,
                    xlabel=None,
                    add_reg_line=False, 
                    title=None):
     """
-    Take data vector and return prob values for plotting.
-    Upgraded empirical_ccdf
+    接受数据向量并返回用于绘图的概率值。
+    升级版的 empirical_ccdf
     """
     y_vals = np.empty_like(data, dtype='float64')
     p_vals = np.empty_like(data, dtype='float64')
     n = len(data)
     if aw is None:
         for i, d in enumerate(data):
-            # record fraction of sample above d
+            # 记录样本中大于 d 的分数
             y_vals[i] = np.sum(data >= d) / n
             p_vals[i] = np.sum(data == d) / n
     else:
@@ -771,11 +726,11 @@ def empirical_ccdf(data,
 
     ax.scatter(x, y, **kwargs)
     if add_reg_line:
-        ax.plot(x, x * a + b, 'k-', alpha=0.6, label=f"slope = ${a: 1.2f}$")
+        ax.plot(x, x * a + b, 'k-', alpha=0.6, label=f"斜率 = ${a: 1.2f}$")
     if not xlabel:
-        xlabel='log value'
+        xlabel='对数值'
     ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel("log prob", fontsize=12)
+    ax.set_ylabel("对数概率", fontsize=12)
         
     if label:
         ax.legend(loc='lower left', fontsize=12)
@@ -795,7 +750,7 @@ def extract_wb(varlist=['NY.GDP.MKTP.CD'],
                e=2021, 
                varnames=None):
     if c == "all_countries":
-        # Keep countries only (no aggregated regions)
+        # 仅保留国家（不包括汇总区域）
         countries = wb.get_countries()
         countries_name = countries[countries['region'] != 'Aggregates']['name'].values
         c = "all"
@@ -810,15 +765,15 @@ def extract_wb(varlist=['NY.GDP.MKTP.CD'],
     return df1
 ```
 
-### Firm size
+### 公司规模
 
-Here is a plot of the firm size distribution for the largest 500 firms in 2020 taken from Forbes Global 2000.
+以下是2020年来自福布斯全球2000强的最大500家公司的公司规模分布图。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Firm size distribution
+    caption: 公司规模分布
     name: firm-size-dist
 tags: [hide-input]
 ---
@@ -826,29 +781,29 @@ df_fs = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_di
 df_fs = df_fs[['Country', 'Sales', 'Profits', 'Assets', 'Market Value']]
 fig, ax = plt.subplots(figsize=(6.4, 3.5))
 
-label="firm size (market value)"
-top = 500 # set the cutting for top
+label="公司规模（市值）"
+top = 500 # 设置排名前500的切断点
 d = df_fs.sort_values('Market Value', ascending=False)
 empirical_ccdf(np.asarray(d['Market Value'])[:top], ax, label=label, add_reg_line=True)
 
 plt.show()
 ```
 
-### City size
+### 城市规模
 
-Here are plots of the city size distribution for the US and Brazil in 2023 from the World Population Review.
+以下是2023年来自世界人口审查的美国和巴西城市规模分布图。
 
-The size is measured by population.
+大小由人口衡量。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: City size distribution
+    caption: 城市规模分布
     name: city-size-dist
 tags: [hide-input]
 ---
-# import population data of cities in 2023 United States and 2023 Brazil from world population review
+# 导入2023年美国和2023年巴西城市的人口数据
 df_cs_us = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_us.csv')
 df_cs_br = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_brazil.csv')
 
@@ -860,17 +815,17 @@ empirical_ccdf(np.asarray(df_cs_br['pop2023']), axes[1], label="Brazil", add_reg
 plt.show()
 ```
 
-### Wealth
+### 财富
 
-Here is a plot of the upper tail (top 500) of the wealth distribution.
+这里是财富分布上尾部（前500名）的图表示。
 
-The data is from the Forbes Billionaires list in 2020.
+数据来源于2020年的《福布斯亿万富翁》名单。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Wealth distribution (Forbes billionaires in 2020)
+    caption: 财富分布（2020年福布斯亿万富翁）
     name: wealth-dist
 tags: [hide-input]
 ---
@@ -887,12 +842,12 @@ axs = axs.flatten()
 for i, c in enumerate(countries):
     df_w_c = df_w[df_w['country'] == c].reset_index()
     z = np.asarray(df_w_c['realTimeWorth'])
-    # print('number of the global richest 2000 from '+ c, len(z))
-    top = 500           # cut-off number: top 500
+    # 打印来自该国的全球前2000位富豪的人数
+    top = 500           # 截止数：前500名
     if len(z) <= top:    
         z = z[:top]
 
-    empirical_ccdf(z[:top], axs[i], label=c, xlabel='log wealth', add_reg_line=True)
+    empirical_ccdf(z[:top], axs[i], label=c, xlabel='对数财富', add_reg_line=True)
     
 fig.tight_layout()
 
@@ -901,17 +856,17 @@ plt.show()
 
 ### GDP
 
-Of course, not all cross-sectional distributions are heavy-tailed.
+当然，并非所有的横截面分布都是重尾的。
 
-Here we show cross-country per capita GDP.
+这里我们展示的是各国人均GDP。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-# get gdp and gdp per capita for all regions and countries in 2021
+# 获取2021年所有地区和国家的GDP及人均GDP
 
 variable_code = ['NY.GDP.MKTP.CD', 'NY.GDP.PCAP.CD']
-variable_names = ['GDP', 'GDP per capita']
+variable_names = ['GDP', '人均GDP']
 
 df_gdp1 = extract_wb(varlist=variable_code, 
                      c="all_countries", 
@@ -925,7 +880,7 @@ df_gdp1.dropna(inplace=True)
 ---
 mystnb:
   figure:
-    caption: GDP per capita distribution
+    caption: 人均GDP分布
     name: gdppc-dist
 tags: [hide-input]
 ---
@@ -937,24 +892,20 @@ for name, ax in zip(variable_names, axes):
 plt.show()
 ```
 
-The plot is concave rather than linear, so the distribution has light tails.
+图形是凹形的而不是线形的，因此分布具有轻尾。
 
-One reason is that this is data on an aggregate variable, which involves some
-averaging in its definition.
+这其中一个原因是这是关于一个综合变量的数据，其定义中涉及了一些平均处理。
 
-Averaging tends to eliminate extreme outcomes.
+平均处理往往会消除极端结果。
 
 
-## Failure of the LLN
+## 大数定律的失败
 
-One impact of heavy tails is that sample averages can be poor estimators of
-the underlying mean of the distribution.
+重尾分布的一个影响是样本平均值可能是底层均值的糟糕估计。
 
-To understand this point better, recall {doc}`our earlier discussion <lln_clt>` 
-of the law of large numbers, which considered IID $X_1, \ldots, X_n$ with common distribution $F$
+为了更好地理解这一点，请回想一下{doc}`我们早期关于大数定律的讨论<lln_clt>`，它考虑了具有共同分布$F$的独立同分布的$X_1, \ldots, X_n$
 
-If $\mathbb E |X_i|$ is finite, then
-the sample mean $\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i$ satisfies
+如果$\mathbb E |X_i|$是有限的，那么样本平均值$\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i$满足
 
 ```{math}
 :label: lln_as2
@@ -962,15 +913,13 @@ the sample mean $\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i$ satisfies
 \mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1
 ```
 
-where $\mu := \mathbb E X_i = \int x F(dx)$ is the common mean of the sample.
+其中$\mu := \mathbb E X_i = \int x F(dx)$是样本的共同均值。
 
-The condition $\mathbb E | X_i | = \int |x| F(dx) < \infty$ holds
-in most cases but can fail if the distribution $F$ is very heavy-tailed.
+在大多数情况下，条件$\mathbb E | X_i | = \int |x| F(dx) < \infty$成立，但如果分布$F$是非常重尾的，则可能不成立。
 
-For example, it fails for the Cauchy distribution.
+例如，柯西分布就是不成立的。
 
-Let's have a look at the behavior of the sample mean in this case, and see
-whether or not the LLN is still valid.
+让我们来看看这种情况下样本平均值的行为，看是否大数定律仍然有效。
 
 ```{code-cell} ipython3
 ---
@@ -989,12 +938,12 @@ distribution = cauchy()
 fig, ax = plt.subplots()
 data = distribution.rvs(N)
 
-# Compute sample mean at each n
+# 计算每个n的样本平均值
 sample_mean = np.empty(N)
 for n in range(1, N):
     sample_mean[n] = np.mean(data[:n])
 
-# Plot
+# 绘图
 ax.plot(range(N), sample_mean, alpha=0.6, label='$\\bar{X}_n$')
 ax.plot(range(N), np.zeros(N), 'k--', lw=0.5)
 ax.set_xlabel(r"$n$")
@@ -1003,181 +952,162 @@ ax.legend()
 plt.show()
 ```
 
-The sequence shows no sign of converging.
+序列显示没有收敛的迹象。
 
-We return to this point in the exercises.
+我们在练习中会回到这一点。
 
 
 (heavy-tail:application)=
-## Why do heavy tails matter?
+## 为什么重尾分布很重要？
 
-We have now seen that 
+我们已经看到
 
-1. heavy tails are frequent in economics and
-2. the law of large numbers fails when tails are very heavy.
+1. 在经济学中，重尾分布非常常见；
+2. 当尾部非常重时，大数定律失效。
 
-But what about in the real world?  Do heavy tails matter?
+但是在现实世界中，重尾分布重要吗？让我们简要讨论一下它们为什么重要。
 
-Let's briefly discuss why they do.
+### 分散化投资
 
+投资中一个最重要的概念是使用分散化来降低风险。
 
-### Diversification
+这是一个非常古老的想法——例如，考虑这个表达式“不要把所有的鸡蛋放在一个篮子里”。
 
-One of the most important ideas in investing is using diversification to
-reduce risk.
+为了说明这一点，设想一个拥有一美元财富的投资者，在$n$种资产中进行选择，这些资产的回报为$X_1, \ldots, X_n$。
 
-This is a very old idea --- consider, for example, the expression "don't put all your eggs in one basket".
+假设不同资产的回报是独立的，每个回报有均值$\mu$和方差$\sigma^2$。
 
-To illustrate, consider an investor with one dollar of wealth and a choice over
-$n$ assets with payoffs $X_1, \ldots, X_n$.  
+如果投资者将所有财富投资在一个资产上，那么该投资组合的预期收益为$\mu$，方差为$\sigma^2$。
 
-Suppose that returns on distinct  assets are
-independent and each return has  mean $\mu$ and variance $\sigma^2$.
-
-If the investor puts all wealth in one asset, say, then the expected payoff of the
-portfolio is $\mu$ and the variance is $\sigma^2$.  
-
-If instead the investor puts share $1/n$ of her wealth in each asset, then the portfolio payoff is
+如果投资者将她的财富均分到每一个资产上，即每个资产的份额为$1/n$，那么投资组合的收益为
 
 $$
-Y_n = \sum_{i=1}^n \frac{X_i}{n} = \frac{1}{n} \sum_{i=1}^n X_i. 
-$$  
+Y_n = \sum_{i=1}^n \frac{X_i}{n} = \frac{1}{n} \sum_{i=1}^n X_i.
+$$
 
-Try computing the mean and variance.
+试着计算均值和方差。
 
-You will find that
+你会发现：
 
-* The mean is unchanged at $\mu$, while 
-* the variance of the portfolio has fallen to $\sigma^2 / n$.
+* 均值保持不变，依旧是$\mu$，
+* 投资组合的方差降低到了$\sigma^2 / n$。
 
-Diversification reduces risk, as expected.
+正如预期的那样，分散化减少了风险。
 
-But there is a hidden assumption here: the variance of returns is finite.
+但是这里有一个隐藏的假设：回报的方差是有限的。
 
-If the distribution is heavy-tailed and the variance is infinite, then this
-logic is incorrect.
+如果分布是重尾的并且方差是无限的，那么这种逻辑就是不正确的。
 
-For example, we saw above that if every $X_i$ is Cauchy, then so is $Y_n$.
+例如，我们上面看到，如果每个$X_i$都是柯西分布，那么$Y_n$也是。
 
-This means that diversification doesn't help at all!
+这意味着分散化根本没有帮助！
 
+### 财政政策
 
-### Fiscal policy
+财富分配中尾部的厚重程度对税收和再分配政策至关重要。
 
-The heaviness of the tail in the wealth distribution matters for taxation and redistribution policies.
+收入分配也是如此。
 
-The same is true for the income distribution.
-
-For example, the heaviness of the tail of the income distribution helps
-determine {doc}`how much revenue a given tax policy will raise <mle>`.
-
+例如，收入分配尾部的厚重程度有助于决定{doc}`how much revenue a given tax policy will raise <mle>`。
 
 (cltail)=
-## Classifying tail properties
+## 分类尾部特性
 
-Up until now we have discussed light and heavy tails without any mathematical
-definitions.
+到目前为止，我们讨论了轻尾和重尾，但没有任何数学定义。
 
-Let's now rectify this.
+现在让我们来纠正这一点。
 
-We will focus our attention on the right hand tails of
-nonnegative random variables and their distributions.
+我们将关注非负随机变量及其分布的右侧尾部。
 
-The definitions for
-left hand tails are very similar and we omit them to simplify the exposition.
+左侧尾部的定义非常相似，为了简化论述，我们省略它们。
 
 (heavy-tail:formal-definition)=
-### Light and heavy tails
+### 轻尾和重尾
 
-A distribution $F$ with density $f$ on $\mathbb R_+$ is called [heavy-tailed](https://en.wikipedia.org/wiki/Heavy-tailed_distribution) if
+一个在 $\mathbb R_+$ 上有密度 $f$ 的分布 $F$ 被称为[重尾](https://en.wikipedia.org/wiki/Heavy-tailed_distribution)的，如果
 
 ```{math}
 :label: defht
 
-\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ for all } t > 0.
+\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ 对于所有 } t > 0.
 ```
 
-We say that a nonnegative random variable $X$ is **heavy-tailed** if its density is heavy-tailed.
+我们说一个非负随机变量 $X$ 是**重尾**的，如果它的密度是重尾的。
 
-This is equivalent to stating that its **moment generating function** $m(t) :=
-\mathbb E \exp(t X)$ is infinite for all $t > 0$.
+这等同于说它的**矩生成函数** $m(t) := \mathbb E \exp(t X)$ 对于所有 $t > 0$ 都是无限的。
 
-For example, the [log-normal
-distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) is
-heavy-tailed because its moment generating function is infinite everywhere on
-$(0, \infty)$.
+例如，[对数正态分布](https://en.wikipedia.org/wiki/Log-normal_distribution)是重尾的，因为它的矩生成函数在 $(0, \infty)$ 上无限。
 
-The Pareto distribution is also heavy-tailed.
 
-Less formally, a heavy-tailed distribution is one that is not exponentially bounded (i.e. the tails are heavier than the exponential distribution). 
+帕累托分布也是重尾分布。
 
-A distribution $F$ on $\mathbb R_+$ is called **light-tailed** if it is not heavy-tailed.
+非正式地说，重尾分布是指不受指数型界限约束的分布（即尾部比指数分布更重）。
 
-A nonnegative random variable $X$ is **light-tailed** if its distribution $F$ is light-tailed.
+如果一个在 $\mathbb R_+$ 上的分布 $F$ 不是重尾的，则称它为**轻尾**。
 
-For example, every random variable with bounded support is light-tailed. (Why?)
+一个非负随机变量 $X$ 是**轻尾的**，如果它的分布 $F$ 是轻尾的。
 
-As another example, if $X$ has the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution), with cdf $F(x) = 1 - \exp(-\lambda x)$ for some $\lambda > 0$, then its moment generating function is 
+例如，所有有界支撑的随机变量都是轻尾的。（为什么？）
+
+再举一个例子，如果 $X$ 有[指数分布](https://en.wikipedia.org/wiki/Exponential_distribution)，累积分布函数 $F(x) = 1 - \exp(-\lambda x)$ 对某个 $\lambda > 0$，则其矩生成函数为
 
 $$
-m(t) = \frac{\lambda}{\lambda - t} \quad \text{when } t < \lambda 
+m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t < \lambda 
 $$
 
-In particular, $m(t)$ is finite whenever $t < \lambda$, so $X$ is light-tailed.
+特别地，只要 $t < \lambda$，$m(t)$ 就是有限的，因此 $X$ 是轻尾的。
 
-One can show that if $X$ is light-tailed, then all of its
-[moments](https://en.wikipedia.org/wiki/Moment_(mathematics)) are finite.
+可以证明，如果 $X$ 是轻尾的，则它的所有
+[矩](https://en.wikipedia.org/wiki/Moment_(mathematics))都是有限的。
 
-Conversely, if some moment is infinite, then $X$ is heavy-tailed.
+反之，如果某个矩是无限的，则 $X$ 是重尾的。
 
-The latter condition is not necessary, however.
+但后者条件不是必需的。
 
-For example, the lognormal distribution is heavy-tailed but every moment is finite.
-
-
-
-## Further reading
-
-For more on heavy tails in the wealth distribution, see e.g., {cite}`pareto1896cours` and {cite}`benhabib2018skewed`.
-
-For more on heavy tails in the firm size distribution, see e.g., {cite}`axtell2001zipf`, {cite}`gabaix2016power`.
-
-For more on heavy tails in the city size distribution, see e.g., {cite}`rozenfeld2011area`, {cite}`gabaix2016power`.
-
-There are other important implications of heavy tails, aside from those
-discussed above.
-
-For example, heavy tails in income and wealth affect productivity growth, business cycles, and political economy.
-
-For further reading, see, for example, {cite}`acemoglu2002political`, {cite}`glaeser2003injustice`, {cite}`bhandari2018inequality` or {cite}`ahn2018inequality`.
+例如，对数正态分布是重尾的，但每个矩都是有限的。
 
 
 
-## Exercises
+## 延伸阅读
+
+想了解更多关于财富分布中的重尾，可以参考文献 {cite}`pareto1896cours` 和 {cite}`benhabib2018skewed`。
+
+想了解更多关于公司规模分布中的重尾，可以参考文献 {cite}`axtell2001zipf`, {cite}`gabaix2016power`。
+
+想了解更多关于城市规模分布中的重尾，可以参考文献 {cite}`rozenfeld2011area`, {cite}`gabaix2016power`。
+
+重尾的其他重要影响，除了上述讨论之外，还有不少。
+
+例如，收入和财富中的重尾会影响生产力增长、商业周期和政治经济学。
+
+欲了解更多，请参阅 {cite}`acemoglu2002political`, {cite}`glaeser2003injustice`, {cite}`bhandari2018inequality` 或 {cite}`ahn2018inequality`。
+
+
+## 练习
 
 
 ```{exercise}
 :label: ht_ex2
 
-Prove: If $X$ has a Pareto tail with tail index $\alpha$, then
-$\mathbb E[X^r] = \infty$ for all $r \geq \alpha$.
+证明：如果 $X$ 拥有尾指数为 $\alpha$ 的帕累托尾，则
+$\mathbb E[X^r] = \infty$ 对所有的 $r \geq \alpha$ 都成立。
 ```
 
 ```{solution-start} ht_ex2
 :class: dropdown
 ```
 
-Let $X$ have a Pareto tail with tail index $\alpha$ and let $F$ be its cdf.
+设 $X$ 拥有尾指数为 $\alpha$ 的帕累托尾，并且设 $F$ 为其累积分布函数。
 
-Fix $r \geq \alpha$.
+固定 $r \geq \alpha$。
 
-In view of {eq}`plrt`, we can take positive constants $b$ and $\bar x$ such that
+根据公式 {eq}`plrt`，我们可以取正常数 $b$ 和 $\bar x$，使得
 
 $$
-\mathbb P\{X > x\} \geq b x^{- \alpha} \text{ whenever } x \geq \bar x
+\mathbb P\{X > x\} \geq b x^{-\alpha} \text{ 当 } x \geq \bar x
 $$
 
-But then
+但是
 
 $$
 \mathbb E X^r = r \int_0^\infty x^{r-1} \mathbb P\{ X > x \} dx
@@ -1186,24 +1116,21 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X > x \} dx
 + r \int_{\bar x}^\infty  x^{r-1} b x^{-\alpha} dx.
 $$
 
-We know that $\int_{\bar x}^\infty x^{r-\alpha-1} dx = \infty$ whenever $r - \alpha - 1 \geq -1$.
+我们知道 $\int_{\bar x}^\infty x^{r-\alpha-1} dx = \infty$ 当 $r - \alpha - 1 \geq -1$ 时。
 
-Since $r \geq \alpha$, we have $\mathbb E X^r = \infty$.
+由于 $r \geq \alpha$，我们得到 $\mathbb E X^r = \infty$。
 
 ```{solution-end}
 ```
 
-
 ```{exercise}
 :label: ht_ex3
 
-Repeat exercise 1, but replace the three distributions (two normal, one
-Cauchy) with three Pareto distributions using different choices of
-$\alpha$.
+重复练习1，但将三个分布（两个正态，一个柯西）替换为三个帕累托分布，并使用不同的 $\alpha$ 值。
 
-For $\alpha$, try 1.15, 1.5 and 1.75.
+对于 $\alpha$，尝试1.15、1.5和1.75。
 
-Use `np.random.seed(11)` to set the seed.
+使用 `np.random.seed(11)` 来设置种子。
 ```
 
 
@@ -1226,7 +1153,7 @@ for (a, ax) in zip(alphas, axes):
     data = pareto.rvs(size=n, scale=1, b=a)
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"Pareto draws with $\\alpha = {a}$", fontsize=11)
+    ax.set_title(f"帕累托分布抽样 $\\alpha = {a}$", fontsize=11)
 
 plt.subplots_adjust(hspace=0.4)
 
@@ -1236,95 +1163,77 @@ plt.show()
 ```{solution-end}
 ```
 
-
 ```{exercise}
 :label: ht_ex5
 
-There is an ongoing argument about whether the firm size distribution should
-be modeled as a Pareto distribution or a lognormal distribution (see, e.g.,
-{cite}`fujiwara2004pareto`, {cite}`kondo2018us` or {cite}`schluter2019size`).
+关于企业规模分布应该用帕累托分布还是对数正态分布进行建模的争论一直持续不断（参见例如 {cite}`fujiwara2004pareto`、{cite}`kondo2018us` 或 {cite}`schluter2019size`）。
 
-This sounds esoteric but has real implications for a variety of economic
-phenomena.
+这听起来很深奥，但对各种经济现象都有实际影响。
 
-To illustrate this fact in a simple way, let us consider an economy with
-100,000 firms, an interest rate of `r = 0.05` and a corporate tax rate of
-15%.
+为了简单说明这个事实，我们考虑一个拥有100,000家企业的经济体，利率为 `r = 0.05` 并且企业税率为15%。
 
-Your task is to estimate the present discounted value of projected corporate
-tax revenue over the next 10 years.
+你的任务是估计未来10年企业税收的现值折现。
 
-Because we are forecasting, we need a model.
+因为我们在进行预测，我们需要一个模型。
 
-We will suppose that
+我们将假设：
 
-1. the number of firms and the firm size distribution (measured in profits) remain fixed and
-1. the firm size distribution is either lognormal or Pareto.
+1. 企业数量和企业规模分布（以利润计）保持不变，并且
+1. 企业规模分布要么是对数正态分布，要么是帕累托分布。
 
-Present discounted value of tax revenue will be estimated by
+税收的现值折现将通过以下步骤估算：
 
-1. generating 100,000 draws of firm profit from the firm size distribution,
-1. multiplying by the tax rate, and
-1. summing the results with discounting to obtain present value.
+1. 从企业规模分布生成100,000次企业利润的抽样，
+1. 将其乘以税率，并且
+1. 通过折现将结果求和以获得现值。
 
-The Pareto distribution is assumed to take the form {eq}`pareto` with $\bar x = 1$ and $\alpha = 1.05$.
+帕累托分布假设采用 {eq}`pareto` 形式，其中 $\bar x = 1$ 且 $\alpha = 1.05$。
 
-(The value of the tail index $\alpha$ is plausible given the data {cite}`gabaix2016power`.)
+（尾指数 $\alpha$ 的值是合理的，鉴于数据 {cite}`gabaix2016power`。）
 
-To make the lognormal option as similar as possible to the Pareto option, choose 
-its parameters such that the mean and median of both distributions are the same.
+为了使对数正态选项尽可能类似于帕累托选项，请选择其参数使得两个分布的均值和中位数相同。
 
-Note that, for each distribution, your estimate of tax revenue will be random 
-because it is based on a finite number of draws.
+注意，对于每个分布，你的税收估算都是随机的，因为它基于有限的抽样。
 
-To take this into account, generate 100 replications (evaluations of tax revenue) 
-for each of the two distributions and compare the two samples by
+为了考虑到这一点，对两种分布各产生100次重复（税收收入的估计），并通过以下方式比较两个样本：
 
-* producing a [violin plot](https://en.wikipedia.org/wiki/Violin_plot) visualizing the two samples side-by-side and
-* printing the mean and standard deviation of both samples.
+* 制作一张将两个样本并排显示的[小提琴图](https://en.wikipedia.org/wiki/Violin_plot)，并且
+* 输出两个样本的均值和标准差。
 
-For the seed use `np.random.seed(1234)`.
+对种子使用 `np.random.seed(1234)`。
 
-What differences do you observe?
+你观察到了哪些差异？
 
-(Note: a better approach to this problem would be to model firm dynamics and
-try to track individual firms given the current distribution.  We will discuss
-firm dynamics in later lectures.)
+（注：解决这个问题的更好方法将是建模企业动态并尝试给定当前分布追踪个别企业。我们将在后续讲座中讨论企业动态。）
 ```
 
 ```{solution-start} ht_ex5
 :class: dropdown
 ```
 
-To do the exercise, we need to choose the parameters $\mu$
-and $\sigma$ of the lognormal distribution to match the mean and median
-of the Pareto distribution.
+为了完成这个练习，我们需要选择对数正态分布的参数 $\mu$ 和 $\sigma$，使其匹配Pareto分布的均值和中位数。
 
-Here we understand the lognormal distribution as that of the random variable
-$\exp(\mu + \sigma Z)$ when $Z$ is standard normal.
+这里我们将对数正态分布理解为随机变量 $\exp(\mu + \sigma Z)$，当 $Z$ 是标准正态分布时。
 
-The mean and median of the Pareto distribution {eq}`pareto` with
-$\bar x = 1$ are
+Pareto分布 {eq}`pareto` 的均值和中位数，其中 $\bar x = 1$，分别是
 
 $$
-\text{mean } = \frac{\alpha}{\alpha - 1}
-\quad \text{and} \quad
-\text{median } = 2^{1/\alpha}
+\text{均值} = \frac{\alpha}{\alpha - 1}
+\quad \text{和} \quad
+\text{中位数} = 2^{1/\alpha}
 $$
 
-Using the corresponding expressions for the lognormal distribution leads us to
-the equations
+使用对应的对数正态分布表达式，我们得到以下方程组
 
 $$
 \frac{\alpha}{\alpha - 1} = \exp(\mu + \sigma^2/2)
-\quad \text{and} \quad
+\quad \text{和} \quad
 2^{1/\alpha} = \exp(\mu)
 $$
 
-which we solve for $\mu$ and $\sigma$ given $\alpha = 1.05$.
+我们用 $\alpha = 1.05$ 来解这些方程得到 $\mu$ 和 $\sigma$。
 
-Here is the code that generates the two samples, produces the violin plot and
-prints the mean and standard deviation of the two samples.
+以下是生成两个样本、制作小提琴图并打印两个样本的均值和标准差的代码。
 
 ```{code-cell} ipython3
 num_firms = 100_000
@@ -1332,19 +1241,19 @@ num_years = 10
 tax_rate = 0.15
 r = 0.05
 
-β = 1 / (1 + r)    # discount factor
+β = 1 / (1 + r)    # 折现因子
 
 x_bar = 1.0
 α = 1.05
 
 def pareto_rvs(n):
-    "Uses a standard method to generate Pareto draws."
+    "使用标准方法生成Pareto抽样。"
     u = np.random.uniform(size=n)
     y = x_bar / (u**(1/α))
     return y
 ```
 
-Let's compute the lognormal parameters:
+我们来计算对数正态分布的参数：
 
 ```{code-cell} ipython3
 μ = np.log(2) / α
@@ -1352,8 +1261,7 @@ Let's compute the lognormal parameters:
 σ = np.sqrt(σ_sq)
 ```
 
-Here's a function to compute a single estimate of tax revenue for a particular
-choice of distribution `dist`.
+这是一个计算特定分布 `dist` 的单一税收估计的函数。
 
 ```{code-cell} ipython3
 def tax_rev(dist):
@@ -1367,7 +1275,7 @@ def tax_rev(dist):
     return tax_raised
 ```
 
-Now let's generate the violin plot.
+现在让我们生成小提琴图。
 
 ```{code-cell} ipython3
 num_reps = 100
@@ -1388,8 +1296,7 @@ ax.violinplot(data)
 
 plt.show()
 ```
-
-Finally, let's print the means and standard deviations.
+最后，我们来生成均值和标准差。
 
 ```{code-cell} ipython3
 tax_rev_pareto.mean(), tax_rev_pareto.std()
@@ -1399,8 +1306,7 @@ tax_rev_pareto.mean(), tax_rev_pareto.std()
 tax_rev_lognorm.mean(), tax_rev_lognorm.std()
 ```
 
-Looking at the output of the code, our main conclusion is that the Pareto
-assumption leads to a lower mean and greater dispersion.
+通过查看代码的输出，我们的主要结论是，帕累托分布假设会导致更低的均值和更大的离散度。
 
 ```{solution-end}
 ```
@@ -1408,17 +1314,15 @@ assumption leads to a lower mean and greater dispersion.
 ```{exercise}
 :label: ht_ex_cauchy
 
-The [characteristic function](https://en.wikipedia.org/wiki/Characteristic_function_%28probability_theory%29) of the Cauchy distribution is
+柯西分布的[特征函数](https://en.wikipedia.org/wiki/Characteristic_function_%28probability_theory%29)为
 
 $$
 \phi(t) = \mathbb E e^{itX} = \int e^{i t x} f(x) dx = e^{-|t|}
 $$ (lln_cch)
 
-Prove that the sample mean $\bar X_n$ of $n$ independent draws $X_1, \ldots,
-X_n$ from the Cauchy distribution has the same characteristic function as
-$X_1$.
+证明 $n$ 次独立抽样 $X_1, \ldots, X_n$ 从柯西分布得来的样本均值 $\bar X_n$ 具有与 $X_1$ 相同的特征函数。
 
-(This means that the sample mean never converges.)
+（这意味着样本均值永远不会收敛。）
 
 ```
 
@@ -1426,7 +1330,7 @@ $X_1$.
 :class: dropdown
 ```
 
-By independence, the characteristic function of the sample mean becomes
+由独立性，样本均值的特征函数变为
 
 $$
 \begin{aligned}
@@ -1440,9 +1344,9 @@ $$
 \end{aligned}
 $$
 
-In view of {eq}`lln_cch`, this is just $e^{-|t|}$.
+根据 {eq}`lln_cch`，这就是 $e^{-|t|}$。
 
-Thus, in the case of the Cauchy distribution, the sample mean itself has the very same Cauchy distribution, regardless of $n$!
+因此，在柯西分布的情况下，样本均值本身具有完全相同的柯西分布，无论 $n$ 是多少！
 
 ```{solution-end}
 ```

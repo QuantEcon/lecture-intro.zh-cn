@@ -11,23 +11,27 @@ kernelspec:
   name: python3
 ---
 
-# Maximum Likelihood Estimation
+# 最大似然估计
 
 ```{code-cell} ipython3
 from scipy.stats import lognorm, pareto, expon
 import numpy as np
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import pandas as pd
 from math import exp
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-## Introduction
+## 介绍
 
-Consider a situation where a policymaker is trying to estimate how much revenue
-a proposed wealth tax will raise.
+考虑一个政策制定者试图估算提议中的财富税将带来多少收入的情况。
 
-The proposed tax is 
+提议的税务公式为：
 
 $$
     h(w) = 
@@ -35,21 +39,22 @@ $$
     a w                       & \text{if } w \leq \bar w  \\
     a \bar{w} + b (w-\bar{w}) & \text{if } w > \bar w  
     \end{cases}
-$$ 
+$$
 
-where $w$ is wealth.
+其中 $w$ 代表财富。
 
 ```{prf:example}
 :label: mle_ex_wt
 
-For example, if $a = 0.05$, $b = 0.1$, and $\bar w = 2.5$, this means 
+例如，如果 $a = 0.05$，$b = 0.1$，且 $\bar w = 2.5$，意味着：
 
-* a 5% tax on wealth up to 2.5 and 
-* a 10% tax on wealth in excess of 2.5.
+* 对于2.5及以下的财富征收5%的税，
+* 对超过2.5的部分财富征收10%的税。
 
-The unit is 100,000, so $w= 2.5$ means 250,000 dollars.
+单位是100,000，所以 $w= 2.5$ 的意思是 250,000 美元。
 ```
-Let's go ahead and define $h$:
+
+让我们来定义函数 $h$:
 
 ```{code-cell} ipython3
 def h(w, a=0.05, b=0.1, w_bar=2.5):
@@ -59,33 +64,29 @@ def h(w, a=0.05, b=0.1, w_bar=2.5):
         return a * w_bar + b * (w - w_bar)
 ```
 
-For a population of size $N$, where individual $i$ has wealth $w_i$, total revenue raised by 
-the tax will be 
+对于一个人口数量为 $N$ 的社区，每个人 $i$ 拥有财富 $w_i$，通过税收收入总额为
 
 $$
     T = \sum_{i=1}^{N} h(w_i)
 $$
 
-We wish to calculate this quantity.
+我们希望计算这个总量。
 
-The problem we face is that, in most countries, wealth is not observed for all individuals.
+我们面对的问题是，在大多数国家中，并不是所有个人的财富都能被观测到。
 
-Collecting and maintaining accurate wealth data for all individuals or households in a country
-is just too hard.
+为一个国家的所有个人或家庭收集并维持准确的财富数据是非常困难的。
 
-So let's suppose instead that we obtain a sample $w_1, w_2, \cdots, w_n$ telling us the wealth of $n$ randomly selected individuals.
+因此，假设我们得到了一个样本 $w_1, w_2, \cdots, w_n$，它告诉我们 $n$ 个随机选定个人的财富。
 
-For our exercise we are going to use a sample of $n = 10,000$ observations from wealth data in the US in 2016.
+在这个练习中，我们将使用 $n = 10,000$ 来自2016年美国的财富数据样本。
 
 ```{code-cell} ipython3
 n = 10_000
 ```
 
-The data is derived from the
-[Survey of Consumer Finances](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF).
+这些数据来源于[消费者财务调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF)。
 
-
-The following code imports this data  and reads it into an array called `sample`.
+以下代码导入了数据并将其读入名为 `sample` 的数组。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -94,41 +95,39 @@ url = 'https://media.githubusercontent.com/media/QuantEcon/high_dim_data/update_
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]
-df = df.loc[df['n_wealth'] > 1 ]   #restrcting data to net worth > 1
+df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净值大于 1 的数据
 rv = df['n_wealth'].sample(n=n, random_state=1234)
 rv = rv.to_numpy() / 100_000
 sample = rv
 ```
 
-Let's histogram this sample.
+让我们来做一个这个样本的直方图。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.set_xlim(-1, 20)
 density, edges = np.histogram(sample, bins=5000, density=True)
 prob = density * np.diff(edges)
-plt.stairs(prob, edges, fill=True, alpha=0.8, label=r"unit: $\$100,000$")
-plt.ylabel("prob")
-plt.xlabel("net wealth")
+plt.stairs(prob, edges, fill=True, alpha=0.8, label=r"单位：$100,000$")
+plt.ylabel("概率")
+plt.xlabel("净资产")
 plt.legend()
 plt.show()
 ```
 
-The histogram shows that many people have very low wealth and a few people have
-very high wealth.
+直方图显示许多人的财富非常低，少数人的财富非常高。
 
-
-We will take the full population size to be
+我们将假定全体人口规模为
 
 ```{code-cell} ipython3
 N = 100_000_000
 ```
 
-How can we estimate total revenue from the full population using only the sample data?
+我们如何仅使用样本数据来估计全体人口的总收入呢？
 
-Our plan is to assume that wealth of each individual is a draw from a distribution with density $f$.
+我们的计划是假设每个人的财富是从密度为 $f$ 的分布中抽取的。
 
-If we obtain an estimate of $f$ we can then approximate $T$ as follows:
+如果我们获得 $f$ 的估计，那么我们可以按照下面的方式近似 $T$：
 
 $$
     T = \sum_{i=1}^{N} h(w_i) 
@@ -136,32 +135,24 @@ $$
       \approx N \int_{0}^{\infty} h(w)f(w) dw
 $$ (eq:est_rev)
 
-(The sample mean should be close to the mean by the law of large numbers.)
+（样本均值应该靠近平均值，根据大数定律。）
 
-The problem now is: how do we estimate $f$?
+现在的问题是：我们如何估计 $f$？
 
+## 最大似然估计
 
-## Maximum likelihood estimation
+[最大似然估计](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) 是一种估计未知分布的方法。
 
-[Maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) 
-is a method of estimating an unknown distribution.
+最大似然估计有两个步骤：
 
-Maximum likelihood estimation has two steps:
+1. 猜测潜在分布是什么（例如，正态分布，均值为 $\mu$，标准差为 $\sigma$）。
+2. 估计参数值（例如，估计正态分布的 $\mu$ 和 $\sigma$）。
 
-1. Guess what the underlying distribution is (e.g., normal with mean $\mu$ and
-   standard deviation $\sigma$).
-2. Estimate the parameter values (e.g., estimate $\mu$ and $\sigma$ for the
-   normal distribution)
+对于财富，一个可能的假设是每个 $w_i$ 都是[对数正态分布](https://en.wikipedia.org/wiki/Log-normal_distribution)的，参数 $\mu$ 在 $(-\infty, \infty)$ 范围内，$\sigma$ 在 $(0, \infty)$ 范围内。
 
-One possible assumption for the wealth is that each
-$w_i$ is [log-normally distributed](https://en.wikipedia.org/wiki/Log-normal_distribution),
-with parameters $\mu \in (-\infty,\infty)$ and $\sigma \in (0,\infty)$.
+（这意味着 $\ln w_i$ 是以 $\mu$ 为均值，$\sigma$ 为标准差的正态分布。）
 
-(This means that $\ln w_i$ is normally distributed with mean $\mu$ and standard deviation $\sigma$.)
-
-You can see that this assumption is not completely unreasonable because, if we
-histogram log wealth instead of wealth, the picture starts to look something
-like a bell-shaped curve.
+你可以看到这个假设不是完全没有道理，因为如果我们对财富的对数进行直方图表示而不是财富本身，图片开始看起来像一个钟形曲线。
 
 ```{code-cell} ipython3
 ln_sample = np.log(sample)
@@ -170,32 +161,30 @@ ax.hist(ln_sample, density=True, bins=200, histtype='stepfilled', alpha=0.8)
 plt.show()
 ```
 
-Now our job is to obtain the maximum likelihood estimates of $\mu$ and $\sigma$, which
-we denote by $\hat{\mu}$ and $\hat{\sigma}$.
+现在我们的任务是获取 $\mu$ 和 $\sigma$ 的最大似然估计，我们用 $\hat{\mu}$ 和 $\hat{\sigma}$ 表示。
 
-These estimates can be found by maximizing the likelihood function given the
-data.
+这些估计值可以通过最大化给定数据的似然函数找到。
 
-The pdf of a lognormally distributed random variable $X$ is given by:
+对数正态分布随机变量 $X$ 的概率密度函数 (pdf) 如下：
 
 $$
     f(x, \mu, \sigma) 
     = \frac{1}{x}\frac{1}{\sigma \sqrt{2\pi}} 
-    \exp\left(\frac{-1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)\right)^2
+    \exp\left(-\frac{1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)^2\right)
 $$
 
-For our sample $w_1, w_2, \cdots, w_n$, the [likelihood function](https://en.wikipedia.org/wiki/Likelihood_function) is given by
+对于我们的样本 $w_1, w_2, \cdots, w_n$，[似然函数](https://en.wikipedia.org/wiki/Likelihood_function)定义为：
 
 $$
     L(\mu, \sigma | w_i) = \prod_{i=1}^{n} f(w_i, \mu, \sigma)
 $$
 
-The likelihood function can be viewed as both
+似然函数可以被视为：
 
-* the joint distribution of the sample (which is assumed to be IID) and
-* the "likelihood" of parameters $(\mu, \sigma)$ given the data.
+* 样本的联合分布（假设是独立同分布）和
+* 给定数据的参数 $(\mu, \sigma)$ 的“似然性”。
 
-Taking logs on both sides gives us the log likelihood function, which is
+对两边取对数，我们得到对数似然函数，如下所示：
 
 $$
 \begin{aligned}
@@ -207,9 +196,9 @@ $$
 \end{aligned}
 $$
 
-To find where this function is maximised we find its partial derivatives wrt $\mu$ and $\sigma ^2$ and equate them to $0$.
+为了找到这个函数的最大值，我们计算关于 $\mu$ 和 $\sigma ^2$ 的偏导数，并将它们设为 $0$.
 
-Let's first find the maximum likelihood estimate (MLE) of $\mu$
+让我们首先找到 $\mu$ 的最大似然估计（MLE）
 
 $$
 \frac{\delta \ell}{\delta \mu} 
@@ -218,7 +207,7 @@ $$
 \implies \hat{\mu} = \frac{\sum_{i=1}^n \ln w_i}{n}
 $$
 
-Now let's find the MLE of $\sigma$
+现在让我们找到 $\sigma$ 的MLE
 
 $$
 \frac{\delta \ell}{\delta \sigma^2} 
@@ -230,79 +219,72 @@ $$
     \left( \frac{\sum_{i=1}^{n}(\ln w_i - \hat{\mu})^2}{n} \right)^{1/2}
 $$
 
-Now that we have derived the expressions for $\hat{\mu}$ and $\hat{\sigma}$,
-let's compute them for our wealth sample.
+现在我们已经推导出 $\hat{\mu}$ 和 $\hat{\sigma}$ 的表达式，
+让我们为我们的财富样本计算它们。
 
 ```{code-cell} ipython3
-μ_hat = np.mean(ln_sample)
+μ_hat = np.mean(ln_sample) # 计算 μ 的估计值
 μ_hat
 ```
 
 ```{code-cell} ipython3
-num = (ln_sample - μ_hat)**2
-σ_hat = (np.mean(num))**(1/2)
+num = (ln_sample - μ_hat)**2 # 计算方差的分子部分
+σ_hat = (np.mean(num))**(1/2) # 计算 σ 的估计值
 σ_hat
 ```
 
-Let's plot the lognormal pdf using the estimated parameters against our sample data.
+我们来绘制使用估计参数的对数正态分布概率密度函数，并与我们的样本数据进行对比。
 
 ```{code-cell} ipython3
-dist_lognorm = lognorm(σ_hat, scale = exp(μ_hat))
-x = np.linspace(0,50,10000)
+dist_lognorm = lognorm(σ_hat, scale = exp(μ_hat))  # 初始化对数正态分布
+x = np.linspace(0,50,10000)  # 产生数据点
 
-fig, ax = plt.subplots()
-ax.set_xlim(-1,20)
+fig, ax = plt.subplots()  # 创建图形和轴
+ax.set_xlim(-1,20)  # 设置x轴的范围
 
-ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='lognormal pdf')
-ax.legend()
-plt.show()
+ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)  # 绘制样本的直方图
+ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='lognormal pdf')  # 绘制对数正态分布的PDF
+ax.legend()  # 显示图例
+plt.show()  # 展示图形
 ```
 
-Our estimated lognormal distribution appears to be a reasonable fit for the overall data.
+我们的估计的对数正态分布看起来很适合整体数据。
 
-We now use {eq}`eq:est_rev` to calculate total revenue.
+我们现在使用方程{eq}`eq:est_rev`来计算总收入。
 
-We will compute the integral using numerical integration via SciPy's
-[quad](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html)
-function
+我们将通过 **SciPy** 的 [quad](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html) 函数使用数值积分计算
 
 ```{code-cell} ipython3
 def total_revenue(dist):
-    integral, _ = quad(lambda x: h(x) * dist.pdf(x), 0, 100_000)
-    T = N * integral
-    return T
+    integral, _ = quad(lambda x: h(x) * dist.pdf(x), 0, 100_000)  # 计算积分
+    T = N * integral  # 总收入 = 人数 * 单个收入
+    return T  # 返回总收入
 ```
 
 ```{code-cell} ipython3
-tr_lognorm = total_revenue(dist_lognorm)
-tr_lognorm
+tr_lognorm = total_revenue(dist_lognorm)  # 使用对数正态分布计算总收入
+tr_lognorm  # 显示总收入
 ```
 
-(Our unit was 100,000 dollars, so this means that actual revenue is 100,000
-times as large.)
+（我们的单位是10万美元，所以这意味着实际收入是10万倍。）
 
+## 帕累托分布
 
-## Pareto distribution
+如上所述，使用最大似然估计时需要我们假定一个先验的底层分布。
 
-We mentioned above that using maximum likelihood estimation requires us to make
-a prior assumption of the underlying distribution.
+之前我们假定这个分布是对数正态分布。
 
-Previously we assumed that the distribution is lognormal.
+假设我们改为假设 $w_i$ 来自具有参数 $b$ 和 $x_m$ 的[帕累托分布](https://en.wikipedia.org/wiki/Pareto_distribution)。
 
-Suppose instead we assume that $w_i$ are drawn from the 
-[Pareto Distribution](https://en.wikipedia.org/wiki/Pareto_distribution)
-with parameters $b$ and $x_m$.
-
-In this case, the maximum likelihood estimates are known to be
+在这种情况下，最大似然估计已知为
 
 $$
     \hat{b} = \frac{n}{\sum_{i=1}^{n} \ln (w_i/\hat{x_m})}
-    \quad \text{and} \quad
+    \quad \text{和} \quad
     \hat{x}_m = \min_{i} w_i
 $$
 
-Let's calculate them.
+我们来计算它们。
 
 ```{code-cell} ipython3
 xm_hat = min(sample)
@@ -315,7 +297,7 @@ b_hat = 1/np.mean(den)
 b_hat
 ```
 
-Now let's recompute total revenue.
+现在让我们重新计算总收入。
 
 ```{code-cell} ipython3
 dist_pareto = pareto(b = b_hat, scale = xm_hat)
@@ -323,17 +305,15 @@ tr_pareto = total_revenue(dist_pareto)
 tr_pareto
 ```
 
-The number is very different!
+这个数字差距很大！
 
 ```{code-cell} ipython3
 tr_pareto / tr_lognorm
 ```
 
-We see that choosing the right distribution is extremely important.
+我们看到选择正确的分布非常重要。
 
-
-
-Let's compare the fitted Pareto distribution to the histogram:
+让我们将拟合的帕累托分布与直方图进行比较：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -347,22 +327,21 @@ ax.legend()
 plt.show()
 ```
 
-We observe that in this case the fit for the Pareto distribution is not very
-good, so we can probably reject it.
+我们观察到在这种情况下，帕累托分布的拟合效果并不好，所以我们可能会拒绝它。
 
-## What is the best distribution?
+## 什么是最好的分布？
 
-There is no "best" distribution --- every choice we make is an assumption.
+没有“最好”的分布——我们做出的每一个选择都是一种假设。
 
-All we can do is try to pick a distribution that fits the data well.
+我们能做的就是尝试选择一个能很好地拟合数据的分布。
 
-The plots above suggested that the lognormal distribution is optimal.
+上面的图表表明，对数正态分布是最佳的。
 
-However when we inspect the upper tail (the richest people), the Pareto distribution may be a better fit.
+然而，当我们检查上尾部（最富有的人）时，帕累托分布可能是一个更好的选择。
 
-To see this, let's now set a minimum threshold of net worth in our dataset.
+为了查看这一点，现在让我们设定一个数据集中的净资产最低阈值。
 
-We set an arbitrary threshold of $500,000 and read the data into `sample_tail`.
+我们设定一个任意阈值为 $500,000，并将数据读入 `sample_tail`。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -374,7 +353,7 @@ rv_tail = rv_tail.to_numpy()
 sample_tail = rv_tail/500_000
 ```
 
-Let's plot this data.
+让我们绘制这些数据。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -383,14 +362,13 @@ ax.hist(sample_tail, density=True, bins=500, histtype='stepfilled', alpha=0.8)
 plt.show()
 ```
 
-Now let's try fitting some distributions to this data.
+现在让我们尝试对这些数据拟合一些分布。
 
+### 对数正态分布和右尾部
 
-### Lognormal distribution for the right hand tail
+让我们从对数正态分布开始
 
-Let's start with the lognormal distribution
-
-We estimate the parameters again and plot the density against our data.
+我们再次估计参数并将密度与我们的数据进行对比。
 
 ```{code-cell} ipython3
 ln_sample_tail = np.log(sample_tail)
@@ -402,20 +380,19 @@ dist_lognorm_tail = lognorm(σ_hat_tail, scale = exp(μ_hat_tail))
 fig, ax = plt.subplots()
 ax.set_xlim(0,50)
 ax.hist(sample_tail, density=True, bins=500, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='lognormal pdf')
+ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='对数正态 pdf')
 ax.legend()
 plt.show()
 ```
 
-While the lognormal distribution was a good fit for the entire dataset,
-it is not a good fit for the right hand tail.
+虽然对数正态分布对整个数据集拟合良好，
+但它并不适合右尾部。
 
+### 帕累托分布用于右尾部
 
-### Pareto distribution for the right hand tail
+现在假设截断数据集符合帕累托分布。
 
-Let's now assume the truncated dataset has a Pareto distribution.
-
-We estimate the parameters again and plot the density against our data.
+我们再次估计参数，并将密度与我们的数据进行对比。
 
 ```{code-cell} ipython3
 xm_hat_tail = min(sample_tail)
@@ -431,38 +408,35 @@ ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='pareto pdf')
 plt.show()
 ```
 
-The Pareto distribution is a better fit for the right hand tail of our dataset.
+帕累托分布更适合我们数据集的右尾部。
 
-### So what is the best distribution?
+### 那么什么是最佳分布？
 
-As we said above, there is no "best" distribution --- each choice is an
-assumption.
+如上所述，没有“最佳”分布——每个选择都是一个假设。
 
-We just have to test what we think are reasonable distributions.
+我们只需要测试我们认为合理的分布。
 
-One test is to plot the data against the fitted distribution, as we did.
+一种测试方法是将数据与拟合分布进行绘图，正如我们所做的。
 
-There are other more rigorous tests, such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test).
+还有其他更严格的测试方法，比如[科尔莫哥洛夫-斯米尔诺夫检验](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)。
 
-We omit such advanced topics (but encourage readers to study them once
-they have completed these lectures).
+我们忽略了这些高级主题（但鼓励读者在完成这些讲座后研究它们）。
 
-## Exercises
+## 练习
 
 ```{exercise-start}
 :label: mle_ex1
 ```
-Suppose we assume wealth is [exponentially](https://en.wikipedia.org/wiki/Exponential_distribution)
-distributed with parameter $\lambda > 0$.
+假设我们假设财富是以参数 $\lambda > 0$ 的[指数](https://en.wikipedia.org/wiki/Exponential_distribution)分布。
 
-The maximum likelihood estimate of $\lambda$ is given by
+$\lambda$ 的最大似然估计为
 
 $$
 \hat{\lambda} = \frac{n}{\sum_{i=1}^n w_i}
 $$
 
-1. Compute $\hat{\lambda}$ for our initial sample.
-2. Use $\hat{\lambda}$ to find the total revenue 
+1. 计算我们初始样本的 $\hat{\lambda}$。
+2. 使用 $\hat{\lambda}$ 来找到总收入
 
 ```{exercise-end}
 ```
@@ -489,7 +463,7 @@ tr_expo
 :label: mle_ex2
 ```
 
-Plot the exponential distribution against the sample and check if it is a good fit or not.
+绘制指数分布与样本的比较，并检查它是否适合。
 
 ```{exercise-end}
 ```
@@ -509,7 +483,7 @@ ax.legend()
 plt.show()
 ```
 
-Clearly, this distribution is not a good fit for our data.
+很明显，这个分布不适合我们的数据。
 
 ```{solution-end}
 ```
