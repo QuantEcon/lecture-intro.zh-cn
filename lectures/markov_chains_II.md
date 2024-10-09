@@ -47,6 +47,11 @@ kernelspec:
 import matplotlib.pyplot as plt
 import quantecon as qe
 import numpy as np
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 (mc_irreducible)=
@@ -65,7 +70,7 @@ import numpy as np
 
 如果所有状态都相互沟通，则称随机矩阵 $P$ 是**不可约的**，即对于所有 $(x, y)$ 在 $S \times S$ 中，$x$ 和 $y$ 相互沟通。
 
-```{prf:example}
+````{prf:example}
 :label: mc2_ex_ir
 例如，考虑以下一组虚构家庭的财富转移概率。
 
@@ -86,7 +91,7 @@ P :=
 $$
 
 从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。
-```
+````
 
 我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` 类来测试这一点：
 
@@ -99,7 +104,7 @@ mc = qe.MarkovChain(P, ('poor', 'middle', 'rich'))
 mc.is_irreducible
 ```
 
-```{prf:example}
+````{prf:example}
 :label: mc2_ex_pf
 
 这是一个更加悲观的情景，贫困者永远保持贫困。
@@ -110,7 +115,7 @@ mc.is_irreducible
 ```
 
 这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。
-```
+````
 
 让我们确认这一点：
 

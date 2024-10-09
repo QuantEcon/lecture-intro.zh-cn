@@ -366,7 +366,7 @@ $$
 以及
 
 $$
-\Sigma_y = \tilde A (\σ_u^2 I_{T \times T} ) \tilde A^T
+\Sigma_y = \tilde A (\sigma_u^2 I_{T \times T} ) \tilde A^T
 $$
 
 让我们编写一个Python类来计算均值向量 $\mu_y$ 和协方差矩阵 $\Sigma_y$。

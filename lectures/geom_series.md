@@ -24,14 +24,22 @@ kernelspec:
 ```
 
 # 基础经济学中的几何级数
+
 ## 概述
+
 本讲座描述了使用几何级数数学的重要经济学概念。
+
 其中包括：
+
 - 凯恩斯主义的**乘数**
+
 - 在部分准备金银行系统中普遍存在的货币**乘数**
+
 - 资产支付流的利率和现值
+
 （如我们下面将看到的，术语**乘数**实际上意味着**收敛几何级数的和**）
-这些应用和其他应用证实了这句俏皮话的真实性：
+
+这些应用和其他应用证实了这句话的真实性：
 
 ```{epigraph}
 "在经济学中，一点几何级数的知识就能走很远"
@@ -47,6 +55,11 @@ import numpy as np
 import sympy as sym
 from sympy import init_printing
 from matplotlib import cm
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 关键公式
@@ -133,14 +146,9 @@ $$
 L_i + R_i = D_i
 ```
 
-上面方程的左侧是银行的 **资产** 之和，
-即其未偿还贷款 $L_i$ 加上其现金准备金
-$R_i$。
+上面方程的左侧是银行的 **资产** 之和，即其未偿还贷款 $L_i$ 加上其现金准备金$R_i$。
 
-右侧记录了银行 $i$ 的负债，
-即其存款人持有的存款 $D_i$；这些是
-银行对其存款人的 IOU，以支票
-账户或储蓄账户的形式（或在1914年之前，银行发行的
+右侧记录了银行 $i$ 的负债，即其存款人持有的存款 $D_i$；这些是银行对其存款人的 IOU，以支票账户或储蓄账户的形式（或在1914年之前，银行发行的
 承诺按需兑换成金或银的银行票据）。
 
 每个银行 $i$ 设置其准备金以满足方程

@@ -40,6 +40,11 @@ from numpy.linalg import matrix_power
 from matplotlib.lines import Line2D
 from matplotlib.patches import FancyArrowPatch
 from mpl_toolkits.mplot3d import proj3d
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 (matrices_as_transformation)=
@@ -199,13 +204,13 @@ def grid_transform(A=np.array([[1, -1], [1, 1]])):
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
     # ax[0].grid(True)
     # ax[0].axis("equal")
-    ax[0].set_title("points $x_1, x_2, \cdots, x_k$")
+    ax[0].set_title("点 $x_1, x_2, \cdots, x_k$")
 
     # 绘制变换的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
     # ax[1].grid(True)
     # ax[1].axis("equal")
-    ax[1].set_title("points $Ax_1, Ax_2, \cdots, Ax_k$")
+    ax[1].set_title("点 $Ax_1, Ax_2, \cdots, Ax_k$")
 
     plt.show()
 
@@ -485,15 +490,15 @@ def grid_composition_transform(A=np.array([[1, -1], [1, 1]]),
 
     # 绘制格点
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
-    ax[0].set_title("points $x_1, x_2, \cdots, x_k$")
+    ax[0].set_title("点 $x_1, x_2, \cdots, x_k$")
 
     # 绘制中间的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
-    ax[1].set_title("points $Bx_1, Bx_2, \cdots, Bx_k$")
+    ax[1].set_title("点 $Bx_1, Bx_2, \cdots, Bx_k$")
 
     # 绘制变换后的格点
     ax[2].scatter(abgrid[0], abgrid[1], s=36, c=colors, edgecolor="none")
-    ax[2].set_title("points $ABx_1, ABx_2, \cdots, ABx_k$")
+    ax[2].set_title("点 $ABx_1, ABx_2, \cdots, ABx_k$")
 
     plt.show()
 ```
@@ -708,33 +713,50 @@ plt.show()
 +++ {"user_expressions": []}
 
 ### 复数值
+
 到目前为止，我们对特征值和特征向量的定义似乎很直观。
+
 但还有一个我们尚未提到的复杂情况：
+
 在求解 $Av = \lambda v$ 时，
+
 * $\lambda$ 可以是复数，并且
 * $v$ 可以是一个包含 n 个复数的向量。
+
 我们将在下面看到一些例子。
 
 ### 一些数学细节
-我们为更高级的读者注明一些数学细节。
-（其他读者可以跳到下一节。）
+
+我们为更高级的读者注明一些数学细节。（其他读者可以跳到下一节。）
+
 特征值方程等价于 $(A - \lambda I) v = 0$。
+
 只有当 $A - \lambda I$ 的列线性相关时，这个方程才有非零解 $v$。
+
 这反过来等价于行列式为零。
+
 因此，要找到所有特征值，我们可以寻找使 $A - \lambda I$ 的行列式为零的 $\lambda$。
+
 这个问题可以表示为求解一个 $\lambda$ 的 n 次多项式的根。
+
 这进而意味着在复平面上存在 n 个解，尽管有些可能是重复的。
 
 ### 事实
+
 关于方阵 $A$ 的特征值，有一些很好的事实：
+
 1. $A$ 的行列式等于其特征值的乘积
+
 2. $A$ 的迹（主对角线上元素的和）等于其特征值的和
+
 3. 如果 $A$ 是对称的，那么它的所有特征值都是实数
+
 4. 如果 $A$ 可逆，且 $\lambda_1, \ldots, \lambda_n$ 是它的特征值，那么 $A^{-1}$ 的特征值是 $1/\lambda_1, \ldots, 1/\lambda_n$。
 
 最后一个陈述的一个推论是，当且仅当矩阵的所有特征值都非零时，该矩阵才是可逆的。
 
 ### 计算
+
 使用 NumPy，我们可以按如下方式求解矩阵的特征值和特征向量
 
 
@@ -756,8 +778,11 @@ evecs  # 特征向量
 +++ {"user_expressions": []}
 
 请注意，`evecs` 的*列*是特征向量。
+
 由于特征向量的任何标量倍数都是具有相同特征值的特征向量（这可以被验证），`eig` 程序将每个特征向量的长度归一化为1。
+
 映射 $A$ 的特征向量和特征值决定了当我们反复乘以 $A$ 时，向量 $v$ 如何被变换。
+
 这一点将在后面进一步讨论。
 
 (la_neumann)=
@@ -771,7 +796,9 @@ evecs  # 特征向量
 ### 标量级数
 
 以下是关于级数的一个基本结果：
+
 如果 $a$ 是一个数，且 $|a| < 1$，那么
+
 ```{math}
 :label: gp_sum
 
@@ -780,6 +807,7 @@ evecs  # 特征向量
 ```
 
 对于一维线性方程 $x = ax + b$，其中 x 未知，我们可以得出解 $x^{*}$ 由以下给出：
+
 $$
     x^{*} = \frac{b}{1-a} = \sum_{k=0}^{\infty} a^k b
 $$
@@ -787,8 +815,11 @@ $$
 ### 矩阵级数
 
 这个想法在矩阵设置中也有一个推广。
+
 考虑方程组 $x = Ax + b$，其中 $A$ 是一个 $n \times n$ 的方阵，$x$ 和 $b$ 都是 $\mathbb{R}^n$ 中的列向量。
+
 使用矩阵代数，我们可以得出这个方程组的解由以下给出：
+
 
 ```{math}
 :label: neumann_eqn
@@ -798,10 +829,11 @@ $$
 ```
 
 什么保证了存在唯一的向量 $x^{*}$ 满足方程 {eq}`neumann_eqn`？
+
 以下是泛函分析中的一个基本结果，它将 {eq}`gp_sum` 推广到多变量情况。
 
 (neumann_series_lemma)=
-```{prf:Theorem} Neumann Series Lemma
+```{prf:Theorem} 诺伊曼级数引理
 :label: neumann_series_lemma
 
 设 $A$ 为方阵，$A^k$ 为 $A$ 的 $k$ 次幂。
@@ -827,6 +859,7 @@ r = max(abs(λ) for λ in evals)    # 计算谱半径
 print(r)
 ```
 获得的谱半径 $r(A)$ 小于1。
+
 因此，我们可以应用诺伊曼级数引理来求 $(I-A)^{-1}$。
 
 ```{code-cell} ipython3
@@ -860,11 +893,15 @@ np.allclose(A_sum, B_inverse)
 :label: eig1_ex1
 
 幂迭代法是一种用于寻找可对角化矩阵最大绝对特征值的方法。
+
 该方法从一个随机向量 $b_0$ 开始，重复地对其应用矩阵 $A$
+
 $$
 b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 $$
+
 关于该方法的详细讨论可以在[这里](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html)找到。
+
 在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
 然后可视化收敛过程。
 ```
@@ -1035,7 +1072,7 @@ plt.quiver(*origin, - eigenvectors[0],
 
 colors = ['b', 'g']
 lines = [Line2D([0], [0], color=c, linewidth=3) for c in colors]
-labels = ["2.4 eigenspace", "0.4 eigenspace"]
+labels = ["2.4 特征空间", "0.4 特征空间"]
 plt.legend(lines, labels, loc='center left',
            bbox_to_anchor=(1, 0.5))
 
