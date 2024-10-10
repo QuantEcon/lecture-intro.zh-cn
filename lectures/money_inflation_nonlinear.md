@@ -427,4 +427,3 @@ draw_iterations(p0s, model, line_params, p0_bars, num_steps=20)
 正如我们将看到的，接受这个建议是我们在 {doc}`unpleasant` 中描述的“不愉快算术”结果的关键成分。
 
 在 {doc}`laffer_adaptive` 中，我们将探讨 {cite}`bruno1990seigniorage` 和其他人是如何以其他方式为我们的均衡选择提供理由的。
-```

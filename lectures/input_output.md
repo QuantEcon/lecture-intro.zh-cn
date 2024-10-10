@@ -36,6 +36,10 @@ from matplotlib.patches import Polygon
 
 quantecon_book_networks.config("matplotlib")
 mpl.rcParams.update(mpl.rcParamsDefault)
+
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 下图展示了从美国经济分析局2021年输入-输出账户数据中获得的15个部门之间的联系网络。
@@ -104,8 +108,11 @@ plt.show()
 | ma  | 制造业 | fi  | 金融 | go  | 政府 |
 
 从$i$到$j$的箭头表示$i$行业的一些产出作为$j$行业生产的输入。
+
 经济的特征是存在许多这样的联系。
+
 分析这些联系的基本框架是[列昂惕夫](https://en.wikipedia.org/wiki/Wassily_Leontief)的投入产出模型。
+
 在介绍投入产出模型之后，我们将描述它与{doc}`线性规划讲座 <lp_intro>`的一些联系。
 
 ## 投入产出分析
@@ -207,7 +214,7 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(250, 120, "*", color="black")
-ax.text(260, 115, "solution", size=10)
+ax.text(260, 115, "解", size=10)
 
 plt.show()
 ```
@@ -322,6 +329,7 @@ $$
 :label: io_ex_ppf
 
 考虑{eq}`eq:inout_ex`中的例子。
+
 假设我们现在给出
 
 $$
@@ -366,6 +374,7 @@ p = A^\top p + a_0 w
 $$
 
 这表明每种最终商品的价格等于生产的总成本，包括中间投入品的成本 $A^\top p$ 和劳动力成本 $a_0 w$。
+
 这个方程可以写成
 
 $$
@@ -379,9 +388,11 @@ p = (I - A^\top)^{-1} a_0 w
 $$
 
 注意 {eq}`eq:inout_price` 与 {eq}`eq:inout_1` 通过相互转置的算子形成了一个**共轭对**。
+
 这种联系在经典线性规划及其对偶问题中再次出现。
 
 ## 线性规划
+
 **原始问题**是
 
 $$
@@ -407,7 +418,9 @@ $$
 $$
 
 原始问题选择一个可行的生产计划，以最小化交付预先指定的最终商品消费向量 $d$ 的成本。
+
 对偶问题选择价格，以最大化预先指定的最终商品向量 $d$ 的价值，同时受制于价格覆盖生产成本。
+
 根据[强对偶定理](https://en.wikipedia.org/wiki/Dual_linear_program#Strong_duality)，
 原始问题和对偶问题的最优值相同：
 
@@ -416,6 +429,7 @@ w a_0^\top x^* = p^* d
 $$
 
 其中 $^*$ 表示原始和对偶问题的最优选择。
+
 对偶问题可以用图形表示如下。
 
 ```{code-cell} ipython3
@@ -444,7 +458,7 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(17, 69, "*", color="black")
-ax.text(18, 60, "dual solution", size=10)
+ax.text(18, 60, "对偶解", size=10)
 
 plt.show()
 ```

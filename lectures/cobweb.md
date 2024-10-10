@@ -41,6 +41,11 @@ kernelspec:
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 历史
@@ -334,8 +339,8 @@ def ts_plot_price(model,             # 市场模型
 ts_plot_price(m, 4, ts_length=15)
 ```
 
-我们看到一个循环已经形成，而且这个循环是持续的。
-（您可以通过绘制更长时间范围的图表来确认这一点。）
+我们看到一个循环已经形成，而且这个循环是持续的。（您可以通过绘制更长时间范围的图表来确认这一点。）
+
 这个循环是"稳定的"，意味着从大多数起始条件开始，价格都会收敛到这个循环。
 例如，
 
@@ -347,9 +352,13 @@ ts_plot_price(m, 10, ts_length=15)
 ## 适应性预期
 
 朴素预期相当简单，也在我们发现的周期中起着重要的驱动作用。
+
 如果预期以不同的方式形成会怎样？
+
 接下来我们考虑适应性预期。
+
 这指的是生产者对下一期价格的预期形成是基于他们上一次猜测和当前现货价格的加权平均。
+
 也就是说，
 
 ```{math}

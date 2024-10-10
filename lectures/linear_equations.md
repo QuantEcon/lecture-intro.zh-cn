@@ -461,6 +461,7 @@ $$
 :label: le_ex_ma
 
 考虑这个矩阵加法的例子，
+
 $$
 \begin{bmatrix}
     1 & 5 \\
