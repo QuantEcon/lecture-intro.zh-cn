@@ -18,314 +18,273 @@ kernelspec:
 ```
 
 (scalar_dynam)=
-# Dynamics in One Dimension
+# 一维动力学
 
+## 概述
 
-## Overview
+在经济学中，许多变量依赖于它们的过去值。
 
-In economics many variables depend on their past values
+例如，我们有理由相信去年的通货膨胀会影响今年的通货膨胀。
+（也许去年的高通胀会导致人们要求更高的工资作为补偿，这将导致今年的价格进一步上涨。）
 
-For example, it seems reasonable to believe that inflation last year with affects inflation this year.
-
-(Perhaps high inflation last year will lead people to demand higher wages to
-compensate, which will feed into higher prices this year.)
-
-Letting $\pi_t$ be inflation this year and $\pi_{t-1}$ be inflation last year, we
-can write this relationship in a general form as
+让$\pi_t$表示今年的通货膨胀率，$\pi_{t-1}$表示去年的通货膨胀率，我们可以用一般形式将这种关系写成：
 
 $$ \pi_t = f(\pi_{t-1}) $$
 
-where $f$ is some function describing the relationship between the variables.
+其中$f$是描述变量之间关系的某个函数。
 
-This equation is an example of one-dimensional discrete time dynamic system.
+这个方程是一维离散时间动态系统的一个例子。
 
-In this lecture we cover the foundations of one-dimensional discrete time
-dynamics.
+在本讲座中，我们将介绍一维离散时间动力学的基础知识。
 
-(While most quantitative models have two or more state variables, the
-one-dimensional setting is a good place to learn foundations 
-and understand key concepts.)
+（虽然大多数定量模型有两个或更多的状态变量，但一维设置是学习基础知识和理解关键概念的好地方。）
 
-Let's start with some standard imports:
+让我们从一些标准导入开始：
 
 ```{code-cell} ipython
 import matplotlib.pyplot as plt
 import numpy as np
 ```
+## 一些定义
 
+本节阐述了我们关注的对象和研究的属性类型。
 
-## Some definitions
+### 函数组合
 
-This section sets out the objects of interest and the kinds of properties we study.
+对于本讲座，您应该了解以下内容：
 
-### Composition of functions
+如果
 
-For this lecture you should know the following.
+* $g$ 是从 $A$ 到 $B$ 的函数，且
 
-If 
+* $f$ 是从 $B$ 到 $C$ 的函数，
 
-* $g$ is a function from $A$ to $B$ and
-* $f$ is a function from $B$ to $C$, 
-
-then the **composition** $f \circ g$ of $f$ and $g$ is defined by
+那么 $f$ 和 $g$ 的**组合** $f \circ g$ 定义为
 
 $$ 
     (f \circ g)(x) = f(g(x))
 $$
 
-For example, if 
+例如，如果
 
-* $A=B=C=\mathbb R$, the set of real numbers, 
-* $g(x)=x^2$ and $f(x)=\sqrt{x}$, then $(f \circ g)(x) = \sqrt{x^2} = |x|$.
+* $A=B=C=\mathbb R$，即实数集，
 
-If $f$ is a function from $A$ to itself, then $f^2$ is the composition of $f$
-with itself.
+* $g(x)=x^2$ 且 $f(x)=\sqrt{x}$，那么 $(f \circ g)(x) = \sqrt{x^2} = |x|$。
 
-For example, if $A = (0, \infty)$, the set of positive numbers, and $f(x) =
-\sqrt{x}$, then 
+如果 $f$ 是从 $A$ 到其自身的函数，那么 $f^2$ 是 $f$ 与自身的组合。
+
+例如，如果 $A = (0, \infty)$，即正数集，且 $f(x) = \sqrt{x}$，那么
 
 $$
     f^2(x) = \sqrt{\sqrt{x}} = x^{1/4}
 $$
 
-Similarly, if $n$ is a positive integer, then $f^n$ is $n$ compositions of $f$ with
-itself.
+同样，如果 $n$ 是正整数，那么 $f^n$ 是 $f$ 与自身的 $n$ 次组合。
 
-In the example above, $f^n(x) = x^{1/(2^n)}$.
+在上面的例子中，$f^n(x) = x^{1/(2^n)}$。
 
+### 动态系统
+**（离散时间）动态系统**是一个集合 $S$ 和一个将集合 $S$ 映射回自身的函数 $g$。
 
+动态系统的例子包括：
 
-### Dynamic systems
+* $S = (0, 1)$ 且 $g(x) = \sqrt{x}$
 
-A **(discrete time) dynamic system** is a set $S$ and a function $g$ that sends
-set $S$ back into to itself.
+* $S = (0, 1)$ 且 $g(x) = x^2$
 
+* $S = \mathbb Z$（整数集）且 $g(x) = 2 x$
 
-Examples of dynamic systems include
+另一方面，如果 $S = (-1, 1)$ 且 $g(x) = x+1$，那么 $S$ 和 $g$ 不构成动态系统，因为 $g(1) = 2$。
 
-*  $S = (0, 1)$ and $g(x) = \sqrt{x}$
-*  $S = (0, 1)$ and $g(x) = x^2$
-*  $S = \mathbb Z$ (the integers) and $g(x) = 2 x$
+* $g$ 并不总是将 $S$ 中的点映射回 $S$。
 
+我们关心动态系统是因为我们可以用它们来研究动态！
 
-On the other hand, if  $S = (-1, 1)$ and $g(x) = x+1$, then $S$ and $g$ do not
-form a dynamic system, since $g(1) = 2$.
-
-* $g$ does not always send points in $S$ back into $S$.
-
-We care about dynamic systems because we can use them to study dynamics!
-
-Given a dynamic system consisting of set $S$ and function $g$, we can create
-a sequence $\{x_t\}$ of points in $S$ by setting
+给定由集合 $S$ 和函数 $g$ 组成的动态系统，我们可以通过设定
 
 ```{math}
 :label: sdsod
+
     x_{t+1} = g(x_t)
-    \quad \text{ with } 
-    x_0 \text{ given}.
+    \quad \text{其中} 
+    x_0 \text{给定}
 ```
 
-This means that we choose some number $x_0$ in $S$ and then take
+来创建 $S$ 中点的序列 $\{x_t\}$。
+
+这意味着我们选择 $S$ 中的某个数 $x_0$，然后取
 
 ```{math}
 :label: sdstraj
+
     x_0, \quad
     x_1 = g(x_0), \quad
-    x_2 = g(x_1) = g(g(x_0)), \quad \text{etc.}
+    x_2 = g(x_1) = g(g(x_0)), \quad \text{等等}
 ```
 
-This sequence $\{x_t\}$ is called the **trajectory** of $x_0$ under $g$.
+这个序列 $\{x_t\}$ 被称为 $x_0$ 在 $g$ 下的**轨迹**。
 
-In this setting, $S$ is called the **state space** and $x_t$ is called the
-**state variable**.
+在这种情况下，$S$ 被称为**状态空间**，$x_t$ 被称为**状态变量**。
 
-Recalling that $g^n$ is the $n$ compositions of $g$ with itself, 
-we can write the trajectory more simply as 
-
+回想一下 $g^n$ 是 $g$ 与自身的 $n$ 次组合，
+我们可以更简单地将轨迹写为
 $$
-    x_t = g^t(x_0) \quad \text{ for } t = 0, 1, 2, \ldots
+    x_t = g^t(x_0) \quad \text{对于} t = 0, 1, 2, \ldots
 $$
 
-In all of what follows, we are going to assume that $S$ is a subset of
-$\mathbb R$, the real numbers.
+在接下来的所有内容中，我们假设 $S$ 是 $\mathbb R$（实数集）的子集。
 
-Equation {eq}`sdsod` is sometimes called a **first order difference equation**
+方程 {eq}`sdsod` 有时被称为**一阶差分方程**
 
-* first order means dependence on only one lag (i.e., earlier states such as $x_{t-1}$ do not enter into {eq}`sdsod`).
+* 一阶意味着只依赖于一个滞后（即，像 $x_{t-1}$ 这样的早期状态不会出现在 {eq}`sdsod` 中）。
 
+### 示例：线性模型
 
+动态系统的一个简单例子是当 $S=\mathbb R$ 且 $g(x)=ax + b$ 时，其中 $a, b$ 是常数（有时称为"参数"）。
 
-### Example: a linear model
-
-One simple example of a dynamic system is when $S=\mathbb R$ and $g(x)=ax +
-b$, where $a, b$ are constants (sometimes called ``parameters'').
-
-This leads to the **linear difference equation**
-
+这导致了**线性差分方程**
 $$
     x_{t+1} = a x_t + b 
-    \quad \text{ with } 
-    x_0 \text{ given}.
+    \quad \text{其中}
+    x_0 \text{已给定}。
 $$
-
-
-The trajectory of $x_0$ is 
+$x_0$ 的轨迹是
 
 ```{math}
 :label: sdslinmodpath
 
 x_0, \quad
 a x_0 + b, \quad
-a^2 x_0 + a b + b, \quad \text{etc.}
+a^2 x_0 + a b + b, \quad \text{等等}
 ```
 
-Continuing in this way, and using our knowledge of {doc}`geometric series
-<geom_series>`, we find that, for any $t = 0, 1, 2, \ldots$,
+继续这样下去，并利用我们对几何级数的知识，我们发现，对于任何 $t = 0, 1, 2, \ldots$，
 
 ```{math}
 :label: sdslinmod
+
     x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}
+    
 ```
 
-We have an exact expression for $x_t$ for all non-negative integer $t$ and hence a full
-understanding of the dynamics.
+我们得到了所有非负整数 $t$ 的 $x_t$ 的精确表达式，从而完全理解了其动态。
 
-Notice in particular that $|a| < 1$, then, by {eq}`sdslinmod`, we have
+特别注意，如果 $|a| < 1$，那么根据上式，我们有
 
 ```{math}
 :label: sdslinmodc
 
-x_t \to  \frac{b}{1 - a} \text{ as } t \to \infty
+x_t \to  \frac{b}{1 - a} \text{ 当 } t \to \infty
 ```
 
-regardless of $x_0$.
+无论 $x_0$ 为何值。
 
-This is an example of what is called global stability, a topic we return to
-below.
+这是所谓全局稳定性的一个例子，我们将在后面再次讨论这个话题。
 
+### 示例：非线性模型
 
+在上面的线性例子中，我们得到了 $x_t$ 关于任意非负整数 $t$ 和 $x_0$ 的精确解析表达式。
 
+这使得动态分析变得非常容易。
 
-### Example: a nonlinear model
+然而，当模型是非线性时，情况可能会大不相同。
 
-In the linear example above, we obtained an exact analytical expression for
-$x_t$ in terms of arbitrary non-negative integer $t$ and $x_0$.
-
-This made analysis of dynamics very easy.
-
-When models are nonlinear, however, the situation can be quite different.
-
-For example, in a later lecture {doc}`solow`, we will study the Solow-Swan growth model, which has dynamics 
+例如，在后面的索洛讲座中，我们将研究索洛-斯旺增长模型，其动态为
 
 ```{math}
 :label: solow_lom2
 
 k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t
+
 ```
 
-Here $k=K/L$ is the per capita capital stock, $s$ is the saving rate, $A$ is the total factor productivity, $\alpha$ is the capital share, and $\delta$ is the depreciation rate. 
+这里 $k=K/L$ 是人均资本存量，$s$ 是储蓄率，$A$ 是全要素生产率，$\alpha$ 是资本份额，$\delta$ 是折旧率。
 
-All these parameter are positive and $0 < \alpha, \delta < 1$.
+所有这些参数都是正数，且 $0 < \alpha, \delta < 1$。
 
-If you try to iterate like we did in {eq}`sdslinmodpath`, you will find that
-the algebra gets messy quickly.
+如果你尝试像我们在线性模型中那样迭代，你会发现代数运算很快就变得复杂。
 
-Analyzing the dynamics of this model requires a different method (see below).
+分析这个模型的动态需要一种不同的方法（见下文）。
 
+## 稳定性
 
-
-
-
-
-## Stability
-
-Consider a dynamic system consisting of set $S \subset \mathbb R$ and
-$g$ mapping $S$ to $S$.
+考虑一个动态系统，由集合 $S \subset \mathbb R$ 和将 $S$ 映射到 $S$ 的函数 $g$ 组成。
 
 (scalar-dynam:steady-state)=
-### Steady states
+### 稳态
 
-A **steady state** of this system is a
-point $x^*$ in $S$ such that $x^* = g(x^*)$.
+该系统的**稳态**是 $S$ 中的一个点 $x^*$，满足 $x^* = g(x^*)$。
 
-In other words, $x^*$ is a **fixed point** of the function $g$ in
-$S$.
+换句话说，$x^*$ 是函数 $g$ 在 $S$ 中的一个**不动点**。
 
-For example, for the linear model $x_{t+1} = a x_t + b$, you can use the
-definition to check that
+例如，对于线性模型 $x_{t+1} = a x_t + b$，你可以使用定义来验证：
 
-* $x^* := b/(1-a)$ is a steady state whenever $a \not= 1$,
-* if $a = 1$ and $b=0$, then every $x \in \mathbb R$ is a
-  steady state,
-* if $a = 1$ and $b \not= 0$, then the linear model has no steady
-  state in $\mathbb R$.
+* 当 $a \not= 1$ 时，$x^* := b/(1-a)$ 是一个稳态，
 
+* 如果 $a = 1$ 且 $b=0$，那么每个 $x \in \mathbb R$ 都是稳态，
 
+* 如果 $a = 1$ 且 $b \not= 0$，那么这个线性模型在 $\mathbb R$ 中没有稳态。
 
 (scalar-dynam:global-stability)=
-### Global stability
+### 全局稳定性
 
-A steady state $x^*$ of the dynamic system is called
-**globally stable** if, for all $x_0 \in S$,
+如果对于所有的 $x_0 \in S$，都有
 
 $$
-x_t = g^t(x_0) \to x^* \text{ as } t \to \infty
+x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 $$
 
-For example, in the linear model $x_{t+1} = a x_t + b$ with $a
-\not= 1$, the steady state $x^*$
+那么动态系统的稳态 $x^*$ 被称为**全局稳定**的。
 
-* is globally stable if $|a| < 1$ and
-* fails to be globally stable otherwise.
+例如，在线性模型 $x_{t+1} = a x_t + b$ 中，当 $a \not= 1$ 时，稳态 $x^*$
 
-This follows directly from {eq}`sdslinmod`.
+* 如果 $|a| < 1$，则是全局稳定的，
 
+* 否则不是全局稳定的。
 
-### Local stability
+这直接从方程 {eq}`sdslinmod` 得出。
 
-A steady state $x^*$ of the dynamic system is called
-**locally stable** if there exists an $\epsilon > 0$ such that
+### 局部稳定性
+
+如果存在一个 $\epsilon > 0$，使得
 
 $$
 | x_0 - x^* | < \epsilon
 \; \implies \;
-x_t = g^t(x_0) \to x^* \text{ as } t \to \infty
+x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 $$
 
-Obviously every globally stable steady state is also locally stable.
+那么动态系统的稳态 $x^*$ 被称为**局部稳定**的。
 
-Here is an example where the converse is not true.
+显然，每个全局稳定的稳态也是局部稳定的。
+
+下面是一个反之不成立的例子。
 
 ```{prf:example}
-Consider the self-map $g$ on $\mathbb{R}$ defined by $g(x)=x^2$. The fixed point $1$ is not stable.
+考虑 $\mathbb{R}$ 上的自映射 $g$，定义为 $g(x)=x^2$。不动点 $1$ 不是稳定的。
 
-For example, $g^t (x)\to\infty$ for any $x>1$.
+例如，对于任何 $x>1$，$g^t (x)\to\infty$。
 
-However, $0$ is locally stable, because $-1<x<1$ implies that $g^t (x)\to 0$ as $t\to\infty$.
+然而，$0$ 是局部稳定的，因为当 $-1<x<1$ 时，$g^t (x)\to 0$（当 $t\to\infty$）。
 
-Since we have more than one fixed point, $0$ is not globally stable.
+由于我们有多个不动点，$0$ 不是全局稳定的。
 ```
 
+## 图形分析
 
-## Graphical analysis
+如我们上面所见，分析非线性模型的动态是非常复杂的。
 
-As we saw above, analyzing the dynamics for nonlinear models is nontrivial.
+没有一种单一的方法可以处理所有的非线性模型。
 
-There is no single way to tackle all nonlinear models.
+然而，对于一维模型，有一种技术可以提供大量的直观理解。
 
-However, there is one technique for one-dimensional models that provides a
-great deal of intuition.
+这是一种基于**45度图**的图形方法。
 
-This is a graphical approach based on **45-degree diagrams**.
+让我们看一个例子：索洛-斯旺模型，其动态由{eq}`solow_lom2`给出。
 
-Let's look at an example: the Solow-Swan model with dynamics given in {eq}`solow_lom2`.
+我们首先从一些绘图代码开始，你可以在第一次阅读时忽略这些代码。
 
-We begin with some plotting code that you can ignore at first reading.
-
-The function of the code is to produce 45-degree diagrams and time series
-plots.
-
-
+这段代码的功能是生成45度图和时间序列图。
 
 ```{code-cell} ipython
 ---
@@ -333,10 +292,10 @@ tags: [hide-input,
        output_scroll]
 ---
 def subplots():
-    "Custom subplots with axes throught the origin"
+    "通过原点的自定义子图轴"
     fig, ax = plt.subplots()
 
-    # Set the axes through the origin
+    # 通过原点设置坐标轴
     for spine in ['left', 'bottom']:
         ax.spines[spine].set_position('zero')
         ax.spines[spine].set_color('green')
@@ -418,54 +377,54 @@ def ts_plot(g, xmin, xmax, x0, ts_length=6, var='x'):
     plt.show()
 ```
 
-Let's create a 45-degree diagram for the Solow-Swan model with a fixed set of
-parameters. Here's the update function corresponding to the model.
+让我们为索洛-斯旺模型创建一个45度图，使用固定的参数集。以下是对应该模型的更新函数。
 
 ```{code-cell} ipython
 def g(k, A = 2, s = 0.3, alpha = 0.3, delta = 0.4):
     return A * s * k**alpha + (1 - delta) * k
 ```
 
-Here is the 45-degree plot.
+这里是一个45度图。
 
 ```{code-cell} ipython
-xmin, xmax = 0, 4  # Suitable plotting region.
+xmin, xmax = 0, 4  # 适合的绘图区域
 
 plot45(g, xmin, xmax, 0, num_arrows=0)
 ```
 
-The plot shows the function $g$ and the 45-degree line.
+图表显示了函数 $g$ 和45度线。
 
-Think of $k_t$ as a value on the horizontal axis.
+将 $k_t$ 视为横轴上的一个值。
 
-To calculate $k_{t+1}$, we can use the graph of $g$ to see its
-value on the vertical axis.
+要计算 $k_{t+1}$，我们可以使用 $g$ 的图像来查看其在纵轴上的值。
 
-Clearly,
+显然，
 
-* If $g$ lies above the 45-degree line at this point, then we have $k_{t+1} > k_t$.
-* If $g$ lies below the 45-degree line at this point, then we have $k_{t+1} < k_t$.
-* If $g$ hits the 45-degree line at this point, then we have $k_{t+1} = k_t$, so $k_t$ is a steady state.
+* 如果在这一点上 $g$ 位于45度线之上，那么我们有 $k_{t+1} > k_t$。
 
-For the Solow-Swan model, there are two steady states when $S = \mathbb R_+ =
-[0, \infty)$.
+* 如果在这一点上 $g$ 位于45度线之下，那么我们有 $k_{t+1} < k_t$。
 
-* the origin $k=0$
-* the unique positive number such that $k = s z k^{\alpha} + (1 - \delta) k$.
+* 如果在这一点上 $g$ 与45度线相交，那么我们有 $k_{t+1} = k_t$，所以 $k_t$ 是一个稳态。
 
-By using some algebra, we can show that in the second case, the steady state is
+对于索洛-斯旺模型，当 $S = \mathbb R_+ = [0, \infty)$ 时，有两个稳态。
+
+* 原点 $k=0$
+
+* 唯一的正数，使得 $k = s z k^{\alpha} + (1 - \delta) k$。
+
+通过一些代数运算，我们可以证明在第二种情况下，稳态是
 
 $$
 k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 $$
 
-### Trajectories
+### 轨迹
 
-By the preceding discussion, in regions where $g$ lies above the 45-degree line, we know that the trajectory is increasing.
+根据前面的讨论，在 $g$ 位于45度线之上的区域，我们知道轨迹是递增的。
 
-The next figure traces out a trajectory in such a region so we can see this more clearly.
+下图追踪了这样一个区域内的轨迹，使我们能更清楚地看到这一点。
 
-The initial condition is $k_0 = 0.25$.
+初始条件是 $k_0 = 0.25$。
 
 ```{code-cell} ipython
 k0 = 0.25
@@ -473,21 +432,19 @@ k0 = 0.25
 plot45(g, xmin, xmax, k0, num_arrows=5, var='k')
 ```
 
-We can plot the time series of per capita capital corresponding to the figure above as
-follows:
+我们可以按照上图所示，绘制人均资本随时间变化的时间序列图，具体如下：
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, k0, var='k')
 ```
 
-Here's a somewhat longer view:
+这里是一个稍长一些的视角：
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, k0, ts_length=20, var='k')
 ```
 
-When per capita capital stock is higher than the unique positive steady state, we see that
-it declines:
+当人均资本存量高于唯一的正稳态值时，我们可以看到它呈下降趋势：
 
 ```{code-cell} ipython
 k0 = 2.95
@@ -495,24 +452,24 @@ k0 = 2.95
 plot45(g, xmin, xmax, k0, num_arrows=5, var='k')
 ```
 
-Here is the time series:
+这里是一个时间序列：
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, k0, var='k')
 ```
 
-### Complex dynamics
+### 复杂动态
 
-The Solow-Swan model is nonlinear but still generates very regular dynamics.
+索洛-斯旺模型是非线性的，但仍然产生非常规律的动态。
 
-One model that generates irregular dynamics is the **quadratic map**
-
+一个能产生不规则动态的模型是**二次映射**
 $$
 g(x) = 4 x (1 - x),
 \qquad x \in [0, 1]
 $$
 
-Let's have a look at the 45-degree diagram.
+让我们来看看45度图。
+
 
 ```{code-cell} ipython
 xmin, xmax = 0, 1
@@ -521,56 +478,51 @@ g = lambda x: 4 * x * (1 - x)
 x0 = 0.3
 plot45(g, xmin, xmax, x0, num_arrows=0)
 ```
-
-Now let's look at a typical trajectory.
+现在让我们来看一个典型的轨迹。
 
 ```{code-cell} ipython
 plot45(g, xmin, xmax, x0, num_arrows=6)
 ```
+注意它是多么不规则。
 
-Notice how irregular it is.
-
-Here is the corresponding time series plot.
+这是相应的时间序列图。
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, x0, ts_length=6)
 ```
-
-The irregularity is even clearer over a longer time horizon:
+在更长的时间范围内，这种不规则性甚至更加明显：
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, x0, ts_length=20)
 ```
 
-## Exercises
+## 练习
 
 ```{exercise}
 :label: sd_ex1
 
-Consider again the linear model $x_{t+1} = a x_t + b$ with $a
-\not=1$.
+再次考虑线性模型 $x_{t+1} = a x_t + b$，其中 $a \not=1$。
 
-The unique steady state is $b / (1 - a)$.
+唯一的稳态为 $b / (1 - a)$。
 
-The steady state is globally stable if $|a| < 1$.
+当 $|a| < 1$ 时，该稳态是全局稳定的。
 
-Try to illustrate this graphically by looking at a range of initial conditions.
+尝试通过观察一系列初始条件来图形化地说明这一点。
 
-What differences do you notice in the cases $a \in (-1, 0)$ and $a
-\in (0, 1)$?
+在 $a \in (-1, 0)$ 和 $a \in (0, 1)$ 的情况下，你注意到了什么区别？
 
-Use $a=0.5$ and then $a=-0.5$ and study the trajectories.
+使用 $a=0.5$ 然后使用 $a=-0.5$ 并研究轨迹。
 
-Set $b=1$ throughout.
+在整个过程中设置 $b=1$。
+
 ```
 
 ```{solution-start} sd_ex1
 :class: dropdown
 ```
 
-We will start with the case $a=0.5$.
-
-Let's set up the model and plotting region:
+我们将从 $a=0.5$ 的情况开始。
+让我们设置模型和绘图区域：
 
 ```{code-cell} ipython
 a, b = 0.5, 1
@@ -578,23 +530,22 @@ xmin, xmax = -1, 3
 g = lambda x: a * x + b
 ```
 
-Now let's plot a trajectory:
+现在让我们来绘制轨迹：
 
 ```{code-cell} ipython
 x0 = -0.5
 plot45(g, xmin, xmax, x0, num_arrows=5)
 ```
 
-Here is the corresponding time series, which converges towards the steady
-state.
+这是相应的时间序列，它收敛于稳态。
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, x0, ts_length=10)
 ```
 
-Now let's try $a=-0.5$ and see what differences we observe.
+现在让我们尝试 $a=-0.5$ 并观察有什么不同。
 
-Let's set up the model and plotting region:
+让我们设置模型和绘图区域：
 
 ```{code-cell} ipython
 a, b = -0.5, 1
@@ -602,27 +553,23 @@ xmin, xmax = -1, 3
 g = lambda x: a * x + b
 ```
 
-Now let's plot a trajectory:
+现在让我们来绘制轨迹：
 
 ```{code-cell} ipython
 x0 = -0.5
 plot45(g, xmin, xmax, x0, num_arrows=5)
 ```
-
-Here is the corresponding time series, which converges towards the steady
-state.
+这是相应的时间序列，它收敛于稳态。
 
 ```{code-cell} ipython
 ts_plot(g, xmin, xmax, x0, ts_length=10)
 ```
 
-Once again, we have convergence to the steady state but the nature of
-convergence differs.
+我们再次观察到收敛于稳态的情况，但收敛的性质有所不同。
 
-In particular, the time series jumps from above the steady state to below it
-and back again.
+特别是，时间序列在稳态上方和下方来回跳跃。
 
-In the current context, the series is said to exhibit **damped oscillations**.
+在当前的语境中，这个序列被称为呈现**阻尼振荡**。
 
 ```{solution-end}
 ```
