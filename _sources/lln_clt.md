@@ -36,6 +36,7 @@ import matplotlib as mpl
 import numpy as np
 import scipy.stats as st
 
+import matplotlib as mpl
 FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
@@ -461,9 +462,9 @@ ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 xgrid = np.linspace(xmin, xmax, 200)
 ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 
-        'k-', lw=2, label='N(0, \sigma^2)')
+        'k-', lw=2, label=r'$N(0, \sigma^2)$')
 ax.set_xlabel(r"$Y_n$", size=12)
-ax.set_ylabel(r"$密度$", size=12)
+ax.set_ylabel("密度", size=12)
 
 ax.legend()
 

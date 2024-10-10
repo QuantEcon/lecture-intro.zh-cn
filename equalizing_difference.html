@@ -262,6 +262,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -366,18 +370,18 @@ w_0^h A_h  = \phi w_0^h A_c - D .
 c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\pi \in (0,1)\)</span> 是企业家的”项目”成功的概率。</p>
-<p>对于我们的工人和企业模型，我们将把 <span class="math notranslate nohighlight">\(D\)</span> 解释为成为企业家的成本。
-这个成本可能包括雇佣工人、办公空间和律师的费用。
-我们过去称之为大学、高中工资差距的 <span class="math notranslate nohighlight">\(\phi\)</span> 现在变成了
-成功企业家收入与工人收入的比率。
-我们会发现，随着 <span class="math notranslate nohighlight">\(\pi\)</span> 的减少，<span class="math notranslate nohighlight">\(\phi\)</span> 会增加，这表明
+<p>对于我们的工人和企业模型，我们将把 <span class="math notranslate nohighlight">\(D\)</span> 解释为成为企业家的成本。</p>
+<p>这个成本可能包括雇佣工人、办公空间和律师的费用。</p>
+<p>我们过去称之为大学、高中工资差距的 <span class="math notranslate nohighlight">\(\phi\)</span> 现在变成了
+成功企业家收入与工人收入的比率。</p>
+<p>我们会发现，随着 <span class="math notranslate nohighlight">\(\pi\)</span> 的减少，<span class="math notranslate nohighlight">\(\phi\)</span> 会增加，这表明
 成为企业家的风险越大，成功项目的回报就必须越高。</p>
 </section>
 <section id="id11">
 <h2><span class="section-number">13.4. </span>计算<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <p>我们可以通过调整各种参数来做一些有趣的例子，
-主要包括 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>。
-现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并将其作为某些决定因素的函数进行绘图。</p>
+主要包括 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>。</p>
+<p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并将其作为某些决定因素的函数进行绘图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">equalizing_diff</span><span class="p">:</span>
@@ -407,9 +411,9 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>我们使用向量化而不是循环来构建一些函数，以帮助进行比较静态分析。
-对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。
-让我们举个例子。</p>
+<p>我们使用向量化而不是循环来构建一些函数，以帮助进行比较静态分析。</p>
+<p>对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>让我们举个例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ϕ_R</span>
@@ -466,8 +470,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>让我们设想不收取大学学费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。
-初始的大学工资溢价应该会降低。</p>
+<p>让我们设想不收取大学学费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>初始的大学工资溢价应该会降低。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 免费大学</span>
@@ -483,8 +487,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>让我们构建一些图表，展示如果初始大学-高中工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 的某个决定因素发生变化，<span class="math notranslate nohighlight">\(\phi\)</span> 将如何改变。
-我们先从总利率 <span class="math notranslate nohighlight">\(R\)</span> 开始。</p>
+<p>让我们构建一些图表，展示如果初始大学-高中工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 的某个决定因素发生变化，<span class="math notranslate nohighlight">\(\phi\)</span> 将如何改变。</p>
+<p>我们先从总利率 <span class="math notranslate nohighlight">\(R\)</span> 开始。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
@@ -496,23 +500,13 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24037 (\N{CJK UNIFIED IDEOGRAPH-5DE5}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36164 (\N{CJK UNIFIED IDEOGRAPH-8D44}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36317 (\N{CJK UNIFIED IDEOGRAPH-8DDD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/07774e69f419342242e099b4c1c966b09d4ff82aeecd01f6fea7ab7a5fc17b80.png"><img alt="_images/07774e69f419342242e099b4c1c966b09d4ff82aeecd01f6fea7ab7a5fc17b80.png" src="_images/07774e69f419342242e099b4c1c966b09d4ff82aeecd01f6fea7ab7a5fc17b80.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9e4a0cc8ccdb1fe6b3ab7238b3d269bb9b7dafe34350e915d3f389f05875b0f7.png"><img alt="_images/9e4a0cc8ccdb1fe6b3ab7238b3d269bb9b7dafe34350e915d3f389f05875b0f7.png" src="_images/9e4a0cc8ccdb1fe6b3ab7238b3d269bb9b7dafe34350e915d3f389f05875b0f7.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。
-工资差距下降是为了”平衡”两种职业类型的现值，一种是高中工人，另一种是大学工人。
-你能猜到当我们接下来改变高中工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？同时保持 <span class="math notranslate nohighlight">\(\phi\)</span> 的所有其他决定因素不变。
-下图显示了会发生什么。</p>
+<p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。</p>
+<p>工资差距下降是为了”平衡”两种职业类型的现值，一种是高中工人，另一种是大学工人。</p>
+<p>你能猜到当我们接下来改变高中工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？同时保持 <span class="math notranslate nohighlight">\(\phi\)</span> 的所有其他决定因素不变。</p>
+<p>下图显示了会发生什么。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γh_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
@@ -524,14 +518,14 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e9739100205360933b52a124dbe3ff12dc77b8c5529f824dd7886a1a0dbd99fb.png"><img alt="_images/e9739100205360933b52a124dbe3ff12dc77b8c5529f824dd7886a1a0dbd99fb.png" src="_images/e9739100205360933b52a124dbe3ff12dc77b8c5529f824dd7886a1a0dbd99fb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/61bdcd34c2a4397001977a4f4f6a2e0e9acc31f311408cd4f5de734b0d1c2aa6.png"><img alt="_images/61bdcd34c2a4397001977a4f4f6a2e0e9acc31f311408cd4f5de734b0d1c2aa6.png" src="_images/61bdcd34c2a4397001977a4f4f6a2e0e9acc31f311408cd4f5de734b0d1c2aa6.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id12">
 <h2><span class="section-number">13.5. </span>企业家-工人解释<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
-<p>现在让我们采用我们模型的企业家-工人解释。
-如果一个新企业成功的概率是 <span class="math notranslate nohighlight">\(0.2\)</span>，让我们计算成功企业家的初始工资溢价。</p>
+<p>现在让我们采用我们模型的企业家-工人解释。</p>
+<p>如果一个新企业成功的概率是 <span class="math notranslate nohighlight">\(0.2\)</span>，让我们计算成功企业家的初始工资溢价。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 企业家模型</span>
@@ -560,20 +554,20 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/615c7b8bc5189a7a0ea14b65d686bc3a12b76f1914fba05a3286e3ce021e054c.png"><img alt="_images/615c7b8bc5189a7a0ea14b65d686bc3a12b76f1914fba05a3286e3ce021e054c.png" src="_images/615c7b8bc5189a7a0ea14b65d686bc3a12b76f1914fba05a3286e3ce021e054c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6e4513ddda716d3f28017b98ce6dcd1c05e28c1ea448f3cdbe85ffc4c4620451.png"><img alt="_images/6e4513ddda716d3f28017b98ce6dcd1c05e28c1ea448f3cdbe85ffc4c4620451.png" src="_images/6e4513ddda716d3f28017b98ce6dcd1c05e28c1ea448f3cdbe85ffc4c4620451.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>这个图表对你来说有意义吗？</p>
+<p>这个图表是不是符合你的猜想呢？</p>
 </section>
 <section id="id13">
 <h2><span class="section-number">13.6. </span>微积分的应用<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
-<p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。
-然而，懂得微积分的人可能会希望我们直接求偏导数。
-现在我们就来做这个。
-不懂微积分的读者可以不用继续往下读，可以确信应用线性代数已经让我们了解了模型的主要特性。
-但对于那些有兴趣了解我们如何让 Python 完成计算偏导数的所有繁重工作的读者，我们现在会说一些相关的内容。
-我们将使用 Python 模块 ‘sympy’ 来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 对决定它的参数的偏导数。
-让我们从 sympy 导入关键函数。</p>
+<p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。</p>
+<p>然而，懂得微积分的人可能会希望我们直接求偏导数。</p>
+<p>现在我们就来做这个。</p>
+<p>不懂微积分的读者可以不用继续往下读，可以确信应用线性代数已经让我们了解了模型的主要特性。</p>
+<p>但对于那些有兴趣了解我们如何让 Python 完成计算偏导数的所有繁重工作的读者，我们现在会说一些相关的内容。</p>
+<p>我们将使用 Python 模块 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 对决定它的参数的偏导数。</p>
+<p>让我们从 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 导入关键函数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
@@ -647,7 +641,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span>然后测量其在默认值的值</p>
+<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> 然后测量其在默认值的值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_D</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -700,8 +694,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 \[\displaystyle -0.00973478032996598\]</div>
 </div>
 </div>
-<p>我们发现提高 <span class="math notranslate nohighlight">\(T\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>。
-这是因为大学毕业生现在有更长的职业生涯来”收回”他们为上大学付出的时间和其他成本。</p>
+<p>我们发现提高 <span class="math notranslate nohighlight">\(T\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>这是因为大学毕业生现在有更长的职业生涯来”收回”他们为上大学付出的时间和其他成本。</p>
 <p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_h}\)</span> 并在默认参数下评估它。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1005,17 +999,17 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1027,22 +1021,22 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1054,22 +1048,22 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1081,12 +1075,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1098,22 +1092,22 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1125,12 +1119,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1142,12 +1136,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1159,17 +1153,17 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

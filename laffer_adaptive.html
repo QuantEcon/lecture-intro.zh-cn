@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>32. 拉弗曲线与自适应预期 &#8212; Python数量经济学入门</title>
+    <title>31. 拉弗曲线与自适应预期 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="33. AR(1) 过程" href="ar1_processes.html" />
-    <link rel="prev" title="31. 通货膨胀税拉弗曲线" href="money_inflation_nonlinear.html" />
+    <link rel="next" title="32. AR(1) 过程" href="ar1_processes.html" />
+    <link rel="prev" title="30. 通货膨胀税拉弗曲线" href="money_inflation_nonlinear.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -172,17 +172,17 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">32.1. 概览</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">32.2. 模型</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">32.3. 计算平衡序列</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">32.4. 声明或猜想</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">32.5. 通货膨胀率的限制值</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">32.6. 稳态拉弗曲线</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">32.7. 相关的初始价格水平</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">32.7.1. 验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">31.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">31.2. 模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">31.3. 计算平衡序列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">31.4. 声明或猜想</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">31.5. 通货膨胀率的限制值</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">31.6. 稳态拉弗曲线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">31.7. 相关的初始价格水平</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">31.7.1. 验证</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">32.8. 动态拉弗曲线的滑动侧面</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">31.8. 动态拉弗曲线的滑动侧面</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -242,9 +242,9 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">32. </span>拉弗曲线与自适应预期<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">31. </span>拉弗曲线与自适应预期<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">32.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>本讲座研究了在通货膨胀税率下的静态和动态<strong>拉弗曲线</strong>，其采用的模型为此讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中研究的非线性版本。</p>
 <p>与讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中一样，此讲座使用了<span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中使用的线性需求函数。</p>
 <p>但现在，我们将不采用’‘理性预期’‘的’‘完全预见’‘形式，而是采用<span id="id4">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id183" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span>使用的’‘自适应预期’’假设。</p>
@@ -253,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
 \[
 \pi_t^* = p_{t+1} - p_t
 \]</div>
-<p>我们在讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税拉弗曲线</span></a>中采用的假设，现在我们假设<span class="math notranslate nohighlight">\(\pi_t^*\)</span>由下面报告的自适应预期假设<a class="reference internal" href="#equation-eq-adaptex">(32.4)</a>决定。</p>
+<p>我们在讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税拉弗曲线</span></a>中采用的假设，现在我们假设<span class="math notranslate nohighlight">\(\pi_t^*\)</span>由下面报告的自适应预期假设<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>决定。</p>
 <p>我们将发现，以这种方式改变关于预期形成的假设会改变我们的一些发现并保持其他发现不变。特别是，我们将发现</p>
 <ul class="simple">
 <li><p>用自适应预期替换理性预期不改变两个静态通货膨胀率，但是<span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
@@ -262,7 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p>这些更合理的比较动态是建立在“老式信仰”上的，即“通货膨胀总是且处处由政府赤字引起”。</p>
 <p><span id="id6">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span>研究了这些问题。</p>
-<p>他们的目的是通过放弃理性预期，而假设人们根据下面描述的“自适应预期”方案<a class="reference internal" href="#equation-eq-adaptex">(32.4)</a>来形成对未来通货膨胀率的预期，从而逆转他们认为在理性预期（即在这种情况下的完全预见）下模型的违反直觉的预测。</p>
+<p>他们的目的是通过放弃理性预期，而假设人们根据下面描述的“自适应预期”方案<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>来形成对未来通货膨胀率的预期，从而逆转他们认为在理性预期（即在这种情况下的完全预见）下模型的违反直觉的预测。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>{sargeant1989least} 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
@@ -270,7 +270,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </section>
 <section id="id7">
-<h2><span class="section-number">32.2. </span>模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.2. </span>模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>设</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m_t\)</span> 为时间 <span class="math notranslate nohighlight">\(t\)</span> 初始的货币供应量对数</p></li>
@@ -279,47 +279,47 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p>货币供应量的动态方程是</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-msupply">
-<span class="eqno">(32.1)<a class="headerlink" href="#equation-eq-ada-msupply" title="Permalink to this equation">#</a></span>\[ 
+<span class="eqno">(31.1)<a class="headerlink" href="#equation-eq-ada-msupply" title="Permalink to this equation">#</a></span>\[ 
 \exp(m_{t+1}) - \exp(m_t) = g \exp(p_t) 
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(g\)</span> 是政府支出中通过印制货币来融资的部分。</p>
-<p>注意方程 <a class="reference internal" href="#equation-eq-ada-msupply">(32.1)</a> 暗示</p>
+<p>注意方程 <a class="reference internal" href="#equation-eq-ada-msupply">(31.1)</a> 暗示</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-msupply2">
-<span class="eqno">(32.2)<a class="headerlink" href="#equation-eq-ada-msupply2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.2)<a class="headerlink" href="#equation-eq-ada-msupply2" title="Permalink to this equation">#</a></span>\[
 m_{t+1} = \log[ \exp(m_t) + g \exp(p_t)]
 \]</div>
 <p>货币需求函数是</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-mdemand">
-<span class="eqno">(32.3)<a class="headerlink" href="#equation-eq-ada-mdemand" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.3)<a class="headerlink" href="#equation-eq-ada-mdemand" title="Permalink to this equation">#</a></span>\[
 m_{t+1} - p_t = -\alpha \pi_t^* 
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>。</p>
 <p>通胀预期受控于</p>
 <div class="math notranslate nohighlight" id="equation-eq-adaptex">
-<span class="eqno">(32.4)<a class="headerlink" href="#equation-eq-adaptex" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.4)<a class="headerlink" href="#equation-eq-adaptex" title="Permalink to this equation">#</a></span>\[
 \pi_{t}^* = (1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span></p>
 </section>
 <section id="id8">
-<h2><span class="section-number">32.3. </span>计算平衡序列<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
-<p>通过将<a class="reference internal" href="#equation-eq-ada-mdemand">(32.3)</a> 和 <a class="reference internal" href="#equation-eq-ada-msupply2">(32.2)</a> 提供的 <span class="math notranslate nohighlight">\(m_{t+1}\)</span> 表达式与使用方程 <a class="reference internal" href="#equation-eq-adaptex">(32.4)</a> 消除 <span class="math notranslate nohighlight">\(\pi_t^*\)</span>，得到下列 <span class="math notranslate nohighlight">\(p_t\)</span> 的方程：</p>
+<h2><span class="section-number">31.3. </span>计算平衡序列<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>通过将<a class="reference internal" href="#equation-eq-ada-mdemand">(31.3)</a> 和 <a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a> 提供的 <span class="math notranslate nohighlight">\(m_{t+1}\)</span> 表达式与使用方程 <a class="reference internal" href="#equation-eq-adaptex">(31.4)</a> 消除 <span class="math notranslate nohighlight">\(\pi_t^*\)</span>，得到下列 <span class="math notranslate nohighlight">\(p_t\)</span> 的方程：</p>
 <div class="math notranslate nohighlight" id="equation-eq-pequation">
-<span class="eqno">(32.5)<a class="headerlink" href="#equation-eq-pequation" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.5)<a class="headerlink" href="#equation-eq-pequation" title="Permalink to this equation">#</a></span>\[
 \log[ \exp(m_t) + g \exp(p_t)] - p_t = -\alpha [(1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*]
 \]</div>
 <p><strong>伪代码</strong></p>
 <p>这是我们算法的伪代码。</p>
 <p>从时间 <span class="math notranslate nohighlight">\(0\)</span> 开始，初始条件为 <span class="math notranslate nohighlight">\((m_0, \pi_{-1}^*, p_{-1})\)</span>，对于每个 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 按顺序执行以下步骤：</p>
 <ul class="simple">
-<li><p>解方程 <a class="reference internal" href="#equation-eq-pequation">(32.5)</a> 以求得 <span class="math notranslate nohighlight">\(p_t\)</span></p></li>
-<li><p>解方程 <a class="reference internal" href="#equation-eq-adaptex">(32.4)</a> 以求得 <span class="math notranslate nohighlight">\(\pi_t^*\)</span></p></li>
-<li><p>解方程 <a class="reference internal" href="#equation-eq-ada-msupply2">(32.2)</a> 以求得 <span class="math notranslate nohighlight">\(m_{t+1}\)</span></p></li>
+<li><p>解方程 <a class="reference internal" href="#equation-eq-pequation">(31.5)</a> 以求得 <span class="math notranslate nohighlight">\(p_t\)</span></p></li>
+<li><p>解方程 <a class="reference internal" href="#equation-eq-adaptex">(31.4)</a> 以求得 <span class="math notranslate nohighlight">\(\pi_t^*\)</span></p></li>
+<li><p>解方程 <a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a> 以求得 <span class="math notranslate nohighlight">\(m_{t+1}\)</span></p></li>
 </ul>
 <p>这完成了算法。</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">32.4. </span>声明或猜想<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.4. </span>声明或猜想<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <p>结果表明：</p>
 <ul class="simple">
 <li><p>如果存在，限制值 <span class="math notranslate nohighlight">\(\overline \pi\)</span> 和 <span class="math notranslate nohighlight">\(\overline \mu\)</span> 将是相等的</p></li>
@@ -334,7 +334,7 @@ m_{t+1} - p_t = -\alpha \pi_t^*
 </ul>
 </section>
 <section id="id10">
-<h2><span class="section-number">32.5. </span>通货膨胀率的限制值<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.5. </span>通货膨胀率的限制值<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <p>正如我们在早前的讲座 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税拉弗曲线</span></a> 中讨论的，我们可以通过研究稳态劳动曲线来计算 <span class="math notranslate nohighlight">\(\bar \pi\)</span> 的两个潜在的限制值。</p>
 <p>因此，在一个<strong>稳态</strong>中</p>
 <div class="math notranslate nohighlight">
@@ -344,18 +344,18 @@ m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 <p>其中 <span class="math notranslate nohighlight">\(x &gt; 0\)</span> 是货币供应量和价格水平的对数的共同增长率。</p>
 <p>几行代数可以得出满足 <span class="math notranslate nohighlight">\(x\)</span> 的以下方程</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-steadypi">
-<span class="eqno">(32.6)<a class="headerlink" href="#equation-eq-ada-steadypi" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.6)<a class="headerlink" href="#equation-eq-ada-steadypi" title="Permalink to this equation">#</a></span>\[
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
 \]</div>
 <p>我们要求</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-revmax">
-<span class="eqno">(32.7)<a class="headerlink" href="#equation-eq-ada-revmax" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(31.7)<a class="headerlink" href="#equation-eq-ada-revmax" title="Permalink to this equation">#</a></span>\[
 g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,  
 \]</div>
 <p>这样就可以通过印钞来财务支持 <span class="math notranslate nohighlight">\(g\)</span>。</p>
-<p><a class="reference internal" href="#equation-eq-ada-steadypi">(32.6)</a> 的左侧是通过印钞筹集的稳定状态收入。</p>
-<p><a class="reference internal" href="#equation-eq-ada-steadypi">(32.6)</a> 的右侧是政府通过印钞筹集的 <span class="math notranslate nohighlight">\(t\)</span> 时刻的商品数量。</p>
-<p>很快我们将绘制方程 <a class="reference internal" href="#equation-eq-ada-steadypi">(32.6)</a> 的左右两侧。</p>
+<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的左侧是通过印钞筹集的稳定状态收入。</p>
+<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的右侧是政府通过印钞筹集的 <span class="math notranslate nohighlight">\(t\)</span> 时刻的商品数量。</p>
+<p>很快我们将绘制方程 <a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的左右两侧。</p>
 <p>但首先，我们将编写代码来计算稳态的
 <span class="math notranslate nohighlight">\(\bar \pi\)</span>。</p>
 <p>让我们开始导入一些库</p>
@@ -423,7 +423,7 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 <p>我们找到了两个稳态 <span class="math notranslate nohighlight">\(\bar \pi\)</span> 值。</p>
 </section>
 <section id="id11">
-<h2><span class="section-number">32.6. </span>稳态拉弗曲线<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.6. </span>稳态拉弗曲线<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <p>下图绘制了稳态拉弗曲线以及两个稳定的通货膨胀率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -464,14 +464,14 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 <figure class="align-default" id="laffer-curve-adaptive">
 <a class="reference internal image-reference" href="_images/e01c8ccad23a10bac06943f92bf61a825456db1971f63a2996c17d0a715f290c.png"><img alt="_images/e01c8ccad23a10bac06943f92bf61a825456db1971f63a2996c17d0a715f290c.png" src="_images/e01c8ccad23a10bac06943f92bf61a825456db1971f63a2996c17d0a715f290c.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32.1 </span><span class="caption-text">稳态通胀下的铸币税函数。虚线棕色线条代表<span class="math notranslate nohighlight">\(\pi_l\)</span>和<span class="math notranslate nohighlight">\(\pi_u\)</span>。</span><a class="headerlink" href="#laffer-curve-adaptive" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.1 </span><span class="caption-text">稳态通胀下的铸币税函数。虚线棕色线条代表<span class="math notranslate nohighlight">\(\pi_l\)</span>和<span class="math notranslate nohighlight">\(\pi_u\)</span>。</span><a class="headerlink" href="#laffer-curve-adaptive" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="id12">
-<h2><span class="section-number">32.7. </span>相关的初始价格水平<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.7. </span>相关的初始价格水平<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <p>现在我们掌握了两个可能的稳定状态，我们可以计算两个初始对数价格水平 <span class="math notranslate nohighlight">\(p_{-1}\)</span>，作为初始条件，这意味着对于所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(\pi_t = \bar \pi\)</span>。</p>
 <p>特别是，为了启动动态劳弗曲线动态的固定点，我们设置</p>
 <div class="math notranslate nohighlight">
@@ -497,7 +497,7 @@ p_{-1} = m_0 + \alpha \pi^*
 </div>
 </div>
 <section id="id13">
-<h3><span class="section-number">32.7.1. </span>验证<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.7.1. </span>验证<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
 <p>首先，我们编写一些代码来验证，如果我们适当初始化 <span class="math notranslate nohighlight">\(\pi_{-1}^*,p_{-1}\)</span>，则通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 对于所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 将保持恒定（取决于初始条件，可以是 <span class="math notranslate nohighlight">\(\pi_u\)</span> 或 <span class="math notranslate nohighlight">\(\pi_l\)</span>）</p>
 <p>以下代码进行了验证。</p>
 <div class="cell docutils container">
@@ -586,7 +586,7 @@ eq_g == g: True
 </section>
 </section>
 <section id="id14">
-<h2><span class="section-number">32.8. </span>动态拉弗曲线的滑动侧面<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.8. </span>动态拉弗曲线的滑动侧面<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
 <p>我们现在已经具备了从不同的 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 设置开始计算时间序列的能力，类似于这个讲座中的设置 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 和这个讲座 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税拉弗曲线</span></a>。</p>
 <p>现在我们将研究当我们从动态拉弗曲线的一个静止点开始 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span>，即远离 <span class="math notranslate nohighlight">\(\pi_u\)</span> 或 <span class="math notranslate nohighlight">\( \pi_l\)</span> 时，结果如何展开。</p>
 <p>为了构建一个扰动对 <span class="math notranslate nohighlight">\(\check p_{-1}, \check \pi_{-1}^*\)</span>，我们将实现以下伪代码：</p>
@@ -655,7 +655,7 @@ eq_g == g: True
 <figure class="align-default" id="pi0-path">
 <a class="reference internal image-reference" href="_images/998f0c0f1c27ed794222e90d5c90e51d05a40d50497a4c4970e9228bd6602d53.png"><img alt="_images/998f0c0f1c27ed794222e90d5c90e51d05a40d50497a4c4970e9228bd6602d53.png" src="_images/998f0c0f1c27ed794222e90d5c90e51d05a40d50497a4c4970e9228bd6602d53.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32.2 </span><span class="caption-text">从不同的 <span class="math notranslate nohighlight">\(\pi_0\)</span> 初始值开始，<span class="math notranslate nohighlight">\(m_t\)</span> 的路径（顶部面板，<span class="math notranslate nohighlight">\(m\)</span> 的对数标度），<span class="math notranslate nohighlight">\(p_t\)</span>（第二面板，<span class="math notranslate nohighlight">\(p\)</span> 的对数标度），<span class="math notranslate nohighlight">\(\pi_t\)</span>（第三面板），和 <span class="math notranslate nohighlight">\(\mu_t\)</span>（底部面板）</span><a class="headerlink" href="#pi0-path" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31.2 </span><span class="caption-text">从不同的 <span class="math notranslate nohighlight">\(\pi_0\)</span> 初始值开始，<span class="math notranslate nohighlight">\(m_t\)</span> 的路径（顶部面板，<span class="math notranslate nohighlight">\(m\)</span> 的对数标度），<span class="math notranslate nohighlight">\(p_t\)</span>（第二面板，<span class="math notranslate nohighlight">\(p\)</span> 的对数标度），<span class="math notranslate nohighlight">\(\pi_t\)</span>（第三面板），和 <span class="math notranslate nohighlight">\(\mu_t\)</span>（底部面板）</span><a class="headerlink" href="#pi0-path" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -882,17 +882,17 @@ eq_g == g: True
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -904,22 +904,22 @@ eq_g == g: True
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -931,22 +931,22 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -958,12 +958,12 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -975,22 +975,22 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1002,12 +1002,12 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1019,12 +1019,12 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1036,17 +1036,17 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

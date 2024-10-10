@@ -1008,7 +1008,7 @@ $$
 
 收入分配也是如此。
 
-例如，收入分配尾部的厚重程度有助于决定{doc}`how much revenue a given tax policy will raise <mle>`。
+例如，收入分配尾部的厚重程度有助于决定{doc}`税收政策 <mle>`。
 
 (cltail)=
 ## 分类尾部特性

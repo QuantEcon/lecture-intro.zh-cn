@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>35. 马尔科夫链：不可约性与遍历性 &#8212; Python数量经济学入门</title>
+    <title>34. 马尔科夫链：不可约性与遍历性 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="36. 用矩阵代数表示的单变量时间序列" href="time_series_with_matrices.html" />
-    <link rel="prev" title="34. 马尔科夫链：基本概念" href="markov_chains_I.html" />
+    <link rel="next" title="35. 用矩阵代数表示的单变量时间序列" href="time_series_with_matrices.html" />
+    <link rel="prev" title="33. 马尔科夫链：基本概念" href="markov_chains_I.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -172,19 +172,19 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">35.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-irreducible">35.2. 不可约性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">35.2.1. 不可约性与平稳性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">34.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-irreducible">34.2. 不可约性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">34.2.1. 不可约性与平稳性</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">35.3. 遍历性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg1-2">35.3.1. 示例：遍历性与失业</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ergo">35.3.2. 示例：汉密尔顿动力学</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">35.3.3. 示例：一个周期链</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">35.3.4. 示例：政治制度</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">34.3. 遍历性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg1-2">34.3.1. 示例：遍历性与失业</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ergo">34.3.2. 示例：汉密尔顿动力学</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">34.3.3. 示例：一个周期链</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">34.3.4. 示例：政治制度</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">35.4. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">34.4. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">35. </span>马尔科夫链：不可约性与遍历性<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">34. </span>马尔科夫链：不可约性与遍历性<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p id="index-0">除了 Anaconda 中的库外，这个讲座还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -259,15 +259,15 @@ const thebe_selector_output = ".output, .cell_output"
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
-Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.32.2)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
 Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.6.2)
@@ -278,7 +278,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </details>
 </div>
 <section id="id2">
-<h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>本讲座是我们<a class="reference internal" href="markov_chains_I.html"><span class="doc">早期关于马尔科夫链的讲座</span></a>的延续。</p>
 <p>具体来说，我们将介绍不可约性和遍历性的概念，并了解它们与平稳性的联系。</p>
 <p>不可约性描述了马尔科夫链在系统中移动任意两个状态之间的能力。</p>
@@ -295,13 +295,18 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="mc-irreducible">
-<span id="id3"></span><h2><span class="section-number">35.2. </span>不可约性<a class="headerlink" href="#mc-irreducible" title="Permalink to this heading">#</a></h2>
+<span id="id3"></span><h2><span class="section-number">34.2. </span>不可约性<a class="headerlink" href="#mc-irreducible" title="Permalink to this heading">#</a></h2>
 <p>为了解释不可约性，让我们设 <span class="math notranslate nohighlight">\(P\)</span> 为一个固定的随机矩阵。</p>
 <p>如果对于某个整数 <span class="math notranslate nohighlight">\(t\ge 0\)</span>，<span class="math notranslate nohighlight">\(P^t(x,y)&gt;0\)</span>，则称状态 <span class="math notranslate nohighlight">\(x\)</span> 对状态 <span class="math notranslate nohighlight">\(y\)</span> 是<strong>可达的</strong>。</p>
 <p>当状态 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 彼此可达时，称它们<strong>相互沟通</strong>。</p>
@@ -312,12 +317,11 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </ul>
 <p>如果所有状态都相互沟通，则称随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 是<strong>不可约的</strong>，即对于所有 <span class="math notranslate nohighlight">\((x, y)\)</span> 在 <span class="math notranslate nohighlight">\(S \times S\)</span> 中，<span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 相互沟通。</p>
 <div class="proof example admonition" id="mc2_ex_ir">
-<p class="admonition-title"><span class="caption-number">Example 35.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 34.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>例如，考虑以下一组虚构家庭的财富转移概率。</p>
 <img alt="_images/Irre_1.png" class="align-center" id="mc-irre1" src="_images/Irre_1.png" />
-</section>
-</div><p>我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。</p>
+<p>我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P :=
@@ -328,47 +332,60 @@ P :=
 \end{bmatrix} 
 \end{split}\]</div>
 <p>从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` 类来测试这一点：
+</section>
+</div><p>我们还可以使用 <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 的 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> 类来测试这一点：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]]</span>
 
-```{code-cell} ipython3
-P = [[0.9, 0.1, 0.0],
-     [0.4, 0.4, 0.2],
-     [0.1, 0.1, 0.8]]
-
-mc = qe.MarkovChain(P, (&#39;poor&#39;, &#39;middle&#39;, &#39;rich&#39;))
-mc.is_irreducible
+<span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;poor&#39;</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="s1">&#39;rich&#39;</span><span class="p">))</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">is_irreducible</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <div class="proof example admonition" id="mc2_ex_pf">
-<p class="admonition-title"><span class="caption-number">Example 35.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 34.2 </span></p>
 <section class="example-content" id="proof-content">
 <p>这是一个更加悲观的情景，贫困者永远保持贫困。</p>
 <img alt="_images/Irre_2.png" class="align-center" id="mc-irre2" src="_images/Irre_2.png" />
+<p>这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。</p>
 </section>
-</div><p>这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-让我们确认这一点：
+</div><p>让我们确认这一点：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]]</span>
 
-```{code-cell} ipython3
-P = [[1.0, 0.0, 0.0],
-     [0.1, 0.8, 0.1],
-     [0.0, 0.2, 0.8]]
-
-mc = qe.MarkovChain(P, (&#39;poor&#39;, &#39;middle&#39;, &#39;rich&#39;))
-mc.is_irreducible
+<span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;poor&#39;</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="s1">&#39;rich&#39;</span><span class="p">))</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">is_irreducible</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
 </div>
 <p>你可能已经明白，不可约性在长期结果中非常重要。</p>
 <p>例如，在第二个图中，贫困是一种终身的困境，但在第一个图中不是。</p>
 <p>我们稍后会回到这个问题。</p>
 <section id="id4">
-<h3><span class="section-number">35.2.1. </span>不可约性与平稳性<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.2.1. </span>不可约性与平稳性<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>我们在之前的讲座 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中讨论了平稳分布的唯一性。</p>
 <p>我们<a class="reference internal" href="markov_chains_I.html#mc_po_conv_thm">指出</a>，当转移矩阵处处为正时，唯一性成立。</p>
 <p>事实上，不可约性就足够了：</p>
 <div class="proof theorem admonition" id="mc_conv_thm">
-<p class="admonition-title"><span class="caption-number">Theorem 35.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 34.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果 <span class="math notranslate nohighlight">\(P\)</span> 是不可约的，那么 <span class="math notranslate nohighlight">\(P\)</span> 只有一个平稳分布。</p>
 </section>
@@ -376,14 +393,14 @@ mc.is_irreducible
 </section>
 </section>
 <section id="ergodicity">
-<span id="id7"></span><h2><span class="section-number">35.3. </span>遍历性<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
+<span id="id7"></span><h2><span class="section-number">34.3. </span>遍历性<a class="headerlink" href="#ergodicity" title="Permalink to this heading">#</a></h2>
 <p>在不可约性下，还可以得到另一个重要结果：</p>
 <div class="proof theorem admonition" id="stationary">
-<p class="admonition-title"><span class="caption-number">Theorem 35.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 34.2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果 <span class="math notranslate nohighlight">\(P\)</span> 是不可约的，并且 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是唯一的平稳分布，那么对于所有 <span class="math notranslate nohighlight">\(x \in S\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-llnfmc0">
-<span class="eqno">(35.1)<a class="headerlink" href="#equation-llnfmc0" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = x\}  \to \psi^*(x)
+<span class="eqno">(34.1)<a class="headerlink" href="#equation-llnfmc0" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = x\}  \to \psi^*(x)
     \quad \text{当 } m \to \infty\]</div>
 </section>
 </div><p>这里</p>
@@ -391,14 +408,14 @@ mc.is_irreducible
 <li><p><span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是具有随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 和初始分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 的马尔科夫链。</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb{1} \{X_t = x\} = 1\)</span> 当且仅当 <span class="math notranslate nohighlight">\(X_t = x\)</span>，否则为0。</p></li>
 </ul>
-<p>定理<a class="reference internal" href="#equation-llnfmc0">(35.1)</a>中的结果有时称为<strong>遍历性</strong>。</p>
+<p>定理<a class="reference internal" href="#equation-llnfmc0">(34.1)</a>中的结果有时称为<strong>遍历性</strong>。</p>
 <p>该定理告诉我们，随着时间趋于无穷大，链花费在状态 <span class="math notranslate nohighlight">\(x\)</span> 的时间比例收敛到 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>。</p>
 <p id="new-interp-sd">这为我们提供了另一种解释平稳分布的方法（假设不可约性成立）。</p>
 <p>重要的是，这一结果对于任何 <span class="math notranslate nohighlight">\(\psi_0\)</span> 都有效。</p>
 <p>该定理与<a class="reference internal" href="lln_clt.html"><span class="doc">大数定律</span></a>相关。</p>
 <p>它告诉我们，在某些设置中，即使随机变量序列<a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">不是独立同分布</span></a>，大数定律有时也成立。</p>
 <section id="mc-eg1-2">
-<span id="id8"></span><h3><span class="section-number">35.3.1. </span>示例：遍历性与失业<a class="headerlink" href="#mc-eg1-2" title="Permalink to this heading">#</a></h3>
+<span id="id8"></span><h3><span class="section-number">34.3.1. </span>示例：遍历性与失业<a class="headerlink" href="#mc-eg1-2" title="Permalink to this heading">#</a></h3>
 <p>回顾我们关于就业/失业模型的截面解释<a class="reference internal" href="markov_chains_I.html#mc-eg1-1"><span class="std std-ref">之前讨论过</span></a>。</p>
 <p>假设 <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>，因此不可约性成立。</p>
 <p>我们看到平稳分布是 <span class="math notranslate nohighlight">\((p, 1-p)\)</span>，其中</p>
@@ -412,7 +429,7 @@ p = \frac{\beta}{\alpha + \beta}
 <p>这是遍历性概念的一个方面。</p>
 </section>
 <section id="ergo">
-<span id="id9"></span><h3><span class="section-number">35.3.2. </span>示例：汉密尔顿动力学<a class="headerlink" href="#ergo" title="Permalink to this heading">#</a></h3>
+<span id="id9"></span><h3><span class="section-number">34.3.2. </span>示例：汉密尔顿动力学<a class="headerlink" href="#ergo" title="Permalink to this heading">#</a></h3>
 <p>另一个示例是我们<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">之前讨论过的</span></a>汉密尔顿动力学。</p>
 <p>让 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是由这些动力学生成的样本路径。</p>
 <p>令在时间段 <span class="math notranslate nohighlight">\(t=1, \ldots, n\)</span> 内花费在状态 <span class="math notranslate nohighlight">\(x\)</span> 上的时间比例为 <span class="math notranslate nohighlight">\(\hat p_n(x)\)</span>，则有</p>
@@ -450,34 +467,16 @@ p = \frac{\beta}{\alpha + \beta}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f53&#39; [U+5f53], substituting with a dummy symbol.
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/0e0045194c336db5a8481b600070a0dbbf8e2d987c1a81118983ca1fd0f51d41.png"><img alt="_images/0e0045194c336db5a8481b600070a0dbbf8e2d987c1a81118983ca1fd0f51d41.png" src="_images/0e0045194c336db5a8481b600070a0dbbf8e2d987c1a81118983ca1fd0f51d41.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/56ca7de1a136f9fe6aea2e24b1fe14ffcc62b7093456bd1a44f563c8198ca35f.png"><img alt="_images/56ca7de1a136f9fe6aea2e24b1fe14ffcc62b7093456bd1a44f563c8198ca35f.png" src="_images/56ca7de1a136f9fe6aea2e24b1fe14ffcc62b7093456bd1a44f563c8198ca35f.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>你可能想尝试将 <span class="math notranslate nohighlight">\(x=1\)</span> 改为 <span class="math notranslate nohighlight">\(x=0\)</span> 或 <span class="math notranslate nohighlight">\(x=2\)</span>。</p>
 <p>在这些情况下，遍历性都会成立。</p>
 </section>
 <section id="id10">
-<h3><span class="section-number">35.3.3. </span>示例：一个周期链<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.3.3. </span>示例：一个周期链<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
 <div class="proof example admonition" id="mc2_ex_pc">
-<p class="admonition-title"><span class="caption-number">Example 35.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 34.3 </span></p>
 <section class="example-content" id="proof-content">
 <p>让我们来看以下状态0和1的例子：</p>
 <div class="math notranslate nohighlight">
@@ -525,14 +524,14 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png"><img alt="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png" src="_images/1471e6b5bbc891a53db88f77864dd8365b96b26ab2c6a0bcfe53e8eb5a4dcb7d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9f882882b2a4289be949e3c488a51308d840bbcf11973d1df3111caa0e5b3412.png"><img alt="_images/9f882882b2a4289be949e3c488a51308d840bbcf11973d1df3111caa0e5b3412.png" src="_images/9f882882b2a4289be949e3c488a51308d840bbcf11973d1df3111caa0e5b3412.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>该示例帮助强调了渐近平稳性是关于分布的，而遍历性是关于样本路径的。</p>
 <p>在周期性链中，花费在某个状态的时间比例可以收敛到平稳分布。然而，每个状态的分布却不会收敛。</p>
 </section>
 <section id="id11">
-<h3><span class="section-number">35.3.4. </span>示例：政治制度<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">34.3.4. </span>示例：政治制度<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
 <p>让我们回到<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">前一讲中讨论的</span></a>具有六个状态的政治制度模型，并研究其遍历性。</p>
 <p>以下是转移矩阵：</p>
 <div class="math notranslate nohighlight">
@@ -580,16 +579,16 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5dc2acbd2b2b322edf83f6192e36c5c3a80031d209c48a749a58c0da800fe612.png"><img alt="_images/5dc2acbd2b2b322edf83f6192e36c5c3a80031d209c48a749a58c0da800fe612.png" src="_images/5dc2acbd2b2b322edf83f6192e36c5c3a80031d209c48a749a58c0da800fe612.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1fc6145c28c5d2fa773e6273c67960ae1c6bc26c119ced15931545ad01757a2a.png"><img alt="_images/1fc6145c28c5d2fa773e6273c67960ae1c6bc26c119ced15931545ad01757a2a.png" src="_images/1fc6145c28c5d2fa773e6273c67960ae1c6bc26c119ced15931545ad01757a2a.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
 <section id="id12">
-<h2><span class="section-number">35.4. </span>练习<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">34.4. </span>练习<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="mc_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 35.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 34.1 </span></p>
 <section id="exercise-content">
 <p>Benhabib 等人 <span id="id13">[<a class="reference internal" href="zreferences.html#id278" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">Benhabib <em>et al.</em>, 2019</a>]</span> 估计了如下的社会流动性转移矩阵：</p>
 <div class="math notranslate nohighlight">
@@ -635,7 +634,7 @@ P:=
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-6">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex1"> Exercise 35.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex1"> Exercise 34.1</a></p>
 <section id="solution-content">
 <p>第1部分：</p>
 <p>一种选择是对转移矩阵取幂。</p>
@@ -716,7 +715,7 @@ P:=
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png"><img alt="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png" src="_images/78c66cdb4803e84a2168250b91cd7275b596595694311ee1cbea93991ce6635b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c34536773e5526fc719d69df24be7aa1f78c407eff8a6063ec2fb7d06e414f5c.png"><img alt="_images/c34536773e5526fc719d69df24be7aa1f78c407eff8a6063ec2fb7d06e414f5c.png" src="_images/c34536773e5526fc719d69df24be7aa1f78c407eff8a6063ec2fb7d06e414f5c.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>注意，花费在每个状态的时间比例收敛到平稳分布为该状态分配的概率。</p>
@@ -724,7 +723,7 @@ P:=
 </div>
 <div class="exercise admonition" id="mc_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 35.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 34.2 </span></p>
 <section id="exercise-content">
 <p>根据<a class="reference internal" href="#mc-eg1-2"><span class="std std-ref">上述讨论</span></a>，如果一个工人的就业动态遵循以下随机矩阵</p>
 <div class="math notranslate nohighlight">
@@ -752,7 +751,7 @@ p := \frac{\beta}{\alpha + \beta}
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-8">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 35.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 34.2</a></p>
 <section id="solution-content">
 <p>我们将以图形方式解决此练习。</p>
 <p>图显示了 <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> 的时间序列，对于两个初始条件。</p>
@@ -786,14 +785,14 @@ p := \frac{\beta}{\alpha + \beta}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d9ac34bacff73e0ac9f7bd9af4c111fcdb1d0f72616ed94b772bf6dc3daeab5e.png"><img alt="_images/d9ac34bacff73e0ac9f7bd9af4c111fcdb1d0f72616ed94b772bf6dc3daeab5e.png" src="_images/d9ac34bacff73e0ac9f7bd9af4c111fcdb1d0f72616ed94b772bf6dc3daeab5e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7553e0dbdcb48eeb4234185817c9f4baf64bed039cf8e2bc4d2c6894deebd04f.png"><img alt="_images/7553e0dbdcb48eeb4234185817c9f4baf64bed039cf8e2bc4d2c6894deebd04f.png" src="_images/7553e0dbdcb48eeb4234185817c9f4baf64bed039cf8e2bc4d2c6894deebd04f.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </div>
 <div class="exercise admonition" id="mc_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 35.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 34.3 </span></p>
 <section id="exercise-content">
 <p>在 <code class="docutils literal notranslate"><span class="pre">quantecon</span></code> 库中，通过检查链是否形成<a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html">强连通分量</a>来测试不可约性。</p>
 <p>另一种测试不可约性的方法是通过以下陈述：</p>
@@ -804,7 +803,7 @@ p := \frac{\beta}{\alpha + \beta}
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-10">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex3"> Exercise 35.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex3"> Exercise 34.3</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1073,17 +1072,17 @@ p := \frac{\beta}{\alpha + \beta}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1095,22 +1094,22 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1122,22 +1121,22 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1149,12 +1148,12 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1166,22 +1165,22 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1193,12 +1192,12 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1210,12 +1209,12 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1227,17 +1226,17 @@ p := \frac{\beta}{\alpha + \beta}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

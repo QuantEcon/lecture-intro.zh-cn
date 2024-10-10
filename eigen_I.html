@@ -291,6 +291,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
 <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">FancyArrowPatch</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">proj3d</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -398,7 +403,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png"><img alt="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png" src="_images/ae939e5f399be91fd7a22fd06eb05c2957a66d43367e81848ce3d6cec7045348.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d4abbc47cc71ad8f43aa037bcd401fb219e1591fbee222a40401c3851100f209.png"><img alt="_images/d4abbc47cc71ad8f43aa037bcd401fb219e1591fbee222a40401c3851100f209.png" src="_images/d4abbc47cc71ad8f43aa037bcd401fb219e1591fbee222a40401c3851100f209.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>理解这种变换的一种方式是 <span class="math notranslate nohighlight">\(A\)</span></p>
@@ -456,13 +461,13 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
     <span class="c1"># ax[0].grid(True)</span>
     <span class="c1"># ax[0].axis(&quot;equal&quot;)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;点 $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
 
     <span class="c1"># 绘制变换的格点</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uvgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
     <span class="c1"># ax[1].grid(True)</span>
     <span class="c1"># ax[1].axis(&quot;equal&quot;)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $Ax_1, Ax_2, \cdots, Ax_k$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;点 $Ax_1, Ax_2, \cdots, Ax_k$&quot;</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -538,48 +543,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png"><img alt="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png" src="_images/fef4b70257808178fc9226550dd72172a7a4e64ca17728dd495b08dc8d14f148.png" style="width: 80%;" /></a>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5355&#39; [U+5355], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f4d&#39; [U+4f4d], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5706&#39; [U+5706], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21464 (\N{CJK UNIFIED IDEOGRAPH-53D8}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25442 (\N{CJK UNIFIED IDEOGRAPH-6362}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21518 (\N{CJK UNIFIED IDEOGRAPH-540E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30340 (\N{CJK UNIFIED IDEOGRAPH-7684}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22278 (\N{CJK UNIFIED IDEOGRAPH-5706}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5355&#39; [U+5355], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f4d&#39; [U+4f4d], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5706&#39; [U+5706], substituting with a dummy symbol.
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/de670c87a777413a2cb8de89653b84982d58bbcdfa23e755c0f49f398900c865.png"><img alt="_images/de670c87a777413a2cb8de89653b84982d58bbcdfa23e755c0f49f398900c865.png" src="_images/de670c87a777413a2cb8de89653b84982d58bbcdfa23e755c0f49f398900c865.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b7eb7252154689c2e1ddd511502689cdcdb54ef20ecd28afa4332d5c95c3a100.png"><img alt="_images/b7eb7252154689c2e1ddd511502689cdcdb54ef20ecd28afa4332d5c95c3a100.png" src="_images/b7eb7252154689c2e1ddd511502689cdcdb54ef20ecd28afa4332d5c95c3a100.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/10899bb2a950a33168214b4fdcd69341e41de20e14c7888edc01ee79715c4fe8.png"><img alt="_images/10899bb2a950a33168214b4fdcd69341e41de20e14c7888edc01ee79715c4fe8.png" src="_images/10899bb2a950a33168214b4fdcd69341e41de20e14c7888edc01ee79715c4fe8.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -603,38 +568,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png"><img alt="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png" src="_images/9f5b74c0424e7f7d0b87ad0d27b5d798bf64d3f31d46df197ca1edcedc8476ec.png" style="width: 80%;" /></a>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5355&#39; [U+5355], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f4d&#39; [U+4f4d], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5706&#39; [U+5706], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5355&#39; [U+5355], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f4d&#39; [U+4f4d], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5706&#39; [U+5706], substituting with a dummy symbol.
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/44f066e385081e20b8b1435f012249a474424accfe752ca1f7b52e9d47b7949a.png"><img alt="_images/44f066e385081e20b8b1435f012249a474424accfe752ca1f7b52e9d47b7949a.png" src="_images/44f066e385081e20b8b1435f012249a474424accfe752ca1f7b52e9d47b7949a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8b5102df1a2a162690af8fcdf5a8a3e148824bd01711619a649279af3e5d7040.png"><img alt="_images/8b5102df1a2a162690af8fcdf5a8a3e148824bd01711619a649279af3e5d7040.png" src="_images/8b5102df1a2a162690af8fcdf5a8a3e148824bd01711619a649279af3e5d7040.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7b31e97b3023ca57549381052df37524a4ba8a05ddcb24d1d84e8acf3a0413e0.png"><img alt="_images/7b31e97b3023ca57549381052df37524a4ba8a05ddcb24d1d84e8acf3a0413e0.png" src="_images/7b31e97b3023ca57549381052df37524a4ba8a05ddcb24d1d84e8acf3a0413e0.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -659,7 +594,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png"><img alt="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png" src="_images/334f5e40f5bcad5ec6f094074bcbd43b14609aab9713499769af82e767869d66.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fb0a05c9c1e272f043f7710aa30142cec1ac596d6dbcda2d9ac1f29651222575.png"><img alt="_images/fb0a05c9c1e272f043f7710aa30142cec1ac596d6dbcda2d9ac1f29651222575.png" src="_images/fb0a05c9c1e272f043f7710aa30142cec1ac596d6dbcda2d9ac1f29651222575.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -681,7 +616,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png"><img alt="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png" src="_images/0a06f950f550498f8905c1111cfae15f16857f22b877f3da441fb5bb566ab61d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/62c5b23d71d820d997155b519684873219e45b79aadc441707b3aa484ebf5b74.png"><img alt="_images/62c5b23d71d820d997155b519684873219e45b79aadc441707b3aa484ebf5b74.png" src="_images/62c5b23d71d820d997155b519684873219e45b79aadc441707b3aa484ebf5b74.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>更多常见的变换矩阵示例可以在<a class="reference external" href="https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions">这里</a>找到。</p>
@@ -831,15 +766,15 @@ $<span class="math notranslate nohighlight">\(
 
     <span class="c1"># 绘制格点</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xygrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;点 $x_1, x_2, \cdots, x_k$&quot;</span><span class="p">)</span>
 
     <span class="c1"># 绘制中间的格点</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">uvgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">uvgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $Bx_1, Bx_2, \cdots, Bx_k$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;点 $Bx_1, Bx_2, \cdots, Bx_k$&quot;</span><span class="p">)</span>
 
     <span class="c1"># 绘制变换后的格点</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">abgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">abgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;points $ABx_1, ABx_2, \cdots, ABx_k$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;点 $ABx_1, ABx_2, \cdots, ABx_k$&quot;</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -866,7 +801,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png"><img alt="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png" src="_images/600da8ff80e1b319a3c2070d944a2238591b02b8059e0eab54ebcae85129087c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e914850b3645bbb80a059d2205fffd63dc3e45a66348ae1f53c33a3e2392096d.png"><img alt="_images/e914850b3645bbb80a059d2205fffd63dc3e45a66348ae1f53c33a3e2392096d.png" src="_images/e914850b3645bbb80a059d2205fffd63dc3e45a66348ae1f53c33a3e2392096d.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -879,7 +814,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png"><img alt="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png" src="_images/916941cbf02440eccbd9513c61e3f7580bfd3859bc63189118851e7a73601220.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3b17fe542cfbea96568768f8d21d3e6e7b40ecf30dd549b24188e18b3d0b5fc9.png"><img alt="_images/3b17fe542cfbea96568768f8d21d3e6e7b40ecf30dd549b24188e18b3d0b5fc9.png" src="_images/3b17fe542cfbea96568768f8d21d3e6e7b40ecf30dd549b24188e18b3d0b5fc9.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>很显然，变换 <span class="math notranslate nohighlight">\(AB\)</span> 与变换 <span class="math notranslate nohighlight">\(BA\)</span> 是不同的。</p>
@@ -1066,31 +1001,30 @@ A v = \lambda v.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png"><img alt="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png" src="_images/e09ad116f35ad581581c2a703cc0a8370932357cc47763156a41734c62b8d643.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/99c1bd146bd1845a13b09cebcf26c9cd3c97db7491d5eeed8939994a7100921e.png"><img alt="_images/99c1bd146bd1845a13b09cebcf26c9cd3c97db7491d5eeed8939994a7100921e.png" src="_images/99c1bd146bd1845a13b09cebcf26c9cd3c97db7491d5eeed8939994a7100921e.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id19">
 <h3><span class="section-number">16.6.2. </span>复数值<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
-<p>到目前为止，我们对特征值和特征向量的定义似乎很直观。
-但还有一个我们尚未提到的复杂情况：
-在求解 <span class="math notranslate nohighlight">\(Av = \lambda v\)</span> 时，</p>
+<p>到目前为止，我们对特征值和特征向量的定义似乎很直观。</p>
+<p>但还有一个我们尚未提到的复杂情况：</p>
+<p>在求解 <span class="math notranslate nohighlight">\(Av = \lambda v\)</span> 时，</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\lambda\)</span> 可以是复数，并且</p></li>
-<li><p><span class="math notranslate nohighlight">\(v\)</span> 可以是一个包含 n 个复数的向量。
-我们将在下面看到一些例子。</p></li>
+<li><p><span class="math notranslate nohighlight">\(v\)</span> 可以是一个包含 n 个复数的向量。</p></li>
 </ul>
+<p>我们将在下面看到一些例子。</p>
 </section>
 <section id="id20">
 <h3><span class="section-number">16.6.3. </span>一些数学细节<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
-<p>我们为更高级的读者注明一些数学细节。
-（其他读者可以跳到下一节。）
-特征值方程等价于 <span class="math notranslate nohighlight">\((A - \lambda I) v = 0\)</span>。
-只有当 <span class="math notranslate nohighlight">\(A - \lambda I\)</span> 的列线性相关时，这个方程才有非零解 <span class="math notranslate nohighlight">\(v\)</span>。
-这反过来等价于行列式为零。
-因此，要找到所有特征值，我们可以寻找使 <span class="math notranslate nohighlight">\(A - \lambda I\)</span> 的行列式为零的 <span class="math notranslate nohighlight">\(\lambda\)</span>。
-这个问题可以表示为求解一个 <span class="math notranslate nohighlight">\(\lambda\)</span> 的 n 次多项式的根。
-这进而意味着在复平面上存在 n 个解，尽管有些可能是重复的。</p>
+<p>我们为更高级的读者注明一些数学细节。（其他读者可以跳到下一节。）</p>
+<p>特征值方程等价于 <span class="math notranslate nohighlight">\((A - \lambda I) v = 0\)</span>。</p>
+<p>只有当 <span class="math notranslate nohighlight">\(A - \lambda I\)</span> 的列线性相关时，这个方程才有非零解 <span class="math notranslate nohighlight">\(v\)</span>。</p>
+<p>这反过来等价于行列式为零。</p>
+<p>因此，要找到所有特征值，我们可以寻找使 <span class="math notranslate nohighlight">\(A - \lambda I\)</span> 的行列式为零的 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
+<p>这个问题可以表示为求解一个 <span class="math notranslate nohighlight">\(\lambda\)</span> 的 n 次多项式的根。</p>
+<p>这进而意味着在复平面上存在 n 个解，尽管有些可能是重复的。</p>
 </section>
 <section id="id21">
 <h3><span class="section-number">16.6.4. </span>事实<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
@@ -1138,10 +1072,10 @@ A v = \lambda v.
 </div>
 </div>
 </div>
-<p>请注意，<code class="docutils literal notranslate"><span class="pre">evecs</span></code> 的<em>列</em>是特征向量。
-由于特征向量的任何标量倍数都是具有相同特征值的特征向量（这可以被验证），<code class="docutils literal notranslate"><span class="pre">eig</span></code> 程序将每个特征向量的长度归一化为1。
-映射 <span class="math notranslate nohighlight">\(A\)</span> 的特征向量和特征值决定了当我们反复乘以 <span class="math notranslate nohighlight">\(A\)</span> 时，向量 <span class="math notranslate nohighlight">\(v\)</span> 如何被变换。
-这一点将在后面进一步讨论。</p>
+<p>请注意，<code class="docutils literal notranslate"><span class="pre">evecs</span></code> 的<em>列</em>是特征向量。</p>
+<p>由于特征向量的任何标量倍数都是具有相同特征值的特征向量（这可以被验证），<code class="docutils literal notranslate"><span class="pre">eig</span></code> 程序将每个特征向量的长度归一化为1。</p>
+<p>映射 <span class="math notranslate nohighlight">\(A\)</span> 的特征向量和特征值决定了当我们反复乘以 <span class="math notranslate nohighlight">\(A\)</span> 时，向量 <span class="math notranslate nohighlight">\(v\)</span> 如何被变换。</p>
+<p>这一点将在后面进一步讨论。</p>
 </section>
 </section>
 <section id="la-neumann">
@@ -1149,27 +1083,28 @@ A v = \lambda v.
 <p id="index-2">在本节中，我们将介绍一个关于矩阵级数的著名结果，它在经济学中有许多应用。</p>
 <section id="id24">
 <h3><span class="section-number">16.7.1. </span>标量级数<a class="headerlink" href="#id24" title="Permalink to this heading">#</a></h3>
-<p>以下是关于级数的一个基本结果：
-如果 <span class="math notranslate nohighlight">\(a\)</span> 是一个数，且 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，那么</p>
+<p>以下是关于级数的一个基本结果：</p>
+<p>如果 <span class="math notranslate nohighlight">\(a\)</span> 是一个数，且 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，那么</p>
 <div class="math notranslate nohighlight" id="equation-gp-sum">
 <span class="eqno">(16.1)<a class="headerlink" href="#equation-gp-sum" title="Permalink to this equation">#</a></span>\[    \sum_{k=0}^{\infty} a^k =\frac{1}{1-a} = (1 - a)^{-1}\]</div>
-<p>对于一维线性方程 <span class="math notranslate nohighlight">\(x = ax + b\)</span>，其中 x 未知，我们可以得出解 <span class="math notranslate nohighlight">\(x^{*}\)</span> 由以下给出：
-$<span class="math notranslate nohighlight">\(
+<p>对于一维线性方程 <span class="math notranslate nohighlight">\(x = ax + b\)</span>，其中 x 未知，我们可以得出解 <span class="math notranslate nohighlight">\(x^{*}\)</span> 由以下给出：</p>
+<div class="math notranslate nohighlight">
+\[
     x^{*} = \frac{b}{1-a} = \sum_{k=0}^{\infty} a^k b
-\)</span>$</p>
+\]</div>
 </section>
 <section id="id25">
 <h3><span class="section-number">16.7.2. </span>矩阵级数<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h3>
-<p>这个想法在矩阵设置中也有一个推广。
-考虑方程组 <span class="math notranslate nohighlight">\(x = Ax + b\)</span>，其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的方阵，<span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 都是 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> 中的列向量。
-使用矩阵代数，我们可以得出这个方程组的解由以下给出：</p>
+<p>这个想法在矩阵设置中也有一个推广。</p>
+<p>考虑方程组 <span class="math notranslate nohighlight">\(x = Ax + b\)</span>，其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的方阵，<span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 都是 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> 中的列向量。</p>
+<p>使用矩阵代数，我们可以得出这个方程组的解由以下给出：</p>
 <div class="math notranslate nohighlight" id="equation-neumann-eqn">
 <span class="eqno">(16.2)<a class="headerlink" href="#equation-neumann-eqn" title="Permalink to this equation">#</a></span>\[    x^{*} = (I-A)^{-1}b
     \]</div>
-<p>什么保证了存在唯一的向量 <span class="math notranslate nohighlight">\(x^{*}\)</span> 满足方程 <a class="reference internal" href="#equation-neumann-eqn">(16.2)</a>？
-以下是泛函分析中的一个基本结果，它将 <a class="reference internal" href="#equation-gp-sum">(16.1)</a> 推广到多变量情况。</p>
+<p>什么保证了存在唯一的向量 <span class="math notranslate nohighlight">\(x^{*}\)</span> 满足方程 <a class="reference internal" href="#equation-neumann-eqn">(16.2)</a>？</p>
+<p>以下是泛函分析中的一个基本结果，它将 <a class="reference internal" href="#equation-gp-sum">(16.1)</a> 推广到多变量情况。</p>
 <div class="proof theorem admonition" id="neumann_series_lemma">
-<span id="neumann-series-lemma"></span><p class="admonition-title"><span class="caption-number">Theorem 16.1 </span> (Neumann Series Lemma)</p>
+<span id="neumann-series-lemma"></span><p class="admonition-title"><span class="caption-number">Theorem 16.1 </span> (诺伊曼级数引理)</p>
 <section class="theorem-content" id="proof-content">
 <p>设 <span class="math notranslate nohighlight">\(A\)</span> 为方阵，<span class="math notranslate nohighlight">\(A^k\)</span> 为 <span class="math notranslate nohighlight">\(A\)</span> 的 <span class="math notranslate nohighlight">\(k\)</span> 次幂。
 设 <span class="math notranslate nohighlight">\(r(A)\)</span> 为 <span class="math notranslate nohighlight">\(A\)</span> 的<strong>谱半径</strong>，定义为 <span class="math notranslate nohighlight">\(\max_i |\lambda_i|\)</span>，其中</p>
@@ -1201,8 +1136,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
-<p>获得的谱半径 <span class="math notranslate nohighlight">\(r(A)\)</span> 小于1。
-因此，我们可以应用诺伊曼级数引理来求 <span class="math notranslate nohighlight">\((I-A)^{-1}\)</span>。</p>
+<p>获得的谱半径 <span class="math notranslate nohighlight">\(r(A)\)</span> 小于1。</p>
+<p>因此，我们可以应用诺伊曼级数引理来求 <span class="math notranslate nohighlight">\((I-A)^{-1}\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 2 x 2 单位矩阵</span>
@@ -1251,13 +1186,14 @@ $<span class="math notranslate nohighlight">\(
 
 <p class="admonition-title"><span class="caption-number">Exercise 16.1 </span></p>
 <section id="exercise-content">
-<p>幂迭代法是一种用于寻找可对角化矩阵最大绝对特征值的方法。
-该方法从一个随机向量 <span class="math notranslate nohighlight">\(b_0\)</span> 开始，重复地对其应用矩阵 <span class="math notranslate nohighlight">\(A\)</span>
-$<span class="math notranslate nohighlight">\(
+<p>幂迭代法是一种用于寻找可对角化矩阵最大绝对特征值的方法。</p>
+<p>该方法从一个随机向量 <span class="math notranslate nohighlight">\(b_0\)</span> 开始，重复地对其应用矩阵 <span class="math notranslate nohighlight">\(A\)</span></p>
+<div class="math notranslate nohighlight">
+\[
 b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
-\)</span>$
-关于该方法的详细讨论可以在<a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html">这里</a>找到。
-在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
+\]</div>
+<p>关于该方法的详细讨论可以在<a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html">这里</a>找到。</p>
+<p>在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
 然后可视化收敛过程。</p>
 </section>
 </div>
@@ -1315,26 +1251,8 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 真实的特征值是 [ 4. -2.  2.]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 35823 (\N{CJK UNIFIED IDEOGRAPH-8BEF}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/events.py:82: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from current font.
-  func(*args, **kwargs)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 35823 (\N{CJK UNIFIED IDEOGRAPH-8BEF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="pow-dist">
-<a class="reference internal image-reference" href="_images/7fe516ecd044547f8de0efb762bfa1f2de42e768363fc6839dee30143cdc01e8.png"><img alt="_images/7fe516ecd044547f8de0efb762bfa1f2de42e768363fc6839dee30143cdc01e8.png" src="_images/7fe516ecd044547f8de0efb762bfa1f2de42e768363fc6839dee30143cdc01e8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7590a5f2fa64cace64c2f7ca0019ee7f2db56fa7e2bf102f1eaab7b27f5f830e.png"><img alt="_images/7590a5f2fa64cace64c2f7ca0019ee7f2db56fa7e2bf102f1eaab7b27f5f830e.png" src="_images/7590a5f2fa64cace64c2f7ca0019ee7f2db56fa7e2bf102f1eaab7b27f5f830e.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Power iteration</span><a class="headerlink" href="#pow-dist" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1376,62 +1294,8 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30495 (\N{CJK UNIFIED IDEOGRAPH-771F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27491 (\N{CJK UNIFIED IDEOGRAPH-6B63}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21521 (\N{CJK UNIFIED IDEOGRAPH-5411}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-Font &#39;default&#39; does not have a glyph for &#39;\u8fd1&#39; [U+8fd1], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f3c&#39; [U+4f3c], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7279&#39; [U+7279], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f81&#39; [U+5f81], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5411&#39; [U+5411], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u91cf&#39; [U+91cf], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u8fd1&#39; [U+8fd1], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f3c&#39; [U+4f3c], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7684&#39; [U+7684], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u7279&#39; [U+7279], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5f81&#39; [U+5f81], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5411&#39; [U+5411], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u91cf&#39; [U+91cf], substituting with a dummy symbol.
-</pre></div>
-</div>
 <figure class="align-default" id="pow-trajectory">
-<a class="reference internal image-reference" href="_images/804c96b2e30f90eeffc02660680a7d2869a92ba8045ee4c21e9bb51bda25f59b.png"><img alt="_images/804c96b2e30f90eeffc02660680a7d2869a92ba8045ee4c21e9bb51bda25f59b.png" src="_images/804c96b2e30f90eeffc02660680a7d2869a92ba8045ee4c21e9bb51bda25f59b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1618addca90f7c2cb6bafd2a96c8300d444b2605c22464f3a7cf4b05bd4e84ed.png"><img alt="_images/1618addca90f7c2cb6bafd2a96c8300d444b2605c22464f3a7cf4b05bd4e84ed.png" src="_images/1618addca90f7c2cb6bafd2a96c8300d444b2605c22464f3a7cf4b05bd4e84ed.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Power iteration trajectory</span><a class="headerlink" href="#pow-trajectory" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1511,7 +1375,7 @@ Font &#39;default&#39; does not have a glyph for &#39;\u8fd1&#39; [U+8fd1], subs
 
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">]</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2.4 eigenspace&quot;</span><span class="p">,</span> <span class="s2">&quot;0.4 eigenspace&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2.4 特征空间&quot;</span><span class="p">,</span> <span class="s2">&quot;0.4 特征空间&quot;</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span>
            <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 
@@ -1525,7 +1389,7 @@ Font &#39;default&#39; does not have a glyph for &#39;\u8fd1&#39; [U+8fd1], subs
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="eigen-conv">
-<a class="reference internal image-reference" href="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png"><img alt="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png" src="_images/45cea5663c5aca80e0220a3a3340d1bffd90db55f5f8ed64a9913f2be085b407.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1030701b70ddf5b123d4e5f7295fcbe88711abadc1aac2eb10a1c12d662a00de.png"><img alt="_images/1030701b70ddf5b123d4e5f7295fcbe88711abadc1aac2eb10a1c12d662a00de.png" src="_images/1030701b70ddf5b123d4e5f7295fcbe88711abadc1aac2eb10a1c12d662a00de.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.3 </span><span class="caption-text">Convergence towards eigenvectors</span><a class="headerlink" href="#eigen-conv" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1643,7 +1507,7 @@ Example 2:
 </pre></div>
 </div>
 <figure class="align-default" id="vector-field">
-<a class="reference internal image-reference" href="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png"><img alt="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png" src="_images/ab7b56901ef5eb0023c78d4d97bdc21840fd323e4a58d70cff5b30573f398bbe.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1adc960981cc58f7eb399f143479198eeb2dac78af3c53576c26fbde25b656d0.png"><img alt="_images/1adc960981cc58f7eb399f143479198eeb2dac78af3c53576c26fbde25b656d0.png" src="_images/1adc960981cc58f7eb399f143479198eeb2dac78af3c53576c26fbde25b656d0.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.4 </span><span class="caption-text">Vector fields of the three matrices</span><a class="headerlink" href="#vector-field" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1714,7 +1578,7 @@ Example 2:
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="d-vector-field">
-<a class="reference internal image-reference" href="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png"><img alt="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png" src="_images/5391d9fb62e114a6bc4d3e8933e364dc79d6050e8f6806f340d350e25ad06a85.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/adbb8507334b9e52643866c55888c1710461875b06a5219ab68a12a0b2cd8347.png"><img alt="_images/adbb8507334b9e52643866c55888c1710461875b06a5219ab68a12a0b2cd8347.png" src="_images/adbb8507334b9e52643866c55888c1710461875b06a5219ab68a12a0b2cd8347.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.5 </span><span class="caption-text">3D plot of the vector field</span><a class="headerlink" href="#d-vector-field" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1945,17 +1809,17 @@ Example 2:
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1967,22 +1831,22 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1994,22 +1858,22 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -2021,12 +1885,12 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -2038,22 +1902,22 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -2065,12 +1929,12 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -2082,12 +1946,12 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -2099,17 +1963,17 @@ Example 2:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

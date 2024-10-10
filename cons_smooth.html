@@ -275,14 +275,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>该模型描述了一个从时间 <span class="math notranslate nohighlight">\(t=0, 1, \ldots, T\)</span> 生活的消费者，接收非金融收入流 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span>，并选择消费流 <span class="math notranslate nohighlight">\(\{c_t\}_{t=0}^T\)</span>。
-我们通常认为非金融收入流来自于个人提供劳动的工资。
-该模型将非金融收入流作为输入，将其视为”外生”，即不由模型决定。
-消费者面临固定的总利率 <span class="math notranslate nohighlight">\(R &gt;1\)</span>，她可以自由借贷，但有限制条件，我们将在下面描述。</p>
+<p>该模型描述了一个从时间 <span class="math notranslate nohighlight">\(t=0, 1, \ldots, T\)</span> 生活的消费者，接收非金融收入流 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span>，并选择消费流 <span class="math notranslate nohighlight">\(\{c_t\}_{t=0}^T\)</span>。</p>
+<p>我们通常认为非金融收入流来自于个人提供劳动的工资。</p>
+<p>该模型将非金融收入流作为输入，将其视为”外生”，即不由模型决定。</p>
+<p>消费者面临固定的总利率 <span class="math notranslate nohighlight">\(R &gt;1\)</span>，她可以自由借贷，但有限制条件，我们将在下面描述。</p>
 <p>为设置模型，让：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(T \geq 2\)</span> 为一个正整数，构成时间范围。</p></li>
@@ -294,21 +299,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><span class="math notranslate nohighlight">\(a_0\)</span> 为给定的初始金融资产水平。</p></li>
 <li><p><span class="math notranslate nohighlight">\(a_{T+1} \geq 0\)</span> 为最终资产的终端条件。</p></li>
 </ul>
-<p>金融财富序列 <span class="math notranslate nohighlight">\(a\)</span> 由模型决定。
-它必须满足两个<strong>边界条件</strong>：</p>
+<p>金融财富序列 <span class="math notranslate nohighlight">\(a\)</span> 由模型决定。</p>
+<p>它必须满足两个<strong>边界条件</strong>：</p>
 <ul class="simple">
 <li><p>在时间 0 时必须等于外生值 <span class="math notranslate nohighlight">\(a_0\)</span></p></li>
-<li><p>在时间 <span class="math notranslate nohighlight">\(T+1\)</span> 时必须等于或超过外生值 <span class="math notranslate nohighlight">\(a_{T+1}\)</span>。
-<strong>终端条件</strong> <span class="math notranslate nohighlight">\(a_{T+1} \geq 0\)</span> 要求消费者不能带着债务离开模型。
-（我们很快会看到，一个效用最大化的消费者不会想留下正资产就死去，所以她会安排她的事务使得 <span class="math notranslate nohighlight">\(a_{T+1} = 0\)</span>。）</p></li>
+<li><p>在时间 <span class="math notranslate nohighlight">\(T+1\)</span> 时必须等于或超过外生值 <span class="math notranslate nohighlight">\(a_{T+1}\)</span>。</p></li>
 </ul>
+<p><strong>终端条件</strong> <span class="math notranslate nohighlight">\(a_{T+1} \geq 0\)</span> 要求消费者不能带着债务离开模型。</p>
+<p>（我们很快会看到，一个效用最大化的消费者不会想留下正资产就死去，所以她会安排她的资产使得 <span class="math notranslate nohighlight">\(a_{T+1} = 0\)</span>。）</p>
 <p>消费者面临一系列预算约束，这些约束限制了序列 <span class="math notranslate nohighlight">\((y, c, a)\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-a-t">
 <span class="eqno">(12.1)<a class="headerlink" href="#equation-eq-a-t" title="Permalink to this equation">#</a></span>\[
 a_{t+1} = R (a_t+ y_t - c_t), \quad t =0, 1, \ldots T
 \]</div>
-<p>方程 <a class="reference internal" href="#equation-eq-a-t">(12.1)</a> 构成了 <span class="math notranslate nohighlight">\(T+1\)</span> 个这样的预算约束，每个 <span class="math notranslate nohighlight">\(t=0, 1, \ldots, T\)</span> 对应一个。
-给定非金融收入序列 <span class="math notranslate nohighlight">\(y\)</span>，大量的（金融财富，消费）序列对 <span class="math notranslate nohighlight">\((a, c)\)</span> 满足预算约束序列 <a class="reference internal" href="#equation-eq-a-t">(12.1)</a>。</p>
+<p>方程 <a class="reference internal" href="#equation-eq-a-t">(12.1)</a> 构成了 <span class="math notranslate nohighlight">\(T+1\)</span> 个这样的预算约束，每个 <span class="math notranslate nohighlight">\(t=0, 1, \ldots, T\)</span> 对应一个。</p>
+<p>给定非金融收入序列 <span class="math notranslate nohighlight">\(y\)</span>，大量的（金融财富，消费）序列对 <span class="math notranslate nohighlight">\((a, c)\)</span> 满足预算约束序列 <a class="reference internal" href="#equation-eq-a-t">(12.1)</a>。</p>
 <p>我们的模型有以下逻辑流程：</p>
 <ul class="simple">
 <li><p>从外生非金融收入序列 <span class="math notranslate nohighlight">\(y\)</span>、初始金融财富 <span class="math notranslate nohighlight">\(a_0\)</span> 和候选消费路径 <span class="math notranslate nohighlight">\(c\)</span> 开始。</p></li>
@@ -322,9 +327,9 @@ a_{t+1} = R (a_t+ y_t - c_t), \quad t =0, 1, \ldots T
 </ul>
 <p>下面，我们将描述如何使用线性代数——矩阵求逆和乘法来执行这些步骤。</p>
 <p>上述程序似乎是找到”预算可行”消费路径 <span class="math notranslate nohighlight">\(c\)</span> 的合理方法，即与外生非金融收入流 <span class="math notranslate nohighlight">\(y\)</span>、初始金融资产水平 <span class="math notranslate nohighlight">\(a_0\)</span> 和终端资产水平 <span class="math notranslate nohighlight">\(a_{T+1}\)</span> 一致的路径。</p>
-<p>一般来说，有<strong>许多</strong>预算可行的消费路径 <span class="math notranslate nohighlight">\(c\)</span>。
-在所有预算可行的消费路径中，消费者应该想要哪一个？
-为回答这个问题，我们最终将使用以下效用函数或<strong>福利标准</strong>来评估替代的预算可行消费路径 <span class="math notranslate nohighlight">\(c\)</span>：</p>
+<p>一般来说，有<strong>许多</strong>预算可行的消费路径 <span class="math notranslate nohighlight">\(c\)</span>。</p>
+<p>在所有预算可行的消费路径中，消费者应该想要哪一个？</p>
+<p>为回答这个问题，我们最终将使用以下效用函数或<strong>福利标准</strong>来评估替代的预算可行消费路径 <span class="math notranslate nohighlight">\(c\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-welfare">
 <span class="eqno">(12.2)<a class="headerlink" href="#equation-welfare" title="Permalink to this equation">#</a></span>\[W = \sum_{t=0}^T \beta^t (g_1 c_t - \frac{g_2}{2} c_t^2 )\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(g_1 &gt; 0, g_2 &gt; 0\)</span>。</p>
@@ -358,9 +363,9 @@ a_{t+1} = R (a_t+ y_t - c_t), \quad t =0, 1, \ldots T
 h_0 \equiv \sum_{t=0}^T R^{-t} y_t = \begin{bmatrix} 1 &amp; R^{-1} &amp; \cdots &amp; R^{-T} \end{bmatrix}
 \begin{bmatrix} y_0 \cr y_1  \cr \vdots \cr y_T \end{bmatrix}
 \]</div>
-<p>时间 0 的人力或非金融财富显然就是消费者非金融收入流 <span class="math notranslate nohighlight">\(y\)</span> 的现值。
-从形式上看，它与我们在 QuantEcon 讲座 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 中计算的资产价格非常相似。
-事实上，这就是为什么弥尔顿·弗里德曼称之为”人力资本”。</p>
+<p>时间 0 的人力或非金融财富显然就是消费者非金融收入流 <span class="math notranslate nohighlight">\(y\)</span> 的现值。</p>
+<p>从形式上看，它与我们在 QuantEcon 讲座 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 中计算的资产价格非常相似。</p>
+<p>事实上，这就是为什么弥尔顿·弗里德曼称之为”人力资本”。</p>
 <p>通过迭代方程 <a class="reference internal" href="#equation-eq-a-t">(12.1)</a> 并施加终端条件</p>
 <div class="math notranslate nohighlight">
 \[
@@ -464,10 +469,10 @@ a_{T+1} = 0.
 </div>
 </div>
 </div>
-<p>我们使用一个例子，其中消费者继承了 <span class="math notranslate nohighlight">\(a_0&lt;0\)</span>。
-这可以被解释为学生贷款。
-非金融过程 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^{T}\)</span> 在 <span class="math notranslate nohighlight">\(t=45\)</span> 之前保持恒定且为正值，之后变为零。
-生命后期非金融收入的下降反映了退休。</p>
+<p>我们使用一个例子，其中消费者继承了 <span class="math notranslate nohighlight">\(a_0&lt;0\)</span>。</p>
+<p>这可以被解释为学生贷款。</p>
+<p>非金融过程 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^{T}\)</span> 在 <span class="math notranslate nohighlight">\(t=45\)</span> 之前保持恒定且为正值，之后变为零。</p>
+<p>生命后期非金融收入的下降反映了退休。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 金融财富</span>
@@ -509,27 +514,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38750 (\N{CJK UNIFIED IDEOGRAPH-975E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37329 (\N{CJK UNIFIED IDEOGRAPH-91D1}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 34701 (\N{CJK UNIFIED IDEOGRAPH-878D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25910 (\N{CJK UNIFIED IDEOGRAPH-6536}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20837 (\N{CJK UNIFIED IDEOGRAPH-5165}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28040 (\N{CJK UNIFIED IDEOGRAPH-6D88}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36153 (\N{CJK UNIFIED IDEOGRAPH-8D39}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36130 (\N{CJK UNIFIED IDEOGRAPH-8D22}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23500 (\N{CJK UNIFIED IDEOGRAPH-5BCC}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/732a832f831c4da863c5b7726502fc36d5e147057c11b8137961070712a0ccea.png"><img alt="_images/732a832f831c4da863c5b7726502fc36d5e147057c11b8137961070712a0ccea.png" src="_images/732a832f831c4da863c5b7726502fc36d5e147057c11b8137961070712a0ccea.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d44422783b72eb0b5275ed7f63eb06c4ded4bbbf546e73b509a96fc076486349.png"><img alt="_images/d44422783b72eb0b5275ed7f63eb06c4ded4bbbf546e73b509a96fc076486349.png" src="_images/d44422783b72eb0b5275ed7f63eb06c4ded4bbbf546e73b509a96fc076486349.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>其中 <span class="math notranslate nohighlight">\(a_{T+1} = 0\)</span>如我们所预期的一样。
@@ -556,7 +541,8 @@ a_{T+1} = 0.
 <section id="id16">
 <h3><span class="section-number">12.4.4. </span>实验<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
 <p>在本节中，我们描述了消费序列如何对不同的非金融收入序列做出最佳反应。</p>
-<p>首先，我们创建一个名为<code class="docutils literal notranslate"><span class="pre">plot_cs</span></code>的函数，用于为<code class="docutils literal notranslate"><span class="pre">cs_model</span></code>（消费平滑模型）的不同实例生成图表。这将有助于我们避免为不同的非金融收入序列重写绘图代码。</p>
+<p>首先，我们创建一个名为<code class="docutils literal notranslate"><span class="pre">plot_cs</span></code>的函数，用于为<code class="docutils literal notranslate"><span class="pre">cs_model</span></code>（消费平滑模型）的不同实例生成图表。</p>
+<p>这将有助于我们避免为不同的非金融收入序列重写绘图代码。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_cs</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>    <span class="c1"># 消费平滑模型      </span>
@@ -587,8 +573,8 @@ a_{T+1} = 0.
 <p>在下面的实验中，请研究消费和金融资产序列如何随着不同的非金融收入序列而变化。</p>
 <section id="id17">
 <h4><span class="section-number">12.4.4.1. </span>实验1：一次性收益/损失<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h4>
-<p>我们首先假设在收入序列<span class="math notranslate nohighlight">\(y\)</span>的第21年有一次性的意外收入<span class="math notranslate nohighlight">\(W_0\)</span>。
-我们会使<span class="math notranslate nohighlight">\(W_0\)</span>的数值较大 - 正值表示一次性意外收入，负值表示一次性”灾难”。</p>
+<p>我们首先假设在收入序列<span class="math notranslate nohighlight">\(y\)</span>的第21年有一次性的意外收入<span class="math notranslate nohighlight">\(W_0\)</span>。</p>
+<p>我们会使<span class="math notranslate nohighlight">\(W_0\)</span>的数值较大 - 正值表示一次性意外收入，负值表示一次性”灾难”。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 一次性意外收入W_0 = 2.5</span>
@@ -599,7 +585,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0645c577a40fbff459e08221fdd1a27f2621d6ce6fae21e61d362a1cb5950416.png"><img alt="_images/0645c577a40fbff459e08221fdd1a27f2621d6ce6fae21e61d362a1cb5950416.png" src="_images/0645c577a40fbff459e08221fdd1a27f2621d6ce6fae21e61d362a1cb5950416.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7582118f18938eceb30882a24254470e14809df7db8c8839f92ff33539257c3a.png"><img alt="_images/7582118f18938eceb30882a24254470e14809df7db8c8839f92ff33539257c3a.png" src="_images/7582118f18938eceb30882a24254470e14809df7db8c8839f92ff33539257c3a.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -612,14 +598,14 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/16464dca4a164454d39f0f57f9551d0fc596044888d708f1e968401216fd676b.png"><img alt="_images/16464dca4a164454d39f0f57f9551d0fc596044888d708f1e968401216fd676b.png" src="_images/16464dca4a164454d39f0f57f9551d0fc596044888d708f1e968401216fd676b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/df3f1bbfa0cc8f8de85939061b43c430ecde70fa694b7f53476654d9f130c02e.png"><img alt="_images/df3f1bbfa0cc8f8de85939061b43c430ecde70fa694b7f53476654d9f130c02e.png" src="_images/df3f1bbfa0cc8f8de85939061b43c430ecde70fa694b7f53476654d9f130c02e.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id18">
 <h4><span class="section-number">12.4.4.2. </span>实验2：永久性工资增加/减少<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h4>
-<p>现在我们假设在<span class="math notranslate nohighlight">\(y\)</span>序列的第21年，收入永久性增加<span class="math notranslate nohighlight">\(W\)</span>。
-同样，我们可以研究正面和负面的情况。</p>
+<p>现在我们假设在<span class="math notranslate nohighlight">\(y\)</span>序列的第21年，收入永久性增加<span class="math notranslate nohighlight">\(W\)</span>。</p>
+<p>同样，我们可以研究正面和负面的情况。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 永久收入增加 W = 0.5 档 t &gt;= 21</span>
@@ -631,7 +617,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a6923387cc5859841f4951e9140a7cd7a9c2f2b6906b8e0923b8024e3a698efd.png"><img alt="_images/a6923387cc5859841f4951e9140a7cd7a9c2f2b6906b8e0923b8024e3a698efd.png" src="_images/a6923387cc5859841f4951e9140a7cd7a9c2f2b6906b8e0923b8024e3a698efd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/927e1466e8da8897511d9c6c0b6ebb9e0e83b2e400669c1d913c883f13d05be9.png"><img alt="_images/927e1466e8da8897511d9c6c0b6ebb9e0e83b2e400669c1d913c883f13d05be9.png" src="_images/927e1466e8da8897511d9c6c0b6ebb9e0e83b2e400669c1d913c883f13d05be9.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -645,7 +631,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5d8c7a9a8ddab3f5427058703583fc5eb3eb051de9e81ffc99a06dcc2d1eb775.png"><img alt="_images/5d8c7a9a8ddab3f5427058703583fc5eb3eb051de9e81ffc99a06dcc2d1eb775.png" src="_images/5d8c7a9a8ddab3f5427058703583fc5eb3eb051de9e81ffc99a06dcc2d1eb775.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/065d8b8011196d9559b8f28e3a9021b31ee83e3c6cabad7d40b44720c3ea44d7.png"><img alt="_images/065d8b8011196d9559b8f28e3a9021b31ee83e3c6cabad7d40b44720c3ea44d7.png" src="_images/065d8b8011196d9559b8f28e3a9021b31ee83e3c6cabad7d40b44720c3ea44d7.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -663,14 +649,14 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/270feb1dbee262675113662153c6567527b4b86b9ac6bf168b9ed1e0f0a32de9.png"><img alt="_images/270feb1dbee262675113662153c6567527b4b86b9ac6bf168b9ed1e0f0a32de9.png" src="_images/270feb1dbee262675113662153c6567527b4b86b9ac6bf168b9ed1e0f0a32de9.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/18a40d59f93b32a37686944fdbb02f3af7b287bc6830058b030c5c39fbcc7309.png"><img alt="_images/18a40d59f93b32a37686944fdbb02f3af7b287bc6830058b030c5c39fbcc7309.png" src="_images/18a40d59f93b32a37686944fdbb02f3af7b287bc6830058b030c5c39fbcc7309.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id20">
 <h4><span class="section-number">12.4.4.4. </span>实验4：几何增长收入者<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h4>
-<p>现在我们模拟一个几何 <span class="math notranslate nohighlight">\(y\)</span> 序列，其中一个人在前46年获得 <span class="math notranslate nohighlight">\(y_t = \lambda^t y_0\)</span> 的收入。
-我们首先尝试 <span class="math notranslate nohighlight">\(\lambda = 1.05\)</span></p>
+<p>现在我们模拟一个几何 <span class="math notranslate nohighlight">\(y\)</span> 序列，其中一个人在前46年获得 <span class="math notranslate nohighlight">\(y_t = \lambda^t y_0\)</span> 的收入。</p>
+<p>我们首先尝试 <span class="math notranslate nohighlight">\(\lambda = 1.05\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 几何收入增长者 λ = 1.05</span>
@@ -688,7 +674,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/dcb447e5f0d831aa069f2e6057a067cce72f88ab485c85615287986d892a85db.png"><img alt="_images/dcb447e5f0d831aa069f2e6057a067cce72f88ab485c85615287986d892a85db.png" src="_images/dcb447e5f0d831aa069f2e6057a067cce72f88ab485c85615287986d892a85db.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e4b609f4d7007c8c9b0612164b5b54799483872a1a920ffde84e4c07a0804fc0.png"><img alt="_images/e4b609f4d7007c8c9b0612164b5b54799483872a1a920ffde84e4c07a0804fc0.png" src="_images/e4b609f4d7007c8c9b0612164b5b54799483872a1a920ffde84e4c07a0804fc0.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>我现在我们展示当<span class="math notranslate nohighlight">\(\lambda = 0.95\)</span>的行为。</p>
@@ -705,7 +691,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7f0313b46212b91eaee849b1627052b692665a698f12031e6d6c6d09e6720cf0.png"><img alt="_images/7f0313b46212b91eaee849b1627052b692665a698f12031e6d6c6d09e6720cf0.png" src="_images/7f0313b46212b91eaee849b1627052b692665a698f12031e6d6c6d09e6720cf0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b3f68081aa10d80f7500485919edc3dfc78014861c9b42e08d0ced8b4bd7bce6.png"><img alt="_images/b3f68081aa10d80f7500485919edc3dfc78014861c9b42e08d0ced8b4bd7bce6.png" src="_images/b3f68081aa10d80f7500485919edc3dfc78014861c9b42e08d0ced8b4bd7bce6.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>当<span class="math notranslate nohighlight">\(\lambda\)</span>为负的时候会发生什么</p>
@@ -722,7 +708,7 @@ a_{T+1} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/534e5cf3ede15df4ed5f3efc8aa80faf7ccb9ae3cf9f6c98b11ead82418f3eaa.png"><img alt="_images/534e5cf3ede15df4ed5f3efc8aa80faf7ccb9ae3cf9f6c98b11ead82418f3eaa.png" src="_images/534e5cf3ede15df4ed5f3efc8aa80faf7ccb9ae3cf9f6c98b11ead82418f3eaa.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/418ac44465be4da02ab6c3dfabfbaa327182a00ce6c906e446f6d5c6230c550c.png"><img alt="_images/418ac44465be4da02ab6c3dfabfbaa327182a00ce6c906e446f6d5c6230c550c.png" src="_images/418ac44465be4da02ab6c3dfabfbaa327182a00ce6c906e446f6d5c6230c550c.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -746,8 +732,8 @@ a_{T+1} = 0.
 \[
 v_t = \xi_1 \phi^t - \xi_0
 \]</div>
-<p>我们说是两个而不是三个参数类，因为 <span class="math notranslate nohighlight">\(\xi_0\)</span> 将是 <span class="math notranslate nohighlight">\((\phi, \xi_1; R)\)</span> 的函数，以保证变化序列是可行的。
-让我们来计算这个函数。</p>
+<p>我们说是两个而不是三个参数类，因为 <span class="math notranslate nohighlight">\(\xi_0\)</span> 将是 <span class="math notranslate nohighlight">\((\phi, \xi_1; R)\)</span> 的函数，以保证变化序列是可行的。</p>
+<p>让我们来计算这个函数。</p>
 <p>我们要求：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -829,18 +815,6 @@ v_t = \xi_1 \phi^t - \xi_0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6700&#39; [U+6700], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f18&#39; [U+4f18], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6700&#39; [U+6700], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4f18&#39; [U+4f18], substituting with a dummy symbol.
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>变化 0: ξ1=0.01, ϕ=0.95
 检查: True
 福利=13.285009346064836
@@ -859,12 +833,12 @@ v_t = \xi_1 \phi^t - \xi_0
 ----------------------------------------------------------------
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/512d09d1570d55448b53b31ba524396db104e564765b6835932e63439060ec7d.png"><img alt="_images/512d09d1570d55448b53b31ba524396db104e564765b6835932e63439060ec7d.png" src="_images/512d09d1570d55448b53b31ba524396db104e564765b6835932e63439060ec7d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7ea35eb84a52efa10e555b082847d92c08add79f5111a7b85cb413122a38a5f3.png"><img alt="_images/7ea35eb84a52efa10e555b082847d92c08add79f5111a7b85cb413122a38a5f3.png" src="_images/7ea35eb84a52efa10e555b082847d92c08add79f5111a7b85cb413122a38a5f3.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们甚至可以使用 Python 的 <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> 命令来计算福利对我们两个参数的导数。
-我们正在教授<strong>变分法</strong>背后的关键思想。
-首先，我们定义关于 <span class="math notranslate nohighlight">\(\xi_1\)</span> 和 <span class="math notranslate nohighlight">\(\phi\)</span> 的福利函数</p>
+<p>我们甚至可以使用 Python 的 <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> 命令来计算福利对我们两个参数的导数。</p>
+<p>我们正在教授<strong>变分法</strong>背后的关键思想。</p>
+<p>首先，我们定义关于 <span class="math notranslate nohighlight">\(\xi_1\)</span> 和 <span class="math notranslate nohighlight">\(\phi\)</span> 的福利函数</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">welfare_rel</span><span class="p">(</span><span class="n">ξ1</span><span class="p">,</span> <span class="n">ϕ</span><span class="p">):</span>
@@ -906,22 +880,8 @@ v_t = \xi_1 \phi^t - \xi_0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31119 (\N{CJK UNIFIED IDEOGRAPH-798F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21033 (\N{CJK UNIFIED IDEOGRAPH-5229}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/668442e9e05bce2e9b970c1e9a638817b6677d1f32e5961f609283363a082477.png"><img alt="_images/668442e9e05bce2e9b970c1e9a638817b6677d1f32e5961f609283363a082477.png" src="_images/668442e9e05bce2e9b970c1e9a638817b6677d1f32e5961f609283363a082477.png" style="width: 80%;" /></a>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30340 (\N{CJK UNIFIED IDEOGRAPH-7684}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23548 (\N{CJK UNIFIED IDEOGRAPH-5BFC}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/03499a0fe480c19eb385005a64efa8e8bc03a95f33b5cfd8d915594bf5e00130.png"><img alt="_images/03499a0fe480c19eb385005a64efa8e8bc03a95f33b5cfd8d915594bf5e00130.png" src="_images/03499a0fe480c19eb385005a64efa8e8bc03a95f33b5cfd8d915594bf5e00130.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2123acdb19f7aa8c482efe4e78e13d6da73eeff885d34bdf67401c1df432ff4e.png"><img alt="_images/2123acdb19f7aa8c482efe4e78e13d6da73eeff885d34bdf67401c1df432ff4e.png" src="_images/2123acdb19f7aa8c482efe4e78e13d6da73eeff885d34bdf67401c1df432ff4e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/374143a3f0bfe10592df192048699284739019afb3a28894ab5021a38663c352.png"><img alt="_images/374143a3f0bfe10592df192048699284739019afb3a28894ab5021a38663c352.png" src="_images/374143a3f0bfe10592df192048699284739019afb3a28894ab5021a38663c352.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>同理，对<span class="math notranslate nohighlight">\(\phi\)</span></p>
@@ -944,8 +904,8 @@ v_t = \xi_1 \phi^t - \xi_0
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2a6ed1862ef2ac8cadeac80efb01c4b6a8f5a788b159ab2add5fea1fce4ed053.png"><img alt="_images/2a6ed1862ef2ac8cadeac80efb01c4b6a8f5a788b159ab2add5fea1fce4ed053.png" src="_images/2a6ed1862ef2ac8cadeac80efb01c4b6a8f5a788b159ab2add5fea1fce4ed053.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/e2b4f863fd95d7d52446b0e9005f7a94103c74110203144eac9fb1e7562870ac.png"><img alt="_images/e2b4f863fd95d7d52446b0e9005f7a94103c74110203144eac9fb1e7562870ac.png" src="_images/e2b4f863fd95d7d52446b0e9005f7a94103c74110203144eac9fb1e7562870ac.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ae869d54f10cf08d94d61a47be49ad28ec81e46920f2ae0dff5c8d4102c340af.png"><img alt="_images/ae869d54f10cf08d94d61a47be49ad28ec81e46920f2ae0dff5c8d4102c340af.png" src="_images/ae869d54f10cf08d94d61a47be49ad28ec81e46920f2ae0dff5c8d4102c340af.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/00b3dc3b1332231644667dbfd1671f982406638bfc51fac7785e236c31d7d291.png"><img alt="_images/00b3dc3b1332231644667dbfd1671f982406638bfc51fac7785e236c31d7d291.png" src="_images/00b3dc3b1332231644667dbfd1671f982406638bfc51fac7785e236c31d7d291.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -1011,8 +971,8 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <section id="exercise-content">
 <p>为了得到 <a class="reference internal" href="#equation-fst-ord-inverse">(12.6)</a>，我们将 <a class="reference internal" href="#equation-eq-first-order-lin-diff">(12.5)</a> 的两边都乘以矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的逆矩阵。请确认
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-635c16b6-de50-43b2-88d7-4d3339989e2c">
-<span class="eqno">(12.7)<a class="headerlink" href="#equation-635c16b6-de50-43b2-88d7-4d3339989e2c" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 
+<div class="amsmath math notranslate nohighlight" id="equation-35c7458f-a484-4cfd-baba-a82a9b603e79">
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-35c7458f-a484-4cfd-baba-a82a9b603e79" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 
 1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \cr
 \lambda &amp; 1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \cr
 \lambda^2 &amp; \lambda &amp; 1 &amp; \cdots &amp; 0 &amp; 0 \cr
@@ -1055,8 +1015,8 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 
 <p class="admonition-title"><span class="caption-number">Exercise 12.2 </span></p>
 <section id="exercise-content">
-<p>作为练习，我们要求你表示并求解一个<strong>三阶线性差分方程</strong>。
-你必须指定多少个初始条件？</p>
+<p>作为练习，我们要求你表示并求解一个<strong>三阶线性差分方程</strong>。</p>
+<p>你必须指定多少个初始条件？</p>
 </section>
 </div>
 </section>
@@ -1282,17 +1242,17 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1304,22 +1264,22 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1331,22 +1291,22 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1358,12 +1318,12 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1375,22 +1335,22 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1402,12 +1362,12 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1419,12 +1379,12 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1436,17 +1396,17 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

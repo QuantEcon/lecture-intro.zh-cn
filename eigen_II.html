@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>41. 佩龙-弗罗贝尼乌斯定理 &#8212; Python数量经济学入门</title>
+    <title>38. 佩龙-弗罗贝尼乌斯定理 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="43. 输入-输出模型" href="input_output.html" />
-    <link rel="prev" title="38. 最短路径" href="short_path.html" />
+    <link rel="next" title="39. 输入-输出模型" href="input_output.html" />
+    <link rel="prev" title="37. 最短路径" href="short_path.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -172,27 +172,22 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">41. 佩龙-弗罗贝尼乌斯定理</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">42. 除了Anaconda中已有的库之外，本讲座还需要以下库：</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">42.1. 非负矩阵</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible">42.1.1. 不可约矩阵</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">42.1.2. 左特征向量</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">42.1.3. 佩龙-弗罗贝尼乌斯定理</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">42.1.3.1. 示例：不可约矩阵</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">38.1. 非负矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irreducible">38.1.1. 不可约矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">38.1.2. 左特征向量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perron-frobe">38.1.3. 佩龙-弗罗贝尼乌斯定理</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">38.1.3.1. 示例：不可约矩阵</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prim-matrices">42.1.4. 原始矩阵</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">42.1.4.1. 示例1：原始矩阵</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spec-markov">42.1.4.2. 示例2：与马尔可夫链的联系</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prim-matrices">38.1.4. 原始矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">38.1.4.1. 示例1：原始矩阵</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spec-markov">38.1.4.2. 示例2：与马尔可夫链的联系</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">42.2. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">38.2. 练习</a></li>
 </ul>
-</li>
-</ul>
-
                             <p class="logo">
                                 
                                     
@@ -251,10 +246,8 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">41. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="anaconda">
-<span id="index-0"></span><h1><span class="section-number">42. </span>除了Anaconda中已有的库之外，本讲座还需要以下库：<a class="headerlink" href="#anaconda" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">38. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p id="index-0">除了Anaconda中已有的库之外，本讲座还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -271,9 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading quantecon-0.7.2-py3-none-any.whl.metadata (4.9 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.32.2)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.13.1)
@@ -283,14 +274,12 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.2.2)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.6.2)
-Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
+Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/215.4 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">215.4/215.4 kB</span> <span class=" -Color -Color-Red">6.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">215.4/215.4 kB</span> <span class=" -Color -Color-Red">15.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -317,17 +306,17 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">42.1. </span>非负矩阵<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.1. </span>非负矩阵<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>在经济学中，我们经常处理的矩阵是非负的。非负矩阵具有几个特殊且有用的性质。在本节中，我们将讨论其中的一些性质——特别是非负性与特征值之间的联系。</p>
 <p>一个 <span class="math notranslate nohighlight">\(n \times m\)</span> 的矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为<strong>非负</strong>，如果 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都是非负的，即对于每个 <span class="math notranslate nohighlight">\(i,j\)</span>，都有 <span class="math notranslate nohighlight">\(a_{ij} \geq 0\)</span>。我们将此表示为 <span class="math notranslate nohighlight">\(A \geq 0\)</span>。</p>
 <section id="irreducible">
-<span id="id3"></span><h3><span class="section-number">42.1.1. </span>不可约矩阵<a class="headerlink" href="#irreducible" title="Permalink to this heading">#</a></h3>
+<span id="id3"></span><h3><span class="section-number">38.1.1. </span>不可约矩阵<a class="headerlink" href="#irreducible" title="Permalink to this heading">#</a></h3>
 <p>我们在<a class="reference internal" href="markov_chains_II.html#mc-irreducible"><span class="std std-ref">马尔可夫链讲座</span></a>中介绍了不可约矩阵。这里我们将推广这个概念：</p>
 <p>令 <span class="math notranslate nohighlight">\(a^{k}_{ij}\)</span> 为 <span class="math notranslate nohighlight">\(A^k\)</span> 的第 <span class="math notranslate nohighlight">\((i,j)\)</span> 个元素。</p>
 <p>一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的非负矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为不可约的，如果 <span class="math notranslate nohighlight">\(A + A^2 + A^3 + \cdots \gg 0\)</span>，其中 <span class="math notranslate nohighlight">\(\gg 0\)</span> 表示 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都严格为正。</p>
 <p>换句话说，对于每个 <span class="math notranslate nohighlight">\(1 \leq i, j \leq n\)</span>，存在一个 <span class="math notranslate nohighlight">\(k \geq 0\)</span> 使得 <span class="math notranslate nohighlight">\(a^{k}_{ij} &gt; 0\)</span>。</p>
 <div class="proof example admonition" id="eigen2_ex_irr">
-<p class="admonition-title"><span class="caption-number">Example 42.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 38.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>以下是一些进一步说明的例子：</p>
 <div class="math notranslate nohighlight">
@@ -359,19 +348,20 @@ C = \begin{bmatrix} 1 &amp; 0 \\
 </section>
 </div></section>
 <section id="id4">
-<h3><span class="section-number">42.1.2. </span>左特征向量<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>回想一下，我们之前在 <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">特征值和特征向量</span></a> 中讨论过特征向量。
-特别地，如果 <span class="math notranslate nohighlight">\(v\)</span> 是非零向量，且满足
-$<span class="math notranslate nohighlight">\(
+<h3><span class="section-number">38.1.2. </span>左特征向量<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>回想一下，我们之前在 <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">特征值和特征向量</span></a> 中讨论过特征向量。</p>
+<p>特别地，如果 <span class="math notranslate nohighlight">\(v\)</span> 是非零向量，且满足</p>
+<div class="math notranslate nohighlight">
+\[
 Av = \lambda v
-\)</span><span class="math notranslate nohighlight">\(
-那么 \)</span>\lambda<span class="math notranslate nohighlight">\( 是 \)</span>A<span class="math notranslate nohighlight">\( 的一个特征值，而 \)</span>v<span class="math notranslate nohighlight">\( 是 \)</span>A$ 的一个特征向量。</p>
-<p>在本节中，我们将介绍左特征向量。
-为避免混淆，我们之前称为”特征向量”的将被称为”右特征向量”。
-左特征向量在接下来的内容中将扮演重要角色，包括在马尔可夫假设下动态模型的随机稳态。</p>
-<p>如果 <span class="math notranslate nohighlight">\(w\)</span> 是 <span class="math notranslate nohighlight">\(A^\top\)</span> 的右特征向量，那么 <span class="math notranslate nohighlight">\(w\)</span> 被称为 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量。
-换句话说，如果 <span class="math notranslate nohighlight">\(w\)</span> 是矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量，那么 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span>，其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是与左特征向量 <span class="math notranslate nohighlight">\(v\)</span> 相关的特征值。
-这暗示了如何计算左特征向量。</p>
+\]</div>
+<p>那么 <span class="math notranslate nohighlight">\(\lambda\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征值，而 <span class="math notranslate nohighlight">\(v\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征向量。</p>
+<p>在本节中，我们将介绍左特征向量。</p>
+<p>为避免混淆，我们之前称为”特征向量”的将被称为”右特征向量”。</p>
+<p>左特征向量在接下来的内容中将扮演重要角色，包括在马尔可夫假设下动态模型的随机稳态。</p>
+<p>如果 <span class="math notranslate nohighlight">\(w\)</span> 是 <span class="math notranslate nohighlight">\(A^\top\)</span> 的右特征向量，那么 <span class="math notranslate nohighlight">\(w\)</span> 被称为 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量。</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(w\)</span> 是矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量，那么 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span>，其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是与左特征向量 <span class="math notranslate nohighlight">\(v\)</span> 相关的特征值。</p>
+<p>这暗示了如何计算左特征向量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -430,16 +420,16 @@ Av = \lambda v
 </div>
 </div>
 <p>特征值是相同的，而特征向量本身是不同的。
-（还要注意，我们取的是 <a class="reference internal" href="#perron-frobe"><span class="std std-ref">主特征值</span></a> 的特征向量的非负值，这是因为 <code class="docutils literal notranslate"><span class="pre">eig</span></code> 函数会自动对特征向量进行归一化。）
-然后我们可以对 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span> 进行转置，得到 <span class="math notranslate nohighlight">\(w^\top A= \lambda w^\top\)</span>。
-这是一个更常见的表达式，也是左特征向量这个名称的由来。</p>
+（还要注意，我们取的是 <a class="reference internal" href="#perron-frobe"><span class="std std-ref">主特征值</span></a> 的特征向量的非负值，这是因为 <code class="docutils literal notranslate"><span class="pre">eig</span></code> 函数会自动对特征向量进行归一化。）</p>
+<p>然后我们可以对 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span> 进行转置，得到 <span class="math notranslate nohighlight">\(w^\top A= \lambda w^\top\)</span>。</p>
+<p>这是一个更常见的表达式，也是左特征向量这个名称的由来。</p>
 </section>
 <section id="perron-frobe">
-<span id="id5"></span><h3><span class="section-number">42.1.3. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
-<p>对于一个非负方阵<span class="math notranslate nohighlight">\(A\)</span>，当<span class="math notranslate nohighlight">\(k \to \infty\)</span>时，<span class="math notranslate nohighlight">\(A^k\)</span>的行为由绝对值最大的特征值控制，通常称为<strong>主特征值</strong>。
-对于任何这样的矩阵<span class="math notranslate nohighlight">\(A\)</span>，佩龙-弗罗贝尼乌斯定理描述了主特征值及其对应特征向量的某些特性。</p>
+<span id="id5"></span><h3><span class="section-number">38.1.3. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
+<p>对于一个非负方阵<span class="math notranslate nohighlight">\(A\)</span>，当<span class="math notranslate nohighlight">\(k \to \infty\)</span>时，<span class="math notranslate nohighlight">\(A^k\)</span>的行为由绝对值最大的特征值控制，通常称为<strong>主特征值</strong>。</p>
+<p>对于任何这样的矩阵<span class="math notranslate nohighlight">\(A\)</span>，佩龙-弗罗贝尼乌斯定理描述了主特征值及其对应特征向量的某些特性。</p>
 <div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 42.1 </span> (佩龙-弗罗贝尼乌斯定理)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 38.1 </span> (佩龙-弗罗贝尼乌斯定理)</p>
 <section class="theorem-content" id="proof-content">
 <p>如果矩阵<span class="math notranslate nohighlight">\(A \geq 0\)</span>，那么：</p>
 <ol class="arabic simple">
@@ -453,11 +443,11 @@ Av = \lambda v
 <p>（关于原始矩阵的佩龙-弗罗贝尼乌斯定理的更多内容将在<a class="reference internal" href="#prim-matrices"><span class="std std-ref">下文</span></a>中介绍。）</p>
 </section>
 </div><p>（这是该定理的一个相对简单的版本——更多详细信息请参见<a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">这里</a>）。
-我们将在下面看到该定理的应用。
-让我们使用我们之前见过的一个简单<a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">例子</span></a>来建立对这个定理的直觉。
-现在让我们考虑每种情况的例子。</p>
+我们将在下面看到该定理的应用。</p>
+<p>让我们使用我们之前见过的一个简单<a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">例子</span></a>来建立对这个定理的直觉。</p>
+<p>现在让我们考虑每种情况的例子。</p>
 <section id="id6">
-<h4><span class="section-number">42.1.3.1. </span>示例：不可约矩阵<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">38.1.3.1. </span>示例：不可约矩阵<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
 <p>考虑以下不可约矩阵<span class="math notranslate nohighlight">\(A\)</span>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -494,13 +484,13 @@ Av = \lambda v
 </section>
 </section>
 <section id="prim-matrices">
-<span id="id7"></span><h3><span class="section-number">42.1.4. </span>原始矩阵<a class="headerlink" href="#prim-matrices" title="Permalink to this heading">#</a></h3>
-<p>我们知道，在现实世界的情况下，很难让一个矩阵处处为正（尽管它们具有良好的性质）。
-然而，原始矩阵仍然可以在更宽松的定义下给我们提供有用的性质。</p>
-<p>设<span class="math notranslate nohighlight">\(A\)</span>是一个非负方阵，<span class="math notranslate nohighlight">\(A^k\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的<span class="math notranslate nohighlight">\(k\)</span>次幂。
-如果存在一个<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，使得<span class="math notranslate nohighlight">\(A^k\)</span>处处为正，则称该矩阵为<strong>原始矩阵</strong>。</p>
+<span id="id7"></span><h3><span class="section-number">38.1.4. </span>原始矩阵<a class="headerlink" href="#prim-matrices" title="Permalink to this heading">#</a></h3>
+<p>我们知道，在现实世界的情况下，很难让一个矩阵处处为正（尽管它们具有良好的性质）。</p>
+<p>然而，原始矩阵仍然可以在更宽松的定义下给我们提供有用的性质。</p>
+<p>设<span class="math notranslate nohighlight">\(A\)</span>是一个非负方阵，<span class="math notranslate nohighlight">\(A^k\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的<span class="math notranslate nohighlight">\(k\)</span>次幂。</p>
+<p>如果存在一个<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，使得<span class="math notranslate nohighlight">\(A^k\)</span>处处为正，则称该矩阵为<strong>原始矩阵</strong>。</p>
 <div class="proof example admonition" id="eigen2_ex_prim">
-<p class="admonition-title"><span class="caption-number">Example 42.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 38.2 </span></p>
 <section class="example-content" id="proof-content">
 <p>回顾一下在不可约矩阵中给出的例子：</p>
 <div class="math notranslate nohighlight">
@@ -525,7 +515,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </div><p>我们可以看到，如果一个矩阵是原始的，那么它意味着该矩阵是不可约的，但反之则不然。</p>
 <p>现在让我们回到佩龙-弗罗贝尼乌斯定理中关于原始矩阵的部分</p>
 <div class="proof theorem admonition" id="con-perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 42.2 </span> (佩龙-弗罗贝尼乌斯定理)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 38.2 </span> (佩龙-弗罗贝尼乌斯定理)</p>
 <section class="theorem-content" id="proof-content">
 <p>如果<span class="math notranslate nohighlight">\(A\)</span>是原始矩阵，那么：</p>
 <ol class="arabic" start="6">
@@ -536,7 +526,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </ol>
 </section>
 </div><section id="id8">
-<h4><span class="section-number">42.1.4.1. </span>示例1：原始矩阵<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">38.1.4.1. </span>示例1：原始矩阵<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
 <p>考虑以下原始矩阵<span class="math notranslate nohighlight">\(B\)</span>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -740,15 +730,15 @@ n = 10000, error = 1.0000000000
 </div>
 </div>
 </div>
-<p>结果表明该矩阵不是原始矩阵，因为它并非处处为正。
-这些例子展示了佩龙-弗罗贝尼乌斯定理如何与正矩阵的特征值和特征向量以及矩阵幂的收敛性相关。
-事实上，我们在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">马尔可夫链讲座</span></a>中已经看到了该定理的应用。</p>
+<p>结果表明该矩阵不是原始矩阵，因为它并非处处为正。</p>
+<p>这些例子展示了佩龙-弗罗贝尼乌斯定理如何与正矩阵的特征值和特征向量以及矩阵幂的收敛性相关。</p>
+<p>事实上，我们在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">马尔可夫链讲座</span></a>中已经看到了该定理的应用。</p>
 </section>
 <section id="spec-markov">
-<span id="id9"></span><h4><span class="section-number">42.1.4.2. </span>示例2：与马尔可夫链的联系<a class="headerlink" href="#spec-markov" title="Permalink to this heading">#</a></h4>
-<p>我们现在准备好将这两节课中使用的语言联系起来。
-原始矩阵既是不可约的，又是非周期的。
-因此，佩龙-弗罗贝尼乌斯定理解释了为什么<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">伊玛目和寺庙矩阵</span></a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">哈密顿矩阵</a>都收敛到一个平稳分布，这就是这两个矩阵的佩龙投影。</p>
+<span id="id9"></span><h4><span class="section-number">38.1.4.2. </span>示例2：与马尔可夫链的联系<a class="headerlink" href="#spec-markov" title="Permalink to this heading">#</a></h4>
+<p>我们现在准备好将这两节课中使用的语言联系起来。</p>
+<p>原始矩阵既是不可约的，又是非周期的。</p>
+<p>因此，佩龙-弗罗贝尼乌斯定理解释了为什么<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">伊玛目和寺庙矩阵</span></a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">哈密顿矩阵</a>都收敛到一个平稳分布，这就是这两个矩阵的佩龙投影。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">],</span>
@@ -814,43 +804,46 @@ n = 10000, error = 1.0000000000
 </div>
 </div>
 <p>我们还可以验证 Perron-Frobenius 定理暗示的这些随机矩阵的其他性质。</p>
-<p>另一个例子是收敛间隙和收敛速率之间的关系。
-在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">练习</span></a>中，我们指出收敛速率由谱间隙决定，即最大特征值和第二大特征值之间的差异。
-利用我们在这里学到的知识，可以证明这一点。
-请注意，在本讲中我们使用 <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> 表示全1向量。
-对于具有状态空间 <span class="math notranslate nohighlight">\(S\)</span> 和转移矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔可夫模型，我们可以将 <span class="math notranslate nohighlight">\(P^t\)</span> 写成
-$<span class="math notranslate nohighlight">\(
+<p>另一个例子是收敛间隙和收敛速率之间的关系。</p>
+<p>在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">练习</span></a>中，我们指出收敛速率由谱间隙决定，即最大特征值和第二大特征值之间的差异。</p>
+<p>利用我们在这里学到的知识，可以证明这一点。</p>
+<p>请注意，在本讲中我们使用 <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> 表示全1向量。</p>
+<p>对于具有状态空间 <span class="math notranslate nohighlight">\(S\)</span> 和转移矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔可夫模型，我们可以将 <span class="math notranslate nohighlight">\(P^t\)</span> 写成</p>
+<div class="math notranslate nohighlight">
+\[
 P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
-\)</span><span class="math notranslate nohighlight">\(
-这在{cite}`sargent2023economic`中得到证明，[这里](https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector)有一个很好的讨论。
-在这个公式中，\)</span>\lambda_i<span class="math notranslate nohighlight">\( 是 \)</span>P<span class="math notranslate nohighlight">\( 的特征值，\)</span>v_i<span class="math notranslate nohighlight">\( 和 \)</span>w_i<span class="math notranslate nohighlight">\( 分别是对应的右特征向量和左特征向量。
-现在用任意 \)</span>\psi \in \mathscr{D}(S)<span class="math notranslate nohighlight">\( 左乘 \)</span>P^t<span class="math notranslate nohighlight">\( 并重新排列，得到
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>这在<span id="id10">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span>中得到证明，<a class="reference external" href="https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector">这里</a>有一个很好的讨论。</p>
+<p>在这个公式中，<span class="math notranslate nohighlight">\(\lambda_i\)</span> 是 <span class="math notranslate nohighlight">\(P\)</span> 的特征值，<span class="math notranslate nohighlight">\(v_i\)</span> 和 <span class="math notranslate nohighlight">\(w_i\)</span> 分别是对应的右特征向量和左特征向量。</p>
+<p>现在用任意 <span class="math notranslate nohighlight">\(\psi \in \mathscr{D}(S)\)</span> 左乘 <span class="math notranslate nohighlight">\(P^t\)</span> 并重新排列，得到</p>
+<div class="math notranslate nohighlight">
+\[
 \psi P^t-\psi^*=\sum_{i=1}^{n-1} \lambda_i^t \psi v_i w_i^{\top}
-\)</span><span class="math notranslate nohighlight">\(
-回想一下，特征值从 \)</span>i = 1 … n<span class="math notranslate nohighlight">\( 从小到大排序。
-正如我们所见，原始随机矩阵的最大特征值是1。
-这可以用[Gershgorin圆盘定理](https://en.wikipedia.org/wiki/Gershgorin_circle_theorem)来证明，
-但这超出了本讲的范围。
-因此，根据 Perron-Frobenius 定理的第(6)条陈述，当 \)</span>P<span class="math notranslate nohighlight">\( 是原始的时候，对所有 \)</span>i&lt;n<span class="math notranslate nohighlight">\(，有 \)</span>\lambda_i&lt;1<span class="math notranslate nohighlight">\(，且 \)</span>\lambda_n=1<span class="math notranslate nohighlight">\(。
-因此，在取欧几里得范数偏差后，我们得到
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>回想一下，特征值从 <span class="math notranslate nohighlight">\(i = 1 ... n\)</span> 从小到大排序。</p>
+<p>正如我们所见，原始随机矩阵的最大特征值是1。</p>
+<p>这可以用<a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin圆盘定理</a>来证明，
+但这超出了本讲的范围。</p>
+<p>因此，根据 Perron-Frobenius 定理的第(6)条陈述，当 <span class="math notranslate nohighlight">\(P\)</span> 是原始的时候，对所有 <span class="math notranslate nohighlight">\(i&lt;n\)</span>，有 <span class="math notranslate nohighlight">\(\lambda_i&lt;1\)</span>，且 <span class="math notranslate nohighlight">\(\lambda_n=1\)</span>。</p>
+<p>因此，在取欧几里得范数偏差后，我们得到</p>
+<div class="math notranslate nohighlight">
+\[
 \left\|\psi P^t-\psi^*\right\|=O\left(\eta^t\right) \quad \text { 其中 } \quad \eta:=\left|\lambda_{n-1}\right|&lt;1
-\)</span>$
-因此，收敛速率由第二大特征值的模决定。</p>
+\]</div>
+<p>因此，收敛速率由第二大特征值的模决定。</p>
 </section>
 </section>
 </section>
-<section id="id10">
-<h2><span class="section-number">42.2. </span>练习<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<section id="id11">
+<h2><span class="section-number">38.2. </span>练习<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="eig_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 42.1 </span> (列昂惕夫投入产出模型)</p>
+<p class="admonition-title"><span class="caption-number">Exercise 38.1 </span> (列昂惕夫投入产出模型)</p>
 <section id="exercise-content">
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">瓦西里·列昂惕夫</a>开发了一个具有<span class="math notranslate nohighlight">\(n\)</span>个部门生产<span class="math notranslate nohighlight">\(n\)</span>种不同商品的经济模型，代表了经济不同部门之间的相互依存关系。
-在这个模型中，一部分产出在行业内部消耗，其余部分由外部消费者消费。
-我们定义一个简单的三部门模型 - 农业、工业和服务业。
-下表描述了产出如何在经济中分配：</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">瓦西里·列昂惕夫</a>开发了一个具有<span class="math notranslate nohighlight">\(n\)</span>个部门生产<span class="math notranslate nohighlight">\(n\)</span>种不同商品的经济模型，代表了经济不同部门之间的相互依存关系。</p>
+<p>在这个模型中，一部分产出在行业内部消耗，其余部分由外部消费者消费。</p>
+<p>我们定义一个简单的三部门模型 - 农业、工业和服务业。</p>
+<p>下表描述了产出如何在经济中分配：</p>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-center head"><p></p></th>
@@ -883,54 +876,46 @@ P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
 <td class="text-center"><p>0.1<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>12</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>第一行描述了农业的总产出<span class="math notranslate nohighlight">\(x_1\)</span>是如何分配的</p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-<td class="text-center"><p></p></td>
-</tr>
 </tbody>
 </table>
 </div>
+<p>第一行描述了农业的总产出<span class="math notranslate nohighlight">\(x_1\)</span>是如何分配的</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(0.3x_1\)</span>在农业内部用作投入，</p></li>
 <li><p><span class="math notranslate nohighlight">\(0.2x_2\)</span>被工业部门用作投入以生产<span class="math notranslate nohighlight">\(x_2\)</span>单位，</p></li>
 <li><p><span class="math notranslate nohighlight">\(0.3x_3\)</span>被服务业部门用作投入以生产<span class="math notranslate nohighlight">\(x_3\)</span>单位，</p></li>
-<li><p>4单位是消费者的外部需求。
-我们可以将其转化为三个部门的线性方程组系统，如下所示：
-$<span class="math notranslate nohighlight">\(
-  x_1 = 0.3x_1 + 0.2x_2 + 0.3x_3 + 4 \\
-  x_2 = 0.2x_1 + 0.4x_2 + 0.3x_3 + 5 \\
-  x_3 = 0.2x_1 + 0.5x_2 + 0.1x_3 + 12
-\)</span><span class="math notranslate nohighlight">\(
-这可以转化为矩阵方程\)</span>x = Ax + d<span class="math notranslate nohighlight">\(，其中
-\)</span>$
-x =</p></li>
+<li><p>4单位是消费者的外部需求。</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-20ece9aa-3a4d-41ea-b8fa-12f72be8636f">
-<span class="eqno">(41.1)<a class="headerlink" href="#equation-20ece9aa-3a4d-41ea-b8fa-12f72be8636f" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+<p>我们可以将其转化为三个部门的线性方程组系统，如下所示：
+$<span class="math notranslate nohighlight">\(
+    x_1 = 0.3x_1 + 0.2x_2 + 0.3x_3 + 4 \\
+    x_2 = 0.2x_1 + 0.4x_2 + 0.3x_3 + 5 \\
+    x_3 = 0.2x_1 + 0.5x_2 + 0.1x_3 + 12
+\)</span>$</p>
+<p>这可以转化为矩阵方程<span class="math notranslate nohighlight">\(x = Ax + d\)</span>，其中</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x =
+\begin{bmatrix}
     x_1 \\
     x_2 \\
     x_3
-\end{bmatrix}\]</div>
-<p>, ; A =</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d96efeb4-8eec-4278-9492-93d76f0c1bdd">
-<span class="eqno">(41.2)<a class="headerlink" href="#equation-d96efeb4-8eec-4278-9492-93d76f0c1bdd" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+\end{bmatrix}
+, \; A =
+\begin{bmatrix}
     0.3 &amp; 0.2 &amp; 0.3 \\
     0.2 &amp; 0.4 &amp; 0.3 \\
     0.2 &amp; 0.5 &amp; 0.1
-\end{bmatrix}\]</div>
-<p>; \text{和} ;
-d =</p>
-<div class="amsmath math notranslate nohighlight" id="equation-55e44928-b011-4572-bd4a-3b8c60227581">
-<span class="eqno">(41.3)<a class="headerlink" href="#equation-55e44928-b011-4572-bd4a-3b8c60227581" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
+\end{bmatrix}
+\; \text{和} \;
+d =
+\begin{bmatrix}
     4 \\
     5 \\
     12
-\end{bmatrix}\]</div>
-<p>$<span class="math notranslate nohighlight">\(
-解\)</span>x^{<em>}<span class="math notranslate nohighlight">\(由方程\)</span>x^{</em>} = (I-A)^{-1} d$给出</p>
+\end{bmatrix}
+\end{split}\]</div>
+<p>解<span class="math notranslate nohighlight">\(x^{*}\)</span>由方程<span class="math notranslate nohighlight">\(x^{*} = (I-A)^{-1} d\)</span>给出</p>
 <ol class="arabic simple">
 <li><p>由于<span class="math notranslate nohighlight">\(A\)</span>是一个非负不可约矩阵，求<span class="math notranslate nohighlight">\(A\)</span>的Perron-Frobenius特征值。</p></li>
 <li><p>使用<a class="reference internal" href="eigen_I.html#la-neumann"><span class="std std-ref">诺伊曼级数引理</span></a>求解<span class="math notranslate nohighlight">\(x^{*}\)</span>（如果存在）。</p></li>
@@ -939,7 +924,7 @@ d =</p>
 </div>
 <div class="solution dropdown admonition" id="eigen_II-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 42.1 (列昂惕夫投入产出模型)</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eig_ex1"> Exercise 38.1 (列昂惕夫投入产出模型)</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1207,17 +1192,17 @@ d =</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1229,22 +1214,22 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1256,22 +1241,22 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1283,12 +1268,12 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1300,22 +1285,22 @@ d =</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1327,12 +1312,12 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1344,12 +1329,12 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1361,17 +1346,17 @@ d =</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

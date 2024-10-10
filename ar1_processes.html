@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>33. AR(1) 过程 &#8212; Python数量经济学入门</title>
+    <title>32. AR(1) 过程 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="34. 马尔科夫链：基本概念" href="markov_chains_I.html" />
-    <link rel="prev" title="32. 拉弗曲线与自适应预期" href="laffer_adaptive.html" />
+    <link rel="next" title="33. 马尔科夫链：基本概念" href="markov_chains_I.html" />
+    <link rel="prev" title="31. 拉弗曲线与自适应预期" href="laffer_adaptive.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -172,18 +172,18 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">33.1. 概览</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">33.2. AR(1) 模型</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">33.2.1. 移动平均表示</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">33.2.2. 分布动态</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">32.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">32.2. AR(1) 模型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">32.2.1. 移动平均表示</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">32.2.2. 分布动态</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">33.3. 平稳性和渐近稳定性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">33.3.1. 平稳分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">32.3. 平稳性和渐近稳定性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">32.3.1. 平稳分布</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">33.4. 遍历性</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">33.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">32.4. 遍历性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">32.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -247,9 +247,9 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="ar-1">
-<span id="ar1-processes"></span><h1><span class="section-number">33. </span>AR(1) 过程<a class="headerlink" href="#ar-1" title="Permalink to this heading">#</a></h1>
+<span id="ar1-processes"></span><h1><span class="section-number">32. </span>AR(1) 过程<a class="headerlink" href="#ar-1" title="Permalink to this heading">#</a></h1>
 <section id="index-0">
-<span id="id1"></span><h2><span class="section-number">33.1. </span>概览<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2><span class="section-number">32.1. </span>概览<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
 <p>在这个讲座中，我们将研究一类非常简单的随机模型，称为 AR(1) 过程。</p>
 <p>这些简单的模型在经济研究中一次又一次地被用来表示诸如</p>
 <ul class="simple">
@@ -264,30 +264,35 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 设置默认图像大小</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id2">
-<h2><span class="section-number">33.2. </span>AR(1) 模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.2. </span>AR(1) 模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p><strong>AR(1) 模型</strong>（一阶自回归模型）形式是：</p>
 <div class="math notranslate nohighlight" id="equation-can-ar1">
-<span class="eqno">(33.1)<a class="headerlink" href="#equation-can-ar1" title="Permalink to this equation">#</a></span>\[X_{t+1} = a X_t + b + c W_{t+1}\]</div>
+<span class="eqno">(32.1)<a class="headerlink" href="#equation-can-ar1" title="Permalink to this equation">#</a></span>\[X_{t+1} = a X_t + b + c W_{t+1}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(a, b, c\)</span> 是标量参数</p>
-<p>(方程 <a class="reference internal" href="#equation-can-ar1">(33.1)</a> 有时被称为 <strong>随机差分方程</strong>。)</p>
+<p>(方程 <a class="reference internal" href="#equation-can-ar1">(32.1)</a> 有时被称为 <strong>随机差分方程</strong>。)</p>
 <div class="proof example admonition" id="ar1_ex_ar">
-<p class="admonition-title"><span class="caption-number">Example 33.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 32.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>例如，<span class="math notranslate nohighlight">\(X_t\)</span> 可能是</p>
 <ul class="simple">
 <li><p>某个家庭的劳动收入对数，或</p></li>
 <li><p>某个经济体的货币需求对数。</p></li>
 </ul>
-<p>在两种情况下，<a class="reference internal" href="#equation-can-ar1">(33.1)</a> 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 来演变的。</p>
+<p>在两种情况下，<a class="reference internal" href="#equation-can-ar1">(32.1)</a> 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 来演变的。</p>
 <p>(我们使用 <span class="math notranslate nohighlight">\(t+1\)</span> 作为 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的下标，因为在时间 <span class="math notranslate nohighlight">\(t\)</span> 这个随机变量还未被观察到。)</p>
 </section>
-</div><p>一旦我们指定一个初始条件 <span class="math notranslate nohighlight">\(X_0\)</span>，我们就可以用<a class="reference internal" href="#equation-can-ar1">(33.1)</a> 生成一个时间序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span>。</p>
+</div><p>一旦我们指定一个初始条件 <span class="math notranslate nohighlight">\(X_0\)</span>，我们就可以用<a class="reference internal" href="#equation-can-ar1">(32.1)</a> 生成一个时间序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span>。</p>
 <p>为了使事情变得更简单，我们将假设</p>
 <ul class="simple">
 <li><p>过程 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> 且符合标准正态分布，</p></li>
@@ -295,7 +300,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 与 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 独立。</p></li>
 </ul>
 <section id="id3">
-<h3><span class="section-number">33.2.1. </span>移动平均表示<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.1. </span>移动平均表示<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>从时间 <span class="math notranslate nohighlight">\(t\)</span> 向后迭代，我们得到</p>
 <div class="math notranslate nohighlight">
 \[
@@ -306,9 +311,9 @@ X_t = a X_{t-1} + b +  c W_t
 \]</div>
 <p>如果我们一直追溯到零时，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ma">
-<span class="eqno">(33.2)<a class="headerlink" href="#equation-ar1-ma" title="Permalink to this equation">#</a></span>\[X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
+<span class="eqno">(32.2)<a class="headerlink" href="#equation-ar1-ma" title="Permalink to this equation">#</a></span>\[X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
         c \sum_{j=0}^{t-1} a^j  W_{t-j}\]</div>
-<p>方程 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 显示 <span class="math notranslate nohighlight">\(X_t\)</span> 是一个明确定义的随机变量，其值取决于</p>
+<p>方程 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 显示 <span class="math notranslate nohighlight">\(X_t\)</span> 是一个明确定义的随机变量，其值取决于</p>
 <ul class="simple">
 <li><p>参数，</p></li>
 <li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 和</p></li>
@@ -317,23 +322,23 @@ X_t = a X_{t-1} + b +  c W_t
 <p>在整个过程中，符号 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将用来指代这个随机变量 <span class="math notranslate nohighlight">\(X_t\)</span> 的密度。</p>
 </section>
 <section id="id4">
-<h3><span class="section-number">33.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>这个模型的一个好处是很容易追踪一系列分布 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>，这些分布对应于时间
 序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 的现实演变。具体来说，我们可以在每个日期 <span class="math notranslate nohighlight">\(t\)</span> 上追踪观测到的 <span class="math notranslate nohighlight">\(X_t\)</span> 的边际分布。</p>
 <p>让我们看看我们如何做到这一点。</p>
 <p>首先我们指出，对于每个时间 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的。</p>
-<p>这是从 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 显见的，因为独立正态随机变量的线性组合是正态分布的。</p>
+<p>这是从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 显见的，因为独立正态随机变量的线性组合是正态分布的。</p>
 <p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的前两个<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
 <p>设 <span class="math notranslate nohighlight">\(\mu_t\)</span> 和 <span class="math notranslate nohighlight">\(v_t\)</span> 分别表示 <span class="math notranslate nohighlight">\(X_t\)</span> 的均值和方差。</p>
-<p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 确定这些值，或者我们可以使用以下递归表达式：</p>
+<p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 确定这些值，或者我们可以使用以下递归表达式：</p>
 <div class="math notranslate nohighlight" id="equation-dyn-tm">
-<span class="eqno">(33.3)<a class="headerlink" href="#equation-dyn-tm" title="Permalink to this equation">#</a></span>\[\mu_{t+1} = a \mu_t + b
+<span class="eqno">(32.3)<a class="headerlink" href="#equation-dyn-tm" title="Permalink to this equation">#</a></span>\[\mu_{t+1} = a \mu_t + b
 \quad 	ext{和} \quad
 v_{t+1} = a^2 v_t + c^2\]</div>
-<p>通过分别取等式两侧的期望和方差，从 <a class="reference internal" href="#equation-can-ar1">(33.1)</a> 得到这些表达式。</p>
+<p>通过分别取等式两侧的期望和方差，从 <a class="reference internal" href="#equation-can-ar1">(32.1)</a> 得到这些表达式。</p>
 <p>在计算第二个表达式时，我们利用了 <span class="math notranslate nohighlight">\(X_t\)</span> 和 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的独立性。</p>
-<p>(这是根据我们的假设和 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 得出的。)</p>
-<p>给定 <a class="reference internal" href="#equation-ar1-ma">(33.2)</a> 中的动态和初始条件 <span class="math notranslate nohighlight">\(\mu_0, v_0\)</span>，我们得到 <span class="math notranslate nohighlight">\(\mu_t, v_t\)</span>，因此</p>
+<p>(这是根据我们的假设和 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 得出的。)</p>
+<p>给定 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 中的动态和初始条件 <span class="math notranslate nohighlight">\(\mu_0, v_0\)</span>，我们得到 <span class="math notranslate nohighlight">\(\mu_t, v_t\)</span>，因此</p>
 <div class="math notranslate nohighlight">
 \[
 \psi_t = N(\mu_t, v_t)
@@ -373,13 +378,13 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ca5d15b3c87a70fc341399f7e91658ce7141fbe961965b0518cbade0fad68fbb.png"><img alt="_images/ca5d15b3c87a70fc341399f7e91658ce7141fbe961965b0518cbade0fad68fbb.png" src="_images/ca5d15b3c87a70fc341399f7e91658ce7141fbe961965b0518cbade0fad68fbb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/87aaab38cce6a38e64d528ed0dc6c166e5a9316d012c2410c70f037f13d1c4bc.png"><img alt="_images/87aaab38cce6a38e64d528ed0dc6c166e5a9316d012c2410c70f037f13d1c4bc.png" src="_images/87aaab38cce6a38e64d528ed0dc6c166e5a9316d012c2410c70f037f13d1c4bc.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
 <section id="id5">
-<h2><span class="section-number">33.3. </span>平稳性和渐近稳定性<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.3. </span>平稳性和渐近稳定性<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>当我们使用模型来研究现实世界时，通常希望我们的模型具有清晰准确的预测。</p>
 <p>对于动态问题，清晰的预测与稳定性有关。</p>
 <p>例如，如果一个动态模型预测通货膨胀总是收敛到某种稳态，那么这个模型提供了一个明确的预测。</p>
@@ -404,7 +409,7 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png"><img alt="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png" src="_images/88183024acda6460a65dae6bcca16d214d907c07260934b72a58633d421629b2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a5bf62574fd39b91a9f4f1d7be5d4df47e094ff636ddfa2fd56be27bef7dd57a.png"><img alt="_images/a5bf62574fd39b91a9f4f1d7be5d4df47e094ff636ddfa2fd56be27bef7dd57a.png" src="_images/a5bf62574fd39b91a9f4f1d7be5d4df47e094ff636ddfa2fd56be27bef7dd57a.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>此外，极限不依赖于初始条件。</p>
@@ -418,21 +423,21 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png"><img alt="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png" src="_images/d55488b0c7075d2181e02de513c68275ea0f2e3e554bffe779631af778b3ea44.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/00d5a20b1c61de872745994cab6129930f317297af29602835d43cb45b4125ce.png"><img alt="_images/00d5a20b1c61de872745994cab6129930f317297af29602835d43cb45b4125ce.png" src="_images/00d5a20b1c61de872745994cab6129930f317297af29602835d43cb45b4125ce.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>事实上，可以很容易地证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，不管初始条件如何，都会发生这种收敛。</p>
 <p>为了看到这一点，我们只需查看前两个矩的动态，
-如 <a class="reference internal" href="#equation-dyn-tm">(33.3)</a> 中所给出的。</p>
+如 <a class="reference internal" href="#equation-dyn-tm">(32.3)</a> 中所给出的。</p>
 <p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，这些序列会收敛到各自的极限</p>
 <div class="math notranslate nohighlight" id="equation-mu-sig-star">
-<span class="eqno">(33.4)<a class="headerlink" href="#equation-mu-sig-star" title="Permalink to this equation">#</a></span>\[\mu^* := \frac{b}{1-a}
+<span class="eqno">(32.4)<a class="headerlink" href="#equation-mu-sig-star" title="Permalink to this equation">#</a></span>\[\mu^* := \frac{b}{1-a}
 \quad 和 \quad
 v^* = \frac{c^2}{1 - a^2}\]</div>
 <p>（请参阅我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">一维动力学讲座</span></a>，了解确定性收敛的背景。）</p>
 <p>因此</p>
 <div class="math notranslate nohighlight" id="equation-ar1-psi-star">
-<span class="eqno">(33.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Permalink to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
+<span class="eqno">(32.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Permalink to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
 \quad 当
 t \to \infty\]</div>
 <p>我们可以使用以下代码确认这对于上面的序列是有效的。</p>
@@ -452,13 +457,13 @@ t \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png"><img alt="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png" src="_images/ff218eb377b75199fea552684c06b82ea0f8962b60cd48e64d0dec6a9ab3a03b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fd59ee0a34a20ef528d0ebbedeafeb623789cb2eff21407f14fffc44c9ac7e3d.png"><img alt="_images/fd59ee0a34a20ef528d0ebbedeafeb623789cb2eff21407f14fffc44c9ac7e3d.png" src="_images/fd59ee0a34a20ef528d0ebbedeafeb623789cb2eff21407f14fffc44c9ac7e3d.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>请注意，根据上述参数，我们看到序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 收敛到 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。</p>
 <section id="id6">
-<h3><span class="section-number">33.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>让我们更好地理解极限分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>平稳分布是 AR(1) 过程更新规则的一个“固定点”。</p>
 <p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb N\)</span> 中成立。</p>
@@ -469,7 +474,7 @@ X_t \sim \psi
 \quad \implies \quad
 a X_t + b + c W_{t+1} \sim \psi
 \]</div>
-<p><span class="math notranslate nohighlight">\(\psi^*\)</span> 在 <a class="reference internal" href="#equation-ar1-psi-star">(33.5)</a> 中具有这一性质——检查这一点是一个练习。</p>
+<p><span class="math notranslate nohighlight">\(\psi^*\)</span> 在 <a class="reference internal" href="#equation-ar1-psi-star">(32.5)</a> 中具有这一性质——检查这一点是一个练习。</p>
 <p>（当然，我们假设 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 从而 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是
 良定义的。）</p>
 <p>事实上，可以证明 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上没有其他分布具有这一性质。</p>
@@ -477,23 +482,23 @@ a X_t + b + c W_{t+1} \sim \psi
 </section>
 </section>
 <section id="id7">
-<h2><span class="section-number">33.4. </span>遍历性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.4. </span>遍历性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>不同的作者使用遍历性这一概念有不同的方式。</p>
 <p>在当前设定中理解它的一种方式是，即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律也是有效的。</p>
 <p>特别是，时间序列的平均值收敛于平稳分布下的期望值。</p>
 <p>实际上，可以证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，我们就有</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ergo">
-<span class="eqno">(33.6)<a class="headerlink" href="#equation-ar1-ergo" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t) \to
+<span class="eqno">(32.6)<a class="headerlink" href="#equation-ar1-ergo" title="Permalink to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t) \to
 \int h(x) \psi^*(x) dx
     \quad 当 m \to \infty\]</div>
 <p>只要右侧的积分是有限且良定义的。</p>
 <p>注意：</p>
 <ul class="simple">
-<li><p>在 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 中，收敛性以概率1成立。</p></li>
+<li><p>在 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 中，收敛性以概率1成立。</p></li>
 <li><p>由 <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span> 编写的教科书是关于遍历性的经典参考。</p></li>
 </ul>
 <div class="proof example admonition" id="ar1_ex_id">
-<p class="admonition-title"><span class="caption-number">Example 33.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 32.2 </span></p>
 <section class="example-content" id="proof-content">
 <p>如果我们考虑恒等函数 <span class="math notranslate nohighlight">\(h(x) = x\)</span>，我们得到</p>
 <div class="math notranslate nohighlight">
@@ -505,16 +510,16 @@ a X_t + b + c W_{t+1} \sim \psi
 <p>即，时间序列样本均值收敛于平稳分布的均值。</p>
 </section>
 </div><p>出于多种原因，遍历性非常重要。</p>
-<p>例如，<a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 可用来测试理论。</p>
-<p>在这个方程中，我们可以使用观测数据来评估 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a> 的左侧。</p>
+<p>例如，<a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 可用来测试理论。</p>
+<p>在这个方程中，我们可以使用观测数据来评估 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 的左侧。</p>
 <p>我们可以使用理论的 AR(1) 模型来计算右侧。</p>
 <p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> 即使在很多观测下也不接近 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>，那么我们的理论似乎是错误的，我们将需要修订它。</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">33.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="ar1p_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 32.1 </span></p>
 <section id="exercise-content">
 <p>假设 <span class="math notranslate nohighlight">\(k\)</span> 是一个自然数。</p>
 <p>随机变量的 <span class="math notranslate nohighlight">\(k\)</span> 阶中心矩定义为</p>
@@ -532,7 +537,7 @@ M_k =
 \end{cases}
 \end{split}\]</div>
 <p>这里 <span class="math notranslate nohighlight">\(n!!\)</span> 是<a class="reference external" href="https://en.wikipedia.org/wiki/Double_factorial">双阶乘</a>。</p>
-<p>根据 <a class="reference internal" href="#equation-ar1-ergo">(33.6)</a>, 对于任何 <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span>，</p>
+<p>根据 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a>, 对于任何 <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span>，</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{m} \sum_{t = 1}^m
@@ -545,7 +550,7 @@ M_k =
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex1"> Exercise 33.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex1"> Exercise 32.1</a></p>
 <section id="solution-content">
 <p>这是一个解法：</p>
 <div class="cell docutils container">
@@ -587,26 +592,14 @@ M_k =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30495 (\N{CJK UNIFIED IDEOGRAPH-771F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30697 (\N{CJK UNIFIED IDEOGRAPH-77E9}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26679 (\N{CJK UNIFIED IDEOGRAPH-6837}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26412 (\N{CJK UNIFIED IDEOGRAPH-672C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png"><img alt="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png" src="_images/4e8291b8d3a7a60cef540befbf02eecc0114f14294178ddffc47e51af3531257.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d6cbaa3df4d5133293a2a6d2182ab3f0a83a885f30778f44fc2a51f0914c3e23.png"><img alt="_images/d6cbaa3df4d5133293a2a6d2182ab3f0a83a885f30778f44fc2a51f0914c3e23.png" src="_images/d6cbaa3df4d5133293a2a6d2182ab3f0a83a885f30778f44fc2a51f0914c3e23.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </div>
 <div class="exercise admonition" id="ar1p_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 32.2 </span></p>
 <section id="exercise-content">
 <p>编写一个一维<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">核密度估计</a>的版本，用于从样本中估计密度。</p>
 <p>将其写为一个类，该类在初始化时接受数据 <span class="math notranslate nohighlight">\(X\)</span> 和带宽 <span class="math notranslate nohighlight">\(h\)</span>，并提供一个方法 <span class="math notranslate nohighlight">\(f\)</span>，使得</p>
@@ -634,7 +627,7 @@ K \left( \frac{x-X_i}{h} \right)
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex2"> Exercise 33.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex2"> Exercise 32.2</a></p>
 <section id="solution-content">
 <p>这是一个解决方案：</p>
 <div class="cell docutils container">
@@ -692,21 +685,9 @@ K \left( \frac{x-X_i}{h} \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20272 (\N{CJK UNIFIED IDEOGRAPH-4F30}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 35745 (\N{CJK UNIFIED IDEOGRAPH-8BA1}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20540 (\N{CJK UNIFIED IDEOGRAPH-503C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23494 (\N{CJK UNIFIED IDEOGRAPH-5BC6}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/c3bcb70dc9a93fc0744764a06a664d19bb02df30184f5d228185a5fba071429d.png"><img alt="_images/c3bcb70dc9a93fc0744764a06a664d19bb02df30184f5d228185a5fba071429d.png" src="_images/c3bcb70dc9a93fc0744764a06a664d19bb02df30184f5d228185a5fba071429d.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/4feaf58fe74e70a54d24d72f8587128f25473e5ae0a1aef70b6cbc7d0affbd80.png"><img alt="_images/4feaf58fe74e70a54d24d72f8587128f25473e5ae0a1aef70b6cbc7d0affbd80.png" src="_images/4feaf58fe74e70a54d24d72f8587128f25473e5ae0a1aef70b6cbc7d0affbd80.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/2e6b22c04db51d5913cb6fafb0a7efdc543cd571d73d94d7f582f77bc92d4e55.png"><img alt="_images/2e6b22c04db51d5913cb6fafb0a7efdc543cd571d73d94d7f582f77bc92d4e55.png" src="_images/2e6b22c04db51d5913cb6fafb0a7efdc543cd571d73d94d7f582f77bc92d4e55.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f5cf19dd4a69fc5a329a7adf5c0aebfbf6537af8631c806355c75e373b71e80c.png"><img alt="_images/f5cf19dd4a69fc5a329a7adf5c0aebfbf6537af8631c806355c75e373b71e80c.png" src="_images/f5cf19dd4a69fc5a329a7adf5c0aebfbf6537af8631c806355c75e373b71e80c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/bab99fca33459c603b9b2e14d8c7563040cb086fb7f88ffc8b2bebcb5eec9dc7.png"><img alt="_images/bab99fca33459c603b9b2e14d8c7563040cb086fb7f88ffc8b2bebcb5eec9dc7.png" src="_images/bab99fca33459c603b9b2e14d8c7563040cb086fb7f88ffc8b2bebcb5eec9dc7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3d04886c5df7ade8e2b6f326d4c2718850a04fcf8ad676565e0ba68df874f506.png"><img alt="_images/3d04886c5df7ade8e2b6f326d4c2718850a04fcf8ad676565e0ba68df874f506.png" src="_images/3d04886c5df7ade8e2b6f326d4c2718850a04fcf8ad676565e0ba68df874f506.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>我们可以看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则效果不佳。</p>
@@ -714,7 +695,7 @@ K \left( \frac{x-X_i}{h} \right)
 </div>
 <div class="exercise admonition" id="ar1p_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 32.3 </span></p>
 <section id="exercise-content">
 <p>在讲座中我们讨论了以下事实：对于 <span class="math notranslate nohighlight">\(AR(1)\)</span> 过程</p>
 <div class="math notranslate nohighlight">
@@ -747,7 +728,7 @@ X_{t+1} = a X_t + b + c W_{t+1}
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex3"> Exercise 33.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex3"> Exercise 32.3</a></p>
 <section id="solution-content">
 <p>这是我们的解决方案</p>
 <div class="cell docutils container">
@@ -1015,17 +996,17 @@ X_{t+1} = a X_t + b + c W_{t+1}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1037,22 +1018,22 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1064,22 +1045,22 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1091,12 +1072,12 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1108,22 +1089,22 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1135,12 +1116,12 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1152,12 +1133,12 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1169,17 +1150,17 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

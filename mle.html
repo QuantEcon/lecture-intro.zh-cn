@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>49. 最大似然估计 &#8212; Python数量经济学入门</title>
+    <title>45. 最大似然估计 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -123,8 +123,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="50. 故障排除" href="troubleshooting.html" />
-    <link rel="prev" title="48. 简单线性回归模型" href="simple_linear_regression.html" />
+    <link rel="next" title="46. 故障排除" href="troubleshooting.html" />
+    <link rel="prev" title="44. 简单线性回归模型" href="simple_linear_regression.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -172,16 +172,16 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">49.1. 介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">49.2. 最大似然估计</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">49.3. 帕累托分布</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">49.4. 什么是最好的分布？</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">49.4.1. 对数正态分布和右尾部</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">49.4.2. 帕累托分布用于右尾部</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">49.4.3. 那么什么是最佳分布？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">45.1. 介绍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">45.2. 最大似然估计</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">45.3. 帕累托分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">45.4. 什么是最好的分布？</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">45.4.1. 对数正态分布和右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">45.4.2. 帕累托分布用于右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">45.4.3. 那么什么是最佳分布？</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">49.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">45.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -241,7 +241,7 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">49. </span>最大似然估计<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">45. </span>最大似然估计<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
@@ -260,7 +260,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">49.1. </span>介绍<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.1. </span>介绍<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>考虑一个政策制定者试图估算提议中的财富税将带来多少收入的情况。</p>
 <p>提议的税务公式为：</p>
 <div class="math notranslate nohighlight">
@@ -273,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
 \end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(w\)</span> 代表财富。</p>
 <div class="proof example admonition" id="mle_ex_wt">
-<p class="admonition-title"><span class="caption-number">Example 49.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 45.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>例如，如果 <span class="math notranslate nohighlight">\(a = 0.05\)</span>，<span class="math notranslate nohighlight">\(b = 0.1\)</span>，且 <span class="math notranslate nohighlight">\(\bar w = 2.5\)</span>，意味着：</p>
 <ul class="simple">
@@ -365,7 +365,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>我们的计划是假设每个人的财富是从密度为 <span class="math notranslate nohighlight">\(f\)</span> 的分布中抽取的。</p>
 <p>如果我们获得 <span class="math notranslate nohighlight">\(f\)</span> 的估计，那么我们可以按照下面的方式近似 <span class="math notranslate nohighlight">\(T\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-est-rev">
-<span class="eqno">(49.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
     T = \sum_{i=1}^{N} h(w_i) 
       = N \frac{1}{N} \sum_{i=1}^{N} h(w_i) 
       \approx N \int_{0}^{\infty} h(w)f(w) dw
@@ -374,7 +374,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>现在的问题是：我们如何估计 <span class="math notranslate nohighlight">\(f\)</span>？</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">49.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">最大似然估计</a> 是一种估计未知分布的方法。</p>
 <p>最大似然估计有两个步骤：</p>
 <ol class="arabic simple">
@@ -497,7 +497,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>我们的估计的对数正态分布看起来很适合整体数据。</p>
-<p>我们现在使用方程<a class="reference internal" href="#equation-eq-est-rev">(49.1)</a>来计算总收入。</p>
+<p>我们现在使用方程<a class="reference internal" href="#equation-eq-est-rev">(45.1)</a>来计算总收入。</p>
 <p>我们将通过 <strong>SciPy</strong> 的 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a> 函数使用数值积分计算</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -525,7 +525,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>（我们的单位是10万美元，所以这意味着实际收入是10万倍。）</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">49.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>如上所述，使用最大似然估计时需要我们假定一个先验的底层分布。</p>
 <p>之前我们假定这个分布是对数正态分布。</p>
 <p>假设我们改为假设 <span class="math notranslate nohighlight">\(w_i\)</span> 来自具有参数 <span class="math notranslate nohighlight">\(b\)</span> 和 <span class="math notranslate nohighlight">\(x_m\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">帕累托分布</a>。</p>
@@ -615,7 +615,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>我们观察到在这种情况下，帕累托分布的拟合效果并不好，所以我们可能会拒绝它。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">49.4. </span>什么是最好的分布？<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.4. </span>什么是最好的分布？<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>没有“最好”的分布——我们做出的每一个选择都是一种假设。</p>
 <p>我们能做的就是尝试选择一个能很好地拟合数据的分布。</p>
 <p>上面的图表表明，对数正态分布是最佳的。</p>
@@ -655,7 +655,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>现在让我们尝试对这些数据拟合一些分布。</p>
 <section id="id6">
-<h3><span class="section-number">49.4.1. </span>对数正态分布和右尾部<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.1. </span>对数正态分布和右尾部<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>让我们从对数正态分布开始</p>
 <p>我们再次估计参数并将密度与我们的数据进行对比。</p>
 <div class="cell docutils container">
@@ -683,7 +683,7 @@ const thebe_selector_output = ".output, .cell_output"
 但它并不适合右尾部。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">49.4.2. </span>帕累托分布用于右尾部<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.2. </span>帕累托分布用于右尾部<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>现在假设截断数据集符合帕累托分布。</p>
 <p>我们再次估计参数，并将密度与我们的数据进行对比。</p>
 <div class="cell docutils container">
@@ -709,7 +709,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>帕累托分布更适合我们数据集的右尾部。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">49.4.3. </span>那么什么是最佳分布？<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.3. </span>那么什么是最佳分布？<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <p>如上所述，没有“最佳”分布——每个选择都是一个假设。</p>
 <p>我们只需要测试我们认为合理的分布。</p>
 <p>一种测试方法是将数据与拟合分布进行绘图，正如我们所做的。</p>
@@ -718,10 +718,10 @@ const thebe_selector_output = ".output, .cell_output"
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">49.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="mle_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 49.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 45.1 </span></p>
 <section id="exercise-content">
 <p>假设我们假设财富是以参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_distribution">指数</a>分布。</p>
 <p><span class="math notranslate nohighlight">\(\lambda\)</span> 的最大似然估计为</p>
@@ -737,7 +737,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="solution dropdown admonition" id="mle-solution-2">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 49.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 45.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -770,14 +770,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="exercise admonition" id="mle_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 49.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 45.2 </span></p>
 <section id="exercise-content">
 <p>绘制指数分布与样本的比较，并检查它是否适合。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="mle-solution-4">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 49.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 45.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1021,17 +1021,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1043,22 +1043,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1070,22 +1070,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1097,12 +1097,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1114,22 +1114,22 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1141,12 +1141,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1158,12 +1158,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1175,17 +1175,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

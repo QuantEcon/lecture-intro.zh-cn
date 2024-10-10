@@ -12,6 +12,7 @@ kernelspec:
 ---
 
 # 均衡差异模型
+
 ## 概述
 本讲座介绍了一个大学-高中工资差距模型，其中"培养"大学毕业生的时间扮演了关键角色。
 
@@ -43,6 +44,10 @@ kernelspec:
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 无差异条件
@@ -174,9 +179,12 @@ $$
 其中 $\pi \in (0,1)$ 是企业家的"项目"成功的概率。
 
 对于我们的工人和企业模型，我们将把 $D$ 解释为成为企业家的成本。
+
 这个成本可能包括雇佣工人、办公空间和律师的费用。
+
 我们过去称之为大学、高中工资差距的 $\phi$ 现在变成了
 成功企业家收入与工人收入的比率。
+
 我们会发现，随着 $\pi$ 的减少，$\phi$ 会增加，这表明
 成为企业家的风险越大，成功项目的回报就必须越高。
 
@@ -184,6 +192,7 @@ $$
 
 我们可以通过调整各种参数来做一些有趣的例子，
 主要包括 $\gamma_h, \gamma_c, R$。
+
 现在让我们编写一些 Python 代码来计算 $\phi$ 并将其作为某些决定因素的函数进行绘图。
 
 ```{code-cell} ipython3
@@ -212,7 +221,9 @@ class equalizing_diff:
         return ϕ
 ```
 我们使用向量化而不是循环来构建一些函数，以帮助进行比较静态分析。
+
 对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 $\phi$。
+
 让我们举个例子。
 
 ```{code-cell} ipython3
@@ -260,6 +271,7 @@ gap1 = ex1.compute_gap()
 print(gap1)
 ```
 让我们设想不收取大学学费，然后重新计算 $\phi$。
+
 初始的大学工资溢价应该会降低。
 
 ```{code-cell} ipython3
@@ -269,6 +281,7 @@ gap2 = ex2.compute_gap()
 print(gap2)
 ```
 让我们构建一些图表，展示如果初始大学-高中工资比率 $\phi$ 的某个决定因素发生变化，$\phi$ 将如何改变。
+
 我们先从总利率 $R$ 开始。
 
 ```{code-cell} ipython3
@@ -280,8 +293,11 @@ plt.show()
 ```
 
 注意当大学工资增长率 $\gamma_c$ 上升时，初始工资差距是如何下降的。
+
 工资差距下降是为了"平衡"两种职业类型的现值，一种是高中工人，另一种是大学工人。
+
 你能猜到当我们接下来改变高中工资的增长率时，初始工资比率 $\phi$ 会发生什么变化吗？同时保持 $\phi$ 的所有其他决定因素不变。
+
 下图显示了会发生什么。
 
 ```{code-cell} ipython3
@@ -292,7 +308,9 @@ plt.ylabel(r'工资差距')
 plt.show()
 ```
 ## 企业家-工人解释
+
 现在让我们采用我们模型的企业家-工人解释。
+
 如果一个新企业成功的概率是 $0.2$，让我们计算成功企业家的初始工资溢价。
 
 ```{code-cell} ipython3
@@ -313,16 +331,23 @@ plt.xlabel(r'$\pi$')
 plt.show()
 ```
 
-这个图表对你来说有意义吗？
+这个图表是不是符合你的猜想呢？
 
 ## 微积分的应用
+
 到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。
+
 然而，懂得微积分的人可能会希望我们直接求偏导数。
+
 现在我们就来做这个。
+
 不懂微积分的读者可以不用继续往下读，可以确信应用线性代数已经让我们了解了模型的主要特性。
+
 但对于那些有兴趣了解我们如何让 Python 完成计算偏导数的所有繁重工作的读者，我们现在会说一些相关的内容。
-我们将使用 Python 模块 'sympy' 来计算 $\phi$ 对决定它的参数的偏导数。
-让我们从 sympy 导入关键函数。
+
+我们将使用 Python 模块 `sympy` 来计算 $\phi$ 对决定它的参数的偏导数。
+
+让我们从 `sympy` 导入关键函数。
 
 ```{code-cell} ipython3
 from sympy import Symbol, Lambda, symbols
@@ -370,7 +395,7 @@ w_h0_value = 1
 D_value = 10
 ```
 
-现在让我们计算 $\frac{\partial \phi}{\partial D}$然后测量其在默认值的值
+现在让我们计算 $\frac{\partial \phi}{\partial D}$ 然后测量其在默认值的值
 
 ```{code-cell} ipython3
 ϕ_D = ϕ(D, γ_h, γ_c, R, T, w_h0).diff(D)
@@ -384,7 +409,9 @@ D_value = 10
 ```
 
 因此，与我们之前的图表一样，我们发现提高 $R$ 会增加初始大学工资溢价 $\phi$。
+
 +++
+
 计算 $\frac{\partial \phi}{\partial T}$ 并在默认参数下评估它
 
 ```{code-cell} ipython3
@@ -397,9 +424,13 @@ D_value = 10
 ϕ_T_func = Lambda((D, γ_h, γ_c, R, T, w_h0), ϕ_T)
 ϕ_T_func(D_value, γ_h_value, γ_c_value, R_value, T_value, w_h0_value)
 ```
+
 我们发现提高 $T$ 会降低初始大学工资溢价 $\phi$。
+
 这是因为大学毕业生现在有更长的职业生涯来"收回"他们为上大学付出的时间和其他成本。
+
 +++
+
 让我们计算 $\frac{\partial \phi}{\partial \gamma_h}$ 并在默认参数下评估它。
 
 
@@ -429,7 +460,9 @@ D_value = 10
 ```
 
 我们发现提高 $\gamma_c$ 会降低初始大学工资溢价 $\phi$，这与我们之前的图形分析结果一致。
+
 +++
+
 让我们计算 $\frac{\partial \phi}{\partial R}$ 并在默认参数值下对其进行数值评估
 
 
@@ -446,9 +479,7 @@ D_value = 10
 
 我们发现提高总利率 $R$ 会增加初始大学工资溢价 $\phi$，这与我们之前的图形分析结果一致。
 
-
 ```{code-cell} ipython3
-
 ```
 
 

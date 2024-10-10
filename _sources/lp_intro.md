@@ -53,6 +53,11 @@ from ortools.linear_solver import pywraplp
 from scipy.optimize import linprog
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 让我们从一些线性规划问题的例子开始。

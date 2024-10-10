@@ -427,6 +427,11 @@ m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -535,7 +540,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/3f57caead16a600e434b364faca3a7d43e31fb7c092f5db5435412a290dfa4df.png"><img alt="_images/3f57caead16a600e434b364faca3a7d43e31fb7c092f5db5435412a290dfa4df.png" src="_images/3f57caead16a600e434b364faca3a7d43e31fb7c092f5db5435412a290dfa4df.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8fef9ecdd2120d9a8ea49d1dbd3875e73ab65a74aa37ba4849c24c4bc35f43ce.png"><img alt="_images/8fef9ecdd2120d9a8ea49d1dbd3875e73ab65a74aa37ba4849c24c4bc35f43ce.png" src="_images/8fef9ecdd2120d9a8ea49d1dbd3875e73ab65a74aa37ba4849c24c4bc35f43ce.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>顶部面板中货币增长率 <span class="math notranslate nohighlight">\(\mu_t\)</span> 的图表显示在时间 <span class="math notranslate nohighlight">\(T_1 = 60\)</span> 时从 <span class="math notranslate nohighlight">\(.5\)</span> 突然降至 <span class="math notranslate nohighlight">\(0\)</span>。</p>
@@ -572,7 +577,7 @@ p_t = m_t + \alpha \left[ (1-\delta) \sum_{s=t}^T \delta^{s-t} \mu_s + \delta^{T
 <p>在 <span class="math notranslate nohighlight">\(T_1\)</span> 时什么跳跃？</p>
 <p>是 <span class="math notranslate nohighlight">\(p_{T_1}\)</span> 还是 <span class="math notranslate nohighlight">\(m_{T_1}\)</span>？</p>
 <p>如果我们坚持认为货币供应 <span class="math notranslate nohighlight">\(m_{T_1}\)</span> 锁定在从过去继承的 <span class="math notranslate nohighlight">\(m_{T_1}^1\)</span> 值，那么公式 <a class="reference internal" href="#equation-eq-pformula2">(14.10)</a> 意味着价格水平在时间 <span class="math notranslate nohighlight">\(T_1\)</span> 向下跳跃，以与
-<span class="math notranslate nohighlight">\(\pi_{T_1}\)</span> 的向下跳跃一致</p>
+<span class="math notranslate nohighlight">\(\pi_{T_1}\)</span> 的向下跳跃一致.</p>
 <p>关于货币供应水平的另一个假设是，作为”通货膨胀稳定”的一部分，
 政府根据以下公式重置 <span class="math notranslate nohighlight">\(m_{T_1}\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqnmoneyjump">
@@ -690,11 +695,11 @@ m_{T_{1}}=p_{T_{1}}-\alpha\pi_{T_{1}}=\left(m_{T_{1}-1}+\mu_{0}\right)+\alpha\le
     <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">π_seq_2</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$\pi$&#39;</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span> <span class="o">-</span> <span class="n">p_seq_2_regime1</span><span class="p">)],</span> 
      <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m - p$&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;Smooth $m_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">),</span> 
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;Jumpy $m_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">)],</span> 
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;平滑的 $m_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">),</span> 
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;非平滑的 $m_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">)],</span> 
      <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m$&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;Smooth $p_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">),</span> 
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;Jumpy $p_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">)],</span> 
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;平滑的 $p_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">),</span> 
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;非平滑的  $p_</span><span class="si">{T_1}</span><span class="s1">$&#39;</span><span class="p">)],</span> 
      <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">}</span>
 <span class="p">]</span>
 
@@ -718,20 +723,20 @@ m_{T_{1}}=p_{T_{1}}-\alpha\pi_{T_{1}}=\left(m_{T_{1}-1}+\mu_{0}\right)+\alpha\le
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/65ce4f8e78d488efbdc6d8c8b969c70c37e1755874f5026222164fa3752da1a1.png"><img alt="_images/65ce4f8e78d488efbdc6d8c8b969c70c37e1755874f5026222164fa3752da1a1.png" src="_images/65ce4f8e78d488efbdc6d8c8b969c70c37e1755874f5026222164fa3752da1a1.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/480d218d09b8ebab72d5237d7a7d5026a4749231390ab0aa1705c327dffa9eb2.png"><img alt="_images/480d218d09b8ebab72d5237d7a7d5026a4749231390ab0aa1705c327dffa9eb2.png" src="_images/480d218d09b8ebab72d5237d7a7d5026a4749231390ab0aa1705c327dffa9eb2.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们邀请您将这些图表与上面实验1中分析的预期稳定化的相应图表进行比较。
-请注意，第二个面板中的通货膨胀图现在与顶部面板中的货币增长图完全相同，以及现在在第三个面板中描绘的实际余额的对数在时间<span class="math notranslate nohighlight">\(T_1\)</span>时向上跳跃。
-底部两个面板绘制了在<span class="math notranslate nohighlight">\(m_{T_1}\)</span>可能调整的两种方式下的<span class="math notranslate nohighlight">\(m\)</span>和<span class="math notranslate nohighlight">\(p\)</span>，以满足在<span class="math notranslate nohighlight">\(T_1\)</span>时<span class="math notranslate nohighlight">\(m - p\)</span>的向上跳跃的要求。</p>
+<p>我们邀请您将这些图表与上面实验1中分析的预期稳定化的相应图表进行比较。</p>
+<p>请注意，第二个面板中的通货膨胀图现在与顶部面板中的货币增长图完全相同，以及现在在第三个面板中描绘的实际余额的对数在时间<span class="math notranslate nohighlight">\(T_1\)</span>时向上跳跃。</p>
+<p>底部两个面板绘制了在<span class="math notranslate nohighlight">\(m_{T_1}\)</span>可能调整的两种方式下的<span class="math notranslate nohighlight">\(m\)</span>和<span class="math notranslate nohighlight">\(p\)</span>，以满足在<span class="math notranslate nohighlight">\(T_1\)</span>时<span class="math notranslate nohighlight">\(m - p\)</span>的向上跳跃的要求。</p>
 <ul class="simple">
 <li><p>橙色线让<span class="math notranslate nohighlight">\(m_{T_1}\)</span>向上跳跃，以确保对数价格水平<span class="math notranslate nohighlight">\(p_{T_1}\)</span>不会下降。</p></li>
 <li><p>蓝色线让<span class="math notranslate nohighlight">\(p_{T_1}\)</span>下降，同时阻止货币供应量跳跃。</p></li>
 </ul>
-<p>以下是一种解释政府在橙色线政策实施时所做的事情的方法。
-政府通过印钞来资助支出，利用从货币供应增长率永久性下降带来的实际余额需求增加中获得的”速度红利”。
-接下来的代码生成一个多面板图，包括实验1和实验2的结果。
-这使我们能够评估理解<span class="math notranslate nohighlight">\(\mu_t\)</span>在<span class="math notranslate nohighlight">\(t=T_1\)</span>时的突然永久性下降是完全预期的（如实验1中）还是完全未预期的（如实验2中）的重要性。</p>
+<p>以下是一种解释政府在橙色线政策实施时所做的事情的方法。</p>
+<p>政府通过印钞来资助支出，利用从货币供应增长率永久性下降带来的实际余额需求增加中获得的”速度红利”。</p>
+<p>接下来的代码生成一个多面板图，包括实验1和实验2的结果。</p>
+<p>这使我们能够评估理解<span class="math notranslate nohighlight">\(\mu_t\)</span>在<span class="math notranslate nohighlight">\(t=T_1\)</span>时的突然永久性下降是完全预期的（如实验1中）还是完全未预期的（如实验2中）的重要性。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -744,16 +749,16 @@ m_{T_{1}}=p_{T_{1}}-\alpha\pi_{T_{1}}=\left(m_{T_{1}-1}+\mu_{0}\right)+\alpha\le
 
 <span class="n">plot_configs</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">μ_seq_2</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">π_seq_2</span><span class="p">,</span> <span class="s1">&#39;Unforeseen&#39;</span><span class="p">),</span> 
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">π_seq_1</span><span class="p">,</span> <span class="s1">&#39;Foreseen&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span> <span class="o">-</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;Unforeseen&#39;</span><span class="p">),</span> 
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_1</span> <span class="o">-</span> <span class="n">p_seq_1</span><span class="p">,</span> <span class="s1">&#39;Foreseen&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m - p$&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;Unforeseen (Smooth $m_</span><span class="si">{T_1}</span><span class="s1">$)&#39;</span><span class="p">),</span> 
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;Unforeseen ($m_</span><span class="si">{T_1}</span><span class="s1">$ jumps)&#39;</span><span class="p">),</span>
-              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_1</span><span class="p">,</span> <span class="s1">&#39;Foreseen&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m$&#39;</span><span class="p">},</span>   
-    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;Unforeseen (Smooth $m_</span><span class="si">{T_1}</span><span class="s1">$)&#39;</span><span class="p">),</span> 
-          <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;Unforeseen ($m_</span><span class="si">{T_1}</span><span class="s1">$ jumps)&#39;</span><span class="p">),</span>
-          <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_1</span><span class="p">,</span> <span class="s1">&#39;Foreseen&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">}</span>   
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">π_seq_2</span><span class="p">,</span> <span class="s1">&#39;不可预见的&#39;</span><span class="p">),</span> 
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">π_seq_1</span><span class="p">,</span> <span class="s1">&#39;可预见的&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span> <span class="o">-</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;不可预见的&#39;</span><span class="p">),</span> 
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_1</span> <span class="o">-</span> <span class="n">p_seq_1</span><span class="p">,</span> <span class="s1">&#39;可预见的&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m - p$&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;不可预见的 (平滑的 $m_</span><span class="si">{T_1}</span><span class="s1">$)&#39;</span><span class="p">),</span> 
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;不可预见的 ($m_</span><span class="si">{T_1}</span><span class="s1">$ 跳变)&#39;</span><span class="p">),</span>
+              <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq_1</span><span class="p">,</span> <span class="s1">&#39;可预见的&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$m$&#39;</span><span class="p">},</span>   
+    <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime1</span><span class="p">,</span> <span class="s1">&#39;不可预见的 (平滑的 $m_</span><span class="si">{T_1}</span><span class="s1">$)&#39;</span><span class="p">),</span> 
+          <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_2_regime2</span><span class="p">,</span> <span class="s1">&#39;不可预见的 ($m_</span><span class="si">{T_1}</span><span class="s1">$ 跳变)&#39;</span><span class="p">),</span>
+          <span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq_1</span><span class="p">,</span> <span class="s1">&#39;可预见的&#39;</span><span class="p">)],</span> <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">}</span>   
 <span class="p">]</span>
 
 <span class="n">experiment_plot</span><span class="p">(</span><span class="n">plot_configs</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
@@ -762,7 +767,7 @@ m_{T_{1}}=p_{T_{1}}-\alpha\pi_{T_{1}}=\left(m_{T_{1}-1}+\mu_{0}\right)+\alpha\le
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0ed813f54c7ce088128ec3c2d5c8cff972bad2252586e125c238207fe20ffce7.png"><img alt="_images/0ed813f54c7ce088128ec3c2d5c8cff972bad2252586e125c238207fe20ffce7.png" src="_images/0ed813f54c7ce088128ec3c2d5c8cff972bad2252586e125c238207fe20ffce7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cba2aedd535c20538cc29df9a9b90a71ea1139fd9d53c81baf5fe30bf924f45c.png"><img alt="_images/cba2aedd535c20538cc29df9a9b90a71ea1139fd9d53c81baf5fe30bf924f45c.png" src="_images/cba2aedd535c20538cc29df9a9b90a71ea1139fd9d53c81baf5fe30bf924f45c.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>将前面的图表与<a class="reference internal" href="inflation_history.html"><span class="doc">这篇讲座</span></a>中描述的四次大通货膨胀数据的对数价格水平和通货膨胀率图表进行比较是很有启发性的。</p>
@@ -799,7 +804,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d0327574e516c81be07e611d7b285ef73fdec7f2eec986d337b2bb682fd4dd97.png"><img alt="_images/d0327574e516c81be07e611d7b285ef73fdec7f2eec986d337b2bb682fd4dd97.png" src="_images/d0327574e516c81be07e611d7b285ef73fdec7f2eec986d337b2bb682fd4dd97.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/46787dd908b88aa0d55ab24a110f47a807a6bb46de0b716c90eae6434dd03de8.png"><img alt="_images/46787dd908b88aa0d55ab24a110f47a807a6bb46de0b716c90eae6434dd03de8.png" src="_images/46787dd908b88aa0d55ab24a110f47a807a6bb46de0b716c90eae6434dd03de8.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -807,9 +812,9 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="id16">
 <h2><span class="section-number">14.4. </span>续篇<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
-<p>另一篇讲座 <a class="reference internal" href="cagan_adaptive.html"><span class="doc">带有适应性预期的价格水平货币主义理论</span></a> 描述了凯根模型的”适应性预期”版本。
-这个版本的动态变得更加复杂，代数运算也更加繁琐。
-如今，在中央银行家和为他们提供建议的经济学家中，该模型的”理性预期”版本更受欢迎。</p>
+<p>另一篇讲座 <a class="reference internal" href="cagan_adaptive.html"><span class="doc">带有适应性预期的价格水平货币主义理论</span></a> 描述了凯根模型的”适应性预期”版本。</p>
+<p>这个版本的动态变得更加复杂，代数运算也更加繁琐。</p>
+<p>如今，在中央银行家和为他们提供建议的经济学家中，该模型的”理性预期”版本更受欢迎。</p>
 </section>
 </section>
 
@@ -1032,17 +1037,17 @@ $<span class="math notranslate nohighlight">\(
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1054,22 +1059,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1081,22 +1086,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1108,12 +1113,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1125,22 +1130,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1152,12 +1157,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1169,12 +1174,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1186,17 +1191,17 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

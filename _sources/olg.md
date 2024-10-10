@@ -53,22 +53,37 @@ import numpy as np
 from scipy import optimize
 from collections import namedtuple
 import matplotlib.pyplot as plt
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 环境
 我们假设时间是离散的，因此 $t=0, 1, \ldots$。
+
 在时间 $t$ 出生的个体存活两个时期，$t$ 和 $t + 1$。
+
 我们称一个个体
 - 在生命的第一个时期为"年轻人"
 - 在生命的第二个时期为"老年人"。
+
 年轻人工作，提供劳动并赚取劳动收入。
+
 他们还决定存多少钱。
+
 老年人不工作，所以所有收入都是金融收入。
+
 他们的金融收入来自工资收入的储蓄利息，
 这些储蓄随后与 $t+1$ 时期新的年轻一代的劳动相结合。
+
 工资和利率在均衡中由供求决定。
+
 为了使代数计算稍微简单一些，我们假设人口规模恒定。
+
 我们将每个时期的恒定人口规模标准化为1。
+
 我们还假设每个个体提供一个"单位"的劳动时间，因此总劳动供给为1。
 
 ## 资本供给
@@ -89,7 +104,9 @@ import matplotlib.pyplot as plt
 - $\beta \in (0, 1)$ 是贴现因子
 - $c_t$ 是在时间 $t$ 出生的个体在时间 $t$ 的消费
 - $c_{t+1}$ 是同一个体在时间 $t+1$ 的消费
+
 我们假设 $u$ 是严格递增的。
+
 储蓄行为由以下优化问题决定
 
 
@@ -137,7 +154,9 @@ $c_{t+1} = R_{t+1}(w_t - c_t)$。
 
 假设对于每个 $w_t$ 和 $R_{t+1}$，恰好有一个 $s_t$ 可以
 解决 [](euler_2_olg)。
+
 那么储蓄可以被写成 $w_t$ 和 $R_{t+1}$ 的固定函数。
+
 我们将其表示为
 
 ```{math}
@@ -146,7 +165,9 @@ $c_{t+1} = R_{t+1}(w_t - c_t)$。
 ```
 
 $s$ 函数的具体形式将取决于流效用函数 $u$ 的选择。
+
 $w_t$ 和 $R_{t+1}$ 共同代表经济中的*价格*（劳动力价格和资本租赁率）。
+
 因此，[](saving_1_olg) 表示给定价格下的储蓄量。
 
 ### 示例：对数偏好
@@ -261,7 +282,9 @@ def capital_supply(R, β, w):
 
 原则上，我们现在可以给定$w_t$来求解均衡价格$R_{t+1}$。
 （实际上，我们首先需要指定函数$u$，从而得到$s$。）
+
 当我们求解这个关于$t+1$时刻结果的方程时，$t$时刻的量已经确定，所以我们可以将$w_t$视为常数。
+
 从均衡$R_{t+1}$和[](aggregate_demand_capital_olg)，我们可以得到
 均衡数量$k_{t+1}$。
 
@@ -330,12 +353,15 @@ plt.show()
 ## 动力学
 
 在本节中，我们讨论动力学。
+
 目前，我们将重点关注对数效用的情况，因此均衡由[](equilibrium_quantity)决定。
 
 ### 资本的演变
 
 上述讨论展示了如何在给定$w_t$的情况下获得均衡$k_{t+1}$。
+
 从[](wage_one)中，我们可以将此转换为$k_{t+1}$作为$k_t$的函数。
+
 特别是，由于$w_t = (1-\alpha)k_t^\alpha$，我们有
 
 ```{math}
@@ -344,7 +370,9 @@ plt.show()
 ```
 
 如果我们对这个方程进行迭代，我们将得到一个资本存量序列。
+
 让我们绘制这些动态的45度图，我们将其表示为
+
 $$
     k_{t+1} = g(k_t)
     \quad \text{其中 }
@@ -381,6 +409,7 @@ plt.show()
 ### 稳态（对数情况）
 
 图表显示，该模型具有唯一的正稳态，我们将其表示为$k^*$。
+
 我们可以通过设置$k^* = g(k^*)$来求解$k^*$，即
 
 ```{math}
@@ -394,12 +423,16 @@ plt.show()
 :label: steady_state_2
     k^* = \left (\frac{\beta (1-\alpha)}{1+\beta} \right )^{1/(1-\alpha)}
 ```
+
 我们可以从[](interest_rate_one)得到稳态利率，即
+
 $$
     R^* = \alpha (k^*)^{\alpha - 1} 
         = \frac{\alpha}{1 - \alpha} \frac{1 + \beta}{\beta}
 $$
+
 在Python中，我们有
+
 ```{code-cell} ipython3
 k_star = ((β * (1 - α))/(1 + β))**(1/(1-α))
 R_star = (α/(1 - α)) * ((1 + β) / β)
@@ -408,8 +441,8 @@ R_star = (α/(1 - α)) * ((1 + β) / β)
 ### 时间序列
 
 上面的45度图显示，具有正初始条件的资本时间序列会收敛到这个稳态。
-让我们绘制一些时间序列来可视化这一点。
 
+让我们绘制一些时间序列来可视化这一点。
 
 ```{code-cell} ipython3
 ts_length = 25
@@ -427,8 +460,11 @@ ax.set_xlabel("$t$")
 ax.legend()
 plt.show()
 ```
+
 如果你尝试不同的正初始条件，你会发现这个序列总是收敛于$k^*$。
+
 +++
+
 下面我们还绘制了随时间变化的总利率。
 
 ```{code-cell} ipython3
@@ -445,13 +481,21 @@ plt.show()
 ```
 
 利率反映了资本的边际产出，当资本存量较低时，利率较高。
+
 +++
+
 ## CRRA偏好
+
 此前，在我们的例子中，我们研究了对数效用的情况。
+
 对数效用是CRRA效用在$\gamma \to 1$时的一个特殊情况。
+
 在本节中，我们假设$u(c) = \frac{ c^{1-\gamma}-1}{1-\gamma}$，其中$\gamma >0, \gamma\neq 1$。
+
 这个函数被称为CRRA效用函数。
+
 在其他方面，模型保持不变。
+
 下面我们用Python定义效用函数，并构造一个`namedtuple`来存储参数。
 
 ```{code-cell} ipython3
@@ -533,6 +577,7 @@ plt.show()
 ```
 
 这个表达式相当复杂，我们无法解析地求解 $R_{t+1}$。
+
 将[](interest_rate_one)和[](equilibrium_crra_2)结合起来，得到
 
 ```{math}
@@ -541,6 +586,7 @@ plt.show()
 ```
 
 同样，有了这个等式和给定的 $k_t$，我们无法用纸笔求解 $k_{t+1}$。
+
 在下面的练习中，你将被要求用数值方法解这些方程。
 
 +++
@@ -552,6 +598,7 @@ plt.show()
 :label: olg_ex1
 
 使用[](law_of_motion_capital_crra)在 CRRA 情况下数值求解均衡资本存量的动态。
+
 使用 45 度图来可视化这个动态过程。
 
 ```
@@ -563,6 +610,7 @@ plt.show()
 
 
 为了在给定 $k_t$ 的情况下求解 $k_{t+1}$，我们使用[牛顿法](https://python.quantecon.org/newton_method.html)。
+
 设
 
 ```{math}
@@ -579,7 +627,9 @@ plt.show()
 ```
 
 如果给定了 $k_t$，那么 $f$ 就是未知数 $k_{t+1}$ 的函数。
+
 然后我们可以使用 `scipy.optimize.newton` 求解 $f(k_{t+1}, k_t)=0$ 来得到 $k_{t+1}$。
+
 首先让我们定义 $f$。
 
 ```{code-cell} ipython3

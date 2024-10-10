@@ -289,29 +289,23 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
-<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span>
 
-<span class="c1"># List all available font names</span>
-<span class="n">font_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">ttflist</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">font_list</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;DejaVu Serif&#39;, &#39;STIXSizeTwoSym&#39;, &#39;STIXSizeOneSym&#39;, &#39;DejaVu Sans&#39;, &#39;DejaVu Sans&#39;, &#39;cmb10&#39;, &#39;cmtt10&#39;, &#39;DejaVu Serif Display&#39;, &#39;STIXSizeFourSym&#39;, &#39;DejaVu Sans Display&#39;, &#39;STIXSizeFourSym&#39;, &#39;STIXSizeOneSym&#39;, &#39;STIXGeneral&#39;, &#39;STIXGeneral&#39;, &#39;DejaVu Sans Mono&#39;, &#39;STIXGeneral&#39;, &#39;cmmi10&#39;, &#39;DejaVu Serif&#39;, &#39;DejaVu Sans&#39;, &#39;DejaVu Serif&#39;, &#39;STIXNonUnicode&#39;, &#39;cmss10&#39;, &#39;STIXSizeFiveSym&#39;, &#39;cmex10&#39;, &#39;STIXGeneral&#39;, &#39;cmsy10&#39;, &#39;DejaVu Sans Mono&#39;, &#39;STIXNonUnicode&#39;, &#39;cmr10&#39;, &#39;STIXSizeThreeSym&#39;, &#39;STIXNonUnicode&#39;, &#39;DejaVu Serif&#39;, &#39;DejaVu Sans&#39;, &#39;STIXNonUnicode&#39;, &#39;STIXSizeThreeSym&#39;, &#39;DejaVu Sans Mono&#39;, &#39;STIXSizeTwoSym&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Nimbus Roman&#39;, &#39;Gillius ADF No2&#39;, &#39;Noto Sans Mono&#39;, &#39;EB Garamond&#39;, &#39;Noto Serif&#39;, &#39;Noto Sans Kharoshthi&#39;, &#39;Noto Sans Telugu&#39;, &#39;Noto Sans Hanifi Rohingya&#39;, &#39;Noto Sans Khmer&#39;, &#39;Noto Serif Hmong Nyiakeng&#39;, &#39;Noto Sans Canadian Aboriginal&#39;, &#39;Accanthis ADF Std No3&#39;, &#39;Noto Serif Display&#39;, &#39;Lato&#39;, &#39;EB Garamond&#39;, &#39;FontAwesome&#39;, &#39;Noto Sans Old Italic&#39;, &#39;Noto Serif Gujarati&#39;, &#39;Noto Sans Kayah Li&#39;, &#39;Noto Sans Medefaidrin&#39;, &#39;Roboto&#39;, &#39;Go&#39;, &#39;Accanthis ADF Std No2&#39;, &#39;STIX Math&#39;, &#39;Noto Sans Gurmukhi&#39;, &#39;Berenis ADF Pro&#39;, &#39;Noto Sans Cherokee&#39;, &#39;Nimbus Sans&#39;, &#39;Liberation Serif&#39;, &#39;Caladea&#39;, &#39;Noto Sans Lisu&#39;, &#39;Noto Sans Math&#39;, &#39;STIXGeneral&#39;, &#39;Noto Sans Shavian&#39;, &#39;Noto Sans Tifinagh Agraw Imazighen&#39;, &#39;Universalis ADF Std&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Sans Tai Viet&#39;, &#39;Noto Sans Bengali&#39;, &#39;Noto Sans Mandaic&#39;, &#39;Noto Sans New Tai Lue&#39;, &#39;Noto Sans Balinese&#39;, &#39;Noto Sans&#39;, &#39;Noto Sans Mono&#39;, &#39;Noto Serif Hmong Nyiakeng&#39;, &#39;Go Medium&#39;, &#39;D050000L&#39;, &#39;Noto Serif Armenian&#39;, &#39;EB Garamond SC&#39;, &#39;Noto Serif Lao&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Junicode&#39;, &#39;Noto Sans Tamil&#39;, &#39;Noto Sans Grantha&#39;, &#39;Noto Sans Soyombo&#39;, &#39;STIXSizeThreeSym&#39;, &#39;Noto Sans Ethiopic&#39;, &#39;Lato&#39;, &#39;Roboto Condensed&#39;, &#39;Noto Sans Thai&#39;, &#39;Noto Sans Osage&#39;, &#39;GFS Didot&#39;, &#39;Noto Sans Armenian&#39;, &#39;Lobster Two&#39;, &#39;C059&#39;, &#39;Gillius ADF&#39;, &#39;Noto Sans Runic&#39;, &#39;Lato&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Sans Linear A&#39;, &#39;Lobster Two&#39;, &#39;Nimbus Sans Narrow&#39;, &#39;Noto Sans Tifinagh Ghat&#39;, &#39;EB Garamond Initials&#39;, &#39;Universalis ADF Std&#39;, &#39;Noto Sans Tagalog&#39;, &#39;Noto Sans Old South Arabian&#39;, &#39;Gentium Book Plus&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Sans Ol Chiki&#39;, &#39;Noto Sans Duployan&#39;, &#39;STIXIntegralsUp&#39;, &#39;Noto Sans Old Hungarian&#39;, &#39;Gillius ADF&#39;, &#39;Noto Serif Sinhala&#39;, &#39;STIXSizeFourSym&#39;, &#39;Go Mono&#39;, &#39;Universalis ADF Std&#39;, &#39;Noto Serif Sinhala&#39;, &#39;Nimbus Roman&#39;, &#39;FreeSerif&#39;, &#39;Noto Sans Saurashtra&#39;, &#39;Nimbus Mono PS&#39;, &#39;Universalis ADF Std&#39;, &#39;Cantarell&#39;, &#39;Noto Sans Warang Citi&#39;, &#39;Noto Naskh Arabic&#39;, &#39;Noto Sans Old Permic&#39;, &#39;Noto Sans PhagsPa&#39;, &#39;Noto Sans Hanunoo&#39;, &#39;Noto Sans Lisu&#39;, &#39;Liberation Sans&#39;, &#39;Go Smallcaps&#39;, &#39;Noto Sans Vai&#39;, &#39;Noto Sans Limbu&#39;, &#39;Noto Sans Cham&#39;, &#39;Noto Sans Oriya&#39;, &#39;Cantarell&#39;, &#39;STIX&#39;, &#39;Noto Serif Dogra&#39;, &#39;Accanthis ADF Std&#39;, &#39;STIXSizeOneSym&#39;, &#39;Noto Sans Kaithi&#39;, &#39;Roboto&#39;, &#39;Cabin&#39;, &#39;Comfortaa&#39;, &#39;Lato&#39;, &#39;GFS Solomos&#39;, &#39;Liberation Mono&#39;, &#39;Lato&#39;, &#39;Noto Sans Masaram Gondi&#39;, &#39;Noto Sans Hebrew&#39;, &#39;Cabin&#39;, &#39;Noto Sans Pau Cin Hau&#39;, &#39;Roboto Condensed&#39;, &#39;Noto Sans Meetei Mayek&#39;, &#39;Lato&#39;, &#39;Noto Sans&#39;, &#39;URW Bookman&#39;, &#39;Liberation Mono&#39;, &#39;Noto Sans Bamum&#39;, &#39;Noto Sans Pahawh Hmong&#39;, &#39;Noto Looped Lao&#39;, &#39;Noto Sans Khudawadi&#39;, &#39;Linux Libertine Initials O&#39;, &#39;Cousine&#39;, &#39;Open Sans&#39;, &#39;Go Smallcaps&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Sans Ethiopic&#39;, &#39;Asana Math&#39;, &#39;Gillius ADF No2&#39;, &#39;Gentium Basic&#39;, &#39;Gillius ADF No2&#39;, &#39;EB Garamond 12 All SC&#39;, &#39;EB Garamond&#39;, &#39;Noto Sans Chakma&#39;, &#39;Gentium Book Plus&#39;, &#39;FreeMono&#39;, &#39;Noto Sans Coptic&#39;, &#39;Nimbus Sans&#39;, &#39;Noto Sans Cuneiform&#39;, &#39;Noto Sans Sinhala&#39;, &#39;Noto Serif Khmer&#39;, &#39;Gentium Plus Compact&#39;, &#39;Noto Sans Wancho&#39;, &#39;Roboto Condensed&#39;, &#39;Noto Sans Takri&#39;, &#39;Linux Libertine O&#39;, &#39;Noto Sans Carian&#39;, &#39;P052&#39;, &#39;Go&#39;, &#39;Caladea&#39;, &#39;DejaVu Sans&#39;, &#39;GentiumAlt&#39;, &#39;Junicode&#39;, &#39;Noto Sans Elymaic&#39;, &#39;Noto Sans Mongolian&#39;, &#39;Cabin&#39;, &#39;Noto Sans Caucasian Albanian&#39;, &#39;Noto Serif&#39;, &#39;GFS Artemisia&#39;, &#39;Noto Serif Hebrew&#39;, &#39;Noto Serif&#39;, &#39;Go Mono&#39;, &#39;Noto Sans Tifinagh Ahaggar&#39;, &#39;Roboto&#39;, &#39;Gentium Plus&#39;, &#39;Noto Serif Kannada&#39;, &#39;URW Gothic&#39;, &#39;Noto Sans Yi&#39;, &#39;Noto Sans Tifinagh Adrar&#39;, &#39;Noto Sans Tifinagh Hawad&#39;, &#39;EB Garamond&#39;, &#39;Universalis ADF Std&#39;, &#39;STIXVariants&#39;, &#39;Nimbus Roman&#39;, &#39;Nimbus Sans Narrow&#39;, &#39;DejaVu Sans&#39;, &#39;Arimo&#39;, &#39;Noto Sans Miao&#39;, &#39;Go&#39;, &#39;Gillius ADF&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Universalis ADF Std&#39;, &#39;Noto Sans Tagbanwa&#39;, &#39;EB Garamond&#39;, &#39;Linux Biolinum O&#39;, &#39;Noto Sans Malayalam&#39;, &#39;STIXSizeTwoSym&#39;, &#39;Gentium Book Basic&#39;, &#39;Noto Sans Myanmar&#39;, &#39;Noto Serif Gurmukhi&#39;, &#39;Noto Sans Imperial Aramaic&#39;, &#39;Noto Sans&#39;, &#39;Open Sans&#39;, &#39;Noto Sans Ol Chiki&#39;, &#39;Comfortaa&#39;, &#39;Accanthis ADF Std No3&#39;, &#39;Noto Sans Elbasan&#39;, &#39;EB Garamond Initials Fill2&#39;, &#39;Noto Sans Deseret&#39;, &#39;GFS Neohellenic&#39;, &#39;FreeSans&#39;, &#39;Noto Serif Hebrew&#39;, &#39;Z003&#39;, &#39;Linux Libertine O&#39;, &#39;Lato&#39;, &#39;Lato&#39;, &#39;Roboto Condensed&#39;, &#39;FontAwesome&#39;, &#39;Noto Sans Cham&#39;, &#39;Noto Serif Tamil Slanted&#39;, &#39;Noto Serif Telugu&#39;, &#39;Noto Serif Gurmukhi&#39;, &#39;Noto Serif Tangut&#39;, &#39;URW Bookman&#39;, &#39;Gentium&#39;, &#39;Noto Sans Glagolitic&#39;, &#39;Open Sans&#39;, &#39;GFS Complutum&#39;, &#39;URW Bookman&#39;, &#39;GFS Neohellenic&#39;, &#39;STIXSizeTwoSym&#39;, &#39;Cabin&#39;, &#39;Noto Serif Display&#39;, &#39;Cabin&#39;, &#39;Noto Sans Gurmukhi&#39;, &#39;Nimbus Mono PS&#39;, &#39;Junicode&#39;, &#39;Comfortaa&#39;, &#39;Noto Sans Tifinagh&#39;, &#39;Noto Serif Khojki&#39;, &#39;Liberation Mono&#39;, &#39;Noto Looped Thai&#39;, &#39;STIXNonUnicode&#39;, &#39;Noto Sans Devanagari&#39;, &#39;Noto Serif Display&#39;, &#39;Arimo&#39;, &#39;EB Garamond Initials Fill2&#39;, &#39;Noto Sans Devanagari&#39;, &#39;Roboto&#39;, &#39;STIXIntegralsSm&#39;, &#39;Noto Sans Thaana&#39;, &#39;Noto Sans Gujarati&#39;, &#39;Noto Serif Armenian&#39;, &#39;FreeSerif&#39;, &#39;FreeSerif&#39;, &#39;Noto Serif&#39;, &#39;Lato&#39;, &#39;STIX&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Noto Nastaliq Urdu&#39;, &#39;Roboto Condensed&#39;, &#39;Noto Sans Tai Tham&#39;, &#39;Noto Sans Inscriptional Pahlavi&#39;, &#39;Nimbus Sans&#39;, &#39;Linux Libertine O&#39;, &#39;Lato&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Serif Yezidi&#39;, &#39;Gillius ADF No2&#39;, &#39;C059&#39;, &#39;Noto Sans Old Sogdian&#39;, &#39;STIXIntegralsUpSm&#39;, &#39;Noto Sans Batak&#39;, &#39;STIX&#39;, &#39;Noto Serif Devanagari&#39;, &#39;Noto Sans Brahmi&#39;, &#39;Gillius ADF No2&#39;, &#39;Nimbus Mono PS&#39;, &#39;Noto Sans Adlam Unjoined&#39;, &#39;Noto Serif Tibetan&#39;, &#39;Gillius ADF&#39;, &#39;Noto Sans Bassa Vah&#39;, &#39;Noto Sans Siddham&#39;, &#39;Go&#39;, &#39;Open Sans&#39;, &#39;FreeMono&#39;, &#39;EB Garamond&#39;, &#39;Linux Libertine Mono O&#39;, &#39;Noto Sans Cypriot&#39;, &#39;Lato&#39;, &#39;Gentium Book Plus&#39;, &#39;Noto Serif Tamil&#39;, &#39;DejaVu Sans&#39;, &#39;Noto Sans Sundanese&#39;, &#39;Cabin&#39;, &#39;STIXSizeThreeSym&#39;, &#39;Gillius ADF&#39;, &#39;EB Garamond SC&#39;, &#39;Caladea&#39;, &#39;Noto Sans Tai Le&#39;, &#39;Noto Sans Osmanya&#39;, &#39;Noto Sans Symbols2&#39;, &#39;Noto Sans Old North Arabian&#39;, &#39;STIXSizeFourSym&#39;, &#39;Gillius ADF&#39;, &#39;Noto Serif Myanmar&#39;, &#39;Accanthis ADF Std No2&#39;, &#39;Noto Sans Javanese&#39;, &#39;Cabin&#39;, &#39;Noto Serif Khojki&#39;, &#39;Noto Serif Lao&#39;, &#39;FreeSans&#39;, &#39;Noto Serif Yezidi&#39;, &#39;Roboto Condensed&#39;, &#39;Noto Sans Arabic&#39;, &#39;Charis SIL&#39;, &#39;Tinos&#39;, &#39;Noto Sans Telugu&#39;, &#39;Noto Sans Mahajani&#39;, &#39;Noto Sans Thai&#39;, &#39;Noto Serif Bengali&#39;, &#39;Open Sans&#39;, &#39;Lato&#39;, &#39;Gentium Book Basic&#39;, &#39;Gillius ADF&#39;, &#39;Noto Sans Myanmar&#39;, &#39;Charis SIL&#39;, &#39;Roboto&#39;, &#39;Noto Sans Medefaidrin&#39;, &#39;Gillius ADF&#39;, &#39;Noto Sans&#39;, &#39;EB Garamond Initials Fill1&#39;, &#39;Accanthis ADF Std No3&#39;, &#39;EB Garamond&#39;, &#39;Lobster Two&#39;, &#39;Open Sans&#39;, &#39;EB Garamond SC&#39;, &#39;URW Bookman&#39;, &#39;Lobster Two&#39;, &#39;Liberation Mono&#39;, &#39;GFS Didot&#39;, &#39;Noto Serif Kannada&#39;, &#39;Berenis ADF Pro Math&#39;, &#39;DejaVu Sans&#39;, &#39;Gentium Basic&#39;, &#39;URW Gothic&#39;, &#39;Noto Serif Georgian&#39;, &#39;Gentium Plus Compact&#39;, &#39;GFS Didot&#39;, &#39;Gentium Basic&#39;, &#39;Roboto&#39;, &#39;Noto Serif Grantha&#39;, &#39;Noto Serif Devanagari&#39;, &#39;STIXGeneral&#39;, &#39;Lato&#39;, &#39;Linux Libertine O&#39;, &#39;Noto Sans Tifinagh Azawagh&#39;, &#39;Noto Sans Adlam&#39;, &#39;Liberation Sans Narrow&#39;, &#39;Noto Sans Phoenician&#39;, &#39;Noto Kufi Arabic&#39;, &#39;Noto Sans Buginese&#39;, &#39;FreeMono&#39;, &#39;EB Garamond&#39;, &#39;GFS Didot&#39;, &#39;FreeSerif&#39;, &#39;Noto Sans Zanabazar Square&#39;, &#39;Noto Sans Canadian Aboriginal&#39;, &#39;Noto Sans Modi&#39;, &#39;Berenis ADF Pro&#39;, &#39;Noto Sans Lepcha&#39;, &#39;Noto Mono&#39;, &#39;Noto Sans Symbols&#39;, &#39;Liberation Sans Narrow&#39;, &#39;Noto Sans Bhaiksuki&#39;, &#39;Go Medium&#39;, &#39;STIXGeneral&#39;, &#39;Gentium&#39;, &#39;EB Garamond 12 All SC&#39;, &#39;Noto Serif Georgian&#39;, &#39;Gillius ADF No2&#39;, &#39;EB Garamond Initials Fill1&#39;, &#39;Carlito&#39;, &#39;Noto Sans Psalter Pahlavi&#39;, &#39;Roboto&#39;, &#39;Nimbus Roman&#39;, &#39;Noto Serif Bengali&#39;, &#39;Noto Sans Balinese&#39;, &#39;Lato&#39;, &#39;Noto Sans Multani&#39;, &#39;Noto Sans Ogham&#39;, &#39;DejaVu Sans&#39;, &#39;Carlito&#39;, &#39;Gentium Book Basic&#39;, &#39;GFS Neohellenic&#39;, &#39;STIXIntegralsD&#39;, &#39;Nimbus Sans Narrow&#39;, &#39;Go Mono&#39;, &#39;Accanthis ADF Std No2&#39;, &#39;Noto Sans Tamil&#39;, &#39;GFS Olga&#39;, &#39;Noto Sans Avestan&#39;, &#39;Noto Sans Indic Siyaq Numbers&#39;, &#39;Noto Sans Tifinagh Air&#39;, &#39;Noto Sans Old Persian&#39;, &#39;Noto Sans Display&#39;, &#39;Noto Serif Myanmar&#39;, &#39;Noto Serif Ethiopic&#39;, &#39;Roboto&#39;, &#39;Noto Sans Georgian&#39;, &#39;Noto Sans Sora Sompeng&#39;, &#39;STIXNonUnicode&#39;, &#39;Noto Sans Kannada&#39;, &#39;Gentium Book Basic&#39;, &#39;Lato&#39;, &#39;Lato&#39;, &#39;Gentium Basic&#39;, &#39;Standard Symbols PS&#39;, &#39;Noto Sans Symbols&#39;, &#39;P052&#39;, &#39;Noto Sans Sundanese&#39;, &#39;FreeMono&#39;, &#39;Gillius ADF No2&#39;, &#39;Noto Serif Malayalam&#39;, &#39;Noto Sans Gunjala Gondi&#39;, &#39;Noto Sans Sogdian&#39;, &#39;GFS Artemisia&#39;, &#39;Accanthis ADF Std No3&#39;, &#39;Cantarell&#39;, &#39;EB Garamond SC&#39;, &#39;Noto Sans Lao&#39;, &#39;Open Sans&#39;, &#39;Noto Sans Tirhuta&#39;, &#39;Noto Sans Oriya&#39;, &#39;Noto Sans Adlam Unjoined&#39;, &#39;Liberation Sans&#39;, &#39;Noto Sans Gothic&#39;, &#39;Noto Sans Samaritan&#39;, &#39;Noto Serif Khmer&#39;, &#39;Roboto Condensed&#39;, &#39;Universalis ADF Std&#39;, &#39;FreeSans&#39;, &#39;Lato&#39;, &#39;Liberation Serif&#39;, &#39;Roboto&#39;, &#39;Cousine&#39;, &#39;C059&#39;, &#39;Noto Sans Meetei Mayek&#39;, &#39;Roboto Condensed&#39;, &#39;Liberation Sans Narrow&#39;, &#39;Noto Serif Display&#39;, &#39;FreeMono&#39;, &#39;Linux Biolinum Keyboard O&#39;, &#39;Noto Sans Mayan Numerals&#39;, &#39;Noto Sans Cherokee&#39;, &#39;Cabin&#39;, &#39;Noto Sans Mro&#39;, &#39;Droid Sans Fallback&#39;, &#39;Open Sans&#39;, &#39;DejaVu Sans&#39;, &#39;Junicode&#39;, &#39;Noto Sans Lycian&#39;, &#39;Noto Sans Sinhala&#39;, &#39;DejaVu Serif&#39;, &#39;STIX&#39;, &#39;Noto Sans Nushu&#39;, &#39;Noto Sans Bamum&#39;, &#39;STIXIntegralsD&#39;, &#39;Accanthis ADF Std No2&#39;, &#39;Carlito&#39;, &#39;STIXIntegralsUpSm&#39;, &#39;FreeMono&#39;, &#39;Roboto&#39;, &#39;Noto Sans Tifinagh Rhissa Ixa&#39;, &#39;Noto Sans Tifinagh SIL&#39;, &#39;C059&#39;, &#39;Noto Sans Javanese&#39;, &#39;Caladea&#39;, &#39;Noto Sans Syloti Nagri&#39;, &#39;Noto Sans Hatran&#39;, &#39;Noto Traditional Nushu&#39;, &#39;Noto Serif Ethiopic&#39;, &#39;Gentium Plus&#39;, &#39;Open Sans&#39;, &#39;Accanthis ADF Std&#39;, &#39;STIXVariants&#39;, &#39;Accanthis ADF Std&#39;, &#39;FreeSerif&#39;, &#39;Tinos&#39;, &#39;P052&#39;, &#39;Noto Sans Mende Kikakui&#39;, &#39;Noto Serif Thai&#39;, &#39;GFS Artemisia&#39;, &#39;Noto Sans Marchen&#39;, &#39;Lobster Two&#39;, &#39;Noto Serif Malayalam&#39;, &#39;Noto Sans Lao&#39;, &#39;Noto Sans Lydian&#39;, &#39;Liberation Serif&#39;, &#39;Noto Sans Khojki&#39;, &#39;DejaVu Sans Mono&#39;, &#39;Noto Sans Kannada&#39;, &#39;Noto Sans Hanifi Rohingya&#39;, &#39;Berenis ADF Pro&#39;, &#39;Noto Sans Display&#39;, &#39;Noto Sans Bengali&#39;, &#39;Noto Sans Hebrew&#39;, &#39;Cantarell&#39;, &#39;Noto Sans Thaana&#39;, &#39;Noto Sans Arabic&#39;, &#39;Noto Serif Telugu&#39;, &#39;Noto Sans Linear B&#39;, &#39;Berenis ADF Pro&#39;, &#39;Noto Looped Lao&#39;, &#39;Lato&#39;, &#39;Noto Sans Armenian&#39;, &#39;STIXSizeOneSym&#39;, &#39;DejaVu Serif&#39;, &#39;FoulisGreek&#39;, &#39;Noto Sans Adlam&#39;, &#39;Noto Sans Tamil Supplement&#39;, &#39;Charis SIL&#39;, &#39;STIXNonUnicode&#39;, &#39;Noto Nastaliq Urdu&#39;, &#39;Noto Sans Khmer&#39;, &#39;Noto Sans NKo&#39;, &#39;Go Mono&#39;, &#39;GFS Didot&#39;, &#39;STIXSizeFiveSym&#39;, &#39;DejaVu Sans&#39;, &#39;DejaVu Serif&#39;, &#39;Noto Sans Syriac&#39;, &#39;Linux Libertine O&#39;, &#39;Liberation Sans&#39;, &#39;Tinos&#39;, &#39;Noto Serif Tamil&#39;, &#39;Open Sans&#39;, &#39;Linux Biolinum O&#39;, &#39;Cantarell&#39;, &#39;Liberation Sans&#39;, &#39;Noto Sans Anatolian Hieroglyphs&#39;, &#39;Noto Sans Sharada&#39;, &#39;Noto Looped Thai&#39;, &#39;EB Garamond Initials&#39;, &#39;Noto Sans Palmyrene&#39;, &#39;Noto Sans Inscriptional Parthian&#39;, &#39;Noto Sans Rejang&#39;, &#39;FreeSans&#39;, &#39;DejaVu Sans&#39;, &#39;Noto Sans Kayah Li&#39;, &#39;Noto Sans Manichaean&#39;, &#39;Noto Serif Gujarati&#39;, &#39;Noto Sans Display&#39;, &#39;Roboto&#39;, &#39;STIXNonUnicode&#39;, &#39;URW Gothic&#39;, &#39;Noto Serif Thai&#39;, &#39;Noto Serif Ahom&#39;, &#39;Nimbus Sans Narrow&#39;, &#39;Noto Rashi Hebrew&#39;, &#39;Noto Sans Meroitic&#39;, &#39;Arimo&#39;, &#39;Noto Serif Balinese&#39;, &#39;Nimbus Sans&#39;, &#39;FreeSans&#39;, &#39;FreeSans&#39;, &#39;Gillius ADF No2&#39;, &#39;Open Sans&#39;, &#39;Noto Sans Nabataean&#39;, &#39;FreeSans&#39;, &#39;STIXGeneral&#39;, &#39;Noto Sans Tai Tham&#39;, &#39;Noto Serif Tibetan&#39;, &#39;Gentium Book Plus&#39;, &#39;DejaVu Sans&#39;, &#39;FreeSans&#39;, &#39;Noto Sans Tifinagh APT&#39;, &#39;Noto Sans Buhid&#39;, &#39;Nimbus Mono PS&#39;, &#39;Noto Sans SignWriting&#39;, &#39;Cousine&#39;, &#39;Noto Sans Tifinagh Tawellemmet&#39;, &#39;Roboto&#39;, &#39;Charis SIL&#39;, &#39;Linux Libertine O&#39;, &#39;FreeSerif&#39;, &#39;Noto Sans Sora Sompeng&#39;, &#39;FreeSerif&#39;, &#39;GentiumAlt&#39;, &#39;STIXIntegralsUp&#39;, &#39;Noto Sans Malayalam&#39;, &#39;Liberation Serif&#39;, &#39;URW Gothic&#39;, &#39;Liberation Sans Narrow&#39;, &#39;Noto Sans Georgian&#39;, &#39;Noto Music&#39;, &#39;Carlito&#39;, &#39;Open Sans&#39;, &#39;Open Sans Condensed&#39;, &#39;Noto Sans Ugaritic&#39;, &#39;Noto Naskh Arabic&#39;, &#39;Noto Sans Newa&#39;, &#39;Universalis ADF Std&#39;, &#39;P052&#39;, &#39;Cousine&#39;, &#39;FreeMono&#39;, &#39;Noto Sans Display&#39;, &#39;Linux Biolinum O&#39;, &#39;Gentium Plus&#39;, &#39;Linux Libertine Display O&#39;, &#39;Arimo&#39;, &#39;STIXIntegralsSm&#39;, &#39;Noto Rashi Hebrew&#39;, &#39;EB Garamond&#39;, &#39;Noto Serif Tamil Slanted&#39;, &#39;Noto Kufi Arabic&#39;, &#39;GFS Neohellenic&#39;, &#39;Gentium Plus&#39;, &#39;Accanthis ADF Std&#39;, &#39;FreeSerif&#39;, &#39;FreeMono&#39;, &#39;Noto Sans Egyptian Hieroglyphs&#39;, &#39;STIXIntegralsUpD&#39;, &#39;Noto Sans Gujarati&#39;, &#39;Tinos&#39;, &#39;EB Garamond&#39;, &#39;DejaVu Math TeX Gyre&#39;, &#39;STIXIntegralsUpD&#39;, &#39;Noto Sans Old Turkic&#39;]
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>在我们研究供给和需求模型之前，了解一些关于（a）消费者和生产者剩余以及（b）积分的背景知识会很有帮助。
-（如果你对这两个主题都很熟悉，可以跳到<a class="reference internal" href="#integration"><span class="std std-ref">下一节</span></a>。）</p>
+<p>在我们研究供给和需求模型之前，了解一些关于（a）消费者和生产者剩余以及（b）积分的背景知识会很有帮助。</p>
+<p>（如果你对这两个主题都很熟悉，可以跳到<a class="reference internal" href="#integration"><span class="std std-ref">下一节</span></a>。）</p>
 </section>
 <section id="id5">
 <h3><span class="section-number">7.1.3. </span>一个离散的例子<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>关于消费者剩余，假设我们有一种商品和10个消费者。
-这10个消费者有不同的偏好；特别是，他们愿意为一单位商品支付的金额各不相同。
-假设这10个消费者的支付意愿如下：</p>
+<p>关于消费者剩余，假设我们有一种商品和10个消费者。</p>
+<p>这10个消费者有不同的偏好；特别是，他们愿意为一单位商品支付的金额各不相同。</p>
+<p>假设这10个消费者的支付意愿如下：</p>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>消费者</p></th>
@@ -355,9 +349,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>如果 <span class="math notranslate nohighlight">\(w_i &lt; p\)</span>，那么消费者不购买并获得剩余 <span class="math notranslate nohighlight">\(0\)</span></p></li>
 </ul>
 <p>例如，如果价格是 <span class="math notranslate nohighlight">\(p=40\)</span>，那么消费者1获得的剩余是 <span class="math notranslate nohighlight">\(98-40=58\)</span>。</p>
-<p>下面的条形图显示了当 <span class="math notranslate nohighlight">\(p=25\)</span> 时每个消费者的剩余。
-每个条形 <span class="math notranslate nohighlight">\(i\)</span> 的总高度是消费者 <span class="math notranslate nohighlight">\(i\)</span> 的支付意愿。
-一些条形的橙色部分显示了消费者剩余。</p>
+<p>下面的条形图显示了当 <span class="math notranslate nohighlight">\(p=25\)</span> 时每个消费者的剩余。</p>
+<p>每个条形 <span class="math notranslate nohighlight">\(i\)</span> 的总高度是消费者 <span class="math notranslate nohighlight">\(i\)</span> 的支付意愿。</p>
+<p>一些条形的橙色部分显示了消费者剩余。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -378,46 +372,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28040 (\N{CJK UNIFIED IDEOGRAPH-6D88}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36153 (\N{CJK UNIFIED IDEOGRAPH-8D39}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32773 (\N{CJK UNIFIED IDEOGRAPH-8005}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25903 (\N{CJK UNIFIED IDEOGRAPH-652F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20184 (\N{CJK UNIFIED IDEOGRAPH-4ED8}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24847 (\N{CJK UNIFIED IDEOGRAPH-610F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24895 (\N{CJK UNIFIED IDEOGRAPH-613F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-Font &#39;default&#39; does not have a glyph for &#39;\u4ef7&#39; [U+4ef7], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u683c&#39; [U+683c], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21097 (\N{CJK UNIFIED IDEOGRAPH-5269}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20313 (\N{CJK UNIFIED IDEOGRAPH-4F59}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-Font &#39;default&#39; does not have a glyph for &#39;\u4ef7&#39; [U+4ef7], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u683c&#39; [U+683c], substituting with a dummy symbol.
-</pre></div>
-</div>
 <figure class="align-default" id="wpdisc">
-<a class="reference internal image-reference" href="_images/babed765582b15b96b08f6b27bc57b054212a2adc21ae24debc45b2b68c48a8a.png"><img alt="_images/babed765582b15b96b08f6b27bc57b054212a2adc21ae24debc45b2b68c48a8a.png" src="_images/babed765582b15b96b08f6b27bc57b054212a2adc21ae24debc45b2b68c48a8a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d93d44269962969fac00294f5202d62a943547239d78836043937a89575085d5.png"><img alt="_images/d93d44269962969fac00294f5202d62a943547239d78836043937a89575085d5.png" src="_images/d93d44269962969fac00294f5202d62a943547239d78836043937a89575085d5.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">支付意愿（离散）</span><a class="headerlink" href="#wpdisc" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -473,20 +429,8 @@ p = 100 e^{-q}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21453 (\N{CJK UNIFIED IDEOGRAPH-53CD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38656 (\N{CJK UNIFIED IDEOGRAPH-9700}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27714 (\N{CJK UNIFIED IDEOGRAPH-6C42}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26354 (\N{CJK UNIFIED IDEOGRAPH-66F2}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32447 (\N{CJK UNIFIED IDEOGRAPH-7EBF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="wpcont">
-<a class="reference internal image-reference" href="_images/424cd9d6eef58cb2f9709260c931c49374d7b21838b1689aabe16f9d806d1196.png"><img alt="_images/424cd9d6eef58cb2f9709260c931c49374d7b21838b1689aabe16f9d806d1196.png" src="_images/424cd9d6eef58cb2f9709260c931c49374d7b21838b1689aabe16f9d806d1196.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/057d9a8f4505b00d57fa7221cd580ed55671301f247446cdfe76a04aaa3d9384.png"><img alt="_images/057d9a8f4505b00d57fa7221cd580ed55671301f247446cdfe76a04aaa3d9384.png" src="_images/057d9a8f4505b00d57fa7221cd580ed55671301f247446cdfe76a04aaa3d9384.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">支付意愿（连续）</span><a class="headerlink" href="#wpcont" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -521,7 +465,7 @@ p = 100 e^{-q}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="wpcont-cs">
-<a class="reference internal image-reference" href="_images/0017f64f3dd985a47c75178989967f22145bd432c0a475d2474cc56af9acfb95.png"><img alt="_images/0017f64f3dd985a47c75178989967f22145bd432c0a475d2474cc56af9acfb95.png" src="_images/0017f64f3dd985a47c75178989967f22145bd432c0a475d2474cc56af9acfb95.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/346e3b5af3c63154dc6cb40d7aabb8b038c1646b0f71691215a18effe1d62961.png"><img alt="_images/346e3b5af3c63154dc6cb40d7aabb8b038c1646b0f71691215a18effe1d62961.png" src="_images/346e3b5af3c63154dc6cb40d7aabb8b038c1646b0f71691215a18effe1d62961.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">支付意愿（连续）和消费者剩余</span><a class="headerlink" href="#wpcont-cs" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -555,41 +499,31 @@ p = 100 e^{-q}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20135 (\N{CJK UNIFIED IDEOGRAPH-4EA7}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20986 (\N{CJK UNIFIED IDEOGRAPH-51FA}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21806 (\N{CJK UNIFIED IDEOGRAPH-552E}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="wsdisc">
-<a class="reference internal image-reference" href="_images/ddba89eb2f8aa758c774b4a5d9f996c89bc78626467874a3469530d4a13954e3.png"><img alt="_images/ddba89eb2f8aa758c774b4a5d9f996c89bc78626467874a3469530d4a13954e3.png" src="_images/ddba89eb2f8aa758c774b4a5d9f996c89bc78626467874a3469530d4a13954e3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b7bc598b95ba9d13782a4a3f51c9b0dec840fcc1fb4db4bb899bff6435af47fc.png"><img alt="_images/b7bc598b95ba9d13782a4a3f51c9b0dec840fcc1fb4db4bb899bff6435af47fc.png" src="_images/b7bc598b95ba9d13782a4a3f51c9b0dec840fcc1fb4db4bb899bff6435af47fc.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">出售意愿（离散）</span><a class="headerlink" href="#wsdisc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>设 <span class="math notranslate nohighlight">\(v_i\)</span> 为生产者 <span class="math notranslate nohighlight">\(i\)</span> 愿意出售商品的价格。
-当价格为 <span class="math notranslate nohighlight">\(p\)</span> 时，生产者 <span class="math notranslate nohighlight">\(i\)</span> 的生产者剩余为 <span class="math notranslate nohighlight">\(\max\{p - v_i, 0\}\)</span>。
-例如，一个愿意以 10 美元价格出售且以 20 美元价格售出的生产者获得 10 美元的剩余。
-总生产者剩余由以下公式给出：
-$<span class="math notranslate nohighlight">\(
+<p>设 <span class="math notranslate nohighlight">\(v_i\)</span> 为生产者 <span class="math notranslate nohighlight">\(i\)</span> 愿意出售商品的价格。</p>
+<p>当价格为 <span class="math notranslate nohighlight">\(p\)</span> 时，生产者 <span class="math notranslate nohighlight">\(i\)</span> 的生产者剩余为 <span class="math notranslate nohighlight">\(\max\{p - v_i, 0\}\)</span>。</p>
+<p>例如，一个愿意以 10 美元价格出售且以 20 美元价格售出的生产者获得 10 美元的剩余。</p>
+<p>总生产者剩余由以下公式给出：</p>
+<div class="math notranslate nohighlight">
+\[
 \sum_{i=1}^{10} \max\{p - v_i, 0\}
 = \sum_{p \geq v_i} (p - v_i)
-\)</span><span class="math notranslate nohighlight">\(
-与消费者情况一样，将生产者的销售意愿近似为连续曲线对分析有帮助。
-这条曲线被称为**反供给曲线**。
-我们在下面展示了一个例子，其中反供给曲线为：
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>与消费者情况一样，将生产者的销售意愿近似为连续曲线对分析有帮助。</p>
+<p>这条曲线被称为<strong>反供给曲线</strong>。</p>
+<p>我们在下面展示了一个例子，其中反供给曲线为：</p>
+<div class="math notranslate nohighlight">
+\[
 p = 2 q^2
-\)</span>$
-阴影部分是这个连续模型中的总生产者剩余。</p>
+\]</div>
+<p>阴影部分是这个连续模型中的总生产者剩余。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse_supply</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
@@ -620,14 +554,8 @@ p = 2 q^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20379 (\N{CJK UNIFIED IDEOGRAPH-4F9B}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32473 (\N{CJK UNIFIED IDEOGRAPH-7ED9}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="wscont">
-<a class="reference internal image-reference" href="_images/4ed3357e66725b651e9a5aa3574f4c9bcc85885a40de198fe196444c1de422a6.png"><img alt="_images/4ed3357e66725b651e9a5aa3574f4c9bcc85885a40de198fe196444c1de422a6.png" src="_images/4ed3357e66725b651e9a5aa3574f4c9bcc85885a40de198fe196444c1de422a6.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ed6ad89001a591e1b354d86c2461596eb71698e91befee667da2bf7edd1d1018.png"><img alt="_images/ed6ad89001a591e1b354d86c2461596eb71698e91befee667da2bf7edd1d1018.png" src="_images/ed6ad89001a591e1b354d86c2461596eb71698e91befee667da2bf7edd1d1018.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">出售意愿（连续）和生产者剩余</span><a class="headerlink" href="#wscont" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -638,12 +566,12 @@ p = 2 q^2
 </section>
 <section id="integration">
 <span id="id10"></span><h2><span class="section-number">7.3. </span>积分<a class="headerlink" href="#integration" title="Permalink to this heading">#</a></h2>
-<p>在连续情况下，我们如何计算消费者和生产者剩余呢？
-简短的答案是：通过使用<a class="reference external" href="https://en.wikipedia.org/wiki/Integral">积分</a>。
-一些读者可能已经熟悉积分的基础知识。
-对于那些不熟悉的读者，这里是一个简短的介绍。
-一般来说，对于函数 <span class="math notranslate nohighlight">\(f\)</span>，<span class="math notranslate nohighlight">\(f\)</span> 在区间 <span class="math notranslate nohighlight">\([a, b]\)</span> 上的<strong>积分</strong>是 <span class="math notranslate nohighlight">\(f\)</span> 在 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 之间的曲线下面积。
-这个值写作 <span class="math notranslate nohighlight">\(\int_a^b f(x) \mathrm{d} x\)</span>，下图展示了当 <span class="math notranslate nohighlight">\(f(x) = \cos(x/2) + 1\)</span> 时的情况。</p>
+<p>在连续情况下，我们如何计算消费者和生产者剩余呢？</p>
+<p>简短的答案是：通过使用<a class="reference external" href="https://en.wikipedia.org/wiki/Integral">积分</a>。</p>
+<p>一些读者可能已经熟悉积分的基础知识。</p>
+<p>对于那些不熟悉的读者，这里是一个简短的介绍。</p>
+<p>一般来说，对于函数 <span class="math notranslate nohighlight">\(f\)</span>，<span class="math notranslate nohighlight">\(f\)</span> 在区间 <span class="math notranslate nohighlight">\([a, b]\)</span> 上的<strong>积分</strong>是 <span class="math notranslate nohighlight">\(f\)</span> 在 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 之间的曲线下面积。</p>
+<p>这个值写作 <span class="math notranslate nohighlight">\(\int_a^b f(x) \mathrm{d} x\)</span>，下图展示了当 <span class="math notranslate nohighlight">\(f(x) = \cos(x/2) + 1\)</span> 时的情况。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -665,45 +593,45 @@ p = 2 q^2
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="integrate">
-<a class="reference internal image-reference" href="_images/74941fd13c5c7728d14a78f36c46026e7c7fb272e76af3e66e8a3e7bfc4da03d.png"><img alt="_images/74941fd13c5c7728d14a78f36c46026e7c7fb272e76af3e66e8a3e7bfc4da03d.png" src="_images/74941fd13c5c7728d14a78f36c46026e7c7fb272e76af3e66e8a3e7bfc4da03d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/525ef4452bbfe392db880864d0607bd9abd0820a9f44cfadd7503b9f1f7822fd.png"><img alt="_images/525ef4452bbfe392db880864d0607bd9abd0820a9f44cfadd7503b9f1f7822fd.png" src="_images/525ef4452bbfe392db880864d0607bd9abd0820a9f44cfadd7503b9f1f7822fd.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">曲线下面积</span><a class="headerlink" href="#integrate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>计算积分有许多规则，不同的 <span class="math notranslate nohighlight">\(f\)</span> 选择适用不同的规则。
-这些规则中的许多与数学中最美丽和最强大的结果之一有关：<a class="reference external" href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus">微积分基本定理</a>。
-我们不会在这里试图涵盖这些思想，部分原因是这个主题太大，部分原因是对于本讲座，你只需要知道下面陈述的一条规则。
-如果 <span class="math notranslate nohighlight">\(f(x) = c + \mathrm{d} x\)</span>，那么
+<p>计算积分有许多规则，不同的 <span class="math notranslate nohighlight">\(f\)</span> 选择适用不同的规则。</p>
+<p>这些规则中的许多与数学中最美丽和最强大的结果之一有关：<a class="reference external" href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus">微积分基本定理</a>。</p>
+<p>我们不会在这里试图涵盖这些思想，部分原因是这个主题太大，部分原因是对于本讲座，你只需要知道下面陈述的一条规则。</p>
+<p>如果 <span class="math notranslate nohighlight">\(f(x) = c + \mathrm{d} x\)</span>，那么
 $<span class="math notranslate nohighlight">\( 
 \int_a^b f(x) \mathrm{d} x = c (b - a) + \frac{d}{2}(b^2 - a^2) 
-\)</span><span class="math notranslate nohighlight">\(
-事实上，这个规则如此简单，以至于可以通过基本几何计算得出——你可以试着绘制 \)</span>f<span class="math notranslate nohighlight">\( 的图形并计算 \)</span>a<span class="math notranslate nohighlight">\( 和 \)</span>b$ 之间曲线下的面积。
+\)</span>$</p>
+<p>事实上，这个规则如此简单，以至于可以通过基本几何计算得出——你可以试着绘制 <span class="math notranslate nohighlight">\(f\)</span> 的图形并计算 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 之间曲线下的面积。
 在接下来的内容中，我们将反复使用这个规则。</p>
 </section>
 <section id="id11">
 <h2><span class="section-number">7.4. </span>供给和需求<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
-<p>现在让我们把供给和需求放在一起。
-这将引导我们到非常重要的市场均衡概念，并从那里讨论均衡和福利。
-在大部分讨论中，我们假设反需求曲线和供给曲线是数量的<strong>仿射</strong>函数。</p>
+<p>现在让我们把供给和需求放在一起。</p>
+<p>这将引导我们到非常重要的市场均衡概念，并从那里讨论均衡和福利。</p>
+<p>在大部分讨论中，我们假设反需求曲线和供给曲线是数量的<strong>仿射</strong>函数。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>“仿射”意味着”线性加上一个常数”，<a class="reference external" href="https://math.stackexchange.com/questions/275310/what-is-the-difference-between-linear-and-affine-function">这里</a>有一个很好的讨论。</p>
 </div>
-<p>在我们研究<a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">后续讲座</span></a>中的多消费品模型时，我们也将假设仿射反供给和需求函数。
-我们这样做是为了简化说明，并使我们能够仅使用线性代数的几个工具，即矩阵乘法和矩阵求逆。
-我们研究一个单一商品市场，买家和卖家以价格 <span class="math notranslate nohighlight">\(p\)</span> 交换数量 <span class="math notranslate nohighlight">\(q\)</span>。
-数量 <span class="math notranslate nohighlight">\(q\)</span> 和价格 <span class="math notranslate nohighlight">\(p\)</span> 都是标量。
-我们假设该商品的反需求曲线和供给曲线为：
+<p>在我们研究<a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">后续讲座</span></a>中的多消费品模型时，我们也将假设仿射反供给和需求函数。</p>
+<p>我们这样做是为了简化说明，并使我们能够仅使用线性代数的几个工具，即矩阵乘法和矩阵求逆。</p>
+<p>我们研究一个单一商品市场，买家和卖家以价格 <span class="math notranslate nohighlight">\(p\)</span> 交换数量 <span class="math notranslate nohighlight">\(q\)</span>。</p>
+<p>数量 <span class="math notranslate nohighlight">\(q\)</span> 和价格 <span class="math notranslate nohighlight">\(p\)</span> 都是标量。</p>
+<p>我们假设该商品的反需求曲线和供给曲线为：
 $<span class="math notranslate nohighlight">\(
 p = d_0 - d_1 q, \quad d_0, d_1 &gt; 0
 \)</span><span class="math notranslate nohighlight">\(
 \)</span><span class="math notranslate nohighlight">\(
 p = s_0 + s_1 q , \quad s_0, s_1 &gt; 0
-\)</span>$
-我们称它们为反需求曲线和供给曲线，因为价格在等式的左侧，而不是像直接需求或供给函数那样在右侧。
-我们可以使用 <a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">namedtuple</a> 来存储我们单一商品市场的参数。</p>
+\)</span>$</p>
+<p>我们称它们为反需求曲线和供给曲线，因为价格在等式的左侧，而不是像直接需求或供给函数那样在右侧。</p>
+<p>我们可以使用 <a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">namedtuple</a> 来存储我们单一商品市场的参数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Market</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Market&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;d_0&#39;</span><span class="p">,</span> <span class="c1"># 需求截距</span>
@@ -761,7 +689,7 @@ p = s_0 + s_1 q , \quad s_0, s_1 &gt; 0
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="supply-demand">
-<a class="reference internal image-reference" href="_images/27edb4e603f6910af8ca050c42f6350dc135d79cea1b2119498b2b3bddfe8af4.png"><img alt="_images/27edb4e603f6910af8ca050c42f6350dc135d79cea1b2119498b2b3bddfe8af4.png" src="_images/27edb4e603f6910af8ca050c42f6350dc135d79cea1b2119498b2b3bddfe8af4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d28aaadf582f481f468d1d6452f7010ba61a8127df44d1be76ce09bb9f5b13e6.png"><img alt="_images/d28aaadf582f481f468d1d6452f7010ba61a8127df44d1be76ce09bb9f5b13e6.png" src="_images/d28aaadf582f481f468d1d6452f7010ba61a8127df44d1be76ce09bb9f5b13e6.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">供给和需求</span><a class="headerlink" href="#supply-demand" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -771,8 +699,8 @@ p = s_0 + s_1 q , \quad s_0, s_1 &gt; 0
 <p>在上图中，供给曲线和需求曲线的交点出现<strong>均衡</strong>价格-数量对。</p>
 <section id="id12">
 <h3><span class="section-number">7.4.1. </span>消费者剩余<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>给定数量 <span class="math notranslate nohighlight">\(q\)</span>，设 <span class="math notranslate nohighlight">\(p := d_0 - d_1 q\)</span> 为反需求曲线上对应的价格。
-我们将<strong>消费者剩余</strong> <span class="math notranslate nohighlight">\(S_c(q)\)</span> 定义为反需求曲线下的面积减去 <span class="math notranslate nohighlight">\(p q\)</span>:</p>
+<p>给定数量 <span class="math notranslate nohighlight">\(q\)</span>，设 <span class="math notranslate nohighlight">\(p := d_0 - d_1 q\)</span> 为反需求曲线上对应的价格。</p>
+<p>我们将<strong>消费者剩余</strong> <span class="math notranslate nohighlight">\(S_c(q)\)</span> 定义为反需求曲线下的面积减去 <span class="math notranslate nohighlight">\(p q\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-cstm-spls">
 <span class="eqno">(7.1)<a class="headerlink" href="#equation-eq-cstm-spls" title="Permalink to this equation">#</a></span>\[
 S_c(q) := 
@@ -815,32 +743,8 @@ S_c(q) :=
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38656 (\N{CJK UNIFIED IDEOGRAPH-9700}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27714 (\N{CJK UNIFIED IDEOGRAPH-6C42}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28040 (\N{CJK UNIFIED IDEOGRAPH-6D88}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36153 (\N{CJK UNIFIED IDEOGRAPH-8D39}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32773 (\N{CJK UNIFIED IDEOGRAPH-8005}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21097 (\N{CJK UNIFIED IDEOGRAPH-5269}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20313 (\N{CJK UNIFIED IDEOGRAPH-4F59}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="supply-demand-cs">
-<a class="reference internal image-reference" href="_images/1f71c9985222ab085b8f2d5c3573b96b903e6dc63911a4b5f5cc6c34d916bcbb.png"><img alt="_images/1f71c9985222ab085b8f2d5c3573b96b903e6dc63911a4b5f5cc6c34d916bcbb.png" src="_images/1f71c9985222ab085b8f2d5c3573b96b903e6dc63911a4b5f5cc6c34d916bcbb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c28248fc122cc89881fb3a8553bfd63513e6816846cb964cbca7f91b593fb5ab.png"><img alt="_images/c28248fc122cc89881fb3a8553bfd63513e6816846cb964cbca7f91b593fb5ab.png" src="_images/c28248fc122cc89881fb3a8553bfd63513e6816846cb964cbca7f91b593fb5ab.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">供给和需求（消费者剩余）</span><a class="headerlink" href="#supply-demand-cs" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -904,32 +808,8 @@ S_p(q)
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20379 (\N{CJK UNIFIED IDEOGRAPH-4F9B}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32473 (\N{CJK UNIFIED IDEOGRAPH-7ED9}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20135 (\N{CJK UNIFIED IDEOGRAPH-4EA7}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32773 (\N{CJK UNIFIED IDEOGRAPH-8005}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21097 (\N{CJK UNIFIED IDEOGRAPH-5269}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20313 (\N{CJK UNIFIED IDEOGRAPH-4F59}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="supply-demand-ps">
-<a class="reference internal image-reference" href="_images/a0b87806d3ee15db3e7d86b46c86c27cb3e911335be65c5ce80773ecb9eb35b7.png"><img alt="_images/a0b87806d3ee15db3e7d86b46c86c27cb3e911335be65c5ce80773ecb9eb35b7.png" src="_images/a0b87806d3ee15db3e7d86b46c86c27cb3e911335be65c5ce80773ecb9eb35b7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7199a88cdadbc1379734b4abd1852b3ebe01d21d243d4b9d9b9ed0f263c71250.png"><img alt="_images/7199a88cdadbc1379734b4abd1852b3ebe01d21d243d4b9d9b9ed0f263c71250.png" src="_images/7199a88cdadbc1379734b4abd1852b3ebe01d21d243d4b9d9b9ed0f263c71250.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">供给和需求（生产者剩余）</span><a class="headerlink" href="#supply-demand-ps" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -988,22 +868,16 @@ W(q) = (d_0 - s_0) q -  \frac{1}{2} (d_1 + s_1) q^2
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31119 (\N{CJK UNIFIED IDEOGRAPH-798F}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21033 (\N{CJK UNIFIED IDEOGRAPH-5229}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="wf">
-<a class="reference internal image-reference" href="_images/7e1fb0d9b9daabf6737f1ebaa676b5efcfeb36e033175fe9e91393787a8bb621.png"><img alt="_images/7e1fb0d9b9daabf6737f1ebaa676b5efcfeb36e033175fe9e91393787a8bb621.png" src="_images/7e1fb0d9b9daabf6737f1ebaa676b5efcfeb36e033175fe9e91393787a8bb621.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/50dce831995d1a3239ace6501c584921ff9f098af5cddcf2da6145279dfdb2a9.png"><img alt="_images/50dce831995d1a3239ace6501c584921ff9f098af5cddcf2da6145279dfdb2a9.png" src="_images/50dce831995d1a3239ace6501c584921ff9f098af5cddcf2da6145279dfdb2a9.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">福利</span><a class="headerlink" href="#wf" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>现在让我们给社会规划者一个最大化社会福利的任务。
-为了计算使福利准则最大化的数量，我们对 <span class="math notranslate nohighlight">\(W\)</span> 关于 <span class="math notranslate nohighlight">\(q\)</span> 求导，然后将导数设为零。</p>
+<p>现在让我们给社会规划者一个最大化社会福利的任务。</p>
+<p>为了计算使福利准则最大化的数量，我们对 <span class="math notranslate nohighlight">\(W\)</span> 关于 <span class="math notranslate nohighlight">\(q\)</span> 求导，然后将导数设为零。</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\mathrm{d} W(q)}{\mathrm{d} q} = d_0 - s_0 - (d_1 + s_1) q  = 0
@@ -1013,8 +887,8 @@ W(q) = (d_0 - s_0) q -  \frac{1}{2} (d_1 + s_1) q^2
 <span class="eqno">(7.3)<a class="headerlink" href="#equation-eq-old1" title="Permalink to this equation">#</a></span>\[
 q = \frac{ d_0 - s_0}{s_1 + d_1}
 \]</div>
-<p>让我们记住方程 <a class="reference internal" href="#equation-eq-old1">(7.3)</a> 给出的数量 <span class="math notranslate nohighlight">\(q\)</span>，这是社会规划者为最大化消费者剩余加生产者剩余而选择的数量。
-我们将把它与在竞争均衡中出现的、使供给等于需求的数量进行比较。</p>
+<p>让我们记住方程 <a class="reference internal" href="#equation-eq-old1">(7.3)</a> 给出的数量 <span class="math notranslate nohighlight">\(q\)</span>，这是社会规划者为最大化消费者剩余加生产者剩余而选择的数量。</p>
+<p>我们将把它与在竞争均衡中出现的、使供给等于需求的数量进行比较。</p>
 </section>
 <section id="id15">
 <h3><span class="section-number">7.4.4. </span>竞争均衡<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
@@ -1028,8 +902,8 @@ p =  d_0 - d_1 q = s_0 + s_1 q
 <span class="eqno">(7.4)<a class="headerlink" href="#equation-eq-equilib-q" title="Permalink to this equation">#</a></span>\[
 q = \frac{ d_0 - s_0}{s_1 + d_1}
 \]</div>
-<p>这就是竞争均衡数量。
-注意，均衡数量等于方程 <a class="reference internal" href="#equation-eq-old1">(7.3)</a> 给出的相同的 <span class="math notranslate nohighlight">\(q\)</span>。</p>
+<p>这就是竞争均衡数量。</p>
+<p>注意，均衡数量等于方程 <a class="reference internal" href="#equation-eq-old1">(7.3)</a> 给出的相同的 <span class="math notranslate nohighlight">\(q\)</span>。</p>
 <p>方程 <a class="reference internal" href="#equation-eq-old1">(7.3)</a> 确定的数量使供给等于需求，这带来了一个<strong>关键发现</strong>：</p>
 <ul class="simple">
 <li><p>竞争均衡数量最大化了我们的福利准则</p></li>
@@ -1043,9 +917,9 @@ q = \frac{ d_0 - s_0}{s_1 + d_1}
 </section>
 <section id="id16">
 <h2><span class="section-number">7.5. </span>推广<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
-<p>在<a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">后面的讲座</span></a>中，我们将从其他对象推导出上述需求和供给曲线的推广。
-我们的推广将把前面对单一商品市场的分析扩展到 <span class="math notranslate nohighlight">\(n\)</span> 种商品的 <span class="math notranslate nohighlight">\(n\)</span> 个同时市场的分析。
-此外</p>
+<p>在<a class="reference internal" href="supply_demand_multiple_goods.html"><span class="doc">后面的讲座</span></a>中，我们将从其他对象推导出上述需求和供给曲线的推广。</p>
+<p>我们的推广将把前面对单一商品市场的分析扩展到 <span class="math notranslate nohighlight">\(n\)</span> 种商品的 <span class="math notranslate nohighlight">\(n\)</span> 个同时市场的分析。</p>
+<p>此外</p>
 <ul class="simple">
 <li><p>我们将从消费者问题中推导出<strong>需求曲线</strong>，该问题在<strong>预算约束</strong>下最大化<strong>效用函数</strong>。</p></li>
 <li><p>我们将从生产者问题中推导出<strong>供给曲线</strong>，该生产者是价格接受者，最大化其利润减去由<strong>成本函数</strong>描述的总成本。</p></li>
@@ -1110,13 +984,7 @@ p = i_s(q) := s_0 + s_1 q^{1.8}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38656 (\N{CJK UNIFIED IDEOGRAPH-9700}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27714 (\N{CJK UNIFIED IDEOGRAPH-6C42}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/0c65b02695573c5e34fe740aa36d0f0151a2c4e77c5fd3b7c478275221596c59.png"><img alt="_images/0c65b02695573c5e34fe740aa36d0f0151a2c4e77c5fd3b7c478275221596c59.png" src="_images/0c65b02695573c5e34fe740aa36d0f0151a2c4e77c5fd3b7c478275221596c59.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/710a923f4c84e5d0d03bb1e41b9a9fd1adc1ffc4ec16a735a64502748a6f0959.png"><img alt="_images/710a923f4c84e5d0d03bb1e41b9a9fd1adc1ffc4ec16a735a64502748a6f0959.png" src="_images/710a923f4c84e5d0d03bb1e41b9a9fd1adc1ffc4ec16a735a64502748a6f0959.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -1183,7 +1051,7 @@ W(q)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/3edc429783c0822e6c44f220ccb9cb3c3572264c08def1a4d3007f75c9181d2b.png"><img alt="_images/3edc429783c0822e6c44f220ccb9cb3c3572264c08def1a4d3007f75c9181d2b.png" src="_images/3edc429783c0822e6c44f220ccb9cb3c3572264c08def1a4d3007f75c9181d2b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3de646c69661d6b02fd41f6eb773efbce6d2cca6c7765f484ef85984cb9ad13d.png"><img alt="_images/3de646c69661d6b02fd41f6eb773efbce6d2cca6c7765f484ef85984cb9ad13d.png" src="_images/3de646c69661d6b02fd41f6eb773efbce6d2cca6c7765f484ef85984cb9ad13d.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -1192,8 +1060,8 @@ W(q)
 
 <p class="admonition-title"><span class="caption-number">Exercise 7.3 </span></p>
 <section id="exercise-content">
-<p>由于非线性性，新的福利函数不容易用纸笔最大化。
-相反，我们可以使用 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize_scalar</span></code> 来最大化它。</p>
+<p>由于非线性性，新的福利函数不容易用纸笔最大化。</p>
+<p>相反，我们可以使用 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize_scalar</span></code> 来最大化它。</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>我们的 <a class="reference external" href="https://python-programming.quantecon.org/scipy.html">SciPy</a> 讲座中有一个关于<a class="reference external" href="https://python-programming.quantecon.org/scipy.html#optimization">优化</a>的章节，这是一个了解更多信息的有用资源。</p>
@@ -1241,20 +1109,19 @@ W(q)
 
 <p class="admonition-title"><span class="caption-number">Exercise 7.4 </span></p>
 <section id="exercise-content">
-<p>现在通过找到使供给和需求相等的价格来计算均衡数量。
-您可以通过寻找超额需求函数的根来数值计算这个价格：</p>
+<p>现在通过找到使供给和需求相等的价格来计算均衡数量。</p>
+<p>我们可以通过寻找超额需求函数的根来数值计算这个价格：</p>
 <div class="math notranslate nohighlight">
 \[
 e_d(q) := i_d(q) - i_s(q) 
 \]</div>
-<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.newton</span></code> 来计算根。</p>
+<p>我们可以使用 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.newton</span></code> 来计算根。</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>我们的 <a class="reference external" href="https://python-programming.quantecon.org/scipy.html">SciPy</a> 讲座中有一个关于<a class="reference external" href="https://python-programming.quantecon.org/scipy.html#roots-and-fixed-points">根和不动点</a>的章节，这是一个了解更多信息的有用资源。</p>
 </div>
-<p>使用接近 1.0 的初始猜测值来初始化 <code class="docutils literal notranslate"><span class="pre">newton</span></code>。
-（相似的初始条件将给出相同的结果。）
-您应该发现均衡价格与福利最大化价格一致，这符合第一基本福利定理。</p>
+<p>使用接近 1.0 的初始猜测值来初始化 <code class="docutils literal notranslate"><span class="pre">newton</span></code>。（相似的初始条件将给出相同的结果。）</p>
+<p>我们发现应该发现均衡价格与福利最大化价格一致，这符合第一基本福利定理。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="intro_supply_demand-solution-7">
@@ -1503,17 +1370,17 @@ e_d(q) := i_d(q) - i_s(q)
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1525,22 +1392,22 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1552,22 +1419,22 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1579,12 +1446,12 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1596,22 +1463,22 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1623,12 +1490,12 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1640,12 +1507,12 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1657,17 +1524,17 @@ e_d(q) := i_d(q) - i_s(q)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

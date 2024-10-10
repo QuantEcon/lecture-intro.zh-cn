@@ -245,68 +245,73 @@ const thebe_selector_output = ".output, .cell_output"
 <h2><span class="section-number">17.1. </span>引言<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Bertrand Russell. History of western philosophy. Routledge, 2004.">Russell, 2004</a>]</span> 第24章关于早期希腊数学和天文学的内容中包含了这段引人入胜的段落：</p>
 <blockquote class="epigraph">
-<div><p>2的平方根是第一个被发现的无理数，早期的毕达哥拉斯学派就已知晓，并发明了巧妙的方法来逼近其值。最佳方法如下：形成两列数字，我们称之为 <span class="math notranslate nohighlight">\(a\)</span> 列和 <span class="math notranslate nohighlight">\(b\)</span> 列；每列都从1开始。在每一步中，下一个 <span class="math notranslate nohighlight">\(a\)</span> 是通过加上最后一个 <span class="math notranslate nohighlight">\(a\)</span> 和已获得的 <span class="math notranslate nohighlight">\(b\)</span> 形成的；下一个 <span class="math notranslate nohighlight">\(b\)</span> 是通过加上前一个 <span class="math notranslate nohighlight">\(a\)</span> 的两倍和前一个 <span class="math notranslate nohighlight">\(b\)</span> 形成的。这样获得的前6对数是 <span class="math notranslate nohighlight">\((1,1), (2,3), (5,7), (12,17), (29,41), (70,99)\)</span>。在每一对中，<span class="math notranslate nohighlight">\(2a - b\)</span> 等于1或-1。因此，<span class="math notranslate nohighlight">\(b/a\)</span> 接近2的平方根，并且每进行一步就会更接近。例如，读者可以自己验证 <span class="math notranslate nohighlight">\(99/70\)</span> 的平方非常接近2。</p>
+<div><p>2的平方根是第一个被发现的无理数，早期的毕达哥拉斯学派就已知晓，并发明了巧妙的方法来逼近其值。</p>
+<p>最佳方法如下：形成两列数字，我们称之为 <span class="math notranslate nohighlight">\(a\)</span> 列和 <span class="math notranslate nohighlight">\(b\)</span> 列；每列都从1开始。在每一步中，下一个 <span class="math notranslate nohighlight">\(a\)</span> 是通过加上最后一个 <span class="math notranslate nohighlight">\(a\)</span> 和已获得的 <span class="math notranslate nohighlight">\(b\)</span> 形成的；</p>
+<p>下一个 <span class="math notranslate nohighlight">\(b\)</span> 是通过加上前一个 <span class="math notranslate nohighlight">\(a\)</span> 的两倍和前一个 <span class="math notranslate nohighlight">\(b\)</span> 形成的。</p>
+<p>这样获得的前6对数是 <span class="math notranslate nohighlight">\((1,1), (2,3), (5,7), (12,17), (29,41), (70,99)\)</span>。</p>
+<p>在每一对中，<span class="math notranslate nohighlight">\(2a - b\)</span> 等于1或-1。因此，<span class="math notranslate nohighlight">\(b/a\)</span> 接近2的平方根，并且每进行一步就会更接近。</p>
+<p>例如，读者可以自己验证 <span class="math notranslate nohighlight">\(99/70\)</span> 的平方非常接近2。</p>
 </div></blockquote>
-<p>本讲座深入研究了这种古老的计算平方根方法，运用了我们在之前quantecon讲座中学到的一些矩阵代数知识。
-特别地，本讲座可以被视为 <a class="reference internal" href="eigen_I.html"><span class="doc">特征值和特征向量</span></a> 的续篇。
-它提供了一个例子，说明特征向量如何分离出<em>不变子空间</em>，帮助构造和分析线性差分方程的解。
-当向量 <span class="math notranslate nohighlight">\(x_t\)</span> 从不变子空间开始时，迭代差分方程会使 <span class="math notranslate nohighlight">\(x_{t+j}\)</span> 对所有 <span class="math notranslate nohighlight">\(j \geq 1\)</span> 保持在该子空间中。
-不变子空间方法在应用经济动力学中广泛使用，例如在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 讲座中。
-我们的方法是用一个古老的例子来说明这种方法，这个例子是古希腊数学家用来计算正整数平方根的。</p>
+<p>本讲座深入研究了这种古老的计算平方根方法，运用了我们在之前quantecon讲座中学到的一些矩阵代数知识。</p>
+<p>特别地，本讲座可以被视为 <a class="reference internal" href="eigen_I.html"><span class="doc">特征值和特征向量</span></a> 的续篇。</p>
+<p>它提供了一个例子，说明特征向量如何分离出<em>不变子空间</em>，帮助构造和分析线性差分方程的解。</p>
+<p>当向量 <span class="math notranslate nohighlight">\(x_t\)</span> 从不变子空间开始时，迭代差分方程会使 <span class="math notranslate nohighlight">\(x_{t+j}\)</span> 对所有 <span class="math notranslate nohighlight">\(j \geq 1\)</span> 保持在该子空间中。</p>
+<p>不变子空间方法在应用经济动力学中广泛使用，例如在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 讲座中。</p>
+<p>我们的方法是用一个古老的例子来说明这种方法，这个例子是古希腊数学家用来计算正整数平方根的。</p>
 </section>
 <section id="id4">
 <h2><span class="section-number">17.2. </span>完全平方数和无理数<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>如果一个整数的平方根也是整数，则称该整数为<strong>完全平方数</strong>。
-完全平方数的有序序列从以下数字开始：</p>
+<p>如果一个整数的平方根也是整数，则称该整数为<strong>完全平方数</strong>。</p>
+<p>完全平方数的有序序列从以下数字开始：</p>
 <div class="math notranslate nohighlight">
 \[
 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, \ldots 
 \]</div>
-<p>如果一个整数不是完全平方数，那么它的平方根就是一个无理数 – 即它不能表示为两个整数的比值，其小数展开是无限的。
-古希腊人发明了一种算法来计算整数的平方根，包括那些不是完全平方数的整数。
-他们的方法涉及：</p>
+<p>如果一个整数不是完全平方数，那么它的平方根就是一个无理数 – 即它不能表示为两个整数的比值，其小数展开是无限的。</p>
+<p>古希腊人发明了一种算法来计算整数的平方根，包括那些不是完全平方数的整数。</p>
+<p>他们的方法涉及：</p>
 <ul class="simple">
 <li><p>计算特定的整数序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>；</p></li>
 <li><p>计算 <span class="math notranslate nohighlight">\(\lim_{t \rightarrow \infty} \left(\frac{y_{t+1}}{y_t}\right) = \bar r\)</span>；</p></li>
 <li><p>从 <span class="math notranslate nohighlight">\(\bar r\)</span> 推导出所需的平方根。</p></li>
 </ul>
-<p>在本讲座中，我们将描述这种方法。
-我们还将使用不变子空间来描述这种方法的变体，这些变体更快。</p>
+<p>在本讲座中，我们将描述这种方法。</p>
+<p>我们还将使用不变子空间来描述这种方法的变体，这些变体更快。</p>
 </section>
 <section id="id5">
 <h2><span class="section-number">17.3. </span>二阶线性差分方程<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>在讲述古希腊人如何计算平方根之前，我们将简要介绍二阶线性差分方程。
-我们将研究以下二阶线性差分方程：</p>
+<p>在讲述古希腊人如何计算平方根之前，我们将简要介绍二阶线性差分方程。</p>
+<p>我们将研究以下二阶线性差分方程：</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff1">
 <span class="eqno">(17.1)<a class="headerlink" href="#equation-eq-2diff1" title="Permalink to this equation">#</a></span>\[
 y_t = a_1 y_{t-1} + a_2 y_{t-2}, \quad t \geq 0
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span> 是给定的一对初始条件。
-方程 <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> 实际上是序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> 的无限多个线性方程。
-对于 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span> 中的每一个 <span class="math notranslate nohighlight">\(t\)</span>，都有一个方程。
-我们可以采用 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 讲座中的方法，将所有这些方程堆叠成一个单一的矩阵方程，然后使用矩阵求逆来求解。</p>
+<p>其中 <span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span> 是给定的一对初始条件。</p>
+<p>方程 <a class="reference internal" href="#equation-eq-2diff1">(17.1)</a> 实际上是序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> 的无限多个线性方程。</p>
+<p>对于 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span> 中的每一个 <span class="math notranslate nohighlight">\(t\)</span>，都有一个方程。</p>
+<p>我们可以采用 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 讲座中的方法，将所有这些方程堆叠成一个单一的矩阵方程，然后使用矩阵求逆来求解。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>在当前情况下，矩阵方程将对一个可数无穷维的方阵与一个可数无穷维的向量进行乘法运算。在一些限定条件下，矩阵乘法和求逆工具适用于这样的方程。</p>
 </div>
-<p>但我们不会在这里采用这种方法。
-相反，我们将寻找一个时不变函数来<em>解决</em>我们的差分方程，这意味着
-它为满足方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>序列提供了一个公式，适用于每个<span class="math notranslate nohighlight">\(t \geq 0\)</span>。
-我们寻求<span class="math notranslate nohighlight">\(y_t, t \geq 0\)</span>的表达式，作为初始条件<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>的函数：</p>
+<p>但我们不会在这里采用这种方法。</p>
+<p>相反，我们将寻找一个时不变函数来<em>解决</em>我们的差分方程，这意味着
+它为满足方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span>序列提供了一个公式，适用于每个<span class="math notranslate nohighlight">\(t \geq 0\)</span>。</p>
+<p>我们寻求<span class="math notranslate nohighlight">\(y_t, t \geq 0\)</span>的表达式，作为初始条件<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>的函数：</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff2">
 <span class="eqno">(17.2)<a class="headerlink" href="#equation-eq-2diff2" title="Permalink to this equation">#</a></span>\[ 
 y_t = g((y_{-1}, y_{-2});t), \quad t \geq 0.
 \]</div>
-<p>我们称这样的函数<span class="math notranslate nohighlight">\(g\)</span>为差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<em>解</em>。
-发现解的一种方法是使用猜测和验证法。
-我们将从考虑一对特殊的初始条件开始，
+<p>我们称这样的函数<span class="math notranslate nohighlight">\(g\)</span>为差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的<em>解</em>。</p>
+<p>发现解的一种方法是使用猜测和验证法。</p>
+<p>我们将从考虑一对特殊的初始条件开始，
 这对初始条件满足</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff3">
 <span class="eqno">(17.3)<a class="headerlink" href="#equation-eq-2diff3" title="Permalink to this equation">#</a></span>\[
 y_{-1} = \delta y_{-2}
 \]</div>
-<p>其中<span class="math notranslate nohighlight">\(\delta\)</span>是待确定的标量。
-对于满足<a class="reference internal" href="#equation-eq-2diff3">(17.3)</a>的初始条件，
+<p>其中<span class="math notranslate nohighlight">\(\delta\)</span>是待确定的标量。</p>
+<p>对于满足<a class="reference internal" href="#equation-eq-2diff3">(17.3)</a>的初始条件，
 方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>意味着</p>
 <div class="math notranslate nohighlight" id="equation-eq-2diff4">
 <span class="eqno">(17.4)<a class="headerlink" href="#equation-eq-2diff4" title="Permalink to this equation">#</a></span>\[
@@ -354,11 +359,11 @@ y_t = \eta_1 \delta_1^t + \eta_2 \delta_2^t
 \begin{bmatrix} \eta_1 \cr \eta_2 \end{bmatrix} = \begin{bmatrix} \delta_1^{-1} &amp; \delta_2^{-1} \cr \delta_1^{-2} &amp; \delta_2^{-2} \end{bmatrix}^{-1} \begin{bmatrix} y_{-1} \cr y_{-2} \end{bmatrix}
 \]</div>
 <p>有时我们可以自由选择初始条件<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>，在这种情况下，我们
-使用系统<a class="reference internal" href="#equation-eq-2diff10">(17.10)</a>来找到相关的<span class="math notranslate nohighlight">\((\eta_1, \eta_2)\)</span>。
-如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_1^t\)</span>。
-如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_2^t\)</span>。
-很快我们将把前面的计算与表示差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的转移矩阵的特征分解的组成部分联系起来，这种方式非常方便。
-在我们描述古希腊人如何计算不是完全平方的正整数的平方根之前，我们将先转向这个问题。</p>
+使用系统<a class="reference internal" href="#equation-eq-2diff10">(17.10)</a>来找到相关的<span class="math notranslate nohighlight">\((\eta_1, \eta_2)\)</span>。</p>
+<p>如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (1, 0)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_1^t\)</span>。</p>
+<p>如果我们选择<span class="math notranslate nohighlight">\((y_{-1}, y_{-2})\)</span>使<span class="math notranslate nohighlight">\((\eta_1, \eta_2) = (0, 1)\)</span>，那么对于所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>，<span class="math notranslate nohighlight">\(y_t = \delta_2^t\)</span>。</p>
+<p>很快我们将把前面的计算与表示差分方程<a class="reference internal" href="#equation-eq-2diff1">(17.1)</a>的转移矩阵的特征分解的组成部分联系起来，这种方式非常方便。</p>
+<p>在我们描述古希腊人如何计算不是完全平方的正整数的平方根之前，我们将先转向这个问题。</p>
 </section>
 <section id="id6">
 <h2><span class="section-number">17.4. </span>古希腊人的算法<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
@@ -470,6 +475,11 @@ y_t = \lambda_1^t \eta_1 + \lambda_2^t \eta_2
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -709,10 +719,10 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 
 <span class="c1"># 标记斜率</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">1.2</span><span class="p">,</span> 
-         <span class="sa">r</span><span class="s1">&#39;slope=$\frac{V_{1,1}}{V_{1,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;斜率=$\frac{V_{1,1}}{V_{1,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
          <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">1.2</span><span class="p">,</span> 
-         <span class="sa">r</span><span class="s1">&#39;slope=$\frac{V_{2,1}}{V_{2,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;斜率=$\frac{V_{2,1}}{V_{2,2}}=$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
          <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
 
 <span class="c1"># 添加标记</span>
@@ -728,7 +738,7 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/dd31e2dd15eb472fd77bdf8beda11b0d5cc5ebdd331212f4b5c980e27a770762.png"><img alt="_images/dd31e2dd15eb472fd77bdf8beda11b0d5cc5ebdd331212f4b5c980e27a770762.png" src="_images/dd31e2dd15eb472fd77bdf8beda11b0d5cc5ebdd331212f4b5c980e27a770762.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3ca60aa45c0d9924c480b2944c90d556578d036c12592d856a8ac40cd201b218.png"><img alt="_images/3ca60aa45c0d9924c480b2944c90d556578d036c12592d856a8ac40cd201b218.png" src="_images/3ca60aa45c0d9924c480b2944c90d556578d036c12592d856a8ac40cd201b218.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -839,7 +849,7 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 <p>我们发现 <span class="math notranslate nohighlight">\(x_{2,0}^* = 0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模拟消音的λ1 λ2。</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模拟失活的λ1 λ2。</span>
 <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">xs_λ1</span> <span class="o">=</span> <span class="n">iterate_M</span><span class="p">(</span><span class="n">xd_1</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">xs_λ2</span> <span class="o">=</span> <span class="n">iterate_M</span><span class="p">(</span><span class="n">xd_2</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -870,7 +880,7 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\lambda_2$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在消音 $\lambda_1$之后&#39;</span><span class="p">,</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在失活 $\lambda_1$之后&#39;</span><span class="p">,</span> 
                  <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -881,7 +891,7 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\lambda_1$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在消音 $\lambda_2$之后&#39;</span><span class="p">,</span> 
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{y_t}</span><span class="s1">{y_{t-1}}$ 在失活 $\lambda_2$之后&#39;</span><span class="p">,</span> 
                  <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -892,74 +902,14 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u5728&#39; [U+5728], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u6d88&#39; [U+6d88], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u97f3&#39; [U+97f3], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u4e4b&#39; [U+4e4b], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;default&#39; does not have a glyph for &#39;\u540e&#39; [U+540e], substituting with a dummy symbol.
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png"><img alt="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png" src="_images/c7583ddd8558a565d9686a3a0cc4559e761b76b5280e9136835f42d2e88557c8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/97027e75e5703b811de43e01fb6e49a8e4254a6bad536c75bc2fbbfb0e9eaae0.png"><img alt="_images/97027e75e5703b811de43e01fb6e49a8e4254a6bad536c75bc2fbbfb0e9eaae0.png" src="_images/97027e75e5703b811de43e01fb6e49a8e4254a6bad536c75bc2fbbfb0e9eaae0.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id10">
 <h2><span class="section-number">17.8. </span>结束语<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p>本讲为<em>不变子空间</em>方法的许多其他应用奠定了基础。
-所有这些应用都利用了基于特征分解的非常相似的方程。
+<p>本讲为<em>不变子空间</em>方法的许多其他应用奠定了基础。</p>
+<p>所有这些应用都利用了基于特征分解的非常相似的方程。
 我们将在<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和动态经济理论的许多其他地方遇到与<a class="reference internal" href="#equation-eq-deactivate1">(17.19)</a>和<a class="reference internal" href="#equation-eq-deactivate2">(17.20)</a>非常相似的方程。</p>
 </section>
 <section id="id11">
@@ -1024,8 +974,8 @@ A = \begin{bmatrix} 1 &amp; 1 \cr
 <span class="c1"># 计算 A 的特征值和特征向量</span>
 <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Eigenvalues:</span><span class="se">\n</span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Eigenvectors:</span><span class="se">\n</span><span class="si">{</span><span class="n">eigenvectors</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">特征值:</span><span class="se">\n</span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">特征向量:</span><span class="se">\n</span><span class="si">{</span><span class="n">eigenvectors</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1037,10 +987,10 @@ A = \begin{bmatrix} 1 &amp; 1 \cr
 迭代 4: a_t = 29, b_t = 41
 迭代 5: a_t = 70, b_t = 99
 
-Eigenvalues:
+特征值:
 [ 2.41421356 -0.41421356]
 
-Eigenvectors:
+特征向量:
 [[ 0.57735027 -0.57735027]
  [ 0.81649658  0.81649658]]
 </pre></div>
@@ -1271,17 +1221,17 @@ Eigenvectors:
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -1293,22 +1243,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1320,22 +1270,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1347,12 +1297,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1364,22 +1314,22 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1391,12 +1341,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1408,12 +1358,12 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1425,17 +1375,17 @@ Eigenvectors:
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

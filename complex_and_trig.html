@@ -184,7 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">9.3.3. 例3</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">9.3.4. 三角恒等式</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">9.3.5. 三角积分</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.3.6. Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">9.3.6. 练习</a></li>
 </ul>
 </li>
 </ul>
@@ -253,45 +253,50 @@ const thebe_selector_output = ".output, .cell_output"
 <span id="id1"></span><h1><span class="section-number">9. </span>复数和三角函数<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">9.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>本讲座介绍一些基础数学和三角函数知识。
-这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时，会带来巨大回报。
-例如，这些工具是理解Paul Samuelson（1939年）<span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>在其经典论文中关于投资加速器与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座<a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span class="xref std std-doc">Samuelson乘数加速器</span></a>中的主题。
-除了为Samuelson的工作及其扩展提供基础外，本讲座还可以作为独立的快速回顾，回顾高中基础三角函数的关键结果。
-那么让我们开始吧。</p>
+<p>本讲座介绍一些基础数学和三角函数知识。</p>
+<p>这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时，会带来巨大回报。</p>
+<p>例如，这些工具是理解Paul Samuelson（1939年）<span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>在其经典论文中关于投资加速器与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座<a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span class="xref std std-doc">Samuelson乘数加速器</span></a>中的主题。</p>
+<p>除了为Samuelson的工作及其扩展提供基础外，本讲座还可以作为独立的快速回顾，回顾高中基础三角函数的关键结果。</p>
+<p>那么让我们开始吧。</p>
 <section id="id4">
 <h3><span class="section-number">9.1.1. </span>复数<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>复数有一个<strong>实部</strong><span class="math notranslate nohighlight">\(x\)</span>和一个纯<strong>虚部</strong><span class="math notranslate nohighlight">\(y\)</span>。
-复数<span class="math notranslate nohighlight">\(z\)</span>的欧几里得形式、极坐标形式和三角形式是：
-$<span class="math notranslate nohighlight">\(
+<p>复数有一个<strong>实部</strong><span class="math notranslate nohighlight">\(x\)</span>和一个纯<strong>虚部</strong><span class="math notranslate nohighlight">\(y\)</span>。</p>
+<p>复数<span class="math notranslate nohighlight">\(z\)</span>的欧几里得形式、极坐标形式和三角形式是：</p>
+<div class="math notranslate nohighlight">
+\[
 z = x + iy = re^{i\theta} = r(\cos{\theta} + i \sin{\theta})
-\)</span>$
-上面的第二个等式被称为<strong>欧拉公式</strong></p>
+\]</div>
+<p>上面的第二个等式被称为<strong>欧拉公式</strong></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Leonhard_Euler">欧拉</a>还贡献了许多其他公式！</p></li>
 </ul>
-<p><span class="math notranslate nohighlight">\(z\)</span>的复共轭<span class="math notranslate nohighlight">\(\bar z\)</span>定义为
-$<span class="math notranslate nohighlight">\(
+<p><span class="math notranslate nohighlight">\(z\)</span>的复共轭<span class="math notranslate nohighlight">\(\bar z\)</span>定义为</p>
+<div class="math notranslate nohighlight">
+\[
 \bar z = x - iy = r e^{-i \theta} = r (\cos{\theta} - i \sin{\theta} )
-\)</span><span class="math notranslate nohighlight">\(
-\)</span>x<span class="math notranslate nohighlight">\(是\)</span>z<span class="math notranslate nohighlight">\(的**实部**，\)</span>y<span class="math notranslate nohighlight">\(是\)</span>z$的<strong>虚部</strong>。</p>
-<p>符号<span class="math notranslate nohighlight">\(| z |\)</span> = <span class="math notranslate nohighlight">\(\sqrt{\bar{z}\cdot z} = r\)</span>表示<span class="math notranslate nohighlight">\(z\)</span>的<strong>模</strong>。
-<span class="math notranslate nohighlight">\(r\)</span>是向量<span class="math notranslate nohighlight">\((x,y)\)</span>到原点的欧几里得距离：
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p><span class="math notranslate nohighlight">\(x\)</span>是<span class="math notranslate nohighlight">\(z\)</span>的<strong>实部</strong>，<span class="math notranslate nohighlight">\(y\)</span>是<span class="math notranslate nohighlight">\(z\)</span>的<strong>虚部</strong>。</p>
+<p>符号<span class="math notranslate nohighlight">\(| z |\)</span> = <span class="math notranslate nohighlight">\(\sqrt{\bar{z}\cdot z} = r\)</span>表示<span class="math notranslate nohighlight">\(z\)</span>的<strong>模</strong>。</p>
+<p><span class="math notranslate nohighlight">\(r\)</span>是向量<span class="math notranslate nohighlight">\((x,y)\)</span>到原点的欧几里得距离：</p>
+<div class="math notranslate nohighlight">
+\[
 r = |z| = \sqrt{x^2 + y^2}
-\)</span><span class="math notranslate nohighlight">\(
-\)</span>\theta<span class="math notranslate nohighlight">\(是\)</span>(x,y)<span class="math notranslate nohighlight">\(相对于实轴的角度。
-显然，\)</span>\theta<span class="math notranslate nohighlight">\(的正切是\)</span>\left(\frac{y}{x}\right)<span class="math notranslate nohighlight">\(。
-因此，
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p><span class="math notranslate nohighlight">\(\theta\)</span>是<span class="math notranslate nohighlight">\((x,y)\)</span>相对于实轴的角度。</p>
+<p>显然，<span class="math notranslate nohighlight">\(\theta\)</span>的正切是<span class="math notranslate nohighlight">\(\left(\frac{y}{x}\right)\)</span>。</p>
+<p>因此，</p>
+<div class="math notranslate nohighlight">
+\[
 \theta = \tan^{-1} \Big( \frac{y}{x} \Big)
-\)</span><span class="math notranslate nohighlight">\(
-三个基本三角函数是
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>三个基本三角函数是</p>
+<div class="math notranslate nohighlight">
+\[
 \cos{\theta} = \frac{x}{r} = \frac{e^{i\theta} + e^{-i\theta}}{2} , \quad
 \sin{\theta} = \frac{y}{r} = \frac{e^{i\theta} - e^{-i\theta}}{2i} , \quad
 \tan{\theta} = \frac{y}{x}
-\)</span>$
-我们需要以下导入：</p>
+\]</div>
+<p>我们需要以下导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -299,6 +304,11 @@ r = |z| = \sqrt{x^2 + y^2}
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">nsolve</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">simplify</span><span class="p">,</span>
                   <span class="n">init_printing</span><span class="p">,</span> <span class="n">integrate</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -306,11 +316,10 @@ r = |z| = \sqrt{x^2 + y^2}
 </section>
 <section id="id5">
 <h3><span class="section-number">9.1.2. </span>一个例子<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>考虑复数 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span>。
-对于 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span>，<span class="math notranslate nohighlight">\(x = 1\)</span>，<span class="math notranslate nohighlight">\(y = \sqrt{3}\)</span>。
-由此可得 <span class="math notranslate nohighlight">\(r = 2\)</span> 且
-<span class="math notranslate nohighlight">\(\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o\)</span>。
-让我们使用Python来绘制复数 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span> 的三角形式。</p>
+<p>考虑复数 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span>。</p>
+<p>对于 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span>，<span class="math notranslate nohighlight">\(x = 1\)</span>，<span class="math notranslate nohighlight">\(y = \sqrt{3}\)</span>。</p>
+<p>由此可得 <span class="math notranslate nohighlight">\(r = 2\)</span> 且<span class="math notranslate nohighlight">\(\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o\)</span>。</p>
+<p>让我们使用Python来绘制复数 <span class="math notranslate nohighlight">\(z = 1 + \sqrt{3} i\)</span> 的三角形式。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将值和函数简写</span>
@@ -354,46 +363,35 @@ r = |z| = \sqrt{x^2 + y^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 22797 (\N{CJK UNIFIED IDEOGRAPH-590D}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30340 (\N{CJK UNIFIED IDEOGRAPH-7684}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 19977 (\N{CJK UNIFIED IDEOGRAPH-4E09}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 35282 (\N{CJK UNIFIED IDEOGRAPH-89D2}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20989 (\N{CJK UNIFIED IDEOGRAPH-51FD}) missing from current font.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/a82461008cf88592a52d45b201741aeb55ac31191325d1fa2c945601e9f8a1cc.png"><img alt="_images/a82461008cf88592a52d45b201741aeb55ac31191325d1fa2c945601e9f8a1cc.png" src="_images/a82461008cf88592a52d45b201741aeb55ac31191325d1fa2c945601e9f8a1cc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f25a710f743b6767d59a6e694c905412a89c4e7dd4e80c6fba583ecc87eeeb40.png"><img alt="_images/f25a710f743b6767d59a6e694c905412a89c4e7dd4e80c6fba583ecc87eeeb40.png" src="_images/f25a710f743b6767d59a6e694c905412a89c4e7dd4e80c6fba583ecc87eeeb40.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 </section>
 <section id="id6">
 <h2><span class="section-number">9.2. </span>德莫瓦定理<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>德莫瓦定理指出：
-$<span class="math notranslate nohighlight">\(
+<p>德莫瓦定理指出：</p>
+<div class="math notranslate nohighlight">
+\[
 (r(\cos{\theta} + i \sin{\theta}))^n =
 r^n e^{in\theta} =
 r^n(\cos{n\theta} + i \sin{n\theta})
-\)</span><span class="math notranslate nohighlight">\(
-要证明德莫瓦定理，注意到
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>要证明德莫瓦定理，注意到</p>
+<div class="math notranslate nohighlight">
+\[
 (r(\cos{\theta} + i \sin{\theta}))^n = \big( re^{i\theta} \big)^n
-\)</span>$
-然后进行计算。</p>
+\]</div>
+<p>然后进行计算。</p>
 </section>
 <section id="id7">
 <h2><span class="section-number">9.3. </span>德莫瓦定理的应用<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <section id="id8">
 <h3><span class="section-number">9.3.1. </span>例1<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>我们可以使用德莫瓦定理来证明 <span class="math notranslate nohighlight">\(r = \sqrt{x^2 + y^2}\)</span>。
-我们有
-$<span class="math notranslate nohighlight">\(
+<p>我们可以使用德莫瓦定理来证明 <span class="math notranslate nohighlight">\(r = \sqrt{x^2 + y^2}\)</span>。</p>
+<p>我们有</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 1 &amp;= e^{i\theta} e^{-i\theta} \\
 &amp;= (\cos{\theta} + i \sin{\theta})(\cos{(\text{-}\theta)} + i \sin{(\text{-}\theta)}) \\
@@ -401,22 +399,24 @@ $<span class="math notranslate nohighlight">\(
 &amp;= \cos^2{\theta} + \sin^2{\theta} \\
 &amp;= \frac{x^2}{r^2} + \frac{y^2}{r^2}
 \end{aligned}
-\)</span><span class="math notranslate nohighlight">\(
-因此
-\)</span><span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>因此</p>
+<div class="math notranslate nohighlight">
+\[
 x^2 + y^2 = r^2
-\)</span>$
-我们认识到这是<strong>勾股定理</strong>。</p>
+\]</div>
+<p>我们认识到这是<strong>勾股定理</strong>。</p>
 </section>
 <section id="id9">
 <h3><span class="section-number">9.3.2. </span>例2<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
-<p>设 <span class="math notranslate nohighlight">\(z = re^{i\theta}\)</span> 且 <span class="math notranslate nohighlight">\(\bar{z} = re^{-i\theta}\)</span>，其中 <span class="math notranslate nohighlight">\(\bar{z}\)</span> 是 <span class="math notranslate nohighlight">\(z\)</span> 的<strong>复共轭</strong>。
-<span class="math notranslate nohighlight">\((z, \bar z)\)</span> 构成一对<strong>复共轭对</strong>。
-设 <span class="math notranslate nohighlight">\(a = pe^{i\omega}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{a} = pe^{-i\omega}\)</span> 是另一对复共轭对。
-对于整数序列 <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots, \)</span> 中的每个元素。
-为此，我们可以应用德莫瓦公式。
-因此，
-$<span class="math notranslate nohighlight">\(
+<p>设 <span class="math notranslate nohighlight">\(z = re^{i\theta}\)</span> 且 <span class="math notranslate nohighlight">\(\bar{z} = re^{-i\theta}\)</span>，其中 <span class="math notranslate nohighlight">\(\bar{z}\)</span> 是 <span class="math notranslate nohighlight">\(z\)</span> 的<strong>复共轭</strong>。</p>
+<p><span class="math notranslate nohighlight">\((z, \bar z)\)</span> 构成一对<strong>复共轭对</strong>。</p>
+<p>设 <span class="math notranslate nohighlight">\(a = pe^{i\omega}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{a} = pe^{-i\omega}\)</span> 是另一对复共轭对。</p>
+<p>对于整数序列 <span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots, \)</span> 中的每个元素。</p>
+<p>为此，我们可以应用德莫瓦公式。</p>
+<p>因此，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 x_n &amp;= az^n + \bar{a}\bar{z}^n \\
 &amp;= p e^{i\omega} (re^{i\theta})^n + p e^{-i\omega} (re^{-i\theta})^n \\
@@ -425,44 +425,47 @@ x_n &amp;= az^n + \bar{a}\bar{z}^n \\
          \cos{(\omega + n\theta)} - i \sin{(\omega + n\theta)}] \\
 &amp;= 2 pr^n \cos{(\omega + n\theta)}
 \end{aligned}
-\)</span>$</p>
+\end{split}\]</div>
 </section>
 <section id="id10">
 <h3><span class="section-number">9.3.3. </span>例3<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>这个例子提供了Samuelson在分析其乘数-加速器模型时所使用的核心机制 <span id="id11">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>。
-因此，考虑一个<strong>二阶线性差分方程</strong>
-$<span class="math notranslate nohighlight">\(
+<p>这个例子提供了Samuelson在分析其乘数-加速器模型时所使用的核心机制 <span id="id11">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>。</p>
+<p>因此，考虑一个<strong>二阶线性差分方程</strong></p>
+<div class="math notranslate nohighlight">
+\[
 x_{n+2} = c_1 x_{n+1} + c_2 x_n
-\)</span><span class="math notranslate nohighlight">\(
-其**特征多项式**为
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>其<strong>特征多项式</strong>为</p>
+<div class="math notranslate nohighlight">
+\[
 z^2 - c_1 z - c_2 = 0
-\)</span><span class="math notranslate nohighlight">\(
-或
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>或</p>
+<div class="math notranslate nohighlight">
+\[
 (z^2 - c_1 z - c_2 ) = (z - z_1)(z- z_2) = 0
-\)</span><span class="math notranslate nohighlight">\(
-具有根 \)</span>z_1, z_1<span class="math notranslate nohighlight">\(。
-**解**是满足差分方程的序列 \)</span>{x_n}_{n=0}^\infty$。
-在以下情况下，我们可以应用例2的公式来解决差分方程</p>
+\]</div>
+<p>具有根 <span class="math notranslate nohighlight">\(z_1, z_1\)</span>。</p>
+<p><strong>解</strong>是满足差分方程的序列 <span class="math notranslate nohighlight">\(\{x_n\}_{n=0}^\infty\)</span>。</p>
+<p>在以下情况下，我们可以应用例2的公式来解决差分方程</p>
 <ul class="simple">
 <li><p>差分方程特征多项式的根 <span class="math notranslate nohighlight">\(z_1, z_2\)</span> 构成一对复共轭</p></li>
 <li><p>给定初始条件 <span class="math notranslate nohighlight">\(x_0, x_1\)</span> 的值</p></li>
 </ul>
-<p>要解决差分方程，回想例2中
-$<span class="math notranslate nohighlight">\(
+<p>要解决差分方程，回想例2中</p>
+<div class="math notranslate nohighlight">
+\[
 x_n = 2 pr^n \cos{(\omega + n\theta)}
-\)</span><span class="math notranslate nohighlight">\(
-其中 \)</span>\omega, p<span class="math notranslate nohighlight">\( 是需要从初始条件 \)</span>x_1, x_0<span class="math notranslate nohighlight">\( 中编码的信息确定的系数。
-由于
-\)</span>x_0 = 2 p \cos{\omega}<span class="math notranslate nohighlight">\( 且 \)</span>x_1 = 2 pr \cos{(\omega + \theta)}<span class="math notranslate nohighlight">\(
-\)</span>x_1<span class="math notranslate nohighlight">\( 与 \)</span>x_0<span class="math notranslate nohighlight">\( 的比率为
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\omega, p\)</span> 是需要从初始条件 <span class="math notranslate nohighlight">\(x_1, x_0\)</span> 中编码的信息确定的系数。</p>
+<p>由于<span class="math notranslate nohighlight">\(x_0 = 2 p \cos{\omega}\)</span> 且 <span class="math notranslate nohighlight">\(x_1 = 2 pr \cos{(\omega + \theta)}\)</span>，<span class="math notranslate nohighlight">\(x_1\)</span> 与 <span class="math notranslate nohighlight">\(x_0\)</span> 的比率为</p>
+<div class="math notranslate nohighlight">
+\[
 \frac{x_1}{x_0} = \frac{r \cos{(\omega + \theta)}}{\cos{\omega}}
-\)</span><span class="math notranslate nohighlight">\(
-我们可以解这个方程得到 \)</span>\omega<span class="math notranslate nohighlight">\(，然后用 \)</span>x_0 = 2 pr^0 \cos{(\omega + n\theta)}<span class="math notranslate nohighlight">\( 解出 \)</span>p$。</p>
-<p>使用Python中的<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包，我们能够解决并绘制给定不同 <span class="math notranslate nohighlight">\(n\)</span> 值时 <span class="math notranslate nohighlight">\(x_n\)</span> 的动态。
-在这个例子中，我们设置初始值：</p>
+\]</div>
+<p>我们可以解这个方程得到 <span class="math notranslate nohighlight">\(\omega\)</span>，然后用 <span class="math notranslate nohighlight">\(x_0 = 2 pr^0 \cos{(\omega + n\theta)}\)</span> 解出 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>使用Python中的<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包，我们能够解决并绘制给定不同 <span class="math notranslate nohighlight">\(n\)</span> 值时 <span class="math notranslate nohighlight">\(x_n\)</span> 的动态。</p>
+<p>在这个例子中，我们设置初始值：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(r = 0.9\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\theta = \frac{1}{4}\pi\)</span></p></li>
@@ -503,10 +506,10 @@ p = 2.000
 </div>
 </div>
 </div>
-<p>使用上面的代码，我们计算得出
-<span class="math notranslate nohighlight">\(\omega = 0\)</span> 和 <span class="math notranslate nohighlight">\(p = 2\)</span>。
-然后我们将解出的 <span class="math notranslate nohighlight">\(\omega\)</span> 和 <span class="math notranslate nohighlight">\(p\)</span> 的值代入
-并绘制动态图。</p>
+<p>使用上面的代码，我们计算得出</p>
+<p><span class="math notranslate nohighlight">\(\omega = 0\)</span> 和 <span class="math notranslate nohighlight">\(p = 2\)</span>。</p>
+<p>然后我们将解出的 <span class="math notranslate nohighlight">\(\omega\)</span> 和 <span class="math notranslate nohighlight">\(p\)</span> 的值代入</p>
+<p>并绘制动态图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设定 n 的范围</span>
@@ -543,28 +546,30 @@ p = 2.000
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/921d4aa16b1f5a3df714e8b2c7be18b159fdfc76fa2c5cb14f1b436b5e908a91.png"><img alt="_images/921d4aa16b1f5a3df714e8b2c7be18b159fdfc76fa2c5cb14f1b436b5e908a91.png" src="_images/921d4aa16b1f5a3df714e8b2c7be18b159fdfc76fa2c5cb14f1b436b5e908a91.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2ec99fe12c407afe14b284d9f08f10a65acb1c3c44e2b428a698f8caea777cb4.png"><img alt="_images/2ec99fe12c407afe14b284d9f08f10a65acb1c3c44e2b428a698f8caea777cb4.png" src="_images/2ec99fe12c407afe14b284d9f08f10a65acb1c3c44e2b428a698f8caea777cb4.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
 <section id="id12">
 <h3><span class="section-number">9.3.4. </span>三角恒等式<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>我们可以通过适当操作复数的极坐标形式来获得一套完整的三角恒等式。
-我们将通过推导等式
+<p>我们可以通过适当操作复数的极坐标形式来获得一套完整的三角恒等式。</p>
+<p>我们将通过推导等式
 $<span class="math notranslate nohighlight">\(
 e^{i(\omega + \theta)} = e^{i\omega} e^{i\theta}
 \)</span>$
-的含义来得到许多恒等式。</p>
-<p>例如，我们将计算 <span class="math notranslate nohighlight">\(\cos{(\omega + \theta)}\)</span> 和 <span class="math notranslate nohighlight">\(\sin{(\omega + \theta)}\)</span> 的恒等式。
-使用本讲座开始时给出的正弦和余弦公式，我们有：
-$<span class="math notranslate nohighlight">\(
+来得到许多恒等式。</p>
+<p>例如，我们将计算 <span class="math notranslate nohighlight">\(\cos{(\omega + \theta)}\)</span> 和 <span class="math notranslate nohighlight">\(\sin{(\omega + \theta)}\)</span> 的恒等式。</p>
+<p>使用本讲座开始时给出的正弦和余弦公式，我们有：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 \cos{(\omega + \theta)} = \frac{e^{i(\omega + \theta)} + e^{-i(\omega + \theta)}}{2} \\
 \sin{(\omega + \theta)} = \frac{e^{i(\omega + \theta)} - e^{-i(\omega + \theta)}}{2i}
 \end{aligned}
-\)</span>$</p>
-<p>我们还可以通过以下方式获得三角恒等式：
-$<span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>我们还可以通过以下方式获得三角恒等式：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 \cos{(\omega + \theta)} + i \sin{(\omega + \theta)}
 &amp;= e^{i(\omega + \theta)} \\
@@ -573,14 +578,15 @@ $<span class="math notranslate nohighlight">\(
 &amp;= (\cos{\omega}\cos{\theta} - \sin{\omega}\sin{\theta}) +
 i (\cos{\omega}\sin{\theta} + \sin{\omega}\cos{\theta})
 \end{aligned}
-\)</span>$</p>
-<p>由于上述公式的实部和虚部都应相等，我们得到：
-$<span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>由于上述公式的实部和虚部都应相等，我们得到：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 \cos{(\omega + \theta)} = \cos{\omega}\cos{\theta} - \sin{\omega}\sin{\theta} \\
 \sin{(\omega + \theta)} = \cos{\omega}\sin{\theta} + \sin{\omega}\cos{\theta}
 \end{aligned}
-\)</span>$</p>
+\end{split}\]</div>
 <p>上述方程也被称为<strong>角和恒等式</strong>。我们可以使用<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包中的<code class="docutils literal notranslate"><span class="pre">simplify</span></code>函数来验证这些方程：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -606,12 +612,14 @@ cos(ω)sin(θ) + sin(ω)cos(θ) = sin(θ + ω)
 <section id="id13">
 <h3><span class="section-number">9.3.5. </span>三角积分<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
 <p>我们也可以使用复数的极坐标形式来计算三角积分。</p>
-<p>例如，我们要解决以下积分：
-$<span class="math notranslate nohighlight">\(
+<p>例如，我们要解决以下积分：</p>
+<div class="math notranslate nohighlight">
+\[
 \int_{-\pi}^{\pi} \cos(\omega) \sin(\omega) \, d\omega
-\)</span>$</p>
-<p>使用欧拉公式，我们有：
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>使用欧拉公式，我们有：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 \int \cos(\omega) \sin(\omega) \, d\omega
 &amp;=
@@ -636,12 +644,13 @@ e^{2i\omega} - e^{-2i\omega}
 \frac{1}{2} \bigg( \frac{e^{i\omega} - e^{-i\omega}}{2i} \bigg)^2 + C_2 \\
 &amp;= \frac{1}{2} \sin^2(\omega) + C_2
 \end{aligned}
-\)</span>$</p>
-<p>因此：
-$<span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>因此：</p>
+<div class="math notranslate nohighlight">
+\[
 \int_{-\pi}^{\pi} \cos(\omega) \sin(\omega) \, d\omega =
 \frac{1}{2}\sin^2(\pi) - \frac{1}{2}\sin^2(-\pi) = 0
-\)</span>$</p>
+\]</div>
 <p>我们可以使用<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包中的<code class="docutils literal notranslate"><span class="pre">integrate</span></code>来验证分析结果和数值结果：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,8 +687,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </section>
-<section id="exercises">
-<h3><span class="section-number">9.3.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
+<section id="id14">
+<h3><span class="section-number">9.3.6. </span>练习<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
 <div class="exercise admonition" id="complex_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 9.1 </span></p>
@@ -963,17 +972,17 @@ $<span class="math notranslate nohighlight">\(
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   26. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   27. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   28. 商品价格
+   27. 商品价格
   </a>
  </li>
 </ul>
@@ -985,22 +994,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   29. 通过货币资助的政府赤字和价格水平
+   28. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   30. 一些不愉快的货币主义算术
+   29. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   31. 通货膨胀税拉弗曲线
+   30. 通货膨胀税拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   32. 拉弗曲线与自适应预期
+   31. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1012,22 +1021,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   33. AR(1) 过程
+   32. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   34. 马尔科夫链：基本概念
+   33. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   35. 马尔科夫链：不可约性与遍历性
+   34. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   36. 用矩阵代数表示的单变量时间序列
+   35. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1039,12 +1048,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   37. 线性规划
+   36. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   38. 最短路径
+   37. 最短路径
   </a>
  </li>
 </ul>
@@ -1056,22 +1065,22 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   41. 佩龙-弗罗贝尼乌斯定理
+   38. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   43. 输入-输出模型
+   39. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   44. 就业的湖泊模型
+   40. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   45. 网络
+   41. 网络
   </a>
  </li>
 </ul>
@@ -1083,12 +1092,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   46. 多种商品的供需关系
+   42. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   47. 市场均衡与异质性
+   43. 市场均衡与异质性
   </a>
  </li>
 </ul>
@@ -1100,12 +1109,12 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   48. 简单线性回归模型
+   44. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   49. 最大似然估计
+   45. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1117,17 +1126,17 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. 故障排除
+   46. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. 参考文献
+   47. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. 执行统计数据
+   48. 执行统计数据
   </a>
  </li>
 </ul>

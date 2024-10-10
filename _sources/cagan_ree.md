@@ -223,6 +223,11 @@ import numpy as np
 from collections import namedtuple
 import matplotlib.pyplot as plt
 plt.rcParams['figure.dpi'] = 200
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 首先，我们将参数存储在一个`namedtuple`中：
 
@@ -369,7 +374,7 @@ $$ (eq:pfiscaltheory2)
 是 $p_{T_1}$ 还是 $m_{T_1}$？
 
 如果我们坚持认为货币供应 $m_{T_1}$ 锁定在从过去继承的 $m_{T_1}^1$ 值，那么公式 {eq}`eq:pformula2` 意味着价格水平在时间 $T_1$ 向下跳跃，以与
-$\pi_{T_1}$ 的向下跳跃一致
+$\pi_{T_1}$ 的向下跳跃一致.
 
 关于货币供应水平的另一个假设是，作为"通货膨胀稳定"的一部分，
 政府根据以下公式重置 $m_{T_1}$：
@@ -502,11 +507,11 @@ plot_configs = [
     {'data': [(T_seq, π_seq_2)], 'ylabel': r'$\pi$'},
     {'data': [(T_seq, m_seq_2_regime1 - p_seq_2_regime1)], 
      'ylabel': r'$m - p$'},
-    {'data': [(T_seq, m_seq_2_regime1, 'Smooth $m_{T_1}$'), 
-              (T_seq, m_seq_2_regime2, 'Jumpy $m_{T_1}$')], 
+    {'data': [(T_seq, m_seq_2_regime1, '平滑的 $m_{T_1}$'), 
+              (T_seq, m_seq_2_regime2, '非平滑的 $m_{T_1}$')], 
      'ylabel': r'$m$'},
-    {'data': [(T_seq, p_seq_2_regime1, 'Smooth $p_{T_1}$'), 
-              (T_seq, p_seq_2_regime2, 'Jumpy $p_{T_1}$')], 
+    {'data': [(T_seq, p_seq_2_regime1, '平滑的 $p_{T_1}$'), 
+              (T_seq, p_seq_2_regime2, '非平滑的  $p_{T_1}$')], 
      'ylabel': r'$p$'}
 ]
 
@@ -527,14 +532,20 @@ def experiment_plot(plot_configs, ax):
 experiment_plot(plot_configs, ax)
 ```
 我们邀请您将这些图表与上面实验1中分析的预期稳定化的相应图表进行比较。
+
 请注意，第二个面板中的通货膨胀图现在与顶部面板中的货币增长图完全相同，以及现在在第三个面板中描绘的实际余额的对数在时间$T_1$时向上跳跃。
+
 底部两个面板绘制了在$m_{T_1}$可能调整的两种方式下的$m$和$p$，以满足在$T_1$时$m - p$的向上跳跃的要求。
+
 * 橙色线让$m_{T_1}$向上跳跃，以确保对数价格水平$p_{T_1}$不会下降。
 * 蓝色线让$p_{T_1}$下降，同时阻止货币供应量跳跃。
 
 以下是一种解释政府在橙色线政策实施时所做的事情的方法。
+
 政府通过印钞来资助支出，利用从货币供应增长率永久性下降带来的实际余额需求增加中获得的"速度红利"。
+
 接下来的代码生成一个多面板图，包括实验1和实验2的结果。
+
 这使我们能够评估理解$\mu_t$在$t=T_1$时的突然永久性下降是完全预期的（如实验1中）还是完全未预期的（如实验2中）的重要性。
 
 ```{code-cell} ipython3
@@ -545,16 +556,16 @@ fig, ax = plt.subplots(5, figsize=(5, 12))
 
 plot_configs = [
     {'data': [(T_seq[:-1], μ_seq_2)], 'ylabel': r'$\mu$'},
-    {'data': [(T_seq, π_seq_2, 'Unforeseen'), 
-              (T_seq, π_seq_1, 'Foreseen')], 'ylabel': r'$p$'},
-    {'data': [(T_seq, m_seq_2_regime1 - p_seq_2_regime1, 'Unforeseen'), 
-              (T_seq, m_seq_1 - p_seq_1, 'Foreseen')], 'ylabel': r'$m - p$'},
-    {'data': [(T_seq, m_seq_2_regime1, 'Unforeseen (Smooth $m_{T_1}$)'), 
-              (T_seq, m_seq_2_regime2, 'Unforeseen ($m_{T_1}$ jumps)'),
-              (T_seq, m_seq_1, 'Foreseen')], 'ylabel': r'$m$'},   
-    {'data': [(T_seq, p_seq_2_regime1, 'Unforeseen (Smooth $m_{T_1}$)'), 
-          (T_seq, p_seq_2_regime2, 'Unforeseen ($m_{T_1}$ jumps)'),
-          (T_seq, p_seq_1, 'Foreseen')], 'ylabel': r'$p$'}   
+    {'data': [(T_seq, π_seq_2, '不可预见的'), 
+              (T_seq, π_seq_1, '可预见的')], 'ylabel': r'$p$'},
+    {'data': [(T_seq, m_seq_2_regime1 - p_seq_2_regime1, '不可预见的'), 
+              (T_seq, m_seq_1 - p_seq_1, '可预见的')], 'ylabel': r'$m - p$'},
+    {'data': [(T_seq, m_seq_2_regime1, '不可预见的 (平滑的 $m_{T_1}$)'), 
+              (T_seq, m_seq_2_regime2, '不可预见的 ($m_{T_1}$ 跳变)'),
+              (T_seq, m_seq_1, '可预见的')], 'ylabel': r'$m$'},   
+    {'data': [(T_seq, p_seq_2_regime1, '不可预见的 (平滑的 $m_{T_1}$)'), 
+          (T_seq, p_seq_2_regime2, '不可预见的 ($m_{T_1}$ 跳变)'),
+          (T_seq, p_seq_1, '可预见的')], 'ylabel': r'$p$'}   
 ]
 
 experiment_plot(plot_configs, ax)
@@ -600,5 +611,7 @@ plot_sequences(sequences, (r'$\mu$', r'$\pi$',
 ## 续篇
 
 另一篇讲座 {doc}`带有适应性预期的价格水平货币主义理论 <cagan_adaptive>` 描述了凯根模型的"适应性预期"版本。
+
 这个版本的动态变得更加复杂，代数运算也更加繁琐。
+
 如今，在中央银行家和为他们提供建议的经济学家中，该模型的"理性预期"版本更受欢迎。

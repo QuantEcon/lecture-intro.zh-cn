@@ -53,20 +53,22 @@ kernelspec:
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
-from matplotlib import font_manager
-import matplotlib.font_manager
 
-# List all available font names
-font_list = [f.name for f in matplotlib.font_manager.fontManager.ttflist]
-print(font_list)
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 在我们研究供给和需求模型之前，了解一些关于（a）消费者和生产者剩余以及（b）积分的背景知识会很有帮助。
+
 （如果你对这两个主题都很熟悉，可以跳到{ref}`下一节 <integration>`。）
 
 ### 一个离散的例子
 
 关于消费者剩余，假设我们有一种商品和10个消费者。
+
 这10个消费者有不同的偏好；特别是，他们愿意为一单位商品支付的金额各不相同。
+
 假设这10个消费者的支付意愿如下：
 
 | 消费者 | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 |
@@ -88,7 +90,9 @@ print(font_list)
 例如，如果价格是 $p=40$，那么消费者1获得的剩余是 $98-40=58$。
 
 下面的条形图显示了当 $p=25$ 时每个消费者的剩余。
+
 每个条形 $i$ 的总高度是消费者 $i$ 的支付意愿。
+
 一些条形的橙色部分显示了消费者剩余。
 
 ```{code-cell} ipython3
@@ -206,9 +210,13 @@ ax.legend()
 plt.show()
 ```
 值 $q^*$ 是反需求曲线与价格相交的点。
+
 ## 生产者剩余
+
 在讨论了需求之后，让我们现在转向市场的供给方。
+
 ### 离散情况
+
 下图显示了一组编号从 1 到 10 的生产者愿意出售一单位该商品的价格
 
 ```{code-cell} ipython3
@@ -232,19 +240,28 @@ ax.legend()
 plt.show()
 ```
 设 $v_i$ 为生产者 $i$ 愿意出售商品的价格。
+
 当价格为 $p$ 时，生产者 $i$ 的生产者剩余为 $\max\{p - v_i, 0\}$。
+
 例如，一个愿意以 10 美元价格出售且以 20 美元价格售出的生产者获得 10 美元的剩余。
+
 总生产者剩余由以下公式给出：
+
 $$
 \sum_{i=1}^{10} \max\{p - v_i, 0\}
 = \sum_{p \geq v_i} (p - v_i)
 $$
+
 与消费者情况一样，将生产者的销售意愿近似为连续曲线对分析有帮助。
+
 这条曲线被称为**反供给曲线**。
+
 我们在下面展示了一个例子，其中反供给曲线为：
+
 $$
 p = 2 q^2
 $$
+
 阴影部分是这个连续模型中的总生产者剩余。
 
 ```{code-cell} ipython3
@@ -279,13 +296,20 @@ ax.text(q_star, -10, "$q^*$")
 ax.legend()
 plt.show()
 ```
+
 (integration)=
 ## 积分
+
 在连续情况下，我们如何计算消费者和生产者剩余呢？
+
 简短的答案是：通过使用[积分](https://en.wikipedia.org/wiki/Integral)。
+
 一些读者可能已经熟悉积分的基础知识。
+
 对于那些不熟悉的读者，这里是一个简短的介绍。
+
 一般来说，对于函数 $f$，$f$ 在区间 $[a, b]$ 上的**积分**是 $f$ 在 $a$ 和 $b$ 之间的曲线下面积。
+
 这个值写作 $\int_a^b f(x) \mathrm{d} x$，下图展示了当 $f(x) = \cos(x/2) + 1$ 时的情况。
 
 ```{code-cell} ipython3
@@ -310,27 +334,41 @@ ax.fill_between(ab_grid, [0] * len(ab_grid), f(ab_grid),
 ax.legend()
 plt.show()
 ```
+
 计算积分有许多规则，不同的 $f$ 选择适用不同的规则。
+
 这些规则中的许多与数学中最美丽和最强大的结果之一有关：[微积分基本定理](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus)。
+
 我们不会在这里试图涵盖这些思想，部分原因是这个主题太大，部分原因是对于本讲座，你只需要知道下面陈述的一条规则。
+
 如果 $f(x) = c + \mathrm{d} x$，那么
 $$ 
 \int_a^b f(x) \mathrm{d} x = c (b - a) + \frac{d}{2}(b^2 - a^2) 
 $$
+
 事实上，这个规则如此简单，以至于可以通过基本几何计算得出——你可以试着绘制 $f$ 的图形并计算 $a$ 和 $b$ 之间曲线下的面积。
 在接下来的内容中，我们将反复使用这个规则。
 
 ## 供给和需求
+
 现在让我们把供给和需求放在一起。
+
 这将引导我们到非常重要的市场均衡概念，并从那里讨论均衡和福利。
+
 在大部分讨论中，我们假设反需求曲线和供给曲线是数量的**仿射**函数。
+
 ```{note}
 "仿射"意味着"线性加上一个常数"，[这里](https://math.stackexchange.com/questions/275310/what-is-the-difference-between-linear-and-affine-function)有一个很好的讨论。
 ```
+
 在我们研究{doc}`后续讲座 <supply_demand_multiple_goods>`中的多消费品模型时，我们也将假设仿射反供给和需求函数。
+
 我们这样做是为了简化说明，并使我们能够仅使用线性代数的几个工具，即矩阵乘法和矩阵求逆。
+
 我们研究一个单一商品市场，买家和卖家以价格 $p$ 交换数量 $q$。
+
 数量 $q$ 和价格 $p$ 都是标量。
+
 我们假设该商品的反需求曲线和供给曲线为：
 $$
 p = d_0 - d_1 q, \quad d_0, d_1 > 0
@@ -338,7 +376,9 @@ $$
 $$
 p = s_0 + s_1 q , \quad s_0, s_1 > 0
 $$
+
 我们称它们为反需求曲线和供给曲线，因为价格在等式的左侧，而不是像直接需求或供给函数那样在右侧。
+
 我们可以使用 [namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) 来存储我们单一商品市场的参数。
 
 ```{code-cell} ipython3
@@ -348,6 +388,7 @@ Market = namedtuple('Market', ['d_0', # 需求截距
                                's_1'] # 供给斜率
                    )
 ```
+
 下面的函数创建一个具有默认值的 Market namedtuple 实例。
 
 ```{code-cell} ipython3
@@ -364,6 +405,7 @@ def inverse_demand(q, model):
 def inverse_supply(q, model):
     return model.s_0 + model.s_1 * q
 ```
+
 下面是这两个函数用`market`的图像。
 
 ```{code-cell} ipython3
@@ -391,10 +433,13 @@ ax.set_xlabel('数量')
 ax.set_ylabel('价格')
 plt.show()
 ```
+
 在上图中，供给曲线和需求曲线的交点出现**均衡**价格-数量对。
 
 ### 消费者剩余
+
 给定数量 $q$，设 $p := d_0 - d_1 q$ 为反需求曲线上对应的价格。
+
 我们将**消费者剩余** $S_c(q)$ 定义为反需求曲线下的面积减去 $p q$:
 
 $$
@@ -558,6 +603,7 @@ plt.show()
 ```
 
 现在让我们给社会规划者一个最大化社会福利的任务。
+
 为了计算使福利准则最大化的数量，我们对 $W$ 关于 $q$ 求导，然后将导数设为零。
 
 $$
@@ -571,6 +617,7 @@ q = \frac{ d_0 - s_0}{s_1 + d_1}
 $$ (eq:old1)
 
 让我们记住方程 {eq}`eq:old1` 给出的数量 $q$，这是社会规划者为最大化消费者剩余加生产者剩余而选择的数量。
+
 我们将把它与在竞争均衡中出现的、使供给等于需求的数量进行比较。
 
 ### 竞争均衡
@@ -588,20 +635,26 @@ q = \frac{ d_0 - s_0}{s_1 + d_1}
 $$ (eq:equilib_q)
 
 这就是竞争均衡数量。
+
 注意，均衡数量等于方程 {eq}`eq:old1` 给出的相同的 $q$。
 
 方程 {eq}`eq:old1` 确定的数量使供给等于需求，这带来了一个**关键发现**：
+
 * 竞争均衡数量最大化了我们的福利准则
 
 这是[福利经济学第一基本定理](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics)的一个版本。
 它还带来了一个有用的**竞争均衡计算策略**：
+
 * 在为最优数量解决福利问题后，我们可以从竞争均衡数量下的供给价格或需求价格中读取竞争均衡价格
 
 ## 推广
 
 在{doc}`后面的讲座 <supply_demand_multiple_goods>`中，我们将从其他对象推导出上述需求和供给曲线的推广。
+
 我们的推广将把前面对单一商品市场的分析扩展到 $n$ 种商品的 $n$ 个同时市场的分析。
+
 此外
+
 * 我们将从消费者问题中推导出**需求曲线**，该问题在**预算约束**下最大化**效用函数**。
 * 我们将从生产者问题中推导出**供给曲线**，该生产者是价格接受者，最大化其利润减去由**成本函数**描述的总成本。
 
@@ -731,6 +784,7 @@ plt.show()
 :label: isd_ex3
 
 由于非线性性，新的福利函数不容易用纸笔最大化。
+
 相反，我们可以使用 `scipy.optimize.minimize_scalar` 来最大化它。
 
 ```{seealso}
@@ -765,21 +819,22 @@ print(f"{maximizing_q: .5f}")
 :label: isd_ex4
 
 现在通过找到使供给和需求相等的价格来计算均衡数量。
-您可以通过寻找超额需求函数的根来数值计算这个价格：
+
+我们可以通过寻找超额需求函数的根来数值计算这个价格：
 
 $$
 e_d(q) := i_d(q) - i_s(q) 
 $$
 
-您可以使用 `scipy.optimize.newton` 来计算根。
+我们可以使用 `scipy.optimize.newton` 来计算根。
 
 ```{seealso}
 我们的 [SciPy](https://python-programming.quantecon.org/scipy.html) 讲座中有一个关于[根和不动点](https://python-programming.quantecon.org/scipy.html#roots-and-fixed-points)的章节，这是一个了解更多信息的有用资源。
 ```
 
-使用接近 1.0 的初始猜测值来初始化 `newton`。
-（相似的初始条件将给出相同的结果。）
-您应该发现均衡价格与福利最大化价格一致，这符合第一基本福利定理。
+使用接近 1.0 的初始猜测值来初始化 `newton`。（相似的初始条件将给出相同的结果。）
+
+我们发现应该发现均衡价格与福利最大化价格一致，这符合第一基本福利定理。
 
 ````
 
