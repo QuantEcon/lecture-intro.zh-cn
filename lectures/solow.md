@@ -380,10 +380,12 @@ $$
 :label: solow_ex1
 
 绘制稳态下人均消费 $c$ 作为储蓄率 $s$ 的函数图，其中 $0 \leq s \leq 1$。
-使用柯布-道格拉斯生产函数 $f(k) = A k^\alpha$。
-设定 $A=2.0, \alpha=0.3,$ 且 $\delta=0.5$。
-此外，找出大约能使 $c^*(s)$ 最大化的 $s$ 值，并在图中显示。
 
+使用柯布-道格拉斯生产函数 $f(k) = A k^\alpha$。
+
+设定 $A=2.0, \alpha=0.3,$ 且 $\delta=0.5$。
+
+此外，找出大约能使 $c^*(s)$ 最大化的 $s$ 值，并在图中显示。
 ```
 
 ```{solution-start} solow_ex1
@@ -409,6 +411,7 @@ c_star = (1 - s_grid) * A * k_star ** alpha
 ```
 
 让我们使用 [scipy.optimize.minimize_scalar](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar) 来找出使 $c^*$ 最大化的 $s$ 值。
+
 我们将使用 $-c^*(s)$，因为 `minimize_scalar` 函数是用来寻找最小值的。
 
 
