@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.16.4
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -25,6 +25,7 @@ kernelspec:
 
 !pip install --upgrade yfinance  
 ```
+
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -38,6 +39,7 @@ FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
+
 ## 常见分布
 
 在本节中，我们回顾一些众所周知的分布的定义，并探讨如何使用 SciPy 来操作它们。
@@ -114,6 +116,7 @@ u.mean(), u.var()
 ```{code-cell} ipython3
 u.pmf(1)
 ```
+
 ```{code-cell} ipython3
 u.pmf(2)
 ```
@@ -130,6 +133,7 @@ ax.set_xlabel('S')
 ax.set_ylabel('PMF')
 plt.show()
 ```
+
 这里是 CDF 的图：
 
 ```{code-cell} ipython3
@@ -177,16 +181,19 @@ $$
 θ = 0.4
 u = scipy.stats.bernoulli(θ)
 ```
+
 这是 $\theta=0.4$ 时的均值和方差：
 
 ```{code-cell} ipython3
 u.mean(), u.var()
 ```
+
 我们可以评估 PMF 如下：
 
 ```{code-cell} ipython3
 u.pmf(0), u.pmf(1)
 ```
+
 #### 二项分布
 
 另一个有用（而且更有趣）的分布是 $S=\{0, \ldots, n\}$ 上的**二项分布**，其 PMF 为：
@@ -216,6 +223,7 @@ u = scipy.stats.binom(n, θ)
 ```{code-cell} ipython3
 n * θ,  n *  θ * (1 - θ)  
 ```
+
 让我们看看SciPy是否给出了相同的结果：
 
 ```{code-cell} ipython3
@@ -861,7 +869,7 @@ x_costco = prices.pct_change()[1:] * 100
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
-ax.violinplot([x_amazon, x_costco])
+ax.violinplot([x_amazon['AMZN'], x_costco['COST']])
 ax.set_ylabel('月度回报率（百分比变化）')
 ax.set_xlabel('零售商')
 
