@@ -2,7 +2,28 @@
 
 An Undergraduate Lecture Series for the Foundations of Computational Economics (Chinese Language)
 
-## Description
+## Installing the quantecon environment
+
+When working on the lectures it is useful to install the quantecon environment for executing and building 
+the lectures locally. 
+
+This can be done using conda by:
+
+```bash
+conda env create -f environment.yml
+```
+
+or within China it is best to use the `environment-cn.yml`
+
+```bash
+conda env create -f environment-cn.yml
+```
+
+---
+
+## Translation Project Plan
+
+### Description
 
 This repo is a testing ground for the development of a high-quality Chinese language version of the
 introductory lecture site. 
@@ -11,8 +32,6 @@ This project will initially undertake a manual editing process (with the assista
 with the eventual goal of automating as much of the conversion process as possible. This will include iterating and tracking 
 changes to see if we can (a) improve the initial AI conversion, and (b) think about the future editing experience for improvements
 to future workflows (ie. how to keep the english and chinese versions in sync ENGLISH -> CHINESE; ENGLISH<->CHINESE)
-
-## Plan
 
 ### Phase 1 (Short Term)
 
