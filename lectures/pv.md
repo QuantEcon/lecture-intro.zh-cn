@@ -17,7 +17,7 @@ kernelspec:
 
 本讲座描述了**现值模型**，这是许多资产定价理论的起点。
 
-资产定价理论是关于许多经济决策理论的组成部分，包括
+资产定价理论是许多经济决策理论的组成部分，包括
 
   * 消费
   * 劳动力供给
@@ -47,11 +47,11 @@ kernelspec:
 设
 
  * $\{d_t\}_{t=0}^T $ 是一系列股息或“支付”
- * $\{p_t\}_{t=0}^T $ 是从$t$日期开始的资产支付流的延续索赔价格序列，即$\{d_s\}_{s=t}^T $
+ * $\{p_t\}_{t=0}^T $ 是从时间$t$开始的延续性的资产支付价格序列，即$\{d_s\}_{s=t}^T $
  * $ \delta  \in (0,1) $ 是一个周期的“折现因子”
- * $p_{T+1}^*$ 是时间$T+1$时资产的终端价格
+ * $p_{T+1}^*$ 是$T+1$时资产的终端价格
 
-我们假设股息流$\{d_t\}_{t=0}^T $和终端价格$p_{T+1}^*$都是外生的。
+我们假设股息序列$\{d_t\}_{t=0}^T $和终端价格$p_{T+1}^*$都是外生的。
 
 这意味着它们是在模型之外确定的。
 
@@ -61,7 +61,7 @@ $$
     p_t = d_t + \delta p_{t+1}, \quad t = 0, 1, \ldots , T
 $$ (eq:Euler1)
 
-我们说方程**s**，复数，因为有$T+1$个方程，每个$t =0, 1, \ldots, T$都有一个。
+我们说方程**序列**，因为有$T+1$个方程，每个$t =0, 1, \ldots, T$都有一个。
 
 方程{eq}`eq:Euler1`断言在时间$t$购买资产所支付的价格等于支付$d_t$加上时间$t+1$的价格乘以时间折现因子$\delta$。
 
@@ -186,6 +186,11 @@ $$
 让我们编写Python代码来计算和绘制股息流。
 
 ```{code-cell} ipython3
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
+
 T = 6
 current_d = 1.0
 d = []
@@ -199,6 +204,7 @@ ax.legend()
 ax.set_xlabel('时间')
 plt.show()
 ```
+
 现在让我们来计算和绘制资产价格。
 
 我们将 $\delta$ 和 $p_{T+1}^*$ 设定为
@@ -220,10 +226,12 @@ for i in range(T+1):
                 A[i, j+1] = -δ
 
 ```
-让我们来一起检视$A$
+让我们将矩阵 $A$ 表示出来：
+
 ```{code-cell} ipython3
 A
 ```
+
 让我们用 {eq}`eq:apdb_sol`来求解价格。
 
 ```{code-cell} ipython3
@@ -261,13 +269,16 @@ plt.show()
 ```{exercise-start} 
 :label: pv_ex_cyc
 ```
+
 当$p^*_{T+1} = 0$ 和 $\delta = 0.98$ 时，计算相对应的价格序列。
+
 ```{exercise-end}
 ```
 
 ```{solution-start} pv_ex_cyc
 :class: dropdown
 ```
+
 我们改变之前的参数和矩阵$A$。
 
 ```{code-cell} ipython3
@@ -291,6 +302,7 @@ ax.set_xlabel('时间')
 plt.show()
 
 ```
+
 与现值计算相关的加权平均在很大程度上消除了周期。
 
 ```{solution-end} 
@@ -328,19 +340,24 @@ $$
     p_t =  \sum_{s=t}^T \delta^{s-t} d_s +  \delta^{T+1-t} p_{T+1}^*
 $$ (eq:ptpveq)
 
-定价公式 {eq}`eq:ptpveq` 断言两个组成部分相加得到资产价格 $p_t$：
+定价公式 {eq}`eq:ptpveq` 表明两个组成部分相加得到资产价格 $p_t$：
 
 * 一个**基本组成部分** $\sum_{s=t}^T \delta^{s-t} d_s$，等于预期股息的**贴现现值**
   
 * 一个**泡沫组成部分** $\delta^{T+1-t} p_{T+1}^*$
 
 基本组成部分由贴现因子 $\delta$ 和资产的支付（在这种情况下为股息）确定。
-泡沫组成部分是价格中不由基本面决定的部分。
+
+泡沫组成部分是其中不由基本面决定的价格部分。
+
 有时将泡沫组成部分重写为
+
 $$ 
 c \delta^{-t}
 $$
+
 更为方便，其中
+
 $$ 
 c \equiv \delta^{T+1}p_{T+1}^*
 $$
@@ -386,7 +403,7 @@ $$
 p_{T+1}^* = c \delta^{-(T+1)} 
 $$ (eq:eqbubbleterm)
 
-其中 $c$ 为某个正常数。
+其中 $c$ 为某个正数。
 
 在这种情况下，当我们用方程 {eq}`eq:Ainv` 中的矩阵 $A^{-1}$ 乘以 {eq}`eq:pieq2` 的两边时，我们发现：
 
@@ -414,6 +431,7 @@ $$
 ```{exercise-start} 
 :label: pv_ex_a
 ```
+
 给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的分析表达式：
 
 1. $p_{T+1}^* = 0, d_t = g^t d_0$（戈登增长公式的修改版）
@@ -427,6 +445,7 @@ $$
 ```{solution-start} pv_ex_a
 :class: dropdown
 ```
+
 将上述每对 $p_{T+1}^*, d_t$ 代入方程 {eq}`eq:ptpveq` 得到：
 
 1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0$
