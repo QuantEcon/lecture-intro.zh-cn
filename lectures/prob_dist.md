@@ -759,7 +759,7 @@ x.mean(), x.var()
 我们将讲解
 
 - 直方图
-- 核密度估计和
+- 核密度估计
 - 小提琴图
 
 
@@ -786,7 +786,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('AMZN', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('AMZN', '2000-1-1', '2024-1-1', 
+                    interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_amazon = prices.pct_change()[1:] * 100
 x_amazon.head()
@@ -862,7 +863,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('COST', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('COST', '2000-1-1', '2024-1-1', 
+                 interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_costco = prices.pct_change()[1:] * 100
 ```
@@ -909,7 +911,7 @@ ax.set_ylabel('密度')
 plt.show()
 ```
 
-直方图与密度的匹配不错，但也不是很好。
+直方图与密度的匹配不是很好。
 
 一个原因是正态分布实际上并不真正适合这个观察数据 --- 我们在讨论{ref}`重尾分布<heavy_tail>`时将再次提到这一点。
 
