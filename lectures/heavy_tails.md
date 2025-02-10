@@ -175,7 +175,7 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-data = yf.download('AMZN', '2015-1-1', '2022-7-1')
+data = yf.download('AMZN', '2015-1-1', '2022-7-1', auto_adjust=False)
 ```
 
 ```{code-cell} ipython3
@@ -207,7 +207,7 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-data = yf.download('BTC-USD', '2015-1-1', '2022-7-1')
+data = yf.download('BTC-USD', '2015-1-1', '2022-7-1', auto_adjust=False)
 ```
 
 ```{code-cell} ipython3
