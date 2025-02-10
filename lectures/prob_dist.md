@@ -786,7 +786,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('AMZN', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('AMZN', '2000-1-1', '2024-1-1', 
+                    interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_amazon = prices.pct_change()[1:] * 100
 x_amazon.head()
@@ -862,7 +863,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('COST', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('COST', '2000-1-1', '2024-1-1', 
+                 interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_costco = prices.pct_change()[1:] * 100
 ```
