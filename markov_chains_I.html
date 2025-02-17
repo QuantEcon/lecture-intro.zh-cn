@@ -71,14 +71,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -91,14 +91,15 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
@@ -109,11 +110,7 @@
                 gtag('js', new Date());
                 gtag('config', 'G-QDS1YRJNGM');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -272,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">33. </span>马尔科夫链：基本概念<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p id="index-0">除了 Anaconda 中的库之外，本讲座还需要以下库：</p>
+<p id="index-0">除了 Anaconda 中的自带函数库之外，本讲座还需要以下函数库，可以通过以下指令下载：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -285,14 +282,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.7.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.8.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
@@ -304,22 +303,22 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 <section id="id2">
 <h2><span class="section-number">33.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>马尔科夫链提供了一种对过去对未来产生影响的情况进行建模的方法。</p>
-<p>我们的意思是，观察当前情况的一些测量值可以帮助我们预测未来的情况。</p>
-<p>当在不同时间点对某事物的测量之间存在统计依赖时，这可能是可能的。</p>
+<p>马尔科夫链提供了一种在过去对未来有影响的情况下进行建模的方法。</p>
+<p>也就是说，观察当前情况的一些指标可以帮助我们预测未来的情况。</p>
+<p>当在不同时间点对某事物的指标之间存在统计依赖时，这样的作法是可行的。</p>
 <p>例如，</p>
 <ul class="simple">
-<li><p>明年的通货膨胀可能与今年的通货膨胀共同变化</p></li>
-<li><p>下个月的失业率可能与本月的失业率共同变化</p></li>
+<li><p>明年的通货膨胀可能与今年的通货膨胀有着相互关联的变化</p></li>
+<li><p>下个月的失业率可能与本月的失业率有着相互关联的变化</p></li>
 </ul>
 <p>马尔科夫链是经济学和金融学的一个重要工具。</p>
-<p>马尔科夫链理论是美丽的，并为概率和动态提供了许多见解。</p>
-<p>在本讲座中，我们将</p>
+<p>马尔科夫链理论是美丽的，并为概率和动态变化相关的领域提供了许多见解。</p>
+<p>在本讲中，我们将</p>
 <ul class="simple">
-<li><p>回顾马尔科夫链理论中的一些关键思想，及</p></li>
+<li><p>回顾马尔科夫链理论中的一些关键思想，并</p></li>
 <li><p>展示马尔科夫链在一些经济应用中的出现方式。</p></li>
 </ul>
-<p>让我们从一些标准导入开始：</p>
+<p>让我们从一些通常的函数包导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -343,10 +342,10 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>在本节中，我们将提供一些定义和基本示例。</p>
 <section id="finite-dp-stoch-mat">
 <span id="id4"></span><h3><span class="section-number">33.2.1. </span>随机矩阵<a class="headerlink" href="#finite-dp-stoch-mat" title="Permalink to this heading">#</a></h3>
-<p>回想一下，<strong>概率质量函数</strong>是一个 <span class="math notranslate nohighlight">\(n\)</span> 个可能结果上的非负 <span class="math notranslate nohighlight">\(n\)</span>-维向量 <span class="math notranslate nohighlight">\(p\)</span>，其总和为 1。</p>
+<p>回想一下，<strong>概率质量函数</strong>是一个 <span class="math notranslate nohighlight">\(n\)</span> 个可能结果上的非负 <span class="math notranslate nohighlight">\(n\)</span>-维向量 <span class="math notranslate nohighlight">\(p\)</span>，向量内所有元素总和为 1。</p>
 <p>例如，<span class="math notranslate nohighlight">\(p = (0.2, 0.2, 0.6)\)</span> 是一个三个结果上的概率质量函数。</p>
-<p><strong>随机矩阵</strong>（或<strong>马尔科夫矩阵</strong>）是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的方阵 <span class="math notranslate nohighlight">\(P\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 的每一行都是一个 <span class="math notranslate nohighlight">\(n\)</span> 个结果上的概率质量函数。</p>
-<p>换句话说，</p>
+<p><strong>随机矩阵</strong>（或<strong>马尔科夫矩阵</strong>）是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的矩阵 <span class="math notranslate nohighlight">\(P\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 的每一行都是一个 <span class="math notranslate nohighlight">\(n\)</span> 个结果上的概率质量函数。</p>
+<p>也就是说，</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(P\)</span> 的每个元素都是非负的，且</p></li>
 <li><p><span class="math notranslate nohighlight">\(P\)</span> 的每一行的和为 1</p></li>
@@ -360,20 +359,20 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>在严格定义马尔科夫链之前，我们先给出一些示例。</p>
 <section id="mc-eg2">
 <span id="id6"></span><h4><span class="section-number">33.2.2.1. </span>示例 1<a class="headerlink" href="#mc-eg2" title="Permalink to this heading">#</a></h4>
-<p>根据美国失业数据，Hamilton <span id="id7">[<a class="reference internal" href="zreferences.html#id187" title="James D Hamilton. What's real about the business cycle? Federal Reserve Bank of St. Louis Review, pages 435–452, 2005.">Hamilton, 2005</a>]</span> 估计了以下动态。</p>
+<p>根据美国失业数据，Hamilton <span id="id7">[<a class="reference internal" href="zreferences.html#id187" title="James D Hamilton. What's real about the business cycle? Federal Reserve Bank of St. Louis Review, pages 435–452, 2005.">Hamilton, 2005</a>]</span> 估算了以下动态变化。</p>
 <img alt="_images/Hamilton.png" class="align-center" id="mc-hamilton" src="_images/Hamilton.png" />
-<p>这里有三个<strong>状态</strong>：</p>
+<p>这里可以分为三个<strong>状态</strong>：</p>
 <ul class="simple">
-<li><p>“ng” 表示正常增长</p></li>
-<li><p>“mr” 表示轻度衰退</p></li>
-<li><p>“sr” 表示严重衰退</p></li>
+<li><p>“ng” 表示正常增长(normal growth）</p></li>
+<li><p>“mr” 表示轻度衰退(mild recession)</p></li>
+<li><p>“sr” 表示严重衰退(severe recession)</p></li>
 </ul>
 <p>箭头代表一个月内的转移概率。</p>
 <p>例如，从轻度衰退到正常增长的箭头旁边有 0.145。</p>
 <p>这告诉我们，根据过去的数据，从轻度衰退转移到正常增长的概率为 14.5%。</p>
 <p>从正常增长回到正常增长的箭头告诉我们，从正常增长转移到正常增长（保持在同一状态）的概率为 97%。</p>
-<p>请注意，这些是条件概率——从一个状态转移到另一个状态（或保持在同一状态）的概率是以当前状态为条件的。</p>
-<p>为了便于数值处理，让我们将状态转换为数字。</p>
+<p>请注意，这些转移概率其实是条件概率——从一个状态转移到另一个状态（或保持在同一状态）的概率是以当前状态为条件的。</p>
+<p>为了便于数值处理，让我们用数字来表示状态。</p>
 <p>具体来说，我们约定</p>
 <ul class="simple">
 <li><p>状态 0 代表正常增长</p></li>
@@ -386,7 +385,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 \[
     \mathbb P\{X_{t+1} = 0 \,|\, X_t = 1\} = 0.145
 \]</div>
-<p>我们可以将所有这些条件概率收集到一个矩阵中，如下所示：</p>
+<p>我们可以将所有这些条件概率写到一个矩阵中，如下所示：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P =
@@ -404,7 +403,7 @@ P =
     = \mathbb P\{X_{t+1} = j \,|\, X_t = i\}
 \]</div>
 <p>这对于任何 <span class="math notranslate nohighlight">\(i,j\)</span> 在 0 到 2 之间都成立。</p>
-<p>在此，<span class="math notranslate nohighlight">\(P(i,j)\)</span> 是从状态 <span class="math notranslate nohighlight">\(i\)</span> 转移到状态 <span class="math notranslate nohighlight">\(j\)</span> 在一个月内的概率。</p>
+<p>在此之中，<span class="math notranslate nohighlight">\(P(i,j)\)</span> 是在一个月后从状态 <span class="math notranslate nohighlight">\(i\)</span> 转移到状态 <span class="math notranslate nohighlight">\(j\)</span> 的概率。</p>
 </section>
 <section id="mc-eg1">
 <span id="id8"></span><h4><span class="section-number">33.2.2.2. </span>示例 2<a class="headerlink" href="#mc-eg1" title="Permalink to this heading">#</a></h4>
@@ -412,7 +411,7 @@ P =
 <p>假设在一个月内，</p>
 <ol class="arabic simple">
 <li><p>失业的工人以概率 <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> 找到工作。</p></li>
-<li><p>就业的工人以概率 <span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 失去工作并变得失业。</p></li>
+<li><p>就业的工人以概率 <span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 失去工作并变成失业状态。</p></li>
 </ol>
 <p>根据上述信息，我们可以将转移概率写成矩阵形式</p>
 <div class="math notranslate nohighlight" id="equation-p-unempemp">
@@ -430,7 +429,7 @@ P =
         \text{ 从状态 $0$ 转移到状态 $1$ 的概率（一个月内）}
         \\
         &amp; =
-        \text{ 找到下个月工作的概率}
+        \text{ 下个月找到工作的概率}
         \\
         &amp; = \alpha
 \end{aligned}
@@ -526,12 +525,12 @@ P :=
 <p>集合 <span class="math notranslate nohighlight">\(S\)</span> 被称为<strong>状态空间</strong>，<span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> 被称为<strong>状态值</strong>。</p>
 <p>一个分布 <span class="math notranslate nohighlight">\(\psi\)</span> 在 <span class="math notranslate nohighlight">\(S\)</span> 上是一个长度为 <span class="math notranslate nohighlight">\(n\)</span> 的概率质量函数，其中 <span class="math notranslate nohighlight">\(\psi(i)\)</span> 是分配给状态 <span class="math notranslate nohighlight">\(x_i\)</span> 的概率。</p>
 <p>在 <span class="math notranslate nohighlight">\(S\)</span> 上的<strong>马尔科夫链</strong> <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是一个取值于 <span class="math notranslate nohighlight">\(S\)</span> 的随机变量序列，且具有<strong>马尔科夫性质</strong>。</p>
-<p>这意味着，对于任何时间 <span class="math notranslate nohighlight">\(t\)</span> 和任何状态 <span class="math notranslate nohighlight">\(y \in S\)</span>，</p>
+<p>也就是，对于任何时间 <span class="math notranslate nohighlight">\(t\)</span> 和任何状态 <span class="math notranslate nohighlight">\(y \in S\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-fin-markov-mp">
 <span class="eqno">(33.2)<a class="headerlink" href="#equation-fin-markov-mp" title="Permalink to this equation">#</a></span>\[\mathbb P \{ X_{t+1} = y  \,|\, X_t \}
 = \mathbb P \{ X_{t+1}  = y \,|\, X_t, X_{t-1}, \ldots \}\]</div>
-<p>这意味着一旦我们知道当前状态 <span class="math notranslate nohighlight">\(X_t\)</span>，添加之前状态 <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}\)</span> 的知识不会对未来状态的概率提供额外信息。</p>
-<p>因此，马尔科夫链的动态完全由<strong>条件概率</strong>集合决定：</p>
+<p>这意味着一旦我们知道当前状态 <span class="math notranslate nohighlight">\(X_t\)</span>，添加之前状态 <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}\)</span> 不会对未来状态的概率提供额外信息。</p>
+<p>因此，马尔科夫链的动态完全由<strong>条件概率</strong>的集合决定：</p>
 <div class="math notranslate nohighlight" id="equation-mpp">
 <span class="eqno">(33.3)<a class="headerlink" href="#equation-mpp" title="Permalink to this equation">#</a></span>\[P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
 \qquad (x, y \in S)\]</div>
@@ -556,9 +555,9 @@ P :=
 </section>
 <section id="id13">
 <h2><span class="section-number">33.3. </span>模拟<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
-<p id="index-1">研究马尔科夫链的一个好方法是模拟它们。</p>
-<p>让我们先自己做这个，然后再看看可以帮助我们的库。</p>
-<p>在这些练习中，我们将状态空间设为 <span class="math notranslate nohighlight">\(S = 0,\ldots, n-1\)</span>。</p>
+<p id="index-1">学习马尔科夫链的一个好方法是模拟它们。</p>
+<p>让我们先自己独立试着模拟，然后再使用能够帮助我们的函数库进行模拟。</p>
+<p>在接下来的练习中，我们将状态空间设为 <span class="math notranslate nohighlight">\(S = 0,\ldots, n-1\)</span>。</p>
 <p>（我们从 <span class="math notranslate nohighlight">\(0\)</span> 开始，因为 Python 数组是从 <span class="math notranslate nohighlight">\(0\)</span> 索引的。）</p>
 <section id="id14">
 <h3><span class="section-number">33.3.1. </span>编写我们自己的模拟代码<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
@@ -567,7 +566,7 @@ P :=
 <li><p>一个随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 和</p></li>
 <li><p>一个长度为 <span class="math notranslate nohighlight">\(n\)</span> 的概率质量函数 <span class="math notranslate nohighlight">\(\psi_0\)</span>，从中抽取 <span class="math notranslate nohighlight">\(X_0\)</span> 的初始实现。</p></li>
 </ol>
-<p>然后马尔科夫链按照如下方式构建：</p>
+<p>然后按照如下方式构建马尔科夫链：</p>
 <ol class="arabic simple">
 <li><p>在时间 <span class="math notranslate nohighlight">\(t=0\)</span>，从分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 中抽取 <span class="math notranslate nohighlight">\(X_0\)</span> 的一个实现。</p></li>
 <li><p>在每个后续时间 <span class="math notranslate nohighlight">\(t\)</span>，从 <span class="math notranslate nohighlight">\(P(X_t, \cdot)\)</span> 中抽取一个新状态 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 的实现。</p></li>
@@ -585,7 +584,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 0, 0])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, 1, 1])
 </pre></div>
 </div>
 </div>
@@ -640,7 +639,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, 0, 1, 1, 1, 1, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 1, 0, 1, 1, 1, 1, 0])
 </pre></div>
 </div>
 </div>
@@ -657,7 +656,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.250653
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.248916
 </pre></div>
 </div>
 </div>
@@ -666,7 +665,7 @@ P :=
 </section>
 <section id="quantecon">
 <h3><span class="section-number">33.3.2. </span>使用 QuantEcon 的例程<a class="headerlink" href="#quantecon" title="Permalink to this heading">#</a></h3>
-<p><a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 提供了一些处理马尔科夫链的例程，包括模拟。</p>
+<p><a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 提供了一些处理马尔科夫链包括模拟的步骤。</p>
 <p>以下是使用与前例相同的 <span class="math notranslate nohighlight">\(P\)</span> 的说明</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -677,7 +676,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.249887
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.251002
 </pre></div>
 </div>
 </div>
@@ -690,11 +689,11 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.18 s, sys: 142 μs, total: 1.18 s
-Wall time: 1.18 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.22 s, sys: 1.99 ms, total: 1.22 s
+Wall time: 1.22 s
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, ..., 1, 0, 0])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 0, ..., 1, 1, 1])
 </pre></div>
 </div>
 </div>
@@ -706,18 +705,18 @@ Wall time: 1.18 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 ms, sys: 3.89 ms, total: 14.4 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.15 ms, sys: 5.01 ms, total: 14.2 ms
 Wall time: 14 ms
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, ..., 1, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, ..., 1, 1, 1])
 </pre></div>
 </div>
 </div>
 </div>
 <section id="id15">
 <h4><span class="section-number">33.3.2.1. </span>添加状态值和初始条件<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
-<p>如果需要，我们可以向 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> 提供状态值的规范。</p>
+<p>如果需要，我们可以向 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> 提供表示状态的值的规范。</p>
 <p>这些状态值可以是整数、浮点数，甚至是字符串。</p>
 <p>以下代码说明了这一点</p>
 <div class="cell docutils container">
@@ -740,7 +739,7 @@ Wall time: 14 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;就业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -752,12 +751,12 @@ Wall time: 14 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
 </div>
-<p>如果我们希望看到索引而不是状态值作为输出，我们可以使用</p>
+<p>如果我们希望看到状态值对应的索引而不是状态值本身作为输出，我们可以使用</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span><span class="o">.</span><span class="n">simulate_indices</span><span class="p">(</span><span class="n">ts_length</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -793,7 +792,7 @@ Wall time: 14 ms
                \cdot \mathbb P \{ X_t = x \}
 \]</div>
 <p>（我们正在使用<a class="reference external" href="https://en.wikipedia.org/wiki/Law_of_total_probability">全概率公式</a>。）</p>
-<p>将这一陈述重新写为边际概率和条件概率的形式：</p>
+<p>将这一陈述重新写为边缘概率和条件概率的形式：</p>
 <div class="math notranslate nohighlight">
 \[
     \psi_{t+1}(y) = \sum_{x \in S} P(x,y) \psi_t(x)
@@ -805,12 +804,12 @@ Wall time: 14 ms
 <p>因此，我们通过右乘 <span class="math notranslate nohighlight">\(P\)</span> 将分布向前移动一个时间单位。</p>
 <p>通过右乘 <span class="math notranslate nohighlight">\(m\)</span> 次，我们将分布向前移动 <span class="math notranslate nohighlight">\(m\)</span> 步进入未来。</p>
 <p>因此，迭代 <a class="reference internal" href="#equation-fin-mc-fr">(33.4)</a>，表达式 <span class="math notranslate nohighlight">\(\psi_{t+m} = \psi_t P^m\)</span> 也是有效的——这里 <span class="math notranslate nohighlight">\(P^m\)</span> 是 <span class="math notranslate nohighlight">\(P\)</span> 的第 <span class="math notranslate nohighlight">\(m\)</span> 次幂。</p>
-<p>作为一个特例，我们看到，如果 <span class="math notranslate nohighlight">\(\psi_0\)</span> 是从中抽取 <span class="math notranslate nohighlight">\(X_0\)</span> 的初始分布，则 <span class="math notranslate nohighlight">\(\psi_0 P^m\)</span> 是 <span class="math notranslate nohighlight">\(X_m\)</span> 的分布。</p>
+<p>作为一个特例，我们看到，如果 <span class="math notranslate nohighlight">\(\psi_0\)</span> 是从中抽取 <span class="math notranslate nohighlight">\(X_0\)</span> 的初始分布，则 <span class="math notranslate nohighlight">\(\psi_0 P^m\)</span> 是 <span class="math notranslate nohighlight">\(X_m\)</span> 的概率分布。</p>
 <p>这非常重要，所以我们重复一下</p>
 <div class="math notranslate nohighlight" id="equation-mdfmc">
 <span class="eqno">(33.5)<a class="headerlink" href="#equation-mdfmc" title="Permalink to this equation">#</a></span>\[X_0 \sim \psi_0 \quad \implies \quad X_m \sim \psi_0 P^m\]</div>
 <p>一般规则是通过右乘 <span class="math notranslate nohighlight">\(P^m\)</span> 将分布向前移动 <span class="math notranslate nohighlight">\(m\)</span> 个时间单位。</p>
-<p>因此，以下也是有效的。</p>
+<p>因此，以下推断也是有效的。</p>
 <div class="math notranslate nohighlight" id="equation-mdfmc2">
 <span class="eqno">(33.6)<a class="headerlink" href="#equation-mdfmc2" title="Permalink to this equation">#</a></span>\[X_t \sim \psi_t \quad \implies \quad X_{t+m} \sim \psi_t P^m\]</div>
 <section id="finite-mc-mstp">
@@ -1231,42 +1230,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgd1bd63d579a64a18a317b87dfd039b83">
+  <img id="_anim_imgb15c664aba1c4f859b43ec6706f5fe21">
   <div class="anim-controls">
-    <input id="_anim_sliderd1bd63d579a64a18a317b87dfd039b83" type="range" class="anim-slider"
+    <input id="_anim_sliderb15c664aba1c4f859b43ec6706f5fe21" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animd1bd63d579a64a18a317b87dfd039b83.set_frame(parseInt(this.value));">
+           oninput="animb15c664aba1c4f859b43ec6706f5fe21.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animd1bd63d579a64a18a317b87dfd039b83.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animb15c664aba1c4f859b43ec6706f5fe21.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animd1bd63d579a64a18a317b87dfd039b83.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animb15c664aba1c4f859b43ec6706f5fe21.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animd1bd63d579a64a18a317b87dfd039b83.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animb15c664aba1c4f859b43ec6706f5fe21.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animd1bd63d579a64a18a317b87dfd039b83.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animb15c664aba1c4f859b43ec6706f5fe21.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animd1bd63d579a64a18a317b87dfd039b83.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animb15c664aba1c4f859b43ec6706f5fe21.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animd1bd63d579a64a18a317b87dfd039b83.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animb15c664aba1c4f859b43ec6706f5fe21.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animd1bd63d579a64a18a317b87dfd039b83.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animb15c664aba1c4f859b43ec6706f5fe21.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animd1bd63d579a64a18a317b87dfd039b83.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animb15c664aba1c4f859b43ec6706f5fe21.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animd1bd63d579a64a18a317b87dfd039b83.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animb15c664aba1c4f859b43ec6706f5fe21.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectd1bd63d579a64a18a317b87dfd039b83"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectb15c664aba1c4f859b43ec6706f5fe21"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_d1bd63d579a64a18a317b87dfd039b83"
+      <input type="radio" name="state" value="once" id="_anim_radio1_b15c664aba1c4f859b43ec6706f5fe21"
              checked>
-      <label for="_anim_radio1_d1bd63d579a64a18a317b87dfd039b83">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_d1bd63d579a64a18a317b87dfd039b83"
+      <label for="_anim_radio1_b15c664aba1c4f859b43ec6706f5fe21">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_b15c664aba1c4f859b43ec6706f5fe21"
              >
-      <label for="_anim_radio2_d1bd63d579a64a18a317b87dfd039b83">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_d1bd63d579a64a18a317b87dfd039b83"
+      <label for="_anim_radio2_b15c664aba1c4f859b43ec6706f5fe21">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_b15c664aba1c4f859b43ec6706f5fe21"
              >
-      <label for="_anim_radio3_d1bd63d579a64a18a317b87dfd039b83">Reflect</label>
+      <label for="_anim_radio3_b15c664aba1c4f859b43ec6706f5fe21">Reflect</label>
     </form>
   </div>
 </div>
@@ -1276,9 +1275,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgd1bd63d579a64a18a317b87dfd039b83";
-    var slider_id = "_anim_sliderd1bd63d579a64a18a317b87dfd039b83";
-    var loop_select_id = "_anim_loop_selectd1bd63d579a64a18a317b87dfd039b83";
+    var img_id = "_anim_imgb15c664aba1c4f859b43ec6706f5fe21";
+    var slider_id = "_anim_sliderb15c664aba1c4f859b43ec6706f5fe21";
+    var loop_select_id = "_anim_loop_selectb15c664aba1c4f859b43ec6706f5fe21";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -25494,7 +25493,7 @@ JI+OjgAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animd1bd63d579a64a18a317b87dfd039b83 = new Animation(frames, img_id, slider_id, 200.0,
+        animb15c664aba1c4f859b43ec6706f5fe21 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -25776,42 +25775,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgb8fa1b2ca7104f37b2c4b583ba058a99">
+  <img id="_anim_imge94f90ddd54e4e93af1a2f7e0005ac07">
   <div class="anim-controls">
-    <input id="_anim_sliderb8fa1b2ca7104f37b2c4b583ba058a99" type="range" class="anim-slider"
+    <input id="_anim_slidere94f90ddd54e4e93af1a2f7e0005ac07" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animb8fa1b2ca7104f37b2c4b583ba058a99.set_frame(parseInt(this.value));">
+           oninput="anime94f90ddd54e4e93af1a2f7e0005ac07.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animb8fa1b2ca7104f37b2c4b583ba058a99.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anime94f90ddd54e4e93af1a2f7e0005ac07.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectb8fa1b2ca7104f37b2c4b583ba058a99"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selecte94f90ddd54e4e93af1a2f7e0005ac07"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_b8fa1b2ca7104f37b2c4b583ba058a99"
+      <input type="radio" name="state" value="once" id="_anim_radio1_e94f90ddd54e4e93af1a2f7e0005ac07"
              checked>
-      <label for="_anim_radio1_b8fa1b2ca7104f37b2c4b583ba058a99">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_b8fa1b2ca7104f37b2c4b583ba058a99"
+      <label for="_anim_radio1_e94f90ddd54e4e93af1a2f7e0005ac07">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_e94f90ddd54e4e93af1a2f7e0005ac07"
              >
-      <label for="_anim_radio2_b8fa1b2ca7104f37b2c4b583ba058a99">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_b8fa1b2ca7104f37b2c4b583ba058a99"
+      <label for="_anim_radio2_e94f90ddd54e4e93af1a2f7e0005ac07">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_e94f90ddd54e4e93af1a2f7e0005ac07"
              >
-      <label for="_anim_radio3_b8fa1b2ca7104f37b2c4b583ba058a99">Reflect</label>
+      <label for="_anim_radio3_e94f90ddd54e4e93af1a2f7e0005ac07">Reflect</label>
     </form>
   </div>
 </div>
@@ -25821,9 +25820,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgb8fa1b2ca7104f37b2c4b583ba058a99";
-    var slider_id = "_anim_sliderb8fa1b2ca7104f37b2c4b583ba058a99";
-    var loop_select_id = "_anim_loop_selectb8fa1b2ca7104f37b2c4b583ba058a99";
+    var img_id = "_anim_imge94f90ddd54e4e93af1a2f7e0005ac07";
+    var slider_id = "_anim_slidere94f90ddd54e4e93af1a2f7e0005ac07";
+    var loop_select_id = "_anim_loop_selecte94f90ddd54e4e93af1a2f7e0005ac07";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -50508,7 +50507,7 @@ giAIgiCsMSIAFARBEARBWGNEACgIgiAIgrDGiABQEARBEARhjREBoCAIgiAIwhojAkBBEARBEIQ1\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animb8fa1b2ca7104f37b2c4b583ba058a99 = new Animation(frames, img_id, slider_id, 200.0,
+        anime94f90ddd54e4e93af1a2f7e0005ac07 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -51199,7 +51198,11 @@ P :=
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/markov_chains_I.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>

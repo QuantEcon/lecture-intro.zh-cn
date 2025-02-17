@@ -71,14 +71,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -91,14 +91,15 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
@@ -109,11 +110,7 @@
                 gtag('js', new Date());
                 gtag('config', 'G-QDS1YRJNGM');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -242,14 +239,14 @@ const thebe_selector_output = ".output, .cell_output"
 <section id="id2">
 <h2><span class="section-number">11.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>本讲座描述了<strong>现值模型</strong>，这是许多资产定价理论的起点。</p>
-<p>资产定价理论是关于许多经济决策理论的组成部分，包括</p>
+<p>资产定价理论是许多经济决策理论的组成部分，包括</p>
 <ul class="simple">
 <li><p>消费</p></li>
 <li><p>劳动力供给</p></li>
 <li><p>教育选择</p></li>
 <li><p>货币需求</p></li>
 </ul>
-<p>在资产定价理论中，更广泛的经济动态中，一个基本主题是不同<strong>时间序列</strong>之间的关系。</p>
+<p>在资产定价理论以及更广泛的经济动态研究中，一个基本主题是不同<strong>时间序列</strong>之间的关系。</p>
 <p><strong>时间序列</strong>是按时间索引的<strong>序列</strong>。</p>
 <p>在本讲座中，我们将把序列表示为向量。</p>
 <p>因此，我们的分析通常归结为研究向量之间的关系。</p>
@@ -258,7 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>矩阵乘法，和</p></li>
 <li><p>矩阵求逆。</p></li>
 </ul>
-<p>我们将在后续讲座中使用这里描述的计算，包括<a class="reference internal" href="cons_smooth.html"><span class="doc">消费平滑</span></a>，<a class="reference internal" href="equalizing_difference.html"><span class="doc">均衡差异模型</span></a>，和<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>。</p>
+<p>我们将在后续的许多讲座中使用这些工具，包括<a class="reference internal" href="cons_smooth.html"><span class="doc">消费平滑</span></a>，<a class="reference internal" href="equalizing_difference.html"><span class="doc">均衡差异模型</span></a>，和<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>。</p>
 <p>让我们开始吧。</p>
 </section>
 <section id="id3">
@@ -266,25 +263,25 @@ const thebe_selector_output = ".output, .cell_output"
 <p>设</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\{d_t\}_{t=0}^T \)</span> 是一系列股息或“支付”</p></li>
-<li><p><span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^T \)</span> 是从<span class="math notranslate nohighlight">\(t\)</span>日期开始的资产支付流的延续索赔价格序列，即<span class="math notranslate nohighlight">\(\{d_s\}_{s=t}^T \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^T \)</span> 是从时间<span class="math notranslate nohighlight">\(t\)</span>开始的延续性的资产支付价格序列，即<span class="math notranslate nohighlight">\(\{d_s\}_{s=t}^T \)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\( \delta  \in (0,1) \)</span> 是一个周期的“折现因子”</p></li>
-<li><p><span class="math notranslate nohighlight">\(p_{T+1}^*\)</span> 是时间<span class="math notranslate nohighlight">\(T+1\)</span>时资产的终端价格</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{T+1}^*\)</span> 是<span class="math notranslate nohighlight">\(T+1\)</span>时资产的终端价格</p></li>
 </ul>
-<p>我们假设股息流<span class="math notranslate nohighlight">\(\{d_t\}_{t=0}^T \)</span>和终端价格<span class="math notranslate nohighlight">\(p_{T+1}^*\)</span>都是外生的。</p>
+<p>我们假设股息序列<span class="math notranslate nohighlight">\(\{d_t\}_{t=0}^T \)</span>和终端价格<span class="math notranslate nohighlight">\(p_{T+1}^*\)</span>都是外生的。</p>
 <p>这意味着它们是在模型之外确定的。</p>
 <p>假设资产定价方程序列</p>
 <div class="math notranslate nohighlight" id="equation-eq-euler1">
 <span class="eqno">(11.1)<a class="headerlink" href="#equation-eq-euler1" title="Permalink to this equation">#</a></span>\[
     p_t = d_t + \delta p_{t+1}, \quad t = 0, 1, \ldots , T
 \]</div>
-<p>我们说方程<strong>s</strong>，复数，因为有<span class="math notranslate nohighlight">\(T+1\)</span>个方程，每个<span class="math notranslate nohighlight">\(t =0, 1, \ldots, T\)</span>都有一个。</p>
-<p>方程<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>断言在时间<span class="math notranslate nohighlight">\(t\)</span>购买资产所支付的价格等于支付<span class="math notranslate nohighlight">\(d_t\)</span>加上时间<span class="math notranslate nohighlight">\(t+1\)</span>的价格乘以时间折现因子<span class="math notranslate nohighlight">\(\delta\)</span>。</p>
+<p>我们称其为方程<strong>序列</strong>，因为有<span class="math notranslate nohighlight">\(T+1\)</span>个方程，每个<span class="math notranslate nohighlight">\(t =0, 1, \ldots, T\)</span>都有一个。</p>
+<p>方程<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>告诉我们在时间<span class="math notranslate nohighlight">\(t\)</span>购买资产所支付的价格等于支付<span class="math notranslate nohighlight">\(d_t\)</span>加上时间<span class="math notranslate nohighlight">\(t+1\)</span>的价格乘以时间折现因子<span class="math notranslate nohighlight">\(\delta\)</span>。</p>
 <p>通过将明天的价格乘以<span class="math notranslate nohighlight">\(\delta\)</span>来折现，考虑了“等待一个周期的价值”。</p>
-<p>我们想要解决<span class="math notranslate nohighlight">\(T+1\)</span>个方程<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>的系统，以资产价格序列<span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^T \)</span>作为股息序列<span class="math notranslate nohighlight">\(\{d_t\}_{t=0}^T \)</span>和外生终端价格<span class="math notranslate nohighlight">\(p_{T+1}^*\)</span>的函数。</p>
+<p>我们想要解<span class="math notranslate nohighlight">\(T+1\)</span>个方程<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>的系统，以资产价格序列<span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^T \)</span>作为股息序列<span class="math notranslate nohighlight">\(\{d_t\}_{t=0}^T \)</span>和外生终端价格<span class="math notranslate nohighlight">\(p_{T+1}^*\)</span>的函数。</p>
 <p>像<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>这样的方程系统是线性<strong>差分方程</strong>的一个例子。</p>
-<p>有强大的数学方法可以用来解决这样的系统，它们本身就值得研究，因为它们是分析许多有趣经济模型的基础。</p>
+<p>有许多强大的数学方法可以用来解决这样的系统，这些方法本身就很值得研究，因为它们是分析许多经济模型的基础。</p>
 <p>例如，参见<a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span class="xref std std-doc">Samuelson乘数-加速器</span></a></p>
-<p>在本讲座中，我们将使用矩阵乘法和矩阵求逆来解决系统<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>，这是线性代数中的基本工具，在<a class="reference internal" href="linear_equations.html"><span class="doc">线性方程和矩阵代数</span></a>中介绍。</p>
+<p>在本讲座中，我们将使用矩阵乘法和矩阵求逆来解决系统<a class="reference internal" href="#equation-eq-euler1">(11.1)</a>，这是线性代数中的基本工具，在<a class="reference internal" href="linear_equations.html"><span class="doc">线性方程和矩阵代数</span></a>中有介绍。</p>
 <p>我们将导入以下的库</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -382,7 +379,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>让我们编写Python代码来计算和绘制股息流。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">current_d</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -398,17 +400,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32929 (\N{CJK UNIFIED IDEOGRAPH-80A1}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24687 (\N{CJK UNIFIED IDEOGRAPH-606F}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/4d2d7daa9be3e97a8159d9d7968ff4af9dbc1dec41469d390e48920b85a77cec.png"><img alt="_images/4d2d7daa9be3e97a8159d9d7968ff4af9dbc1dec41469d390e48920b85a77cec.png" src="_images/4d2d7daa9be3e97a8159d9d7968ff4af9dbc1dec41469d390e48920b85a77cec.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png"><img alt="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png" src="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>现在让我们来计算和绘制资产价格。</p>
@@ -421,7 +413,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>让我们来建立矩阵 <span class="math notranslate nohighlight">\(A\)</span></p>
+<p>现在我们建立矩阵 <span class="math notranslate nohighlight">\(A\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
@@ -435,7 +427,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>让我们来一起检视<span class="math notranslate nohighlight">\(A\)</span></p>
+<p>让我们将矩阵 <span class="math notranslate nohighlight">\(A\)</span> 打印出来：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
@@ -454,7 +446,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>让我们用 <a class="reference internal" href="#equation-eq-apdb-sol">(11.5)</a>来求解价格。</p>
+<p>现在用 <a class="reference internal" href="#equation-eq-apdb-sol">(11.5)</a>来求解价格。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -469,20 +461,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36164 (\N{CJK UNIFIED IDEOGRAPH-8D44}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20135 (\N{CJK UNIFIED IDEOGRAPH-4EA7}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/d975443c775dd2d5b06d8093d5011b942f9587f648ab48924cc745e54b8d5e5b.png"><img alt="_images/d975443c775dd2d5b06d8093d5011b942f9587f648ab48924cc745e54b8d5e5b.png" src="_images/d975443c775dd2d5b06d8093d5011b942f9587f648ab48924cc745e54b8d5e5b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png"><img alt="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png" src="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>现在让我们来看一个周期性增长的股息序列：</p>
+<p>现在让我们考虑一个周期性增长的股息序列：</p>
 <div class="math notranslate nohighlight">
 \[
     d_{t+1} = 1.01 d_t + 0.1 \sin t, \quad t = 0, 1, \ldots , T-1.
@@ -505,7 +487,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0981b9a82677bebf6697a809862e676bd481eba788159674bc9f583e392a4130.png"><img alt="_images/0981b9a82677bebf6697a809862e676bd481eba788159674bc9f583e392a4130.png" src="_images/0981b9a82677bebf6697a809862e676bd481eba788159674bc9f583e392a4130.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png"><img alt="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png" src="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png" style="width: 80%;" /></a>
 </div>
 </div>
 <div class="exercise admonition" id="pv_ex_cyc">
@@ -544,7 +526,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/47d465845ab2a6b13e953916d597b841790497b1c2d39af9df4908aaef7b5ce0.png"><img alt="_images/47d465845ab2a6b13e953916d597b841790497b1c2d39af9df4908aaef7b5ce0.png" src="_images/47d465845ab2a6b13e953916d597b841790497b1c2d39af9df4908aaef7b5ce0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png"><img alt="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png" src="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>与现值计算相关的加权平均在很大程度上消除了周期。</p>
@@ -569,7 +551,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <p class="admonition-title"><span class="caption-number">Exercise 11.3 </span></p>
 <section id="exercise-content">
-<p>通过证明<span class="math notranslate nohighlight">\(AA^{-1}\)</span>为单位矩阵来检查。</p>
+<p>通过证明<span class="math notranslate nohighlight">\(AA^{-1}\)</span>为单位矩阵来验证这一点。</p>
 </section>
 </div>
 <p>如果我们在 <a class="reference internal" href="#equation-eq-apdb-sol">(11.5)</a> 中使用表达式 <a class="reference internal" href="#equation-eq-ainv">(11.6)</a> 并执行所指示的矩阵乘法，我们将发现</p>
@@ -577,25 +559,27 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="eqno">(11.7)<a class="headerlink" href="#equation-eq-ptpveq" title="Permalink to this equation">#</a></span>\[
     p_t =  \sum_{s=t}^T \delta^{s-t} d_s +  \delta^{T+1-t} p_{T+1}^*
 \]</div>
-<p>定价公式 <a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a> 断言两个组成部分相加得到资产价格 <span class="math notranslate nohighlight">\(p_t\)</span>：</p>
+<p>定价公式 <a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a> 表明资产价格 <span class="math notranslate nohighlight">\(p_t\)</span> 由两个组成部分相加得到：</p>
 <ul class="simple">
-<li><p>一个<strong>基本组成部分</strong> <span class="math notranslate nohighlight">\(\sum_{s=t}^T \delta^{s-t} d_s\)</span>，等于预期股息的<strong>贴现现值</strong></p></li>
-<li><p>一个<strong>泡沫组成部分</strong> <span class="math notranslate nohighlight">\(\delta^{T+1-t} p_{T+1}^*\)</span></p></li>
+<li><p><strong>基本面部分</strong> <span class="math notranslate nohighlight">\(\sum_{s=t}^T \delta^{s-t} d_s\)</span>，它等于预期股息的<strong>贴现现值</strong></p></li>
+<li><p><strong>泡沫组成部分</strong> <span class="math notranslate nohighlight">\(\delta^{T+1-t} p_{T+1}^*\)</span></p></li>
 </ul>
-<p>基本组成部分由贴现因子 <span class="math notranslate nohighlight">\(\delta\)</span> 和资产的支付（在这种情况下为股息）确定。
-泡沫组成部分是价格中不由基本面决定的部分。
-有时将泡沫组成部分重写为
-$<span class="math notranslate nohighlight">\( 
+<p>基本组成部分由贴现因子 <span class="math notranslate nohighlight">\(\delta\)</span> 和资产的支付（在这种情况下为股息）确定。</p>
+<p>泡沫组成部分是其中不由基本面决定的价格部分。</p>
+<p>有时将泡沫组成部分重写为</p>
+<div class="math notranslate nohighlight">
+\[ 
 c \delta^{-t}
-\)</span><span class="math notranslate nohighlight">\(
-更为方便，其中
-\)</span><span class="math notranslate nohighlight">\( 
+\]</div>
+<p>更为方便，其中</p>
+<div class="math notranslate nohighlight">
+\[ 
 c \equiv \delta^{T+1}p_{T+1}^*
-\)</span>$</p>
+\]</div>
 </section>
 <section id="id6">
 <h2><span class="section-number">11.5. </span>关于泡沫的更多内容<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>让我们暂时关注一种特殊情况，即一种永不支付股息的资产，在这种情况下</p>
+<p>让我们暂时考虑一个从不支付股息的资产这个特殊情况，在这种情况下</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{bmatrix}  
@@ -626,7 +610,7 @@ d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
 <span class="eqno">(11.9)<a class="headerlink" href="#equation-eq-eqbubbleterm" title="Permalink to this equation">#</a></span>\[
 p_{T+1}^* = c \delta^{-(T+1)} 
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(c\)</span> 为某个正常数。</p>
+<p>其中 <span class="math notranslate nohighlight">\(c\)</span> 为某个正数。</p>
 <p>在这种情况下，当我们用方程 <a class="reference internal" href="#equation-eq-ainv">(11.6)</a> 中的矩阵 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 乘以 <a class="reference internal" href="#equation-eq-pieq2">(11.8)</a> 的两边时，我们发现：</p>
 <div class="math notranslate nohighlight" id="equation-eq-bubble">
 <span class="eqno">(11.10)<a class="headerlink" href="#equation-eq-bubble" title="Permalink to this equation">#</a></span>\[
@@ -1098,7 +1082,11 @@ R_t = \delta^{-1} &gt; 1 , t = 0, 1, \ldots, T
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/pv.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>

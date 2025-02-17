@@ -71,14 +71,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -91,14 +91,15 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
@@ -109,11 +110,7 @@
                 gtag('js', new Date());
                 gtag('config', 'G-QDS1YRJNGM');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -241,12 +238,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>蛛网模型是一个描述特定市场中价格和数量及其随时间演变的模型。</p>
 <section id="id2">
 <h2><span class="section-number">25.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>蛛网模型可以追溯到20世纪30年代，虽然简单，但它仍然具有重要意义，因为它展示了<em>预期</em>的根本重要性。</p>
+<p>蛛网模型可以追溯到20世纪30年代，虽然简单，但它仍然具有重要意义，因为它展示了 <em>预期</em> 的重要性。</p>
 <p>为了说明模型如何运作以及为什么预期很重要，想象以下场景：</p>
 <p>有一个大豆市场，价格和交易数量取决于买家和卖家的选择。买家由需求曲线表示——在低价时购买更多，高价时购买更少。卖家有一条供应曲线——他们希望在高价时卖出更多，低价时卖出更少。</p>
-<p>然而，卖家（农民）需要时间来种植作物。假设现在价格很高。看到这个高价，可能预期高价会持续一段时间，农民在许多田地里种植大豆。</p>
-<p>下一个周期，由此产生的高供应量充斥市场，导致价格下跌。看到这个低价，农民现在减少大豆种植，限制供应，导致价格再次上涨。</p>
-<p>你可以想象这种动态如何导致价格和数量的周期性波动持续一段时间。</p>
+<p>然而，卖家（农民）需要时间来种植作物。假设现在价格很高，农民看到这个高价，可能预期高价会持续一段时间，会在许多田地里种植大豆。</p>
+<p>下一个周期，由此产生的高供应量充斥市场，导致价格下跌。看到这个低价，农民会减少大豆种植，限制供应，导致价格再次上涨。</p>
+<p>你可以想象这种动态如何导致价格和数量在持续时间上的周期性波动。</p>
 <p>蛛网模型将这些想法转化为方程，这样我们就可以尝试量化它们，并研究周期持续（或消失）的条件。</p>
 <p>在本讲座中，我们将在不同的生产者形成预期的假设下调查和模拟基本模型。</p>
 <p>我们的讨论和模拟借鉴了<a class="reference external" href="https://www.uva.nl/en/profile/h/o/c.h.hommes/c.h.hommes.html">Cars Hommes</a>的<a class="reference external" href="https://comp-econ.org/CEF_2013/downloads/Complex%20Econ%20Systems%20Lecture%20II.pdf">高质量讲座</a>。</p>
@@ -294,7 +291,7 @@ const thebe_selector_output = ".output, .cell_output"
 </section>
 <section id="id7">
 <h2><span class="section-number">25.3. </span>模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>让我们回到讨论假设的大豆市场，其中价格由供需决定。</p>
+<p>让我们回到假设的大豆市场的讨论，其中价格由供需决定。</p>
 <p>我们假设大豆的需求由以下公式给出：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -302,14 +299,14 @@ const thebe_selector_output = ".output, .cell_output"
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是非负常数，<span class="math notranslate nohighlight">\(p_t\)</span> 是 <span class="math notranslate nohighlight">\(t\)</span> 时刻的现货（即当前市场）价格。
 （<span class="math notranslate nohighlight">\(D(p_t)\)</span> 是以某个固定单位表示的需求量，如千吨。）</p>
-<p>由于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆作物是在 <span class="math notranslate nohighlight">\(t-1\)</span> 时种植的，<span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆供应取决于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的<em>预期</em>价格，我们用 <span class="math notranslate nohighlight">\(p^e_t\)</span> 表示。</p>
+<p>由于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆作物是在 <span class="math notranslate nohighlight">\(t-1\)</span> 时种植的，<span class="math notranslate nohighlight">\(t\)</span> 时刻的大豆供应取决于 <span class="math notranslate nohighlight">\(t\)</span> 时刻的 <em>预期</em> 价格，我们用 <span class="math notranslate nohighlight">\(p^e_t\)</span> 表示。</p>
 <p>我们假设供应对预期价格是非线性的，并采用以下形式：</p>
 <div class="math notranslate nohighlight">
 \[
     S(p^e_t) = \tanh(\lambda(p^e_t - c)) + d
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是正常数，<span class="math notranslate nohighlight">\(c, d\)</span> 是非负常数，<span class="math notranslate nohighlight">\(\tanh\)</span> 是一种<a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_functions">双曲函数</a>。</p>
-<p>让我们为特定参数值选择绘制供需图。</p>
+<p>让我们为特定参数值绘制供需图。</p>
 <p>首先，我们将参数存储在一个类中，并将上述函数定义为方法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -356,20 +353,22 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png"><img alt="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" src="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>市场均衡要求供给等于需求，即
-$<span class="math notranslate nohighlight">\(
+<p>市场均衡要求供给等于需求，即</p>
+<div class="math notranslate nohighlight">
+\[
     a - b p_t = S(p^e_t)
-\)</span><span class="math notranslate nohighlight">\(
-用\)</span>p_t<span class="math notranslate nohighlight">\(重写可得
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>用<span class="math notranslate nohighlight">\(p_t\)</span>重写可得</p>
+<div class="math notranslate nohighlight">
+\[
     p_t = - \frac{1}{b} [S(p^e_t) - a]
-\)</span>$
-最后，为了完成这个模型，我们需要描述价格预期是如何形成的。
+\]</div>
+<p>最后，为了完成这个模型，我们需要描述价格预期是如何形成的。
 我们假设t时刻的预期价格取决于过去的价格。
 特别地，我们假设</p>
 <div class="math notranslate nohighlight" id="equation-p-et">
 <span class="eqno">(25.1)<a class="headerlink" href="#equation-p-et" title="Permalink to this equation">#</a></span>\[    p^e_t = f(p_{t-1}, p_{t-2})\]</div>
-<p>其中<span class="math notranslate nohighlight">\(f\)</span>是某个函数。
+<p>其中 <span class="math notranslate nohighlight">\(f\)</span> 是某个函数。
 因此，我们假设生产者预期t时刻的价格是滞后价格的某个函数，最多滞后2期。
 （当然，我们可以添加更多的滞后期，鼓励读者尝试这样的情况。）
 结合最后两个等式，我们得到价格的动态方程：</p>
@@ -404,7 +403,7 @@ p_t^e = p_{t-1}
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_price</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  给定当前价格和市场模型，用于找到下一个价格的函数</span>
+<span class="sd">  该函数在给定当前价格和市场模型的情况下找到下一期价格</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
     <span class="n">next_price</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">current_price</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span>
@@ -413,8 +412,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 </div>
-<p>让我们尝试使用 45 度图来理解价格将如何演变，这是研究一维动态的工具。
-下面定义的函数 <code class="docutils literal notranslate"><span class="pre">plot45</span></code> 帮助我们绘制 45 度图。</p>
+<p>让我们尝试使用 45 度图来理解价格将如何演变，这是研究一维动态的工具。</p>
+<p>下面定义的函数 <code class="docutils literal notranslate"><span class="pre">plot45</span></code> 帮助我们绘制 45 度图。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -493,7 +492,7 @@ p_t^e = p_{t-1}
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:26: SyntaxWarning: invalid escape sequence &#39;\d&#39;
 &lt;&gt;:26: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-/tmp/ipykernel_5079/3607278976.py:26: SyntaxWarning: invalid escape sequence &#39;\d&#39;
+/tmp/ipykernel_7248/3607278976.py:26: SyntaxWarning: invalid escape sequence &#39;\d&#39;
   ax.plot(pgrid, pgrid, lw=1, alpha=0.7, label=&#39;$45\degree$&#39;)
 </pre></div>
 </div>
@@ -518,17 +517,17 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <p>图表显示了方程 <a class="reference internal" href="#equation-def-g">(25.3)</a> 中定义的函数 <span class="math notranslate nohighlight">\(g\)</span> 和 45 度线。</p>
-<p>将 <span class="math notranslate nohighlight">\(p_t\)</span> 视为横轴上的值。</p>
-<p>由于 <span class="math notranslate nohighlight">\(p_{t+1} = g(p_t)\)</span>，我们使用 <span class="math notranslate nohighlight">\(g\)</span> 的图形在纵轴上看到 <span class="math notranslate nohighlight">\(p_{t+1}\)</span>。</p>
+<p>横坐标为 <span class="math notranslate nohighlight">\(p_t\)</span> 。</p>
+<p>由于 <span class="math notranslate nohighlight">\(p_{t+1} = g(p_t)\)</span>，我们让纵坐标为  <span class="math notranslate nohighlight">\(p_{t+1}\)</span> 并画出函数 <span class="math notranslate nohighlight">\(g\)</span> 的图形。</p>
 <p>显然，</p>
 <ul class="simple">
 <li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处位于 45 度线上方，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} &gt; p_t\)</span>。</p></li>
 <li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处位于 45 度线下方，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} &lt; p_t\)</span>。</p></li>
-<li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处与 45 度线相交，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} = p_t\)</span>，所以 <span class="math notranslate nohighlight">\(p_t\)</span> 是一个稳态。</p></li>
+<li><p>如果 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(p_t\)</span> 处与 45 度线相交，那么我们有 <span class="math notranslate nohighlight">\(p_{t+1} = p_t\)</span>，也就是说 <span class="math notranslate nohighlight">\(p_t\)</span> 是一个稳态。</p></li>
 </ul>
 <p>考虑从 <span class="math notranslate nohighlight">\(p_0\)</span> 开始的价格序列，如图所示。</p>
-<p>我们在纵轴上找到 <span class="math notranslate nohighlight">\(p_1\)</span>，然后使用 45 度线（两个轴上的值相等）将其移到横轴上。</p>
-<p>然后从 <span class="math notranslate nohighlight">\(p_1\)</span> 得到 <span class="math notranslate nohighlight">\(p_2\)</span> 并继续。</p>
+<p>我们在纵轴上找到 <span class="math notranslate nohighlight">\(p_1\)</span>，然后使用 45 度线（在 45 度线上两个轴上的值相等）将其移到横轴上。</p>
+<p>然后从 <span class="math notranslate nohighlight">\(p_1\)</span> 得到 <span class="math notranslate nohighlight">\(p_2\)</span> 以此类推。</p>
 <p>我们可以看到一个循环的开始。</p>
 <p>为了确认这一点，让我们绘制一个时间序列图。</p>
 <div class="cell docutils container">
@@ -588,10 +587,10 @@ p_t^e = p_{t-1}
 </section>
 <section id="id9">
 <h2><span class="section-number">25.5. </span>适应性预期<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
-<p>朴素预期相当简单，也在我们发现的周期中起着重要的驱动作用。</p>
+<p>简单预期相当简单，也在我们发现的周期中起着重要的驱动作用。</p>
 <p>如果预期以不同的方式形成会怎样？</p>
 <p>接下来我们考虑适应性预期。</p>
-<p>这指的是生产者对下一期价格的预期形成是基于他们上一次猜测和当前现货价格的加权平均。</p>
+<p>这指的是生产者对下一期价格的预期是基于他们上一次对价格的预期和当前现货价格的加权平均。</p>
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-adaptive">
 <span class="eqno">(25.4)<a class="headerlink" href="#equation-pe-adaptive" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p^e_{t-1}
@@ -614,7 +613,7 @@ p_t^e = p_{t-1}
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_next_price_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">   给定当前价格预期和市场模型，计算下一个价格的函数</span>
+<span class="sd">   该函数是在给定当前价格预期和市场模型的情况下计算下一期的价格。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">supply</span><span class="p">(</span><span class="n">curr_price_exp</span><span class="p">)</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span>
 </pre></div>
@@ -654,7 +653,7 @@ p_t^e = p_{t-1}
 <a class="reference internal image-reference" href="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png"><img alt="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" src="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>请注意，如果<span class="math notranslate nohighlight">\(\alpha=1\)</span>，那么适应性预期就等同于朴素预期。
+<p>请注意，如果<span class="math notranslate nohighlight">\(\alpha=1\)</span>，那么适应性预期就等同于简单预期。
 减小<span class="math notranslate nohighlight">\(\alpha\)</span>的值会使更多权重转移到先前的预期上，这会稳定预期价格。
 这种增加的稳定性可以在图表中看出。</p>
 </section>
@@ -664,8 +663,8 @@ p_t^e = p_{t-1}
 
 <p class="admonition-title"><span class="caption-number">Exercise 25.1 </span></p>
 <section id="exercise-content">
-<p>使用默认的<code class="docutils literal notranslate"><span class="pre">Market</span></code>类和简单的预期，绘制一个供给（而不是价格）的时间序列模拟。
-特别展示供给也会循环变化。</p>
+<p>使用默认的<code class="docutils literal notranslate"><span class="pre">Market</span></code>类和简单预期，绘制一个供给（而不是价格）的时间序列模拟。</p>
+<p>特别展示出供给也会循环变化。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="cobweb-solution-1">
@@ -721,8 +720,8 @@ p_t^e = p_{t-1}
 
 <p class="admonition-title"><span class="caption-number">Exercise 25.2 </span></p>
 <section id="exercise-content">
-<p><strong>回顾性平均预期</strong></p>
-<p>回顾性平均预期是指生产者对下一期价格的预期形成为他们最后一次猜测和倒数第二次猜测的线性组合。</p>
+<p><strong>回顾平均预期</strong></p>
+<p>回顾平均预期是指生产者对下一期价格的预期为他们最后一次猜测和倒数第二次猜测的线性组合。</p>
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-blae">
 <span class="eqno">(25.6)<a class="headerlink" href="#equation-pe-blae" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p_{t-2}\]</div>
@@ -1213,7 +1212,11 @@ p_t^e = p_{t-1}
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro/cobweb.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-intro" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
