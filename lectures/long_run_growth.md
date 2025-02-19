@@ -513,7 +513,9 @@ draw_interp_plots(gdp[country].loc[start_year:end_year],
 
 在本节中，我们将介绍如何构建本讲座开始时讨论过的{cite}`Tooze_2014`第1章中引人注目的图表。
 
-首先，让我们定义一个由大英帝国（BEM）组成的国家集合，这样我们就可以用图泽的数据中复制绘制这幅图
+首先，我们定义一个由大英帝国(BEM)所包含的国家组成的集合，这样我们就可以复制图兹图表中的这一系列数据。
+
+
 
 ```{code-cell} ipython3
 BEM = ['GBR', 'IND', 'AUS', 'NZL', 'CAN', 'ZAF']
@@ -521,13 +523,13 @@ BEM = ['GBR', 'IND', 'AUS', 'NZL', 'CAN', 'ZAF']
 gdp['BEM'] = gdp[BEM].loc[start_year-1:end_year].interpolate(method='index').sum(axis=1)
 ```
 
-现在，让我们组装这些数据序列
+现在，让我们整理好数据系列，准备绘制图表。
+
 
 ```{code-cell} ipython3
 color_mapping['BEM'] = color_mapping['GBR']  
 ```
 
-并绘制他们
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(dpi=300)
@@ -573,7 +575,7 @@ draw_interp_plots(gdp[country].loc[start_year:end_year],
 
 ## 地区分析
 
-我们经常要研究“世界大国”俱乐部之外的国家的历史。
+我们经常会想要研究那些不属于“世界强国”俱乐部的国家的历史经验。
 
 [Maddison Historical Statistics](https://www.rug.nl/ggdc/historicaldevelopment/maddison/) 数据集还整合了地区汇总信息
 
@@ -592,7 +594,7 @@ regionalgdp_pc = data['gdppc_2011'].copy()
 regionalgdp_pc.index = pd.to_datetime(regionalgdp_pc.index, format='%Y')
 ```
 
-我们基于时间进行插值来填补数据集中的任何缺口，以便于绘图
+我们可以基于时间进行插值来填补数据集中的任何缺口，以便于绘图
 
 ```{code-cell} ipython3
 regionalgdp_pc.interpolate(method='time', inplace=True)
@@ -601,7 +603,7 @@ regionalgdp_pc.columns = ['西欧', '东欧', '西方分支', '拉丁美洲', '�
 
 进行更深入的研究，我们将西方分支（`Western Offshoots`）和撒哈拉以南非洲（`Sub-Saharan Africa`）的时间序列与世界各地多个不同地区进行比较。
 
-下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同
+我们再次看到，工业革命后西方与世界其他地区的发展出现分歧，而在1950年代后，世界各地开始趋于一致。
 
 ```{code-cell} ipython3
 ---
