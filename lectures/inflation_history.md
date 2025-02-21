@@ -10,16 +10,15 @@ kernelspec:
   language: python
   name: python3
 ---
-
-# 价格水平历史 
+# 价格水平历史
 
 本讲将讨论一些关于综合价格指数波动的历史数据。
 
 我们首先安装必要的Python包。
 
-`xlrd` 在这里被引入是因为 `pandas` 需要它来对Excel文件执行操作。
+这里引入 `xlrd`是因为 `pandas` 需要它来对Excel文件执行操作。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 !pip install xlrd
@@ -27,7 +26,7 @@ kernelspec:
 
 <!-- Check for pandas>=2.1.4 for Google Collab Compat -->
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-cell]
 
 from importlib.metadata import version
@@ -39,7 +38,7 @@ if Version(version("pandas")) < Version('2.1.4'):
 
 我们现在导入本讲所需的Python库。
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -84,9 +83,9 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 在金本位或银本位制度下，一些货币也包括代表对金银币的纸质索取权的“仓库凭证”。政府或私人银行发行的银行票据可以视为此类“仓库凭证”的例子。
 ```
 
-我们用`pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
+我们用 `pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
 
-```{code-cell} ipython3
+```{code-cell}
 # 导入数据并清理索引
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/longprices.xls"
 df_fig5 = pd.read_excel(data_url, 
@@ -100,7 +99,7 @@ df_fig5.index = df_fig5.index.astype(int)
 
 在这段时间的大多数年份内，这些国家采用金本位或银本位。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -169,7 +168,7 @@ plt.show()
 
 现在，让我们通过展示原载于{cite}`sargent2002big`第35页的完整图表，来看看1914年之后，当四个国家相继脱离金/银本位制时，它们的物价水平发生了什么变化。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -219,7 +218,6 @@ plt.show()
 * 图 3.3：批发价格，波兰，1921-1924 年（第 44 页）
 * 图 3.4：批发价格，德国，1919-1924 年（第 45 页）
 
-
 我们在四幅图中的每一幅都加上了相对美元汇率的对数。
 引自{cite}`sargent2013rational`第3章。
 
@@ -228,18 +226,18 @@ plt.show()
 
 在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def process_entry(entry):
     "清理数据帧的每个条目"
-    
+  
     if type(entry) == str:
         # 删除前导和尾部空白
         entry = entry.strip()
         # 删除逗号
         entry = entry.replace(',', '')
-    
+  
         # 删除 HTML 标记
         item_to_remove = ['<s>a</s>', '<s>c</s>', 
                           '<s>d</s>', '<s>e</s>']
@@ -256,14 +254,14 @@ def process_entry(entry):
 
 def process_df(df):
     "Clean and reorganize the entire dataframe."
-    
+  
     # 删除列名中的 HTML 标记
     for item in ['<s>a</s>', '<s>c</s>', '<s>d</s>', '<s>e</s>']:
         df.columns = df.columns.str.replace(item, '')
-        
+      
     # 将年份转换为整数
     df['Year'] = df['Year'].apply(lambda x: int(x))
-    
+  
     # 将索引设置为包含年月的日期时间
     df = df.set_index(
             pd.to_datetime(
@@ -271,14 +269,14 @@ def process_df(df):
                  df['Month'].astype(str)), 
                 format='%Y%B'))
     df = df.drop(['Year', 'Month'], axis=1)
-    
+  
      # 处理重复数据，保留第一个数据 
     df = df[~df.index.duplicated(keep='first')]
-    
+  
    # 将属性值转换为数字
     df = df.map(lambda x: float(x) \
                 if x != '—' else np.nan)
-    
+  
     # 最后，我们只关注 1919 年到 1925 年之间的数据
     mask = (df.index >= '1919-01-01') & \
            (df.index < '1925-01-01')
@@ -289,26 +287,26 @@ def process_df(df):
 
 现在，我们编写了绘图函数 `pe_plot` 和 `pr_plot` ，它们将绘制出显示价格水平、汇率和通货膨胀率的图表、和通货膨胀率。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def pe_plot(p_seq, e_seq, index, labs, ax):
     "生成价格和汇率图"
 
     p_lab, e_lab = labs
-    
+  
     # 绘制价格和汇率图
     ax.plot(index, p_seq, label=p_lab, color='tab:blue', lw=2)
-    
+  
     # 添加新轴
     ax1 = ax.twinx()
     ax1.plot([None], [None], label=p_lab, color='tab:blue', lw=2)
     ax1.plot(index, e_seq, label=e_lab, color='tab:orange', lw=2)
-    
+  
     # 设置对数轴
     ax.set_yscale('log')
     ax1.set_yscale('log')
-    
+  
     # 定义轴标签格式
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
@@ -316,13 +314,13 @@ def pe_plot(p_seq, e_seq, index, labs, ax):
         mdates.DateFormatter('%b %Y'))
     for label in ax.get_xticklabels():
         label.set_rotation(45)
-    
+  
     # 设置标签
     ax.set_ylabel('价格水平')
     ax1.set_ylabel('汇率')
   
     ax1.legend(loc='upper left')
-    
+  
     return ax1
 
 def pr_plot(p_seq, index, ax):
@@ -330,20 +328,20 @@ def pr_plot(p_seq, index, ax):
 
     # 计算对数 p_seq 的差值
     log_diff_p = np.diff(np.log(p_seq))
-    
+  
     # 计算并绘制移动平均值
     diff_smooth = pd.DataFrame(log_diff_p).rolling(3, center=True).mean()
     ax.plot(index[1:], diff_smooth, label='移动平均数（3 期）', alpha=0.5, lw=2)
     ax.set_ylabel('通胀率')
-    
+  
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
     ax.xaxis.set_major_formatter(
         mdates.DateFormatter('%b %Y'))
-    
+  
     for label in ax.get_xticklabels():
         label.set_rotation(45)
-    
+  
     ax.legend()
 
     return ax
@@ -351,7 +349,7 @@ def pr_plot(p_seq, index, ax):
 
 接下来我们为每个国家准备数据
 
-```{code-cell} ipython3
+```{code-cell}
 # 导入数据
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"
 xls = pd.ExcelFile(data_url)
@@ -372,15 +370,15 @@ remove_row = [(-2, -2, -2),
 df_list = []
 
 for i in range(4):
-    
+  
     indices, rows = sheet_index[i], remove_row[i]
-    
+  
     # 在选定的工作表上应用 process_entry
     sheet_list = [
         pd.read_excel(xls, 'Table3.' + str(ind), 
             header=1).iloc[:row].map(process_entry)
         for ind, row in zip(indices, rows)]
-    
+  
     sheet_list = [process_df(df) for df in sheet_list]
     df_list.append(pd.concat(sheet_list, axis=1))
 
@@ -391,7 +389,7 @@ df_aus, df_hun, df_pol, df_deu = df_list
 
 我们将为每个国家绘制两幅图。
 
-第一幅图绘制的是 
+第一幅图绘制的是
 
 * 价格水平
 * 相对于美元的汇率
@@ -407,7 +405,7 @@ df_aus, df_hun, df_pol, df_deu = df_list
 * 表 3.3，零售价格水平 $\exp p$
 * 表 3.4，与美国的汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -429,7 +427,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -459,7 +457,7 @@ plt.show()
 
 * 表 3.10，价格水平 $\exp p$ 和汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -481,7 +479,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -500,7 +498,7 @@ plt.show()
 
 波兰的数据来源如下
 
-* 表 3.15，价格水平 $\exp p$ 
+* 表 3.15，价格水平 $\exp p$
 * 表 3.15，汇率
 
 ```{note}
@@ -511,7 +509,7 @@ plt.show()
 我们放弃了 1924 年 6 月采用兹罗提后的汇率。这样做是因为我们没有以兹罗提为单位的价格。我们使用 6 月份的旧货币来计算汇率调整。
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -543,7 +541,7 @@ e_seq = 1/df_pol['Cents per Polish mark (zloty after May 1924)']
 e_seq[e_seq.index > '05-01-1924'] = np.nan
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 lab = ['批发价格指数', 
        '波兰马克兑美分']
 
@@ -555,7 +553,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -575,10 +573,10 @@ plt.show()
 
 德国的数据来源于{cite}`sargent2013rational`第 3 章中的以下表格：
 
-* 表 3.18，批发价格水平 $\exp p$ 
+* 表 3.18，批发价格水平 $\exp p$
 * 表 3.19，汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -601,7 +599,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -630,7 +628,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -679,7 +677,7 @@ plt.show()
 但人们不能指望这些国库券会通过征税来偿还，而是通过印制更多的票据或国库券来偿还。
 ```
 
-这种行为的规模之大，导致了各国货币的惊人贬值。 
+这种行为的规模之大，导致了各国货币的惊人贬值。
 
 {cite}`sargent2002big`第3章描述了匈牙利、奥地利、波兰和德国为结束恶性通货膨胀而刻意改变政策的情况。
 
