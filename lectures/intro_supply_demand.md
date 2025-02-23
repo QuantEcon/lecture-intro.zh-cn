@@ -29,7 +29,7 @@ kernelspec:
 
 进口被认为是不好的，因为需要用金银来支付（黄金流出）。
 
-这种[零和](https://en.wikipedia.org/wiki/Zero-sum_game)经济观最终被古典经济学家如[亚当·斯密](https://en.wikipedia.org/wiki/Adam_Smith)和[大卫·李嘉图](https://en.wikipedia.org/wiki/David_Ricardo)的工作推翻，他们展示了如何通过放开国内和国际贸易来提高福利。
+这种[零和](https://baike.baidu.com/item/%E9%9B%B6%E5%92%8C%E5%8D%9A%E5%BC%88/3562463)经济观最终被古典经济学家如[亚当·斯密](https://baike.baidu.com/item/%E4%BA%9A%E5%BD%93%C2%B7%E6%96%AF%E5%AF%86/972521?fromModule=lemma_search-box)和[大卫·李嘉图](https://baike.baidu.com/item/%E5%A4%A7%E5%8D%AB%C2%B7%E6%9D%8E%E5%98%89%E5%9B%BE?fromModule=lemma_search-box)的工作推翻，他们展示了如何通过放开国内和国际贸易来提高福利。
 
 这一观点在经济学中有许多不同的表达方式。
 
@@ -302,7 +302,7 @@ plt.show()
 
 在连续情况下，我们如何计算消费者和生产者剩余呢？
 
-简短的答案是：通过使用[积分](https://en.wikipedia.org/wiki/Integral)。
+简短的答案是：通过使用[积分](https://baike.baidu.com/item/%E7%A7%AF%E5%88%86/5749068)。
 
 一些读者可能已经熟悉积分的基础知识。
 
@@ -337,7 +337,7 @@ plt.show()
 
 计算积分有许多规则，不同的 $f$ 选择适用不同的规则。
 
-这些规则中的许多与数学中最美丽和最强大的结果之一有关：[微积分基本定理](https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus)。
+这些规则中的许多与数学中最美丽和最强大的结果之一有关：[微积分基本定理](https://baike.baidu.com/item/%E7%89%9B%E9%A1%BF-%E8%8E%B1%E5%B8%83%E5%B0%BC%E8%8C%A8%E5%85%AC%E5%BC%8F?fromtitle=%E5%BE%AE%E7%A7%AF%E5%88%86%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86&fromid=10350012&fromModule=lemma_search-box)。
 
 我们不会在这里试图涵盖这些思想，部分原因是因为这个主题太大，部分原因是对于本讲座，你只需要知道下面陈述的一条定理。
 
@@ -643,7 +643,7 @@ $$ (eq:equilib_q)
 
 * 竞争均衡数量最大化了我们的福利准则
 
-这是[福利经济学第一基本定理](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics)的一个版本。
+这是[福利经济学第一基本定理](https://baike.baidu.com/item/%E7%A6%8F%E5%88%A9%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%AC%AC%E4%B8%80%E5%AE%9A%E7%90%86?fromModule=lemma_search-box)的一个版本。
 它还带来了一个有用的**竞争均衡计算策略**：
 
 * 在为最优数量解决福利问题后，我们可以从竞争均衡数量下的供给价格或需求价格中计算出竞争均衡价格
