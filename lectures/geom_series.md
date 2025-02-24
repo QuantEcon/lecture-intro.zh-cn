@@ -27,7 +27,7 @@ kernelspec:
 
 ## 概述
 
-本讲座描述了使用几何级数的重要经济学概念。
+本讲描述了使用几何级数的重要经济学概念。
 
 其中包括：
 
@@ -39,7 +39,7 @@ kernelspec:
 
 （如我们下面将看到的，术语**乘数**实际上意味着**收敛几何级数的和**）
 
-这些应用和其他应用证实了下面这句话的真实性：
+这些应用和其他应用印证了下面这句话的真实性：
 
 ```{epigraph}
 "在经济学中，一点几何级数的知识就能走很远"
@@ -64,7 +64,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 ## 关键公式
 
-首先，让 $c$ 是一个严格介于 $-1$ 和 $1$ 之间的实数。
+首先，定义 $c$ 为一个严格介于 $-1$ 和 $1$ 之间的实数。
 
 - 我们通常写作 $c \in (-1,1)$。
 - 这里 $(-1,1)$ 表示所有严格小于 $1$ 且严格大于 $-1$ 的实数的集合。
@@ -238,7 +238,7 @@ $i=0, 1, 2, \ldots$ 是
 
 方程 {eq}`sumdeposits` 断言 **货币乘数** 是 $\frac{1}{r}$
 
-- 在银行 $0$ 初始存入现金 $D_0$ 导致银行系统创造总存款 $\frac{D_0}{r}$。
+- 在银行 $0$ 初始存入现金 $D_0$ 那么银行系统创造总存款 $\frac{D_0}{r}$。
 - 初始存款 $D_0$ 作为准备金持有，按照 $D_0 = \sum_{i=0}^\infty R_i$ 分布在整个银行系统中。
 
 ## 示例：凯恩斯乘数
@@ -316,7 +316,7 @@ $$
 
 这样 $b$ 就是上一期收入的边际消费倾向。
 
-我们从一个初始条件开始，说明
+我们从一个初始条件开始，设定
 
 $$
 y_{-1} = 0
@@ -348,7 +348,7 @@ $$
 y_2 = c_2 + i = b y_1 + i = (1 + b + b^2) i
 $$
 
-更一般地
+继续推广，我们得到
 
 $$
 y_t = b y_{t-1} + i = (1+ b + b^2 + \cdots + b^t) i
@@ -366,7 +366,7 @@ $$
 y_t \rightarrow \frac{1}{1-b} i
 $$
 
-**备注 1：** 上述公式通常用于断言在时间 $0$ 投资增加 $\Delta i$ 引发的动态过程，使国民收入按连续金额增加
+**备注 1：** 上述公式通常用于说明在 $0$ 时刻投资的外生增加量 $\Delta i$ 会在时刻$0, 1, 2, \ldots$引发国民收入连续增长的动态过程 
 
 $$
 \Delta i, (1 + b )\Delta i, (1+b + b^2) \Delta i , \cdots
@@ -550,13 +550,13 @@ $$
 \begin{aligned} \begin{split}p_0&=x_0 + x_1/R  + \dots +x_T/R^T \\ &= x_0(1+GR^{-1}+\dots +G^{T}R^{-T}) \\ &= \frac{x_0(1-G^{T+1}R^{-(T+1)})}{1-GR^{-1}}  \end{split}\end{aligned}
 $$
 
-将泰勒级数应用于 $R^{-(T+1)}$ 关于 $r=0$ 我们得到：
+利用 $R^{-(T+1)}$ 在 $r=0$ 处的泰勒级数我们得到：
 
 $$
 \frac{1}{(1+r)^{T+1}}= 1-r(T+1)+\frac{1}{2}r^2(T+1)(T+2)+\dots \approx 1-r(T+1)
 $$
 
-类似地，将泰勒级数应用于 $G^{T+1}$ 关于 $g=0$：
+类似地，利用 $G^{T+1}$ 在 $g=0$ 处的泰勒级数我们得到：
 
 $$
 (1+g)^{T+1} = 1+(T+1)g+\frac{T(T+1)}{2!}g^2+\frac{(T-1)T(T+1)}{3!}g^3+\dots \approx 1+ (T+1)g
@@ -568,7 +568,7 @@ $$
 p_0 =\frac{x_0(1-(1+(T+1)g)(1-r(T+1)))}{1-(1-r)(1+g) }
 $$
 
-展开：
+展开可得：
 
 $$
 \begin{aligned} p_0 &=\frac{x_0(1-1+(T+1)^2 rg -r(T+1)+g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\ &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{aligned}
@@ -586,8 +586,8 @@ def finite_lease_pv_true(T, g, r, x_0):
     G = (1 + g)
     R = (1 + r)
     return (x_0 * (1 - G**(T + 1) * R**(-T - 1))) / (1 - G * R**(-1))
-# 有限租赁的第一次近似
 
+# 有限租赁的第一次近似
 def finite_lease_pv_approx_1(T, g, r, x_0):
     p = x_0 * (T + 1) + x_0 * r * g * (T + 1) / (r - g)
     return p
@@ -648,7 +648,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "无限期和有限期租赁的现值 $T$ 期前"
+    caption: "无限期和有限期租赁的未来 $T$ 期的现值"
     name: infinite_and_finite_lease_present_value
 ---
 # 无限和有限的收敛性
@@ -785,6 +785,7 @@ def calculate_y(i, b, g, T, y_init):
 # 初始值
 i_0 = 0.3
 g_0 = 0.3
+
 # 2/3 的收入为消费
 b = 2/3
 y_init = 0
@@ -794,7 +795,8 @@ fig, ax = plt.subplots()
 ax.set_xlabel('$t$')
 ax.set_ylabel('$y_t$')
 ax.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init))
-# Output predicted by geometric series
+
+# 几何级数的预测
 ax.hlines(i_0 / (1 - b) + g_0 / (1 - b), xmin=-1, xmax=101, linestyles='--')
 plt.show()
 ```
@@ -830,7 +832,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "对产出的不同增加"
+    caption: "不同的产出增加值"
     name: different_increase_on_output
 ---
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 10))
@@ -856,54 +858,3 @@ for ax, param in zip(axes, param_labels):
 plt.show()
 ```
 请注意，无论政府支出从 0.3 增加到 0.4，还是投资从 0.3 增加到 0.4，图表中的变化都是相同的。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
