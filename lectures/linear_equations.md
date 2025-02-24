@@ -73,6 +73,7 @@ import matplotlib.pyplot as plt
 ```
 
 （我们假设当任一商品的价格上涨时需求会下降，但其他情况也是可能的。）
+
 让我们假设供给由以下方程给出：
 
 
@@ -666,7 +667,8 @@ A + B
 
 我们现在可以重新审视两种商品模型，并通过矩阵代数数值求解 {eq}`two_equilibrium` 方程。
 
-这涉及一些额外的步骤，但这种方法广泛适用 --- 正如我们在包含更多商品时将看到的那样。
+这涉及一些额外的步骤，但这种方法广泛适用，我们将在求解包含更多商品时用上。
+
 首先，我们将 {eq}`two_eq_demand` 重写为
 
 ```{math}
@@ -730,6 +732,7 @@ $$
 $$
 
 如果所有项都是数字，我们可以求解价格为 $p = h / (C-D)$。
+
 矩阵代数允许我们做类似的事情：我们可以使用 $C - D$ 的逆矩阵来求解均衡价格：
 
 ```{math}
@@ -824,6 +827,7 @@ $$
         b_n
     \end{bmatrix}.
 ```
+
 例如，{eq}`n_eq_sys_la` 具有这种形式，其中
 
 $$
@@ -1013,7 +1017,7 @@ C = ((10, 5),      # 矩阵 C
      (5, 10))
 ```
 
-Now we change this to a NumPy array.
+现在我们把它录入到NumPy数组中。
 
 ```{code-cell} ipython3
 C = np.array(C)
@@ -1066,6 +1070,7 @@ p
 q = C @ p  # 均衡数量
 q
 ```
+
 观察我们如何通过 `inv(A) @ y` 或使用 `solve(A, y)` 来求解 $x = A^{-1} y$。
 
 后一种方法使用了一种不同的算法，在数值上更加稳定，因此应该是默认选项。
@@ -1328,6 +1333,6 @@ plt.show()
 
 ### 延伸阅读
 
-`numpy.linalg` 子模块的文档可以在[这里](https://numpy.org/devdocs/reference/routines.linalg.html)找到。
+`numpy.linalg` 子模块的文档可以阅读[这里](https://numpy.org/devdocs/reference/routines.linalg.html)。
 
-线性代数的更高级主题可以在[这里](https://python.quantecon.org/linear_algebra.html#id5)找到。
+如果对更高级的线性代数知识感兴趣可以继续阅读[这里](https://python.quantecon.org/linear_algebra.html#id5)。

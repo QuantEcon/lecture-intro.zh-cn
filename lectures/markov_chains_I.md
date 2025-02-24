@@ -16,7 +16,7 @@ kernelspec:
 ```{index} single: 马尔科夫链: 基本概念与平稳性
 ```
 
-除了 Anaconda 中的自带函数库之外，本讲座还需要以下函数库，可以通过以下指令下载：
+除了 Anaconda 中的自带函数库之外，本讲还需要以下函数库，可以通过以下指令下载：
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -44,7 +44,7 @@ kernelspec:
 在本讲中，我们将
 
 * 回顾马尔科夫链理论中的一些关键思想，并
-* 展示马尔科夫链在一些经济应用中的出现方式。
+* 展示马尔科夫链在经济学中的应用。
 
 让我们从一些通常的函数包导入开始：
 
@@ -69,7 +69,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 (finite_dp_stoch_mat)=
 ### 随机矩阵
 
-回想一下，**概率质量函数**是一个 $n$ 个可能结果上的非负 $n$-维向量 $p$，向量内所有元素总和为 1。
+**概率质量函数**是一个 $n$ 个可能结果上的非负 $n$-维向量 $p$，向量内所有元素总和为 1。
 
 例如，$p = (0.2, 0.2, 0.6)$ 是一个三个结果上的概率质量函数。
 
@@ -102,7 +102,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 这里可以分为三个**状态**：
 
-* "ng" 表示正常增长(normal growth）
+* "ng" 表示正常增长(normal growth)
 * "mr" 表示轻度衰退(mild recession)
 * "sr" 表示严重衰退(severe recession)
 
@@ -159,7 +159,7 @@ $$
 (mc_eg1)=
 #### 示例 2
 
-考虑一个工人，在任何给定时间 $t$，他要么失业（状态 0），要么就业（状态 1）。
+考虑一个工人，在任何给定时间 $t$，他要么处于失业状态（状态 0），要么处于就业状态（状态 1）。
 
 假设在一个月内，
 
@@ -501,7 +501,7 @@ $$
 
 （我们正在使用[全概率公式](https://en.wikipedia.org/wiki/Law_of_total_probability)。）
 
-将这一陈述重新写为边缘概率和条件概率的形式：
+将这一表达式重新写为边缘概率和条件概率的形式：
 
 $$
     \psi_{t+1}(y) = \sum_{x \in S} P(x,y) \psi_t(x)
@@ -836,7 +836,7 @@ $$
 * 当 $m$ 为奇数时，$P^m = P$
 * 当 $m$ 为偶数时，$P^m = I$，即单位矩阵。
 
-因此，没有 $m$ 使得 $P^m$ 的所有元素都为严格正数。
+因此，没有 $m$ 可以使得 $P^m$ 的所有元素都为严格正数。
 
 此外，我们可以看到，全局稳定性并不成立。
 
@@ -1162,7 +1162,7 @@ plt.show()
 
 此外，如果 $\mathbf 1$ 是全 1 列向量，那么由于 $P^k$ 是随机矩阵，我们有 $P^k \mathbf 1 = \mathbf 1$ （每一行的和为一）。
 
-因此 $P^{k+1} \mathbf 1 = P P^k \mathbf 1 = P \mathbf 1 = \mathbf 1$
+因此 $P^{k+1} \mathbf 1 = P P^k \mathbf 1 = P \mathbf 1 = \mathbf 1$。
 
 证明完毕。
 
