@@ -400,7 +400,7 @@ def simulate(m0, model, length=15, p0_guess=1):
     T = model.T
 
     # (pt, mt, bt, Rt)
-    路径 = np.empty((4, length))
+    paths = np.empty((4, length))
 
     # 公开市场操作
     p0 = compute_fixed_point(m0, 1, model)
