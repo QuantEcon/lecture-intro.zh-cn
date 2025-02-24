@@ -16,7 +16,7 @@ kernelspec:
 ```{index} single: 马尔科夫链: 不可约性与遍历性
 ```
 
-除了 Anaconda 中的库外，这个讲座还需要以下库：
+除了 Anaconda 中的函数库外，这个讲座还需要以下函数库：
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -26,22 +26,22 @@ kernelspec:
 
 ## 概述
 
-本讲座是我们{doc}`早期关于马尔科夫链的讲座 <markov_chains_I>`的延续。
+本讲座是我们{doc}`之前关于马尔科夫链的讲座 <markov_chains_I>`的延续。
 
 具体来说，我们将介绍不可约性和遍历性的概念，并了解它们与平稳性的联系。
 
-不可约性描述了马尔科夫链在系统中移动任意两个状态之间的能力。
+不可约性描述了马尔科夫链在系统中任意两个状态之间移动的能力。
 
-遍历性是一种样本路径属性，描述了系统在长时间内的行为。
+遍历性是一种样本路径性质，描述了系统在长时间内的行为。
 
 正如我们将看到的：
 
-* 不可约的马尔科夫链保证存在唯一的平稳分布，而
-* 遍历的马尔科夫链生成满足大数定律版本的时间序列。
+* 不可约的马尔科夫链保证唯一的平稳分布存在，而
+* 具有遍历性的马尔科夫链可以生成满足大数定律的时间序列。
 
-这些概念一起为理解马尔科夫链的长期行为提供了基础。
+这些概念一起为理解马尔科夫链的长期表现提供了基础。
 
-让我们从一些标准导入开始：
+让我们从一些通常的函数库导入开始：
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -59,27 +59,27 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 为了解释不可约性，让我们设 $P$ 为一个固定的随机矩阵。
 
-如果对于某个整数 $t\ge 0$，$P^t(x,y)>0$，则称状态 $x$ 对状态 $y$ 是**可达的**。
+如果对于某个整数 $t\ge 0$，$P^t(x,y)>0$，则称状态 $x$ 对状态 $y$ 是**可达**的。
 
-当状态 $x$ 和 $y$ 彼此可达时，称它们**相互沟通**。
+当状态 $x$ 和 $y$ 彼此可达时，称它们**互通**。
 
 根据我们{ref}`前面讨论的 <finite_mc_mstp>`，这正意味着
 
 * 状态 $x$ 最终可以从状态 $y$ 到达，且
 * 状态 $y$ 最终可以从状态 $x$ 到达。
 
-如果所有状态都相互沟通，则称随机矩阵 $P$ 是**不可约的**，即对于所有 $(x, y)$ 在 $S \times S$ 中，$x$ 和 $y$ 相互沟通。
+如果所有状态都互通，则称随机矩阵 $P$ 是**不可约**的，即对于所有 在 $S \times S$ 空间中的 $(x, y)$，$x$ 的 $y$ 互通。
 
 ````{prf:example}
 :label: mc2_ex_ir
-例如，考虑以下一组虚构家庭的财富转移概率。
+例如，考虑下面虚构的一组家庭的财富状况转移概率。
 
 ```{image} /_static/lecture_specific/markov_chains_II/Irre_1.png
 :name: mc_irre1
 :align: center
 ```
 
-我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。
+我们可以将其转化为一个随机矩阵，用0填充对应节点之间没有边线连接的地方。
 
 $$
 P :=
@@ -90,10 +90,10 @@ P :=
 \end{bmatrix} 
 $$
 
-从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。
+从图中可以看出，这个随机矩阵是不可约的：我们可以最终（步数足够大）从其中任何状态到达任何其他状态。
 ````
 
-我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` 类来测试这一点：
+我们还可以使用 [QuantEcon.py](http://quantecon.org/quantecon-py) 的 `MarkovChain` python类来测试这一点：
 
 ```{code-cell} ipython3
 P = [[0.9, 0.1, 0.0],
@@ -114,7 +114,7 @@ mc.is_irreducible
 :align: center
 ```
 
-这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。
+这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态直接到达。
 ````
 
 让我们确认这一点：
@@ -186,7 +186,7 @@ mc.is_irreducible
 
 该定理与{doc}`大数定律 <lln_clt>`相关。
 
-它告诉我们，在某些设置中，即使随机变量序列[不是独立同分布](iid_violation)，大数定律有时也成立。
+它告诉我们，在某些情况中，即使随机变量序列[不是独立同分布](iid_violation)，大数定律有时也成立。
 
 (mc_eg1-2)=
 ### 示例：遍历性与失业
@@ -278,7 +278,7 @@ $$
 :align: center
 ```
 
-请注意，这里有一个周期循环——状态以规则的方式在两个状态之间循环。
+请注意，这里有一个周期循环——当前状态以规则的方式在两个状态之间循环。
 ````
 
 毫不奇怪，这种属性被称为[周期性](https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains)。
@@ -414,7 +414,7 @@ P = np.array(P)
 codes_B = ('1','2','3','4','5','6','7','8')
 ```
 
-1. 展示该过程是渐近平稳的，并计算平稳分布的近似值。
+1. 证明该过程是渐近平稳的，并计算平稳分布的近似值。
 
 2. 使用模拟来说明遍历性。
 
@@ -471,7 +471,7 @@ ax.legend()
 plt.show()
 ```
 
-注意，花费在每个状态的时间比例收敛到平稳分布为该状态分配的概率。
+注意，花费在每个状态的时间比例收敛到对应平稳分布下该状态的概率。
 
 ```{solution-end}
 ```
@@ -495,15 +495,15 @@ $$
 p := \frac{\beta}{\alpha + \beta}
 $$
 
-换句话说，如果 $\{X_t\}$ 表示工人的马尔科夫链，那么 $\bar X_m \to p$ 当 $m \to \infty$，其中
+换句话说，如果 $\{X_t\}$ 表示就业状态的马尔科夫链，那么当 $m \to \infty$， $\bar X_m \to p$，其中
 
 $$
 \bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = 0\}
 $$
 
-本练习要求您通过计算大 $m$ 时的 $\bar X_m$ 来说明收敛性，并检查其是否接近 $p$。
+本练习要求您通过计算 $m$ 充分大时的 $\bar X_m$ 来说明收敛性，并检查其是否接近 $p$。
 
-您会看到无论初始条件或 $\alpha, \beta$ 的选择如何，只要它们都位于 $(0,1)$ 区间内，此结论都成立。
+会看到无论初始条件或 $\alpha, \beta$ 的值如何，只要它们都位于 $(0,1)$ 区间内，此结论都成立。
 
 结果应与我们在[这里](ergo)绘制的图类似。
 ```
@@ -514,7 +514,7 @@ $$
 
 我们将以图形方式解决此练习。
 
-图显示了 $\bar X_m - p$ 的时间序列，对于两个初始条件。
+图显示了对于两个初始条件 $\bar X_m - p$ 的时间序列。
 
 当 $m$ 变大时，两个序列都收敛到零。
 
@@ -552,13 +552,13 @@ plt.show()
 
 在 `quantecon` 库中，通过检查链是否形成[强连通分量](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html)来测试不可约性。
 
-另一种测试不可约性的方法是通过以下陈述：
+另一种测试不可约性的方法是通过以下定理：
 
 当且仅当 $\sum_{k=0}^{n-1}A^k$ 是严格正矩阵时，$n \times n$ 矩阵 $A$ 是不可约的。
 
 （参见{cite}`zhao_power_2012` 和 [此 StackExchange 讨论](https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix)）
 
-根据此断言，编写一个函数来测试不可约性。
+根据此定理，编写一个函数来测试不可约性。
 
 ``` 
 
