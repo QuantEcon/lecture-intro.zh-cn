@@ -72,7 +72,7 @@ ax = df.plot(
     x='X', 
     y='Y', 
     kind='scatter', 
-    ylabel='冰淇淋销售额（\$）', 
+    ylabel=r'冰淇淋销售额（\$）', 
     xlabel='摄氏度'
 )
 ```
@@ -102,7 +102,7 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 ax = df.plot(x='X',y='Y', kind='scatter', ax=ax)
-ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, label='$\hat Y$')
+ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, label=r'$\hat Y$')
 plt.show()
 ```
 
@@ -124,7 +124,7 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 ax = df.plot(x='X',y='Y', kind='scatter', ax=ax)
-ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, label='$\hat Y$')
+ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, label=r'$\hat Y$')
 plt.show()
 ```
 
@@ -142,7 +142,7 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 ax = df.plot(x='X',y='Y', kind='scatter', ax=ax)
-yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label='$\hat Y$')
+yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.show()
 ```
 
@@ -174,7 +174,7 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 ax = df.plot(x='X',y='Y', kind='scatter', ax=ax)
-yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label='$\hat Y$')
+yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r')
 plt.show()
 ```
@@ -384,7 +384,7 @@ df['error'] = df['Y_hat'] - df['Y']
 
 fig, ax = plt.subplots()
 ax = df.plot(x='X',y='Y', kind='scatter', ax=ax)
-yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label='$\hat Y$')
+yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 ```
 
