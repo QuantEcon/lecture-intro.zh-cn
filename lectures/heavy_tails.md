@@ -335,7 +335,7 @@ for ax, s in zip(axes[:2], s_vals):
     data = np.random.randn(n) * s
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"从 $N(0, \sigma^2)$ 抽取，$\sigma = {s}$", fontsize=11)
+    ax.set_title(fr"从 $N(0, \sigma^2)$ 抽取，$\sigma = {s}$", fontsize=11)
 
 ax = axes[2]
 distribution = cauchy()

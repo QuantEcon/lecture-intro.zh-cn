@@ -434,7 +434,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -449,7 +449,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -496,7 +496,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.lognorm(σ, scale=np.exp(μ))
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -510,7 +510,7 @@ for σ in σ_vals:
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
     ax.set_xlim(0, 3)
 ax.set_xlabel('x')
@@ -554,7 +554,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\lambda={λ}$')
+    label=fr'$\lambda={λ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -567,7 +567,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\lambda={λ}$')
+    label=fr'$\lambda={λ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')

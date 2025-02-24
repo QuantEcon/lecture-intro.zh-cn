@@ -487,7 +487,7 @@ mystnb:
 fix, ax = plot_inequality_measures(σ_vals, 
                                   ginis, 
                                   '模拟数据', 
-                                  '$\sigma$', 
+                                  r'$\sigma$', 
                                   '基尼系数')
 plt.show()
 ```
@@ -838,7 +838,7 @@ ax.plot(years, df_topshares["topshare_n_wealth"],
 ax.plot(years, df_topshares["topshare_t_income"],
         marker='o', label="总收入")
 ax.set_xlabel("年份")
-ax.set_ylabel("前 $10\%$ 比例")
+ax.set_ylabel(r"前 $10\%$ 比例")
 ax.legend()
 plt.show()
 ```
@@ -908,8 +908,8 @@ mystnb:
 fig, ax = plot_inequality_measures(σ_vals, 
                                   topshares, 
                                   "模拟数据", 
-                                  "$\sigma$", 
-                                  "前 $10\%$ 比例") 
+                                  r"$\sigma$", 
+                                  r"前 $10\%$ 比例") 
 plt.show()
 ```
 
@@ -942,7 +942,7 @@ mystnb:
 fig, ax = plt.subplots()
 ax.plot([0,1],[0,1], label=f"平等线")
 for i in range(len(f_vals)):
-    ax.plot(f_vals[i], l_vals[i], label=f"$\sigma$ = {σ_vals[i]}")
+    ax.plot(f_vals[i], l_vals[i], label=fr"$\sigma$ = {σ_vals[i]}")
 plt.legend()
 plt.show()
 ```
@@ -995,7 +995,7 @@ ax.plot(years, df_topshares["topshare_n_wealth"], marker='o',   label="净财富
 ax.plot(years, top_shares_nw, marker='o', label="净财富-洛伦兹曲线")
 
 ax.set_xlabel("年份")
-ax.set_ylabel("前 $10\%$ 比例")
+ax.set_ylabel(r"前 $10\%$ 比例")
 ax.legend()
 plt.show()
 ```
