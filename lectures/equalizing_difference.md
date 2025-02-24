@@ -357,7 +357,7 @@ from sympy import Symbol, Lambda, symbols
 
 
 ```{code-cell} ipython3
-γ_h, γ_c, w_h0, D = symbols('\gamma_h, \gamma_h_c, w_0^h, D', real=True)
+γ_h, γ_c, w_h0, D = symbols(r'\gamma_h, \gamma_h_c, w_0^h, D', real=True)
 R, T = Symbol('R', real=True), Symbol('T', integer=True)
 ```
 

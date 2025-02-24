@@ -434,7 +434,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -449,7 +449,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -496,7 +496,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.lognorm(σ, scale=np.exp(μ))
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -510,7 +510,7 @@ for σ in σ_vals:
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\mu={μ}, \sigma={σ}$')
+    label=fr'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
     ax.set_xlim(0, 3)
 ax.set_xlabel('x')
@@ -554,7 +554,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\lambda={λ}$')
+    label=fr'$\lambda={λ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -567,7 +567,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=f'$\lambda={λ}$')
+    label=fr'$\lambda={λ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -759,7 +759,7 @@ x.mean(), x.var()
 我们将讲解
 
 - 直方图
-- 核密度估计和
+- 核密度估计
 - 小提琴图
 
 
@@ -786,7 +786,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('AMZN', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('AMZN', '2000-1-1', '2024-1-1', 
+                    interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_amazon = prices.pct_change()[1:] * 100
 x_amazon.head()
@@ -862,7 +863,8 @@ plt.show()
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('COST', '2000-1-1', '2024-1-1', interval='1mo')
+df = yf.download('COST', '2000-1-1', '2024-1-1', 
+                 interval='1mo', auto_adjust=False)
 prices = df['Adj Close']
 x_costco = prices.pct_change()[1:] * 100
 ```
@@ -909,7 +911,7 @@ ax.set_ylabel('密度')
 plt.show()
 ```
 
-直方图与密度的匹配不错，但也不是很好。
+直方图与密度的匹配不是很好。
 
 一个原因是正态分布实际上并不真正适合这个观察数据 --- 我们在讨论{ref}`重尾分布<heavy_tail>`时将再次提到这一点。
 

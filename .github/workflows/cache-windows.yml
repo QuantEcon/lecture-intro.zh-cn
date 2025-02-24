@@ -1,7 +1,12 @@
-name: HTML Build on Windows
-on: [pull_request]
+name: Build Cache [using jupyter-book] for Windows
+on:
+  schedule:
+    # Execute cache weekly at 3am on Monday
+    - cron:  '0 3 * * 1'
+  workflow_dispatch:  # Allows manual trigger if required
+
 jobs:
-  preview:
+  cache:
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -15,26 +20,19 @@ jobs:
           python-version: "3.12"
           environment-file: environment.yml
           activate-environment: quantecon
-      - name: Download "build" folder (cache)
-        uses: dawidd6/action-download-artifact@v7
-        with:
-          workflow: cache-windows.yml
-          branch: main
-          name: build-cache-windows
-          path: _build
-      - name: Display Conda Environment Versions
-        shell: bash -l {0}
-        run: conda list
-      - name: Display Pip Versions
-        shell: bash -l {0}
-        run: pip list
       - name: Build HTML
         shell: bash -l {0}
         run: |
-          jb build lectures --path-output ./ -nW --keep-going
+          jb build lectures --path-output ./ -W --keep-going
       - name: Upload Execution Reports (HTML)
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: execution-reports
           path: _build/html/reports
+      - name: Upload "_build" folder (cache)
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-cache-windows
+          path: _build
+          include-hidden-files: true
