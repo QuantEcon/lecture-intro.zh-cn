@@ -512,9 +512,9 @@ xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 ax.set_xlabel(r"$Y_n$", size=12)
-ax.set_ylabel(r"$密度$", size=12)
+ax.set_ylabel("密度", size=12)
 xgrid = np.linspace(xmin, xmax, 200)
-ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 'k-', lw=2, label='$N(0, \sigma^2)$')
+ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 'k-', lw=2, label=r'$N(0, \sigma^2)$')
 ax.legend()
 
 plt.show()

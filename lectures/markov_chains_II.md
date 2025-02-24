@@ -307,7 +307,7 @@ for i in range(n):
         # 从不同的 x_0 生成时间序列
         X = mc.simulate(ts_length, init=x0)
         p_hat = (X == i).cumsum() / np.arange(1, ts_length+1)
-        axes[i].plot(p_hat, label=f'$x_0 = \, {x0} $')
+        axes[i].plot(p_hat, label=fr'$x_0 = \, {x0} $')
 
     axes[i].legend()
 plt.tight_layout()
@@ -536,7 +536,7 @@ for x0 in range(len(P)):
     # 计算每个 n 的失业时间比例
     X_bar = (X == 0).cumsum() / np.arange(1, ts_length+1)
     # 绘图
-    ax.plot(X_bar - p, label=f'$x_0 = \, {x0} $')
+    ax.plot(X_bar - p, label=fr'$x_0 = \, {x0} $')
     ax.set_xlabel('t')
     ax.set_ylabel(r'$\bar X_m - \psi^* (x)$')
     
