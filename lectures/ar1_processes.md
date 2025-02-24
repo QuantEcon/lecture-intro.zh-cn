@@ -34,7 +34,7 @@ kernelspec:
 * 股息
 * 生产力等序列的动态。
 
-我们之所以研究 AR(1) 过程，部分是因为它们有广泛的应用，部分是因为它们帮助我们理解很多非常重要的概念。
+AR(1) 过程不仅有广泛的应用，还可以帮助我们理解很多非常重要的概念。
 
 让我们从一些函数库导入开始：
 
@@ -149,7 +149,7 @@ $$
 \psi_t = N(\mu_t, v_t)
 $$
 
-下面的代码利用这些事实来追踪边缘分布序列 $\{ \psi_t \}$。
+下面的代码利用以上所得来追踪边缘分布序列 $\{ \psi_t \}$。
 
 参数是
 
@@ -219,6 +219,7 @@ fig, ax = plt.subplots()
 plot_density_seq(ax, mu_0=4.0)
 plt.show()
 ```
+
 事实上，可以很容易地证明，只要 $|a| < 1$，不管初始条件如何，都会发生这种收敛。
 
 为了证明这一点，我们只需查看前两个矩的动态，
@@ -234,7 +235,7 @@ plt.show()
 v^* = \frac{c^2}{1 - a^2}
 ```
 
-（请参阅我们的 {doc}`一维动力学讲座 <scalar_dynam>`，了解确定性收敛的背景。）
+（可以通过阅读我们的 {doc}`一维动力学讲座 <scalar_dynam>`来了解确定性收敛的背景。）
 
 因此
 
@@ -260,6 +261,7 @@ ax.legend()
 
 plt.show()
 ```
+
 请注意，根据上述参数，我们看到序列 $\{ \psi_t \}$ 收敛到 $\psi^*$。
 
 我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。
@@ -293,7 +295,7 @@ $\psi^*$ 在 {eq}`ar1_psi_star` 中具有这一性质——验证这一点是留
 
 不同的作者使用遍历性这一概念有不同的方式。
 
-在当前情况中理解它的一种方式是，即使 $\{X_t\}$ 不是独立同分布的，大数定律也是有效的。
+在当前情况中可以理解为：即使 $\{X_t\}$ 不是独立同分布的，大数定律也是有效的。
 
 特别是，时间序列的平均值收敛于平稳分布下的期望值。
 
@@ -336,7 +338,7 @@ $$
 
 我们可以使用理论的 AR(1) 模型来计算右侧。
 
-如果 $\frac{1}{m} \sum_{t = 1}^m X_t$ 即使在大量观测下也不接近 $\psi^*(x)$，那么我们的理论似乎是错误的，我们将需要修订它。
+如果 $\frac{1}{m} \sum_{t = 1}^m X_t$ 即使在大量观测下也不接近 $\psi^*(x)$，那么我们的理论便有可能是错误的，我们将需要修订它。
 
 
 ## 练习
@@ -426,7 +428,7 @@ plt.show()
 ```{exercise}
 :label: ar1p_ex2
 
-编写一个你自己的·一维[核密度估计](https://en.wikipedia.org/wiki/Kernel_density_estimation)，用于从样本中估计概率密度。
+编写一个你自己的一维[核密度估计](https://baike.baidu.com/item/%E6%A0%B8%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1/10349033)，用于从样本中估计概率密度。
 
 将其写为一个类，该类在初始化时接受数据 $X$ 和带宽 $h$，并提供一个方法 $f$，使得
 
@@ -445,9 +447,9 @@ $$
 
 给定如下分布 $\phi$ 类型：
 
-- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = \beta = 2$
-- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = 2$ 且 $\beta = 5$
-- [beta 分布](https://en.wikipedia.org/wiki/Beta_distribution)，$\alpha = \beta = 0.5$
+- [贝塔分布](https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma)，$\alpha = \beta = 2$
+- [贝塔分布](https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma)，$\alpha = 2$ 且 $\beta = 5$
+- [贝塔分布](https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma)，$\alpha = \beta = 0.5$
 
 使用 $n=500$。
 
@@ -506,7 +508,7 @@ for α, β in parameter_pairs:
     plot_kde(beta(α, β))
 ```
 
-我们可以看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则效果不佳。
+我们可以看到，当基础分布是平滑时，核密度估计是有效的，但在其他情况下则效果不佳。
 
 ```{solution-end}
 ```
@@ -515,7 +517,7 @@ for α, β in parameter_pairs:
 ```{exercise}
 :label: ar1p_ex3
 
-在讲座中我们讨论了以下事实：对于 $AR(1)$ 过程
+在本讲中我们讨论了以下事实：对于 $AR(1)$ 过程
 
 $$
 X_{t+1} = a X_t + b + c W_{t+1}
