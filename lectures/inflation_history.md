@@ -18,7 +18,7 @@ kernelspec:
 
 这里引入 `xlrd`是因为 `pandas` 需要它来对Excel文件执行操作。
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-output]
 
 !pip install xlrd
@@ -26,7 +26,7 @@ kernelspec:
 
 <!-- Check for pandas>=2.1.4 for Google Collab Compat -->
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-cell]
 
 from importlib.metadata import version
@@ -38,7 +38,7 @@ if Version(version("pandas")) < Version('2.1.4'):
 
 我们现在导入本讲所需的Python库。
 
-```{code-cell}
+```{code-cell} ipython3
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -85,7 +85,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 我们用 `pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
 
-```{code-cell}
+```{code-cell} ipython3
 # 导入数据并清理索引
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/longprices.xls"
 df_fig5 = pd.read_excel(data_url, 
@@ -99,7 +99,7 @@ df_fig5.index = df_fig5.index.astype(int)
 
 在这段时间的大多数年份内，这些国家采用金本位或银本位。
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -168,7 +168,7 @@ plt.show()
 
 现在，让我们通过展示原载于{cite}`sargent2002big`第35页的完整图表，来看看1914年之后，当四个国家相继脱离金/银本位制时，它们的物价水平发生了什么变化。
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -226,7 +226,7 @@ plt.show()
 
 在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 def process_entry(entry):
@@ -287,7 +287,7 @@ def process_df(df):
 
 现在，我们编写了绘图函数 `pe_plot` 和 `pr_plot` ，它们将绘制出显示价格水平、汇率和通货膨胀率的图表、和通货膨胀率。
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 def pe_plot(p_seq, e_seq, index, labs, ax):
@@ -349,7 +349,7 @@ def pr_plot(p_seq, index, ax):
 
 接下来我们为每个国家准备数据
 
-```{code-cell}
+```{code-cell} ipython3
 # 导入数据
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"
 xls = pd.ExcelFile(data_url)
@@ -405,7 +405,7 @@ df_aus, df_hun, df_pol, df_deu = df_list
 * 表 3.3，零售价格水平 $\exp p$
 * 表 3.4，与美国的汇率
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -427,7 +427,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -457,7 +457,7 @@ plt.show()
 
 * 表 3.10，价格水平 $\exp p$ 和汇率
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -479,7 +479,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -509,7 +509,7 @@ plt.show()
 我们放弃了 1924 年 6 月采用兹罗提后的汇率。这样做是因为我们没有以兹罗提为单位的价格。我们使用 6 月份的旧货币来计算汇率调整。
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -541,7 +541,7 @@ e_seq = 1/df_pol['Cents per Polish mark (zloty after May 1924)']
 e_seq[e_seq.index > '05-01-1924'] = np.nan
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 lab = ['批发价格指数', 
        '波兰马克兑美分']
 
@@ -553,7 +553,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -576,7 +576,7 @@ plt.show()
 * 表 3.18，批发价格水平 $\exp p$
 * 表 3.19，汇率
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -599,7 +599,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
@@ -628,7 +628,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 mystnb:
   figure:
