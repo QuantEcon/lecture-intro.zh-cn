@@ -22,7 +22,9 @@ kernelspec:
 ## 概述
 
 特征值和特征向量是线性代数中一个相对高级的话题。
+
 同时，这些概念在以下领域非常有用：
+
 * 经济建模（尤其是动态模型！）
 * 统计学
 * 应用数学的某些部分
@@ -30,7 +32,9 @@ kernelspec:
 * 以及许多其他科学领域
 
 在本讲座中，我们将解释特征值和特征向量的基础知识，并介绍诺伊曼级数引理。
+
 我们假设学生已经熟悉矩阵，并理解{doc}`矩阵代数的基础知识<linear_equations>`。
+
 我们将使用以下导入：
 
 ```{code-cell} ipython3
@@ -76,11 +80,11 @@ $$
 
 让我们将讨论限制在方阵上。
 
-在上述讨论中，这意味着 $m=n$，且 $A$ 将 $\mathbb R^n$ 映射到自身。
+在上述讨论中，这意味着 $m=n$，则 $A$ 将 $\mathbb R^n$ 映射到自身。
 
 这表示 $A$ 是一个 $n \times n$ 矩阵，它将 $\mathbb{R}^n$ 中的向量 $x$ 映射（或"变换"）为同样在 $\mathbb{R}^n$ 中的新向量 $y=Ax$。
 
-这里有一个例子：
+下面是一个例子
 
 $$
     \begin{bmatrix}
@@ -107,9 +111,9 @@ $$
 $$
 
 将向量 $x = \begin{bmatrix} 1 \\ 3 \end{bmatrix}$ 变换为向量 $y = \begin{bmatrix} 5 \\ 2 \end{bmatrix}$。
+```
 
 让我们用 Python 来可视化这个过程：
-
 
 ```{code-cell} ipython3
 A = np.array([[2,  1],
@@ -120,7 +124,7 @@ A = np.array([[2,  1],
 from math import sqrt
 
 fig, ax = plt.subplots()
-# 将坐标轴设置通过原点
+# 设置坐标轴通过原点
 
 for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
@@ -158,7 +162,8 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-理解这种变换的一种方式是 $A$ 
+理解 $A$ 这种变换的一种方式是 
+
 * 首先将 $x$ 旋转某个角度 $\theta$，然后
 * 将其缩放某个标量 $\gamma$ 以获得 $x$ 的像 $y$。
 
@@ -168,7 +173,9 @@ plt.show()
 我们考虑给定矩阵如何变换
 * 一个点网格和
 * 位于 $\mathbb{R}^2$ 中单位圆上的一组点。
+
 为了构建这些变换，我们将使用两个函数，称为 `grid_transform` 和 `circle_transform`。
+
 这些函数中的每一个都可视化给定 $2 \times 2$ 矩阵 $A$ 的作用。
 
 ```{code-cell} ipython3
@@ -265,15 +272,19 @@ def circle_transform(A=np.array([[-1, 2], [0, 1]])):
 +++ {"user_expressions": []}
 
 ### 缩放
+
 形如
+
 $$
     \begin{bmatrix} 
         \alpha & 0 
         \\ 0 & \beta 
     \end{bmatrix}
 $$
+
 的矩阵沿 x 轴将向量缩放 $\alpha$ 倍，沿 y 轴缩放 $\beta$ 倍。
-这里我们举一个简单的例子，其中 $\alpha = \beta = 3$。
+
+这里我们举一个简单的例子，其中 $\alpha = \beta = 3$ 。
 
 ```{code-cell} ipython3
 A = np.array([[3, 0],  # 在两个方向放大三倍
@@ -286,12 +297,14 @@ circle_transform(A)
 
 ### 剪切
 形如
+
 $$
     \begin{bmatrix} 
         1 & \lambda \\ 
         0 & 1 
     \end{bmatrix}
 $$ 
+
 的"剪切"矩阵沿 x 轴拉伸向量，拉伸量与点的 y 坐标成比例。
 
 ```{code-cell} ipython3
@@ -304,15 +317,18 @@ circle_transform(A)
 +++ {"user_expressions": []}
 
 ### 旋转
+
 形如
+
 $$
     \begin{bmatrix} 
         \cos \theta & \sin \theta 
         \\ - \sin \theta & \cos \theta 
     \end{bmatrix}
 $$
-的矩阵被称为*旋转矩阵*。
-这个矩阵将向量顺时针旋转角度 $\theta$。
+
+的矩阵被称为 *旋转矩阵* 。
+这个矩阵将向量顺时针旋转角度 $\theta$ 。
 
 ```{code-cell} ipython3
 θ = np.pi/4  # 顺时针旋转45度
@@ -325,12 +341,14 @@ grid_transform(A)
 
 ### 置换
 置换矩阵
+
 $$
     \begin{bmatrix} 
         0 & 1 \\ 
         1 & 0 
     \end{bmatrix}
 $$ 
+
 交换向量的坐标。
 
 ```{code-cell} ipython3
@@ -349,6 +367,7 @@ grid_transform(A)
 ### 线性组合
 
 考虑两个矩阵
+
 $$
     A = 
         \begin{bmatrix} 
@@ -362,6 +381,7 @@ $$
             0 & 1 
         \end{bmatrix}
 $$ 
+
 当我们尝试对某个 $2 \times 1$ 向量 $x$ 求 $ABx$ 时，输出会是什么？
 
 $$
@@ -453,9 +473,10 @@ $$
 
 当我们将一个 $n \times m$ 矩阵 $A$ 与一个 $m \times k$ 矩阵 $B$ 相乘时，得到的矩阵乘积是一个 $n \times k$ 矩阵 $AB$。
 
-因此，如果 $A$ 和 $B$ 是变换，使得 $A \colon \mathbb{R}^m \to \mathbb{R}^n$ 且 $B \colon \mathbb{R}^k \to \mathbb{R}^m$，那么 $AB$ 将 $\mathbb{R}^k$ 变换到 $\mathbb{R}^n$。
+因此，如果 $A$ 和 $B$ 是变换， $A \colon \mathbb{R}^m \to \mathbb{R}^n$ 且 $B \colon \mathbb{R}^k \to \mathbb{R}^m$，那么 $AB$ 将 $\mathbb{R}^k$ 变换到 $\mathbb{R}^n$。
 
 将矩阵乘法视为映射的组合有助于我们理解为什么在矩阵乘法下，$AB$ 通常不等于 $BA$。
+
 （毕竟，当我们组合函数时，顺序通常很重要。）
 
 ### 示例
@@ -635,7 +656,9 @@ plot_series(B, v, n)
 
 在这里，每次迭代向量趋向于变长，即离原点更远。
 在这种情况下，重复将向量乘以$A$会使向量"螺旋式地向外"。
+
 因此，我们观察到序列$(A^kv)_{k \geq 0}$的行为取决于映射$A$本身。
+
 现在我们讨论决定这种行为的$A$的性质。
 
 
@@ -649,17 +672,20 @@ plot_series(B, v, n)
 
 ### 定义
 
-设$A$为$n \times n$的方阵。
-如果存在标量$\lambda$和非零$n$维向量$v$，使得
+设 $A$ 为 $n \times n$ 的方阵。
+
+如果存在标量 $\lambda$ 和非零 $n$ 维向量 $v$ ，使得
+
 $$
 A v = \lambda v.
 $$
-则我们称$\lambda$为$A$的*特征值*，$v$为相应的*特征向量*。
 
-因此，$A$的特征向量是一个非零向量$v$，当映射$A$应用于它时，$v$仅仅被缩放。
+则我们称 $\lambda$ 为 $A$的 *特征值* ，$v$ 为相应的 *特征向量*。
 
-下图显示了两个特征向量（蓝色箭头）及其在$A$下的像（红色箭头）。
-如预期的那样，每个$v$的像$Av$只是原始向量的缩放版本。
+因此，$A$ 的特征向量是一个非零向量 $v$，当映射 $A$ 应用于它时，$v$ 仅仅被缩放。
+
+下图显示了两个特征向量（蓝色箭头）及其在 $A$ 下的像（红色箭头）。
+如预期的那样，每个 $v$ 的像 $Av$ 只是原始向量的缩放版本。
 
 ```{code-cell} ipython3
 :tags: [output_scroll]
@@ -903,6 +929,7 @@ $$
 关于该方法的详细讨论可以在[这里](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html)找到。
 
 在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
+
 然后可视化收敛过程。
 ```
 
@@ -1010,7 +1037,9 @@ plt.show()
 :label: eig1_ex2
 
 我们已经讨论了向量 $v$ 经过矩阵 $A$ 变换后的轨迹。
+
 考虑矩阵 $A = \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix}$ 和向量 $v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}$。
+
 尝试计算向量 $v$ 经过矩阵 $A$ 变换 $n=4$ 次迭代后的轨迹，并绘制结果。
 
 ```
@@ -1100,6 +1129,7 @@ plt.show()
 :label: eig1_ex3
 
 {ref}`之前 <plot_series>`，我们展示了向量$v$被三种不同矩阵$A$变换后的轨迹。
+
 使用前面练习中的可视化来解释向量$v$被这三种不同矩阵$A$变换后的轨迹。
 
 ```
