@@ -35,7 +35,7 @@ $$
 * 它通过使系统通常收敛于**较低**的静态通货膨胀率来逆转不正常的动态
 * 出现了更加合理的比较动态结果，现在通过运行**更低**的政府赤字可以**降低**通货膨胀
 
-这些更合理的比较动态是建立在“老式信仰”上的，即“通货膨胀总是且处处由政府赤字引起”。
+这些更合理的比较动态是建立在“老派信仰”上的，即“通货膨胀总是且处处由政府赤字引起”。
 
 {cite}`bruno1990seigniorage`研究了这些问题。
 
@@ -237,14 +237,14 @@ def plot_laffer(model, πs):
     # 绘制函数图形
     plt.plot(x_values, y_values, 
             label=f'$exp((-{α})x) - exp(- (1- {α}) x)$')
-    for π, label in zip(πs, ['$\pi_l$', '$\pi_u$']):
+    for π, label in zip(πs, [r'$\pi_l$', r'$\pi_u$']):
         plt.text(π, plt.gca().get_ylim()[0]*2, 
                  label, horizontalalignment='center',
                  color='brown', size=10)
         plt.axvline(π, color='brown', linestyle='--')
     plt.axhline(g, color='red', linewidth=0.5, 
                 linestyle='--', label='g')
-    plt.xlabel('$\pi$')
+    plt.xlabel(r'$\pi$')
     plt.ylabel('铸币税')
     plt.legend()
     plt.grid(True)
@@ -373,15 +373,15 @@ def draw_iterations(π0s, model, line_params, π_bars, num_steps):
             
     axes[2].axhline(y=π_bars[0], color='grey', linestyle='--', lw=1.5, alpha=0.6)
     axes[2].axhline(y=π_bars[1], color='grey', linestyle='--', lw=1.5, alpha=0.6)
-    axes[2].text(num_steps * 1.07, π_bars[0], '$\pi_l$', verticalalignment='center', 
+    axes[2].text(num_steps * 1.07, π_bars[0], r'$\pi_l$', verticalalignment='center', 
                      color='grey', size=10)
-    axes[2].text(num_steps * 1.07, π_bars[1], '$\pi_u$', verticalalignment='center', 
+    axes[2].text(num_steps * 1.07, π_bars[1], r'$\pi_u$', verticalalignment='center', 
                          color='grey', size=10)
 
     axes[0].set_ylabel('$m_t$')
     axes[1].set_ylabel('$p_t$')
-    axes[2].set_ylabel('$\pi_t$')
-    axes[3].set_ylabel('$\mu_t$')
+    axes[2].set_ylabel(r'$\pi_t$')
+    axes[3].set_ylabel(r'$\mu_t$')
     axes[3].set_xlabel('时间步')
     axes[3].xaxis.set_major_locator(MaxNLocator(integer=True))
 

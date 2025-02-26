@@ -211,13 +211,13 @@ def grid_transform(A=np.array([[1, -1], [1, 1]])):
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
     # ax[0].grid(True)
     # ax[0].axis("equal")
-    ax[0].set_title("点 $x_1, x_2, \cdots, x_k$")
+    ax[0].set_title(r"点 $x_1, x_2, \cdots, x_k$")
 
     # 绘制变换的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
     # ax[1].grid(True)
     # ax[1].axis("equal")
-    ax[1].set_title("点 $Ax_1, Ax_2, \cdots, Ax_k$")
+    ax[1].set_title(r"点 $Ax_1, Ax_2, \cdots, Ax_k$")
 
     plt.show()
 
@@ -252,7 +252,7 @@ def circle_transform(A=np.array([[-1, 2], [0, 1]])):
     ax[0].plot(x, y, color='black', zorder=1)
     ax[0].scatter(a_1, b_1, c=colors, alpha=1, s=60,
                   edgecolors='black', zorder=2)
-    ax[0].set_title("在 $\mathbb{R}^2$的单位圆")
+    ax[0].set_title(r"在 $\mathbb{R}^2$的单位圆")
 
     x1 = x.reshape(1, -1)
     y1 = y.reshape(1, -1)

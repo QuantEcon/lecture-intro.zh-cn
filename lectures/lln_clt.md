@@ -22,11 +22,11 @@ kernelspec:
 
 这些美丽的定理是许多计量经济学和定量经济模型的基础。
 
-本讲座围绕模拟进行，展示了大数定律和中心极限定理的实际操作。
+本讲座围绕模拟进行，用实践展示大数定律和中心极限定理的核心思想。
 
-我们还将演示当所依赖的假设不成立时，大数定律和中心极限定理如何失效。
+我们还将演示当假设不成立时，大数定律和中心极限定理会如何失效。
 
-本讲将关注单变量情况（多变量情况在[更高级的讲座中处理](https://python.quantecon.org/lln_clt.html#the-multivariate-case)）。
+本讲将关注单变量情况（多变量情况我们在[更高级的讲座中](https://python.quantecon.org/lln_clt.html#the-multivariate-case)讨论）。
 
 我们将需要以下导入：
 
@@ -48,7 +48,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```{index} single: Law of Large Numbers
 ```
 
-我们从大数定律开始讲起，该定律说明在什么条件下样本平均值会收敛到它们的总体平均值。
+我们从大数定律开始讲起，该定律说明在什么条件下样本均值会收敛到它们的总体均值。
 
 ### 大数定律的应用
 
@@ -57,7 +57,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```{prf:example}
 :label: lln_ex_ber
 
-考虑一个参数为 $p$ 的[伯努利随机变量](https://en.wikipedia.org/wiki/Bernoulli_distribution) $X$。
+考虑一个参数为 $p$ 的[伯努利随机变量](https://baike.baidu.com/item/%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83/1442377) $X$。
 
 这意味着 $X$ 的取值在 $\{0,1\}$ 中，且 $\mathbb P\{X=1\} = p$。
 
@@ -83,11 +83,12 @@ p = 0.8
 X = st.bernoulli.rvs(p)
 print(X)
 ```
-在这个场景中，大数定律告诉我们如果我们多次投掷硬币，我们看到的正面比例将接近均值 $p$。
+
+在这个场景中，大数定律告诉我们，如果我们多次投掷硬币，硬币落在“正面”的比例将接近均值 $p$。
 
 我们使用 $n$ 来表示投掷硬币的次数。
 
-让我们检查一下：
+让我们查看一下实验的结果：
 
 ```{code-cell} ipython3
 n = 1_000_000
@@ -103,19 +104,19 @@ X_draws = st.bernoulli.rvs(p, size=n)
 print(X_draws.mean())
 ```
 
-让我们将这个讨论与上面的讨论联系起来，我们说的样本平均值收敛于“群体平均值”。
+让我们将这个讨论与我们前面说的样本均值收敛于“总体均值”联系起来。
 
 想象 $X_1, \ldots, X_n$ 是独立的投掷硬币行为。
 
-群体平均值是在无限样本中的平均值，等于期望 $\mathbb E X$。
+总体均值是在无限样本中的平均值，等于期望 $\mathbb E X$。
 
-抽样的平均值义 $X_1, \ldots, X_n$ 是
+抽样的样本均值 $X_1, \ldots, X_n$ 是
 
 $$
     \bar X_n := \frac{1}{n} \sum_{i=1}^n X_i
 $$
 
-在这种情况下，它是等于一的抽样的比例（正面的数量除以 $n$）。
+在这种情况下，它是等于一的抽样的比例（硬币落在“正面”的次数除以 $n$）。
 
 因此，大数定律告诉我们对于上述伯努利试验
 
@@ -131,7 +132,7 @@ $$
 (lln_ksl)=
 ### 大数定律的陈述
 
-让我们更仔细地阐述大数定律。
+让我们更仔细地阐述大数定律(Law of Large Number, LLN)。
 
 设 $X_1, \ldots, X_n$ 是随机变量，它们都具有相同的分布。
 
@@ -148,7 +149,7 @@ $$
   \mathbb P\{a \leq X_i \leq b\} = \int_a^b f(x) dx
 $$
 
-（对于离散情况，我们需要用概率质量函数替换密度，并用求和替换积分。）
+（对于离散情况，我们需要用概率质量函数替换概率密度函数，并用求和替换积分。）
 
 让 $\mu$ 表示这个样本的共同平均值。
 
@@ -179,7 +180,7 @@ $$
 
 这里
 
-* IID 表示独立同分布
+* IID 表示独立同分布，并且
 * $\mathbb E |X| = \int_{-\infty}^\infty |x| f(x) dx$
 
 
@@ -187,18 +188,18 @@ $$
 
 定理中的概率为一是什么意思？
 
-我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这[并非严格真实](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)）。
+我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这[并非严格真实](https://baike.baidu.com/item/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%8F%91%E7%94%9F%E5%99%A8/20835345)）。
 
 同时假设我们可以生成无限序列，从而使得 $\bar X_n \to \mu$ 能够得到评估。
 
-在这种设置下，{eq}`lln_as` 应该被理解为计算机生成一个 $\bar X_n \to \mu$ 失败发生的概率是零。
+在这种设置下，{eq}`lln_as` 应该被理解为计算机生成一个没有满足 $\bar X_n \to \mu$ 的序列的概率是零。
 
 ### 示例说明
 
 ```{index} single: Law of Large Numbers; Illustration
 ```
 
-让我们使用模拟来说明大数定律（LLN）。
+让我们使用模拟来说明大数定律。
 
 在说明它时，我们将使用一个关键思想：样本均值 $\bar X_n$ 本身是一个随机变量。
 
@@ -219,13 +220,13 @@ $\bar X_n$ 是随机变量的原因是它是随机变量 $X_1, \ldots, X_n$ 的�
 
 数组 `sample_means` 现在将包含 $m$ 次抽取的随机变量 $\bar X_n$。
 
-如果我们对 $\bar X_n$ 的这些观测做直方图，我们应该看到它们聚集在总体平均值 $\mathbb E X$ 周围。
+如果我们对 $\bar X_n$ 的这些观测值做直方图，我们应该看到它们聚集在总体均值 $\mathbb E X$ 周围。
 
-此外，如果我们在更大的 $n$ 值下重复这个练习，我们应该看到观测结果更紧密地聚集在总体平均值周围。
+此外，如果我们在更大的 $n$ 值下重复这个练习，我们应该看到观测结果更紧密地聚集在总体均值周围。
 
-这实质上就是 LLN 告诉我们的内容。
+这实质上就是大数定律告诉我们的内容。
 
-为了实现这些步骤，我们将使用函数。
+为了实现这些步骤，我们将使用几个函数。
 
 我们的第一个函数生成给定分布的大小为 $n$ 的样本均值。
 
@@ -279,7 +280,7 @@ generate_histogram(X_distribution, n=1_000, m=1000)
 
 我们将使用[小提琴图](https://intro.quantecon.org/prob_dist.html#violin-plots)来显示不同的分布。
 
-小提琴图中的每一个分布代表着某个 $n$ 的 $X_n$ 分布，通过模拟计算得到。
+小提琴图中的每一个分布代表着通过模拟计算得到的某个 $n$ 的 $X_n$ 分布。
 
 ```{code-cell} ipython3
 def means_violin_plot(distribution,  
@@ -332,13 +333,13 @@ means_violin_plot(st.beta(6, 6))
 
 我们必须关注大数定律陈述中的假设。
 
-如果这些假设不成立，那么大数定律可能会失败。
+如果这些假设不成立，那么大数定律可能会不成立。
 
-### 无限的第一矩
+### 无限的一阶矩
 
-如定理所示，当 $\mathbb E |X|$ 不是有限的时候，大数定律可以失败。
+如定理所示，当 $\mathbb E |X|$ 不是有限的时候，大数定律可以不成立。
 
-我们可以使用[柯西分布](https://zh.wikipedia.org/wiki/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83)来证明这一点。
+我们可以使用[柯西分布](https://baike.baidu.com/item/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83/5021907)来证明这一点。
 
 柯西分布具有以下性质：
 
@@ -348,13 +349,13 @@ means_violin_plot(st.beta(6, 6))
 
 因此大数定律不成立。
 
-这里大数定律失败是因为柯西分布违反了假设 $\mathbb E|X| < \infty$。
+这里大数定律不成立是因为柯西分布违反了假设 $\mathbb E|X| < \infty$。
 
 +++
 
-### IID 条件的失败
+### IID 条件的失效
 
-LLN 可能因违反 IID 假设而不成立。
+大数定律可能因违反 IID 假设而不成立。
 
 ```{prf:example}
 :label: lln_ex_fail
@@ -371,10 +372,10 @@ $$
     \bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
 $$
 
-因此，$\bar{X}_n$ 的分布对所有 $n$ 都是 $N(0,1)$！
+因此，对所有 $n$ ，$\bar{X}_n$ 的分布都是 $N(0,1)$！
 ```
 
-这是否与 LLN 相矛盾，LLN 表明 $\bar{X}_n$ 的分布将收敛至单点 $\mu$？
+这是否与表明 $\bar{X}_n$ 的分布将收敛至单点 $\mu$ 的大数定律相矛盾？
 
 不，LLN 是正确的——问题在于其假设未被满足。
 
@@ -383,7 +384,7 @@ $$
 ```{note}
 :name: iid_violation
 
-尽管在这种情况下，IID 的违反破坏了 LLN，但*有*的情况下即使 IID 失败 LLN 仍然成立。
+尽管在这种情况下，IID 的违反破坏了大数定律，但*存在*某些情况下即使 IID 失败大数定律仍然成立。
 
 我们将在[练习](lln_ex3)中展示一个例子。
 ```
@@ -395,7 +396,7 @@ $$
 ```{index} single: Central Limit Theorem
 ```
 
-接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
+接下来，我们来讨论中心极限定理（Central Limit Theorem, CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
 
 ### 定理的陈述
 
@@ -417,16 +418,16 @@ n \to \infty
 ```
 ````
 
-这里的 $\stackrel { d } { \to } N(0, \sigma^2)$ 表示[分布收敛](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution)到以 0 为均值且标准差为 $\sigma$ 的正态分布。
+这里的 $\stackrel { d } { \to } N(0, \sigma^2)$ 表示[分布收敛](https://baike.baidu.com/item/%E4%BE%9D%E5%88%86%E5%B8%83%E6%94%B6%E6%95%9B/19127365)到以 0 为均值且标准差为 $\sigma$ 的正态分布。
 
-CLT 的惊人含义是，对于任何具有有限[二阶矩](https://en.wikipedia.org/wiki/Moment_(mathematics))的分布，简单地添加独立副本总是会得到高斯（正态）曲线。
+CLT 的惊人含义是，对于任何具有有限[二阶矩](https://baike.baidu.com/item/%E7%9F%A9/22856460)的分布，简单地添加独立样本总是会得到高斯（正态）曲线。
 
 
 
 
 ### 模拟 1
 
-由于中心极限定理(CLT)几乎像魔法一样，运行验证其含义的模拟是构建理解的一种好方法。
+由于中心极限定理几乎像魔法一样，运行验证其含义的模拟是辅助理解的好方法。
 
 为此，我们现在进行以下模拟：
 
@@ -437,7 +438,7 @@ CLT 的惊人含义是，对于任何具有有限[二阶矩](https://en.wikipedi
 
 下面的代码正是为指数分布 $F(x) = 1 - e^{- \lambda x}$ 执行了这一操作。
 
-（请尝试使用其他 $F$ 的选择，但请记住，为了符合CLT的条件，分布必须有有限的二阶矩。）
+（请尝试使用其他分布$F$ ，但请记住，为了符合中心极限定理的条件，分布必须有有限的二阶矩。）
 
 (sim_one)=
 
@@ -473,7 +474,7 @@ plt.show()
 
 （注意这里没有 for 循环——所有的操作都是矢量化的，意味着主要计算都转移到了快速的 C 代码上。）
 
-通过增加 `n`，拟合到正态密度可以进一步改进。
+通过增加 `n`，我们会越来越接近正态分布。
 
 
 ## 练习
@@ -483,7 +484,7 @@ plt.show()
 ```{exercise} 
 :label: lln_ex1
 
-用[贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)重复[上面](sim_one)的模拟。
+用[贝塔分布](https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021)重复[上面](sim_one)的模拟。
 
 你可以选择任何 $\alpha > 0$ 和 $\beta > 0$。
 ```
@@ -512,9 +513,9 @@ xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 ax.set_xlabel(r"$Y_n$", size=12)
-ax.set_ylabel(r"$密度$", size=12)
+ax.set_ylabel("密度", size=12)
 xgrid = np.linspace(xmin, xmax, 200)
-ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 'k-', lw=2, label='$N(0, \sigma^2)$')
+ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 'k-', lw=2, label=r'$N(0, \sigma^2)$')
 ax.legend()
 
 plt.show()
@@ -538,7 +539,7 @@ X = 1 if U < p else 0
 print(X)
 ```
 
-解释为什么这能提供一个具有正确分布的随机变量$X$。
+解释为什么这能行代码可以提供一个具有正确分布的随机变量$X$。
 ````
 
 ```{solution-start} lln_ex2
@@ -563,9 +564,9 @@ $$
 ```{exercise}
 :label: lln_ex3
 
-我们上面提到即使违反IID条件，LLN有时仍然成立。
+我们上面提到即使违反IID条件，大数定律有时仍然成立。
 
-让我们进一步调查这个说法。
+让我们进一步探讨这个说法。
 
 考虑AR(1)过程
 
@@ -582,13 +583,12 @@ $$
     X_0 \sim N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right)
 $$
 
-这个过程违反了LLN的独立性假设
+这个过程违反了大数定律的独立性假设
 （因为 $X_{t+1}$ 依赖于 $X_t$ 的值）。
-
-然而，下一个练习告诉我们，样本均值向总体均值的LLN类型收敛仍然会发生。
+与大数定律类似的收敛仍然会发生。
 
 1. 证明序列 $X_1, X_2, \ldots$ 是同分布的。
-2. 使用模拟证明LLN收敛成立，其中 $\alpha = 0.8$, $\beta = 0.2$。
+2. 使用模拟证明大数定律类似的收敛成立，其中 $\alpha = 0.8$, $\beta = 0.2$。
 
 ```
 
@@ -596,15 +596,15 @@ $$
 :class: dropdown
 ```
 
-**Q1 解答**
+**第一题答案**
 
 关于第一部分，我们认为 $X_t$ 在所有 $t$ 时刻的分布与 $X_0$ 相同。
 
 为了构建证明，我们假设这个命题对 $X_t$ 是正确的。
 
-现在我们声称它对于 $X_{t+1}$ 也是正确的。
+现在我们证明它对于 $X_{t+1}$ 也是正确的。
 
-观察我们是否得到了正确的均值：
+首先我们验证均值是正确的：
 
 $$
 \begin{aligned}
@@ -614,7 +614,7 @@ $$
 \end{aligned}
 $$ 
 
-我们也得到了正确的方差：
+其次我们也得到了正确的方差：
 
 $$
 \begin{aligned}
@@ -635,7 +635,7 @@ $$
 
 我们可以得出结论，这个AR(1)过程违反了独立性假设，但是分布相同。
 
-**Q2 解决方案**
+**第二题答案**
 
 ```{code-cell} ipython3
 σ = 10
