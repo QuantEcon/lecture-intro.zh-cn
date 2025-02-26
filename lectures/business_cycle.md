@@ -66,13 +66,13 @@ name_cn = pd.read_csv('../lectures/datasets/country_code_cn.csv').set_index('nam
 
 我们可以使用 `wb.series.info` 并使用参数 `q` 来查询来自[世界银行](https://www.worldbank.org/en/home)的可用数据。
 
-例如，我们可以试着检索GDP增长的数据。
+例如，我们可以试着检索 GDP 增长数据 ID 以查询 GDP 增长数据。
 
 ```{code-cell} ipython3
 wb.series.info(q='GDP growth')
 ```
 
-我们可以使用这个数据系列的 ID 来获取数据。
+现在我们使用这个系列 ID 来获取数据。
 
 ```{code-cell} ipython3
 gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
@@ -81,7 +81,7 @@ gdp_growth = wb.data.DataFrame('NY.GDP.MKTP.KD.ZG',
 gdp_growth
 ```
 
-我们可以通过展开下面代码的输出来获取数据的元数据
+我们可以查看系列的元数据，了解有关该系列的更多信息（点击展开）。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -111,7 +111,7 @@ gdp_growth.columns = gdp_growth.columns.str.replace('YR', '').astype(int)
 gdp_growth
 ```
 
-接下来我们写一个函数来绘制时间序列图并突出显示经济衰退的时期。
+接下来我们写一个函数来绘制各个国家的时间序列图并突出显示经济衰退的时期。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -120,7 +120,7 @@ def plot_series(data, country, ylabel,
                 txt_pos, ax, g_params,
                 b_params, t_params, ylim=15, baseline=0):
     """
-    使用突出显示的衰退阶段绘制时间序列图。
+    绘制数据的时间序列图并突出显示经济衰退的时期。
 
     参数
     ----------
@@ -165,8 +165,8 @@ def plot_series(data, country, ylabel,
     else:
         ylim = ax.get_ylim()[1]
     ax.text(1974, ylim + ylim*txt_pos, '石油危机\n(1974)', **t_params) 
-    ax.text(1991, ylim + ylim*txt_pos, '90年代衰退\n(1991)', **t_params) 
-    ax.text(2008, ylim + ylim*txt_pos, '金融危机\n(2008)', **t_params) 
+    ax.text(1991, ylim + ylim*txt_pos, '90年代经济衰退\n(1991)', **t_params) 
+    ax.text(2008, ylim + ylim*txt_pos, '全球金融危机\n(2008)', **t_params) 
     ax.text(2020, ylim + ylim*txt_pos, 'Covid-19\n(2020)', **t_params)
 
     # 添加基线
@@ -232,7 +232,7 @@ plt.show()
 
 接下来我们看看日本，它在1960年代和1970年代经历了快速增长，并在过去二十年里增长放缓。
 
-重大增长率下降与1970年代的石油危机、全球金融危机（GFC）和Covid-19大流行相一致。
+增长率的大幅下降与 1970 年代的石油危机、全球金融危机（GFC）和 Covid-19 大流行同时发生。
 
 ```{code-cell} ipython3
 ---
@@ -296,7 +296,7 @@ plt.show()
 
 失业率是衡量商业周期的另一个重要指标。
 
-[1929-1942年](https://fred.stlouisfed.org/series/M0892AUSM156SNBR)和[1948-2022年](https://fred.stlouisfed.org/series/UNRATE)两个时期的数据来自[FRED](https://fred.stlouisfed.org/)，而1942-1948年的失业率数据由是从[人口普查局的数据估算](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html)。
+我们使用 [FRED](https://fred.stlouisfed.org/) 提供的 [1929-1942](https://fred.stlouisfed.org/series/M0892AUSM156SNBR) 年和 [1948-2022](https://fred.stlouisfed.org/series/UNRATE) 年的失业率数据以及[人口普查局](https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html) 估算的 1942-1948 年的失业率数据来研究失业问题。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -370,16 +370,16 @@ plt.show()
 图表显示：
 
 * 劳动力市场的扩张和收缩与经济衰退高度相关。
-* 周期一般是不对称的：失业率的急剧上升后面通常跟随着缓慢的恢复。
+* 周期一般是不对称的：失业率的急剧上升后面通常跟随着缓慢的复苏。
 
-它还向我们展示了美国在疫情后复苏期间劳动力市场条件的独特性。
+它还向我们展示了美国在疫情后复苏期间劳动力市场状况的独特性。
 
-劳动力市场在2020-2021年的冲击后以前所未有的速度恢复。
+劳动力市场在2020-2021年的冲击后以前所未有的速度复苏。
 
 (synchronization)=
 ## 同步化
 
-在我们的{ref}`之前的讨论<gdp_growth>`中，我们发现发达经济体的衰退期有相对同步的时间。
+在我们的{ref}`之前的讨论<gdp_growth>`中，我们发现发达经济体的衰退期相对同步。
 
 同时，这种同步现象直到21世纪才在阿根廷出现。
 
@@ -458,6 +458,8 @@ t_params = {'color':'grey', 'fontsize': 9,
             'va':'center', 'ha':'center'}
 ```
 
+在此，我们对发达经济体和发展中经济体的GDP增长率进行比较。
+
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -469,7 +471,7 @@ gdp_growth = gdp_growth.set_index('Country')
 gdp_growth.columns = gdp_growth.columns.str.replace('YR', '').astype(int)
 ```
 
-首先我们绘制发达经济体的GDP增长率
+我们将英国、美国、德国和日本作为发达经济体的例子。
 
 ```{code-cell} ipython3
 ---
@@ -477,10 +479,11 @@ mystnb:
   figure:
     caption: "发达经济体（GDP增长率 %）"
     name: global_gdp_comparison
+tags: [hide-input]
 ---
-fig, ax = plt.subplots(figsize=(12, 8))
+fig, ax = plt.subplots()
 
-countries = ['美国', '英国', '德国', '日本']
+countries = ['英国', '美国', '德国', '日本']
 ylabel = 'GDP 增长率 (%)'
 plot_comparison(gdp_growth, countries, 
                 ylabel, 0.1, 20, ax, 
@@ -508,13 +511,13 @@ plot_comparison(gdp_growth.loc[name_cn.loc[countries]['name'], 1962:],
 plt.show()
 ```
 
-上述GDP增长率的比较表明，21世纪衰退期的商业周期变得更加同步。
+上述GDP增长率的比较表明，在21世纪全球的商业周期变得更加同步。
 
 然而，新兴和不发达经济体的经济周期通常经历更加剧烈的变化。
 
 尽管GDP增长实现了同步，但在衰退期间各国的经历常常有所不同。
 
-我们使用失业率和劳动市场的恢复作为另一个例子。
+我们使用失业率和劳动市场的复苏作为另一个例子。
 
 这里我们比较了美国、英国、日本和法国的失业率。
 
@@ -541,7 +544,7 @@ plot_comparison(unempl_rate, countries,
 plt.show()
 ```
 
-我们看到，工会力量强大的法国在受到负面冲击后，劳动力市场的恢复通常会相对缓慢。
+我们看到，工会力量强大的法国在受到负面冲击后，劳动力市场的复苏通常会相对缓慢。
 
 我们还注意到，日本的失业率一直非常低且稳定。
 
@@ -553,12 +556,12 @@ plt.show()
 
 ### 消费
 
-消费取决于消费者对其收入的信心以及经济的整体表现。
+消费取决于消费者对其收入的信心以及未来经济的整体表现。
 
 密歇根大学发布的[消费者信心指数](https://fred.stlouisfed.org/series/UMCSENT)是一个被广泛引用的消费者信心指标。
 
-这里我们绘制了密歇根大学消费者信心指数和同比 
-[核心消费价格指数](https://fred.stlouisfed.org/series/CPILFESL) (CPI) 的变化。
+这里我们绘制了密歇根大学消费者信心指数和年同比 
+[居民消费价格指数](https://fred.stlouisfed.org/series/CPILFESL) (CPI) 的变化。
 
 ```{code-cell} ipython3
 ---
@@ -639,7 +642,7 @@ plt.show()
 ---
 mystnb:
   figure:
-    caption: "美国实际产出年变化（%）"
+    caption: "年实际产出变化，美国（%）"
     name: roc
 tags: [hide-input]
 ---
@@ -662,33 +665,29 @@ ax.fill_between(nber.index, 0, 1,
                 transform=ax.get_xaxis_transform(), 
                 label='NBER衰退指标')
 ax.set_ylim([ax.get_ylim()[0], ax.get_ylim()[1]])
-ax.set_ylabel('年实际产出变化率 (%)')
+ax.set_ylabel('年实际产出变化 (%)')
 plt.show()
 ```
 
-图表显示了实际产出变化与商业周期的密切相关性。
-
-在NBER定义的衰退期间，产出基本上都有显著下降。
-
-实际产出的缩减反应了整体需求的减少，这在经济危机期间尤为显著。
+我们从图中可以观察到各次经济衰退的延迟收缩。
 
 ### 信贷水平
 
 我们最后一个观察的相关因素是信贷水平。
 
-信贷收缩经常在经济衰退期间发生，因为出贷方变得更加谨慎，借款人也更不愿意承担额外的债务。
+信贷收缩经常在经济衰退期间发生，因为出贷方变得更加谨慎，借款人也更加犹豫是否要承担更多的债务。
 
 这是由于整体经济活动的减少和对未来前景的悲观预期。
 
-一个例子是英国银行对私人部门的国内信贷。
+一个例子是英国银行对私营部门的国内信贷。
 
-下面的图表显示了1970年到2022年英国的银行国内信贷对私人部门的百分比。
+下面的图表显示了1970年到2022年英国银行对私营部门的国内信贷占 GDP 的百分比。。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: "银行国内信贷对私人部门的百分比（% GDP）"
+    caption: "银行对私营部门的国内信贷（% GDP）"
     name: dcpc
 tags: [hide-input]
 ---
