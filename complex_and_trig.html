@@ -251,9 +251,9 @@
 <section id="id2">
 <h2><span class="section-number">9.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>本讲座介绍一些基础数学和三角函数知识。</p>
-<p>这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时，会带来巨大回报。</p>
-<p>例如，这些工具是理解Paul Samuelson（1939年）<span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>在其经典论文中关于投资加速器与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座<a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span class="xref std std-doc">Samuelson乘数加速器</span></a>中的主题。</p>
-<p>除了为Samuelson的工作及其扩展提供基础外，本讲座还可以作为独立的快速回顾，回顾高中基础三角函数的关键结果。</p>
+<p>这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时会有很大的帮助。</p>
+<p>例如，这些工具是理解Paul Samuelson（1939年）<span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>在其经典论文中关于投资加速数与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座<a class="reference external" href="https://dynamics.quantecon.org/samuelson.html" title="(in Python)"><span class="xref std std-doc">Samuelson乘数加速数</span></a>中的主题。</p>
+<p>除了为Samuelson的工作及其扩展提供基础外，本讲座也是对高中基础三角函数知识的复习。</p>
 <p>那么让我们开始吧。</p>
 <section id="id4">
 <h3><span class="section-number">9.1.1. </span>复数<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
@@ -265,7 +265,7 @@ z = x + iy = re^{i\theta} = r(\cos{\theta} + i \sin{\theta})
 \]</div>
 <p>上面的第二个等式被称为<strong>欧拉公式</strong></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Leonhard_Euler">欧拉</a>还贡献了许多其他公式！</p></li>
+<li><p><a class="reference external" href="https://baike.baidu.com/item/%E8%8E%B1%E6%98%82%E5%93%88%E5%BE%B7%C2%B7%E6%AC%A7%E6%8B%89/2148998">欧拉</a>还贡献了许多其他公式！</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(z\)</span>的复共轭<span class="math notranslate nohighlight">\(\bar z\)</span>定义为</p>
 <div class="math notranslate nohighlight">
@@ -293,7 +293,7 @@ r = |z| = \sqrt{x^2 + y^2}
 \sin{\theta} = \frac{y}{r} = \frac{e^{i\theta} - e^{-i\theta}}{2i} , \quad
 \tan{\theta} = \frac{y}{x}
 \]</div>
-<p>我们需要以下导入：</p>
+<p>我们需要以下函数库导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -334,9 +334,9 @@ r = |z| = \sqrt{x^2 + y^2}
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;polar&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">θ</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>          <span class="c1"># 绘制 r</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">x_range</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>       <span class="c1"># 绘制 x</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_range</span><span class="p">,</span> <span class="n">x</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>        <span class="c1"># 绘制 y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">θ</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>            <span class="c1"># 绘制 r</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">x_range</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>      <span class="c1"># 绘制 x</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_range</span><span class="p">,</span> <span class="n">x</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">θ_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>          <span class="c1"># 绘制 y</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_range</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">θ_range</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>  <span class="c1"># 绘制 θ</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 从原点开始绘制</span>
@@ -374,7 +374,7 @@ r = |z| = \sqrt{x^2 + y^2}
 r^n e^{in\theta} =
 r^n(\cos{n\theta} + i \sin{n\theta})
 \]</div>
-<p>要证明德莫瓦定理，注意到</p>
+<p>要证明德莫瓦定理，首先注意</p>
 <div class="math notranslate nohighlight">
 \[
 (r(\cos{\theta} + i \sin{\theta}))^n = \big( re^{i\theta} \big)^n
@@ -426,7 +426,7 @@ x_n &amp;= az^n + \bar{a}\bar{z}^n \\
 </section>
 <section id="id10">
 <h3><span class="section-number">9.3.3. </span>例3<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>这个例子提供了Samuelson在分析其乘数-加速器模型时所使用的核心机制 <span id="id11">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>。</p>
+<p>这个例子提供了Samuelson在分析其乘数-加速数模型时所使用的核心机制 <span id="id11">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span>。</p>
 <p>因此，考虑一个<strong>二阶线性差分方程</strong></p>
 <div class="math notranslate nohighlight">
 \[
@@ -461,7 +461,7 @@ x_n = 2 pr^n \cos{(\omega + n\theta)}
 \frac{x_1}{x_0} = \frac{r \cos{(\omega + \theta)}}{\cos{\omega}}
 \]</div>
 <p>我们可以解这个方程得到 <span class="math notranslate nohighlight">\(\omega\)</span>，然后用 <span class="math notranslate nohighlight">\(x_0 = 2 pr^0 \cos{(\omega + n\theta)}\)</span> 解出 <span class="math notranslate nohighlight">\(p\)</span>。</p>
-<p>使用Python中的<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包，我们能够解决并绘制给定不同 <span class="math notranslate nohighlight">\(n\)</span> 值时 <span class="math notranslate nohighlight">\(x_n\)</span> 的动态。</p>
+<p>使用Python中的<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包，我们能够解决并绘制给定不同 <span class="math notranslate nohighlight">\(n\)</span> 值时 <span class="math notranslate nohighlight">\(x_n\)</span> 的动态变化。</p>
 <p>在这个例子中，我们设置初始值：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(r = 0.9\)</span></p></li>
@@ -549,14 +549,15 @@ p = 2.000
 </section>
 <section id="id12">
 <h3><span class="section-number">9.3.4. </span>三角恒等式<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>我们可以通过适当操作复数的极坐标形式来获得一套完整的三角恒等式。</p>
-<p>我们将通过推导等式
-$<span class="math notranslate nohighlight">\(
+<p>我们可以通过适当转换复数的极坐标形式来获得一套完整的三角恒等式。</p>
+<p>我们将通过推导等式</p>
+<div class="math notranslate nohighlight">
+\[
 e^{i(\omega + \theta)} = e^{i\omega} e^{i\theta}
-\)</span>$
-来得到许多恒等式。</p>
+\]</div>
+<p>来得到许多恒等式。</p>
 <p>例如，我们将计算 <span class="math notranslate nohighlight">\(\cos{(\omega + \theta)}\)</span> 和 <span class="math notranslate nohighlight">\(\sin{(\omega + \theta)}\)</span> 的恒等式。</p>
-<p>使用本讲座开始时给出的正弦和余弦公式，我们有：</p>
+<p>使用本讲开始时给出的正弦和余弦公式，我们有：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -651,7 +652,7 @@ e^{2i\omega} - e^{-2i\omega}
 <p>我们可以使用<code class="docutils literal notranslate"><span class="pre">sympy</span></code>包中的<code class="docutils literal notranslate"><span class="pre">integrate</span></code>来验证分析结果和数值结果：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置初始打印</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置打印的格式</span>
 <span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="s2">&quot;mathjax&quot;</span><span class="p">)</span>
 
 <span class="n">ω</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;ω&#39;</span><span class="p">)</span>
@@ -690,13 +691,15 @@ e^{2i\omega} - e^{-2i\omega}
 
 <p class="admonition-title"><span class="caption-number">Exercise 9.1 </span></p>
 <section id="exercise-content">
-<p>我们邀请读者通过解析方法和使用 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 包来验证以下两个等式：
-$<span class="math notranslate nohighlight">\(
+<p>我们邀请读者通过解析方法和使用 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 包来验证以下两个等式：</p>
+<div class="math notranslate nohighlight">
+\[
 \int_{-\pi}^{\pi} \cos (\omega)^2 \, d\omega = \pi
-\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 \int_{-\pi}^{\pi} \sin (\omega)^2 \, d\omega = \pi
-\)</span>$</p>
+\]</div>
 </section>
 </div>
 <div class="solution dropdown admonition" id="complex_and_trig-solution-1">

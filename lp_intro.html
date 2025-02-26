@@ -246,7 +246,7 @@
                         
   <section class="tex2jax_ignore mathjax_ignore" id="lp-intro">
 <span id="id1"></span><h1><span class="section-number">36. </span>线性规划<a class="headerlink" href="#lp-intro" title="Permalink to this heading">#</a></h1>
-<p>在本讲中，我们将需要以下库。使用 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <a class="reference external" href="https://developers.google.com/optimization">ortools</a>。</p>
+<p>在本讲中，我们将需要以下库并使用 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <a class="reference external" href="https://developers.google.com/optimization">ortools</a>。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ortools
@@ -260,9 +260,7 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ortools
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ortools-9.12.4544-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+  Downloading ortools-9.12.4544-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting absl-py&gt;=2.0.0 (from ortools)
@@ -272,14 +270,12 @@ Requirement already satisfied: pandas&gt;=2.0.0 in /home/runner/miniconda3/envs/
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting protobuf&lt;5.30,&gt;=5.29.3 (from ortools)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+  Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
 Collecting immutabledict&gt;=3.0.0 (from ortools)
+  Downloading immutabledict-4.2.1-py3-none-any.whl.metadata (3.5 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading immutabledict-4.2.1-py3-none-any.whl.metadata (3.5 kB)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2.9.0.post0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2023.3)
 Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=2.0.0-&gt;ortools) (1.16.0)
@@ -287,18 +283,13 @@ Downloading ortools-9.12.4544-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/25.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━ <span class=" -Color -Color-Green">22.5/25.0 MB</span> <span class=" -Color -Color-Red">146.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">24.9/25.0 MB</span> <span class=" -Color -Color-Red">138.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.0/25.0 MB</span> <span class=" -Color -Color-Red">118.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.0/25.0 MB</span> <span class=" -Color -Color-Red">109.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading absl_py-2.1.0-py3-none-any.whl (133 kB)
 Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
+Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: protobuf, immutabledict, absl-py, ortools
@@ -319,20 +310,20 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 <section id="id2">
 <h2><span class="section-number">36.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p><strong>线性规划</strong> 问题旨在在一组线性等式和/或不等式约束下，最大化或最小化一个线性目标函数。</p>
-<p>线性程序成对出现：</p>
+<p>线性规划问题是成对出现的：</p>
 <ul class="simple">
 <li><p>一个原始的 <strong>原始</strong> 问题，以及</p></li>
 <li><p>一个相关的 <strong>对偶</strong> 问题。</p></li>
 </ul>
 <p>如果原始问题涉及 <em>最大化</em>，则对偶问题涉及 <em>最小化</em>。</p>
 <p>如果原始问题涉及 <em>最小化</em>，则对偶问题涉及 <em>最大化</em>。</p>
-<p>我们提供线性程序的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。</p>
+<p>我们提供线性规划的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。</p>
 <p>我们将说明如何使用 <a class="reference external" href="https://scipy.org/">SciPy</a> 和 <a class="reference external" href="https://developers.google.com/optimization">Google OR-Tools</a> 来解决线性规划问题。</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>在另一讲中，我们将使用线性规划方法来解决 <a class="reference external" href="https://tools-techniques.quantecon.org/opt_transport.html" title="(in Python)"><span class="xref std std-doc">最优运输问题</span></a>。</p>
 </div>
-<p>让我们先进行一些标准的导入。</p>
+<p>让我们先进行一些导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -404,6 +395,7 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
 <span class="c1">#绘制约束</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
@@ -475,7 +467,7 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fbc57491c80&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f7187839a70&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -515,7 +507,7 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 <section id="id5">
 <h2><span class="section-number">36.3. </span>示例 2：投资问题<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>我们现在考虑一个由 <span id="id6">[<a class="reference internal" href="zreferences.html#id64" title="Y. Hu, Y. &amp; Guo. Operations research. Tsinghua University Press, 5th edition, 2018.">Hu, 2018</a>]</span> 提出的并解决的问题。</p>
-<p>一个共同基金有 <span class="math notranslate nohighlight">\(100,000 美元\)</span> 可在三年内投资。</p>
+<p>一个共同基金有 $100,000 美元 可在三年内投资。</p>
 <p>有三种投资选择可供选择：</p>
 <ol class="arabic simple">
 <li><p>年金：基金可以在每年的开始支付相同金额的新资本，并在第三年末获得投资总资本的130%的收益。一旦共同基金决定投资于此年金，它必须在三年内持续投资。</p></li>
@@ -636,7 +628,7 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fbc57de5020&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f7186d5bcf0&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -690,7 +682,7 @@ Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
 <p>为了</p>
 <ul class="simple">
 <li><p>统一最初以表面不同形式表述的线性规划问题，以及</p></li>
-<li><p>拥有一种便于放入黑盒软件包的形式，</p></li>
+<li><p>拥有一种便于放入程序的统一形式，</p></li>
 </ul>
 <p>花一些精力来描述 <strong>标准形式</strong> 是很有用的。</p>
 <p>我们的标准形式是：</p>
@@ -727,7 +719,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
  &amp; x \geq 0\\
 \end{aligned}
 \end{split}\]</div>
-<p>这里，<span class="math notranslate nohighlight">\(Ax = b\)</span> 意味着 <span class="math notranslate nohighlight">\(Ax\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素等于 <span class="math notranslate nohighlight">\(b\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素，对于每个 <span class="math notranslate nohighlight">\(i\)</span> 都成立。</p>
+<p>这里，<span class="math notranslate nohighlight">\(Ax = b\)</span> 意味着 <span class="math notranslate nohighlight">\(Ax\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素等于 <span class="math notranslate nohighlight">\(b\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素，这个等式对于每个 <span class="math notranslate nohighlight">\(i\)</span> 都成立。</p>
 <p>同样，<span class="math notranslate nohighlight">\(x \geq 0\)</span> 意味着 <span class="math notranslate nohighlight">\(x_j\)</span> 对于每个 <span class="math notranslate nohighlight">\(j\)</span> 都大于等于 <span class="math notranslate nohighlight">\(0\)</span>。</p>
 <section id="id9">
 <h3><span class="section-number">36.4.1. </span>有用的变换<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
@@ -794,7 +786,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 </div>
-<p>一旦我们解决了问题，就可以使用布尔属性 <code class="docutils literal notranslate"><span class="pre">success</span></code> 检查求解器是否成功解决了该问题。如果成功，则 <code class="docutils literal notranslate"><span class="pre">success</span></code> 属性被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
+<p>一旦我们解决了问题，就可以使用布尔属性 <code class="docutils literal notranslate"><span class="pre">success</span></code> 查看求解器是否成功解决了该问题。如果成功，则 <code class="docutils literal notranslate"><span class="pre">success</span></code> 属性被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解决问题</span>
@@ -978,7 +970,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fbc57353630&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f7186d6c090&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1069,7 +1061,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fbc57352ee0&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f7186d6c2d0&gt; &gt;
 </pre></div>
 </div>
 </div>

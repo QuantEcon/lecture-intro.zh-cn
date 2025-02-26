@@ -265,16 +265,16 @@
 <p>经济学和金融学中的许多问题都需要解线性方程。</p>
 <p>在本讲座中，我们将讨论线性方程及其应用。</p>
 <p>为了说明线性方程的重要性，我们从一个两种商品的供需模型开始。</p>
-<p>两种商品的情况非常简单，可以手动计算解。</p>
+<p>两种商品的情况非常简单，可以手动计算求解。</p>
 <p>但我们经常需要考虑包含多种商品的市场。</p>
 <p>在多种商品的情况下，我们面对的是大型线性方程组，有许多方程和未知数。</p>
-<p>为了处理这样的系统，我们需要两样东西：</p>
+<p>为了处理这样的系统，我们需要两样知识：</p>
 <ul class="simple">
 <li><p>矩阵代数（以及如何使用它的知识）以及</p></li>
 <li><p>将矩阵代数应用于感兴趣问题的计算机代码。</p></li>
 </ul>
 <p>本讲座涵盖了这些步骤。</p>
-<p>我们将使用以下的库：</p>
+<p>我们将使用以下函数库：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -306,15 +306,15 @@
     q_0^d = 100 - 10 p_0 - 5 p_1 \\
     q_1^d = 50 - p_0 - 10 p_1
 \end{aligned}\end{split}\]</div>
-<p>（我们假设当任一商品的价格上涨时需求会下降，但其他情况也是可能的。）
-让我们假设供给由以下方程给出：</p>
+<p>（我们假设当任一商品的价格上涨时需求会下降，但其他情况也是可能的。）</p>
+<p>让我们假设供给由以下方程给出：</p>
 <div class="math notranslate nohighlight" id="equation-two-eq-supply">
 <span class="eqno">(8.2)<a class="headerlink" href="#equation-two-eq-supply" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
     q_0^s = 10 p_0 + 5 p_1 \\
     q_1^s = 5 p_0 + 10 p_1
 \end{aligned}\end{split}\]</div>
 <p>当供给等于需求时（<span class="math notranslate nohighlight">\(q_0^s = q_0^d\)</span> 和 <span class="math notranslate nohighlight">\(q_1^s = q_1^d\)</span>），市场达到均衡。</p>
-<p>这产生了以下线性系统：</p>
+<p>这产生了以下线性方程组：</p>
 <div class="math notranslate nohighlight" id="equation-two-equilibrium">
 <span class="eqno">(8.3)<a class="headerlink" href="#equation-two-equilibrium" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
     100 - 10 p_0 - 5 p_1 = 10 p_0 + 5 p_1 \\
@@ -568,10 +568,10 @@ x + y =
 </div>
 </div>
 <p>在Python中，向量可以用列表或元组表示，
-例如 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">(2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code>。</p>
+例如 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">(2,</span> <span class="pre">4,</span> <span class="pre">6)</span></code>。</p>
 <p>然而，更常见的是用
 <a class="reference external" href="https://python-programming.quantecon.org/numpy.html#numpy-arrays">NumPy数组</a>来表示向量。</p>
-<p>NumPy数组的一个优点是标量乘法和加法具有非常自然的语法。</p>
+<p>使用NumPy数组的一个优点是标量乘法和加法的语法非常自然。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>            <span class="c1"># 三个元素为一的向量</span>
@@ -676,8 +676,8 @@ x^\top y =
 </section>
 <section id="id9">
 <h2><span class="section-number">8.4. </span>矩阵运算<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
-<p id="index-6">当我们讨论线性价格系统时，我们提到了使用矩阵代数。</p>
-<p>矩阵代数类似于数字代数。</p>
+<p id="index-6">当我们讨论线性价格方程组时，我们提到了使用矩阵代数。</p>
+<p>矩阵代数类似于算术代数。</p>
 <p>让我们回顾一些细节。</p>
 <section id="id10">
 <h3><span class="section-number">8.4.1. </span>加法和标量乘法<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
@@ -789,7 +789,7 @@ Ax =
 \end{split}\]</div>
 </section>
 </div><p>作为一个重要的特殊情况，考虑将 <span class="math notranslate nohighlight">\(n \times k\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(k \times 1\)</span> 列向量 <span class="math notranslate nohighlight">\(x\)</span> 相乘。</p>
-<p>根据前面的规则，这给我们一个 <span class="math notranslate nohighlight">\(n \times 1\)</span> 列向量。</p>
+<p>根据前面的规则，结果是一个 <span class="math notranslate nohighlight">\(n \times 1\)</span> 列向量。</p>
 <div class="math notranslate nohighlight" id="equation-la-atx">
 <span class="eqno">(8.4)<a class="headerlink" href="#equation-la-atx" title="Permalink to this equation">#</a></span>\[\begin{split}A x =
 {\begin{bmatrix}
@@ -837,7 +837,7 @@ AB =
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>与数字乘积不同，<span class="math notranslate nohighlight">\(A B\)</span> 和 <span class="math notranslate nohighlight">\(B A\)</span> 通常不是同一件事。</p>
+<p>与数字乘积不同，<span class="math notranslate nohighlight">\(A B\)</span> 和 <span class="math notranslate nohighlight">\(B A\)</span> 通常不相等。</p>
 </div>
 <p>一个重要的特殊情况是<a class="reference external" href="https://en.wikipedia.org/wiki/Identity_matrix">单位矩阵</a>，它在主对角线上有 1，其他地方都是 0：</p>
 <div class="math notranslate nohighlight">
@@ -849,7 +849,7 @@ AB =
         0 &amp;  \cdots &amp; 1
     \end{bmatrix}
 \end{split}\]</div>
-<p>验证以下内容是一个有用的练习：</p>
+<p>作为练习请验证以下内容：</p>
 <ul class="simple">
 <li><p>如果 <span class="math notranslate nohighlight">\(A\)</span> 是 <span class="math notranslate nohighlight">\(n \times k\)</span> 矩阵，<span class="math notranslate nohighlight">\(I\)</span> 是 <span class="math notranslate nohighlight">\(k \times k\)</span> 单位矩阵，那么 <span class="math notranslate nohighlight">\(AI = A\)</span>，并且</p></li>
 <li><p>如果 <span class="math notranslate nohighlight">\(I\)</span> 是 <span class="math notranslate nohighlight">\(n \times n\)</span> 单位矩阵，那么 <span class="math notranslate nohighlight">\(IA = A\)</span>。</p></li>
@@ -944,8 +944,8 @@ AB =
 <section id="id12">
 <h3><span class="section-number">8.4.4. </span>矩阵形式的两种商品模型<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
 <p>我们现在可以重新审视两种商品模型，并通过矩阵代数数值求解 <a class="reference internal" href="#equation-two-equilibrium">(8.3)</a> 方程。</p>
-<p>这涉及一些额外的步骤，但这种方法广泛适用 — 正如我们在包含更多商品时将看到的那样。
-首先，我们将 <a class="reference internal" href="#equation-two-eq-demand">(8.1)</a> 重写为</p>
+<p>这涉及一些额外的步骤，但这种方法广泛适用，我们将在求解包含更多商品时用上。</p>
+<p>首先，我们将 <a class="reference internal" href="#equation-two-eq-demand">(8.1)</a> 重写为</p>
 <div class="math notranslate nohighlight" id="equation-two-eq-demand-mat">
 <span class="eqno">(8.5)<a class="headerlink" href="#equation-two-eq-demand-mat" title="Permalink to this equation">#</a></span>\[\begin{split}    q^d = D p + h
     \quad \text{where} \quad
@@ -993,11 +993,11 @@ AB =
 \[
     (C - D) p = h.
 \]</div>
-<p>如果所有项都是数字，我们可以求解价格为 <span class="math notranslate nohighlight">\(p = h / (C-D)\)</span>。
-矩阵代数允许我们做类似的事情：我们可以使用 <span class="math notranslate nohighlight">\(C - D\)</span> 的逆矩阵来求解均衡价格：</p>
+<p>如果所有项都是数字，我们可以求解价格为 <span class="math notranslate nohighlight">\(p = h / (C-D)\)</span>。</p>
+<p>矩阵代数允许我们做类似的事情：我们可以使用 <span class="math notranslate nohighlight">\(C - D\)</span> 的逆矩阵来求解均衡价格：</p>
 <div class="math notranslate nohighlight" id="equation-two-matrix">
 <span class="eqno">(8.7)<a class="headerlink" href="#equation-two-matrix" title="Permalink to this equation">#</a></span>\[p = (C - D)^{-1} h.\]</div>
-<p>在我们实施解决方案之前，让我们考虑一个更一般的设置。</p>
+<p>在我们实施解决方案之前，让我们考虑一个更一般的问题。</p>
 </section>
 <section id="id13">
 <h3><span class="section-number">8.4.5. </span>更多商品<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
@@ -1131,7 +1131,7 @@ AB =
 <p>在这种情况下，矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的行被称为<strong>线性相关的。</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>高级读者可以在<a class="reference external" href="https://python.quantecon.org/linear_algebra.html#linear-independence">这里</a>找到关于线性相关和线性无关的详细解释。</p>
+<p>读者可以在<a class="reference external" href="https://python.quantecon.org/linear_algebra.html#linear-independence">这里</a>找到关于线性相关和线性无关的详细解释。</p>
 <p>但在接下来的内容中不需要这些细节。</p>
 </div>
 </section>
@@ -1174,7 +1174,7 @@ AB =
 <p>当且仅当 <span class="math notranslate nohighlight">\(A\)</span> 的行和列是线性无关的，方阵 <span class="math notranslate nohighlight">\(A\)</span> 才是非奇异的。</p>
 <p>关于矩阵逆的更详细解释可以在<a class="reference external" href="https://www.mathsisfun.com/algebra/matrix-inverse.html">这里</a>找到。</p>
 <p>你可以自己检查 <a class="reference internal" href="#equation-no-soln">(8.12)</a> 和 <a class="reference internal" href="#equation-many-solns">(8.13)</a> 中具有线性相关行的矩阵是奇异矩阵。</p>
-<p>这为我们提供了一个有用的单数值概括，用来判断一个方阵是否可逆。</p>
+<p>这为我们提供了一个有用的单数值标准，用来判断一个方阵是否可逆。</p>
 <p>特别地，方阵 <span class="math notranslate nohighlight">\(A\)</span> 具有非零行列式，当且仅当它具有<em>逆矩阵</em> <span class="math notranslate nohighlight">\(A^{-1}\)</span>，满足 <span class="math notranslate nohighlight">\(A A^{-1} = A^{-1} A = I\)</span>。</p>
 <p>因此，如果我们用 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 左乘 <span class="math notranslate nohighlight">\(Ax = b\)</span> 的两边，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-la-se-inv">
@@ -1183,7 +1183,7 @@ AB =
 </section>
 <section id="id19">
 <h3><span class="section-number">8.5.4. </span>使用NumPy求解线性方程<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
-<p id="index-9">在两个好的例子中，我们得到了矩阵方程：</p>
+<p id="index-9">根据上述例子中，我们得到了矩阵方程：</p>
 <div class="math notranslate nohighlight">
 \[
 p = (C-D)^{-1} h.
@@ -1191,7 +1191,7 @@ p = (C-D)^{-1} h.
 <p>其中 <span class="math notranslate nohighlight">\(C\)</span>、<span class="math notranslate nohighlight">\(D\)</span> 和 <span class="math notranslate nohighlight">\(h\)</span> 由 <a class="reference internal" href="#equation-two-eq-demand-mat">(8.5)</a> 和 <a class="reference internal" href="#equation-two-eq-supply-mat">(8.6)</a> 给出。</p>
 <p>这个方程类似于 <a class="reference internal" href="#equation-la-se-inv">(8.14)</a>，其中 <span class="math notranslate nohighlight">\(A = (C-D)^{-1}\)</span>，<span class="math notranslate nohighlight">\(b = h\)</span>，且 <span class="math notranslate nohighlight">\(x = p\)</span>。</p>
 <p>我们现在可以使用NumPy的<code class="docutils literal notranslate"><span class="pre">linalg</span></code>子模块求解均衡价格。</p>
-<p>所有这些程序都是经过时间检验和高度优化的FORTRAN代码的Python前端。</p>
+<p>所有这些程序都是经过时间考验和高度优化的FORTRAN代码的Python前端。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>      <span class="c1"># 矩阵 C</span>
@@ -1200,7 +1200,7 @@ p = (C-D)^{-1} h.
 </div>
 </div>
 </div>
-<p>Now we change this to a NumPy array.</p>
+<p>现在我们把它录入到NumPy数组中。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
@@ -1345,7 +1345,7 @@ p = (C-D)^{-1} h.
 \end{split}\]</div>
 <p>当供给等于需求时，市场达到均衡，即 <span class="math notranslate nohighlight">\(q_0^d = q_0^s\)</span>，<span class="math notranslate nohighlight">\(q_1^d = q_1^s\)</span> 和 <span class="math notranslate nohighlight">\(q_2^d = q_2^s\)</span>。</p>
 <ol class="arabic simple">
-<li><p>将市场设置为线性方程组。</p></li>
+<li><p>将市场均衡条件设置为线性方程组。</p></li>
 <li><p>使用矩阵代数求解均衡价格。分别使用 <code class="docutils literal notranslate"><span class="pre">numpy.linalg.solve</span></code> 和 <code class="docutils literal notranslate"><span class="pre">inv(A)</span></code> 方法来做这个。比较这两种解法。</p></li>
 </ol>
 </section>
@@ -1641,8 +1641,8 @@ p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
 </div>
 <section id="id21">
 <h3><span class="section-number">8.6.1. </span>延伸阅读<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code> 子模块的文档可以在<a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html">这里</a>找到。</p>
-<p>线性代数的更高级主题可以在<a class="reference external" href="https://python.quantecon.org/linear_algebra.html#id5">这里</a>找到。</p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code> 子模块的文档可以阅读<a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html">这里</a>。</p>
+<p>如果对更高级的线性代数知识感兴趣可以继续阅读<a class="reference external" href="https://python.quantecon.org/linear_algebra.html#id5">这里</a>。</p>
 </section>
 </section>
 </section>

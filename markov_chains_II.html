@@ -242,7 +242,7 @@
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">34. </span>马尔科夫链：不可约性与遍历性<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p id="index-0">除了 Anaconda 中的库外，这个讲座还需要以下库：</p>
+<p id="index-0">除了 Anaconda 中的函数库外，这个讲座还需要以下函数库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -264,9 +264,7 @@ Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/l
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
@@ -276,17 +274,17 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 <section id="id2">
 <h2><span class="section-number">34.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>本讲座是我们<a class="reference internal" href="markov_chains_I.html"><span class="doc">早期关于马尔科夫链的讲座</span></a>的延续。</p>
+<p>本讲座是我们<a class="reference internal" href="markov_chains_I.html"><span class="doc">之前关于马尔科夫链的讲座</span></a>的延续。</p>
 <p>具体来说，我们将介绍不可约性和遍历性的概念，并了解它们与平稳性的联系。</p>
-<p>不可约性描述了马尔科夫链在系统中移动任意两个状态之间的能力。</p>
-<p>遍历性是一种样本路径属性，描述了系统在长时间内的行为。</p>
+<p>不可约性描述了马尔科夫链在系统中任意两个状态之间移动的能力。</p>
+<p>遍历性是一种样本路径性质，描述了系统在长时间内的行为。</p>
 <p>正如我们将看到的：</p>
 <ul class="simple">
-<li><p>不可约的马尔科夫链保证存在唯一的平稳分布，而</p></li>
-<li><p>遍历的马尔科夫链生成满足大数定律版本的时间序列。</p></li>
+<li><p>不可约的马尔科夫链保证唯一的平稳分布存在，而</p></li>
+<li><p>具有遍历性的马尔科夫链可以生成满足大数定律的时间序列。</p></li>
 </ul>
-<p>这些概念一起为理解马尔科夫链的长期行为提供了基础。</p>
-<p>让我们从一些标准导入开始：</p>
+<p>这些概念一起为理解马尔科夫链的长期表现提供了基础。</p>
+<p>让我们从一些通常的函数库导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -305,20 +303,20 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <section id="mc-irreducible">
 <span id="id3"></span><h2><span class="section-number">34.2. </span>不可约性<a class="headerlink" href="#mc-irreducible" title="Permalink to this heading">#</a></h2>
 <p>为了解释不可约性，让我们设 <span class="math notranslate nohighlight">\(P\)</span> 为一个固定的随机矩阵。</p>
-<p>如果对于某个整数 <span class="math notranslate nohighlight">\(t\ge 0\)</span>，<span class="math notranslate nohighlight">\(P^t(x,y)&gt;0\)</span>，则称状态 <span class="math notranslate nohighlight">\(x\)</span> 对状态 <span class="math notranslate nohighlight">\(y\)</span> 是<strong>可达的</strong>。</p>
-<p>当状态 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 彼此可达时，称它们<strong>相互沟通</strong>。</p>
+<p>如果对于某个整数 <span class="math notranslate nohighlight">\(t\ge 0\)</span>，<span class="math notranslate nohighlight">\(P^t(x,y)&gt;0\)</span>，则称状态 <span class="math notranslate nohighlight">\(x\)</span> 对状态 <span class="math notranslate nohighlight">\(y\)</span> 是<strong>可达</strong>的。</p>
+<p>当状态 <span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 彼此可达时，称它们<strong>互通</strong>。</p>
 <p>根据我们<a class="reference internal" href="markov_chains_I.html#finite-mc-mstp"><span class="std std-ref">前面讨论的</span></a>，这正意味着</p>
 <ul class="simple">
 <li><p>状态 <span class="math notranslate nohighlight">\(x\)</span> 最终可以从状态 <span class="math notranslate nohighlight">\(y\)</span> 到达，且</p></li>
 <li><p>状态 <span class="math notranslate nohighlight">\(y\)</span> 最终可以从状态 <span class="math notranslate nohighlight">\(x\)</span> 到达。</p></li>
 </ul>
-<p>如果所有状态都相互沟通，则称随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 是<strong>不可约的</strong>，即对于所有 <span class="math notranslate nohighlight">\((x, y)\)</span> 在 <span class="math notranslate nohighlight">\(S \times S\)</span> 中，<span class="math notranslate nohighlight">\(x\)</span> 和 <span class="math notranslate nohighlight">\(y\)</span> 相互沟通。</p>
+<p>如果所有状态都互通，则称随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 是<strong>不可约</strong>的，即对于所有 在 <span class="math notranslate nohighlight">\(S \times S\)</span> 空间中的 <span class="math notranslate nohighlight">\((x, y)\)</span>，<span class="math notranslate nohighlight">\(x\)</span> 的 <span class="math notranslate nohighlight">\(y\)</span> 互通。</p>
 <div class="proof example admonition" id="mc2_ex_ir">
 <p class="admonition-title"><span class="caption-number">Example 34.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>例如，考虑以下一组虚构家庭的财富转移概率。</p>
+<p>例如，考虑下面虚构的一组家庭的财富状况转移概率。</p>
 <img alt="_images/Irre_1.png" class="align-center" id="mc-irre1" src="_images/Irre_1.png" />
-<p>我们可以将其转化为一个随机矩阵，在没有节点之间边的地方填充零。</p>
+<p>我们可以将其转化为一个随机矩阵，用0填充对应节点之间没有边线连接的地方。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 P :=
@@ -328,9 +326,9 @@ P :=
      0.1 &amp; 0.1 &amp; 0.8
 \end{bmatrix} 
 \end{split}\]</div>
-<p>从图中可以看出，这个随机矩阵是不可约的：我们可以最终从任何状态到达任何其他状态。</p>
+<p>从图中可以看出，这个随机矩阵是不可约的：我们可以最终（步数足够大）从其中任何状态到达任何其他状态。</p>
 </section>
-</div><p>我们还可以使用 <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 的 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> 类来测试这一点：</p>
+</div><p>我们还可以使用 <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 的 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> python类来测试这一点：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
@@ -353,7 +351,7 @@ P :=
 <section class="example-content" id="proof-content">
 <p>这是一个更加悲观的情景，贫困者永远保持贫困。</p>
 <img alt="_images/Irre_2.png" class="align-center" id="mc-irre2" src="_images/Irre_2.png" />
-<p>这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态到达。</p>
+<p>这个随机矩阵不是不可约的，因为例如，富有状态无法从贫困状态直接到达。</p>
 </section>
 </div><p>让我们确认这一点：</p>
 <div class="cell docutils container">
@@ -410,7 +408,7 @@ P :=
 <p id="new-interp-sd">这为我们提供了另一种解释平稳分布的方法（假设不可约性成立）。</p>
 <p>重要的是，这一结果对于任何 <span class="math notranslate nohighlight">\(\psi_0\)</span> 都有效。</p>
 <p>该定理与<a class="reference internal" href="lln_clt.html"><span class="doc">大数定律</span></a>相关。</p>
-<p>它告诉我们，在某些设置中，即使随机变量序列<a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">不是独立同分布</span></a>，大数定律有时也成立。</p>
+<p>它告诉我们，在某些情况中，即使随机变量序列<a class="reference internal" href="lln_clt.html#iid-violation"><span class="std std-ref">不是独立同分布</span></a>，大数定律有时也成立。</p>
 <section id="mc-eg1-2">
 <span id="id8"></span><h3><span class="section-number">34.3.1. </span>示例：遍历性与失业<a class="headerlink" href="#mc-eg1-2" title="Permalink to this heading">#</a></h3>
 <p>回顾我们关于就业/失业模型的截面解释<a class="reference internal" href="markov_chains_I.html#mc-eg1-1"><span class="std std-ref">之前讨论过</span></a>。</p>
@@ -464,7 +462,7 @@ p = \frac{\beta}{\alpha + \beta}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/774b8e7302fd49693cc43487b6f1e204969b0877c4524e3cf614cc6bb18fe5aa.png"><img alt="_images/774b8e7302fd49693cc43487b6f1e204969b0877c4524e3cf614cc6bb18fe5aa.png" src="_images/774b8e7302fd49693cc43487b6f1e204969b0877c4524e3cf614cc6bb18fe5aa.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a64bbafcbb9b88d8e77eac7beef6fbb1694820473724b696de92820b74549017.png"><img alt="_images/a64bbafcbb9b88d8e77eac7beef6fbb1694820473724b696de92820b74549017.png" src="_images/a64bbafcbb9b88d8e77eac7beef6fbb1694820473724b696de92820b74549017.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>你可能想尝试将 <span class="math notranslate nohighlight">\(x=1\)</span> 改为 <span class="math notranslate nohighlight">\(x=0\)</span> 或 <span class="math notranslate nohighlight">\(x=2\)</span>。</p>
@@ -486,7 +484,7 @@ P :=
 \end{split}\]</div>
 <p>转移图表明该模型是不可约的。</p>
 <img alt="_images/example4.png" class="align-center" id="mc-example4" src="_images/example4.png" />
-<p>请注意，这里有一个周期循环——状态以规则的方式在两个状态之间循环。</p>
+<p>请注意，这里有一个周期循环——当前状态以规则的方式在两个状态之间循环。</p>
 </section>
 </div><p>毫不奇怪，这种属性被称为<a class="reference external" href="https://stats.libretexts.org/Bookshelves/Probability_Theory/Probability_Mathematical_Statistics_and_Stochastic_Processes_(Siegrist)/16%3A_Markov_Processes/16.05%3A_Periodicity_of_Discrete-Time_Chains">周期性</a>。</p>
 <p>尽管如此，该模型是不可约的，因此遍历性成立。</p>
@@ -512,7 +510,7 @@ P :=
         <span class="c1"># 从不同的 x_0 生成时间序列</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
         <span class="n">p_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
 
     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -521,12 +519,6 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-/tmp/ipykernel_8174/2634713776.py:20: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-  axes[i].plot(p_hat, label=f&#39;$x_0 = \, {x0} $&#39;)
-</pre></div>
-</div>
 <a class="reference internal image-reference" href="_images/4b6f6501fe917971cc882cd9c1e9beab89b635e6be7f6d45f20b70e3f4836f56.png"><img alt="_images/4b6f6501fe917971cc882cd9c1e9beab89b635e6be7f6d45f20b70e3f4836f56.png" src="_images/4b6f6501fe917971cc882cd9c1e9beab89b635e6be7f6d45f20b70e3f4836f56.png" style="width: 80%;" /></a>
 </div>
 </div>
@@ -630,7 +622,7 @@ P:=
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>展示该过程是渐近平稳的，并计算平稳分布的近似值。</p></li>
+<li><p>证明该过程是渐近平稳的，并计算平稳分布的近似值。</p></li>
 <li><p>使用模拟来说明遍历性。</p></li>
 </ol>
 </section>
@@ -721,7 +713,7 @@ P:=
 <a class="reference internal image-reference" href="_images/5ac3db48e7be0976893752b1833126931cb7c69b2234e8009227c1ef91d7e3d9.png"><img alt="_images/5ac3db48e7be0976893752b1833126931cb7c69b2234e8009227c1ef91d7e3d9.png" src="_images/5ac3db48e7be0976893752b1833126931cb7c69b2234e8009227c1ef91d7e3d9.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>注意，花费在每个状态的时间比例收敛到平稳分布为该状态分配的概率。</p>
+<p>注意，花费在每个状态的时间比例收敛到对应平稳分布下该状态的概率。</p>
 </section>
 </div>
 <div class="exercise admonition" id="mc_ex2">
@@ -742,13 +734,13 @@ P :=
 \[
 p := \frac{\beta}{\alpha + \beta}
 \]</div>
-<p>换句话说，如果 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 表示工人的马尔科夫链，那么 <span class="math notranslate nohighlight">\(\bar X_m \to p\)</span> 当 <span class="math notranslate nohighlight">\(m \to \infty\)</span>，其中</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 表示就业状态的马尔科夫链，那么当 <span class="math notranslate nohighlight">\(m \to \infty\)</span>， <span class="math notranslate nohighlight">\(\bar X_m \to p\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[
 \bar X_m := \frac{1}{m} \sum_{t = 1}^m \mathbb{1}\{X_t = 0\}
 \]</div>
-<p>本练习要求您通过计算大 <span class="math notranslate nohighlight">\(m\)</span> 时的 <span class="math notranslate nohighlight">\(\bar X_m\)</span> 来说明收敛性，并检查其是否接近 <span class="math notranslate nohighlight">\(p\)</span>。</p>
-<p>您会看到无论初始条件或 <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> 的选择如何，只要它们都位于 <span class="math notranslate nohighlight">\((0,1)\)</span> 区间内，此结论都成立。</p>
+<p>本练习要求您通过计算 <span class="math notranslate nohighlight">\(m\)</span> 充分大时的 <span class="math notranslate nohighlight">\(\bar X_m\)</span> 来说明收敛性，并检查其是否接近 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>会看到无论初始条件或 <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> 的值如何，只要它们都位于 <span class="math notranslate nohighlight">\((0,1)\)</span> 区间内，此结论都成立。</p>
 <p>结果应与我们在<a class="reference internal" href="#ergo"><span class="std std-ref">这里</span></a>绘制的图类似。</p>
 </section>
 </div>
@@ -757,7 +749,7 @@ p := \frac{\beta}{\alpha + \beta}
 <p class="admonition-title">Solution to<a class="reference internal" href="#mc_ex2"> Exercise 34.2</a></p>
 <section id="solution-content">
 <p>我们将以图形方式解决此练习。</p>
-<p>图显示了 <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> 的时间序列，对于两个初始条件。</p>
+<p>图显示了对于两个初始条件 <span class="math notranslate nohighlight">\(\bar X_m - p\)</span> 的时间序列。</p>
 <p>当 <span class="math notranslate nohighlight">\(m\)</span> 变大时，两个序列都收敛到零。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -778,7 +770,7 @@ p := \frac{\beta}{\alpha + \beta}
     <span class="c1"># 计算每个 n 的失业时间比例</span>
     <span class="n">X_bar</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1"># 绘图</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_bar</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_bar</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$x_0 = \, </span><span class="si">{</span><span class="n">x0</span><span class="si">}</span><span class="s1"> $&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\bar X_m - \psi^* (x)$&#39;</span><span class="p">)</span>
     
@@ -788,13 +780,7 @@ p := \frac{\beta}{\alpha + \beta}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:18: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-&lt;&gt;:18: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-/tmp/ipykernel_8174/835660966.py:18: SyntaxWarning: invalid escape sequence &#39;\,&#39;
-  ax.plot(X_bar - p, label=f&#39;$x_0 = \, {x0} $&#39;)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/3c5e742cb168bd044121d090ad5c3d2d7b656646e3cda95bd6d94953d038da01.png"><img alt="_images/3c5e742cb168bd044121d090ad5c3d2d7b656646e3cda95bd6d94953d038da01.png" src="_images/3c5e742cb168bd044121d090ad5c3d2d7b656646e3cda95bd6d94953d038da01.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0ac4576a34cc829c695578a6dc51c8d8bc6d668891dd728e690ab0a1b5848fef.png"><img alt="_images/0ac4576a34cc829c695578a6dc51c8d8bc6d668891dd728e690ab0a1b5848fef.png" src="_images/0ac4576a34cc829c695578a6dc51c8d8bc6d668891dd728e690ab0a1b5848fef.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -804,10 +790,10 @@ p := \frac{\beta}{\alpha + \beta}
 <p class="admonition-title"><span class="caption-number">Exercise 34.3 </span></p>
 <section id="exercise-content">
 <p>在 <code class="docutils literal notranslate"><span class="pre">quantecon</span></code> 库中，通过检查链是否形成<a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.components.is_strongly_connected.html">强连通分量</a>来测试不可约性。</p>
-<p>另一种测试不可约性的方法是通过以下陈述：</p>
+<p>另一种测试不可约性的方法是通过以下定理：</p>
 <p>当且仅当 <span class="math notranslate nohighlight">\(\sum_{k=0}^{n-1}A^k\)</span> 是严格正矩阵时，<span class="math notranslate nohighlight">\(n \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 是不可约的。</p>
 <p>（参见<span id="id14">[<a class="reference internal" href="zreferences.html#id277" title="Dongmei Zhao. Power Distribution and Performance Analysis for Wireless Communication Networks. SpringerBriefs in Computer Science. Springer US, Boston, MA, 2012. ISBN 978-1-4614-3283-8 978-1-4614-3284-5. URL: https://link.springer.com/10.1007/978-1-4614-3284-5 (visited on 2023-02-03), doi:10.1007/978-1-4614-3284-5.">Zhao, 2012</a>]</span> 和 <a class="reference external" href="https://math.stackexchange.com/questions/3336616/how-to-prove-this-matrix-is-a-irreducible-matrix">此 StackExchange 讨论</a>）</p>
-<p>根据此断言，编写一个函数来测试不可约性。</p>
+<p>根据此定理，编写一个函数来测试不可约性。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="markov_chains_II-solution-10">

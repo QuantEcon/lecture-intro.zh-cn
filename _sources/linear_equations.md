@@ -24,20 +24,20 @@ kernelspec:
 
 为了说明线性方程的重要性，我们从一个两种商品的供需模型开始。
 
-两种商品的情况非常简单，可以手动计算解。
+两种商品的情况非常简单，可以手动计算求解。
 
 但我们经常需要考虑包含多种商品的市场。
 
 在多种商品的情况下，我们面对的是大型线性方程组，有许多方程和未知数。
 
-为了处理这样的系统，我们需要两样东西：
+为了处理这样的系统，我们需要两样知识：
 
 * 矩阵代数（以及如何使用它的知识）以及
 * 将矩阵代数应用于感兴趣问题的计算机代码。
 
 本讲座涵盖了这些步骤。
 
-我们将使用以下的库：
+我们将使用以下函数库：
 
 ```{code-cell} ipython3
 import numpy as np
@@ -73,6 +73,7 @@ import matplotlib.pyplot as plt
 ```
 
 （我们假设当任一商品的价格上涨时需求会下降，但其他情况也是可能的。）
+
 让我们假设供给由以下方程给出：
 
 
@@ -87,7 +88,7 @@ import matplotlib.pyplot as plt
 
 当供给等于需求时（$q_0^s = q_0^d$ 和 $q_1^s = q_1^d$），市场达到均衡。
 
-这产生了以下线性系统：
+这产生了以下线性方程组：
 
 ```{math}
 :label: two_equilibrium
@@ -338,12 +339,12 @@ plt.show()
 ```
 
 在Python中，向量可以用列表或元组表示，
-例如 `x = [2, 4, 6]` 或 `x = (2, 4, 6]`。
+例如 `x = [2, 4, 6]` 或 `x = (2, 4, 6)`。
 
 然而，更常见的是用
 [NumPy数组](https://python-programming.quantecon.org/numpy.html#numpy-arrays)来表示向量。
 
-NumPy数组的一个优点是标量乘法和加法具有非常自然的语法。
+使用NumPy数组的一个优点是标量乘法和加法的语法非常自然。
 
 ```{code-cell} ipython3
 x = np.ones(3)            # 三个元素为一的向量
@@ -411,9 +412,9 @@ np.linalg.norm(x)      # x的范数，方法二
 ```{index} single: Matrix; Operations
 ```
 
-当我们讨论线性价格系统时，我们提到了使用矩阵代数。
+当我们讨论线性价格方程组时，我们提到了使用矩阵代数。
 
-矩阵代数类似于数字代数。
+矩阵代数类似于算术代数。
 
 让我们回顾一些细节。
 
@@ -538,7 +539,7 @@ $$
 
 作为一个重要的特殊情况，考虑将 $n \times k$ 矩阵 $A$ 和 $k \times 1$ 列向量 $x$ 相乘。
 
-根据前面的规则，这给我们一个 $n \times 1$ 列向量。
+根据前面的规则，结果是一个 $n \times 1$ 列向量。
 
 ```{math}
 :label: la_atx
@@ -591,7 +592,7 @@ $$
 * [维基百科页面](https://en.wikipedia.org/wiki/Matrix_multiplication)上的讨论。
 
 ```{note}
-与数字乘积不同，$A B$ 和 $B A$ 通常不是同一件事。
+与数字乘积不同，$A B$ 和 $B A$ 通常不相等。
 ```
 
 一个重要的特殊情况是[单位矩阵](https://en.wikipedia.org/wiki/Identity_matrix)，它在主对角线上有 1，其他地方都是 0：
@@ -605,7 +606,7 @@ $$
     \end{bmatrix}
 $$
 
-验证以下内容是一个有用的练习：
+作为练习请验证以下内容：
 
 * 如果 $A$ 是 $n \times k$ 矩阵，$I$ 是 $k \times k$ 单位矩阵，那么 $AI = A$，并且
 * 如果 $I$ 是 $n \times n$ 单位矩阵，那么 $IA = A$。
@@ -666,7 +667,8 @@ A + B
 
 我们现在可以重新审视两种商品模型，并通过矩阵代数数值求解 {eq}`two_equilibrium` 方程。
 
-这涉及一些额外的步骤，但这种方法广泛适用 --- 正如我们在包含更多商品时将看到的那样。
+这涉及一些额外的步骤，但这种方法广泛适用，我们将在求解包含更多商品时用上。
+
 首先，我们将 {eq}`two_eq_demand` 重写为
 
 ```{math}
@@ -730,6 +732,7 @@ $$
 $$
 
 如果所有项都是数字，我们可以求解价格为 $p = h / (C-D)$。
+
 矩阵代数允许我们做类似的事情：我们可以使用 $C - D$ 的逆矩阵来求解均衡价格：
 
 ```{math}
@@ -738,7 +741,7 @@ $$
 p = (C - D)^{-1} h.
 ```
 
-在我们实施解决方案之前，让我们考虑一个更一般的设置。
+在我们实施解决方案之前，让我们考虑一个更一般的问题。
 
 ### 更多商品
 
@@ -824,6 +827,7 @@ $$
         b_n
     \end{bmatrix}.
 ```
+
 例如，{eq}`n_eq_sys_la` 具有这种形式，其中
 
 $$
@@ -914,7 +918,7 @@ plt.show()
 在这种情况下，矩阵 $A$ 的行被称为**线性相关的。**
 
 ```{note}
-高级读者可以在[这里](https://python.quantecon.org/linear_algebra.html#linear-independence)找到关于线性相关和线性无关的详细解释。
+读者可以在[这里](https://python.quantecon.org/linear_algebra.html#linear-independence)找到关于线性相关和线性无关的详细解释。
 
 但在接下来的内容中不需要这些细节。
 
@@ -975,7 +979,7 @@ $$
 
 你可以自己检查 {eq}`no_soln` 和 {eq}`many_solns` 中具有线性相关行的矩阵是奇异矩阵。
 
-这为我们提供了一个有用的单数值概括，用来判断一个方阵是否可逆。
+这为我们提供了一个有用的单数值标准，用来判断一个方阵是否可逆。
 
 特别地，方阵 $A$ 具有非零行列式，当且仅当它具有*逆矩阵* $A^{-1}$，满足 $A A^{-1} = A^{-1} A = I$。
 
@@ -994,7 +998,7 @@ $$
 ```{index} single: Linear Algebra; SciPy
 ```
 
-在两个好的例子中，我们得到了矩阵方程：
+根据上述例子中，我们得到了矩阵方程：
 
 $$
 p = (C-D)^{-1} h.
@@ -1006,14 +1010,14 @@ $$
 
 我们现在可以使用NumPy的`linalg`子模块求解均衡价格。
 
-所有这些程序都是经过时间检验和高度优化的FORTRAN代码的Python前端。
+所有这些程序都是经过时间考验和高度优化的FORTRAN代码的Python前端。
 
 ```{code-cell} ipython3
 C = ((10, 5),      # 矩阵 C
      (5, 10))
 ```
 
-Now we change this to a NumPy array.
+现在我们把它录入到NumPy数组中。
 
 ```{code-cell} ipython3
 C = np.array(C)
@@ -1066,6 +1070,7 @@ p
 q = C @ p  # 均衡数量
 q
 ```
+
 观察我们如何通过 `inv(A) @ y` 或使用 `solve(A, y)` 来求解 $x = A^{-1} y$。
 
 后一种方法使用了一种不同的算法，在数值上更加稳定，因此应该是默认选项。
@@ -1101,7 +1106,7 @@ $$
 
 当供给等于需求时，市场达到均衡，即 $q_0^d = q_0^s$，$q_1^d = q_1^s$ 和 $q_2^d = q_2^s$。
 
-1. 将市场设置为线性方程组。
+1. 将市场均衡条件设置为线性方程组。
 2. 使用矩阵代数求解均衡价格。分别使用 `numpy.linalg.solve` 和 `inv(A)` 方法来做这个。比较这两种解法。
 
 ```{exercise-end}
@@ -1328,6 +1333,6 @@ plt.show()
 
 ### 延伸阅读
 
-`numpy.linalg` 子模块的文档可以在[这里](https://numpy.org/devdocs/reference/routines.linalg.html)找到。
+`numpy.linalg` 子模块的文档可以阅读[这里](https://numpy.org/devdocs/reference/routines.linalg.html)。
 
-线性代数的更高级主题可以在[这里](https://python.quantecon.org/linear_algebra.html#id5)找到。
+如果对更高级的线性代数知识感兴趣可以继续阅读[这里](https://python.quantecon.org/linear_algebra.html#id5)。

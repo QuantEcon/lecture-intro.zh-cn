@@ -254,8 +254,8 @@
 <li><p>股息</p></li>
 <li><p>生产力等序列的动态。</p></li>
 </ul>
-<p>我们之所以研究 AR(1) 过程，部分是因为它们很有用，部分是因为它们帮助我们理解很多非常重要的概念。</p>
-<p>让我们从一些导入开始：</p>
+<p>AR(1) 过程不仅有广泛的应用，还可以帮助我们理解很多非常重要的概念。</p>
+<p>让我们从一些函数库导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -286,15 +286,15 @@
 <li><p>某个家庭的劳动收入对数，或</p></li>
 <li><p>某个经济体的货币需求对数。</p></li>
 </ul>
-<p>在两种情况下，<a class="reference internal" href="#equation-can-ar1">(32.1)</a> 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 来演变的。</p>
-<p>(我们使用 <span class="math notranslate nohighlight">\(t+1\)</span> 作为 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的下标，因为在时间 <span class="math notranslate nohighlight">\(t\)</span> 这个随机变量还未被观察到。)</p>
+<p>在两种情况任意一种下，<a class="reference internal" href="#equation-can-ar1">(32.1)</a> 显示当前值是通过上一个值的线性函数以及一个独立同分布的冲击 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 来演变的。</p>
+<p>(我们使用 <span class="math notranslate nohighlight">\(t+1\)</span> 作为 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的下标，因为在时间 <span class="math notranslate nohighlight">\(t\)</span> 时这个随机变量还未被观察到。)</p>
 </section>
 </div><p>一旦我们指定一个初始条件 <span class="math notranslate nohighlight">\(X_0\)</span>，我们就可以用<a class="reference internal" href="#equation-can-ar1">(32.1)</a> 生成一个时间序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span>。</p>
-<p>为了使事情变得更简单，我们将假设</p>
+<p>为了使分析变得更简单，我们将假设</p>
 <ul class="simple">
 <li><p>过程 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> 且符合标准正态分布，</p></li>
 <li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 从正态分布 <span class="math notranslate nohighlight">\(N(\mu_0, v_0)\)</span> 中抽取，</p></li>
-<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 与 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 独立。</p></li>
+<li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 独立于 <span class="math notranslate nohighlight">\(\{ W_t \}\)</span> 。</p></li>
 </ul>
 <section id="id3">
 <h3><span class="section-number">32.2.1. </span>移动平均表示<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
@@ -316,16 +316,16 @@ X_t = a X_{t-1} + b +  c W_t
 <li><p>初始条件 <span class="math notranslate nohighlight">\(X_0\)</span> 和</p></li>
 <li><p>从时间 <span class="math notranslate nohighlight">\(t=1\)</span> 到现在的冲击 <span class="math notranslate nohighlight">\(W_1, \ldots W_t\)</span>。</p></li>
 </ul>
-<p>在整个过程中，符号 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将用来指代这个随机变量 <span class="math notranslate nohighlight">\(X_t\)</span> 的密度。</p>
+<p>在整个过程中，符号 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将用来指代这个随机变量 <span class="math notranslate nohighlight">\(X_t\)</span> 的概率密度。</p>
 </section>
 <section id="id4">
 <h3><span class="section-number">32.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>这个模型的一个好处是很容易追踪一系列分布 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>，这些分布对应于时间
-序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 的现实演变。具体来说，我们可以在每个日期 <span class="math notranslate nohighlight">\(t\)</span> 上追踪观测到的 <span class="math notranslate nohighlight">\(X_t\)</span> 的边际分布。</p>
+序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 。具体来说，我们可以在每个日期 <span class="math notranslate nohighlight">\(t\)</span> 上追踪观测到的 <span class="math notranslate nohighlight">\(X_t\)</span> 的边缘分布。</p>
 <p>让我们看看我们如何做到这一点。</p>
 <p>首先我们指出，对于每个时间 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的。</p>
 <p>这是从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 显见的，因为独立正态随机变量的线性组合是正态分布的。</p>
-<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的前两个<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
+<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">一阶矩和二阶矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
 <p>设 <span class="math notranslate nohighlight">\(\mu_t\)</span> 和 <span class="math notranslate nohighlight">\(v_t\)</span> 分别表示 <span class="math notranslate nohighlight">\(X_t\)</span> 的均值和方差。</p>
 <p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 确定这些值，或者我们可以使用以下递归表达式：</p>
 <div class="math notranslate nohighlight" id="equation-dyn-tm">
@@ -340,7 +340,7 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 \[
 \psi_t = N(\mu_t, v_t)
 \]</div>
-<p>下面的代码利用这些事实来追踪边际分布序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>。</p>
+<p>下面的代码利用以上所得来追踪边缘分布序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>。</p>
 <p>参数是</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -365,7 +365,7 @@ v_{t+1} = a^2 v_t + c^2\]</div>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">b</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="p">)),</span>
-            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$\psi_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$\psi_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span>
             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">[</span><span class="mf">1.05</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">borderaxespad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -375,12 +375,6 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:12: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-&lt;&gt;:12: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-/tmp/ipykernel_7208/1737174689.py:12: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-  label=f&quot;$\psi_{t}$&quot;,
-</pre></div>
-</div>
 <a class="reference internal image-reference" href="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png"><img alt="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png" src="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png" style="width: 80%;" /></a>
 </div>
 </div>
@@ -389,11 +383,11 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 <section id="id5">
 <h2><span class="section-number">32.3. </span>平稳性和渐近稳定性<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>当我们使用模型来研究现实世界时，通常希望我们的模型具有清晰准确的预测。</p>
-<p>对于动态问题，清晰的预测与稳定性有关。</p>
+<p>对于动态问题，准确的预测与稳定性有关。</p>
 <p>例如，如果一个动态模型预测通货膨胀总是收敛到某种稳态，那么这个模型提供了一个明确的预测。</p>
 <p>（预测可能是错误的，但即便如此，它也是有帮助的，因为我们可以判断模型的质量。）</p>
 <p>注意，在上图中，序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 似乎正在收敛到一个极限分布，这表明存在某种稳定性。</p>
-<p>如果我们进一步向未来进行投影，这一点就更加明显：</p>
+<p>如果我们进一步研究未来的情况，这一点就更加明显：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_density_seq</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=-</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">sim_length</span><span class="o">=</span><span class="mi">40</span><span class="p">):</span>
@@ -430,14 +424,14 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <p>事实上，可以很容易地证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，不管初始条件如何，都会发生这种收敛。</p>
-<p>为了看到这一点，我们只需查看前两个矩的动态，
+<p>为了证明这一点，我们只需查看前两个矩的动态，
 如 <a class="reference internal" href="#equation-dyn-tm">(32.3)</a> 中所给出的。</p>
 <p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，这些序列会收敛到各自的极限</p>
 <div class="math notranslate nohighlight" id="equation-mu-sig-star">
 <span class="eqno">(32.4)<a class="headerlink" href="#equation-mu-sig-star" title="Permalink to this equation">#</a></span>\[\mu^* := \frac{b}{1-a}
 \quad 和 \quad
 v^* = \frac{c^2}{1 - a^2}\]</div>
-<p>（请参阅我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">一维动力学讲座</span></a>，了解确定性收敛的背景。）</p>
+<p>（可以通过阅读我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">一维动力学讲座</span></a>来了解确定性收敛的背景。）</p>
 <p>因此</p>
 <div class="math notranslate nohighlight" id="equation-ar1-psi-star">
 <span class="eqno">(32.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Permalink to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
@@ -452,7 +446,7 @@ t \to \infty\]</div>
 <span class="n">mu_star</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">std_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># v_star的平方根</span>
 <span class="n">psi_star</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu_star</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std_star</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">psi_star</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\psi^*$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">psi_star</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\psi^*$&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -460,12 +454,6 @@ t \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:7: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-&lt;&gt;:7: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-/tmp/ipykernel_7208/1672476850.py:7: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-  ax.plot(grid, psi_star, &#39;k-&#39;, lw=2, label=&quot;$\psi^*$&quot;)
-</pre></div>
-</div>
 <a class="reference internal image-reference" href="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png"><img alt="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png" src="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png" style="width: 80%;" /></a>
 </div>
 </div>
@@ -473,27 +461,27 @@ t \to \infty\]</div>
 <p>我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。</p>
 <section id="id6">
 <h3><span class="section-number">32.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<p>让我们更好地理解极限分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
-<p>平稳分布是 AR(1) 过程更新规则的一个“固定点”。</p>
-<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb N\)</span> 中成立。</p>
-<p>另一种针对当前设置的说法是：如果一个在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的密度 <span class="math notranslate nohighlight">\(\psi\)</span> 对 AR(1) 过程是<strong>平稳的</strong>，则有</p>
+<p>让我们试着更深入地理解极限分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p>平稳分布是 AR(1) 过程更新规则的一个“不动点”。</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb N\)</span> 时成立。</p>
+<p>另一种针对当前情况的说法是：如果一个在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的概率密度 <span class="math notranslate nohighlight">\(\psi\)</span> 对 AR(1) 过程是<strong>平稳的</strong>，则有</p>
 <div class="math notranslate nohighlight">
 \[
 X_t \sim \psi
 \quad \implies \quad
 a X_t + b + c W_{t+1} \sim \psi
 \]</div>
-<p><span class="math notranslate nohighlight">\(\psi^*\)</span> 在 <a class="reference internal" href="#equation-ar1-psi-star">(32.5)</a> 中具有这一性质——检查这一点是一个练习。</p>
+<p><span class="math notranslate nohighlight">\(\psi^*\)</span> 在 <a class="reference internal" href="#equation-ar1-psi-star">(32.5)</a> 中具有这一性质——验证这一点是留给读者的练习。</p>
 <p>（当然，我们假设 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 从而 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是
 良定义的。）</p>
 <p>事实上，可以证明 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上没有其他分布具有这一性质。</p>
-<p>因此，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，AR(1) 模型恰好有一个平稳密度，那就是 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p>因此，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，AR(1) 模型恰好有一个平稳概率密度，那就是 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 </section>
 </section>
 <section id="id7">
 <h2><span class="section-number">32.4. </span>遍历性<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>不同的作者使用遍历性这一概念有不同的方式。</p>
-<p>在当前设定中理解它的一种方式是，即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律也是有效的。</p>
+<p>在当前情况中可以理解为：即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律也是有效的。</p>
 <p>特别是，时间序列的平均值收敛于平稳分布下的期望值。</p>
 <p>实际上，可以证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，我们就有</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ergo">
@@ -522,7 +510,7 @@ a X_t + b + c W_{t+1} \sim \psi
 <p>例如，<a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 可用来测试理论。</p>
 <p>在这个方程中，我们可以使用观测数据来评估 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 的左侧。</p>
 <p>我们可以使用理论的 AR(1) 模型来计算右侧。</p>
-<p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> 即使在很多观测下也不接近 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>，那么我们的理论似乎是错误的，我们将需要修订它。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> 即使在大量观测下也不接近 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>，那么我们的理论便有可能是错误的，我们将需要修订它。</p>
 </section>
 <section id="id9">
 <h2><span class="section-number">32.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
@@ -554,7 +542,7 @@ M_k =
     \approx M_k
 \]</div>
 <p>当 <span class="math notranslate nohighlight">\(m\)</span> 是较大时。</p>
-<p>通过仿真验证一系列 <span class="math notranslate nohighlight">\(k\)</span>，使用讲座中的默认参数。</p>
+<p>通过模拟验证一系列 <span class="math notranslate nohighlight">\(k\)</span>，使用本讲中的默认参数。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-3">
@@ -610,7 +598,7 @@ M_k =
 
 <p class="admonition-title"><span class="caption-number">Exercise 32.2 </span></p>
 <section id="exercise-content">
-<p>编写一个一维<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">核密度估计</a>的版本，用于从样本中估计密度。</p>
+<p>编写一个你自己的一维<a class="reference external" href="https://baike.baidu.com/item/%E6%A0%B8%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1/10349033">核密度估计</a>，用于从样本中估计概率密度。</p>
 <p>将其写为一个类，该类在初始化时接受数据 <span class="math notranslate nohighlight">\(X\)</span> 和带宽 <span class="math notranslate nohighlight">\(h\)</span>，并提供一个方法 <span class="math notranslate nohighlight">\(f\)</span>，使得</p>
 <div class="math notranslate nohighlight">
 \[
@@ -624,21 +612,21 @@ K \left( \frac{x-X_i}{h} \right)
 <li><p>在适当的范围内绘制核密度估计</p></li>
 <li><p>在同一图形上绘制 <span class="math notranslate nohighlight">\(\phi\)</span> 的密度</p></li>
 </ol>
-<p>分布 <span class="math notranslate nohighlight">\(\phi\)</span> 类型如下：</p>
+<p>给定如下分布 <span class="math notranslate nohighlight">\(\phi\)</span> 类型：</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 2\)</span></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = 2\)</span> 且 <span class="math notranslate nohighlight">\(\beta = 5\)</span></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">beta 分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 0.5\)</span></p></li>
+<li><p><a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma">贝塔分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 2\)</span></p></li>
+<li><p><a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma">贝塔分布</a>，<span class="math notranslate nohighlight">\(\alpha = 2\)</span> 且 <span class="math notranslate nohighlight">\(\beta = 5\)</span></p></li>
+<li><p><a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021?fromModule=search-result_lemma">贝塔分布</a>，<span class="math notranslate nohighlight">\(\alpha = \beta = 0.5\)</span></p></li>
 </ul>
 <p>使用 <span class="math notranslate nohighlight">\(n=500\)</span>。</p>
-<p>对结果进行评论。（你认为这是这些分布的良好估计吗？）</p>
+<p>对结果进行总结。（你认为这是这些分布的良好估计吗？）</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-5">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex2"> Exercise 32.2</a></p>
 <section id="solution-content">
-<p>这是一个解决方案：</p>
+<p>这是一个解答：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span>
@@ -694,19 +682,19 @@ K \left( \frac{x-X_i}{h} \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d11aaf835ea5f940431a3193dd6c9c988229bec322cf3f27c7a39a6138055728.png"><img alt="_images/d11aaf835ea5f940431a3193dd6c9c988229bec322cf3f27c7a39a6138055728.png" src="_images/d11aaf835ea5f940431a3193dd6c9c988229bec322cf3f27c7a39a6138055728.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/01293fe5c7c0b25c0feb1d57fd3c33421990a00188d910b055580e8714de1308.png"><img alt="_images/01293fe5c7c0b25c0feb1d57fd3c33421990a00188d910b055580e8714de1308.png" src="_images/01293fe5c7c0b25c0feb1d57fd3c33421990a00188d910b055580e8714de1308.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/639654607be1501db072c606d9a1c28e4b950cbc902ef4191588557af3017a45.png"><img alt="_images/639654607be1501db072c606d9a1c28e4b950cbc902ef4191588557af3017a45.png" src="_images/639654607be1501db072c606d9a1c28e4b950cbc902ef4191588557af3017a45.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6070545b965c0f794c98804b451a385d1973dc8170d952ce964199c880ae58f2.png"><img alt="_images/6070545b965c0f794c98804b451a385d1973dc8170d952ce964199c880ae58f2.png" src="_images/6070545b965c0f794c98804b451a385d1973dc8170d952ce964199c880ae58f2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c7c39183bb42e85f3861c603fdfbe2c99938a892ca6f1b9a9b7b0a278efaf283.png"><img alt="_images/c7c39183bb42e85f3861c603fdfbe2c99938a892ca6f1b9a9b7b0a278efaf283.png" src="_images/c7c39183bb42e85f3861c603fdfbe2c99938a892ca6f1b9a9b7b0a278efaf283.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/22a50cdd0e6f50d35857989a19453d25241b7693fdf921d7e417210dd82f815b.png"><img alt="_images/22a50cdd0e6f50d35857989a19453d25241b7693fdf921d7e417210dd82f815b.png" src="_images/22a50cdd0e6f50d35857989a19453d25241b7693fdf921d7e417210dd82f815b.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们可以看到，当基础分布是平滑时，核密度估计器是有效的，但在其他情况下则效果不佳。</p>
+<p>我们可以看到，当基础分布是平滑时，核密度估计是有效的，但在其他情况下则效果不佳。</p>
 </section>
 </div>
 <div class="exercise admonition" id="ar1p_ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 32.3 </span></p>
 <section id="exercise-content">
-<p>在讲座中我们讨论了以下事实：对于 <span class="math notranslate nohighlight">\(AR(1)\)</span> 过程</p>
+<p>在本讲中我们讨论了以下事实：对于 <span class="math notranslate nohighlight">\(AR(1)\)</span> 过程</p>
 <div class="math notranslate nohighlight">
 \[
 X_{t+1} = a X_t + b + c W_{t+1}
@@ -729,17 +717,17 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <p>其次，在同一个图形上（用不同的颜色），绘制 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 如下：</p>
 <ol class="arabic simple">
 <li><p>从分布 <span class="math notranslate nohighlight">\(N(\mu, s^2)\)</span> 中生成 <span class="math notranslate nohighlight">\(n\)</span> 次 <span class="math notranslate nohighlight">\(X_t\)</span> 抽样</p></li>
-<li><p>使用规则 <span class="math notranslate nohighlight">\(X_{t+1} = a X_t + b + c W_{t+1}\)</span> 更新它们所有</p></li>
-<li><p>使用 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 的结果样本产生通过核密度估计的密度估计。</p></li>
+<li><p>使用方程 <span class="math notranslate nohighlight">\(X_{t+1} = a X_t + b + c W_{t+1}\)</span> 更新全部的数据</p></li>
+<li><p>使用 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 的结果样本通过核密度估计产生的估计密度。</p></li>
 </ol>
-<p>尝试 <span class="math notranslate nohighlight">\(n=2000\)</span> 并确认基于抽样实验的 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 估计会收敛到理论分布。</p>
+<p>尝试用 <span class="math notranslate nohighlight">\(n=2000\)</span> 并确认基于抽样实验的 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 估计会收敛到理论分布。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ar1_processes-solution-7">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ar1p_ex3"> Exercise 32.3</a></p>
 <section id="solution-content">
-<p>这是我们的解决方案</p>
+<p>这是我们的解答</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.9</span>

@@ -269,7 +269,7 @@
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">33. </span>马尔科夫链：基本概念<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p id="index-0">除了 Anaconda 中的自带函数库之外，本讲座还需要以下函数库，可以通过以下指令下载：</p>
+<p id="index-0">除了 Anaconda 中的自带函数库之外，本讲还需要以下函数库，可以通过以下指令下载：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
@@ -289,9 +289,7 @@ Requirement already satisfied: requests in /home/runner/miniconda3/envs/quanteco
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
@@ -316,7 +314,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>在本讲中，我们将</p>
 <ul class="simple">
 <li><p>回顾马尔科夫链理论中的一些关键思想，并</p></li>
-<li><p>展示马尔科夫链在一些经济应用中的出现方式。</p></li>
+<li><p>展示马尔科夫链在经济学中的应用。</p></li>
 </ul>
 <p>让我们从一些通常的函数包导入开始：</p>
 <div class="cell docutils container">
@@ -342,7 +340,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>在本节中，我们将提供一些定义和基本示例。</p>
 <section id="finite-dp-stoch-mat">
 <span id="id4"></span><h3><span class="section-number">33.2.1. </span>随机矩阵<a class="headerlink" href="#finite-dp-stoch-mat" title="Permalink to this heading">#</a></h3>
-<p>回想一下，<strong>概率质量函数</strong>是一个 <span class="math notranslate nohighlight">\(n\)</span> 个可能结果上的非负 <span class="math notranslate nohighlight">\(n\)</span>-维向量 <span class="math notranslate nohighlight">\(p\)</span>，向量内所有元素总和为 1。</p>
+<p><strong>概率质量函数</strong>是一个 <span class="math notranslate nohighlight">\(n\)</span> 个可能结果上的非负 <span class="math notranslate nohighlight">\(n\)</span>-维向量 <span class="math notranslate nohighlight">\(p\)</span>，向量内所有元素总和为 1。</p>
 <p>例如，<span class="math notranslate nohighlight">\(p = (0.2, 0.2, 0.6)\)</span> 是一个三个结果上的概率质量函数。</p>
 <p><strong>随机矩阵</strong>（或<strong>马尔科夫矩阵</strong>）是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的矩阵 <span class="math notranslate nohighlight">\(P\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 的每一行都是一个 <span class="math notranslate nohighlight">\(n\)</span> 个结果上的概率质量函数。</p>
 <p>也就是说，</p>
@@ -363,7 +361,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <img alt="_images/Hamilton.png" class="align-center" id="mc-hamilton" src="_images/Hamilton.png" />
 <p>这里可以分为三个<strong>状态</strong>：</p>
 <ul class="simple">
-<li><p>“ng” 表示正常增长(normal growth）</p></li>
+<li><p>“ng” 表示正常增长(normal growth)</p></li>
 <li><p>“mr” 表示轻度衰退(mild recession)</p></li>
 <li><p>“sr” 表示严重衰退(severe recession)</p></li>
 </ul>
@@ -407,7 +405,7 @@ P =
 </section>
 <section id="mc-eg1">
 <span id="id8"></span><h4><span class="section-number">33.2.2.2. </span>示例 2<a class="headerlink" href="#mc-eg1" title="Permalink to this heading">#</a></h4>
-<p>考虑一个工人，在任何给定时间 <span class="math notranslate nohighlight">\(t\)</span>，他要么失业（状态 0），要么就业（状态 1）。</p>
+<p>考虑一个工人，在任何给定时间 <span class="math notranslate nohighlight">\(t\)</span>，他要么处于失业状态（状态 0），要么处于就业状态（状态 1）。</p>
 <p>假设在一个月内，</p>
 <ol class="arabic simple">
 <li><p>失业的工人以概率 <span class="math notranslate nohighlight">\(\alpha \in (0, 1)\)</span> 找到工作。</p></li>
@@ -639,7 +637,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 0, 1, 0, 0, 0, 1, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, 1, 1, 1, 1, 1, 0, 1])
 </pre></div>
 </div>
 </div>
@@ -656,7 +654,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.250862
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.250488
 </pre></div>
 </div>
 </div>
@@ -676,7 +674,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.250065
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.250203
 </pre></div>
 </div>
 </div>
@@ -689,7 +687,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.2 s, sys: 1.07 ms, total: 1.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.19 s, sys: 941 μs, total: 1.2 s
 Wall time: 1.2 s
 </pre></div>
 </div>
@@ -705,11 +703,11 @@ Wall time: 1.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.1 ms, sys: 2.02 ms, total: 14.1 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12 ms, sys: 2.01 ms, total: 14.1 ms
 Wall time: 13.8 ms
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, ..., 1, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, ..., 1, 1, 1])
 </pre></div>
 </div>
 </div>
@@ -727,7 +725,7 @@ Wall time: 13.8 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -739,7 +737,7 @@ Wall time: 13.8 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -751,7 +749,7 @@ Wall time: 13.8 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -792,7 +790,7 @@ Wall time: 13.8 ms
                \cdot \mathbb P \{ X_t = x \}
 \]</div>
 <p>（我们正在使用<a class="reference external" href="https://en.wikipedia.org/wiki/Law_of_total_probability">全概率公式</a>。）</p>
-<p>将这一陈述重新写为边缘概率和条件概率的形式：</p>
+<p>将这一表达式重新写为边缘概率和条件概率的形式：</p>
 <div class="math notranslate nohighlight">
 \[
     \psi_{t+1}(y) = \sum_{x \in S} P(x,y) \psi_t(x)
@@ -814,9 +812,9 @@ Wall time: 13.8 ms
 <span class="eqno">(33.6)<a class="headerlink" href="#equation-mdfmc2" title="Permalink to this equation">#</a></span>\[X_t \sim \psi_t \quad \implies \quad X_{t+m} \sim \psi_t P^m\]</div>
 <section id="finite-mc-mstp">
 <span id="id17"></span><h3><span class="section-number">33.4.1. </span>多步转移概率<a class="headerlink" href="#finite-mc-mstp" title="Permalink to this heading">#</a></h3>
-<p>我们知道，从 <span class="math notranslate nohighlight">\(x\)</span> 到 <span class="math notranslate nohighlight">\(y\)</span> 的一步转移概率是 <span class="math notranslate nohighlight">\(P(x,y)\)</span>。</p>
+<p>我们已知从 <span class="math notranslate nohighlight">\(x\)</span> 到 <span class="math notranslate nohighlight">\(y\)</span> 的一步转移概率是 <span class="math notranslate nohighlight">\(P(x,y)\)</span>。</p>
 <p>实际上，从 <span class="math notranslate nohighlight">\(x\)</span> 到 <span class="math notranslate nohighlight">\(y\)</span> 的 <span class="math notranslate nohighlight">\(m\)</span> 步转移概率是 <span class="math notranslate nohighlight">\(P^m(x,y)\)</span>，即 <span class="math notranslate nohighlight">\(P\)</span> 的 <span class="math notranslate nohighlight">\(m\)</span> 次方的 <span class="math notranslate nohighlight">\((x,y)\)</span> 元素。</p>
-<p>要理解为什么是这样，请再次考虑 <a class="reference internal" href="#equation-mdfmc2">(33.6)</a>，但现在设 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将所有概率都放在状态 <span class="math notranslate nohighlight">\(x\)</span> 上。</p>
+<p>要理解为什么是这样，请再次考虑 <a class="reference internal" href="#equation-mdfmc2">(33.6)</a>，但现在设 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将所有可能的结果概率都放在状态 <span class="math notranslate nohighlight">\(x\)</span> 上。</p>
 <p>此时，<span class="math notranslate nohighlight">\(\psi_t\)</span> 是一个在 <span class="math notranslate nohighlight">\(x\)</span> 位置为 <span class="math notranslate nohighlight">\(1\)</span>，在其他地方为 <span class="math notranslate nohighlight">\(0\)</span> 的向量。</p>
 <p>将其代入 <a class="reference internal" href="#equation-mdfmc2">(33.6)</a>，我们看到，条件 <span class="math notranslate nohighlight">\(X_t = x\)</span> 的情况下，<span class="math notranslate nohighlight">\(X_{t+m}\)</span> 的分布是 <span class="math notranslate nohighlight">\(P^m\)</span> 的第 <span class="math notranslate nohighlight">\(x\)</span> 行。</p>
 <p>特别地，</p>
@@ -829,7 +827,7 @@ Wall time: 13.8 ms
 <h3><span class="section-number">33.4.2. </span>示例：衰退概率<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
 <p id="index-2">回顾我们<a class="reference internal" href="#mc-eg2"><span class="std std-ref">之前讨论的</span></a>关于衰退和增长的随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 。</p>
 <p>假设当前状态未知——也许统计数据只能在当前月份<em>结束</em>时获得。</p>
-<p>我们猜测，在时间 <span class="math notranslate nohighlight">\(t\)</span> 时经济处于状态 <span class="math notranslate nohighlight">\(x\)</span> 的概率是 <span class="math notranslate nohighlight">\(\psi_t(x)\)</span>。</p>
+<p>我们假设，在时间 <span class="math notranslate nohighlight">\(t\)</span> 时经济处于状态 <span class="math notranslate nohighlight">\(x\)</span> 的概率是 <span class="math notranslate nohighlight">\(\psi_t(x)\)</span>。</p>
 <p>那么，6 个月后处于衰退（无论是轻度还是严重衰退）的概率为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -852,9 +850,9 @@ Wall time: 13.8 ms
 </ul>
 <p>10 个周期之后，横截面分布会是什么样子？</p>
 <p>答案是 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 是 <a class="reference internal" href="#equation-p-unempemp">(33.1)</a> 中的随机矩阵。</p>
-<p>这是因为每个工人的状态都根据 <span class="math notranslate nohighlight">\(P\)</span> 变化，因此 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 是单个随机选择的工人的<a class="reference external" href="https://en.wikipedia.org/wiki/Marginal_distribution">边际分布</a>。</p>
+<p>这是因为每个工人的状态都根据 <span class="math notranslate nohighlight">\(P\)</span> 变化，因此 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 是单个随机选择的工人的<a class="reference external" href="https://en.wikipedia.org/wiki/Marginal_distribution">边缘分布</a>。</p>
 <p>但当样本很大时，结果和概率大致相等（通过应用大数法则）。</p>
-<p>因此，对于一个非常大的（趋向于无限）群体，<span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 也代表每个状态的工人比例。</p>
+<p>因此，对于一个非常大的（趋向于无限）群体，<span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 也代表处于每个状态的工人比例。</p>
 <p>这正是横截面分布。</p>
 </section>
 </section>
@@ -877,9 +875,9 @@ Wall time: 13.8 ms
 </div>
 </div>
 </div>
-<p>注意，<code class="docutils literal notranslate"><span class="pre">ψ</span> <span class="pre">&#64;</span> <span class="pre">P</span></code> 与 <code class="docutils literal notranslate"><span class="pre">ψ</span></code> 相同。</p>
+<p>注意，<code class="docutils literal notranslate"><span class="pre">ψ</span> <span class="pre">&#64;</span> <span class="pre">P</span></code> 与 <code class="docutils literal notranslate"><span class="pre">ψ</span></code> 相同（可以验证<span class="math notranslate nohighlight">\(\psiXP=\psi\)</span>）。</p>
 <p>这样的分布被称为<strong>平稳</strong>或<strong>不变</strong>分布。</p>
-<p id="mc-stat-dd">正式地，如果分布 <span class="math notranslate nohighlight">\(\psi^*\)</span> 满足 <span class="math notranslate nohighlight">\(\psi^* P = \psi^*\)</span>，则称其为 <span class="math notranslate nohighlight">\(P\)</span> 的<strong>平稳</strong>分布。</p>
+<p id="mc-stat-dd">严格的表述如下，如果分布 <span class="math notranslate nohighlight">\(\psi^*\)</span> 满足 <span class="math notranslate nohighlight">\(\psi^* P = \psi^*\)</span>，则称其为 <span class="math notranslate nohighlight">\(P\)</span> 的<strong>平稳</strong>分布。</p>
 <p>注意，通过右乘 <span class="math notranslate nohighlight">\(P\)</span>，我们有 <span class="math notranslate nohighlight">\(\psi^* P^2 = \psi^* P = \psi^*\)</span>。</p>
 <p>继续以同样的方式推导得到 <span class="math notranslate nohighlight">\(\psi^* = \psi^* P^t\)</span> 对于所有 <span class="math notranslate nohighlight">\(t \ge 0\)</span> 成立。</p>
 <p>这告诉我们一个重要的事实：如果分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 是平稳分布，那么对于所有 <span class="math notranslate nohighlight">\(t \ge 0\)</span>，<span class="math notranslate nohighlight">\(\psi_t\)</span> 将具有相同的分布。</p>
@@ -905,7 +903,7 @@ Wall time: 13.8 ms
 <h3><span class="section-number">33.5.1. </span>示例<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
 <p>回顾我们之前讨论的关于特定工人的就业/失业动态的模型 <a class="reference internal" href="#mc-eg1"><span class="std std-ref">在上面讨论过的</span></a>。</p>
 <p>如果 <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>，则转移矩阵在各处为正。</p>
-<p>设 <span class="math notranslate nohighlight">\(\psi^* = (p, 1-p)\)</span> 为平稳分布，其中 <span class="math notranslate nohighlight">\(p\)</span> 对应失业（状态 0）。</p>
+<p>设 <span class="math notranslate nohighlight">\(\psi^* = (p, 1-p)\)</span> 为该转移矩阵的平稳分布，其中 <span class="math notranslate nohighlight">\(p\)</span> 对应失业（状态 0）。</p>
 <p>使用 <span class="math notranslate nohighlight">\(\psi^* = \psi^* P\)</span> 和一些代数推导得到</p>
 <div class="math notranslate nohighlight">
 \[
@@ -952,7 +950,7 @@ Wall time: 13.8 ms
 <p>其中 <span class="math notranslate nohighlight">\(\psi^*\)</span> 是唯一的平稳分布。</p>
 </section>
 </div><p>这种情况通常称为<strong>渐进平稳性</strong>或<strong>全局稳定性</strong>。</p>
-<p>该定理的证明可以在 <span id="id25">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> 的第4章及许多其他来源中找到。</p>
+<p>该定理的证明可以在 <span id="id25">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> 的第4章或许多其他来源中找到。</p>
 <section id="hamilton">
 <span id="id26"></span><h4><span class="section-number">33.5.3.1. </span>示例：汉密尔顿链<a class="headerlink" href="#hamilton" title="Permalink to this heading">#</a></h4>
 <p>汉密尔顿链满足定理的条件，因为 <span class="math notranslate nohighlight">\(P^2\)</span> 处处为正：</p>
@@ -1230,42 +1228,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img891938e86205468ba2f92a8fd2043c60">
+  <img id="_anim_imged5a79e784d2442b91d9d0590a667a1a">
   <div class="anim-controls">
-    <input id="_anim_slider891938e86205468ba2f92a8fd2043c60" type="range" class="anim-slider"
+    <input id="_anim_slidered5a79e784d2442b91d9d0590a667a1a" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim891938e86205468ba2f92a8fd2043c60.set_frame(parseInt(this.value));">
+           oninput="animed5a79e784d2442b91d9d0590a667a1a.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim891938e86205468ba2f92a8fd2043c60.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animed5a79e784d2442b91d9d0590a667a1a.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim891938e86205468ba2f92a8fd2043c60.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animed5a79e784d2442b91d9d0590a667a1a.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim891938e86205468ba2f92a8fd2043c60.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animed5a79e784d2442b91d9d0590a667a1a.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim891938e86205468ba2f92a8fd2043c60.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animed5a79e784d2442b91d9d0590a667a1a.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim891938e86205468ba2f92a8fd2043c60.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animed5a79e784d2442b91d9d0590a667a1a.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim891938e86205468ba2f92a8fd2043c60.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animed5a79e784d2442b91d9d0590a667a1a.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim891938e86205468ba2f92a8fd2043c60.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animed5a79e784d2442b91d9d0590a667a1a.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim891938e86205468ba2f92a8fd2043c60.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animed5a79e784d2442b91d9d0590a667a1a.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim891938e86205468ba2f92a8fd2043c60.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animed5a79e784d2442b91d9d0590a667a1a.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select891938e86205468ba2f92a8fd2043c60"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selected5a79e784d2442b91d9d0590a667a1a"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_891938e86205468ba2f92a8fd2043c60"
+      <input type="radio" name="state" value="once" id="_anim_radio1_ed5a79e784d2442b91d9d0590a667a1a"
              checked>
-      <label for="_anim_radio1_891938e86205468ba2f92a8fd2043c60">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_891938e86205468ba2f92a8fd2043c60"
+      <label for="_anim_radio1_ed5a79e784d2442b91d9d0590a667a1a">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_ed5a79e784d2442b91d9d0590a667a1a"
              >
-      <label for="_anim_radio2_891938e86205468ba2f92a8fd2043c60">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_891938e86205468ba2f92a8fd2043c60"
+      <label for="_anim_radio2_ed5a79e784d2442b91d9d0590a667a1a">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_ed5a79e784d2442b91d9d0590a667a1a"
              >
-      <label for="_anim_radio3_891938e86205468ba2f92a8fd2043c60">Reflect</label>
+      <label for="_anim_radio3_ed5a79e784d2442b91d9d0590a667a1a">Reflect</label>
     </form>
   </div>
 </div>
@@ -1275,9 +1273,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img891938e86205468ba2f92a8fd2043c60";
-    var slider_id = "_anim_slider891938e86205468ba2f92a8fd2043c60";
-    var loop_select_id = "_anim_loop_select891938e86205468ba2f92a8fd2043c60";
+    var img_id = "_anim_imged5a79e784d2442b91d9d0590a667a1a";
+    var slider_id = "_anim_slidered5a79e784d2442b91d9d0590a667a1a";
+    var loop_select_id = "_anim_loop_selected5a79e784d2442b91d9d0590a667a1a";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -25493,7 +25491,7 @@ JI+OjgAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim891938e86205468ba2f92a8fd2043c60 = new Animation(frames, img_id, slider_id, 200.0,
+        animed5a79e784d2442b91d9d0590a667a1a = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -25503,8 +25501,8 @@ JI+OjgAAAABJRU5ErkJggg==\
 <p>在这里</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P\)</span> 是 <a class="reference internal" href="#mc-eg2"><span class="std std-ref">之前讨论的</span></a> 衰退和增长的随机矩阵。</p></li>
-<li><p>红色、蓝色和绿色的点是初始边际概率分布 <span class="math notranslate nohighlight">\(\psi_1, \psi_2, \psi_3\)</span>，它们分别表示为 <span class="math notranslate nohighlight">\(\mathbb R^3\)</span> 中的向量。</p></li>
-<li><p>透明点是边际分布 <span class="math notranslate nohighlight">\(\psi_i P^t\)</span> 对于 <span class="math notranslate nohighlight">\(t = 1, 2, \ldots\)</span>，<span class="math notranslate nohighlight">\(i=1,2,3.\)</span>。</p></li>
+<li><p>红色、蓝色和绿色的点是初始边缘概率分布 <span class="math notranslate nohighlight">\(\psi_1, \psi_2, \psi_3\)</span>，它们分别表示为 <span class="math notranslate nohighlight">\(\mathbb R^3\)</span> 中的向量。</p></li>
+<li><p>各种颜色的透明点是边际分布 <span class="math notranslate nohighlight">\(\psi_i P^t\)</span> 对于 <span class="math notranslate nohighlight">\(t = 1, 2, \ldots\)</span>，<span class="math notranslate nohighlight">\(i=1,2,3.\)</span>。</p></li>
 <li><p>黄色点是 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p></li>
 </ul>
 <p>你可以尝试不同的初始条件来进行实验。</p>
@@ -25520,12 +25518,12 @@ P =
     1 &amp; 0 \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>该矩阵不满足 <a class="reference external" href="https://intro.quantecon.org/markov_chains_I.html#strict-stationary" title="(in Python)"><span class="xref std std-ref">strict_stationary</span></a> 的条件，因为很容易检查到：</p>
+<p>该矩阵不满足 <a class="reference external" href="https://intro.quantecon.org/markov_chains_I.html#strict-stationary" title="(in Python)"><span class="xref std std-ref">strict_stationary</span></a> 的条件，因为很容易检验到：</p>
 <ul class="simple">
 <li><p>当 <span class="math notranslate nohighlight">\(m\)</span> 为奇数时，<span class="math notranslate nohighlight">\(P^m = P\)</span></p></li>
 <li><p>当 <span class="math notranslate nohighlight">\(m\)</span> 为偶数时，<span class="math notranslate nohighlight">\(P^m = I\)</span>，即单位矩阵。</p></li>
 </ul>
-<p>因此，没有 <span class="math notranslate nohighlight">\(m\)</span> 使得 <span class="math notranslate nohighlight">\(P^m\)</span> 的所有元素都为严格正数。</p>
+<p>因此，没有 <span class="math notranslate nohighlight">\(m\)</span> 可以使得 <span class="math notranslate nohighlight">\(P^m\)</span> 的所有元素都为严格正数。</p>
 <p>此外，我们可以看到，全局稳定性并不成立。</p>
 <p>例如，如果我们从 <span class="math notranslate nohighlight">\(\psi_0 = (1,0)\)</span> 开始，则 <span class="math notranslate nohighlight">\(\psi_m = \psi_0 P^m\)</span> 当 <span class="math notranslate nohighlight">\(m\)</span> 为偶数时是 <span class="math notranslate nohighlight">\((1, 0)\)</span>，当 <span class="math notranslate nohighlight">\(m\)</span> 为奇数时是 <span class="math notranslate nohighlight">\((0,1)\)</span>。</p>
 <p>我们可以在更高维度中看到类似的现象。</p>
@@ -25775,42 +25773,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img5b948002a4574cbfa6dbced943b2bd6b">
+  <img id="_anim_imgc792ced1aeb14926a67db1b8b1c6f7ed">
   <div class="anim-controls">
-    <input id="_anim_slider5b948002a4574cbfa6dbced943b2bd6b" type="range" class="anim-slider"
+    <input id="_anim_sliderc792ced1aeb14926a67db1b8b1c6f7ed" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim5b948002a4574cbfa6dbced943b2bd6b.set_frame(parseInt(this.value));">
+           oninput="animc792ced1aeb14926a67db1b8b1c6f7ed.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim5b948002a4574cbfa6dbced943b2bd6b.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animc792ced1aeb14926a67db1b8b1c6f7ed.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select5b948002a4574cbfa6dbced943b2bd6b"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectc792ced1aeb14926a67db1b8b1c6f7ed"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_5b948002a4574cbfa6dbced943b2bd6b"
+      <input type="radio" name="state" value="once" id="_anim_radio1_c792ced1aeb14926a67db1b8b1c6f7ed"
              checked>
-      <label for="_anim_radio1_5b948002a4574cbfa6dbced943b2bd6b">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_5b948002a4574cbfa6dbced943b2bd6b"
+      <label for="_anim_radio1_c792ced1aeb14926a67db1b8b1c6f7ed">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_c792ced1aeb14926a67db1b8b1c6f7ed"
              >
-      <label for="_anim_radio2_5b948002a4574cbfa6dbced943b2bd6b">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_5b948002a4574cbfa6dbced943b2bd6b"
+      <label for="_anim_radio2_c792ced1aeb14926a67db1b8b1c6f7ed">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_c792ced1aeb14926a67db1b8b1c6f7ed"
              >
-      <label for="_anim_radio3_5b948002a4574cbfa6dbced943b2bd6b">Reflect</label>
+      <label for="_anim_radio3_c792ced1aeb14926a67db1b8b1c6f7ed">Reflect</label>
     </form>
   </div>
 </div>
@@ -25820,9 +25818,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img5b948002a4574cbfa6dbced943b2bd6b";
-    var slider_id = "_anim_slider5b948002a4574cbfa6dbced943b2bd6b";
-    var loop_select_id = "_anim_loop_select5b948002a4574cbfa6dbced943b2bd6b";
+    var img_id = "_anim_imgc792ced1aeb14926a67db1b8b1c6f7ed";
+    var slider_id = "_anim_sliderc792ced1aeb14926a67db1b8b1c6f7ed";
+    var loop_select_id = "_anim_loop_selectc792ced1aeb14926a67db1b8b1c6f7ed";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -50507,7 +50505,7 @@ giAIgiCsMSIAFARBEARBWGNEACgIgiAIgrDGiABQEARBEARhjREBoCAIgiAIwhojAkBBEARBEIQ1\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim5b948002a4574cbfa6dbced943b2bd6b = new Animation(frames, img_id, slider_id, 200.0,
+        animc792ced1aeb14926a67db1b8b1c6f7ed = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -50518,13 +50516,13 @@ giAIgiCsMSIAFARBEARBWGNEACgIgiAIgrDGiABQEARBEARhjREBoCAIgiAIwhojAkBBEARBEIQ1\
 <p>红色、黄色和绿色的点表示不同的初始概率分布。</p>
 <p>蓝色点表示唯一的平稳分布。</p>
 <p>与汉密尔顿的马尔科夫链不同，这些初始分布不会收敛到唯一的平稳分布。</p>
-<p>相反，它们周期性地在概率单纯形上循环，说明了渐进稳定性失败的情况。</p>
+<p>相反，它们周期性地在概率单纯形上循环，说明了此时渐进稳定性失败的。</p>
 </section>
 </section>
 </section>
 <section id="finite-mc-expec">
 <span id="id28"></span><h2><span class="section-number">33.6. </span>计算期望<a class="headerlink" href="#finite-mc-expec" title="Permalink to this heading">#</a></h2>
-<p id="index-3">我们有时想要计算形式为 <span class="math notranslate nohighlight">\(X_t\)</span> 的函数的数学期望</p>
+<p id="index-3">我们有时需要计算形式为 <span class="math notranslate nohighlight">\(X_t\)</span> 的函数的数学期望</p>
 <div class="math notranslate nohighlight" id="equation-mc-une">
 <span class="eqno">(33.7)<a class="headerlink" href="#equation-mc-une" title="Permalink to this equation">#</a></span>\[\mathbb E [ h(X_t) ]\]</div>
 <p>以及条件期望，例如</p>
@@ -50545,7 +50543,7 @@ h =
 \end{bmatrix}.
 \end{split}\]</div>
 <p>计算无条件期望 <a class="reference internal" href="#equation-mc-une">(33.7)</a> 非常简单。</p>
-<p>我们只需对 <span class="math notranslate nohighlight">\(X_t\)</span> 的边际分布进行求和，得到</p>
+<p>我们只需对 <span class="math notranslate nohighlight">\(X_t\)</span> 的边缘分布进行求和，得到</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb E [ h(X_t) ]
@@ -50565,7 +50563,7 @@ h =
 = (P^k h)(x)\]</div>
 <section id="id29">
 <h3><span class="section-number">33.6.1. </span>几何和的期望<a class="headerlink" href="#id29" title="Permalink to this heading">#</a></h3>
-<p>有时我们想要计算几何和的数学期望，例如 <span class="math notranslate nohighlight">\(\sum_t \beta^t h(X_t)\)</span>。</p>
+<p>有时我们需要计算几何和的数学期望，例如 <span class="math notranslate nohighlight">\(\sum_t \beta^t h(X_t)\)</span>。</p>
 <p>根据前面的讨论，这是</p>
 <div class="math notranslate nohighlight">
 \[
@@ -50768,8 +50766,8 @@ P :=
 <p>我们将证明 <span class="math notranslate nohighlight">\(P^{k+1} = P P^k\)</span> 也是随机矩阵。</p>
 <p>（我们正在进行归纳证明——假设在 <span class="math notranslate nohighlight">\(k\)</span> 时命题为真，并证明在 <span class="math notranslate nohighlight">\(k+1\)</span> 时命题也为真。）</p>
 <p>要看到这一点，注意到，由于 <span class="math notranslate nohighlight">\(P^k\)</span> 是随机矩阵且非负矩阵的乘积是非负的，因此 <span class="math notranslate nohighlight">\(P^{k+1} = P P^k\)</span> 是非负的。</p>
-<p>此外，如果 <span class="math notranslate nohighlight">\(\mathbf 1\)</span> 是全 1 列向量，那么由于 <span class="math notranslate nohighlight">\(P^k\)</span> 是随机矩阵，我们有 <span class="math notranslate nohighlight">\(P^k \mathbf 1 = \mathbf 1\)</span> （行和为一）。</p>
-<p>因此 <span class="math notranslate nohighlight">\(P^{k+1} \mathbf 1 = P P^k \mathbf 1 = P \mathbf 1 = \mathbf 1\)</span></p>
+<p>此外，如果 <span class="math notranslate nohighlight">\(\mathbf 1\)</span> 是全 1 列向量，那么由于 <span class="math notranslate nohighlight">\(P^k\)</span> 是随机矩阵，我们有 <span class="math notranslate nohighlight">\(P^k \mathbf 1 = \mathbf 1\)</span> （每一行的和为一）。</p>
+<p>因此 <span class="math notranslate nohighlight">\(P^{k+1} \mathbf 1 = P P^k \mathbf 1 = P \mathbf 1 = \mathbf 1\)</span>。</p>
 <p>证明完毕。</p>
 </section>
 </div>

@@ -249,22 +249,22 @@
 <h2><span class="section-number">2.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>在本讲座中，我们将使用Python、<a class="reference external" href="https://python-programming.quantecon.org/pandas.html" title="(in Python)"><span class="xref std std-doc">pandas</span></a> 和 <a class="reference external" href="https://python-programming.quantecon.org/matplotlib.html" title="(in Python)"><span class="xref std std-doc">Matplotlib</span></a> 来下载、处理和可视化经济增长的历史数据。</p>
 <p>除了学习如何运用这些工具之外，我们还将使用它们来描述跨越多个世纪的多个国家的经济增长经历。</p>
-<p>这些 “增长事实 ”之所以有趣，原因是多方面的。</p>
-<p>首先解释增长事实是 “发展经济学 ”和 “经济史”的主要目的。</p>
-<p>其次增长事实也是历史学家研究地缘政治力量和动态的重要依据。</p>
-<p>因此，亚当·图泽在阐述第一次世界大战的地缘政治先例和前因后果时，首先描述了欧洲大国的国内生产总值（GDP）在 1914 年之前的 70 年间是如何演变的（见 <span id="id3">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span> 第 1 章）。</p>
-<p>使用与图泽构建图表时相同的数据（时间线稍长），下面是我们对他的第 1 章图表的解读。</p>
+<p>这些 “增长事实 ”之所以有趣，原因有很多。</p>
+<p>解释增长事实是 “发展经济学 ”和 “经济史”的主要目的。</p>
+<p>并且增长事实也是历史学家研究地缘政治力量和动态的重要依据。</p>
+<p>因此，亚当·图泽(Adam Tooze)在阐述第一次世界大战的地缘政治先例和前因后果时，首先描述了欧洲大国的国内生产总值（GDP）在 1914 年之前的 70 年间是如何演变的（见 <span id="id3">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span> 第 1 章）。</p>
+<p>使用与图泽构建图表时相同的数据（使用稍长一些的时间线），以下是我们在他的第一章图表基础上制作的版本。</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/tooze_ch1_graph.png"><img alt="_images/tooze_ch1_graph.png" src="_images/tooze_ch1_graph.png" style="width: 100%;" /></a>
 </figure>
-<p>（这只是我们的图 <a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a> 的副本。 我们将在本讲座的稍后部分介绍如何绘制<a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a>）。</p>
+<p>（这只是我们的图 <a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a> 的副本。 我们将在本讲的稍后部分介绍如何绘制<a class="reference internal" href="#gdp1"><span class="std std-numref">Fig. 2.6</span></a>）。</p>
 <p><span id="id4">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。</p>
 <p>到 19 世纪末，美国的 GDP 已赶上大英帝国的 GDP，而在 20 世纪上半叶，
-美国的国内生产总值超过了大英帝国。</p>
+美国的GDP超过了大英帝国。</p>
 <p>在亚当·图泽看来，这一事实是 “美国世纪 ”的关键地缘政治基础。</p>
-<p>看了这张图，以及这些数据是如何为 “美国的20世纪” 搭建地缘政治舞台的，我们或许想知道 2014 年及以后与上图对应的图表。</p>
-<p>(感兴趣的读者若想找到这个答案的提示，现在不妨跳到后面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
-<p>正如我们将看到的，通过类比推理，这张图或许奠定了“XXX国的21世纪”的基础，XXX可以替换为任何国家。</p>
+<p>看了这张图，以及它是如何为 “美国的20世纪” 搭建地缘政治舞台的，自然会让人想为2014年或之后的时期制作一张类似的图表。</p>
+<p>(如果心急的读者想提前了解答案，现在可以跳到后面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
+<p>正如我们将看到的，通过类比推理，这张2014年或之后的图表或许为解释“某某国家的（21世纪）世纪”奠定了基础，而你可以自由填入你对某某国家的猜测。</p>
 <p>在我们收集数据以构建这两个图表的过程中，我们还将研究很多国家在尽可能长的时间范围内的增长经历。</p>
 <p>这些图表将描绘“工业革命”是如何在18世纪末始于英国，然后传播到一个又一个国家。</p>
 <p>简而言之，本讲记录了各个国家在很长一段时间内的增长轨迹。</p>
@@ -444,7 +444,7 @@
 </div>
 </div>
 <p>我们现在可以继续探索数据集里的169个国家。</p>
-<p>我们可以遍历每个国家来了解每个国家可用的年份。</p>
+<p>我们可以遍历每个国家来了解每个国家可用的年份都有哪些。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_years</span> <span class="o">=</span> <span class="p">[]</span>
@@ -516,7 +516,7 @@
 </table>
 </div></div></div>
 </div>
-<p>现在，让我们将原始数据重塑为一些方便的变量，以便更快地访问各国的时间序列数据。</p>
+<p>现在，让我们将原始数据重新整理成一些方便的变量，以便更快地访问各国的时间序列数据。</p>
 <p>我们可以在该数据集中的国家代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和国家名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系。</p>
 <p>为了方便使用中文标签，我们导入地区代码与中文名对应的数据集</p>
 <div class="cell docutils container">
@@ -526,7 +526,7 @@
 </div>
 </div>
 </div>
-<p>现在，我们调用人均 GDP (<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>)，并生成一个宽格式的数据</p>
+<p>现在，我们专注于人均 GDP (<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>)，并生成一个宽格式的数据表。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdp_pc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;countrycode&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])[</span><span class="s1">&#39;gdppc&#39;</span><span class="p">]</span>
@@ -761,7 +761,6 @@
 <section id="id7">
 <h3><span class="section-number">2.3.1. </span>英国<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>首先我们研究英国的 GDP 增长情况</p>
-<p>现在我们可以提取并绘制这些国家的 GDP 数据。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -788,7 +787,7 @@
 <p class="admonition-title">Note</p>
 <p><a class="reference external" href="https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%85%83">国际元</a> 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 元（GK 元）。</p>
 </div>
-<p>我们可以看到，在本千年早期的 250 年中有长一段数据是不连续的，因此我们可以选择内插法得到连续的线图。</p>
+<p>我们可以看到，在本千年的头 250 年中有长一段数据是不连续的，因此我们可以选择内插法得到连续的线图。</p>
 <p>在这里，我们用虚线表示插值趋势</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,7 +946,7 @@
 <li><p>大部分增长发生在工业革命之后的过去150年间。</p></li>
 <li><p>从1820年到1940年，美国和英国的人均GDP上升并与中国拉开差距。</p></li>
 <li><p>1950年后，尤其是1970年代末后，差距迅速缩小。</p></li>
-<li><p>这些结果反映了技术和经济政策因素的复杂组合，经济增长的研究者们试图理解并量化这些因素。</p></li>
+<li><p>这些结果反映了科技和经济政策因素的复杂组合，经济增长的研究者们试图理解并量化这些因素。</p></li>
 </ul>
 </section>
 <section id="id9">
@@ -959,7 +958,7 @@
 <li><p>清政府闭关锁国政策后的长期经济下行和停滞。</p></li>
 <li><p>英国工业革命开始后，中国的经历与英国截然不同。</p></li>
 <li><p>自强运动似乎主要帮助了中国的增长。</p></li>
-<li><p>现代中国经济政策的惊人增长成果，最终在1970年代末进行的改革和开放政策中达到高潮。</p></li>
+<li><p>现代中国经济政策的惊人增长成果，最终在1970年代末进行的改革开放政策后达到高位。</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1114,7 +1113,7 @@
 <h3><span class="section-number">2.4.1. </span>早期工业化（1820至1940年）<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
 <p>我们首先可视化中国、俄罗斯/前苏联、日本、英国和美国的趋势。</p>
 <p>最显著的趋势是美国的崛起，在1860年代超过英国，并在1880年代超过中国。</p>
-<p>这种增长持续到1930年代的大萧条到来时出现大幅下降。</p>
+<p>持续的增长在1930年代的大萧条到来时出现了转折并大幅下降。</p>
 <p>与此同时，俄罗斯在第一次世界大战期间经历了重大挫折，并在二月革命后显著恢复。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1140,7 +1139,7 @@
 <section id="id12">
 <h4><span class="section-number">2.4.1.1. </span>构建类似于图泽的图<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
 <p>在本节中，我们将介绍如何构建本讲座开始时讨论过的<span id="id13">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>第1章中引人注目的图表。</p>
-<p>首先，让我们定义一个由大英帝国（BEM）组成的国家集合，这样我们就可以用图泽的数据中复制绘制这幅图</p>
+<p>首先，我们定义一个由大英帝国(BEM)所包含的国家组成的集合，这样我们就可以复制图兹图表中的这一系列数据。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BEM</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span> <span class="s1">&#39;IND&#39;</span><span class="p">,</span> <span class="s1">&#39;AUS&#39;</span><span class="p">,</span> <span class="s1">&#39;NZL&#39;</span><span class="p">,</span> <span class="s1">&#39;CAN&#39;</span><span class="p">,</span> <span class="s1">&#39;ZAF&#39;</span><span class="p">]</span>
@@ -1150,7 +1149,7 @@
 </div>
 </div>
 </div>
-<p>现在，让我们组装这些数据序列</p>
+<p>现在，让我们整理好数据系列，准备绘制图表。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;BEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_mapping</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">]</span>  
@@ -1158,7 +1157,6 @@
 </div>
 </div>
 </div>
-<p>并绘制他们</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -1213,7 +1211,7 @@
 </section>
 <section id="id15">
 <h2><span class="section-number">2.5. </span>地区分析<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
-<p>我们经常要研究“世界大国”俱乐部之外的国家的历史。</p>
+<p>我们也想要研究那些不属于“世界强国”俱乐部的国家的历史经验。</p>
 <p><a class="reference external" href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/">Maddison Historical Statistics</a> 数据集还整合了地区汇总信息</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1235,7 +1233,7 @@
 </div>
 </div>
 </div>
-<p>我们基于时间进行插值来填补数据集中的任何缺口，以便于绘图</p>
+<p>我们可以基于时间进行插值来填补数据集中的任何缺口，以便于绘图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regionalgdp_pc</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1245,7 +1243,7 @@
 </div>
 </div>
 <p>进行更深入的研究，我们将西方分支（<code class="docutils literal notranslate"><span class="pre">Western</span> <span class="pre">Offshoots</span></code>）和撒哈拉以南非洲（<code class="docutils literal notranslate"><span class="pre">Sub-Saharan</span> <span class="pre">Africa</span></code>）的时间序列与世界各地多个不同地区进行比较。</p>
-<p>下图再次展示了工业革命之后西方与世界其他地区的差距，以及1950年之后的世界趋同</p>
+<p>我们再次看到，工业革命后西方与世界其他地区的发展出现分歧，而在1950年代后，世界各地开始趋于一致。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>

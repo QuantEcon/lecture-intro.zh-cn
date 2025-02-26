@@ -178,8 +178,8 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">19.3. 打破大数定律</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">19.3.1. 无限的第一矩</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iid">19.3.2. IID 条件的失败</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">19.3.1. 无限的一阶矩</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iid">19.3.2. IID 条件的失效</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">19.4. 中心极限定理</a><ul class="nav section-nav flex-column">
@@ -256,9 +256,9 @@
 <li><p>中心极限定理（CLT）。</p></li>
 </ol>
 <p>这些美丽的定理是许多计量经济学和定量经济模型的基础。</p>
-<p>本讲座围绕模拟进行，展示了大数定律和中心极限定理的实际操作。</p>
-<p>我们还将演示当所依赖的假设不成立时，大数定律和中心极限定理如何失效。</p>
-<p>本讲将关注单变量情况（多变量情况在<a class="reference external" href="https://python.quantecon.org/lln_clt.html#the-multivariate-case">更高级的讲座中处理</a>）。</p>
+<p>本讲座围绕模拟进行，用实践展示大数定律和中心极限定理的核心思想。</p>
+<p>我们还将演示当假设不成立时，大数定律和中心极限定理会如何失效。</p>
+<p>本讲将关注单变量情况（多变量情况我们在<a class="reference external" href="https://python.quantecon.org/lln_clt.html#the-multivariate-case">更高级的讲座中</a>讨论）。</p>
 <p>我们将需要以下导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -278,14 +278,14 @@
 </section>
 <section id="lln-mr">
 <span id="id3"></span><h2><span class="section-number">19.2. </span>大数定律<a class="headerlink" href="#lln-mr" title="Permalink to this heading">#</a></h2>
-<p id="index-0">我们从大数定律开始讲起，该定律说明在什么条件下样本平均值会收敛到它们的总体平均值。</p>
+<p id="index-0">我们从大数定律开始讲起，该定律说明在什么条件下样本均值会收敛到它们的总体均值。</p>
 <section id="id4">
 <h3><span class="section-number">19.2.1. </span>大数定律的应用<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>在我们进一步讨论之前，让我们看一个大数定律的例子。</p>
 <div class="proof example admonition" id="lln_ex_ber">
 <p class="admonition-title"><span class="caption-number">Example 19.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>考虑一个参数为 <span class="math notranslate nohighlight">\(p\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">伯努利随机变量</a> <span class="math notranslate nohighlight">\(X\)</span>。</p>
+<p>考虑一个参数为 <span class="math notranslate nohighlight">\(p\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83/1442377">伯努利随机变量</a> <span class="math notranslate nohighlight">\(X\)</span>。</p>
 <p>这意味着 <span class="math notranslate nohighlight">\(X\)</span> 的取值在 <span class="math notranslate nohighlight">\(\{0,1\}\)</span> 中，且 <span class="math notranslate nohighlight">\(\mathbb P\{X=1\} = p\)</span>。</p>
 <p>我们可以将抽取 <span class="math notranslate nohighlight">\(X\)</span> 想象为抛掷一个有偏的硬币，其中</p>
 <ul class="simple">
@@ -315,9 +315,9 @@
 </div>
 </div>
 </div>
-<p>在这个场景中，大数定律告诉我们如果我们多次投掷硬币，我们看到的正面比例将接近均值 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>在这个场景中，大数定律告诉我们，如果我们多次投掷硬币，硬币落在“正面”的比例将接近均值 <span class="math notranslate nohighlight">\(p\)</span>。</p>
 <p>我们使用 <span class="math notranslate nohighlight">\(n\)</span> 来表示投掷硬币的次数。</p>
-<p>让我们检查一下：</p>
+<p>让我们查看一下实验的结果：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1_000_000</span>
@@ -327,7 +327,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.800022
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.800257
 </pre></div>
 </div>
 </div>
@@ -342,20 +342,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.300617
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.300214
 </pre></div>
 </div>
 </div>
 </div>
-<p>让我们将这个讨论与上面的讨论联系起来，我们说的样本平均值收敛于“群体平均值”。</p>
+<p>让我们将这个讨论与我们前面说的样本均值收敛于“总体均值”联系起来。</p>
 <p>想象 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是独立的投掷硬币行为。</p>
-<p>群体平均值是在无限样本中的平均值，等于期望 <span class="math notranslate nohighlight">\(\mathbb E X\)</span>。</p>
-<p>抽样的平均值义 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是</p>
+<p>总体均值是在无限样本中的平均值，等于期望 <span class="math notranslate nohighlight">\(\mathbb E X\)</span>。</p>
+<p>抽样的样本均值 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是</p>
 <div class="math notranslate nohighlight">
 \[
     \bar X_n := \frac{1}{n} \sum_{i=1}^n X_i
 \]</div>
-<p>在这种情况下，它是等于一的抽样的比例（正面的数量除以 <span class="math notranslate nohighlight">\(n\)</span>）。</p>
+<p>在这种情况下，它是等于一的抽样的比例（硬币落在“正面”的次数除以 <span class="math notranslate nohighlight">\(n\)</span>）。</p>
 <p>因此，大数定律告诉我们对于上述伯努利试验</p>
 <div class="math notranslate nohighlight" id="equation-exp">
 <span class="eqno">(19.1)<a class="headerlink" href="#equation-exp" title="Permalink to this equation">#</a></span>\[    \bar X_n \to \mathbb E X = p
@@ -364,7 +364,7 @@
 </section>
 <section id="lln-ksl">
 <span id="id5"></span><h3><span class="section-number">19.2.2. </span>大数定律的陈述<a class="headerlink" href="#lln-ksl" title="Permalink to this heading">#</a></h3>
-<p>让我们更仔细地阐述大数定律。</p>
+<p>让我们更仔细地阐述大数定律(Law of Large Number, LLN)。</p>
 <p>设 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是随机变量，它们都具有相同的分布。</p>
 <p>这些随机变量可以是连续的或离散的。</p>
 <p>为简单起见，我们将：</p>
@@ -377,7 +377,7 @@
 \[ 
   \mathbb P\{a \leq X_i \leq b\} = \int_a^b f(x) dx
 \]</div>
-<p>（对于离散情况，我们需要用概率质量函数替换密度，并用求和替换积分。）</p>
+<p>（对于离散情况，我们需要用概率质量函数替换概率密度函数，并用求和替换积分。）</p>
 <p>让 <span class="math notranslate nohighlight">\(\mu\)</span> 表示这个样本的共同平均值。</p>
 <p>因此，对于每个 <span class="math notranslate nohighlight">\(i\)</span>，</p>
 <div class="math notranslate nohighlight">
@@ -399,20 +399,20 @@
 </section>
 </div><p>这里</p>
 <ul class="simple">
-<li><p>IID 表示独立同分布</p></li>
+<li><p>IID 表示独立同分布，并且</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb E |X| = \int_{-\infty}^\infty |x| f(x) dx\)</span></p></li>
 </ul>
 </section>
 <section id="id6">
 <h3><span class="section-number">19.2.3. </span>关于定理的评论<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>定理中的概率为一是什么意思？</p>
-<p>我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这<a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">并非严格真实</a>）。</p>
+<p>我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这<a class="reference external" href="https://baike.baidu.com/item/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%8F%91%E7%94%9F%E5%99%A8/20835345">并非严格真实</a>）。</p>
 <p>同时假设我们可以生成无限序列，从而使得 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 能够得到评估。</p>
-<p>在这种设置下，<a class="reference internal" href="#equation-lln-as">(19.2)</a> 应该被理解为计算机生成一个 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 失败发生的概率是零。</p>
+<p>在这种设置下，<a class="reference internal" href="#equation-lln-as">(19.2)</a> 应该被理解为计算机生成一个没有满足 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 的序列的概率是零。</p>
 </section>
 <section id="id7">
 <h3><span class="section-number">19.2.4. </span>示例说明<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p id="index-1">让我们使用模拟来说明大数定律（LLN）。</p>
+<p id="index-1">让我们使用模拟来说明大数定律。</p>
 <p>在说明它时，我们将使用一个关键思想：样本均值 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 本身是一个随机变量。</p>
 <p><span class="math notranslate nohighlight">\(\bar X_n\)</span> 是随机变量的原因是它是随机变量 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 的函数。</p>
 <p>我们现在要做的是：</p>
@@ -428,10 +428,10 @@
 </ol>
 <p>我们将循环这三个步骤 <span class="math notranslate nohighlight">\(m\)</span> 次，其中 <span class="math notranslate nohighlight">\(m\)</span> 是一个较大的整数。</p>
 <p>数组 <code class="docutils literal notranslate"><span class="pre">sample_means</span></code> 现在将包含 <span class="math notranslate nohighlight">\(m\)</span> 次抽取的随机变量 <span class="math notranslate nohighlight">\(\bar X_n\)</span>。</p>
-<p>如果我们对 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 的这些观测做直方图，我们应该看到它们聚集在总体平均值 <span class="math notranslate nohighlight">\(\mathbb E X\)</span> 周围。</p>
-<p>此外，如果我们在更大的 <span class="math notranslate nohighlight">\(n\)</span> 值下重复这个练习，我们应该看到观测结果更紧密地聚集在总体平均值周围。</p>
-<p>这实质上就是 LLN 告诉我们的内容。</p>
-<p>为了实现这些步骤，我们将使用函数。</p>
+<p>如果我们对 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 的这些观测值做直方图，我们应该看到它们聚集在总体均值 <span class="math notranslate nohighlight">\(\mathbb E X\)</span> 周围。</p>
+<p>此外，如果我们在更大的 <span class="math notranslate nohighlight">\(n\)</span> 值下重复这个练习，我们应该看到观测结果更紧密地聚集在总体均值周围。</p>
+<p>这实质上就是大数定律告诉我们的内容。</p>
+<p>为了实现这些步骤，我们将使用几个函数。</p>
 <p>我们的第一个函数生成给定分布的大小为 <span class="math notranslate nohighlight">\(n\)</span> 的样本均值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -484,13 +484,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0333897837c8142b708bf33ca0495dbf595dd10d1bb4bee4bd34a42ac5cddee2.png"><img alt="_images/0333897837c8142b708bf33ca0495dbf595dd10d1bb4bee4bd34a42ac5cddee2.png" src="_images/0333897837c8142b708bf33ca0495dbf595dd10d1bb4bee4bd34a42ac5cddee2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/828e398c077b7715586e3d17be8676f1beb62769bc66ce76a9f4d641a7477fa8.png"><img alt="_images/828e398c077b7715586e3d17be8676f1beb62769bc66ce76a9f4d641a7477fa8.png" src="_images/828e398c077b7715586e3d17be8676f1beb62769bc66ce76a9f4d641a7477fa8.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>我们可以看到 <span class="math notranslate nohighlight">\(\bar X\)</span> 的分布像预期的那样围绕 <span class="math notranslate nohighlight">\(\mathbb E X\)</span> 聚集。</p>
 <p>让我们改变 <code class="docutils literal notranslate"><span class="pre">n</span></code> 来看样本均值的分布是如何变化的。</p>
 <p>我们将使用<a class="reference external" href="https://intro.quantecon.org/prob_dist.html#violin-plots">小提琴图</a>来显示不同的分布。</p>
-<p>小提琴图中的每一个分布代表着某个 <span class="math notranslate nohighlight">\(n\)</span> 的 <span class="math notranslate nohighlight">\(X_n\)</span> 分布，通过模拟计算得到。</p>
+<p>小提琴图中的每一个分布代表着通过模拟计算得到的某个 <span class="math notranslate nohighlight">\(n\)</span> 的 <span class="math notranslate nohighlight">\(X_n\)</span> 分布。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">means_violin_plot</span><span class="p">(</span><span class="n">distribution</span><span class="p">,</span>  
@@ -531,7 +531,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1264d89538b8b9e7900374a5829e09552433931e555bae002c0b85d49a0970e3.png"><img alt="_images/1264d89538b8b9e7900374a5829e09552433931e555bae002c0b85d49a0970e3.png" src="_images/1264d89538b8b9e7900374a5829e09552433931e555bae002c0b85d49a0970e3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9548c47fb6ec3c25a98aef97218f4cb399fadf32c29b9de7e74707e56540e58c.png"><img alt="_images/9548c47fb6ec3c25a98aef97218f4cb399fadf32c29b9de7e74707e56540e58c.png" src="_images/9548c47fb6ec3c25a98aef97218f4cb399fadf32c29b9de7e74707e56540e58c.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>随着 <span class="math notranslate nohighlight">\(n\)</span> 的增大，更多的概率质量聚集在总体均值 <span class="math notranslate nohighlight">\(\mu\)</span> 附近。</p>
@@ -543,7 +543,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/3f6d1f2971d25cac007d5374a037774b112720ae924aaf80355b2bfe337429cc.png"><img alt="_images/3f6d1f2971d25cac007d5374a037774b112720ae924aaf80355b2bfe337429cc.png" src="_images/3f6d1f2971d25cac007d5374a037774b112720ae924aaf80355b2bfe337429cc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c280e3a3817c1e5be126ae990931f3e6ae9246a5aec6027d30cc44786f5607f6.png"><img alt="_images/c280e3a3817c1e5be126ae990931f3e6ae9246a5aec6027d30cc44786f5607f6.png" src="_images/c280e3a3817c1e5be126ae990931f3e6ae9246a5aec6027d30cc44786f5607f6.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>我们得到了类似的结果。</p>
@@ -552,20 +552,20 @@
 <section id="id8">
 <h2><span class="section-number">19.3. </span>打破大数定律<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <p>我们必须关注大数定律陈述中的假设。</p>
-<p>如果这些假设不成立，那么大数定律可能会失败。</p>
+<p>如果这些假设不成立，那么大数定律可能会不成立。</p>
 <section id="id9">
-<h3><span class="section-number">19.3.1. </span>无限的第一矩<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
-<p>如定理所示，当 <span class="math notranslate nohighlight">\(\mathbb E |X|\)</span> 不是有限的时候，大数定律可以失败。</p>
-<p>我们可以使用<a class="reference external" href="https://zh.wikipedia.org/wiki/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83">柯西分布</a>来证明这一点。</p>
+<h3><span class="section-number">19.3.1. </span>无限的一阶矩<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>如定理所示，当 <span class="math notranslate nohighlight">\(\mathbb E |X|\)</span> 不是有限的时候，大数定律可以不成立。</p>
+<p>我们可以使用<a class="reference external" href="https://baike.baidu.com/item/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83/5021907">柯西分布</a>来证明这一点。</p>
 <p>柯西分布具有以下性质：</p>
 <p>如果 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是独立同分布且符合柯西分布，那么 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 也符合柯西分布。</p>
 <p>这意味着 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 的分布最终不会集中在某一个数字上。</p>
 <p>因此大数定律不成立。</p>
-<p>这里大数定律失败是因为柯西分布违反了假设 <span class="math notranslate nohighlight">\(\mathbb E|X| &lt; \infty\)</span>。</p>
+<p>这里大数定律不成立是因为柯西分布违反了假设 <span class="math notranslate nohighlight">\(\mathbb E|X| &lt; \infty\)</span>。</p>
 </section>
 <section id="iid">
-<h3><span class="section-number">19.3.2. </span>IID 条件的失败<a class="headerlink" href="#iid" title="Permalink to this heading">#</a></h3>
-<p>LLN 可能因违反 IID 假设而不成立。</p>
+<h3><span class="section-number">19.3.2. </span>IID 条件的失效<a class="headerlink" href="#iid" title="Permalink to this heading">#</a></h3>
+<p>大数定律可能因违反 IID 假设而不成立。</p>
 <div class="proof example admonition" id="lln_ex_fail">
 <p class="admonition-title"><span class="caption-number">Example 19.2 </span></p>
 <section class="example-content" id="proof-content">
@@ -580,21 +580,21 @@
 \[
     \bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
 \]</div>
-<p>因此，<span class="math notranslate nohighlight">\(\bar{X}_n\)</span> 的分布对所有 <span class="math notranslate nohighlight">\(n\)</span> 都是 <span class="math notranslate nohighlight">\(N(0,1)\)</span>！</p>
+<p>因此，对所有 <span class="math notranslate nohighlight">\(n\)</span> ，<span class="math notranslate nohighlight">\(\bar{X}_n\)</span> 的分布都是 <span class="math notranslate nohighlight">\(N(0,1)\)</span>！</p>
 </section>
-</div><p>这是否与 LLN 相矛盾，LLN 表明 <span class="math notranslate nohighlight">\(\bar{X}_n\)</span> 的分布将收敛至单点 <span class="math notranslate nohighlight">\(\mu\)</span>？</p>
+</div><p>这是否与表明 <span class="math notranslate nohighlight">\(\bar{X}_n\)</span> 的分布将收敛至单点 <span class="math notranslate nohighlight">\(\mu\)</span> 的大数定律相矛盾？</p>
 <p>不，LLN 是正确的——问题在于其假设未被满足。</p>
 <p>特别是，序列 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 不是独立的。</p>
 <div class="admonition note" id="iid-violation">
 <p class="admonition-title">Note</p>
-<p>尽管在这种情况下，IID 的违反破坏了 LLN，但<em>有</em>的情况下即使 IID 失败 LLN 仍然成立。</p>
+<p>尽管在这种情况下，IID 的违反破坏了大数定律，但<em>存在</em>某些情况下即使 IID 失败大数定律仍然成立。</p>
 <p>我们将在<a class="reference internal" href="#lln_ex3"><span class="std std-ref">练习</span></a>中展示一个例子。</p>
 </div>
 </section>
 </section>
 <section id="id10">
 <h2><span class="section-number">19.4. </span>中心极限定理<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p id="index-2">接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。</p>
+<p id="index-2">接下来，我们来讨论中心极限定理（Central Limit Theorem, CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。</p>
 <section id="id11">
 <h3><span class="section-number">19.4.1. </span>定理的陈述<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
 <p>中心极限定理是数学中最了不起的结果之一。</p>
@@ -608,12 +608,12 @@
 \quad \text{as} \quad
 n \to \infty\]</div>
 </section>
-</div><p>这里的 <span class="math notranslate nohighlight">\(\stackrel { d } { \to } N(0, \sigma^2)\)</span> 表示<a class="reference external" href="https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution">分布收敛</a>到以 0 为均值且标准差为 <span class="math notranslate nohighlight">\(\sigma\)</span> 的正态分布。</p>
-<p>CLT 的惊人含义是，对于任何具有有限<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">二阶矩</a>的分布，简单地添加独立副本总是会得到高斯（正态）曲线。</p>
+</div><p>这里的 <span class="math notranslate nohighlight">\(\stackrel { d } { \to } N(0, \sigma^2)\)</span> 表示<a class="reference external" href="https://baike.baidu.com/item/%E4%BE%9D%E5%88%86%E5%B8%83%E6%94%B6%E6%95%9B/19127365">分布收敛</a>到以 0 为均值且标准差为 <span class="math notranslate nohighlight">\(\sigma\)</span> 的正态分布。</p>
+<p>CLT 的惊人含义是，对于任何具有有限<a class="reference external" href="https://baike.baidu.com/item/%E7%9F%A9/22856460">二阶矩</a>的分布，简单地添加独立样本总是会得到高斯（正态）曲线。</p>
 </section>
 <section id="id12">
 <h3><span class="section-number">19.4.2. </span>模拟 1<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>由于中心极限定理(CLT)几乎像魔法一样，运行验证其含义的模拟是构建理解的一种好方法。</p>
+<p>由于中心极限定理几乎像魔法一样，运行验证其含义的模拟是辅助理解的好方法。</p>
 <p>为此，我们现在进行以下模拟：</p>
 <ol class="arabic simple">
 <li><p>为基本观察值 <span class="math notranslate nohighlight">\(X_i\)</span> 选择一个任意分布 <span class="math notranslate nohighlight">\(F\)</span>。</p></li>
@@ -622,7 +622,7 @@ n \to \infty\]</div>
 <li><p>将后者与 <span class="math notranslate nohighlight">\(N(0, \sigma^2)\)</span> 进行比较。</p></li>
 </ol>
 <p>下面的代码正是为指数分布 <span class="math notranslate nohighlight">\(F(x) = 1 - e^{- \lambda x}\)</span> 执行了这一操作。</p>
-<p>（请尝试使用其他 <span class="math notranslate nohighlight">\(F\)</span> 的选择，但请记住，为了符合CLT的条件，分布必须有有限的二阶矩。）</p>
+<p>（请尝试使用其他分布<span class="math notranslate nohighlight">\(F\)</span> ，但请记住，为了符合中心极限定理的条件，分布必须有有限的二阶矩。）</p>
 <div class="cell docutils container" id="sim-one">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设定参数</span>
@@ -656,11 +656,11 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fbad7f8a3896e25b9c43aa77635b8978a9502e448ebcb745777b8953b6653beb.png"><img alt="_images/fbad7f8a3896e25b9c43aa77635b8978a9502e448ebcb745777b8953b6653beb.png" src="_images/fbad7f8a3896e25b9c43aa77635b8978a9502e448ebcb745777b8953b6653beb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fad070b9950396c14d69ce0cc7abd9ef1053bc7b4617232d65a4adc71fde0686.png"><img alt="_images/fad070b9950396c14d69ce0cc7abd9ef1053bc7b4617232d65a4adc71fde0686.png" src="_images/fad070b9950396c14d69ce0cc7abd9ef1053bc7b4617232d65a4adc71fde0686.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>（注意这里没有 for 循环——所有的操作都是矢量化的，意味着主要计算都转移到了快速的 C 代码上。）</p>
-<p>通过增加 <code class="docutils literal notranslate"><span class="pre">n</span></code>，拟合到正态密度可以进一步改进。</p>
+<p>通过增加 <code class="docutils literal notranslate"><span class="pre">n</span></code>，我们会越来越接近正态分布。</p>
 </section>
 </section>
 <section id="id13">
@@ -669,7 +669,7 @@ n \to \infty\]</div>
 
 <p class="admonition-title"><span class="caption-number">Exercise 19.1 </span></p>
 <section id="exercise-content">
-<p>用<a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">贝塔分布</a>重复<a class="reference internal" href="#sim-one"><span class="std std-ref">上面</span></a>的模拟。</p>
+<p>用<a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021">贝塔分布</a>重复<a class="reference internal" href="#sim-one"><span class="std std-ref">上面</span></a>的模拟。</p>
 <p>你可以选择任何 <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
 </section>
 </div>
@@ -698,9 +698,9 @@ n \to \infty\]</div>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$Y_n$&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$密度$&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;密度&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N(0, \sigma^2)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$N(0, \sigma^2)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -708,25 +708,7 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:22: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-&lt;&gt;:22: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-/tmp/ipykernel_8012/292538398.py:22: SyntaxWarning: invalid escape sequence &#39;\s&#39;
-  ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), &#39;k-&#39;, lw=2, label=&#39;$N(0, \sigma^2)$&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;rm&#39; does not have a glyph for &#39;\u5bc6&#39; [U+5bc6], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;rm&#39; does not have a glyph for &#39;\u5ea6&#39; [U+5ea6], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;rm&#39; does not have a glyph for &#39;\u5bc6&#39; [U+5bc6], substituting with a dummy symbol.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Font &#39;rm&#39; does not have a glyph for &#39;\u5ea6&#39; [U+5ea6], substituting with a dummy symbol.
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/25484fa43b31ead3d857725b0caebf2aaf30c673130cccfc140e1e9a2c919d8c.png"><img alt="_images/25484fa43b31ead3d857725b0caebf2aaf30c673130cccfc140e1e9a2c919d8c.png" src="_images/25484fa43b31ead3d857725b0caebf2aaf30c673130cccfc140e1e9a2c919d8c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/609d047f2767207fe45731fce813340bd0d31a4a17f9af3fc8129e52c66075d6.png"><img alt="_images/609d047f2767207fe45731fce813340bd0d31a4a17f9af3fc8129e52c66075d6.png" src="_images/609d047f2767207fe45731fce813340bd0d31a4a17f9af3fc8129e52c66075d6.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -743,7 +725,7 @@ n \to \infty\]</div>
 <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>解释为什么这能提供一个具有正确分布的随机变量<span class="math notranslate nohighlight">\(X\)</span>。</p>
+<p>解释为什么这能行代码可以提供一个具有正确分布的随机变量<span class="math notranslate nohighlight">\(X\)</span>。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="lln_clt-solution-7">
@@ -765,8 +747,8 @@ n \to \infty\]</div>
 
 <p class="admonition-title"><span class="caption-number">Exercise 19.3 </span></p>
 <section id="exercise-content">
-<p>我们上面提到即使违反IID条件，LLN有时仍然成立。</p>
-<p>让我们进一步调查这个说法。</p>
+<p>我们上面提到即使违反IID条件，大数定律有时仍然成立。</p>
+<p>让我们进一步探讨这个说法。</p>
 <p>考虑AR(1)过程</p>
 <div class="math notranslate nohighlight">
 \[
@@ -779,12 +761,12 @@ n \to \infty\]</div>
 \[
     X_0 \sim N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right)
 \]</div>
-<p>这个过程违反了LLN的独立性假设
-（因为 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 依赖于 <span class="math notranslate nohighlight">\(X_t\)</span> 的值）。</p>
-<p>然而，下一个练习告诉我们，样本均值向总体均值的LLN类型收敛仍然会发生。</p>
+<p>这个过程违反了大数定律的独立性假设
+（因为 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 依赖于 <span class="math notranslate nohighlight">\(X_t\)</span> 的值）。
+与大数定律类似的收敛仍然会发生。</p>
 <ol class="arabic simple">
 <li><p>证明序列 <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span> 是同分布的。</p></li>
-<li><p>使用模拟证明LLN收敛成立，其中 <span class="math notranslate nohighlight">\(\alpha = 0.8\)</span>, <span class="math notranslate nohighlight">\(\beta = 0.2\)</span>。</p></li>
+<li><p>使用模拟证明大数定律类似的收敛成立，其中 <span class="math notranslate nohighlight">\(\alpha = 0.8\)</span>, <span class="math notranslate nohighlight">\(\beta = 0.2\)</span>。</p></li>
 </ol>
 </section>
 </div>
@@ -792,11 +774,11 @@ n \to \infty\]</div>
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex3"> Exercise 19.3</a></p>
 <section id="solution-content">
-<p><strong>Q1 解答</strong></p>
+<p><strong>第一题答案</strong></p>
 <p>关于第一部分，我们认为 <span class="math notranslate nohighlight">\(X_t\)</span> 在所有 <span class="math notranslate nohighlight">\(t\)</span> 时刻的分布与 <span class="math notranslate nohighlight">\(X_0\)</span> 相同。</p>
 <p>为了构建证明，我们假设这个命题对 <span class="math notranslate nohighlight">\(X_t\)</span> 是正确的。</p>
-<p>现在我们声称它对于 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 也是正确的。</p>
-<p>观察我们是否得到了正确的均值：</p>
+<p>现在我们证明它对于 <span class="math notranslate nohighlight">\(X_{t+1}\)</span> 也是正确的。</p>
+<p>首先我们验证均值是正确的：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -805,7 +787,7 @@ n \to \infty\]</div>
     &amp;= \frac{\alpha}{1-\beta}
 \end{aligned}
 \end{split}\]</div>
-<p>我们也得到了正确的方差：</p>
+<p>其次我们也得到了正确的方差：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -822,7 +804,7 @@ n \to \infty\]</div>
     N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right) 
 \]</div>
 <p>我们可以得出结论，这个AR(1)过程违反了独立性假设，但是分布相同。</p>
-<p><strong>Q2 解决方案</strong></p>
+<p><strong>第二题答案</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">σ</span> <span class="o">=</span> <span class="mi">10</span>
@@ -856,7 +838,7 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/8e52b9081bbf1439af824fabb14b8d33068606603f51e032c0a5ebc03022da4c.png"><img alt="_images/8e52b9081bbf1439af824fabb14b8d33068606603f51e032c0a5ebc03022da4c.png" src="_images/8e52b9081bbf1439af824fabb14b8d33068606603f51e032c0a5ebc03022da4c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4fc3d08acc5956e3870f5db6f85a4ca8573589857ebfb41c60ae37c1400315c5.png"><img alt="_images/4fc3d08acc5956e3870f5db6f85a4ca8573589857ebfb41c60ae37c1400315c5.png" src="_images/4fc3d08acc5956e3870f5db6f85a4ca8573589857ebfb41c60ae37c1400315c5.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>我们看到在独立性假设被违反的情况下，<span class="math notranslate nohighlight">\(\bar{x}\)</span> 仍然收敛于 <span class="math notranslate nohighlight">\(\mu\)</span>。</p>
