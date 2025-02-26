@@ -120,7 +120,7 @@ def plot_series(data, country, ylabel,
                 txt_pos, ax, g_params,
                 b_params, t_params, ylim=15, baseline=0):
     """
-    使用突出显示的衰退阶段绘制时间序列图。
+    绘制数据的时间序列图并突出显示经济衰退的时期。
 
     参数
     ----------
@@ -511,7 +511,7 @@ plot_comparison(gdp_growth.loc[name_cn.loc[countries]['name'], 1962:],
 plt.show()
 ```
 
-上述GDP增长率的比较表明，在21世纪的经济衰退,的商业周期变得更加同步。
+上述GDP增长率的比较表明，在21世纪全球的商业周期变得更加同步。
 
 然而，新兴和不发达经济体的经济周期通常经历更加剧烈的变化。
 
