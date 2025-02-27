@@ -15,35 +15,35 @@ kernelspec:
 
 ## 概述
 
-本讲座基于 {doc}`money_inflation` 中引入的概念和问题。
+本讲座基于 {doc}`money_inflation` 中介绍的概念和问题。
 
-那个讲座描述了揭示通货膨胀税率和关联的货币收益率的静止均衡 [*拉弗曲线*](https://en.wikipedia.org/wiki/Laffer_curve)。
+那个讲座描述了揭示通货膨胀税率和关联的货币收益率的[*拉弗曲线*]上的静止均衡 (https://baike.baidu.com/item/%E6%8B%89%E5%BC%97%E6%9B%B2%E7%BA%BF/2527248)。
 
-在这次讲座中，我们研究一个在日期 $T > 0$ 之后占优的静止均衡的情况，但在那之前并非如此。
+在这次讲座中，我们研究一个只在日期 $T > 0$ 之后才占优的静止均衡。
 
-对于 $t=0, \ldots, T-1$，货币供应、价格水平和计息政府债务沿着一个在 $t=T$ 结束的过渡路径变化。
+对于 $t=0, \ldots, T-1$，货币供应、价格水平和计息政府债务会沿着一个在 $t=T$ 结束的过渡路径变化。
 
-在这个过渡期间，实际余额 $\frac{m_{t+1}}{p_t}$ 与在时间 $t$ 到期的一期政府债券 $\tilde{R} B_{t-1}$ 的比率每个期间都在减少。
+在这个过渡期间，实际余额 $\frac{m_{t+1}}{p_t}$ 与在时间 $t$ 到期的一期政府债券 $\tilde{R} B_{t-1}$ 的比率每期递减。
 
-这对于必须通过印制货币来融资的 **息前** 政府赤字在 $t \geq T$ 时期有影响。
+这对于必须通过印钞来融资的 政府**总利息** 赤字在 $t \geq T$ 时期有影响。
 
 关键的 **货币与债券** 比率只在时间 $T$ 及之后稳定。
 
-并且 $T$ 越大，在 $t \geq T$ 时期必须通过印制货币来融资的息前政府赤字就越大。
+并且 $T$ 越大，在 $t \geq T$ 时期必须通过印钞来融资的政府总利息赤字就越大。
 
 这些结果是 Sargent 和 Wallace 的“不愉快的货币主义算术” {cite}`sargent1981` 的基本发现。
 
-那次讲座描述了在讲座中出现的货币供应和需求。
+那个讲座描述了此讲座中出现的货币供应和需求。
 
-它还描述了我们在本讲座中从中向后工作的稳态均衡。
+它还描述了我们在本讲座中倒推得到的稳态均衡。
 
 除了学习“不愉快的货币主义算术”，在这次讲座中，我们还将学习如何实施一个用于计算初始价格水平的 [*不动点*](https://en.wikipedia.org/wiki/Fixed_point_(mathematics)) 算法。
 
 ## 设置
 
-让我们从快速回顾一下 {doc}`money_inflation` 中提到的模型组件开始。
+让我们从回顾 {doc}`money_inflation` 中的模型设定开始。
 
-请查阅那篇讲义以获取更多详情和我们在此讲义中也将使用的Python代码。
+如有需要可以回顾那篇讲义以及查阅我们在本讲义中将重复使用的Python代码。
 
 对于 $t \geq 1$，**实际余额** 按照以下方式变化
 
@@ -72,7 +72,7 @@ $$ (eq:up_bdemand)
 
 ## 货币-财政政策
 
-在{doc}`money_inflation`的基本模型上，我们增加了通胀指数化的一期政府债券作为政府筹集财政支出的另一种方式。
+在{doc}`money_inflation`的基础模型上，我们增加了通胀指数化的一期政府债券作为政府筹集财政支出的另一种方式。
 
 设 $\widetilde R > 1$ 为政府一期通胀指数化债券的恒定名义回报率。
 
@@ -145,9 +145,9 @@ $$ (eq:overlineg)
 
 ## 算法（基本思想）
 
-从 $t=T$ 向后工作，首先计算与低通胀、低通胀税率平稳状态平衡相关的 $p_T, R_u$，如 {doc}`money_inflation_nonlinear` 中所述。
+与 {doc}`money_inflation_nonlinear` 类似，我们从 $t=T$ 反向计算，首先计算与低通胀、低通胀税率平稳状态平衡相关的 $p_T, R_u$。
 
-首先开始我们的算法描述，回忆一下货币利率 $\bar R$ 解决的二次方程很有用
+我们从描述算法开始，我们需要回顾一下稳态收益率 $\bar{R}$ 满足下列二次方程
 
 $$
 -\gamma_2 + (\gamma_1 + \gamma_2 - \overline g) \bar R - \gamma_1 \bar R^2 = 0
@@ -155,7 +155,7 @@ $$ (eq:up_steadyquadratic)
 
 二次方程 {eq}`eq:up_steadyquadratic` 有两个根，$R_l < R_u < 1$。
 
-如 {doc}`money_inflation` 末尾描述，我们选择较大的根 $R_u$。
+与 {doc}`money_inflation` 末尾所描述的原因类似，我们选择较大的根 $R_u$。
 
 接下来，我们计算
 
@@ -215,34 +215,34 @@ $$
 p_t = \gamma_1^{-1} m_0 + \lambda p_{t+1}, \quad t = T-1, T-2, \ldots, 0
 $$
 
-从
+起始于
 
 $$
 p_T =    \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}  = \gamma_1^{-1} m_0  \left\{\frac{1}{R_u-\lambda} \right\}
 $$ (eq:pTformula)
 
 ```{prf:remark}
-可以通过回想 $R_u$ 是二次方程 {eq}`eq:up_steadyquadratic` 的根，该方程确定了货币的稳定状态回报率，从而验证 {eq}`eq:pTformula` 右侧两个公式的等价性。
+ $R_u$ 是二次方程 {eq}`eq:up_steadyquadratic` 的根，该方程确定了货币的稳定状态回报率，所以 {eq}`eq:pTformula` 右侧两个公式是等价的。
 ```
 
 ## 算法（伪代码）
 
-现在我们更详细地以伪代码形式描述一个计算算法，因为它接近我们可以提供给Python编程者的一组指令。
+现在我们详细地以伪代码形式描述一个计算算法。
 
 为了计算一个均衡，我们使用以下算法。
 
 ```{prf:algorithm}
-给定 *参数* 包括 $g, \check m_0, \check B_{-1}, \widetilde R >1, T $。
+给定 *参数*  $g, \check m_0, \check B_{-1}, \widetilde R >1, T $。
 
 我们定义一个从 $p_0$ 到 $\widehat p_0$ 的映射，如下。
 
-* 设置 $m_0$，然后计算 $B_{-1}$ 以满足时间 $0$ **公开市场操作的** 约束
+* 设置 $m_0$，然后计算 $B_{-1}$ 以满足时刻 $0$ 时**公开市场操作的** 约束
 
 $$
 B_{-1}- \check B_{-1} = \frac{\widetilde R}{p_0} \left( \check m_0 - m_0 \right)
 $$
 
-* 从以下公式计算 $B_{T-1}$
+* 通过以下公式计算 $B_{T-1}$
 
 $$
 B_{T-1} = \widetilde R^T B_{-1} + \left( \frac{1 - \widetilde R^T}{1-\widetilde R} \right) g
@@ -275,38 +275,34 @@ $$
 其中 $\theta \in [0,1)$ 是一个松弛参数。
 ```
 
-## 示例计算
+## 计算示例
 
-我们将模型参数设置为，在时间 $T$ 后的稳态初始和 {doc}`money_inflation_nonlinear` 中的相同。
+我们将模型参数设置为使时间 $T$ 后的稳态初始和 {doc}`money_inflation_nonlinear` 中相同的值。
 
-特别是设置 $\gamma_1=100, \gamma_2 =50, g=3.0$。在那次讲座中，我们设置 $m_0 = 100$，
-但现在相应的将是 $M_T$，它是内生的。
+我们设置 $\gamma_1=100, \gamma_2 =50, g=3.0$。在那次讲座中，我们设置 $m_0 = 100$，
+但对应于本次讲座是 $M_T$，它是内生的。
 
 对于新参数，我们将设置 $\tilde R = 1.01, \check B_{-1} = 0, \check m_0 = 105, T = 5$。
 
-我们将通过设置 $m_0 = 100$ 来研究一个“小型”公开市场操作。
+我们通过设置 $m_0 = 100$ 来研究一个“小型”公开市场操作。
 
 这些参数设置意味着，在时间 $0$ 之前，“中央银行”以 $\check m_0 - m_0 = 5$ 货币单位换取了公众的债券。
 
 这使得公众持有更少的货币但更多的政府有息债券。
 
-由于公众持有的货币较少（供应减少），可以合理预见时间 $0$ 的价格水平将受到向下推动。
+由于公众持有的货币较少（供应减少），可以合理预见时间 $0$ 的价格水平将被向下推动。
 
-但这还不是故事的终点，因为时间 $0$ 的这次**公开市场操作**对未来 $m_{t+1}$ 和名义政府赤字 $\bar g_t$ 的设置产生了影响。
+但这还不是故事的终点，因为时刻 $0$ 的这次**公开市场操作**对未来的 $m_{t+1}$ 和名义政府赤字 $\bar g_t$ 产生了影响。
 
-让我们开始一些导入：
+让我们从一些导入开始：
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
-import matplotlib as mpl
-FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
-mpl.font_manager.fontManager.addfont(FONTPATH)
-plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-现在让我们开始实现我们的伪代码用 Python。
+现在让我们用Python来实现我们的伪代码。
 
 ```{code-cell} ipython3
 # 创建一个包含参数的命名元组
@@ -339,7 +335,7 @@ def S(p0, m0, model):
     m0_check, Bm1_check = model.m0_check, model.Bm1_check
     T = model.T
 
-    # 开放市场操作
+    # 公开市场操作
     Bm1 = 1 / (p0 * R_tilde) * (m0_check - m0) + Bm1_check
 
     # 计算 B_{T-1}
@@ -373,12 +369,12 @@ def compute_fixed_point(m0, p0_guess, model, θ=0.5, tol=1e-6):
     return p0
 ```
 
-让我们看看在静态$R_u$均衡中，价格水平$p_0$如何依赖于初始货币供应量$m_0$。
+让我们看看在稳态$R_u$均衡中，价格水平$p_0$如何依赖于初始货币供应量$m_0$。
 
 注意$p_0$作为$m_0$的函数的斜率是恒定的。
 
-这个结果表明，我们的模型验证了一种货币数量论的结果，
-这是Sargent和Wallace {cite}`sargent1981`在其模型中特意构建的，以证明其标题中“货币主义者”这一形容词。
+这一结果表明，我们的模型验证了货币数量论的结论，
+这正是 Sargent 和 Wallace {cite}`sargent1981`用来证明其标题中“货币主义”一词的合理性而刻意融入其模型的。
 
 ```{code-cell} ipython3
 m0_arr = np.arange(10, 110, 10)
@@ -393,7 +389,7 @@ plt.xlabel('初始货币供应量 $m_0$')
 plt.show()
 ```
 
-现在让我们编写并实现代码，以便我们可以试验前面描述的时刻 $0$ 的公开市场操作。
+现在让我们编写代码来试验前面描述的在时刻 $0$ 的公开市场操作。
 
 ```{code-cell} ipython3
 def simulate(m0, model, length=15, p0_guess=1):
@@ -404,9 +400,9 @@ def simulate(m0, model, length=15, p0_guess=1):
     T = model.T
 
     # (pt, mt, bt, Rt)
-    路径 = np.empty((4, length))
+    paths = np.empty((4, length))
 
-    # 开市操作
+    # 公开市场操作
     p0 = compute_fixed_point(m0, 1, model)
     Bm1 = 1 / (p0 * R_tilde) * (m0_check - m0) + Bm1_check
     BTm1 = R_tilde ** T * Bm1 + ((1 - R_tilde ** T) / (1 - R_tilde)) * g
@@ -416,28 +412,29 @@ def simulate(m0, model, length=15, p0_guess=1):
     λ = γ2 / γ1
 
     # t = 0
-    路径[0, 0] = p0
-    路径[1, 0] = m0
+    paths[0, 0] = p0
+    paths[1, 0] = m0
 
     # 1 <= t <= T
     for t in range(1, T+1, 1):
-        路径[0, t] = (1 / γ1) * m0 *                       ((1 - λ ** (T - t)) / (1 - λ)
+        paths[0, t] = (1 / γ1) * m0 * \
+                      ((1 - λ ** (T - t)) / (1 - λ)
                        + (λ ** (T - t) / (Ru - λ)))
-        路径[1, t] = m0
+        paths[1, t] = m0
 
     # t > T
     for t in range(T+1, length):
-        路径[0, t] = 路径[0, t-1] / Ru
-        路径[1, t] = 路径[1, t-1] + 路径[0, t] * g_bar
+        paths[0, t] = paths[0, t-1] / Ru
+        paths[1, t] = paths[1, t-1] + paths[0, t] * g_bar
 
     # Rt = pt / pt+1
-    路径[3, :T] = 路径[0, :T] / 路径[0, 1:T+1]
-    路径[3, T:] = Ru
+    paths[3, :T] = paths[0, :T] / paths[0, 1:T+1]
+    paths[3, T:] = Ru
 
     # bt = γ1 - γ2 / Rt
-    路径[2, :] = γ1 - γ2 / 路径[3, :]
+    paths[2, :] = γ1 - γ2 / paths[3, :]
 
-    return 路径
+    return paths
 ```
 
 ```{code-cell} ipython3
@@ -447,9 +444,9 @@ def plot_path(m0_arr, model, length=15):
     titles = ['$p_t$', '$m_t$', '$b_t$', '$R_t$']
     
     for m0 in m0_arr:
-        路径 = simulate(m0, model, length=length)
+        paths = simulate(m0, model, length=length)
         for i, ax in enumerate(axs.flat):
-            ax.plot(路径[i])
+            ax.plot(paths[i])
             ax.set_title(titles[i])
     
     axs[0, 1].hlines(model.m0_check, 0, length, color='r', linestyle='--')
@@ -467,12 +464,14 @@ mystnb:
 plot_path([80, 100], msm)
 ```
 
-{numref}`fig:unpl1` 总结了两个实验结果，这些结果传达了 Sargent 和 Wallace {cite}`sargent1981` 的信息。
+{numref}`fig:unpl1` 总结了两个实验结果，这些结果传达了 Sargent 和 Wallace {cite}`sargent1981` 中的信息。
 
-* 在时间 $t=0$ 进行的公开市场操作减少了货币供应，导致当时的价格水平下降
+* 在 $t=0$ 进行的公开市场操作减少了货币供应，导致当时的价格水平下降
 
-* 在时间 $0$ 进行的公开市场操作后货币供应量越低，价格水平越低。
+* 在时刻 $0$ 进行的公开市场操作后货币供应量越低，价格水平越低。`
 
-* 在时间 $0$ 减少公开市场操作后的货币供应量的公开市场操作，也会*降低*时间 $t \geq T$ 的货币回报率 $R_u$，因为它带来了更高的政府借贷需通过印钞（即征收通货膨胀税）在时间 $t \geq T$ 来融资。
+* 能减少时刻 $0$ 公开市场操作后的货币供应量的公开市场操作，也会*降低* $t \geq T$ 时的货币回报率 $R_u$，因为它带来的更高的政府借贷需通过印钞（即征收通货膨胀税）在时刻 $t \geq T$ 来融资。
+
+* $R$ 在维持货币稳定和处理政府赤字引起的通货膨胀后果的背景下非常重要。因此，较大的 $R$ 也可能被选择来减轻因通货膨胀造成的实际回报率的负面影响。
 
 * $R$ 在维持货币稳定和处理政府赤字引起的通货膨胀后果的背景下非常重要。因此，可能会选择较大的 $R$ 来减轻因通货膨胀造成的实际回报率的负面影响。
