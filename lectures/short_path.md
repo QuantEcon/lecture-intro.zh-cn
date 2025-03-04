@@ -49,7 +49,9 @@ import numpy as np
 ```
 
 ## 问题概述
-最短路径问题是寻找如何以最小成本从[图](https://en.wikipedia.org/wiki/Graph_%28mathematics%29)中的一个指定节点遍历到另一个节点。
+
+最短路径问题是寻找如何以最小成本从[图](https://baike.baidu.com/item/%E5%9B%BE/13018767)中的一个指定节点遍历到另一个节点。
+
 考虑下面这个图
 
 ```{figure} /_static/lecture_specific/short_path/graph.png
@@ -57,16 +59,19 @@ import numpy as np
 ```
 
 我们希望以最小成本从节点（顶点）A到达节点G
+
 * 箭头（边）表示我们可以采取的移动。
 * 边上的数字表示沿该边行进的成本。
 （像上面这样的图被称为加权[有向图](https://en.wikipedia.org/wiki/Directed_graph)。）
 
 图的可能解释包括
+
 * 供应商到达目的地的最小成本。
 * 互联网上的数据包路由（最小化时间）。
 * 等等。
 
 对于这个简单的图，快速扫描边可以看出最优路径是
+
 * A, C, F, G，成本为8
 
 ```{figure} /_static/lecture_specific/short_path/graph4.png
@@ -80,8 +85,11 @@ import numpy as np
 ```
 
 ## 寻找最低成本路径
-对于大型图，我们需要一个系统的解决方案。
+
+对于更大的图，我们需要一个系统性的解决方案。
+
 让 $J(v)$ 表示从节点 $v$ 出发的最小成本，理解为如果我们选择最佳路线，从 $v$ 出发的总成本。
+
 假设我们知道每个节点 $v$ 的 $J(v)$，如下图所示（基于前面示例中的图）。
 
 ```{figure} /_static/lecture_specific/short_path/graph2.png
@@ -89,7 +97,9 @@ import numpy as np
 ```
 
 注意 $J(G) = 0$。
-现在可以通过以下步骤找到最佳路径：
+
+我们可以通过以下步骤找到最佳路径：
+
 1. 从节点 $v = A$ 开始
 1. 从当前节点 $v$，移动到解决以下问题的任何节点
 
@@ -100,10 +110,14 @@ import numpy as np
 ```
 
 其中
+
 * $F_v$ 是可以从 $v$ 一步到达的节点集合。
 * $c(v, w)$ 是从 $v$ 到 $w$ 的旅行成本。
+* 
 因此，如果我们知道函数 $J$，那么找到最佳路径几乎就是轻而易举的事。
+
 但是我们如何找到成本函数 $J$ 呢？
+
 经过一些思考，你会确信对于每个节点 $v$，
 函数 $J$ 满足
 
@@ -113,7 +127,7 @@ import numpy as np
 J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}
 ```
 
-这被称为**贝尔曼方程**，以数学家[理查德·贝尔曼](https://en.wikipedia.org/wiki/Richard_E._Bellman)的名字命名。
+这被称为**贝尔曼方程**，以数学家[理查德·贝尔曼](https://baike.baidu.com/item/%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%96%B9%E7%A8%8B/5500990)的名字命名。
 
 贝尔曼方程可以被理解为$J$必须满足的一个限制条件。
 
@@ -121,8 +135,7 @@ J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}
 
 ## 求解最小成本函数
 
-
-让我们来看一个计算$J$的算法，然后思考如何实现它。
+让我们一起学习一个计算$J$的算法，然后思考如何实现它。
 
 ### 算法
 
@@ -144,6 +157,7 @@ J_0(v) = 0 \text{ for all } v
 3. 如果 $J_{n+1}$ 和 $J_n$ 不相等，则将 $n$ 加 1，返回步骤 2
 
 这个序列收敛于 $J$。
+
 虽然我们在此省略了证明，但我们将在其他动态规划讲座中证明类似的结论。
 
 ### 实现
@@ -160,6 +174,7 @@ Q(v, w)
    & +\infty \text{ 否则 }
 \end{cases}
 $$
+
 在这种情况下，$Q$ 通常被称为**距离矩阵**。
 
 我们现在也对节点进行编号，其中 $A = 0$，所以，例如
@@ -169,6 +184,7 @@ Q(1, 2)
 =
 \text{ 从 B 到 C 的旅行成本 }
 $$
+
 例如，对于上面的简单图，我们设置
 
 ```{code-cell} python3
@@ -184,6 +200,7 @@ Q = np.array([[inf, 1,   5,   3,   inf, inf, inf],
 ```
 
 请注意，保持不动（在主对角线上）的成本设置为：
+
 * 对于非目的地节点，设为 `np.inf` --- 必须继续移动。
 * 对于目的地节点，设为 0 --- 这是我们停止的地方。
 
@@ -191,7 +208,7 @@ Q = np.array([[inf, 1,   5,   3,   inf, inf, inf],
 让我们尝试这个例子，看看效果如何：
 
 ```{code-cell} python3
-nodes = range(7)                              # 节点 = 0, 1, ..., 6
+nodes = range(7)                           # 节点 = 0, 1, ..., 6
 J = np.zeros_like(nodes, dtype=int)        # 初始猜测
 next_J = np.empty_like(nodes, dtype=int)   # 储存更新的猜测
 
@@ -206,14 +223,16 @@ while i < max_iter:
     if np.array_equal(next_J, J):                
         break
     
-    J[:] = next_J                                # 将 next_J 的内容复制到 J
+    J[:] = next_J                          # 将 next_J 的内容复制到 J
     i += 1
 
 print("到达成本函数是", J)
 ```
 
 这与我们上面通过观察得到的数字相符。
+
 但更重要的是，我们现在有了一种处理大型图的方法。
+
 ## 练习
 
 ```{exercise-start}
@@ -374,10 +393,13 @@ def map_graph_to_distance_matrix(in_file):
     return Q
 ```
 
+
 此外，让我们编写
 1. 一个"贝尔曼算子"函数，该函数接受距离矩阵和当前的J估计值，并返回更新后的J估计值，以及
 2. 一个函数，该函数接受距离矩阵并返回一个代价函数。
+
 我们将使用上述算法。
+
 最小化步骤被向量化以提高速度。
 
 ```{code-cell} python3
