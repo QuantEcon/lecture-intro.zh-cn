@@ -268,8 +268,8 @@
 <span id="id1"></span><h1><span class="section-number">16. </span>特征值和特征向量<a class="headerlink" href="#eigen" title="Permalink to this heading">#</a></h1>
 <section id="index-0">
 <span id="id2"></span><h2><span class="section-number">16.1. </span>概述<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
-<p>特征值和特征向量是线性代数中一个相对高级的话题。
-同时，这些概念在以下领域非常有用：</p>
+<p>特征值和特征向量是线性代数中一个相对高级的话题。</p>
+<p>同时，这些概念在以下领域非常有用：</p>
 <ul class="simple">
 <li><p>经济建模（尤其是动态模型！）</p></li>
 <li><p>统计学</p></li>
@@ -277,9 +277,9 @@
 <li><p>机器学习</p></li>
 <li><p>以及许多其他科学领域</p></li>
 </ul>
-<p>在本讲座中，我们将解释特征值和特征向量的基础知识，并介绍诺伊曼级数引理。
-我们假设学生已经熟悉矩阵，并理解<a class="reference internal" href="linear_equations.html"><span class="doc">矩阵代数的基础知识</span></a>。
-我们将使用以下导入：</p>
+<p>在本讲座中，我们将解释特征值和特征向量的基础知识，并介绍诺伊曼级数引理。</p>
+<p>我们假设学生已经熟悉矩阵，并理解<a class="reference internal" href="linear_equations.html"><span class="doc">矩阵代数的基础知识</span></a>。</p>
+<p>我们将使用以下导入：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -321,9 +321,9 @@
 <section id="id5">
 <h3><span class="section-number">16.2.2. </span>方阵<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>让我们将讨论限制在方阵上。</p>
-<p>在上述讨论中，这意味着 <span class="math notranslate nohighlight">\(m=n\)</span>，且 <span class="math notranslate nohighlight">\(A\)</span> 将 <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> 映射到自身。</p>
+<p>在上述讨论中，这意味着 <span class="math notranslate nohighlight">\(m=n\)</span>，则 <span class="math notranslate nohighlight">\(A\)</span> 将 <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> 映射到自身。</p>
 <p>这表示 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 矩阵，它将 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> 中的向量 <span class="math notranslate nohighlight">\(x\)</span> 映射（或”变换”）为同样在 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> 中的新向量 <span class="math notranslate nohighlight">\(y=Ax\)</span>。</p>
-<p>这里有一个例子：</p>
+<p>以下是一个例子</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \begin{bmatrix}
@@ -348,21 +348,20 @@
         \end{bmatrix}
 \end{split}\]</div>
 <p>将向量 <span class="math notranslate nohighlight">\(x = \begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> 变换为向量 <span class="math notranslate nohighlight">\(y = \begin{bmatrix} 5 \\ 2 \end{bmatrix}\)</span>。</p>
-<p>让我们用 Python 来可视化这个过程：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
-              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+让我们用 Python 来可视化这个过程：
+
+```{code-cell} ipython3
+A = np.array([[2,  1],
+              [-1, 1]])
 </pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="c1"># 将坐标轴设置通过原点</span>
+<span class="c1"># 设置坐标轴通过原点</span>
 
 <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
@@ -403,7 +402,7 @@
 <a class="reference internal image-reference" href="_images/1e9859dab1bf3855d12e6d196363de624a7da34b6c3d53305fb1dab7e8b22bb7.png"><img alt="_images/1e9859dab1bf3855d12e6d196363de624a7da34b6c3d53305fb1dab7e8b22bb7.png" src="_images/1e9859dab1bf3855d12e6d196363de624a7da34b6c3d53305fb1dab7e8b22bb7.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>理解这种变换的一种方式是 <span class="math notranslate nohighlight">\(A\)</span></p>
+<p>我们可以这样理解 <span class="math notranslate nohighlight">\(A\)</span>：</p>
 <ul class="simple">
 <li><p>首先将 <span class="math notranslate nohighlight">\(x\)</span> 旋转某个角度 <span class="math notranslate nohighlight">\(\theta\)</span>，然后</p></li>
 <li><p>将其缩放某个标量 <span class="math notranslate nohighlight">\(\gamma\)</span> 以获得 <span class="math notranslate nohighlight">\(x\)</span> 的像 <span class="math notranslate nohighlight">\(y\)</span>。</p></li>
@@ -412,15 +411,15 @@
 </section>
 <section id="id6">
 <h2><span class="section-number">16.3. </span>变换类型<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>让我们来检查一些可以用矩阵执行的标准变换。
-下面我们通过将向量视为点而不是箭头来可视化变换。
-我们考虑给定矩阵如何变换</p>
+<p>让我们来检查一些可以用矩阵执行的标准变换。</p>
+<p>下面我们通过将向量视为点而不是箭头来可视化变换。</p>
+<p>我们将给定一个矩阵并观察它如何变换</p>
 <ul class="simple">
-<li><p>一个点网格和</p></li>
-<li><p>位于 <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> 中单位圆上的一组点。
-为了构建这些变换，我们将使用两个函数，称为 <code class="docutils literal notranslate"><span class="pre">grid_transform</span></code> 和 <code class="docutils literal notranslate"><span class="pre">circle_transform</span></code>。
-这些函数中的每一个都可视化给定 <span class="math notranslate nohighlight">\(2 \times 2\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的作用。</p></li>
+<li><p>一个点阵网格和</p></li>
+<li><p>位于 <span class="math notranslate nohighlight">\(\mathbb{R}^2\)</span> 中单位圆上的一组点。</p></li>
 </ul>
+<p>为了构建这些变换，我们将使用两个函数，称为 <code class="docutils literal notranslate"><span class="pre">grid_transform</span></code> 和 <code class="docutils literal notranslate"><span class="pre">circle_transform</span></code>。</p>
+<p>这些函数中的每一个都可视化一个特定的 <span class="math notranslate nohighlight">\(2 \times 2\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的作用。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -521,15 +520,16 @@
 </div>
 <section id="id7">
 <h3><span class="section-number">16.3.1. </span>缩放<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>形如
-$<span class="math notranslate nohighlight">\(
+<p>类似</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{bmatrix} 
         \alpha &amp; 0 
         \\ 0 &amp; \beta 
     \end{bmatrix}
-\)</span><span class="math notranslate nohighlight">\(
-的矩阵沿 x 轴将向量缩放 \)</span>\alpha<span class="math notranslate nohighlight">\( 倍，沿 y 轴缩放 \)</span>\beta<span class="math notranslate nohighlight">\( 倍。
-这里我们举一个简单的例子，其中 \)</span>\alpha = \beta = 3$。</p>
+\end{split}\]</div>
+<p>的矩阵沿 x 轴将向量缩放 <span class="math notranslate nohighlight">\(\alpha\)</span> 倍，沿 y 轴缩放 <span class="math notranslate nohighlight">\(\beta\)</span> 倍。</p>
+<p>这里我们举一个简单的例子，其中 <span class="math notranslate nohighlight">\(\alpha = \beta = 3\)</span> 。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># 在两个方向放大三倍</span>
@@ -547,14 +547,15 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="id8">
 <h3><span class="section-number">16.3.2. </span>剪切<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>形如
-$<span class="math notranslate nohighlight">\(
+<p>类似</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{bmatrix} 
         1 &amp; \lambda \\ 
         0 &amp; 1 
     \end{bmatrix}
-\)</span>$
-的”剪切”矩阵沿 x 轴拉伸向量，拉伸量与点的 y 坐标成比例。</p>
+\end{split}\]</div>
+<p>的”剪切”矩阵沿 x 轴拉伸向量，拉伸量与点的 y 坐标成比例。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>     <span class="c1"># 沿x-轴进行剪切</span>
@@ -572,15 +573,16 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="id9">
 <h3><span class="section-number">16.3.3. </span>旋转<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
-<p>形如
-$<span class="math notranslate nohighlight">\(
+<p>类似</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{bmatrix} 
         \cos \theta &amp; \sin \theta 
         \\ - \sin \theta &amp; \cos \theta 
     \end{bmatrix}
-\)</span><span class="math notranslate nohighlight">\(
-的矩阵被称为*旋转矩阵*。
-这个矩阵将向量顺时针旋转角度 \)</span>\theta$。</p>
+\end{split}\]</div>
+<p>的矩阵被称为 <em>旋转矩阵</em> 。</p>
+<p>这个矩阵将向量顺时针旋转角度 <span class="math notranslate nohighlight">\(\theta\)</span> 。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>  <span class="c1"># 顺时针旋转45度</span>
@@ -597,14 +599,15 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="id10">
 <h3><span class="section-number">16.3.4. </span>置换<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>置换矩阵
-$<span class="math notranslate nohighlight">\(
+<p>置换矩阵</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{bmatrix} 
         0 &amp; 1 \\ 
         1 &amp; 0 
     \end{bmatrix}
-\)</span>$
-交换向量的坐标。</p>
+\end{split}\]</div>
+<p>交换向量的坐标。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
@@ -616,16 +619,17 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="_images/8c058a575849acd2927818fff2a65acf69e104cca3f620468a80b276c22c1bd2.png"><img alt="_images/8c058a575849acd2927818fff2a65acf69e104cca3f620468a80b276c22c1bd2.png" src="_images/8c058a575849acd2927818fff2a65acf69e104cca3f620468a80b276c22c1bd2.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>更多常见的变换矩阵示例可以在<a class="reference external" href="https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions">这里</a>找到。</p>
+<p>更多常见的变换矩阵示例可以在<a class="reference external" href="https://baike.baidu.com/item/%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5/9035701">这里</a>找到。</p>
 </section>
 </section>
 <section id="id11">
 <h2><span class="section-number">16.4. </span>矩阵乘法作为组合<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
-<p>由于矩阵作为将一个向量转换为另一个向量的函数，我们也可以将函数组合的概念应用于矩阵。</p>
+<p>由于矩阵可以理解为将一个向量转换为另一个向量的函数，我们也可以将函数组合的概念应用于矩阵。</p>
 <section id="id12">
 <h3><span class="section-number">16.4.1. </span>线性组合<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>考虑两个矩阵
-$<span class="math notranslate nohighlight">\(
+<p>考虑两个矩阵</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     A = 
         \begin{bmatrix} 
             0 &amp; 1 \\ 
@@ -637,8 +641,8 @@ $<span class="math notranslate nohighlight">\(
             1 &amp; 2 \\ 
             0 &amp; 1 
         \end{bmatrix}
-\)</span><span class="math notranslate nohighlight">\( 
-当我们尝试对某个 \)</span>2 \times 1<span class="math notranslate nohighlight">\( 向量 \)</span>x<span class="math notranslate nohighlight">\( 求 \)</span>ABx$ 时，输出会是什么？</p>
+\end{split}\]</div>
+<p>当我们尝试对某个 <span class="math notranslate nohighlight">\(2 \times 1\)</span> 向量 <span class="math notranslate nohighlight">\(x\)</span> 求 <span class="math notranslate nohighlight">\(ABx\)</span> 时，输出会是什么？</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \color{red}{\underbrace{
@@ -722,16 +726,16 @@ $<span class="math notranslate nohighlight">\(
 }^{\textstyle y}}
 \end{split}\]</div>
 <p>我们可以观察到，对向量 <span class="math notranslate nohighlight">\(x\)</span> 应用变换 <span class="math notranslate nohighlight">\(AB\)</span> 与先对 <span class="math notranslate nohighlight">\(x\)</span> 应用 <span class="math notranslate nohighlight">\(B\)</span>，然后对向量 <span class="math notranslate nohighlight">\(Bx\)</span> 应用 <span class="math notranslate nohighlight">\(A\)</span> 是相同的。</p>
-<p>因此，矩阵乘积 <span class="math notranslate nohighlight">\(AB\)</span> 是矩阵变换 <span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(B\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Function_composition">组合</a>。
+<p>因此，矩阵乘积 <span class="math notranslate nohighlight">\(AB\)</span> 是矩阵变换 <span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(B\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0/6176286">复合函数</a>。
 这意味着先应用变换 <span class="math notranslate nohighlight">\(B\)</span>，然后应用变换 <span class="math notranslate nohighlight">\(A\)</span>。</p>
 <p>当我们将一个 <span class="math notranslate nohighlight">\(n \times m\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span> 与一个 <span class="math notranslate nohighlight">\(m \times k\)</span> 矩阵 <span class="math notranslate nohighlight">\(B\)</span> 相乘时，得到的矩阵乘积是一个 <span class="math notranslate nohighlight">\(n \times k\)</span> 矩阵 <span class="math notranslate nohighlight">\(AB\)</span>。</p>
-<p>因此，如果 <span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(B\)</span> 是变换，使得 <span class="math notranslate nohighlight">\(A \colon \mathbb{R}^m \to \mathbb{R}^n\)</span> 且 <span class="math notranslate nohighlight">\(B \colon \mathbb{R}^k \to \mathbb{R}^m\)</span>，那么 <span class="math notranslate nohighlight">\(AB\)</span> 将 <span class="math notranslate nohighlight">\(\mathbb{R}^k\)</span> 变换到 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>。</p>
-<p>将矩阵乘法视为映射的组合有助于我们理解为什么在矩阵乘法下，<span class="math notranslate nohighlight">\(AB\)</span> 通常不等于 <span class="math notranslate nohighlight">\(BA\)</span>。
-（毕竟，当我们组合函数时，顺序通常很重要。）</p>
+<p>因此，如果 <span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(B\)</span> 是变换， <span class="math notranslate nohighlight">\(A \colon \mathbb{R}^m \to \mathbb{R}^n\)</span> 且 <span class="math notranslate nohighlight">\(B \colon \mathbb{R}^k \to \mathbb{R}^m\)</span>，那么 <span class="math notranslate nohighlight">\(AB\)</span> 将 <span class="math notranslate nohighlight">\(\mathbb{R}^k\)</span> 变换到 <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>。</p>
+<p>将矩阵乘法视为映射的组合有助于我们理解为什么在矩阵乘法下，<span class="math notranslate nohighlight">\(AB\)</span> 通常不等于 <span class="math notranslate nohighlight">\(BA\)</span>。</p>
+<p>（毕竟，当我们使用复合函数时，顺序通常很重要。）</p>
 </section>
 <section id="id13">
 <h3><span class="section-number">16.4.2. </span>示例<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
-<p>设 <span class="math notranslate nohighlight">\(A\)</span> 为顺时针旋转 <span class="math notranslate nohighlight">\(90^{\circ}\)</span> 的矩阵，由 <span class="math notranslate nohighlight">\(\begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix}\)</span> 给出，设 <span class="math notranslate nohighlight">\(B\)</span> 为沿 x 轴的剪切矩阵，由 <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span> 给出。</p>
+<p>设 <span class="math notranslate nohighlight">\(A\)</span> 为顺时针旋转 <span class="math notranslate nohighlight">\(90^{\circ}\)</span> 的矩阵，即 <span class="math notranslate nohighlight">\(\begin{bmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{bmatrix}\)</span> ，设 <span class="math notranslate nohighlight">\(B\)</span> 为沿 x 轴的剪切矩阵，即 <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>。</p>
 <p>我们将可视化当我们应用变换 <span class="math notranslate nohighlight">\(AB\)</span> 时点的网格如何变化，然后将其与变换 <span class="math notranslate nohighlight">\(BA\)</span> 进行比较。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -785,11 +789,11 @@ $<span class="math notranslate nohighlight">\(
 &lt;&gt;:24: SyntaxWarning: invalid escape sequence &#39;\c&#39;
 &lt;&gt;:28: SyntaxWarning: invalid escape sequence &#39;\c&#39;
 &lt;&gt;:32: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-/tmp/ipykernel_6190/3245402642.py:24: SyntaxWarning: invalid escape sequence &#39;\c&#39;
+/tmp/ipykernel_7455/3245402642.py:24: SyntaxWarning: invalid escape sequence &#39;\c&#39;
   ax[0].set_title(&quot;点 $x_1, x_2, \cdots, x_k$&quot;)
-/tmp/ipykernel_6190/3245402642.py:28: SyntaxWarning: invalid escape sequence &#39;\c&#39;
+/tmp/ipykernel_7455/3245402642.py:28: SyntaxWarning: invalid escape sequence &#39;\c&#39;
   ax[1].set_title(&quot;点 $Bx_1, Bx_2, \cdots, Bx_k$&quot;)
-/tmp/ipykernel_6190/3245402642.py:32: SyntaxWarning: invalid escape sequence &#39;\c&#39;
+/tmp/ipykernel_7455/3245402642.py:32: SyntaxWarning: invalid escape sequence &#39;\c&#39;
   ax[2].set_title(&quot;点 $ABx_1, ABx_2, \cdots, ABx_k$&quot;)
 </pre></div>
 </div>
@@ -822,7 +826,7 @@ $<span class="math notranslate nohighlight">\(
 <h4><span class="section-number">16.4.2.2. </span>旋转后剪切<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_composition_transform</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>         <span class="c1"># 变换 BA</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_composition_transform</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>         <span class="c1"># 变换 BA</span>
 </pre></div>
 </div>
 </div>
@@ -836,8 +840,8 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="id16">
 <h2><span class="section-number">16.5. </span>对固定映射进行迭代<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
-<p>在经济学（尤其是动态建模）中，我们经常对重复应用固定矩阵的行为感兴趣。</p>
-<p>例如，给定一个向量 <span class="math notranslate nohighlight">\(v\)</span> 和一个矩阵 <span class="math notranslate nohighlight">\(A\)</span>，我们对研究以下序列感兴趣：</p>
+<p>在经济学（尤其是动态建模）中，我们经常对重复应用固定矩阵所产生的变换感兴趣。</p>
+<p>例如，给定一个向量 <span class="math notranslate nohighlight">\(v\)</span> 和一个矩阵 <span class="math notranslate nohighlight">\(A\)</span>，我们希望可以研究以下序列：</p>
 <div class="math notranslate nohighlight">
 \[ 
     v, \quad
@@ -909,8 +913,8 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="_images/9ced777f16d19e89fb2bc2aaa592659dc2d2fb14b60505c9f381706515c0eb8e.png"><img alt="_images/9ced777f16d19e89fb2bc2aaa592659dc2d2fb14b60505c9f381706515c0eb8e.png" src="_images/9ced777f16d19e89fb2bc2aaa592659dc2d2fb14b60505c9f381706515c0eb8e.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>每次迭代后，向量变得更短，即更靠近原点。
-在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>会使向量”螺旋式地向内”。</p>
+<p>每次迭代后，向量变得更短，即更靠近原点。</p>
+<p>在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>会使向量”螺旋式地向内”。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
@@ -927,8 +931,8 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="_images/b972eb0c72f8cd89ea3c6a033b580b58756f65903acbb44d6f8cbe20567d186c.png"><img alt="_images/b972eb0c72f8cd89ea3c6a033b580b58756f65903acbb44d6f8cbe20567d186c.png" src="_images/b972eb0c72f8cd89ea3c6a033b580b58756f65903acbb44d6f8cbe20567d186c.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>在这里，每次迭代向量不会变长或变短。
-在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>只会使其”围绕一个椭圆旋转”。</p>
+<p>在这里，每次迭代向量不会变长或变短。</p>
+<p>在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>只会使其”围绕一个椭圆旋转”。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
@@ -945,25 +949,26 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="_images/122313210dbad73aa3c02ac616d43c0a96407a0f275e99c4b9fca65bc5ec7009.png"><img alt="_images/122313210dbad73aa3c02ac616d43c0a96407a0f275e99c4b9fca65bc5ec7009.png" src="_images/122313210dbad73aa3c02ac616d43c0a96407a0f275e99c4b9fca65bc5ec7009.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>在这里，每次迭代向量趋向于变长，即离原点更远。
-在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>会使向量”螺旋式地向外”。
-因此，我们观察到序列<span class="math notranslate nohighlight">\((A^kv)_{k \geq 0}\)</span>的行为取决于映射<span class="math notranslate nohighlight">\(A\)</span>本身。
-现在我们讨论决定这种行为的<span class="math notranslate nohighlight">\(A\)</span>的性质。</p>
+<p>在这里，每次迭代向量趋向于变长，即离原点更远。</p>
+<p>在这种情况下，重复将向量乘以<span class="math notranslate nohighlight">\(A\)</span>会使向量”螺旋式地向外”。</p>
+<p>因此，我们观察到序列<span class="math notranslate nohighlight">\((A^kv)_{k \geq 0}\)</span>的行为取决于映射<span class="math notranslate nohighlight">\(A\)</span>本身。</p>
+<p>现在我们讨论决定这种行为的<span class="math notranslate nohighlight">\(A\)</span>的性质。</p>
 </section>
 <section id="la-eigenvalues">
 <span id="id17"></span><h2><span class="section-number">16.6. </span>特征值<a class="headerlink" href="#la-eigenvalues" title="Permalink to this heading">#</a></h2>
 <p id="index-1">在本节中，我们引入特征值和特征向量的概念。</p>
 <section id="id18">
 <h3><span class="section-number">16.6.1. </span>定义<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
-<p>设<span class="math notranslate nohighlight">\(A\)</span>为<span class="math notranslate nohighlight">\(n \times n\)</span>的方阵。
-如果存在标量<span class="math notranslate nohighlight">\(\lambda\)</span>和非零<span class="math notranslate nohighlight">\(n\)</span>维向量<span class="math notranslate nohighlight">\(v\)</span>，使得
-$<span class="math notranslate nohighlight">\(
+<p>设 <span class="math notranslate nohighlight">\(A\)</span> 为 <span class="math notranslate nohighlight">\(n \times n\)</span> 的方阵。</p>
+<p>如果存在标量 <span class="math notranslate nohighlight">\(\lambda\)</span> 和非零 <span class="math notranslate nohighlight">\(n\)</span> 维向量 <span class="math notranslate nohighlight">\(v\)</span> ，使得</p>
+<div class="math notranslate nohighlight">
+\[
 A v = \lambda v.
-\)</span><span class="math notranslate nohighlight">\(
-则我们称\)</span>\lambda<span class="math notranslate nohighlight">\(为\)</span>A<span class="math notranslate nohighlight">\(的*特征值*，\)</span>v$为相应的<em>特征向量</em>。</p>
-<p>因此，<span class="math notranslate nohighlight">\(A\)</span>的特征向量是一个非零向量<span class="math notranslate nohighlight">\(v\)</span>，当映射<span class="math notranslate nohighlight">\(A\)</span>应用于它时，<span class="math notranslate nohighlight">\(v\)</span>仅仅被缩放。</p>
-<p>下图显示了两个特征向量（蓝色箭头）及其在<span class="math notranslate nohighlight">\(A\)</span>下的像（红色箭头）。
-如预期的那样，每个<span class="math notranslate nohighlight">\(v\)</span>的像<span class="math notranslate nohighlight">\(Av\)</span>只是原始向量的缩放版本。</p>
+\]</div>
+<p>则我们称 <span class="math notranslate nohighlight">\(\lambda\)</span> 为 <span class="math notranslate nohighlight">\(A\)</span>的 <em>特征值</em> ，<span class="math notranslate nohighlight">\(v\)</span> 为相应的 <em>特征向量</em>。</p>
+<p>因此，<span class="math notranslate nohighlight">\(A\)</span> 的特征向量是一个非零向量 <span class="math notranslate nohighlight">\(v\)</span>，当映射 <span class="math notranslate nohighlight">\(A\)</span> 应用于它时，<span class="math notranslate nohighlight">\(v\)</span> 仅仅是被缩放。</p>
+<p>下图显示了两个特征向量（蓝色箭头）及其在 <span class="math notranslate nohighlight">\(A\)</span> 下的像（红色箭头）。</p>
+<p>如预期的那样，每个 <span class="math notranslate nohighlight">\(v\)</span> 的像 <span class="math notranslate nohighlight">\(Av\)</span> 只是原始向量的缩放。</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">eig</span>
@@ -1031,7 +1036,7 @@ A v = \lambda v.
 </section>
 <section id="id20">
 <h3><span class="section-number">16.6.3. </span>一些数学细节<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
-<p>我们为更高级的读者注明一些数学细节。（其他读者可以跳到下一节。）</p>
+<p>我们为有兴趣的读者注明一些数学细节。（其他读者可以跳到下一节。）</p>
 <p>特征值方程等价于 <span class="math notranslate nohighlight">\((A - \lambda I) v = 0\)</span>。</p>
 <p>只有当 <span class="math notranslate nohighlight">\(A - \lambda I\)</span> 的列线性相关时，这个方程才有非零解 <span class="math notranslate nohighlight">\(v\)</span>。</p>
 <p>这反过来等价于行列式为零。</p>
@@ -1086,7 +1091,7 @@ A v = \lambda v.
 </div>
 </div>
 <p>请注意，<code class="docutils literal notranslate"><span class="pre">evecs</span></code> 的<em>列</em>是特征向量。</p>
-<p>由于特征向量的任何标量倍数都是具有相同特征值的特征向量（这可以被验证），<code class="docutils literal notranslate"><span class="pre">eig</span></code> 程序将每个特征向量的长度归一化为1。</p>
+<p>由于特征向量的任何标量倍数都是具有相同特征值的特征向量（可以试着验证一下），<code class="docutils literal notranslate"><span class="pre">eig</span></code> 程序将每个特征向量的长度归一化为1。</p>
 <p>映射 <span class="math notranslate nohighlight">\(A\)</span> 的特征向量和特征值决定了当我们反复乘以 <span class="math notranslate nohighlight">\(A\)</span> 时，向量 <span class="math notranslate nohighlight">\(v\)</span> 如何被变换。</p>
 <p>这一点将在后面进一步讨论。</p>
 </section>
@@ -1114,7 +1119,7 @@ A v = \lambda v.
 <div class="math notranslate nohighlight" id="equation-neumann-eqn">
 <span class="eqno">(16.2)<a class="headerlink" href="#equation-neumann-eqn" title="Permalink to this equation">#</a></span>\[    x^{*} = (I-A)^{-1}b
     \]</div>
-<p>什么保证了存在唯一的向量 <span class="math notranslate nohighlight">\(x^{*}\)</span> 满足方程 <a class="reference internal" href="#equation-neumann-eqn">(16.2)</a>？</p>
+<p>什么条件保证了存在唯一的向量 <span class="math notranslate nohighlight">\(x^{*}\)</span> 满足方程 <a class="reference internal" href="#equation-neumann-eqn">(16.2)</a>？</p>
 <p>以下是泛函分析中的一个基本结果，它将 <a class="reference internal" href="#equation-gp-sum">(16.1)</a> 推广到多变量情况。</p>
 <div class="proof theorem admonition" id="neumann_series_lemma">
 <span id="neumann-series-lemma"></span><p class="admonition-title"><span class="caption-number">Theorem 16.1 </span> (诺伊曼级数引理)</p>
@@ -1125,10 +1130,11 @@ A v = \lambda v.
 <li><p><span class="math notranslate nohighlight">\(\{\lambda_i\}_i\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的特征值集，且</p></li>
 <li><p><span class="math notranslate nohighlight">\(|\lambda_i|\)</span> 是复数 <span class="math notranslate nohighlight">\(\lambda_i\)</span> 的模</p></li>
 </ul>
-<p>诺伊曼定理陈述如下：如果 <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span>，那么 <span class="math notranslate nohighlight">\(I - A\)</span> 是可逆的，且
-$<span class="math notranslate nohighlight">\(
+<p>诺伊曼定理陈述如下：如果 <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span>，那么 <span class="math notranslate nohighlight">\(I - A\)</span> 是可逆的，且</p>
+<div class="math notranslate nohighlight">
+\[
 (I - A)^{-1} = \sum_{k=0}^{\infty} A^k
-\)</span>$</p>
+\]</div>
 </section>
 </div><p>我们可以在以下例子中看到诺伊曼级数引理的应用。</p>
 <div class="cell docutils container">
@@ -1190,7 +1196,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
-<p>虽然我们在 <span class="math notranslate nohighlight">\(k = 50\)</span> 时截断了无限级数，但两种方法给出了相同的结果，这说明了诺伊曼级数引理的结论。</p>
+<p>虽然我们在 <span class="math notranslate nohighlight">\(k = 50\)</span> 时截断了无限级数，但两种方法给出了相同的结果，这体现了诺伊曼级数引理的结论。</p>
 </section>
 </section>
 <section id="id26">
@@ -1206,16 +1212,16 @@ $<span class="math notranslate nohighlight">\(
 b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 \]</div>
 <p>关于该方法的详细讨论可以在<a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/chapter15.02-The-Power-Method.html">这里</a>找到。</p>
-<p>在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。
-然后可视化收敛过程。</p>
+<p>在这个练习中，首先实现幂迭代方法，并用它来找出最大绝对特征值及其对应的特征向量。</p>
+<p>然后可视化收敛过程。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="eigen_I-solution-2">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#eig1_ex1"> Exercise 16.1</a></p>
 <section id="solution-content">
-<p>这里有一个解决方案。
-我们首先研究特征向量近似值与真实特征向量之间的距离。</p>
+<p>这里有一个解决方案。</p>
+<p>我们首先研究特征向量近似值与真实特征向量之间的距离。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义矩阵A</span>
@@ -1265,7 +1271,7 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 </pre></div>
 </div>
 <figure class="align-default" id="pow-dist">
-<a class="reference internal image-reference" href="_images/96ef27f6a38bb49508b0d782054da5f08b672fab6eb96f43021e09e354ade0e5.png"><img alt="_images/96ef27f6a38bb49508b0d782054da5f08b672fab6eb96f43021e09e354ade0e5.png" src="_images/96ef27f6a38bb49508b0d782054da5f08b672fab6eb96f43021e09e354ade0e5.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/bf1079c839139d2796ce58d7c0f4cb4d80eed1748fe9b60d3fc7f520d3dc6a4b.png"><img alt="_images/bf1079c839139d2796ce58d7c0f4cb4d80eed1748fe9b60d3fc7f520d3dc6a4b.png" src="_images/bf1079c839139d2796ce58d7c0f4cb4d80eed1748fe9b60d3fc7f520d3dc6a4b.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Power iteration</span><a class="headerlink" href="#pow-dist" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1308,7 +1314,7 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="pow-trajectory">
-<a class="reference internal image-reference" href="_images/4dfd290c40b75670ab5afe1039f2cb2c50c5bf27a726a5c1acc37567407794d3.png"><img alt="_images/4dfd290c40b75670ab5afe1039f2cb2c50c5bf27a726a5c1acc37567407794d3.png" src="_images/4dfd290c40b75670ab5afe1039f2cb2c50c5bf27a726a5c1acc37567407794d3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1e50eff9182582a38594894e8671597e482e7eae3d3ef79b86a4b57c85932877.png"><img alt="_images/1e50eff9182582a38594894e8671597e482e7eae3d3ef79b86a4b57c85932877.png" src="_images/1e50eff9182582a38594894e8671597e482e7eae3d3ef79b86a4b57c85932877.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Power iteration trajectory</span><a class="headerlink" href="#pow-trajectory" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -1321,9 +1327,9 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 
 <p class="admonition-title"><span class="caption-number">Exercise 16.2 </span></p>
 <section id="exercise-content">
-<p>我们已经讨论了向量 <span class="math notranslate nohighlight">\(v\)</span> 经过矩阵 <span class="math notranslate nohighlight">\(A\)</span> 变换后的轨迹。
-考虑矩阵 <span class="math notranslate nohighlight">\(A = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}\)</span> 和向量 <span class="math notranslate nohighlight">\(v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}\)</span>。
-尝试计算向量 <span class="math notranslate nohighlight">\(v\)</span> 经过矩阵 <span class="math notranslate nohighlight">\(A\)</span> 变换 <span class="math notranslate nohighlight">\(n=4\)</span> 次迭代后的轨迹，并绘制结果。</p>
+<p>我们已经讨论了向量 <span class="math notranslate nohighlight">\(v\)</span> 经过矩阵 <span class="math notranslate nohighlight">\(A\)</span> 变换后的轨迹。</p>
+<p>考虑矩阵 <span class="math notranslate nohighlight">\(A = \begin{bmatrix} 1 &amp; 2 \\ 1 &amp; 1 \end{bmatrix}\)</span> 和向量 <span class="math notranslate nohighlight">\(v = \begin{bmatrix} 2 \\ -2 \end{bmatrix}\)</span>。</p>
+<p>尝试计算向量 <span class="math notranslate nohighlight">\(v\)</span> 经过矩阵 <span class="math notranslate nohighlight">\(A\)</span> 变换 <span class="math notranslate nohighlight">\(n=4\)</span> 次迭代后的轨迹，并绘制结果。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="eigen_I-solution-4">
@@ -1358,9 +1364,9 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 <a class="reference internal image-reference" href="_images/1fe5955a14d4268e0613aba9fa5ca5d05a4bd97233937d0e449b24479f5d8bcc.png"><img alt="_images/1fe5955a14d4268e0613aba9fa5ca5d05a4bd97233937d0e449b24479f5d8bcc.png" src="_images/1fe5955a14d4268e0613aba9fa5ca5d05a4bd97233937d0e449b24479f5d8bcc.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>结果似乎收敛于矩阵 <span class="math notranslate nohighlight">\(A\)</span> 最大特征值对应的特征向量。
-让我们使用<a class="reference external" href="https://en.wikipedia.org/wiki/Vector_field">向量场</a>来可视化矩阵 <span class="math notranslate nohighlight">\(A\)</span> 带来的变换。
-（这是线性代数中的一个较高级话题，如果你对数学感到足够自在，请继续往下学习。）</p>
+<p>结果似乎收敛于矩阵 <span class="math notranslate nohighlight">\(A\)</span> 最大特征值对应的特征向量。</p>
+<p>让我们使用<a class="reference external" href="https://baike.baidu.com/item/%E5%90%91%E9%87%8F%E5%9C%BA/9812041">向量场</a>来可视化矩阵 <span class="math notranslate nohighlight">\(A\)</span> 带来的变换。
+（这是线性代数中的一个较高级话题，如果你对数学感到足够自信和感兴趣的话，可以继续往下学习。）</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建格点</span>
@@ -1419,15 +1425,15 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 
 <p class="admonition-title"><span class="caption-number">Exercise 16.3 </span></p>
 <section id="exercise-content">
-<p><a class="reference internal" href="#plot-series"><span class="std std-ref">之前</span></a>，我们展示了向量<span class="math notranslate nohighlight">\(v\)</span>被三种不同矩阵<span class="math notranslate nohighlight">\(A\)</span>变换后的轨迹。
-使用前面练习中的可视化来解释向量<span class="math notranslate nohighlight">\(v\)</span>被这三种不同矩阵<span class="math notranslate nohighlight">\(A\)</span>变换后的轨迹。</p>
+<p><a class="reference internal" href="#plot-series"><span class="std std-ref">之前</span></a>，我们展示了向量<span class="math notranslate nohighlight">\(v\)</span>被三种不同矩阵<span class="math notranslate nohighlight">\(A\)</span>变换后的轨迹。</p>
+<p>使用前面练习中的可视化来解释向量<span class="math notranslate nohighlight">\(v\)</span>被这三种不同矩阵<span class="math notranslate nohighlight">\(A\)</span>变换后的轨迹。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="eigen_I-solution-6">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#eig1_ex3"> Exercise 16.3</a></p>
 <section id="solution-content">
-<p>这里是一个答案。</p>
+<p>以下是其中一种解法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1450,7 +1456,7 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 
     <span class="c1"># 计算特征向量和特征值</span>
     <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Example </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;实例 </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;特征值:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvalues</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;特征向量:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">eigenvectors</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
@@ -1493,24 +1499,24 @@ b_{k+1}=\frac{A b_k}{\left\|A b_k\right\|}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>实例 1:
 
 特征值:
  [0.61237244+0.35355339j 0.61237244-0.35355339j]
 特征向量:
  [[0.81649658+0.j         0.81649658-0.j        ]
  [0.40824829-0.40824829j 0.40824829+0.40824829j]]
-
-Example 2:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>实例 2:
 
 特征值:
  [0.8660254+0.5j 0.8660254-0.5j]
 特征向量:
  [[0.81649658+0.j         0.81649658-0.j        ]
  [0.40824829-0.40824829j 0.40824829+0.40824829j]]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 3:
+
+实例 3:
 
 特征值:
  [1.22474487+0.70710678j 1.22474487-0.70710678j]
@@ -1522,7 +1528,7 @@ Example 2:
 <figure class="align-default" id="vector-field">
 <a class="reference internal image-reference" href="_images/14cf33627e3a1492c2266fef21ab97569ce10a92c5af8a35ece8423e2360b27e.png"><img alt="_images/14cf33627e3a1492c2266fef21ab97569ce10a92c5af8a35ece8423e2360b27e.png" src="_images/14cf33627e3a1492c2266fef21ab97569ce10a92c5af8a35ece8423e2360b27e.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.4 </span><span class="caption-text">Vector fields of the three matrices</span><a class="headerlink" href="#vector-field" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.4 </span><span class="caption-text">三个不同矩阵的向量场</span><a class="headerlink" href="#vector-field" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1593,7 +1599,7 @@ Example 2:
 <figure class="align-default" id="d-vector-field">
 <a class="reference internal image-reference" href="_images/eaf2978ade88496e9a4cce150503e7da3cd7033524259e23615a3699bc46432d.png"><img alt="_images/eaf2978ade88496e9a4cce150503e7da3cd7033524259e23615a3699bc46432d.png" src="_images/eaf2978ade88496e9a4cce150503e7da3cd7033524259e23615a3699bc46432d.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16.5 </span><span class="caption-text">3D plot of the vector field</span><a class="headerlink" href="#d-vector-field" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.5 </span><span class="caption-text">向量场的三维图（复平面）</span><a class="headerlink" href="#d-vector-field" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>

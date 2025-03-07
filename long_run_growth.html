@@ -378,11 +378,11 @@
 </div></div></div>
 </div>
 <p>我们可以看到，该数据集包含许多国家和年份的人均国内生产总值（<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>）和人口（<code class="docutils literal notranslate"><span class="pre">pop</span></code>）。</p>
-<p>让我们看看这个数据集中有多少国家和哪些国家</p>
+<p>让我们看看这个数据集中有多少国家/地区。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -392,11 +392,11 @@
 </div>
 </div>
 </div>
-<p>通过运行上面的代码，我们可以列出这个数据集有多少个国家。</p>
+<p>通过运行上面的代码，我们可以列出这个数据集有多少个国家/地区。</p>
 <p>下面，我们将列出这些国家。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span>
 </pre></div>
 </div>
 </div>
@@ -443,12 +443,12 @@
 </div>
 </div>
 </div>
-<p>我们现在可以继续探索数据集里的169个国家。</p>
-<p>我们可以遍历每个国家来了解每个国家可用的年份都有哪些。</p>
+<p>我们现在可以继续探索数据集里的169个国家/地区。</p>
+<p>我们可以遍历每个样本来了解每个样本可用的年份都有哪些。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_years</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
     <span class="n">cy_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="n">country</span><span class="p">][</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
     <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">country_years</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">country</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>

@@ -97,28 +97,28 @@ data.head()
 
 我们可以看到，该数据集包含许多国家和年份的人均国内生产总值（`gdppc`）和人口（`pop`）。
 
-让我们看看这个数据集中有多少国家和哪些国家
+让我们看看这个数据集中有多少国家/地区。
 
 ```{code-cell} ipython3
-countries = data.country.unique()
-len(countries)
+regions = data.country.unique()
+len(regions)
 ```
 
-通过运行上面的代码，我们可以列出这个数据集有多少个国家。
+通过运行上面的代码，我们可以列出这个数据集有多少个国家/地区。
 
 下面，我们将列出这些国家。
 
 ```{code-cell} ipython3
-countries
+regions
 ```
 
-我们现在可以继续探索数据集里的169个国家。
+我们现在可以继续探索数据集里的169个国家/地区。
 
-我们可以遍历每个国家来了解每个国家可用的年份都有哪些。
+我们可以遍历每个样本来了解每个样本可用的年份都有哪些。
 
 ```{code-cell} ipython3
 country_years = []
-for country in countries:
+for country in regions:
     cy_data = data[data.country == country]['year']
     ymin, ymax = cy_data.min(), cy_data.max()
     country_years.append((country, ymin, ymax))
