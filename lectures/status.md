@@ -20,7 +20,7 @@ kernelspec:
 
 这些讲座是通过 `github actions` 在 `linux` 实例上构建的。
 
-这些讲座使用以下的python版本
+我们使用以下的python版本
 
 ```{code-cell} ipython
 !python --version
