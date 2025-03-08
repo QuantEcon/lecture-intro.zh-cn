@@ -53,14 +53,14 @@ kernelspec:
 
 ```
 
-其次，你可以开一个[`Issue`](https://github.com/QuantEcon/lecture-python/issues)，
+其次，你可以开一个[`Issue`](https://github.com/QuantEcon/lecture-intro.zh-cn/issues)，
 这样我们可以一起帮忙尝试修复你的本地设置。
 
 我们都很喜欢收到课程的反馈，所以请随时与我们联系！
 
 ## 报告问题
 
-上文提到，其中一种联系我们的方式是通过我们的[问题跟踪器](https://github.com/QuantEcon/lecture-python/issues)提出问题。
+上文提到，其中一种联系我们的方式是通过我们的[问题跟踪器](https://github.com/QuantEcon/lecture-intro.zh-cn/issues)提出问题。
 
 请尽可能具体。告诉我们问题所在，以及尽可能多的关于你本地设置的细节（比如环境变量、操作系统、Python版本等）。
 
