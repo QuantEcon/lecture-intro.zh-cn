@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.15.2
+    jupytext_version: 1.16.7
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -29,9 +29,9 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 ## 介绍
 
-考虑一个政策制定者试图估算提议中的财富税将带来多少收入的情况。
+假设你是一位政策制定者，你想尝试估算增加财富税将带来多少收入。
 
-提议的税务公式为：
+财富税的计算公式为：
 
 $$
     h(w) = 
@@ -49,12 +49,12 @@ $$
 例如，如果 $a = 0.05$，$b = 0.1$，且 $\bar w = 2.5$，意味着：
 
 * 对于2.5及以下的财富征收5%的税，
-* 对超过2.5的部分财富征收10%的税。
+* 对超过2.5的部分征收10%的税。
 
-单位是100,000，所以 $w= 2.5$ 的意思是 250,000 美元。
+这里财富的单位是100,000，所以 $w= 2.5$ 指 250,000 美元。
 ```
 
-让我们来定义函数 $h$:
+接下来，我们定义函数 $h$:
 
 ```{code-cell} ipython3
 def h(w, a=0.05, b=0.1, w_bar=2.5):
@@ -64,27 +64,27 @@ def h(w, a=0.05, b=0.1, w_bar=2.5):
         return a * w_bar + b * (w - w_bar)
 ```
 
-对于一个人口数量为 $N$ 的社区，每个人 $i$ 拥有财富 $w_i$，通过税收收入总额为
+对于一个人口数量为 $N$ 的地区，每个人 $i$ 拥有财富 $w_i$，则财富税收入总额为
 
 $$
     T = \sum_{i=1}^{N} h(w_i)
 $$
 
-我们希望计算这个总量。
+而我们希望计算这一数量。
 
-我们面对的问题是，在大多数国家中，并不是所有个人的财富都能被观测到。
+但问题是，在大多数国家中，并不是所有的个人财富都能被观测到。
 
-为一个国家的所有个人或家庭收集并维持准确的财富数据是非常困难的。
+收集并追踪一国所有个人或家庭的财富数据是非常困难的。
 
-因此，假设我们得到了一个样本 $w_1, w_2, \cdots, w_n$，它告诉我们 $n$ 个随机选定个人的财富。
+因此，假设我们得到了一个样本 $w_1, w_2, \cdots, w_n$，它包含了 $n$ 位随机选择的个人的财富。
 
-在这个练习中，我们将使用 $n = 10,000$ 来自2016年美国的财富数据样本。
+在练习中，我们将使用 $n = 10,000$ 来自2016年美国的财富数据样本。
 
 ```{code-cell} ipython3
 n = 10_000
 ```
 
-这些数据来源于[消费者财务调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF)。
+这些数据来源于[消费者财务状况调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF)。<!-- 这里没有找到中午的对应百科链接 -->
 
 以下代码导入了数据并将其读入名为 `sample` 的数组。
 
@@ -95,39 +95,39 @@ url = 'https://media.githubusercontent.com/media/QuantEcon/high_dim_data/update_
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]
-df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净值大于 1 的数据
+df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据 <!-- 原网页可能有笔误，应该是wealth而不是worth -->
 rv = df['n_wealth'].sample(n=n, random_state=1234)
 rv = rv.to_numpy() / 100_000
 sample = rv
 ```
 
-让我们来做一个这个样本的直方图。
+我们先绘制该样本的直方图。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 ax.set_xlim(-1, 20)
 density, edges = np.histogram(sample, bins=5000, density=True)
 prob = density * np.diff(edges)
-plt.stairs(prob, edges, fill=True, alpha=0.8, label=r"单位：$100,000$")
+plt.stairs(prob, edges, fill=True, alpha=0.8, label=r"单位：\$100,000")
 plt.ylabel("概率")
 plt.xlabel("净资产")
 plt.legend()
 plt.show()
 ```
 
-直方图显示许多人的财富非常低，少数人的财富非常高。
+该直方图显示，大部分人的财富水平非常低，而少部分人却拥有非常多的财富。
 
-我们将假定全体人口规模为
+我们假定全体人口规模为
 
 ```{code-cell} ipython3
 N = 100_000_000
 ```
 
-我们如何仅使用样本数据来估计全体人口的总收入呢？
+仅依靠样本数据，我们又该如何估计全体人口的总收入呢？
 
-我们的计划是假设每个人的财富是从密度为 $f$ 的分布中抽取的。
+我们的计划是，假设每个人的财富是从密度为 $f$ 的分布中抽取的。
 
-如果我们获得 $f$ 的估计，那么我们可以按照下面的方式近似 $T$：
+如果我们获得 $f$ 的估计，那么我们可以按照以下方式近似 $T$：
 
 $$
     T = \sum_{i=1}^{N} h(w_i) 
@@ -135,9 +135,9 @@ $$
       \approx N \int_{0}^{\infty} h(w)f(w) dw
 $$ (eq:est_rev)
 
-（样本均值应该靠近平均值，根据大数定律。）
+（根据大数定律，样本均值应该接近总体均值。）
 
-现在的问题是：我们如何估计 $f$？
+现在的问题是：我们要如何估计 $f$？
 
 ## 最大似然估计
 
