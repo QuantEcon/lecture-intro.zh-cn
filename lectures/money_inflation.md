@@ -88,7 +88,7 @@ kernelspec:
     
 现在，我们的任务是确定货币的需求和供给函数。
 
-我们假设货币需求满足类似Cagan的需求函数
+我们假设货币需求满足类似凯根的需求函数
 
 $$
 \frac{m_{t+1}^d}{p_t}=\gamma_1 - \gamma_2 \frac{p_{t+1}}{p_t}, \quad t \geq 0
