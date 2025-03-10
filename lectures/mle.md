@@ -115,7 +115,7 @@ plt.legend()
 plt.show()
 ```
 
-该直方图显示，大部分人的财富水平非常低，而少部分人却拥有非常多的财富。
+该直方图显示，大部分人的财富水平很低，而少部分人却拥有非常多的财富。
 
 我们假定全体人口规模为
 
@@ -141,18 +141,18 @@ $$ (eq:est_rev)
 
 ## 最大似然估计
 
-[最大似然估计](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) 是一种估计未知分布的方法。
+[最大似然估计](https://baike.baidu.com/item/最大似然估计/4967925) 是一种估计未知分布的方法。
 
 最大似然估计有两个步骤：
 
-1. 猜测潜在分布是什么（例如，正态分布，均值为 $\mu$，标准差为 $\sigma$）。
+1. 猜测潜在分布是什么（例如，均值为 $\mu$，标准差为 $\sigma$ 的正态分布）。
 2. 估计参数值（例如，估计正态分布的 $\mu$ 和 $\sigma$）。
 
-对于财富，一个可能的假设是每个 $w_i$ 都是[对数正态分布](https://en.wikipedia.org/wiki/Log-normal_distribution)的，参数 $\mu$ 在 $(-\infty, \infty)$ 范围内，$\sigma$ 在 $(0, \infty)$ 范围内。
+对于财富而言，一种假设是每个 $w_i$ 都符合[对数正态分布](https://baike.baidu.com/item/对数正态分布/8976782)的，其中参数 $\mu \in (-\infty, \infty)$，$\sigma \in (0, \infty)$。
 
 （这意味着 $\ln w_i$ 是以 $\mu$ 为均值，$\sigma$ 为标准差的正态分布。）
 
-你可以看到这个假设不是完全没有道理，因为如果我们对财富的对数进行直方图表示而不是财富本身，图片开始看起来像一个钟形曲线。
+不难发现，这个假设不是完全没有道理，因为如果我们用直方图表示财富的对数（而不是财富本身），直方图将看起来像一个钟形曲线。
 
 ```{code-cell} ipython3
 ln_sample = np.log(sample)
@@ -161,9 +161,9 @@ ax.hist(ln_sample, density=True, bins=200, histtype='stepfilled', alpha=0.8)
 plt.show()
 ```
 
-现在我们的任务是获取 $\mu$ 和 $\sigma$ 的最大似然估计，我们用 $\hat{\mu}$ 和 $\hat{\sigma}$ 表示。
+我们现在的任务是获取 $\mu$ 和 $\sigma$ 的最大似然估计值，我们用 $\hat{\mu}$ 和 $\hat{\sigma}$ 表示。
 
-这些估计值可以通过最大化给定数据的似然函数找到。
+这些估计值可以通过最大化给定数据的似然函数获得。
 
 对数正态分布随机变量 $X$ 的概率密度函数 (pdf) 如下：
 
@@ -173,7 +173,7 @@ $$
     \exp\left(-\frac{1}{2}\left(\frac{\ln x-\mu}{\sigma}\right)^2\right)
 $$
 
-对于我们的样本 $w_1, w_2, \cdots, w_n$，[似然函数](https://en.wikipedia.org/wiki/Likelihood_function)定义为：
+对于我们的样本 $w_1, w_2, \cdots, w_n$，[似然函数](https://baike.baidu.com/item/似然函数/6011241)是：
 
 $$
     L(\mu, \sigma | w_i) = \prod_{i=1}^{n} f(w_i, \mu, \sigma)
@@ -181,10 +181,10 @@ $$
 
 似然函数可以被视为：
 
-* 样本的联合分布（假设是独立同分布）和
+* 样本（假设是独立同分布）的联合分布和
 * 给定数据的参数 $(\mu, \sigma)$ 的“似然性”。
 
-对两边取对数，我们得到对数似然函数，如下所示：
+对两边取对数，我们得到对数似然函数：
 
 $$
 \begin{aligned}
@@ -196,9 +196,9 @@ $$
 \end{aligned}
 $$
 
-为了找到这个函数的最大值，我们计算关于 $\mu$ 和 $\sigma ^2$ 的偏导数，并将它们设为 $0$.
+要找到这个函数的最大值，我们需要计算对 $\mu$ 和 $\sigma ^2$ 的偏导数，并令结果为 $0$.
 
-让我们首先找到 $\mu$ 的最大似然估计（MLE）
+我们首先推导 $\mu$ 的最大似然估计（MLE）
 
 $$
 \frac{\delta \ell}{\delta \mu} 
@@ -207,7 +207,7 @@ $$
 \implies \hat{\mu} = \frac{\sum_{i=1}^n \ln w_i}{n}
 $$
 
-现在让我们找到 $\sigma$ 的MLE
+现在让我们推导 $\sigma$ 的最大似然估计
 
 $$
 \frac{\delta \ell}{\delta \sigma^2} 
@@ -219,8 +219,7 @@ $$
     \left( \frac{\sum_{i=1}^{n}(\ln w_i - \hat{\mu})^2}{n} \right)^{1/2}
 $$
 
-现在我们已经推导出 $\hat{\mu}$ 和 $\hat{\sigma}$ 的表达式，
-让我们为我们的财富样本计算它们。
+至此我们已经推导出 $\hat{\mu}$ 和 $\hat{\sigma}$ 的表达式，现在要通过财富样本计算具体数值。
 
 ```{code-cell} ipython3
 μ_hat = np.mean(ln_sample) # 计算 μ 的估计值
@@ -228,12 +227,12 @@ $$
 ```
 
 ```{code-cell} ipython3
-num = (ln_sample - μ_hat)**2 # 计算方差的分子部分
+num = (ln_sample - μ_hat)**2 # 计算方差的分子
 σ_hat = (np.mean(num))**(1/2) # 计算 σ 的估计值
 σ_hat
 ```
 
-我们来绘制使用估计参数的对数正态分布概率密度函数，并与我们的样本数据进行对比。
+我们绘制对数正态分布概率密度函数（使用估计的参数），并与样本数据进行对比。
 
 ```{code-cell} ipython3
 dist_lognorm = lognorm(σ_hat, scale = exp(μ_hat))  # 初始化对数正态分布
@@ -248,11 +247,11 @@ ax.legend()  # 显示图例
 plt.show()  # 展示图形
 ```
 
-我们的估计的对数正态分布看起来很适合整体数据。
+我们估计的对数正态分布看起来很适合整体数据。
 
 我们现在使用方程{eq}`eq:est_rev`来计算总收入。
 
-我们将通过 **SciPy** 的 [quad](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html) 函数使用数值积分计算
+我们将通过 **SciPy** 的 [quad](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html) 函数，使用数值积分的方式计算积分。
 
 ```{code-cell} ipython3
 def total_revenue(dist):
@@ -266,17 +265,17 @@ tr_lognorm = total_revenue(dist_lognorm)  # 使用对数正态分布计算总收
 tr_lognorm  # 显示总收入
 ```
 
-（我们的单位是10万美元，所以这意味着实际收入是10万倍。）
+（我们的单位是10万美元，这意味着实际收入是这一数字的10万倍。）
 
 ## 帕累托分布
 
-如上所述，使用最大似然估计时需要我们假定一个先验的底层分布。
+如上所示，使用最大似然估计时，我们需要先对分布做出假设。
 
-之前我们假定这个分布是对数正态分布。
+刚才我们假定这个分布是对数正态分布。
 
-假设我们改为假设 $w_i$ 来自具有参数 $b$ 和 $x_m$ 的[帕累托分布](https://en.wikipedia.org/wiki/Pareto_distribution)。
+如果，我们改为假设 $w_i$ 抽样自参数为 $b$ 和 $x_m$ 的[帕累托分布](https://baike.baidu.com/item/帕累托分布/3344172)。
 
-在这种情况下，最大似然估计已知为
+在这种情况下，最大似然估计为
 
 $$
     \hat{b} = \frac{n}{\sum_{i=1}^{n} \ln (w_i/\hat{x_m})}
@@ -284,7 +283,7 @@ $$
     \hat{x}_m = \min_{i} w_i
 $$
 
-我们来计算它们。
+下面，我们来计算它们。
 
 ```{code-cell} ipython3
 xm_hat = min(sample)
@@ -305,15 +304,15 @@ tr_pareto = total_revenue(dist_pareto)
 tr_pareto
 ```
 
-这个数字差距很大！
+这个数字差别很大！
 
 ```{code-cell} ipython3
 tr_pareto / tr_lognorm
 ```
 
-我们看到选择正确的分布非常重要。
+可见，选择正确的分布极其重要。
 
-让我们将拟合的帕累托分布与直方图进行比较：
+我们将拟合的帕累托分布与直方图进行比较：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -327,21 +326,21 @@ ax.legend()
 plt.show()
 ```
 
-我们观察到在这种情况下，帕累托分布的拟合效果并不好，所以我们可能会拒绝它。
+我们观察到在这种情况下，帕累托分布的拟合效果并不理想，所以我们很可能会拒绝这一假设。
 
-## 什么是最好的分布？
+## 最好的分布是怎样的？
 
-没有“最好”的分布——我们做出的每一个选择都是一种假设。
+没有“最好”的分布——我们做出的每一个选择，都只是一种假设。
 
-我们能做的就是尝试选择一个能很好地拟合数据的分布。
+我们唯一能做的，就是不断尝试，选择一个能很好拟合数据的分布。
 
 上面的图表表明，对数正态分布是最佳的。
 
-然而，当我们检查上尾部（最富有的人）时，帕累托分布可能是一个更好的选择。
+然而，当我们检查右尾部（最富有的人）时，帕累托分布可能是一个更好的选择。
 
-为了查看这一点，现在让我们设定一个数据集中的净资产最低阈值。
+要看清楚这一点，让我们设定数据集中净资产最低阈值。
 
-我们设定一个任意阈值为 $500,000，并将数据读入 `sample_tail`。
+我们不妨设定阈值为 $500,000，并将数据读入 `sample_tail`。
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -353,7 +352,7 @@ rv_tail = rv_tail.to_numpy()
 sample_tail = rv_tail/500_000
 ```
 
-让我们绘制这些数据。
+接下来，绘制这些数据。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -362,13 +361,13 @@ ax.hist(sample_tail, density=True, bins=500, histtype='stepfilled', alpha=0.8)
 plt.show()
 ```
 
-现在让我们尝试对这些数据拟合一些分布。
+现在，我们尝试用不同的分布来拟合数据。
 
-### 对数正态分布和右尾部
+### 用对数正态分布拟合右尾部
 
-让我们从对数正态分布开始
+让我们从对数正态分布开始。
 
-我们再次估计参数并将密度与我们的数据进行对比。
+我们重新估计参数并绘制概率密度函数，与数据进行对比。
 
 ```{code-cell} ipython3
 ln_sample_tail = np.log(sample_tail)
@@ -386,13 +385,13 @@ plt.show()
 ```
 
 虽然对数正态分布对整个数据集拟合良好，
-但它并不适合右尾部。
+但它对于右尾部的拟合效果并不好。
 
-### 帕累托分布用于右尾部
+### 用帕累托分布拟合右尾部
 
-现在假设截断数据集符合帕累托分布。
+现在假设截取的数据集符合帕累托分布。
 
-我们再次估计参数，并将密度与我们的数据进行对比。
+我们再次估计参数，并将概率密度函数与数据进行对比。
 
 ```{code-cell} ipython3
 xm_hat_tail = min(sample_tail)
@@ -408,26 +407,26 @@ ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='帕累托分布pdf')
 plt.show()
 ```
 
-帕累托分布更适合我们数据集的右尾部。
+帕累托分布更适合数据集的右尾部。
 
-### 那么什么是最佳分布？
+### 到底什么才是最好的分布？
 
-如上所述，没有“最佳”分布——每个选择都是一个假设。
+如刚才所言，没有“最好”的分布——每个选择都只是一种假设。
 
-我们只需要测试我们认为合理的分布。
+我们只需要检验我们认为合理的分布。
 
-一种测试方法是将数据与拟合分布进行绘图，正如我们所做的。
+一种检验方法是，将数据与拟合分布进行绘图，如我们刚才所做的。
 
-还有其他更严格的测试方法，比如[科尔莫哥洛夫-斯米尔诺夫检验](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)。
+还有其他更严谨的测试方法，比如[科尔莫哥洛夫-斯米尔诺夫检验](https://baike.baidu.com/item/科尔莫格罗夫一斯米尔诺夫拟合优度检验/22366278)。
 
-我们忽略了这些高级主题（但鼓励读者在完成这些讲座后研究它们）。
+我们省略了这些更深入的主题（但鼓励读者在完成这些讲座后研究它们）。
 
 ## 练习
 
 ```{exercise-start}
 :label: mle_ex1
 ```
-假设我们假设财富是以参数 $\lambda > 0$ 的[指数](https://en.wikipedia.org/wiki/Exponential_distribution)分布。
+假设我们假设财富是以参数 $\lambda > 0$ 的[指数分布](https://baike.baidu.com/item/负指数分布/6057031)。
 
 $\lambda$ 的最大似然估计为
 
@@ -436,7 +435,7 @@ $$
 $$
 
 1. 计算我们初始样本的 $\hat{\lambda}$。
-2. 使用 $\hat{\lambda}$ 来找到总收入
+2. 使用 $\hat{\lambda}$ 来计算总收入
 
 ```{exercise-end}
 ```
@@ -463,7 +462,7 @@ tr_expo
 :label: mle_ex2
 ```
 
-绘制指数分布与样本的比较，并检查它是否适合。
+绘制指数分布曲线，与样本比较并讨论它的拟合效果。
 
 ```{exercise-end}
 ```
@@ -483,7 +482,7 @@ ax.legend()
 plt.show()
 ```
 
-很明显，这个分布不适合我们的数据。
+显然，这个分布对数据的拟合效果并不好。
 
 ```{solution-end}
 ```
