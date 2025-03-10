@@ -253,9 +253,7 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
   Downloading quantecon-0.8.0-py3-none-any.whl.metadata (5.2 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
@@ -265,7 +263,9 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
-Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
 Downloading quantecon-0.8.0-py3-none-any.whl (322 kB)
 </pre></div>
 </div>
@@ -278,7 +278,7 @@ Downloading quantecon-0.8.0-py3-none-any.whl (322 kB)
 </div>
 </details>
 </div>
-<p>在本讲座中，我们将从谱理论的基本概念开始。</p>
+<p>在本讲座中，我们将从<a class="reference external" href="https://baike.baidu.com/item/%E8%B0%B1%E8%AE%BA/91543">谱论</a>的基本概念开始。</p>
 <p>然后，我们将探讨佩龙-弗罗贝尼乌斯定理，并将其与马尔可夫链和网络的应用联系起来。</p>
 <p>我们将使用以下导入：</p>
 <div class="cell docutils container">
@@ -293,25 +293,29 @@ Downloading quantecon-0.8.0-py3-none-any.whl (322 kB)
 </div>
 <section id="id2">
 <h2><span class="section-number">38.1. </span>非负矩阵<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>在经济学中，我们经常处理的矩阵是非负的。非负矩阵具有几个特殊且有用的性质。在本节中，我们将讨论其中的一些性质——特别是非负性与特征值之间的联系。</p>
+<p>在经济学中，我们经常遇到非负矩阵。非负矩阵具有几个特殊且有用的性质。在本节中，我们将讨论其中的一些性质——特别是非负性与特征值之间的联系。</p>
 <p>一个 <span class="math notranslate nohighlight">\(n \times m\)</span> 的矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为<strong>非负</strong>，如果 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都是非负的，即对于每个 <span class="math notranslate nohighlight">\(i,j\)</span>，都有 <span class="math notranslate nohighlight">\(a_{ij} \geq 0\)</span>。我们将此表示为 <span class="math notranslate nohighlight">\(A \geq 0\)</span>。</p>
 <section id="irreducible">
 <span id="id3"></span><h3><span class="section-number">38.1.1. </span>不可约矩阵<a class="headerlink" href="#irreducible" title="Permalink to this heading">#</a></h3>
 <p>我们在<a class="reference internal" href="markov_chains_II.html#mc-irreducible"><span class="std std-ref">马尔可夫链讲座</span></a>中介绍了不可约矩阵。这里我们将推广这个概念：</p>
 <p>令 <span class="math notranslate nohighlight">\(a^{k}_{ij}\)</span> 为 <span class="math notranslate nohighlight">\(A^k\)</span> 的第 <span class="math notranslate nohighlight">\((i,j)\)</span> 个元素。</p>
-<p>一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的非负矩阵 <span class="math notranslate nohighlight">\(A\)</span> 被称为不可约的，如果 <span class="math notranslate nohighlight">\(A + A^2 + A^3 + \cdots \gg 0\)</span>，其中 <span class="math notranslate nohighlight">\(\gg 0\)</span> 表示 <span class="math notranslate nohighlight">\(A\)</span> 的每个元素都严格为正。</p>
+<p>一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的非负矩阵 <span class="math notranslate nohighlight">\(A\)</span> 如果满足以下条件，则被称为<strong>不可约</strong>的：
+存在一个正整数 <span class="math notranslate nohighlight">\(k\)</span>，使得矩阵 <span class="math notranslate nohighlight">\(A + A^2 + \dots + A^k\)</span> 的所有元素都大于零。
+我们用 <span class="math notranslate nohighlight">\(\gg 0\)</span> 来表示矩阵的所有元素都严格为正。</p>
 <p>换句话说，对于每个 <span class="math notranslate nohighlight">\(1 \leq i, j \leq n\)</span>，存在一个 <span class="math notranslate nohighlight">\(k \geq 0\)</span> 使得 <span class="math notranslate nohighlight">\(a^{k}_{ij} &gt; 0\)</span>。</p>
 <div class="proof example admonition" id="eigen2_ex_irr">
 <p class="admonition-title"><span class="caption-number">Example 38.1 </span></p>
 <section class="example-content" id="proof-content">
-<p>以下是一些进一步说明的例子：</p>
+<p>我们用以下例子进一步说明：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-A = \begin{bmatrix} 0.5 &amp; 0.1 \\ 
-                    0.2 &amp; 0.2 
+A = 
+\begin{bmatrix} 
+0.5 &amp; 0.1 \\ 
+0.2 &amp; 0.2 
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(A\)</span> 是不可约的，因为对于所有的 <span class="math notranslate nohighlight">\((i,j)\)</span>，<span class="math notranslate nohighlight">\(a_{ij}&gt;0\)</span>。</p>
+<p>因为对于所有的 <span class="math notranslate nohighlight">\((i,j)\)</span>，<span class="math notranslate nohighlight">\(a_{ij}&gt;0\)</span>， 所以 <span class="math notranslate nohighlight">\(A\)</span> 是不可约的。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 B = \begin{bmatrix} 0 &amp; 1 \\ 
@@ -322,21 +326,21 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
                       0 &amp; 1
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(B\)</span> 是不可约的，因为 <span class="math notranslate nohighlight">\(B + B^2\)</span> 是一个全为 1 的矩阵。</p>
+<p>因为 <span class="math notranslate nohighlight">\(B + B^2\)</span> 是一个全为 1 的矩阵，<span class="math notranslate nohighlight">\(B\)</span> 是不可约的。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 C = \begin{bmatrix} 1 &amp; 0 \\ 
                     0 &amp; 1 
 \end{bmatrix}
 \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(C\)</span> 不是不可约的，因为对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(C^k = C\)</span>，因此
-对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(c^{k}_{12},c^{k}_{21} = 0\)</span>。</p>
+<p>因为对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(C^k = C\)</span>，因此
+对于所有 <span class="math notranslate nohighlight">\(k \geq 0\)</span>，<span class="math notranslate nohighlight">\(c^{k}_{12},c^{k}_{21} = 0\)</span>， 所以 <span class="math notranslate nohighlight">\(C\)</span> 不是不可约的。</p>
 </section>
 </div></section>
 <section id="id4">
 <h3><span class="section-number">38.1.2. </span>左特征向量<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>回想一下，我们之前在 <a class="reference internal" href="eigen_I.html#la-eigenvalues"><span class="std std-ref">特征值和特征向量</span></a> 中讨论过特征向量。</p>
-<p>特别地，如果 <span class="math notranslate nohighlight">\(v\)</span> 是非零向量，且满足</p>
+<p>即，如果 <span class="math notranslate nohighlight">\(v\)</span> 是非零向量，且满足</p>
 <div class="math notranslate nohighlight">
 \[
 Av = \lambda v
@@ -344,10 +348,10 @@ Av = \lambda v
 <p>那么 <span class="math notranslate nohighlight">\(\lambda\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征值，而 <span class="math notranslate nohighlight">\(v\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征向量。</p>
 <p>在本节中，我们将介绍左特征向量。</p>
 <p>为避免混淆，我们之前称为”特征向量”的将被称为”右特征向量”。</p>
-<p>左特征向量在接下来的内容中将扮演重要角色，包括在马尔可夫假设下动态模型的随机稳态。</p>
+<p>左特征向量在下文中将扮演重要角色，特别是在马尔可夫假设下的动态模型中，它们与随机稳态分布密切相关。</p>
 <p>如果 <span class="math notranslate nohighlight">\(w\)</span> 是 <span class="math notranslate nohighlight">\(A^\top\)</span> 的右特征向量，那么 <span class="math notranslate nohighlight">\(w\)</span> 被称为 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量。</p>
 <p>换句话说，如果 <span class="math notranslate nohighlight">\(w\)</span> 是矩阵 <span class="math notranslate nohighlight">\(A\)</span> 的左特征向量，那么 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span>，其中 <span class="math notranslate nohighlight">\(\lambda\)</span> 是与左特征向量 <span class="math notranslate nohighlight">\(v\)</span> 相关的特征值。</p>
-<p>这暗示了如何计算左特征向量。</p>
+<p>这句话解释了如何计算左特征向量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -405,7 +409,7 @@ Av = \lambda v
 </div>
 </div>
 </div>
-<p>特征值是相同的，而特征向量本身是不同的。
+<p>特征值是相同的，而特征向量却是不同的。
 （还要注意，我们取的是 <a class="reference internal" href="#perron-frobe"><span class="std std-ref">主特征值</span></a> 的特征向量的非负值，这是因为 <code class="docutils literal notranslate"><span class="pre">eig</span></code> 函数会自动对特征向量进行归一化。）</p>
 <p>然后我们可以对 <span class="math notranslate nohighlight">\(A^\top w = \lambda w\)</span> 进行转置，得到 <span class="math notranslate nohighlight">\(w^\top A= \lambda w^\top\)</span>。</p>
 <p>这是一个更常见的表达式，也是左特征向量这个名称的由来。</p>
@@ -413,9 +417,9 @@ Av = \lambda v
 <section id="perron-frobe">
 <span id="id5"></span><h3><span class="section-number">38.1.3. </span>佩龙-弗罗贝尼乌斯定理<a class="headerlink" href="#perron-frobe" title="Permalink to this heading">#</a></h3>
 <p>对于一个非负方阵<span class="math notranslate nohighlight">\(A\)</span>，当<span class="math notranslate nohighlight">\(k \to \infty\)</span>时，<span class="math notranslate nohighlight">\(A^k\)</span>的行为由绝对值最大的特征值控制，通常称为<strong>主特征值</strong>。</p>
-<p>对于任何这样的矩阵<span class="math notranslate nohighlight">\(A\)</span>，佩龙-弗罗贝尼乌斯定理描述了主特征值及其对应特征向量的某些特性。</p>
+<p>对于任何这样的矩阵<span class="math notranslate nohighlight">\(A\)</span>，佩龙-弗罗贝尼乌斯定理（Perron-Frobenius theorem）描述了主特征值及其对应特征向量的某些特性。</p>
 <div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 38.1 </span> (佩龙-弗罗贝尼乌斯定理)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 38.1 </span> (佩龙-弗罗贝尼乌斯定理（Perron-Frobenius theorem）)</p>
 <section class="theorem-content" id="proof-content">
 <p>如果矩阵<span class="math notranslate nohighlight">\(A \geq 0\)</span>，那么：</p>
 <ol class="arabic simple">
@@ -428,9 +432,9 @@ Av = \lambda v
 5. 不存在其他与<span class="math notranslate nohighlight">\(r(A)\)</span>相关的正特征向量<span class="math notranslate nohighlight">\(v\)</span>（除了<span class="math notranslate nohighlight">\(v\)</span>的标量倍数）。</p>
 <p>（关于原始矩阵的佩龙-弗罗贝尼乌斯定理的更多内容将在<a class="reference internal" href="#prim-matrices"><span class="std std-ref">下文</span></a>中介绍。）</p>
 </section>
-</div><p>（这是该定理的一个相对简单的版本——更多详细信息请参见<a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">这里</a>）。
-我们将在下面看到该定理的应用。</p>
-<p>让我们使用我们之前见过的一个简单<a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">例子</span></a>来建立对这个定理的直觉。</p>
+</div><p>（这是该定理的一个简化版——更详细的版本请参见<a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem">这里</a>）。</p>
+<p>我们将在下文中运用该定理。</p>
+<p>首先我们讨论一个之前见过的简单<a class="reference internal" href="markov_chains_I.html#mc-eg1"><span class="std std-ref">例子</span></a>来建立对这个定理的理解。</p>
 <p>现在让我们考虑每种情况的例子。</p>
 <section id="id6">
 <h4><span class="section-number">38.1.3.1. </span>示例：不可约矩阵<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
@@ -459,7 +463,7 @@ Av = \lambda v
 </div>
 </div>
 </div>
-<p>现在我们可以看到佩龙-弗罗贝尼乌斯定理对不可约矩阵<span class="math notranslate nohighlight">\(A\)</span>的声明成立：</p>
+<p>现在我们可以看到，佩龙-弗罗贝尼乌斯定理的结论对于不可约矩阵<span class="math notranslate nohighlight">\(A\)</span>成立。</p>
 <ol class="arabic simple">
 <li><p>主特征值是实数且非负的。</p></li>
 <li><p>所有其他特征值的绝对值小于或等于主特征值。</p></li>
@@ -471,7 +475,7 @@ Av = \lambda v
 </section>
 <section id="prim-matrices">
 <span id="id7"></span><h3><span class="section-number">38.1.4. </span>原始矩阵<a class="headerlink" href="#prim-matrices" title="Permalink to this heading">#</a></h3>
-<p>我们知道，在现实世界的情况下，很难让一个矩阵处处为正（尽管它们具有良好的性质）。</p>
+<p>我们知道，在现实世界的情况下，矩阵很难处处为正（尽管它们具有很好的性质）。</p>
 <p>然而，原始矩阵仍然可以在更宽松的定义下给我们提供有用的性质。</p>
 <p>设<span class="math notranslate nohighlight">\(A\)</span>是一个非负方阵，<span class="math notranslate nohighlight">\(A^k\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的<span class="math notranslate nohighlight">\(k\)</span>次幂。</p>
 <p>如果存在一个<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，使得<span class="math notranslate nohighlight">\(A^k\)</span>处处为正，则称该矩阵为<strong>原始矩阵</strong>。</p>
@@ -485,7 +489,7 @@ A = \begin{bmatrix} 0.5 &amp; 0.1 \\
                     0.2 &amp; 0.2 
 \end{bmatrix}
 \end{split}\]</div>
-<p>这里的<span class="math notranslate nohighlight">\(A\)</span>也是一个原始矩阵，因为对于<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，<span class="math notranslate nohighlight">\(A^k\)</span>处处非负。</p>
+<p>这里的<span class="math notranslate nohighlight">\(A\)</span>也是一个原始矩阵，因为对于<span class="math notranslate nohighlight">\(k \in \mathbb{N}\)</span>，<span class="math notranslate nohighlight">\(A^k\)</span>处处为正。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 B = \begin{bmatrix} 0 &amp; 1 \\ 
@@ -505,7 +509,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 <section class="theorem-content" id="proof-content">
 <p>如果<span class="math notranslate nohighlight">\(A\)</span>是原始矩阵，那么：</p>
 <ol class="arabic" start="6">
-<li><p>对于<span class="math notranslate nohighlight">\(A\)</span>的所有不同于<span class="math notranslate nohighlight">\(r(A)\)</span>的特征值<span class="math notranslate nohighlight">\(\lambda\)</span>，不等式<span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span>是<strong>严格的</strong>，并且</p></li>
+<li><p>对于<span class="math notranslate nohighlight">\(A\)</span>的所有不同于<span class="math notranslate nohighlight">\(r(A)\)</span>的特征值<span class="math notranslate nohighlight">\(\lambda\)</span>，不等式<span class="math notranslate nohighlight">\(|\lambda| \leq r(A)\)</span>是该不等式<strong>严格成立</strong>，并且</p></li>
 <li><p>当<span class="math notranslate nohighlight">\(v\)</span>和<span class="math notranslate nohighlight">\(w\)</span>被归一化使得<span class="math notranslate nohighlight">\(w\)</span>和<span class="math notranslate nohighlight">\(v\)</span>的内积等于1时，我们有：</p>
 <p>当<span class="math notranslate nohighlight">\(m \rightarrow \infty\)</span>时，<span class="math notranslate nohighlight">\(r(A)^{-m} A^m\)</span>收敛于<span class="math notranslate nohighlight">\(v w^{\top}\)</span>。矩阵<span class="math notranslate nohighlight">\(v w^{\top}\)</span>被称为<span class="math notranslate nohighlight">\(A\)</span>的<strong>佩龙投影</strong>。</p>
 </li>
@@ -547,7 +551,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 </div>
 </div>
 </div>
-<p>现在让我们给出一些例子，看看佩龙-弗罗贝尼乌斯定理的声明是否对原始矩阵<span class="math notranslate nohighlight">\(B\)</span>成立：</p>
+<p>现在让我们给出一些例子，看看佩龙-弗罗贝尼乌斯定理的结论是否对原始矩阵<span class="math notranslate nohighlight">\(B\)</span>成立：</p>
 <ol class="arabic simple">
 <li><p>主特征值是实数且非负的。</p></li>
 <li><p>所有其他特征值的绝对值严格小于主特征值。</p></li>
@@ -566,7 +570,7 @@ B^2 = \begin{bmatrix} 1 &amp; 0 \\
 
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eigval</span><span class="p">)</span>
 
-    <span class="c1"># 找出主要（佩龙）特征值的指数</span>
+    <span class="c1"># 找出主（佩龙）特征值的指数</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">eigval</span><span class="p">)</span>
 
     <span class="c1"># 获取佩龙特征向量</span>
@@ -676,8 +680,8 @@ n = 10000, error = 0.0000000000
 </div>
 </div>
 </div>
-<p>在非原始矩阵的情况下，不会观察到收敛。
-让我们通过一个例子来说明</p>
+<p>在非原始矩阵的情况下，不会观察到收敛。</p>
+<p>让我们通过一个例子来说明</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
@@ -722,9 +726,9 @@ n = 10000, error = 1.0000000000
 </section>
 <section id="spec-markov">
 <span id="id9"></span><h4><span class="section-number">38.1.4.2. </span>示例2：与马尔可夫链的联系<a class="headerlink" href="#spec-markov" title="Permalink to this heading">#</a></h4>
-<p>我们现在准备好将这两节课中使用的语言联系起来。</p>
+<p>现在让我们把这两节课中使用的语言联系起来。</p>
 <p>原始矩阵既是不可约的，又是非周期的。</p>
-<p>因此，佩龙-弗罗贝尼乌斯定理解释了为什么<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">伊玛目和寺庙矩阵</span></a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_matrix">哈密顿矩阵</a>都收敛到一个平稳分布，这就是这两个矩阵的佩龙投影。</p>
+<p>因此，佩龙-弗罗贝尼乌斯定理解释了为什么<a class="reference internal" href="markov_chains_I.html#mc-eg3"><span class="std std-ref">Imam 和 Temple 矩阵</span></a>和<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">汉弥尔顿矩阵</span></a>都收敛到一个平稳分布，这就是这两个矩阵的佩龙投影。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.68</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">],</span>
@@ -789,17 +793,17 @@ n = 10000, error = 1.0000000000
 </div>
 </div>
 </div>
-<p>我们还可以验证 Perron-Frobenius 定理暗示的这些随机矩阵的其他性质。</p>
-<p>另一个例子是收敛间隙和收敛速率之间的关系。</p>
+<p>我们还可以验证佩龙-弗罗贝尼乌斯定理给出的这些随机矩阵的其他性质。</p>
+<p>其中一个例子是收敛间隙和收敛速率之间的关系。</p>
 <p>在<a class="reference internal" href="markov_chains_I.html#mc1_ex_1"><span class="std std-ref">练习</span></a>中，我们指出收敛速率由谱间隙决定，即最大特征值和第二大特征值之间的差异。</p>
 <p>利用我们在这里学到的知识，可以证明这一点。</p>
 <p>请注意，在本讲中我们使用 <span class="math notranslate nohighlight">\(\mathbb{1}\)</span> 表示全1向量。</p>
-<p>对于具有状态空间 <span class="math notranslate nohighlight">\(S\)</span> 和转移矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔可夫模型，我们可以将 <span class="math notranslate nohighlight">\(P^t\)</span> 写成</p>
+<p>对于具有状态空间 <span class="math notranslate nohighlight">\(S\)</span> 和转移矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔可夫模型<span class="math notranslate nohighlight">\(M\)</span>，我们可以将 <span class="math notranslate nohighlight">\(P^t\)</span> 写成</p>
 <div class="math notranslate nohighlight">
 \[
 P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
 \]</div>
-<p>这在<span id="id10">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span>中得到证明，<a class="reference external" href="https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector">这里</a>有一个很好的讨论。</p>
+<p>这在<span id="id10">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span>中得到证明，<a class="reference external" href="https://math.stackexchange.com/questions/2433997/can-all-matrices-be-decomposed-as-product-of-right-and-left-eigenvector">在这里</a>也有一个很好的讨论。</p>
 <p>在这个公式中，<span class="math notranslate nohighlight">\(\lambda_i\)</span> 是 <span class="math notranslate nohighlight">\(P\)</span> 的特征值，<span class="math notranslate nohighlight">\(v_i\)</span> 和 <span class="math notranslate nohighlight">\(w_i\)</span> 分别是对应的右特征向量和左特征向量。</p>
 <p>现在用任意 <span class="math notranslate nohighlight">\(\psi \in \mathscr{D}(S)\)</span> 左乘 <span class="math notranslate nohighlight">\(P^t\)</span> 并重新排列，得到</p>
 <div class="math notranslate nohighlight">
@@ -810,7 +814,7 @@ P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
 <p>正如我们所见，原始随机矩阵的最大特征值是1。</p>
 <p>这可以用<a class="reference external" href="https://en.wikipedia.org/wiki/Gershgorin_circle_theorem">Gershgorin圆盘定理</a>来证明，
 但这超出了本讲的范围。</p>
-<p>因此，根据 Perron-Frobenius 定理的第(6)条陈述，当 <span class="math notranslate nohighlight">\(P\)</span> 是原始的时候，对所有 <span class="math notranslate nohighlight">\(i&lt;n\)</span>，有 <span class="math notranslate nohighlight">\(\lambda_i&lt;1\)</span>，且 <span class="math notranslate nohighlight">\(\lambda_n=1\)</span>。</p>
+<p>因此，根据佩龙-弗罗贝尼乌斯定理的第(6)条陈述，当 <span class="math notranslate nohighlight">\(P\)</span> 是原始的时候，对所有 <span class="math notranslate nohighlight">\(i&lt;n\)</span>，有 <span class="math notranslate nohighlight">\(\lambda_i&lt;1\)</span>，且 <span class="math notranslate nohighlight">\(\lambda_n=1\)</span>。</p>
 <p>因此，在取欧几里得范数偏差后，我们得到</p>
 <div class="math notranslate nohighlight">
 \[
@@ -826,7 +830,8 @@ P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
 
 <p class="admonition-title"><span class="caption-number">Exercise 38.1 </span> (列昂惕夫投入产出模型)</p>
 <section id="exercise-content">
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Wassily_Leontief">瓦西里·列昂惕夫</a>开发了一个具有<span class="math notranslate nohighlight">\(n\)</span>个部门生产<span class="math notranslate nohighlight">\(n\)</span>种不同商品的经济模型，代表了经济不同部门之间的相互依存关系。</p>
+<p><a class="reference external" href="https://baike.baidu.com/item/%E5%8D%8E%E8%A5%BF%E9%87%8C%C2%B7%E5%88%97%E6%98%82%E6%83%95%E5%A4%AB/11051863">华西里·列昂惕夫</a>
+给出了一个具有<span class="math notranslate nohighlight">\(n\)</span>个部门生产<span class="math notranslate nohighlight">\(n\)</span>种不同商品的经济模型，代表了经济不同部门之间的相互依存关系。</p>
 <p>在这个模型中，一部分产出在行业内部消耗，其余部分由外部消费者消费。</p>
 <p>我们定义一个简单的三部门模型 - 农业、工业和服务业。</p>
 <p>下表描述了产出如何在经济中分配：</p>
@@ -843,23 +848,23 @@ P^t=\sum_{i=1}^{n-1} \lambda_i^t v_i w_i^{\top}+\mathbb{1} \psi^*,
 <tbody>
 <tr class="row-even"><td class="text-center"><p>农业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_1\)</span></p></td>
-<td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
-<td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
-<td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
+<td class="text-center"><p>0.3 <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td class="text-center"><p>0.2 <span class="math notranslate nohighlight">\(x_2\)</span></p></td>
+<td class="text-center"><p>0.3 <span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>4</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>工业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_2\)</span></p></td>
-<td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
-<td class="text-center"><p>0.4<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
-<td class="text-center"><p>0.3<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
+<td class="text-center"><p>0.2 <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td class="text-center"><p>0.4 <span class="math notranslate nohighlight">\(x_2\)</span></p></td>
+<td class="text-center"><p>0.3 <span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>5</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>服务业</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x_3\)</span></p></td>
-<td class="text-center"><p>0.2<span class="math notranslate nohighlight">\(x_1\)</span></p></td>
-<td class="text-center"><p>0.5<span class="math notranslate nohighlight">\(x_2\)</span></p></td>
-<td class="text-center"><p>0.1<span class="math notranslate nohighlight">\(x_3\)</span></p></td>
+<td class="text-center"><p>0.2 <span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td class="text-center"><p>0.5 <span class="math notranslate nohighlight">\(x_2\)</span></p></td>
+<td class="text-center"><p>0.1 <span class="math notranslate nohighlight">\(x_3\)</span></p></td>
 <td class="text-center"><p>12</p></td>
 </tr>
 </tbody>

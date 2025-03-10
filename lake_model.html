@@ -277,16 +277,16 @@
 </section>
 <section id="id4">
 <h2><span class="section-number">40.3. </span>动态变化<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>设 <span class="math notranslate nohighlight">\(e_t\)</span> 和 <span class="math notranslate nohighlight">\(u_t\)</span> 分别表示在时间 <span class="math notranslate nohighlight">\(t\)</span> 时就业和失业工人的数量。
-工人总人口为 <span class="math notranslate nohighlight">\(n_t = e_t + u_t\)</span>。
-因此，失业和就业工人的数量按以下方式变化：</p>
+<p>设 <span class="math notranslate nohighlight">\(e_t\)</span> 和 <span class="math notranslate nohighlight">\(u_t\)</span> 分别表示在时间 <span class="math notranslate nohighlight">\(t\)</span> 时就业和失业工人的数量。</p>
+<p>工人总人口为 <span class="math notranslate nohighlight">\(n_t = e_t + u_t\)</span>。</p>
+<p>因此，失业和就业工人的数量按以下方式变化：</p>
 <div class="math notranslate nohighlight" id="equation-lake-model">
 <span class="eqno">(40.1)<a class="headerlink" href="#equation-lake-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
     u_{t+1} &amp;= (1-d)(1-\lambda)u_t + \alpha(1-d)e_t + bn_t \\
     &amp;= ((1-d)(1-\lambda) + b)u_t + (\alpha(1-d) + b)e_t \\
     e_{t+1} &amp;= (1-d)\lambda u_t + (1 - \alpha)(1-d)e_t
 \end{aligned}\end{split}\]</div>
-<p>我们可以将<a class="reference internal" href="#equation-lake-model">(40.1)</a>安排为矩阵形式的线性方程组 <span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span>，其中</p>
+<p>我们可以将<a class="reference internal" href="#equation-lake-model">(40.1)</a>整理为矩阵形式的线性方程组 <span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 x_{t+1} =
@@ -310,8 +310,8 @@ x_t =
 <p>假设在 <span class="math notranslate nohighlight">\(t=0\)</span> 时，我们有 <span class="math notranslate nohighlight">\(x_0 = \begin{bmatrix} u_0 &amp; e_0 \end{bmatrix}^\top\)</span>。</p>
 <p>那么，<span class="math notranslate nohighlight">\(x_1=Ax_0\)</span>，<span class="math notranslate nohighlight">\(x_2=Ax_1=A^2x_0\)</span>，因此 <span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span>。</p>
 <p>因此，该系统的长期结果可能取决于初始条件 <span class="math notranslate nohighlight">\(x_0\)</span> 和矩阵 <span class="math notranslate nohighlight">\(A\)</span>。</p>
-<p>我们关心 <span class="math notranslate nohighlight">\(u_t\)</span> 和 <span class="math notranslate nohighlight">\(e_t\)</span> 随时间如何演变。</p>
-<p>我们应该预期什么样的长期失业率和就业率？</p>
+<p>我们关心 <span class="math notranslate nohighlight">\(u_t\)</span> 和 <span class="math notranslate nohighlight">\(e_t\)</span> 如何随时间如何演变。</p>
+<p>失业率和就业率从长期来看会如何变化？</p>
 <p>长期结果是否取决于初始值 <span class="math notranslate nohighlight">\((u_0, e_o)\)</span>？</p>
 <section id="id5">
 <h3><span class="section-number">40.3.1. </span>可视化长期结果<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
@@ -326,7 +326,7 @@ x_t =
 <span class="sd">     ------------</span>
 <span class="sd">     λ：标量</span>
 <span class="sd">    当前失业工人的找到工作的比率</span>
-<span class="sd">    α：标量</span>
+<span class="sd">     α：标量</span>
 <span class="sd">    当前就业工人的解雇率</span>
 <span class="sd">     b：标量</span>
 <span class="sd">    进入劳动力市场的比率</span>
@@ -364,7 +364,7 @@ x_t =
 <span class="sd">        x：迭代器</span>
 <span class="sd">        包含就业率和失业率的序列</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>  <span class="c1"># 以防万一，重新转换为数组</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>  <span class="c1"># 重新转换为数组</span>
         <span class="n">x_ts</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
         <span class="n">x_ts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
@@ -410,12 +410,11 @@ x_t =
 <a class="reference internal image-reference" href="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png"><img alt="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png" src="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>将劳动力 <span class="math notranslate nohighlight">\(n_t\)</span> 以恒定速率增长的观察结果并不令人惊讶。</p>
-<p>这与失业和就业池只有一个流入源（新进入者池）的事实相吻合。</p>
-<p>劳动力市场系统的流入和流出
-在长期内由劳动力市场的固定退出率和进入率决定。</p>
+<p>不出所料，我们观察到劳动力<span class="math notranslate nohighlight">\(n_t\)</span>以恒定的速率增长。</p>
+<p>这与只有一个流入源（新进入者池）流向失业和就业池的事实相吻合。</p>
+<p>从长期来看，劳动力市场系统的流入和流出是由劳动力市场的恒定退出率和进入率决定的。</p>
 <p>具体来说，令 <span class="math notranslate nohighlight">\(\mathbb{1}=[1, 1]^\top\)</span> 为一个全1向量。</p>
-<p>观察到</p>
+<p>我们可以得出</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \begin{aligned}
@@ -431,19 +430,17 @@ x_t =
 </section>
 <section id="id6">
 <h3><span class="section-number">40.3.2. </span>佩龙-弗罗贝尼乌斯定理的应用<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<p>直观上，如果我们将失业池和就业池视为一个封闭系统，其增长应与劳动力相似。</p>
-<p>接下来我们询问 <span class="math notranslate nohighlight">\(e_t\)</span> 和 <span class="math notranslate nohighlight">\(u_t\)</span> 的长期增长率
-是否也由 <span class="math notranslate nohighlight">\(1+b-d\)</span> 主导，就像劳动力一样。</p>
-<p>如果我们求助于<a class="reference internal" href="eigen_II.html#perron-frobe"><span class="std std-ref">佩龙-弗罗贝尼乌斯定理</span></a>，答案将更加清晰。</p>
-<p>佩龙-弗罗贝尼乌斯定理的重要性源于以下事实：
-首先，在现实世界中，我们遇到的大多数矩阵都是非负矩阵。</p>
-<p>其次，许多重要模型都是简单的线性迭代模型，
-从初始条件 <span class="math notranslate nohighlight">\(x_0\)</span> 开始，然后按规则 <span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span> 或简写为 <span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span> 递归演变。</p>
-<p>这个定理有助于表征主导特征值 <span class="math notranslate nohighlight">\(r(A)\)</span>，它
-决定了这个迭代过程的行为。</p>
+<p>从直觉上讲，如果我们将失业池和就业池视为一个封闭系统，其增长应该与劳动力相似。</p>
+<p>接下来我们要问，<span class="math notranslate nohighlight">\(e_t\)</span> 和 <span class="math notranslate nohighlight">\(u_t\)</span> 的长期增长率
+是否也像劳动力一样主要由 <span class="math notranslate nohighlight">\(1+b-d\)</span> 决定？</p>
+<p>如果我们应用<a class="reference internal" href="eigen_II.html#perron-frobe"><span class="std std-ref">佩龙-弗罗贝尼乌斯定理</span></a>，答案将更加清晰。</p>
+<p>佩龙-弗罗贝尼乌斯定理的重要性源于以下事实：</p>
+<p>首先，在现实世界中，我们遇到的大多数矩阵都是非负矩阵。</p>
+<p>其次，许多重要模型只是线性迭代模型，它们从初始条件<span class="math notranslate nohighlight">\(x_0\)</span>开始，然后通过规则<span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span>或简写为<span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span>递归演化。</p>
+<p>这个定理有助于描述主特征值<span class="math notranslate nohighlight">\(r(A)\)</span>，它决定了这个迭代过程的行为。</p>
 <section id="id7">
 <h4><span class="section-number">40.3.2.1. </span>主导特征向量<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
-<p>现在我们通过展示佩龙-弗罗贝尼乌斯定理如何帮助我们分析湖泊模型来说明它的力量。</p>
+<p>现在我们学习如何运用佩龙-弗罗贝尼乌斯定理来帮助我们分析湖泊模型。</p>
 <p>由于 <span class="math notranslate nohighlight">\(A\)</span> 是非负且不可约的矩阵，佩龙-弗罗贝尼乌斯定理意味着：</p>
 <ul class="simple">
 <li><p>谱半径 <span class="math notranslate nohighlight">\(r(A)\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征值，其中</p></li>
@@ -461,18 +458,18 @@ x_t =
     A \phi = r(A) \phi, \quad  \psi A = r(A) \psi
 \]</div>
 <ul class="simple">
-<li><p>如果进一步 <span class="math notranslate nohighlight">\(A\)</span> 是正的，那么当 <span class="math notranslate nohighlight">\(&lt;\psi, \phi&gt; = \psi \phi=1\)</span> 时，我们有</p></li>
+<li><p>如果进一步假设 <span class="math notranslate nohighlight">\(A\)</span> 是正的，那么当 <span class="math notranslate nohighlight">\(&lt;\psi, \phi&gt; = \psi \phi=1\)</span> 时，我们有</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
     r(A)^{-t} A^t \to \phi \psi
 \]</div>
-<p>最后一个陈述意味着长期来看，<span class="math notranslate nohighlight">\(A^t\)</span> 的量级与 <span class="math notranslate nohighlight">\(r(A)^t\)</span> 的量级相同，其中 <span class="math notranslate nohighlight">\(r(A)\)</span> 在本讲座中可被视为主导特征值。</p>
+<p>最后一个陈述意味着长期来看，<span class="math notranslate nohighlight">\(A^t\)</span> 的量级与 <span class="math notranslate nohighlight">\(r(A)^t\)</span> 的量级相同，其中 <span class="math notranslate nohighlight">\(r(A)\)</span> 在本讲座中可被视为主特征值。</p>
 <p>因此，长期来看，<span class="math notranslate nohighlight">\(x_t = A^t x_0\)</span> 的量级也由 <span class="math notranslate nohighlight">\(r(A)^t\)</span> 主导。</p>
 <p>回想一下，谱半径受列和的约束：对于 <span class="math notranslate nohighlight">\(A \geq 0\)</span>，我们有</p>
 <div class="math notranslate nohighlight" id="equation-pf-bounds">
 <span class="eqno">(40.2)<a class="headerlink" href="#equation-pf-bounds" title="Permalink to this equation">#</a></span>\[\min_j \text{colsum}_j (A) \leq r(A) \leq \max_j \text{colsum}_j (A)\]</div>
-<p>注意，对于 <span class="math notranslate nohighlight">\(j=1,2\)</span>，<span class="math notranslate nohighlight">\(\text{colsum}_j(A) = 1 + b - d\)</span>，根据<a class="reference internal" href="#equation-pf-bounds">(40.2)</a>，我们因此可以得出主特征值为 <span class="math notranslate nohighlight">\(r(A) = 1 + b - d\)</span>。</p>
+<p>注意，对于 <span class="math notranslate nohighlight">\(j=1,2\)</span>，有<span class="math notranslate nohighlight">\(\text{colsum}_j(A) = 1 + b - d\)</span>，且根据<a class="reference internal" href="#equation-pf-bounds">(40.2)</a>，我们可以得出主特征值为 <span class="math notranslate nohighlight">\(r(A) = 1 + b - d\)</span>。</p>
 <p>令 <span class="math notranslate nohighlight">\(g = b - d\)</span> 表示总劳动力的整体增长率，因此 <span class="math notranslate nohighlight">\(r(A) = 1 + g\)</span>。</p>
 <p>佩龙-弗罗贝尼乌斯定理意味着存在唯一的正特征向量 <span class="math notranslate nohighlight">\(\bar{x} = \begin{bmatrix} \bar{u} \\ \bar{e} \end{bmatrix}\)</span>，
 使得 <span class="math notranslate nohighlight">\(A\bar{x} = r(A)\bar{x}\)</span> 且 <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 1 \end{bmatrix} \bar{x} = 1\)</span>：</p>
@@ -509,11 +506,11 @@ x_t =
 
         <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-            <span class="c1"># Plot line D</span>
+            <span class="c1"># 绘制线$D$</span>
             <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;set $D$&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;设置$D$&#39;</span><span class="p">)</span>
 
-        <span class="c1"># Set the axes through the origin</span>
+        <span class="c1"># 设置通过原点的坐标轴</span>
         <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">]:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s2">&quot;zero&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]:</span>
@@ -599,7 +596,7 @@ x_t =
 <section id="id9">
 <h3><span class="section-number">40.3.3. </span>性质<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
 <p>由于 <span class="math notranslate nohighlight">\(A\)</span> 的列和为 <span class="math notranslate nohighlight">\(r(A)=1\)</span>，左特征向量是 <span class="math notranslate nohighlight">\(\mathbb{1}^\top=[1, 1]\)</span>。</p>
-<p>佩龙-弗罗贝尼乌斯理论意味着</p>
+<p>佩龙-弗罗贝尼乌斯理论告诉我们</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 r(A)^{-t} A^{t} \approx \bar{x} \mathbb{1}^\top = \begin{bmatrix} \bar{u} &amp; \bar{u} \\ \bar{e} &amp; \bar{e} \end{bmatrix}.
@@ -618,22 +615,22 @@ x_t = A^t x_0 &amp;\approx r(A)^t \begin{bmatrix} \bar{u} &amp; \bar{u} \\ \bar{
 <p>我们看到，在长期内，<span class="math notranslate nohighlight">\(u_t\)</span> 和 <span class="math notranslate nohighlight">\(e_t\)</span> 的增长也由 <span class="math notranslate nohighlight">\(r(A) = 1+g\)</span> 主导：当 <span class="math notranslate nohighlight">\(r(A) &gt; 1\)</span> 时，<span class="math notranslate nohighlight">\(x_t\)</span> 沿着 <span class="math notranslate nohighlight">\(D\)</span> 增长，当 <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span> 时，收敛到 <span class="math notranslate nohighlight">\((0, 0)\)</span>。</p>
 <p>此外，长期失业和就业是 <span class="math notranslate nohighlight">\(n_t\)</span> 的稳定比例。</p>
 <p>后者意味着 <span class="math notranslate nohighlight">\(\bar{u}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{e}\)</span> 分别是长期失业率和就业率。</p>
-<p>具体来说，我们有失业率和就业率：当 <span class="math notranslate nohighlight">\(t \to \infty\)</span> 时，<span class="math notranslate nohighlight">\(x_t / n_t = A^t n_0 / n_t \to \bar{x}\)</span>。</p>
-<p>为了说明这些比率的动态，令 <span class="math notranslate nohighlight">\(\hat{A} := A / (1+g)\)</span> 为 <span class="math notranslate nohighlight">\(r_t := x_t/ n_t\)</span> 的转移矩阵。
-比率的动态遵循</p>
+<p>具体来说，当 <span class="math notranslate nohighlight">\(t \to \infty\)</span> 时，我们有失业率和就业率：<span class="math notranslate nohighlight">\(x_t / n_t = A^t n_0 / n_t \to \bar{x}\)</span>。</p>
+<p>为了说明这些比率的动态，令 <span class="math notranslate nohighlight">\(\hat{A} := A / (1+g)\)</span> 为 <span class="math notranslate nohighlight">\(r_t := x_t/ n_t\)</span> 的转移矩阵。</p>
+<p>比率的动态遵循</p>
 <div class="math notranslate nohighlight">
 \[
 r_{t+1} = \frac{x_{t+1}}{n_{t+1}} = \frac{x_{t+1}}{(1+g) n_{t}} = \frac{A x_t}{(1+g)n_t} = \hat{A} \frac{x_t}{n_t}
 =\hat{A} r_t.
 \]</div>
-<p>注意到 <span class="math notranslate nohighlight">\(\hat{A}\)</span> 的列和都为 1，因此 <span class="math notranslate nohighlight">\(r(\hat{A})=1\)</span>。</p>
-<p>可以验证 <span class="math notranslate nohighlight">\(\bar{x}\)</span> 也是 <span class="math notranslate nohighlight">\(\hat{A}\)</span> 对应于 <span class="math notranslate nohighlight">\(r(\hat{A})\)</span> 的右特征向量，即 <span class="math notranslate nohighlight">\(\bar{x} = \hat{A} \bar{x}\)</span>。</p>
+<p>注意 <span class="math notranslate nohighlight">\(\hat{A}\)</span> 的列和都为 1，因此 <span class="math notranslate nohighlight">\(r(\hat{A})=1\)</span>。</p>
+<p>我们可以验证 <span class="math notranslate nohighlight">\(\bar{x}\)</span> 也是 <span class="math notranslate nohighlight">\(\hat{A}\)</span> 对应于 <span class="math notranslate nohighlight">\(r(\hat{A})\)</span> 的右特征向量，即 <span class="math notranslate nohighlight">\(\bar{x} = \hat{A} \bar{x}\)</span>。</p>
 <p>此外，对于任何 <span class="math notranslate nohighlight">\(r_0 = x_0 / n_0\)</span>，当 <span class="math notranslate nohighlight">\(t \to \infty\)</span> 时，<span class="math notranslate nohighlight">\(\hat{A}^t r_0 \to \bar{x}\)</span>，因为上述讨论意味着</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix} \bar{u} &amp; \bar{u} \\ \bar{e} &amp; \bar{e} \end{bmatrix} r_0 = \begin{bmatrix} \bar{u} \\  \bar{e} \end{bmatrix}. 
 \end{split}\]</div>
-<p>这在下面有所说明。</p>
+<p>我们用下面的代码来说明</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">()</span>
@@ -675,7 +672,7 @@ r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix}
 <a class="reference internal image-reference" href="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png"><img alt="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png" src="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>为了更直观地理解收敛性，我们在下面不使用佩龙-弗罗贝尼乌斯定理进一步解释收敛过程。</p>
+<p>为了能更直观地理解收敛性，我们在下面不使用佩龙-弗罗贝尼乌斯定理进一步解释收敛过程。</p>
 <p>假设 <span class="math notranslate nohighlight">\(\hat{A} = P D P^{-1}\)</span> 是可对角化的，其中 <span class="math notranslate nohighlight">\(P = [v_1, v_2]\)</span> 由 <span class="math notranslate nohighlight">\(\hat{A}\)</span> 的特征向量 <span class="math notranslate nohighlight">\(v_1\)</span> 和 <span class="math notranslate nohighlight">\(v_2\)</span> 组成，
 分别对应于特征值 <span class="math notranslate nohighlight">\(\gamma_1\)</span> 和 <span class="math notranslate nohighlight">\(\gamma_2\)</span>，
 且 <span class="math notranslate nohighlight">\(D = \text{diag}(\gamma_1, \gamma_2)\)</span>。</p>
