@@ -40,8 +40,8 @@ $$
 {cite}`bruno1990seigniorage`对这些问题进行了研究。他们认为理性预期(完全预见)模型的预测有悖直觉,因此提出用自适应预期来替代。在自适应预期下,人们根据下文的方程{eq}`eq:adaptex`来形成对未来通货膨胀的预期。
 
 ```{note}
-{cite}`sargeant1989least` 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
-{cite}`sargeant2009conquest` 和 {cite}`marcet2003recurrent` 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
+{cite}`sargent1989least` 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
+{cite}`marcet2003recurrent` 和 {cite}`sargent2009conquest` 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
 ```  
 
 ## 模型
