@@ -22,7 +22,7 @@ kernelspec:
   * 当支出超过税收时，政府可能会要求中央银行通过印钞来填补这个缺口
   * 这会引发价格水平的变化，直到货币供给与货币需求达到平衡
 
-托马斯·萨金特和尼尔·华莱士在{cite}`sargent2013rational`第5章（重印自1981年明尼阿波利斯联储的文章"令人不快的货币主义算术"）中详细阐述了这一理论。
+托马斯·萨金特和尼尔·华莱士在{cite}`sargent2013rational`第5章（重印自1981年明尼阿波利斯联储的文章《令人不快的货币主义算术》）中详细阐述了这一理论。
 
 这个理论有时也被称为"价格水平的财政理论"，强调了财政赤字在影响货币供应变化中的核心作用。约翰·科克伦{cite}`cochrane2023fiscal`对该理论进行了进一步的发展、评析和应用。
 
@@ -74,7 +74,7 @@ $$
 m_t^d - p_t = -\alpha \pi_t^* \: , \: \alpha > 0 ; \quad t = 0, 1, \ldots, T .
 $$ (eq:caganmd)
 
-这个公式表明，实际货币余额的需求与预期通货膨胀率成反比。
+这个方程表明，实际货币余额的需求与预期通货膨胀率成反比。
 
 人们通过解决预测问题获得了**完全预见**。
 
@@ -86,19 +86,19 @@ $$ (eq:ree)
 
 同时使货币需求等于供给让我们对所有 $t \geq 0$ 设置 $m_t^d = m_t$。
 
-前面的公式然后意味着
+前面的方程然后意味着
 
 $$
 m_t - p_t = -\alpha(p_{t+1} - p_t)
 $$ (eq:cagan)
 
-为了使个体完全预见通胀率,我们从时间 $ t $ 的公式 {eq}`eq:cagan` 中减去 $ t+1 $ 时的相同公式得到
+为了使个体完全预见通胀率,我们从时间 $ t $ 的方程 {eq}`eq:cagan` 中减去 $ t+1 $ 时的相同方程得到
 
 $$
 \mu_t - \pi_t = -\alpha \pi_{t+1} + \alpha \pi_t ,
 $$
 
-我们将其重写为关于 $\pi_s$ 的前瞻性一阶线性差分公式,其中 $\mu_s$ 作为"强制变量":
+我们将其重写为关于 $\pi_s$ 的前瞻性一阶线性差分方程,其中 $\mu_s$ 作为"强制变量":
 
 $$
 \pi_t = \frac{\alpha}{1+\alpha} \pi_{t+1} + \frac{1}{1+\alpha} \mu_t , \quad t= 0, 1, \ldots , T 
@@ -106,13 +106,13 @@ $$
 
 其中 $ 0< \frac{\alpha}{1+\alpha} <1$。
 
-设 $\delta =\frac{\alpha}{1+\alpha}$,让我们将前面的公式表示为
+设 $\delta =\frac{\alpha}{1+\alpha}$,让我们将前面的方程表示为
 
 $$
 \pi_t = \delta \pi_{t+1} + (1-\delta) \mu_t , \quad t =0, 1, \ldots, T
 $$
 
-将这个 $T+1$ 个公式的系统写成单个矩阵公式
+将这个 $T+1$ 个方程的系统写成单个矩阵方程
 
 $$
 \begin{bmatrix} 1 & -\delta & 0 & 0 & \cdots & 0 & 0 \cr
@@ -131,7 +131,7 @@ $$
 \end{bmatrix}
 $$ (eq:pieq)
 
-通过将公式 {eq}`eq:pieq` 两边乘以左侧矩阵的逆,我们可以计算
+通过将方程 {eq}`eq:pieq` 两边乘以左侧矩阵的逆,我们可以计算
 
 $$
 \pi \equiv \begin{bmatrix} \pi_0 \cr \pi_1 \cr \pi_2 \cr \vdots \cr \pi_{T-1} \cr \pi_T 
@@ -144,13 +144,13 @@ $$
 \pi_t = (1-\delta) \sum_{s=t}^T \delta^{s-t} \mu_s + \delta^{T+1-t} \pi_{T+1}^*
 $$ (eq:fisctheory1)
 
-我们可以将公式
+我们可以将方程
 
 $$ 
 m_{t+1} = m_t + \mu_t , \quad t = 0, 1, \ldots, T
 $$
 
-表示为矩阵公式
+表示为矩阵方程
 
 $$
 \begin{bmatrix}
@@ -172,17 +172,17 @@ m_0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 $$ (eq:eq101)
 
-将公式 {eq}`eq:eq101` 两边乘以左侧矩阵的逆将得到
+将方程 {eq}`eq:eq101` 两边乘以左侧矩阵的逆将得到
 
 $$
 m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
 $$ (eq:mcum)
 
-公式 {eq}`eq:mcum` 显示，时间 $t$ 的货币供应对数等于初始货币供应对数 $m_0$ 加上从时间 $0$ 到 $T$ 之间的货币增长率累积。
+方程 {eq}`eq:mcum` 显示，时间 $t$ 的货币供应对数等于初始货币供应对数 $m_0$ 加上从时间 $0$ 到 $T$ 之间的货币增长率累积。
 
 ## 延续值
 
-为确定延续通胀率 $\pi_{T+1}^*$，我们将在 $t = T+1$ 时应用以下公式 {eq}`eq:fisctheory1` 的无限期版本：
+为确定延续通胀率 $\pi_{T+1}^*$，我们将在 $t = T+1$ 时应用以下方程 {eq}`eq:fisctheory1` 的无限期版本：
 
 $$
 \pi_t = (1-\delta) \sum_{s=t}^\infty \delta^{s-t} \mu_s , 
@@ -194,7 +194,7 @@ $$
 \mu_{t+1} = \gamma^* \mu_t, \quad t \geq T .
 $$
 
-将上述公式代入 $t = T+1$ 时的公式 {eq}`eq:fisctheory2` 并重新排列，我们可以推导出：
+将上述方程代入 $t = T+1$ 时的方程 {eq}`eq:fisctheory2` 并重新排列，我们可以推导出：
 
 $$ 
 \pi_{T+1}^* = \frac{1 - \delta}{1 - \delta \gamma^*} \gamma^* \mu_T
@@ -235,7 +235,7 @@ def create_cagan_model(m0=1, α=5, μ_seq=None):
     return CaganREE(m0, μ_seq, α, δ, π_end)
 ```
 
-现在我们可以求解这个模型通过矩阵公式来计算$\pi_t$, $m_t$ 和 $p_t$ 当 $t =1, \ldots, T+1$
+现在我们可以求解这个模型通过矩阵方程来计算$\pi_t$, $m_t$ 和 $p_t$ 当 $t =1, \ldots, T+1$
 
 ```{code-cell} ipython3
 def solve(model, T):
@@ -337,13 +337,13 @@ plot_sequences(sequences, (r'$\mu$', r'$\pi$', r'$m - p$', r'$m$', r'$p$'))
 
 ### 对数价格水平
 
-根据公式 {eq}`eq:caganmd` 和 {eq}`eq:ree`，我们可以推导出对数价格水平满足以下关系：
+根据方程 {eq}`eq:caganmd` 和 {eq}`eq:ree`，我们可以推导出对数价格水平满足以下关系：
 
 $$
 p_t = m_t + \alpha \pi_t
 $$ (eq:pformula2)
 
-或者，通过公式{eq}`eq:fisctheory1`我们可以推导
+或者，通过方程{eq}`eq:fisctheory1`我们可以推导
 
 $$ 
 p_t = m_t + \alpha \left[ (1-\delta) \sum_{s=t}^T \delta^{s-t} \mu_s + \delta^{T+1-t} \pi_{T+1}^* \right] 
