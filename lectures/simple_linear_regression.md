@@ -24,17 +24,18 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-简单回归模型估计两个变量 $x_i$ 和 $y_i$ 之间的关系
+这个简单回归模型估计了两个变量 $x_i$ 和 $y_i$ 之间的关系
 
 $$
 y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 $$
 
-其中 $\epsilon_i$ 表示最佳拟合线与样本值 $y_i$ 与 $x_i$ 的误差。
+其中 $\epsilon_i$ 表示最佳拟合线与给定 $x_i$ 的样本值 $y_i$ 之间的误差。
 
-我们的目标是为 $\alpha$ 和 $\beta$ 选择值来为一些可用的变量 $x_i$ 和 $y_i$ 的数据构建“最佳”拟合线。
+我们的目标是选择 $\alpha$ 和 $\beta$ 的值来为一些适用于变量 $x_i$ 和 $y_i$ 的数据构建一条“最佳”拟合线。
 
-让我们考虑一个具有10个观察值的简单数据集，变量为 $x_i$ 和 $y_i$：
+让我们假设存在一个简单的数据集，其中包含 10 个变量 $x_i$ 和 $y_i$ 的观测值：
+
 
 | | $y_i$  | $x_i$ |
 |-|---|---|
@@ -49,7 +50,7 @@ $$
 |9| 1800 | 27 |
 |10 | 250 | 2 |
 
-让我们把 $y_i$ 视为一个冰淇淋车的销售额，而 $x_i$ 是记录当天摄氏度温度的变量。
+让我们把 $y_i$ 视为一个冰淇淋车的销售额，而 $x_i$ 是记录当天气温（摄氏度）的变量。
 
 ```{code-cell} ipython3
 x = [32, 21, 24, 35, 10, 11, 22, 21, 27, 2]
@@ -59,7 +60,7 @@ df.columns = ['X', 'Y']
 df
 ```
 
-我们可以通过数据的散点图来观察 $y_i$（冰淇淋销售额（美元(\$\'s)）和 $x_i$（摄氏度）之间的关系。
+我们可以通过散点图来观察 $y_i$（冰淇淋销售额（美元(\$\'s)）和 $x_i$（摄氏度）之间的关系。
 
 ```{code-cell} ipython3
 ---
@@ -72,14 +73,14 @@ ax = df.plot(
     x='X', 
     y='Y', 
     kind='scatter', 
-    ylabel=r'冰淇淋销售额（\$）', 
+    ylabel=r'冰淇淋销售额（$\'s）', 
     xlabel='摄氏度'
 )
 ```
 
-如您所见，数据表明在更热的日子里通常会卖出更多的冰淇淋。
+如你所见，数据表明在较热的日子里通常会卖出较多的冰淇淋。
 
-为了建立数据的线性模型，我们需要选择代表“最佳”拟合线的 $\alpha$ 和 $\beta$ 值，使得
+为了构建数据的线性模型，我们需要选择代表“最佳”拟合线的 $\alpha$ 和 $\beta$ 值，使得
 
 $$
 \hat{y_i} = \hat{\alpha} + \hat{\beta} x_i
@@ -106,9 +107,9 @@ ax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, label=r'$\hat Y$')
 plt.show()
 ```
 
-我们可以看到这个模型在估计关系上做得很差。
+我们可以看到这个模型没法很好地估计两者的关系。
 
-我们可以继续通过调整参数来试图迭代并逼近“最佳”拟合线。
+我们可以继续猜测，并通过调整参数迭代出一条 “最佳 ”拟合线。
 
 ```{code-cell} ipython3
 β = 100
@@ -146,7 +147,7 @@ yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.show()
 ```
 
-但是我们需要考虑将这个猜测过程正式化，把这个问题看作是一个优化问题。
+不过，我们需要把这一问题视为一个优化问题，将猜测过程正规化。
 
 让我们考虑误差 $\epsilon_i$ 并定义观测值 $y_i$ 与估计值 $\hat{y}_i$ 之间的差异，我们将其称为残差
 
@@ -179,7 +180,7 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r')
 plt.show()
 ```
 
-普通最小二乘方法 (OLS) 选择 $\alpha$ 和 $\beta$，以使残差平方和 (SSR) **最小化**。
+普通最小二乘方法 (OLS) 通过 **最小化** 残差平方和 (SSR)来选择 $\alpha$ 和 $\beta$ 的值。
 
 $$
 \min_{\alpha,\beta} \sum_{i=1}^{N}{\hat{e}_i^2} = \min_{\alpha,\beta} \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
@@ -191,20 +192,20 @@ $$
 C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 $$
 
-我们希望通过参数 $\alpha$ 和 $\beta$ 来最小化这个成本函数。
+我们希望通过调整参数 $\alpha$ 和 $\beta$ 来最小化这个成本函数。
 
-## 残差相对于 $\alpha$ 和 $\beta$ 的变化
+## 残差相对于 $\alpha$ 和 $\beta$ 是如何变化的
 
-首先让我们看看总误差相对于 $\beta$ 的变化（保持截距 $\alpha$ 不变）
+首先，我们看看总残差相对于 $\beta$ 的变化（保持截距 $\alpha$ 不变）
 
-我们从[下一节](slr:optimal-values)知道 $\alpha$ 和 $\beta$ 的最优值是：
+我们从[下一节](slr:optimal-values)可以知道 $\alpha$ 和 $\beta$ 的最优值是：
 
 ```{code-cell} ipython3
 β_optimal = 64.38
 α_optimal = -14.72
 ```
 
-我们可以计算一个范围内的 $\beta$ 值的残差
+我们可以计算一系列 $\beta$ 值的残差
 
 ```{code-cell} ipython3
 errors = {}
@@ -249,7 +250,7 @@ plt.axvline(α_optimal, color='r');
 (slr:optimal-values)=
 ## 计算最优值
 
-现在让我们使用微积分来解决优化问题，并计算出 $\alpha$ 和 $\beta$ 的最优值，以找到普通最小二乘解。
+现在让我们使用微积分来解决优化问题，并计算出 $\alpha$ 和 $\beta$ 的最优值，以找到普通最小二乘（OLS）解。
 
 首先对 $\alpha$ 取偏导
 
@@ -269,31 +270,31 @@ $$
 0 = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)}
 $$
 
-现在我们可以将这个方程分解为各个组成部分
+现在我们可以将这个方程分解成几个组成部分
 
 $$
 0 = \sum_{i=1}^{N}{y_i} - \sum_{i=1}^{N}{\alpha} - \beta \sum_{i=1}^{N}{x_i}
 $$
 
-中间项是从 $i=1,...N$ 对常数 $\alpha$ 进行简单求和
+中间项是常数 $\alpha$ 从 $i=1,...N$ 进行直接相加得到的
 
 $$
 0 = \sum_{i=1}^{N}{y_i} - N*\alpha - \beta \sum_{i=1}^{N}{x_i}
 $$
 
-并重新排列各项
+重新排列各项可得
 
 $$
 \alpha = \frac{\sum_{i=1}^{N}{y_i} - \beta \sum_{i=1}^{N}{x_i}}{N}
 $$
 
-我们观察到两个分数分别归结为均值 $\bar{y_i}$ 和 $\bar{x_i}$
+我们可以发现分解成两个分数后，它们分别是均值 $\bar{y_i}$ 和 $\bar{x_i}$
 
 $$
 \alpha = \bar{y_i} - \beta\bar{x_i}
 $$ (eq:optimal-alpha)
 
-现在让我们对成本函数 $C$ 关于 $\beta$ 取偏导
+回到成本函数 $C$ ，现在我们对 $\beta$ 取偏导
 
 $$
 \frac{\partial C}{\partial \beta}[\sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}]
@@ -305,13 +306,13 @@ $$
 0 = \sum_{i=1}^{N}{-2 x_i (y_i - \alpha - \beta x_i)}
 $$
 
-我们可以再次将常数从求和中取出，并将两边除以 $-2$
+我们可以通过将两边除以 $-2$ ，再次将常数从求和中取出
 
 $$
 0 = \sum_{i=1}^{N}{x_i (y_i - \alpha - \beta x_i)}
 $$
 
-这变成了
+进一步化简
 
 $$
 0 = \sum_{i=1}^{N}{(x_i y_i - \alpha x_i - \beta x_i^2)}
@@ -323,19 +324,19 @@ $$
 0 = \sum_{i=1}^{N}{(x_i y_i - (\bar{y_i} - \beta \bar{x_i}) x_i - \beta x_i^2)}
 $$
 
-并重新排列各项
+重新排列各项
 
 $$
 0 = \sum_{i=1}^{N}{(x_i y_i - \bar{y_i} x_i - \beta \bar{x_i} x_i - \beta x_i^2)}
 $$
 
-这可以被分成两个求和
+这个方程可以被分成两个求和
 
 $$
 0 = \sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i) + \beta \sum_{i=1}^{N}(\bar{x_i} x_i - x_i^2)
 $$
 
-解$\beta$得到
+得到 $\beta$ 的解
 
 $$
 \beta = \frac{\sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i)}{\sum_{i=1}^{N}(x_i^2 - \bar{x_i} x_i)}
@@ -353,10 +354,10 @@ x_bar = df['X'].mean()
 y_bar = df['Y'].mean()
 ```
 
-现在计算10个观察值，然后求和分子和分母
+现在我们用10个观察值进行计算，然后把分子和分母分别求和
 
 ```{code-cell} ipython3
-# 计算求和
+# 计算求和项
 df['num'] = df['X'] * df['Y'] - y_bar * df['X']
 df['den'] = pow(df['X'],2) - x_bar * df['X']
 β = df['num'].sum() / df['den'].sum()
@@ -370,7 +371,7 @@ print(β)
 print(α)
 ```
 
-现在我们可以绘制OLS解决方案
+现在我们可以绘制OLS解
 
 ```{code-cell} ipython3
 ---
@@ -391,23 +392,23 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 :::{exercise}
 :label: slr-ex1
 
-现在您已经知道了使用OLS解决简单线性回归模型的方程，您可以开始运行自己的回归以构建$y$和$x$之间的模型了。
+现在你已经知道了使用OLS解决简单线性回归模型的方程，你可以开始运行自己的回归来构建$y$和$x$之间的模型了。
 
 让我们考虑两个经济变量，人均GDP和预期寿命。
 
 1. 你认为它们之间的关系会是怎样的？
-2. 从[我们的世界数据中](https://ourworldindata.org)搜集一些数据
+2. 从[our world in data](https://ourworldindata.org)中搜集一些数据
 3. 使用`pandas`导入`csv`格式的数据，并绘制几个不同国家的图表
 4. 使用{eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta`计算$\alpha$和$\beta$的最优值
 5. 使用OLS绘制最佳拟合线
-6. 解释系数并写出人均GDP和预期寿命之间关系的总结句子
+6. 解释系数并用一句话总结人均GDP和预期寿命之间的关系
 
 :::
 
 :::{solution-start} slr-ex1
 :::
 
-**Q2:** 搜集一些数据 [来自我们的世界数据](https://ourworldindata.org)
+**Q2:** 从[our world in data](https://ourworldindata.org)中搜集一些数据
 
 :::{raw} html
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
@@ -415,7 +416,7 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 
 如果你遇到困难，可以从这里下载{download}`数据副本 <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>`
 
-**Q3:** 使用`pandas`导入`csv`格式的数据并绘制几个不同国家的兴趣图表
+**Q3:** 使用`pandas`导入`csv`格式的数据并绘制几个感兴趣的国家的图表
 
 ```{code-cell} ipython3
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv"
@@ -426,11 +427,11 @@ df = pd.read_csv(data_url, nrows=10)
 df
 ```
 
-您可以看到从我们的世界数据下载的数据为全球各国提供了人均GDP和预期寿命数据。
+你可以看到从Our World in Data下载的数据提供了全球各国的人均GDP和预期寿命数据。
 
-首先从csv文件中导入几行数据以了解其结构，以便您可以选择要读取到DataFrame中的列，这通常是一个好主意。
+先从csv文件中导入几行数据以了解其结构，以便你可以选择要读取到DataFrame中的列，这通常是一个好主意。
 
-您可以观察到有许多我们不需要导入的列，比如`Continent`
+你可以观察到有许多我们不需要导入的列，比如`Continent`
 
 那么我们来构建一个我们想要导入的列的列表
 
@@ -440,7 +441,7 @@ df = pd.read_csv(data_url, usecols=cols)
 df
 ```
 
-有时候重命名列名可以使得在DataFrame中更容易操作
+有时候重命名列名可以让我们在DataFrame中更方便进行操作
 
 ```{code-cell} ipython3
 df.columns = ["cntry", "year", "life_expectancy", "gdppc"]
@@ -457,22 +458,22 @@ df.dropna(inplace=True)
 df
 ```
 
-我们现在已经将我们的DataFrame的行数从62156减少到12445，删除了很多空的数据关系。
+现在，我们已经将DataFrame的行数从62156减少到12445，删除了很多空的数据关系。
 
-现在我们有一个包含一系列年份的人均寿命和人均GDP的数据集。
+现在我们有一个包含一系列年份的预期寿命和人均GDP的数据集。
 
 花点时间了解你实际拥有的数据总是一个好主意。
 
-例如，您可能想要探索这些数据，看看是否所有国家在各年之间的报告都是一致的。
+例如，你可能想要探索这些数据，看看是否所有国家在各个年份的报告都是一致的。
 
-让我们首先看看寿命数据
+首先，我们看看预期寿命数据
 
 ```{code-cell} ipython3
 le_years = df[['cntry', 'year', 'life_expectancy']].set_index(['cntry', 'year']).unstack()['life_expectancy']
 le_years
 ```
 
-如您所见，有很多国家在1543年的数据是不可用的！
+如你所见，有很多国家在1543年的数据是不可用的！
 
 哪个国家报告了这些数据？
 
@@ -480,35 +481,35 @@ le_years
 le_years[~le_years[1543].isna()]
 ```
 
-您可以看到，只有大不列颠（GBR）是可用的
+你可以看到，只有大不列颠（GBR）的数据是可用的
 
-您还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。
+你还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。
 
 ```{code-cell} ipython3
-le_years.loc['GBR'].plot()
+le_years.loc['GBR'].plot(xlabel="年份")
 ```
 
 实际上我们可以使用pandas快速检查每个年份涵盖了多少个国家
 
 ```{code-cell} ipython3
-le_years.stack().unstack(level=0).count(axis=1).plot(xlabel="Year", ylabel="Number of countries");
+le_years.stack().unstack(level=0).count(axis=1).plot(xlabel="年份", ylabel="国家数量");
 ```
 
-所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家集合
+所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家
 
-现在让我们考虑数据集中最近的一年2018
+现在让我们考虑数据集中最近的一年，也就是2018
 
 ```{code-cell} ipython3
 df = df[df.year == 2018].reset_index(drop=True).copy()
 ```
 
 ```{code-cell} ipython3
-df.plot(x='gdppc', y='life_expectancy', kind='scatter', xlabel="GDP per capita", ylabel="Life expectancy (years)",);
+df.plot(x='gdppc', y='life_expectancy', kind='scatter', xlabel="人均GDP", ylabel="预期寿命（年）",);
 ```
 
 这些数据显示了一些有趣的关系。
 
-1. 许多国家的人均GDP相近，但寿命差别很大
+1. 许多国家的人均GDP相近，但预期寿命差别很大
 2. 人均GDP与预期寿命之间似乎存在正向关系。人均GDP较高的国家往往拥有更高的预期寿命
 
 尽管普通最小二乘法（OLS）是用来解线性方程的，但我们可以通过对变量进行转换（例如对数变换），然后使用OLS来估计转换后的变量。
@@ -574,9 +575,9 @@ plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy
 :::{exercise}
 :label: slr-ex2
 
-通过最小化平方和并不是生成最佳拟合线的**唯一**方法。
+最小化平方和并不是生成最佳拟合线的 **唯一** 方法。
 
-例如，我们还可以考虑最小化**绝对值之和**，这样对异常值的权重会更小。
+举个例子，我们还可以考虑最小化 **绝对值** 之和，这样可以减少对异常值的权重。
 
-求解 $\alpha$ 和 $\beta$ 使用最小绝对值法
+使用最小绝对值法求解 $\alpha$ 和 $\beta$ 
 :::
