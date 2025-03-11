@@ -113,7 +113,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. 价格水平的货币主义理论" href="cagan_ree.html" />
+    <link rel="next" title="14. 货币主义价格水平理论" href="cagan_ree.html" />
     <link rel="prev" title="12. 消费平滑" href="cons_smooth.html" />
 
 <!-- Normal Meta Tags -->
@@ -165,13 +165,13 @@
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 概述</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.2. 无差异条件</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.2.1. 高中教育工人的现值</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.2.2. 准备上大学的新高中毕业生的现值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.2.1. 不上大学直接工作的现值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.2.2. 上大学后工作的现值</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.3. 重新诠释模型：工人和企业家</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.3. 重新解读模型：打工人和企业家</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.4. 计算</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.5. 企业家-工人解释</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.5. 企业家和打工人</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6. 微积分的应用</a></li>
 </ul>
                             <p class="logo">
@@ -235,20 +235,20 @@
 <h1><span class="section-number">13. </span>均衡差异模型<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>本讲座介绍了一个大学-高中工资差距模型，其中”培养”大学毕业生的时间扮演了关键角色。</p>
-<p>米尔顿·弗里德曼发明了这个模型，用来研究美国牙医和医生收入的差异是竞争性劳动力市场的结果，还是政府与医生专业组织合作施加的入行障碍的结果。</p>
-<p>詹妮弗·伯恩斯的著作<span id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，最终导致了<span id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
-<p>将弗里德曼的应用映射到我们的模型中，可以将我们的高中生视为弗里德曼的牙医，将我们的大学毕业生视为弗里德曼的医生。</p>
-<p>我们的呈现是”不完整的”，因为它基于一个单一方程，这个方程将是更完整模型中一组均衡条件的一部分。</p>
-<p>这个”均衡差异”方程确定了一个大学-高中工资比率，使高中毕业工人和大学毕业工人的现值相等。</p>
-<p>这个想法是，终身收入会以某种方式调整，使新高中毕业工人对是否上大学或立即工作无差别。
-（更完整模型中的”其他方程”的作用将是描述什么会调整以实现这个结果。）</p>
-<p>我们的模型只是相对工资率”均衡差异”理论的一个例子，这类理论至少可以追溯到亚当·斯密的《国富论》<span id="id6">[<a class="reference internal" href="zreferences.html#id11" title="Adam Smith. The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations. Harriman House Limited, 2010.">Smith, 2010</a>]</span>。</p>
-<p>在本讲座的大部分内容中，我们将只使用线性代数的数学工具，特别是矩阵乘法和矩阵求逆。</p>
-<p>然而，在讲座接近尾声时，我们会使用微积分，以防读者想看看如何通过计算偏导数来更简洁地呈现一些发现。</p>
-<p>这样做还能让我们展示Python在进行微积分计算方面有多么出色！</p>
-<p>但如果你不懂微积分，我们的线性代数工具肯定足够了。</p>
-<p>像往常一样，我们先导入一些Python模块。</p>
+<p>本讲座介绍了一个研究大学与高中毕业生工资差距的模型，其中获得大学学历所需的时间是关键因素。</p>
+<p>这个模型最初由米尔顿·弗里德曼创建，用于研究美国牙医和医生的收入差异——他想弄清这种差异是竞争性劳动力市场的自然结果，还是源于政府与医疗专业组织设置的准入门槛。</p>
+<p>詹妮弗·伯恩斯在其著作<span id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章中，详细描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，这项研究最终促成了<span id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
+<p>我们可以将弗里德曼的模型对应到我们的研究中：把高中毕业生对应于牙医，把大学毕业生对应于医生。</p>
+<p>我们提供的是一个简化模型，仅包含一个方程。在更完整的模型中，这个方程将是多个均衡条件之一。</p>
+<p>这个”均衡差异”方程确定了使高中和大学毕业生终身收入现值相等的工资比率。</p>
+<p>其基本思想是：工资水平会自动调整，直到高中应届毕业生在”直接工作”和”继续上大学”这两个选择之间无差别。</p>
+<p>（在更完整的模型中，其他方程会解释是什么因素推动了这种调整。）</p>
+<p>我们的模型是相对工资”均衡差异”理论的一个具体应用。这类理论可以追溯到亚当·斯密的《国富论》<span id="id6">[<a class="reference internal" href="zreferences.html#id11" title="Adam Smith. The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations. Harriman House Limited, 2010.">Smith, 2010</a>]</span>。</p>
+<p>本讲座主要使用线性代数知识，特别是矩阵乘法和矩阵求逆。</p>
+<p>在讲座末尾，我们会引入一些微积分内容，展示如何用偏导数更简洁地表达某些结论。</p>
+<p>这也让我们有机会展示Python在处理微积分计算时的强大功能！</p>
+<p>不过即使不懂微积分，掌握线性代数知识也足以理解核心内容。</p>
+<p>首先，让我们导入所需的Python模块。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -264,12 +264,12 @@
 </section>
 <section id="id7">
 <h2><span class="section-number">13.2. </span>无差异条件<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>关键思想是，大学入学级别的工资溢价必须调整，以使代表性工人对上大学和不上大学无差别。</p>
+<p>这个模型的关键在于：大学教育带来的额外工资收益会达到一个均衡点，在这个点上，普通工人选择上大学或直接工作的预期收益是相等的。</p>
 <p>设：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R &gt; 1\)</span> 为一期债券的总回报率</p></li>
 <li><p><span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots T\)</span> 表示一个人工作或上大学的年数</p></li>
-<li><p><span class="math notranslate nohighlight">\(0\)</span> 表示一个人如果不上大学可以工作的高中毕业后的第一个时期</p></li>
+<li><p><span class="math notranslate nohighlight">\(0\)</span> 表示一个人如果不上大学高中毕业后可以工作的第一个时期</p></li>
 <li><p><span class="math notranslate nohighlight">\(T\)</span> 表示一个人工作的最后一个时期</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_t^h\)</span> 为高中毕业生在 <span class="math notranslate nohighlight">\(t\)</span> 时的工资</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_t^c\)</span> 为大学毕业生在 <span class="math notranslate nohighlight">\(t\)</span> 时的工资</p></li>
@@ -277,16 +277,16 @@
 <span class="math notranslate nohighlight">\( w_t^h = w_0^h \gamma_h^t\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma_c &gt; 1\)</span> 为大学毕业生工资的（总）增长率，使得
 <span class="math notranslate nohighlight">\( w_t^c = w_0^c \gamma_c^t\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(D\)</span> 为上大学的前期货币成本</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> 为上大学所需的成本</p></li>
 </ul>
-<p>现在我们计算新高中毕业生如果：</p>
+<p>现在我们考虑一个新的高中毕业生所面临的两个选择：</p>
 <ul class="simple">
-<li><p>立即工作并赚取无大学教育者的工资</p></li>
+<li><p>立即工作并赚取高中毕业生的工资</p></li>
 <li><p>上大学四年，毕业后赚取大学毕业生的工资</p></li>
 </ul>
-<p>所能获得的现值</p>
+<p>并计算这位毕业生所能获得的现值</p>
 <section id="id8">
-<h3><span class="section-number">13.2.1. </span>高中教育工人的现值<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <p>如果某人高中毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots, T\)</span> 的 <span class="math notranslate nohighlight">\(T+1\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -300,7 +300,7 @@ A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
 <p>现值 <span class="math notranslate nohighlight">\(h_0\)</span> 是选择不上大学而是立即以高中毕业生的工资开始工作的人在时间 <span class="math notranslate nohighlight">\(0\)</span> 开始时的”人力财富”。</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">13.2.2. </span>准备上大学的新高中毕业生的现值<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.2. </span>上大学后工作的现值<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
 <p>如果某人在 <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> 的四年内上大学，期间收入为 <span class="math notranslate nohighlight">\(0\)</span>，但在大学毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=4, 5, \ldots ,T\)</span> 的 <span class="math notranslate nohighlight">\(T-3\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -312,19 +312,19 @@ c_0 = \sum_{t=4}^T R^{-t} w_t^c = w_0^c (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R
 A_c = (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1} \gamma_c } \right] .
 \]</div>
 <p>现值 <span class="math notranslate nohighlight">\(c_0\)</span> 是选择上大学四年然后在 <span class="math notranslate nohighlight">\(t=4\)</span> 时以大学毕业生的工资开始工作的人在时间 <span class="math notranslate nohighlight">\(0\)</span> 开始时的”人力财富”。</p>
-<p>假设大学学费加上四年的食宿费用总计为 <span class="math notranslate nohighlight">\(D\)</span>，必须在时间 <span class="math notranslate nohighlight">\(0\)</span> 支付。</p>
+<p>假设大学学费加上四年的食宿费用总计为 <span class="math notranslate nohighlight">\(D\)</span>，必须在时间 <span class="math notranslate nohighlight">\(0\)</span> 付清。</p>
 <p>因此，扣除上大学的货币成本后，高中毕业后第一个时期上大学的现值为：</p>
 <div class="math notranslate nohighlight">
 \[ 
 c_0 - D
 \]</div>
-<p>现在我们制定一个纯<strong>均衡差异</strong>模型，用于初始大学-高中工资差距 <span class="math notranslate nohighlight">\(\phi\)</span>，其中：</p>
+<p>现在我们制定一个纯<strong>均衡差异</strong>模型，用于设定大学-高中工资的初始差距 <span class="math notranslate nohighlight">\(\phi\)</span>，其中：</p>
 <div class="math notranslate nohighlight">
 \[
 w_0^c = \phi w_0^h 
 \]</div>
 <p>我们假设 <span class="math notranslate nohighlight">\(R, \gamma_h, \gamma_c, T\)</span> 以及 <span class="math notranslate nohighlight">\(w_0^h\)</span> 是固定参数。</p>
-<p>我们首先注意到，纯均衡差异模型断言，大学-高中工资差距 <span class="math notranslate nohighlight">\(\phi\)</span> 满足一个”均衡”方程，该方程将不上大学的现值设置为等于上大学的现值：</p>
+<p>首先，均衡差异模型揭示了一个重要关系：大学与高中毕业生的工资差距 <span class="math notranslate nohighlight">\(\phi\)</span> 需要满足一个”均衡”方程。在这个方程中，选择不上大学直接工作的终身收入现值，应该等于选择上大学后工作的终身收入现值：</p>
 <div class="math notranslate nohighlight">
 \[
 h_0 = c_0 - D
@@ -341,38 +341,37 @@ w_0^h A_h  = \phi w_0^h A_c - D .
 \phi  = \frac{A_h}{A_c} + \frac{D}{w_0^h A_c} .
 \]</div>
 <p>在<strong>免费大学</strong>的特殊情况下，<span class="math notranslate nohighlight">\(D =0\)</span>。</p>
-<p>在这种情况下，上大学的唯一成本是放弃作为高中教育工人的收入。</p>
+<p>在这种情况下，上大学的唯一成本是放弃作为高中学历工人的收入。</p>
 <p>因此，</p>
 <div class="math notranslate nohighlight">
 \[
 \phi  = \frac{A_h}{A_c} . 
 \]</div>
-<p>我们很快将编写 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制它作为其决定因素的函数图。</p>
-<p>但首先，我们将描述我们模型的一种替代解释，这主要只是重新标记变量。</p>
+<p>我们很快将编写 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制它的函数图。</p>
+<p>但首先，我们重新解读这些变量并描述我们模型的一种新的解释。</p>
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">13.3. </span>重新诠释模型：工人和企业家<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p>我们可以添加一个参数并重新解释变量，以得到一个企业家与工人的模型。</p>
-<p>现在让 <span class="math notranslate nohighlight">\(h\)</span> 表示”工人”的现值。
-我们将企业家的现值定义为：</p>
+<h2><span class="section-number">13.3. </span>重新解读模型：打工人和企业家<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p>我们可以通过添加一个参数并重新解读变量来获得一个有关企业家和打工人的模型。</p>
+<p>现在让 <span class="math notranslate nohighlight">\(h\)</span> 表示”打工人”的现值。</p>
+<p>我们将企业家的现值定义为：</p>
 <div class="math notranslate nohighlight">
 \[
 c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\pi \in (0,1)\)</span> 是企业家的”项目”成功的概率。</p>
-<p>对于我们的工人和企业模型，我们将把 <span class="math notranslate nohighlight">\(D\)</span> 解释为成为企业家的成本。</p>
+<p>对于我们的打工人和企业家模型，我们将把 <span class="math notranslate nohighlight">\(D\)</span> 解释为成为企业家的成本。</p>
 <p>这个成本可能包括雇佣工人、办公空间和律师的费用。</p>
 <p>我们过去称之为大学、高中工资差距的 <span class="math notranslate nohighlight">\(\phi\)</span> 现在变成了
-成功企业家收入与工人收入的比率。</p>
+成功企业家收入与打工人收入的比率。</p>
 <p>我们会发现，随着 <span class="math notranslate nohighlight">\(\pi\)</span> 的减少，<span class="math notranslate nohighlight">\(\phi\)</span> 会增加，这表明
 成为企业家的风险越大，成功项目的回报就必须越高。</p>
 </section>
 <section id="id11">
 <h2><span class="section-number">13.4. </span>计算<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
-<p>我们可以通过调整各种参数来做一些有趣的例子，
-主要包括 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>。</p>
-<p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并将其作为某些决定因素的函数进行绘图。</p>
+<p>通过变动参数 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>， 我们可以创建出一些有趣的例子。</p>
+<p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制其与某些决定因素的关系。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">equalizing_diff</span><span class="p">:</span>
@@ -402,9 +401,9 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>我们使用向量化而不是循环来构建一些函数，以帮助进行比较静态分析。</p>
+<p>为了帮助我们进行比较静态分析，我们使用向量化而不是循环来构建一些函数。</p>
 <p>对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
-<p>让我们举个例子。</p>
+<p>举个例子：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ϕ_R</span>
@@ -461,7 +460,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>让我们设想不收取大学学费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>假设大学不收费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
 <p>初始的大学工资溢价应该会降低。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -496,7 +495,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。</p>
 <p>工资差距下降是为了”平衡”两种职业类型的现值，一种是高中工人，另一种是大学工人。</p>
-<p>你能猜到当我们接下来改变高中工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？同时保持 <span class="math notranslate nohighlight">\(\phi\)</span> 的所有其他决定因素不变。</p>
+<p>给定其它参数不变，你能猜到我们改变高中学历工人的工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？</p>
 <p>下图显示了会发生什么。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -514,8 +513,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </section>
 <section id="id12">
-<h2><span class="section-number">13.5. </span>企业家-工人解释<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
-<p>现在让我们采用我们模型的企业家-工人解释。</p>
+<h2><span class="section-number">13.5. </span>企业家和打工人<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<p>现在让我们用企业家-打工人的视角来解读这个模型。</p>
 <p>如果一个新企业成功的概率是 <span class="math notranslate nohighlight">\(0.2\)</span>，让我们计算成功企业家的初始工资溢价。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -554,9 +553,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <h2><span class="section-number">13.6. </span>微积分的应用<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
 <p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。</p>
 <p>然而，懂得微积分的人可能会希望我们直接求偏导数。</p>
-<p>现在我们就来做这个。</p>
-<p>不懂微积分的读者可以不用继续往下读，可以确信应用线性代数已经让我们了解了模型的主要特性。</p>
-<p>但对于那些有兴趣了解我们如何让 Python 完成计算偏导数的所有繁重工作的读者，我们现在会说一些相关的内容。</p>
+<p>还不会微积分的读者可以不用继续往下读，因为线性代数已经让我们了解了模型的主要特性。</p>
+<p>但对于那些有兴趣了解我们如何让 Python 计算偏导数的读者，我们接下来会讲解这些内容。</p>
 <p>我们将使用 Python 模块 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 对决定它的参数的偏导数。</p>
 <p>让我们从 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 导入关键函数。</p>
 <div class="cell docutils container">
@@ -632,7 +630,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> 然后测量其在默认值的值</p>
+<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> 然后计算其给定默认参数的值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_D</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -647,7 +645,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在默认值的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 给定默认参数的值</span>
 <span class="n">ϕ_D_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_D</span><span class="p">)</span>
 <span class="n">ϕ_D_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -659,7 +657,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>因此，与我们之前的图表一样，我们发现提高 <span class="math notranslate nohighlight">\(R\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
-<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial T}\)</span> 并在默认参数下评估它</p>
+<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial T}\)</span> 并代入默认参数值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_T</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -687,7 +685,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(T\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
 <p>这是因为大学毕业生现在有更长的职业生涯来”收回”他们为上大学付出的时间和其他成本。</p>
-<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_h}\)</span> 并在默认参数下评估它。</p>
+<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_h}\)</span> 并代入默认参数值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_h</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_h</span><span class="p">)</span>
@@ -714,7 +712,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(\gamma_h\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这与我们之前的图形分析结果一致。</p>
-<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_c}\)</span> 并在默认参数值下对其进行数值评估</p>
+<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_c}\)</span> 并代入默认参数值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_c</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_c</span><span class="p">)</span>
@@ -741,7 +739,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这与我们之前的图形分析结果一致。</p>
-<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial R}\)</span> 并在默认参数值下对其进行数值评估</p>
+<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial R}\)</span> 并代入默认参数值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_R</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
@@ -767,7 +765,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 \[\displaystyle 13.2642738659429\]</div>
 </div>
 </div>
-<p>我们发现提高总利率 <span class="math notranslate nohighlight">\(R\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这与我们之前的图形分析结果一致。</p>
+<p>我们发现提高总利率 <span class="math notranslate nohighlight">\(R\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这也与我们之前的图形分析结果一致。</p>
 </section>
 </section>
 
@@ -916,12 +914,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. 价格水平的货币主义理论
+   14. 货币主义价格水平理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. 具有自适应预期的价格水平货币主义理论
+   15. 自适应预期下的货币主义价格水平理论
   </a>
  </li>
 </ul>

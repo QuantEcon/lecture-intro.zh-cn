@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>15. 具有自适应预期的价格水平货币主义理论 &#8212; Python数量经济学入门</title>
+    <title>15. 自适应预期下的货币主义价格水平理论 &#8212; Python数量经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -114,7 +114,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="16. 特征值和特征向量" href="eigen_I.html" />
-    <link rel="prev" title="14. 价格水平的货币主义理论" href="cagan_ree.html" />
+    <link rel="prev" title="14. 货币主义价格水平理论" href="cagan_ree.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -124,13 +124,13 @@
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="具有自适应预期的价格水平货币主义理论"/>
+<meta name="twitter:title" content="自适应预期下的货币主义价格水平理论"/>
 <meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="具有自适应预期的价格水平货币主义理论" />
+<meta property="og:title" content="自适应预期下的货币主义价格水平理论" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/cagan_adaptive.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
@@ -165,10 +165,10 @@
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 引言</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">15.2. 模型结构</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">15.3. 用线性代数表示关键方程</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">15.4. 从矩阵表述中获得洞见</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">15.5. 预测误差</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">15.6. 稳定性的技术条件</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">15.3. 关键方程的矩阵表示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">15.4. 求解模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">15.5. 预期与实际通货膨胀的差异</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">15.6. 稳定性的条件</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">15.6.1. 实验1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">15.6.2. 实验2</a></li>
 </ul>
@@ -205,7 +205,7 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">具有自适应预期的价格水平货币主义理论</p>
+                        <p class="qe-page__header-subheading">自适应预期下的货币主义价格水平理论</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -232,64 +232,64 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">15. </span>具有自适应预期的价格水平货币主义理论<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">15. </span>自适应预期下的货币主义价格水平理论<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">15.1. </span>引言<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>本讲座是另一讲座 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 的续集或前传。</p>
-<p>我们将使用线性代数对另一种”货币主义”或”财政”价格水平理论进行一些实验。</p>
-<p>与 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 讲座中的模型类似，该模型断言，当政府持续支出超过税收并通过印钞来弥补赤字时，会对价格水平产生上行压力并产生持续通货膨胀。</p>
-<p>与 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 讲座中的”完美预见”或”理性预期”版本不同，本讲座中的模型是菲利普·凯根 <span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> 用于研究恶性通货膨胀货币动态的”自适应预期”版本。</p>
-<p>它结合了以下组成部分：</p>
+<p>本讲座可以被看作是 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 的续篇或前传。</p>
+<p>我们将运用线性代数来探讨另一种”货币主义”或”财政”价格水平理论。</p>
+<p>与 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中的模型类似，本模型认为，当政府实施持续性的财政赤字并通过印钞来弥补时，会推高价格水平并导致持续通货膨胀。</p>
+<p>不同于 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中的”完全预见”或”理性预期”版本，本讲座介绍的是菲利普·凯根 <span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> 用于研究恶性通货膨胀动态的”自适应预期”版本。</p>
+<p>该模型包含以下几个要素：</p>
 <ul class="simple">
-<li><p>一个实际货币余额需求函数，断言所需实际余额对数与公众预期通货膨胀率成反比</p></li>
-<li><p>一个<strong>自适应预期</strong>模型，描述公众预期通货膨胀率如何对过去实际通货膨胀值做出反应</p></li>
-<li><p>一个使货币需求等于供给的均衡条件</p></li>
-<li><p>货币供应增长率的外生序列</p></li>
+<li><p>一个实际货币需求函数，表明所需实际货币余额的对数与公众预期通胀率呈负相关</p></li>
+<li><p>一个<strong>自适应预期</strong>模型，描述公众如何根据过去的实际通胀率调整其通胀预期</p></li>
+<li><p>一个货币供需均衡条件</p></li>
+<li><p>一个外生的货币供应增长率序列</p></li>
 </ul>
-<p>我们的模型非常接近凯根的原始规范。</p>
-<p>与 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 和 <a class="reference internal" href="cons_smooth.html"><span class="doc">消费平滑</span></a> 讲座一样，我们将使用的唯一线性代数运算是矩阵乘法和矩阵求逆。</p>
-<p>为了便于使用线性矩阵代数作为我们的主要数学工具，我们将使用模型的有限时域版本。</p>
+<p>我们的模型与凯根的原始模型非常接近。</p>
+<p>与 <a class="reference internal" href="pv.html"><span class="doc">现值</span></a> 和 <a class="reference internal" href="cons_smooth.html"><span class="doc">消费平滑</span></a> 讲座一样，我们只需要用到矩阵乘法和矩阵求逆这些基本的线性代数运算。</p>
+<p>为了便于使用线性矩阵代数作为主要分析工具，我们将研究模型的有限视界版本。</p>
 </section>
 <section id="id4">
 <h2><span class="section-number">15.2. </span>模型结构<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>令</p>
+<p>令：</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( m_t \)</span> 为名义货币余额供给的对数；</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t \)</span> 为名义余额的净增长率；</p></li>
-<li><p><span class="math notranslate nohighlight">\(p_t \)</span> 为价格水平的对数；</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pi_t = p_{t+1} - p_t \)</span> 为 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\( t+1\)</span> 之间的净通货膨胀率；</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pi_t^*\)</span> 为公众预期的 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(t+1\)</span> 之间的通货膨胀率；</p></li>
-<li><p><span class="math notranslate nohighlight">\(T\)</span> 为时域 – 即模型将确定 <span class="math notranslate nohighlight">\(p_t\)</span> 的最后一个时期</p></li>
-<li><p><span class="math notranslate nohighlight">\(\pi_0^*\)</span> 为公众最初预期的时间 0 和时间 1 之间的通货膨胀率。</p></li>
+<li><p><span class="math notranslate nohighlight">\( m_t \)</span> 为名义货币余额的对数</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t \)</span> 为名义货币余额的增长率</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_t \)</span> 为价格水平的对数</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pi_t = p_{t+1} - p_t \)</span> 为 <span class="math notranslate nohighlight">\(t\)</span> 到 <span class="math notranslate nohighlight">\( t+1\)</span> 期间的通胀率</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pi_t^*\)</span> 为公众对 <span class="math notranslate nohighlight">\(t\)</span> 到 <span class="math notranslate nohighlight">\(t+1\)</span> 期间通胀率的预期</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> 为时间跨度 – 即模型确定 <span class="math notranslate nohighlight">\(p_t\)</span> 的最后一期</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pi_0^*\)</span> 为公众对第0期到第1期通胀率的初始预期</p></li>
 </ul>
-<p>实际余额 <span class="math notranslate nohighlight">\(\exp\left(\frac{m_t^d}{p_t}\right)\)</span> 的需求由以下版本的Cagan需求函数支配</p>
+<p>实际货币余额 <span class="math notranslate nohighlight">\(\exp\left(\frac{m_t^d}{p_t}\right)\)</span> 的需求由以下凯根需求函数决定：</p>
 <div class="math notranslate nohighlight" id="equation-eq-caganmd-ad">
 <span class="eqno">(15.1)<a class="headerlink" href="#equation-eq-caganmd-ad" title="Permalink to this equation">#</a></span>\[  
 m_t^d - p_t = -\alpha \pi_t^* \: , \: \alpha &gt; 0 ; \quad t = 0, 1, \ldots, T .
 \]</div>
-<p>该方程断言，实际余额需求与公众预期的通货膨胀率成反比。</p>
-<p>在方程 <a class="reference internal" href="#equation-eq-caganmd-ad">(15.1)</a> 中将货币需求的对数 <span class="math notranslate nohighlight">\(m_t^d\)</span> 等同于货币供给的对数 <span class="math notranslate nohighlight">\(m_t\)</span>，并求解价格水平的对数 <span class="math notranslate nohighlight">\(p_t\)</span>，得到</p>
+<p>该方程表明，实际货币余额需求与预期通胀率成反比。</p>
+<p>将方程 <a class="reference internal" href="#equation-eq-caganmd-ad">(15.1)</a> 中的货币需求对数 <span class="math notranslate nohighlight">\(m_t^d\)</span> 设为等于货币供给对数 <span class="math notranslate nohighlight">\(m_t\)</span>，并求解价格水平对数 <span class="math notranslate nohighlight">\(p_t\)</span>，得到：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqfiscth1">
 <span class="eqno">(15.2)<a class="headerlink" href="#equation-eq-eqfiscth1" title="Permalink to this equation">#</a></span>\[
 p_t = m_t + \alpha \pi_t^*
 \]</div>
-<p>取方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 和时间 <span class="math notranslate nohighlight">\(t\)</span> 的差，得到</p>
+<p>对方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 求时间差分，得到：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqpipi">
 <span class="eqno">(15.3)<a class="headerlink" href="#equation-eq-eqpipi" title="Permalink to this equation">#</a></span>\[
 \pi_t = \mu_t + \alpha \pi_{t+1}^* - \alpha \pi_t^*
 \]</div>
-<p>我们假设预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 由弗里德曼-凯根自适应预期方案支配</p>
+<p>我们假设预期通胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 遵循弗里德曼-凯根的自适应预期机制：</p>
 <div class="math notranslate nohighlight" id="equation-eq-adaptexpn">
 <span class="eqno">(15.4)<a class="headerlink" href="#equation-eq-adaptexpn" title="Permalink to this equation">#</a></span>\[
 \pi_{t+1}^* = \lambda \pi_t^* + (1 -\lambda) \pi_t 
 \]</div>
-<p>作为模型的外生输入，我们采用初始条件 <span class="math notranslate nohighlight">\(m_0, \pi_0^*\)</span> 和货币增长序列 <span class="math notranslate nohighlight">\(\mu = \{\mu_t\}_{t=0}^T\)</span>。</p>
-<p>作为模型的内生输出，我们希望找到序列 <span class="math notranslate nohighlight">\(\pi = \{\pi_t\}_{t=0}^T, p = \{p_t\}_{t=0}^T\)</span> 作为内生输入的函数。</p>
-<p>我们将通过研究模型输出如何随模型输入的变化而变化来进行一些思想实验。</p>
+<p>模型的外生输入包括初始条件 <span class="math notranslate nohighlight">\(m_0, \pi_0^*\)</span> 和货币增长序列 <span class="math notranslate nohighlight">\(\mu = \{\mu_t\}_{t=0}^T\)</span>。</p>
+<p>模型的内生输出是序列 <span class="math notranslate nohighlight">\(\pi = \{\pi_t\}_{t=0}^T\)</span> 和 <span class="math notranslate nohighlight">\(p = \{p_t\}_{t=0}^T\)</span>，它们是外生输入的函数。</p>
+<p>我们将通过研究模型输出如何随输入变化而变化来进行一些思想实验。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">15.3. </span>用线性代数表示关键方程<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>我们首先将方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 自适应预期模型写成 <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span> 的形式</p>
+<h2><span class="section-number">15.3. </span>关键方程的矩阵表示<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>首先，我们将方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 中的自适应预期模型写成 <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span> 的矩阵形式：</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \cr
@@ -314,13 +314,13 @@ p_t = m_t + \alpha \pi_t^*
   \end{bmatrix} +
   \begin{bmatrix} \pi_0^* \cr 0 \cr 0 \cr \vdots \cr 0 \end{bmatrix}
 \]</div>
-<p>将此方程写成</p>
+<p>让我们将上述方程简洁地写成矩阵形式：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq1">
 <span class="eqno">(15.5)<a class="headerlink" href="#equation-eq-eq1" title="Permalink to this equation">#</a></span>\[
  A \pi^* = (1-\lambda) B \pi + \pi_0^*
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\((T+2) \times (T+2)\)</span> 矩阵 <span class="math notranslate nohighlight">\(A\)</span>、<span class="math notranslate nohighlight">\((T+2)\times (T+1)\)</span> 矩阵 <span class="math notranslate nohighlight">\(B\)</span> 以及向量 <span class="math notranslate nohighlight">\(\pi^* , \pi_0, \pi_0^*\)</span> 通过对齐这两个方程隐式定义。</p>
-<p>接下来，我们将关键方程 <a class="reference internal" href="#equation-eq-eqpipi">(15.3)</a> 写成矩阵形式</p>
+<p>其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2) \times (T+2)\)</span> 矩阵，<span class="math notranslate nohighlight">\(B\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2)\times (T+1)\)</span> 矩阵，<span class="math notranslate nohighlight">\(\pi^*\)</span>、<span class="math notranslate nohighlight">\(\pi\)</span> 和 <span class="math notranslate nohighlight">\(\pi_0^*\)</span> 是相应的向量。这些矩阵和向量的具体形式可以通过比较上述两个等式得到。</p>
+<p>现在，让我们将方程 <a class="reference internal" href="#equation-eq-eqpipi">(15.3)</a> 表示为矩阵形式</p>
 <div class="math notranslate nohighlight">
 \[ 
 \begin{bmatrix}
@@ -340,17 +340,17 @@ p_t = m_t + \alpha \pi_t^*
   \pi_{T+1}^* 
   \end{bmatrix}
 \]</div>
-<p>用向量和矩阵表示上述方程系统</p>
+<p>让我们用向量和矩阵简洁地表示上述方程系统:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq2">
 <span class="eqno">(15.6)<a class="headerlink" href="#equation-eq-eq2" title="Permalink to this equation">#</a></span>\[
 \pi = \mu + C \pi^*
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\((T+1) \times (T+2)\)</span> 矩阵 <span class="math notranslate nohighlight">\(C\)</span> 隐式定义，以使此方程与前面的方程系统对齐。</p>
+<p>其中 <span class="math notranslate nohighlight">\(C\)</span> 是一个 <span class="math notranslate nohighlight">\((T+1) \times (T+2)\)</span> 矩阵,其形式可以从前面的方程系统中看出。</p>
 </section>
 <section id="id6">
-<h2><span class="section-number">15.4. </span>从矩阵表述中获得洞见<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>我们现在拥有了求解 <span class="math notranslate nohighlight">\(\pi\)</span> 作为 <span class="math notranslate nohighlight">\(\mu, \pi_0, \pi_0^*\)</span> 函数所需的所有要素。</p>
-<p>结合方程 <a class="reference internal" href="#equation-eq-eq1">(15.5)</a> 和 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a>，得到</p>
+<h2><span class="section-number">15.4. </span>求解模型<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>现在我们有了求解 <span class="math notranslate nohighlight">\(\pi\)</span> 作为 <span class="math notranslate nohighlight">\(\mu, \pi_0, \pi_0^*\)</span> 函数所需的所有要素。</p>
+<p>将方程 <a class="reference internal" href="#equation-eq-eq1">(15.5)</a> 和 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 结合:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -358,30 +358,31 @@ A \pi^* &amp; = (1-\lambda) B \pi + \pi_0^* \cr
  &amp; = (1-\lambda) B \left[ \mu + C \pi^* \right] + \pi_0^*
 \end{aligned}
 \]</div>
-<p>这意味着</p>
+<p>整理得到:</p>
 <div class="math notranslate nohighlight">
 \[
 \left[ A - (1-\lambda) B C \right] \pi^* = (1-\lambda) B \mu+ \pi_0^*
 \]</div>
-<p>将上述方程两边乘以左侧矩阵的逆，得到</p>
+<p>求解 <span class="math notranslate nohighlight">\(\pi^*\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq4">
 <span class="eqno">(15.7)<a class="headerlink" href="#equation-eq-eq4" title="Permalink to this equation">#</a></span>\[
 \pi^* = \left[ A - (1-\lambda) B C \right]^{-1} \left[ (1-\lambda) B \mu+ \pi_0^* \right]
 \]</div>
-<p>求解方程 <a class="reference internal" href="#equation-eq-eq4">(15.7)</a> 得到 <span class="math notranslate nohighlight">\(\pi^*\)</span> 后，我们可以使用方程 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 求解 <span class="math notranslate nohighlight">\(\pi\)</span>：</p>
+<p>有了 <span class="math notranslate nohighlight">\(\pi^*\)</span>,我们就可以从方程 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 求出 <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \pi = \mu + C \pi^*
 \]</div>
-<p>我们因此解决了我们模型所决定的两个关键内生时间序列，即预期通货膨胀率序列 <span class="math notranslate nohighlight">\(\pi^*\)</span> 和实际通货膨胀率序列 <span class="math notranslate nohighlight">\(\pi\)</span>。</p>
-<p>知道了这些，我们就可以从方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 快速计算出相关的价格水平对数序列 <span class="math notranslate nohighlight">\(p\)</span>。</p>
-<p>让我们填补这一步骤的细节。</p>
-<p>既然我们现在知道了 <span class="math notranslate nohighlight">\(\mu\)</span>，计算 <span class="math notranslate nohighlight">\(m\)</span> 就很容易了。</p>
-<p>因此，注意到我们可以将方程
-$<span class="math notranslate nohighlight">\( 
+<p>这样我们就解出了模型的两个关键内生变量序列:预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi^*\)</span> 和实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi\)</span>。</p>
+<p>有了这些,我们就可以从方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 计算出价格水平对数序列 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>让我们来看看具体步骤。</p>
+<p>首先,已知 <span class="math notranslate nohighlight">\(\mu\)</span>,我们可以计算货币供应 <span class="math notranslate nohighlight">\(m\)</span>。</p>
+<p>注意到方程</p>
+<div class="math notranslate nohighlight">
+\[ 
 m_{t+1} = m_t + \mu_t , \quad t = 0, 1, \ldots, T
-\)</span>$</p>
-<p>表示为矩阵方程</p>
+\]</div>
+<p>可以写成矩阵形式:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq101-ad">
 <span class="eqno">(15.8)<a class="headerlink" href="#equation-eq-eq101-ad" title="Permalink to this equation">#</a></span>\[
 \begin{bmatrix}
@@ -402,7 +403,7 @@ m_1 \cr m_2 \cr m_3 \cr \vdots \cr m_T \cr m_{T+1}
 m_0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 \]</div>
-<p>将方程 <a class="reference internal" href="#equation-eq-eq101-ad">(15.8)</a> 的两边都乘以左侧矩阵的逆矩阵，将得到</p>
+<p>将方程 <a class="reference internal" href="#equation-eq-eq101-ad">(15.8)</a> 的两边都乘以左侧矩阵的逆矩阵，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-eq-mcum-ad">
 <span class="eqno">(15.9)<a class="headerlink" href="#equation-eq-mcum-ad" title="Permalink to this equation">#</a></span>\[
 m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
@@ -423,24 +424,23 @@ p = m + \alpha \hat \pi^*
   \pi_{T}^* 
   \end{bmatrix},
  \]</div>
-<p>这只是去掉最后一个元素的 <span class="math notranslate nohighlight">\(\pi^*\)</span>。</p>
+<p>这是去掉最后一个元素的 <span class="math notranslate nohighlight">\(\pi^*\)</span>。</p>
 </section>
 <section id="id7">
-<h2><span class="section-number">15.5. </span>预测误差<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>我们的计算将验证</p>
+<h2><span class="section-number">15.5. </span>预期与实际通货膨胀的差异<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>在这个适应性预期模型中，人们的通货膨胀预期通常会与实际通货膨胀率不同。具体来说，我们的计算将显示：</p>
 <div class="math notranslate nohighlight">
 \[
 \hat \pi^* \neq  \pi,
 \]</div>
-<p>因此通常</p>
+<p>也就是说，对于任意时期 <span class="math notranslate nohighlight">\(t\)</span>，预期通货膨胀率与实际通货膨胀率不相等：</p>
 <div class="math notranslate nohighlight" id="equation-eq-notre">
 <span class="eqno">(15.10)<a class="headerlink" href="#equation-eq-notre" title="Permalink to this equation">#</a></span>\[ 
 \pi_t^* \neq \pi_t, \quad t = 0, 1, \ldots , T
 \]</div>
-<p>这种结果在包含像方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 这样的适应性预期假设作为组成部分的模型中很典型。</p>
-<p>在讲座 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 中，我们研究了用”完美预见”或”理性预期”假设替代假设 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 的模型版本。</p>
-<p>但现在，让我们深入并用适应性预期版本的模型进行一些计算。</p>
-<p>像往常一样，我们将从导入一些 Python 模块开始。</p>
+<p>这种预期误差是适应性预期模型的一个典型特征。在这类模型中，人们根据过去的经验逐步调整他们的预期，如方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 所示。</p>
+<p>这与我们在 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 中研究的”完美预见”或”理性预期”版本形成对比。在那个版本中，人们能够完全准确地预测通货膨胀。</p>
+<p>让我们通过一些数值实验来探索这个适应性预期版本的具体表现。首先，我们需要导入必要的Python模块：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -468,7 +468,7 @@ p = m + \alpha \hat \pi^*
 <span class="n">T</span> <span class="o">=</span> <span class="mi">80</span>
 <span class="n">T1</span> <span class="o">=</span> <span class="mi">60</span>
 <span class="n">α</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.9</span>   <span class="c1"># 0.7</span>
+<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">m0</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">μ0</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -483,7 +483,7 @@ p = m + \alpha \hat \pi^*
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">):</span>
-    <span class="s2">&quot; 在求解有限时间的凯根模型&quot;</span>
+    <span class="s2">&quot;在求解有限视界的凯根模型&quot;</span>
     
     <span class="n">model_params</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">Eπ0</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">λ</span>
     <span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="n">model_params</span>
@@ -547,7 +547,7 @@ p = m + \alpha \hat \pi^*
 </div>
 </section>
 <section id="id8">
-<h2><span class="section-number">15.6. </span>稳定性的技术条件<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">15.6. </span>稳定性的条件<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <p>在构建我们的示例时，我们假设 <span class="math notranslate nohighlight">\((\lambda, \alpha)\)</span> 满足</p>
 <div class="math notranslate nohighlight" id="equation-eq-suffcond">
 <span class="eqno">(15.11)<a class="headerlink" href="#equation-eq-suffcond" title="Permalink to this equation">#</a></span>\[
@@ -561,7 +561,7 @@ p = m + \alpha \hat \pi^*
 \end{aligned}
 \end{split}\]</div>
 <p>通过确保 <span class="math notranslate nohighlight">\(\pi_t\)</span> 的系数绝对值小于1，条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>保证了由我们推导过程最后一行描述的 <span class="math notranslate nohighlight">\(\{\pi_t\}\)</span> 动态的稳定性。</p>
-<p>读者可以自由研究违反条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>的示例结果。</p>
+<p>读者可以尝试探索当条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>不满足时会发生什么情况。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">λ</span> <span class="o">-</span> <span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">))))</span>
@@ -589,9 +589,8 @@ p = m + \alpha \hat \pi^*
 <p>现在我们来看一些实验。</p>
 <section id="id9">
 <h3><span class="section-number">15.6.1. </span>实验1<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
-<p>我们将研究一种情况，其中货币供应量的增长率从t=0到t=T_1时为<span class="math notranslate nohighlight">\(\mu_0\)</span>，然后在t=T_1时永久下降到<span class="math notranslate nohighlight">\(\mu^*\)</span>。</p>
-<p>因此，设<span class="math notranslate nohighlight">\(T_1 \in (0, T)\)</span>。</p>
-<p>所以当<span class="math notranslate nohighlight">\(\mu_0 &gt; \mu^*\)</span>时，我们假设</p>
+<p>让我们研究一个简单的货币政策变化场景：货币供应增长率最初维持在较高水平<span class="math notranslate nohighlight">\(\mu_0\)</span>，直到时间<span class="math notranslate nohighlight">\(T_1\)</span>时突然降至较低水平<span class="math notranslate nohighlight">\(\mu^*\)</span>并保持不变。</p>
+<p>具体来说，假设<span class="math notranslate nohighlight">\(T_1\)</span>是介于0和<span class="math notranslate nohighlight">\(T\)</span>之间的某个时点，且<span class="math notranslate nohighlight">\(\mu_0 &gt; \mu^*\)</span>。货币供应增长率的路径可以写为：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \mu_{t+1} = \begin{cases}
@@ -599,8 +598,7 @@ p = m + \alpha \hat \pi^*
      \mu^* , &amp; t \geq T_1
      \end{cases}
 \end{split}\]</div>
-<p>注意，我们在这个讲座<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>中的理性预期版本模型中研究了完全相同的实验。</p>
-<p>因此，通过比较这两个讲座的结果，我们可以了解假设适应性预期（如我们在这里所做的）而不是理性预期（如我们在另一个讲座中所假设的）的后果。</p>
+<p>这个实验与我们在<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>讲座中分析的情形完全相同。通过对比两个讲座的结果，我们可以清楚地看到采用适应性预期（本讲座）和理性预期（前一讲座）这两种不同预期机制的影响。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_seq_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">T1</span><span class="p">))</span>
@@ -614,15 +612,14 @@ p = m + \alpha \hat \pi^*
 <a class="reference internal image-reference" href="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png"><img alt="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png" src="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们邀请读者将结果与在另一讲座 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中研究的理性预期下的结果进行比较。</p>
-<p>请注意实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 在时间 <span class="math notranslate nohighlight">\(T_1\)</span> 货币供应增长率突然减少时如何”超调”其最终稳态值。</p>
-<p>我们邀请您向自己解释这种超调的来源，以及为什么在模型的理性预期版本中不会出现这种情况。</p>
+<p>让我们将这些结果与<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>讲座中的理性预期情形进行对比。</p>
+<p>值得注意的是,当货币供应增长率在时间<span class="math notranslate nohighlight">\(T_1\)</span>突然下降时,实际通货膨胀率<span class="math notranslate nohighlight">\(\pi_t\)</span>会”超调”其最终稳态值。这种超调现象在理性预期版本中并不存在,读者可以思考其背后的原因。</p>
 </section>
 <section id="id10">
 <h3><span class="section-number">15.6.2. </span>实验2<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>现在我们将进行一个不同的实验，即渐进式稳定化，其中货币供应增长率从高值平稳下降到持续的低值。</p>
-<p>虽然价格水平通货膨胀最终会下降，但它下降的速度比最终导致它下降的驱动力（即货币供应增长率的下降）要慢。</p>
-<p>通货膨胀缓慢下降的原因可以解释为在从高通胀向低通胀过渡期间，预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 持续高于实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span>。</p>
+<p>接下来我们考虑一个渐进式稳定化的情形,即货币供应增长率从高水平逐步平稳下降到一个较低的水平。</p>
+<p>在这种情况下,我们观察到价格水平的通货膨胀率虽然最终会下降,但其下降速度要慢于货币供应增长率的下降速度。</p>
+<p>这种通货膨胀率下降缓慢的现象可以归因于从高通胀向低通胀过渡期间,公众的预期通货膨胀率<span class="math notranslate nohighlight">\(\pi_t^*\)</span>始终高于实际通货膨胀率<span class="math notranslate nohighlight">\(\pi_t\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 参数</span>
@@ -789,12 +786,12 @@ p = m + \alpha \hat \pi^*
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. 价格水平的货币主义理论
+   14. 货币主义价格水平理论
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   15. 具有自适应预期的价格水平货币主义理论
+   15. 自适应预期下的货币主义价格水平理论
   </a>
  </li>
 </ul>

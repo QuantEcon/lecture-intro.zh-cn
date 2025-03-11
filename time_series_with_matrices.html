@@ -168,7 +168,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">35.3. 添加随机项</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">35.4. 计算总体矩</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">35.5. 移动平均表示</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">35.6. 一个前瞻性模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">35.6. 从后视到前瞻</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -231,14 +231,14 @@
 <h1><span class="section-number">35. </span>用矩阵代数表示的单变量时间序列<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>本讲使用矩阵来解决一些线性差分方程。</p>
+<p>本讲使用矩阵来解决线性差分方程。</p>
 <p>作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 <span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span> 中的<strong>二阶线性差分方程</strong>，该文章引入了<strong>乘数加速器</strong>模型。</p>
-<p>该模型推动了早期美国凯恩斯主义宏观经济模型的计量经济版本。</p>
-<p>你可以在<a class="reference external" href="https://python.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a>中阅读该模型的详细信息。</p>
-<p>（该讲座还描述了一些关于二阶线性差分方程的细节。）</p>
-<p>在本讲座中，我们还将了解一个非平稳单变量时间序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span> 的<strong>自回归</strong>表达和<strong>移动平均</strong>表达。</p>
-<p>我们还将研究一个涉及解“前瞻性”线性差分方程的“完美預期”股票价格模型。</p>
-<p>我们将使用以下导入：</p>
+<p>这个模型对早期美国凯恩斯主义宏观经济学的计量经济学研究产生了重要影响。</p>
+<p>如果你想了解更多关于这个模型的细节，可以参考<a class="reference external" href="https://python.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a>。</p>
+<p>（该讲座也包含了二阶线性差分方程的一些技术细节。）</p>
+<p>在本讲座中，我们将探讨如何用两种不同的方式来表示非平稳时间序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span>：<strong>自回归</strong>表示和<strong>移动平均</strong>表示。</p>
+<p>我们还将研究一个涉及解“前瞻性”线性差分方程的“完全预见的”股票价格模型。</p>
+<p>让我们先导入所需的Python包：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -267,7 +267,7 @@
 <p>实际上，它是 <span class="math notranslate nohighlight">\(T\)</span> 个关于 <span class="math notranslate nohighlight">\(T\)</span> 个变量 <span class="math notranslate nohighlight">\(y_1, y_2, \ldots, y_T\)</span> 的线性方程的集合。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>为了能够解决一个二阶线性差分方程，我们需要两个<strong>边界条件</strong>，它们可以采取两种<strong>初始条件</strong>或两种<strong>终端条件</strong>或可能是每种一种的形式。</p>
+<p>为了能够解决一个二阶线性差分方程，我们需要两个<strong>边界条件</strong>，它们可以采取两个<strong>初始条件</strong>或两个<strong>终端条件</strong>或每种各一个的形式。</p>
 </div>
 <p>我们将方程写成堆叠系统</p>
 <div class="math notranslate nohighlight">
@@ -312,7 +312,7 @@ y = A^{-1} b
 \]</div>
 <p>向量 <span class="math notranslate nohighlight">\(y\)</span> 是完整的时间路径 <span class="math notranslate nohighlight">\(\{y_t\}_{t=1}^T\)</span>。</p>
 <p>我们用 Python 来实现一个例子来展现萨缪尔森乘数-加速器模型的基本思想。</p>
-<p>我们将参数设置为与讲<a class="reference external" href="https://python.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a>中使用的值相同。</p>
+<p>我们使用与<a class="reference external" href="https://python.quantecon.org/samuelson.html" title="(in Python)"><span>Samuelson Multiplier-Accelerator</span></a>讲座相同的参数值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">80</span>
@@ -348,7 +348,7 @@ y = A^{-1} b
 </div>
 </div>
 </div>
-<p>让我们来看看我们的例子中的矩阵 <span class="math notranslate nohighlight">\(A\)</span> 和向量 <span class="math notranslate nohighlight">\(b\)</span>。</p>
+<p>让我们打印出例子中的矩阵 <span class="math notranslate nohighlight">\(A\)</span> 和向量 <span class="math notranslate nohighlight">\(b\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">b</span>
@@ -378,8 +378,7 @@ y = A^{-1} b
 </div>
 </div>
 <p>现在我们来求解 <span class="math notranslate nohighlight">\(y\)</span> 的路径。</p>
-<p>如果 <span class="math notranslate nohighlight">\(y_t\)</span> 是 <span class="math notranslate nohighlight">\(t\)</span> 时间的国民生产总值，那么我们就有了一个版本的
-萨缪尔森的国民生产总值动态模型。</p>
+<p>如果 <span class="math notranslate nohighlight">\(y_t\)</span> 表示 <span class="math notranslate nohighlight">\(t\)</span> 时期的国民生产总值，那么这就是萨缪尔森国民生产总值动态模型的一个版本。</p>
 <p>要求解 <span class="math notranslate nohighlight">\(y = A^{-1} b\)</span>，我们可以直接倒置 <span class="math notranslate nohighlight">\(A\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -390,7 +389,7 @@ y = A^{-1} b
 </div>
 </div>
 </div>
-<p>or we can use <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>:</p>
+<p>或者我们可以使用 <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_second_method</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -430,7 +429,7 @@ y = A^{-1} b
 <p>一般来说，<code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>比使用<code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>在数值上更稳定。
 然而，对于这个小例子来说，稳定性不是问题。此外，我们将下面重复使用<code class="docutils literal notranslate"><span class="pre">A_inv</span></code>，直接计算出它来会有比较好。</p>
 </div>
-<p>Now we can plot.</p>
+<p>现在我们可以绘制时间序列。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -445,7 +444,7 @@ y = A^{-1} b
 <a class="reference internal image-reference" href="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png"><img alt="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" src="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>通过在<a class="reference internal" href="#equation-tswm-1">(35.1)</a>中设定 <span class="math notranslate nohighlight">\(y_t = y_{t-1} = y_{t-2} = y^*\)</span>，可以得到 <span class="math notranslate nohighlight">\(y_t\)</span> 的 <a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">*稳态*</span></a> 值 <span class="math notranslate nohighlight">\(y^*\)</span>。</p>
+<p>通过在<a class="reference internal" href="#equation-tswm-1">(35.1)</a>中设 <span class="math notranslate nohighlight">\(y_t = y_{t-1} = y_{t-2} = y^*\)</span>，可以得到 <span class="math notranslate nohighlight">\(y_t\)</span> 的 <a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">*稳态*</span></a> 值 <span class="math notranslate nohighlight">\(y^*\)</span>。</p>
 <div class="math notranslate nohighlight">
 \[
 y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
@@ -488,7 +487,7 @@ y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
 </section>
 <section id="id5">
 <h2><span class="section-number">35.3. </span>添加随机项<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>为了让这个例子有趣一些，我们将遵循经济学家<a class="reference external" href="https://en.wikipedia.org/wiki/Eugen_Slutsky">尤金·斯卢茨基</a>和<a class="reference external" href="https://en.wikipedia.org/wiki/Ragnar_Frisch">拉格纳·弗里希</a>的方法，用以下<strong>二阶随机线性差分方程</strong>替换我们原来的二阶差分方程：</p>
+<p>为了让这个例子有趣一些，我们将遵循经济学家<a class="reference external" href="https://baike.baidu.com/item/%E5%B0%A4%E9%87%91%C2%B7%E6%96%AF%E5%8B%92%E8%8C%A8%E5%9F%BA/15727527">尤金·斯卢茨基</a>和<a class="reference external" href="https://baike.baidu.com/item/%E6%8B%89%E6%A0%BC%E7%BA%B3%C2%B7%E5%BC%97%E9%87%8C%E5%B8%8C/11051879">拉格纳·弗里希</a>的方法，用以下<strong>二阶随机线性差分方程</strong>替换我们原来的二阶差分方程：</p>
 <div class="math notranslate nohighlight" id="equation-tswm-2">
 <span class="eqno">(35.2)<a class="headerlink" href="#equation-tswm-2" title="Permalink to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(u_{t} \sim N\left(0, \sigma_{u}^{2}\right)\)</span> 并且是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> – 相互独立且服从相同分布。</p>
@@ -535,10 +534,10 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d359387f9b59d77a3caa510f5b03d0e5372cd28bbfb3f53f4eb57d0a191f3d60.png"><img alt="_images/d359387f9b59d77a3caa510f5b03d0e5372cd28bbfb3f53f4eb57d0a191f3d60.png" src="_images/d359387f9b59d77a3caa510f5b03d0e5372cd28bbfb3f53f4eb57d0a191f3d60.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/398bdee449e9fed1e68e54d01dc8ab7cc718d513800317c7471e27adc0c6b60e.png"><img alt="_images/398bdee449e9fed1e68e54d01dc8ab7cc718d513800317c7471e27adc0c6b60e.png" src="_images/398bdee449e9fed1e68e54d01dc8ab7cc718d513800317c7471e27adc0c6b60e.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>上面的时间序列在最近几十年中与很多先进国家（去趋势后的）GDP系列非常相似。</p>
+<p>上面生成的时间序列与许多发达国家近几十年的实际GDP数据（去除趋势后）有着惊人的相似性。</p>
 <p>我们可以模拟 <span class="math notranslate nohighlight">\(N\)</span> 条路径。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,7 +557,7 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/04e43bd33e6a1f6f22f932a4e1f391463b2b2f2809b3d377a3b3fb5651024378.png"><img alt="_images/04e43bd33e6a1f6f22f932a4e1f391463b2b2f2809b3d377a3b3fb5651024378.png" src="_images/04e43bd33e6a1f6f22f932a4e1f391463b2b2f2809b3d377a3b3fb5651024378.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2387a60b04a3b7778caebd55dbe1a9963d268ae736438a7e0216ebfa41ed1963.png"><img alt="_images/2387a60b04a3b7778caebd55dbe1a9963d268ae736438a7e0216ebfa41ed1963.png" src="_images/2387a60b04a3b7778caebd55dbe1a9963d268ae736438a7e0216ebfa41ed1963.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>同样考虑 <span class="math notranslate nohighlight">\(y_{0}\)</span> 和 <span class="math notranslate nohighlight">\(y_{-1}\)</span> 处于稳态的情况。</p>
@@ -580,7 +579,7 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9690ee8e3b70c87a32f6dc0260907b3d98405906bfc5dcb5d01ba0a1f36c9d13.png"><img alt="_images/9690ee8e3b70c87a32f6dc0260907b3d98405906bfc5dcb5d01ba0a1f36c9d13.png" src="_images/9690ee8e3b70c87a32f6dc0260907b3d98405906bfc5dcb5d01ba0a1f36c9d13.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cfa6c721c78b9c9eb1cde187fd87afaa08525f235720fa1b7c2ec4081e74f700.png"><img alt="_images/cfa6c721c78b9c9eb1cde187fd87afaa08525f235720fa1b7c2ec4081e74f700.png" src="_images/cfa6c721c78b9c9eb1cde187fd87afaa08525f235720fa1b7c2ec4081e74f700.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -682,9 +681,9 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>研究由各种参数值隐含的 <span class="math notranslate nohighlight">\(\mu_y, \Sigma_y\)</span> 是非常有意义的。</p>
-<p>此外，我们可以使用该类展示 <span class="math notranslate nohighlight">\(y\)</span> 的<strong>统计平稳性</strong>仅在非常特殊的初始条件下成立。</p>
-<p>让我们首先生成 <span class="math notranslate nohighlight">\(y\)</span> 的 <span class="math notranslate nohighlight">\(N\)</span> 次时间实现，并将它们与总体均值 <span class="math notranslate nohighlight">\(\mu_y\)</span> 一起绘制出来。</p>
+<p>接下来，让我们探索不同参数值对 <span class="math notranslate nohighlight">\(\mu_y\)</span> 和 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 的影响。</p>
+<p>这个分析也将帮助我们理解一个重要的性质：<span class="math notranslate nohighlight">\(y\)</span> 序列的<strong>统计平稳性</strong>。我们会发现，只有在非常特定的初始条件下，这个序列才是平稳的。</p>
+<p>为了直观地理解这一点，我们先生成 <span class="math notranslate nohighlight">\(N\)</span> 条 <span class="math notranslate nohighlight">\(y\)</span> 序列的样本路径，并将它们与理论均值 <span class="math notranslate nohighlight">\(\mu_y\)</span> 进行对比。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制均值</span>
@@ -704,10 +703,10 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/70893a471218250c831e428d122f5a8a1ce2e2bc8fb77ec6bed8e82119adaf7b.png"><img alt="_images/70893a471218250c831e428d122f5a8a1ce2e2bc8fb77ec6bed8e82119adaf7b.png" src="_images/70893a471218250c831e428d122f5a8a1ce2e2bc8fb77ec6bed8e82119adaf7b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b771875b0ba8f1593ba1e2b11d142a512ffafffc24073133e36ddd8e814b36e0.png"><img alt="_images/b771875b0ba8f1593ba1e2b11d142a512ffafffc24073133e36ddd8e814b36e0.png" src="_images/b771875b0ba8f1593ba1e2b11d142a512ffafffc24073133e36ddd8e814b36e0.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>从视觉上看，注意到随着 <span class="math notranslate nohighlight">\(t\)</span> 增加，<span class="math notranslate nohighlight">\(y_t\)</span> 的各次实现之间的方差在减少。</p>
+<p>从图中可以观察到一个有趣的现象：随着时间 <span class="math notranslate nohighlight">\(t\)</span> 的推移，不同样本路径之间的离散程度在逐渐减小。</p>
 <p>绘制总体方差 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 对角线。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -721,8 +720,8 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 <a class="reference internal image-reference" href="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png"><img alt="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" src="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>注意总体方差如何增加并接近渐近值。</p>
-<p>让我们从多个实现中计算样本方差并绘制出来。</p>
+<p>从图中我们可以看到，总体方差随时间增加，最终趋于一个稳定值。这种收敛行为反映了系统的内在稳定性。</p>
+<p>为了进一步验证这一点，让我们通过模拟多条样本路径来计算样本方差，并将其与理论预测进行对比。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series_process</span> <span class="o">=</span> <span class="n">population_moments</span><span class="p">(</span><span class="n">α_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
@@ -752,11 +751,11 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>注意 <span class="math notranslate nohighlight">\(y_t\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 之间的协方差——即超对角线上的元素——并<em>不</em>相同。</p>
-<p>这表明由 <span class="math notranslate nohighlight">\(y\)</span> 向量表示的时间序列并非<strong>平稳</strong>。</p>
-<p>为了使其平稳，我们必须改变系统，使得<em>初始条件</em> <span class="math notranslate nohighlight">\((y_0, y_{-1})\)</span> 不再是固定的数值，而是一个具有特定均值和协方差矩阵的联合正态分布随机向量。</p>
-<p>我们在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中描述了如何实现这一点。</p>
-<p>但为了为分析做好铺垫，接下来我们打印出 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 的右下角。</p>
+<p>观察 <span class="math notranslate nohighlight">\(y_t\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 之间的协方差（即超对角线上的元素），我们发现它们并不相等。</p>
+<p>这个特征告诉我们，由 <span class="math notranslate nohighlight">\(y\)</span> 向量表示的时间序列不具有<strong>平稳性</strong>。</p>
+<p>要使序列变得平稳，我们需要对系统做一个关键的改变：不再将初始条件 <span class="math notranslate nohighlight">\((y_0, y_{-1})\)</span> 设为固定值，而是让它们服从一个特定的联合正态分布，这个分布具有合适的均值和协方差矩阵。</p>
+<p>如果你想了解如何实现这一点，可以参考我们在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中的详细讨论。</p>
+<p>在继续深入分析之前，让我们先来看看 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 矩阵右下角的数值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series_process</span> <span class="o">=</span> <span class="n">population_moments</span><span class="p">()</span>
@@ -780,20 +779,18 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>注意 <span class="math notranslate nohighlight">\(y_t\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 之间的协方差——即超对角线上的元素——并<em>不</em>相同。</p>
-<p>这表明由 <span class="math notranslate nohighlight">\(y\)</span> 向量表示的时间序列并非<strong>平稳</strong>。</p>
-<p>为了使其平稳，我们必须改变系统，使得<em>初始条件</em> <span class="math notranslate nohighlight">\((y_0, y_{-1})\)</span> 不再是固定的数值，而是一个具有特定均值和协方差矩阵的联合正态分布随机向量。</p>
-<p>我们在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中描述了如何实现这一点。</p>
-<p>但为了为分析做好铺垫，接下来我们打印出 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 的右下角。</p>
+<p>请注意，随着时间 <span class="math notranslate nohighlight">\(t\)</span> 的增加，子对角线和超对角线上的元素似乎趋于收敛。</p>
+<p>这表明我们的过程是渐近平稳的。</p>
+<p>你可以在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中阅读更多关于更一般线性时间序列模型的平稳性。</p>
+<p>通过观察不同时间段的<span class="math notranslate nohighlight">\(\Sigma_y\)</span>的非对角线元素，我们可以学到很多关于这个过程的知识，但我们在这里暂时先不展开。</p>
 </section>
 <section id="id7">
 <h2><span class="section-number">35.5. </span>移动平均表示<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>让我们打印出 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 并观察其结构</p>
+<p>让我们来研究 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 矩阵的结构。这个矩阵的形状会告诉我们一些关于系统动态特性的重要信息。</p>
 <ul class="simple">
 <li><p>它是三角形矩阵、接近三角形，还是其他形式 <span class="math notranslate nohighlight">\(\ldots\)</span>？</p></li>
 </ul>
-<p>为了研究 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 的结构，我们将只打印到小数点后三位。</p>
-<p>首先让我们打印出 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 的左上角部分。</p>
+<p>为了便于观察，我们将打印 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 矩阵左上角的一部分，并将数值保留到小数点后三位。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A_inv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
@@ -825,27 +822,27 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 \[
 y_{t+1}=\sum_{i=1}^{t+1}\tilde{A}_{t+1,i}b_{i}+\sum_{i=1}^{t}\tilde{A}_{t+1,i}u_{i}+u_{t+1}
 \]</div>
-<p>这是一个具有时间变化系数的<strong>移动平均</strong>表示。</p>
-<p>正如系统 <a class="reference internal" href="#equation-eq-eqma">(35.4)</a> 构成了 <span class="math notranslate nohighlight">\(y\)</span> 的<strong>移动平均</strong>表示，系统 <a class="reference internal" href="#equation-eq-eqar">(35.3)</a> 构成了 <span class="math notranslate nohighlight">\(y\)</span> 的<strong>自回归</strong>表示。</p>
+<p>这是一个<strong>移动平均</strong>表示，其系数随时间变化。</p>
+<p>我们可以看到，系统既可以用移动平均形式 <a class="reference internal" href="#equation-eq-eqma">(35.4)</a> 表示，也可以用自回归形式 <a class="reference internal" href="#equation-eq-eqar">(35.3)</a> 表示。这两种表示方式描述了同一个随机过程，只是从不同的角度来看。</p>
 </section>
 <section id="id8">
-<h2><span class="section-number">35.6. </span>一个前瞻性模型<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
-<p>萨缪尔森的模型是<em>后视</em>的，因为我们给它<em>初始条件</em>并让它运行。</p>
-<p>现在我们转向一个<em>前瞻性</em>模型。</p>
-<p>我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的<em>完美预见</em>模型。</p>
+<h2><span class="section-number">35.6. </span>从后视到前瞻<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>到目前为止，我们分析的萨缪尔森模型是一个<em>后视(backward-looking)<em>模型 - 给定</em>初始条件</em>后，系统就会向前演化。</p>
+<p>接下来让我们转向一个*前瞻(forward-looking)*模型，这类模型在宏观经济学和金融学中被广泛使用。</p>
+<p>我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的<em>完全预见</em>模型。</p>
 <p>例如，假设 <span class="math notranslate nohighlight">\(p_t\)</span> 是股票价格，<span class="math notranslate nohighlight">\(y_t\)</span> 是其股息。</p>
-<p>我们假设 <span class="math notranslate nohighlight">\(y_t\)</span> 由我们刚刚分析的二阶差分方程确定，因此</p>
+<p>假设股息 <span class="math notranslate nohighlight">\(y_t\)</span> 遵循我们前面分析的二阶差分方程，即</p>
 <div class="math notranslate nohighlight">
 \[
 y = A^{-1} \left(b + u\right)
 \]</div>
-<p>我们的<em>完美预见</em>股票价格模型是</p>
+<p>我们的<em>完全预见</em>股票价格模型是</p>
 <div class="math notranslate nohighlight">
 \[
 p_{t} = \sum_{j=0}^{T-t} \beta^{j} y_{t+j}, \quad \beta \in (0,1)
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\beta\)</span> 是折现因子。</p>
-<p>该模型断言，在 <span class="math notranslate nohighlight">\(t\)</span> 时股票的价格等于（完美预见的）未来股息的折现现值之和</p>
+<p>该模型表明，股票在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的价格等于从当期开始直到终期所有未来股息的现值之和。每期股息都按折现因子 <span class="math notranslate nohighlight">\(\beta\)</span> 进行贴现，期数越远贴现程度越大。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \underset{\equiv p}{\underbrace{\left[\begin{array}{c}
@@ -877,7 +874,7 @@ y_{T}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct B</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  构建 B</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
@@ -1105,12 +1102,12 @@ y_{T}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_ree.html">
-   14. 价格水平的货币主义理论
+   14. 货币主义价格水平理论
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_adaptive.html">
-   15. 具有自适应预期的价格水平货币主义理论
+   15. 自适应预期下的货币主义价格水平理论
   </a>
  </li>
 </ul>
