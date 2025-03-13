@@ -76,7 +76,7 @@ $$ (eq:old7)
 
 求得 $\mu_i, 其中 i = 1,2$。
 
-```{练习-start}
+```{exercise-start}
 :label: sdh_ex1
 ```
 
@@ -98,7 +98,7 @@ $$
 e = e_1 + e_2 .
 $$
 
-```{练习-end}
+```{exercise-end}
 ```
 
 ## 纯交换经济体
