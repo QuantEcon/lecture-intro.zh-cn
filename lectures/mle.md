@@ -84,7 +84,7 @@ $$
 n = 10_000
 ```
 
-这些数据来源于[消费者财务状况调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF)。<!-- 这里没有找到中午的对应百科链接 -->
+这些数据来源于[消费者财务状况调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances) (SCF)。
 
 以下代码导入了数据并将其读入名为 `sample` 的数组。
 
@@ -95,7 +95,7 @@ url = 'https://media.githubusercontent.com/media/QuantEcon/high_dim_data/update_
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]
-df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据 <!-- 原网页可能有笔误，应该是wealth而不是worth -->
+df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据
 rv = df['n_wealth'].sample(n=n, random_state=1234)
 rv = rv.to_numpy() / 100_000
 sample = rv
@@ -165,7 +165,7 @@ plt.show()
 
 这些估计值可以通过最大化给定数据的似然函数获得。
 
-对数正态分布随机变量 $X$ 的概率密度函数 (pdf) 如下：
+对数正态分布随机变量 $X$ 的概率密度函数 (PDF) 如下：
 
 $$
     f(x, \mu, \sigma) 
@@ -242,7 +242,7 @@ fig, ax = plt.subplots()  # 创建图形和轴
 ax.set_xlim(-1,20)  # 设置x轴的范围
 
 ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)  # 绘制样本的直方图
-ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='对数正态分布pdf')  # 绘制对数正态分布的PDF
+ax.plot(x, dist_lognorm.pdf(x), 'k-', lw=0.5, label='对数正态分布PDF')  # 绘制对数正态分布的PDF
 ax.legend()  # 显示图例
 plt.show()  # 展示图形
 ```
@@ -320,7 +320,7 @@ ax.set_xlim(-1, 20)
 ax.set_ylim(0,1.75)
 
 ax.hist(sample, density=True, bins=5_000, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_pareto.pdf(x), 'k-', lw=0.5, label='帕累托分布pdf')
+ax.plot(x, dist_pareto.pdf(x), 'k-', lw=0.5, label='帕累托分布PDF')
 ax.legend()
 
 plt.show()
@@ -379,7 +379,7 @@ dist_lognorm_tail = lognorm(σ_hat_tail, scale = exp(μ_hat_tail))
 fig, ax = plt.subplots()
 ax.set_xlim(0,50)
 ax.hist(sample_tail, density=True, bins=500, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='对数正态分布pdf')
+ax.plot(x, dist_lognorm_tail.pdf(x), 'k-', lw=0.5, label='对数正态分布PDF')
 ax.legend()
 plt.show()
 ```
@@ -403,7 +403,7 @@ fig, ax = plt.subplots()
 ax.set_xlim(0, 50)
 ax.set_ylim(0,0.65)
 ax.hist(sample_tail, density=True, bins= 500, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='帕累托分布pdf')
+ax.plot(x, dist_pareto_tail.pdf(x), 'k-', lw=0.5, label='帕累托分布PDF')
 plt.show()
 ```
 
@@ -417,9 +417,9 @@ plt.show()
 
 一种检验方法是，将数据与拟合分布进行绘图，如我们刚才所做的。
 
-还有其他更严谨的测试方法，比如[科尔莫哥洛夫-斯米尔诺夫检验](https://baike.baidu.com/item/科尔莫格罗夫一斯米尔诺夫拟合优度检验/22366278)。
+还有其他更严谨的测试方法，比如[科尔莫格罗夫一斯米尔诺夫拟合优度检验](https://baike.baidu.com/item/科尔莫格罗夫一斯米尔诺夫拟合优度检验/22366278)。
 
-我们省略了这些更深入的主题（但鼓励读者在完成这些讲座后研究它们）。
+我们省略了这些更深入的主题（但我们鼓励读者在完成这些讲座后研究它们）。
 
 ## 练习
 
@@ -476,7 +476,7 @@ fig, ax = plt.subplots()
 ax.set_xlim(-1, 20)
 
 ax.hist(sample, density=True, bins=5000, histtype='stepfilled', alpha=0.5)
-ax.plot(x, dist_exp.pdf(x), 'k-', lw=0.5, label='指数分布pdf')
+ax.plot(x, dist_exp.pdf(x), 'k-', lw=0.5, label='指数分布PDF')
 ax.legend()
 
 plt.show()
