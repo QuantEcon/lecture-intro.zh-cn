@@ -24,7 +24,7 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-这个简单回归模型估计了两个变量 $x_i$ 和 $y_i$ 之间的关系
+以下的简单回归模型估计了两个变量 $x_i$ 和 $y_i$ 之间的关系
 
 $$
 y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
@@ -54,7 +54,7 @@ $$
 
 ```{code-cell} ipython3
 x = [32, 21, 24, 35, 10, 11, 22, 21, 27, 2]
-y = [2000,1000,1500,2500,500,900,1100,1500,1800, 250]
+y = [2000, 1000, 1500, 2500, 500, 900, 1100, 1500, 1800, 250]
 df = pd.DataFrame([x,y]).T
 df.columns = ['X', 'Y']
 df
@@ -147,9 +147,9 @@ yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.show()
 ```
 
-不过，我们需要把这一问题视为一个优化问题，将猜测过程正规化。
+与其不断猜测参数值，我们可以把这个问题转化为一个优化问题，用数学方法来求解最优的参数。
 
-让我们考虑误差 $\epsilon_i$ 并定义观测值 $y_i$ 与估计值 $\hat{y}_i$ 之间的差异，我们将其称为残差
+为此，我们先来定义一个重要的概念：残差（residual）。残差 $\epsilon_i$ 是实际观测值 $y_i$ 与模型预测值 $\hat{y}_i$ 之间的差异。
 
 $$
 \begin{aligned}
@@ -180,7 +180,7 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r')
 plt.show()
 ```
 
-普通最小二乘方法 (OLS) 通过 **最小化** 残差平方和 (SSR)来选择 $\alpha$ 和 $\beta$ 的值。
+普通最小二乘方法 (OLS) 通过 **最小化** 残差平方和 (SSR) 来选择 $\alpha$ 和 $\beta$ 的值。
 
 $$
 \min_{\alpha,\beta} \sum_{i=1}^{N}{\hat{e}_i^2} = \min_{\alpha,\beta} \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
@@ -389,7 +389,7 @@ yax = df.plot(x='X',y='Y_hat', kind='line', ax=ax, color='g', label=r'$\hat Y$')
 plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 ```
 
-:::{exercise}
+```{exercise}
 :label: slr-ex1
 
 现在你已经知道了使用OLS解决简单线性回归模型的方程，你可以开始运行自己的回归来构建$y$和$x$之间的模型了。
@@ -403,16 +403,16 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 5. 使用OLS绘制最佳拟合线
 6. 解释系数并用一句话总结人均GDP和预期寿命之间的关系
 
-:::
+```
 
-:::{solution-start} slr-ex1
-:::
+```{solution-start} slr-ex1
+```
 
 **Q2:** 从[our world in data](https://ourworldindata.org)中搜集一些数据
 
-:::{raw} html
+```{raw} html
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
-:::
+```
 
 如果你遇到困难，可以从这里下载{download}`数据副本 <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>`
 
@@ -427,13 +427,13 @@ df = pd.read_csv(data_url, nrows=10)
 df
 ```
 
-你可以看到从Our World in Data下载的数据提供了全球各国的人均GDP和预期寿命数据。
+从Our World in Data下载的数据包含了全球各国的人均GDP和预期寿命数据。
 
-先从csv文件中导入几行数据以了解其结构，以便你可以选择要读取到DataFrame中的列，这通常是一个好主意。
+在导入完整数据集之前，我们先看看前几行数据来了解其结构。这样可以帮助我们确定哪些列是我们真正需要的。
 
-你可以观察到有许多我们不需要导入的列，比如`Continent`
+我们可以看到数据集中包含了一些不必要的列，比如`Continent`。
 
-那么我们来构建一个我们想要导入的列的列表
+让我们选择我们需要的列来创建一个更简洁的数据集：
 
 ```{code-cell} ipython3
 cols = ['Code', 'Year', 'Life expectancy at birth (historical)', 'GDP per capita']
@@ -458,15 +458,13 @@ df.dropna(inplace=True)
 df
 ```
 
-现在，我们已经将DataFrame的行数从62156减少到12445，删除了很多空的数据关系。
+通过删除缺失值，我们的数据集从62156行减少到了12445行。
 
-现在我们有一个包含一系列年份的预期寿命和人均GDP的数据集。
+现在我们有了一个清理过的数据集，包含了不同国家在不同年份的预期寿命和人均GDP数据。
 
-花点时间了解你实际拥有的数据总是一个好主意。
+在进行任何分析之前，我们应该先仔细了解数据的特点。一个重要的问题是: 不同国家在不同时期的数据是否完整?
 
-例如，你可能想要探索这些数据，看看是否所有国家在各个年份的报告都是一致的。
-
-首先，我们看看预期寿命数据
+让我们先来看看预期寿命数据的分布情况
 
 ```{code-cell} ipython3
 le_years = df[['cntry', 'year', 'life_expectancy']].set_index(['cntry', 'year']).unstack()['life_expectancy']
@@ -512,7 +510,7 @@ df.plot(x='gdppc', y='life_expectancy', kind='scatter', xlabel="人均GDP", ylab
 1. 许多国家的人均GDP相近，但预期寿命差别很大
 2. 人均GDP与预期寿命之间似乎存在正向关系。人均GDP较高的国家往往拥有更高的预期寿命
 
-尽管普通最小二乘法（OLS）是用来解线性方程的，但我们可以通过对变量进行转换（例如对数变换），然后使用OLS来估计转换后的变量。
+虽然普通最小二乘法（OLS）主要用于线性关系，但我们可以通过对变量进行适当的转换（比如取对数），使非线性关系转化为线性关系，从而仍然可以使用OLS方法。
 
 通过指定 `logx` 你可以在对数尺度上绘制人均GDP数据
 
@@ -569,10 +567,10 @@ data.plot(x='log_gdppc',y='life_expectancy_hat', kind='line', ax=ax, color='g')
 plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy'], color='r')
 ```
 
-:::{solution-end}
-:::
+```{solution-end}
+```
 
-:::{exercise}
+```{exercise}
 :label: slr-ex2
 
 最小化平方和并不是生成最佳拟合线的 **唯一** 方法。
@@ -580,4 +578,4 @@ plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy
 举个例子，我们还可以考虑最小化 **绝对值** 之和，这样可以减少对异常值的权重。
 
 使用最小绝对值法求解 $\alpha$ 和 $\beta$ 
-:::
+```
