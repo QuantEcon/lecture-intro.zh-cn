@@ -406,9 +406,10 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 ```
 
 ```{solution-start} slr-ex1
+:class: dropdown
 ```
 
-**Q2:** 从[our world in data](https://ourworldindata.org)中搜集一些数据
+**第2问：** 从[our world in data](https://ourworldindata.org)中搜集一些数据
 
 ```{raw} html
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
@@ -416,7 +417,7 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 
 如果你遇到困难，可以从这里下载{download}`数据副本 <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>`
 
-**Q3:** 使用`pandas`导入`csv`格式的数据并绘制几个感兴趣的国家的图表
+**第3问：** 使用`pandas`导入`csv`格式的数据并绘制几个感兴趣的国家的图表
 
 ```{code-cell} ipython3
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv"
@@ -528,7 +529,7 @@ df['log_gdppc'] = df['gdppc'].apply(np.log10)
 df
 ```
 
-**Q4:** 使用 {eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta` 来计算  $\alpha$ 和 $\beta$ 的最优值
+**第4问:** 使用 {eq}`eq:optimal-alpha` 和 {eq}`eq:optimal-beta` 来计算  $\alpha$ 和 $\beta$ 的最优值
 
 ```{code-cell} ipython3
 data = df[['log_gdppc', 'life_expectancy']].copy()  # 从DataFrame中提取数据
@@ -555,7 +556,7 @@ print(β)
 print(α)
 ```
 
-**Q5:** 绘制使用 OLS 找到的最佳拟合线
+**第5问:** 绘制使用 OLS 找到的最佳拟合线
 
 ```{code-cell} ipython3
 data['life_expectancy_hat'] = α + β * df['log_gdppc']
