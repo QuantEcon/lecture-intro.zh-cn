@@ -336,7 +336,7 @@ plt.show()
 
 为实施这一计划，国民议会采取了一系列巧妙的制度安排。在无神论者主教塔列朗的提议下，议会首先将教会土地收归国有。
 
-为了在不增加税收的情况下偿还债务，他们开始实施一项私有化计划。他们发行了一种名为"assignats"的纸币，持有者可以用它购买国有土地。由于这些纸币可以用来购买前教会土地，因此在某种程度上可以与银币等价。
+为了在不增加税收的情况下偿还债务，他们开始实施一项私有化计划。他们发行了一种名为"指券（assignats）"的纸币，持有者可以用它购买国有土地。由于这些纸币可以用来购买前教会土地，因此在某种程度上可以与银币等价。
 
 财政部长内克尔和议会代表们希望通过这种新货币同时解决私有化和债务问题。他们设计了一个方案，通过拍卖没收的土地来筹集资金，并以政府出售土地为担保收回已发行的纸币。
 
@@ -452,7 +452,7 @@ data12 = pd.read_excel(assignat_url, sheet_name='seignor',
 
 # 创建图表并绘制
 plt.figure()
-plt.plot(pd.date_range(start='1790', periods=len(data12), freq='M'),
+plt.plot(pd.date_range(start='1790', periods=len(data12), freq='ME'),
          data12, linewidth=0.8)
 
 
@@ -461,7 +461,7 @@ plt.gca().spines['right'].set_visible(False)
 
 plt.axhline(y=472.42/12, color='r', linestyle=':')
 plt.xticks(ticks=pd.date_range(start='1790', 
-           end='1796', freq='AS'), labels=range(1790, 1797))
+           end='1796', freq='YS'), labels=range(1790, 1797))
 plt.xlim(pd.Timestamp('1791'),
          pd.Timestamp('1796-02') + pd.DateOffset(months=2))
 plt.ylabel('百万里弗', fontsize=12)
@@ -549,7 +549,7 @@ plt.show()
 
 ```{note}
 根据{cite}`Cagan`采用的恶性通货膨胀的经验定义，
-从通货膨胀率超过每月 50% 的月份开始，到通货膨胀率降至每月 50% 以下的月份结束，至少持续一年，*assignat* 从 1795 年 5 月到 12 月经历了恶性通货膨胀。
+从通货膨胀率超过每月 50% 的月份开始，到通货膨胀率降至每月 50% 以下的月份结束，至少持续一年，*指券* 从 1795 年 5 月到 12 月经历了恶性通货膨胀。
 ```
 
 我们并不将这些理论视为竞争对手，而是将其视为关于政府票据发行的“如果-那么”的集合，每个理论都有其更接近现实条件的地方—即更接近满足”如果“的地方。
@@ -569,7 +569,7 @@ data7a = pd.read_excel(assignat_url, sheet_name='Data',
 
 # 创建图表并绘制
 plt.figure()
-h = plt.plot(pd.date_range(start='1789-11-01', periods=len(data7), freq='M'), 
+h = plt.plot(pd.date_range(start='1789-11-01', periods=len(data7), freq='ME'), 
             (data7a.values * [1, 1]) * data7.values, linewidth=1.)
 plt.setp(h[1], linestyle='--', color='red')
 
