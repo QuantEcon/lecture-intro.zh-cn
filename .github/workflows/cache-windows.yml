@@ -1,11 +1,13 @@
-name: Build Cache [using jupyter-book]
+name: Build Cache [using jupyter-book] for Windows
 on:
   schedule:
     # Execute cache weekly at 3am on Monday
     - cron:  '0 3 * * 1'
+  workflow_dispatch:  # Allows manual trigger if required
+
 jobs:
-  tests:
-    runs-on: ubuntu-latest
+  cache:
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,22 +20,6 @@ jobs:
           python-version: "3.12"
           environment-file: environment.yml
           activate-environment: quantecon
-      - name: graphviz Support # TODO: required?
-        run: |
-          sudo apt-get -qq update && sudo apt-get install -y graphviz
-      - name: Install latex dependencies
-        run: |
-          sudo apt-get -qq update
-          sudo apt-get install -y     \
-            texlive-latex-recommended \
-            texlive-latex-extra       \
-            texlive-fonts-recommended \
-            texlive-fonts-extra       \
-            texlive-xetex             \
-            latexmk                   \
-            xindy                     \
-            dvipng                    \
-            cm-super
       - name: Build HTML
         shell: bash -l {0}
         run: |
@@ -47,6 +33,6 @@ jobs:
       - name: Upload "_build" folder (cache)
         uses: actions/upload-artifact@v4
         with:
-          name: build-cache
+          name: build-cache-windows
           path: _build
           include-hidden-files: true

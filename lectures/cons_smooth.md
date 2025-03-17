@@ -15,21 +15,22 @@ kernelspec:
 
 ## 概述
 
-在本讲座中，我们将研究Milton Friedman {cite}`Friedman1956`和Robert Hall {cite}`Hall1978`提出的一个著名的"消费函数"模型，该模型旨在拟合一些实证数据模式，这些模式是原始凯恩斯消费函数（在QuantEcon讲座{doc}`几何级数 <geom_series>`中描述的）所忽略的。
+在本讲座中，我们将研究米尔顿·弗里德曼(Milton Friedman) {cite}`Friedman1956`和罗伯特霍尔(Robert Hall) {cite}`Hall1978`提出的一个著名的"消费函数"模型，该模型旨在拟合一些实证数据模式，这些模式是原始凯恩斯消费函数（参阅{doc}`几何级数 <geom_series>`）所忽略的。
 
 在本讲座中，我们将使用矩阵乘法和矩阵求逆来研究通常称为"消费平滑模型"的内容，这些工具与我们在QuantEcon讲座{doc}`现值 <pv>`中使用的工具相同。
 
 {doc}`现值公式<pv>`中提出的公式是消费平滑模型的核心，因为我们将使用它们来定义消费者的"人力财富"。
 
-Milton Friedman的关键想法是，一个人的非金融收入（即他或她从工作中获得的工资）可以被视为该人"人力资本"的股息流，并且可以应用标准资产定价公式来计算一个人的"非金融财富"，这种财富将收入流资本化。
+米尔顿·弗里德曼的关键想法是，一个人的非金融收入（即他或她从工作中获得的工资）可以被视为该人"人力资本"的股息流，并且可以应用标准资产定价公式来计算一个人的"非金融财富"，这种财富将收入流资本化。
 
 ```{note}
-正如我们将在QuantEcon讲座{doc}`均衡差异模型 <equalizing_difference>`中看到的，Milton Friedman在他在哥伦比亚大学的博士论文中使用了这个想法，最终发表为{cite}`kuznets1939incomes`和{cite}`friedman1954incomes`。
+正如我们将在QuantEcon讲座{doc}`均衡差异模型 <equalizing_difference>`中看到的，米尔顿·弗里德曼在他在哥伦比亚大学的博士论文中使用了这个想法，最终发表在{cite}`kuznets1939incomes`和{cite}`friedman1954incomes`中。
 ```
 
-在本讲座中，"现值"或资产价格显式出现需要一段时间，但当它出现时，它将成为一个关键角色。
+在本讲中，"现值"或资产价格的概念不会立马出现，但当它出现时，它将成为一个关键角色。
 
 ## 分析
+
 像往常一样，我们将从导入一些Python模块开始。
 
 ```{code-cell} ipython3
@@ -43,7 +44,9 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-该模型描述了一个从时间 $t=0, 1, \ldots, T$ 生活的消费者，接收非金融收入流 $\{y_t\}_{t=0}^T$，并选择消费流 $\{c_t\}_{t=0}^T$。
+该模型描述了一个从生活在时间 $t=0, 1, \ldots, T$ 的消费者。
+
+消费者接收非金融收入流 $\{y_t\}_{t=0}^T$，并选择消费流 $\{c_t\}_{t=0}^T$。
 
 我们通常认为非金融收入流来自于个人提供劳动的工资。
 
@@ -120,9 +123,9 @@ W = \sum_{t=0}^T \beta^t (g_1 c_t - \frac{g_2}{2} c_t^2 )
 ```
 其中 $g_1 > 0, g_2 > 0$。
 
-当 $\beta R \approx 1$ 时，效用函数 $g_1 c_t - \frac{g_2}{2} c_t^2$ 具有递减的边际效用，这赋予了对非常平滑消费的偏好。
+当 $\beta R \approx 1$ 时，效用函数 $g_1 c_t - \frac{g_2}{2} c_t^2$ 具有递减的边际效用，这赋予了对平滑消费的偏好。
 
-事实上，我们将看到，当 $\beta R = 1$（这是Milton Friedman {cite}`Friedman1956` 和 Robert Hall {cite}`Hall1978` 所假设的条件）时，标准 {eq}`welfare` 会为更平滑的消费路径分配更高的福利。
+事实上，我们将看到，当 $\beta R = 1$（这是米尔顿·弗里德曼 {cite}`Friedman1956` 和 罗伯特霍尔 {cite}`Hall1978` 所假设的条件）时，标准 {eq}`welfare` 会为更平滑的消费路径分配更高的福利。
 
 所谓**更平滑**，我们指的是尽可能接近随时间保持恒定。
 
@@ -132,7 +135,7 @@ W = \sum_{t=0}^T \beta^t (g_1 c_t - \frac{g_2}{2} c_t^2 )
 
 这里我们使用默认参数 $R = 1.05$，$g_1 = 1$，$g_2 = 1/2$，以及 $T = 65$。
 
-我们创建一个Python的**命名元组**来存储这些带有默认值的参数。
+我们创建一个Python的*命名元组*（`namedtuple`）来存储这些带有默认值的参数。
 
 ```{code-cell} ipython3
 ConsumptionSmoothing = namedtuple("ConsumptionSmoothing", 
@@ -193,7 +196,7 @@ $$ (eq:conssmoothing)
 
 ## 消费平滑模型的机制
 
-按照承诺，我们将提供逐步说明，说明如何使用线性代数（在 Python 中易于实现）来计算消费平滑模型中涉及的所有对象。
+按照承诺，我们将提供逐步说明，说明如何使用线性代数（在 Python 中很好实现）来计算消费平滑模型中涉及的所有对象。
 
 在以下计算中，我们将设置 $R > 1$ 的默认值，例如 $R = 1.05$，并且 $\beta = R^{-1}$。
 
@@ -249,6 +252,7 @@ a_{T+1} = 0.
 $$
 
 让我们用 Python 代码来验证这一点。
+
 首先，我们用 `compute_optimal` 来实现模型
 
 ```{code-cell} ipython3
@@ -256,13 +260,12 @@ def compute_optimal(model, a0, y_seq):
     R, T = model.R, model.T
 
     # 非金融财富
-    h0 = model.β_seq @ y_seq     # since β = 1/R
+    h0 = model.β_seq @ y_seq     # 因为 β = 1/R
 
     # c0
     c0 = (1 - 1/R) / (1 - (1/R)**(T+1)) * (a0 + h0)
     c_seq = c0*np.ones(T+1)
 
-    # 检查
     A = np.diag(-R*np.ones(T), k=-1) + np.eye(T+1)
     b = y_seq - c_seq
     b[0] = b[0] + a0
@@ -310,7 +313,8 @@ plt.xlabel(r'$t$')
 plt.ylabel(r'$c_t,y_t,a_t$')
 plt.show()
 ```
-其中 $a_{T+1} = 0$如我们所预期的一样。
+如我们所预期的一样， $a_{T+1} = 0$。
+
 我们可以测量福利标准  {eq}`welfare`
 
 ```{code-cell} ipython3
@@ -329,7 +333,7 @@ print('福利:', welfare(cs_model, c_seq))
 
 首先，我们创建一个名为`plot_cs`的函数，用于为`cs_model`（消费平滑模型）的不同实例生成图表。
 
-这将有助于我们避免为不同的非金融收入序列重写绘图代码。
+这个函数可以帮我们避免为不同的非金融收入序列重写绘图代码。
 
 ```{code-cell} ipython3
 def plot_cs(model,    # 消费平滑模型      
@@ -344,14 +348,21 @@ def plot_cs(model,    # 消费平滑模型
     T = cs_model.T
     
     # 绘图
-    plt.plot(range(T+1), y_seq, label='非金融收入')
-    plt.plot(range(T+1), c_seq, label='消费')
-    plt.plot(range(T+2), a_seq, label='金融财富')
-    plt.plot(range(T+2), np.zeros(T+2), '--')
+    T = cs_model.T
     
-    plt.legend()
-    plt.xlabel(r'$t$')
-    plt.ylabel(r'$c_t,y_t,a_t$')
+    fig, axes = plt.subplots(1, 2, figsize=(12,5))
+    
+    axes[0].plot(range(T+1), y_seq, label='非金融收入', lw=2)
+    axes[0].plot(range(T+1), c_seq, label='消费', lw=2)
+    axes[1].plot(range(T+2), a_seq, label='金融资产', color='green', lw=2)
+    axes[0].set_ylabel(r'$c_t,y_t$')
+    axes[1].set_ylabel(r'$a_t$')
+    
+    for ax in axes:
+        ax.plot(range(T+2), np.zeros(T+2), '--', lw=1, color='black')
+        ax.legend()
+        ax.set_xlabel(r'$t$')
+    
     plt.show()
 ```
 
@@ -383,7 +394,7 @@ plot_cs(cs_model, a0, y_seq_neg)
 同样，我们可以研究正面和负面的情况。
 
 ```{code-cell} ipython3
-# 永久收入增加 W = 0.5 档 t >= 21
+# 在 t >= 21 后收入永久增加 W = 0.5
 y_seq_pos = np.concatenate(
     [np.ones(21), 1.5*np.ones(25), np.zeros(20)])
 
@@ -391,7 +402,7 @@ plot_cs(cs_model, a0, y_seq_pos)
 ```
 
 ```{code-cell} ipython3
-# 永久收入减少 W = -0.5 档 t >= 21
+# t >= 21 后收入永久减少 W = -0.5
 y_seq_neg = np.concatenate(
     [np.ones(21), .5*np.ones(25), np.zeros(20)])
 
@@ -399,12 +410,12 @@ plot_cs(cs_model, a0, y_seq_neg)
 ```
 #### 实验3：晚期起步者
 
-现在我们模拟一个$y$序列，其中一个人在前46年收入为零，然后在生命的最后20年工作并获得1的收入（一个"晚起步者"）。
+现在我们模拟一个$y$序列，其中一个人在前46年收入为零，然后在生命的最后20年工作并获得2的收入（一个"晚起步者"）。
 
 ```{code-cell} ipython3
 # 晚起步者
 y_seq_late = np.concatenate(
-    [np.zeros(46), np.ones(20)])
+    [np.ones(46), 2*np.ones(20)])
 
 plot_cs(cs_model, a0, y_seq_late)
 ```
@@ -421,7 +432,7 @@ plot_cs(cs_model, a0, y_seq_late)
 y_0 = 1
 t_max = 46
 
-# 制造几何序列 y 
+# 创建几何序列 y 
 geo_seq = λ ** np.arange(t_max) * y_0 
 y_seq_geo = np.concatenate(
             [geo_seq, np.zeros(20)])
@@ -446,18 +457,18 @@ plot_cs(cs_model, a0, y_seq_geo)
 ```{code-cell} ipython3
 λ = -0.95
 
-geo_seq = λ ** np.arange(t_max) * y_0 
+geo_seq = λ ** np.arange(t_max) * y_0 + 1
 y_seq_geo = np.concatenate(
-            [geo_seq, np.zeros(20)])
+            [geo_seq, np.ones(20)])
 
 plot_cs(cs_model, a0, y_seq_geo)
 ```
 
 ### 可行的消费变化
 
-我们承诺证明恒定消费计划 $c_t = c_0$（对所有 $t$）是最优的。现在让我们来做这个证明。
+我们之前说过本讲会证明恒定消费计划 $c_t = c_0$（对所有 $t$）是最优的。现在让我们来做这个证明。
 
-我们将采用的方法是"变分法"的一个基本例子。让我们深入了解其中的关键思想。
+我们将采用"变分法"。
 
 为了探索哪些类型的消费路径能改善福利，我们将创建一个**可接受的消费路径变化序列** $\{v_t\}_{t=0}^T$，满足：
 
@@ -476,7 +487,7 @@ $$
 v_t = \xi_1 \phi^t - \xi_0
 $$
 
-我们说是两个而不是三个参数类，因为 $\xi_0$ 将是 $(\phi, \xi_1; R)$ 的函数，以保证变化序列是可行的。
+我们说上面的式子是两个而不是三个参数类，因为 $\xi_0$ 将是 $(\phi, \xi_1; R)$ 的函数。
 
 让我们来计算这个函数。
 
@@ -627,7 +638,7 @@ plt.show()
 
 米尔顿·弗里德曼 {cite}`Friedman1956` 和罗伯特·霍尔 {cite}`Hall1978` 的消费平滑模型是现代宏观经济学的基石，对QuantEcon讲座 {doc}`几何级数 <geom_series>` 中简要描述的凯恩斯"财政政策乘数"的大小有重要影响。
 
-特别是，相对于 {doc}`几何级数 <geom_series>` 中提出的原始凯恩斯消费函数所暗示的乘数，它**降低**了政府支出乘数。
+特别是，相对于 {doc}`几何级数 <geom_series>` 中提到的凯恩斯消费函数所给出的乘数，它**降低**了政府支出乘数。
 
 弗里德曼的工作为研究总消费函数和相关政府支出乘数开辟了一个富有启发性的领域，这一领域至今仍然活跃。
 
@@ -639,7 +650,7 @@ plt.show()
 
 我们将通过给出几个例子来结束本讲座。
 
-我们将描述一种表示和"求解"线性差分方程的有用方法。
+我们将描述一种十分有用的表达和"求解"线性差分方程的方法。
 
 为了生成一些 $y$ 向量，我们只需写下一个具有适当初始条件的线性差分方程，然后使用线性代数来求解。
 
@@ -747,54 +758,3 @@ $$
 
 你必须指定多少个初始条件？
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
