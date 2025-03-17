@@ -114,7 +114,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="45. 最大似然估计" href="mle.html" />
-    <link rel="prev" title="43. 市场均衡与异质性" href="supply_demand_heterogeneity.html" />
+    <link rel="prev" title="43. 具有异质性的市场均衡" href="supply_demand_heterogeneity.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -163,7 +163,7 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">44.1. 残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">44.1. 残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slr-optimal-values">44.2. 计算最优值</a></li>
 </ul>
                             <p class="logo">
@@ -239,14 +239,14 @@
 </div>
 </div>
 </div>
-<p>简单回归模型估计两个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 之间的关系</p>
+<p>以下的简单回归模型估计了两个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 之间的关系</p>
 <div class="math notranslate nohighlight">
 \[
 y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 表示最佳拟合线与样本值 <span class="math notranslate nohighlight">\(y_i\)</span> 与 <span class="math notranslate nohighlight">\(x_i\)</span> 的误差。</p>
-<p>我们的目标是为 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 选择值来为一些可用的变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的数据构建“最佳”拟合线。</p>
-<p>让我们考虑一个具有10个观察值的简单数据集，变量为 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span>：</p>
+<p>其中 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 表示最佳拟合线与给定 <span class="math notranslate nohighlight">\(x_i\)</span> 的样本值 <span class="math notranslate nohighlight">\(y_i\)</span> 之间的误差。</p>
+<p>我们的目标是选择 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的值来为一些适用于变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的数据构建一条“最佳”拟合线。</p>
+<p>让我们假设存在一个简单的数据集，其中包含 10 个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的观测值：</p>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
@@ -298,11 +298,11 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </tbody>
 </table>
 </div>
-<p>让我们把 <span class="math notranslate nohighlight">\(y_i\)</span> 视为一个冰淇淋车的销售额，而 <span class="math notranslate nohighlight">\(x_i\)</span> 是记录当天摄氏度温度的变量。</p>
+<p>让我们把 <span class="math notranslate nohighlight">\(y_i\)</span> 视为一个冰淇淋车的销售额，而 <span class="math notranslate nohighlight">\(x_i\)</span> 是记录当天气温（摄氏度）的变量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2500</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">900</span><span class="p">,</span><span class="mi">1100</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">]</span>
 <span class="n">df</span>
@@ -387,14 +387,14 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </table>
 </div></div></div>
 </div>
-<p>我们可以通过数据的散点图来观察 <span class="math notranslate nohighlight">\(y_i\)</span>（冰淇淋销售额（美元($’s)）和 <span class="math notranslate nohighlight">\(x_i\)</span>（摄氏度）之间的关系。</p>
+<p>我们可以通过散点图来观察 <span class="math notranslate nohighlight">\(y_i\)</span>（冰淇淋销售额（美元($’s)）和 <span class="math notranslate nohighlight">\(x_i\)</span>（摄氏度）之间的关系。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> 
     <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> 
     <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> 
-    <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;冰淇淋销售额（\$）&#39;</span><span class="p">,</span> 
+    <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;冰淇淋销售额（$</span><span class="se">\&#39;</span><span class="s1">s）&#39;</span><span class="p">,</span> 
     <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;摄氏度&#39;</span>
 <span class="p">)</span>
 </pre></div>
@@ -402,15 +402,15 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp1">
-<a class="reference internal image-reference" href="_images/e5e93fcd510171f7fbd4950fc23c22909a71827cd0a26ea1bf481a3c8eecb4cd.png"><img alt="_images/e5e93fcd510171f7fbd4950fc23c22909a71827cd0a26ea1bf481a3c8eecb4cd.png" src="_images/e5e93fcd510171f7fbd4950fc23c22909a71827cd0a26ea1bf481a3c8eecb4cd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png"><img alt="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" src="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">散点图</span><a class="headerlink" href="#sales-v-temp1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>如您所见，数据表明在更热的日子里通常会卖出更多的冰淇淋。</p>
-<p>为了建立数据的线性模型，我们需要选择代表“最佳”拟合线的 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 值，使得</p>
+<p>如你所见，数据表明在较热的日子里通常会卖出较多的冰淇淋。</p>
+<p>为了构建数据的线性模型，我们需要选择代表“最佳”拟合线的 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 值，使得</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{y_i} = \hat{\alpha} + \hat{\beta} x_i
@@ -443,8 +443,8 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </figure>
 </div>
 </div>
-<p>我们可以看到这个模型在估计关系上做得很差。</p>
-<p>我们可以继续通过调整参数来试图迭代并逼近“最佳”拟合线。</p>
+<p>我们可以看到这个模型没法很好地估计两者的关系。</p>
+<p>我们可以继续猜测，并通过调整参数迭代出一条 “最佳 ”拟合线。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="mi">100</span>
@@ -497,8 +497,8 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </figure>
 </div>
 </div>
-<p>但是我们需要考虑将这个猜测过程正式化，把这个问题看作是一个优化问题。</p>
-<p>让我们考虑误差 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 并定义观测值 <span class="math notranslate nohighlight">\(y_i\)</span> 与估计值 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> 之间的差异，我们将其称为残差</p>
+<p>与其不断猜测参数值，我们可以把这个问题转化为一个优化问题，用数学方法来求解最优的参数。</p>
+<p>为此，我们先来定义一个重要的概念：残差（residual）。残差 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 是实际观测值 <span class="math notranslate nohighlight">\(y_i\)</span> 与模型预测值 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> 之间的差异。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -638,7 +638,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </figure>
 </div>
 </div>
-<p>普通最小二乘方法 (OLS) 选择 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span>，以使残差平方和 (SSR) <strong>最小化</strong>。</p>
+<p>普通最小二乘方法 (OLS) 通过 <strong>最小化</strong> 残差平方和 (SSR) 来选择 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的值。</p>
 <div class="math notranslate nohighlight">
 \[
 \min_{\alpha,\beta} \sum_{i=1}^{N}{\hat{e}_i^2} = \min_{\alpha,\beta} \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
@@ -648,11 +648,11 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 \[
 C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
-<p>我们希望通过参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 来最小化这个成本函数。</p>
+<p>我们希望通过调整参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 来最小化这个成本函数。</p>
 <section id="alpha-beta">
-<h2><span class="section-number">44.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化<a class="headerlink" href="#alpha-beta" title="Permalink to this heading">#</a></h2>
-<p>首先让我们看看总误差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
-<p>我们从<a class="reference internal" href="#slr-optimal-values"><span class="std std-ref">下一节</span></a>知道 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值是：</p>
+<h2><span class="section-number">44.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的<a class="headerlink" href="#alpha-beta" title="Permalink to this heading">#</a></h2>
+<p>首先，我们看看总残差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
+<p>我们从<a class="reference internal" href="#slr-optimal-values"><span class="std std-ref">下一节</span></a>可以知道 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值是：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β_optimal</span> <span class="o">=</span> <span class="mf">64.38</span>
@@ -661,7 +661,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>我们可以计算一个范围内的 <span class="math notranslate nohighlight">\(\beta\)</span> 值的残差</p>
+<p>我们可以计算一系列 <span class="math notranslate nohighlight">\(\beta\)</span> 值的残差</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
@@ -718,7 +718,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </section>
 <section id="slr-optimal-values">
 <span id="id2"></span><h2><span class="section-number">44.2. </span>计算最优值<a class="headerlink" href="#slr-optimal-values" title="Permalink to this heading">#</a></h2>
-<p>现在让我们使用微积分来解决优化问题，并计算出 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值，以找到普通最小二乘解。</p>
+<p>现在让我们使用微积分来解决优化问题，并计算出 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值，以找到普通最小二乘（OLS）解。</p>
 <p>首先对 <span class="math notranslate nohighlight">\(\alpha\)</span> 取偏导</p>
 <div class="math notranslate nohighlight">
 \[
@@ -734,27 +734,27 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \[
 0 = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)}
 \]</div>
-<p>现在我们可以将这个方程分解为各个组成部分</p>
+<p>现在我们可以将这个方程分解成几个组成部分</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}{y_i} - \sum_{i=1}^{N}{\alpha} - \beta \sum_{i=1}^{N}{x_i}
 \]</div>
-<p>中间项是从 <span class="math notranslate nohighlight">\(i=1,...N\)</span> 对常数 <span class="math notranslate nohighlight">\(\alpha\)</span> 进行简单求和</p>
+<p>中间项是常数 <span class="math notranslate nohighlight">\(\alpha\)</span> 从 <span class="math notranslate nohighlight">\(i=1,...N\)</span> 进行直接相加得到的</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}{y_i} - N*\alpha - \beta \sum_{i=1}^{N}{x_i}
 \]</div>
-<p>并重新排列各项</p>
+<p>重新排列各项可得</p>
 <div class="math notranslate nohighlight">
 \[
 \alpha = \frac{\sum_{i=1}^{N}{y_i} - \beta \sum_{i=1}^{N}{x_i}}{N}
 \]</div>
-<p>我们观察到两个分数分别归结为均值 <span class="math notranslate nohighlight">\(\bar{y_i}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{x_i}\)</span></p>
+<p>我们可以发现分解成两个分数后，它们分别是均值 <span class="math notranslate nohighlight">\(\bar{y_i}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{x_i}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-optimal-alpha">
 <span class="eqno">(44.1)<a class="headerlink" href="#equation-eq-optimal-alpha" title="Permalink to this equation">#</a></span>\[
 \alpha = \bar{y_i} - \beta\bar{x_i}
 \]</div>
-<p>现在让我们对成本函数 <span class="math notranslate nohighlight">\(C\)</span> 关于 <span class="math notranslate nohighlight">\(\beta\)</span> 取偏导</p>
+<p>回到成本函数 <span class="math notranslate nohighlight">\(C\)</span> ，现在我们对 <span class="math notranslate nohighlight">\(\beta\)</span> 取偏导</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial C}{\partial \beta}[\sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}]
@@ -764,12 +764,12 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \[
 0 = \sum_{i=1}^{N}{-2 x_i (y_i - \alpha - \beta x_i)}
 \]</div>
-<p>我们可以再次将常数从求和中取出，并将两边除以 <span class="math notranslate nohighlight">\(-2\)</span></p>
+<p>我们可以通过将两边除以 <span class="math notranslate nohighlight">\(-2\)</span> ，再次将常数从求和中取出</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}{x_i (y_i - \alpha - \beta x_i)}
 \]</div>
-<p>这变成了</p>
+<p>进一步化简</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}{(x_i y_i - \alpha x_i - \beta x_i^2)}
@@ -779,17 +779,17 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \[
 0 = \sum_{i=1}^{N}{(x_i y_i - (\bar{y_i} - \beta \bar{x_i}) x_i - \beta x_i^2)}
 \]</div>
-<p>并重新排列各项</p>
+<p>重新排列各项</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}{(x_i y_i - \bar{y_i} x_i - \beta \bar{x_i} x_i - \beta x_i^2)}
 \]</div>
-<p>这可以被分成两个求和</p>
+<p>这个方程可以被分成两个求和</p>
 <div class="math notranslate nohighlight">
 \[
 0 = \sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i) + \beta \sum_{i=1}^{N}(\bar{x_i} x_i - x_i^2)
 \]</div>
-<p>解<span class="math notranslate nohighlight">\(\beta\)</span>得到</p>
+<p>得到 <span class="math notranslate nohighlight">\(\beta\)</span> 的解</p>
 <div class="math notranslate nohighlight" id="equation-eq-optimal-beta">
 <span class="eqno">(44.2)<a class="headerlink" href="#equation-eq-optimal-beta" title="Permalink to this equation">#</a></span>\[
 \beta = \frac{\sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i)}{\sum_{i=1}^{N}(x_i^2 - \bar{x_i} x_i)}
@@ -807,10 +807,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>现在计算10个观察值，然后求和分子和分母</p>
+<p>现在我们用10个观察值进行计算，然后把分子和分母分别求和</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 计算求和</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 计算求和项</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_bar</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;den&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">x_bar</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
 <span class="n">β</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;den&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -838,7 +838,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>现在我们可以绘制OLS解决方案</p>
+<p>现在我们可以绘制OLS解</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">+</span> <span class="n">β</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
@@ -864,25 +864,25 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 
 <p class="admonition-title"><span class="caption-number">Exercise 44.1 </span></p>
 <section id="exercise-content">
-<p>现在您已经知道了使用OLS解决简单线性回归模型的方程，您可以开始运行自己的回归以构建<span class="math notranslate nohighlight">\(y\)</span>和<span class="math notranslate nohighlight">\(x\)</span>之间的模型了。</p>
+<p>现在你已经知道了使用OLS解决简单线性回归模型的方程，你可以开始运行自己的回归来构建<span class="math notranslate nohighlight">\(y\)</span>和<span class="math notranslate nohighlight">\(x\)</span>之间的模型了。</p>
 <p>让我们考虑两个经济变量，人均GDP和预期寿命。</p>
 <ol class="arabic simple">
 <li><p>你认为它们之间的关系会是怎样的？</p></li>
-<li><p>从<a class="reference external" href="https://ourworldindata.org">我们的世界数据中</a>搜集一些数据</p></li>
+<li><p>从<a class="reference external" href="https://ourworldindata.org">our world in data</a>中搜集一些数据</p></li>
 <li><p>使用<code class="docutils literal notranslate"><span class="pre">pandas</span></code>导入<code class="docutils literal notranslate"><span class="pre">csv</span></code>格式的数据，并绘制几个不同国家的图表</p></li>
 <li><p>使用<a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a>计算<span class="math notranslate nohighlight">\(\alpha\)</span>和<span class="math notranslate nohighlight">\(\beta\)</span>的最优值</p></li>
 <li><p>使用OLS绘制最佳拟合线</p></li>
-<li><p>解释系数并写出人均GDP和预期寿命之间关系的总结句子</p></li>
+<li><p>解释系数并用一句话总结人均GDP和预期寿命之间的关系</p></li>
 </ol>
 </section>
 </div>
-<div class="solution admonition" id="simple_linear_regression-solution-1">
+<div class="solution dropdown admonition" id="simple_linear_regression-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#slr-ex1"> Exercise 44.1</a></p>
 <section id="solution-content">
-<p><strong>Q2:</strong> 搜集一些数据 <a class="reference external" href="https://ourworldindata.org">来自我们的世界数据</a></p>
+<p><strong>第2问：</strong> 从<a class="reference external" href="https://ourworldindata.org">our world in data</a>中搜集一些数据</p>
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe><p>如果你遇到困难，可以从这里下载<a class="reference download external" download="" href="https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv"><code class="xref download docutils literal notranslate"><span class="pre">数据副本</span></code></a></p>
-<p><strong>Q3:</strong> 使用<code class="docutils literal notranslate"><span class="pre">pandas</span></code>导入<code class="docutils literal notranslate"><span class="pre">csv</span></code>格式的数据并绘制几个不同国家的兴趣图表</p>
+<p><strong>第3问：</strong> 使用<code class="docutils literal notranslate"><span class="pre">pandas</span></code>导入<code class="docutils literal notranslate"><span class="pre">csv</span></code>格式的数据并绘制几个感兴趣的国家的图表</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv&quot;</span>
@@ -1041,10 +1041,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </table>
 </div></div></div>
 </div>
-<p>您可以看到从我们的世界数据下载的数据为全球各国提供了人均GDP和预期寿命数据。</p>
-<p>首先从csv文件中导入几行数据以了解其结构，以便您可以选择要读取到DataFrame中的列，这通常是一个好主意。</p>
-<p>您可以观察到有许多我们不需要导入的列，比如<code class="docutils literal notranslate"><span class="pre">Continent</span></code></p>
-<p>那么我们来构建一个我们想要导入的列的列表</p>
+<p>从Our World in Data下载的数据包含了全球各国的人均GDP和预期寿命数据。</p>
+<p>在导入完整数据集之前，我们先看看前几行数据来了解其结构。这样可以帮助我们确定哪些列是我们真正需要的。</p>
+<p>我们可以看到数据集中包含了一些不必要的列，比如<code class="docutils literal notranslate"><span class="pre">Continent</span></code>。</p>
+<p>让我们选择我们需要的列来创建一个更简洁的数据集：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Life expectancy at birth (historical)&#39;</span><span class="p">,</span> <span class="s1">&#39;GDP per capita&#39;</span><span class="p">]</span>
@@ -1161,7 +1161,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>62156 rows × 4 columns</p>
 </div></div></div>
 </div>
-<p>有时候重命名列名可以使得在DataFrame中更容易操作</p>
+<p>有时候重命名列名可以让我们在DataFrame中更方便进行操作</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cntry&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;life_expectancy&quot;</span><span class="p">,</span> <span class="s2">&quot;gdppc&quot;</span><span class="p">]</span>
@@ -1399,11 +1399,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>12445 rows × 4 columns</p>
 </div></div></div>
 </div>
-<p>我们现在已经将我们的DataFrame的行数从62156减少到12445，删除了很多空的数据关系。</p>
-<p>现在我们有一个包含一系列年份的人均寿命和人均GDP的数据集。</p>
-<p>花点时间了解你实际拥有的数据总是一个好主意。</p>
-<p>例如，您可能想要探索这些数据，看看是否所有国家在各年之间的报告都是一致的。</p>
-<p>让我们首先看看寿命数据</p>
+<p>通过删除缺失值，我们的数据集从62156行减少到了12445行。</p>
+<p>现在我们有了一个清理过的数据集，包含了不同国家在不同年份的预期寿命和人均GDP数据。</p>
+<p>在进行任何分析之前，我们应该先仔细了解数据的特点。一个重要的问题是: 不同国家在不同时期的数据是否完整?</p>
+<p>让我们先来看看预期寿命数据的分布情况</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;cntry&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;life_expectancy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;cntry&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">()[</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">]</span>
@@ -1747,7 +1746,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>166 rows × 310 columns</p>
 </div></div></div>
 </div>
-<p>如您所见，有很多国家在1543年的数据是不可用的！</p>
+<p>如你所见，有很多国家在1543年的数据是不可用的！</p>
 <p>哪个国家报告了这些数据？</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1851,34 +1850,34 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>1 rows × 310 columns</p>
 </div></div></div>
 </div>
-<p>您可以看到，只有大不列颠（GBR）是可用的</p>
-<p>您还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。</p>
+<p>你可以看到，只有大不列颠（GBR）的数据是可用的</p>
+<p>你还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;GBR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;年份&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;year&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;年份&#39;&gt;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/e29efce71435159f40e3a8cb843b6fd3e515accb141acb5477d55270be444e57.png"><img alt="_images/e29efce71435159f40e3a8cb843b6fd3e515accb141acb5477d55270be444e57.png" src="_images/e29efce71435159f40e3a8cb843b6fd3e515accb141acb5477d55270be444e57.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png"><img alt="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" src="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>实际上我们可以使用pandas快速检查每个年份涵盖了多少个国家</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Number of countries&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;年份&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;国家数量&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6c1fb4b4100bd37e47b56b574bc053c2574985cfe1679bed24a60825867f4445.png"><img alt="_images/6c1fb4b4100bd37e47b56b574bc053c2574985cfe1679bed24a60825867f4445.png" src="_images/6c1fb4b4100bd37e47b56b574bc053c2574985cfe1679bed24a60825867f4445.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png"><img alt="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" src="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家集合</p>
-<p>现在让我们考虑数据集中最近的一年2018</p>
+<p>所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家</p>
+<p>现在让我们考虑数据集中最近的一年，也就是2018</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2018</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1888,20 +1887,20 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdppc&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;GDP per capita&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Life expectancy (years)&quot;</span><span class="p">,);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdppc&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;人均GDP&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;预期寿命（年）&quot;</span><span class="p">,);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/38aab775680b5f5afcc9ef436ddae6b122b7850f664ed48ce88d6397f3606a30.png"><img alt="_images/38aab775680b5f5afcc9ef436ddae6b122b7850f664ed48ce88d6397f3606a30.png" src="_images/38aab775680b5f5afcc9ef436ddae6b122b7850f664ed48ce88d6397f3606a30.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png"><img alt="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" src="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>这些数据显示了一些有趣的关系。</p>
 <ol class="arabic simple">
-<li><p>许多国家的人均GDP相近，但寿命差别很大</p></li>
+<li><p>许多国家的人均GDP相近，但预期寿命差别很大</p></li>
 <li><p>人均GDP与预期寿命之间似乎存在正向关系。人均GDP较高的国家往往拥有更高的预期寿命</p></li>
 </ol>
-<p>尽管普通最小二乘法（OLS）是用来解线性方程的，但我们可以通过对变量进行转换（例如对数变换），然后使用OLS来估计转换后的变量。</p>
+<p>虽然普通最小二乘法（OLS）主要用于线性关系，但我们可以通过对变量进行适当的转换（比如取对数），使非线性关系转化为线性关系，从而仍然可以使用OLS方法。</p>
 <p>通过指定 <code class="docutils literal notranslate"><span class="pre">logx</span></code> 你可以在对数尺度上绘制人均GDP数据</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2047,7 +2046,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>166 rows × 5 columns</p>
 </div></div></div>
 </div>
-<p><strong>Q4:</strong> 使用 <a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a> 来计算  <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值</p>
+<p><strong>第4问:</strong> 使用 <a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a> 来计算  <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;log_gdppc&#39;</span><span class="p">,</span> <span class="s1">&#39;life_expectancy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># 从DataFrame中提取数据</span>
@@ -2178,7 +2177,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p><strong>Q5:</strong> 绘制使用 OLS 找到的最佳拟合线</p>
+<p><strong>第5问:</strong> 绘制使用 OLS 找到的最佳拟合线</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;life_expectancy_hat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">+</span> <span class="n">β</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;log_gdppc&#39;</span><span class="p">]</span>
@@ -2192,7 +2191,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7fb4eb45ee40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7efc9bed28a0&gt;
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/3ea9e13da91c98b81b8fcdd4e0e9c6a8be3cbe88f4e43f770429cda0ca753674.png"><img alt="_images/3ea9e13da91c98b81b8fcdd4e0e9c6a8be3cbe88f4e43f770429cda0ca753674.png" src="_images/3ea9e13da91c98b81b8fcdd4e0e9c6a8be3cbe88f4e43f770429cda0ca753674.png" style="width: 80%;" /></a>
@@ -2204,9 +2203,9 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 
 <p class="admonition-title"><span class="caption-number">Exercise 44.2 </span></p>
 <section id="exercise-content">
-<p>通过最小化平方和并不是生成最佳拟合线的<strong>唯一</strong>方法。</p>
-<p>例如，我们还可以考虑最小化<strong>绝对值之和</strong>，这样对异常值的权重会更小。</p>
-<p>求解 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 使用最小绝对值法</p>
+<p>最小化平方和并不是生成最佳拟合线的 <strong>唯一</strong> 方法。</p>
+<p>举个例子，我们还可以考虑最小化 <strong>绝对值</strong> 之和，这样可以减少对异常值的权重。</p>
+<p>使用最小绝对值法求解 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span></p>
 </section>
 </div>
 </section>
@@ -2465,7 +2464,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. 通货膨胀税拉弗曲线
+   30. 通货膨胀税的拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
@@ -2558,7 +2557,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. 市场均衡与异质性
+   43. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
