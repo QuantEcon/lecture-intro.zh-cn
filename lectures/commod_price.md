@@ -13,7 +13,7 @@ kernelspec:
 
 ## 大纲
 
-在全球超过一半的国家中，[商品](https://en.wikipedia.org/wiki/Commodity)占[总出口的大部分](https://unctad.org/publication/commodities-and-development-report-2019)。
+在全球超过一半的国家中，[商品](https://baike.baidu.com/item/%E5%95%86%E5%93%81/1245866)占[总出口的大部分](https://unctad.org/publication/commodities-and-development-report-2019)。
 
 商品的例子包括铜、钻石、铁矿石、锂、棉花和咖啡豆。
 
@@ -145,7 +145,7 @@ $$
 
 因此，如果预期利润为正，则市场不处于均衡状态。
 
-所以要达到均衡，价格必须满足"无套利"条件：
+所以要达到均衡，价格必须满足“无套利”条件：
 
 $$
   \alpha \mathbb{E}_t \, p_{t+1}  - p_t \leq 0
