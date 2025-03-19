@@ -236,15 +236,15 @@
 <h1><span class="section-number">27. </span>商品价格<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">27.1. </span>大纲<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>在全球超过一半的国家中，<a class="reference external" href="https://en.wikipedia.org/wiki/Commodity">商品</a> 占 <a class="reference external" href="https://unctad.org/publication/commodities-and-development-report-2019">总出口的大部分</a>。</p>
+<p>在全球超过一半的国家中，<a class="reference external" href="https://baike.baidu.com/item/%E5%95%86%E5%93%81/1245866">商品</a>占<a class="reference external" href="https://unctad.org/publication/commodities-and-development-report-2019">总出口的大部分</a>。</p>
 <p>商品的例子包括铜、钻石、铁矿石、锂、棉花和咖啡豆。</p>
-<p>在本讲中，我们将介绍商品价格理论。</p>
-<p>相对于本系列的其他讲座，这一讲座内容较为高级。</p>
-<p>我们需要计算一个均衡，该均衡由价格函数描述。</p>
+<p>本讲将介绍商品价格理论。</p>
+<p>相比本系列的其他讲座，这一讲内容较为高级。</p>
+<p>我们需要计算一个由价格函数描述的均衡。</p>
 <p>我们将解一个方程，其中价格函数是未知量。</p>
-<p>这比解一个未知数或向量的方程更难。</p>
-<p>讲座将讨论一种解 <a class="reference external" href="https://en.wikipedia.org/wiki/Functional_equation">函数方程</a>（未知对象是函数的方程）的方法。</p>
-<p>对于本讲座，我们需要使用 <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> 库。</p>
+<p>这比解一个未知数或向量的方程要难得多。</p>
+<p>本讲将讨论一种解<a class="reference external" href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E6%96%B9%E7%A8%8B/6162392">函数方程</a>的方法，这类方程的未知对象是函数。</p>
+<p>本讲需要使用<code class="docutils literal notranslate"><span class="pre">yfinance</span></code>库。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>yfinance
@@ -272,14 +272,12 @@ Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting frozendict&gt;=2.3.4 (from yfinance)
   Downloading frozendict-2.4.6-py312-none-any.whl.metadata (23 kB)
+Collecting peewee&gt;=3.16.2 (from yfinance)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting peewee&gt;=3.16.2 (from yfinance)
-  Downloading peewee-3.17.9.tar.gz (3.0 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading peewee-3.17.9.tar.gz (3.0 MB)
 ?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">100.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/3.0 MB</span> <span class=" -Color -Color-Red">82.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -292,13 +290,13 @@ Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/q
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Getting requirements to build wheel ... ?25l- done
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Getting requirements to build wheel ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h  Preparing metadata (pyproject.toml) ... ?25l-
@@ -332,7 +330,7 @@ Building wheels for collected packages: peewee
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for peewee: filename=peewee-3.17.9-cp312-cp312-linux_x86_64.whl size=303841 sha256=498a9e04cdb8bf67a69c5a4cc7e3a4fa64a42b88a5ce79f309f3f99e4759795f
+?25h  Created wheel for peewee: filename=peewee-3.17.9-cp312-cp312-linux_x86_64.whl size=303841 sha256=f04a409757ae180f6fcc239174062d807d4aa74c6a1f13e1dd79cba1fa6b7752
   Stored in directory: /home/runner/.cache/pip/wheels/43/ef/2d/2c51d496bf084945ffdf838b4cc8767b8ba1cc20eb41588831
 Successfully built peewee
 </pre></div>
@@ -431,7 +429,7 @@ Successfully built peewee
 </section>
 <section id="id10">
 <h2><span class="section-number">27.3. </span>竞争性储存模型<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p>在竞争性储存模型中，商品是一种资产，它们：</p>
+<p>在竞争性储存模型中，商品被视为一种资产。这些商品具有两个特点：</p>
 <ol class="arabic simple">
 <li><p>可以被投机者交易，并且</p></li>
 <li><p>对消费者有内在价值。</p></li>
@@ -440,8 +438,8 @@ Successfully built peewee
 <p>供应是外生的，取决于“收成”。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>如今，像基本的计算机芯片和集成电路这样的商品在金融市场上通常被视为商品，因为它们高度标准化。对于这些类型的商品，使用“收成”一词并不合适。</p>
-<p>尽管如此，为了简化问题，我们仍然保留了这个术语。</p>
+<p>如今，基本的计算机芯片和集成电路等高度标准化的产品，在金融市场上也被视为商品。对这类商品来说，”收成”一词并不太恰当。</p>
+<p>不过为了简化问题，我们还是沿用这个术语。</p>
 </div>
 <p>均衡价格是通过竞争决定的。</p>
 <p>它是当前状态的一个函数（决定当前的收成并预测未来的收成）。</p>
@@ -468,50 +466,50 @@ Successfully built peewee
 <h3><span class="section-number">27.5.1. </span>均衡条件<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
 <p>假设投机者是风险中性的，这意味着他们在预期利润为正时会购买商品。</p>
 <p>因此，如果预期利润为正，则市场不处于均衡状态。</p>
-<p>因此，要达到均衡，价格必须满足“无套利”条件</p>
+<p>所以要达到均衡，价格必须满足“无套利”条件：</p>
 <div class="math notranslate nohighlight" id="equation-eq-arbi">
 <span class="eqno">(27.1)<a class="headerlink" href="#equation-eq-arbi" title="Permalink to this equation">#</a></span>\[
   \alpha \mathbb{E}_t \, p_{t+1}  - p_t \leq 0
 \]</div>
-<p>这意味着如果预期价格低于当前价格，则没有套利空间。</p>
-<p>利润最大化给出了额外条件</p>
+<p>这表明当预期价格低于当前价格时，就不存在套利空间。</p>
+<p>利润最大化给出了额外条件：</p>
 <div class="math notranslate nohighlight" id="equation-eq-pmco">
 <span class="eqno">(27.2)<a class="headerlink" href="#equation-eq-pmco" title="Permalink to this equation">#</a></span>\[
   \alpha \mathbb{E}_t \, p_{t+1}  - p_t  &lt; 0 \text{ 意味着 } I_t = 0
 \]</div>
-<p>我们还要求市场清算，即每期供应等于需求。</p>
-<p>我们假设消费者根据价格 <span class="math notranslate nohighlight">\(p\)</span> 生成需求量 <span class="math notranslate nohighlight">\(D(p)\)</span>。</p>
+<p>我们还要求市场出清，即每期供应等于需求。</p>
+<p>假设消费者根据价格 <span class="math notranslate nohighlight">\(p\)</span> 产生需求量 <span class="math notranslate nohighlight">\(D(p)\)</span>。</p>
 <p>令 <span class="math notranslate nohighlight">\(P := D^{-1}\)</span> 为逆需求函数。</p>
-<p>关于数量，</p>
+<p>关于数量：</p>
 <ul class="simple">
-<li><p>供应是投机者的持有量和当前收成的总和，且</p></li>
+<li><p>供应是投机者的持有量和当前收成的总和，并且</p></li>
 <li><p>需求是消费者购买和投机者购买的总和。</p></li>
 </ul>
-<p>在数学上，</p>
+<p>用数学语言表述：</p>
 <ul class="simple">
-<li><p>供应由 <span class="math notranslate nohighlight">\(X_t = \alpha I_{t-1} + Z_t\)</span> 给出，其取值在 <span class="math notranslate nohighlight">\(S := \mathbb R_+\)</span> 中，而</p></li>
-<li><p>需求为 <span class="math notranslate nohighlight">\(D(p_t) + I_t\)</span></p></li>
+<li><p>供应由 <span class="math notranslate nohighlight">\(X_t = \alpha I_{t-1} + Z_t\)</span> 给出，取值在 <span class="math notranslate nohighlight">\(S := \mathbb R_+\)</span> 中。</p></li>
+<li><p>需求为 <span class="math notranslate nohighlight">\(D(p_t) + I_t\)</span>。</p></li>
 </ul>
-<p>因此，市场均衡条件为</p>
+<p>因此，市场均衡条件为：</p>
 <div class="math notranslate nohighlight" id="equation-eq-mkeq">
 <span class="eqno">(27.3)<a class="headerlink" href="#equation-eq-mkeq" title="Permalink to this equation">#</a></span>\[
   \alpha I_{t-1} + Z_t =  D(p_t) + I_t
 \]</div>
-<p>初始条件 <span class="math notranslate nohighlight">\(X_0 \in S\)</span> 被视为给定。</p>
+<p>初始条件 <span class="math notranslate nohighlight">\(X_0 \in S\)</span> 为给定值。</p>
 </section>
 <section id="id14">
 <h3><span class="section-number">27.5.2. </span>一个均衡函数<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
-<p>我们如何找到均衡？</p>
-<p>我们的攻击路径将是寻找一个仅依赖于当前状态的价格系统。</p>
-<p>（我们的解法涉及使用 <a class="reference external" href="https://en.wikipedia.org/wiki/Ansatz">ansatz</a>，这是一种经过推测的猜测——在这种情况下是针对价格函数的猜测。）</p>
-<p>换句话说，我们在 <span class="math notranslate nohighlight">\(S\)</span> 上取一个函数 <span class="math notranslate nohighlight">\(p\)</span>，并为每个 <span class="math notranslate nohighlight">\(t\)</span> 设置 <span class="math notranslate nohighlight">\(p_t = p(X_t)\)</span>。</p>
-<p>价格和数量随后遵循</p>
+<p>如何找到均衡呢？</p>
+<p>我们的思路是寻找一个只依赖当前状态的价格系统。</p>
+<p>（我们的解法使用了 <a class="reference external" href="https://baike.baidu.com/item/%E6%8B%9F%E8%AE%BE/18875444">拟设（ansatz）</a>，这是一种基于推测的猜想——在这里是对价格函数的猜想。）</p>
+<p>具体来说，我们在 <span class="math notranslate nohighlight">\(S\)</span> 上取一个函数 <span class="math notranslate nohighlight">\(p\)</span>，对每个 <span class="math notranslate nohighlight">\(t\)</span> 令 <span class="math notranslate nohighlight">\(p_t = p(X_t)\)</span>。</p>
+<p>价格和数量随后满足：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eosy">
 <span class="eqno">(27.4)<a class="headerlink" href="#equation-eq-eosy" title="Permalink to this equation">#</a></span>\[
-  p_t = p(X_t), \quad I_t = X_t - D(p_t), \quad X_{t+1} = \alpha I_t + Z_{t+1}
+  p_t = p(X_t)，\quad I_t = X_t - D(p_t)，\quad X_{t+1} = \alpha I_t + Z_{t+1}
 \]</div>
-<p>我们选择 <span class="math notranslate nohighlight">\(p\)</span> 使得这些价格和数量满足上述均衡条件。</p>
-<p>更准确地说，我们寻找一个 <span class="math notranslate nohighlight">\(p\)</span>，使得 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 和 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a> 对应的系统 <a class="reference internal" href="#equation-eq-eosy">(27.4)</a> 成立。</p>
+<p>我们选择 <span class="math notranslate nohighlight">\(p\)</span> 使这些价格和数量满足上述均衡条件。</p>
+<p>更准确地说，我们要找一个 <span class="math notranslate nohighlight">\(p\)</span>，使得 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 和 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a> 对应的系统 <a class="reference internal" href="#equation-eq-eosy">(27.4)</a> 成立。</p>
 <div class="math notranslate nohighlight" id="equation-eq-dopf">
 <span class="eqno">(27.5)<a class="headerlink" href="#equation-eq-dopf" title="Permalink to this equation">#</a></span>\[
   p^*(x) = \max
@@ -526,8 +524,8 @@ Successfully built peewee
   I(x) := x - D(p^*(x))
     \qquad (x \in S)
 \]</div>
-<p>事实证明，这样的 <span class="math notranslate nohighlight">\(p^*\)</span> 是足够的，因为 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 和 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a> 对应的系统 <a class="reference internal" href="#equation-eq-eosy">(27.4)</a> 成立。</p>
-<p>要看到这一点，首先观察</p>
+<p>事实证明，这样的 <span class="math notranslate nohighlight">\(p^*\)</span> 是充分的，因为它满足 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 和 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a> 对应的系统 <a class="reference internal" href="#equation-eq-eosy">(27.4)</a>。</p>
+<p>要理解这一点，我们首先注意到：</p>
 <div class="math notranslate nohighlight">
 \[
   \mathbb{E}_t \, p_{t+1}
@@ -535,33 +533,33 @@ Successfully built peewee
    = \mathbb{E}_t \, p^*(\alpha I(X_t) + Z_{t+1})
    = \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz
 \]</div>
-<p>因此，条件 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 要求</p>
+<p>因此，条件 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 要求：</p>
 <div class="math notranslate nohighlight">
 \[
    \alpha \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz \leq p^*(X_t)
 \]</div>
-<p>这个不等式是从 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 直接得到的。</p>
-<p>其次，关于 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a>，假设</p>
+<p>这个不等式直接来自 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a>。</p>
+<p>其次，对于 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a>，假设：</p>
 <div class="math notranslate nohighlight">
 \[
    \alpha \int_0^\infty p^*(\alpha I(X_t) + z) \phi(z)dz &lt; p^*(X_t)
 \]</div>
-<p>那么根据 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a>，我们有 <span class="math notranslate nohighlight">\(p^*(X_t) = P(X_t)\)</span>。</p>
-<p>但这时 <span class="math notranslate nohighlight">\(D(p^*(X_t)) = X_t\)</span>，并且 <span class="math notranslate nohighlight">\(I_t = I(X_t) = 0\)</span>。</p>
+<p>那么根据 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a>，我们得到 <span class="math notranslate nohighlight">\(p^*(X_t) = P(X_t)\)</span>。</p>
+<p>此时有 <span class="math notranslate nohighlight">\(D(p^*(X_t)) = X_t\)</span>，并且 <span class="math notranslate nohighlight">\(I_t = I(X_t) = 0\)</span>。</p>
 <p>因此，条件 <a class="reference internal" href="#equation-eq-arbi">(27.1)</a> 和 <a class="reference internal" href="#equation-eq-pmco">(27.2)</a> 都成立。</p>
 <p>我们找到了一个均衡，验证了 ansatz。</p>
 </section>
 <section id="id15">
 <h3><span class="section-number">27.5.3. </span>计算均衡<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
-<p>我们现在知道，均衡可以通过找到一个满足 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 的函数 <span class="math notranslate nohighlight">\(p^*\)</span> 来获得。</p>
-<p>可以证明，在温和的条件下，<span class="math notranslate nohighlight">\(S\)</span> 上恰好存在一个满足 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 的函数。</p>
+<p>现在我们知道，均衡可以通过找到一个满足 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 的函数 <span class="math notranslate nohighlight">\(p^*\)</span> 来获得。</p>
+<p>在温和的条件下，可以证明在 <span class="math notranslate nohighlight">\(S\)</span> 上恰好存在一个满足 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 的函数。</p>
 <p>此外，我们可以通过逐次逼近来计算这个函数。</p>
-<p>这意味着我们从对函数的一个猜测开始，然后使用 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 更新它。</p>
-<p>这会生成一系列函数 <span class="math notranslate nohighlight">\(p_1, p_2, \ldots\)</span></p>
+<p>具体来说，我们从一个初始函数猜测开始，然后使用 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 来更新它。</p>
+<p>这会生成一系列函数 <span class="math notranslate nohighlight">\(p_1, p_2, \ldots\)</span>。</p>
 <p>我们继续这个过程，直到它收敛，即 <span class="math notranslate nohighlight">\(p_k\)</span> 和 <span class="math notranslate nohighlight">\(p_{k+1}\)</span> 非常接近。</p>
-<p>然后，我们将计算得到的最终 <span class="math notranslate nohighlight">\(p_k\)</span> 作为 <span class="math notranslate nohighlight">\(p^*\)</span> 的近似值。</p>
-<p>为了实现我们的更新步骤，将 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 和 <a class="reference internal" href="#equation-eq-einvf">(27.6)</a> 放在一起是有帮助的。</p>
-<p>这使我们得到了更新规则</p>
+<p>然后，我们将最终计算得到的 <span class="math notranslate nohighlight">\(p_k\)</span> 作为 <span class="math notranslate nohighlight">\(p^*\)</span> 的近似值。</p>
+<p>为了实现更新步骤，将 <a class="reference internal" href="#equation-eq-dopf">(27.5)</a> 和 <a class="reference internal" href="#equation-eq-einvf">(27.6)</a> 结合起来是很有帮助的。</p>
+<p>这给出了更新规则：</p>
 <div class="math notranslate nohighlight" id="equation-eq-dopf2">
 <span class="eqno">(27.7)<a class="headerlink" href="#equation-eq-dopf2" title="Permalink to this equation">#</a></span>\[
   p_{k+1}(x) = \max
@@ -577,17 +575,17 @@ Successfully built peewee
     \alpha \int_0^\infty p_k(\alpha ( x - D(q)) + z) \phi(z)dz, P(x)
     \right\}
 \]</div>
-<p>实际上，我们无法在每个 <span class="math notranslate nohighlight">\(x\)</span> 处进行此操作，因此我们在一系列点 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> 上进行。</p>
-<p>然后我们得到对应的值 <span class="math notranslate nohighlight">\(q_1, \ldots, q_n\)</span>。</p>
-<p>接着，我们将 <span class="math notranslate nohighlight">\(p_{k+1}\)</span> 计算为在网格 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> 上对值 <span class="math notranslate nohighlight">\(q_1, \ldots, q_n\)</span> 的线性插值。</p>
-<p>然后我们重复这个过程，寻求收敛。</p>
+<p>实际上，我们无法对每个 <span class="math notranslate nohighlight">\(x\)</span> 进行这样的计算，所以我们选择一系列离散点 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> 来进行计算。</p>
+<p>对这些点，我们可以得到相应的值 <span class="math notranslate nohighlight">\(q_1, \ldots, q_n\)</span>。</p>
+<p>然后，我们在网格点 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> 上对这些值 <span class="math notranslate nohighlight">\(q_1, \ldots, q_n\)</span> 进行线性插值，从而得到 <span class="math notranslate nohighlight">\(p_{k+1}\)</span>。</p>
+<p>我们不断重复这个过程，直到结果收敛。</p>
 </section>
 </section>
 <section id="id16">
 <h2><span class="section-number">27.6. </span>代码<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
-<p>下面的代码实现了这个迭代过程，从 <span class="math notranslate nohighlight">\(p_0 = P\)</span> 开始。</p>
-<p>分布 <span class="math notranslate nohighlight">\(\phi\)</span> 被设定为一个偏移的贝塔分布（尽管可以选择许多其他的分布）。</p>
-<p>在 <a class="reference internal" href="#equation-eq-dopf3">(27.8)</a> 中的积分通过 <a class="reference external" href="https://intro.quantecon.org/monte_carlo.html#monte-carlo" title="(in Python)"><span class="xref std std-ref">Monte Carlo</span></a> 方法计算。</p>
+<p>下面的代码实现了这个迭代过程。我们从 <span class="math notranslate nohighlight">\(p_0 = P\)</span> 开始。</p>
+<p>我们选择一个偏移的贝塔分布作为分布 <span class="math notranslate nohighlight">\(\phi\)</span>（当然也可以选择其他分布）。</p>
+<p><a class="reference internal" href="#equation-eq-dopf3">(27.8)</a> 中的积分通过 <a class="reference external" href="https://intro.quantecon.org/monte_carlo.html#monte-carlo" title="(in Python)"><span class="xref std std-ref">Monte Carlo</span></a> 方法来计算。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span>
@@ -598,7 +596,7 @@ Successfully built peewee
 <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">grid_max</span><span class="p">,</span> <span class="n">gridsize</span><span class="p">)</span>
 
 <span class="n">beta_dist</span> <span class="o">=</span> <span class="n">beta</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">beta_dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mc_draw_size</span><span class="p">)</span> <span class="o">*</span> <span class="n">c</span>    <span class="c1"># 冲击观察</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">beta_dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mc_draw_size</span><span class="p">)</span> <span class="o">*</span> <span class="n">c</span>    <span class="c1"># 随机冲击的观测值</span>
 <span class="n">D</span> <span class="o">=</span> <span class="n">P</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">x</span>
 <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-4</span>
 
@@ -643,7 +641,7 @@ Successfully built peewee
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/8d061e6b6a73dfaee7a18aefe16ff9711a5533171e6dde37870aea3d476066ed.png"><img alt="_images/8d061e6b6a73dfaee7a18aefe16ff9711a5533171e6dde37870aea3d476066ed.png" src="_images/8d061e6b6a73dfaee7a18aefe16ff9711a5533171e6dde37870aea3d476066ed.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/40d8114742c72090bfe881a93d6733880a289402e501bfdccf2fb62f265dbcd8.png"><img alt="_images/40d8114742c72090bfe881a93d6733880a289402e501bfdccf2fb62f265dbcd8.png" src="_images/40d8114742c72090bfe881a93d6733880a289402e501bfdccf2fb62f265dbcd8.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>上图显示了逆需求曲线 <span class="math notranslate nohighlight">\(P\)</span>，也就是 <span class="math notranslate nohighlight">\(p_0\)</span>，以及我们对 <span class="math notranslate nohighlight">\(p^*\)</span> 的近似。</p>
@@ -676,7 +674,7 @@ Successfully built peewee
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2be0efbf9bbb588b6e8b73b77a4f30ae9bd5464600b03a8c5494ae51a840f9a3.png"><img alt="_images/2be0efbf9bbb588b6e8b73b77a4f30ae9bd5464600b03a8c5494ae51a840f9a3.png" src="_images/2be0efbf9bbb588b6e8b73b77a4f30ae9bd5464600b03a8c5494ae51a840f9a3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7b035681c06a1a531364bc76f4bae63fa9df5c3e44d2cae097caaff0d338d4fc.png"><img alt="_images/7b035681c06a1a531364bc76f4bae63fa9df5c3e44d2cae097caaff0d338d4fc.png" src="_images/7b035681c06a1a531364bc76f4bae63fa9df5c3e44d2cae097caaff0d338d4fc.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
