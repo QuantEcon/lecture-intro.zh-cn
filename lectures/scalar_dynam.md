@@ -208,9 +208,8 @@ k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t
 
 ## 稳定性
 
-考虑一个动态系统，由集合 $S \subset \mathbb R$ 和将 $S$ 映射到 $S$ 的函数 $g$ 组成。
+考虑这样一个动态系统，其由集合 $S \subset \mathbb R$ 和将 $S$ 映射到 $S$ 的函数 $g$ 组成。
 
-(scalar-dynam:steady-state)=
 ### 稳态
 
 该系统的**稳态**是 $S$ 中的一个点 $x^*$，满足 $x^* = g(x^*)$。
@@ -225,7 +224,6 @@ k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t
 
 * 如果 $a = 1$ 且 $b \not= 0$，那么这个线性模型在 $\mathbb R$ 中没有稳态。
 
-(scalar-dynam:global-stability)=
 ### 全局稳定性
 
 如果对于所有的 $x_0 \in S$，都有
@@ -242,7 +240,7 @@ $$
 
 * 否则不是全局稳定的。
 
-这直接从方程 {eq}`sdslinmod` 得出。
+以上可以直接从方程 {eq}`sdslinmod` 得出。
 
 ### 局部稳定性
 
