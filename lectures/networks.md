@@ -21,15 +21,24 @@ kernelspec:
 
 ## 概述
 
-近年来，一个被称为[网络科学](https://en.wikipedia.org/wiki/Network_science)的领域迅速发展。
+近年来，一个被称为[网络科学](https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E7%A7%91%E5%AD%A6?fromModule=lemma_search-box)的领域迅速发展。
+
 网络科学研究对象群体之间的关系。
-一个重要的例子是[万维网](https://en.wikipedia.org/wiki/World_Wide_Web#Linking)，其中网页通过超链接相互连接。
-另一个例子是[人脑](https://en.wikipedia.org/wiki/Neural_circuit)：对大脑功能的研究强调神经细胞（神经元）之间的连接网络。
-[人工神经网络](https://en.wikipedia.org/wiki/Artificial_neural_network)基于这一理念，利用数据在简单处理单元之间建立复杂的连接。
-研究COVID-19等[疾病传播](https://en.wikipedia.org/wiki/Network_medicine#Network_epidemics)的流行病学家分析人类宿主群体之间的相互作用。
-在运筹学中，网络分析用于研究基本问题，如最小成本流、旅行商问题、[最短路径](https://en.wikipedia.org/wiki/Shortest_path_problem)和分配问题。
+
+一个重要的例子是[万维网](https://baike.baidu.com/item/www/109924?fromtitle=%E4%B8%87%E7%BB%B4%E7%BD%91&fromid=215515&fromModule=lemma_search-boxg)，其中网页通过超链接相互连接。
+
+另一个例子是[人脑](https://baike.baidu.com/item/%E7%A5%9E%E7%BB%8F%E5%9B%9E%E8%B7%AF?fromModule=lemma_search-box)：对大脑功能的研究强调神经细胞（神经元）之间的连接网络。
+
+[人工神经网络](https://baike.baidu.com/item/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/382460)基于这一理念，利用数据在简单处理单元之间建立复杂的连接。
+
+研究COVID-19等[疾病传播](https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%8C%BB%E5%AD%A6?fromModule=lemma_search-box)的流行病学家分析人类宿主群体之间的相互作用。
+
+在运筹学中，网络分析用于研究基本问题，如最小成本流、旅行商问题、[最短路径](https://baike.baidu.com/item/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84?fromModule=lemma_search-box)和分配问题。
+
 本讲座介绍了经济和金融网络。
+
 本讲座的部分内容来自教材书[《经济网络》](https://networks.quantecon.org)，但本讲座的水平更为入门。
+
 我们需要以下导入。
 
 ```{code-cell} ipython3
@@ -56,8 +65,11 @@ import matplotlib.patches as mpatches
 * 社交网络
 
 社交网络影响市场情绪和消费者决策的趋势。
+
 金融网络的结构有助于确定金融系统的相对脆弱性。
+
 生产网络的结构影响贸易、创新和局部冲击的传播。
+
 为了更好地理解这些网络，让我们深入看一些例子。
 
 ### 例子：飞机出口
@@ -123,10 +135,15 @@ plt.show()
 ```
 
 图中的圆圈被称为**节点**或**顶点** -- 在这个例子中，它们代表国家。
+
 图中的箭头被称为**边**或**链接**。
+
 节点大小与总出口成正比，边的宽度与对目标国家的出口成正比。
+
 （数据针对重量至少15,000公斤的商用飞机贸易，数据来源于CID Dataverse。）
+
 图表显示美国、法国和德国是主要的出口枢纽。
+
 在下面的讨论中，我们将学习如何量化这些概念。
 
 ### 例子：马尔可夫链
@@ -155,7 +172,7 @@ $$
 
 这个理论将帮助我们更好地组织我们的思路。
 
-网络科学的理论部分是使用数学的一个主要分支——[图论](https://en.wikipedia.org/wiki/Graph_theory)构建的。
+网络科学的理论部分是使用数学的一个主要分支——[图论](https://baike.baidu.com/item/%E5%9B%BE%E8%AE%BA/1433806)构建的。
 
 图论可能很复杂，我们只会涉及基础部分。
 
