@@ -12,7 +12,7 @@ kernelspec:
 (solow)=
 # 索洛-斯旺增长模型
 
-在本讲中，我们将回顾一个由[罗伯特·索洛（1925--2023）](https://baike.baidu.com/item/%E7%BD%97%E4%BC%AF%E7%89%B9%C2%B7%E9%BB%98%E9%A1%BF%C2%B7%E7%B4%A2%E6%B4%9B/4822664)和[特雷弗·斯旺（1918--1989）](https://wikii.one/Trevor_Swan#gsc.tab=0)提出的著名模型。
+在本讲中，我们将回顾一个由[罗伯特·索洛（1925--2023）](https://baike.baidu.com/item/%E7%BD%97%E4%BC%AF%E7%89%B9%C2%B7%E9%BB%98%E9%A1%BF%C2%B7%E7%B4%A2%E6%B4%9B/4822664)和[特雷弗·斯旺（1918--1989）](https://baike.baidu.com/item/%E6%96%AF%E6%97%BA%E5%9B%BE/646055)提出的著名模型。
 
 这个模型被用于研究长期的经济增长。
 
