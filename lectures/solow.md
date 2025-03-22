@@ -344,7 +344,7 @@ plot_gcon(kstar)
     x'_t = (1-\alpha) (sA - \delta x_t)
 ```
 
-这个方程是一个[线性常微分方程](https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)/17%3A_Differential_Equations/17.01%3A_First_Order_Differential_Equations)，其解为
+这个方程是一个[线性常微分方程](https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/12609971)，其解为
 $$
     x_t
     = \left(
