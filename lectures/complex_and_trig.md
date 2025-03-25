@@ -22,18 +22,21 @@ kernelspec:
 ```
 
 # 复数和三角函数
+
 ## 概述
+
 本讲座介绍一些基础数学和三角函数知识。
 
-这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时，会带来巨大回报。
+这些概念本身既有用又有趣，在研究由线性差分方程或线性微分方程生成的动力学时会有很大的帮助。
 
-例如，这些工具是理解Paul Samuelson（1939年）{cite}`Samuelson1939`在其经典论文中关于投资加速器与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座{doc}`Samuelson乘数加速器<dynam:samuelson>`中的主题。
+例如，这些工具是理解Paul Samuelson（1939年）{cite}`Samuelson1939`在其经典论文中关于投资加速数与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座{doc}`Samuelson乘数加速数<dynam:samuelson>`中的主题。
 
-除了为Samuelson的工作及其扩展提供基础外，本讲座还可以作为独立的快速回顾，回顾高中基础三角函数的关键结果。
+除了为Samuelson的工作及其扩展提供基础外，本讲座也是对高中基础三角函数知识的复习。
 
 那么让我们开始吧。
 
 ### 复数
+
 复数有一个**实部**$x$和一个纯**虚部**$y$。
 
 复数$z$的欧几里得形式、极坐标形式和三角形式是：
@@ -44,7 +47,7 @@ $$
 
 上面的第二个等式被称为**欧拉公式**
 
-- [欧拉](https://en.wikipedia.org/wiki/Leonhard_Euler)还贡献了许多其他公式！
+- [欧拉](https://baike.baidu.com/item/%E8%8E%B1%E6%98%82%E5%93%88%E5%BE%B7%C2%B7%E6%AC%A7%E6%8B%89/2148998)还贡献了许多其他公式！
 
 $z$的复共轭$\bar z$定义为
 
@@ -80,7 +83,7 @@ $$
 \tan{\theta} = \frac{y}{x}
 $$
 
-我们需要以下导入：
+我们需要以下函数库导入：
 
 ```{code-cell} ipython
 import matplotlib.pyplot as plt
@@ -121,9 +124,9 @@ x_range = np.linspace(0, x, 1000)
 fig = plt.figure(figsize=(8, 8))
 ax = plt.subplot(111, projection='polar')
 
-ax.plot((0, θ), (0, r), marker='o', color='b')          # 绘制 r
-ax.plot(np.zeros(x_range.shape), x_range, color='b')       # 绘制 x
-ax.plot(θ_range, x / np.cos(θ_range), color='b')        # 绘制 y
+ax.plot((0, θ), (0, r), marker='o', color='b')            # 绘制 r
+ax.plot(np.zeros(x_range.shape), x_range, color='b')      # 绘制 x
+ax.plot(θ_range, x / np.cos(θ_range), color='b')          # 绘制 y
 ax.plot(θ_range, np.full(θ_range.shape, 0.1), color='r')  # 绘制 θ
 
 ax.margins(0) # 从原点开始绘制
@@ -155,7 +158,7 @@ r^n e^{in\theta} =
 r^n(\cos{n\theta} + i \sin{n\theta})
 $$
 
-要证明德莫瓦定理，注意到
+要证明德莫瓦定理，首先注意
 
 $$
 (r(\cos{\theta} + i \sin{\theta}))^n = \big( re^{i\theta} \big)^n
@@ -216,7 +219,7 @@ $$
 
 ### 例3
 
-这个例子提供了Samuelson在分析其乘数-加速器模型时所使用的核心机制 {cite}`Samuelson1939`。
+这个例子提供了Samuelson在分析其乘数-加速数模型时所使用的核心机制 {cite}`Samuelson1939`。
 
 因此，考虑一个**二阶线性差分方程**
 
@@ -261,9 +264,10 @@ $$
 
 我们可以解这个方程得到 $\omega$，然后用 $x_0 = 2 pr^0 \cos{(\omega + n\theta)}$ 解出 $p$。
 
-使用Python中的`sympy`包，我们能够解决并绘制给定不同 $n$ 值时 $x_n$ 的动态。
+使用Python中的`sympy`包，我们能够解决并绘制给定不同 $n$ 值时 $x_n$ 的动态变化。
 
 在这个例子中，我们设置初始值：
+
 - $r = 0.9$
 - $\theta = \frac{1}{4}\pi$
 - $x_0 = 4$
@@ -338,17 +342,19 @@ plt.show()
 
 ### 三角恒等式
 
-我们可以通过适当操作复数的极坐标形式来获得一套完整的三角恒等式。
+我们可以通过适当转换复数的极坐标形式来获得一套完整的三角恒等式。
 
 我们将通过推导等式
+
 $$
 e^{i(\omega + \theta)} = e^{i\omega} e^{i\theta}
 $$
+
 来得到许多恒等式。
 
 例如，我们将计算 $\cos{(\omega + \theta)}$ 和 $\sin{(\omega + \theta)}$ 的恒等式。
 
-使用本讲座开始时给出的正弦和余弦公式，我们有：
+使用本讲开始时给出的正弦和余弦公式，我们有：
 
 $$
 \begin{aligned}
@@ -391,6 +397,7 @@ print("cos(ω)cos(θ) - sin(ω)sin(θ) =",
 print("cos(ω)sin(θ) + sin(ω)cos(θ) =",
     simplify(cos(ω)*sin(θ) + sin(ω) * cos(θ)))
 ```
+
 ### 三角积分
 
 我们也可以使用复数的极坐标形式来计算三角积分。
@@ -440,7 +447,7 @@ $$
 我们可以使用`sympy`包中的`integrate`来验证分析结果和数值结果：
 
 ```{code-cell} python3
-# 设置初始打印
+# 设置打印的格式
 init_printing(use_latex="mathjax")
 
 ω = Symbol('ω')
@@ -459,9 +466,11 @@ integrate(cos(ω) * sin(ω), (ω, -π, π))
 :label: complex_ex1
 
 我们邀请读者通过解析方法和使用 `sympy` 包来验证以下两个等式：
+
 $$
 \int_{-\pi}^{\pi} \cos (\omega)^2 \, d\omega = \pi
 $$
+
 $$
 \int_{-\pi}^{\pi} \sin (\omega)^2 \, d\omega = \pi
 $$

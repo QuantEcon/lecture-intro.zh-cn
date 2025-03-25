@@ -37,7 +37,7 @@ OLG模型的动态与[索洛-斯旺增长模型](https://intro.quantecon.org/sol
 
 这些变化可能会大大改变模型的预测。
 
-因此，如果我们关心准确的预测，我们应该对代理人的决策问题进行建模。
+因此，如果我们关心准确的预测，我们应该对个人的决策问题进行建模。
 
 特别是，模型中的家庭应该根据他们面临的环境（技术、税收、价格等）决定储蓄多少和消费多少。
 
@@ -396,7 +396,7 @@ fig, ax = plt.subplots(figsize=(6, 6))
 ymin, ymax = np.min(k_grid_next), np.max(k_grid_next)
 
 ax.plot(k_grid, k_grid_next,  lw=2, alpha=0.6, label='$g$')
-ax.plot(k_grid, k_grid, 'k-', lw=1, alpha=0.7, label='$45^{\circ}$')
+ax.plot(k_grid, k_grid, 'k-', lw=1, alpha=0.7, label=r'$45^{\circ}$')
 
 
 ax.legend(loc='upper left', frameon=False, fontsize=12)
@@ -665,7 +665,7 @@ fig, ax = plt.subplots(figsize=(6, 6))
 ymin, ymax = np.min(k_grid_next), np.max(k_grid_next)
 
 ax.plot(k_grid, k_grid_next,  lw=2, alpha=0.6, label='$g$')
-ax.plot(k_grid, k_grid, 'k-', lw=1, alpha=0.7, label='$45^{\circ}$')
+ax.plot(k_grid, k_grid, 'k-', lw=1, alpha=0.7, label=r'$45^{\circ}$')
 
 
 ax.legend(loc='upper left', frameon=False, fontsize=12)

@@ -12,7 +12,7 @@ kernelspec:
 (lp_intro)=
 # 线性规划
 
-在本讲中，我们将需要以下库。使用 `pip` 安装 [ortools](https://developers.google.com/optimization)。
+在本讲中，我们将需要以下库并使用 `pip` 安装 [ortools](https://developers.google.com/optimization)。
 
 
 ```{code-cell} ipython3
@@ -26,7 +26,7 @@ tags: [hide-output]
 
 **线性规划** 问题旨在在一组线性等式和/或不等式约束下，最大化或最小化一个线性目标函数。
 
-线性程序成对出现：
+线性规划问题是成对出现的：
 
 * 一个原始的 **原始** 问题，以及
 
@@ -36,7 +36,7 @@ tags: [hide-output]
 
 如果原始问题涉及 *最小化*，则对偶问题涉及 *最大化*。
 
-我们提供线性程序的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。
+我们提供线性规划的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。
 
 我们将说明如何使用 [SciPy](https://scipy.org/) 和 [Google OR-Tools](https://developers.google.com/optimization) 来解决线性规划问题。
 
@@ -45,7 +45,7 @@ tags: [hide-output]
 在另一讲中，我们将使用线性规划方法来解决 {doc}`最优运输问题 <tools:opt_transport>`。
 ```
 
-让我们先进行一些标准的导入。
+让我们先进行一些导入。
 
 ```{code-cell} ipython3
 import numpy as np
@@ -106,6 +106,7 @@ $$
 tags: [hide-input]
 ---
 fig, ax = plt.subplots()
+
 #绘制约束
 ax.set_xlim(0,15)
 ax.set_ylim(0,10)
@@ -195,7 +196,7 @@ else:
 
 我们现在考虑一个由 {cite}`hu_guo2018` 提出的并解决的问题。
 
-一个共同基金有 $100,000 美元$ 可在三年内投资。
+一个共同基金有 $100,000 美元 可在三年内投资。
 
 有三种投资选择可供选择：
 
@@ -342,7 +343,7 @@ OR-Tools 告诉我们，最佳投资策略是：
 
 * 统一最初以表面不同形式表述的线性规划问题，以及
 
-* 拥有一种便于放入黑盒软件包的形式，
+* 拥有一种便于放入程序的统一形式，
 
 花一些精力来描述 **标准形式** 是很有用的。
 
@@ -383,7 +384,7 @@ $$
 \end{aligned}
 $$ (lpproblem)
 
-这里，$Ax = b$ 意味着 $Ax$ 的第 $i$ 个元素等于 $b$ 的第 $i$ 个元素，对于每个 $i$ 都成立。
+这里，$Ax = b$ 意味着 $Ax$ 的第 $i$ 个元素等于 $b$ 的第 $i$ 个元素，这个等式对于每个 $i$ 都成立。
 
 同样，$x \geq 0$ 意味着 $x_j$ 对于每个 $j$ 都大于等于 $0$。
 
@@ -459,7 +460,7 @@ A_ex1 = np.array([[2, 5],
 b_ex1 = np.array([30,20])
 ```
 
-一旦我们解决了问题，就可以使用布尔属性 `success` 检查求解器是否成功解决了该问题。如果成功，则 `success` 属性被设置为 `True`。
+一旦我们解决了问题，就可以使用布尔属性 `success` 查看求解器是否成功解决了该问题。如果成功，则 `success` 属性被设置为 `True`。
 
 ```{code-cell} ipython3
 # 解决问题

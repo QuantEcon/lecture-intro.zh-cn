@@ -15,6 +15,13 @@ jobs:
           python-version: "3.12"
           environment-file: environment.yml
           activate-environment: quantecon
+      - name: Download "build" folder (cache)
+        uses: dawidd6/action-download-artifact@v9
+        with:
+          workflow: cache-windows.yml
+          branch: main
+          name: build-cache-windows
+          path: _build
       - name: Display Conda Environment Versions
         shell: bash -l {0}
         run: conda list

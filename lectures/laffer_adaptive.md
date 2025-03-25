@@ -19,31 +19,29 @@ kernelspec:
 
 与讲座{doc}`money_inflation`中一样，此讲座使用了{cite}`Cagan`在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座{doc}`money_inflation`中使用的线性需求函数。
 
-但现在，我们将不采用''理性预期''的''完全预见''形式，而是采用{cite}`Cagan`和{cite}`Friedman1956`使用的''自适应预期''假设。
+但在本讲中，我们将不采用"理性预期"的"完全预见"形式，而是采用{cite}`Cagan`和{cite}`Friedman1956`使用的"自适应预期"假设。
 
-这意味着，我们不再假设预期通货膨胀$\pi_t^*$是由"完全预见"或"理性预期"假设描述
+这意味着，我们不再假设预期通货膨胀$\pi_t^*$遵循"完全预见"或"理性预期"
 
 $$
 \pi_t^* = p_{t+1} - p_t
 $$
 
-我们在讲座{doc}`money_inflation`和讲座{doc}`money_inflation_nonlinear`中采用的假设，现在我们假设$\pi_t^*$由下面报告的自适应预期假设{eq}`eq:adaptex`决定。
+我们现在不再采用讲座{doc}`money_inflation`和讲座{doc}`money_inflation_nonlinear`中的假设，而是假设$\pi_t^*$遵循下文中的自适应预期假设{eq}`eq:adaptex`。
 
-我们将发现，以这种方式改变关于预期形成的假设会改变我们的一些发现并保持其他发现不变。特别是，我们将发现
+这种预期形成机制的改变会带来一些重要的影响。具体来说:
 
-* 用自适应预期替换理性预期不改变两个静态通货膨胀率，但是$\ldots$
-* 它通过使系统通常收敛于**较低**的静态通货膨胀率来逆转不正常的动态
-* 出现了更加合理的比较动态结果，现在通过运行**更低**的政府赤字可以**降低**通货膨胀
+* 两个静态通货膨胀率水平保持不变
+* 但系统的动态行为发生了变化 - 它现在倾向于收敛到**较低**的通货膨胀率水平
+* 政策效果变得更符合直觉 - **降低**政府赤字能够**降低**通货膨胀
 
-这些更合理的比较动态是建立在“老式信仰”上的，即“通货膨胀总是且处处由政府赤字引起”。
+这些结果更符合传统的经济学观点,即通货膨胀主要由政府赤字驱动。
 
-{cite}`bruno1990seigniorage`研究了这些问题。
-
-他们的目的是通过放弃理性预期，而假设人们根据下面描述的“自适应预期”方案{eq}`eq:adaptex`来形成对未来通货膨胀率的预期，从而逆转他们认为在理性预期（即在这种情况下的完全预见）下模型的违反直觉的预测。
+{cite}`bruno1990seigniorage`对这些问题进行了研究。他们认为理性预期(完全预见)模型的预测有悖直觉,因此提出用自适应预期来替代。在自适应预期下,人们根据下文的方程{eq}`eq:adaptex`来形成对未来通货膨胀的预期。
 
 ```{note}
-{sargeant1989least} 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
-{sargeant2009conquest} 和 {marcet2003recurrent} 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
+{cite}`sargent1989least` 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
+{cite}`marcet2003recurrent` 和 {cite}`sargent2009conquest` 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
 ```  
 
 ## 模型
@@ -84,48 +82,40 @@ $$ (eq:adaptex)
 
 其中 $\delta \in (0,1)$
 
-## 计算平衡序列
+## 计算均衡序列
 
-通过将{eq}`eq:ada_mdemand` 和 {eq}`eq:ada_msupply2` 提供的 $m_{t+1}$ 表达式与使用方程 {eq}`eq:adaptex` 消除 $\pi_t^*$，得到下列 $p_t$ 的方程：
+我们可以通过以下步骤求解均衡序列。首先，将方程{eq}`eq:ada_mdemand`和{eq}`eq:ada_msupply2`中的$m_{t+1}$表达式结合，并使用方程{eq}`eq:adaptex`消除$\pi_t^*$，得到关于$p_t$的方程：
 
 $$
 \log[ \exp(m_t) + g \exp(p_t)] - p_t = -\alpha [(1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*]
 $$ (eq:pequation)
 
-**伪代码**
+给定初始条件$(m_0, \pi_{-1}^*, p_{-1})$，我们可以按照以下步骤求解均衡序列：
 
-这是我们算法的伪代码。
+1. 求解方程{eq}`eq:pequation`得到$p_t$
+2. 使用方程{eq}`eq:adaptex`计算$\pi_t^*$ 
+3. 使用方程{eq}`eq:ada_msupply2`计算$m_{t+1}$
+4. 重复步骤1-3
 
-从时间 $0$ 开始，初始条件为 $(m_0, \pi_{-1}^*, p_{-1})$，对于每个 $t \geq 0$ 按顺序执行以下步骤：
+## 主要结论
 
-* 解方程 {eq}`eq:pequation` 以求得 $p_t$
-* 解方程 {eq}`eq:adaptex` 以求得 $\pi_t^*$
-* 解方程 {eq}`eq:ada_msupply2` 以求得 $m_{t+1}$
+通过分析模型,我们可以得出以下几个重要结论:
 
-这完成了算法。
+1. 如果存在稳态,通货膨胀率$\overline \pi$将等于货币增长率$\overline \mu$
 
-## 声明或猜想
+2. 模型存在两个可能的稳态通货膨胀率 - 一个高值和一个低值
 
-结果表明：
+3. 与{doc}`money_inflation_nonlinear`中的理性预期模型不同,在大多数初始条件$(p_0, \pi_{t}^*)$下,系统会收敛到**较低**的稳态通货膨胀率
 
-* 如果存在，限制值 $\overline \pi$ 和 $\overline \mu$ 将是相等的
+4. 对于每个稳态通货膨胀率$\overline \pi$,都存在唯一的初始价格水平$p_0$使得系统立即进入稳态($\pi_t = \mu_t = \overline \mu$ 对所有 $t \geq 0$)
+   - 这个$p_0$满足方程:$\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \overline \pi$
+   - 该方程来自稳态条件$m_1 - p_0 = - \alpha \overline \pi$
 
-* 如果存在限制值，有两种可能的限制值，一个高，一个低
-
-* 与讲座{doc}`money_inflation_nonlinear`中的结果不同，对于几乎所有初始对数价格水平和预期通货膨胀率 $p_0, \pi_{t}^*$，限制 $\overline \pi = \overline \mu$ 是**较低**的稳态值
-
-* 对于这两个可能的限制值 $\overline \pi$，有一个唯一的初始对数价格水平 $p_0$，意味着 $\pi_t = \mu_t = \overline \mu$ 对所有 $t \geq 0$
-
-  * 这个唯一的初始对数价格水平解决 $\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \overline \pi$
-  
-  * 上述关于 $p_0$ 的方程来自于 $m_1 - p_0 = - \alpha \overline \pi$
-  
-## 通货膨胀率的限制值
+## 稳态通货膨胀率的计算
 
 正如我们在早前的讲座 {doc}`money_inflation_nonlinear` 中讨论的，我们可以通过研究稳态劳动曲线来计算 $\bar \pi$ 的两个潜在的限制值。
 
 因此，在一个**稳态**中
-
 $$
 m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 $$
@@ -138,7 +128,7 @@ $$
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
 $$ (eq:ada_steadypi)
 
-我们要求
+我们需要满足
 
 $$
 g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,  
@@ -184,7 +174,7 @@ LafferAdaptive = namedtuple('LafferAdaptive',
                          "g",   # 政府支出
                          "δ"])
 
-# 创建一个 Cagan Laffer 模型
+# 创建一个 凯根拉弗 模型 
 def create_model(α=0.5, m0=np.log(100), g=0.35, δ=0.9):
     return LafferAdaptive(α=α, m0=m0, g=g, δ=δ)
 
@@ -237,14 +227,14 @@ def plot_laffer(model, πs):
     # 绘制函数图形
     plt.plot(x_values, y_values, 
             label=f'$exp((-{α})x) - exp(- (1- {α}) x)$')
-    for π, label in zip(πs, ['$\pi_l$', '$\pi_u$']):
+    for π, label in zip(πs, [r'$\pi_l$', r'$\pi_u$']):
         plt.text(π, plt.gca().get_ylim()[0]*2, 
                  label, horizontalalignment='center',
                  color='brown', size=10)
         plt.axvline(π, color='brown', linestyle='--')
     plt.axhline(g, color='red', linewidth=0.5, 
                 linestyle='--', label='g')
-    plt.xlabel('$\pi$')
+    plt.xlabel(r'$\pi$')
     plt.ylabel('铸币税')
     plt.legend()
     plt.grid(True)
@@ -254,15 +244,19 @@ def plot_laffer(model, πs):
 plot_laffer(model, (π_l, π_u))
 ```
 
-## 相关的初始价格水平
+## 初始价格水平的计算
 
-现在我们掌握了两个可能的稳定状态，我们可以计算两个初始对数价格水平 $p_{-1}$，作为初始条件，这意味着对于所有 $t \geq 0$，$\pi_t = \bar \pi$。
+既然我们已经找到了两个可能的稳态通货膨胀率，接下来我们需要计算与每个稳态相对应的初始价格水平 $p_{-1}$。
 
-特别是，为了启动动态劳弗曲线动态的固定点，我们设置
+这些初始价格水平很重要，因为它们能让系统从一开始就处于稳态，也就是说，如果我们从正确的 $p_{-1}$ 开始，那么通货膨胀率 $\pi_t$ 会在所有时期 $t \geq 0$ 保持在稳态值 $\bar \pi$ 不变。
+
+根据货币需求方程，初始价格水平应满足:
 
 $$
 p_{-1} = m_0 + \alpha \pi^*
 $$
+
+其中 $m_0$ 是初始货币供应量的对数，$\alpha$ 是货币需求对预期通货膨胀的敏感度，$\pi^*$ 是稳态通货膨胀率。
 
 ```{code-cell} ipython3
 def solve_p_init(model, π_star):
@@ -276,7 +270,7 @@ print('相关的初始 p_{-1}', f'为: {p_l, p_u}')
 
 ### 验证
 
-首先，我们编写一些代码来验证，如果我们适当初始化 $\pi_{-1}^*,p_{-1}$，则通货膨胀率 $\pi_t$ 对于所有 $t \geq 0$ 将保持恒定（取决于初始条件，可以是 $\pi_u$ 或 $\pi_l$）
+首先，我们编写一些代码来验证，如果我们适当初始化 $\pi_{-1}^*,p_{-1}$，则通货膨胀率 $\pi_t$ 对于所有 $t \geq 0$ 将保持恒定（根据初始条件的不同，可能是较高的稳态值 $\pi_u$ 或较低的稳态值 $\pi_l$）。
 
 以下代码进行了验证。
 
@@ -294,19 +288,19 @@ def solve_laffer_adapt(p_init, π_init, model, num_steps):
     p_seq[0] = p_init
         
     for t in range(1, num_steps):
-        # 解决 p_t
+        # 解出 p_t
         def p_t(pt):
             return np.log(np.exp(m_seq[t]) + g * np.exp(pt)) - pt + α * ((1-δ)*(pt - p_seq[t-1]) + δ*π_seq[t-1])
         
         p_seq[t] = root(fun=p_t, x0=p_seq[t-1]).x[0]
         
-        # 解决 π_t
+        # 解出 π_t
         π_seq[t] = (1-δ) * (p_seq[t]-p_seq[t-1]) + δ*π_seq[t-1]
         
-        # 解决 m_t
+        # 解出 m_t
         m_seq[t+1] = np.log(np.exp(m_seq[t]) + g*np.exp(p_seq[t]))
         
-        # 解决 μ_t
+        # 解出 μ_t
         μ_seq[t] = m_seq[t+1] - m_seq[t]
     
     return π_seq, μ_seq, m_seq, p_seq
@@ -327,7 +321,7 @@ eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-计算从 $p_{-1}$ 开始，与 $\pi_u$ 相关联的极限值
+现在计算从初始价格水平 $p_{-1}$ 开始，收敛到高通胀稳态 $\pi_u$ 的动态路径
 
 ```{code-cell} ipython3
 π_seq, μ_seq, m_seq, p_seq = solve_laffer_adapt(p_u, π_u, model, 50)
@@ -342,16 +336,16 @@ eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-## 动态拉弗曲线的滑动侧面
+## 拉弗曲线动态的不稳定性
 
-我们现在已经具备了从不同的 $p_{-1}, \pi_{-1}^*$ 设置开始计算时间序列的能力，类似于这个讲座中的设置 {doc}`money_inflation` 和这个讲座 {doc}`money_inflation_nonlinear`。
+与{doc}`money_inflation` 和{doc}`money_inflation_nonlinear`类似，我们现在已经具备了从不同的 $p_{-1}, \pi_{-1}^*$ 设置开始计算时间序列的能力。
 
-现在我们将研究当我们从动态拉弗曲线的一个静止点开始 $p_{-1}, \pi_{-1}^*$，即远离 $\pi_u$ 或 $ \pi_l$ 时，结果如何展开。
+现在我们将研究当初始条件 $p_{-1}, \pi_{-1}^*$ 偏离稳态值 $\pi_u$ 或 $\pi_l$ 时，系统的动态演化过程。
 
-为了构建一个扰动对 $\check p_{-1}, \check \pi_{-1}^*$，我们将实现以下伪代码：
+为了生成不同的初始条件，我们将:
 
-* 设置 $\check \pi_{-1}^* $ 不等于静止点之一 $\pi_u$ 或 $ \pi_l$。
-* 设置 $\check p_{-1} = m_0 + \alpha \check \pi_{-1}^*$
+* 选择一系列不同于稳态值的初始预期通胀率 $\pi_{-1}^*$
+* 根据货币需求方程，计算对应的初始价格水平 $p_{-1} = m_0 + \alpha \pi_{-1}^*$
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -373,16 +367,16 @@ def draw_iterations(π0s, model, line_params, π_bars, num_steps):
             
     axes[2].axhline(y=π_bars[0], color='grey', linestyle='--', lw=1.5, alpha=0.6)
     axes[2].axhline(y=π_bars[1], color='grey', linestyle='--', lw=1.5, alpha=0.6)
-    axes[2].text(num_steps * 1.07, π_bars[0], '$\pi_l$', verticalalignment='center', 
+    axes[2].text(num_steps * 1.07, π_bars[0], r'$\pi_l$', verticalalignment='center', 
                      color='grey', size=10)
-    axes[2].text(num_steps * 1.07, π_bars[1], '$\pi_u$', verticalalignment='center', 
+    axes[2].text(num_steps * 1.07, π_bars[1], r'$\pi_u$', verticalalignment='center', 
                          color='grey', size=10)
 
     axes[0].set_ylabel('$m_t$')
     axes[1].set_ylabel('$p_t$')
-    axes[2].set_ylabel('$\pi_t$')
-    axes[3].set_ylabel('$\mu_t$')
-    axes[3].set_xlabel('时间步')
+    axes[2].set_ylabel(r'$\pi_t$')
+    axes[3].set_ylabel(r'$\mu_t$')
+    axes[3].set_xlabel('时间')
     axes[3].xaxis.set_major_locator(MaxNLocator(integer=True))
 
     plt.tight_layout()
@@ -395,7 +389,7 @@ def draw_iterations(π0s, model, line_params, π_bars, num_steps):
 ---
 mystnb:
   figure:
-    caption: 从不同的 $\pi_0$ 初始值开始，$m_t$ 的路径（顶部面板，$m$ 的对数标度），$p_t$（第二面板，$p$ 的对数标度），$\pi_t$（第三面板），和 $\mu_t$（底部面板）
+    caption: 从不同的 $\pi_0$ 初始值开始，$m_t$ 的路径（顶部图，$m$ 的对数标度），$p_t$（第二副图，$p$ 的对数标度），$\pi_t$（第三副图），和 $\mu_t$（底部图）
     name: pi0_path
     width: 500px
 ---
