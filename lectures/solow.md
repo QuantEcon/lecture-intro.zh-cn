@@ -16,7 +16,7 @@ kernelspec:
 
 这个模型被用于研究长期的经济增长。
 
-尽管模型简单，但它包含了一些有趣的启示。
+尽管这是一个相对简单的模型，但它提供了许多关于经济增长的深刻见解。
 
 我们将使用以下导入语句。
 
@@ -91,11 +91,11 @@ $$
 
 为此，我们首先需要为 $f$ 指定函数形式并为参数赋值。
 
-我们选择Cobb–Douglas规格 $f(k) = A k^\alpha$，并设定 $A=2.0$，$\alpha=0.3$，$s=0.3$ 和 $\delta=0.4$。
+我们采用Cobb–Douglas生产函数 $f(k) = A k^\alpha$，并设置参数值为 $A=2.0$，$\alpha=0.3$，$s=0.3$ 和 $\delta=0.4$。
 
 然后绘制方程 {eq}`solow` 中的函数 $g$，以及45度线。
 
-我们定义这些常数如下。
+我们定义这些常数如下
 
 ```{code-cell} ipython3
 A, s, alpha, delta = 2, 0.3, 0.3, 0.4
@@ -103,14 +103,14 @@ x0 = 0.25
 xmin, xmax = 0, 3
 ```
 
-现在我们来定义函数$g$。
+现在我们来定义函数$g$
 
 ```{code-cell} ipython3
 def g(A, s, alpha, delta, k):
     return A * s * k**alpha + (1 - delta) * k
 ```
 
-让我们来绘制函数$g$的45度图。
+让我们来绘制函数$g$的45度图
 
 ```{code-cell} ipython3
 def plot45(kstar=None):
@@ -167,20 +167,20 @@ plot45()
 
 （模型的{ref}`稳态<scalar-dynam:steady-state>`是映射 $g$ 的[不动点](https://baike.baidu.com/item/%E4%B8%8D%E5%8A%A8%E7%82%B9/8535695)。）
 
-从图中 $g$ 函数的形状可以看出，在 $(0, \infty)$ 内存在唯一的稳态。
+从图中可以看出，$g$ 函数与45度线只有一个交点，这意味着在 $(0, \infty)$ 区间内存在唯一的稳态。
 
-它满足方程 $k = s Ak^{\alpha} + (1-\delta)k$，因此可以表示为
+在稳态时，$k^* = g(k^*)$，即 $k^* = s A(k^*)^{\alpha} + (1-\delta)k^*$。解这个方程，我们得到
 
 ```{math}
 :label: kstarss
     k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}
 ```
 
-如果初始资本低于 $k^*$，那么资本会随时间增加。
+当初始资本低于稳态值 $k^*$ 时，我们可以从图中看到 $g(k_t) > k_t$，这意味着资本存量会随时间增加，逐渐接近稳态。
 
-如果初始资本高于这个水平，则反之成立。
+相反，如果初始资本高于 $k^*$，则 $g(k_t) < k_t$，资本存量会随时间减少，同样趋向于稳态值。
 
-让我们绘制45度图来在图中展示 $k^*$。
+让我们在45度图中标出这个稳态值 $k^*$，以便更直观地理解这一动态过程。
 
 ```{code-cell} ipython3
 kstar = ((s * A) / delta)**(1/(1 - alpha))
@@ -243,11 +243,11 @@ simulate_ts(x0, ts_length)
 
 在本节中，我们将研究索洛-斯旺增长模型的连续时间版本。
 
-我们将探讨连续时间提供的平滑作用如何简化分析。
+连续时间框架提供了一种更为流畅的分析方法，使得模型的动态特性更容易理解。
 
-回顾一下，资本的离散时间动态由以下公式给出：$k_{t+1} = s f(k_t) + (1 - \delta) k_t$。
+让我们回顾一下离散时间版本的资本动态方程：$k_{t+1} = s f(k_t) + (1 - \delta) k_t$。
 
-经过简单重排即可得到单位时间的变化率：
+我们可以将其重新整理为单位时间内的变化量：
 
 $$
     \Delta k_t = s f(k_t) - \delta k_t
@@ -255,7 +255,7 @@ $$
     \Delta k_t := k_{t+1}  - k_t
 $$
 
-将时间步长趋近于零得到连续时间极限
+当我们让时间间隔无限趋近于零时，这个离散变化自然过渡到连续时间的导数形式
 
 ```{math}
 :label: solowc
@@ -263,6 +263,7 @@ $$
     \qquad \text{with} \qquad
     k'_t := \frac{d}{dt} k_t
 ```
+
 我们的目标是在给定初始资本存量 $k_0$ 的条件下，研究 $k_t$ 随时间演变的规律。
 
 方程 {eq}`solowc` 的**稳态**是指资本存量保持不变的 $k^*$，即 $k'_t = 0$ 或等价地，$s f(k^*) = \delta k^*$。
@@ -329,15 +330,15 @@ kstar = ((s * A) / delta)**(1/(1 - alpha))
 plot_gcon(kstar)
 ```
 
-这通过启发式方法展示了在固定参数设定下的全局稳定性，但我们如何针对连续的可能参数范围严格证明同样的结论？
+上图直观地展示了特定参数下的全局稳定性，但我们如何严格证明这一性质对于所有合理参数都成立呢？
 
-在离散时间的情况下，我们很难得到 $k_t$ 的简洁表达式。
+在离散时间模型中，要得到 $k_t$ 的解析表达式相当困难。
 
-在连续时间框架下，分析过程更为简便：我们可以得到一个相对简单的 $k_t$ 表达式，该表达式可明确描述整个时间路径的动态变化。
+然而，转向连续时间框架可以大大简化分析。在连续时间下，我们能够推导出 $k_t$ 的简洁表达式，从而清晰地描述资本存量随时间的演化路径。
 
-第一步是设 $x_t := k_t^{1-\alpha}$，使得 $x'_t = (1-\alpha) k_t^{-\alpha} k'_t$。
+为此，我们引入变量替换 $x_t := k_t^{1-\alpha}$，这样 $x'_t = (1-\alpha) k_t^{-\alpha} k'_t$。
 
-将其代入$k'_t = sAk_t^\alpha - \delta k_t$，得到以下线性微分方程
+将连续时间的动态方程 $k'_t = sAk_t^\alpha - \delta k_t$ 代入上式，我们得到一个线性微分方程
 
 ```{math}
 :label: xsolow
@@ -371,7 +372,7 @@ $$
     \right]^{1/(1-\alpha)}
 ```
 
-由于 $\delta > 0$ 且 $\alpha \in (0, 1)$，我们立即可以看出，当 $t \to \infty$ 时，$k_t \to k^*$，且与 $k_0$ 无关。
+由于 $\delta > 0$ 且 $\alpha \in (0, 1)$，我们立即可以得出结论，当 $t \to \infty$ 时，$k_t \to k^*$，且与 $k_0$ 无关。
 
 因此，全局稳定性成立。
 
@@ -441,7 +442,7 @@ fig, ax = plt.subplots(figsize=[11, 5])
 
 fps = (c_star_max,)
 
-# Highlight the maximum point with a marker
+# 用标记突出显示最大点
 ax.plot((s_star_max, ), (c_star_max,), 'go', ms=8, alpha=0.6)
 
 ax.annotate(r'$s^*$',
@@ -480,7 +481,7 @@ s_star = solve(c.diff())[0]
 print(f"s_star = {s_star}")
 ```
 
-顺便说一下，使人均消费的稳态水平最大化的储蓄率被称为[黄金法则储蓄率](https://baike.baidu.com/item/%E7%BB%8F%E6%B5%8E%E5%A2%9E%E9%95%BF%E9%BB%84%E9%87%91%E5%BE%8B/10376669)。
+顺便说一下，使人均消费的稳态水平最大化的储蓄率被称为[经济增长黄金律](https://baike.baidu.com/item/%E7%BB%8F%E6%B5%8E%E5%A2%9E%E9%95%BF%E9%BB%84%E9%87%91%E5%BE%8B/10376669)。
 
 ```{solution-end}
 ```
@@ -523,7 +524,7 @@ print(f"s_star = {s_star}")
 让我们定义用于模拟的对数正态分布的常数和初始值
 
 ```{code-cell} ipython3
-# 定义一下常数
+# 定义常数
 sig = 0.2
 mu = np.log(2) - sig**2 / 2
 A = 2.0
@@ -568,8 +569,6 @@ def ts_plot(x_values, ts_length):
 ```{code-cell} ipython3
 ts_plot(x0, 50)
 ```
-
-
 
 ```{solution-end}
 ```
