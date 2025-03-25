@@ -11,11 +11,12 @@ kernelspec:
   name: python3
 ---
 (heavy_tail)=
+
 # 重尾分布
 
 除了Anaconda中的内容，本讲还需要以下库：
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 !pip install --upgrade yfinance pandas_datareader
@@ -23,7 +24,7 @@ kernelspec:
 
 我们使用以下的导入。
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -53,7 +54,6 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 在这次讲座中，我们将解释什么是重尾，以及为什么它们是 -- 或者至少应该是 -- 经济分析的核心。
 
-
 ### 引言：轻尾分布
 
 大多数{doc}`常用概率分布<prob_dist>`在经典统计学和自然科学中都具有“轻尾”。
@@ -79,7 +79,7 @@ $$
 
 我们可以通过绘制密度图和展示观测值的直方图来看到这一点，如下代码所示（假设 $\mu=0$ 和 $\sigma=1$）。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -102,13 +102,13 @@ plt.show()
 
 我们可以通过执行以下代码更清楚地看到最后一点：
 
-```{code-cell} ipython3
+```{code-cell}
 X.min(), X.max()
 ```
 
 这里是从同一分布中抽取的另一种视图：
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -128,11 +128,9 @@ plt.show()
 
 我们已经绘制了每个单独的抽样 $X_i$ 与 $i$ 的对应关系。
 
-没有一个非常大或非常小。
+极端的观测值很少，抽样结果不会太偏离均值。
 
-换句话说，极端的观测值很少，抽样倾向于不会太偏离均值。
-
-换种说法，轻尾分布是那些很少产生极端值的分布。
+换句话说，轻尾分布是那些很少产生极端值的分布。
 
 （更正式的定义见{ref}`下面 <heavy-tail:formal-definition>`。）
 
@@ -140,7 +138,7 @@ plt.show()
 
 但这只有在分布具有轻尾的时候才成立。
 
-### 何时适用于轻尾分布？
+### 轻尾分布适用于哪些情况？
 
 在概率理论和现实世界中，许多分布都是轻尾的。
 
@@ -172,13 +170,13 @@ plt.show()
 
 以下代码通过 `yfinance` 库使用雅虎财经数据生成所需的图表。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 data = yf.download('AMZN', '2015-1-1', '2022-7-1', auto_adjust=False)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -204,13 +202,13 @@ plt.show()
 
 如果我们查看其他资产，比如比特币，我们会得到类似的图像。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 data = yf.download('BTC-USD', '2015-1-1', '2022-7-1', auto_adjust=False)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -232,7 +230,7 @@ plt.show()
 
 这个直方图也与正态分布的直方图不同:
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -285,7 +283,7 @@ plt.show()
 
 在本讲座的后面部分，我们将研究这些分布中的重尾现象。
 
-### 为什么我们应该关心？
+### 为什么我们应该关心重尾分布？
 
 重尾在经济数据中很常见，但这是否意味着它们很重要？
 
@@ -300,6 +298,7 @@ plt.show()
 我们将回到这些点 {ref}`下面 <heavy-tail:application>`。
 
 ## 视觉比较
+
 在本节中，我们将介绍帕雷托分布、计数器累积分布函数和幂律等重要概念，这些概念有助于识别重尾分布。
 
 稍后我们将提供有关轻尾和重尾差异的数学定义。
@@ -314,7 +313,7 @@ plt.show()
 
 下面的子图显示来自[柯西分布](https://en.wikipedia.org/wiki/Cauchy_distribution)的120个独立抽取，这是重尾分布。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -357,7 +356,6 @@ plt.show()
 
 这是典型的重尾分布特征。
 
-
 ### 非负分布
 
 让我们比较一些只取非负值的分布。
@@ -368,7 +366,7 @@ plt.show()
 
 这里有一些来自指数分布的抽样。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -414,14 +412,14 @@ plt.show()
 特别地，如果 $X$ 是以率参数 $\alpha$ 指数分布的，那么
 
 $$
-Y = \bar x \exp(X) 
+Y = \bar x \exp(X)
 $$
 
 具有最小值 $\bar x$ 和尾指数 $\alpha$ 的帕累托分布。
 
 这里是一些从帕累托分布中抽取的数据，尾指数为 $1$，最小值为 $1$。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -479,9 +477,10 @@ $$
 展示如何从指数分布的CCDF推导出标准帕雷托分布的CCDF。
 ```
 
-```{solution-start} ht_ex_x1
+```{solution-start}
 :class: dropdown
 ```
+
 设 $G_E$ 和 $G_P$ 如上定义，设 $X$ 是具有速率参数 $\alpha$ 的指数分布，并设 $Y = \exp(X)$，我们有
 
 $$
@@ -494,12 +493,14 @@ $$
         & = y^{-\alpha}
 \end{aligned}
 $$
+
 ```{solution-end}
+
 ```
 
 这是一个图示，展示了$G_E$比$G_P$衰减得更快。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -519,7 +520,7 @@ plt.show()
 
 下面是同一函数的对数对数图，便于视觉比较。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -552,7 +553,7 @@ $$
 
 因此，$\hat G(x)$ 显示样本中超过 $x$ 的比例。
 
-```{code-cell} ipython3
+```{code-cell}
 def eccdf(x, data):
     "简单的经验 CCDF 函数。"
     return np.mean(data > x)
@@ -560,7 +561,7 @@ def eccdf(x, data):
 
 下面是一些从模拟数据得到的经验 CCDFs 的图。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -591,10 +592,10 @@ for data, label, ax in zip(data_list, labels, axes):
         'o', markersize=3.0, alpha=0.5, label=label)
     ax.set_xlabel("对数值")
     ax.set_ylabel("对数概率")
-    
+  
     ax.legend()
-    
-    
+  
+  
 fig.subplots_adjust(hspace=0.4)
 
 plt.show()
@@ -614,7 +615,7 @@ plt.show()
 
 如果数据来自正态分布，该图看起来会像：
 
-```{code-cell} ipython3
+```{code-cell}
 data_normal = np.random.normal(size=sample_size)
 sm.qqplot(data_normal, line='45')
 plt.xlabel("理论分位数")
@@ -624,7 +625,7 @@ plt.show()
 
 我们现在可以将其与指数分布、对数正态分布和帕累托分布进行比较
 
-```{code-cell} ipython3
+```{code-cell}
 # 构建图形
 fig, axes = plt.subplots(1, 3, figsize=(12, 4))
 axes = axes.flatten()
@@ -648,6 +649,7 @@ plt.show()
 \mathbb P\{X > x\} \approx  x^{-\alpha}
 \quad \text{当 $x$ 很大}
 ```
+
 我们可以更数学化地写成
 
 ```{math}
@@ -681,7 +683,7 @@ plt.show()
 
 我们隐藏了生成图形的代码，该代码有些复杂，但读者当然可以探索代码（也许可以在查看图形后进行）。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def empirical_ccdf(data, 
@@ -715,10 +717,10 @@ def empirical_ccdf(data,
             y_vals[i] = 1- j
 
     x, y = np.log(data), np.log(y_vals)
-    
+  
     results = sm.OLS(y, sm.add_constant(x)).fit()
     b, a = results.params
-    
+  
     kwargs = [('alpha', 0.3)]
     if label:
         kwargs.append(('label', label))
@@ -731,17 +733,17 @@ def empirical_ccdf(data,
         xlabel='对数值'
     ax.set_xlabel(xlabel, fontsize=12)
     ax.set_ylabel("对数概率", fontsize=12)
-        
+      
     if label:
         ax.legend(loc='lower left', fontsize=12)
-        
+      
     if title:
         ax.set_title(title)
-        
+      
     return np.log(data), y_vals, p_vals
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def extract_wb(varlist=['NY.GDP.MKTP.CD'], 
@@ -754,13 +756,13 @@ def extract_wb(varlist=['NY.GDP.MKTP.CD'],
         countries = wb.get_countries()
         countries_name = countries[countries['region'] != 'Aggregates']['name'].values
         c = "all"
-    
+  
     df = wb.download(indicator=varlist, country=c, start=s, end=e).stack().unstack(0).reset_index()
     df = df.drop(['level_1'], axis=1).transpose()
     if varnames is not None:
         df.columns = varnames
         df = df[1:]
-    
+  
     df1 =df[df.index.isin(countries_name)]
     return df1
 ```
@@ -769,7 +771,7 @@ def extract_wb(varlist=['NY.GDP.MKTP.CD'],
 
 以下是2020年来自福布斯全球2000强的最大500家公司的公司规模分布图。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -795,7 +797,7 @@ plt.show()
 
 大小由人口衡量。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -821,7 +823,7 @@ plt.show()
 
 数据来源于2020年的《福布斯亿万富翁》名单。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -844,11 +846,11 @@ for i, c in enumerate(countries):
     z = np.asarray(df_w_c['realTimeWorth'])
     # 打印来自该国的全球前2000位富豪的人数
     top = 500           # 截止数：前500名
-    if len(z) <= top:    
+    if len(z) <= top:  
         z = z[:top]
 
     empirical_ccdf(z[:top], axs[i], label=c, xlabel='对数财富', add_reg_line=True)
-    
+  
 fig.tight_layout()
 
 plt.show()
@@ -860,7 +862,7 @@ plt.show()
 
 这里我们展示的是各国人均GDP。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 # 获取2021年所有地区和国家的GDP及人均GDP
@@ -876,7 +878,7 @@ df_gdp1 = extract_wb(varlist=variable_code,
 df_gdp1.dropna(inplace=True)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -897,7 +899,6 @@ plt.show()
 这其中一个原因是这是关于一个综合变量的数据，其定义中涉及了一些平均处理。
 
 平均处理往往会消除极端结果。
-
 
 ## 大数定律的失败
 
@@ -921,7 +922,7 @@ plt.show()
 
 让我们来看看这种情况下样本平均值的行为，看是否大数定律仍然有效。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -956,8 +957,8 @@ plt.show()
 
 我们在练习中会回到这一点。
 
-
 (heavy-tail:application)=
+
 ## 为什么重尾分布很重要？
 
 我们已经看到
@@ -971,7 +972,7 @@ plt.show()
 
 投资中一个最重要的概念是使用分散化来降低风险。
 
-这是一个非常古老的想法——例如，考虑这个表达式“不要把所有的鸡蛋放在一个篮子里”。
+这是一个非常古老的想法——例如“不要把所有的鸡蛋放在一个篮子里”。
 
 为了说明这一点，设想一个拥有一美元财富的投资者，在$n$种资产中进行选择，这些资产的回报为$X_1, \ldots, X_n$。
 
@@ -1011,6 +1012,7 @@ $$
 例如，收入分配尾部的厚重程度有助于决定{doc}`税收政策 <mle>`。
 
 (cltail)=
+
 ## 分类尾部特性
 
 到目前为止，我们讨论了轻尾和重尾，但没有任何数学定义。
@@ -1022,6 +1024,7 @@ $$
 左侧尾部的定义非常相似，为了简化论述，我们省略它们。
 
 (heavy-tail:formal-definition)=
+
 ### 轻尾和重尾
 
 一个在 $\mathbb R_+$ 上有密度 $f$ 的分布 $F$ 被称为[重尾](https://en.wikipedia.org/wiki/Heavy-tailed_distribution)的，如果
@@ -1038,7 +1041,6 @@ $$
 
 例如，[对数正态分布](https://en.wikipedia.org/wiki/Log-normal_distribution)是重尾的，因为它的矩生成函数在 $(0, \infty)$ 上无限。
 
-
 帕累托分布也是重尾分布。
 
 非正式地说，重尾分布是指不受指数型界限约束的分布（即尾部比指数分布更重）。
@@ -1052,7 +1054,7 @@ $$
 再举一个例子，如果 $X$ 有[指数分布](https://en.wikipedia.org/wiki/Exponential_distribution)，累积分布函数 $F(x) = 1 - \exp(-\lambda x)$ 对某个 $\lambda > 0$，则其矩生成函数为
 
 $$
-m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t < \lambda 
+m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t < \lambda
 $$
 
 特别地，只要 $t < \lambda$，$m(t)$ 就是有限的，因此 $X$ 是轻尾的。
@@ -1065,8 +1067,6 @@ $$
 但后者条件不是必需的。
 
 例如，对数正态分布是重尾的，但每个矩都是有限的。
-
-
 
 ## 延伸阅读
 
@@ -1082,9 +1082,7 @@ $$
 
 欲了解更多，请参阅 {cite}`acemoglu2002political`, {cite}`glaeser2003injustice`, {cite}`bhandari2018inequality` 或 {cite}`ahn2018inequality`。
 
-
 ## 练习
-
 
 ```{exercise}
 :label: ht_ex2
@@ -1093,7 +1091,7 @@ $$
 $\mathbb E[X^r] = \infty$ 对所有的 $r \geq \alpha$ 都成立。
 ```
 
-```{solution-start} ht_ex2
+```{solution-start}
 :class: dropdown
 ```
 
@@ -1121,6 +1119,7 @@ $$
 由于 $r \geq \alpha$，我们得到 $\mathbb E X^r = \infty$。
 
 ```{solution-end}
+
 ```
 
 ```{exercise}
@@ -1133,12 +1132,11 @@ $$
 使用 `np.random.seed(11)` 来设置种子。
 ```
 
-
-```{solution-start} ht_ex3
+```{solution-start}
 :class: dropdown
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 from scipy.stats import pareto
 
 np.random.seed(11)
@@ -1161,6 +1159,7 @@ plt.show()
 ```
 
 ```{solution-end}
+
 ```
 
 ```{exercise}
@@ -1207,7 +1206,7 @@ plt.show()
 （注：解决这个问题的更好方法将是建模企业动态并尝试给定当前分布追踪个别企业。我们将在后续讲座中讨论企业动态。）
 ```
 
-```{solution-start} ht_ex5
+```{solution-start}
 :class: dropdown
 ```
 
@@ -1235,7 +1234,7 @@ $$
 
 以下是生成两个样本、制作小提琴图并打印两个样本的均值和标准差的代码。
 
-```{code-cell} ipython3
+```{code-cell}
 num_firms = 100_000
 num_years = 10
 tax_rate = 0.15
@@ -1255,7 +1254,7 @@ def pareto_rvs(n):
 
 我们来计算对数正态分布的参数：
 
-```{code-cell} ipython3
+```{code-cell}
 μ = np.log(2) / α
 σ_sq = 2 * (np.log(α/(α - 1)) - np.log(2)/α)
 σ = np.sqrt(σ_sq)
@@ -1263,7 +1262,7 @@ def pareto_rvs(n):
 
 这是一个计算特定分布 `dist` 的单一税收估计的函数。
 
-```{code-cell} ipython3
+```{code-cell}
 def tax_rev(dist):
     tax_raised = 0
     for t in range(num_years):
@@ -1277,7 +1276,7 @@ def tax_rev(dist):
 
 现在让我们生成小提琴图。
 
-```{code-cell} ipython3
+```{code-cell}
 num_reps = 100
 np.random.seed(1234)
 
@@ -1296,19 +1295,21 @@ ax.violinplot(data)
 
 plt.show()
 ```
+
 最后，我们来生成均值和标准差。
 
-```{code-cell} ipython3
+```{code-cell}
 tax_rev_pareto.mean(), tax_rev_pareto.std()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 tax_rev_lognorm.mean(), tax_rev_lognorm.std()
 ```
 
 通过查看代码的输出，我们的主要结论是，帕累托分布假设会导致更低的均值和更大的离散度。
 
 ```{solution-end}
+
 ```
 
 ```{exercise}
@@ -1326,7 +1327,7 @@ $$ (lln_cch)
 
 ```
 
-```{solution-start} ht_ex_cauchy
+```{solution-start}
 :class: dropdown
 ```
 
@@ -1349,4 +1350,5 @@ $$
 因此，在柯西分布的情况下，样本均值本身具有完全相同的柯西分布，无论 $n$ 是多少！
 
 ```{solution-end}
+
 ```

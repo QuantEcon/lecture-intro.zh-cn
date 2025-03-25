@@ -257,7 +257,7 @@ def process_df(df):
     # 删除列名中的 HTML 标记
     for item in ['<s>a</s>', '<s>c</s>', '<s>d</s>', '<s>e</s>']:
         df.columns = df.columns.str.replace(item, '')
-      
+    
     # 将年份转换为整数
     df['Year'] = df['Year'].apply(lambda x: int(x))
   
@@ -653,7 +653,7 @@ plt.show()
 此外，这四个国家的美元汇率走势与其价格水平相似。
 
 ```{note}
-这种模式是汇率兑换率理论中[购买力平价理论](https://en.wikipedia.org/wiki/Purchasing_power_parity)的一个实例。
+这种模式是汇率兑换率理论中[购买力平价理论](https://baike.baidu.com/item/%E8%B4%AD%E4%B9%B0%E5%8A%9B%E5%B9%B3%E4%BB%B7/5461066)的一个实例。
 ```
 
 这些大通胀似乎都“在一瞬间停止”。
