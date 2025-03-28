@@ -18,7 +18,7 @@ kernelspec:
 
 这里引入 `xlrd`是因为 `pandas` 需要它来对Excel文件执行操作。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 !pip install xlrd
@@ -26,7 +26,7 @@ kernelspec:
 
 <!-- Check for pandas>=2.1.4 for Google Collab Compat -->
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-cell]
 
 from importlib.metadata import version
@@ -38,7 +38,7 @@ if Version(version("pandas")) < Version('2.1.4'):
 
 我们现在导入本讲所需的Python库。
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -85,7 +85,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 我们用 `pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
 
-```{code-cell} ipython3
+```{code-cell}
 # 导入数据并清理索引
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/longprices.xls"
 df_fig5 = pd.read_excel(data_url, 
@@ -99,7 +99,7 @@ df_fig5.index = df_fig5.index.astype(int)
 
 在这段时间的大多数年份内，这些国家采用金本位或银本位。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -168,7 +168,7 @@ plt.show()
 
 现在，让我们通过展示原载于{cite}`sargent2002big`第35页的完整图表，来看看1914年之后，当四个国家相继脱离金/银本位制时，它们的物价水平发生了什么变化。
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -225,7 +225,7 @@ plt.show()
 
 在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def process_entry(entry):
@@ -257,7 +257,7 @@ def process_df(df):
     # 删除列名中的 HTML 标记
     for item in ['<s>a</s>', '<s>c</s>', '<s>d</s>', '<s>e</s>']:
         df.columns = df.columns.str.replace(item, '')
-      
+    
     # 将年份转换为整数
     df['Year'] = df['Year'].apply(lambda x: int(x))
   
@@ -286,7 +286,7 @@ def process_df(df):
 
 现在，我们编写绘图函数 `pe_plot` 和 `pr_plot` ，它们将绘制出价格水平、汇率、和通货膨胀率的图表。
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
 
 def pe_plot(p_seq, e_seq, index, labs, ax):
@@ -348,7 +348,7 @@ def pr_plot(p_seq, index, ax):
 
 接下来我们为每个国家准备数据
 
-```{code-cell} ipython3
+```{code-cell}
 # 导入数据
 data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"
 xls = pd.ExcelFile(data_url)
@@ -404,7 +404,7 @@ df_aus, df_hun, df_pol, df_deu = df_list
 * 表 3.3，零售价格水平 $\exp p$
 * 表 3.4，与美国的汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -426,7 +426,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -456,7 +456,7 @@ plt.show()
 
 * 表 3.10，价格水平 $\exp p$ 和汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -478,7 +478,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -510,7 +510,7 @@ plt.show()
 我们在1924年6月兹罗提被采用后放弃了汇率。我们这样做是因为我们没有以兹罗提计量的价格。我们使用6月的旧货币来计算汇率调整。
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -542,7 +542,7 @@ e_seq = 1/df_pol['Cents per Polish mark (zloty after May 1924)']
 e_seq[e_seq.index > '05-01-1924'] = np.nan
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 lab = ['批发价格指数', 
        '波兰马克兑美分(或1924年6月后的波兰兹罗提)']
 
@@ -554,7 +554,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -577,7 +577,7 @@ plt.show()
 * 表 3.18，批发价格水平 $\exp p$
 * 表 3.19，汇率
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -600,7 +600,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -629,7 +629,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ---
 mystnb:
   figure:
@@ -653,7 +653,7 @@ plt.show()
 此外，这四个国家的美元汇率走势与其价格水平相似。
 
 ```{note}
-这种模式是汇率兑换率理论中[购买力平价理论](https://en.wikipedia.org/wiki/Purchasing_power_parity)的一个实例。
+这种模式是汇率兑换率理论中[购买力平价理论](https://baike.baidu.com/item/%E8%B4%AD%E4%B9%B0%E5%8A%9B%E5%B9%B3%E4%BB%B7/5461066)的一个实例。
 ```
 
 这些大通胀似乎都“在一瞬间停止”。
