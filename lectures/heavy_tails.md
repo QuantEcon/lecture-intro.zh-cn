@@ -177,7 +177,7 @@ data = yf.download('AMZN', '2015-1-1', '2022-7-1', auto_adjust=False)
 ---
 mystnb:
   figure:
-    caption: 每日亚马逊回报
+    caption: 亚马逊每日回报
     name: dailyreturns-amzn
 ---
 s = data['Adj Close']
@@ -306,15 +306,15 @@ plt.show()
 
 下图显示了一次模拟。
 
-上面两个子图各显示来自正态分布的120个独立抽取，这是轻尾分布。
+上面两个子图各显示来自正态分布的120个独立样本，这是轻尾分布。
 
-下面的子图显示来自[柯西分布](https://en.wikipedia.org/wiki/Cauchy_distribution)的120个独立抽取，这是重尾分布。
+下面的子图显示来自[柯西分布](https://en.wikipedia.org/wiki/Cauchy_distribution)的120个独立样本，这是重尾分布。
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: 来自正态分布和柯西分布的抽取
+    caption: 来自正态分布和柯西分布的样本
     name: draws-normal-cauchy
 ---
 n = 120
@@ -338,18 +338,18 @@ distribution = cauchy()
 data = distribution.rvs(n)
 ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
 ax.vlines(list(range(n)), 0, data, lw=0.2)
-ax.set_title(f"来自柯西分布的抽取", fontsize=11)
+ax.set_title(f"来自柯西分布的样本", fontsize=11)
 
 plt.subplots_adjust(hspace=0.25)
 
 plt.show()
 ```
 
-在顶部的子图中，正态分布的标准偏差为2，抽取值围绕均值聚集。
+在顶部的子图中，正态分布的标准偏差为2，样本值围绕均值聚集。
 
 在中间的子图中，标准偏差增加到12，如预期的那样，分散度增加。
 
-底部的子图中，柯西的抽取显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。
+底部的子图中，柯西的样本显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。
 
 这是典型的重尾分布特征。
 
@@ -362,7 +362,7 @@ plt.show()
 
 指数分布是典型的轻尾分布。
 
-下面展示了从指数分布中抽取的一些随机样本。
+下面展示了从指数分布中样本的一些随机样本。
 
 ```{code-cell} ipython3
 ---
@@ -540,7 +540,7 @@ plt.show()
 
 ### 经验 CCDFs
 
-样本对应的 CCDF 函数是**经验 CCDF**。
+从样本数据得到的 CCDF 函数被称为**经验 CCDF**。
 
 给定一个样本 $x_1, \ldots, x_n$，经验 CCDF 定义为
 
@@ -826,6 +826,7 @@ df_w = df_w[['country', 'realTimeWorth', 'realTimeRank']].dropna()
 df_w = df_w.astype({'realTimeRank': int})
 df_w = df_w.sort_values('realTimeRank', ascending=True).copy()
 countries = ['United States', 'Japan', 'India', 'Italy']  
+country_names = ['美国', '日本', '印度', '意大利']
 N = len(countries)
 
 fig, axs = plt.subplots(2, 2, figsize=(8, 6))
@@ -839,7 +840,7 @@ for i, c in enumerate(countries):
     if len(z) <= top:    
         z = z[:top]
 
-    empirical_ccdf(z[:top], axs[i], label=c, xlabel='对数财富', add_reg_line=True)
+    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)
     
 fig.tight_layout()
 
