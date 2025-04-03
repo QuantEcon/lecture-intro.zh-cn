@@ -142,7 +142,7 @@ plt.show()
 
 尽管出现了这些暂时的中断，图中一个显著的特点是三个世纪以来价格水平大致保持恒定。
 
-在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[欧文·费雪（Irving Fisher）](https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963#:~:text=%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA(Irving%20Fisher,%E5%B9%B4%E8%8E%B7%E5%93%B2%E5%AD%A6%E5%8D%9A%E5%A3%AB%E5%AD%A6%E4%BD%8D%E3%80%82)和剑桥大学的[约翰·梅纳德·凯恩斯（John Maynard Keynes）](https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330)的关注。
+在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[欧文·费雪（Irving Fisher）](https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963)和剑桥大学的[约翰·梅纳德·凯恩斯（John Maynard Keynes）](https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330)的关注。
 
 * 尽管长期锚定在相同的平均水平上，年度价格水平的波动还是很大
 * 虽然使用有价值的黄金和白银作为货币成功地通过限制货币供给稳定了价格水平，但这需要消耗现实的资源 --
