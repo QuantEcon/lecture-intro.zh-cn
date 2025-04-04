@@ -86,6 +86,9 @@ $$
 
 以下是一个例子
 
+```{prf:example}
+:label: eigen1_ex_sq
+
 $$
     \begin{bmatrix}
         2 & 1 \\
