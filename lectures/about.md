@@ -32,7 +32,7 @@
 
 这个讲座系列的完成离不开QuantEcon研究助理团队和众多同事的宝贵帮助。
 
-特别感谢以下人员的贡献：
+特别感谢并致谢
 
 - [Aakash Gupta](https://github.com/AakashGfude)
 - [Shu Hu](https://github.com/shlff)
@@ -44,4 +44,4 @@
 - [Humphrey Yang](https://github.com/HumphreyYang)
 - [Sylvia Zhao](https://github.com/SylviaZhaooo)
 
-我们还要特别感谢Noritaka Kudoh教授，是他鼓励我们启动这个项目并提供了宝贵的建议。
+我们还要感谢Noritaka Kudoh教授，是他鼓励我们启动这个项目并提供了宝贵的建议。
