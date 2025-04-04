@@ -186,7 +186,7 @@ solver.Maximize(3 * x1 + 4 * x2)
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
-    print('Objective value =', solver.Objective().Value())
+    print('目标值 =', solver.Objective().Value())
     print(f'(x1, x2): ({x1.solution_value():.2}, {x2.solution_value():.2})')
 else:
     print('该问题没有最优解。')
