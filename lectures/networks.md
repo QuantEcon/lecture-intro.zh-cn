@@ -601,6 +601,7 @@ plt.show()
 :label: graph_theory_property1
 
 对于 $V$ 中的不同节点 $i, j$ 和任意整数 $k$，我们有
+
 $$
 a^k_{i j} > 0
 \quad \text{当且仅当} \quad
