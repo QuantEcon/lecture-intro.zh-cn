@@ -73,6 +73,7 @@ jobs:
           jb build lectures --path-output ./ -nW --keep-going
       - name: Upload Build Folder
         uses: actions/upload-artifact@v4
+        if: failure()
         with:
           name: build-assets
           path: _build/
