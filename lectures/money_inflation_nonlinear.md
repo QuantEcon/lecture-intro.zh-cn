@@ -165,7 +165,7 @@ print(f'两个稳态的π是: {π_l, π_u}')
 ---
 mystnb:
   figure:
-    caption: 稳态通胀的铸币税功能。虚线棕色线条代表 $\pi_l$ 和 $\pi_u$。
+    caption: 稳态通胀的铸币税功能。棕色虚线代表 $\pi_l$ 和 $\pi_u$。
     name: laffer_curve_nonlinear
     width: 500px
 ---
@@ -338,7 +338,7 @@ def draw_iterations(p0s, model, line_params, p0_bars, num_steps):
 
     fig, axes = plt.subplots(4, 1, figsize=(8, 10), sharex=True)
     
-    # 预先计算时间步
+    # 预先计算时间
     time_steps = np.arange(num_steps) 
     
     # 在对数刻度上绘制前两个y轴
@@ -366,7 +366,7 @@ def draw_iterations(p0s, model, line_params, p0_bars, num_steps):
     axes[1].set_ylabel('$p_t$')
     axes[2].set_ylabel(r'$\pi_t$')
     axes[3].set_ylabel(r'$\mu_t$')
-    axes[3].set_xlabel('时间步')
+    axes[3].set_xlabel('时间')
     
     for p_0, label in [(p0_bars[0], '$p_0=p_l$'), (p0_bars[1], '$p_0=p_u$')]:
         y = simulate_seq(p_0, model, 1)[0]

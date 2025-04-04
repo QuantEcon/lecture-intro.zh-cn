@@ -86,6 +86,9 @@ $$
 
 以下是一个例子
 
+```{prf:example}
+:label: eigen1_ex_sq
+
 $$
     \begin{bmatrix}
         2 & 1 \\
@@ -517,15 +520,15 @@ def grid_composition_transform(A=np.array([[1, -1], [1, 1]]),
 
     # 绘制格点
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
-    ax[0].set_title("点 $x_1, x_2, \cdots, x_k$")
+    ax[0].set_title(r"点 $x_1, x_2, \cdots, x_k$")
 
     # 绘制中间的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
-    ax[1].set_title("点 $Bx_1, Bx_2, \cdots, Bx_k$")
+    ax[1].set_title(r"点 $Bx_1, Bx_2, \cdots, Bx_k$")
 
     # 绘制变换后的格点
     ax[2].scatter(abgrid[0], abgrid[1], s=36, c=colors, edgecolor="none")
-    ax[2].set_title("点 $ABx_1, ABx_2, \cdots, ABx_k$")
+    ax[2].set_title(r"点 $ABx_1, ABx_2, \cdots, ABx_k$")
 
     plt.show()
 ```
@@ -1088,7 +1091,7 @@ plot_series(A, v, n)
 ---
 mystnb:
   figure:
-    caption: Convergence towards eigenvectors
+    caption: 收敛于特征向量
     name: eigen-conv
 ---
 # 创建格点

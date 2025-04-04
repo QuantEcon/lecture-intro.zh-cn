@@ -208,7 +208,7 @@ print(f'两个稳态的π是: {π_l, π_u}')
 ---
 mystnb:
   figure:
-    caption: 稳态通胀下的铸币税函数。虚线棕色线条代表$\pi_l$和$\pi_u$。
+    caption: 稳态通胀下的铸币税函数。棕色虚线代表$\pi_l$和$\pi_u$。
     name: laffer_curve_adaptive
     width: 500px
 ---
@@ -265,7 +265,7 @@ def solve_p_init(model, π_star):
 
 # 计算与 π_l 和 π_u 相关联的两个初始价格水平
 p_l, p_u = map(lambda π: solve_p_init(model, π), (π_l, π_u))
-print('相关的初始 p_{-1}', f'为: {p_l, p_u}')
+print('初始 p_{-1}', f'为: {p_l, p_u}')
 ```
 
 ### 验证

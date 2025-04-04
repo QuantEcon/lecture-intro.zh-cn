@@ -51,6 +51,11 @@ import quantecon_book_networks.input_output as qbn_io
 import quantecon_book_networks.data as qbn_data
 
 import matplotlib.patches as mpatches
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 经济和金融网络
@@ -613,6 +618,7 @@ plt.show()
 :label: graph_theory_property1
 
 对于 $V$ 中的不同节点 $i, j$ 和任意整数 $k$，我们有
+
 $$
 a^k_{i j} > 0
 \quad \text{当且仅当} \quad
@@ -770,7 +776,7 @@ df = centrality_plot_data(countries, indegree)
 
 ax.bar('code', 'centrality', data=df, color=df["color"], alpha=0.6)
 
-patch = mpatches.Patch(color=None, label='in degree', visible=False)
+patch = mpatches.Patch(color=None, label='入度', visible=False)
 ax.legend(handles=[patch], fontsize=12, loc="upper left", handlelength=0, frameon=False)
 
 ax.set_ylim((0,20))
