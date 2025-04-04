@@ -14,7 +14,7 @@ kernelspec:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install quantecon quantecon-book-networks pandas-datareader
+!pip install quantecon quantecon-book-networks wbgapi
 ```
 
 ## 概述
