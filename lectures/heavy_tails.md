@@ -1142,7 +1142,7 @@ for (a, ax) in zip(alphas, axes):
     data = pareto.rvs(size=n, scale=1, b=a)
     ax.plot(list(range(n)), data, linestyle='', marker='o', alpha=0.5, ms=4)
     ax.vlines(list(range(n)), 0, data, lw=0.2)
-    ax.set_title(f"帕累托分布抽样 $\\alpha = {a}$", fontsize=11)
+    ax.set_title(f"帕累托分布样本 $\\alpha = {a}$", fontsize=11)
 
 plt.subplots_adjust(hspace=0.4)
 

@@ -925,7 +925,7 @@ mystnb:
 fig, ax = plot_inequality_measures(σ_vals, 
                                   ginis, 
                                   "模拟数据", 
-                                  "$\sigma$", 
+                                  r"$\sigma$", 
                                   "基尼系数")
 plt.show()
 ```

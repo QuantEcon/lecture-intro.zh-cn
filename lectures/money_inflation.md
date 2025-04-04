@@ -525,7 +525,7 @@ def draw_paths(R0_values, model, line_params, num_steps):
     
     # 添加标签
     axes[0].set_ylabel('$R_t$')
-    axes[1].set_xlabel('时间步')
+    axes[1].set_xlabel('时间')
     axes[1].set_ylabel('$b_t$')
     axes[1].xaxis.set_major_locator(MaxNLocator(integer=True))
     
@@ -842,7 +842,7 @@ def draw_iterations(p0s, model, line_params, num_steps):
 
     fig, axes = plt.subplots(3, 1, figsize=(8, 10), sharex=True)
     
-    # 预计算时间步
+    # 预计算时间
     time_steps = np.arange(num_steps) 
     
     # 前两个y轴使用对数刻度
@@ -872,7 +872,7 @@ def draw_iterations(p0s, model, line_params, num_steps):
     axes[0].set_ylabel('$m_t$')
     axes[1].set_ylabel('$p_t$')
     axes[2].set_ylabel('$R_t$')
-    axes[2].set_xlabel('时间步')
+    axes[2].set_xlabel('时间')
     
     # 强制整数轴标签
     axes[2].xaxis.set_major_locator(MaxNLocator(integer=True))

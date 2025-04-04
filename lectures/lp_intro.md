@@ -316,7 +316,7 @@ solver.Maximize(1.30 * 3 * x1 + 1.06 * x4 + 1.30 * x5)
 status = solver.Solve()
 
 if status == pywraplp.Solver.OPTIMAL:
-    print('Objective value =', solver.Objective().Value())
+    print(f'目标值 = {solver.Objective().Value():.3f}')
     x1_sol = round(x1.solution_value(), 3)
     x2_sol = round(x2.solution_value(), 3)
     x3_sol = round(x1.solution_value(), 3)

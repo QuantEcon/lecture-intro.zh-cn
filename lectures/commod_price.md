@@ -70,8 +70,8 @@ s = yf.download('CT=F', '2016-1-1', '2023-4-1', auto_adjust=False)['Adj Close']
 fig, ax = plt.subplots()
 
 ax.plot(s, marker='o', alpha=0.5, ms=1)
-ax.set_ylabel('cotton price in USD', fontsize=12)
-ax.set_xlabel('date', fontsize=12)
+ax.set_ylabel(r'棉花价格（美元）', fontsize=12)
+ax.set_xlabel(r'日期', fontsize=12)
 
 plt.show()
 ```
