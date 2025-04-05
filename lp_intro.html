@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>36. 线性规划 &#8212; Python数量经济学入门</title>
+    <title>36. 线性规划 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/lp_intro.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -210,7 +210,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">线性规划</p>
 
@@ -258,17 +258,15 @@
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ortools-9.12.4544-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
 Collecting absl-py&gt;=2.0.0 (from ortools)
-  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
+  Downloading absl_py-2.2.2-py3-none-any.whl.metadata (2.6 kB)
 Requirement already satisfied: numpy&gt;=1.13.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (1.26.4)
 Requirement already satisfied: pandas&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (2.2.2)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting protobuf&lt;5.30,&gt;=5.29.3 (from ortools)
-  Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+  Downloading protobuf-5.29.4-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
 Collecting immutabledict&gt;=3.0.0 (from ortools)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading immutabledict-4.2.1-py3-none-any.whl.metadata (3.5 kB)
+  Downloading immutabledict-4.2.1-py3-none-any.whl.metadata (3.5 kB)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2023.3)
@@ -277,16 +275,10 @@ Downloading ortools-9.12.4544-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/25.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">11.8/25.0 MB</span> <span class=" -Color -Color-Red">63.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.0/25.0 MB</span> <span class=" -Color -Color-Red">81.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.0/25.0 MB</span> <span class=" -Color -Color-Red">167.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading absl_py-2.2.2-py3-none-any.whl (135 kB)
 Downloading immutabledict-4.2.1-py3-none-any.whl (4.7 kB)
-Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
+Downloading protobuf-5.29.4-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: protobuf, immutabledict, absl-py, ortools
@@ -298,7 +290,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled protobuf-4.25.3
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed absl-py-2.1.0 immutabledict-4.2.1 ortools-9.12.4544 protobuf-5.29.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed absl-py-2.2.2 immutabledict-4.2.1 ortools-9.12.4544 protobuf-5.29.4
 </pre></div>
 </div>
 </div>
@@ -464,7 +456,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f1e7287c180&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f68eab08c90&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -485,7 +477,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 <span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Objective value =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;目标值 =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): (</span><span class="si">{</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">()</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">()</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
@@ -493,7 +485,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Objective value = 27.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>目标值 = 27.5
 (x1, x2): (2.5, 5.0)
 </pre></div>
 </div>
@@ -625,7 +617,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f1e7287c1e0&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f68eabe41b0&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -646,7 +638,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 <span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
 
 <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Objective value =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;目标值 = </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">()</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">x1_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">x2_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">x3_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
@@ -659,7 +651,7 @@ Downloading protobuf-5.29.3-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Objective value = 141018.24349792692
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>目标值 = 141018.243
 (x1, x2, x3, x4, x5): (24927.755, 75072.245, 24927.755, 75072.245, 24927.755)
 </pre></div>
 </div>
@@ -967,7 +959,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f1e72633d20&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f68ea147990&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1058,7 +1050,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f1e72632820&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7f68ea147300&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1171,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1265,7 +1257,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. 线性方程和矩阵代数 &#8212; Python数量经济学入门</title>
+    <title>8. 线性方程和矩阵代数 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/linear_equations.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -224,7 +224,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">线性方程和矩阵代数</p>
 
@@ -273,6 +273,11 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -379,7 +384,7 @@
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/41dfebb0a38f55c5664c94134920136a4e5899af0e78a35a6d2e52f72969eb74.png"><img alt="_images/41dfebb0a38f55c5664c94134920136a4e5899af0e78a35a6d2e52f72969eb74.png" src="_images/41dfebb0a38f55c5664c94134920136a4e5899af0e78a35a6d2e52f72969eb74.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/79c3890876c858c5ec575329cb3865b52c7c6c467e739a12240e6ce334a41202.png"><img alt="_images/79c3890876c858c5ec575329cb3865b52c7c6c467e739a12240e6ce334a41202.png" src="_images/79c3890876c858c5ec575329cb3865b52c7c6c467e739a12240e6ce334a41202.png" style="width: 80%;" /></a>
 </div>
 </div>
 <section id="id7">
@@ -480,7 +485,7 @@ x + y =
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/00054ce8d0f61d6ec8714dd056784f8d6da74088651ec0ca9d1c634db8a3c0d1.png"><img alt="_images/00054ce8d0f61d6ec8714dd056784f8d6da74088651ec0ca9d1c634db8a3c0d1.png" src="_images/00054ce8d0f61d6ec8714dd056784f8d6da74088651ec0ca9d1c634db8a3c0d1.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cf94fcba4b4127f164fc27c53e6ac5807eb11dfe3232006ad2a4ff7090580de3.png"><img alt="_images/cf94fcba4b4127f164fc27c53e6ac5807eb11dfe3232006ad2a4ff7090580de3.png" src="_images/cf94fcba4b4127f164fc27c53e6ac5807eb11dfe3232006ad2a4ff7090580de3.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>标量乘法是一种将向量 <span class="math notranslate nohighlight">\(x\)</span> 与一个标量进行元素级别相乘的运算。</p>
@@ -558,7 +563,7 @@ x + y =
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2ce92fc805abed43558cc03e5541d0f6b1e35bdd372c5509a3616bf222cf7e83.png"><img alt="_images/2ce92fc805abed43558cc03e5541d0f6b1e35bdd372c5509a3616bf222cf7e83.png" src="_images/2ce92fc805abed43558cc03e5541d0f6b1e35bdd372c5509a3616bf222cf7e83.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7d4f44d624e4e6aa100c364bfb484a900b98a7da18b16f03c807189bce663acd.png"><img alt="_images/7d4f44d624e4e6aa100c364bfb484a900b98a7da18b16f03c807189bce663acd.png" src="_images/7d4f44d624e4e6aa100c364bfb484a900b98a7da18b16f03c807189bce663acd.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>在Python中，向量可以用列表或元组表示，
@@ -1101,7 +1106,7 @@ AB =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2e8c2ce326876e4895dceba908694a92c74becaf35357980c28ead9e649965bd.png"><img alt="_images/2e8c2ce326876e4895dceba908694a92c74becaf35357980c28ead9e649965bd.png" src="_images/2e8c2ce326876e4895dceba908694a92c74becaf35357980c28ead9e649965bd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/171bc7305cc4c31ffd7a3988e6e4bec781432a59064f6ea34adc6539fb227408.png"><img alt="_images/171bc7305cc4c31ffd7a3988e6e4bec781432a59064f6ea34adc6539fb227408.png" src="_images/171bc7305cc4c31ffd7a3988e6e4bec781432a59064f6ea34adc6539fb227408.png" style="width: 80%;" /></a>
 </div>
 </div>
 <p>显然，这些是平行线，因此我们永远无法找到一个点 <span class="math notranslate nohighlight">\(x \in \mathbb{R}^2\)</span> 使得这些线相交。</p>
@@ -1602,33 +1607,7 @@ p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38656 (\N{CJK UNIFIED IDEOGRAPH-9700}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27714 (\N{CJK UNIFIED IDEOGRAPH-6C42}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25968 (\N{CJK UNIFIED IDEOGRAPH-6570}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 37327 (\N{CJK UNIFIED IDEOGRAPH-91CF}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 20215 (\N{CJK UNIFIED IDEOGRAPH-4EF7}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26684 (\N{CJK UNIFIED IDEOGRAPH-683C}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 35266 (\N{CJK UNIFIED IDEOGRAPH-89C2}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 28857 (\N{CJK UNIFIED IDEOGRAPH-70B9}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25311 (\N{CJK UNIFIED IDEOGRAPH-62DF}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 21512 (\N{CJK UNIFIED IDEOGRAPH-5408}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32447 (\N{CJK UNIFIED IDEOGRAPH-7EBF}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/7863f85979c4aac8260b3ff6b040dcd7ee11de178cf8b3981d0aff5fa0078df7.png"><img alt="_images/7863f85979c4aac8260b3ff6b040dcd7ee11de178cf8b3981d0aff5fa0078df7.png" src="_images/7863f85979c4aac8260b3ff6b040dcd7ee11de178cf8b3981d0aff5fa0078df7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/611445b5d14e5eefea327d75e4ef3c3e5ad9ffd79e1d4214c916b5599d2bb428.png"><img alt="_images/611445b5d14e5eefea327d75e4ef3c3e5ad9ffd79e1d4214c916b5599d2bb428.png" src="_images/611445b5d14e5eefea327d75e4ef3c3e5ad9ffd79e1d4214c916b5599d2bb428.png" style="width: 80%;" /></a>
 </div>
 </div>
 </section>
@@ -1722,7 +1701,7 @@ p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1808,7 +1787,7 @@ p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

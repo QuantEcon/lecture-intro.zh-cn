@@ -327,9 +327,9 @@ def check_convergence(M):
         # 计算A^n / r^n与佩龙投影之间的差异
         diff = np.abs(M_n - P)
 
-        # 计算差异矩阵的范数
+        # 计算矩阵差异的范数
         diff_norm = np.linalg.norm(diff, 'fro')
-        print(f"n = {n}, error = {diff_norm:.10f}")
+        print(f"n = {n}, 误差 = {diff_norm:.10f}")
 
 
 A1 = np.array([[1, 2],

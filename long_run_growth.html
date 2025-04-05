@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. 长期增长 &#8212; Python数量经济学入门</title>
+    <title>2. 长期增长 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -133,7 +133,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/long_run_growth.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -209,7 +209,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">长期增长</p>
 
@@ -243,8 +243,8 @@
 <h2><span class="section-number">2.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>在本讲座中，我们将使用Python、<a class="reference external" href="https://python-programming.quantecon.org/pandas.html" title="(in Python)"><span class="xref std std-doc">pandas</span></a> 和 <a class="reference external" href="https://python-programming.quantecon.org/matplotlib.html" title="(in Python)"><span class="xref std std-doc">Matplotlib</span></a> 来下载、处理和可视化经济增长的历史数据。</p>
 <p>除了学习如何运用这些工具之外，我们还将使用它们来描述跨越多个世纪的多个国家的经济增长经历。</p>
-<p>这些 “增长事实 ”之所以有趣，原因有很多。</p>
-<p>解释增长事实是 “发展经济学 ”和 “经济史”的主要目的。</p>
+<p>这些 “增长事实”之所以有趣，原因有很多。</p>
+<p>解释增长事实是 “发展经济学”和 “经济史”的主要目的。</p>
 <p>并且增长事实也是历史学家研究地缘政治力量和动态的重要依据。</p>
 <p>因此，亚当·图泽(Adam Tooze)在阐述第一次世界大战的地缘政治先例和前因后果时，首先描述了欧洲大国的国内生产总值（GDP）在 1914 年之前的 70 年间是如何演变的（见 <span id="id3">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span> 第 1 章）。</p>
 <p>使用与图泽构建图表时相同的数据（使用稍长一些的时间线），以下是我们在他的第一章图表基础上制作的版本。</p>
@@ -255,9 +255,9 @@
 <p><span id="id4">[<a class="reference internal" href="zreferences.html#id16" title="Adam Tooze. The deluge: the great war, america and the remaking of the global order, 1916–1931. 2014.">Tooze, 2014</a>]</span>的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。</p>
 <p>到 19 世纪末，美国的 GDP 已赶上大英帝国的 GDP，而在 20 世纪上半叶，
 美国的GDP超过了大英帝国。</p>
-<p>在亚当·图泽看来，这一事实是 “美国世纪 ”的关键地缘政治基础。</p>
+<p>在亚当·图泽看来，这一事实是 “美国世纪”的关键地缘政治基础。</p>
 <p>看了这张图，以及它是如何为 “美国的20世纪” 搭建地缘政治舞台的，自然会让人想为2014年或之后的时期制作一张类似的图表。</p>
-<p>(如果心急的读者想提前了解答案，现在可以跳到后面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
+<p>（如果读者们想提前了解答案，现在可以跳到后面看看图<a class="reference internal" href="#gdp2"><span class="std std-numref">Fig. 2.7</span></a>）。</p>
 <p>正如我们将看到的，通过类比推理，这张2014年或之后的图表或许为解释“某某国家的（21世纪）世纪”奠定了基础，而你可以自由填入你对某某国家的猜测。</p>
 <p>在我们收集数据以构建这两个图表的过程中，我们还将研究很多国家在尽可能长的时间范围内的增长经历。</p>
 <p>这些图表将描绘“工业革命”是如何在18世纪末始于英国，然后传播到一个又一个国家。</p>
@@ -289,7 +289,7 @@
 有些可以追溯到第一个世纪。</p>
 <p>可以从<a class="reference external" href="https://www.rug.nl/ggdc/historicaldevelopment/maddison/">Maddison Historical Statistics</a>下载数据，点击“Latest Maddison Project Release”即可获取。</p>
 <p>我们将从 QuantEcon GitHub 的库中读取数据。</p>
-<p>本节的目的是生成一个方便使用的包含不同国家的人均 GDP 的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 实例。</p>
+<p>本节的目的是生成一个方便使用的包含不同经济体的人均 GDP 的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 实例。</p>
 <p>在这里，我们将 Maddison 的数据读入一个 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -371,8 +371,8 @@
 </table>
 </div></div></div>
 </div>
-<p>我们可以看到，该数据集包含许多国家和年份的人均国内生产总值（<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>）和人口（<code class="docutils literal notranslate"><span class="pre">pop</span></code>）。</p>
-<p>让我们看看这个数据集中有多少国家/地区。</p>
+<p>我们可以看到，该数据集包含许多经济体和年份的人均国内生产总值（<code class="docutils literal notranslate"><span class="pre">gdppc</span></code>）和人口（<code class="docutils literal notranslate"><span class="pre">pop</span></code>）。</p>
+<p>让我们看看这个数据集中有多少经济体。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -386,8 +386,8 @@
 </div>
 </div>
 </div>
-<p>通过运行上面的代码，我们可以列出这个数据集有多少个国家/地区。</p>
-<p>下面，我们将列出这些国家。</p>
+<p>通过运行上面的代码，我们可以列出这个数据集有多少个经济体。</p>
+<p>下面，我们将列出这些经济体。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span>
@@ -437,7 +437,7 @@
 </div>
 </div>
 </div>
-<p>我们现在可以继续探索数据集里的169个国家/地区。</p>
+<p>我们现在可以继续探索数据集里的169个经济体。</p>
 <p>我们可以遍历每个样本来了解每个样本可用的年份都有哪些。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -511,7 +511,7 @@
 </div></div></div>
 </div>
 <p>现在，让我们将原始数据重新整理成一些方便的变量，以便更快地访问各国的时间序列数据。</p>
-<p>我们可以在该数据集中的国家代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和国家名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系。</p>
+<p>我们可以在该数据集中的经济体代码（<code class="docutils literal notranslate"><span class="pre">countrycode</span></code>）和经济体名称（<code class="docutils literal notranslate"><span class="pre">country</span></code>）之间建立一个有用的映射关系。</p>
 <p>为了方便使用中文标签，我们导入地区代码与中文名对应的数据集</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -727,7 +727,7 @@
 <p>5 rows × 169 columns</p>
 </div></div></div>
 </div>
-<p>我们创建了一个变量 <code class="docutils literal notranslate"><span class="pre">color_mapping</span></code> 来存储国家代码和颜色之间的映射，以保证接下来线条的颜色一致</p>
+<p>我们创建了一个变量 <code class="docutils literal notranslate"><span class="pre">color_mapping</span></code> 来存储经济体代码和颜色之间的映射，以保证接下来线条的颜色一致</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -737,10 +737,10 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_names</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;countrycode&#39;</span><span class="p">]</span>
 
-<span class="c1"># 生成一个颜色图，颜色数量与国家数量相匹配</span>
+<span class="c1"># 生成一个颜色图，颜色数量与经济体数量相匹配</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">tab20</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">country_names</span><span class="p">)))</span>
 
-<span class="c1"># 创建一个字典，将每个国家映射成相应的颜色</span>
+<span class="c1"># 创建一个字典，将每个经济体映射成相应的颜色</span>
 <span class="n">color_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">country</span><span class="p">:</span> <span class="n">color</span> <span class="k">for</span> 
                  <span class="n">country</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">country_names</span><span class="p">,</span> <span class="n">colors</span><span class="p">)}</span>
 </pre></div>
@@ -1344,7 +1344,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1430,7 +1430,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

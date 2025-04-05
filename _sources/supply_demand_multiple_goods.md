@@ -264,7 +264,7 @@ class ExchangeEconomy:
         c = Π_inv @ b - slope_dc @ p
 
         if any(c < 0):
-            print('allocation: ', c)
+            print(f'分配: {c}')
             raise Exception('负分配：均衡不存在')
 
         return p, c

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. 价格水平历史 &#8212; Python数量经济学入门</title>
+    <title>4. 通货膨胀的历史 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -124,18 +124,18 @@
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@quantecon" />
-<meta name="twitter:title" content="价格水平历史"/>
+<meta name="twitter:title" content="通货膨胀的历史"/>
 <meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
 <meta name="twitter:creator" content="@quantecon">
 <meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
 
 <!-- Opengraph tags -->
-<meta property="og:title" content="价格水平历史" />
+<meta property="og:title" content="通货膨胀的历史" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/inflation_history.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -202,9 +202,9 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">价格水平历史</p>
+                        <p class="qe-page__header-subheading">通货膨胀的历史</p>
 
                     </div>
                     <!-- length 2, since its a string and empty dict has length 2 - {} -->
@@ -231,10 +231,10 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">4. </span>价格水平历史<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>本讲将讨论一些关于综合价格指数波动的历史数据。</p>
-<p>我们首先安装必要的Python包。</p>
-<p>这里引入 <code class="docutils literal notranslate"><span class="pre">xlrd</span></code>是因为 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 需要它来对Excel文件执行操作。</p>
+<h1><span class="section-number">4. </span>通货膨胀的历史<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>本讲将透过一些历史数据探讨价格指数的波动模式及其背后的故事。</p>
+<p>首先，我们需要安装一些必要的Python包。</p>
+<p>注意：我们安装<code class="docutils literal notranslate"><span class="pre">xlrd</span></code>是因为<code class="docutils literal notranslate"><span class="pre">pandas</span></code>在读取Excel文件时需要它。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>xlrd
@@ -248,10 +248,10 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting xlrd
+  Downloading xlrd-2.0.1-py2.py3-none-any.whl.metadata (3.4 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading xlrd-2.0.1-py2.py3-none-any.whl.metadata (3.4 kB)
-Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: xlrd
@@ -263,7 +263,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </div>
 </details>
 </div>
-<!-- Check for pandas>=2.1.4 for Google Collab Compat --><div class="cell tag_hide-cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show content</span>
@@ -297,12 +297,12 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </div>
 </div>
 <p>价格水平的增长率在媒体和央行及财政官员的口中被称为<strong>通货膨胀</strong>。</p>
-<p>价格水平是以国内货币单位对一组一篮子消费品的单位进行衡量的。</p>
-<p>因此，在美国，<span class="math notranslate nohighlight">\(t\)</span>时期的价格水平以美元（<span class="math notranslate nohighlight">\(t\)</span>月或<span class="math notranslate nohighlight">\(t\)</span>年）对一单位一篮子消费品的比值计算。</p>
-<p>20世纪初之前，在许多西方经济体中，价格水平虽然年复一年地波动，但趋势不太明显。</p>
-<p>通常价格水平在一个世纪结束时与其开始时相近。</p>
-<p>20世纪的情况则有所不同，我们将在本讲中看到。</p>
-<p>一个广为接受的解释是20世纪初期各国放弃了金本位和银本位制度。</p>
+<p>价格水平衡量的是一篮子消费品在国内货币单位中的价值。</p>
+<p>例如，在美国，<span class="math notranslate nohighlight">\(t\)</span>时期的价格水平表示购买一单位标准消费品篮子所需的美元数量（以<span class="math notranslate nohighlight">\(t\)</span>月或<span class="math notranslate nohighlight">\(t\)</span>年计）。</p>
+<p>在20世纪之前，许多西方经济体的价格水平虽然存在短期波动，但长期来看并没有明显的上升或下降趋势。</p>
+<p>一个世纪开始时的价格水平通常与该世纪结束时的水平相差不大。</p>
+<p>然而，20世纪的情况发生了显著变化，这一点我们将在本讲中详细探讨。</p>
+<p>这种变化的一个普遍接受的解释是，20世纪初期各国逐渐放弃了以黄金和白银作为货币基础的金本位和银本位制度。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>本讲为后续几讲做好了铺垫，这些后续几讲中我们将用宏观经济学家的角度来思考决定价格水平的因素，即<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 和 <a class="reference internal" href="cagan_adaptive.html"><span class="doc">自适应预期下的货币主义价格水平理论</span></a></p>
@@ -321,7 +321,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 <p class="admonition-title">Note</p>
 <p>在金本位或银本位制下，一些货币还包括”仓单”，即代表对金币或银币索赔权的纸质凭证。政府或私人银行发行的钞票可以被视为这种”仓单”的例子。</p>
 </div>
-<p>我们用 <code class="docutils literal notranslate"><span class="pre">pandas</span></code>导入一个托管在Github上的<a class="reference external" href="https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets">电子表格</a>。</p>
+<p>我们用 <code class="docutils literal notranslate"><span class="pre">pandas</span></code>导入一个<a class="reference external" href="https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets">数据集</a>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 导入数据并清理索引</span>
@@ -343,7 +343,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 
 <span class="c1"># 创建图表</span>
 <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;UK&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;France&#39;</span><span class="p">,</span> <span class="s1">&#39;Castile&#39;</span><span class="p">]</span>
-<span class="n">cols_cn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;英国&#39;</span><span class="p">,</span> <span class="s1">&#39;美国&#39;</span><span class="p">,</span> <span class="s1">&#39;法国&#39;</span><span class="p">,</span> <span class="s1">&#39;卡斯蒂利亚&#39;</span><span class="p">]</span>
+<span class="n">cols_cn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;英国&#39;</span><span class="p">,</span> <span class="s1">&#39;美国&#39;</span><span class="p">,</span> <span class="s1">&#39;法国&#39;</span><span class="p">,</span> <span class="s1">&#39;卡斯蒂利亚(西班牙)&#39;</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
@@ -362,7 +362,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="lrpl">
-<a class="reference internal image-reference" href="_images/dd089c936309b2ff7acaaaa25afd5e27138f94972c5ab08a58eaca99fe73a86d.png"><img alt="_images/dd089c936309b2ff7acaaaa25afd5e27138f94972c5ab08a58eaca99fe73a86d.png" src="_images/dd089c936309b2ff7acaaaa25afd5e27138f94972c5ab08a58eaca99fe73a86d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0a29521d9cf8c10cb59cbbdd4f3920dfe76dcf73c15ce54f43b749ac4057b59a.png"><img alt="_images/0a29521d9cf8c10cb59cbbdd4f3920dfe76dcf73c15ce54f43b749ac4057b59a.png" src="_images/0a29521d9cf8c10cb59cbbdd4f3920dfe76dcf73c15ce54f43b749ac4057b59a.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">长期价格水平时间序列</span><a class="headerlink" href="#lrpl" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -382,7 +382,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 <p><a class="reference internal" href="french_rev.html"><span class="doc">法国大革命期间的通货膨胀</span></a> 讲述了在法国大革命期间发生的大通胀的历史。</p>
 </div>
 <p>尽管出现了这些暂时的中断，图中一个显著的特点是三个世纪以来价格水平大致保持恒定。</p>
-<p>在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[欧文·费雪（Irving Fisher）](<a class="reference external" href="https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963#:~:text=%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA(Irving%20Fisher,%E5%B9%B4%E8%8E%B7%E5%93%B2%E5%AD%A6%E5%8D%9A%E5%A3%AB%E5%AD%A6%E4%BD%8D%E3%80%82)%E5%92%8C%E5%89%91%E6%A1%A5%E5%A4%A7%E5%AD%A6%E7%9A%84">https://baike.baidu.com/item/欧文·费雪/9127963#:~:text=欧文·费雪(Irving Fisher,年获哲学博士学位。)和剑桥大学的</a><a class="reference external" href="https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330">约翰·梅纳德·凯恩斯（John Maynard Keynes）</a>的关注。</p>
+<p>在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的<a class="reference external" href="https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963">欧文·费雪（Irving Fisher）</a>和剑桥大学的<a class="reference external" href="https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330">约翰·梅纳德·凯恩斯（John Maynard Keynes）</a>的关注。</p>
 <ul class="simple">
 <li><p>尽管长期锚定在相同的平均水平上，年度价格水平的波动还是很大</p></li>
 <li><p>虽然使用有价值的黄金和白银作为货币成功地通过限制货币供给稳定了价格水平，但这需要消耗现实的资源 –</p></li>
@@ -424,7 +424,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="lrpl-lg">
-<a class="reference internal image-reference" href="_images/9b7c6b3c5cab923b0d2b3c178c3d97a4a265066a56ab557e4ceeff309501c255.png"><img alt="_images/9b7c6b3c5cab923b0d2b3c178c3d97a4a265066a56ab557e4ceeff309501c255.png" src="_images/9b7c6b3c5cab923b0d2b3c178c3d97a4a265066a56ab557e4ceeff309501c255.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/358c9de4b992e4af0520a2dba290a312059843d7cc4f4ddd554833f5f2364267.png"><img alt="_images/358c9de4b992e4af0520a2dba290a312059843d7cc4f4ddd554833f5f2364267.png" src="_images/358c9de4b992e4af0520a2dba290a312059843d7cc4f4ddd554833f5f2364267.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">长期价格水平时间序列（对数）</span><a class="headerlink" href="#lrpl-lg" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -451,8 +451,8 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 <li><p>图 3.4：批发价格，德国，1919-1924 年（第 45 页）</p></li>
 </ul>
 <p>我们在四幅图中的每一幅都加上了相对美元汇率的对数。</p>
-<p>图表的基础数据载于<span id="id7">[<a class="reference internal" href="zreferences.html#id13" title="Thomas J Sargent. Rational Expectations and Inflation. Princeton University Press, Princeton, New Jersey, 2013.">Sargent, 2013</a>]</span>第3章附录中的表格。
-我们将所有这些数据转录到电子表格 <a class="reference download external" download="" href="https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"><code class="xref download docutils literal notranslate"><span class="pre">chapter_3.xlsx</span></code></a> 中，并将其读入 pandas。</p>
+<p>图表的基础数据载于<span id="id7">[<a class="reference internal" href="zreferences.html#id13" title="Thomas J Sargent. Rational Expectations and Inflation. Princeton University Press, Princeton, New Jersey, 2013.">Sargent, 2013</a>]</span>第3章附录中的表格。</p>
+<p>我们将所有这些数据转录到电子表格 <a class="reference download external" download="" href="https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"><code class="xref download docutils literal notranslate"><span class="pre">chapter_3.xlsx</span></code></a> 中，并将其读入 pandas。</p>
 <p>在下面的代码单元中，我们将清理数据并构建一个 <code class="docutils literal notranslate"><span class="pre">pandas.dataframe</span></code>。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -485,7 +485,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
     <span class="k">return</span> <span class="n">entry</span>
 
 <span class="k">def</span> <span class="nf">process_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="s2">&quot;Clean and reorganize the entire dataframe.&quot;</span>
+    <span class="s2">&quot;清理和重新组织整个数据集。&quot;</span>
   
     <span class="c1"># 删除列名中的 HTML 标记</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&lt;s&gt;a&lt;/s&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;s&gt;c&lt;/s&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;s&gt;d&lt;/s&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;s&gt;e&lt;/s&gt;&#39;</span><span class="p">]:</span>
@@ -763,34 +763,34 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>为了从电子表格中的数据构建价格水平序列，我们遵循 <span id="id11">[<a class="reference internal" href="zreferences.html#id13" title="Thomas J Sargent. Rational Expectations and Inflation. Princeton University Press, Princeton, New Jersey, 2013.">Sargent, 2013</a>]</span> 第 3 章中的相同程序。</p>
-<p>我们将三个序列拼接在一起——批发价格指数、基于纸币的批发价格指数和基于兹罗提（1924年6月后的波兰货币）的批发价格指数。</p>
-<p>我们根据前一个可用序列最后一期的价格水平比率调整了序列，并将它们粘合在一起构建成单一序列。</p>
-<p>我们在1924年6月兹罗提被采用后放弃了汇率。我们这样做是因为我们没有以兹罗提计量的价格。我们使用6月的旧货币来计算汇率调整。</p>
+<p>为了构建波兰的价格水平序列，我们参照 <span id="id11">[<a class="reference internal" href="zreferences.html#id13" title="Thomas J Sargent. Rational Expectations and Inflation. Princeton University Press, Princeton, New Jersey, 2013.">Sargent, 2013</a>]</span> 第3章的方法处理电子表格数据。</p>
+<p>我们需要将三个不同的价格指数序列连接起来：批发价格指数、基于纸币的批发价格指数，以及1924年6月波兰引入新货币兹罗提后的批发价格指数。</p>
+<p>为了确保连接后的序列连续性，我们根据相邻序列重叠期间的价格比率进行了调整，从而创建一个完整的价格水平时间序列。</p>
+<p>关于汇率数据，我们只使用到1924年5月的数据，因为6月后波兰采用了新货币兹罗提，而我们缺少以兹罗提计价的价格数据。为了保持一致性，我们使用了旧货币（波兰马克）在6月的汇率进行最后的调整。</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Splice three price series in different units</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 拼接三个不同单位的价格序列</span>
 <span class="n">p_seq1</span> <span class="o">=</span> <span class="n">df_pol</span><span class="p">[</span><span class="s1">&#39;Wholesale price index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">p_seq2</span> <span class="o">=</span> <span class="n">df_pol</span><span class="p">[</span><span class="s1">&#39;Wholesale Price Index: &#39;</span>
                 <span class="s1">&#39;On paper currency basis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">p_seq3</span> <span class="o">=</span> <span class="n">df_pol</span><span class="p">[</span><span class="s1">&#39;Wholesale Price Index: &#39;</span> 
                 <span class="s1">&#39;On zloty basis&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="c1"># Non-nan part</span>
+<span class="c1"># 非NaN部分</span>
 <span class="n">mask_1</span> <span class="o">=</span> <span class="n">p_seq1</span><span class="p">[</span><span class="o">~</span><span class="n">p_seq1</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">mask_2</span> <span class="o">=</span> <span class="n">p_seq2</span><span class="p">[</span><span class="o">~</span><span class="n">p_seq2</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="n">adj_ratio12</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_seq1</span><span class="p">[</span><span class="n">mask_1</span><span class="p">]</span> <span class="o">/</span> <span class="n">p_seq2</span><span class="p">[</span><span class="n">mask_1</span><span class="p">])</span>
 <span class="n">adj_ratio23</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_seq2</span><span class="p">[</span><span class="n">mask_2</span><span class="p">]</span> <span class="o">/</span> <span class="n">p_seq3</span><span class="p">[</span><span class="n">mask_2</span><span class="p">])</span>
 
-<span class="c1"># Glue three series</span>
+<span class="c1"># 拼接三个序列</span>
 <span class="n">p_seq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">p_seq1</span><span class="p">[:</span><span class="n">mask_1</span><span class="p">],</span> 
                    <span class="n">adj_ratio12</span> <span class="o">*</span> <span class="n">p_seq2</span><span class="p">[</span><span class="n">mask_1</span><span class="p">:</span><span class="n">mask_2</span><span class="p">],</span> 
                    <span class="n">adj_ratio23</span> <span class="o">*</span> <span class="n">p_seq3</span><span class="p">[</span><span class="n">mask_2</span><span class="p">:]])</span>
 <span class="n">p_seq</span> <span class="o">=</span> <span class="n">p_seq</span><span class="p">[</span><span class="o">~</span><span class="n">p_seq</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)]</span>
 
-<span class="c1"># Exchange rate</span>
+<span class="c1"># 汇率</span>
 <span class="n">e_seq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">df_pol</span><span class="p">[</span><span class="s1">&#39;Cents per Polish mark (zloty after May 1924)&#39;</span><span class="p">]</span>
 <span class="n">e_seq</span><span class="p">[</span><span class="n">e_seq</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="s1">&#39;05-01-1924&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 </pre></div>
@@ -935,7 +935,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
 <p>此外，这四个国家的美元汇率走势与其价格水平相似。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>这种模式是汇率兑换率理论中<a class="reference external" href="https://en.wikipedia.org/wiki/Purchasing_power_parity">购买力平价理论</a>的一个实例。</p>
+<p>这种模式是汇率兑换率理论中<a class="reference external" href="https://baike.baidu.com/item/%E8%B4%AD%E4%B9%B0%E5%8A%9B%E5%B9%B3%E4%BB%B7%E7%90%86%E8%AE%BA/794486">购买力平价理论</a>的一个实例。</p>
 </div>
 <p>这些大通胀似乎都“在一瞬间停止”。</p>
 <p><span id="id15">[<a class="reference internal" href="zreferences.html#id12" title="Thomas J Sargent and François R Velde. The Big Problem of Small Change. Princeton University Press, Princeton, New Jersey, 2002.">Sargent and Velde, 2002</a>]</span> 的第3章对这一显著模式提供了解释。</p>
@@ -1039,7 +1039,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1125,7 +1125,7 @@ Downloading xlrd-2.0.1-py2.py3-none-any.whl (96 kB)
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

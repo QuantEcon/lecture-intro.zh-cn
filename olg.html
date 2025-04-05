@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>26. 世代交叠模型 &#8212; Python数量经济学入门</title>
+    <title>26. 世代交叠模型 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/olg.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -168,10 +168,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">26.3. 资本供给</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">26.3.1. 消费者问题</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">26.3.2. 示例：对数偏好</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">26.3.3. 储蓄和投资</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">26.3.3. 储蓄与投资的关系</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">26.4. 资本需求</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">26.4. 资本需求分析</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">26.4.1. 企业问题</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">26.4.2. 需求</a></li>
 </ul>
@@ -181,8 +181,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">26.5.2. 示例：对数效用</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">26.6. 动力学</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">26.6.1. 资本的演变</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">26.6. 动态分析</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">26.6.1. 资本积累过程</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">26.6.2. 稳态（对数情况）</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">26.6.3. 时间序列</a></li>
 </ul>
@@ -223,7 +223,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">世代交叠模型</p>
 
@@ -257,24 +257,22 @@
 <ul class="simple">
 <li><p>财政政策</p></li>
 <li><p>货币政策</p></li>
-<li><p>长期增长
-以及许多其他主题。</p></li>
+<li><p>长期增长</p></li>
 </ul>
-<p>OLG模型的第一个严谨版本是由Paul Samuelson开发的<span id="id2">[<a class="reference internal" href="zreferences.html#id23" title="Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. Journal of political economy, 66(6):467–482, 1958.">Samuelson, 1958</a>]</span>。</p>
-<p>我们的目标是对OLG模型的一个简单版本有深入的理解。</p>
+<p>以及许多其他主题。</p>
+<p>世代交叠模型的第一个严谨版本由保罗·萨缪尔森(Paul Samuelson)在1958年提出<span id="id2">[<a class="reference internal" href="zreferences.html#id23" title="Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. Journal of political economy, 66(6):467–482, 1958.">Samuelson, 1958</a>]</span>，此后成为经济学中研究代际问题的基础框架。</p>
+<p>在这一讲中，我们将深入探讨世代交叠模型的一个简单版本，帮助大家理解其核心机制和应用。</p>
 <section id="id3">
 <h2><span class="section-number">26.1. </span>概述<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>OLG模型的动态与<a class="reference external" href="https://intro.quantecon.org/solow.html">索洛-斯旺增长模型</a>非常相似。</p>
-<p>同时，OLG模型增加了一个重要的新特征：储蓄量的选择是内生的。</p>
-<p>为了理解这一点的重要性，假设我们想预测一项新税收对长期增长的影响。</p>
-<p>我们可以在索洛-斯旺模型中添加一项税收，然后观察稳态的变化。</p>
-<p>但这忽略了一个事实：当面对新的税率时，家庭会改变他们的储蓄和消费行为。</p>
-<p>这些变化可能会大大改变模型的预测。</p>
-<p>因此，如果我们关心准确的预测，我们应该对个人的决策问题进行建模。</p>
-<p>特别是，模型中的家庭应该根据他们面临的环境（技术、税收、价格等）决定储蓄多少和消费多少。</p>
-<p>OLG模型应对了这一挑战。</p>
-<p>我们将介绍OLG模型的一个简单版本，阐明家庭的决策问题，并研究其对长期增长的影响。</p>
-<p>让我们从一些导入开始。</p>
+<p>与索洛-斯旺模型相比，OLG模型的一个关键区别是储蓄决策是内生的。</p>
+<p>这一特征为什么重要呢？考虑我们想要分析一项新税收政策对经济增长的影响。</p>
+<p>在索洛-斯旺模型中，我们可以引入税收并观察稳态如何变化。但这种方法忽略了一个重要现实：税收政策会改变家庭的储蓄和消费行为。</p>
+<p>当家庭面对新的税率时，他们会调整自己的经济决策，这些调整可能会显著影响模型的预测结果。</p>
+<p>因此，为了获得更准确的预测，我们需要明确建模个人的决策过程。在OLG模型中，家庭会根据他们所处的经济环境（包括技术水平、税收政策和市场价格等）来优化他们的储蓄和消费选择。</p>
+<p>OLG模型正是为解决这类问题而设计的。</p>
+<p>在接下来的内容中，我们将探讨OLG模型的基本版本，详细说明家庭如何做出决策，并分析这些决策如何影响经济的长期增长。</p>
+<p>首先，让我们导入需要的库。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -305,28 +303,28 @@
 <p>老年人不工作，所以所有收入都是金融收入。</p>
 <p>他们的金融收入来自工资收入的储蓄利息，
 这些储蓄随后与 <span class="math notranslate nohighlight">\(t+1\)</span> 时期新的年轻一代的劳动相结合。</p>
-<p>工资和利率在均衡中由供求决定。</p>
+<p>在均衡状态下，工资和利率由市场供求关系决定。</p>
 <p>为了使代数计算稍微简单一些，我们假设人口规模恒定。</p>
 <p>我们将每个时期的恒定人口规模标准化为1。</p>
 <p>我们还假设每个个体提供一个”单位”的劳动时间，因此总劳动供给为1。</p>
 </section>
 <section id="id5">
 <h2><span class="section-number">26.3. </span>资本供给<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>首先让我们考虑家庭方面。</p>
+<p>现在让我们从单个家庭的角度开始分析模型。</p>
 <section id="id6">
 <h3><span class="section-number">26.3.1. </span>消费者问题<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p>假设在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体的效用函数形式为</p>
 <div class="math notranslate nohighlight" id="equation-eq-crra">
 <span class="eqno">(26.1)<a class="headerlink" href="#equation-eq-crra" title="Permalink to this equation">#</a></span>\[    U_t = u(c_t) + \beta u(c_{t+1})\]</div>
-<p>这里</p>
+<p>其中</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(u: \mathbb R_+ \to \mathbb R\)</span> 被称为”流量”效用函数</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 是贴现因子</p></li>
-<li><p><span class="math notranslate nohighlight">\(c_t\)</span> 是在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体在时间 <span class="math notranslate nohighlight">\(t\)</span> 的消费</p></li>
-<li><p><span class="math notranslate nohighlight">\(c_{t+1}\)</span> 是同一个体在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的消费</p></li>
+<li><p><span class="math notranslate nohighlight">\(u: \mathbb R_+ \to \mathbb R\)</span> 是”瞬时”效用函数（或”流”效用函数）</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 是时间偏好的贴现因子</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_t\)</span> 表示 <span class="math notranslate nohighlight">\(t\)</span> 期出生的个体在年轻时期（即 <span class="math notranslate nohighlight">\(t\)</span> 期）的消费</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{t+1}\)</span> 表示该个体在老年时期（即 <span class="math notranslate nohighlight">\(t+1\)</span> 期）的消费</p></li>
 </ul>
-<p>我们假设 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的。</p>
-<p>储蓄行为由以下优化问题决定</p>
+<p>我们假设效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的。</p>
+<p>个体的储蓄决策来自于解决以下效用最大化问题</p>
 <div class="math notranslate nohighlight" id="equation-max-sav-olg">
 <span class="eqno">(26.2)<a class="headerlink" href="#equation-max-sav-olg" title="Permalink to this equation">#</a></span>\[    \max_{c_t, c_{t+1}} 
     \,  \left \{ u(c_t) + \beta u(c_{t+1}) \right \} \]</div>
@@ -343,58 +341,55 @@
 <li><p><span class="math notranslate nohighlight">\(w_t\)</span> 是时间 <span class="math notranslate nohighlight">\(t\)</span> 的工资率</p></li>
 <li><p><span class="math notranslate nohighlight">\(R_{t+1}\)</span> 是在时间 <span class="math notranslate nohighlight">\(t\)</span> 投资的储蓄在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 支付的总利率</p></li>
 </ul>
-<p>由于 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的，这两个约束在最大值时都将成为等式。</p>
-<p>利用这一事实，并将第一个约束中的 <span class="math notranslate nohighlight">\(s_t\)</span> 代入第二个约束，我们得到
+<p>由于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的，消费者会完全用尽预算约束，使两个约束等式成立。</p>
+<p>将第一个约束改写为 <span class="math notranslate nohighlight">\(s_t = w_t - c_t\)</span>，并代入第二个约束，我们得到
 <span class="math notranslate nohighlight">\(c_{t+1} = R_{t+1}(w_t - c_t)\)</span>。</p>
-<p>最大值的一阶条件可以通过将 <span class="math notranslate nohighlight">\(c_{t+1}\)</span> 代入目标函数，对 <span class="math notranslate nohighlight">\(c_t\)</span> 求导，
-并将其设为零来获得。</p>
-<p>这导致了OLG模型的<strong>欧拉方程</strong>，它描述了最优的跨期消费动态：</p>
+<p>为了求解最大化问题，我们将 <span class="math notranslate nohighlight">\(c_{t+1} = R_{t+1}(w_t - c_t)\)</span> 代入目标函数，然后对 <span class="math notranslate nohighlight">\(c_t\)</span> 求导并设为零。</p>
+<p>这给出了OLG模型的<strong>欧拉方程</strong>，它刻画了消费者在不同时期之间如何优化分配消费：</p>
 <div class="math notranslate nohighlight" id="equation-euler-1-olg">
 <span class="eqno">(26.3)<a class="headerlink" href="#equation-euler-1-olg" title="Permalink to this equation">#</a></span>\[    u'(c_t) = \beta R_{t+1}  u'( R_{t+1} (w_t - c_t))\]</div>
 <p>从第一个约束我们得到 <span class="math notranslate nohighlight">\(c_t = w_t - s_t\)</span>，所以欧拉方程
 也可以表示为</p>
 <div class="math notranslate nohighlight" id="equation-euler-2-olg">
 <span class="eqno">(26.4)<a class="headerlink" href="#equation-euler-2-olg" title="Permalink to this equation">#</a></span>\[    u'(w_t - s_t) = \beta R_{t+1}  u'( R_{t+1} s_t)\]</div>
-<p>假设对于每个 <span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，恰好有一个 <span class="math notranslate nohighlight">\(s_t\)</span> 可以
-解决 <a class="reference internal" href="#equation-euler-2-olg">(26.4)</a>。</p>
+<p>假设对于每个 <span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，恰好有一个 <span class="math notranslate nohighlight">\(s_t\)</span> 可以满足 <a class="reference internal" href="#equation-euler-2-olg">(26.4)</a>。</p>
 <p>那么储蓄可以被写成 <span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 的固定函数。</p>
 <p>我们将其表示为</p>
 <div class="math notranslate nohighlight" id="equation-saving-1-olg">
 <span class="eqno">(26.5)<a class="headerlink" href="#equation-saving-1-olg" title="Permalink to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1})\]</div>
-<p><span class="math notranslate nohighlight">\(s\)</span> 函数的具体形式将取决于流效用函数 <span class="math notranslate nohighlight">\(u\)</span> 的选择。</p>
+<p><span class="math notranslate nohighlight">\(s\)</span> 函数的具体形式将取决于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 的选择。</p>
 <p><span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 共同代表经济中的<em>价格</em>（劳动力价格和资本租赁率）。</p>
 <p>因此，<a class="reference internal" href="#equation-saving-1-olg">(26.5)</a> 表示给定价格下的储蓄量。</p>
 </section>
 <section id="id7">
 <h3><span class="section-number">26.3.2. </span>示例：对数偏好<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>在特殊情况 <span class="math notranslate nohighlight">\(u(c) = \log c\)</span> 下，欧拉方程简化为
-<span class="math notranslate nohighlight">\(s_t= \beta (w_t - s_t)\)</span>。
-求解储蓄，我们得到</p>
+<p>在特殊情况 <span class="math notranslate nohighlight">\(u(c) = \log c\)</span> 下，欧拉方程简化为 <span class="math notranslate nohighlight">\(s_t= \beta (w_t - s_t)\)</span>。</p>
+<p>求解储蓄，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-saving-log-2-olg">
 <span class="eqno">(26.6)<a class="headerlink" href="#equation-saving-log-2-olg" title="Permalink to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1}) = \frac{\beta}{1+\beta} w_t\]</div>
-<p>在这种特殊情况下，储蓄不依赖于利率。</p>
+<p>在这种特殊情况下，储蓄完全不受利率影响。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">26.3.3. </span>储蓄和投资<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>由于人口规模被标准化为1，<span class="math notranslate nohighlight">\(s_t\)</span>也代表了t时期经济中的总储蓄。</p>
-<p>在我们的封闭经济中，没有外国投资，所以净储蓄等于总投资，这可以理解为对企业的资本供给。</p>
-<p>在下一节中，我们将研究资本需求。</p>
-<p>通过使供给和需求相等，我们将能够确定OLG经济中的均衡。</p>
+<h3><span class="section-number">26.3.3. </span>储蓄与投资的关系<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>由于我们将人口规模标准化为1，<span class="math notranslate nohighlight">\(s_t\)</span>不仅代表个人储蓄，也代表了<span class="math notranslate nohighlight">\(t\)</span>时期整个经济的总储蓄。</p>
+<p>在我们考虑的封闭经济模型中，不存在国际资本流动，因此国内净储蓄必然等于总投资，这构成了企业的资本供给。</p>
+<p>接下来，我们将转向分析资本需求。</p>
+<p>当我们将资本供给与需求相匹配时，就能确定OLG经济中的均衡状态。</p>
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">26.4. </span>资本需求<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
-<p>首先我们描述企业的问题，然后我们写出一个方程来描述给定价格下的资本需求。</p>
+<h2><span class="section-number">26.4. </span>资本需求分析<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>下面我们先详细描述企业的最优化问题，然后推导出一个方程，用于表示在给定价格条件下的资本需求。</p>
 <section id="id10">
 <h3><span class="section-number">26.4.1. </span>企业问题<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>对于每个整数 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，t期的产出 <span class="math notranslate nohighlight">\(y_t\)</span> 由**<a class="reference external" href="https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function">柯布-道格拉斯生产函数</a>**给出</p>
+<p>对于每个整数 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，t期的产出 <span class="math notranslate nohighlight">\(y_t\)</span> 由**<a class="reference external" href="https://baike.baidu.com/item/%E6%9F%AF%E5%B8%83-%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%E7%94%9F%E4%BA%A7%E5%87%BD%E6%95%B0/8250187">柯布-道格拉斯生产函数</a>**给出</p>
 <div class="math notranslate nohighlight" id="equation-cobb-douglas">
 <span class="eqno">(26.7)<a class="headerlink" href="#equation-cobb-douglas" title="Permalink to this equation">#</a></span>\[    y_t = k_t^{\alpha} \ell_t^{1-\alpha}\]</div>
-<p>在这里，<span class="math notranslate nohighlight">\(k_t\)</span> 是资本，<span class="math notranslate nohighlight">\(\ell_t\)</span> 是劳动，而 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个参数（有时被称为”资本的产出弹性”）。
-公司的利润最大化问题是</p>
+<p>在这里，<span class="math notranslate nohighlight">\(k_t\)</span> 表示资本投入，<span class="math notranslate nohighlight">\(\ell_t\)</span> 表示劳动投入，而 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个介于0和1之间的参数，通常被解释为”资本的产出弹性”。
+企业面临的利润最大化问题是</p>
 <div class="math notranslate nohighlight" id="equation-opt-profit-olg">
 <span class="eqno">(26.8)<a class="headerlink" href="#equation-opt-profit-olg" title="Permalink to this equation">#</a></span>\[    \max_{k_t, \ell_t} \{ k^{\alpha}_t \ell_t^{1-\alpha} - R_t k_t -w_t \ell_t  \}\]</div>
-<p>一阶条件是通过分别对资本和劳动求目标函数的导数，并将它们设为零来获得的：</p>
+<p>一阶条件是通过对资本和劳动分别求导，并令导数等于零得到的：</p>
 <div class="math notranslate nohighlight">
 \[    (1-\alpha)(k_t / \ell_t)^{\alpha} = w_t
     \quad \text{and} \quad
@@ -402,7 +397,7 @@
 </section>
 <section id="id11">
 <h3><span class="section-number">26.4.2. </span>需求<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
-<p>我们的假设<span class="math notranslate nohighlight">\(\ell_t = 1\)</span> 让我们可以</p>
+<p>根据我们的假设<span class="math notranslate nohighlight">\(\ell_t = 1\)</span>，我们可以得到</p>
 <div class="math notranslate nohighlight" id="equation-wage-one">
 <span class="eqno">(26.9)<a class="headerlink" href="#equation-wage-one" title="Permalink to this equation">#</a></span>\[    w_t = (1-\alpha)k_t^\alpha \]</div>
 <p>并且</p>
@@ -440,8 +435,8 @@
 <p>在本节中，我们将推导均衡条件并研究一个例子。</p>
 <section id="id13">
 <h3><span class="section-number">26.5.1. </span>均衡条件<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
-<p>在均衡状态下，t时刻的储蓄等于t时刻的投资，也等于t+1时刻的资本供给。
-通过将这些数量设为相等来计算均衡，即</p>
+<p>在均衡状态下，<span class="math notranslate nohighlight">\(t\)</span>时刻的储蓄等于<span class="math notranslate nohighlight">\(t\)</span>时刻的投资，也等于<span class="math notranslate nohighlight">\(t+1\)</span>时刻的资本供给。</p>
+<p>通过将这些数量设为相等来计算均衡，即</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-1">
 <span class="eqno">(26.12)<a class="headerlink" href="#equation-equilibrium-1" title="Permalink to this equation">#</a></span>\[    s(w_t, R_{t+1}) 
     = k^d(R_{t+1})
@@ -475,11 +470,11 @@
 </div>
 </div>
 </div>
-<p>在对数效用的情况下，由于资本供给不依赖于利率，均衡数量是由供给固定的。
-也就是说，</p>
+<p>在对数效用的情况下，由于资本供给不依赖于利率，均衡数量是由供给固定的。</p>
+<p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-quantity">
 <span class="eqno">(26.15)<a class="headerlink" href="#equation-equilibrium-quantity" title="Permalink to this equation">#</a></span>\[    k_{t+1} = s(w_t, R_{t+1}) = \frac{\beta }{1+\beta} w_t\]</div>
-<p>让我们重新绘制上面的图，但这次加入均衡数量和价格。</p>
+<p>我们重新绘制上面的图，但这次加入均衡数量和价格。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -512,14 +507,14 @@
 </section>
 </section>
 <section id="id15">
-<h2><span class="section-number">26.6. </span>动力学<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
-<p>在本节中，我们讨论动力学。</p>
-<p>目前，我们将重点关注对数效用的情况，因此均衡由<a class="reference internal" href="#equation-equilibrium-quantity">(26.15)</a>决定。</p>
+<h2><span class="section-number">26.6. </span>动态分析<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<p>在本节中，我们将研究模型的动态行为。</p>
+<p>我们主要关注对数效用的情况，此时均衡由方程<a class="reference internal" href="#equation-equilibrium-quantity">(26.15)</a>确定。</p>
 <section id="id16">
-<h3><span class="section-number">26.6.1. </span>资本的演变<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
-<p>上述讨论展示了如何在给定<span class="math notranslate nohighlight">\(w_t\)</span>的情况下获得均衡<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
-<p>从<a class="reference internal" href="#equation-wage-one">(26.9)</a>中，我们可以将此转换为<span class="math notranslate nohighlight">\(k_{t+1}\)</span>作为<span class="math notranslate nohighlight">\(k_t\)</span>的函数。</p>
-<p>特别是，由于<span class="math notranslate nohighlight">\(w_t = (1-\alpha)k_t^\alpha\)</span>，我们有</p>
+<h3><span class="section-number">26.6.1. </span>资本积累过程<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<p>前面我们已经分析了如何根据当期工资<span class="math notranslate nohighlight">\(w_t\)</span>确定下一期的均衡资本<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
+<p>现在，我们可以利用<a class="reference internal" href="#equation-wage-one">(26.9)</a>中的工资决定方程，将资本积累表示为一个关于当期资本<span class="math notranslate nohighlight">\(k_t\)</span>的函数。</p>
+<p>具体来说，由于工资由<span class="math notranslate nohighlight">\(w_t = (1-\alpha)k_t^\alpha\)</span>给出，我们可以得到资本的演化方程</p>
 <div class="math notranslate nohighlight" id="equation-law-of-motion-capital">
 <span class="eqno">(26.16)<a class="headerlink" href="#equation-law-of-motion-capital" title="Permalink to this equation">#</a></span>\[    k_{t+1} = \frac{\beta}{1+\beta} (1-\alpha)(k_t)^{\alpha}\]</div>
 <p>如果我们对这个方程进行迭代，我们将得到一个资本存量序列。</p>
@@ -619,7 +614,7 @@
 <a class="reference internal image-reference" href="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png"><img alt="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" src="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>如果你尝试不同的正初始条件，你会发现这个序列总是收敛于<span class="math notranslate nohighlight">\(k^*\)</span>。</p>
+<p>如果你尝试不同的正初始值，你会发现这个序列总是收敛于<span class="math notranslate nohighlight">\(k^*\)</span>。</p>
 <p>下面我们还绘制了随时间变化的总利率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -645,12 +640,12 @@
 </section>
 <section id="crra">
 <h2><span class="section-number">26.7. </span>CRRA偏好<a class="headerlink" href="#crra" title="Permalink to this heading">#</a></h2>
-<p>此前，在我们的例子中，我们研究了对数效用的情况。</p>
-<p>对数效用是CRRA效用在<span class="math notranslate nohighlight">\(\gamma \to 1\)</span>时的一个特殊情况。</p>
+<p>到目前为止，我们一直使用对数效用函数来分析模型。现在让我们扩展到更一般的情况。</p>
+<p>对数效用实际上是常相对风险厌恶(CRRA)效用函数的一个特例，当风险厌恶参数<span class="math notranslate nohighlight">\(\gamma\)</span>趋近于1时得到。</p>
 <p>在本节中，我们假设<span class="math notranslate nohighlight">\(u(c) = \frac{ c^{1-\gamma}-1}{1-\gamma}\)</span>，其中<span class="math notranslate nohighlight">\(\gamma &gt;0, \gamma\neq 1\)</span>。</p>
 <p>这个函数被称为CRRA效用函数。</p>
-<p>在其他方面，模型保持不变。</p>
-<p>下面我们用Python定义效用函数，并构造一个<code class="docutils literal notranslate"><span class="pre">namedtuple</span></code>来存储参数。</p>
+<p>在这一节中，我们将采用这种更一般的效用函数，同时保持模型的其他方面不变。</p>
+<p>首先，让我们在Python中实现CRRA效用函数，并创建一个包含所有模型参数的数据结构。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crra</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">γ</span><span class="p">):</span>
@@ -724,8 +719,8 @@
 </section>
 <section id="id20">
 <h3><span class="section-number">26.7.2. </span>均衡<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
-<p>将资本的总需求（参见<a class="reference internal" href="#equation-aggregate-demand-capital-olg">(26.11)</a>）与我们新的总供给函数相等，即可得出均衡资本。
-因此，我们设定</p>
+<p>将资本的总需求（参见<a class="reference internal" href="#equation-aggregate-demand-capital-olg">(26.11)</a>）与我们新的总供给函数相等，即可得出均衡资本。</p>
+<p>因此，我们设定</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-crra-2">
 <span class="eqno">(26.21)<a class="headerlink" href="#equation-equilibrium-crra-2" title="Permalink to this equation">#</a></span>\[    w_t \left [ 1 + \beta^{-1/\gamma} R_{t+1}^{(\gamma-1)/\gamma} \right ]^{-1} 
     = \left (\frac{R_{t+1}}{\alpha} \right )^{1/(\alpha - 1)}\]</div>
@@ -848,7 +843,7 @@
     \left [ 
         1 + \beta^{-1/\gamma} (\alpha (k^*)^{\alpha-1})^{(\gamma-1)/\gamma} 
     \right ] - (1-\alpha)(k^*)^{\alpha}\]</div>
-<p>这是用Python写的</p>
+<p>现在让我们用Python实现这个函数：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">k_star</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -899,6 +894,7 @@
 </div>
 </div>
 </div>
+<p>现在我们定义一个函数来模拟时间序列。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
@@ -926,6 +922,7 @@
 </div>
 </div>
 </div>
+<p>现在我们可以模拟时间序列并绘制结果。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">)</span>
@@ -1022,7 +1019,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1108,7 +1105,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>23. 一维动力学 &#8212; Python数量经济学入门</title>
+    <title>23. 一维动力学 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/scalar_dynam.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -172,8 +172,8 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">23.3. 稳定性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-dynam-steady-state">23.3.1. 稳态</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-dynam-global-stability">23.3.2. 全局稳定性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">23.3.1. 稳态</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">23.3.2. 全局稳定性</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">23.3.3. 局部稳定性</a></li>
 </ul>
 </li>
@@ -213,7 +213,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">一维动力学</p>
 
@@ -251,14 +251,14 @@
 <h2><span class="section-number">23.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>在经济学中，许多变量依赖于它们的过去值。</p>
 <p>例如，我们有理由相信去年的通货膨胀会影响今年的通货膨胀。
-（也许去年的高通胀会导致人们要求更高的工资作为补偿，这将导致今年的价格进一步上涨。）</p>
-<p>让<span class="math notranslate nohighlight">\(\pi_t\)</span>表示今年的通货膨胀率，<span class="math notranslate nohighlight">\(\pi_{t-1}\)</span>表示去年的通货膨胀率，我们可以用一般形式将这种关系写成：</p>
+（比如去年的高通胀会导致人们要求更高的工资作为补偿，导致今年的价格进一步上涨。）</p>
+<p>用<span class="math notranslate nohighlight">\(\pi_t\)</span>表示今年的通货膨胀率，<span class="math notranslate nohighlight">\(\pi_{t-1}\)</span>表示去年的通货膨胀率，我们可以用一般形式将这种关系写成：</p>
 <div class="math notranslate nohighlight">
 \[ \pi_t = f(\pi_{t-1}) \]</div>
 <p>其中<span class="math notranslate nohighlight">\(f\)</span>是描述变量之间关系的某个函数。</p>
-<p>这个方程是一维离散时间动态系统的一个例子。</p>
-<p>在本讲座中，我们将介绍一维离散时间动力学的基础知识。</p>
-<p>（虽然大多数定量模型有两个或更多的状态变量，但一维设置是学习基础知识和理解关键概念的好地方。）</p>
+<p>这个方程是一维离散时间动力系统的典型例子。</p>
+<p>在本讲中，我们将探讨一维离散时间动力学的基本原理。</p>
+<p>（虽然实际经济模型通常包含两个或更多状态变量，但一维框架为我们理解基础理论和掌握核心概念提供了绝佳的起点。）</p>
 <p>让我们从一些标准导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -271,116 +271,118 @@
 </section>
 <section id="id3">
 <h2><span class="section-number">23.2. </span>一些定义<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>本节阐述了我们关注的对象和研究的属性类型。</p>
+<p>本节将介绍我们要研究的对象和关键概念。</p>
 <section id="id4">
 <h3><span class="section-number">23.2.1. </span>函数组合<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>对于本讲座，您应该了解以下内容：</p>
+<p>首先，让我们回顾一下函数组合的概念：</p>
 <p>如果</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(g\)</span> 是从 <span class="math notranslate nohighlight">\(A\)</span> 到 <span class="math notranslate nohighlight">\(B\)</span> 的函数，且</p></li>
-<li><p><span class="math notranslate nohighlight">\(f\)</span> 是从 <span class="math notranslate nohighlight">\(B\)</span> 到 <span class="math notranslate nohighlight">\(C\)</span> 的函数，</p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span> 是从集合 <span class="math notranslate nohighlight">\(A\)</span> 到集合 <span class="math notranslate nohighlight">\(B\)</span> 的函数，且</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> 是从集合 <span class="math notranslate nohighlight">\(B\)</span> 到集合 <span class="math notranslate nohighlight">\(C\)</span> 的函数</p></li>
 </ul>
 <p>那么 <span class="math notranslate nohighlight">\(f\)</span> 和 <span class="math notranslate nohighlight">\(g\)</span> 的<strong>组合</strong> <span class="math notranslate nohighlight">\(f \circ g\)</span> 定义为</p>
 <div class="math notranslate nohighlight">
 \[ 
     (f \circ g)(x) = f(g(x))
 \]</div>
-<p>例如，如果</p>
+<p>举个简单的例子，如果</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(A=B=C=\mathbb R\)</span>，即实数集，</p></li>
-<li><p><span class="math notranslate nohighlight">\(g(x)=x^2\)</span> 且 <span class="math notranslate nohighlight">\(f(x)=\sqrt{x}\)</span>，那么 <span class="math notranslate nohighlight">\((f \circ g)(x) = \sqrt{x^2} = |x|\)</span>。</p></li>
+<li><p><span class="math notranslate nohighlight">\(A=B=C=\mathbb R\)</span>（实数集）</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x)=x^2\)</span> 且 <span class="math notranslate nohighlight">\(f(x)=\sqrt{x}\)</span></p></li>
 </ul>
-<p>如果 <span class="math notranslate nohighlight">\(f\)</span> 是从 <span class="math notranslate nohighlight">\(A\)</span> 到其自身的函数，那么 <span class="math notranslate nohighlight">\(f^2\)</span> 是 <span class="math notranslate nohighlight">\(f\)</span> 与自身的组合。</p>
-<p>例如，如果 <span class="math notranslate nohighlight">\(A = (0, \infty)\)</span>，即正数集，且 <span class="math notranslate nohighlight">\(f(x) = \sqrt{x}\)</span>，那么</p>
+<p>那么 <span class="math notranslate nohighlight">\((f \circ g)(x) = \sqrt{x^2} = |x|\)</span></p>
+<p>当函数映射到自身的集合时，我们可以定义函数的多次组合。如果 <span class="math notranslate nohighlight">\(f\)</span> 是从集合 <span class="math notranslate nohighlight">\(A\)</span> 到自身的函数，那么 <span class="math notranslate nohighlight">\(f^2\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的组合。</p>
+<p>例如，当 <span class="math notranslate nohighlight">\(A = (0, \infty)\)</span>（正实数集）且 <span class="math notranslate nohighlight">\(f(x) = \sqrt{x}\)</span> 时，我们有</p>
 <div class="math notranslate nohighlight">
 \[
     f^2(x) = \sqrt{\sqrt{x}} = x^{1/4}
 \]</div>
-<p>同样，如果 <span class="math notranslate nohighlight">\(n\)</span> 是正整数，那么 <span class="math notranslate nohighlight">\(f^n\)</span> 是 <span class="math notranslate nohighlight">\(f\)</span> 与自身的 <span class="math notranslate nohighlight">\(n\)</span> 次组合。</p>
+<p>更一般地，对于任意正整数 <span class="math notranslate nohighlight">\(n\)</span>，<span class="math notranslate nohighlight">\(f^n\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的 <span class="math notranslate nohighlight">\(n\)</span> 次组合。</p>
 <p>在上面的例子中，<span class="math notranslate nohighlight">\(f^n(x) = x^{1/(2^n)}\)</span>。</p>
 </section>
 <section id="id5">
 <h3><span class="section-number">23.2.2. </span>动态系统<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p><strong>（离散时间）动态系统</strong>是一个集合 <span class="math notranslate nohighlight">\(S\)</span> 和一个将集合 <span class="math notranslate nohighlight">\(S\)</span> 映射回自身的函数 <span class="math notranslate nohighlight">\(g\)</span>。</p>
+<p><strong>（离散时间）动态系统</strong>由一个集合 <span class="math notranslate nohighlight">\(S\)</span> 和一个将 <span class="math notranslate nohighlight">\(S\)</span> 映射到自身的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
 <p>动态系统的例子包括：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(S = (0, 1)\)</span> 且 <span class="math notranslate nohighlight">\(g(x) = \sqrt{x}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(S = (0, 1)\)</span> 且 <span class="math notranslate nohighlight">\(g(x) = x^2\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(S = \mathbb Z\)</span>（整数集）且 <span class="math notranslate nohighlight">\(g(x) = 2 x\)</span></p></li>
 </ul>
-<p>另一方面，如果 <span class="math notranslate nohighlight">\(S = (-1, 1)\)</span> 且 <span class="math notranslate nohighlight">\(g(x) = x+1\)</span>，那么 <span class="math notranslate nohighlight">\(S\)</span> 和 <span class="math notranslate nohighlight">\(g\)</span> 不构成动态系统，因为 <span class="math notranslate nohighlight">\(g(1) = 2\)</span>。</p>
+<p>如果 <span class="math notranslate nohighlight">\(S = (-1, 1)\)</span> 且 <span class="math notranslate nohighlight">\(g(x) = x+1\)</span>，那么 <span class="math notranslate nohighlight">\(S\)</span> 和 <span class="math notranslate nohighlight">\(g\)</span> 不构成动态系统，因为 <span class="math notranslate nohighlight">\(g(1) = 2\)</span>。</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(g\)</span> 并不总是将 <span class="math notranslate nohighlight">\(S\)</span> 中的点映射回 <span class="math notranslate nohighlight">\(S\)</span>。</p></li>
+<li><p>即 <span class="math notranslate nohighlight">\(g\)</span> 并不总是将 <span class="math notranslate nohighlight">\(S\)</span> 中的点映射回 <span class="math notranslate nohighlight">\(S\)</span>。</p></li>
 </ul>
-<p>我们关心动态系统是因为我们可以用它们来研究动态！</p>
+<p>研究动态系统的重要性在于它们能帮助我们理解和分析动态过程的基本特性。</p>
 <p>给定由集合 <span class="math notranslate nohighlight">\(S\)</span> 和函数 <span class="math notranslate nohighlight">\(g\)</span> 组成的动态系统，我们可以通过设定</p>
 <div class="math notranslate nohighlight" id="equation-sdsod">
 <span class="eqno">(23.1)<a class="headerlink" href="#equation-sdsod" title="Permalink to this equation">#</a></span>\[    x_{t+1} = g(x_t)
     \quad \text{其中} 
     x_0 \text{给定}\]</div>
-<p>来创建 <span class="math notranslate nohighlight">\(S\)</span> 中点的序列 <span class="math notranslate nohighlight">\(\{x_t\}\)</span>。</p>
+<p>来创建由 <span class="math notranslate nohighlight">\(S\)</span> 中点组成的序列 <span class="math notranslate nohighlight">\(\{x_t\}\)</span>。</p>
 <p>这意味着我们选择 <span class="math notranslate nohighlight">\(S\)</span> 中的某个数 <span class="math notranslate nohighlight">\(x_0\)</span>，然后取</p>
 <div class="math notranslate nohighlight" id="equation-sdstraj">
 <span class="eqno">(23.2)<a class="headerlink" href="#equation-sdstraj" title="Permalink to this equation">#</a></span>\[    x_0, \quad
     x_1 = g(x_0), \quad
     x_2 = g(x_1) = g(g(x_0)), \quad \text{等等}\]</div>
 <p>这个序列 <span class="math notranslate nohighlight">\(\{x_t\}\)</span> 被称为 <span class="math notranslate nohighlight">\(x_0\)</span> 在 <span class="math notranslate nohighlight">\(g\)</span> 下的<strong>轨迹</strong>。</p>
-<p>在这种情况下，<span class="math notranslate nohighlight">\(S\)</span> 被称为<strong>状态空间</strong>，<span class="math notranslate nohighlight">\(x_t\)</span> 被称为<strong>状态变量</strong>。</p>
+<p>在这个理论框架下，<span class="math notranslate nohighlight">\(S\)</span> 被称为<strong>状态空间</strong>，<span class="math notranslate nohighlight">\(x_t\)</span> 被称为<strong>状态变量</strong>。</p>
 <p>回想一下 <span class="math notranslate nohighlight">\(g^n\)</span> 是 <span class="math notranslate nohighlight">\(g\)</span> 与自身的 <span class="math notranslate nohighlight">\(n\)</span> 次组合，
-我们可以更简单地将轨迹写为
-$<span class="math notranslate nohighlight">\(
+我们可以更简单地将轨迹写为</p>
+<div class="math notranslate nohighlight">
+\[
     x_t = g^t(x_0) \quad \text{对于} t = 0, 1, 2, \ldots
-\)</span>$</p>
+\]</div>
 <p>在接下来的所有内容中，我们假设 <span class="math notranslate nohighlight">\(S\)</span> 是 <span class="math notranslate nohighlight">\(\mathbb R\)</span>（实数集）的子集。</p>
 <p>方程 <a class="reference internal" href="#equation-sdsod">(23.1)</a> 有时被称为<strong>一阶差分方程</strong></p>
 <ul class="simple">
-<li><p>一阶意味着只依赖于一个滞后（即，像 <span class="math notranslate nohighlight">\(x_{t-1}\)</span> 这样的早期状态不会出现在 <a class="reference internal" href="#equation-sdsod">(23.1)</a> 中）。</p></li>
+<li><p>一阶意味着只依赖于一个滞后（即，像 <span class="math notranslate nohighlight">\(x_{t-1}\)</span> 这样的更早期的状态不会出现在 <a class="reference internal" href="#equation-sdsod">(23.1)</a> 中）。</p></li>
 </ul>
 </section>
 <section id="id6">
 <h3><span class="section-number">23.2.3. </span>示例：线性模型<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<p>动态系统的一个简单例子是当 <span class="math notranslate nohighlight">\(S=\mathbb R\)</span> 且 <span class="math notranslate nohighlight">\(g(x)=ax + b\)</span> 时，其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是常数（有时称为”参数”）。</p>
-<p>这导致了<strong>线性差分方程</strong>
-$<span class="math notranslate nohighlight">\(
+<p>动态系统的一个典型例子是状态空间 <span class="math notranslate nohighlight">\(S=\mathbb R\)</span> 与映射函数 <span class="math notranslate nohighlight">\(g(x)=ax + b\)</span> ，其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是常数（有时称为”参数”）。</p>
+<p>由此可得<strong>线性差分方程</strong></p>
+<div class="math notranslate nohighlight">
+\[
     x_{t+1} = a x_t + b 
     \quad \text{其中}
     x_0 \text{已给定}。
-\)</span><span class="math notranslate nohighlight">\(
-\)</span>x_0$ 的轨迹是</p>
+\]</div>
+<p>其中<span class="math notranslate nohighlight">\(x_0\)</span> 的轨迹是</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodpath">
 <span class="eqno">(23.3)<a class="headerlink" href="#equation-sdslinmodpath" title="Permalink to this equation">#</a></span>\[x_0, \quad
 a x_0 + b, \quad
 a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 <p>继续这样下去，并利用我们对几何级数的知识，我们发现，对于任何 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmod">
-<span class="eqno">(23.4)<a class="headerlink" href="#equation-sdslinmod" title="Permalink to this equation">#</a></span>\[    x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}
-    \]</div>
-<p>我们得到了所有非负整数 <span class="math notranslate nohighlight">\(t\)</span> 的 <span class="math notranslate nohighlight">\(x_t\)</span> 的精确表达式，从而完全理解了其动态。</p>
-<p>特别注意，如果 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，那么根据上式，我们有</p>
+<span class="eqno">(23.4)<a class="headerlink" href="#equation-sdslinmod" title="Permalink to this equation">#</a></span>\[    x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}\]</div>
+<p>我们可以对任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 求出 <span class="math notranslate nohighlight">\(x_t\)</span> 的精确表达式，这让我们能够完全理解系统的动态特性。</p>
+<p>值得注意的是，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，根据上面的公式，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodc">
 <span class="eqno">(23.5)<a class="headerlink" href="#equation-sdslinmodc" title="Permalink to this equation">#</a></span>\[x_t \to  \frac{b}{1 - a} \text{ 当 } t \to \infty\]</div>
-<p>无论 <span class="math notranslate nohighlight">\(x_0\)</span> 为何值。</p>
-<p>这是所谓全局稳定性的一个例子，我们将在后面再次讨论这个话题。</p>
+<p>无论起点 <span class="math notranslate nohighlight">\(x_0\)</span> 为何值。</p>
+<p>这是被称为全局稳定性的一个例子，我们将在后面再次讨论这个话题。</p>
 </section>
 <section id="id7">
 <h3><span class="section-number">23.2.4. </span>示例：非线性模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>在上面的线性例子中，我们得到了 <span class="math notranslate nohighlight">\(x_t\)</span> 关于任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(x_0\)</span> 的精确解析表达式。</p>
-<p>这使得动态分析变得非常容易。</p>
+<p>在上面的线性例子中，我们得到了 <span class="math notranslate nohighlight">\(x_t\)</span> 关于任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(x_0\)</span> 的精确解析式。</p>
+<p>这使得动力学分析变得轻而易举。</p>
 <p>然而，当模型是非线性时，情况可能会大不相同。</p>
-<p>例如，在后面的索洛讲座中，我们将研究索洛-斯旺增长模型，其动态为</p>
+<p>以索洛-斯旺增长模型为例（后续章节将深入分析），其动态规律由以下方程给出</p>
 <div class="math notranslate nohighlight" id="equation-solow-lom2">
 <span class="eqno">(23.6)<a class="headerlink" href="#equation-solow-lom2" title="Permalink to this equation">#</a></span>\[k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t\]</div>
-<p>这里 <span class="math notranslate nohighlight">\(k=K/L\)</span> 是人均资本存量，<span class="math notranslate nohighlight">\(s\)</span> 是储蓄率，<span class="math notranslate nohighlight">\(A\)</span> 是全要素生产率，<span class="math notranslate nohighlight">\(\alpha\)</span> 是资本份额，<span class="math notranslate nohighlight">\(\delta\)</span> 是折旧率。</p>
+<p>这里 <span class="math notranslate nohighlight">\(k=K/L\)</span> 表示人均资本存量，<span class="math notranslate nohighlight">\(s\)</span> 为储蓄率，<span class="math notranslate nohighlight">\(A\)</span> 表示全要素生产率，<span class="math notranslate nohighlight">\(\alpha\)</span> 为资本份额，<span class="math notranslate nohighlight">\(\delta\)</span> 为折旧率。</p>
 <p>所有这些参数都是正数，且 <span class="math notranslate nohighlight">\(0 &lt; \alpha, \delta &lt; 1\)</span>。</p>
-<p>如果你尝试像我们在线性模型中那样迭代，你会发现代数运算很快就变得复杂。</p>
+<p>如果你尝试像我们在线性模型中做的那样迭代，你会发现代数运算很快就变得复杂。</p>
 <p>分析这个模型的动态需要一种不同的方法（见下文）。</p>
 </section>
 </section>
 <section id="id8">
 <h2><span class="section-number">23.3. </span>稳定性<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
-<p>考虑一个动态系统，由集合 <span class="math notranslate nohighlight">\(S \subset \mathbb R\)</span> 和将 <span class="math notranslate nohighlight">\(S\)</span> 映射到 <span class="math notranslate nohighlight">\(S\)</span> 的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
-<section id="scalar-dynam-steady-state">
-<span id="id9"></span><h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#scalar-dynam-steady-state" title="Permalink to this heading">#</a></h3>
+<p>考虑这样一个动态系统，其由集合 <span class="math notranslate nohighlight">\(S \subset \mathbb R\)</span> 和将 <span class="math notranslate nohighlight">\(S\)</span> 映射到 <span class="math notranslate nohighlight">\(S\)</span> 的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
+<section id="id9">
+<h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
 <p>该系统的<strong>稳态</strong>是 <span class="math notranslate nohighlight">\(S\)</span> 中的一个点 <span class="math notranslate nohighlight">\(x^*\)</span>，满足 <span class="math notranslate nohighlight">\(x^* = g(x^*)\)</span>。</p>
 <p>换句话说，<span class="math notranslate nohighlight">\(x^*\)</span> 是函数 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(S\)</span> 中的一个<strong>不动点</strong>。</p>
 <p>例如，对于线性模型 <span class="math notranslate nohighlight">\(x_{t+1} = a x_t + b\)</span>，你可以使用定义来验证：</p>
@@ -390,8 +392,8 @@ a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 <li><p>如果 <span class="math notranslate nohighlight">\(a = 1\)</span> 且 <span class="math notranslate nohighlight">\(b \not= 0\)</span>，那么这个线性模型在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 中没有稳态。</p></li>
 </ul>
 </section>
-<section id="scalar-dynam-global-stability">
-<span id="id10"></span><h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#scalar-dynam-global-stability" title="Permalink to this heading">#</a></h3>
+<section id="id10">
+<h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
 <p>如果对于所有的 <span class="math notranslate nohighlight">\(x_0 \in S\)</span>，都有</p>
 <div class="math notranslate nohighlight">
 \[
@@ -403,7 +405,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <li><p>如果 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，则是全局稳定的，</p></li>
 <li><p>否则不是全局稳定的。</p></li>
 </ul>
-<p>这直接从方程 <a class="reference internal" href="#equation-sdslinmod">(23.4)</a> 得出。</p>
+<p>以上可以直接从方程 <a class="reference internal" href="#equation-sdslinmod">(23.4)</a> 得出。</p>
 </section>
 <section id="id11">
 <h3><span class="section-number">23.3.3. </span>局部稳定性<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
@@ -431,11 +433,11 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <h2><span class="section-number">23.4. </span>图形分析<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <p>如我们上面所见，分析非线性模型的动态是非常复杂的。</p>
 <p>没有一种单一的方法可以处理所有的非线性模型。</p>
-<p>然而，对于一维模型，有一种技术可以提供大量的直观理解。</p>
+<p>然而，对于一维模型，有一种技巧可以提供大量的直观理解。</p>
 <p>这是一种基于<strong>45度图</strong>的图形方法。</p>
 <p>让我们看一个例子：索洛-斯旺模型，其动态由<a class="reference internal" href="#equation-solow-lom2">(23.6)</a>给出。</p>
 <p>我们首先从一些绘图代码开始，你可以在第一次阅读时忽略这些代码。</p>
-<p>这段代码的功能是生成45度图和时间序列图。</p>
+<p>这段代码的功能是生成45度图和时序图。</p>
 <div class="cell tag_hide-input tag_output_scroll docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -541,7 +543,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 </div>
 </div>
 </div>
-<p>这里是一个45度图。</p>
+<p>以下是一个45度图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span>  <span class="c1"># 适合的绘图区域</span>
@@ -554,8 +556,8 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <a class="reference internal image-reference" href="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png"><img alt="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" src="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>图表显示了函数 <span class="math notranslate nohighlight">\(g\)</span> 和45度线。</p>
-<p>将 <span class="math notranslate nohighlight">\(k_t\)</span> 视为横轴上的一个值。</p>
+<p>这张图显示了函数 <span class="math notranslate nohighlight">\(g\)</span> 和45度线。</p>
+<p>可以将 <span class="math notranslate nohighlight">\(k_t\)</span> 视为横轴上的一个值。</p>
 <p>要计算 <span class="math notranslate nohighlight">\(k_{t+1}\)</span>，我们可以使用 <span class="math notranslate nohighlight">\(g\)</span> 的图像来查看其在纵轴上的值。</p>
 <p>显然，</p>
 <ul class="simple">
@@ -568,7 +570,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <li><p>原点 <span class="math notranslate nohighlight">\(k=0\)</span></p></li>
 <li><p>唯一的正数，使得 <span class="math notranslate nohighlight">\(k = s z k^{\alpha} + (1 - \delta) k\)</span>。</p></li>
 </ul>
-<p>通过一些代数运算，我们可以证明在第二种情况下，稳态是</p>
+<p>通过一些代数运算，我们可以证明在第二种情况下，其稳态是</p>
 <div class="math notranslate nohighlight">
 \[
 k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
@@ -590,7 +592,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 <a class="reference internal image-reference" href="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png"><img alt="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" src="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们可以按照上图所示，绘制人均资本随时间变化的时间序列图，具体如下：</p>
+<p>我们可以按照上图所示，绘制人均资本随时间变化的时序图，具体如下：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
@@ -601,7 +603,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 <a class="reference internal image-reference" href="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png"><img alt="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" src="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>这里是一个稍长一些的视角：</p>
+<p>这里是一个稍长期一些的视角：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
@@ -639,12 +641,13 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </section>
 <section id="id14">
 <h3><span class="section-number">23.4.2. </span>复杂动态<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
-<p>索洛-斯旺模型是非线性的，但仍然产生非常规律的动态。</p>
-<p>一个能产生不规则动态的模型是<strong>二次映射</strong>
-$<span class="math notranslate nohighlight">\(
+<p>尽管索洛-斯旺模型是非线性的，它仍然能生成非常规律的动态。</p>
+<p><strong>二次映射</strong>是一个能生成不规则动态的模型</p>
+<div class="math notranslate nohighlight">
+\[
 g(x) = 4 x (1 - x),
 \qquad x \in [0, 1]
-\)</span>$</p>
+\]</div>
 <p>让我们来看看45度图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -660,7 +663,7 @@ g(x) = 4 x (1 - x),
 <a class="reference internal image-reference" href="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png"><img alt="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" src="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>现在让我们来看一个典型的轨迹。</p>
+<p>现在让我们来看一个特定的轨迹。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot45</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
@@ -671,8 +674,8 @@ g(x) = 4 x (1 - x),
 <a class="reference internal image-reference" href="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png"><img alt="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" src="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>注意它是多么不规则。</p>
-<p>这是相应的时间序列图。</p>
+<p>注意这个轨迹的不规则性。这种混沌行为是二次映射的典型特征。</p>
+<p>这是相应的时序图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
@@ -703,11 +706,11 @@ g(x) = 4 x (1 - x),
 <p class="admonition-title"><span class="caption-number">Exercise 23.1 </span></p>
 <section id="exercise-content">
 <p>再次考虑线性模型 <span class="math notranslate nohighlight">\(x_{t+1} = a x_t + b\)</span>，其中 <span class="math notranslate nohighlight">\(a \not=1\)</span>。</p>
-<p>唯一的稳态为 <span class="math notranslate nohighlight">\(b / (1 - a)\)</span>。</p>
+<p>其唯一的稳态为 <span class="math notranslate nohighlight">\(b / (1 - a)\)</span>。</p>
 <p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，该稳态是全局稳定的。</p>
-<p>尝试通过观察一系列初始条件来图形化地说明这一点。</p>
+<p>请通过选择不同的初始条件并绘制相应的图像来验证这一性质。</p>
 <p>在 <span class="math notranslate nohighlight">\(a \in (-1, 0)\)</span> 和 <span class="math notranslate nohighlight">\(a \in (0, 1)\)</span> 的情况下，你注意到了什么区别？</p>
-<p>使用 <span class="math notranslate nohighlight">\(a=0.5\)</span> 然后使用 <span class="math notranslate nohighlight">\(a=-0.5\)</span> 并研究轨迹。</p>
+<p>使用 <span class="math notranslate nohighlight">\(a=0.5\)</span> 和 <span class="math notranslate nohighlight">\(a=-0.5\)</span> 并分别研究轨迹。</p>
 <p>在整个过程中设置 <span class="math notranslate nohighlight">\(b=1\)</span>。</p>
 </section>
 </div>
@@ -715,8 +718,8 @@ g(x) = 4 x (1 - x),
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#sd_ex1"> Exercise 23.1</a></p>
 <section id="solution-content">
-<p>我们将从 <span class="math notranslate nohighlight">\(a=0.5\)</span> 的情况开始。
-让我们设置模型和绘图区域：</p>
+<p>我们将从 <span class="math notranslate nohighlight">\(a=0.5\)</span> 的情况开始。</p>
+<p>让我们设置模型和绘图区域：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span>
@@ -750,7 +753,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <p>现在让我们尝试 <span class="math notranslate nohighlight">\(a=-0.5\)</span> 并观察有什么不同。</p>
-<p>让我们设置模型和绘图区域：</p>
+<p>我们设置模型和绘图区域为：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span>
@@ -772,7 +775,7 @@ g(x) = 4 x (1 - x),
 <a class="reference internal image-reference" href="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png"><img alt="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" src="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>这是相应的时间序列，它收敛于稳态。</p>
+<p>以上是相应的时间序列，它收敛于稳态。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -783,9 +786,9 @@ g(x) = 4 x (1 - x),
 <a class="reference internal image-reference" href="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png"><img alt="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" src="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>我们再次观察到收敛于稳态的情况，但收敛的性质有所不同。</p>
-<p>特别是，时间序列在稳态上方和下方来回跳跃。</p>
-<p>在当前的语境中，这个序列被称为呈现<strong>阻尼振荡</strong>。</p>
+<p>我们同样观察到序列收敛到稳态，但收敛方式明显不同。</p>
+<p>这次时间序列不是单调收敛，而是在稳态值的上下来回波动，逐渐接近稳态。</p>
+<p>这种在接近稳态过程中振幅逐渐减小的波动模式，在动力系统中被称为<strong>阻尼振荡</strong>。</p>
 </section>
 </div>
 </section>
@@ -872,7 +875,7 @@ g(x) = 4 x (1 - x),
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -958,7 +961,7 @@ g(x) = 4 x (1 - x),
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

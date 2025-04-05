@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>28. 通过货币资助的政府赤字和价格水平 &#8212; Python数量经济学入门</title>
+    <title>28. 通过货币资助的政府赤字和价格水平 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/money_inflation.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">28.4. 一些代码</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">28.5. 两种计算策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">28.5. 两种计算均衡的策略</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">28.5.1. 方法 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">28.5.2. 方法2</a></li>
 </ul>
@@ -212,7 +212,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">通过货币资助的政府赤字和价格水平</p>
 
@@ -244,19 +244,19 @@
 <h1><span class="section-number">28. </span>通过货币资助的政府赤字和价格水平<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">28.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>通过修改控制货币供应的运动法则，本讲座在这个讲座<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>模型的基础上进行了扩展和修改。</p>
-<p>本讲座的模型包括两部分：</p>
+<p>本讲座在<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>模型的基础上进行了扩展，主要通过修改控制货币供应的运动法则。</p>
+<p>我们的模型由两个核心部分组成：</p>
 <ul class="simple">
-<li><p>货币的需求函数</p></li>
+<li><p>货币需求函数</p></li>
 <li><p>货币供应的运动法则</p></li>
 </ul>
-<p>需求函数描述了公众对“实际余额”的需求，即名义货币余额与价格水平的比率：</p>
+<p>货币需求函数描述了公众对”实际余额”的需求，也就是名义货币余额与价格水平的比率：</p>
 <ul class="simple">
-<li><p>它假设当期的实际余额需求与公众预测的当期到下一期间的通货膨胀率成反比</p></li>
-<li><p>它假定公众对该通货膨胀率的预测是完美的</p></li>
+<li><p>当期的实际余额需求与公众预期的通货膨胀率呈反比关系</p></li>
+<li><p>我们假设公众能够完美预测通货膨胀率</p></li>
 </ul>
-<p>货币供应的运动法则假定政府通过加印货币来资助政府支出</p>
-<p>在我们的模型中每个<span class="math notranslate nohighlight">\(t \geq 0\)</span>的时间点下货币的需求与供给相等。</p>
+<p>货币供应的运动法则则表明政府通过印发新货币来为其支出提供资金</p>
+<p>在我们的模型中，对于每个时间点<span class="math notranslate nohighlight">\(t \geq 0\)</span>，货币的需求与供给处于平衡状态。</p>
 <p>需求与供应之间的平衡形成了一个<em>动态</em>模型，在该模型中，货币供应和价格水平<em>序列</em>通过一组同时线性方程来同时决定。</p>
 <p>这些方程通常被称为向量线性<strong>差分方程</strong>。</p>
 <p>在本讲座中，我们将通过两种不同的方法来求解这些方程。</p>
@@ -269,7 +269,7 @@
 <li><p>在对静态通货膨胀率进行比较静态分析时，我们得到一特殊结果：可以通过维持<em>更高</em>的政府赤字来<em>降低</em>通货膨胀，例如通过加印货币来筹集更多资源。</p></li>
 </ul>
 <p>在这个讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>中研究了模型的非线性版本，同样的定性结果也普遍存在。</p>
-<p>这些结果为将在这个讲座<a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a>中呈现的分析奠定了基础 ，它研究了当前模型的非线性版本；它假定了一种“适应性预期”的版本，而不是理性预期。</p>
+<p>这些结果为将在这个讲座<a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a>中呈现的分析奠定了基础，它研究了当前模型的非线性版本；它假定了一种“适应性预期”的版本，而不是理性预期。</p>
 <p>那个讲座将探讨：</p>
 <ul class="simple">
 <li><p>通货膨胀率的两个静止均衡点保持不变，用适应性预期替代理性预期，但是 <span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
@@ -286,27 +286,27 @@
 </section>
 <section id="id3">
 <h2><span class="section-number">28.2. </span>货币的需求与供给<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>我们之所以强调复数形式demand<strong>s</strong>（需求）和supply<strong>s</strong>，是因为每一个<span class="math notranslate nohighlight">\(t \geq 0\)</span> 的时点都有一对应需求和供给。</p>
-<p>设定：</p>
+<p>我们使用复数形式”demands”（需求）和”supplies”（供给），是因为在每个时间点<span class="math notranslate nohighlight">\(t \geq 0\)</span>都存在相应的货币需求和供给。</p>
+<p>让我们定义以下变量：</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(m_{t+1}\)</span> 为时点 <span class="math notranslate nohighlight">\(t\)</span> 结束时的货币供给</p></li>
-<li><p><span class="math notranslate nohighlight">\(m_{t}\)</span> 为从时点 <span class="math notranslate nohighlight">\(t-1\)</span> 带入到时点 <span class="math notranslate nohighlight">\(t\)</span> 的货币供给</p></li>
-<li><p><span class="math notranslate nohighlight">\(g\)</span> 为政府在时点 <span class="math notranslate nohighlight">\(t \geq 1\)</span> 通过印刷货币融资的赤字</p></li>
-<li><p><span class="math notranslate nohighlight">\(m_{t+1}^d\)</span> 为在时点 <span class="math notranslate nohighlight">\(t\)</span> 对带入下一期 <span class="math notranslate nohighlight">\(t+1\)</span> 的货币需求</p></li>
-<li><p><span class="math notranslate nohighlight">\(p_t\)</span> 为 <span class="math notranslate nohighlight">\(t\)</span> 时的价格水平</p></li>
-<li><p><span class="math notranslate nohighlight">\(b_t = \frac{m_{t+1}}{p_t}\)</span> 是 <span class="math notranslate nohighlight">\(t\)</span> 结束时的实际余额</p></li>
-<li><p><span class="math notranslate nohighlight">\(R_t = \frac{p_t}{p_{t+1}}\)</span> 是从 <span class="math notranslate nohighlight">\(t\)</span> 至 <span class="math notranslate nohighlight">\(t+1\)</span> 期持有货币的净回报率</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_{t+1}\)</span> 表示时间点 <span class="math notranslate nohighlight">\(t\)</span> 结束时的货币供给</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_{t}\)</span> 表示从上一时期 <span class="math notranslate nohighlight">\(t-1\)</span> 带入到当前时期 <span class="math notranslate nohighlight">\(t\)</span> 的货币供给</p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span> 表示政府在 <span class="math notranslate nohighlight">\(t \geq 1\)</span> 时通过印钞方式融资的赤字</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_{t+1}^d\)</span> 表示在时间 <span class="math notranslate nohighlight">\(t\)</span> 对下一期 <span class="math notranslate nohighlight">\(t+1\)</span> 的货币需求</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_t\)</span> 表示时间 <span class="math notranslate nohighlight">\(t\)</span> 的价格水平</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_t = \frac{m_{t+1}}{p_t}\)</span> 表示时间 <span class="math notranslate nohighlight">\(t\)</span> 结束时的实际货币余额</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_t = \frac{p_t}{p_{t+1}}\)</span> 表示从时间 <span class="math notranslate nohighlight">\(t\)</span> 到 <span class="math notranslate nohighlight">\(t+1\)</span> 持有货币的实际回报率</p></li>
 </ul>
-<p>在此我们展示度量单位有助于理解各数据在衡量什么：</p>
+<p>为了更好地理解各变量的含义，我们来看看它们的度量单位：</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(m_t\)</span> 和 <span class="math notranslate nohighlight">\(m_t^d\)</span> 用美元计量</p></li>
-<li><p><span class="math notranslate nohighlight">\(g\)</span> 用 <span class="math notranslate nohighlight">\(t\)</span> 时的商品计量</p></li>
-<li><p><span class="math notranslate nohighlight">\(p_t\)</span> 用 <span class="math notranslate nohighlight">\(t\)</span> 时的商品的美元价值计量</p></li>
-<li><p><span class="math notranslate nohighlight">\(R_t\)</span> 用时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的商品衡量 <span class="math notranslate nohighlight">\(t\)</span> 时的商品</p></li>
-<li><p><span class="math notranslate nohighlight">\(b_t\)</span> 用 <span class="math notranslate nohighlight">\(t\)</span> 时的商品计量</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span> 和 <span class="math notranslate nohighlight">\(m_t^d\)</span> 以美元计量</p></li>
+<li><p><span class="math notranslate nohighlight">\(g\)</span> 以时间 <span class="math notranslate nohighlight">\(t\)</span> 的商品数量计量</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_t\)</span> 以每单位商品的美元价格计量</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_t\)</span> 表示持有货币的实际回报率，即时间 <span class="math notranslate nohighlight">\(t\)</span> 的商品与时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的商品之比</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_t\)</span> 以时间 <span class="math notranslate nohighlight">\(t\)</span> 的商品数量计量</p></li>
 </ul>
-<p>现在，我们的任务是确定货币的需求和供给函数。</p>
-<p>我们假设货币需求满足类似凯根的需求函数</p>
+<p>接下来，我们需要确定货币的需求和供给函数。</p>
+<p>对于货币需求，我们采用类似凯根（Cagan）的需求函数</p>
 <div class="math notranslate nohighlight" id="equation-eq-demandmoney">
 <span class="eqno">(28.1)<a class="headerlink" href="#equation-eq-demandmoney" title="Permalink to this equation">#</a></span>\[
 \frac{m_{t+1}^d}{p_t}=\gamma_1 - \gamma_2 \frac{p_{t+1}}{p_t}, \quad t \geq 0
@@ -320,20 +320,20 @@
 <span class="eqno">(28.2)<a class="headerlink" href="#equation-eq-budgcontraint" title="Permalink to this equation">#</a></span>\[
 m_{t+1} - m_{t} = p_t g , \quad t \geq 0
 \]</div>
-<p>根据这个方程，每个时期，政府印刷货币以支付数量为 <span class="math notranslate nohighlight">\(g\)</span> 的商品。</p>
-<p>在<strong>均衡</strong>时，货币的需求等于供给：</p>
+<p>根据这个方程，政府每个时期通过印钞来为购买 <span class="math notranslate nohighlight">\(g\)</span> 单位商品的支出提供资金。</p>
+<p>在<strong>均衡</strong>状态下，货币需求必须等于货币供给：</p>
 <div class="math notranslate nohighlight" id="equation-eq-syeqdemand">
 <span class="eqno">(28.3)<a class="headerlink" href="#equation-eq-syeqdemand" title="Permalink to this equation">#</a></span>\[
 m_{t+1}^d = m_{t+1}, \quad t \geq 0
 \]</div>
-<p>让我们暂停片刻，思考方程<a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a>告诉了我们什么。</p>
-<p><span class="math notranslate nohighlight">\(t\)</span> 时的货币需求取决于 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(t+1\)</span> 时的价格水平。</p>
-<p><span class="math notranslate nohighlight">\(t+1\)</span> 时的货币供给取决于 <span class="math notranslate nohighlight">\(t\)</span> 时的货币供应和价格水平。</p>
-<p>因此，从时刻 <span class="math notranslate nohighlight">\( t \geq 0\)</span> 开始的无限序列方程 <a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a> 暗示了<em>价格序列</em> <span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^\infty\)</span> 和<em>货币供给序列</em> <span class="math notranslate nohighlight">\(\{m_t\}_{t=0}^\infty\)</span> 是紧密联系并最终同时决定的。)</p>
+<p>让我们思考一下方程<a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a>的含义。</p>
+<p>时间 <span class="math notranslate nohighlight">\(t\)</span> 的货币需求取决于 <span class="math notranslate nohighlight">\(t\)</span> 时期和 <span class="math notranslate nohighlight">\(t+1\)</span> 时期的价格水平。</p>
+<p>而时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的货币供给则由 <span class="math notranslate nohighlight">\(t\)</span> 时期的货币供给和价格水平决定。</p>
+<p>因此，从 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 开始的均衡条件<a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a>表明，<em>价格序列</em> <span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^\infty\)</span> 和<em>货币供给序列</em> <span class="math notranslate nohighlight">\(\{m_t\}_{t=0}^\infty\)</span> 是相互关联的，它们必须共同确定。</p>
 </section>
 <section id="id4">
 <h2><span class="section-number">28.3. </span>均衡价格和货币供应序列<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>前述具体要求表明，对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，<strong>实际余额</strong>依据以下公式演变：</p>
+<p>基于上述条件，我们可以推导出对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，<strong>实际货币余额</strong>的演变遵循以下规律：</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{m_{t+1}}{p_t} - \frac{m_{t}}{p_{t-1}} \frac{p_{t-1}}{p_t} = g
@@ -436,6 +436,10 @@ R_t \in  [\underline R, \overline R],  \quad t \geq 0.
 <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -515,36 +519,8 @@ R_max, g_max = 0.7071, 8.5786
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38136 (\N{CJK UNIFIED IDEOGRAPH-94F8}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24065 (\N{CJK UNIFIED IDEOGRAPH-5E01}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 31246 (\N{CJK UNIFIED IDEOGRAPH-7A0E}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36890 (\N{CJK UNIFIED IDEOGRAPH-901A}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36135 (\N{CJK UNIFIED IDEOGRAPH-8D27}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 33192 (\N{CJK UNIFIED IDEOGRAPH-81A8}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 32960 (\N{CJK UNIFIED IDEOGRAPH-80C0}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25910 (\N{CJK UNIFIED IDEOGRAPH-6536}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 30410 (\N{CJK UNIFIED IDEOGRAPH-76CA}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 25919 (\N{CJK UNIFIED IDEOGRAPH-653F}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 24220 (\N{CJK UNIFIED IDEOGRAPH-5E9C}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 36196 (\N{CJK UNIFIED IDEOGRAPH-8D64}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 23383 (\N{CJK UNIFIED IDEOGRAPH-5B57}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="infl-tax">
-<a class="reference internal image-reference" href="_images/99816037a3aefb4aee10d82471248de18b6b4fec610db14d60b2457df81387f0.png"><img alt="_images/99816037a3aefb4aee10d82471248de18b6b4fec610db14d60b2457df81387f0.png" src="_images/99816037a3aefb4aee10d82471248de18b6b4fec610db14d60b2457df81387f0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/329778743931e17f349b172c47802f9ee8b32c08752cc514b105412db3073dbc.png"><img alt="_images/329778743931e17f349b172c47802f9ee8b32c08752cc514b105412db3073dbc.png" src="_images/329778743931e17f349b172c47802f9ee8b32c08752cc514b105412db3073dbc.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 28.1 </span><span class="caption-text">以稳态回报率货币为x画出稳态时通胀税收益的函数（实线蓝色曲线）和实际政府支出（虚线红色线）来对比</span><a class="headerlink" href="#infl-tax" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -571,17 +547,17 @@ R_l, g_l = 0.5344, 3.0000
 </div>
 </div>
 </div>
-<p>现在让我们计算通过印钞票能收集到的最大稳态铸币税以及使他实现的稳态货币回报率。</p>
+<p>现在让我们计算印钞所能获得的最大稳态铸币税收入，以及实现这一最大收入时对应的稳态货币回报率。</p>
 </section>
 <section id="id7">
-<h2><span class="section-number">28.5. </span>两种计算策略<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<p>我们现在继续计算均衡，不一定是稳态。</p>
-<p>我们将尝试两种不同的计算策略。</p>
+<h2><span class="section-number">28.5. </span>两种计算均衡的策略<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>接下来，我们将计算模型的均衡解，这些均衡不一定是稳态。</p>
+<p>为此，我们将探讨两种不同的计算方法。</p>
 <section id="id8">
 <h3><span class="section-number">28.5.1. </span>方法 1<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>设置 <span class="math notranslate nohighlight">\(R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]\)</span> 并计算 <span class="math notranslate nohighlight">\(b_0 = \gamma_1 - \gamma_2/R_0\)</span>。</p></li>
-<li><p>计算序列 <span class="math notranslate nohighlight">\(\{R_t, b_t\}_{t=1}^\infty\)</span>，这些序列是与均衡相关的回报率和实际余额，通过按顺序求解方程 <a class="reference internal" href="#equation-eq-bmotion">(28.4)</a> 和 <a class="reference internal" href="#equation-eq-bdemand">(28.5)</a> 解出 <span class="math notranslate nohighlight">\(t \geq 1\)</span>:</p></li>
+<li><p>首先选择初始货币回报率 <span class="math notranslate nohighlight">\(R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]\)</span>，然后计算对应的初始实际货币余额 <span class="math notranslate nohighlight">\(b_0 = \gamma_1 - \gamma_2/R_0\)</span>。</p></li>
+<li><p>接着，通过递归求解下面的方程组，计算均衡路径上的回报率和实际余额序列 <span class="math notranslate nohighlight">\(\{R_t, b_t\}_{t=1}^\infty\)</span>。对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，我们依次求解方程 <a class="reference internal" href="#equation-eq-bmotion">(28.4)</a> 和 <a class="reference internal" href="#equation-eq-bdemand">(28.5)</a>：</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-rtbt">
 <span class="eqno">(28.10)<a class="headerlink" href="#equation-eq-rtbt" title="Permalink to this equation">#</a></span>\[
@@ -610,73 +586,74 @@ m_t &amp; = b_{t-1} p_t
 <div class="proof remark admonition" id="方法一">
 <p class="admonition-title"><span class="caption-number">Remark 28.1 </span></p>
 <section class="remark-content" id="proof-content">
-<p>方法 1 使用一个间接方法来计算均衡，首先计算一个均衡 <span class="math notranslate nohighlight">\(\{R_t, b_t\}_{t=0}^\infty\)</span> 序列，然后使用它来推导出一个均衡 <span class="math notranslate nohighlight">\(\{p_t, m_t\}_{t=0}^\infty\)</span> 序列。</p>
+<p>方法 1 采用间接计算均衡的策略：先求解货币回报率和实际余额的均衡序列 <span class="math notranslate nohighlight">\(\{R_t, b_t\}_{t=0}^\infty\)</span>，然后基于这些结果推导出价格水平和名义货币量的均衡序列 <span class="math notranslate nohighlight">\(\{p_t, m_t\}_{t=0}^\infty\)</span>。</p>
 </section>
 </div><div class="proof remark admonition" id="初始条件">
 <p class="admonition-title"><span class="caption-number">Remark 28.2 </span></p>
 <section class="remark-content" id="proof-content">
-<p>注意，方法 1 首先从集合 <span class="math notranslate nohighlight">\([\frac{\gamma_2}{\gamma_1}, R_u]\)</span> 中选择一个<strong>初始条件</strong> <span class="math notranslate nohighlight">\(R_0\)</span>。均衡 <span class="math notranslate nohighlight">\(\{p_t, m_t\}_{t=0}^\infty\)</span> 序列不是唯一的。实际上，有一个由 <span class="math notranslate nohighlight">\(R_0\)</span> 的选择索引的均衡连续体。</p>
+<p>需要注意的是，方法 1 要求我们首先从区间 <span class="math notranslate nohighlight">\([\frac{\gamma_2}{\gamma_1}, R_u]\)</span> 中选择一个<strong>初始条件</strong> <span class="math notranslate nohighlight">\(R_0\)</span>。</p>
+<p>这意味着均衡序列 <span class="math notranslate nohighlight">\(\{p_t, m_t\}_{t=0}^\infty\)</span> 并不是唯一的。</p>
+<p>事实上，根据不同的 <span class="math notranslate nohighlight">\(R_0\)</span> 选择，我们可以得到一个连续的均衡族。</p>
 </section>
 </div><div class="proof remark admonition" id="挑选唯一值">
 <p class="admonition-title"><span class="caption-number">Remark 28.3 </span></p>
 <section class="remark-content" id="proof-content">
-<p>每个 <span class="math notranslate nohighlight">\(R_0\)</span> 的选择都有唯一的 <span class="math notranslate nohighlight">\(p_0\)</span>，由方程 <a class="reference internal" href="#equation-eq-p0fromr0">(28.11)</a> 描述。)</p>
+<p>每个初始货币回报率 <span class="math notranslate nohighlight">\(R_0\)</span> 都对应着一个唯一的初始价格水平 <span class="math notranslate nohighlight">\(p_0\)</span>，这种对应关系由方程 <a class="reference internal" href="#equation-eq-p0fromr0">(28.11)</a> 给出。</p>
 </section>
 </div></section>
 <section id="id9">
 <h3><span class="section-number">28.5.2. </span>方法2<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
-<p>此方法采用直接方式。
-它定义了一个“状态向量”
-<span class="math notranslate nohighlight">\(y_t = \begin{bmatrix} m_t \cr p_t\end{bmatrix} \)</span>
-并根据第一阶向量差分方程来表述平衡条件<a class="reference internal" href="#equation-eq-demandmoney">(28.1)</a>，<a class="reference internal" href="#equation-eq-budgcontraint">(28.2)</a>，和<a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a></p>
+<p>方法2采用更直接的计算方式。</p>
+<p>我们首先定义状态向量 <span class="math notranslate nohighlight">\(y_t = \begin{bmatrix} m_t \cr p_t\end{bmatrix}\)</span>，它包含了名义货币量和价格水平。</p>
+<p>然后，我们可以将均衡条件 <a class="reference internal" href="#equation-eq-demandmoney">(28.1)</a>、<a class="reference internal" href="#equation-eq-budgcontraint">(28.2)</a> 和 <a class="reference internal" href="#equation-eq-syeqdemand">(28.3)</a> 整合为一个简洁的一阶向量差分方程：</p>
 <div class="math notranslate nohighlight">
 \[
-y_{t+1} = M y_t, \quad t \geq 0 ,
+y_{t+1} = M y_t, \quad t \geq 0
 \]</div>
-<p>这里我们暂时将 <span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}\)</span> 作为<strong>初始条件</strong>。</p>
+<p>在这个框架下，我们需要指定初始状态 <span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}\)</span> 作为计算的起点。</p>
 <p>解出的结果是</p>
 <div class="math notranslate nohighlight">
 \[
 y_t = M^t y_0.
 \]</div>
 <p>现在让我们思考初始条件 <span class="math notranslate nohighlight">\(y_0\)</span>。</p>
-<p>人们会自然而然地将初始货币存量 <span class="math notranslate nohighlight">\(m_0 &gt;0\)</span> 作为初始条件。</p>
-<p>但<span class="math notranslate nohighlight">\(p_0\)</span>怎么办？</p>
-<p>这不是我们希望由我们的模型来<em>决定</em>的吗？</p>
-<p>是的，但有时我们要求得太多，因为实际上存在一系列与平衡存在相容的初始<span class="math notranslate nohighlight">\(p_0\)</span>水平。</p>
-<p>正如我们很快会看到的，方法2中选择初始<span class="math notranslate nohighlight">\(p_0\)</span>与方法1中选择初始货币回报率<span class="math notranslate nohighlight">\(R_0\)</span>密切相关。</p>
+<p>自然地，我们会将已知的初始货币存量 <span class="math notranslate nohighlight">\(m_0 &gt; 0\)</span> 作为初始条件的一部分。</p>
+<p>但对于 <span class="math notranslate nohighlight">\(p_0\)</span> 应该如何确定呢？</p>
+<p>我们期望模型能够自行<em>决定</em>这个值，不是吗？</p>
+<p>确实如此，但问题在于可能存在多个与均衡相容的初始价格水平 <span class="math notranslate nohighlight">\(p_0\)</span>。</p>
+<p>事实上，我们很快就会看到，在方法2中选择初始价格水平 <span class="math notranslate nohighlight">\(p_0\)</span> 与在方法1中选择初始货币回报率 <span class="math notranslate nohighlight">\(R_0\)</span> 是密切相关的。</p>
 </section>
 </section>
 <section id="id10">
 <h2><span class="section-number">28.6. </span>计算方法1<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
-<p>记住存在两个稳定状态均衡值 <span class="math notranslate nohighlight">\( R_\ell &lt;  R_u\)</span> 对应货币回报率 <span class="math notranslate nohighlight">\(R_t\)</span>。</p>
-<p>我们按以下步骤进行：</p>
+<p>回顾一下，货币回报率 <span class="math notranslate nohighlight">\(R_t\)</span> 存在两个稳态均衡值 <span class="math notranslate nohighlight">\(R_\ell &lt; R_u\)</span>。</p>
+<p>我们按以下步骤进行计算：</p>
 <p>从 <span class="math notranslate nohighlight">\(t=0\)</span> 开始</p>
 <ul class="simple">
 <li><p>选择一个 <span class="math notranslate nohighlight">\(R_0 \in [\frac{\gamma_2}{\gamma_1}, R_u]\)</span></p></li>
 <li><p>计算 <span class="math notranslate nohighlight">\(b_0 = \gamma_1 - \gamma_0 R_0^{-1}\)</span></p></li>
 </ul>
-<p>然后对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，通过迭代方程 <a class="reference internal" href="#equation-eq-rtbt">(28.10)</a> 构造 <span class="math notranslate nohighlight">\(b_t, R_t\)</span>。</p>
-<p>当我们实施方法1的这部分时，我们将发现以下显著的结果：</p>
+<p>然后对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，通过迭代方程 <a class="reference internal" href="#equation-eq-rtbt">(28.10)</a> 构造序列 <span class="math notranslate nohighlight">\(\{b_t, R_t\}\)</span>。</p>
+<p>当我们实施方法1时，会发现以下重要结果：</p>
 <ul class="simple">
-<li><p>从区间 <span class="math notranslate nohighlight">\([\frac{\gamma_2}{\gamma_1}, R_u]\)</span> 中的一个 <span class="math notranslate nohighlight">\(R_0\)</span> 开始，我们将发现 <span class="math notranslate nohighlight">\(\{R_t\}\)</span> 总是收敛到一个取决于初始条件 <span class="math notranslate nohighlight">\(R_0\)</span> 的有限“稳态”值 <span class="math notranslate nohighlight">\(\bar R\)</span>。</p></li>
-<li><p>只有两个可能的极限点 <span class="math notranslate nohighlight">\(\{ R_\ell, R_u\}\)</span>。</p></li>
-<li><p>对于几乎所有初始条件 <span class="math notranslate nohighlight">\(R_0\)</span>，<span class="math notranslate nohighlight">\(\lim_{t \rightarrow +\infty} R_t = R_\ell\)</span>。</p></li>
-<li><p>当且仅当 <span class="math notranslate nohighlight">\(R_0 = R_u\)</span> 时，<span class="math notranslate nohighlight">\(\lim_{t \rightarrow +\infty} R_t = R_u\)</span>。</p></li>
+<li><p>无论从区间 <span class="math notranslate nohighlight">\([\frac{\gamma_2}{\gamma_1}, R_u]\)</span> 中选择哪个 <span class="math notranslate nohighlight">\(R_0\)</span> 作为起点，序列 <span class="math notranslate nohighlight">\(\{R_t\}\)</span> 总是会收敛到一个取决于初始条件 <span class="math notranslate nohighlight">\(R_0\)</span> 的有限”稳态”值 <span class="math notranslate nohighlight">\(\bar R\)</span>。</p></li>
+<li><p>这个极限值 <span class="math notranslate nohighlight">\(\bar R\)</span> 只有两种可能：<span class="math notranslate nohighlight">\(R_\ell\)</span> 或 <span class="math notranslate nohighlight">\(R_u\)</span>。</p></li>
+<li><p>对于几乎所有的初始条件 <span class="math notranslate nohighlight">\(R_0\)</span>，极限值 <span class="math notranslate nohighlight">\(\lim_{t \rightarrow +\infty} R_t = R_\ell\)</span>。</p></li>
+<li><p>只有当 <span class="math notranslate nohighlight">\(R_0 = R_u\)</span> 时，极限值才会是 <span class="math notranslate nohighlight">\(\lim_{t \rightarrow +\infty} R_t = R_u\)</span>。</p></li>
 </ul>
-<p>量 <span class="math notranslate nohighlight">\(1 - R_t\)</span> 可以被解释为政府对持有其货币者征收的 <strong>通货膨胀税率</strong>。</p>
-<p>我们不久将看到，存在两个稳定状态的货币回报率
-表明有一个 <strong>拉弗曲线</strong> 存在于通货膨胀税率中，这用于资助政府的 <span class="math notranslate nohighlight">\(g\)</span> 带来的赤字。</p>
+<p>值得注意的是，<span class="math notranslate nohighlight">\(1 - R_t\)</span> 可以被解释为政府对货币持有者征收的<strong>通货膨胀税率</strong>。</p>
+<p>我们即将看到，货币回报率存在两个稳态值这一事实表明通货膨胀税率存在一条<strong>拉弗曲线</strong>，这条曲线描述了政府如何通过通货膨胀为其赤字 <span class="math notranslate nohighlight">\(g\)</span> 融资。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>拉弗曲线绘制了税收与税率之间呈驼峰形状的曲线。其驼峰形态表明通常有两个税率产生相同的税收额。这是由两个相对作用力造成的，一是提高税率通常会减少税基，因为人们会作出决定以减少他们要面对的税收。</p>
+<p>拉弗曲线描述了税收收入与税率之间的关系，呈现典型的驼峰形状。这种形状意味着通常存在两个不同的税率能产生相同的税收收入。</p>
+<p>这一现象源于两种相互对立的力量：一方面，提高税率会增加单位税基的收入；另一方面，较高的税率往往会导致税基缩小，因为人们会调整自己的行为以减少税负。</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_system</span><span class="p">(</span><span class="n">R0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
     <span class="n">γ1</span><span class="p">,</span> <span class="n">γ2</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">γ1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">γ2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span>
 
-    <span class="c1"># 初始化数组以存储结果</span>
+    <span class="c1"># 初始化数组来存储结果</span>
     <span class="n">b_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span>
     <span class="n">R_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span>
 
@@ -736,7 +713,7 @@ y_t = M^t y_0.
     
     <span class="c1"># 添加标签</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$R_t$&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间步&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$b_t$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     
@@ -759,24 +736,10 @@ y_t = M^t y_0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8269/3989673625.py:38: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-/tmp/ipykernel_8269/3989673625.py:38: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-/tmp/ipykernel_8269/3989673625.py:38: UserWarning: Glyph 27493 (\N{CJK UNIFIED IDEOGRAPH-6B65}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 27493 (\N{CJK UNIFIED IDEOGRAPH-6B65}) missing from font(s) DejaVu Sans.
-  fig.canvas.print_figure(bytes_io, **kw)
-</pre></div>
-</div>
 <figure class="align-default" id="r0-path">
-<a class="reference internal image-reference" href="_images/8ebb4e0a8c1cfca73fe85aeb19d3d9093f992d38635f185faa3ac75874965975.png"><img alt="_images/8ebb4e0a8c1cfca73fe85aeb19d3d9093f992d38635f185faa3ac75874965975.png" src="_images/8ebb4e0a8c1cfca73fe85aeb19d3d9093f992d38635f185faa3ac75874965975.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4e34a2bc13cca7a6c9ea581efee655dd5baacb9b4e5e5bb8af9af2ae327d2411.png"><img alt="_images/4e34a2bc13cca7a6c9ea581efee655dd5baacb9b4e5e5bb8af9af2ae327d2411.png" src="_images/4e34a2bc13cca7a6c9ea581efee655dd5baacb9b4e5e5bb8af9af2ae327d2411.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 28.2 </span><span class="caption-text">从不同初始条件 <span class="math notranslate nohighlight">\(R_0\)</span> 出发的 <span class="math notranslate nohighlight">\(R_t\)</span>（上层图面）和 <span class="math notranslate nohighlight">\(b_t\)</span>（下层图面）的路径</span><a class="headerlink" href="#r0-path" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 28.2 </span><span class="caption-text">从不同初始条件 <span class="math notranslate nohighlight">\(R_0\)</span> 出发的 <span class="math notranslate nohighlight">\(R_t\)</span>（上图）和 <span class="math notranslate nohighlight">\(b_t\)</span>（下图）的路径</span><a class="headerlink" href="#r0-path" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -858,11 +821,11 @@ y_t = H^t y_0, t \geq 0
 \[
 y_0 = \begin{bmatrix} m_{0} \cr p_0 \end{bmatrix} .
 \]</div>
-<p>很自然地，可以将 <span class="math notranslate nohighlight">\(m_0\)</span> 作为模型外部确定的初始条件。</p>
-<p>数学似乎告诉我们 <span class="math notranslate nohighlight">\(p_0\)</span> 也必须在模型外部确定，尽管这是我们希望通过模型确定的东西。</p>
-<p>（像往常一样，当数学向我们发声时，我们应该倾听。）</p>
-<p>现在，让我们就基于信念机械式地继续前进。</p>
-<p>计算特征向量分解</p>
+<p>在这个模型中，我们自然地将 <span class="math notranslate nohighlight">\(m_0\)</span> 视为外生给定的初始条件。</p>
+<p>然而，数学结构表明 <span class="math notranslate nohighlight">\(p_0\)</span> 也需要作为初始条件外部确定，尽管价格水平正是我们希望通过模型内生决定的变量。</p>
+<p>（这种情况提醒我们，当数学给我们提示时，我们应该认真思考其含义。）</p>
+<p>接下来，让我们基于这一认识继续分析模型的动态特性。</p>
+<p>首先，我们计算矩阵 <span class="math notranslate nohighlight">\(H\)</span> 的特征向量分解</p>
 <div class="math notranslate nohighlight">
 \[
 H =  Q \Lambda Q^{-1} 
@@ -965,7 +928,7 @@ y_t = Q \Lambda^t Q^{-1} y_0
 \[
 y^*_t = Q^{-1} y_t . 
 \]</div>
-<p><span class="math notranslate nohighlight">\(y^*_t\)</span>的动力显然受制于</p>
+<p><span class="math notranslate nohighlight">\(y^*_t\)</span>的动态演变明显遵循</p>
 <div class="math notranslate nohighlight" id="equation-eq-stardynamics">
 <span class="eqno">(28.17)<a class="headerlink" href="#equation-eq-stardynamics" title="Permalink to this equation">#</a></span>\[
 y^*_{t+1} = \Lambda^t y^*_t .
@@ -974,20 +937,17 @@ y^*_{t+1} = \Lambda^t y^*_t .
 <p>仔细观察<a class="reference internal" href="#equation-eq-stardynamics">(28.17)</a> 我们可以得出，除非</p>
 <div class="math notranslate nohighlight" id="equation-equation-11">
 <span class="eqno">(28.18)<a class="headerlink" href="#equation-equation-11" title="Permalink to this equation">#</a></span>\[\begin{split}y^*_0 = \begin{bmatrix} y^*_{1,0} \\ 0 \end{bmatrix}\end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(y^*_t\)</span> 的路径，因此 <span class="math notranslate nohighlight">\(y_t = Q y^*_t\)</span> 给出的 <span class="math notranslate nohighlight">\(m_t\)</span> 和 <span class="math notranslate nohighlight">\(p_t\)</span> 的路径将最终以 <span class="math notranslate nohighlight">\(R_l^{-1}\)</span> 的总率增长，随着 <span class="math notranslate nohighlight">\(t \rightarrow +\infty\)</span>。</p>
-<p>方程 <a class="reference internal" href="#equation-equation-11">(28.18)</a> 还让我们得出结论：对于初始向量 <span class="math notranslate nohighlight">\(y_0\)</span> 有一个唯一的设置，使得两个组件永远以较低的速率 <span class="math notranslate nohighlight">\({R_u}^{-1}\)</span> 增长。</p>
-<p>为了使这种情况发生，<span class="math notranslate nohighlight">\(y_0\)</span> 的所需设置显然必须具有以下属性：</p>
+<p>除非初始条件满足特定要求，否则<span class="math notranslate nohighlight">\(y^*_t\)</span>的路径，以及由<span class="math notranslate nohighlight">\(y_t = Q y^*_t\)</span>得到的<span class="math notranslate nohighlight">\(m_t\)</span>和<span class="math notranslate nohighlight">\(p_t\)</span>的路径，将随着<span class="math notranslate nohighlight">\(t \rightarrow +\infty\)</span>最终以<span class="math notranslate nohighlight">\(R_l^{-1}\)</span>的速率增长。</p>
+<p>从方程<a class="reference internal" href="#equation-equation-11">(28.18)</a>我们可以推断出：存在一个唯一的初始向量<span class="math notranslate nohighlight">\(y_0\)</span>设置，使得系统的两个组件能够永远以较低的速率<span class="math notranslate nohighlight">\({R_u}^{-1}\)</span>增长。</p>
+<p>要实现这种情况，初始向量<span class="math notranslate nohighlight">\(y_0\)</span>必须满足以下条件：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 Q^{-1} y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \\ 0 \end{bmatrix} .
 \end{split}\]</div>
-<p>但请注意，因为
-<span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}\)</span> 和 <span class="math notranslate nohighlight">\(m_0\)</span>
-作为初始条件给定，<span class="math notranslate nohighlight">\(p_0\)</span> 必须调整以满足这个方程。</p>
-<p>有时，这种情况非正式地被描述为，尽管 <span class="math notranslate nohighlight">\(m_0\)</span>
-是一个真正的<strong>状态</strong>变量，<span class="math notranslate nohighlight">\(p_0\)</span> 是一个必须在 <span class="math notranslate nohighlight">\(t=0\)</span> 时调整以满足方程的<strong>跳跃</strong>变量。</p>
-<p>因此，简而言之，向量 <span class="math notranslate nohighlight">\(y_0\)</span> 的唯一值使得 <span class="math notranslate nohighlight">\(y_t\)</span> 的路径<em>不</em>最终以 <span class="math notranslate nohighlight">\({R_\ell}^{-1}\)</span> 的速率增长，需要将 <span class="math notranslate nohighlight">\(y^*_0\)</span> 的第二组分设为零。</p>
-<p>初始向量 <span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}\)</span> 的 <span class="math notranslate nohighlight">\(p_0\)</span> 显然必须满足</p>
+<p>需要注意的是，由于 <span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}\)</span>，且 <span class="math notranslate nohighlight">\(m_0\)</span> 是作为初始条件给定的，因此 <span class="math notranslate nohighlight">\(p_0\)</span> 必须进行调整以满足上述方程。</p>
+<p>在经济学中，这种情况通常被描述为：<span class="math notranslate nohighlight">\(m_0\)</span> 是一个<strong>状态</strong>变量（不能自由跳跃），而 <span class="math notranslate nohighlight">\(p_0\)</span> 是一个<strong>跳跃</strong>变量（可以在 <span class="math notranslate nohighlight">\(t=0\)</span> 时刻自由调整以满足均衡条件）。</p>
+<p>总结来说，要使 <span class="math notranslate nohighlight">\(y_t\)</span> 的路径不会最终以较高的通胀率 <span class="math notranslate nohighlight">\({R_\ell}^{-1}\)</span> 增长，唯一的方法是选择一个特定的初始向量 <span class="math notranslate nohighlight">\(y_0\)</span>，使得 <span class="math notranslate nohighlight">\(y^*_0\)</span> 的第二个分量为零。</p>
+<p>因此，对于初始向量 <span class="math notranslate nohighlight">\(y_0 = \begin{bmatrix} m_0 \\ p_0 \end{bmatrix}\)</span>，<span class="math notranslate nohighlight">\(p_0\)</span> 必须满足</p>
 <div class="math notranslate nohighlight">
 \[
 Q^{\{2\}} y_0 = 0
@@ -1001,8 +961,8 @@ Q^{\{2\}} y_0 = 0
 <span class="eqno">(28.20)<a class="headerlink" href="#equation-equation-13" title="Permalink to this equation">#</a></span>\[p_0 = - (Q^{22})^{-1} Q^{21} m_0.\]</div>
 <section id="id12">
 <h3><span class="section-number">28.7.1. </span>更便捷的公式<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
-<p>我们可以得到一个等效但可能更便捷的 <span class="math notranslate nohighlight">\(p_0\)</span> 公式 <a class="reference internal" href="#equation-eq-magicp0">(28.16)</a>，该公式是用 <span class="math notranslate nohighlight">\(Q\)</span> 的组成部分表示的，而不是 <span class="math notranslate nohighlight">\(Q^{-1}\)</span> 的组成部分。</p>
-<p>为了得到这个公式，首先注意到因为 <span class="math notranslate nohighlight">\((Q^{21}\ Q^{22})\)</span> 是 <span class="math notranslate nohighlight">\(Q\)</span> 的逆矩阵的第二行，并且因为 <span class="math notranslate nohighlight">\(Q^{-1} Q = I\)</span>，所以我们有</p>
+<p>我们可以推导出一个等价但更为简洁的 <span class="math notranslate nohighlight">\(p_0\)</span> 表达式 <a class="reference internal" href="#equation-eq-magicp0">(28.16)</a>，它直接使用矩阵 <span class="math notranslate nohighlight">\(Q\)</span> 的元素，而不是 <span class="math notranslate nohighlight">\(Q^{-1}\)</span> 的元素。</p>
+<p>为了推导这个表达式，我们首先利用矩阵乘法的基本性质。由于 <span class="math notranslate nohighlight">\(Q^{-1}Q = I\)</span>（单位矩阵），<span class="math notranslate nohighlight">\(Q^{-1}\)</span> 的第二行 <span class="math notranslate nohighlight">\((Q^{21}\ Q^{22})\)</span> 与 <span class="math notranslate nohighlight">\(Q\)</span> 的第一列相乘必须等于零，即</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{bmatrix} Q^{21} &amp; Q^{22} \end{bmatrix}  \begin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
@@ -1035,7 +995,7 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 </div>
 </div>
 </div>
-<p>可以验证这个公式会随时间自我复制，意味着</p>
+<p>我们可以验证，这个公式在动态系统中具有稳定性，也就是说</p>
 <div class="math notranslate nohighlight" id="equation-equation-15">
 <span class="eqno">(28.21)<a class="headerlink" href="#equation-equation-15" title="Permalink to this equation">#</a></span>\[p_t = Q_{21} Q^{-1}_{11} m_t.\]</div>
 <p>现在让我们从不同的 <span class="math notranslate nohighlight">\(p_0\)</span> 值开始，来可视化 <span class="math notranslate nohighlight">\(m_t\)</span>、<span class="math notranslate nohighlight">\(p_t\)</span> 和 <span class="math notranslate nohighlight">\(R_t\)</span> 的动态，以验证我们上述的论断。</p>
@@ -1051,7 +1011,7 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    <span class="c1"># 预计算时间步</span>
+    <span class="c1"># 预计算时间</span>
     <span class="n">time_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span> 
     
     <span class="c1"># 前两个y轴使用对数刻度</span>
@@ -1081,7 +1041,7 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$m_t$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$p_t$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$R_t$&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间步&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间&#39;</span><span class="p">)</span>
     
     <span class="c1"># 强制整数轴标签</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
@@ -1102,39 +1062,31 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8269/3764470695.py:40: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-/tmp/ipykernel_8269/3764470695.py:40: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-/tmp/ipykernel_8269/3764470695.py:40: UserWarning: Glyph 27493 (\N{CJK UNIFIED IDEOGRAPH-6B65}) missing from font(s) DejaVu Sans.
-  plt.tight_layout()
-</pre></div>
-</div>
 <figure class="align-default" id="p0-path">
-<a class="reference internal image-reference" href="_images/b49d1d29a40fc4126f90621d6605e4f34c391c709c89eef70a16cc374a0fc0be.png"><img alt="_images/b49d1d29a40fc4126f90621d6605e4f34c391c709c89eef70a16cc374a0fc0be.png" src="_images/b49d1d29a40fc4126f90621d6605e4f34c391c709c89eef70a16cc374a0fc0be.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5737d7d791e2fe7ca8510f793e265b0038126d240ff77a9409e282acac2a1d64.png"><img alt="_images/5737d7d791e2fe7ca8510f793e265b0038126d240ff77a9409e282acac2a1d64.png" src="_images/5737d7d791e2fe7ca8510f793e265b0038126d240ff77a9409e282acac2a1d64.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 28.3 </span><span class="caption-text">从不同的初始值 <span class="math notranslate nohighlight">\(p_0\)</span> 出发, <span class="math notranslate nohighlight">\(m_t\)</span> 的路径（顶部面板，<span class="math notranslate nohighlight">\(m\)</span> 使用对数刻度）, <span class="math notranslate nohighlight">\(p_t\)</span>（中间面板，<span class="math notranslate nohighlight">\(m\)</span> 使用对数刻度）, <span class="math notranslate nohighlight">\(R_t\)</span>（底部面板）</span><a class="headerlink" href="#p0-path" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>请注意对于 <span class="math notranslate nohighlight">\(m_t\)</span> 和 <span class="math notranslate nohighlight">\(p_t\)</span>，我们使用了对数刻度。</p>
-<p>使用对数刻度可以让我们更容易地通过视觉识别两个不同的常数极限增长率 <span class="math notranslate nohighlight">\({R_u}^{-1}\)</span> 和
-<span class="math notranslate nohighlight">\({R_\ell}^{-1}\)</span>.</p>
+<p>请注意我们对 <span class="math notranslate nohighlight">\(m_t\)</span> 和 <span class="math notranslate nohighlight">\(p_t\)</span> 使用了对数刻度。</p>
+<p>使用对数刻度使我们能够更容易地通过视觉识别两个不同的常数极限增长率 <span class="math notranslate nohighlight">\({R_u}^{-1}\)</span> 和
+<span class="math notranslate nohighlight">\({R_\ell}^{-1}\)</span>。</p>
 </section>
 </section>
 <section id="id13">
 <h2><span class="section-number">28.8. </span>特殊的静态结果<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
-<p>正如本讲座开始时所承诺的，我们遇到了这些宏观经济学的概念：</p>
+<p>正如本讲座开始时所承诺的，我们遇到了以下宏观经济学概念：</p>
 <ul class="simple">
 <li><p>政府通过印制纸币或电子货币征收的<strong>通货膨胀税</strong></p></li>
-<li><p>通货膨胀税率的动态<strong>劳弗曲线</strong>，该曲线有两个静态均衡点</p></li>
+<li><p>通货膨胀税率的动态<strong>拉弗曲线</strong>，该曲线具有两个静态均衡点</p></li>
 </ul>
-<p>观察图 <a class="reference internal" href="#r0-path"><span class="std std-numref">Fig. 28.2</span></a> 中关于物价水平的回报率路径和图 <a class="reference internal" href="#p0-path"><span class="std std-numref">Fig. 28.3</span></a> 中的物价水平路径显示，几乎所有路径都趋向于在图 <a class="reference internal" href="#infl-tax"><span class="std std-numref">Fig. 28.1</span></a> 展示的劳弗曲线静态状态中显示的<em>较高</em>的通货膨胀税率。</p>
-<p>因此，我们确实发现了我们早先称之为“反常”的动态，即在理性预期下，系统收敛于两个可能的静态通货膨胀税率中的较高者。</p>
-<p>这些动态之所以“反常”，不仅仅是因为它们意味着货币和财政当局选择通过印刷货币来筹集财政收入，最终征收的通货膨胀税超过了筹集财政支出所需的税收，还因为我们可以通过观察图 <a class="reference internal" href="#infl-tax"><span class="std std-numref">Fig. 28.1</span></a> 中显示的静态状态劳弗曲线得出以下“违反直觉”的情况：</p>
+<p>观察图 <a class="reference internal" href="#r0-path"><span class="std std-numref">Fig. 28.2</span></a> 中物价水平回报率的路径和图 <a class="reference internal" href="#p0-path"><span class="std std-numref">Fig. 28.3</span></a> 中的物价水平路径，我们可以看到几乎所有路径都趋向于图 <a class="reference internal" href="#infl-tax"><span class="std std-numref">Fig. 28.1</span></a> 中拉弗曲线静态状态下显示的<em>较高</em>通货膨胀税率。</p>
+<p>因此，我们确实发现了我们早先称为”反常”的动态现象，即在理性预期下，系统收敛到两个可能的静态通货膨胀税率中较高的那个。</p>
+<p>这些动态之所以”反常”，不仅是因为它们意味着货币和财政当局选择通过印钞来筹集财政收入，最终征收的通货膨胀税超过了筹集财政支出所需的税收，还因为我们可以从图 <a class="reference internal" href="#infl-tax"><span class="std std-numref">Fig. 28.1</span></a> 中显示的静态拉弗曲线得出以下”违反直觉”的结论：</p>
 <ul class="simple">
-<li><p>该图表显示，通过运行<em>更高</em>的政府赤字，即通过印制更多的货币来筹集更多资源，可以<em>降低</em>通货膨胀。</p></li>
+<li><p>该图表表明，通过运行<em>更高</em>的政府赤字（即通过印制更多货币来筹集更多资源），实际上可以<em>降低</em>通货膨胀率。</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1143,21 +1095,21 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 </section>
 <section id="id14">
 <h2><span class="section-number">28.9. </span>均衡选择<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
-<p>我们发现作为价格水平路径的模型或模型是<strong>不完整的</strong>，因为存在一系列与实际货币余额总是等于供给的“均衡”路径 <span class="math notranslate nohighlight">\(\{m_{t+1}, p_t\}_{t=0}^\infty\)</span>。</p>
-<p>通过应用我们的计算方法1和2，我们已经了解到这个连续体可以通过选择以下两个标量之一来索引：</p>
+<p>我们的模型在确定价格水平路径方面存在<strong>不完整性</strong>，因为有多条满足”实际货币余额等于供给”条件的”均衡”路径 <span class="math notranslate nohighlight">\(\{m_{t+1}, p_t\}_{t=0}^\infty\)</span>。</p>
+<p>通过前面介绍的两种计算方法，我们发现这些可能的均衡路径可以通过以下两个参数之一来确定：</p>
 <ul class="simple">
-<li><p>对于计算方法1，<span class="math notranslate nohighlight">\(R_0\)</span></p></li>
-<li><p>对于计算方法2，<span class="math notranslate nohighlight">\(p_0\)</span></p></li>
+<li><p>计算方法1中的初始回报率 <span class="math notranslate nohighlight">\(R_0\)</span></p></li>
+<li><p>计算方法2中的初始价格水平 <span class="math notranslate nohighlight">\(p_0\)</span></p></li>
 </ul>
-<p>为了应用我们的模型，我们必须以某种方式<em>完成</em>它，通过在可能的路径连续体中<em>选择</em>一个均衡路径。</p>
-<p>我们发现：</p>
+<p>要实际应用我们的模型，我们需要从这些可能的均衡路径中<em>选择</em>一条特定路径，从而<em>完成</em>我们的模型。</p>
+<p>我们的分析表明：</p>
 <ul class="simple">
-<li><p>除一个外的所有均衡路径都会收敛到其中较高的两个可能的平稳通胀税率的限制</p></li>
-<li><p>存在一个独特的均衡路径，它与关于政府赤字减少如何影响恒定通胀率的“合理”声明相关联</p></li>
+<li><p>几乎所有均衡路径最终都会收敛到两个可能的平稳通胀税率中较高的那个</p></li>
+<li><p>只有一条独特的均衡路径与”减少政府赤字会降低通胀率”这一直觉相符</p></li>
 </ul>
-<p>出于合理性的考虑，我们建议按照许多宏观经济学家的看法，选择收敛到较低平稳通胀税率的独特均衡。</p>
-<p>正如我们将在讲座 <a class="reference internal" href="unpleasant.html"><span class="doc">一些不愉快的货币主义算术</span></a> 中看到的，我们将接受这一建议。</p>
-<p>在讲座 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a> 中，我们将探讨 <span id="id15">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span> 和其他人是如何以其他方式证明这一点的。</p>
+<p>基于经济直觉和合理性考虑，我们倾向于采纳大多数宏观经济学家的观点，选择那条收敛到较低平稳通胀税率的独特均衡路径。</p>
+<p>在后续讲座 <a class="reference internal" href="unpleasant.html"><span class="doc">一些不愉快的货币主义算术</span></a> 中，我们将进一步接受并应用这一观点。</p>
+<p>而在讲座 <a class="reference internal" href="laffer_adaptive.html"><span class="doc">拉弗曲线与自适应预期</span></a> 中，我们将探讨 <span id="id15">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span> 等学者如何从不同角度支持这一选择。</p>
 </section>
 </section>
 
@@ -1242,7 +1194,7 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1328,7 +1280,7 @@ Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>

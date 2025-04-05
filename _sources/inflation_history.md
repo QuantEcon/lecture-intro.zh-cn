@@ -10,21 +10,20 @@ kernelspec:
   language: python
   name: python3
 ---
-# 价格水平历史
 
-本讲将讨论一些关于综合价格指数波动的历史数据。
+# 通货膨胀的历史
 
-我们首先安装必要的Python包。
+本讲将透过一些历史数据探讨价格指数的波动模式及其背后的故事。
 
-这里引入 `xlrd`是因为 `pandas` 需要它来对Excel文件执行操作。
+首先，我们需要安装一些必要的Python包。
+
+注意：我们安装`xlrd`是因为`pandas`在读取Excel文件时需要它。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 
 !pip install xlrd
 ```
-
-<!-- Check for pandas>=2.1.4 for Google Collab Compat -->
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -52,17 +51,17 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 价格水平的增长率在媒体和央行及财政官员的口中被称为**通货膨胀**。
 
-价格水平是以国内货币单位对一组一篮子消费品的单位进行衡量的。
+价格水平衡量的是一篮子消费品在国内货币单位中的价值。
 
-因此，在美国，$t$时期的价格水平以美元（$t$月或$t$年）对一单位一篮子消费品的比值计算。
+例如，在美国，$t$时期的价格水平表示购买一单位标准消费品篮子所需的美元数量（以$t$月或$t$年计）。
 
-20世纪初之前，在许多西方经济体中，价格水平虽然年复一年地波动，但趋势不太明显。
+在20世纪之前，许多西方经济体的价格水平虽然存在短期波动，但长期来看并没有明显的上升或下降趋势。
 
-通常价格水平在一个世纪结束时与其开始时相近。
+一个世纪开始时的价格水平通常与该世纪结束时的水平相差不大。
 
-20世纪的情况则有所不同，我们将在本讲中看到。
+然而，20世纪的情况发生了显著变化，这一点我们将在本讲中详细探讨。
 
-一个广为接受的解释是20世纪初期各国放弃了金本位和银本位制度。
+这种变化的一个普遍接受的解释是，20世纪初期各国逐渐放弃了以黄金和白银作为货币基础的金本位和银本位制度。
 
 ```{tip}
 本讲为后续几讲做好了铺垫，这些后续几讲中我们将用宏观经济学家的角度来思考决定价格水平的因素，即{doc}`cagan_ree` 和 {doc}`cagan_adaptive`
@@ -83,7 +82,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 在金本位或银本位制下，一些货币还包括"仓单"，即代表对金币或银币索赔权的纸质凭证。政府或私人银行发行的钞票可以被视为这种"仓单"的例子。
 ```
 
-我们用 `pandas`导入一个托管在Github上的[电子表格](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
+我们用 `pandas`导入一个[数据集](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)。
 
 ```{code-cell} ipython3
 # 导入数据并清理索引
@@ -110,7 +109,7 @@ df_fig5_befe1914 = df_fig5[df_fig5.index <= 1914]
 
 # 创建图表
 cols = ['UK', 'US', 'France', 'Castile']
-cols_cn = ['英国', '美国', '法国', '卡斯蒂利亚']
+cols_cn = ['英国', '美国', '法国', '卡斯蒂利亚(西班牙)']
 
 fig, ax = plt.subplots(figsize=(10,6))
 
@@ -142,7 +141,7 @@ plt.show()
 
 尽管出现了这些暂时的中断，图中一个显著的特点是三个世纪以来价格水平大致保持恒定。
 
-在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[欧文·费雪（Irving Fisher）](https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963#:~:text=%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA(Irving%20Fisher,%E5%B9%B4%E8%8E%B7%E5%93%B2%E5%AD%A6%E5%8D%9A%E5%A3%AB%E5%AD%A6%E4%BD%8D%E3%80%82)和剑桥大学的[约翰·梅纳德·凯恩斯（John Maynard Keynes）](https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330)的关注。
+在这个世纪初期，这些数据的另外两个特点引起了耶鲁大学的[欧文·费雪（Irving Fisher）](https://baike.baidu.com/item/%E6%AC%A7%E6%96%87%C2%B7%E8%B4%B9%E9%9B%AA/9127963)和剑桥大学的[约翰·梅纳德·凯恩斯（John Maynard Keynes）](https://baike.baidu.com/item/%E7%BA%A6%E7%BF%B0%C2%B7%E6%A2%85%E7%BA%B3%E5%BE%B7%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/4525330)的关注。
 
 * 尽管长期锚定在相同的平均水平上，年度价格水平的波动还是很大
 * 虽然使用有价值的黄金和白银作为货币成功地通过限制货币供给稳定了价格水平，但这需要消耗现实的资源 --
@@ -221,6 +220,7 @@ plt.show()
 我们在四幅图中的每一幅都加上了相对美元汇率的对数。
 
 图表的基础数据载于{cite}`sargent2013rational`第3章附录中的表格。
+
 我们将所有这些数据转录到电子表格 {download}`chapter_3.xlsx <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx>` 中，并将其读入 pandas。
 
 在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
@@ -252,7 +252,7 @@ def process_entry(entry):
     return entry
 
 def process_df(df):
-    "Clean and reorganize the entire dataframe."
+    "清理和重新组织整个数据集。"
   
     # 删除列名中的 HTML 标记
     for item in ['<s>a</s>', '<s>c</s>', '<s>d</s>', '<s>e</s>']:
@@ -501,13 +501,13 @@ plt.show()
 * 表 3.15，汇率
 
 ```{note}
-为了从电子表格中的数据构建价格水平序列，我们遵循 {cite}`sargent2013rational` 第 3 章中的相同程序。
+为了构建波兰的价格水平序列，我们参照 {cite}`sargent2013rational` 第3章的方法处理电子表格数据。
 
-我们将三个序列拼接在一起——批发价格指数、基于纸币的批发价格指数和基于兹罗提（1924年6月后的波兰货币）的批发价格指数。
+我们需要将三个不同的价格指数序列连接起来：批发价格指数、基于纸币的批发价格指数，以及1924年6月波兰引入新货币兹罗提后的批发价格指数。
 
-我们根据前一个可用序列最后一期的价格水平比率调整了序列，并将它们粘合在一起构建成单一序列。
+为了确保连接后的序列连续性，我们根据相邻序列重叠期间的价格比率进行了调整，从而创建一个完整的价格水平时间序列。
 
-我们在1924年6月兹罗提被采用后放弃了汇率。我们这样做是因为我们没有以兹罗提计量的价格。我们使用6月的旧货币来计算汇率调整。
+关于汇率数据，我们只使用到1924年5月的数据，因为6月后波兰采用了新货币兹罗提，而我们缺少以兹罗提计价的价格数据。为了保持一致性，我们使用了旧货币（波兰马克）在6月的汇率进行最后的调整。
 ```
 
 ```{code-cell} ipython3
@@ -517,27 +517,27 @@ mystnb:
     caption: 价格指数和汇率（波兰）
     name: pi_xrate_poland
 ---
-# Splice three price series in different units
+# 拼接三个不同单位的价格序列
 p_seq1 = df_pol['Wholesale price index'].copy()
 p_seq2 = df_pol['Wholesale Price Index: '
                 'On paper currency basis'].copy()
 p_seq3 = df_pol['Wholesale Price Index: ' 
                 'On zloty basis'].copy()
 
-# Non-nan part
+# 非NaN部分
 mask_1 = p_seq1[~p_seq1.isna()].index[-1]
 mask_2 = p_seq2[~p_seq2.isna()].index[-2]
 
 adj_ratio12 = (p_seq1[mask_1] / p_seq2[mask_1])
 adj_ratio23 = (p_seq2[mask_2] / p_seq3[mask_2])
 
-# Glue three series
+# 拼接三个序列
 p_seq = pd.concat([p_seq1[:mask_1], 
                    adj_ratio12 * p_seq2[mask_1:mask_2], 
                    adj_ratio23 * p_seq3[mask_2:]])
 p_seq = p_seq[~p_seq.index.duplicated(keep='first')]
 
-# Exchange rate
+# 汇率
 e_seq = 1/df_pol['Cents per Polish mark (zloty after May 1924)']
 e_seq[e_seq.index > '05-01-1924'] = np.nan
 ```
@@ -653,7 +653,7 @@ plt.show()
 此外，这四个国家的美元汇率走势与其价格水平相似。
 
 ```{note}
-这种模式是汇率兑换率理论中[购买力平价理论](https://en.wikipedia.org/wiki/Purchasing_power_parity)的一个实例。
+这种模式是汇率兑换率理论中[购买力平价理论](https://baike.baidu.com/item/%E8%B4%AD%E4%B9%B0%E5%8A%9B%E5%B9%B3%E4%BB%B7%E7%90%86%E8%AE%BA/794486)的一个实例。
 ```
 
 这些大通胀似乎都“在一瞬间停止”。

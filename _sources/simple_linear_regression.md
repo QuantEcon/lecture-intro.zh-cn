@@ -563,8 +563,8 @@ data['life_expectancy_hat'] = α + β * df['log_gdppc']
 data['error'] = data['life_expectancy_hat'] - data['life_expectancy']
 
 fig, ax = plt.subplots()
-data.plot(x='log_gdppc',y='life_expectancy', kind='scatter', ax=ax)
-data.plot(x='log_gdppc',y='life_expectancy_hat', kind='line', ax=ax, color='g')
+data.plot(x='log_gdppc',y='life_expectancy', kind='scatter', ax=ax, xlabel="人均GDP", ylabel="预期寿命（年）")
+data.plot(x='log_gdppc',y='life_expectancy_hat', kind='line', ax=ax, color='g', xlabel="人均GDP", label="最佳拟合线")
 plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy'], color='r')
 ```
 

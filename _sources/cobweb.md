@@ -465,12 +465,12 @@ def ts_plot_supply(model, p0, ts_length=10):
             'bo-',
             alpha=0.6,
             lw=2,
-            label=r'supply')
+            label=r'供给')
 
     ax.legend(loc='best', fontsize=10)
     ax.set_xticks(np.arange(ts_length))
-    ax.set_xlabel("时间")
-    ax.set_ylabel("数量")
+    ax.set_xlabel(r"时间")
+    ax.set_ylabel(r"数量")
     plt.show()
 ```
 

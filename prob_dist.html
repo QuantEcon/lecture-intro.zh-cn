@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>18. 分布和概率 &#8212; Python数量经济学入门</title>
+    <title>18. 分布和概率 &#8212; Python量化经济学入门</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -114,7 +114,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="19. 大数定律与中心极限定理" href="lln_clt.html" />
-    <link rel="prev" title="17. 计算平方根" href="greek_square.html" />
+    <link rel="prev" title="17. 求解平方根" href="greek_square.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -135,7 +135,7 @@
 <meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/prob_dist.html" />
 <meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
 <meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
-<meta property="og:site_name" content="Python数量经济学入门" />
+<meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
   </head>
@@ -184,7 +184,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">18.3. 观察到的分布</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">18.3.1. 概括统计</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">18.3.1. 描述性统计</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">18.3.2. 可视化</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">18.3.2.1. 直方图</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">18.3.2.2. 核密度估计</a></li>
@@ -224,7 +224,7 @@
 
                     <div class="qe-page__header-copy">
 
-                        <p class="qe-page__header-heading"><a href="intro.html">Python数量经济学入门</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
                         <p class="qe-page__header-subheading">分布和概率</p>
 
@@ -269,7 +269,7 @@
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.2.54)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.2.55)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.2.2)
@@ -284,9 +284,7 @@ Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /home/runner/minicon
 Requirement already satisfied: soupsieve&gt;1.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.5)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.3.2)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (2024.8.30)
@@ -316,7 +314,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </section>
 <section id="id3">
 <h2><span class="section-number">18.2. </span>常见分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>在本节中，我们回顾一些众所周知的分布的定义，并探讨如何使用 SciPy 来操作它们。</p>
+<p>在本节中，我们将介绍几种常见概率分布的基本定义，并展示如何利用 SciPy 库来处理和分析这些分布。</p>
 <section id="id4">
 <h3><span class="section-number">18.2.1. </span>离散分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>我们从离散分布开始。</p>
@@ -325,7 +323,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 \[ 
 \sum_{i=1}^n p(x_i) = 1 
 \]</div>
-<p>我们说一个随机变量 <span class="math notranslate nohighlight">\(X\)</span> <strong>具有分布</strong> <span class="math notranslate nohighlight">\(p\)</span>，如果 <span class="math notranslate nohighlight">\(X\)</span> 以概率 <span class="math notranslate nohighlight">\(p(x_i)\)</span> 取值 <span class="math notranslate nohighlight">\(x_i\)</span>。</p>
+<p>我们说一个随机变量 <span class="math notranslate nohighlight">\(X\)</span> <strong>服从分布</strong> <span class="math notranslate nohighlight">\(p\)</span>，如果 <span class="math notranslate nohighlight">\(X\)</span> 取值为 <span class="math notranslate nohighlight">\(x_i\)</span> 的概率是 <span class="math notranslate nohighlight">\(p(x_i)\)</span>。</p>
 <p>即，</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -336,26 +334,26 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 \[ 
 \mathbb{E}[X] = \sum_{i=1}^n x_i p(x_i)
 \]</div>
-<p>期望也称为分布的<em>第一矩</em>。</p>
+<p>期望值也被称为分布的<em>一阶矩</em>，是描述分布中心位置的重要统计量。</p>
 <p>我们也将这个数字称为分布（由 <span class="math notranslate nohighlight">\(p\)</span> 表示）的均值。</p>
 <p><span class="math notranslate nohighlight">\(X\)</span> 的<strong>方差</strong>定义为</p>
 <div class="math notranslate nohighlight">
 \[ 
 \mathbb{V}[X] = \sum_{i=1}^n (x_i - \mathbb{E}[X])^2 p(x_i)
 \]</div>
-<p>方差也称为分布的<em>第二中心矩</em>。</p>
+<p>方差也称为分布的<em>二阶中心矩</em>。</p>
 <p><span class="math notranslate nohighlight">\(X\)</span> 的<strong>累积分布函数</strong>（CDF）定义为</p>
 <div class="math notranslate nohighlight">
 \[
 F(x) = \mathbb{P}\{X \leq x\}
         = \sum_{i=1}^n \mathbb 1\{x_i \leq x\} p(x_i)
 \]</div>
-<p>这里 <span class="math notranslate nohighlight">\(\mathbb 1\{\text{statement} \} = 1\)</span> 如果 “statement” 为真，否则为零。</p>
+<p>这里 <span class="math notranslate nohighlight">\(\mathbb 1\{\text{判断语句} \} = 1\)</span> 如果 “判断语句” 为真，否则为零。</p>
 <p>因此第二项取所有 <span class="math notranslate nohighlight">\(x_i \leq x\)</span> 并求它们概率的和。</p>
 <section id="id5">
 <h4><span class="section-number">18.2.1.1. </span>均匀分布<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
-<p>一个简单的例子是<strong>均匀分布</strong>，其中 <span class="math notranslate nohighlight">\(p(x_i) = 1/n\)</span> 对于所有 <span class="math notranslate nohighlight">\(i\)</span> 都成立。</p>
-<p>我们可以这样从 SciPy 导入 <span class="math notranslate nohighlight">\(S = \{1, \ldots, n\}\)</span> 上的均匀分布：</p>
+<p>一个简单的例子是<strong>均匀分布</strong>，它为每个可能的结果分配相同的概率，即 <span class="math notranslate nohighlight">\(p(x_i) = 1/n\)</span> 对于所有 <span class="math notranslate nohighlight">\(i = 1, 2, \ldots, n\)</span>。</p>
+<p>在 Python 中，我们可以使用 SciPy 库来处理 <span class="math notranslate nohighlight">\(S = \{1, \ldots, n\}\)</span> 上的均匀分布：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -444,8 +442,8 @@ F(x) = \mathbb{P}\{X \leq x\}
 
 <p class="admonition-title"><span class="caption-number">Exercise 18.1 </span></p>
 <section id="exercise-content">
-<p>计算这个参数化（即 <span class="math notranslate nohighlight">\(n=10\)</span>）的均值和方差，直接从 PMF 使用上面给出的公式计算。</p>
-<p>验证你的答案与 <code class="docutils literal notranslate"><span class="pre">u.mean()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">u.var()</span></code> 是否一致。</p>
+<p>使用均值公式 <span class="math notranslate nohighlight">\((n+1)/2\)</span> 和方差公式 <span class="math notranslate nohighlight">\((n^2 - 1)/12\)</span> 手动计算当 <span class="math notranslate nohighlight">\(n=10\)</span> 时的均值和方差。</p>
+<p>将你计算的结果与 Python 函数 <code class="docutils literal notranslate"><span class="pre">u.mean()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">u.var()</span></code> 返回的值进行比较，确认它们是否一致。</p>
 </section>
 </div>
 </section>
@@ -458,7 +456,7 @@ p(i) = \theta^i (1 - \theta)^{1-i}
 \qquad (i = 0, 1)
 \]</div>
 <p>这里 <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数。</p>
-<p>我们可以将这个分布视为对一个随机试验进行概率建模，其成功概率是 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
+<p>我们可以将这个分布视为对一个只有两种可能结果的随机试验进行概率建模，其成功概率是 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(1) = \theta\)</span> 表示试验成功（取值1）的概率是 <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p(0) = 1 - \theta\)</span> 表示试验失败（取值0）的概率是 <span class="math notranslate nohighlight">\(1-\theta\)</span></p></li>
@@ -507,11 +505,11 @@ p(i) = \theta^i (1 - \theta)^{1-i}
 \[ 
 p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 \]</div>
-<p>再次强调，<span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数。</p>
-<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：<span class="math notranslate nohighlight">\(n\)</span>次独立试验中有<span class="math notranslate nohighlight">\(i\)</span>次成功的概率，每次试验成功的概率为<span class="math notranslate nohighlight">\(\theta\)</span>。</p>
-<p>例如，如果<span class="math notranslate nohighlight">\(\theta=0.5\)</span>，那么<span class="math notranslate nohighlight">\(p(i)\)</span>就是<span class="math notranslate nohighlight">\(n\)</span>次抛掷公平硬币得到<span class="math notranslate nohighlight">\(i\)</span>次正面的概率。</p>
-<p>均值的公式是<span class="math notranslate nohighlight">\(n\theta\)</span>，方差的公式是<span class="math notranslate nohighlight">\(n\theta(1-\theta)\)</span>。</p>
-<p>现在让我们来探讨一个例子</p>
+<p>这里，<span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 仍然是表示成功概率的参数。</p>
+<p>二项分布描述了在<span class="math notranslate nohighlight">\(n\)</span>次独立的伯努利试验中，恰好获得<span class="math notranslate nohighlight">\(i\)</span>次成功的概率，其中每次试验成功的概率都是<span class="math notranslate nohighlight">\(\theta\)</span>。</p>
+<p>一个直观的例子是：当<span class="math notranslate nohighlight">\(\theta=0.5\)</span>时，<span class="math notranslate nohighlight">\(p(i)\)</span>表示在<span class="math notranslate nohighlight">\(n\)</span>次公平硬币投掷中，恰好出现<span class="math notranslate nohighlight">\(i\)</span>次正面的概率。</p>
+<p>二项分布的均值为<span class="math notranslate nohighlight">\(n\theta\)</span>，方差为<span class="math notranslate nohighlight">\(n\theta(1-\theta)\)</span>。</p>
+<p>让我们通过一个具体例子来说明这个分布</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -606,7 +604,7 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#prob_ex3"> Exercise 18.2</a></p>
 <section id="solution-content">
-<p>这里是一个解决方案：</p>
+<p>答案：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -631,17 +629,17 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </section>
 <section id="id8">
 <h4><span class="section-number">18.2.1.4. </span>几何分布<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
-<p>几何分布具有无限支持集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span>，其概率质量函数（PMF）为</p>
+<p>几何分布是一种具有无限支持集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span> 的离散概率分布，其概率质量函数（PMF）为</p>
 <div class="math notranslate nohighlight">
 \[
 p(i) = (1 - \theta)^i \theta
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 是一个参数</p>
-<p>（如果一个离散分布赋予正概率的点集是无限的，则称其具有无限支持。）</p>
-<p>为了理解这个分布，可以想象重复的独立随机试验，每次试验的成功概率为 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
-<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：第一次成功之前发生了 <span class="math notranslate nohighlight">\(i\)</span> 次失败的概率。</p>
-<p>可以证明该分布的平均值是 <span class="math notranslate nohighlight">\(1/\theta\)</span>，方差是 <span class="math notranslate nohighlight">\((1-\theta)/\theta\)</span>。</p>
-<p>下面是一个例子。</p>
+<p>其中参数 <span class="math notranslate nohighlight">\(\theta \in [0,1]\)</span> 表示成功的概率。</p>
+<p>（当一个离散分布在无限多个点上赋予正概率时，我们称它具有无限支持。）</p>
+<p>几何分布通常用来描述在一系列独立的伯努利试验中，首次成功出现前所需的失败次数。每次试验成功的概率都是 <span class="math notranslate nohighlight">\(\theta\)</span>。</p>
+<p>因此，<span class="math notranslate nohighlight">\(p(i)\)</span> 表示在第一次成功之前恰好发生 <span class="math notranslate nohighlight">\(i\)</span> 次失败的概率。</p>
+<p>这个分布的期望值（平均值）是 <span class="math notranslate nohighlight">\((1-\theta)/\theta\)</span>，方差是 <span class="math notranslate nohighlight">\((1-\theta)/\theta^2\)</span>。</p>
+<p>让我们通过一个例子来说明：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ</span> <span class="o">=</span> <span class="mf">0.1</span>
@@ -678,14 +676,14 @@ p(i) = (1 - \theta)^i \theta
 </section>
 <section id="id9">
 <h4><span class="section-number">18.2.1.5. </span>泊松分布<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
-<p>泊松分布在 <span class="math notranslate nohighlight">\(S = \{0, 1, \ldots\}\)</span> 上，参数为 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>，其概率质量函数（PMF）为</p>
+<p>泊松分布是一种常见的离散概率分布，定义在非负整数集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span> 上。它由一个参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 控制，其概率质量函数（PMF）为：</p>
 <div class="math notranslate nohighlight">
 \[
 p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 \]</div>
-<p><span class="math notranslate nohighlight">\(p(i)\)</span> 的解释是：在固定时间区间内事件发生 <span class="math notranslate nohighlight">\(i\)</span> 次的概率，其中事件以常数率 <span class="math notranslate nohighlight">\(\lambda\)</span> 独立发生。</p>
-<p>可以证明，其均值为 <span class="math notranslate nohighlight">\(\lambda\)</span>，方差也为 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
-<p>这里有一个例子。</p>
+<p>泊松分布通常用于模拟在固定时间或空间内随机事件的发生次数。具体来说，<span class="math notranslate nohighlight">\(p(i)\)</span> 表示在给定区间内事件恰好发生 <span class="math notranslate nohighlight">\(i\)</span> 次的概率，其中事件以平均率 <span class="math notranslate nohighlight">\(\lambda\)</span> 独立随机发生。</p>
+<p>这个分布的一个有趣特性是其均值和方差都等于参数 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
+<p>下面我们通过一个具体例子来展示泊松分布：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mi">2</span>
@@ -734,19 +732,18 @@ p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 </section>
 <section id="id10">
 <h3><span class="section-number">18.2.2. </span>连续分布<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
-<p>连续分布由一个<strong>概率密度函数</strong>表示，这是一个在全体实数集 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的函数 <span class="math notranslate nohighlight">\(p\)</span>，满足对所有的 <span class="math notranslate nohighlight">\(x\)</span> 有 <span class="math notranslate nohighlight">\(p(x) \geq 0\)</span>，并且</p>
+<p>连续分布通过<strong>概率密度函数</strong>（PDF）来描述，这是一个定义在实数集 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的非负函数 <span class="math notranslate nohighlight">\(p\)</span>，满足</p>
 <div class="math notranslate nohighlight">
 \[ 
 \int_{-\infty}^\infty p(x) \, dx = 1 
 \]</div>
-<p>我们说随机变量 <span class="math notranslate nohighlight">\(X\)</span> 若有如下性质则服从分布 <span class="math notranslate nohighlight">\(p\)</span>：</p>
+<p>当随机变量 <span class="math notranslate nohighlight">\(X\)</span> 服从概率密度函数 <span class="math notranslate nohighlight">\(p\)</span> 时，任意区间 <span class="math notranslate nohighlight">\([a, b]\)</span> 上的概率可以通过积分计算：</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb P\{a &lt; X &lt; b\} = \int_a^b p(x) \, dx
 \]</div>
-<p>对所有 <span class="math notranslate nohighlight">\(a \leq b\)</span> 都成立。</p>
-<p>随机变量 <span class="math notranslate nohighlight">\(X\)</span> 若服从分布 <span class="math notranslate nohighlight">\(p\)</span>，其均值和方差的定义与离散情况相同，只是将求和换成了积分。</p>
-<p>例如，<span class="math notranslate nohighlight">\(X\)</span> 的均值为</p>
+<p>与离散分布类似，连续随机变量的均值和方差也可以通过其概率密度函数计算，只需将求和替换为积分。</p>
+<p>例如，随机变量 <span class="math notranslate nohighlight">\(X\)</span> 的均值计算为</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb{E}[X] = \int_{-\infty}^\infty x p(x) \, dx
@@ -759,15 +756,15 @@ F(x) = \mathbb P\{X \leq x\}
 \]</div>
 <section id="id11">
 <h4><span class="section-number">18.2.2.1. </span>正态分布<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
-<p>也许最著名的分布是<strong>正态分布</strong>，其密度为</p>
+<p><strong>正态分布</strong>是统计学中最常见也最重要的分布之一，其概率密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{1}{\sqrt{2\pi}\sigma}
             \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \]</div>
-<p>这个分布有两个参数，<span class="math notranslate nohighlight">\(\mu \in \mathbb R\)</span> 和 <span class="math notranslate nohighlight">\(\sigma \in (0, \infty)\)</span>。</p>
-<p>使用微积分，可以证明对于这种分布，均值是 <span class="math notranslate nohighlight">\(\mu\)</span>，方差是 <span class="math notranslate nohighlight">\(\sigma^2\)</span>。</p>
-<p>我们可以通过 SciPy 获取正态分布的矩、PDF 和 CDF：</p>
+<p>正态分布由两个参数决定：<span class="math notranslate nohighlight">\(\mu \in \mathbb R\)</span>（均值参数）和 <span class="math notranslate nohighlight">\(\sigma \in (0, \infty)\)</span>（标准差参数）。</p>
+<p>通过积分计算可以验证，当随机变量 <span class="math notranslate nohighlight">\(X\)</span> 服从正态分布时，<span class="math notranslate nohighlight">\(\mathbb{E}[X] = \mu\)</span>，<span class="math notranslate nohighlight">\(\text{Var}(X) = \sigma^2\)</span>。</p>
+<p>我们可以通过 SciPy 来计算正态分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
@@ -836,20 +833,20 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </section>
 <section id="id12">
 <h4><span class="section-number">18.2.2.2. </span>对数正态分布<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
-<p><strong>对数正态分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的一个分布，其密度函数为</p>
+<p><strong>对数正态分布</strong>是一个定义在正实数轴 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上的概率分布，其密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
-    \exp \left(- \frac{\left(\log x - \mu\right)^2}{2 \sigma^2} \right)
+    \exp \left(- \frac{(\log x - \mu)^2}{2 \sigma^2} \right)
 \]</div>
-<p>这个分布有两个参数，<span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>。</p>
-<p>可以证明，对于这个分布，平均值是 <span class="math notranslate nohighlight">\(\exp\left(\mu + \sigma^2/2\right)\)</span>，方差是 <span class="math notranslate nohighlight">\(\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)\)</span>。</p>
-<p>可以证明：</p>
+<p>该分布由两个参数 <span class="math notranslate nohighlight">\(\mu \in \mathbb{R}\)</span> 和 <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> 决定。</p>
+<p>对于服从对数正态分布的随机变量 <span class="math notranslate nohighlight">\(X\)</span>，其期望值为 <span class="math notranslate nohighlight">\(\mathbb{E}[X] = \exp(\mu + \sigma^2/2)\)</span>，方差为 <span class="math notranslate nohighlight">\(\text{Var}(X) = [\exp(\sigma^2) - 1] \exp(2\mu + \sigma^2)\)</span>。</p>
+<p>对数正态分布与正态分布有着密切的关系：</p>
 <ul class="simple">
-<li><p>如果 <span class="math notranslate nohighlight">\(X\)</span> 是对数正态分布的，则 <span class="math notranslate nohighlight">\(\log X\)</span> 是正态分布的，</p></li>
-<li><p>如果 <span class="math notranslate nohighlight">\(X\)</span> 是正态分布的，则 <span class="math notranslate nohighlight">\(\exp X\)</span> 是对数正态分布的。</p></li>
+<li><p>如果随机变量 <span class="math notranslate nohighlight">\(X\)</span> 服从对数正态分布，那么 <span class="math notranslate nohighlight">\(\log X\)</span> 服从正态分布</p></li>
+<li><p>反之，如果 <span class="math notranslate nohighlight">\(Y\)</span> 服从正态分布，那么 <span class="math notranslate nohighlight">\(\exp(Y)\)</span> 服从对数正态分布</p></li>
 </ul>
-<p>我们可以按照下面的方式获取对数正态分布的矩、PDF 和 CDF：</p>
+<p>我们可以使用 SciPy 来计算对数正态分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
@@ -924,10 +921,10 @@ p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
 p(x) = \lambda \exp \left( - \lambda x \right)
 \qquad (x &gt; 0)
 \]</div>
-<p>这个分布有一个参数 <span class="math notranslate nohighlight">\(\lambda\)</span>。</p>
-<p>指数分布可以被视为几何分布的连续等价物。</p>
-<p>可以证明，对于这个分布，平均值是 <span class="math notranslate nohighlight">\(1/\lambda\)</span>，方差是 <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>。</p>
-<p>我们可以按照下面的方式获取指数分布的矩、PDF 和 CDF：</p>
+<p>指数分布由参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 控制，它决定了分布的形状和尺度。</p>
+<p>在许多方面，指数分布可以被看作是几何分布在连续情境下的自然推广。</p>
+<p>对于指数分布，其均值为 <span class="math notranslate nohighlight">\(1/\lambda\)</span>，方差为 <span class="math notranslate nohighlight">\(1/\lambda^2\)</span>。这意味着 <span class="math notranslate nohighlight">\(\lambda\)</span> 越大，分布越集中在零附近。</p>
+<p>下面我们使用SciPy来计算指数分布的统计特性并绘制其PDF和CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -999,7 +996,7 @@ p(x) = \lambda \exp \left( - \lambda x \right)
 p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
     x^{\alpha - 1} (1 - x)^{\beta - 1}
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(\Gamma\)</span> 是<a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_function">伽马函数</a>。</p>
+<p>其中 <span class="math notranslate nohighlight">\(\Gamma\)</span> 是<a class="reference external" href="https://baike.baidu.com/item/%E4%BC%BD%E7%8E%9B%E5%87%BD%E6%95%B0/3540177">伽马函数</a>。</p>
 <p>(伽马函数的作用是使密度标准化，从而使其积分为一。)</p>
 <p>此分布有两个参数，<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
 <p>可以证明对于该分布，均值为 <span class="math notranslate nohighlight">\(\alpha / (\alpha + \beta)\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha \beta / (\alpha + \beta)^2 (\alpha + \beta + 1)\)</span>。</p>
@@ -1070,16 +1067,16 @@ p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
 </section>
 <section id="id15">
 <h4><span class="section-number">18.2.2.5. </span>伽马分布<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
-<p><strong>伽马分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的分布，其密度为</p>
+<p><strong>伽马分布</strong>是一种在正实数轴 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上的连续概率分布，其概率密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
 p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
     x^{\alpha - 1} \exp(-\beta x)
 \]</div>
-<p>此分布有两个参数，<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
-<p>可以证明对于该分布，均值为 <span class="math notranslate nohighlight">\(\alpha / \beta\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha / \beta^2\)</span>。</p>
-<p>一种解释是，如果 <span class="math notranslate nohighlight">\(X\)</span> 是伽马分布并且 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个整数，那么 <span class="math notranslate nohighlight">\(X\)</span> 是 <span class="math notranslate nohighlight">\(\alpha\)</span> 个独立具有均值 <span class="math notranslate nohighlight">\(1/\beta\)</span> 的指数分布随机变量的总和。</p>
-<p>我们可以如下获得伽马密度的矩、PDF 和 CDF：</p>
+<p>其中 <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 是形状参数，<span class="math notranslate nohighlight">\(\beta &gt; 0\)</span> 是速率参数，<span class="math notranslate nohighlight">\(\Gamma(\alpha)\)</span> 是伽马函数。</p>
+<p>伽马分布的均值为 <span class="math notranslate nohighlight">\(\alpha / \beta\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha / \beta^2\)</span>。</p>
+<p>伽马分布有一个直观的解释：当 <span class="math notranslate nohighlight">\(\alpha\)</span> 是正整数时，伽马分布随机变量可以看作是 <span class="math notranslate nohighlight">\(\alpha\)</span> 个独立的、均值为 <span class="math notranslate nohighlight">\(1/\beta\)</span> 的指数分布随机变量之和。这使得伽马分布在等待时间和可靠性分析中特别有用。</p>
+<p>下面我们来计算伽马分布的矩、PDF 和 CDF：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span>
@@ -1246,19 +1243,19 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </table>
 </div></div></div>
 </div>
-<p>在这种情况下，我们可能称他们的收入集合为“收入分布”。</p>
-<p>这个术语有些令人困惑，因为这个集合不是一个概率分布——它只是一个数字的集合。</p>
-<p>然而，正如我们将看到的，观察到的分布（即，像上述收入分布那样的数字集合）和概率分布之间存在联系。</p>
-<p>下面我们探索一些观察到的分布。</p>
+<p>在这种情况下，我们通常将这组收入数据称为”收入分布”。</p>
+<p>这个术语可能有点让人困惑，因为严格来说，这只是一组数值，而不是真正的概率分布。</p>
+<p>不过，正如我们接下来会看到的，这种观察到的数据分布（比如我们这里的收入数据）与理论上的概率分布有着密切的联系。</p>
+<p>下面让我们来探索一些观察到的数据分布的特性。</p>
 <section id="id17">
-<h3><span class="section-number">18.3.1. </span>概括统计<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
-<p>假设我们有一个观察到的分布，其值为 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span></p>
-<p>这个分布的<strong>样本均值</strong>定义为</p>
+<h3><span class="section-number">18.3.1. </span>描述性统计<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<p>当我们分析一组数据 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span> 时，通常会计算一些基本的统计量来描述其特征。</p>
+<p>最常用的统计量之一是<strong>样本均值</strong>，它代表数据的平均水平：</p>
 <div class="math notranslate nohighlight">
 \[
 \bar x = \frac{1}{n} \sum_{i=1}^n x_i
 \]</div>
-<p><strong>样本方差</strong>定义为</p>
+<p>另一个重要的统计量是<strong>样本方差</strong>，它衡量数据的离散程度：</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2
@@ -1281,8 +1278,8 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 
 <p class="admonition-title"><span class="caption-number">Exercise 18.3 </span></p>
 <section id="exercise-content">
-<p>如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 <span class="math notranslate nohighlight">\(1/(n-1)\)</span> 而不是 <span class="math notranslate nohighlight">\(1/n\)</span> 作为方差的前面的系数。（有些书籍就是这样定义样本方差的。）
-确认。</p>
+<p>如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 <span class="math notranslate nohighlight">\(1/(n-1)\)</span> 而不是 <span class="math notranslate nohighlight">\(1/n\)</span> 作为方差的前面的系数。（有些书籍就是这样定义样本方差的。）</p>
+<p>用纸笔确认这一点。</p>
 </section>
 </div>
 </section>
@@ -1297,7 +1294,7 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </ul>
 <section id="id19">
 <h4><span class="section-number">18.3.2.1. </span>直方图<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h4>
-<p>我们可以如下制作我们刚刚建立的收入分布的直方图</p>
+<p>下面我们来绘制刚才创建的收入分布直方图：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1312,10 +1309,10 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 <a class="reference internal image-reference" href="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png"><img alt="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" src="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>让我们来看一个真实数据的分布。</p>
-<p>特别是，我们将看一下2000/1/1至2024/1/1之间亚马逊股票的月收益率。</p>
-<p>月收益率是每个月股价变动的百分比。</p>
-<p>因此，我们将得到每个月的一个观测。</p>
+<p>现在让我们来分析一个真实世界的数据分布案例。</p>
+<p>我们将研究亚马逊股票在2000年1月1日至2024年1月1日期间的月度收益率数据。</p>
+<p>月度收益率表示股票价格每月的百分比变化，这是金融分析中的一个常用指标。</p>
+<p>这样，我们就能获得一个包含24年间每月观测值的时间序列数据集。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> 
@@ -1389,7 +1386,7 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </div></div></div>
 </details>
 </div>
-<p>第一个观察结果是2000年1月的月回报（百分比变化），这是</p>
+<p>第一个观察结果是2000年1月的月回报（百分比变化），即</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_amazon</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1422,9 +1419,9 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </section>
 <section id="id20">
 <h4><span class="section-number">18.3.2.2. </span>核密度估计<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h4>
-<p>核密度估计（KDE）提供了一种简单的方式来估计和可视化分布的密度。</p>
-<p>如果你不熟悉核密度估计，可以将其视为平滑的直方图。</p>
-<p>让我们看看从亚马逊退货数据中形成的KDE。</p>
+<p>核密度估计（KDE）是一种更平滑地展示数据分布的方法，可以看作是直方图的进阶版本。</p>
+<p>相比直方图的阶梯状外观，KDE生成连续的密度曲线，能更自然地反映数据的分布特征。</p>
+<p>下面让我们用KDE来可视化亚马逊股票的月度收益率数据。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1477,8 +1474,8 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <a class="reference internal image-reference" href="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png"><img alt="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" src="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>小提琴图在我们想要比较不同分布时特别有用。</p>
-<p>例如，让我们比较亚马逊股份的月度回报与Costco股份的月度回报。</p>
+<p>小提琴图在比较多个数据集的分布特征时特别有用，它能直观地展示数据的密度和范围。</p>
+<p>接下来，让我们用小提琴图来对比亚马逊和开市客这两家零售巨头的月度股票回报率分布情况。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;COST&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> 
@@ -1524,12 +1521,11 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </section>
 <section id="id22">
 <h3><span class="section-number">18.3.3. </span>与概率分布的联系<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
-<p>让我们讨论一下观察到的分布与概率分布之间的联系。</p>
-<p>有时候，想象一个观察到的分布是由特定的概率分布生成的会很有帮助。</p>
-<p>例如，我们可能会观察上面亚马逊的回报，并想象它们是由正态分布生成的。</p>
-<p>（尽管这不是真的，但这<em>可能</em>是一种有帮助的思考数据的方式。）</p>
-<p>这里我们通过将样本均值设为正态分布的均值，将样本方差设为方差，来匹配正态分布到亚马逊月度回报上。</p>
-<p>然后我们绘制密度和直方图。</p>
+<p>现在让我们探讨观察数据分布与理论概率分布之间的关系。</p>
+<p>在数据分析中，我们常常会假设观察到的数据来自某个特定的概率分布，这有助于我们理解和建模数据的行为。</p>
+<p>以亚马逊的股票回报为例，我们可以尝试用正态分布来拟合这些数据。</p>
+<p>（虽然股票回报通常不完全符合正态分布，但这种简化假设在初步分析中很有价值。）</p>
+<p>下面，我们将用亚马逊回报数据的样本均值和样本方差来构建一个匹配的正态分布，然后通过可视化比较理论分布与实际数据的吻合度。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  
@@ -1556,13 +1552,13 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <a class="reference internal image-reference" href="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png"><img alt="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" src="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>直方图与密度的匹配不是很好。</p>
-<p>一个原因是正态分布实际上并不真正适合这个观察数据 — 我们在讨论<a class="reference internal" href="heavy_tails.html#heavy-tail"><span class="std std-ref">重尾分布</span></a>时将再次提到这一点。</p>
-<p>当然，如果数据真的是由正态分布生成的，那么拟合效果会更好。</p>
-<p>让我们看到这一点在实际中的运用：</p>
+<p>可以看出，直方图与理论密度曲线的匹配度并不理想。</p>
+<p>这主要是因为亚马逊的股票回报数据并不完全符合正态分布 — 我们将在<a class="reference internal" href="heavy_tails.html#heavy-tail"><span class="std std-ref">重尾分布</span></a>章节中详细探讨这个现象。</p>
+<p>如果数据确实来自正态分布，拟合效果会好得多。</p>
+<p>为了验证这一点，我们可以做一个简单的实验：</p>
 <ul class="simple">
-<li><p>首先我们从正态分布中生成随机抽样</p></li>
-<li><p>然后我们对它们进行直方图绘制，并与密度比较。</p></li>
+<li><p>从标准正态分布中生成随机样本</p></li>
+<li><p>绘制这些样本的直方图，并与理论密度曲线进行比较</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1581,11 +1577,11 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e586473bae4d5f75afba7c4592c51d05eb49a2f560a4e3469db100cb880d541a.png"><img alt="_images/e586473bae4d5f75afba7c4592c51d05eb49a2f560a4e3469db100cb880d541a.png" src="_images/e586473bae4d5f75afba7c4592c51d05eb49a2f560a4e3469db100cb880d541a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/bec060ac7ce95adfeaa5b0c5af96b5a933caadd18a838daa3577cfdabfddc12c.png"><img alt="_images/bec060ac7ce95adfeaa5b0c5af96b5a933caadd18a838daa3577cfdabfddc12c.png" src="_images/bec060ac7ce95adfeaa5b0c5af96b5a933caadd18a838daa3577cfdabfddc12c.png" style="width: 80%;" /></a>
 </div>
 </div>
-<p>请注意，如果你不断增加 <span class="math notranslate nohighlight">\(N\)</span>，即观测数量，拟合效果会越来越好。</p>
-<p>这种收敛是“大数定律”的一个版本，我们将在<a class="reference internal" href="lln_clt.html#lln-mr"><span class="std std-ref">以后</span></a>讨论。</p>
+<p>值得注意的是，随着观测数量 <span class="math notranslate nohighlight">\(N\)</span> 的增加，直方图与理论密度曲线的拟合效果会逐渐改善。</p>
+<p>这种现象体现了”大数定律”的原理，我们将在<a class="reference internal" href="lln_clt.html#lln-mr"><span class="std std-ref">后续章节</span></a>中深入探讨。</p>
 </section>
 </section>
 </section>
@@ -1671,7 +1667,7 @@ Name: 2000-02-01 00:00:00, dtype: float64
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inflation_history.html">
-   4. 价格水平历史
+   4. 通货膨胀的历史
   </a>
  </li>
  <li class="toctree-l1">
@@ -1757,7 +1753,7 @@ Name: 2000-02-01 00:00:00, dtype: float64
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="greek_square.html">
-   17. 计算平方根
+   17. 求解平方根
   </a>
  </li>
 </ul>
