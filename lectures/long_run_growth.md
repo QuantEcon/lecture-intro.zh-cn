@@ -100,16 +100,8 @@ data.head()
 让我们看看这个数据集中有多少经济体。
 
 ```{code-cell} ipython3
-regions = data.country.unique()
-len(regions)
-```
-
-通过运行上面的代码，我们可以列出这个数据集有多少个经济体。
-
-下面，我们将列出这些经济体。
-
-```{code-cell} ipython3
-regions
+countries = data.country.unique()
+len(countries)
 ```
 
 我们现在可以继续探索数据集里的169个经济体。
@@ -118,7 +110,7 @@ regions
 
 ```{code-cell} ipython3
 country_years = []
-for country in regions:
+for country in countries:
     cy_data = data[data.country == country]['year']
     ymin, ymax = cy_data.min(), cy_data.max()
     country_years.append((country, ymin, ymax))
