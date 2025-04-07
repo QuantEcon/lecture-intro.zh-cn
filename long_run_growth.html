@@ -375,8 +375,8 @@
 <p>让我们看看这个数据集中有多少经济体。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -386,63 +386,12 @@
 </div>
 </div>
 </div>
-<p>通过运行上面的代码，我们可以列出这个数据集有多少个经济体。</p>
-<p>下面，我们将列出这些经济体。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regions</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Afghanistan&#39;, &#39;Angola&#39;, &#39;Albania&#39;, &#39;United Arab Emirates&#39;,
-       &#39;Argentina&#39;, &#39;Armenia&#39;, &#39;Australia&#39;, &#39;Austria&#39;, &#39;Azerbaijan&#39;,
-       &#39;Burundi&#39;, &#39;Belgium&#39;, &#39;Benin&#39;, &#39;Burkina Faso&#39;, &#39;Bangladesh&#39;,
-       &#39;Bulgaria&#39;, &#39;Bahrain&#39;, &#39;Bosnia and Herzegovina&#39;, &#39;Belarus&#39;,
-       &#39;Bolivia (Plurinational State of)&#39;, &#39;Brazil&#39;, &#39;Barbados&#39;,
-       &#39;Botswana&#39;, &#39;Central African Republic&#39;, &#39;Canada&#39;, &#39;Switzerland&#39;,
-       &#39;Chile&#39;, &#39;China&#39;, &quot;Côte d&#39;Ivoire&quot;, &#39;Cameroon&#39;, &#39;D.R. of the Congo&#39;,
-       &#39;Congo&#39;, &#39;Colombia&#39;, &#39;Comoros&#39;, &#39;Cabo Verde&#39;, &#39;Costa Rica&#39;,
-       &#39;Czechoslovakia&#39;, &#39;Cuba&#39;, &#39;Cyprus&#39;, &#39;Czech Republic&#39;, &#39;Germany&#39;,
-       &#39;Djibouti&#39;, &#39;Dominica&#39;, &#39;Denmark&#39;, &#39;Dominican Republic&#39;, &#39;Algeria&#39;,
-       &#39;Ecuador&#39;, &#39;Egypt&#39;, &#39;Spain&#39;, &#39;Estonia&#39;, &#39;Ethiopia&#39;, &#39;Finland&#39;,
-       &#39;France&#39;, &#39;Gabon&#39;, &#39;United Kingdom&#39;, &#39;Georgia&#39;, &#39;Ghana&#39;, &#39;Guinea&#39;,
-       &#39;Gambia&#39;, &#39;Guinea-Bissau&#39;, &#39;Equatorial Guinea&#39;, &#39;Greece&#39;,
-       &#39;Guatemala&#39;, &#39;China, Hong Kong SAR&#39;, &#39;Honduras&#39;, &#39;Croatia&#39;,
-       &#39;Haiti&#39;, &#39;Hungary&#39;, &#39;Indonesia&#39;, &#39;India&#39;, &#39;Ireland&#39;,
-       &#39;Iran (Islamic Republic of)&#39;, &#39;Iraq&#39;, &#39;Iceland&#39;, &#39;Israel&#39;, &#39;Italy&#39;,
-       &#39;Jamaica&#39;, &#39;Jordan&#39;, &#39;Japan&#39;, &#39;Kazakhstan&#39;, &#39;Kenya&#39;, &#39;Kyrgyzstan&#39;,
-       &#39;Cambodia&#39;, &#39;Republic of Korea&#39;, &#39;Kuwait&#39;, &quot;Lao People&#39;s DR&quot;,
-       &#39;Lebanon&#39;, &#39;Liberia&#39;, &#39;Libya&#39;, &#39;Saint Lucia&#39;, &#39;Sri Lanka&#39;,
-       &#39;Lesotho&#39;, &#39;Lithuania&#39;, &#39;Luxembourg&#39;, &#39;Latvia&#39;, &#39;Morocco&#39;,
-       &#39;Republic of Moldova&#39;, &#39;Madagascar&#39;, &#39;Mexico&#39;, &#39;TFYR of Macedonia&#39;,
-       &#39;Mali&#39;, &#39;Malta&#39;, &#39;Myanmar&#39;, &#39;Montenegro&#39;, &#39;Mongolia&#39;, &#39;Mozambique&#39;,
-       &#39;Mauritania&#39;, &#39;Mauritius&#39;, &#39;Malawi&#39;, &#39;Malaysia&#39;, &#39;Namibia&#39;,
-       &#39;Niger&#39;, &#39;Nigeria&#39;, &#39;Nicaragua&#39;, &#39;Netherlands&#39;, &#39;Norway&#39;, &#39;Nepal&#39;,
-       &#39;New Zealand&#39;, &#39;Oman&#39;, &#39;Pakistan&#39;, &#39;Panama&#39;, &#39;Peru&#39;, &#39;Philippines&#39;,
-       &#39;Poland&#39;, &#39;Puerto Rico&#39;, &#39;D.P.R. of Korea&#39;, &#39;Portugal&#39;, &#39;Paraguay&#39;,
-       &#39;State of Palestine&#39;, &#39;Qatar&#39;, &#39;Romania&#39;, &#39;Russian Federation&#39;,
-       &#39;Rwanda&#39;, &#39;Saudi Arabia&#39;, &#39;Sudan (Former)&#39;, &#39;Senegal&#39;, &#39;Singapore&#39;,
-       &#39;Sierra Leone&#39;, &#39;El Salvador&#39;, &#39;Serbia&#39;, &#39;Sao Tome and Principe&#39;,
-       &#39;Former USSR&#39;, &#39;Slovakia&#39;, &#39;Slovenia&#39;, &#39;Sweden&#39;, &#39;Swaziland&#39;,
-       &#39;Seychelles&#39;, &#39;Syrian Arab Republic&#39;, &#39;Chad&#39;, &#39;Togo&#39;, &#39;Thailand&#39;,
-       &#39;Tajikistan&#39;, &#39;Turkmenistan&#39;, &#39;Trinidad and Tobago&#39;, &#39;Tunisia&#39;,
-       &#39;Turkey&#39;, &#39;Taiwan, Province of China&#39;,
-       &#39;U.R. of Tanzania: Mainland&#39;, &#39;Uganda&#39;, &#39;Ukraine&#39;, &#39;Uruguay&#39;,
-       &#39;United States&#39;, &#39;Uzbekistan&#39;,
-       &#39;Venezuela (Bolivarian Republic of)&#39;, &#39;Viet Nam&#39;, &#39;Yemen&#39;,
-       &#39;Former Yugoslavia&#39;, &#39;South Africa&#39;, &#39;Zambia&#39;, &#39;Zimbabwe&#39;],
-      dtype=object)
-</pre></div>
-</div>
-</div>
-</div>
 <p>我们现在可以继续探索数据集里的169个经济体。</p>
 <p>我们可以遍历每个样本来了解每个样本可用的年份都有哪些。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_years</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
     <span class="n">cy_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="n">country</span><span class="p">][</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
     <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cy_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">country_years</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">country</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
