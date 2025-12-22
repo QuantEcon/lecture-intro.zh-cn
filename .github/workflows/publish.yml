@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Anaconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -90,7 +90,7 @@ jobs:
           }
           EOF
       - name: Upload archives to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             lecture-intro-zh-cn-html-${{ github.ref_name }}.tar.gz
@@ -115,7 +115,7 @@ jobs:
           publish_dir: _build/html/
           # cname: intro-cn.quantecon.org
       - name: Upload "_build" folder (publish)
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: build-publish
           path: _build
