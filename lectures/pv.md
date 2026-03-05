@@ -46,9 +46,9 @@ kernelspec:
 
 设
 
- * $\{d_t\}_{t=0}^T $ 是一系列股息或“支付”
+ * $\{d_t\}_{t=0}^T $ 是一系列股息或"支付"
  * $\{p_t\}_{t=0}^T $ 是从时间$t$开始的延续性的资产支付价格序列，即$\{d_s\}_{s=t}^T $
- * $ \delta  \in (0,1) $ 是一个周期的“折现因子”
+ * $ \delta  \in (0,1) $ 是一个周期的"折现因子"
  * $p_{T+1}^*$ 是$T+1$时资产的终端价格
 
 我们假设股息序列$\{d_t\}_{t=0}^T $和终端价格$p_{T+1}^*$都是外生的。
@@ -65,7 +65,7 @@ $$ (eq:Euler1)
 
 方程{eq}`eq:Euler1`告诉我们在时间$t$购买资产所支付的价格等于支付$d_t$加上时间$t+1$的价格乘以时间折现因子$\delta$。
 
-通过将明天的价格乘以$\delta$来折现，考虑了“等待一个周期的价值”。
+通过将明天的价格乘以$\delta$来折现，考虑了"等待一个周期的价值"。
 
 我们想要解$T+1$个方程{eq}`eq:Euler1`的系统，以资产价格序列$\{p_t\}_{t=0}^T $作为股息序列$\{d_t\}_{t=0}^T $和外生终端价格$p_{T+1}^*$的函数。
 
@@ -84,10 +84,6 @@ $$ (eq:Euler1)
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
-fontP = font_manager.FontProperties()
-fontP.set_family('SimHei')
-fontP.set_size(14)
 ```
 
 +++
@@ -167,7 +163,7 @@ $$
         0 \\
         0 \\
         \vdots \\
-        p^*_{T+1}
+        \delta p^*_{T+1}
     \end{bmatrix}
 $$
 
@@ -310,7 +306,7 @@ plt.show()
 
 ## 解析表达式
 
-根据逆矩阵定理，当$A B$是单位矩阵时，矩阵$B$是$A$的逆矩阵。
+根据[逆矩阵定理](https://en.wikipedia.org/wiki/Invertible_matrix)，当$A B$是单位矩阵时，矩阵$B$是$A$的逆矩阵。
 
 可以验证，{eq}`eq:pvpieq`中的矩阵$A$的逆矩阵是
 
@@ -431,12 +427,12 @@ $$
 :label: pv_ex_a
 ```
 
-给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的分析表达式：
+假设 $g >1$ 且 $\delta g \in (0,1)$。给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的解析表达式：
 
 1. $p_{T+1}^* = 0, d_t = g^t d_0$（戈登增长公式的修改版）
-2. $p_{T+1}^* = g^{T+1} d_0, d_t = g^t d_0$（普通的戈登增长公式）
-3. $p_{T+1}^* = 0, d_t = 0$（一个无价值股票的价格）
-4. $p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0$（一个纯泡沫股票的价格）
+1. $p_{T+1}^* = \frac{g^{T+1} d_0}{1- \delta g},  d_t = g^t d_0$（普通的戈登增长公式）
+1. $p_{T+1}^* = 0, d_t = 0$（一个无价值股票的价格）
+1. $p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0$（一个纯泡沫股票的价格）
 
 ```{exercise-end} 
 ```
@@ -447,12 +443,11 @@ $$
 
 将上述每对 $p_{T+1}^*, d_t$ 代入方程 {eq}`eq:ptpveq` 得到：
 
-1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0$
-2. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \delta^{T+1-t} g^{T+1} d_0$
+1. $   p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0     = d_t \frac{1 - (\delta g)^{T+1-t}}{1 - \delta g}$
+2. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \frac{\delta^{T+1-t} g^{T+1} d_0}{1 - \delta g} =  \frac{d_t}{1 - \delta g}$
 3. $p_t = 0$
 4. $p_t = c \delta^{-t}$
 
 
 ```{solution-end}
 ```
-
