@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>45. 最大似然估计 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mle';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/mle.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/mle.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/mle.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/mle.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -185,17 +225,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -205,10 +251,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">最大似然估计</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -221,6 +266,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/mle.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -232,16 +299,16 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">45. </span>最大似然估计<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">45. </span>最大似然估计<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">exp</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -251,7 +318,7 @@
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">45.1. </span>介绍<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.1. </span>介绍<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>假设你是一位政策制定者，你想尝试估算增加财富税将带来多少收入。</p>
 <p>财富税的计算公式为：</p>
 <div class="math notranslate nohighlight">
@@ -276,7 +343,7 @@
 </div><p>接下来，我们定义函数 <span class="math notranslate nohighlight">\(h\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">w_bar</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">w_bar</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">w_bar</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">w</span>
     <span class="k">else</span><span class="p">:</span>
@@ -340,7 +407,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png"><img alt="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png" src="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png"><img alt="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png" src="_images/600e59ebb2cb93513e98499e7e888a2ff4a33bcc8c7afc442422d3bbae6d5bf3.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>该直方图显示，大部分人的财富水平很低，而少部分人却拥有非常多的财富。</p>
@@ -356,7 +424,7 @@
 <p>我们的计划是，假设每个人的财富是从密度为 <span class="math notranslate nohighlight">\(f\)</span> 的分布中抽取的。</p>
 <p>如果我们获得 <span class="math notranslate nohighlight">\(f\)</span> 的估计，那么我们可以按照以下方式近似 <span class="math notranslate nohighlight">\(T\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-est-rev">
-<span class="eqno">(45.1)<a class="headerlink" href="#equation-eq-est-rev" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(45.1)<a class="headerlink" href="#equation-eq-est-rev" title="Link to this equation">#</a></span>\[
     T = \sum_{i=1}^{N} h(w_i) 
       = N \frac{1}{N} \sum_{i=1}^{N} h(w_i) 
       \approx N \int_{0}^{\infty} h(w)f(w) dw
@@ -365,7 +433,7 @@
 <p>现在的问题是：我们要如何估计 <span class="math notranslate nohighlight">\(f\)</span>？</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">45.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://baike.baidu.com/item/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/4967925">最大似然估计</a> 是一种估计未知分布的方法。</p>
 <p>最大似然估计有两个步骤：</p>
 <ol class="arabic simple">
@@ -385,7 +453,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png"><img alt="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png" src="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png"><img alt="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png" src="_images/cc021dc1a8103f4be234ad8e70c7ee059c14302381c89a8c0380564f46bfdc27.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们现在的任务是获取 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span> 的最大似然估计值，我们用 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> 和 <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> 表示。</p>
@@ -483,7 +552,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png"><img alt="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png" src="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png"><img alt="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png" src="_images/c300c57991ed03f10356dc41768f74d3de5179f13fd8f4a16e2033f31a3af166.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们估计的对数正态分布看起来很适合整体数据。</p>
@@ -491,7 +561,7 @@
 <p>我们将通过 <strong>SciPy</strong> 的 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a> 函数，使用数值积分的方式计算积分。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">total_revenue</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">total_revenue</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
     <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">)</span>  <span class="c1"># 计算积分</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">integral</span>  <span class="c1"># 总收入 = 人数 * 单个收入</span>
     <span class="k">return</span> <span class="n">T</span>  <span class="c1"># 返回总收入</span>
@@ -515,7 +585,7 @@
 <p>（我们的单位是10万美元，这意味着实际收入是这一数字的10万倍。）</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">45.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>如上所示，使用最大似然估计时，我们需要先对分布做出假设。</p>
 <p>刚才我们假定这个分布是对数正态分布。</p>
 <p>如果，我们改为假设 <span class="math notranslate nohighlight">\(w_i\)</span> 抽样自参数为 <span class="math notranslate nohighlight">\(b\)</span> 和 <span class="math notranslate nohighlight">\(x_m\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E5%B8%83/3344172">帕累托分布</a>。</p>
@@ -599,13 +669,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png"><img alt="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png" src="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png"><img alt="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png" src="_images/b164aa38fbd667d4d79645490902a9328d6099a9db642c2ea93f7cf274724cae.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们观察到在这种情况下，帕累托分布的拟合效果并不理想，所以我们很可能会拒绝这一假设。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">45.4. </span>最好的分布是怎样的？<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.4. </span>最好的分布是怎样的？<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>没有“最好”的分布——我们做出的每一个选择，都只是一种假设。</p>
 <p>我们唯一能做的，就是不断尝试，选择一个能很好拟合数据的分布。</p>
 <p>上面的图表表明，对数正态分布是最佳的。</p>
@@ -640,12 +711,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png"><img alt="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png" src="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png"><img alt="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png" src="_images/c4baf6cd7deaaaee43574b48d1da81a16db5267feecd347ac9d26cc5d6b6e4bc.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>现在，我们尝试用不同的分布来拟合数据。</p>
 <section id="id6">
-<h3><span class="section-number">45.4.1. </span>用对数正态分布拟合右尾部<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.1. </span>用对数正态分布拟合右尾部<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>让我们从对数正态分布开始。</p>
 <p>我们重新估计参数并绘制概率密度函数，与数据进行对比。</p>
 <div class="cell docutils container">
@@ -666,14 +738,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png"><img alt="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png" src="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png"><img alt="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png" src="_images/5fb557a155c1e076bf0839f6458eb1017d5e361341b58aa9f276d51070b0142d.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>虽然对数正态分布对整个数据集拟合良好，
 但它对于右尾部的拟合效果并不好。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">45.4.2. </span>用帕累托分布拟合右尾部<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.2. </span>用帕累托分布拟合右尾部<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>现在假设截取的数据集符合帕累托分布。</p>
 <p>我们再次估计参数，并将概率密度函数与数据进行对比。</p>
 <div class="cell docutils container">
@@ -693,13 +766,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png"><img alt="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png" src="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png"><img alt="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png" src="_images/f899ac0764a8f7929bcefae0ce359069e0d054231c2957b30c6520a6cd63512b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>帕累托分布更适合数据集的右尾部。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">45.4.3. </span>到底什么才是最好的分布？<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">45.4.3. </span>到底什么才是最好的分布？<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>如刚才所言，没有“最好”的分布——每个选择都只是一种假设。</p>
 <p>我们只需要检验我们认为合理的分布。</p>
 <p>一种检验方法是，将数据与拟合分布进行绘图，如我们刚才所做的。</p>
@@ -708,7 +782,7 @@
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">45.5. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">45.5. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="mle_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 45.1 </span></p>
@@ -783,7 +857,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png"><img alt="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png" src="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png"><img alt="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png" src="_images/448fcc6a5c448e9ff95739edf248e13ff47116ef579f5c8f29ebf9070d0c4c29.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>显然，这个分布对数据的拟合效果并不好。</p>
@@ -1221,6 +1296,35 @@
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/mle.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/mle.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/mle.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

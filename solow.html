@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>24. 索洛-斯旺增长模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'solow';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/solow.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/solow.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/solow.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/solow.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -179,17 +219,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -199,10 +245,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">索洛-斯旺增长模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -215,6 +260,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/solow.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -226,21 +293,21 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="solow">
-<span id="id1"></span><h1><span class="section-number">24. </span>索洛-斯旺增长模型<a class="headerlink" href="#solow" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">24. </span>索洛-斯旺增长模型<a class="headerlink" href="#solow" title="Link to this heading">#</a></h1>
 <p>在本讲中，我们将回顾一个由<a class="reference external" href="https://baike.baidu.com/item/%E7%BD%97%E4%BC%AF%E7%89%B9%C2%B7%E9%BB%98%E9%A1%BF%C2%B7%E7%B4%A2%E6%B4%9B/4822664">罗伯特·索洛（1925–2023）</a>和<a class="reference external" href="https://baike.baidu.com/item/%E6%96%AF%E6%97%BA%E5%9B%BE/646055">特雷弗·斯旺（1918–1989）</a>提出的著名模型。</p>
 <p>这个模型被用于研究长期的经济增长。</p>
 <p>尽管这是一个相对简单的模型，但它提供了许多关于经济增长的深刻见解。</p>
 <p>我们将使用以下导入语句。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">24.1. </span>模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">24.1. </span>模型<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>在索洛-斯旺经济模型中，经济主体将其当前收入的固定比例用于储蓄。</p>
 <p>这些储蓄维持或增加了资本存量。</p>
 <p>资本与劳动力相结合生产产出，产出又支付给工人和资本所有者。</p>
@@ -277,12 +344,12 @@
 \]</div>
 <p>令 <span class="math notranslate nohighlight">\(f(k) := F(k, 1)\)</span>，资本动态的最终表达式为</p>
 <div class="math notranslate nohighlight" id="equation-solow">
-<span class="eqno">(24.1)<a class="headerlink" href="#equation-solow" title="Permalink to this equation">#</a></span>\[    k_{t+1} = g(k_t)
+<span class="eqno">(24.1)<a class="headerlink" href="#equation-solow" title="Link to this equation">#</a></span>\[    k_{t+1} = g(k_t)
     \text{ where } g(k) := s f(k) + (1 - \delta) k\]</div>
 <p>我们的目标是在给定外生初始资本存量 <span class="math notranslate nohighlight">\(k_0\)</span> 的条件下，研究 <span class="math notranslate nohighlight">\(k_t\)</span> 随时间演变的规律。</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">24.2. </span>图形化视角<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">24.2. </span>图形化视角<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>为了理解序列 <span class="math notranslate nohighlight">\((k_t)_{t \geq 0}\)</span> 的动态，我们使用45度图。</p>
 <p>为此，我们首先需要为 <span class="math notranslate nohighlight">\(f\)</span> 指定函数形式并为参数赋值。</p>
 <p>我们采用Cobb–Douglas生产函数 <span class="math notranslate nohighlight">\(f(k) = A k^\alpha\)</span>，并设置参数值为 <span class="math notranslate nohighlight">\(A=2.0\)</span>，<span class="math notranslate nohighlight">\(\alpha=0.3\)</span>，<span class="math notranslate nohighlight">\(s=0.3\)</span> 和 <span class="math notranslate nohighlight">\(\delta=0.4\)</span>。</p>
@@ -300,7 +367,7 @@
 <p>现在我们来定义函数<span class="math notranslate nohighlight">\(g\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
@@ -309,7 +376,7 @@
 <p>让我们来绘制函数<span class="math notranslate nohighlight">\(g\)</span>的45度图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot45</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot45</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">12000</span><span class="p">)</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -358,7 +425,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png"><img alt="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" src="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png"><img alt="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" src="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>假设在某个 <span class="math notranslate nohighlight">\(k_t\)</span> 处，<span class="math notranslate nohighlight">\(g(k_t)\)</span> 的值严格高于45度线。</p>
@@ -369,7 +437,7 @@
 <p>从图中可以看出，<span class="math notranslate nohighlight">\(g\)</span> 函数与45度线只有一个交点，这意味着在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 区间内存在唯一的稳态。</p>
 <p>在稳态时，<span class="math notranslate nohighlight">\(k^* = g(k^*)\)</span>，即 <span class="math notranslate nohighlight">\(k^* = s A(k^*)^{\alpha} + (1-\delta)k^*\)</span>。解这个方程，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-kstarss">
-<span class="eqno">(24.2)<a class="headerlink" href="#equation-kstarss" title="Permalink to this equation">#</a></span>\[    k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}\]</div>
+<span class="eqno">(24.2)<a class="headerlink" href="#equation-kstarss" title="Link to this equation">#</a></span>\[    k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}\]</div>
 <p>当初始资本低于稳态值 <span class="math notranslate nohighlight">\(k^*\)</span> 时，我们可以从图中看到 <span class="math notranslate nohighlight">\(g(k_t) &gt; k_t\)</span>，这意味着资本存量会随时间增加，逐渐接近稳态。</p>
 <p>相反，如果初始资本高于 <span class="math notranslate nohighlight">\(k^*\)</span>，则 <span class="math notranslate nohighlight">\(g(k_t) &lt; k_t\)</span>，资本存量会随时间减少，同样趋向于稳态值。</p>
 <p>让我们在45度图中标出这个稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>，以便更直观地理解这一动态过程。</p>
@@ -381,7 +449,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png"><img alt="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" src="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png"><img alt="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" src="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>根据图示分析，无论初始资本存量 <span class="math notranslate nohighlight">\(k_0\)</span> 如何，<span class="math notranslate nohighlight">\(k_t\)</span> 都将收敛于稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>。</p>
@@ -403,7 +472,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_ts</span><span class="p">(</span><span class="n">x0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_ts</span><span class="p">(</span><span class="n">x0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
 
     <span class="n">k_star</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
@@ -438,13 +507,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png"><img alt="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" src="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png"><img alt="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" src="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>如图所示，所有时间路径均如预期收敛至稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>。</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">24.3. </span>连续时间的增长<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">24.3. </span>连续时间的增长<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将研究索洛-斯旺增长模型的连续时间版本。</p>
 <p>连续时间框架提供了一种更为流畅的分析方法，使得模型的动态特性更容易理解。</p>
 <p>让我们回顾一下离散时间版本的资本动态方程：<span class="math notranslate nohighlight">\(k_{t+1} = s f(k_t) + (1 - \delta) k_t\)</span>。</p>
@@ -457,7 +527,7 @@
 \]</div>
 <p>当我们让时间间隔无限趋近于零时，这个离散变化自然过渡到连续时间的导数形式</p>
 <div class="math notranslate nohighlight" id="equation-solowc">
-<span class="eqno">(24.3)<a class="headerlink" href="#equation-solowc" title="Permalink to this equation">#</a></span>\[    k'_t = s f(k_t) - \delta k_t
+<span class="eqno">(24.3)<a class="headerlink" href="#equation-solowc" title="Link to this equation">#</a></span>\[    k'_t = s f(k_t) - \delta k_t
     \qquad \text{with} \qquad
     k'_t := \frac{d}{dt} k_t\]</div>
 <p>我们的目标是在给定初始资本存量 <span class="math notranslate nohighlight">\(k_0\)</span> 的条件下，研究 <span class="math notranslate nohighlight">\(k_t\)</span> 随时间演变的规律。</p>
@@ -478,7 +548,7 @@
 <p>接下来，我们定义函数 <span class="math notranslate nohighlight">\(g\)</span> 表示连续时间的增长</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
@@ -486,7 +556,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_gcon</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_gcon</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="n">k_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
 
@@ -529,7 +599,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png"><img alt="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" src="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png"><img alt="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" src="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>上图直观地展示了特定参数下的全局稳定性，但我们如何严格证明这一性质对于所有合理参数都成立呢？</p>
@@ -538,7 +609,7 @@
 <p>为此，我们引入变量替换 <span class="math notranslate nohighlight">\(x_t := k_t^{1-\alpha}\)</span>，这样 <span class="math notranslate nohighlight">\(x'_t = (1-\alpha) k_t^{-\alpha} k'_t\)</span>。</p>
 <p>将连续时间的动态方程 <span class="math notranslate nohighlight">\(k'_t = sAk_t^\alpha - \delta k_t\)</span> 代入上式，我们得到一个线性微分方程</p>
 <div class="math notranslate nohighlight" id="equation-xsolow">
-<span class="eqno">(24.4)<a class="headerlink" href="#equation-xsolow" title="Permalink to this equation">#</a></span>\[    x'_t = (1-\alpha) (sA - \delta x_t)\]</div>
+<span class="eqno">(24.4)<a class="headerlink" href="#equation-xsolow" title="Link to this equation">#</a></span>\[    x'_t = (1-\alpha) (sA - \delta x_t)\]</div>
 <p>这个方程是一个<a class="reference external" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/12609971">线性常微分方程</a>，其解为
 $<span class="math notranslate nohighlight">\(
     x_t
@@ -551,7 +622,7 @@ $<span class="math notranslate nohighlight">\(
 <p>（你可以通过对 <span class="math notranslate nohighlight">\(t\)</span> 求导来确认这个函数 <span class="math notranslate nohighlight">\(x_t\)</span> 满足方程<a class="reference internal" href="#equation-xsolow">(24.4)</a>。）</p>
 <p>代换回 <span class="math notranslate nohighlight">\(k_t\)</span> 得到</p>
 <div class="math notranslate nohighlight" id="equation-ssivs">
-<span class="eqno">(24.5)<a class="headerlink" href="#equation-ssivs" title="Permalink to this equation">#</a></span>\[    k_t
+<span class="eqno">(24.5)<a class="headerlink" href="#equation-ssivs" title="Link to this equation">#</a></span>\[    k_t
     =
     \left[
         \left(
@@ -564,7 +635,7 @@ $<span class="math notranslate nohighlight">\(
 <p>因此，全局稳定性成立。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">24.4. </span>练习<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">24.4. </span>练习<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="solow_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 24.1 </span></p>
@@ -606,14 +677,14 @@ $<span class="math notranslate nohighlight">\(
 <p>我们将使用 <span class="math notranslate nohighlight">\(-c^*(s)\)</span>，因为 <code class="docutils literal notranslate"><span class="pre">minimize_scalar</span></code> 函数是用来寻找最小值的。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize_scalar</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_c_star</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc_c_star</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="n">k</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
     <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">alpha</span>
 </pre></div>
@@ -665,13 +736,14 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png"><img alt="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" src="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png"><img alt="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" src="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们也可以尝试用数学方法解决这个问题，即对 <span class="math notranslate nohighlight">\(c^*(s)\)</span> 进行微分，并使用 <a class="reference external" href="https://www.sympy.org/en/index.html">sympy</a> 求解 <span class="math notranslate nohighlight">\(\frac{d}{ds}c^*(s)=0\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Symbol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Symbol</span>
 </pre></div>
 </div>
 </div>
@@ -714,7 +786,7 @@ $<span class="math notranslate nohighlight">\(
 <p>一种方法是用某个随机序列 <span class="math notranslate nohighlight">\((A_t)_{t \geq 1}\)</span> 替代常数生产率。</p>
 <p>现在的动态方程变为</p>
 <div class="math notranslate nohighlight" id="equation-solowran">
-<span class="eqno">(24.6)<a class="headerlink" href="#equation-solowran" title="Permalink to this equation">#</a></span>\[    k_{t+1} = s A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
+<span class="eqno">(24.6)<a class="headerlink" href="#equation-solowran" title="Link to this equation">#</a></span>\[    k_{t+1} = s A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
 <p>我们假设 <span class="math notranslate nohighlight">\(f\)</span> 是Cobb–Douglas生产函数，且 <span class="math notranslate nohighlight">\((A_t)\)</span> 是独立同分布的对数正态分布。</p>
 <p>现在，在确定性情况下获得的长期收敛性不再成立，因为系统在每个时间点都会受到新的冲击。</p>
 <p>考虑 <span class="math notranslate nohighlight">\(A=2.0, s=0.6, \alpha=0.3,\)</span> 且 <span class="math notranslate nohighlight">\(\delta=0.5\)</span>。</p>
@@ -743,10 +815,10 @@ $<span class="math notranslate nohighlight">\(
 <p>让我们定义函数 <em>k_next</em> 来找出 <span class="math notranslate nohighlight">\(k\)</span> 的下一个值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lgnorm</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lgnorm</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span> <span class="o">+</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">())</span>
 
-<span class="k">def</span> <span class="nf">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">lgnorm</span><span class="p">()</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
@@ -754,7 +826,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ts_plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ts_length</span><span class="p">)</span>
 
@@ -784,7 +856,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1fa2b0aa306970b19be202ad88e86bd20463b088a0a2b4a1e08ff538bd780aec.png"><img alt="_images/1fa2b0aa306970b19be202ad88e86bd20463b088a0a2b4a1e08ff538bd780aec.png" src="_images/1fa2b0aa306970b19be202ad88e86bd20463b088a0a2b4a1e08ff538bd780aec.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png"><img alt="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png" src="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -1221,6 +1294,35 @@ $<span class="math notranslate nohighlight">\(
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/solow.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/solow.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/solow.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

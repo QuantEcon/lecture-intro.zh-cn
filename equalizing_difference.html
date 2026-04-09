@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>13. 均衡差异模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'equalizing_difference';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/equalizing_difference.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/equalizing_difference.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/equalizing_difference.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/equalizing_difference.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -185,17 +225,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -205,10 +251,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">均衡差异模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -221,6 +266,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/equalizing_difference.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -232,9 +299,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">13. </span>均衡差异模型<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>均衡差异模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座介绍了一个研究大学与高中毕业生工资差距的模型，其中获得大学学历所需的时间是关键因素。</p>
 <p>这个模型最初由米尔顿·弗里德曼创建，用于研究美国牙医和医生的收入差异——他想弄清这种差异是竞争性劳动力市场的自然结果，还是源于政府与医疗专业组织设置的准入门槛。</p>
 <p>詹妮弗·伯恩斯在其著作<span id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章中，详细描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，这项研究最终促成了<span id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
@@ -251,9 +318,9 @@
 <p>首先，让我们导入所需的Python模块。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -263,7 +330,7 @@
 </div>
 </section>
 <section id="id7">
-<h2><span class="section-number">13.2. </span>无差异条件<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>无差异条件<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>这个模型的关键在于：大学教育带来的额外工资收益会达到一个均衡点，在这个点上，普通工人选择上大学或直接工作的预期收益是相等的。</p>
 <p>设：</p>
 <ul class="simple">
@@ -286,7 +353,7 @@
 </ul>
 <p>并计算这位毕业生所能获得的现值</p>
 <section id="id8">
-<h3><span class="section-number">13.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>如果某人高中毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots, T\)</span> 的 <span class="math notranslate nohighlight">\(T+1\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -300,7 +367,7 @@ A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
 <p>现值 <span class="math notranslate nohighlight">\(h_0\)</span> 是选择不上大学而是立即以高中毕业生的工资开始工作的人在时间 <span class="math notranslate nohighlight">\(0\)</span> 开始时的”人力财富”。</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">13.2.2. </span>上大学后工作的现值<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">13.2.2. </span>上大学后工作的现值<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>如果某人在 <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> 的四年内上大学，期间收入为 <span class="math notranslate nohighlight">\(0\)</span>，但在大学毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=4, 5, \ldots ,T\)</span> 的 <span class="math notranslate nohighlight">\(T-3\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -331,13 +398,13 @@ h_0 = c_0 - D
 \]</div>
 <p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-equalize">
-<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Permalink to this equation">#</a></span>\[ 
+<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Link to this equation">#</a></span>\[ 
 w_0^h A_h  = \phi w_0^h A_c - D .
 \]</div>
 <p>这个”无差异条件”是模型的核心。</p>
 <p>求解方程 <a class="reference internal" href="#equation-eq-equalize">(13.1)</a> 得到大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-wagepremium">
-<span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-wagepremium" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-wagepremium" title="Link to this equation">#</a></span>\[
 \phi  = \frac{A_h}{A_c} + \frac{D}{w_0^h A_c} .
 \]</div>
 <p>在<strong>免费大学</strong>的特殊情况下，<span class="math notranslate nohighlight">\(D =0\)</span>。</p>
@@ -352,7 +419,7 @@ w_0^h A_h  = \phi w_0^h A_c - D .
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">13.3. </span>重新解读模型：打工人和企业家<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>重新解读模型：打工人和企业家<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>我们可以通过添加一个参数并重新解读变量来获得一个有关企业家和打工人的模型。</p>
 <p>现在让 <span class="math notranslate nohighlight">\(h\)</span> 表示”打工人”的现值。</p>
 <p>我们将企业家的现值定义为：</p>
@@ -369,22 +436,22 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 成为企业家的风险越大，成功项目的回报就必须越高。</p>
 </section>
 <section id="id11">
-<h2><span class="section-number">13.4. </span>计算<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>计算<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>通过变动参数 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>， 我们可以创建出一些有趣的例子。</p>
 <p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制其与某些决定因素的关系。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">equalizing_diff</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">equalizing_diff</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    均等差异模型的一个类</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># 通过设置 π 切换到弱模型</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> <span class="n">π</span>
     
-    <span class="k">def</span> <span class="nf">compute_gap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_gap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span>
         <span class="n">T</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span>
         
@@ -407,28 +474,28 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ϕ_R</span>
-<span class="k">def</span> <span class="nf">ϕ_R</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">R_new</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_R</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">R_new</span><span class="p">):</span>
     <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">R_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
 
 <span class="n">ϕ_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_R</span><span class="p">)</span>
 
 <span class="c1"># ϕ_γh</span>
-<span class="k">def</span> <span class="nf">ϕ_γh</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γh_new</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_γh</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γh_new</span><span class="p">):</span>
     <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">γh_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
 
 <span class="n">ϕ_γh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_γh</span><span class="p">)</span>
 
 <span class="c1"># ϕ_γc</span>
-<span class="k">def</span> <span class="nf">ϕ_γc</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γc_new</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_γc</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γc_new</span><span class="p">):</span>
     <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γc_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
 
 <span class="n">ϕ_γc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_γc</span><span class="p">)</span>
 
 <span class="c1"># ϕ_π</span>
-<span class="k">def</span> <span class="nf">ϕ_π</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">π_new</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_π</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">π_new</span><span class="p">):</span>
     <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">π_new</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
 
@@ -490,7 +557,8 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png"><img alt="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" src="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png"><img alt="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" src="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。</p>
@@ -508,12 +576,13 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png"><img alt="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" src="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png"><img alt="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" src="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id12">
-<h2><span class="section-number">13.5. </span>企业家和打工人<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>企业家和打工人<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p>现在让我们用企业家-打工人的视角来解读这个模型。</p>
 <p>如果一个新企业成功的概率是 <span class="math notranslate nohighlight">\(0.2\)</span>，让我们计算成功企业家的初始工资溢价。</p>
 <div class="cell docutils container">
@@ -544,13 +613,14 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png"><img alt="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" src="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png"><img alt="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" src="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这个图表是不是符合你的猜想呢？</p>
 </section>
 <section id="id13">
-<h2><span class="section-number">13.6. </span>微积分的应用<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>微积分的应用<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。</p>
 <p>然而，懂得微积分的人可能会希望我们直接求偏导数。</p>
 <p>还不会微积分的读者可以不用继续往下读，因为线性代数已经让我们了解了模型的主要特性。</p>
@@ -559,7 +629,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <p>让我们从 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 导入关键函数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
 </pre></div>
 </div>
 </div>
@@ -1198,6 +1268,35 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/equalizing_difference.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/equalizing_difference.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/equalizing_difference.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

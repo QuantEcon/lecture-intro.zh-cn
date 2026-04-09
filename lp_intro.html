@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>36. 线性规划 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lp_intro';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/lp_intro.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/lp_intro.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/lp_intro.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/lp_intro.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -192,17 +232,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -212,10 +258,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">线性规划</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -228,6 +273,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/lp_intro.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -239,7 +306,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="lp-intro">
-<span id="id1"></span><h1><span class="section-number">36. </span>线性规划<a class="headerlink" href="#lp-intro" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">36. </span>线性规划<a class="headerlink" href="#lp-intro" title="Link to this heading">#</a></h1>
 <p>在本讲中，我们将需要以下库并使用 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <a class="reference external" href="https://developers.google.com/optimization">ortools</a>。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -254,65 +321,39 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ortools
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+  Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
 Collecting absl-py&gt;=2.0.0 (from ortools)
   Downloading absl_py-2.3.1-py3-none-any.whl.metadata (3.3 kB)
 Requirement already satisfied: numpy&gt;=1.13.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (1.26.4)
 Requirement already satisfied: pandas&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (2.2.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting protobuf&lt;6.32,&gt;=6.31.1 (from ortools)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting protobuf&lt;6.32,&gt;=6.31.1 (from ortools)
+  Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
 Collecting typing-extensions&gt;=4.12 (from ortools)
   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting immutabledict&gt;=3.0.0 (from ortools)
+Collecting immutabledict&gt;=3.0.0 (from ortools)
   Downloading immutabledict-4.2.2-py3-none-any.whl.metadata (3.5 kB)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2023.3)
 Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=2.0.0-&gt;ortools) (1.16.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (27.7 MB)
+Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (27.7 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/27.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">11.3/27.7 MB</span> <span class=" -Color -Color-Red">65.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">27.7/27.7 MB</span> <span class=" -Color -Color-Red">82.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/27.7 MB</span> <span class=" -Color -Color-Red">96.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">27.7/27.7 MB</span> <span class=" -Color -Color-Red">74.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading absl_py-2.3.1-py3-none-any.whl (135 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading immutabledict-4.2.2-py3-none-any.whl (4.7 kB)
+Downloading immutabledict-4.2.2-py3-none-any.whl (4.7 kB)
 Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl (321 kB)
 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: typing-extensions, protobuf, immutabledict, absl-py, ortools
+Installing collected packages: typing-extensions, protobuf, immutabledict, absl-py, ortools
   Attempting uninstall: typing-extensions
     Found existing installation: typing_extensions 4.11.0
     Uninstalling typing_extensions-4.11.0:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled typing_extensions-4.11.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Attempting uninstall: protobuf
+      Successfully uninstalled typing_extensions-4.11.0
+  Attempting uninstall: protobuf
     Found existing installation: protobuf 4.25.3
     Uninstalling protobuf-4.25.3:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled protobuf-4.25.3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
+      Successfully uninstalled protobuf-4.25.3
+<span class=" -Color -Color-Red">ERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
 <span class=" -Color -Color-Red">streamlit 1.37.1 requires protobuf&lt;6,&gt;=3.20, but you have protobuf 6.31.1 which is incompatible.</span>
 Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 protobuf-6.31.1 typing-extensions-4.15.0
 </pre></div>
@@ -321,7 +362,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </details>
 </div>
 <section id="id2">
-<h2><span class="section-number">36.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">36.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p><strong>线性规划</strong> 问题旨在在一组线性等式和/或不等式约束下，最大化或最小化一个线性目标函数。</p>
 <p>线性规划问题是成对出现的：</p>
 <ul class="simple">
@@ -339,13 +380,13 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 <p>让我们先进行一些导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ortools.linear_solver</span> <span class="kn">import</span> <span class="n">pywraplp</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Polygon</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ortools.linear_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pywraplp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linprog</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -356,17 +397,17 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 <p>让我们从一些线性规划问题的例子开始。</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">36.2. </span>示例 1：生产问题<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">36.2. </span>示例 1：生产问题<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>这个例子由 <span id="id4">[<a class="reference internal" href="zreferences.html#id63" title="J. N. Bertsimas, D. &amp; Tsitsiklis. Introduction to linear optimization. Athena Scientific, 1997.">Bertsimas, 1997</a>]</span> 创建。</p>
 <p>假设一个工厂可以生产两种商品，称为产品 <span class="math notranslate nohighlight">\(1\)</span> 和产品 <span class="math notranslate nohighlight">\(2\)</span>。</p>
 <p>生产每种产品都需要材料和劳动。</p>
 <p>销售每种产品会产生收入。</p>
 <p>每单位所需的材料和劳动投入及其收入如下表所示：</p>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-center head"><p></p></th>
-<th class="text-center head"><p>产品 1</p></th>
-<th class="text-center head"><p>产品 2</p></th>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>产品 1</p></th>
+<th class="head text-center"><p>产品 2</p></th>
 </tr>
 </thead>
 <tbody>
@@ -438,7 +479,8 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png"><img alt="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" src="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png"><img alt="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" src="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>蓝色区域是可行集合，在该集合内所有约束都得到了满足。</p>
@@ -447,7 +489,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 <p>可行集合与最高黑线的交点界定了最优集合。</p>
 <p>在这个例子中，最优集合是点 <span class="math notranslate nohighlight">\((2.5, 5)\)</span>。</p>
 <section id="or-tools">
-<h3><span class="section-number">36.2.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#or-tools" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.2.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#or-tools" title="Link to this heading">#</a></h3>
 <p>让我们尝试使用 <code class="docutils literal notranslate"><span class="pre">ortools.linear_solver</span></code> 包来解决同样的问题。</p>
 <p>下面的单元格实例化一个求解器，并创建两个变量，指定它们可以具有的值范围。</p>
 <div class="cell docutils container">
@@ -480,7 +522,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fd8d3c7a8e0&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08e399920&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -518,7 +560,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </section>
 </section>
 <section id="id5">
-<h2><span class="section-number">36.3. </span>示例 2：投资问题<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">36.3. </span>示例 2：投资问题<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>我们现在考虑一个由 <span id="id6">[<a class="reference internal" href="zreferences.html#id64" title="Y. Hu, Y. &amp; Guo. Operations research. Tsinghua University Press, 5th edition, 2018.">Hu, 2018</a>]</span> 提出的并解决的问题。</p>
 <p>一个共同基金有 $100,000 美元 可在三年内投资。</p>
 <p>有三种投资选择可供选择：</p>
@@ -532,12 +574,12 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 <p>让 <span class="math notranslate nohighlight">\(x_1\)</span> 表示投入年金的金额，<span class="math notranslate nohighlight">\(x_2, x_3, x_4\)</span> 表示三年初的银行存款余额，<span class="math notranslate nohighlight">\(x_5\)</span> 表示投资于企业债券的金额。</p>
 <p>当 <span class="math notranslate nohighlight">\(x_2, x_3, x_4\)</span> 为负时，意味着共同基金从银行借款。</p>
 <p>下表展示了共同基金的决策变量以及上述时序协议：</p>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-center head"><p></p></th>
-<th class="text-center head"><p>第1年</p></th>
-<th class="text-center head"><p>第2年</p></th>
-<th class="text-center head"><p>第3年</p></th>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>第1年</p></th>
+<th class="head text-center"><p>第2年</p></th>
+<th class="head text-center"><p>第3年</p></th>
 </tr>
 </thead>
 <tbody>
@@ -602,7 +644,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 \end{aligned}
 \end{split}\]</div>
 <section id="id7">
-<h3><span class="section-number">36.3.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.3.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>让我们尝试使用 <code class="docutils literal notranslate"><span class="pre">ortools.linear_solver</span></code> 包来解决上述问题。</p>
 <p>以下代码实例化一个求解器，并创建两个变量，指定它们可以拥有的值范围。</p>
 <div class="cell docutils container">
@@ -641,7 +683,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fd8d3b22f40&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d9cad90&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -691,7 +733,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">36.4. </span>标准形式<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">36.4. </span>标准形式<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>为了</p>
 <ul class="simple">
 <li><p>统一最初以表面不同形式表述的线性规划问题，以及</p></li>
@@ -725,7 +767,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 \end{split}\]</div>
 <p>标准形式的线性规划问题可以简洁地表达为：</p>
 <div class="math notranslate nohighlight" id="equation-lpproblem">
-<span class="eqno">(36.1)<a class="headerlink" href="#equation-lpproblem" title="Permalink to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(36.1)<a class="headerlink" href="#equation-lpproblem" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 \min_{x} \ &amp; c'x \\
 \mbox{受以下约束} \ &amp; Ax = b\\
@@ -735,7 +777,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <p>这里，<span class="math notranslate nohighlight">\(Ax = b\)</span> 意味着 <span class="math notranslate nohighlight">\(Ax\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素等于 <span class="math notranslate nohighlight">\(b\)</span> 的第 <span class="math notranslate nohighlight">\(i\)</span> 个元素，这个等式对于每个 <span class="math notranslate nohighlight">\(i\)</span> 都成立。</p>
 <p>同样，<span class="math notranslate nohighlight">\(x \geq 0\)</span> 意味着 <span class="math notranslate nohighlight">\(x_j\)</span> 对于每个 <span class="math notranslate nohighlight">\(j\)</span> 都大于等于 <span class="math notranslate nohighlight">\(0\)</span>。</p>
 <section id="id9">
-<h3><span class="section-number">36.4.1. </span>有用的变换<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.4.1. </span>有用的变换<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>知道如何将一个最初未以标准形式表述的问题转换为标准形式是很有用的。</p>
 <p>通过以下步骤，任何线性规划问题都可以转化为一个等效的标准形式线性规划问题。</p>
 <ol class="arabic simple">
@@ -746,7 +788,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <p>让我们将上述步骤应用于上面描述的两个示例。</p>
 </section>
 <section id="id10">
-<h3><span class="section-number">36.4.2. </span>示例 1：生产问题<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.4.2. </span>示例 1：生产问题<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>原始问题是：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -769,7 +811,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 \end{split}\]</div>
 </section>
 <section id="scipy">
-<h3><span class="section-number">36.4.3. </span>计算：使用 SciPy<a class="headerlink" href="#scipy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.4.3. </span>计算：使用 SciPy<a class="headerlink" href="#scipy" title="Link to this heading">#</a></h3>
 <p>包 <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> 提供了一个函数 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 用于求解以下形式的线性规划问题：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -834,7 +876,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </section>
 <section id="id11">
-<h3><span class="section-number">36.4.4. </span>示例 2：投资问题<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">36.4.4. </span>示例 2：投资问题<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>原始问题是：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -934,7 +976,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </section>
 </section>
 <section id="id12">
-<h2><span class="section-number">36.5. </span>练习<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">36.5. </span>练习<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="lp_intro_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 36.1 </span></p>
@@ -983,7 +1025,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fd8d3b23030&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d846eb0&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1074,7 +1116,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fd8d3b23510&gt; &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d847180&gt; &gt;
 </pre></div>
 </div>
 </div>
@@ -1543,6 +1585,35 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/lp_intro.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/lp_intro.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/lp_intro.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

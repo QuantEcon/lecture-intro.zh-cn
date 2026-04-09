@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>30. 通货膨胀税的拉弗曲线 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'money_inflation_nonlinear';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/money_inflation_nonlinear.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/money_inflation_nonlinear.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/money_inflation_nonlinear.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/money_inflation_nonlinear.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -185,17 +225,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -205,10 +251,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">通货膨胀税的拉弗曲线</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -221,6 +266,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/money_inflation_nonlinear.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -232,9 +299,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">30. </span>通货膨胀税的拉弗曲线<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">30. </span>通货膨胀税的拉弗曲线<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">30.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座研究了通货膨胀税的静态和动态<em>拉弗曲线</em>，使用的是讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中研究的模型的非线性模型版本。</p>
 <p>我们采用了<span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在其经典论文中使用的对数线性货币需求函数，而不是讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中使用的线性需求函数。</p>
 <p>这一改变需要我们修改部分分析。</p>
@@ -258,7 +325,7 @@
 </ul>
 </section>
 <section id="id4">
-<h2><span class="section-number">30.2. </span>模型<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.2. </span>模型<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>设:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m_t\)</span> 为时间 <span class="math notranslate nohighlight">\(t\)</span> 初的货币供应量对数</p></li>
@@ -266,20 +333,20 @@
 </ul>
 <p>货币需求函数为:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mdemand">
-<span class="eqno">(30.1)<a class="headerlink" href="#equation-eq-mdemand" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(30.1)<a class="headerlink" href="#equation-eq-mdemand" title="Link to this equation">#</a></span>\[
 m_{t+1} - p_t = -\alpha (p_{t+1} - p_t)
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>。</p>
 <p>货币供应量的动态方程为:</p>
 <div class="math notranslate nohighlight" id="equation-eq-msupply">
-<span class="eqno">(30.2)<a class="headerlink" href="#equation-eq-msupply" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(30.2)<a class="headerlink" href="#equation-eq-msupply" title="Link to this equation">#</a></span>\[
 \exp(m_{t+1}) - \exp(m_t) = g \exp(p_t)
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(g\)</span> 是政府支出中通过印钞来融资的部分。</p>
 <p><strong>注意:</strong> 方程<a class="reference internal" href="#equation-eq-mdemand">(30.1)</a>在货币供应量和价格水平的对数上是线性的, 方程<a class="reference internal" href="#equation-eq-msupply">(30.2)</a>在价格水平上是线性的。这需要我们调整在讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中使用的均衡计算方法。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">30.3. </span>通货膨胀率的极限<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.3. </span>通货膨胀率的极限<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>我们可以通过研究稳态拉弗曲线来计算 <span class="math notranslate nohighlight">\(\overline \pi\)</span> 的两个可能极限值。</p>
 <p>因此,在<em>稳态</em>中</p>
 <div class="math notranslate nohighlight">
@@ -289,12 +356,12 @@ m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 <p>其中 <span class="math notranslate nohighlight">\(x &gt; 0\)</span> 是货币供应量和价格水平的对数的共同增长率。</p>
 <p>几行代数运算可以得出 <span class="math notranslate nohighlight">\(x\)</span> 满足的方程:</p>
 <div class="math notranslate nohighlight" id="equation-eq-steadypi">
-<span class="eqno">(30.3)<a class="headerlink" href="#equation-eq-steadypi" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(30.3)<a class="headerlink" href="#equation-eq-steadypi" title="Link to this equation">#</a></span>\[
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
 \]</div>
 <p>我们需要</p>
 <div class="math notranslate nohighlight" id="equation-eq-revmax">
-<span class="eqno">(30.4)<a class="headerlink" href="#equation-eq-revmax" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(30.4)<a class="headerlink" href="#equation-eq-revmax" title="Link to this equation">#</a></span>\[
 g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},  
 \]</div>
 <p>这样通过印钞来融资才是可行的。</p>
@@ -305,12 +372,12 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 <p>让我们先导入一些库</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaxNLocator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsolve</span> 
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -329,7 +396,7 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
                          <span class="s2">&quot;g&quot;</span> <span class="p">])</span>
 
 <span class="c1"># 创建一个 凯根拉弗 模型 </span>
-<span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">m0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">g</span><span class="o">=</span><span class="mf">0.35</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">m0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">g</span><span class="o">=</span><span class="mf">0.35</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">CaganLaffer</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="o">=</span><span class="n">m0</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="n">α</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">α</span><span class="p">),</span> <span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
@@ -341,10 +408,10 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义π_bar的公式</span>
-<span class="k">def</span> <span class="nf">solve_π</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_π</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">g</span>
 
-<span class="k">def</span> <span class="nf">solve_π_bar</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_π_bar</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
     <span class="n">π_bar</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">solve_π</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">π_bar</span>
 
@@ -364,14 +431,14 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 <p>我们找到两个稳态<span class="math notranslate nohighlight">\(\overline \pi\)</span>的值。</p>
 </section>
 <section id="id6">
-<h2><span class="section-number">30.4. </span>稳态拉弗曲线<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.4. </span>稳态拉弗曲线<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>以下图形展示了稳态拉弗曲线以及两个稳态通货膨胀率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_seign</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_seign</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">plot_laffer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">πs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_laffer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">πs</span><span class="p">):</span>
     <span class="n">α</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span>
     
     <span class="c1"># 生成 π 值</span>
@@ -402,26 +469,27 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="laffer-curve-nonlinear">
-<a class="reference internal image-reference" href="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png"><img alt="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png" src="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png"><img alt="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png" src="_images/b86626feedc8af4e855ef9d74c4ccf1ce437639c240994d1ad892fa2a97caf6b.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 30.1 </span><span class="caption-text">稳态通胀的铸币税功能。棕色虚线代表 <span class="math notranslate nohighlight">\(\pi_l\)</span> 和 <span class="math notranslate nohighlight">\(\pi_u\)</span>。</span><a class="headerlink" href="#laffer-curve-nonlinear" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.1 </span><span class="caption-text">稳态通胀的铸币税功能。棕色虚线代表 <span class="math notranslate nohighlight">\(\pi_l\)</span> 和 <span class="math notranslate nohighlight">\(\pi_u\)</span>。</span><a class="headerlink" href="#laffer-curve-nonlinear" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="id7">
-<h2><span class="section-number">30.5. </span>初始价格水平的计算<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.5. </span>初始价格水平的计算<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>现在我们已经掌握了两个可能的稳态，我们可以计算两个函数 <span class="math notranslate nohighlight">\(\underline p(m_0)\)</span> 和
 <span class="math notranslate nohighlight">\(\overline p(m_0)\)</span>，作为时间 <span class="math notranslate nohighlight">\(t\)</span> 时 <span class="math notranslate nohighlight">\(p_t\)</span> 的初始条件。这意味着我们需要找到对于所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span>， <span class="math notranslate nohighlight">\(\pi_t = \overline \pi\)</span>。</p>
 <p>函数 <span class="math notranslate nohighlight">\(\underline p(m_0)\)</span> 将会与较低的稳态通货膨胀率 <span class="math notranslate nohighlight">\(\pi_l\)</span> 相关联。</p>
 <p>函数 <span class="math notranslate nohighlight">\(\overline p(m_0)\)</span> 将会与较高的稳态通货膨胀率 <span class="math notranslate nohighlight">\(\pi_u\)</span> 相关联。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_p0</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_p0</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">m0</span><span class="p">)</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">p0</span><span class="p">))</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="n">π</span> <span class="o">-</span> <span class="n">p0</span>
 
-<span class="k">def</span> <span class="nf">solve_p0_bar</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">π_bar</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_p0_bar</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">π_bar</span><span class="p">):</span>
     <span class="n">p0_bar</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">solve_p0</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-20</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">m0</span><span class="p">,</span> 
                                                        <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> 
                                                        <span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> 
@@ -446,12 +514,12 @@ g \leq \max_{x \geq 0} \{\exp(-\alpha x) - \exp(-(1 + \alpha) x) \},
 </div>
 </div>
 <section id="id8">
-<h3><span class="section-number">30.5.1. </span>验证<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.5.1. </span>验证<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>首先，让我们编写一些代码来验证，如果初始对数价格水平 <span class="math notranslate nohighlight">\(p_0\)</span> 取我们刚刚计算的两个值之一，那么通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 将对所有的 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 保持恒定。</p>
 <p>下面的代码进行了验证。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_seq</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_seq</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
     <span class="n">λ</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">λ</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span>
     <span class="n">π_seq</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">m0</span><span class="p">],</span> <span class="p">[</span><span class="n">p0</span><span class="p">]</span>
 
@@ -498,7 +566,7 @@ eq_g == g: True
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">30.6. </span>计算均衡序列<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.6. </span>计算均衡序列<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>我们将采用类似于 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中的 <em>方法2</em>。</p>
 <p>我们将时间 <span class="math notranslate nohighlight">\(t\)</span> 的状态向量视为对 <span class="math notranslate nohighlight">\((m_t, p_t)\)</span>。</p>
 <p>我们将 <span class="math notranslate nohighlight">\(m_t\)</span> 视为一个 <strong>自然状态变量</strong>，而 <span class="math notranslate nohighlight">\(p_t\)</span> 视为一个 <strong>跳跃</strong> 变量。</p>
@@ -509,7 +577,7 @@ eq_g == g: True
 \]</div>
 <p>让我们重写方程 <a class="reference internal" href="#equation-eq-mdemand">(30.1)</a> 为</p>
 <div class="math notranslate nohighlight" id="equation-eq-mdemand2">
-<span class="eqno">(30.5)<a class="headerlink" href="#equation-eq-mdemand2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(30.5)<a class="headerlink" href="#equation-eq-mdemand2" title="Link to this equation">#</a></span>\[
 p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 \]</div>
 <p>让我们用伪代码来描述计算均衡序列的算法。</p>
@@ -554,7 +622,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </ul>
 </section>
 <section id="id10">
-<h2><span class="section-number">30.7. </span>拉弗曲线动态的不稳定性<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.7. </span>拉弗曲线动态的不稳定性<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>与<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 和<a class="reference internal" href="#"><span class="doc">通货膨胀税的拉弗曲线</span></a>类似，我们现在已经具备了从不同的 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 开始计算时间序列的能力。</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="admonition hide above-input">
@@ -563,7 +631,7 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_iterations</span><span class="p">(</span><span class="n">p0s</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">line_params</span><span class="p">,</span> <span class="n">p0_bars</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">draw_iterations</span><span class="p">(</span><span class="n">p0s</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">line_params</span><span class="p">,</span> <span class="n">p0_bars</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
@@ -631,9 +699,10 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="p0-path-nonlin">
-<a class="reference internal image-reference" href="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png"><img alt="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png" src="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png"><img alt="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png" src="_images/6a4488908453055eef13cf0084f55d111e4197511afe70aacfe0ef8a4d0f0626.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 30.2 </span><span class="caption-text">从不同的初始值 <span class="math notranslate nohighlight">\(p_0\)</span> 开始，<span class="math notranslate nohighlight">\(m_t\)</span>（顶部面板，<span class="math notranslate nohighlight">\(m\)</span> 使用对数刻度），<span class="math notranslate nohighlight">\(p_t\)</span>（第二面板，<span class="math notranslate nohighlight">\(p\)</span> 使用对数刻度），<span class="math notranslate nohighlight">\(\pi_t\)</span>（第三面板）和 <span class="math notranslate nohighlight">\(\mu_t\)</span>（底部面板）的路径</span><a class="headerlink" href="#p0-path-nonlin" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30.2 </span><span class="caption-text">从不同的初始值 <span class="math notranslate nohighlight">\(p_0\)</span> 开始，<span class="math notranslate nohighlight">\(m_t\)</span>（顶部面板，<span class="math notranslate nohighlight">\(m\)</span> 使用对数刻度），<span class="math notranslate nohighlight">\(p_t\)</span>（第二面板，<span class="math notranslate nohighlight">\(p\)</span> 使用对数刻度），<span class="math notranslate nohighlight">\(\pi_t\)</span>（第三面板）和 <span class="math notranslate nohighlight">\(\mu_t\)</span>（底部面板）的路径</span><a class="headerlink" href="#p0-path-nonlin" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1088,6 +1157,35 @@ p_t = (1-\lambda) m_{t+1} + \lambda p_{t+1}
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/money_inflation_nonlinear.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/money_inflation_nonlinear.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/money_inflation_nonlinear.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

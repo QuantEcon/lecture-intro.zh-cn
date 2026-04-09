@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>23. 一维动力学 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'scalar_dynam';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/scalar_dynam.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/scalar_dynam.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/scalar_dynam.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/scalar_dynam.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -195,17 +235,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -215,10 +261,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">一维动力学</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -231,6 +276,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/scalar_dynam.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -246,9 +313,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="scalar-dynam">
-<span id="id1"></span><h1><span class="section-number">23. </span>一维动力学<a class="headerlink" href="#scalar-dynam" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">23. </span>一维动力学<a class="headerlink" href="#scalar-dynam" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">23.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>在经济学中，许多变量依赖于它们的过去值。</p>
 <p>例如，我们有理由相信去年的通货膨胀会影响今年的通货膨胀。
 （比如去年的高通胀会导致人们要求更高的工资作为补偿，导致今年的价格进一步上涨。）</p>
@@ -262,18 +329,18 @@
 <p>让我们从一些标准导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">23.2. </span>一些定义<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.2. </span>一些定义<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>本节将介绍我们要研究的对象和关键概念。</p>
 <section id="id4">
-<h3><span class="section-number">23.2.1. </span>函数组合<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.1. </span>函数组合<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>首先，让我们回顾一下函数组合的概念：</p>
 <p>如果</p>
 <ul class="simple">
@@ -301,7 +368,7 @@
 <p>在上面的例子中，<span class="math notranslate nohighlight">\(f^n(x) = x^{1/(2^n)}\)</span>。</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">23.2.2. </span>动态系统<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.2. </span>动态系统<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p><strong>（离散时间）动态系统</strong>由一个集合 <span class="math notranslate nohighlight">\(S\)</span> 和一个将 <span class="math notranslate nohighlight">\(S\)</span> 映射到自身的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
 <p>动态系统的例子包括：</p>
 <ul class="simple">
@@ -316,13 +383,13 @@
 <p>研究动态系统的重要性在于它们能帮助我们理解和分析动态过程的基本特性。</p>
 <p>给定由集合 <span class="math notranslate nohighlight">\(S\)</span> 和函数 <span class="math notranslate nohighlight">\(g\)</span> 组成的动态系统，我们可以通过设定</p>
 <div class="math notranslate nohighlight" id="equation-sdsod">
-<span class="eqno">(23.1)<a class="headerlink" href="#equation-sdsod" title="Permalink to this equation">#</a></span>\[    x_{t+1} = g(x_t)
+<span class="eqno">(23.1)<a class="headerlink" href="#equation-sdsod" title="Link to this equation">#</a></span>\[    x_{t+1} = g(x_t)
     \quad \text{其中} 
     x_0 \text{给定}\]</div>
 <p>来创建由 <span class="math notranslate nohighlight">\(S\)</span> 中点组成的序列 <span class="math notranslate nohighlight">\(\{x_t\}\)</span>。</p>
 <p>这意味着我们选择 <span class="math notranslate nohighlight">\(S\)</span> 中的某个数 <span class="math notranslate nohighlight">\(x_0\)</span>，然后取</p>
 <div class="math notranslate nohighlight" id="equation-sdstraj">
-<span class="eqno">(23.2)<a class="headerlink" href="#equation-sdstraj" title="Permalink to this equation">#</a></span>\[    x_0, \quad
+<span class="eqno">(23.2)<a class="headerlink" href="#equation-sdstraj" title="Link to this equation">#</a></span>\[    x_0, \quad
     x_1 = g(x_0), \quad
     x_2 = g(x_1) = g(g(x_0)), \quad \text{等等}\]</div>
 <p>这个序列 <span class="math notranslate nohighlight">\(\{x_t\}\)</span> 被称为 <span class="math notranslate nohighlight">\(x_0\)</span> 在 <span class="math notranslate nohighlight">\(g\)</span> 下的<strong>轨迹</strong>。</p>
@@ -340,7 +407,7 @@
 </ul>
 </section>
 <section id="id6">
-<h3><span class="section-number">23.2.3. </span>示例：线性模型<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.3. </span>示例：线性模型<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>动态系统的一个典型例子是状态空间 <span class="math notranslate nohighlight">\(S=\mathbb R\)</span> 与映射函数 <span class="math notranslate nohighlight">\(g(x)=ax + b\)</span> ，其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是常数（有时称为”参数”）。</p>
 <p>由此可得<strong>线性差分方程</strong></p>
 <div class="math notranslate nohighlight">
@@ -351,27 +418,27 @@
 \]</div>
 <p>其中<span class="math notranslate nohighlight">\(x_0\)</span> 的轨迹是</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodpath">
-<span class="eqno">(23.3)<a class="headerlink" href="#equation-sdslinmodpath" title="Permalink to this equation">#</a></span>\[x_0, \quad
+<span class="eqno">(23.3)<a class="headerlink" href="#equation-sdslinmodpath" title="Link to this equation">#</a></span>\[x_0, \quad
 a x_0 + b, \quad
 a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 <p>继续这样下去，并利用我们对几何级数的知识，我们发现，对于任何 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmod">
-<span class="eqno">(23.4)<a class="headerlink" href="#equation-sdslinmod" title="Permalink to this equation">#</a></span>\[    x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}\]</div>
+<span class="eqno">(23.4)<a class="headerlink" href="#equation-sdslinmod" title="Link to this equation">#</a></span>\[    x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}\]</div>
 <p>我们可以对任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 求出 <span class="math notranslate nohighlight">\(x_t\)</span> 的精确表达式，这让我们能够完全理解系统的动态特性。</p>
 <p>值得注意的是，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，根据上面的公式，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodc">
-<span class="eqno">(23.5)<a class="headerlink" href="#equation-sdslinmodc" title="Permalink to this equation">#</a></span>\[x_t \to  \frac{b}{1 - a} \text{ 当 } t \to \infty\]</div>
+<span class="eqno">(23.5)<a class="headerlink" href="#equation-sdslinmodc" title="Link to this equation">#</a></span>\[x_t \to  \frac{b}{1 - a} \text{ 当 } t \to \infty\]</div>
 <p>无论起点 <span class="math notranslate nohighlight">\(x_0\)</span> 为何值。</p>
 <p>这是被称为全局稳定性的一个例子，我们将在后面再次讨论这个话题。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">23.2.4. </span>示例：非线性模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.2.4. </span>示例：非线性模型<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>在上面的线性例子中，我们得到了 <span class="math notranslate nohighlight">\(x_t\)</span> 关于任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(x_0\)</span> 的精确解析式。</p>
 <p>这使得动力学分析变得轻而易举。</p>
 <p>然而，当模型是非线性时，情况可能会大不相同。</p>
 <p>以索洛-斯旺增长模型为例（后续章节将深入分析），其动态规律由以下方程给出</p>
 <div class="math notranslate nohighlight" id="equation-solow-lom2">
-<span class="eqno">(23.6)<a class="headerlink" href="#equation-solow-lom2" title="Permalink to this equation">#</a></span>\[k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t\]</div>
+<span class="eqno">(23.6)<a class="headerlink" href="#equation-solow-lom2" title="Link to this equation">#</a></span>\[k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t\]</div>
 <p>这里 <span class="math notranslate nohighlight">\(k=K/L\)</span> 表示人均资本存量，<span class="math notranslate nohighlight">\(s\)</span> 为储蓄率，<span class="math notranslate nohighlight">\(A\)</span> 表示全要素生产率，<span class="math notranslate nohighlight">\(\alpha\)</span> 为资本份额，<span class="math notranslate nohighlight">\(\delta\)</span> 为折旧率。</p>
 <p>所有这些参数都是正数，且 <span class="math notranslate nohighlight">\(0 &lt; \alpha, \delta &lt; 1\)</span>。</p>
 <p>如果你尝试像我们在线性模型中做的那样迭代，你会发现代数运算很快就变得复杂。</p>
@@ -379,10 +446,10 @@ a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">23.3. </span>稳定性<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.3. </span>稳定性<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>考虑这样一个动态系统，其由集合 <span class="math notranslate nohighlight">\(S \subset \mathbb R\)</span> 和将 <span class="math notranslate nohighlight">\(S\)</span> 映射到 <span class="math notranslate nohighlight">\(S\)</span> 的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
 <section id="id9">
-<h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>该系统的<strong>稳态</strong>是 <span class="math notranslate nohighlight">\(S\)</span> 中的一个点 <span class="math notranslate nohighlight">\(x^*\)</span>，满足 <span class="math notranslate nohighlight">\(x^* = g(x^*)\)</span>。</p>
 <p>换句话说，<span class="math notranslate nohighlight">\(x^*\)</span> 是函数 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(S\)</span> 中的一个<strong>不动点</strong>。</p>
 <p>例如，对于线性模型 <span class="math notranslate nohighlight">\(x_{t+1} = a x_t + b\)</span>，你可以使用定义来验证：</p>
@@ -393,7 +460,7 @@ a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 </ul>
 </section>
 <section id="id10">
-<h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>如果对于所有的 <span class="math notranslate nohighlight">\(x_0 \in S\)</span>，都有</p>
 <div class="math notranslate nohighlight">
 \[
@@ -408,7 +475,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <p>以上可以直接从方程 <a class="reference internal" href="#equation-sdslinmod">(23.4)</a> 得出。</p>
 </section>
 <section id="id11">
-<h3><span class="section-number">23.3.3. </span>局部稳定性<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.3.3. </span>局部稳定性<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>如果存在一个 <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>，使得</p>
 <div class="math notranslate nohighlight">
 \[
@@ -430,7 +497,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 </div></section>
 </section>
 <section id="id12">
-<h2><span class="section-number">23.4. </span>图形分析<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.4. </span>图形分析<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p>如我们上面所见，分析非线性模型的动态是非常复杂的。</p>
 <p>没有一种单一的方法可以处理所有的非线性模型。</p>
 <p>然而，对于一维模型，有一种技巧可以提供大量的直观理解。</p>
@@ -445,7 +512,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">subplots</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subplots</span><span class="p">():</span>
     <span class="s2">&quot;通过原点的自定义子图轴&quot;</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
@@ -459,7 +526,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
 
 
-<span class="k">def</span> <span class="nf">plot45</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot45</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">):</span>
 
     <span class="n">xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
@@ -511,7 +578,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">legend_args</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ts_plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -537,7 +604,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 <p>让我们为索洛-斯旺模型创建一个45度图，使用固定的参数集。以下是对应该模型的更新函数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
@@ -553,7 +620,8 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png"><img alt="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" src="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png"><img alt="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" src="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这张图显示了函数 <span class="math notranslate nohighlight">\(g\)</span> 和45度线。</p>
@@ -576,7 +644,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 \]</div>
 <section id="id13">
-<h3><span class="section-number">23.4.1. </span>轨迹<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.4.1. </span>轨迹<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>根据前面的讨论，在 <span class="math notranslate nohighlight">\(g\)</span> 位于45度线之上的区域，我们知道轨迹是递增的。</p>
 <p>下图追踪了这样一个区域内的轨迹，使我们能更清楚地看到这一点。</p>
 <p>初始条件是 <span class="math notranslate nohighlight">\(k_0 = 0.25\)</span>。</p>
@@ -589,7 +657,8 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png"><img alt="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" src="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png"><img alt="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" src="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们可以按照上图所示，绘制人均资本随时间变化的时序图，具体如下：</p>
@@ -600,7 +669,8 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png"><img alt="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" src="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png"><img alt="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" src="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这里是一个稍长期一些的视角：</p>
@@ -611,7 +681,8 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png"><img alt="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" src="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png"><img alt="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" src="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>当人均资本存量高于唯一的正稳态值时，我们可以看到它呈下降趋势：</p>
@@ -624,7 +695,8 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png"><img alt="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" src="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png"><img alt="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" src="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这里是一个时间序列：</p>
@@ -635,12 +707,13 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png"><img alt="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" src="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png"><img alt="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" src="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id14">
-<h3><span class="section-number">23.4.2. </span>复杂动态<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">23.4.2. </span>复杂动态<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>尽管索洛-斯旺模型是非线性的，它仍然能生成非常规律的动态。</p>
 <p><strong>二次映射</strong>是一个能生成不规则动态的模型</p>
 <div class="math notranslate nohighlight">
@@ -660,7 +733,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png"><img alt="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" src="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png"><img alt="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" src="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>现在让我们来看一个特定的轨迹。</p>
@@ -671,7 +745,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png"><img alt="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" src="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png"><img alt="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" src="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>注意这个轨迹的不规则性。这种混沌行为是二次映射的典型特征。</p>
@@ -683,7 +758,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png"><img alt="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" src="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png"><img alt="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" src="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>在更长的时间范围内，这种不规则性甚至更加明显：</p>
@@ -694,13 +770,14 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png"><img alt="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" src="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png"><img alt="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" src="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 <section id="id15">
-<h2><span class="section-number">23.5. </span>练习<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">23.5. </span>练习<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="sd_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 23.1 </span></p>
@@ -738,7 +815,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png"><img alt="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" src="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png"><img alt="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" src="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这是相应的时间序列，它收敛于稳态。</p>
@@ -749,7 +827,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png"><img alt="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" src="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png"><img alt="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" src="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>现在让我们尝试 <span class="math notranslate nohighlight">\(a=-0.5\)</span> 并观察有什么不同。</p>
@@ -772,7 +851,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png"><img alt="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" src="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png"><img alt="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" src="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>以上是相应的时间序列，它收敛于稳态。</p>
@@ -783,7 +863,8 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png"><img alt="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" src="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png"><img alt="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" src="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们同样观察到序列收敛到稳态，但收敛方式明显不同。</p>
@@ -1223,6 +1304,35 @@ g(x) = 4 x (1 - x),
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/scalar_dynam.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/scalar_dynam.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/scalar_dynam.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

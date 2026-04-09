@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>18. 分布和概率 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prob_dist';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/prob_dist.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/prob_dist.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/prob_dist.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/prob_dist.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -206,17 +246,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -226,10 +272,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">分布和概率</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -242,6 +287,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/prob_dist.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -253,9 +320,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">18. </span>分布和概率<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>分布和概率<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="index-0">
-<span id="id2"></span><h2><span class="section-number">18.1. </span>概述<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">18.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
 <p>在本讲中，我们将使用 Python 快速介绍数据和概率分布。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -269,33 +336,29 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.2.66)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.2.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (1.0)
+Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.2.2)
 Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (1.26.4)
 Requirement already satisfied: requests&gt;=2.31 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.32.3)
 Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.0.12)
 Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.10.0)
 Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2024.1)
-Requirement already satisfied: frozendict&gt;=2.3.4 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.4.6)
-Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.18.2)
+Requirement already satisfied: frozendict&gt;=2.3.4 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.4.7)
+Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.19.0)
 Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (4.12.3)
-Requirement already satisfied: curl_cffi&gt;=0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.13.0)
+Requirement already satisfied: curl_cffi&lt;0.14,&gt;=0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.13.0)
 Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (6.31.1)
-Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (15.0.1)
+Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (16.0)
 Requirement already satisfied: soupsieve&gt;1.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.5)
-Requirement already satisfied: cffi&gt;=1.12.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&gt;=0.7-&gt;yfinance) (1.17.1)
-Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&gt;=0.7-&gt;yfinance) (2024.8.30)
+Requirement already satisfied: cffi&gt;=1.12.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (1.17.1)
+Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (2024.8.30)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.2.3)
-Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from cffi&gt;=1.12.0-&gt;curl_cffi&gt;=0.7-&gt;yfinance) (2.21)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.3.0-&gt;yfinance) (1.16.0)
+Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from cffi&gt;=1.12.0-&gt;curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (2.21)
+Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.3.0-&gt;yfinance) (1.16.0)
 </pre></div>
 </div>
 </div>
@@ -303,13 +366,13 @@ Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantec
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -320,10 +383,10 @@ Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantec
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">18.2. </span>常见分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>常见分布<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将介绍几种常见概率分布的基本定义，并展示如何利用 SciPy 库来处理和分析这些分布。</p>
 <section id="id4">
-<h3><span class="section-number">18.2.1. </span>离散分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.2.1. </span>离散分布<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>我们从离散分布开始。</p>
 <p>离散分布由一组数值 <span class="math notranslate nohighlight">\(S = \{x_1, \ldots, x_n\}\)</span> 定义，并在 <span class="math notranslate nohighlight">\(S\)</span> 上有一个<strong>概率质量函数</strong>（PMF），它是一个从 <span class="math notranslate nohighlight">\(S\)</span> 到 <span class="math notranslate nohighlight">\([0,1]\)</span> 的函数 <span class="math notranslate nohighlight">\(p\)</span>，具有属性</p>
 <div class="math notranslate nohighlight">
@@ -358,7 +421,7 @@ F(x) = \mathbb{P}\{X \leq x\}
 <p>这里 <span class="math notranslate nohighlight">\(\mathbb 1\{\text{判断语句} \} = 1\)</span> 如果 “判断语句” 为真，否则为零。</p>
 <p>因此第二项取所有 <span class="math notranslate nohighlight">\(x_i \leq x\)</span> 并求它们概率的和。</p>
 <section id="id5">
-<h4><span class="section-number">18.2.1.1. </span>均匀分布<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.1.1. </span>均匀分布<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
 <p>一个简单的例子是<strong>均匀分布</strong>，它为每个可能的结果分配相同的概率，即 <span class="math notranslate nohighlight">\(p(x_i) = 1/n\)</span> 对于所有 <span class="math notranslate nohighlight">\(i = 1, 2, \ldots, n\)</span>。</p>
 <p>在 Python 中，我们可以使用 SciPy 库来处理 <span class="math notranslate nohighlight">\(S = \{1, \ldots, n\}\)</span> 上的均匀分布：</p>
 <div class="cell docutils container">
@@ -423,7 +486,8 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png"><img alt="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png" src="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png"><img alt="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png" src="_images/8961f65741a508a4a5ba794e91d70bc03f1643e50bf47467a9f5327e00a2e509.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这里是 CDF 的图：</p>
@@ -441,7 +505,8 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png"><img alt="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png" src="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png"><img alt="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png" src="_images/be12956f4f8db1a7b53ed6204c58988f1e57746fd01fff92e6423da861078cb7.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>CDF 在<span class="math notranslate nohighlight">\(x_i\)</span>处跳升<span class="math notranslate nohighlight">\(p(x_i)\)</span>。</p>
@@ -455,7 +520,7 @@ F(x) = \mathbb{P}\{X \leq x\}
 </div>
 </section>
 <section id="id6">
-<h4><span class="section-number">18.2.1.2. </span>伯努利分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.1.2. </span>伯努利分布<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
 <p>另一个有用的分布是 <span class="math notranslate nohighlight">\(S = \{0,1\}\)</span> 上的伯努利分布，其 PMF 是：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -506,7 +571,7 @@ p(i) = \theta^i (1 - \theta)^{1-i}
 </div>
 </section>
 <section id="id7">
-<h4><span class="section-number">18.2.1.3. </span>二项分布<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.1.3. </span>二项分布<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
 <p>另一个有用（而且更有趣）的分布是 <span class="math notranslate nohighlight">\(S=\{0, \ldots, n\}\)</span> 上的<strong>二项分布</strong>，其 PMF 为：</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -579,7 +644,8 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png"><img alt="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png" src="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png"><img alt="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png" src="_images/f0e12d064fc9382ca822cfc37b71700ce3cd1e6e58b6940bc30c9c08071432d8.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这是 CDF：</p>
@@ -597,7 +663,8 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png"><img alt="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png" src="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png"><img alt="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png" src="_images/a30a5cc6326d4bac6138f29ae52e298d935adf9ff8c42ff3cc1de1203e99b288.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="exercise admonition" id="prob_ex3">
@@ -627,7 +694,8 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png"><img alt="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png" src="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png"><img alt="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png" src="_images/6ed28d86f8ac57f93dbef15ecace3de36cbb9dbc48db133233a165263b3152fa.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们可以看到输出图与上面的相同。</p>
@@ -635,7 +703,7 @@ p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 </div>
 </section>
 <section id="id8">
-<h4><span class="section-number">18.2.1.4. </span>几何分布<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.1.4. </span>几何分布<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
 <p>几何分布是一种具有无限支持集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span> 的离散概率分布，其概率质量函数（PMF）为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -677,12 +745,13 @@ p(i) = (1 - \theta)^i \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png"><img alt="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png" src="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png"><img alt="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png" src="_images/9c1750e14a819b0185d6466ec197c41351f1536e16966a13300b4e9c5080b1f9.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id9">
-<h4><span class="section-number">18.2.1.5. </span>泊松分布<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.1.5. </span>泊松分布<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
 <p>泊松分布是一种常见的离散概率分布，定义在非负整数集 <span class="math notranslate nohighlight">\(S = \{0, 1, 2, \ldots\}\)</span> 上。它由一个参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 控制，其概率质量函数（PMF）为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -732,13 +801,14 @@ p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png"><img alt="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png" src="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png"><img alt="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png" src="_images/252b72c02006c0a49cb7947740a2de5cabe772758fb7dca8667fc4defe8b087e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 <section id="id10">
-<h3><span class="section-number">18.2.2. </span>连续分布<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.2.2. </span>连续分布<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>连续分布通过<strong>概率密度函数</strong>（PDF）来描述，这是一个定义在实数集 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的非负函数 <span class="math notranslate nohighlight">\(p\)</span>，满足</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -762,7 +832,7 @@ F(x) = \mathbb P\{X \leq x\}
         = \int_{-\infty}^x p(x) \, dx
 \]</div>
 <section id="id11">
-<h4><span class="section-number">18.2.2.1. </span>正态分布<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.2.1. </span>正态分布<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <p><strong>正态分布</strong>是统计学中最常见也最重要的分布之一，其概率密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -813,7 +883,8 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png"><img alt="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png" src="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png"><img alt="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png" src="_images/e3aac5572e81fa973cb847f59298a8b2a8b5c69dcc9023b3e8643174308e9f79.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>下面是 CDF 的图像：</p>
@@ -834,12 +905,13 @@ p(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png"><img alt="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png" src="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png"><img alt="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png" src="_images/4a6befc3533acc416032e5ac42c5b66497dd1bcc422db0ebf325f8f36f58d8e8.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id12">
-<h4><span class="section-number">18.2.2.2. </span>对数正态分布<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.2.2. </span>对数正态分布<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
 <p><strong>对数正态分布</strong>是一个定义在正实数轴 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上的概率分布，其密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -894,7 +966,8 @@ p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png"><img alt="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png" src="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png"><img alt="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png" src="_images/0c84b6c8d985a814b987189b5a37ca68d8e851eee67f9c49dacc64d0dbc28e46.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -916,12 +989,13 @@ p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png"><img alt="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png" src="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png"><img alt="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png" src="_images/0736204c024c806e02b6d8838d95eea93086768514c582a2771b91c7da522a3a.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id13">
-<h4><span class="section-number">18.2.2.3. </span>指数分布<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.2.3. </span>指数分布<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
 <p><strong>指数分布</strong>是定义在 <span class="math notranslate nohighlight">\(\left(0, \infty\right)\)</span> 上的分布，其密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -971,7 +1045,8 @@ p(x) = \lambda \exp \left( - \lambda x \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png"><img alt="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png" src="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png"><img alt="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png" src="_images/79cee501e433bfbef4acc93f76eee36f7af6bbe06ed31d2e9b75822f10b7b8df.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -991,12 +1066,13 @@ p(x) = \lambda \exp \left( - \lambda x \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png"><img alt="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png" src="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png"><img alt="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png" src="_images/9ac9976186a43f5284a37bfca63c19894cea21bc925ec9db634a0b2167dae183.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id14">
-<h4><span class="section-number">18.2.2.4. </span>贝塔分布<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.2.4. </span>贝塔分布<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
 <p><strong>贝塔分布</strong>是定义在 <span class="math notranslate nohighlight">\((0, 1)\)</span> 上的分布，其密度为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1048,7 +1124,8 @@ p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png"><img alt="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png" src="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png"><img alt="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png" src="_images/42da8f90878c6b8f77f950121a6b3af9124f71d3deae895b0aa89397c145856c.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1068,12 +1145,13 @@ p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png"><img alt="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png" src="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png"><img alt="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png" src="_images/4f037334cc3d138e7ca89ed68d33f19511c3da23b249573ec99bb2acb2ba8f32.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id15">
-<h4><span class="section-number">18.2.2.5. </span>伽马分布<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.2.2.5. </span>伽马分布<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
 <p><strong>伽马分布</strong>是一种在正实数轴 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上的连续概率分布，其概率密度函数为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1124,7 +1202,8 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png"><img alt="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png" src="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png"><img alt="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png" src="_images/389b66377e16290d4835900c263a8db8bb15d94c66b0cd8b13b094ee27d9c70b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1144,14 +1223,15 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png"><img alt="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png" src="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png"><img alt="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png" src="_images/8574d96257cec969982d6e82c1fd212b6f20c6e54f67a7863f7c3989605ffa5d.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="id16">
-<h2><span class="section-number">18.3. </span>观察到的分布<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>观察到的分布<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
 <p>有时候我们将观测到的数据或测量值称为“分布”。</p>
 <p>例如，假设我们观察了10个人一年的收入：</p>
 <div class="cell docutils container">
@@ -1255,7 +1335,7 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 <p>不过，正如我们接下来会看到的，这种观察到的数据分布（比如我们这里的收入数据）与理论上的概率分布有着密切的联系。</p>
 <p>下面让我们来探索一些观察到的数据分布的特性。</p>
 <section id="id17">
-<h3><span class="section-number">18.3.1. </span>描述性统计<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.1. </span>描述性统计<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <p>当我们分析一组数据 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span> 时，通常会计算一些基本的统计量来描述其特征。</p>
 <p>最常用的统计量之一是<strong>样本均值</strong>，它代表数据的平均水平：</p>
 <div class="math notranslate nohighlight">
@@ -1291,7 +1371,7 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </div>
 </section>
 <section id="id18">
-<h3><span class="section-number">18.3.2. </span>可视化<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.2. </span>可视化<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <p>让我们来看看我们可以用哪些方式来可视化一个或多个观察到的分布。</p>
 <p>我们将讲解</p>
 <ul class="simple">
@@ -1300,7 +1380,7 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 <li><p>小提琴图</p></li>
 </ul>
 <section id="id19">
-<h4><span class="section-number">18.3.2.1. </span>直方图<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.2.1. </span>直方图<a class="headerlink" href="#id19" title="Link to this heading">#</a></h4>
 <p>下面我们来绘制刚才创建的收入分布直方图：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1313,7 +1393,8 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png"><img alt="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" src="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png"><img alt="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" src="_images/b3abf29ec3b5fe862b596da52107bd3a5a6835b622371a73166efa0ade881499.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>现在让我们来分析一个真实世界的数据分布案例。</p>
@@ -1337,9 +1418,6 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1420,12 +1498,13 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png"><img alt="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png" src="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png"><img alt="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png" src="_images/e2c18cb6961bd4286fbbea2834b78e76aecab3a6db7ead515c1e6eb1495049d3.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id20">
-<h4><span class="section-number">18.3.2.2. </span>核密度估计<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.2.2. </span>核密度估计<a class="headerlink" href="#id20" title="Link to this heading">#</a></h4>
 <p>核密度估计（KDE）是一种更平滑地展示数据分布的方法，可以看作是直方图的进阶版本。</p>
 <p>相比直方图的阶梯状外观，KDE生成连续的密度曲线，能更自然地反映数据的分布特征。</p>
 <p>下面让我们用KDE来可视化亚马逊股票的月度收益率数据。</p>
@@ -1440,7 +1519,8 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png"><img alt="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png" src="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png"><img alt="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png" src="_images/f7fabc2c2241080af7c3300a84bf6e672911b356e02b7501dabda64b2ec341fb.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>KDE的平滑程度取决于我们选择带宽的方式。</p>
@@ -1458,14 +1538,15 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png"><img alt="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png" src="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png"><img alt="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png" src="_images/30b7e97dae5abec07514d8bbe896dacffa95fcc77e9c9437e9abd2c1ceebc6af.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>当我们使用较大的带宽时，KDE更加平滑。</p>
 <p>一个合适的带宽既不应过于平滑（欠拟合），也不应过于曲折（过拟合）。</p>
 </section>
 <section id="id21">
-<h4><span class="section-number">18.3.2.3. </span>小提琴图<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">18.3.2.3. </span>小提琴图<a class="headerlink" href="#id21" title="Link to this heading">#</a></h4>
 <p>通过小提琴图展示观察到的分布是另一种方式。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1478,7 +1559,8 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png"><img alt="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" src="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png"><img alt="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" src="_images/11693cffcec4379f8720ced1f5dac9fa1e2031452b32311a170b1fedbd673dad.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>小提琴图在比较多个数据集的分布特征时特别有用，它能直观地展示数据的密度和范围。</p>
@@ -1501,9 +1583,6 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </details>
 </div>
@@ -1521,13 +1600,14 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/aca83bae46306acc313f5888c4b388022b7c7efc80a6c92ccc3359a9388403a3.png"><img alt="_images/aca83bae46306acc313f5888c4b388022b7c7efc80a6c92ccc3359a9388403a3.png" src="_images/aca83bae46306acc313f5888c4b388022b7c7efc80a6c92ccc3359a9388403a3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3f55e1a278bffb3385b45d20c0298dff809bfbef489508e49ddfba758ef00123.png"><img alt="_images/3f55e1a278bffb3385b45d20c0298dff809bfbef489508e49ddfba758ef00123.png" src="_images/3f55e1a278bffb3385b45d20c0298dff809bfbef489508e49ddfba758ef00123.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 <section id="id22">
-<h3><span class="section-number">18.3.3. </span>与概率分布的联系<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.3. </span>与概率分布的联系<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
 <p>现在让我们探讨观察数据分布与理论概率分布之间的关系。</p>
 <p>在数据分析中，我们常常会假设观察到的数据来自某个特定的概率分布，这有助于我们理解和建模数据的行为。</p>
 <p>以亚马逊的股票回报为例，我们可以尝试用正态分布来拟合这些数据。</p>
@@ -1556,7 +1636,8 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png"><img alt="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" src="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png"><img alt="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" src="_images/0bc678622b09dd3c2e7f54ca8454a8310ebdfaa32c62c74d9c83bafd59805149.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>可以看出，直方图与理论密度曲线的匹配度并不理想。</p>
@@ -1584,7 +1665,8 @@ Name: 2000-02-01 00:00:00, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/07355b6e0f67491403a7a3f774e6b59d85ae49dbda883bb2215f02b69e11928d.png"><img alt="_images/07355b6e0f67491403a7a3f774e6b59d85ae49dbda883bb2215f02b69e11928d.png" src="_images/07355b6e0f67491403a7a3f774e6b59d85ae49dbda883bb2215f02b69e11928d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4bfb0582ef1c1c9e20fb894338ef951d770e159eff72aabd322baec44588a10f.png"><img alt="_images/4bfb0582ef1c1c9e20fb894338ef951d770e159eff72aabd322baec44588a10f.png" src="_images/4bfb0582ef1c1c9e20fb894338ef951d770e159eff72aabd322baec44588a10f.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>值得注意的是，随着观测数量 <span class="math notranslate nohighlight">\(N\)</span> 的增加，直方图与理论密度曲线的拟合效果会逐渐改善。</p>
@@ -2022,6 +2104,35 @@ Name: 2000-02-01 00:00:00, dtype: float64
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/prob_dist.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/prob_dist.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/prob_dist.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

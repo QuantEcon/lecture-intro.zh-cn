@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>41. 网络 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'networks';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/networks.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/networks.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/networks.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/networks.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -206,17 +246,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -226,10 +272,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">网络</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -242,6 +287,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/networks.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -253,7 +320,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">41. </span>网络<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">41. </span>网络<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon<span class="w"> </span>quantecon-book-networks<span class="w"> </span>wbgapi
@@ -288,9 +355,7 @@ Requirement already satisfied: packaging&gt;=20.0 in /home/runner/miniconda3/env
 Requirement already satisfied: pillow&gt;=8 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon-book-networks) (10.4.0)
 Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon-book-networks) (3.1.2)
 Requirement already satisfied: python-dateutil&gt;=2.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon-book-networks) (2.9.0.post0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon-book-networks) (2024.1)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon-book-networks) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon-book-networks) (2023.3)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
@@ -304,7 +369,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </details>
 </div>
 <section id="id2">
-<h2><span class="section-number">41.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>近年来，<a class="reference external" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E7%A7%91%E5%AD%A6">网络科学</a>领域迅速发展，成为研究复杂系统中对象间关系的重要方法。</p>
 <p>网络科学关注的是实体之间的连接和互动方式。</p>
 <p><a class="reference external" href="https://baike.baidu.com/item/www/109924?fromtitle=%E4%B8%87%E7%BB%B4%E7%BD%91&amp;amp;fromid=215515">万维网</a>是一个典型例子，其中网页通过超链接形成庞大的信息网络，使信息能够高效传播和获取。</p>
@@ -317,19 +382,19 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>我们需要以下导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks.input_output</span> <span class="k">as</span> <span class="nn">qbn_io</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks.data</span> <span class="k">as</span> <span class="nn">qbn_data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks.input_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qbn_io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks.data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qbn_data</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -339,7 +404,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">41.2. </span>经济和金融网络<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.2. </span>经济和金融网络<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>经济学中的网络应用广泛，主要包括以下几类：</p>
 <ul class="simple">
 <li><p>金融网络</p></li>
@@ -353,7 +418,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>生产网络则决定了贸易模式、创新传播途径以及局部经济冲击如何在整个经济体系中扩散。</p>
 <p>为了更直观地理解这些网络的特性和影响，下面我们通过一些具体例子来进行说明。</p>
 <section id="id4">
-<h3><span class="section-number">41.2.1. </span>例子：飞机出口网络<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.2.1. </span>例子：飞机出口网络<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>以下图表展示了2019年全球大型商用飞机的国际贸易网络，数据来源于国际贸易数据SITC第2修订版。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -416,9 +481,10 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="aircraft-network">
-<a class="reference internal image-reference" href="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png"><img alt="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png" src="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png"><img alt="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png" src="_images/78b00b52ca0fbb1c676cde09decfbcd4e6dc04267c763b2fd21c4ef7fc80465a.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.1 </span><span class="caption-text">商用飞机网络</span><a class="headerlink" href="#aircraft-network" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.1 </span><span class="caption-text">商用飞机网络</span><a class="headerlink" href="#aircraft-network" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -431,7 +497,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>接下来，我们将探讨如何用数学方法来量化网络中的这些特性。</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">41.2.2. </span>例子：马尔可夫链<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.2.2. </span>例子：马尔可夫链<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>在我们之前学习的<a class="reference internal" href="markov_chains_I.html#mc-eg2"><span class="std std-ref">马尔可夫链</span></a>讲座中，我们分析了一个商业周期模型，其中包含三种经济状态：</p>
 <ul class="simple">
 <li><p>“ng”：表示”正常增长”阶段</p></li>
@@ -449,7 +515,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </section>
 </section>
 <section id="id6">
-<h2><span class="section-number">41.3. </span>图论简介<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.3. </span>图论简介<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>看完这些例子后，让我们深入一些理论基础。</p>
 <p>这些理论框架将帮助我们更系统地分析网络结构。</p>
 <p>网络科学的理论基础主要来自数学中的<a class="reference external" href="https://baike.baidu.com/item/%E5%9B%BE%E8%AE%BA/1433806">图论</a>。</p>
@@ -464,7 +530,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </ul>
 <p>（”无向”图，即连接是对称的，是有向图的一种特殊情况——我们只需要保证每个从 <span class="math notranslate nohighlight">\(A\)</span> 指向 <span class="math notranslate nohighlight">\(B\)</span> 的箭头都配对一个从 <span class="math notranslate nohighlight">\(B\)</span> 指向 <span class="math notranslate nohighlight">\(A\)</span> 的箭头。）</p>
 <section id="id7">
-<h3><span class="section-number">41.3.1. </span>关键定义<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.3.1. </span>关键定义<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>一个<strong>有向图</strong>由两个基本元素构成：</p>
 <ol class="arabic simple">
 <li><p>一个有限节点集 <span class="math notranslate nohighlight">\(V\)</span> 和</p></li>
@@ -484,14 +550,14 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <figure class="align-default" id="poverty-trap-1">
 <img alt="_images/poverty_trap_1.png" src="_images/poverty_trap_1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.2 </span><span class="caption-text">贫困陷阱</span><a class="headerlink" href="#poverty-trap-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.2 </span><span class="caption-text">贫困陷阱</span><a class="headerlink" href="#poverty-trap-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>现在，我们构造一个具有相同节点但具有不同边的图。</p>
 <figure class="align-default" id="poverty-trap-2">
 <img alt="_images/poverty_trap_2.png" src="_images/poverty_trap_2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.3 </span><span class="caption-text">贫困陷阱</span><a class="headerlink" href="#poverty-trap-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.3 </span><span class="caption-text">贫困陷阱</span><a class="headerlink" href="#poverty-trap-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>在这些图中，箭头（边）可以理解为表示在给定时间单位内从一个状态转移到另一个状态的概率。</p>
@@ -503,7 +569,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </ul>
 </section>
 <section id="networkx">
-<h3><span class="section-number">41.3.2. </span>Networkx中的有向图<a class="headerlink" href="#networkx" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.3.2. </span>Networkx中的有向图<a class="headerlink" href="#networkx" title="Link to this heading">#</a></h3>
 <p>Python包 <a class="reference external" href="https://networkx.org/">Networkx</a> 为表示有向图提供了一个便捷的数据结构，并实现了许多用于分析它们的常见例程。</p>
 <p>作为示例，让我们使用Networkx重新创建 <a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 41.3</span></a>。</p>
 <p>为此，我们首先创建一个空的 <code class="docutils literal notranslate"><span class="pre">DiGraph</span></code> 对象：</p>
@@ -556,7 +622,8 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e007855eec52100c3e8e697e4a30fa74c5210a3b9bf422673cfcda15be5a22c2.png"><img alt="_images/e007855eec52100c3e8e697e4a30fa74c5210a3b9bf422673cfcda15be5a22c2.png" src="_images/e007855eec52100c3e8e697e4a30fa74c5210a3b9bf422673cfcda15be5a22c2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4cdeeeab3c5dac018d672cac523a097158272a0e5a6015cb59ceb9b61b7d831b.png"><img alt="_images/4cdeeeab3c5dac018d672cac523a097158272a0e5a6015cb59ceb9b61b7d831b.png" src="_images/4cdeeeab3c5dac018d672cac523a097158272a0e5a6015cb59ceb9b61b7d831b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>上面得到的图形与<a class="reference internal" href="#poverty-trap-2"><span class="std std-numref">Fig. 41.3</span></a>中的原始有向图相匹配。</p>
@@ -576,7 +643,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </section>
 <section id="strongly-connected">
-<span id="id8"></span><h3><span class="section-number">41.3.3. </span>连通性<a class="headerlink" href="#strongly-connected" title="Permalink to this heading">#</a></h3>
+<span id="id8"></span><h3><span class="section-number">41.3.3. </span>连通性<a class="headerlink" href="#strongly-connected" title="Link to this heading">#</a></h3>
 <p>接下来，我们研究网络中的连通性概念，这对理解经济网络的结构和影响至关重要。</p>
 <p>当节点<span class="math notranslate nohighlight">\(u\)</span>和<span class="math notranslate nohighlight">\(v\)</span>相同，或者存在一条从<span class="math notranslate nohighlight">\(u\)</span>到<span class="math notranslate nohighlight">\(v\)</span>的路径（一系列相连的边）时，我们说节点<span class="math notranslate nohighlight">\(v\)</span>从节点<span class="math notranslate nohighlight">\(u\)</span><strong>可达</strong>。</p>
 <ul class="simple">
@@ -608,7 +675,8 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/372f2f2413625717cf704583db5278f55257f606dcbbf25acd57bd1384fe73c3.png"><img alt="_images/372f2f2413625717cf704583db5278f55257f606dcbbf25acd57bd1384fe73c3.png" src="_images/372f2f2413625717cf704583db5278f55257f606dcbbf25acd57bd1384fe73c3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/546bb1ffec723155a352496679b554743aa937c708c3c9268ca4cac6aa453d2a.png"><img alt="_images/546bb1ffec723155a352496679b554743aa937c708c3c9268ca4cac6aa453d2a.png" src="_images/546bb1ffec723155a352496679b554743aa937c708c3c9268ca4cac6aa453d2a.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -637,7 +705,8 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/83a642f468ed30028b94371a76652a15c9d6a9aebb94e73a440723f0290b001e.png"><img alt="_images/83a642f468ed30028b94371a76652a15c9d6a9aebb94e73a440723f0290b001e.png" src="_images/83a642f468ed30028b94371a76652a15c9d6a9aebb94e73a440723f0290b001e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e9f350580ece73cfb9e63da56ea5a6a3a1643e0888d04dec9c57ddac2069c70d.png"><img alt="_images/e9f350580ece73cfb9e63da56ea5a6a3a1643e0888d04dec9c57ddac2069c70d.png" src="_images/e9f350580ece73cfb9e63da56ea5a6a3a1643e0888d04dec9c57ddac2069c70d.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -655,13 +724,13 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">41.4. </span>加权图<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.4. </span>加权图<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 </section>
 <section id="id10">
-<h2><span class="section-number">41.5. </span>加权图<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.5. </span>加权图<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>在加权图中，每条边都被赋予一个数值权重，表示连接强度或其他量化特征。</p>
 <section id="id11">
-<h3><span class="section-number">41.5.1. </span>国际私人信贷流动网络<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.5.1. </span>国际私人信贷流动网络<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>下图展示了一个加权图的实例：国家间私人银行的资金流动（贷款）网络。边的粗细表示资金流动的规模，节点的大小反映了该国在网络中的重要性。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -728,24 +797,25 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="financial-network">
-<a class="reference internal image-reference" href="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png"><img alt="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png" src="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png"><img alt="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png" src="_images/aec93beef883c2580a97eb8331f2a9dbebd0954b6bed94568d7c9262e7c117cb.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.4 </span><span class="caption-text">国际信贷网络</span><a class="headerlink" href="#financial-network" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.4 </span><span class="caption-text">国际信贷网络</span><a class="headerlink" href="#financial-network" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 <p>国家代码在下表中给出</p>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-center head"><p>代码</p></th>
-<th class="text-left head"><p>国家</p></th>
-<th class="text-center head"><p>代码</p></th>
-<th class="text-center head"><p>国家</p></th>
-<th class="text-center head"><p>代码</p></th>
-<th class="text-center head"><p>国家</p></th>
-<th class="text-center head"><p>代码</p></th>
-<th class="text-center head"><p>国家</p></th>
+<tr class="row-odd"><th class="head text-center"><p>代码</p></th>
+<th class="head text-left"><p>国家</p></th>
+<th class="head text-center"><p>代码</p></th>
+<th class="head text-center"><p>国家</p></th>
+<th class="head text-center"><p>代码</p></th>
+<th class="head text-center"><p>国家</p></th>
+<th class="head text-center"><p>代码</p></th>
+<th class="head text-center"><p>国家</p></th>
 </tr>
 </thead>
 <tbody>
@@ -797,14 +867,14 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>因此，”加权有向图”是描述这种网络结构的最合适的数据结构。</p>
 </section>
 <section id="id12">
-<h3><span class="section-number">41.5.2. </span>定义<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.5.2. </span>定义<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p><strong>加权有向图</strong>是一个有向图，其中每条边都被赋予一个正数值，称为<strong>权重</strong>。这些权重通过一个函数<span class="math notranslate nohighlight">\(w\)</span>来定义，该函数将每条边映射到一个相应的数值。</p>
 <p>前面展示的国际银行债权网络就是一个加权有向图的例子，其中权重表示资金流动的规模。</p>
 <p>下图显示了一个加权有向图，箭头表示有向图的边。</p>
 <figure class="align-default" id="poverty-trap-weighted">
 <img alt="_images/weighted.png" src="_images/weighted.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 41.5 </span><span class="caption-text">加权贫困陷阱</span><a class="headerlink" href="#poverty-trap-weighted" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.5 </span><span class="caption-text">加权贫困陷阱</span><a class="headerlink" href="#poverty-trap-weighted" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>图中边旁边的数字表示各边的权重。</p>
@@ -813,7 +883,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </section>
 </section>
 <section id="id13">
-<h2><span class="section-number">41.6. </span>邻接矩阵<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.6. </span>邻接矩阵<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <p>表示加权有向图的另一种方式是使用邻接矩阵，这种表示方法在进行数值计算时特别有用。</p>
 <p>假设我们有一个加权有向图，其节点集为 <span class="math notranslate nohighlight">\(\{v_1, \ldots, v_n\}\)</span>，边集为 <span class="math notranslate nohighlight">\(E\)</span>，权重函数为 <span class="math notranslate nohighlight">\(w\)</span>，则该图的<strong>邻接矩阵</strong>定义为</p>
 <div class="math notranslate nohighlight">
@@ -882,7 +952,8 @@ a_{ij} =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png"><img alt="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png" src="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png"><img alt="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png" src="_images/6ac10e3d96569fa478b665772876447f27cceb3519ecbad0ec3d75da1f26b9d0.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们看到银行2向银行3发放了200的贷款。</p>
@@ -938,7 +1009,8 @@ A^\top =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png"><img alt="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png" src="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png"><img alt="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png" src="_images/5bbb209ce3e475bf471e0d846a188af18c041cd773a2d382a1fe0e4027c1efc4.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>任何非负的 <span class="math notranslate nohighlight">\(n \times n\)</span> 矩阵 <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> 都可以自然地表示为一个加权有向图的邻接矩阵。</p>
@@ -947,7 +1019,7 @@ A^\top =
 <p>这样构造的图被称为由矩阵 <span class="math notranslate nohighlight">\(A\)</span> 生成的加权有向图。</p>
 </section>
 <section id="id14">
-<h2><span class="section-number">41.7. </span>性质<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.7. </span>性质<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
 <p>假设我们有一个加权有向图，其邻接矩阵为 <span class="math notranslate nohighlight">\(A\)</span>。</p>
 <p>我们用 <span class="math notranslate nohighlight">\(a^k_{ij}\)</span> 表示矩阵 <span class="math notranslate nohighlight">\(A^k\)</span>（即 <span class="math notranslate nohighlight">\(A\)</span> 的 <span class="math notranslate nohighlight">\(k\)</span> 次幂）中第 <span class="math notranslate nohighlight">\(i\)</span> 行第 <span class="math notranslate nohighlight">\(j\)</span> 列的元素。</p>
 <p>以下结果在图论和网络分析中应用广泛：</p>
@@ -1006,7 +1078,7 @@ a^k_{i j} &gt; 0
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_irreducible</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_irreducible</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1043,7 +1115,7 @@ a^k_{i j} &gt; 0
 </div>
 </section>
 <section id="id17">
-<h2><span class="section-number">41.8. </span>网络中心性<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.8. </span>网络中心性<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
 <p>在研究各种网络时，一个反复出现的话题是不同节点的相对”中心性”或”重要性”。</p>
 <p>例子包括：</p>
 <ul class="simple">
@@ -1053,7 +1125,7 @@ a^k_{i j} &gt; 0
 </ul>
 <p>在接下来的内容中，<strong>中心性度量</strong>将每个加权有向图与一个向量<span class="math notranslate nohighlight">\(m\)</span>关联起来，其中<span class="math notranslate nohighlight">\(m_i\)</span>被解释为节点<span class="math notranslate nohighlight">\(v_i\)</span>的中心性（或排名）。</p>
 <section id="id18">
-<h3><span class="section-number">41.8.1. </span>度中心性<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.8.1. </span>度中心性<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <p>在给定的有向图中，衡量节点”重要性”的两个基本指标是其入度和出度。</p>
 <p>这两者都提供了一种中心性度量。</p>
 <p>入度中心性是一个包含图中每个节点入度的向量。</p>
@@ -1083,9 +1155,10 @@ a^k_{i j} &gt; 0
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sample-gph-1">
-<a class="reference internal image-reference" href="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png"><img alt="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png" src="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png"><img alt="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png" src="_images/9d32759530ed6631cf87aa247ce64144fa600c4b67a4a71915e3bf2fb6929278.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.6 </span><span class="caption-text">样本图</span><a class="headerlink" href="#sample-gph-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.6 </span><span class="caption-text">样本图</span><a class="headerlink" href="#sample-gph-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1123,7 +1196,7 @@ a^k_{i j} &gt; 0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centrality_plot_data</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span> <span class="n">centrality_measures</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">centrality_plot_data</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span> <span class="n">centrality_measures</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">countries</span><span class="p">,</span>
                        <span class="s1">&#39;centrality&#39;</span><span class="p">:</span><span class="n">centrality_measures</span><span class="p">,</span>
                        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">qbn_io</span><span class="o">.</span><span class="n">colorise_weights</span><span class="p">(</span><span class="n">centrality_measures</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -1151,7 +1224,8 @@ a^k_{i j} &gt; 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png"><img alt="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png" src="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png"><img alt="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png" src="_images/794bc064bff5ef823fcf01a6a9410b3926966bbcfe1f306a8ce285ab753c6c77.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>虽然入度和出度中心性计算简单，但它们并不总是有用。</p>
@@ -1175,13 +1249,13 @@ a^k_{i j} &gt; 0
 </section>
 </section>
 <section id="id19">
-<h2><span class="section-number">41.9. </span>特征向量中心性<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.9. </span>特征向量中心性<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
 <p>考虑一个加权有向图，其邻接矩阵为<span class="math notranslate nohighlight">\(A\)</span>。</p>
 <p>为了简化表示，我们假设图中的节点集合<span class="math notranslate nohighlight">\(V\)</span>就是整数集<span class="math notranslate nohighlight">\(\{1, 2, \ldots, n\}\)</span>。</p>
 <p>我们用<span class="math notranslate nohighlight">\(r(A)\)</span>表示<span class="math notranslate nohighlight">\(A\)</span>的<a class="reference internal" href="eigen_I.html#neumann-series-lemma"><span class="std std-ref">谱半径</span></a>（即<span class="math notranslate nohighlight">\(A\)</span>的特征值中模最大的那个）。</p>
 <p>该图的<strong>特征向量中心性</strong>定义为满足以下方程的<span class="math notranslate nohighlight">\(n\)</span>维向量<span class="math notranslate nohighlight">\(e\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-ev-central">
-<span class="eqno">(41.1)<a class="headerlink" href="#equation-ev-central" title="Permalink to this equation">#</a></span>\[ 
+<span class="eqno">(41.1)<a class="headerlink" href="#equation-ev-central" title="Link to this equation">#</a></span>\[ 
 \begin{aligned}
     e = \frac{1}{r(A)} A e.
 \end{aligned}
@@ -1190,7 +1264,7 @@ a^k_{i j} &gt; 0
 请看特征值lecture中关于<a class="reference internal" href="eigen_II.html#perron-frobe"><span class="std std-ref">Perron-Frobenius定理</span></a>的讨论。</p>
 <p>为了更好地理解<a class="reference internal" href="#equation-ev-central">(41.1)</a>，我们写出某个元素<span class="math notranslate nohighlight">\(e_i\)</span>的完整表达式</p>
 <div class="math notranslate nohighlight" id="equation-eq-eicen">
-<span class="eqno">(41.2)<a class="headerlink" href="#equation-eq-eicen" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.2)<a class="headerlink" href="#equation-eq-eicen" title="Link to this equation">#</a></span>\[
 \begin{aligned}
     e_i = \frac{1}{r(A)} \sum_{1 \leq j \leq n} a_{ij} e_j
 \end{aligned}
@@ -1208,7 +1282,7 @@ a^k_{i j} &gt; 0
 <p>下面是一个计算特征向量中心性的函数实现。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eigenvector_centrality</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">authority</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eigenvector_centrality</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">authority</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   计算矩阵A的主特征向量。假设A是本原矩阵，并使用幂法。</span>
 
@@ -1278,9 +1352,10 @@ a^k_{i j} &gt; 0
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="eigenvctr-centrality">
-<a class="reference internal image-reference" href="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png"><img alt="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png" src="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png"><img alt="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png" src="_images/4c59a30f149c0023bc6edb979023259cfb388c0aa405018dd119e414e3bdd982.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.7 </span><span class="caption-text">特征向量中心性</span><a class="headerlink" href="#eigenvctr-centrality" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.7 </span><span class="caption-text">特征向量中心性</span><a class="headerlink" href="#eigenvctr-centrality" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1291,19 +1366,19 @@ a^k_{i j} &gt; 0
 <p>谷歌著名的PageRank算法实际上就是特征向量中心性的一种变体，用于为网页建立排名系统。</p>
 <p>这一算法的核心思想是：来自重要网页（按度中心性衡量）的链接比来自不太重要网页的链接更有分量。</p>
 <section id="id20">
-<h3><span class="section-number">41.9.1. </span>卡茨中心性<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.9.1. </span>卡茨中心性<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 <p>特征向量中心性存在一个潜在问题：当<span class="math notranslate nohighlight">\(r(A)\)</span>为零时，<span class="math notranslate nohighlight">\(1/r(A)\)</span>无法定义。</p>
 <p>基于这个原因以及其他一些考虑，研究人员常常转向另一种网络中心性度量——卡茨中心性。</p>
 <p>对于一个带权有向图，我们选择参数<span class="math notranslate nohighlight">\(\beta\)</span>使其位于<span class="math notranslate nohighlight">\((0, 1/r(A))\)</span>区间内，然后将<strong>卡茨中心性</strong>定义为满足以下方程的向量<span class="math notranslate nohighlight">\(\kappa\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-katz-central">
-<span class="eqno">(41.3)<a class="headerlink" href="#equation-katz-central" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.3)<a class="headerlink" href="#equation-katz-central" title="Link to this equation">#</a></span>\[
 \kappa_i =  \beta \sum_{1 \leq j 1} a_{ij} \kappa_j + 1
 \qquad  \text{对所有 } i \in \{0, \ldots, n-1\}。
 \]</div>
 <p>这里<span class="math notranslate nohighlight">\(\beta\)</span>是一个可调参数。</p>
 <p>用矩阵向量形式表示为：</p>
 <div class="math notranslate nohighlight" id="equation-katz-central-vec">
-<span class="eqno">(41.4)<a class="headerlink" href="#equation-katz-central-vec" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.4)<a class="headerlink" href="#equation-katz-central-vec" title="Link to this equation">#</a></span>\[
 \kappa = \mathbf{1} + \beta A \kappa
 \]</div>
 <p>其中<span class="math notranslate nohighlight">\(\mathbf{1}\)</span>表示全1列向量。</p>
@@ -1319,7 +1394,7 @@ a^k_{i j} &gt; 0
 <p>当谱半径<span class="math notranslate nohighlight">\(r(A)&lt;1\)</span>时，我们通常采用<span class="math notranslate nohighlight">\(\beta=1\)</span>作为卡茨中心性的默认计算参数。</p>
 </section>
 <section id="id21">
-<h3><span class="section-number">41.9.2. </span>权威与枢纽<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.9.2. </span>权威与枢纽<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
 <p>搜索引擎设计者发现网页可以通过两种不同方式成为重要节点。</p>
 <p>一些页面拥有高<strong>枢纽中心性</strong>，这意味着它们链接到许多有价值的信息源（比如新闻聚合网站）。</p>
 <p>而另一些页面则具有高<strong>权威中心性</strong>，表示它们本身包含有价值的信息，这通常体现在有多少重要网站链接到它们（例如知名新闻机构的官方网站）。</p>
@@ -1331,14 +1406,14 @@ a^k_{i j} &gt; 0
 <p>（这样一来，如果一个节点接收到来自多个高中心性节点的链接，它的中心性就会变高。）</p>
 <p>例如，对于邻接矩阵为<span class="math notranslate nohighlight">\(A\)</span>的加权有向图，其<strong>基于权威的特征向量中心性</strong>是满足以下方程的向量<span class="math notranslate nohighlight">\(e\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eicena0">
-<span class="eqno">(41.5)<a class="headerlink" href="#equation-eicena0" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.5)<a class="headerlink" href="#equation-eicena0" title="Link to this equation">#</a></span>\[
 e = \frac{1}{r(A)} A^\top e.
 \]</div>
 <p>与原始定义相比，唯一的区别是用<span class="math notranslate nohighlight">\(A\)</span>的转置替换了<span class="math notranslate nohighlight">\(A\)</span>。</p>
 <p>（转置不会改变矩阵的谱半径，所以我们仍然写作<span class="math notranslate nohighlight">\(r(A)\)</span>而非<span class="math notranslate nohighlight">\(r(A^\top)\)</span>。）</p>
 <p>按元素表示，这个方程可以写成：</p>
 <div class="math notranslate nohighlight" id="equation-eicena">
-<span class="eqno">(41.6)<a class="headerlink" href="#equation-eicena" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.6)<a class="headerlink" href="#equation-eicena" title="Link to this equation">#</a></span>\[
 e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 \]</div>
 <p>从这个公式可以看出，如果许多具有高权威排名的节点都链接到节点<span class="math notranslate nohighlight">\(j\)</span>，那么<span class="math notranslate nohighlight">\(e_j\)</span>的值就会很高。</p>
@@ -1367,9 +1442,10 @@ e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="eigenvector-centrality">
-<a class="reference internal image-reference" href="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png"><img alt="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png" src="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png"><img alt="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png" src="_images/fbf0ee901bdc7ecdf7f06fa834d70faef3f8d9e1f29a181647e2dd781331bae3.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 41.8 </span><span class="caption-text">特征向量权威度</span><a class="headerlink" href="#eigenvector-centrality" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41.8 </span><span class="caption-text">特征向量权威度</span><a class="headerlink" href="#eigenvector-centrality" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1379,7 +1455,7 @@ e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 </section>
 </section>
 <section id="id22">
-<h2><span class="section-number">41.10. </span>进一步阅读<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.10. </span>进一步阅读<a class="headerlink" href="#id22" title="Link to this heading">#</a></h2>
 <p>我们将本讲座中讨论的观点应用于：</p>
 <p>关于经济和社会网络的教科书包括 <span id="id23">[<a class="reference internal" href="zreferences.html#id281" title="Matthew O Jackson. Social and economic networks. Princeton university press, 2010.">Jackson, 2010</a>]</span>、
 <span id="id24">[<a class="reference internal" href="zreferences.html#id282" title="David Easley, Jon Kleinberg, and others. Networks, crowds, and markets. Volume 8. Cambridge university press Cambridge, 2010.">Easley <em>et al.</em>, 2010</a>]</span>、<span id="id25">[<a class="reference internal" href="zreferences.html#id283" title="Stephen P Borgatti, Martin G Everett, and Jeffrey C Johnson. Analyzing social networks. Sage, 2018.">Borgatti <em>et al.</em>, 2018</a>]</span>、
@@ -1388,7 +1464,7 @@ e_j = \frac{1}{r(A)} \sum_{1 \leq i \leq n} a_{ij} e_i
 <span id="id30">[<a class="reference internal" href="zreferences.html#id288" title="Michele Coscia. The atlas for the aspiring network scientist. arXiv preprint arXiv:2101.00863, 2021.">Coscia, 2021</a>]</span> 的著作都非常出色。</p>
 </section>
 <section id="id31">
-<h2><span class="section-number">41.11. </span>练习<a class="headerlink" href="#id31" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.11. </span>练习<a class="headerlink" href="#id31" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="networks_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 41.1 </span></p>
@@ -1463,7 +1539,8 @@ E = \{(0, 1), (0, 3), (1, 0), (2, 4), (3, 2), (3, 4), (3, 7), (4, 3), (5, 4), (5
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png"><img alt="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png" src="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png"><img alt="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png" src="_images/1815bd4222aa3089d31744613b3108681ad0d24323c0312cf24d565ae0079ce5.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1555,7 +1632,7 @@ E = \{(0, 1), (0, 3), (1, 0), (2, 4), (3, 2), (3, 4), (3, 7), (4, 3), (5, 4), (5
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_accessible</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">is_accessible</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -2045,6 +2122,35 @@ E = \{(0, 1), (0, 3), (1, 0), (2, 4), (3, 2), (3, 4), (3, 7), (4, 3), (5, 4), (5
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/networks.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/networks.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/networks.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

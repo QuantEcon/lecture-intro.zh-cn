@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>21. 重尾分布 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'heavy_tails';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/heavy_tails.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/heavy_tails.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/heavy_tails.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/heavy_tails.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -213,17 +253,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -233,10 +279,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">重尾分布</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -249,6 +294,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/heavy_tails.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -260,7 +327,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="heavy-tail">
-<span id="id1"></span><h1><span class="section-number">21. </span>重尾分布<a class="headerlink" href="#heavy-tail" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">21. </span>重尾分布<a class="headerlink" href="#heavy-tail" title="Link to this heading">#</a></h1>
 <p>除了Anaconda中的内容，本讲还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -274,34 +341,30 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.2.66)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas_datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.2.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (1.0)
+Requirement already satisfied: pandas_datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.0)
+Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.2.2)
 Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (1.26.4)
 Requirement already satisfied: requests&gt;=2.31 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.32.3)
 Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.0.12)
 Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.10.0)
 Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2024.1)
-Requirement already satisfied: frozendict&gt;=2.3.4 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.4.6)
-Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.18.2)
+Requirement already satisfied: frozendict&gt;=2.3.4 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (2.4.7)
+Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (3.19.0)
 Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (4.12.3)
-Requirement already satisfied: curl_cffi&gt;=0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.13.0)
+Requirement already satisfied: curl_cffi&lt;0.14,&gt;=0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (0.13.0)
 Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (4.25.3)
-Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (15.0.1)
+Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from yfinance) (16.0)
 Requirement already satisfied: lxml in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas_datareader) (5.2.1)
 Requirement already satisfied: soupsieve&gt;1.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.5)
-Requirement already satisfied: cffi&gt;=1.12.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&gt;=0.7-&gt;yfinance) (1.17.1)
-Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&gt;=0.7-&gt;yfinance) (2024.8.30)
+Requirement already satisfied: cffi&gt;=1.12.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (1.17.1)
+Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (2024.8.30)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.2.3)
-Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from cffi&gt;=1.12.0-&gt;curl_cffi&gt;=0.7-&gt;yfinance) (2.21)
+Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from cffi&gt;=1.12.0-&gt;curl_cffi&lt;0.14,&gt;=0.7-&gt;yfinance) (2.21)
 Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.3.0-&gt;yfinance) (1.16.0)
 </pre></div>
 </div>
@@ -311,16 +374,16 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>我们使用以下的导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
 
-<span class="kn">from</span> <span class="nn">pandas_datareader</span> <span class="kn">import</span> <span class="n">wb</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">cauchy</span>
-<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas_datareader</span><span class="w"> </span><span class="kn">import</span> <span class="n">wb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">cauchy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
 <span class="n">register_matplotlib_converters</span><span class="p">()</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
@@ -331,14 +394,14 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">21.1. </span>概览<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.1. </span>概览<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>重尾分布是一类能够产生”极端”结果的概率分布。</p>
 <p>在自然科学和传统经济学教学中，重尾分布通常被视为特殊情况或非主流现象。</p>
 <p>然而，研究表明重尾分布实际上在经济学中占据着核心地位。</p>
 <p>事实上，经济学中的许多重要分布——可能是大多数——都具有重尾特性。</p>
 <p>在本讲中，我们将探讨重尾分布的本质，以及为什么它们在经济分析中扮演着如此重要的角色。</p>
 <section id="id3">
-<h3><span class="section-number">21.1.1. </span>引言：轻尾分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.1. </span>引言：轻尾分布<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>大多数<a class="reference internal" href="prob_dist.html"><span class="doc">常用概率分布</span></a>在经典统计学和自然科学中都具有“轻尾”。</p>
 <p>为了解释这个概念，让我们先看一些例子。</p>
 <div class="proof example admonition" id="ht_ex_nd">
@@ -370,9 +433,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-obs">
-<a class="reference internal image-reference" href="_images/e10d2f959c01a48251b80a033db14f54dadfc080d432be9525da0025f4e0bd7e.png"><img alt="_images/e10d2f959c01a48251b80a033db14f54dadfc080d432be9525da0025f4e0bd7e.png" src="_images/e10d2f959c01a48251b80a033db14f54dadfc080d432be9525da0025f4e0bd7e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8b79613e69ab25a13fcbb1959e57f18a9eb488c0b62fa76b7b0c8388015ab906.png"><img alt="_images/8b79613e69ab25a13fcbb1959e57f18a9eb488c0b62fa76b7b0c8388015ab906.png" src="_images/8b79613e69ab25a13fcbb1959e57f18a9eb488c0b62fa76b7b0c8388015ab906.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.1 </span><span class="caption-text">观测值直方图</span><a class="headerlink" href="#hist-obs" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.1 </span><span class="caption-text">观测值直方图</span><a class="headerlink" href="#hist-obs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -390,7 +454,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.766560678510278, 5.352264209980646)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.921535213497343, 4.677201047116812)
 </pre></div>
 </div>
 </div>
@@ -412,9 +476,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-obs2">
-<a class="reference internal image-reference" href="_images/6d3185d8b2977a5416de921836cbd7a3b1e9b19288d52e0b503b3a022858d39b.png"><img alt="_images/6d3185d8b2977a5416de921836cbd7a3b1e9b19288d52e0b503b3a022858d39b.png" src="_images/6d3185d8b2977a5416de921836cbd7a3b1e9b19288d52e0b503b3a022858d39b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a6d08092753b40f27095c647052835296d79ae3d2f0256a437dc6f53f1a30de4.png"><img alt="_images/a6d08092753b40f27095c647052835296d79ae3d2f0256a437dc6f53f1a30de4.png" src="_images/a6d08092753b40f27095c647052835296d79ae3d2f0256a437dc6f53f1a30de4.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.2 </span><span class="caption-text">观测值的直方图</span><a class="headerlink" href="#hist-obs2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.2 </span><span class="caption-text">观测值的直方图</span><a class="headerlink" href="#hist-obs2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -428,7 +493,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 <p>然而，这种经验法则只适用于轻尾分布的情况。</p>
 </section>
 <section id="id4">
-<h3><span class="section-number">21.1.2. </span>轻尾分布的应用场景<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.2. </span>轻尾分布的应用场景<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>轻尾分布在自然界和社会现象中非常普遍。</p>
 <p>人类身高就是一个典型的轻尾分布例子。</p>
 <p>虽然我们确实能见到一些特别高的人，但这种情况相对罕见。</p>
@@ -440,7 +505,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 <p>答案在于人类身高分布的性质——它具有非常轻的尾部，这意味着极端值出现的概率极低。实际上，人类身高几乎完美地遵循正态分布的钟形曲线。</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">21.1.3. </span>资产回报率分析<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.3. </span>资产回报率分析<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>那么，经济和金融数据是否也遵循同样的规律呢？</p>
 <p>让我们先来分析一些金融市场数据。</p>
 <p>下面我们将研究亚马逊（AMZN）股票从2015年1月1日到2022年7月1日期间的每日价格变动。</p>
@@ -459,9 +524,6 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -485,9 +547,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="dailyreturns-amzn">
-<a class="reference internal image-reference" href="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png"><img alt="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png" src="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png"><img alt="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png" src="_images/a599c31cc25d6bd89741feff29a4ef708cfeeb2026eaeed64318f9ea175f7cd9.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.3 </span><span class="caption-text">亚马逊每日回报</span><a class="headerlink" href="#dailyreturns-amzn" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.3 </span><span class="caption-text">亚马逊每日回报</span><a class="headerlink" href="#dailyreturns-amzn" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -508,9 +571,6 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </summary>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -534,9 +594,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="dailyreturns-btc">
-<a class="reference internal image-reference" href="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png"><img alt="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png" src="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png"><img alt="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png" src="_images/c757f055b90e82aff5458f8632e8d9d4fcd841ac236f70b412138788717e818a.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.4 </span><span class="caption-text">比特币每日回报</span><a class="headerlink" href="#dailyreturns-btc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.4 </span><span class="caption-text">比特币每日回报</span><a class="headerlink" href="#dailyreturns-btc" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -563,9 +624,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-normal-btc">
-<a class="reference internal image-reference" href="_images/322b6771bf9e64bd63fa9c72436f2ebd339910cc2ae0ea2a242359834d9cad6c.png"><img alt="_images/322b6771bf9e64bd63fa9c72436f2ebd339910cc2ae0ea2a242359834d9cad6c.png" src="_images/322b6771bf9e64bd63fa9c72436f2ebd339910cc2ae0ea2a242359834d9cad6c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1c29c84c652508cf83723bcef280e4f8670c746013ad2af41185757a8dd2e2e1.png"><img alt="_images/1c29c84c652508cf83723bcef280e4f8670c746013ad2af41185757a8dd2e2e1.png" src="_images/1c29c84c652508cf83723bcef280e4f8670c746013ad2af41185757a8dd2e2e1.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.5 </span><span class="caption-text">直方图（正常与比特币回报对比）</span><a class="headerlink" href="#hist-normal-btc" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.5 </span><span class="caption-text">直方图（正常与比特币回报对比）</span><a class="headerlink" href="#hist-normal-btc" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -574,7 +636,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 <p>例如，参见 <span id="id6">[<a class="reference internal" href="zreferences.html#id86" title="Benoit Mandelbrot. The variation of certain speculative prices. The Journal of Business, 36(4):394–419, 1963.">Mandelbrot, 1963</a>]</span> 或 <span id="id7">[<a class="reference internal" href="zreferences.html#id85" title="Svetlozar Todorov Rachev. Handbook of heavy tailed distributions in finance: Handbooks in finance. Volume 1. Elsevier, 2003.">Rachev, 2003</a>]</span>。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">21.1.4. </span>其他数据<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.4. </span>其他数据<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>我们刚刚看到的数据被称为“重尾”。</p>
 <p>在重尾分布中，极端结果相对频繁地发生。</p>
 <div class="proof example admonition" id="ht_ex_od">
@@ -597,7 +659,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div><p>在本讲座的后续部分，我们将深入探讨这些分布中的重尾现象。</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">21.1.5. </span>为什么重尾现象如此重要？<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.5. </span>为什么重尾现象如此重要？<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>重尾分布在经济数据中普遍存在，但我们可能会问：这种现象真的值得特别关注吗？</p>
 <p>答案是毫无疑问的！</p>
 <p>当我们面对重尾分布时，需要重新思考许多传统的分析方法，特别是在以下方面：</p>
@@ -610,12 +672,12 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">21.2. </span>视觉比较<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.2. </span>视觉比较<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将通过直观的视觉对比来理解轻尾分布和重尾分布的区别。这有助于我们在深入数学定义之前，先建立起对这两类分布的基本认识。</p>
 <p>随后我们会介绍一些重要概念，如帕雷托分布、互补累积分布函数和幂律，这些都是识别和分析重尾分布的关键工具。</p>
 <p>虽然我们稍后会给出轻尾和重尾分布的严格数学定义，但先从视觉上感受它们的差异，将帮助我们更好地理解这些概念。</p>
 <section id="id11">
-<h3><span class="section-number">21.2.1. </span>模拟<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.1. </span>模拟<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>下图显示了一次模拟。</p>
 <p>上面两个子图各显示来自正态分布的120个独立样本，这是轻尾分布。</p>
 <p>下面的子图显示来自<a class="reference external" href="https://en.wikipedia.org/wiki/Cauchy_distribution">柯西分布</a>的120个独立样本，这是重尾分布。</p>
@@ -652,9 +714,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-normal-cauchy">
-<a class="reference internal image-reference" href="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png"><img alt="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png" src="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png"><img alt="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png" src="_images/98e83afe9c6d88f10fdd362d86e64f03c8e1cf43bf498fa61d227007f3547e1f.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.6 </span><span class="caption-text">来自正态分布和柯西分布的样本</span><a class="headerlink" href="#draws-normal-cauchy" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.6 </span><span class="caption-text">来自正态分布和柯西分布的样本</span><a class="headerlink" href="#draws-normal-cauchy" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -665,7 +728,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 <p>这是典型的重尾分布特征。</p>
 </section>
 <section id="id12">
-<h3><span class="section-number">21.2.2. </span>非负分布<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.2. </span>非负分布<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>现在让我们来比较几种只取非负值的分布。</p>
 <p>其中一种是指数分布，我们在<a class="reference internal" href="prob_dist.html"><span class="doc">概率与分布讲座</span></a>中已经详细讨论过。</p>
 <p>指数分布是典型的轻尾分布。</p>
@@ -688,9 +751,10 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-exponential">
-<a class="reference internal image-reference" href="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png"><img alt="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png" src="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png"><img alt="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png" src="_images/08164be8b662286bfa704ad2801699216e5f0349c82e93757595543184c13cbf.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.7 </span><span class="caption-text">指数分布的抽样</span><a class="headerlink" href="#draws-exponential" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.7 </span><span class="caption-text">指数分布的抽样</span><a class="headerlink" href="#draws-exponential" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -698,7 +762,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 <p>另一个非负分布是<a class="reference external" href="https://en.wikipedia.org/wiki/Pareto_distribution">帕累托分布</a>。</p>
 <p>对于服从帕累托分布的随机变量 <span class="math notranslate nohighlight">\(X\)</span>，存在两个正参数 <span class="math notranslate nohighlight">\(\bar{x}\)</span> 和 <span class="math notranslate nohighlight">\(\alpha\)</span>，使得其分布函数满足</p>
 <div class="math notranslate nohighlight" id="equation-pareto">
-<span class="eqno">(21.1)<a class="headerlink" href="#equation-pareto" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbb P\{X &gt; x\} =
+<span class="eqno">(21.1)<a class="headerlink" href="#equation-pareto" title="Link to this equation">#</a></span>\[\begin{split}\mathbb P\{X &gt; x\} =
 \begin{cases}
     \left( \frac{\bar x}{x} \right)^{\alpha}
         &amp; \text{ 如果 } x \geq \bar x
@@ -734,9 +798,10 @@ Y = \bar x \exp(X)
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="draws-pareto">
-<a class="reference internal image-reference" href="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png"><img alt="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png" src="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png"><img alt="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png" src="_images/480eb14a5585693c1a0a559e965cd738265b56d3e35be65536cedf3290c3ac23.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.8 </span><span class="caption-text">从帕累托分布中抽取的数据</span><a class="headerlink" href="#draws-pareto" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.8 </span><span class="caption-text">从帕累托分布中抽取的数据</span><a class="headerlink" href="#draws-pareto" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -744,7 +809,7 @@ Y = \bar x \exp(X)
 <p>注意在帕累托分布中，极端结果更常见。</p>
 </section>
 <section id="id13">
-<h3><span class="section-number">21.2.3. </span>互补累积分布函数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.3. </span>互补累积分布函数<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>对于非负随机变量，视觉上区分轻尾和重尾的一种方法是查看<strong>互补累积分布函数</strong>（CCDF）。</p>
 <p>对于一个具有CDF <span class="math notranslate nohighlight">\(F\)</span> 的随机变量 <span class="math notranslate nohighlight">\(X\)</span>，CCDF定义为函数</p>
 <div class="math notranslate nohighlight">
@@ -807,9 +872,10 @@ G_P(x) = x^{- \alpha}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="compare-pareto-exponential">
-<a class="reference internal image-reference" href="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png"><img alt="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png" src="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png"><img alt="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png" src="_images/e176ff5030b123b3c49250ad6b99dbfa40278736ede8904cd683cf12dfd7bbc4.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.9 </span><span class="caption-text">帕累托分布与指数分布对比</span><a class="headerlink" href="#compare-pareto-exponential" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.9 </span><span class="caption-text">帕累托分布与指数分布对比</span><a class="headerlink" href="#compare-pareto-exponential" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -830,9 +896,10 @@ G_P(x) = x^{- \alpha}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="compare-pareto-exponential-log-log">
-<a class="reference internal image-reference" href="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png"><img alt="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png" src="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png"><img alt="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png" src="_images/a49359dcd6acb3d925610eb2a1a7137fd82dc76cfbc6dd6e3be9f5d3db47e362.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">帕累托与指数分布对比（对数对数图）</span><a class="headerlink" href="#compare-pareto-exponential-log-log" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.10 </span><span class="caption-text">帕累托与指数分布对比（对数对数图）</span><a class="headerlink" href="#compare-pareto-exponential-log-log" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -841,7 +908,7 @@ G_P(x) = x^{- \alpha}
 <p>这个观点常用于在视觉化中区分轻尾分布和重尾分布——我们下面会再次讨论这一点。</p>
 </section>
 <section id="ccdfs">
-<h3><span class="section-number">21.2.4. </span>经验 CCDFs<a class="headerlink" href="#ccdfs" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.4. </span>经验 CCDFs<a class="headerlink" href="#ccdfs" title="Link to this heading">#</a></h3>
 <p>从样本数据得到的 CCDF 函数被称为<strong>经验 CCDF</strong>。</p>
 <p>给定一个样本 <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>，经验 CCDF 定义为</p>
 <div class="math notranslate nohighlight">
@@ -851,7 +918,7 @@ G_P(x) = x^{- \alpha}
 <p>因此，<span class="math notranslate nohighlight">\(\hat G(x)\)</span> 显示样本中超过 <span class="math notranslate nohighlight">\(x\)</span> 的比例。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eccdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="s2">&quot;简单的经验 CCDF 函数。&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
@@ -897,9 +964,10 @@ G_P(x) = x^{- \alpha}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="ccdf-empirics">
-<a class="reference internal image-reference" href="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png"><img alt="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png" src="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png"><img alt="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png" src="_images/8dfcccd0d9c14dfdb6e830dc65e97c17a2492d8faa6753cb6d0be1e5304bd5d3.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">经验 CCDFs</span><a class="headerlink" href="#ccdf-empirics" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.11 </span><span class="caption-text">经验 CCDFs</span><a class="headerlink" href="#ccdf-empirics" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -907,7 +975,7 @@ G_P(x) = x^{- \alpha}
 <p>与 CCDF 一样，帕累托分布的经验 CCDF 在对数-对数图中大致呈线性。</p>
 <p>我们将在下面使用这个想法 <a class="reference external" href="https://intro.quantecon.org/heavy_tails.html#heavy-tails-in-economic-cross-sections">here</a> 当我们查看真实数据时。</p>
 <section id="q-q">
-<h4><span class="section-number">21.2.4.1. </span>Q-Q图<a class="headerlink" href="#q-q" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">21.2.4.1. </span>Q-Q图<a class="headerlink" href="#q-q" title="Link to this heading">#</a></h4>
 <p>我们也可以使用<a class="reference external" href="https://baike.baidu.com/item/Q-Q%E5%9B%BE/1143751">Q-Q图</a>来可视化比较两个概率分布。</p>
 <p><a class="reference external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a>包提供了一个方便的<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html">qqplot</a>函数，该函数默认将样本数据与正态分布的分位数进行比较。</p>
 <p>如果数据来自正态分布，该图看起来会像：</p>
@@ -922,7 +990,8 @@ G_P(x) = x^{- \alpha}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png"><img alt="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png" src="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png"><img alt="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png" src="_images/dda86c9d44fd0072cba67667daf83c0cf667a2000b260249ca991eae28215bc4.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们现在可以将其与指数分布、对数正态分布和帕累托分布进行比较</p>
@@ -943,13 +1012,14 @@ G_P(x) = x^{- \alpha}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png"><img alt="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png" src="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png"><img alt="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png" src="_images/0224b06ae52cc8613899c266cef860c7e94de9f2ba81de71cee9cdb64690109e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 <section id="id14">
-<h3><span class="section-number">21.2.5. </span>幂律<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.2.5. </span>幂律<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>在经济和社会现象中，一类特定的重尾分布被反复发现：所谓的幂律。</p>
 <p>若随机变量 <span class="math notranslate nohighlight">\(X\)</span> 满足<strong>幂律</strong>，则存在某个 <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>，</p>
 <div class="math notranslate nohighlight">
@@ -957,7 +1027,7 @@ G_P(x) = x^{- \alpha}
 \quad \text{当 $x$ 很大}\]</div>
 <p>我们可以更数学化地写成</p>
 <div class="math notranslate nohighlight" id="equation-plrt">
-<span class="eqno">(21.2)<a class="headerlink" href="#equation-plrt" title="Permalink to this equation">#</a></span>\[\lim_{x \to \infty} x^\alpha \, \mathbb P\{X &gt; x\} = c
+<span class="eqno">(21.2)<a class="headerlink" href="#equation-plrt" title="Link to this equation">#</a></span>\[\lim_{x \to \infty} x^\alpha \, \mathbb P\{X &gt; x\} = c
 \quad \text{对某个 $c &gt; 0$}\]</div>
 <p>通常我们说具有这种性质的随机变量 <span class="math notranslate nohighlight">\(X\)</span> 具有<strong>帕累托尾</strong>，其<strong>尾指数</strong>为 <span class="math notranslate nohighlight">\(\alpha\)</span>。</p>
 <p>值得注意的是，所有尾指数为 <span class="math notranslate nohighlight">\(\alpha\)</span> 的帕累托分布都具有帕累托尾，且尾指数也为 <span class="math notranslate nohighlight">\(\alpha\)</span>。</p>
@@ -966,7 +1036,7 @@ G_P(x) = x^{- \alpha}
 </section>
 </section>
 <section id="id15">
-<h2><span class="section-number">21.3. </span>经济数据中的重尾分布<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.3. </span>经济数据中的重尾分布<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
 <p>如前所述，重尾现象在经济数据中普遍存在，而且幂律分布似乎特别常见。</p>
 <p>为了直观展示这一点，我们将通过经验互补累积分布函数（CCDF）来观察重尾特性。</p>
 <p>所有图表都采用对数-对数坐标系绘制，这样幂律分布在图中会呈现为直线，至少在尾部区域是如此。</p>
@@ -978,7 +1048,7 @@ G_P(x) = x^{- \alpha}
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">empirical_ccdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">empirical_ccdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
                    <span class="n">ax</span><span class="p">,</span> 
                    <span class="n">aw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>   <span class="c1"># 权重</span>
                    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1045,7 +1115,7 @@ G_P(x) = x^{- \alpha}
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_wb</span><span class="p">(</span><span class="n">varlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NY.GDP.MKTP.CD&#39;</span><span class="p">],</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract_wb</span><span class="p">(</span><span class="n">varlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NY.GDP.MKTP.CD&#39;</span><span class="p">],</span> 
                <span class="n">c</span><span class="o">=</span><span class="s1">&#39;all_countries&#39;</span><span class="p">,</span> 
                <span class="n">s</span><span class="o">=</span><span class="mi">1900</span><span class="p">,</span> 
                <span class="n">e</span><span class="o">=</span><span class="mi">2021</span><span class="p">,</span> 
@@ -1070,7 +1140,7 @@ G_P(x) = x^{- \alpha}
 </details>
 </div>
 <section id="id16">
-<h3><span class="section-number">21.3.1. </span>公司规模<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.3.1. </span>公司规模<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <p>以下是2020年来自福布斯全球2000强的最大500家公司的公司规模分布图。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -1095,16 +1165,17 @@ G_P(x) = x^{- \alpha}
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="firm-size-dist">
-<a class="reference internal image-reference" href="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png"><img alt="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png" src="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png"><img alt="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png" src="_images/f9f6220d8b437f0121d72d98c2d61e79b2267faac01093cfd02c5565f1a811be.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.12 </span><span class="caption-text">公司规模分布</span><a class="headerlink" href="#firm-size-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.12 </span><span class="caption-text">公司规模分布</span><a class="headerlink" href="#firm-size-dist" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="id17">
-<h3><span class="section-number">21.3.2. </span>城市规模<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.3.2. </span>城市规模<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <p>以下是2023年来自世界人口审查的美国和巴西城市规模分布图。</p>
 <p>大小由人口衡量。</p>
 <div class="cell tag_hide-input docutils container">
@@ -1130,16 +1201,17 @@ G_P(x) = x^{- \alpha}
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="city-size-dist">
-<a class="reference internal image-reference" href="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png"><img alt="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png" src="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png"><img alt="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png" src="_images/3ced994cf5413bbe87f4aa8e51ad0bcdf88e50624fc0e29c844694cfbff64d13.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">城市规模分布</span><a class="headerlink" href="#city-size-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.13 </span><span class="caption-text">城市规模分布</span><a class="headerlink" href="#city-size-dist" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="id18">
-<h3><span class="section-number">21.3.3. </span>财富<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.3.3. </span>财富<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <p>这里是财富分布上尾部（前500名）的图表示。</p>
 <p>数据来源于2020年的《福布斯亿万富翁》名单。</p>
 <div class="cell tag_hide-input docutils container">
@@ -1179,16 +1251,17 @@ G_P(x) = x^{- \alpha}
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="wealth-dist">
-<a class="reference internal image-reference" href="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png"><img alt="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png" src="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png"><img alt="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png" src="_images/97c212df1eac595e4088d52ade908a56de8aa04bf7a0bb4f1898eee14f6a35f2.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">财富分布（2020年福布斯亿万富翁）</span><a class="headerlink" href="#wealth-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.14 </span><span class="caption-text">财富分布（2020年福布斯亿万富翁）</span><a class="headerlink" href="#wealth-dist" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="gdp">
-<h3><span class="section-number">21.3.4. </span>GDP<a class="headerlink" href="#gdp" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.3.4. </span>GDP<a class="headerlink" href="#gdp" title="Link to this heading">#</a></h3>
 <p>当然，并非所有的横截面分布都是重尾的。</p>
 <p>这里我们展示的是各国人均GDP。</p>
 <div class="cell tag_hide-input docutils container">
@@ -1213,7 +1286,7 @@ G_P(x) = x^{- \alpha}
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7859/140199782.py:12: FutureWarning: errors=&#39;ignore&#39; is deprecated and will raise in a future version. Use to_numeric without passing `errors` and catch exceptions explicitly instead
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6837/140199782.py:12: FutureWarning: errors=&#39;ignore&#39; is deprecated and will raise in a future version. Use to_numeric without passing `errors` and catch exceptions explicitly instead
   df = wb.download(indicator=varlist, country=c, start=s, end=e).stack().unstack(0).reset_index()
 </pre></div>
 </div>
@@ -1238,9 +1311,10 @@ G_P(x) = x^{- \alpha}
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="gdppc-dist">
-<a class="reference internal image-reference" href="_images/6448082184c981a29d1dc09fee82bc117ed4eabe0f7025ead91b3de205627740.png"><img alt="_images/6448082184c981a29d1dc09fee82bc117ed4eabe0f7025ead91b3de205627740.png" src="_images/6448082184c981a29d1dc09fee82bc117ed4eabe0f7025ead91b3de205627740.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c6d4dc4bc98c9d8a1308267ee76037796cdc7281a78362232f3f4e6de36aed65.png"><img alt="_images/c6d4dc4bc98c9d8a1308267ee76037796cdc7281a78362232f3f4e6de36aed65.png" src="_images/c6d4dc4bc98c9d8a1308267ee76037796cdc7281a78362232f3f4e6de36aed65.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.15 </span><span class="caption-text">人均GDP分布</span><a class="headerlink" href="#gdppc-dist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.15 </span><span class="caption-text">人均GDP分布</span><a class="headerlink" href="#gdppc-dist" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1251,19 +1325,19 @@ G_P(x) = x^{- \alpha}
 </section>
 </section>
 <section id="id19">
-<h2><span class="section-number">21.4. </span>大数定律的失效<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.4. </span>大数定律的失效<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
 <p>重尾分布的一个重要影响是样本平均值可能无法准确估计真实的总体均值。</p>
 <p>为了理解这一点，让我们回顾<a class="reference internal" href="lln_clt.html"><span class="doc">之前关于大数定律的讨论</span></a>。当我们有一组独立同分布的随机变量<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>，它们都服从同一分布<span class="math notranslate nohighlight">\(F\)</span>时：</p>
 <p>如果这些随机变量的绝对期望<span class="math notranslate nohighlight">\(\mathbb E |X_i|\)</span>是有限的，那么样本平均值<span class="math notranslate nohighlight">\(\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i\)</span>将会</p>
 <div class="math notranslate nohighlight" id="equation-lln-as2">
-<span class="eqno">(21.3)<a class="headerlink" href="#equation-lln-as2" title="Permalink to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
+<span class="eqno">(21.3)<a class="headerlink" href="#equation-lln-as2" title="Link to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
 <p>其中<span class="math notranslate nohighlight">\(\mu := \mathbb E X_i = \int x F(dx)\)</span>是样本的共同均值。</p>
 <p>在大多数情况下，条件<span class="math notranslate nohighlight">\(\mathbb E | X_i | = \int |x| F(dx) &lt; \infty\)</span>成立，但如果分布<span class="math notranslate nohighlight">\(F\)</span>是非常重尾的，则可能不成立。</p>
 <p>例如，柯西分布就是不成立的。</p>
 <p>让我们来看看这种情况下样本平均值的行为，看是否大数定律仍然有效。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">cauchy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">cauchy</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">1_000</span>
@@ -1290,9 +1364,10 @@ G_P(x) = x^{- \alpha}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="fail-lln">
-<a class="reference internal image-reference" href="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png"><img alt="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png" src="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png"><img alt="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png" src="_images/853b18cb08988cf379af34e3db4b1586714279013e7e02d970a4daae7838e456.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 21.16 </span><span class="caption-text">大数定律失效</span><a class="headerlink" href="#fail-lln" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 21.16 </span><span class="caption-text">大数定律失效</span><a class="headerlink" href="#fail-lln" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1301,7 +1376,7 @@ G_P(x) = x^{- \alpha}
 <p>我们在练习中会回到这一点。</p>
 </section>
 <section id="heavy-tail-application">
-<span id="id20"></span><h2><span class="section-number">21.5. </span>为什么重尾分布很重要？<a class="headerlink" href="#heavy-tail-application" title="Permalink to this heading">#</a></h2>
+<span id="id20"></span><h2><span class="section-number">21.5. </span>为什么重尾分布很重要？<a class="headerlink" href="#heavy-tail-application" title="Link to this heading">#</a></h2>
 <p>我们已经看到</p>
 <ol class="arabic simple">
 <li><p>在经济学中，重尾分布非常常见；</p></li>
@@ -1309,7 +1384,7 @@ G_P(x) = x^{- \alpha}
 </ol>
 <p>但是在现实世界中，重尾分布重要吗？让我们简要讨论一下它们为什么重要。</p>
 <section id="id21">
-<h3><span class="section-number">21.5.1. </span>分散化投资<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.5.1. </span>分散化投资<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
 <p>投资中一个最重要的概念是使用分散化来降低风险。</p>
 <p>这是一个非常古老的想法——例如，考虑这个表达式“不要把所有的鸡蛋放在一个篮子里”。</p>
 <p>为了说明这一点，设想一个拥有一美元财富的投资者，在<span class="math notranslate nohighlight">\(n\)</span>种资产中进行选择，这些资产的回报为<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>。</p>
@@ -1333,23 +1408,23 @@ Y_n = \sum_{i=1}^n \frac{X_i}{n} = \frac{1}{n} \sum_{i=1}^n X_i.
 <p>这就意味着，无论你将投资分散到多少资产中，风险水平都不会降低！</p>
 </section>
 <section id="id22">
-<h3><span class="section-number">21.5.2. </span>财政政策<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.5.2. </span>财政政策<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
 <p>财富和收入分配的尾部特性对制定有效的税收和再分配政策具有重要影响。</p>
 <p>当社会中存在极端的财富集中现象时，传统的税收政策可能需要重新设计才能实现预期的社会效果。</p>
 <p>例如，了解收入分配尾部的厚重程度能够帮助政策制定者更好地设计<a class="reference internal" href="mle.html"><span class="doc">税收政策</span></a>，使其既能促进公平又不过度抑制经济活力。</p>
 </section>
 </section>
 <section id="cltail">
-<span id="id23"></span><h2><span class="section-number">21.6. </span>分类尾部特性<a class="headerlink" href="#cltail" title="Permalink to this heading">#</a></h2>
+<span id="id23"></span><h2><span class="section-number">21.6. </span>分类尾部特性<a class="headerlink" href="#cltail" title="Link to this heading">#</a></h2>
 <p>虽然我们已经讨论了轻尾和重尾分布的概念，但到目前为止还没有给出它们的严格数学定义。</p>
 <p>接下来，我们将填补这一空白，提供这些概念的精确定义。</p>
 <p>在本节中，我们将主要关注非负随机变量分布的右侧尾部特性。</p>
 <p>尽管左侧尾部的定义与右侧类似，但为了使讨论更加清晰简洁，我们将专注于右尾分析。</p>
 <section id="heavy-tail-formal-definition">
-<span id="id24"></span><h3><span class="section-number">21.6.1. </span>轻尾和重尾<a class="headerlink" href="#heavy-tail-formal-definition" title="Permalink to this heading">#</a></h3>
+<span id="id24"></span><h3><span class="section-number">21.6.1. </span>轻尾和重尾<a class="headerlink" href="#heavy-tail-formal-definition" title="Link to this heading">#</a></h3>
 <p>一个在 <span class="math notranslate nohighlight">\(\mathbb R_+\)</span> 上有密度 <span class="math notranslate nohighlight">\(f\)</span> 的分布 <span class="math notranslate nohighlight">\(F\)</span> 被称为<a class="reference external" href="https://baike.baidu.com/item/%E9%87%8D%E5%B0%BE%E5%88%86%E5%B8%83/4483429">重尾</a>的，如果</p>
 <div class="math notranslate nohighlight" id="equation-defht">
-<span class="eqno">(21.4)<a class="headerlink" href="#equation-defht" title="Permalink to this equation">#</a></span>\[\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ 对于所有 } t &gt; 0.\]</div>
+<span class="eqno">(21.4)<a class="headerlink" href="#equation-defht" title="Link to this equation">#</a></span>\[\int_0^\infty \exp(tx) f(x) dx = \infty \; \text{ 对于所有 } t &gt; 0.\]</div>
 <p>我们说一个非负随机变量 <span class="math notranslate nohighlight">\(X\)</span> 是<strong>重尾</strong>的，如果它的分布密度是重尾的。</p>
 <p>这等价于说它的<strong>矩生成函数</strong> <span class="math notranslate nohighlight">\(m(t) := \mathbb E \exp(t X)\)</span> 对于所有 <span class="math notranslate nohighlight">\(t &gt; 0\)</span> 都不存在（即无限）。</p>
 <p>例如，<a class="reference external" href="https://baike.baidu.com/item/%E5%AF%B9%E6%95%B0%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/8976782">对数正态分布</a>是重尾的，因为它的矩生成函数在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上无限。</p>
@@ -1371,7 +1446,7 @@ m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t &lt; \lambda
 </section>
 </section>
 <section id="id25">
-<h2><span class="section-number">21.7. </span>延伸阅读<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.7. </span>延伸阅读<a class="headerlink" href="#id25" title="Link to this heading">#</a></h2>
 <p>想了解更多关于财富分布中的重尾，可以参考文献 <span id="id26">[<a class="reference internal" href="zreferences.html#id90" title="Pareto Vilfredo. Cours d'économie politique. Rouge, Lausanne, 1896.">Vilfredo, 1896</a>]</span> 和 <span id="id27">[<a class="reference internal" href="zreferences.html#id89" title="Jess Benhabib and Alberto Bisin. Skewed wealth distributions: theory and empirics. Journal of Economic Literature, 56(4):1261–91, 2018.">Benhabib and Bisin, 2018</a>]</span>。</p>
 <p>想了解更多关于公司规模分布中的重尾，可以参考文献 <span id="id28">[<a class="reference internal" href="zreferences.html#id88" title="Robert L Axtell. Zipf distribution of us firm sizes. science, 293(5536):1818–1820, 2001.">Axtell, 2001</a>]</span>, <span id="id29">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>。</p>
 <p>想了解更多关于城市规模分布中的重尾，可以参考文献 <span id="id30">[<a class="reference internal" href="zreferences.html#id84" title="Hernán D Rozenfeld, Diego Rybski, Xavier Gabaix, and Hernán A Makse. The area and population of cities: new insights from a different perspective on cities. American Economic Review, 101(5):2205–25, 2011.">Rozenfeld <em>et al.</em>, 2011</a>]</span>, <span id="id31">[<a class="reference internal" href="zreferences.html#id87" title="Xavier Gabaix. Power laws in economics: an introduction. Journal of Economic Perspectives, 30(1):185–206, 2016.">Gabaix, 2016</a>]</span>。</p>
@@ -1380,7 +1455,7 @@ m(t) = \frac{\lambda}{\lambda - t} \quad \text{当 } t &lt; \lambda
 <p>欲了解更多，请参阅 <span id="id32">[<a class="reference internal" href="zreferences.html#id83" title="Daron Acemoglu and James A. Robinson. The political economy of the Kuznets curve. Review of Development Economics, 6(2):183–203, 2002.">Acemoglu and Robinson, 2002</a>]</span>, <span id="id33">[<a class="reference internal" href="zreferences.html#id82" title="Edward Glaeser, Jose Scheinkman, and Andrei Shleifer. The injustice of inequality. Journal of Monetary Economics, 50(1):199–222, 2003.">Glaeser <em>et al.</em>, 2003</a>]</span>, <span id="id34">[<a class="reference internal" href="zreferences.html#id81" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J Sargent. Inequality, business cycles, and monetary-fiscal policy. Technical Report, National Bureau of Economic Research, 2018.">Bhandari <em>et al.</em>, 2018</a>]</span> 或 <span id="id35">[<a class="reference internal" href="zreferences.html#id80" title="SeHyoun Ahn, Greg Kaplan, Benjamin Moll, Thomas Winberry, and Christian Wolf. When inequality matters for macro and macro matters for inequality. NBER Macroeconomics Annual, 32(1):1–75, 2018.">Ahn <em>et al.</em>, 2018</a>]</span>。</p>
 </section>
 <section id="id36">
-<h2><span class="section-number">21.8. </span>练习<a class="headerlink" href="#id36" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.8. </span>练习<a class="headerlink" href="#id36" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="ht_ex2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 21.2 </span></p>
@@ -1427,7 +1502,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pareto</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">pareto</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
 
@@ -1450,7 +1525,8 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png"><img alt="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png" src="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png"><img alt="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png" src="_images/862005e7312c99d02f212e2ed95393b7a7bda4227245abf53f0e4d258d6fc1a4.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -1520,7 +1596,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 <span class="n">x_bar</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">α</span> <span class="o">=</span> <span class="mf">1.05</span>
 
-<span class="k">def</span> <span class="nf">pareto_rvs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pareto_rvs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="s2">&quot;使用标准方法生成Pareto抽样。&quot;</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">x_bar</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">α</span><span class="p">))</span>
@@ -1542,7 +1618,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 <p>这是一个计算特定分布 <code class="docutils literal notranslate"><span class="pre">dist</span></code> 的单一税收估计的函数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tax_rev</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tax_rev</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
     <span class="n">tax_raised</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_years</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">dist</span> <span class="o">==</span> <span class="s1">&#39;pareto&#39;</span><span class="p">:</span>
@@ -1579,7 +1655,8 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png"><img alt="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png" src="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png"><img alt="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png" src="_images/863b4551cb6ef523add83650cf6869396feea356dd58fc0e2f4d4d37b7becb1c.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>最后，我们来生成均值和标准差。</p>
@@ -1616,7 +1693,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
 <section id="exercise-content">
 <p>柯西分布的<a class="reference external" href="https://baike.baidu.com/item/%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0/5126430">特征函数</a>为</p>
 <div class="math notranslate nohighlight" id="equation-lln-cch">
-<span class="eqno">(21.5)<a class="headerlink" href="#equation-lln-cch" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(21.5)<a class="headerlink" href="#equation-lln-cch" title="Link to this equation">#</a></span>\[
 \phi(t) = \mathbb E e^{itX} = \int e^{i t x} f(x) dx = e^{-|t|}
 \]</div>
 <p>证明 <span class="math notranslate nohighlight">\(n\)</span> 次独立抽样 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 从柯西分布得来的样本均值 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 具有与 <span class="math notranslate nohighlight">\(X_1\)</span> 相同的特征函数。</p>
@@ -2076,6 +2153,35 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/heavy_tails.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/heavy_tails.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/heavy_tails.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>29. 一些不愉快的货币主义算术 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'unpleasant';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/unpleasant.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/unpleasant.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/unpleasant.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/unpleasant.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -186,17 +226,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -206,10 +252,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">一些不愉快的货币主义算术</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -222,6 +267,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/unpleasant.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -233,9 +300,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">29. </span>一些不愉快的货币主义算术<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">29. </span>一些不愉快的货币主义算术<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">29.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座建立在 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中介绍的概念和问题基础上。</p>
 <p>在那个讲座中，我们探讨了通货膨胀税率及其相关货币收益率的<a class="reference external" href="https://baike.baidu.com/item/%E6%8B%89%E5%BC%97%E6%9B%B2%E7%BA%BF/2527248"><em>拉弗曲线</em></a>上的静态均衡点。</p>
 <p>本讲中，我们将研究一个特殊情况：某个静态均衡只在时间 <span class="math notranslate nohighlight">\(T &gt; 0\)</span> 之后才成为主导状态。</p>
@@ -249,7 +316,7 @@
 <p>除了学习”不愉快的货币主义算术”外，本讲座还将教授如何实现一个用于计算初始价格水平的<a class="reference external" href="https://baike.baidu.com/item/%E4%B8%8D%E5%8A%A8%E7%82%B9/8535695"><em>不动点</em></a>算法。</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">29.2. </span>设置<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.2. </span>设置<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>让我们首先回顾 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 中的模型设定。</p>
 <p>如有需要，请参考那篇讲义并查看我们将在本讲中继续使用的Python代码。</p>
 <p>对于 <span class="math notranslate nohighlight">\(t \geq 1\)</span>，<strong>实际货币余额</strong>的变化遵循以下方程：</p>
@@ -259,7 +326,7 @@
 \]</div>
 <p>或者</p>
 <div class="math notranslate nohighlight" id="equation-eq-up-bmotion">
-<span class="eqno">(29.1)<a class="headerlink" href="#equation-eq-up-bmotion" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.1)<a class="headerlink" href="#equation-eq-up-bmotion" title="Link to this equation">#</a></span>\[
 b_t - b_{t-1} R_{t-1} = g
 \]</div>
 <p>其中</p>
@@ -269,13 +336,13 @@ b_t - b_{t-1} R_{t-1} = g
 </ul>
 <p>对实际余额的需求是</p>
 <div class="math notranslate nohighlight" id="equation-eq-up-bdemand">
-<span class="eqno">(29.2)<a class="headerlink" href="#equation-eq-up-bdemand" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.2)<a class="headerlink" href="#equation-eq-up-bdemand" title="Link to this equation">#</a></span>\[
 b_t = \gamma_1 - \gamma_2 R_t^{-1} .
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\gamma_1 &gt; \gamma_2 &gt; 0\)</span>.</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">29.3. </span>货币与财政政策<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.3. </span>货币与财政政策<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>在<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>的基础模型基础上，我们引入了一期通胀指数化政府债券，作为政府筹集财政资金的另一种渠道。</p>
 <p>假设 <span class="math notranslate nohighlight">\(\widetilde R &gt; 1\)</span> 是政府一期通胀指数化债券的固定实际回报率。</p>
 <p>有了这个额外的融资工具，政府在时间 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 的预算约束可以表示为</p>
@@ -287,7 +354,7 @@ B_t + \frac{m_{t+1}}{p_t} = \widetilde R B_{t-1} + \frac{m_t}{p_t} + g
 <p>这两个数值作为模型的初始条件给定。</p>
 <p>值得注意的是，<span class="math notranslate nohighlight">\(\check m_0\)</span> 是一个<em>名义</em>变量（以美元计），而 <span class="math notranslate nohighlight">\(\widetilde R \check B_{-1}\)</span> 是一个<em>实际</em>变量（以商品计量）。</p>
 <section id="id6">
-<h3><span class="section-number">29.3.1. </span>公开市场操作<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">29.3.1. </span>公开市场操作<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>在时间 <span class="math notranslate nohighlight">\(0\)</span> 时，政府可以调整其债务结构，但必须遵循以下公开市场操作约束：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -295,7 +362,7 @@ B_t + \frac{m_{t+1}}{p_t} = \widetilde R B_{t-1} + \frac{m_t}{p_t} + g
 \]</div>
 <p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-openmarketconstraint">
-<span class="eqno">(29.3)<a class="headerlink" href="#equation-eq-openmarketconstraint" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.3)<a class="headerlink" href="#equation-eq-openmarketconstraint" title="Link to this equation">#</a></span>\[
 B_{-1} - \check B_{-1} = \frac{1}{p_0 \widetilde R} \left( \check m_0 - m_0 \right)  
 \]</div>
 <p>该方程表明，政府（特别是中央银行）可以通过增加债券持有量（<span class="math notranslate nohighlight">\(B_{-1}\)</span> 相对于 <span class="math notranslate nohighlight">\(\check B_{-1}\)</span>）来减少货币供应（<span class="math notranslate nohighlight">\(m_0\)</span> 相对于 <span class="math notranslate nohighlight">\(\check m_0\)</span>），反之亦然。</p>
@@ -303,7 +370,7 @@ B_{-1} - \check B_{-1} = \frac{1}{p_0 \widetilde R} \left( \check m_0 - m_0 \rig
 </section>
 </section>
 <section id="id7">
-<h2><span class="section-number">29.4. </span>初始公开市场操作的影响<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.4. </span>初始公开市场操作的影响<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>我们将按照萨金特和华莱士 <span id="id8">[<a class="reference internal" href="zreferences.html#id293" title="Thomas J Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal reserve bank of minneapolis quarterly review, 5(3):1–17, 1981.">Sargent and Wallace, 1981</a>]</span> 的分析框架，探讨一个关键问题：在面对持续性财政赤字（即正值 <span class="math notranslate nohighlight">\(g\)</span>）时，中央银行能否通过公开市场操作有效地控制物价水平？</p>
 <p>在模型的初始阶段（<span class="math notranslate nohighlight">\(t=0\)</span> 之前），政府需要决定初始货币供应量和债券水平 <span class="math notranslate nohighlight">\((m_0, B_{-1})\)</span>，同时遵守公开市场操作约束条件 <a class="reference internal" href="#equation-eq-openmarketconstraint">(29.3)</a>。</p>
 <p>对于 <span class="math notranslate nohighlight">\(t =0, 1, \ldots, T-1\)</span>，</p>
@@ -324,7 +391,7 @@ m_{t+1} &amp; = m_t + p_t \overline g
 \end{split}\]</div>
 <p>其中</p>
 <div class="math notranslate nohighlight" id="equation-eq-overlineg">
-<span class="eqno">(29.4)<a class="headerlink" href="#equation-eq-overlineg" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.4)<a class="headerlink" href="#equation-eq-overlineg" title="Link to this equation">#</a></span>\[
 \overline g = \left[(\widetilde R -1) B_{T-1} +  g \right]
 \]</div>
 <p>我们的目标是计算这一方案下的均衡序列 <span class="math notranslate nohighlight">\(\{p_t,m_t,b_t, R_t\}_{t=0}^\infty\)</span>，这些序列体现了货币和财政政策的执行结果。</p>
@@ -333,18 +400,18 @@ m_{t+1} &amp; = m_t + p_t \overline g
 <p><strong>公开市场操作</strong>是指政府（或其代表中央银行）的货币政策行动，包括用新发行的货币从公众购买政府债券，或向公众出售债券并收回流通中的货币。</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">29.5. </span>算法（基本思想）<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.5. </span>算法（基本思想）<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>类似于 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a> 中的方法，我们将从 <span class="math notranslate nohighlight">\(t=T\)</span> 开始反向计算，首先确定与低通胀、低通胀税率平稳状态相对应的 <span class="math notranslate nohighlight">\(p_T\)</span> 和 <span class="math notranslate nohighlight">\(R_u\)</span> 值。</p>
 <p>在开始描述算法之前，我们需要回顾一下稳态收益率 <span class="math notranslate nohighlight">\(\bar{R}\)</span> 满足的二次方程</p>
 <div class="math notranslate nohighlight" id="equation-eq-up-steadyquadratic">
-<span class="eqno">(29.5)<a class="headerlink" href="#equation-eq-up-steadyquadratic" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.5)<a class="headerlink" href="#equation-eq-up-steadyquadratic" title="Link to this equation">#</a></span>\[
 -\gamma_2 + (\gamma_1 + \gamma_2 - \overline g) \bar R - \gamma_1 \bar R^2 = 0
 \]</div>
 <p>二次方程 <a class="reference internal" href="#equation-eq-up-steadyquadratic">(29.5)</a> 有两个根，<span class="math notranslate nohighlight">\(R_l &lt; R_u &lt; 1\)</span>。</p>
 <p>与 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 末尾所描述的原因类似，我们选择较大的根 <span class="math notranslate nohighlight">\(R_u\)</span>。</p>
 <p>接下来，我们计算</p>
 <div class="math notranslate nohighlight" id="equation-eq-laffertstationary">
-<span class="eqno">(29.6)<a class="headerlink" href="#equation-eq-laffertstationary" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.6)<a class="headerlink" href="#equation-eq-laffertstationary" title="Link to this equation">#</a></span>\[
 \begin{aligned}
 R_T &amp; = R_u \cr
 b_T &amp; = \gamma_1 - \gamma_2 R_u^{-1} \cr
@@ -363,7 +430,7 @@ m_t &amp; = b_{t-1} p_t
 \]</div>
 </section>
 <section id="t">
-<h2><span class="section-number">29.6. </span>在时间 <span class="math notranslate nohighlight">\(T\)</span> 之前<a class="headerlink" href="#t" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.6. </span>在时间 <span class="math notranslate nohighlight">\(T\)</span> 之前<a class="headerlink" href="#t" title="Link to this heading">#</a></h2>
 <p>定义</p>
 <div class="math notranslate nohighlight">
 \[
@@ -380,7 +447,7 @@ p_0 &amp; = \gamma_1^{-1} \left[ \sum_{j=0}^\infty \lambda^j m_{j} \right] \cr
 \]</div>
 <p>因此，</p>
 <div class="math notranslate nohighlight" id="equation-eq-allts">
-<span class="eqno">(29.7)<a class="headerlink" href="#equation-eq-allts" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.7)<a class="headerlink" href="#equation-eq-allts" title="Link to this equation">#</a></span>\[
 \begin{aligned}
 p_0 &amp; = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^T}{1-\lambda} +  \frac{\lambda^T}{R_u-\lambda}    \right\} \cr
 p_1 &amp; = \gamma_1^{-1} m_0  \left\{ \frac{1 - \lambda^{T-1}}{1-\lambda} +  \frac{\lambda^{T-1}}{R_u-\lambda}    \right\} \cr
@@ -396,7 +463,7 @@ p_t = \gamma_1^{-1} m_0 + \lambda p_{t+1}, \quad t = T-1, T-2, \ldots, 0
 \]</div>
 <p>起始于</p>
 <div class="math notranslate nohighlight" id="equation-eq-ptformula">
-<span class="eqno">(29.8)<a class="headerlink" href="#equation-eq-ptformula" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29.8)<a class="headerlink" href="#equation-eq-ptformula" title="Link to this equation">#</a></span>\[
 p_T =    \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}  = \gamma_1^{-1} m_0  \left\{\frac{1}{R_u-\lambda} \right\}
 \]</div>
 <div class="proof remark admonition" id="remark-0">
@@ -406,7 +473,7 @@ p_T =    \frac{m_0}{\gamma_1 - \overline g - \gamma_2 R_u^{-1}}  = \gamma_1^{-1}
 </section>
 </div></section>
 <section id="id10">
-<h2><span class="section-number">29.7. </span>算法（伪代码）<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.7. </span>算法（伪代码）<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>现在我们详细地以伪代码形式描述一个计算算法。</p>
 <p>为了计算一个均衡，我们使用以下算法。</p>
 <div class="proof algorithm admonition" id="algorithm-1">
@@ -456,7 +523,7 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </section>
 </div></section>
 <section id="id11">
-<h2><span class="section-number">29.8. </span>计算示例<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">29.8. </span>计算示例<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>让我们通过一个具体示例来演示模型的计算过程。我们将参数设置为与 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a> 讲座中相同的稳态值，以便于比较结果。</p>
 <p>基本参数设为 <span class="math notranslate nohighlight">\(\gamma_1=100, \gamma_2=50, g=3.0\)</span>。注意，在之前的讲座中我们固定了 <span class="math notranslate nohighlight">\(m_0=100\)</span>，但在本模型中，<span class="math notranslate nohighlight">\(M_T\)</span> 是内生决定的。</p>
 <p>对于新参数，我们将设置 <span class="math notranslate nohighlight">\(\tilde R = 1.01, \check B_{-1} = 0, \check m_0 = 105, T = 5\)</span>。</p>
@@ -467,10 +534,10 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 <p>首先，我们需要导入必要的库：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -488,7 +555,7 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
                                <span class="s2">&quot;R_tilde&quot;</span><span class="p">,</span> <span class="s2">&quot;m0_check&quot;</span><span class="p">,</span> <span class="s2">&quot;Bm1_check&quot;</span><span class="p">,</span>
                                <span class="s2">&quot;T&quot;</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">γ1</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">γ2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_model</span><span class="p">(</span><span class="n">γ1</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">γ2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
                  <span class="n">R_tilde</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span>
                  <span class="n">Bm1_check</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">m0_check</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span>
                  <span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -510,7 +577,7 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">S</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">S</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
 
     <span class="c1"># 解包参数</span>
     <span class="n">γ1</span><span class="p">,</span> <span class="n">γ2</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">γ1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">γ2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span>
@@ -541,7 +608,7 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_fixed_point</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">p0_guess</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">θ</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_fixed_point</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">p0_guess</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">θ</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
 
     <span class="n">p0</span> <span class="o">=</span> <span class="n">p0_guess</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span>
@@ -580,13 +647,14 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png"><img alt="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png" src="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png"><img alt="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png" src="_images/c4ec092dbf026ed40b71147fe0c0728fb6aebfcab1ba4fb4ca035fb2adb744ea.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>现在让我们编写代码来试验前面描述的在时刻 <span class="math notranslate nohighlight">\(0\)</span> 的公开市场操作。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">p0_guess</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">p0_guess</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># 解包参数</span>
     <span class="n">γ1</span><span class="p">,</span> <span class="n">γ2</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">γ1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">γ2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">g</span>
     <span class="n">R_tilde</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">R_tilde</span>
@@ -635,7 +703,7 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_path</span><span class="p">(</span><span class="n">m0_arr</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_path</span><span class="p">(</span><span class="n">m0_arr</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;$p_t$&#39;</span><span class="p">,</span> <span class="s1">&#39;$m_t$&#39;</span><span class="p">,</span> <span class="s1">&#39;$b_t$&#39;</span><span class="p">,</span> <span class="s1">&#39;$R_t$&#39;</span><span class="p">]</span>
@@ -661,9 +729,10 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="fig-unpl1">
-<a class="reference internal image-reference" href="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png"><img alt="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png" src="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png"><img alt="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png" src="_images/6bbe672cab38c9a9ea4e50aa6a2c01f216a1cd8bce78776465b76353fe795f05.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 29.1 </span><span class="caption-text">不愉快的算术</span><a class="headerlink" href="#fig-unpl1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 29.1 </span><span class="caption-text">不愉快的算术</span><a class="headerlink" href="#fig-unpl1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1108,6 +1177,35 @@ p_{0,j+1} = (1-\theta)  {\mathcal S}(p_{0,j})  + \theta  p_{0,j},
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/unpleasant.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/unpleasant.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/unpleasant.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

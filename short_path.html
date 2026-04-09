@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>37. 最短路径 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'short_path';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/short_path.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/short_path.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/short_path.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/short_path.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -184,17 +224,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -204,10 +250,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">最短路径</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -220,6 +265,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/short_path.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -235,9 +302,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">37. </span>最短路径<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">37. </span>最短路径<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="index-0">
-<span id="id2"></span><h2><span class="section-number">37.1. </span>概述<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">37.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
 <p>最短路径问题是数学和计算机科学中的一个经典问题，其应用包括：</p>
 <ul class="simple">
 <li><p>经济学（顺序决策、社会网络分析等）</p></li>
@@ -256,14 +323,14 @@
 <p>接下来我们唯一需要的科学库是NumPy：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">37.2. </span>问题概述<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">37.2. </span>问题概述<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>最短路径问题是寻找如何以最小成本从<a class="reference external" href="https://baike.baidu.com/item/%E5%9B%BE/13018767">图</a>中的一个指定节点遍历到另一个节点。</p>
 <p>考虑下面这个图</p>
 <figure class="align-default">
@@ -296,7 +363,7 @@
 </figure>
 </section>
 <section id="id4">
-<h2><span class="section-number">37.3. </span>寻找最低成本路径<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">37.3. </span>寻找最低成本路径<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>对于更大的图，我们需要一个系统性的解决方案。</p>
 <p>让 <span class="math notranslate nohighlight">\(J(v)\)</span> 表示从节点 <span class="math notranslate nohighlight">\(v\)</span> 出发的最小成本，理解为如果我们选择最佳路线，从 <span class="math notranslate nohighlight">\(v\)</span> 出发的总成本。</p>
 <p>假设我们知道每个节点 <span class="math notranslate nohighlight">\(v\)</span> 的 <span class="math notranslate nohighlight">\(J(v)\)</span>，如下图所示（基于前面示例中的图）。</p>
@@ -310,7 +377,7 @@
 <li><p>从当前节点 <span class="math notranslate nohighlight">\(v\)</span>，移动到解决以下问题的任何节点</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-spprebell">
-<span class="eqno">(37.1)<a class="headerlink" href="#equation-spprebell" title="Permalink to this equation">#</a></span>\[\min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
+<span class="eqno">(37.1)<a class="headerlink" href="#equation-spprebell" title="Link to this equation">#</a></span>\[\min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
 <p>其中</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F_v\)</span> 是可以从 <span class="math notranslate nohighlight">\(v\)</span> 一步到达的节点集合。</p></li>
@@ -322,21 +389,21 @@
 <p>经过一些思考，你会确信对于每个节点 <span class="math notranslate nohighlight">\(v\)</span>，
 函数 <span class="math notranslate nohighlight">\(J\)</span> 满足</p>
 <div class="math notranslate nohighlight" id="equation-spbell">
-<span class="eqno">(37.2)<a class="headerlink" href="#equation-spbell" title="Permalink to this equation">#</a></span>\[J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
+<span class="eqno">(37.2)<a class="headerlink" href="#equation-spbell" title="Link to this equation">#</a></span>\[J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
 <p>这被称为<strong>贝尔曼方程</strong>，以数学家<a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%96%B9%E7%A8%8B/5500990">理查德·贝尔曼</a>的名字命名。</p>
 <p>贝尔曼方程可以被理解为<span class="math notranslate nohighlight">\(J\)</span>必须满足的一个限制条件。</p>
 <p>我们现在想要做的是利用这个限制条件来计算<span class="math notranslate nohighlight">\(J\)</span>。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">37.4. </span>求解最小成本函数<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">37.4. </span>求解最小成本函数<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>让我们一起学习一个计算<span class="math notranslate nohighlight">\(J\)</span>的算法，然后思考如何实现它。</p>
 <section id="id6">
-<h3><span class="section-number">37.4.1. </span>算法<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">37.4.1. </span>算法<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>找到<span class="math notranslate nohighlight">\(J\)</span>的标准算法是从一个初始猜测开始，然后进行迭代。</p>
 <p>这是解决非线性方程的标准方法，通常被称为<strong>连续近似法</strong>。</p>
 <p>我们的初始猜测将是</p>
 <div class="math notranslate nohighlight" id="equation-spguess">
-<span class="eqno">(37.3)<a class="headerlink" href="#equation-spguess" title="Permalink to this equation">#</a></span>\[J_0(v) = 0 \text{ for all } v\]</div>
+<span class="eqno">(37.3)<a class="headerlink" href="#equation-spguess" title="Link to this equation">#</a></span>\[J_0(v) = 0 \text{ for all } v\]</div>
 <p>现在</p>
 <ol class="arabic simple">
 <li><p>设 <span class="math notranslate nohighlight">\(n = 0\)</span></p></li>
@@ -347,7 +414,7 @@
 <p>虽然我们在此省略了证明，但我们将在其他动态规划讲座中证明类似的结论。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">37.4.2. </span>实现<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">37.4.2. </span>实现<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>有了算法是一个好的开始，但我们还需要考虑如何在计算机上实现它。</p>
 <p>首先，对于成本函数 <span class="math notranslate nohighlight">\(c\)</span>，我们将其实现为矩阵 <span class="math notranslate nohighlight">\(Q\)</span>，其中典型元素为</p>
 <div class="math notranslate nohighlight">
@@ -370,7 +437,7 @@ Q(1, 2)
 <p>例如，对于上面的简单图，我们设置</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">inf</span>
 
 <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">inf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">3</span><span class="p">,</span>   <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">],</span>
               <span class="p">[</span><span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span>   <span class="mi">6</span><span class="p">,</span>   <span class="n">inf</span><span class="p">,</span> <span class="n">inf</span><span class="p">],</span>
@@ -425,7 +492,7 @@ Q(1, 2)
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">37.5. </span>练习<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">37.5. </span>练习<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="short_path_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 37.1 </span></p>
@@ -568,7 +635,7 @@ Q(1, 2)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">destination_node</span> <span class="o">=</span> <span class="mi">99</span>
 
-<span class="k">def</span> <span class="nf">map_graph_to_distance_matrix</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_graph_to_distance_matrix</span><span class="p">(</span><span class="n">in_file</span><span class="p">):</span>
 
     <span class="c1"># 首先，让我们用无穷大初始化距离矩阵Q</span>
     <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
@@ -599,11 +666,11 @@ Q(1, 2)
 <p>最小化步骤被向量化以提高速度。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bellman</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bellman</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Q</span> <span class="o">+</span> <span class="n">J</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">compute_cost_to_go</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_cost_to_go</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
     <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span>      <span class="c1"># 初始猜测</span>
     <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">500</span>
@@ -626,7 +693,7 @@ Q(1, 2)
 <p>最后，这里有一个函数，它使用代价函数来获取最优路径（及其成本）。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_best_path</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_best_path</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
     <span class="n">sum_costs</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">current_node</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">current_node</span> <span class="o">!=</span> <span class="n">destination_node</span><span class="p">:</span>
@@ -1128,6 +1195,35 @@ Q(1, 2)
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/short_path.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/short_path.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/short_path.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

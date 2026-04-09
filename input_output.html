@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>39. 输入-输出模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'input_output';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/input_output.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/input_output.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/input_output.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/input_output.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -193,17 +233,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -213,10 +259,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">输入-输出模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -229,6 +274,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/input_output.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -240,9 +307,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">39. </span>输入-输出模型<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">39. </span>输入-输出模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">39.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>在我们学习输入-输出模型之前，本讲座需要以下导入和安装。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -259,9 +326,7 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon_book_networks
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading quantecon_book_networks-1.5-py2.py3-none-any.whl.metadata (1.7 kB)
+  Downloading quantecon_book_networks-1.5-py2.py3-none-any.whl.metadata (1.7 kB)
 Requirement already satisfied: numpy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon_book_networks) (1.26.4)
 Requirement already satisfied: scipy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon_book_networks) (1.13.1)
 Requirement already satisfied: pandas in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon_book_networks) (2.2.2)
@@ -276,9 +341,7 @@ Requirement already satisfied: packaging&gt;=20.0 in /home/runner/miniconda3/env
 Requirement already satisfied: pillow&gt;=8 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon_book_networks) (10.4.0)
 Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon_book_networks) (3.1.2)
 Requirement already satisfied: python-dateutil&gt;=2.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from matplotlib-&gt;quantecon_book_networks) (2.9.0.post0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon_book_networks) (2024.1)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon_book_networks) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-&gt;quantecon_book_networks) (2023.3)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from wbgapi-&gt;quantecon_book_networks) (2.32.3)
 Requirement already satisfied: PyYAML in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from wbgapi-&gt;quantecon_book_networks) (6.0.1)
@@ -288,18 +351,10 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;wbgapi-&gt;quantecon_book_networks) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;wbgapi-&gt;quantecon_book_networks) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;wbgapi-&gt;quantecon_book_networks) (2024.8.30)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading quantecon_book_networks-1.5-py2.py3-none-any.whl (514 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: quantecon_book_networks
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed quantecon_book_networks-1.5
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
+Downloading quantecon_book_networks-1.5-py2.py3-none-any.whl (514 kB)
+Installing collected packages: quantecon_book_networks
+Successfully installed quantecon_book_networks-1.5
+Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
@@ -311,9 +366,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/env
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas-datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.0)
+Requirement already satisfied: pandas-datareader in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.0)
 Requirement already satisfied: lxml in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-datareader) (5.2.1)
 Requirement already satisfied: pandas&gt;=0.23 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-datareader) (2.2.2)
 Requirement already satisfied: requests&gt;=2.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas-datareader) (2.32.3)
@@ -333,15 +386,15 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks.input_output</span> <span class="k">as</span> <span class="nn">qbn_io</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks.plotting</span> <span class="k">as</span> <span class="nn">qbn_plt</span>
-<span class="kn">import</span> <span class="nn">quantecon_book_networks.data</span> <span class="k">as</span> <span class="nn">qbn_data</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Polygon</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks.input_output</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qbn_io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks.plotting</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qbn_plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon_book_networks.data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qbn_data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
 
 <span class="n">quantecon_book_networks</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;matplotlib&quot;</span><span class="p">)</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParamsDefault</span><span class="p">)</span>
@@ -361,7 +414,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_coefficient_matrices</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_coefficient_matrices</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   通过以下方式从Z和X构建系数矩阵A和F：</span>
 
@@ -418,21 +471,22 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="us-15sectors">
-<a class="reference internal image-reference" href="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png"><img alt="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png" src="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png"><img alt="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png" src="_images/a09cc809a4350b89f92871d5d0fe9e24fc415d8db079c0b0e9e1481709251a91.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 39.1 </span><span class="caption-text">美国15个生产部门之间的联系网络</span><a class="headerlink" href="#us-15sectors" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39.1 </span><span class="caption-text">美国15个生产部门之间的联系网络</span><a class="headerlink" href="#us-15sectors" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-center head"><p>标签</p></th>
-<th class="text-center head"><p>行业</p></th>
-<th class="text-center head"><p>标签</p></th>
-<th class="text-center head"><p>行业</p></th>
-<th class="text-center head"><p>标签</p></th>
-<th class="text-center head"><p>行业</p></th>
+<tr class="row-odd"><th class="head text-center"><p>标签</p></th>
+<th class="head text-center"><p>行业</p></th>
+<th class="head text-center"><p>标签</p></th>
+<th class="head text-center"><p>行业</p></th>
+<th class="head text-center"><p>标签</p></th>
+<th class="head text-center"><p>行业</p></th>
 </tr>
 </thead>
 <tbody>
@@ -480,7 +534,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 <p>在介绍投入产出模型之后，我们将描述它与<a class="reference internal" href="lp_intro.html"><span class="doc">线性规划讲座</span></a>的一些联系。</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">39.2. </span>投入产出分析<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.2. </span>投入产出分析<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>设</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x_0\)</span>为单一外生生产要素的数量，例如劳动力</p></li>
@@ -498,7 +552,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
     x_j = \min_{i \in \{0, \ldots , n \}} \left( \frac{z_{ij}}{a_{ij}}\right)
 \]</div>
 <section id="id4">
-<h3><span class="section-number">39.2.1. </span>两种产品<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">39.2.1. </span>两种产品<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>为说明起见，我们首先设<span class="math notranslate nohighlight">\(n =2\)</span>并制定以下网络。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -545,7 +599,8 @@ Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quant
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png"><img alt="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png" src="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png"><img alt="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png" src="_images/c9c282cdc521360a6f44f1e3ec33143bdb1a166a775e621dbd013479195b960f.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p><em>可行分配必须满足</em></p>
@@ -597,12 +652,13 @@ a_{01} x_1 + a_{02} x_2 &amp; \leq x_0
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png"><img alt="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png" src="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png"><img alt="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png" src="_images/2dc6782b8763b78563d6ecf7745c8733c4aecfff5466cf1798cb4e29736c172b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>生产的约束条件是</p>
 <div class="math notranslate nohighlight" id="equation-eq-inout-1">
-<span class="eqno">(39.1)<a class="headerlink" href="#equation-eq-inout-1" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(39.1)<a class="headerlink" href="#equation-eq-inout-1" title="Link to this equation">#</a></span>\[
 \begin{aligned}
 (I - A) x &amp;  \geq d \cr
 a_0^\top x &amp; \leq x_0
@@ -611,7 +667,7 @@ a_0^\top x &amp; \leq x_0
 <p>其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的矩阵，其每个值为 <span class="math notranslate nohighlight">\(a_{ij}\)</span>，而 <span class="math notranslate nohighlight">\(a_0^\top = \begin{bmatrix} a_{01} &amp; \cdots &amp; a_{0n} \end{bmatrix}\)</span>。</p>
 <p>如果我们解 <a class="reference internal" href="#equation-eq-inout-1">(39.1)</a> 的第一组方程，得到总产出 <span class="math notranslate nohighlight">\(x\)</span>，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-eq-inout-2">
-<span class="eqno">(39.2)<a class="headerlink" href="#equation-eq-inout-2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(39.2)<a class="headerlink" href="#equation-eq-inout-2" title="Link to this equation">#</a></span>\[
 x = (I -A)^{-1} d \equiv L d
 \]</div>
 <p>其中矩阵 <span class="math notranslate nohighlight">\(L = (I-A)^{-1}\)</span> 有时被称为 <strong>列昂惕夫逆矩阵</strong>。</p>
@@ -628,7 +684,7 @@ x = (I -A)^{-1} d \equiv L d
 <section class="example-content" id="proof-content">
 <p>例如，一个包含两种商品的经济体</p>
 <div class="math notranslate nohighlight" id="equation-eq-inout-ex">
-<span class="eqno">(39.3)<a class="headerlink" href="#equation-eq-inout-ex" title="Permalink to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(39.3)<a class="headerlink" href="#equation-eq-inout-ex" title="Link to this equation">#</a></span>\[\begin{split}
 A =
 \begin{bmatrix}
     0.1 &amp; 40 \\
@@ -711,7 +767,7 @@ d =
 </section>
 </section>
 <section id="id5">
-<h2><span class="section-number">39.3. </span>生产可能性边界<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.3. </span>生产可能性边界<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="#equation-eq-inout-1">(39.1)</a>的第二个等式可以写成</p>
 <div class="math notranslate nohighlight">
 \[
@@ -719,7 +775,7 @@ a_0^\top x = x_0
 \]</div>
 <p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-inout-frontier">
-<span class="eqno">(39.4)<a class="headerlink" href="#equation-eq-inout-frontier" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(39.4)<a class="headerlink" href="#equation-eq-inout-frontier" title="Link to this equation">#</a></span>\[
 A_0^\top d = x_0
 \]</div>
 <p>其中</p>
@@ -763,7 +819,7 @@ a_0^\top = \begin{bmatrix}
 \]</div>
 </section>
 <section id="id6">
-<h2><span class="section-number">39.4. </span>价格<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.4. </span>价格<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p><span id="id7">[<a class="reference internal" href="zreferences.html#id59" title="Robert Dorfman, Paul A. Samuelson, and Robert M. Solow. Linear Programming and Economic Analysis: Revised Edition. McGraw Hill, New York, 1958.">Dorfman <em>et al.</em>, 1958</a>]</span> 认为，<span class="math notranslate nohighlight">\(n\)</span> 种商品的相对价格必须满足</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -780,7 +836,7 @@ p = A^\top p + a_0 w
 <p>这表明每种最终商品的价格等于生产的总成本，包括中间投入品的成本 <span class="math notranslate nohighlight">\(A^\top p\)</span> 和劳动力成本 <span class="math notranslate nohighlight">\(a_0 w\)</span>。</p>
 <p>这个方程可以写成</p>
 <div class="math notranslate nohighlight" id="equation-eq-inout-price">
-<span class="eqno">(39.5)<a class="headerlink" href="#equation-eq-inout-price" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(39.5)<a class="headerlink" href="#equation-eq-inout-price" title="Link to this equation">#</a></span>\[
 (I - A^\top) p = a_0 w
 \]</div>
 <p>这意味着</p>
@@ -792,7 +848,7 @@ p = (I - A^\top)^{-1} a_0 w
 <p>这种联系在经典线性规划及其对偶问题中再次出现。</p>
 </section>
 <section id="id8">
-<h2><span class="section-number">39.5. </span>线性规划<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.5. </span>线性规划<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p><strong>原始问题</strong>是</p>
 <div class="math notranslate nohighlight">
 \[
@@ -861,12 +917,13 @@ w a_0^\top x^* = p^* d
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png"><img alt="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png" src="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png"><img alt="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png" src="_images/85efc432dcad748ec3f6db1b05bb6822f95caad24c6cf41fe9ac4dd9d5d93567.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id9">
-<h2><span class="section-number">39.6. </span>列昂惕夫逆矩阵<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.6. </span>列昂惕夫逆矩阵<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>我们已经讨论过，总产出 <span class="math notranslate nohighlight">\(x\)</span> 由公式 <a class="reference internal" href="#equation-eq-inout-2">(39.2)</a> 给出，其中 <span class="math notranslate nohighlight">\(L\)</span> 被称为列昂惕夫逆矩阵。</p>
 <p>回顾 <a class="reference internal" href="eigen_II.html"><span class="doc">诺伊曼级数引理</span></a>，它指出如果谱半径 <span class="math notranslate nohighlight">\(r(A)&lt;1\)</span>，则 <span class="math notranslate nohighlight">\(L\)</span> 存在。
 事实上</p>
@@ -875,7 +932,7 @@ w a_0^\top x^* = p^* d
 L = \sum_{i=0}^{\infty} A^i
 \]</div>
 <section id="id10">
-<h3><span class="section-number">39.6.1. </span>需求冲击<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">39.6.1. </span>需求冲击<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>现在我们考虑需求冲击 <span class="math notranslate nohighlight">\(\Delta d\)</span> 的影响，它将需求从 <span class="math notranslate nohighlight">\(d_0\)</span> 转变为 <span class="math notranslate nohighlight">\(d_1 = d_0 + \Delta d\)</span>。
 总产出从 <span class="math notranslate nohighlight">\(x_0 = Ld_0\)</span> 转变为 <span class="math notranslate nohighlight">\(x_1 = Ld_1\)</span>。</p>
 <p>如果 <span class="math notranslate nohighlight">\(r(A) &lt; 1\)</span>，则存在解，且</p>
@@ -887,7 +944,7 @@ L = \sum_{i=0}^{\infty} A^i
 </section>
 </section>
 <section id="id11">
-<h2><span class="section-number">39.7. </span>图论的应用<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.7. </span>图论的应用<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>我们可以通过应用<a class="reference internal" href="networks.html"><span class="doc">图论</span></a>来进一步研究投入产出网络。</p>
 <p>投入产出网络可以通过邻接矩阵 <span class="math notranslate nohighlight">\(A\)</span> 导出的加权有向图来表示。</p>
 <p>节点集 <span class="math notranslate nohighlight">\(V = [n]\)</span> 是部门列表，边集由以下给出：</p>
@@ -898,7 +955,7 @@ E = \{(i,j) \in V \times V : a_{ij}&gt;0\}
 <p>在 <a class="reference internal" href="#us-15sectors"><span class="std std-numref">Fig. 39.1</span></a> 中，权重由箭头的宽度表示，与相应的投入产出系数成正比。</p>
 <p>现在我们可以使用中心性度量来对部门进行排序，并讨论它们相对于其他部门的重要性。</p>
 <section id="id12">
-<h3><span class="section-number">39.7.1. </span>特征向量中心性<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">39.7.1. </span>特征向量中心性<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>节点 <span class="math notranslate nohighlight">\(i\)</span> 的特征向量中心性由以下公式衡量：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -923,7 +980,8 @@ E = \{(i,j) \in V \times V : a_{ij}&gt;0\}
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png"><img alt="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png" src="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png"><img alt="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png" src="_images/c1866a9f90e53156bf20259ce984cf6a49a80688532625a21404b971388a6f0e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>较高的指标表示作为供应商的重要性更高。</p>
@@ -931,7 +989,7 @@ E = \{(i,j) \in V \times V : a_{ij}&gt;0\}
 <p>上图表明制造业是美国经济中最主导的行业。</p>
 </section>
 <section id="id13">
-<h3><span class="section-number">39.7.2. </span>产出乘数<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">39.7.2. </span>产出乘数<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>在投入产出网络中对行业进行排名的另一种方法是通过产出乘数。</p>
 <p>行业 <span class="math notranslate nohighlight">\(j\)</span> 的<strong>产出乘数</strong>，记为 <span class="math notranslate nohighlight">\(\mu_j\)</span>，通常定义为行业 <span class="math notranslate nohighlight">\(j\)</span> 需求单位变化所产生的整个行业范围内的总影响。</p>
 <p>早些时候在讨论需求冲击时，我们得出结论：对于 <span class="math notranslate nohighlight">\(L = (l_{ij})\)</span>，元素 <span class="math notranslate nohighlight">\(l_{ij}\)</span> 表示行业 <span class="math notranslate nohighlight">\(j\)</span> 需求单位变化对行业 <span class="math notranslate nohighlight">\(i\)</span> 的影响。</p>
@@ -969,14 +1027,15 @@ E = \{(i,j) \in V \times V : a_{ij}&gt;0\}
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png"><img alt="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png" src="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png"><img alt="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png" src="_images/45a743574eb03ec287795b1400e12436839c80eb15983e262bf4ea566c47e484.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们观察到制造业和农业是排名最高的行业。</p>
 </section>
 </section>
 <section id="id14">
-<h2><span class="section-number">39.8. </span>练习<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">39.8. </span>练习<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="io_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 39.1 </span></p>
@@ -1504,6 +1563,35 @@ a_{ij} = \frac{z_{ij}}{x_j}
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/input_output.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/input_output.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/input_output.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>35. 用矩阵代数表示的单变量时间序列 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'time_series_with_matrices';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/time_series_with_matrices.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/time_series_with_matrices.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/time_series_with_matrices.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/time_series_with_matrices.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -181,17 +221,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -201,10 +247,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">用矩阵代数表示的单变量时间序列</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -217,6 +262,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/time_series_with_matrices.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -228,9 +295,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">35. </span>用矩阵代数表示的单变量时间序列<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">35. </span>用矩阵代数表示的单变量时间序列<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲使用矩阵来解决线性差分方程。</p>
 <p>作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 <span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span> 中的<strong>二阶线性差分方程</strong>，该文章引入了<strong>乘数加速器</strong>模型。</p>
 <p>这个模型对早期美国凯恩斯主义宏观经济学的计量经济学研究产生了重要影响。</p>
@@ -241,9 +308,9 @@
 <p>让我们先导入所需的Python包：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
 
 <span class="c1"># 设置默认图形大小</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -256,11 +323,11 @@
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">35.2. </span>萨缪尔森的模型<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.2. </span>萨缪尔森的模型<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>设 <span class="math notranslate nohighlight">\(t = 0, \pm 1, \pm 2, \ldots\)</span> 为时间。</p>
 <p>对于 <span class="math notranslate nohighlight">\(t=1, 2, 3, \ldots, T\)</span>，假设</p>
 <div class="math notranslate nohighlight" id="equation-tswm-1">
-<span class="eqno">(35.1)<a class="headerlink" href="#equation-tswm-1" title="Permalink to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2}\]</div>
+<span class="eqno">(35.1)<a class="headerlink" href="#equation-tswm-1" title="Link to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2}\]</div>
 <p>我们假设 <span class="math notranslate nohighlight">\(y_0\)</span> 和 <span class="math notranslate nohighlight">\(y_{-1}\)</span> 是给定的数字，我们将其作为<strong>初始条件</strong>。</p>
 <p>在萨缪尔森的模型中，<span class="math notranslate nohighlight">\(y_t\)</span> 表示 <strong>国民收入</strong> 或者 <strong>国内生产总值</strong>（GDP）在时间 <span class="math notranslate nohighlight">\(t\)</span> 的测量值。</p>
 <p>方程 <a class="reference internal" href="#equation-tswm-1">(35.1)</a> 称为 <strong>二阶线性差分方程</strong>，因为它包含了两个滞后值。</p>
@@ -441,7 +508,8 @@ y = A^{-1} b
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png"><img alt="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" src="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png"><img alt="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" src="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>通过在<a class="reference internal" href="#equation-tswm-1">(35.1)</a>中设 <span class="math notranslate nohighlight">\(y_t = y_{t-1} = y_{t-2} = y^*\)</span>，可以得到 <span class="math notranslate nohighlight">\(y_t\)</span> 的 <a class="reference external" href="https://intro.quantecon.org/scalar_dynam.html#scalar-dynam-steady-state" title="(in Project name not set)"><span class="xref std std-ref">*稳态*</span></a> 值 <span class="math notranslate nohighlight">\(y^*\)</span>。</p>
@@ -481,15 +549,16 @@ y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png"><img alt="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" src="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png"><img alt="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" src="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id5">
-<h2><span class="section-number">35.3. </span>添加随机项<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.3. </span>添加随机项<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>为了让这个例子有趣一些，我们将遵循经济学家<a class="reference external" href="https://baike.baidu.com/item/%E5%B0%A4%E9%87%91%C2%B7%E6%96%AF%E5%8B%92%E8%8C%A8%E5%9F%BA/15727527">尤金·斯卢茨基</a>和<a class="reference external" href="https://baike.baidu.com/item/%E6%8B%89%E6%A0%BC%E7%BA%B3%C2%B7%E5%BC%97%E9%87%8C%E5%B8%8C/11051879">拉格纳·弗里希</a>的方法，用以下<strong>二阶随机线性差分方程</strong>替换我们原来的二阶差分方程：</p>
 <div class="math notranslate nohighlight" id="equation-tswm-2">
-<span class="eqno">(35.2)<a class="headerlink" href="#equation-tswm-2" title="Permalink to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t\]</div>
+<span class="eqno">(35.2)<a class="headerlink" href="#equation-tswm-2" title="Link to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(u_{t} \sim N\left(0, \sigma_{u}^{2}\right)\)</span> 并且是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> – 相互独立且服从相同分布。</p>
 <p>我们将把这些 <span class="math notranslate nohighlight">\(T\)</span> 个方程堆叠成一个以矩阵代数表示的系统。</p>
 <p>让我们定义随机向量</p>
@@ -504,13 +573,13 @@ u_{T}
 \end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(A, b, y\)</span> 定义如上，现在假设 <span class="math notranslate nohighlight">\(y\)</span> 由系统</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqar">
-<span class="eqno">(35.3)<a class="headerlink" href="#equation-eq-eqar" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(35.3)<a class="headerlink" href="#equation-eq-eqar" title="Link to this equation">#</a></span>\[
 A y = b + u
 \]</div>
 <p>所支配</p>
 <p><span class="math notranslate nohighlight">\(y\)</span> 的解变为</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqma">
-<span class="eqno">(35.4)<a class="headerlink" href="#equation-eq-eqma" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(35.4)<a class="headerlink" href="#equation-eq-eqma" title="Link to this equation">#</a></span>\[
 y = A^{-1} \left(b + u\right)
 \]</div>
 <p>让我们在Python中尝试一下。</p>
@@ -534,7 +603,8 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7ff3eee07df17e43529e85f24e9e55ee3e1acb099c460e2748b584ad043b093d.png"><img alt="_images/7ff3eee07df17e43529e85f24e9e55ee3e1acb099c460e2748b584ad043b093d.png" src="_images/7ff3eee07df17e43529e85f24e9e55ee3e1acb099c460e2748b584ad043b093d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png"><img alt="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png" src="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>上面生成的时间序列与许多发达国家近几十年的实际GDP数据（去除趋势后）有着惊人的相似性。</p>
@@ -557,7 +627,8 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/49a9f2a180b4037f8d2d8ad5bf6d3fd4cd3823e4c48310d2dee6fc0046451692.png"><img alt="_images/49a9f2a180b4037f8d2d8ad5bf6d3fd4cd3823e4c48310d2dee6fc0046451692.png" src="_images/49a9f2a180b4037f8d2d8ad5bf6d3fd4cd3823e4c48310d2dee6fc0046451692.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png"><img alt="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png" src="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>同样考虑 <span class="math notranslate nohighlight">\(y_{0}\)</span> 和 <span class="math notranslate nohighlight">\(y_{-1}\)</span> 处于稳态的情况。</p>
@@ -579,12 +650,13 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/64f7f6ed41cb66a950d3e8ef331b10baa2cc4e191e55c1d97c72da3ec7c0f045.png"><img alt="_images/64f7f6ed41cb66a950d3e8ef331b10baa2cc4e191e55c1d97c72da3ec7c0f045.png" src="_images/64f7f6ed41cb66a950d3e8ef331b10baa2cc4e191e55c1d97c72da3ec7c0f045.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png"><img alt="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png" src="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id6">
-<h2><span class="section-number">35.4. </span>计算总体矩<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.4. </span>计算总体矩<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>我们可以应用多元正态分布的标准公式来计算我们的时间序列模型</p>
 <div class="math notranslate nohighlight">
 \[
@@ -615,14 +687,14 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 <p>让我们编写一个Python类来计算均值向量 <span class="math notranslate nohighlight">\(\mu_y\)</span> 和协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma_y\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">population_moments</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">population_moments</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    计算人群矩 mu_y, Sigma_y.</span>
 <span class="sd">    ---------</span>
 <span class="sd">    参数:</span>
 <span class="sd">    alpha0, alpha1, alpha2, T, y_1, y0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α_0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α_0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> 
                        <span class="n">α_1</span><span class="o">=</span><span class="mf">1.53</span><span class="p">,</span> 
                        <span class="n">α_2</span><span class="o">=-</span><span class="mf">.9</span><span class="p">,</span> 
                        <span class="n">T</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> 
@@ -650,7 +722,7 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A_inv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A_inv</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">T</span>
     
-    <span class="k">def</span> <span class="nf">sample_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        提供一个大小为 n 的 y 样本。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -660,7 +732,7 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 
         <span class="k">return</span> <span class="n">ys</span>
 
-    <span class="k">def</span> <span class="nf">get_moments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_moments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        计算 y 的总体矩。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -703,7 +775,8 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/512383190f6002c4fc8222085960d2215168ede90188f9f5895fab501462bf17.png"><img alt="_images/512383190f6002c4fc8222085960d2215168ede90188f9f5895fab501462bf17.png" src="_images/512383190f6002c4fc8222085960d2215168ede90188f9f5895fab501462bf17.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png"><img alt="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png" src="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>从图中可以观察到一个有趣的现象：随着时间 <span class="math notranslate nohighlight">\(t\)</span> 的推移，不同样本路径之间的离散程度在逐渐减小。</p>
@@ -717,7 +790,8 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png"><img alt="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" src="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png"><img alt="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" src="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>从图中我们可以看到，总体方差随时间增加，最终趋于一个稳定值。这种收敛行为反映了系统的内在稳定性。</p>
@@ -785,7 +859,7 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 <p>通过观察不同时间段的<span class="math notranslate nohighlight">\(\Sigma_y\)</span>的非对角线元素，我们可以学到很多关于这个过程的知识，但我们在这里暂时先不展开。</p>
 </section>
 <section id="id7">
-<h2><span class="section-number">35.5. </span>移动平均表示<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.5. </span>移动平均表示<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>让我们来研究 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 矩阵的结构。这个矩阵的形状会告诉我们一些关于系统动态特性的重要信息。</p>
 <ul class="simple">
 <li><p>它是三角形矩阵、接近三角形，还是其他形式 <span class="math notranslate nohighlight">\(\ldots\)</span>？</p></li>
@@ -826,7 +900,7 @@ y_{t+1}=\sum_{i=1}^{t+1}\tilde{A}_{t+1,i}b_{i}+\sum_{i=1}^{t}\tilde{A}_{t+1,i}u_
 <p>我们可以看到，系统既可以用移动平均形式 <a class="reference internal" href="#equation-eq-eqma">(35.4)</a> 表示，也可以用自回归形式 <a class="reference internal" href="#equation-eq-eqar">(35.3)</a> 表示。这两种表示方式描述了同一个随机过程，只是从不同的角度来看。</p>
 </section>
 <section id="id8">
-<h2><span class="section-number">35.6. </span>从后视到前瞻<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">35.6. </span>从后视到前瞻<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们分析的萨缪尔森模型是一个<em>后视(backward-looking)<em>模型 - 给定</em>初始条件</em>后，系统就会向前演化。</p>
 <p>接下来让我们转向一个*前瞻(forward-looking)*模型，这类模型在宏观经济学和金融学中被广泛使用。</p>
 <p>我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的<em>完全预见</em>模型。</p>
@@ -931,7 +1005,8 @@ y_{T}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png"><img alt="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" src="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png"><img alt="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" src="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>你能解释一下为什么价格的趋势在随时间下降吗？</p>
@@ -951,7 +1026,8 @@ y_{T}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png"><img alt="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" src="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png"><img alt="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" src="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -1386,6 +1462,35 @@ y_{T}
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/time_series_with_matrices.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/time_series_with_matrices.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/time_series_with_matrices.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

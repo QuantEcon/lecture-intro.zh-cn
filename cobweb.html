@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>25. 蛛网模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cobweb';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/cobweb.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/cobweb.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/cobweb.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/cobweb.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -181,17 +221,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -201,10 +247,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">蛛网模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -217,6 +262,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/cobweb.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -228,10 +295,10 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="cobweb">
-<span id="id1"></span><h1><span class="section-number">25. </span>蛛网模型<a class="headerlink" href="#cobweb" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">25. </span>蛛网模型<a class="headerlink" href="#cobweb" title="Link to this heading">#</a></h1>
 <p>蛛网模型是一个描述特定市场中价格和数量及其随时间演变的模型。</p>
 <section id="id2">
-<h2><span class="section-number">25.1. </span>概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>蛛网模型可以追溯到20世纪30年代，虽然简单，但它仍然具有重要意义，因为它展示了 <em>预期</em> 的重要性。</p>
 <p>为了说明模型如何运作以及为什么预期很重要，想象以下场景：</p>
 <p>有一个大豆市场，价格和交易数量取决于买家和卖家的选择。买家由需求曲线表示——在低价时购买更多，高价时购买更少。卖家有一条供应曲线——他们希望在高价时卖出更多，低价时卖出更少。</p>
@@ -244,10 +311,10 @@
 <p>我们将使用以下导入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -257,7 +324,7 @@
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">25.2. </span>历史<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.2. </span>历史<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>关于蛛网循环的早期论文包括<span id="id4">[<a class="reference internal" href="zreferences.html#id279" title="Frederick V. Waugh. Cobweb models. Journal of Farm Economics, 46(4):732–750, 1964.">Waugh, 1964</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span>。
 论文<span id="id6">[<a class="reference internal" href="zreferences.html#id280" title="Arthur A. Harlow. The hog cycle and the cobweb theorem. American Journal of Agricultural Economics, 42(4):842-853, 1960. doi:https://doi.org/10.2307/1235116.">Harlow, 1960</a>]</span>使用蛛网定理解释了1920年至1950年间美国猪肉价格的变化。
 下一个图表复制了该论文中图2的一部分，展示了年度猪肉价格。
@@ -279,12 +346,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png"><img alt="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png" src="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png"><img alt="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png" src="_images/d69153f9447f84b8be81a2ed8b07d12aaffb3d4672d80aa8d1050736eba22faa.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id7">
-<h2><span class="section-number">25.3. </span>模型<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.3. </span>模型<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>让我们回到假设的大豆市场的讨论，其中价格由供需决定。</p>
 <p>我们假设大豆的需求由以下公式给出：</p>
 <div class="math notranslate nohighlight">
@@ -304,9 +372,9 @@
 <p>首先，我们将参数存储在一个类中，并将上述函数定义为方法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Market</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Market</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">a</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>      <span class="c1"># 需求参数</span>
                  <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>      <span class="c1"># 需求参数</span>
                  <span class="n">c</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>      <span class="c1"># 供给参数</span>
@@ -315,11 +383,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">λ</span> <span class="o">=</span> <span class="n">λ</span>
 
-    <span class="k">def</span> <span class="nf">demand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">demand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
         <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">p</span>
 
-    <span class="k">def</span> <span class="nf">supply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">supply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">λ</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">λ</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span> <span class="o">+</span> <span class="n">d</span>
 </pre></div>
@@ -344,7 +412,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png"><img alt="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" src="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png"><img alt="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" src="_images/60b93f36a60cdd39390a2ffa513c1afbae615374f161ad85f1fd4903790672cc.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>市场均衡要求供给等于需求，即</p>
@@ -361,17 +430,17 @@
 我们假设t时刻的预期价格取决于过去的价格。
 特别地，我们假设</p>
 <div class="math notranslate nohighlight" id="equation-p-et">
-<span class="eqno">(25.1)<a class="headerlink" href="#equation-p-et" title="Permalink to this equation">#</a></span>\[    p^e_t = f(p_{t-1}, p_{t-2})\]</div>
+<span class="eqno">(25.1)<a class="headerlink" href="#equation-p-et" title="Link to this equation">#</a></span>\[    p^e_t = f(p_{t-1}, p_{t-2})\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(f\)</span> 是某个函数。
 因此，我们假设生产者预期t时刻的价格是滞后价格的某个函数，最多滞后2期。
 （当然，我们可以添加更多的滞后期，鼓励读者尝试这样的情况。）
 结合最后两个等式，我们得到价格的动态方程：</p>
 <div class="math notranslate nohighlight" id="equation-price-t">
-<span class="eqno">(25.2)<a class="headerlink" href="#equation-price-t" title="Permalink to this equation">#</a></span>\[    p_t = - \frac{1}{b} [ S(f(p_{t-1}, p_{t-2})) - a]\]</div>
+<span class="eqno">(25.2)<a class="headerlink" href="#equation-price-t" title="Link to this equation">#</a></span>\[    p_t = - \frac{1}{b} [ S(f(p_{t-1}, p_{t-2})) - a]\]</div>
 <p>价格动态取决于参数值以及决定生产者如何形成预期的函数 <span class="math notranslate nohighlight">\(f\)</span>。</p>
 </section>
 <section id="id8">
-<h2><span class="section-number">25.4. </span>简单预期<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.4. </span>简单预期<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>为了进一步分析，我们需要指定函数 <span class="math notranslate nohighlight">\(f\)</span>；也就是说，预期是如何形成的。</p>
 <p>让我们从简单预期开始，它指的是生产者预期下一期的现货价格将是当前期的价格。</p>
 <p>换句话说，</p>
@@ -391,11 +460,11 @@ p_t^e = p_{t-1}
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(g\)</span> 是由以下定义的函数</p>
 <div class="math notranslate nohighlight" id="equation-def-g">
-<span class="eqno">(25.3)<a class="headerlink" href="#equation-def-g" title="Permalink to this equation">#</a></span>\[    g(p) = - \frac{1}{b} [ S(p) - a]\]</div>
+<span class="eqno">(25.3)<a class="headerlink" href="#equation-def-g" title="Link to this equation">#</a></span>\[    g(p) = - \frac{1}{b} [ S(p) - a]\]</div>
 <p>这里我们来表示函数<span class="math notranslate nohighlight">\(g\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_price</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_price</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  该函数在给定当前价格和市场模型的情况下找到下一期价格</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -415,7 +484,7 @@ p_t^e = p_{t-1}
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot45</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot45</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    绘制 45 度图的函数</span>
 <span class="sd">    参数</span>
@@ -499,7 +568,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png"><img alt="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png" src="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png"><img alt="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png" src="_images/086e097aa210548f411ff5089a1dc165bcdd461028ee18b2a4683cda321be80a.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>图表显示了方程 <a class="reference internal" href="#equation-def-g">(25.3)</a> 中定义的函数 <span class="math notranslate nohighlight">\(g\)</span> 和 45 度线。</p>
@@ -518,7 +588,7 @@ p_t^e = p_{t-1}
 <p>为了确认这一点，让我们绘制一个时间序列图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_price</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>             <span class="c1"># 市场模型</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ts_plot_price</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>             <span class="c1"># 市场模型</span>
                   <span class="n">p0</span><span class="p">,</span>                <span class="c1"># 初始价格</span>
                   <span class="n">y_a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">y_b</span><span class="o">=</span> <span class="mi">12</span><span class="p">,</span>    <span class="c1"># 控制 y-轴</span>
                   <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>     <span class="c1"># 时间序列的长度</span>
@@ -554,7 +624,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png"><img alt="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png" src="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png"><img alt="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png" src="_images/90bf03d4869326e180b794ebc1c4ba16e14caaa8cc7ae671aa2ebe38a440f960.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>我们看到一个循环已经形成，而且这个循环是持续的。（您可以通过绘制更长时间范围的图表来确认这一点。）</p>
@@ -567,23 +638,24 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png"><img alt="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png" src="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png"><img alt="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png" src="_images/1e733dbf9e348cb2ec568038d33c3be516464808cd004dd7a5edcea1e32ba968.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id9">
-<h2><span class="section-number">25.5. </span>适应性预期<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.5. </span>适应性预期<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>简单预期相当简单，也在我们发现的周期中起着重要的驱动作用。</p>
 <p>如果预期以不同的方式形成会怎样？</p>
 <p>接下来我们考虑适应性预期。</p>
 <p>这指的是生产者对下一期价格的预期是基于他们上一次对价格的预期和当前现货价格的加权平均。</p>
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-adaptive">
-<span class="eqno">(25.4)<a class="headerlink" href="#equation-pe-adaptive" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p^e_{t-1}
+<span class="eqno">(25.4)<a class="headerlink" href="#equation-pe-adaptive" title="Link to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p^e_{t-1}
 \qquad (0 \leq \alpha \leq 1)\]</div>
 <p>另一种写法为</p>
 <div class="math notranslate nohighlight" id="equation-pe-adaptive-2">
-<span class="eqno">(25.5)<a class="headerlink" href="#equation-pe-adaptive-2" title="Permalink to this equation">#</a></span>\[p_t^e = p^e_{t-1} + \alpha (p_{t-1} - p_{t-1}^e)\]</div>
+<span class="eqno">(25.5)<a class="headerlink" href="#equation-pe-adaptive-2" title="Link to this equation">#</a></span>\[p_t^e = p^e_{t-1} + \alpha (p_{t-1} - p_{t-1}^e)\]</div>
 <p>这个方程有助于说明预期会在以下情况下发生变化：</p>
 <ol class="arabic simple">
 <li><p>当上一期价格高于预期时，预期上调</p></li>
@@ -597,7 +669,7 @@ p_t^e = p_{t-1}
 <p>让我们尝试模拟价格，并观察在不同<span class="math notranslate nohighlight">\(\alpha\)</span>值下的动态变化。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_next_price_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_next_price_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   该函数是在给定当前价格预期和市场模型的情况下计算下一期的价格。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -609,7 +681,7 @@ p_t^e = p_{t-1}
 <p>下面的函数将在不同的<span class="math notranslate nohighlight">\(\alpha\)</span>值下绘制适应性预期下的价格动态。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_price_plot_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ts_price_plot_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">α</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i_plot</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">α</span><span class="p">):</span>
         <span class="n">pe_last</span> <span class="o">=</span> <span class="n">p0</span>
@@ -636,7 +708,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png"><img alt="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" src="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png"><img alt="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" src="_images/dafc5292a3a2b07989711cafe5f89c0a6942cf56d2945438757c2230d4ad85d7.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>请注意，如果<span class="math notranslate nohighlight">\(\alpha=1\)</span>，那么适应性预期就等同于简单预期。
@@ -644,7 +717,7 @@ p_t^e = p_{t-1}
 这种增加的稳定性可以在图表中看出。</p>
 </section>
 <section id="id10">
-<h2><span class="section-number">25.6. </span>练习<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.6. </span>练习<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="cobweb_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 25.1 </span></p>
@@ -659,7 +732,7 @@ p_t^e = p_{t-1}
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_supply</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ts_plot_supply</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    给定初始价格，模拟和绘制供给函数的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -697,7 +770,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png"><img alt="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png" src="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png"><img alt="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png" src="_images/841dd0aaa441618903d06cefafd2b9e444446586881aa06b672960d4b3ce3f63.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -710,7 +784,7 @@ p_t^e = p_{t-1}
 <p>回顾平均预期是指生产者对下一期价格的预期为他们最后一次猜测和倒数第二次猜测的线性组合。</p>
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-pe-blae">
-<span class="eqno">(25.6)<a class="headerlink" href="#equation-pe-blae" title="Permalink to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p_{t-2}\]</div>
+<span class="eqno">(25.6)<a class="headerlink" href="#equation-pe-blae" title="Link to this equation">#</a></span>\[p_t^e = \alpha p_{t-1} + (1-\alpha) p_{t-2}\]</div>
 <p>模拟并绘制 <span class="math notranslate nohighlight">\(\alpha \in \{0.1, 0.3, 0.5, 0.8\}\)</span> 时的价格动态，其中 <span class="math notranslate nohighlight">\(p_0=1\)</span> 且 <span class="math notranslate nohighlight">\(p_1=2.5\)</span>。</p>
 </section>
 </div>
@@ -720,7 +794,7 @@ p_t^e = p_{t-1}
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_next_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_next_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">curr_price_exp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    给定当前价格预期和市场模型，找出下一个价格的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -731,7 +805,7 @@ p_t^e = p_{t-1}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ts_plot_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ts_plot_price_blae</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   使用回顾性平均预期模拟并绘制价格时间序列的函数。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -769,7 +843,8 @@ p_t^e = p_{t-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png"><img alt="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png" src="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png"><img alt="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png" src="_images/6cb474e56bee0031807d2125b227df7a9a3246c19218c8ce2c524376cd9e12f5.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -1206,6 +1281,35 @@ p_t^e = p_{t-1}
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/cobweb.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/cobweb.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/cobweb.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

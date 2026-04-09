@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>44. 简单线性回归模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'simple_linear_regression';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/simple_linear_regression.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/simple_linear_regression.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/simple_linear_regression.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/simple_linear_regression.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -177,17 +217,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -197,10 +243,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">简单线性回归模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -213,6 +258,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/simple_linear_regression.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -224,13 +291,13 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">44. </span>简单线性回归模型<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">44. </span>简单线性回归模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -247,7 +314,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <p>其中 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 表示最佳拟合线与给定 <span class="math notranslate nohighlight">\(x_i\)</span> 的样本值 <span class="math notranslate nohighlight">\(y_i\)</span> 之间的误差。</p>
 <p>我们的目标是选择 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的值来为一些适用于变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的数据构建一条“最佳”拟合线。</p>
 <p>让我们假设存在一个简单的数据集，其中包含 10 个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的观测值：</p>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(y_i\)</span></p></th>
@@ -402,9 +469,10 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp1">
-<a class="reference internal image-reference" href="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png"><img alt="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" src="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png"><img alt="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" src="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">散点图</span><a class="headerlink" href="#sales-v-temp1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">散点图</span><a class="headerlink" href="#sales-v-temp1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -436,9 +504,10 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp2">
-<a class="reference internal image-reference" href="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png"><img alt="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" src="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png"><img alt="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" src="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.2 </span><span class="caption-text">带有拟合线的散点图</span><a class="headerlink" href="#sales-v-temp2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.2 </span><span class="caption-text">带有拟合线的散点图</span><a class="headerlink" href="#sales-v-temp2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -464,9 +533,10 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp3">
-<a class="reference internal image-reference" href="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png"><img alt="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" src="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png"><img alt="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" src="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.3 </span><span class="caption-text">带拟合线的散点图 #2</span><a class="headerlink" href="#sales-v-temp3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.3 </span><span class="caption-text">带拟合线的散点图 #2</span><a class="headerlink" href="#sales-v-temp3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -490,9 +560,10 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp4">
-<a class="reference internal image-reference" href="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png"><img alt="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" src="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png"><img alt="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" src="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.4 </span><span class="caption-text">带拟合线的散点图 #3</span><a class="headerlink" href="#sales-v-temp4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.4 </span><span class="caption-text">带拟合线的散点图 #3</span><a class="headerlink" href="#sales-v-temp4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -631,9 +702,10 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-residuals">
-<a class="reference internal image-reference" href="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png"><img alt="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" src="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png"><img alt="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" src="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.5 </span><span class="caption-text">残差图</span><a class="headerlink" href="#plt-residuals" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.5 </span><span class="caption-text">残差图</span><a class="headerlink" href="#plt-residuals" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -650,7 +722,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
 <p>我们希望通过调整参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 来最小化这个成本函数。</p>
 <section id="alpha-beta">
-<h2><span class="section-number">44.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的<a class="headerlink" href="#alpha-beta" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">44.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的<a class="headerlink" href="#alpha-beta" title="Link to this heading">#</a></h2>
 <p>首先，我们看看总残差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
 <p>我们从<a class="reference internal" href="#slr-optimal-values"><span class="std std-ref">下一节</span></a>可以知道 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值是：</p>
 <div class="cell docutils container">
@@ -681,9 +753,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors">
-<a class="reference internal image-reference" href="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png"><img alt="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" src="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png"><img alt="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" src="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.6 </span><span class="caption-text">绘制残差图</span><a class="headerlink" href="#plt-errors" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.6 </span><span class="caption-text">绘制残差图</span><a class="headerlink" href="#plt-errors" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -708,16 +781,17 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors-2">
-<a class="reference internal image-reference" href="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png"><img alt="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" src="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png"><img alt="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" src="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.7 </span><span class="caption-text">绘制残差图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.7 </span><span class="caption-text">绘制残差图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="slr-optimal-values">
-<span id="id2"></span><h2><span class="section-number">44.2. </span>计算最优值<a class="headerlink" href="#slr-optimal-values" title="Permalink to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">44.2. </span>计算最优值<a class="headerlink" href="#slr-optimal-values" title="Link to this heading">#</a></h2>
 <p>现在让我们使用微积分来解决优化问题，并计算出 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值，以找到普通最小二乘（OLS）解。</p>
 <p>首先对 <span class="math notranslate nohighlight">\(\alpha\)</span> 取偏导</p>
 <div class="math notranslate nohighlight">
@@ -751,7 +825,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
 <p>我们可以发现分解成两个分数后，它们分别是均值 <span class="math notranslate nohighlight">\(\bar{y_i}\)</span> 和 <span class="math notranslate nohighlight">\(\bar{x_i}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-optimal-alpha">
-<span class="eqno">(44.1)<a class="headerlink" href="#equation-eq-optimal-alpha" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(44.1)<a class="headerlink" href="#equation-eq-optimal-alpha" title="Link to this equation">#</a></span>\[
 \alpha = \bar{y_i} - \beta\bar{x_i}
 \]</div>
 <p>回到成本函数 <span class="math notranslate nohighlight">\(C\)</span> ，现在我们对 <span class="math notranslate nohighlight">\(\beta\)</span> 取偏导</p>
@@ -791,7 +865,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
 <p>得到 <span class="math notranslate nohighlight">\(\beta\)</span> 的解</p>
 <div class="math notranslate nohighlight" id="equation-eq-optimal-beta">
-<span class="eqno">(44.2)<a class="headerlink" href="#equation-eq-optimal-beta" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(44.2)<a class="headerlink" href="#equation-eq-optimal-beta" title="Link to this equation">#</a></span>\[
 \beta = \frac{\sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i)}{\sum_{i=1}^{N}(x_i^2 - \bar{x_i} x_i)}
 \]</div>
 <p>我们现在可以使用<a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a> 来计算<span class="math notranslate nohighlight">\(\alpha\)</span>和<span class="math notranslate nohighlight">\(\beta\)</span>的最优值</p>
@@ -853,9 +927,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-ols">
-<a class="reference internal image-reference" href="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png"><img alt="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" src="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png"><img alt="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" src="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" style="width: 80%;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.8 </span><span class="caption-text">OLS最佳拟合线</span><a class="headerlink" href="#plt-ols" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.8 </span><span class="caption-text">OLS最佳拟合线</span><a class="headerlink" href="#plt-ols" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1862,7 +1937,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;年份&#39;&gt;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png"><img alt="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" src="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png"><img alt="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" src="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>实际上我们可以使用pandas快速检查每个年份涵盖了多少个国家</p>
@@ -1873,7 +1949,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png"><img alt="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" src="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png"><img alt="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" src="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家</p>
@@ -1892,7 +1969,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png"><img alt="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" src="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png"><img alt="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" src="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>这些数据显示了一些有趣的关系。</p>
@@ -1909,7 +1987,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png"><img alt="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" src="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png"><img alt="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" src="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>从这次转换可以看出，线性模型更贴近数据的形状。</p>
@@ -2191,10 +2270,11 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7f1e5db9eb10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7fe040bd9c10&gt;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png"><img alt="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" src="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png"><img alt="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" src="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -2640,6 +2720,35 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/simple_linear_regression.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/simple_linear_regression.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/simple_linear_regression.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

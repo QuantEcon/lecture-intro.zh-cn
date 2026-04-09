@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>22. 种族隔离 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'schelling';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/schelling.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/schelling.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/schelling.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/schelling.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -184,17 +224,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -204,10 +250,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">种族隔离</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -220,6 +265,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/schelling.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -235,9 +302,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">22. </span>种族隔离<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<span class="target" id="index-0"></span><section id="index-1">
-<span id="id2"></span><h2><span class="section-number">22.1. </span>大纲<a class="headerlink" href="#index-1" title="Permalink to this heading">#</a></h2>
+<h1><span class="section-number">22. </span>种族隔离<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="index-1">
+<span id="index-0"></span><span id="id2"></span><h2><span class="section-number">22.1. </span>大纲<a class="headerlink" href="#index-1" title="Link to this heading">#</a></h2>
 <p>1969年，托马斯谢林(Thomas Schelling)提出了一个简单但有趣的种族隔离模型 <span id="id3">[<a class="reference internal" href="zreferences.html#id231" title="Thomas C Schelling. Models of Segregation. American Economic Review, 59(2):488–493, 1969.">Schelling, 1969</a>]</span>。</p>
 <p>他的模型研究了一个社区中不同种族的居民在互动中所产生的动态变化。</p>
 <p>与谢林的许多著作一样，该模型展示了局部互动如何导致令人惊讶的总体结果。</p>
@@ -252,11 +319,11 @@
 <p>让我们从一些代码的导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">seed</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">seed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -266,10 +333,10 @@
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">22.2. </span>模型<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">22.2. </span>模型<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>在这一节中，我们将构建谢林模型的一种版本。</p>
 <section id="id5">
-<h3><span class="section-number">22.2.1. </span>设置<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">22.2.1. </span>设置<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>我们将介绍一个与原始谢林模型不同的变种，但它同样易于编程，也能捕捉到谢林的主要思想。</p>
 <p>假设我们有两种类型的人：橙色人和绿色人。</p>
 <p>假设每种类型都有<span class="math notranslate nohighlight">\(n\)</span>个人。</p>
@@ -281,7 +348,7 @@
 </ul>
 </section>
 <section id="id6">
-<h3><span class="section-number">22.2.2. </span>偏好<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">22.2.2. </span>偏好<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>我们将说一个个体是 <em>满意（快乐）</em> 的，如果她最近的10个邻居中有5个或以上是同类型的。</p>
 <p>而一个不快乐的个体被称为<em>不满意（不快乐）</em>。</p>
 <p>例如，</p>
@@ -294,7 +361,7 @@
 <p>如果他们有一半的邻居是另一种颜色，他们也会完全满意（快乐）。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">22.2.3. </span>行为<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">22.2.3. </span>行为<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>最初，个体们混居在一起。</p>
 <p>换作这个模型的语言，即我们假设每个个体的初始位置是从单位正方形 <span class="math notranslate nohighlight">\(S\)</span> 上的一个双变量均匀分布中独立抽取的。</p>
 <ul class="simple">
@@ -318,7 +385,7 @@
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">22.3. </span>结果<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">22.3. </span>结果<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>让我们现在实现和运行这个模拟。</p>
 <p>在下文中，个体被模型化为<a class="reference external" href="https://python-programming.quantecon.org/python_oop.html">对象</a>。</p>
 <p>以下是它们的结构指示：</p>
@@ -337,22 +404,22 @@
 <p>让我们构建这个结构。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Agent</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">draw_location</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">draw_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="s2">&quot;计算自己与另一个体之间的欧几里得距离。&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
         <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
         <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">happy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">happy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">agents</span><span class="p">,</span>                <span class="c1"># 其他个体的列表</span>
                 <span class="n">num_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>      <span class="c1"># 视为邻居的个体数量</span>
                 <span class="n">require_same_type</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>  <span class="c1"># 必须是同一类型的邻居数量</span>
@@ -378,7 +445,7 @@
         <span class="n">num_same_type</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">agent</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">num_same_type</span> <span class="o">&gt;=</span> <span class="n">require_same_type</span>
 
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agents</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agents</span><span class="p">):</span>
         <span class="s2">&quot;如果不满意（不快乐），随机选择新位置直到满意（快乐）。&quot;</span>
         <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">happy</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">draw_location</span><span class="p">()</span>
@@ -390,7 +457,7 @@
 <p>橙色个体用橙点表示，绿色个体用绿点表示。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_distribution</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">cycle_num</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_distribution</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">cycle_num</span><span class="p">):</span>
     <span class="s2">&quot;绘制经过cycle_num轮循环后的个体分布图。&quot;</span>
     <span class="n">x_values_0</span><span class="p">,</span> <span class="n">y_values_0</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">x_values_1</span><span class="p">,</span> <span class="n">y_values_1</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -428,7 +495,7 @@ while 个体还在移动
 <p>真实的代码如下</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_simulation</span><span class="p">(</span><span class="n">num_of_type_0</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span><span class="n">num_of_type_0</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
                    <span class="n">num_of_type_1</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
                    <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span>       <span class="c1"># 最大迭代次数</span>
                    <span class="n">set_seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
@@ -479,32 +546,20 @@ while 个体还在移动
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png"><img alt="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png" src="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png"><img alt="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png" src="_images/84b08c15b904d7c1140c8a98385b4d29dc08d67f51f3712a863f0edb6d6c9595.png" style="width: 80%;" />
+</a>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  1
+进入循环  2
+进入循环  3
+进入循环  4
+进入循环  5
+进入循环  6
+进入循环  7
+在 8 次迭代后收敛。
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  5
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  6
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>进入循环  7
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png"><img alt="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png" src="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png" style="width: 80%;" /></a>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>在 8 次迭代后收敛。
-</pre></div>
-</div>
+<a class="reference internal image-reference" href="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png"><img alt="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png" src="_images/a084374af7811bd029eae9536868a44759c767021f659f0f957c8db0757f0097.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>如上所述，个体们最初是随机混合在一起的。</p>
@@ -515,7 +570,7 @@ while 个体还在移动
 <p>即使是有这些偏好，结果依旧是高度隔离。</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">22.4. </span>练习<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">22.4. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="schelling_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 22.1 </span></p>
@@ -543,30 +598,30 @@ while 个体还在移动
 <p>解决方案如下</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">randint</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy.random</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">randint</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># 个体数量（个体编号从0到n-1）</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>                  <span class="c1"># 视为邻居的个体数量</span>
 <span class="n">require_same_type</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c1"># 希望 &gt;= require_same_type 的邻居是相同类型</span>
 
-<span class="k">def</span> <span class="nf">initialize_state</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_state</span><span class="p">():</span>
     <span class="n">locations</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
     <span class="n">types</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>   <span class="c1"># 标签为零或一</span>
     <span class="k">return</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span>
 
 
-<span class="k">def</span> <span class="nf">compute_distances_from_loc</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_distances_from_loc</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; 计算位置 loc 到其他所有的点的距离。 &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span> <span class="o">-</span> <span class="n">locations</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">get_neighbors</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_neighbors</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
     <span class="s2">&quot; 获取给定位置的所有邻居。 &quot;</span>
     <span class="n">all_distances</span> <span class="o">=</span> <span class="n">compute_distances_from_loc</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">locations</span><span class="p">)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">all_distances</span><span class="p">)</span>   <span class="c1"># 将个体按距离 loc 的远近排序</span>
     <span class="n">neighbors</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>               <span class="c1"># 保留最近的 k 个</span>
     <span class="k">return</span> <span class="n">neighbors</span>
 
-<span class="k">def</span> <span class="nf">is_happy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_happy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
     <span class="n">happy</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">agent_loc</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
     <span class="n">agent_type</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -576,14 +631,14 @@ while 个体还在移动
         <span class="n">happy</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="n">happy</span>
 
-<span class="k">def</span> <span class="nf">count_happy</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_happy</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
     <span class="s2">&quot; 计算满意（快乐）的个体的数量。 &quot;</span>
     <span class="n">happy_sum</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">happy_sum</span> <span class="o">+=</span> <span class="n">is_happy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">happy_sum</span>
 
-<span class="k">def</span> <span class="nf">update_agent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_agent</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
     <span class="s2">&quot; 如果个体不满意（不快乐），则移动个体。 &quot;</span>
     <span class="n">moved</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">is_happy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
@@ -591,7 +646,7 @@ while 个体还在移动
         <span class="n">locations</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(),</span> <span class="n">uniform</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">moved</span>
 
-<span class="k">def</span> <span class="nf">plot_distribution</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">savepdf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_distribution</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">savepdf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="s2">&quot; 绘制经过 cycle_num 轮循环后的个体分布情况。&quot;</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span>
@@ -606,7 +661,7 @@ while 个体还在移动
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">sim_random_select</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span> <span class="n">flip_prob</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">test_freq</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sim_random_select</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span> <span class="n">flip_prob</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">test_freq</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    每次更新时随机选择一个家庭进行模拟。</span>
 
@@ -657,12 +712,18 @@ while 个体还在移动
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/07c3bd3db527ae6ce15ed951f044ad9ed38ba945879c247728af5c076ef04a0f.png"><img alt="_images/07c3bd3db527ae6ce15ed951f044ad9ed38ba945879c247728af5c076ef04a0f.png" src="_images/07c3bd3db527ae6ce15ed951f044ad9ed38ba945879c247728af5c076ef04a0f.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/2a0cc1b072e56a725a01afd26b247990a9d43e5e88932d68fa7d8eb04785043e.png"><img alt="_images/2a0cc1b072e56a725a01afd26b247990a9d43e5e88932d68fa7d8eb04785043e.png" src="_images/2a0cc1b072e56a725a01afd26b247990a9d43e5e88932d68fa7d8eb04785043e.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/23338410eb8b2bbc0fe377b4b191d68a7cefa46b9b3354f559878ee574376c07.png"><img alt="_images/23338410eb8b2bbc0fe377b4b191d68a7cefa46b9b3354f559878ee574376c07.png" src="_images/23338410eb8b2bbc0fe377b4b191d68a7cefa46b9b3354f559878ee574376c07.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/3bc032bc8f3a94acb83b9451ec4245120f678571022c3011498b636ddb7d61ef.png"><img alt="_images/3bc032bc8f3a94acb83b9451ec4245120f678571022c3011498b636ddb7d61ef.png" src="_images/3bc032bc8f3a94acb83b9451ec4245120f678571022c3011498b636ddb7d61ef.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/73907c42ca89b0c8a95033e82b4f9750478dc9b320fb147f67e462605f5b7059.png"><img alt="_images/73907c42ca89b0c8a95033e82b4f9750478dc9b320fb147f67e462605f5b7059.png" src="_images/73907c42ca89b0c8a95033e82b4f9750478dc9b320fb147f67e462605f5b7059.png" style="width: 80%;" /></a>
-<a class="reference internal image-reference" href="_images/b664803f75292fb1fba9866998663c848bc67dbfd50d42760192857a0815c71d.png"><img alt="_images/b664803f75292fb1fba9866998663c848bc67dbfd50d42760192857a0815c71d.png" src="_images/b664803f75292fb1fba9866998663c848bc67dbfd50d42760192857a0815c71d.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/3315ee5633d0507d4923e6eed0f4869fd7b59ab6fa90a9abe21f7f65b479294b.png"><img alt="_images/3315ee5633d0507d4923e6eed0f4869fd7b59ab6fa90a9abe21f7f65b479294b.png" src="_images/3315ee5633d0507d4923e6eed0f4869fd7b59ab6fa90a9abe21f7f65b479294b.png" style="width: 80%;" />
+</a>
+<a class="reference internal image-reference" href="_images/6d1ac277bc390aea3d5705fa242627bbdb4af4415faa1b99f5d2092da9e10ad2.png"><img alt="_images/6d1ac277bc390aea3d5705fa242627bbdb4af4415faa1b99f5d2092da9e10ad2.png" src="_images/6d1ac277bc390aea3d5705fa242627bbdb4af4415faa1b99f5d2092da9e10ad2.png" style="width: 80%;" />
+</a>
+<a class="reference internal image-reference" href="_images/26ae610a76c5e97c111a27bd102ca1b8159bb373ff46a11df0e6ef984556c0b7.png"><img alt="_images/26ae610a76c5e97c111a27bd102ca1b8159bb373ff46a11df0e6ef984556c0b7.png" src="_images/26ae610a76c5e97c111a27bd102ca1b8159bb373ff46a11df0e6ef984556c0b7.png" style="width: 80%;" />
+</a>
+<a class="reference internal image-reference" href="_images/f91b48885e5692f83c952f6fb1f25b59fc8ba1381799bc814b47d3b40e74c7b3.png"><img alt="_images/f91b48885e5692f83c952f6fb1f25b59fc8ba1381799bc814b47d3b40e74c7b3.png" src="_images/f91b48885e5692f83c952f6fb1f25b59fc8ba1381799bc814b47d3b40e74c7b3.png" style="width: 80%;" />
+</a>
+<a class="reference internal image-reference" href="_images/ffe0d3fa3da911fc6720c12e68e1152217e8d21bbd5c12f32d7281e2ea579cbe.png"><img alt="_images/ffe0d3fa3da911fc6720c12e68e1152217e8d21bbd5c12f32d7281e2ea579cbe.png" src="_images/ffe0d3fa3da911fc6720c12e68e1152217e8d21bbd5c12f32d7281e2ea579cbe.png" style="width: 80%;" />
+</a>
+<a class="reference internal image-reference" href="_images/68c8283bda7d06496a758e01d284401fc67d4ad5d40850527dac164b0a5f2884.png"><img alt="_images/68c8283bda7d06496a758e01d284401fc67d4ad5d40850527dac164b0a5f2884.png" src="_images/68c8283bda7d06496a758e01d284401fc67d4ad5d40850527dac164b0a5f2884.png" style="width: 80%;" />
+</a>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>在迭代 50001 时终止
 </pre></div>
 </div>
@@ -1100,6 +1161,35 @@ while 个体还在移动
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/schelling.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/schelling.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/schelling.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>

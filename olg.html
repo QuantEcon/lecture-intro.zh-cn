@@ -1,18 +1,24 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>26. 世代交叠模型 &#8212; Python量化经济学入门</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,15 +76,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,30 +92,31 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d9faaf6c4b57726f74ba012412af1f5681bdff87"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'olg';</script>
     <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/olg.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -138,10 +145,38 @@
 <meta property="og:site_name" content="Python量化经济学入门" />
 <meta name="theme-color" content="#ffffff" />
 
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/olg.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/olg.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/olg.html" />
+
+
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -153,7 +188,12 @@
 
                 <div class="qe-page__toc">
 
-                    <div class="inner">
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -205,17 +245,23 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
                         <div class="qe-page__toc-footer">
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
+                            
+                            
                         </div>
 
                     </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
 
                 </div>
 
@@ -225,10 +271,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
 
-                        <p class="qe-page__header-subheading">世代交叠模型</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -241,6 +286,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 09, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/olg.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">5 minutes ago</span>
+                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -252,7 +319,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">26. </span>世代交叠模型<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">26. </span>世代交叠模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>在这节课中，我们将学习著名的世代交叠（OLG）模型。政策制定者和研究人员使用这个模型来研究：</p>
 <ul class="simple">
 <li><p>财政政策</p></li>
@@ -263,7 +330,7 @@
 <p>世代交叠模型的第一个严谨版本由保罗·萨缪尔森(Paul Samuelson)在1958年提出<span id="id2">[<a class="reference internal" href="zreferences.html#id23" title="Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. Journal of political economy, 66(6):467–482, 1958.">Samuelson, 1958</a>]</span>，此后成为经济学中研究代际问题的基础框架。</p>
 <p>在这一讲中，我们将深入探讨世代交叠模型的一个简单版本，帮助大家理解其核心机制和应用。</p>
 <section id="id3">
-<h2><span class="section-number">26.1. </span>概述<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.1. </span>概述<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>OLG模型的动态与<a class="reference external" href="https://intro.quantecon.org/solow.html">索洛-斯旺增长模型</a>非常相似。</p>
 <p>与索洛-斯旺模型相比，OLG模型的一个关键区别是储蓄决策是内生的。</p>
 <p>这一特征为什么重要呢？考虑我们想要分析一项新税收政策对经济增长的影响。</p>
@@ -275,12 +342,12 @@
 <p>首先，让我们导入需要的库。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
@@ -290,7 +357,7 @@
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">26.2. </span>环境<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.2. </span>环境<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>我们假设时间是离散的，因此 <span class="math notranslate nohighlight">\(t=0, 1, \ldots\)</span>。</p>
 <p>在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体存活两个时期，<span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(t + 1\)</span>。</p>
 <p>我们称一个个体</p>
@@ -309,13 +376,13 @@
 <p>我们还假设每个个体提供一个”单位”的劳动时间，因此总劳动供给为1。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">26.3. </span>资本供给<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.3. </span>资本供给<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>现在让我们从单个家庭的角度开始分析模型。</p>
 <section id="id6">
-<h3><span class="section-number">26.3.1. </span>消费者问题<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.3.1. </span>消费者问题<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>假设在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体的效用函数形式为</p>
 <div class="math notranslate nohighlight" id="equation-eq-crra">
-<span class="eqno">(26.1)<a class="headerlink" href="#equation-eq-crra" title="Permalink to this equation">#</a></span>\[    U_t = u(c_t) + \beta u(c_{t+1})\]</div>
+<span class="eqno">(26.1)<a class="headerlink" href="#equation-eq-crra" title="Link to this equation">#</a></span>\[    U_t = u(c_t) + \beta u(c_{t+1})\]</div>
 <p>其中</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(u: \mathbb R_+ \to \mathbb R\)</span> 是”瞬时”效用函数（或”流”效用函数）</p></li>
@@ -326,7 +393,7 @@
 <p>我们假设效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的。</p>
 <p>个体的储蓄决策来自于解决以下效用最大化问题</p>
 <div class="math notranslate nohighlight" id="equation-max-sav-olg">
-<span class="eqno">(26.2)<a class="headerlink" href="#equation-max-sav-olg" title="Permalink to this equation">#</a></span>\[    \max_{c_t, c_{t+1}} 
+<span class="eqno">(26.2)<a class="headerlink" href="#equation-max-sav-olg" title="Link to this equation">#</a></span>\[    \max_{c_t, c_{t+1}} 
     \,  \left \{ u(c_t) + \beta u(c_{t+1}) \right \} \]</div>
 <p>受制于</p>
 <div class="math notranslate nohighlight">
@@ -347,30 +414,30 @@
 <p>为了求解最大化问题，我们将 <span class="math notranslate nohighlight">\(c_{t+1} = R_{t+1}(w_t - c_t)\)</span> 代入目标函数，然后对 <span class="math notranslate nohighlight">\(c_t\)</span> 求导并设为零。</p>
 <p>这给出了OLG模型的<strong>欧拉方程</strong>，它刻画了消费者在不同时期之间如何优化分配消费：</p>
 <div class="math notranslate nohighlight" id="equation-euler-1-olg">
-<span class="eqno">(26.3)<a class="headerlink" href="#equation-euler-1-olg" title="Permalink to this equation">#</a></span>\[    u'(c_t) = \beta R_{t+1}  u'( R_{t+1} (w_t - c_t))\]</div>
+<span class="eqno">(26.3)<a class="headerlink" href="#equation-euler-1-olg" title="Link to this equation">#</a></span>\[    u'(c_t) = \beta R_{t+1}  u'( R_{t+1} (w_t - c_t))\]</div>
 <p>从第一个约束我们得到 <span class="math notranslate nohighlight">\(c_t = w_t - s_t\)</span>，所以欧拉方程
 也可以表示为</p>
 <div class="math notranslate nohighlight" id="equation-euler-2-olg">
-<span class="eqno">(26.4)<a class="headerlink" href="#equation-euler-2-olg" title="Permalink to this equation">#</a></span>\[    u'(w_t - s_t) = \beta R_{t+1}  u'( R_{t+1} s_t)\]</div>
+<span class="eqno">(26.4)<a class="headerlink" href="#equation-euler-2-olg" title="Link to this equation">#</a></span>\[    u'(w_t - s_t) = \beta R_{t+1}  u'( R_{t+1} s_t)\]</div>
 <p>假设对于每个 <span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，恰好有一个 <span class="math notranslate nohighlight">\(s_t\)</span> 可以满足 <a class="reference internal" href="#equation-euler-2-olg">(26.4)</a>。</p>
 <p>那么储蓄可以被写成 <span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 的固定函数。</p>
 <p>我们将其表示为</p>
 <div class="math notranslate nohighlight" id="equation-saving-1-olg">
-<span class="eqno">(26.5)<a class="headerlink" href="#equation-saving-1-olg" title="Permalink to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1})\]</div>
+<span class="eqno">(26.5)<a class="headerlink" href="#equation-saving-1-olg" title="Link to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1})\]</div>
 <p><span class="math notranslate nohighlight">\(s\)</span> 函数的具体形式将取决于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 的选择。</p>
 <p><span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 共同代表经济中的<em>价格</em>（劳动力价格和资本租赁率）。</p>
 <p>因此，<a class="reference internal" href="#equation-saving-1-olg">(26.5)</a> 表示给定价格下的储蓄量。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">26.3.2. </span>示例：对数偏好<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.3.2. </span>示例：对数偏好<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>在特殊情况 <span class="math notranslate nohighlight">\(u(c) = \log c\)</span> 下，欧拉方程简化为 <span class="math notranslate nohighlight">\(s_t= \beta (w_t - s_t)\)</span>。</p>
 <p>求解储蓄，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-saving-log-2-olg">
-<span class="eqno">(26.6)<a class="headerlink" href="#equation-saving-log-2-olg" title="Permalink to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1}) = \frac{\beta}{1+\beta} w_t\]</div>
+<span class="eqno">(26.6)<a class="headerlink" href="#equation-saving-log-2-olg" title="Link to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1}) = \frac{\beta}{1+\beta} w_t\]</div>
 <p>在这种特殊情况下，储蓄完全不受利率影响。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">26.3.3. </span>储蓄与投资的关系<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.3.3. </span>储蓄与投资的关系<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>由于我们将人口规模标准化为1，<span class="math notranslate nohighlight">\(s_t\)</span>不仅代表个人储蓄，也代表了<span class="math notranslate nohighlight">\(t\)</span>时期整个经济的总储蓄。</p>
 <p>在我们考虑的封闭经济模型中，不存在国际资本流动，因此国内净储蓄必然等于总投资，这构成了企业的资本供给。</p>
 <p>接下来，我们将转向分析资本需求。</p>
@@ -378,17 +445,17 @@
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">26.4. </span>资本需求分析<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.4. </span>资本需求分析<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>下面我们先详细描述企业的最优化问题，然后推导出一个方程，用于表示在给定价格条件下的资本需求。</p>
 <section id="id10">
-<h3><span class="section-number">26.4.1. </span>企业问题<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.4.1. </span>企业问题<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>对于每个整数 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，t期的产出 <span class="math notranslate nohighlight">\(y_t\)</span> 由**<a class="reference external" href="https://baike.baidu.com/item/%E6%9F%AF%E5%B8%83-%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%E7%94%9F%E4%BA%A7%E5%87%BD%E6%95%B0/8250187">柯布-道格拉斯生产函数</a>**给出</p>
 <div class="math notranslate nohighlight" id="equation-cobb-douglas">
-<span class="eqno">(26.7)<a class="headerlink" href="#equation-cobb-douglas" title="Permalink to this equation">#</a></span>\[    y_t = k_t^{\alpha} \ell_t^{1-\alpha}\]</div>
+<span class="eqno">(26.7)<a class="headerlink" href="#equation-cobb-douglas" title="Link to this equation">#</a></span>\[    y_t = k_t^{\alpha} \ell_t^{1-\alpha}\]</div>
 <p>在这里，<span class="math notranslate nohighlight">\(k_t\)</span> 表示资本投入，<span class="math notranslate nohighlight">\(\ell_t\)</span> 表示劳动投入，而 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个介于0和1之间的参数，通常被解释为”资本的产出弹性”。
 企业面临的利润最大化问题是</p>
 <div class="math notranslate nohighlight" id="equation-opt-profit-olg">
-<span class="eqno">(26.8)<a class="headerlink" href="#equation-opt-profit-olg" title="Permalink to this equation">#</a></span>\[    \max_{k_t, \ell_t} \{ k^{\alpha}_t \ell_t^{1-\alpha} - R_t k_t -w_t \ell_t  \}\]</div>
+<span class="eqno">(26.8)<a class="headerlink" href="#equation-opt-profit-olg" title="Link to this equation">#</a></span>\[    \max_{k_t, \ell_t} \{ k^{\alpha}_t \ell_t^{1-\alpha} - R_t k_t -w_t \ell_t  \}\]</div>
 <p>一阶条件是通过对资本和劳动分别求导，并令导数等于零得到的：</p>
 <div class="math notranslate nohighlight">
 \[    (1-\alpha)(k_t / \ell_t)^{\alpha} = w_t
@@ -396,22 +463,22 @@
     \alpha (k_t / \ell_t)^{\alpha - 1} = R_t\]</div>
 </section>
 <section id="id11">
-<h3><span class="section-number">26.4.2. </span>需求<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.4.2. </span>需求<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>根据我们的假设<span class="math notranslate nohighlight">\(\ell_t = 1\)</span>，我们可以得到</p>
 <div class="math notranslate nohighlight" id="equation-wage-one">
-<span class="eqno">(26.9)<a class="headerlink" href="#equation-wage-one" title="Permalink to this equation">#</a></span>\[    w_t = (1-\alpha)k_t^\alpha \]</div>
+<span class="eqno">(26.9)<a class="headerlink" href="#equation-wage-one" title="Link to this equation">#</a></span>\[    w_t = (1-\alpha)k_t^\alpha \]</div>
 <p>并且</p>
 <div class="math notranslate nohighlight" id="equation-interest-rate-one">
-<span class="eqno">(26.10)<a class="headerlink" href="#equation-interest-rate-one" title="Permalink to this equation">#</a></span>\[    R_t =
+<span class="eqno">(26.10)<a class="headerlink" href="#equation-interest-rate-one" title="Link to this equation">#</a></span>\[    R_t =
     \alpha k_t^{\alpha - 1} \]</div>
 <p>重新整理 <a class="reference internal" href="#equation-interest-rate-one">(26.10)</a> 得出在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的总资本需求</p>
 <div class="math notranslate nohighlight" id="equation-aggregate-demand-capital-olg">
-<span class="eqno">(26.11)<a class="headerlink" href="#equation-aggregate-demand-capital-olg" title="Permalink to this equation">#</a></span>\[    k^d (R_{t+1}) 
+<span class="eqno">(26.11)<a class="headerlink" href="#equation-aggregate-demand-capital-olg" title="Link to this equation">#</a></span>\[    k^d (R_{t+1}) 
     := \left (\frac{\alpha}{R_{t+1}} \right )^{1/(1-\alpha)}\]</div>
 <p>在Python中</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">α</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">α</span><span class="p">))</span> 
 </pre></div>
 </div>
@@ -419,7 +486,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">capital_supply</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capital_supply</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="n">β</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">β</span><span class="p">))</span> <span class="o">*</span> <span class="n">w</span>
 </pre></div>
@@ -431,14 +498,14 @@
 </section>
 </section>
 <section id="id12">
-<h2><span class="section-number">26.5. </span>均衡<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.5. </span>均衡<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将推导均衡条件并研究一个例子。</p>
 <section id="id13">
-<h3><span class="section-number">26.5.1. </span>均衡条件<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.5.1. </span>均衡条件<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <p>在均衡状态下，<span class="math notranslate nohighlight">\(t\)</span>时刻的储蓄等于<span class="math notranslate nohighlight">\(t\)</span>时刻的投资，也等于<span class="math notranslate nohighlight">\(t+1\)</span>时刻的资本供给。</p>
 <p>通过将这些数量设为相等来计算均衡，即</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-1">
-<span class="eqno">(26.12)<a class="headerlink" href="#equation-equilibrium-1" title="Permalink to this equation">#</a></span>\[    s(w_t, R_{t+1}) 
+<span class="eqno">(26.12)<a class="headerlink" href="#equation-equilibrium-1" title="Link to this equation">#</a></span>\[    s(w_t, R_{t+1}) 
     = k^d(R_{t+1})
     = \left (\frac{\alpha}{R_{t+1}} \right )^{1/(1-\alpha)}\]</div>
 <p>原则上，我们现在可以给定<span class="math notranslate nohighlight">\(w_t\)</span>来求解均衡价格<span class="math notranslate nohighlight">\(R_{t+1}\)</span>。
@@ -448,14 +515,14 @@
 均衡数量<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
 </section>
 <section id="id14">
-<h3><span class="section-number">26.5.2. </span>示例：对数效用<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.5.2. </span>示例：对数效用<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>在对数效用的情况下，我们可以使用<a class="reference internal" href="#equation-equilibrium-1">(26.12)</a>和<a class="reference internal" href="#equation-saving-log-2-olg">(26.6)</a>得到</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-2">
-<span class="eqno">(26.13)<a class="headerlink" href="#equation-equilibrium-2" title="Permalink to this equation">#</a></span>\[    \frac{\beta}{1+\beta} w_t
+<span class="eqno">(26.13)<a class="headerlink" href="#equation-equilibrium-2" title="Link to this equation">#</a></span>\[    \frac{\beta}{1+\beta} w_t
     = \left( \frac{\alpha}{R_{t+1}} \right)^{1/(1-\alpha)}\]</div>
 <p>求解均衡利率得到</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-price">
-<span class="eqno">(26.14)<a class="headerlink" href="#equation-equilibrium-price" title="Permalink to this equation">#</a></span>\[    R_{t+1} = 
+<span class="eqno">(26.14)<a class="headerlink" href="#equation-equilibrium-price" title="Link to this equation">#</a></span>\[    R_{t+1} = 
     \alpha 
     \left( 
         \frac{\beta}{1+\beta} w_t
@@ -463,7 +530,7 @@
 <p>在Python中，我们可以通过以下方式计算这个</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">equilibrium_R_log_utility</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">equilibrium_R_log_utility</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">β</span> <span class="o">*</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">β</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">α</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">R</span>
 </pre></div>
@@ -473,7 +540,7 @@
 <p>在对数效用的情况下，由于资本供给不依赖于利率，均衡数量是由供给固定的。</p>
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-quantity">
-<span class="eqno">(26.15)<a class="headerlink" href="#equation-equilibrium-quantity" title="Permalink to this equation">#</a></span>\[    k_{t+1} = s(w_t, R_{t+1}) = \frac{\beta }{1+\beta} w_t\]</div>
+<span class="eqno">(26.15)<a class="headerlink" href="#equation-equilibrium-quantity" title="Link to this equation">#</a></span>\[    k_{t+1} = s(w_t, R_{t+1}) = \frac{\beta }{1+\beta} w_t\]</div>
 <p>我们重新绘制上面的图，但这次加入均衡数量和价格。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -501,22 +568,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png"><img alt="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" src="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png"><img alt="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" src="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 </section>
 <section id="id15">
-<h2><span class="section-number">26.6. </span>动态分析<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.6. </span>动态分析<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将研究模型的动态行为。</p>
 <p>我们主要关注对数效用的情况，此时均衡由方程<a class="reference internal" href="#equation-equilibrium-quantity">(26.15)</a>确定。</p>
 <section id="id16">
-<h3><span class="section-number">26.6.1. </span>资本积累过程<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.6.1. </span>资本积累过程<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <p>前面我们已经分析了如何根据当期工资<span class="math notranslate nohighlight">\(w_t\)</span>确定下一期的均衡资本<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
 <p>现在，我们可以利用<a class="reference internal" href="#equation-wage-one">(26.9)</a>中的工资决定方程，将资本积累表示为一个关于当期资本<span class="math notranslate nohighlight">\(k_t\)</span>的函数。</p>
 <p>具体来说，由于工资由<span class="math notranslate nohighlight">\(w_t = (1-\alpha)k_t^\alpha\)</span>给出，我们可以得到资本的演化方程</p>
 <div class="math notranslate nohighlight" id="equation-law-of-motion-capital">
-<span class="eqno">(26.16)<a class="headerlink" href="#equation-law-of-motion-capital" title="Permalink to this equation">#</a></span>\[    k_{t+1} = \frac{\beta}{1+\beta} (1-\alpha)(k_t)^{\alpha}\]</div>
+<span class="eqno">(26.16)<a class="headerlink" href="#equation-law-of-motion-capital" title="Link to this equation">#</a></span>\[    k_{t+1} = \frac{\beta}{1+\beta} (1-\alpha)(k_t)^{\alpha}\]</div>
 <p>如果我们对这个方程进行迭代，我们将得到一个资本存量序列。</p>
 <p>让我们绘制这些动态的45度图，我们将其表示为</p>
 <div class="math notranslate nohighlight">
@@ -527,7 +595,7 @@
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">k_update</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">k_update</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">β</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span> <span class="o">/</span>  <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">β</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -558,19 +626,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png"><img alt="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" src="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png"><img alt="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" src="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id17">
-<h3><span class="section-number">26.6.2. </span>稳态（对数情况）<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.6.2. </span>稳态（对数情况）<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <p>图表显示，该模型具有唯一的正稳态，我们将其表示为<span class="math notranslate nohighlight">\(k^*\)</span>。</p>
 <p>我们可以通过设置<span class="math notranslate nohighlight">\(k^* = g(k^*)\)</span>来求解<span class="math notranslate nohighlight">\(k^*\)</span>，即</p>
 <div class="math notranslate nohighlight" id="equation-steady-state-1">
-<span class="eqno">(26.17)<a class="headerlink" href="#equation-steady-state-1" title="Permalink to this equation">#</a></span>\[    k^* = \frac{\beta (1-\alpha) (k^*)^{\alpha}}{(1+\beta)}\]</div>
+<span class="eqno">(26.17)<a class="headerlink" href="#equation-steady-state-1" title="Link to this equation">#</a></span>\[    k^* = \frac{\beta (1-\alpha) (k^*)^{\alpha}}{(1+\beta)}\]</div>
 <p>求解方程得到</p>
 <div class="math notranslate nohighlight" id="equation-steady-state-2">
-<span class="eqno">(26.18)<a class="headerlink" href="#equation-steady-state-2" title="Permalink to this equation">#</a></span>\[    k^* = \left (\frac{\beta (1-\alpha)}{1+\beta} \right )^{1/(1-\alpha)}\]</div>
+<span class="eqno">(26.18)<a class="headerlink" href="#equation-steady-state-2" title="Link to this equation">#</a></span>\[    k^* = \left (\frac{\beta (1-\alpha)}{1+\beta} \right )^{1/(1-\alpha)}\]</div>
 <p>我们可以从<a class="reference internal" href="#equation-interest-rate-one">(26.10)</a>得到稳态利率，即</p>
 <div class="math notranslate nohighlight">
 \[
@@ -588,7 +657,7 @@
 </div>
 </section>
 <section id="id18">
-<h3><span class="section-number">26.6.3. </span>时间序列<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.6.3. </span>时间序列<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <p>上面的45度图显示，具有正初始条件的资本时间序列会收敛到这个稳态。</p>
 <p>让我们绘制一些时间序列来可视化这一点。</p>
 <div class="cell docutils container">
@@ -611,7 +680,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png"><img alt="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" src="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png"><img alt="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" src="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>如果你尝试不同的正初始值，你会发现这个序列总是收敛于<span class="math notranslate nohighlight">\(k^*\)</span>。</p>
@@ -632,14 +702,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png"><img alt="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" src="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png"><img alt="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" src="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 <p>利率反映了资本的边际产出，当资本存量较低时，利率较高。</p>
 </section>
 </section>
 <section id="crra">
-<h2><span class="section-number">26.7. </span>CRRA偏好<a class="headerlink" href="#crra" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.7. </span>CRRA偏好<a class="headerlink" href="#crra" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们一直使用对数效用函数来分析模型。现在让我们扩展到更一般的情况。</p>
 <p>对数效用实际上是常相对风险厌恶(CRRA)效用函数的一个特例，当风险厌恶参数<span class="math notranslate nohighlight">\(\gamma\)</span>趋近于1时得到。</p>
 <p>在本节中，我们假设<span class="math notranslate nohighlight">\(u(c) = \frac{ c^{1-\gamma}-1}{1-\gamma}\)</span>，其中<span class="math notranslate nohighlight">\(\gamma &gt;0, \gamma\neq 1\)</span>。</p>
@@ -648,7 +719,7 @@
 <p>首先，让我们在Python中实现CRRA效用函数，并创建一个包含所有模型参数的数据结构。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crra</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">γ</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crra</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">γ</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">c</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ</span><span class="p">)</span>
 
 <span class="n">Model</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;α&#39;</span><span class="p">,</span>        <span class="c1"># 柯布-道格拉斯参数</span>
@@ -656,7 +727,7 @@
                              <span class="s1">&#39;γ&#39;</span><span class="p">]</span>        <span class="c1"># CRRA效用函数中的参数</span>
                    <span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">create_olg_model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_olg_model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="n">β</span><span class="p">,</span> <span class="n">γ</span><span class="o">=</span><span class="n">γ</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -665,20 +736,20 @@
 <p>让我们也重新定义资本需求函数，使其能够与这个<code class="docutils literal notranslate"><span class="pre">namedtuple</span></code>一起工作。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">α</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">))</span> 
 </pre></div>
 </div>
 </div>
 </div>
 <section id="id19">
-<h3><span class="section-number">26.7.1. </span>供给<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.7.1. </span>供给<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
 <p>对于家庭来说，欧拉方程变为</p>
 <div class="math notranslate nohighlight" id="equation-euler-crra">
-<span class="eqno">(26.19)<a class="headerlink" href="#equation-euler-crra" title="Permalink to this equation">#</a></span>\[    (w_t - s_t)^{-\gamma} = \beta R^{1-\gamma}_{t+1}  (s_t)^{-\gamma}\]</div>
+<span class="eqno">(26.19)<a class="headerlink" href="#equation-euler-crra" title="Link to this equation">#</a></span>\[    (w_t - s_t)^{-\gamma} = \beta R^{1-\gamma}_{t+1}  (s_t)^{-\gamma}\]</div>
 <p>求解储蓄，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-saving-crra">
-<span class="eqno">(26.20)<a class="headerlink" href="#equation-saving-crra" title="Permalink to this equation">#</a></span>\[    s_t 
+<span class="eqno">(26.20)<a class="headerlink" href="#equation-saving-crra" title="Link to this equation">#</a></span>\[    s_t 
     = s(w_t, R_{t+1}) 
     = w_t \left [ 
         1 + \beta^{-1/\gamma} R_{t+1}^{(\gamma-1)/\gamma} 
@@ -686,7 +757,7 @@
 <p>请注意，与对数情况不同，储蓄现在取决于利率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">savings_crra</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">savings_crra</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">γ</span> <span class="o">=</span> <span class="n">model</span>
     <span class="k">return</span> <span class="n">w</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">β</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">γ</span><span class="p">)</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="p">((</span><span class="n">γ</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">γ</span><span class="p">))</span> 
 </pre></div>
@@ -713,27 +784,28 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png"><img alt="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" src="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png"><img alt="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" src="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
 <section id="id20">
-<h3><span class="section-number">26.7.2. </span>均衡<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">26.7.2. </span>均衡<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 <p>将资本的总需求（参见<a class="reference internal" href="#equation-aggregate-demand-capital-olg">(26.11)</a>）与我们新的总供给函数相等，即可得出均衡资本。</p>
 <p>因此，我们设定</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-crra-2">
-<span class="eqno">(26.21)<a class="headerlink" href="#equation-equilibrium-crra-2" title="Permalink to this equation">#</a></span>\[    w_t \left [ 1 + \beta^{-1/\gamma} R_{t+1}^{(\gamma-1)/\gamma} \right ]^{-1} 
+<span class="eqno">(26.21)<a class="headerlink" href="#equation-equilibrium-crra-2" title="Link to this equation">#</a></span>\[    w_t \left [ 1 + \beta^{-1/\gamma} R_{t+1}^{(\gamma-1)/\gamma} \right ]^{-1} 
     = \left (\frac{R_{t+1}}{\alpha} \right )^{1/(\alpha - 1)}\]</div>
 <p>这个表达式相当复杂，我们无法解析地求解 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>。</p>
 <p>将<a class="reference internal" href="#equation-interest-rate-one">(26.10)</a>和<a class="reference internal" href="#equation-equilibrium-crra-2">(26.21)</a>结合起来，得到</p>
 <div class="math notranslate nohighlight" id="equation-law-of-motion-capital-crra">
-<span class="eqno">(26.22)<a class="headerlink" href="#equation-law-of-motion-capital-crra" title="Permalink to this equation">#</a></span>\[    k_{t+1} = \left [ 1 + \beta^{-1/\gamma} (\alpha k^{\alpha - 1}_{t+1})^{(\gamma-1)/\gamma} \right ]^{-1} (1-\alpha)(k_t)^{\alpha}\]</div>
+<span class="eqno">(26.22)<a class="headerlink" href="#equation-law-of-motion-capital-crra" title="Link to this equation">#</a></span>\[    k_{t+1} = \left [ 1 + \beta^{-1/\gamma} (\alpha k^{\alpha - 1}_{t+1})^{(\gamma-1)/\gamma} \right ]^{-1} (1-\alpha)(k_t)^{\alpha}\]</div>
 <p>同样，有了这个等式和给定的 <span class="math notranslate nohighlight">\(k_t\)</span>，我们无法用纸笔求解 <span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
 <p>在下面的练习中，你将被要求用数值方法解这些方程。</p>
 </section>
 </section>
 <section id="id21">
-<h2><span class="section-number">26.8. </span>练习<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">26.8. </span>练习<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="olg_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 26.1 </span></p>
@@ -749,7 +821,7 @@
 <p>为了在给定 <span class="math notranslate nohighlight">\(k_t\)</span> 的情况下求解 <span class="math notranslate nohighlight">\(k_{t+1}\)</span>，我们使用<a class="reference external" href="https://python.quantecon.org/newton_method.html">牛顿法</a>。</p>
 <p>设</p>
 <div class="math notranslate nohighlight" id="equation-crra-newton-1">
-<span class="eqno">(26.23)<a class="headerlink" href="#equation-crra-newton-1" title="Permalink to this equation">#</a></span>\[    f(k_{t+1}, k_t)
+<span class="eqno">(26.23)<a class="headerlink" href="#equation-crra-newton-1" title="Link to this equation">#</a></span>\[    f(k_{t+1}, k_t)
     =
     k_{t+1} 
     \left[ 
@@ -763,7 +835,7 @@
 <p>首先让我们定义 <span class="math notranslate nohighlight">\(f\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">k_prime</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">k_prime</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">γ</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">γ</span>
     <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">α</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">γ</span><span class="p">)</span>
@@ -777,7 +849,7 @@
 <p>现在让我们定义一个函数来找出 <span class="math notranslate nohighlight">\(k_{t+1}\)</span> 的值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">k_update</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">k_update</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k_prime</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">k_prime</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -811,7 +883,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png"><img alt="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" src="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png"><img alt="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" src="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -839,14 +912,14 @@
 <p>我们引入一个函数 <span class="math notranslate nohighlight">\(h\)</span>，使得
 正稳态是 <span class="math notranslate nohighlight">\(h\)</span> 的根。</p>
 <div class="math notranslate nohighlight" id="equation-crra-newton-2">
-<span class="eqno">(26.24)<a class="headerlink" href="#equation-crra-newton-2" title="Permalink to this equation">#</a></span>\[    h(k^*) = k^*  
+<span class="eqno">(26.24)<a class="headerlink" href="#equation-crra-newton-2" title="Link to this equation">#</a></span>\[    h(k^*) = k^*  
     \left [ 
         1 + \beta^{-1/\gamma} (\alpha (k^*)^{\alpha-1})^{(\gamma-1)/\gamma} 
     \right ] - (1-\alpha)(k^*)^{\alpha}\]</div>
 <p>现在让我们用Python实现这个函数：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">k_star</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">k_star</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">α</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">γ</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">γ</span>
     <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">k_star</span><span class="o">**</span><span class="n">α</span>
     <span class="n">R1</span> <span class="o">=</span> <span class="n">α</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">γ</span><span class="p">)</span>
@@ -897,7 +970,7 @@
 <p>现在我们定义一个函数来模拟时间序列。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
@@ -930,7 +1003,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png"><img alt="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" src="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png"><img alt="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" src="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" style="width: 80%;" />
+</a>
 </div>
 </div>
 </section>
@@ -1367,6 +1441,35 @@
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/olg.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/olg.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/olg.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
 
             </div>
