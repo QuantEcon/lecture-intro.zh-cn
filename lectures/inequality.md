@@ -270,7 +270,8 @@ for var in varlist:
         # 根据他们的权重来重复这些观测值
         counts = list(round(df[df['year'] == year]['weights'] )) 
         y = df[df['year'] == year][var].repeat(counts)
-        y = np.asarray(y)
+        # `.copy()` 返回可写数组（pandas 3.0 返回的是只读数组）
+        y = np.asarray(y).copy()
         
         # 打乱y的序列来改善图形形状
         rd.shuffle(y)    
