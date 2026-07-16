@@ -464,10 +464,15 @@ plt.show()
 我们也可以尝试用数学方法解决这个问题，即对 $c^*(s)$ 进行微分，并使用 [sympy](https://www.sympy.org/en/index.html) 求解 $\frac{d}{ds}c^*(s)=0$。
 
 ```{code-cell} ipython3
-from sympy import solve, Symbol
+from sympy import solve, Symbol, Rational
 ```
 
 ```{code-cell} ipython3
+# 使用 Rational 进行精确符号计算
+A = Rational(2)
+alpha = Rational(3, 10)
+delta = Rational(1, 2)
+
 s_symbol = Symbol('s', real=True)
 k = ((s_symbol * A) / delta)**(1/(1 - alpha))
 c = (1 - s_symbol) * A * k ** alpha
@@ -478,7 +483,7 @@ c = (1 - s_symbol) * A * k ** alpha
 ```{code-cell} ipython3
 # 使用 sympy 求解
 s_star = solve(c.diff())[0]
-print(f"s_star = {s_star}")
+print(f"s_star = {float(s_star)}")
 ```
 
 顺便说一下，使人均消费的稳态水平最大化的储蓄率被称为[经济增长黄金律](https://baike.baidu.com/item/%E7%BB%8F%E6%B5%8E%E5%A2%9E%E9%95%BF%E9%BB%84%E9%87%91%E5%BE%8B/10376669)。
