@@ -215,7 +215,7 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(250, 120, "*", color="black")
-ax.text(260, 115, "solution", size=10)
+ax.text(260, 115, "解", size=10)
 
 plt.show()
 ```
@@ -459,7 +459,7 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(17, 69, "*", color="black")
-ax.text(18, 60, "dual solution", size=10)
+ax.text(18, 60, "对偶解", size=10)
 
 plt.show()
 ```
