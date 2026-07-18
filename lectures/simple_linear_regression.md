@@ -72,8 +72,8 @@ ax = df.plot(
     x='X', 
     y='Y', 
     kind='scatter', 
-    ylabel='Ice-cream sales ($\'s)', 
-    xlabel='Degrees Celsius'
+    ylabel=r'冰淇淋销售额（$\'s）', 
+    xlabel='摄氏度'
 )
 ```
 
@@ -221,7 +221,7 @@ mystnb:
     caption: "绘制误差图"
     name: plt-errors
 ---
-ax = pd.Series(errors).plot(xlabel='β', ylabel='error')
+ax = pd.Series(errors).plot(xlabel='β', ylabel='残差')
 plt.axvline(β_optimal, color='r');
 ```
 
@@ -242,7 +242,7 @@ mystnb:
     caption: "绘制误差图 (2)"
     name: plt-errors-2
 ---
-ax = pd.Series(errors).plot(xlabel='α', ylabel='error')
+ax = pd.Series(errors).plot(xlabel='α', ylabel='残差')
 plt.axvline(α_optimal, color='r');
 ```
 
@@ -485,13 +485,13 @@ le_years[~le_years[1543].isna()]
 你还可以更仔细地观察时间序列，发现即使对于GBR，它也是不连续的。
 
 ```{code-cell} ipython3
-le_years.loc['GBR'].plot()
+le_years.loc['GBR'].plot(xlabel="年份")
 ```
 
 实际上我们可以使用pandas快速检查每个年份涵盖了多少个国家
 
 ```{code-cell} ipython3
-le_years.stack().unstack(level=0).count(axis=1).plot(xlabel="Year", ylabel="Number of countries");
+le_years.stack().unstack(level=0).count(axis=1).plot(xlabel="年份", ylabel="国家数量");
 ```
 
 所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家
@@ -503,7 +503,7 @@ df = df[df.year == 2018].reset_index(drop=True).copy()
 ```
 
 ```{code-cell} ipython3
-df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="GDP per capita", ylabel="Life expectancy (years)",);
+df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="人均GDP", ylabel="预期寿命（年）",);
 ```
 
 这些数据显示了一些有趣的关系。
@@ -516,7 +516,7 @@ df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="GDP per capita"
 通过指定`logx`，你可以在对数刻度上绘制人均GDP数据
 
 ```{code-cell} ipython3
-df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="GDP per capita", ylabel="Life expectancy (years)", logx=True);
+df.plot(x='gdppc', y='life_expectancy', kind='scatter',  xlabel="人均GDP", ylabel="预期寿命（年）", logx=True);
 ```
 
 从这次转换可以看出——线性模型更贴近数据的形状。
@@ -563,8 +563,8 @@ data['life_expectancy_hat'] = α + β * df['log_gdppc']
 data['error'] = data['life_expectancy_hat'] - data['life_expectancy']
 
 fig, ax = plt.subplots()
-data.plot(x='log_gdppc',y='life_expectancy', kind='scatter', ax=ax)
-data.plot(x='log_gdppc',y='life_expectancy_hat', kind='line', ax=ax, color='g')
+data.plot(x='log_gdppc',y='life_expectancy', kind='scatter', ax=ax, xlabel="人均GDP", ylabel="预期寿命（年）")
+data.plot(x='log_gdppc',y='life_expectancy_hat', kind='line', ax=ax, color='g', xlabel="人均GDP", label="最佳拟合线")
 plt.vlines(data['log_gdppc'], data['life_expectancy_hat'], data['life_expectancy'], color='r')
 ```
 
