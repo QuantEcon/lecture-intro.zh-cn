@@ -9,6 +9,25 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 基础经济学中的几何级数
+  headings:
+    Overview: 概述
+    Key formulas: 关键公式
+    Key formulas::Infinite geometric series: 无限几何级数
+    Key formulas::Finite geometric series: 有限几何级数
+    'Example: The Money Multiplier in Fractional Reserve Banking': 示例：部分准备金银行制度中的货币乘数
+    'Example: The Money Multiplier in Fractional Reserve Banking::A simple model': 一个简单的模型
+    'Example: The Money Multiplier in Fractional Reserve Banking::Money multiplier': 货币乘数
+    'Example: The Keynesian Multiplier': 示例：凯恩斯乘数
+    'Example: The Keynesian Multiplier::Static version': 静态版本
+    'Example: The Keynesian Multiplier::Dynamic version': 动态版本
+    'Example: Interest Rates and Present Values': 示例：利率和现值
+    'Example: Interest Rates and Present Values::Accumulation': 累积
+    'Example: Interest Rates and Present Values::Discounting': 折现
+    'Example: Interest Rates and Present Values::Application to asset pricing': 资产定价的应用
+    Back to the Keynesian multiplier: 回到凯恩斯乘数
+    Exercises: 练习
 ---
 
 (geom_series)=

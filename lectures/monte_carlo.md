@@ -9,6 +9,28 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 蒙特卡罗方法与期权定价
+  headings:
+    Overview: 概览
+    An introduction to Monte Carlo: 蒙特卡罗简介
+    An introduction to Monte Carlo::Share price with known distribution: 给定分布的股票价格
+    An introduction to Monte Carlo::Share price with unknown distribution: 未知分布的股票价格
+    An introduction to Monte Carlo::Share price with unknown distribution::A routine using loops in python: 使用Python循环的一种例程
+    An introduction to Monte Carlo::A vectorized routine: 一种向量化的例程
+    Pricing a European call option under risk neutrality: 利用风险中性定价欧式看涨期权
+    Pricing a European call option under risk neutrality::Risk-neutral pricing: 风险中性定价
+    Pricing a European call option under risk neutrality::A comment on risk: 关于风险的提示
+    Pricing a European call option under risk neutrality::Discounting: 贴现
+    Pricing a European call option under risk neutrality::European call options: 欧式看涨期权
+    Pricing via a dynamic model: 通过动态模型定价
+    Pricing via a dynamic model::Simple dynamics: 简单动态
+    Pricing via a dynamic model::Problems with simple dynamics: 简单动态问题
+    Pricing via a dynamic model::More realistic dynamics: 更加贴合实际的动态模型
+    Pricing via a dynamic model::Default parameters: 默认参数
+    Pricing via a dynamic model::Visualizations: 可视化
+    Pricing via a dynamic model::Computing the price: 计算价格
+    Exercises: 练习
 ---
 
 (monte-carlo)=

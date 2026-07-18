@@ -1,4 +1,13 @@
 ---
+translation:
+  title: 关于这些讲座
+  headings:
+    About: 简介
+    Level: 难度层级
+    Credits: 致谢
+---
+
+---
 # 关于这些讲座
 
 ## 简介

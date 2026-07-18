@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 供给与需求导论
+  headings:
+    Overview: 概述
+    Overview::Why does this model matter?: 为什么这个模型很重要？
+    Overview::Topics and infrastructure: 主题和函数库
+    Consumer surplus: 生产者剩余
+    Consumer surplus::A discrete example: 离散情况
+    Producer surplus: 积分
+    Integration: 供给和需求
+    Supply and demand: 推广
+    Generalizations: 练习
 ---
 # 供给与需求导论
 

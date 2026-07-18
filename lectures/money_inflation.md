@@ -9,6 +9,23 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 通过货币资助的政府赤字和价格水平
+  headings:
+    Overview: 概览
+    Demand for and supply of money: 货币的需求与供给
+    Equilibrium price and money supply sequences: 均衡价格和货币供应序列
+    Equilibrium price and money supply sequences::Steady states: 稳态
+    Some code: 一些代码
+    Two  computation strategies: 两种计算均衡的策略
+    Two  computation strategies::Method 1: 方法 1
+    Two  computation strategies::Method 2: 方法2
+    Computation method 1: 计算方法1
+    Computation method 2: 计算方法 2
+    Computation method 2::More convenient formula: 更便捷的公式
+    Peculiar stationary outcomes: 特殊的静态结果
+    Equilibrium selection: 均衡选择
+    Exercises: 练习
 ---
 
 # 通过货币资助的政府赤字和价格水平

@@ -9,6 +9,15 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 用矩阵代数表示的单变量时间序列
+  headings:
+    Overview: 概述
+    Samuelson's model: 萨缪尔森的模型
+    Adding a random term: 添加随机项
+    Computing population moments: 计算总体矩
+    Moving average representation: 移动平均表示
+    A forward looking model: 一个前瞻性模型
 ---
 
 (time_series_with_matrices)=

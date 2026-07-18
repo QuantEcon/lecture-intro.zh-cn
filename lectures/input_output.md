@@ -9,6 +9,21 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 输入-输出模型
+  headings:
+    Overview: 概述
+    Input-output analysis: 投入产出分析
+    Input-output analysis::Two goods: 两种产品
+    Production possibility frontier: 生产可能性边界
+    Prices: 价格
+    Linear programs: 线性规划
+    Leontief inverse: 列昂惕夫逆矩阵
+    Leontief inverse::Demand shocks: 需求冲击
+    Applications of graph theory: 图论的应用
+    Applications of graph theory::Eigenvector centrality: 特征向量中心性
+    Applications of graph theory::Output multipliers: 产出乘数
+    Exercises: 练习
 ---
 
 # 输入-输出模型

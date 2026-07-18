@@ -7,6 +7,8 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: Python量化经济学入门
 ---
 
 # Python量化经济学入门

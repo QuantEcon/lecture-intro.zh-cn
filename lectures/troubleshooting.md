@@ -7,6 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 故障排除
+  headings:
+    Fixing your local environment: 修复您的本地环境
+    Reporting an issue: 报告问题
 ---
 
 (troubleshooting)=

@@ -9,6 +9,35 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 重尾分布
+  headings:
+    Overview: 概览
+    'Overview::Introduction: light tails': 引言：轻尾分布
+    Overview::When are light tails valid?: 轻尾分布何时成立？
+    Overview::Returns on assets: 资产回报率分析
+    Overview::Other data: 其他数据
+    Overview::Why should we care?: 为什么我们要关注这个问题？
+    Visual comparisons: 视觉比较
+    Visual comparisons::Simulations: 模拟
+    Visual comparisons::Nonnegative distributions: 非负分布
+    Visual comparisons::Counter CDFs: 互补累积分布函数
+    Visual comparisons::Empirical CCDFs: 经验 CCDFs
+    Visual comparisons::Empirical CCDFs::Q-Q Plots: Q-Q图
+    Visual comparisons::Power laws: 幂律
+    Heavy tails in economic cross-sections: 经济数据中的重尾分布
+    Heavy tails in economic cross-sections::Firm size: 公司规模
+    Heavy tails in economic cross-sections::City size: 城市规模
+    Heavy tails in economic cross-sections::Wealth: 财富
+    Heavy tails in economic cross-sections::GDP: GDP
+    Failure of the LLN: 大数定律的失效
+    Why do heavy tails matter?: 为什么重尾分布很重要？
+    Why do heavy tails matter?::Diversification: 分散化投资
+    Why do heavy tails matter?::Fiscal policy: 财政政策
+    Classifying tail properties: 分类尾部特性
+    Classifying tail properties::Light and heavy tails: 轻尾和重尾
+    Further reading: 延伸阅读
+    Exercises: 练习
 ---
 (heavy_tail)=
 # 重尾分布

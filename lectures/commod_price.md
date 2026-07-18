@@ -7,6 +7,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 商品价格
+  headings:
+    Outline: 大纲
+    Data: 数据
+    The competitive storage model: 竞争性储存模型
+    The model: 模型
+    Equilibrium: 均衡
+    Equilibrium::Equilibrium conditions: 均衡条件
+    Equilibrium::An equilibrium function: 一个均衡函数
+    Equilibrium::Computing the equilibrium: 计算均衡
+    Code: 代码
 ---
 
 # 商品价格

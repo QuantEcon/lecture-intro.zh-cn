@@ -7,6 +7,16 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 最短路径
+  headings:
+    Overview: 概述
+    Outline of the problem: 问题概述
+    Finding least-cost paths: 寻找最低成本路径
+    Solving for minimum cost-to-go: 求解最小成本函数
+    Solving for minimum cost-to-go::The algorithm: 算法
+    Solving for minimum cost-to-go::Implementation: 实现
+    Exercises: 练习
 ---
 
 (short_path)=

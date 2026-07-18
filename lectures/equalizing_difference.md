@@ -9,6 +9,17 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 均衡差异模型
+  headings:
+    Overview: 概述
+    The indifference condition: 无差异条件
+    The indifference condition::Present value of a high school educated worker: 不上大学直接工作的现值
+    The indifference condition::Present value of a college-bound new high school graduate: 上大学后工作的高中毕业生的现值
+    Computations: 计算
+    Entrepreneur-worker interpretation: 企业家与打工人的解读
+    An application of calculus: 微积分的应用
+    Exercises: 练习
 ---
 
 # 均衡差异模型

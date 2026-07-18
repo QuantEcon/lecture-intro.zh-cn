@@ -9,6 +9,17 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 法国大革命期间的通货膨胀
+  headings:
+    Overview: 概览
+    Data Sources: 数据来源
+    Government Expenditures and Taxes Collected: 政府开支与税收
+    Nationalization, Privatization, Debt Reduction: 国有化、私有化与债务削减
+    Remaking the tax code and tax administration: 重塑税法与税收管理
+    Hyperinflation Ends: 恶性通货膨胀的终结
+    Underlying Theories: 理论基础
+    Exercises: 练习
 ---
 
 # 法国大革命期间的通货膨胀

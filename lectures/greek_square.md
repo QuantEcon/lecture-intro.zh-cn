@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 求解平方根
+  headings:
+    Introduction: 引言
+    Perfect squares and irrational numbers: 完全平方数与无理数
+    Second-order linear difference equations: 二阶线性差分方程
+    Algorithm of the Ancient Greeks: 古希腊人的算法
+    Implementation: 实现
+    Vectorizing the difference equation: 差分方程的向量化
+    Invariant subspace approach: 不变子空间方法
+    Concluding remarks: 结束语
+    Exercise: 练习
 ---
 
 # 求解平方根

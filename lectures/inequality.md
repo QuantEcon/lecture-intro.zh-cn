@@ -9,6 +9,26 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 收入与财富不平等
+  headings:
+    Overview: 概览
+    Overview::Some history: 一些历史
+    Overview::Measurement: 测量
+    The Lorenz curve: 洛伦兹曲线
+    The Lorenz curve::Definition: 定义
+    The Lorenz curve::Lorenz curves of simulated data: 洛伦兹曲线的模拟数据
+    The Lorenz curve::Lorenz curves for US data: 洛伦兹曲线（美国数据）
+    The Gini coefficient: 基尼系数
+    The Gini coefficient::Definition: 定义
+    The Gini coefficient::Gini coefficient of simulated data: 模拟数据的基尼系数
+    The Gini coefficient::Gini coefficient for income (US data): 美国收入的基尼系数
+    The Gini coefficient::Gini coefficient for wealth: 财富的基尼系数
+    The Gini coefficient::Cross-country comparisons of income inequality: 跨国收入不平等的比较
+    The Gini coefficient::Gini Coefficient and GDP per capita (over time): 基尼系数与人均GDP（随时间变化）
+    Top shares: 前10%比例
+    Top shares::Definition: 定义
+    Exercises: 练习
 ---
 
 # 收入与财富不平等

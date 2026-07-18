@@ -9,6 +9,34 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 特征值和特征向量
+  headings:
+    Overview: 概述
+    Matrices as transformations: 矩阵作为变换
+    Matrices as transformations::Mapping vectors to vectors: 将向量映射到向量
+    Matrices as transformations::Square matrices: 方阵
+    Types of transformations: 变换类型
+    Types of transformations::Scaling: 缩放
+    Types of transformations::Shearing: 剪切
+    Types of transformations::Rotation: 旋转
+    Types of transformations::Permutation: 置换
+    Matrix multiplication as composition: 矩阵乘法作为组合
+    Matrix multiplication as composition::Linear compositions: 线性组合
+    Matrix multiplication as composition::Examples: 示例
+    Matrix multiplication as composition::Examples::Shear then rotate: 剪切后旋转
+    Matrix multiplication as composition::Examples::Rotate then shear: 旋转后剪切
+    Iterating on a fixed map: 对固定映射进行迭代
+    Eigenvalues: 特征值
+    Eigenvalues::Definitions: 定义
+    Eigenvalues::Complex values: 复数值
+    Eigenvalues::Some mathematical details: 一些数学细节
+    Eigenvalues::Facts: 事实
+    Eigenvalues::Computation: 计算
+    The Neumann Series Lemma: 诺伊曼级数引理
+    The Neumann Series Lemma::Scalar series: 标量级数
+    The Neumann Series Lemma::Matrix series: 矩阵级数
+    Exercises: 练习
 ---
 
 +++ {"user_expressions": []}

@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 自适应预期下的货币主义价格水平理论
+  headings:
+    Overview: 引言
+    Structure of the model: 模型结构
+    Representing key equations with linear algebra: 关键方程的矩阵表示
+    Harvesting insights from our matrix formulation: 从矩阵表述中获取洞见
+    Forecast errors and model computation: 预测误差与模型计算
+    Technical condition for stability: 稳定性的技术条件
+    Experiments: 实验
+    Experiments::Experiment 1: 实验1
+    Experiments::Experiment 2: 实验2
+    Exercises: 练习
 ---
 
 # 自适应预期下的货币主义价格水平理论

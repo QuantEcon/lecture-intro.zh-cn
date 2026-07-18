@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 拉弗曲线与自适应预期
+  headings:
+    Overview: 概览
+    The model: 模型
+    Computing an equilibrium sequence: 计算均衡序列
+    Claims or conjectures: 结论或猜想
+    Limiting values of inflation rate: 通货膨胀率的极限值
+    Steady-state Laffer curve: 稳态拉弗曲线
+    Associated initial price levels: 相关的初始价格水平
+    Associated initial price levels::Verification: 验证
+    Slippery side of Laffer curve dynamics: 拉弗曲线动态的不稳定一侧
+    Exercises: 练习
 ---
 
 # 拉弗曲线与自适应预期

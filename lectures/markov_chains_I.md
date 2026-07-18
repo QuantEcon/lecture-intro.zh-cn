@@ -9,6 +9,31 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 马尔科夫链：基本概念
+  headings:
+    Overview: 概述
+    Definitions and examples: 定义与示例
+    Definitions and examples::Stochastic matrices: 随机矩阵
+    Definitions and examples::Markov chains: 马尔科夫链
+    'Definitions and examples::Markov chains::Example 1: Economic states': 示例 1：经济状态
+    'Definitions and examples::Markov chains::Example 2: Unemployment': 示例 2：失业
+    'Definitions and examples::Markov chains::Example 3: Political transition dynamics': 示例 3：政治转型动态
+    Definitions and examples::Defining Markov chains: 定义马尔科夫链
+    Simulation: 模拟
+    Simulation::Writing our own simulation code: 编写我们自己的模拟代码
+    Simulation::Using QuantEcon's routines: 使用 QuantEcon 的例程
+    Simulation::Using QuantEcon's routines::Adding state values and initial conditions: 添加状态值和初始条件
+    Distributions over time: 随时间分布
+    Distributions over time::Multiple step transition probabilities: 多步转移概率
+    Stationary distributions: 平稳分布
+    Stationary distributions::Calculating stationary distributions: 计算平稳分布
+    Stationary distributions::Asymptotic stationarity: 渐进平稳性
+    'Stationary distributions::Asymptotic stationarity::Example: Hamilton''s chain': 示例：汉密尔顿链
+    'Stationary distributions::Asymptotic stationarity::Example: failure of convergence': 示例：收敛失败
+    Computing expectations: 计算期望
+    Computing expectations::Expectations of geometric sums: 几何和的期望
+    Draw the plot: 绘制图像
 ---
 
 # 马尔科夫链：基本概念

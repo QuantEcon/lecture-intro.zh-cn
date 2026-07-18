@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 佩龙-弗罗贝尼乌斯定理
+  headings:
+    Nonnegative matrices: 非负矩阵
+    Nonnegative matrices::Irreducible matrices: 不可约矩阵
+    Nonnegative matrices::Left eigenvectors: 左特征向量
+    Nonnegative matrices::The Perron-Frobenius theorem: 佩龙-弗罗贝尼乌斯定理
+    'Nonnegative matrices::The Perron-Frobenius theorem::Example: irreducible matrix': 示例：不可约矩阵
+    Nonnegative matrices::Primitive matrices: 原始矩阵
+    'Nonnegative matrices::Primitive matrices::Example 1: primitive matrix': 示例1：原始矩阵
+    'Nonnegative matrices::Primitive matrices::Example 2: connection to Markov chains': 示例2：与马尔可夫链的联系
+    Exercises: 练习
 ---
 
 # 佩龙-弗罗贝尼乌斯定理

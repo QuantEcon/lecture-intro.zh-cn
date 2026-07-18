@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 一些不愉快的货币主义算术
+  headings:
+    Overview: 概述
+    Setup: 设置
+    Monetary-Fiscal Policy: 货币与财政政策
+    Monetary-Fiscal Policy::Open market operations: 公开市场操作
+    An open market operation at $t=0$: 在 $t=0$ 时的公开市场操作
+    Algorithm (basic idea): 算法（基本思想）
+    Before time $T$: 在时间 $T$ 之前
+    Algorithm (pseudo code): 算法（伪代码）
+    Example Calculations: 计算示例
+    Exercises: 练习
 ---
 
 # 一些不愉快的货币主义算术

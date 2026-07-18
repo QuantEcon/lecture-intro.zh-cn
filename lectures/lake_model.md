@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 就业的湖泊模型
+  headings:
+    Outline: 大纲
+    The Lake model: 湖泊模型
+    Dynamics: 动态变化
+    Dynamics::Visualising the long-run outcomes: 可视化长期结果
+    Dynamics::The application of Perron-Frobenius theorem: 佩龙-弗罗贝尼乌斯定理的应用
+    Dynamics::The application of Perron-Frobenius theorem::Dominant eigenvector: 主导特征向量
+    Dynamics::The application of Perron-Frobenius theorem::Negative growth rate: 负增长率
+    Dynamics::Properties: 性质
+    Exercise: 练习
 ---
 
 # 就业的湖泊模型
