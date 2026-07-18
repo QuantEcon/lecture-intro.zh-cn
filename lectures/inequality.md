@@ -643,7 +643,7 @@ mystnb:
 ax = data[['USA','GBR', 'NOR']].plot()
 ax.set_xlabel('年份')
 ax.set_ylabel('基尼系数')
-ax.legend(title="") 
+ax.legend(labels=["美国", "英国", "挪威"], title="") 
 plt.show()
 ```
 
@@ -671,7 +671,7 @@ data['NOR'] = data['NOR'].ffill()
 ax = data[['USA','GBR', 'NOR']].plot()
 ax.set_xlabel('年份')
 ax.set_ylabel('基尼系数')
-ax.legend(title="") 
+ax.legend(labels=["美国", "英国", "挪威"], title="") 
 plt.show()
 ```
 
@@ -739,6 +739,8 @@ fig = px.line(plot_data,
               height = 800,
               labels = {"gini" : "基尼系数", "gdppc" : "人均GDP"}
              )
+fig.for_each_trace(lambda t: t.update(name={'USA': '美国', 'GBR': '英国', 'NOR': '挪威'}[t.name]))
+
 fig.update_traces(textposition="bottom right")
 fig.show()
 ```
