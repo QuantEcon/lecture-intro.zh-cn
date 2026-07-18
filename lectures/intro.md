@@ -11,8 +11,7 @@ kernelspec:
 
 # Python量化经济学入门
 
-本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 
+本课程系列提供了使用Python进行量化经济学的入门介绍。
 
 ```{tableofcontents}
 ```
-
