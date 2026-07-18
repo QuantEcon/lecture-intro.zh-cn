@@ -623,6 +623,8 @@ plt.show()
 ```{code-cell} ipython3
 data_normal = rng.normal(size=sample_size)
 sm.qqplot(data_normal, line='45')
+plt.xlabel("理论分位数")
+plt.ylabel("样本分位数")
 plt.show()
 ```
 
@@ -636,6 +638,8 @@ labels = ['指数分布', '对数正态分布', '帕累托分布']
 for data, label, ax in zip(data_list, labels, axes):
     sm.qqplot(data, line='45', ax=ax, )
     ax.set_title(label)
+    ax.set_xlabel('理论分位数')
+    ax.set_ylabel('样本分位数')
 plt.tight_layout()
 plt.show()
 ```
@@ -831,6 +835,7 @@ df_w = df_w[['country', 'realTimeWorth', 'realTimeRank']].dropna()
 df_w = df_w.astype({'realTimeRank': int})
 df_w = df_w.sort_values('realTimeRank', ascending=True).copy()
 countries = ['United States', 'Japan', 'India', 'Italy']  
+country_names = ['美国', '日本', '印度', '意大利']
 N = len(countries)
 
 fig, axs = plt.subplots(2, 2, figsize=(8, 6))
@@ -844,7 +849,7 @@ for i, c in enumerate(countries):
     if len(z) <= top:    
         z = z[:top]
 
-    empirical_ccdf(z[:top], axs[i], label=c, xlabel='对数财富', add_reg_line=True)
+    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)
     
 fig.tight_layout()
 
