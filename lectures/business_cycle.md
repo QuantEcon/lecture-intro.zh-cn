@@ -45,6 +45,9 @@ import matplotlib as mpl
 FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
+
+# 英文国家名 → 中文名映射（用于图例标签）
+name_cn = pd.read_csv('../lectures/datasets/country_code_cn.csv').set_index('name')
 ```
 
 下面几行代码是用来设置图形参数的。
@@ -158,7 +161,8 @@ def plot_series(data, country, ylabel,
         带有图表的轴向。
     """
 
-    ax.plot(data.loc[country], label=country, **g_params)
+    ax.plot(data.loc[country],
+            label=name_cn.loc[country]['name_chinese'], **g_params)
 
     # 高亮衰退
     ax.axvspan(1973, 1975, **b_params)
@@ -450,7 +454,8 @@ def plot_comparison(data, countries,
 
     # 允许函数处理多个系列
     for country in countries:
-        ax.plot(data.loc[country], label=country, **g_params)
+        ax.plot(data.loc[country],
+            label=name_cn.loc[country]['name_chinese'], **g_params)
 
     # 高亮衰退期
     ax.axvspan(1973, 1975, **b_params)
@@ -727,7 +732,7 @@ private_credit.columns = private_credit.columns.str.replace('YR', '').astype(int
 
 fig, ax = plt.subplots()
 
-countries = '英国'
+countries = 'United Kingdom'
 ylabel = '信贷水平 (% of GDP)'
 ax = plot_series(private_credit, countries,
                  ylabel, 0.05, ax, g_params, b_params,
