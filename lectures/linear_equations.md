@@ -145,8 +145,9 @@ $$
 
 * $\mathbb R^2$是平面 --- 即所有$(x_1, x_2)$对的集合。
 * $\mathbb R^3$是三维空间 --- 即所有$(x_1, x_2, x_3)$向量的集合。
-向量通常在视觉上表示为从原点到某点的箭头。
 ```
+
+向量通常在视觉上表示为从原点到某点的箭头。
 
 这里是一个可视化示例。
 
@@ -247,7 +248,6 @@ for spine in ['right', 'top']:
     ax.spines[spine].set_color('none')
 
 ax.set(xlim=(-2, 10), ylim=(-4, 4))
-# ax.grid()
 vecs = ((4, -2), (3, 3), (7, 1))
 tags = ('(x1, x2)', '(y1, y2)', '(x1+x2, y1+y2)')
 colors = ('blue', 'green', 'red')
@@ -596,6 +596,7 @@ $$
 * [这个教程](http://www.mathsisfun.com/algebra/matrix-multiplying.html)，或者
 * [维基百科页面](https://en.wikipedia.org/wiki/Matrix_multiplication)上的讨论。
 
+
 ```{note}
 与数字乘积不同，$A B$ 和 $B A$ 通常不相等。
 ```
@@ -617,10 +618,12 @@ $$
 * 如果 $I$ 是 $n \times n$ 单位矩阵，那么 $IA = A$。
 
 
-###  NumPy中的矩阵
+
+### NumPy中的矩阵
 
 ```{index} single: Matrix; Numpy
 ```
+
 NumPy 数组也被用作矩阵，并且对所有标准矩阵运算都有快速、高效的函数和方法。
 
 你可以通过以下方式从元组的元组（或列表的列表）手动创建它们
@@ -833,15 +836,19 @@ $$
     \end{bmatrix}.
 ```
 
+```{prf:example}
+:label: le_ex_gls
+
 例如，{eq}`n_eq_sys_la` 具有这种形式，其中
 
 $$
     A = D - C,
     \quad
     b = e - h
-    \quad \text{和} \quad
+    \quad \text{and} \quad
     x = p.
 $$
+```
 
 当考虑诸如 {eq}`la_gf` 这样的问题时，我们至少需要问以下一些问题：
 
@@ -858,7 +865,7 @@ $$
 ```{math}
 :label: la_se2
 
-    A x = b
+    A x = b.
 ```
 
 我们面临的问题是找到一个向量 $x \in \mathbb R^n$，使其解决 {eq}`la_se2` ，其中 $b$ 和 $A$ 是给定的。
@@ -893,7 +900,6 @@ plt.show()
 
 +++ {"tags": []}
 
-
 显然，这些是平行线，因此我们永远无法找到一个点 $x \in \mathbb{R}^2$ 使得这些线相交。
 
 因此，这个系统没有可能的解。
@@ -922,12 +928,15 @@ plt.show()
 
 在这种情况下，矩阵 $A$ 的行被称为**线性相关的。**
 
+
+
 ```{note}
-读者可以在[这里](https://python.quantecon.org/linear_algebra.html#linear-independence)找到关于线性相关和线性无关的详细解释。
+高阶读者可以在[这里](https://python.quantecon.org/linear_algebra.html#linear-independence)找到关于线性相关和线性无关的详细解释。
 
 但在接下来的内容中不需要这些细节。
 
 ```
+
 
 
 ### 多解
@@ -960,6 +969,7 @@ $$
 是线性相关的 --- 你能看出为什么吗？
 
 我们现在对 {eq}`la_se2` 中的 $A$ 施加条件，以排除这些问题。
+
 
 ### 非奇异矩阵
 
@@ -998,12 +1008,14 @@ $$
 
 这是对 $Ax = b$ 的解答 --- 这就是我们要寻找的解。
 
+
+
 ### 使用NumPy求解线性方程
 
 ```{index} single: Linear Algebra; SciPy
 ```
 
-根据上述例子中，我们得到了矩阵方程：
+在两种商品的例子中，我们得到了矩阵方程：
 
 $$
 p = (C-D)^{-1} h.
@@ -1011,7 +1023,7 @@ $$
 
 其中 $C$、$D$ 和 $h$ 由 {eq}`two_eq_demand_mat` 和 {eq}`two_eq_supply_mat` 给出。
 
-这个方程类似于 {eq}`la_se_inv`，其中 $A = (C-D)^{-1}$，$b = h$，且 $x = p$。
+这个方程类似于 {eq}`la_se_inv`，其中 $A = C-D$，$b = h$，且 $x = p$。
 
 我们现在可以使用NumPy的`linalg`子模块求解均衡价格。
 
@@ -1042,17 +1054,17 @@ h.shape = 2,1             # 将h转换为列向量
 ```{code-cell} ipython3
 from numpy.linalg import det, inv
 A = C - D
-#检查A是否为奇异矩阵（行列式是否为零），是否可逆
+# 检查A是否为奇异矩阵（行列式是否为零），是否可逆
 det(A)
 ```
 
 ```{code-cell} ipython3
-A_inv = inv(A)  #计算逆矩阵
+A_inv = inv(A)  # 计算逆矩阵
 A_inv
 ```
 
 ```{code-cell} ipython3
-p = A_inv @ h  #均衡价格
+p = A_inv @ h  # 均衡价格
 p
 ```
 
@@ -1081,10 +1093,13 @@ q
 后一种方法使用了一种不同的算法，在数值上更加稳定，因此应该是默认选项。
 
 
+
 ## 练习
+
 ```{exercise-start}
 :label: lin_eqs_ex1
 ```
+
 让我们考虑一个有3种商品的市场 - 商品0、商品1和商品2。
 
 每种商品的需求取决于其他两种商品的价格，由以下公式给出：
@@ -1119,6 +1134,7 @@ $$
 ```{solution-start} lin_eqs_ex1
 :class: dropdown
 ```
+
 生成的系统将是：
 
 $$
@@ -1189,7 +1205,7 @@ p
 答案为：
 
 $$
-p_0 = 4.6925, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
+p_0 = 4.9625, \; p_1 = 7.0625 \;\; \text{and} \;\; p_2 = 7.675
 $$
 
 ```{solution-end}
@@ -1264,16 +1280,15 @@ $$
 
 因此，我们得到一个方程组$Ax = b$，其中$A = \begin{bmatrix} 1 & -9 \\ 1 & -7 \\ 1 & -3 \end{bmatrix}$，
 $x = \begin{bmatrix} m \\ n \end{bmatrix}$，$b = \begin{bmatrix} 1 \\ 3 \\ 8 \end{bmatrix}$。
+
 可以验证这个系统没有解。
 
 （问题在于我们有三个方程但只有两个未知数。）
 
 因此，我们将尝试找到$x$的最佳近似解。
 
-1. 使用{eq}`least_squares`和矩阵代数找到最小二乘解$\hat{x}$。
-
+1. 使用上面的最小二乘公式和矩阵代数找到最小二乘解$\hat{x}$。
 2. 使用`numpy.linalg.lstsq`找到最小二乘解，并比较结果。
-
 
 ```{exercise-end}
 ```
@@ -1313,10 +1328,10 @@ x, res, _, _ = np.linalg.lstsq(A, b, rcond=None)
 print(f"x\u0302 = {x}")
 print(f"\u2016Ax\u0302 - b\u2016\u00B2 = {res[0]}")
 ```
+
 这是一个可视化图，展示了最小二乘法如何近似一组点之间连线的方程。
 
 我们也可以将此描述为在一组点之间"拟合"一条直线。
-
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -1335,6 +1350,7 @@ plt.show()
 
 ```{solution-end}
 ```
+
 
 ### 延伸阅读
 
