@@ -1,0 +1,41 @@
+# Rebase Translation PRs
+#
+# Install this workflow in the TARGET (translated) repository.
+# When a translation-sync PR is merged, this workflow automatically
+# rebases other open translation-sync PRs against the updated main branch.
+#
+# This eliminates merge conflicts caused by multiple upstream PRs
+# modifying the same files. See: https://github.com/QuantEcon/action-translation/issues/63
+#
+# Place this file at: .github/workflows/rebase-translations.yml
+
+name: Rebase Translation PRs
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  rebase:
+    # Only run when a translation-sync PR is merged
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'translation-sync-')
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    # Prevent concurrent rebases from overlapping
+    concurrency:
+      group: rebase-translations
+      cancel-in-progress: false
+
+    steps:
+      - name: Rebase open translation PRs
+        uses: QuantEcon/action-translation@v0
+        with:
+          mode: rebase
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
