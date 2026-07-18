@@ -7,6 +7,21 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 复数和三角函数
+  headings:
+    Overview: 概述
+    Overview::Complex Numbers: 复数
+    Overview::An Example: 一个例子
+    De Moivre's Theorem: 德莫瓦定理
+    Applications of de Moivre's Theorem: 德莫瓦定理的应用
+    Applications of de Moivre's Theorem::Example 1: 例1
+    Applications of de Moivre's Theorem::Example 2: 例2
+    Applications of de Moivre's Theorem::Example 3: 例3
+    'Note: we choose the solution near 0': 注意：我们选择在 0 附近的解
+    'Note: we choose the solution near 0::Trigonometric Identities': 三角恒等式
+    'Note: we choose the solution near 0::Trigonometric Integrals': 三角积分
+    'Note: we choose the solution near 0::Exercises': 练习
 ---
 
 (complex_and_trig)=

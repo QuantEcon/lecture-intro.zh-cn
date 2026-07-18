@@ -9,6 +9,30 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 概率分布
+  headings:
+    Outline: 概述
+    Common distributions: 常见分布
+    Common distributions::Discrete distributions: 离散分布
+    Common distributions::Discrete distributions::Uniform distribution: 均匀分布
+    Common distributions::Discrete distributions::Bernoulli distribution: 伯努利分布
+    Common distributions::Discrete distributions::Binomial distribution: 二项分布
+    Common distributions::Discrete distributions::Geometric distribution: 几何分布
+    Common distributions::Discrete distributions::Poisson distribution: 泊松分布
+    Common distributions::Continuous distributions: 连续分布
+    Common distributions::Continuous distributions::Normal distribution: 正态分布
+    Common distributions::Continuous distributions::Lognormal distribution: 对数正态分布
+    Common distributions::Continuous distributions::Exponential distribution: 指数分布
+    Common distributions::Continuous distributions::Beta distribution: 贝塔分布
+    Common distributions::Continuous distributions::Gamma distribution: 伽马分布
+    Observed distributions: 观察到的分布
+    Observed distributions::Summary statistics: 描述性统计
+    Observed distributions::Visualization: 可视化
+    Observed distributions::Visualization::Histograms: 直方图
+    Observed distributions::Visualization::Kernel density estimates: 核密度估计
+    Observed distributions::Visualization::Violin plots: 小提琴图
+    Observed distributions::Connection to probability distributions: 与概率分布的联系
 ---
 
 # 概率分布

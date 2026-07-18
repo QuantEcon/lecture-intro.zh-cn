@@ -9,6 +9,29 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 世代交叠模型
+  headings:
+    Overview: 概述
+    Environment: 环境
+    Supply of capital: 资本供给
+    Supply of capital::Consumer's problem: 消费者问题
+    'Supply of capital::Special case: log preferences': 特殊情形：对数偏好
+    Supply of capital::Savings and investment: 储蓄与投资的关系
+    Demand for capital: 资本需求
+    Demand for capital::Firm's problem: 企业问题
+    Demand for capital::Demand: 需求
+    Equilibrium: 均衡
+    Equilibrium::Equilibrium conditions: 均衡条件
+    'Equilibrium::Example: log utility': 示例：对数效用
+    Dynamics: 动态分析
+    Dynamics::Evolution of capital: 资本积累过程
+    Dynamics::Steady state (log case): 稳态（对数情况）
+    Dynamics::Time series: 时间序列
+    CRRA preferences: CRRA偏好
+    CRRA preferences::Supply: 供给
+    CRRA preferences::Equilibrium: 均衡
+    Exercises: 练习
 ---
 
 # 世代交叠模型

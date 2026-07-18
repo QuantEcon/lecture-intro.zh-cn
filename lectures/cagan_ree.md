@@ -9,6 +9,23 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 货币主义价格水平理论
+  headings:
+    Overview: 概述
+    Structure of the model: 模型结构
+    Continuation values: 延续值
+    Continuation values::Some quantitative experiments: 一些定量实验
+    'Continuation values::Some quantitative experiments::Experiment 1: Foreseen sudden stabilization': 实验1：可预期的突然稳定
+    Continuation values::The log price level: 对数价格水平
+    Continuation values::What jumps?: 什么在跳跃？
+    Continuation values::What jumps?::Technical details about whether $p$ or $m$ jumps at $T_1$: 关于 $p$ 还是 $m$ 在 $T_1$ 时跳跃的技术细节
+    Continuation values::What jumps?::$m_{T_{1}}$ does not jump.: $m_{T_{1}}$ 不跳跃的情况
+    Continuation values::What jumps?::$m_{T_{1}}$ jumps.: $m_{T_{1}}$ 跳跃的情况
+    'Continuation values::What jumps?::Experiment 2: an unforeseen sudden stabilization': 实验2：不可预期的突然稳定
+    Continuation values::What jumps?::Experiment 3: 实验3
+    Exercises: 练习
+    Sequel: 续篇
 ---
 
 # 货币主义价格水平理论

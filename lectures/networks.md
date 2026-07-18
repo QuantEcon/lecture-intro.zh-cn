@@ -7,6 +7,29 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 网络
+  headings:
+    Outline: 概述
+    Economic and financial networks: 经济和金融网络
+    'Economic and financial networks::Example: Aircraft Exports': 例子：飞机出口网络
+    'Economic and financial networks::Example: A Markov Chain': 例子：马尔可夫链
+    An introduction to graph theory: 图论简介
+    An introduction to graph theory::Key definitions: 关键定义
+    An introduction to graph theory::Digraphs in Networkx: Networkx中的有向图
+    An introduction to graph theory::Communication: 连通性
+    Weighted graphs: 加权图
+    Weighted graphs::International private credit flows by country: 各国间私人信贷流动
+    Weighted graphs::Definitions: 定义
+    Adjacency matrices: 邻接矩阵
+    Properties: 性质
+    Network centrality: 网络中心性
+    Network centrality::Degree centrality: 度中心性
+    Network centrality::Eigenvector centrality: 特征向量中心性
+    Network centrality::Katz centrality: 卡茨中心性
+    Network centrality::Authorities vs hubs: 权威与枢纽
+    Further reading: 进一步阅读
+    Exercises: 练习
 ---
 
 # 网络

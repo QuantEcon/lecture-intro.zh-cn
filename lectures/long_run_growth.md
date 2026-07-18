@@ -9,6 +9,21 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 长期增长
+  headings:
+    Overview: 概述
+    Setting up: 准备数据
+    GDP per capita: 人均国内生产总值
+    GDP per capita::United Kingdom: 英国
+    GDP per capita::Comparing the US, UK, and China: 美国、英国和中国的比较
+    GDP per capita::Focusing on China: 聚焦于中国
+    GDP per capita::Focusing on the US and UK: 聚焦于美国和英国
+    GDP growth: GDP增长
+    GDP growth::Early industrialization (1820 to 1940): 早期工业化（1820至1940年）
+    GDP growth::Early industrialization (1820 to 1940)::Constructing a plot similar to Tooze's: 构建类似于图泽的图
+    GDP growth::The modern era (1950 to 2020): 现代时代（1950至2020年）
+    Regional analysis: 地区分析
 ---
 
 # 长期增长

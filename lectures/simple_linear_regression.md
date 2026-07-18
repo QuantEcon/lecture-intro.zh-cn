@@ -9,6 +9,11 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 简单线性回归模型
+  headings:
+    How does error change with respect to $\alpha$ and $\beta$: 误差相对于 $\alpha$ 和 $\beta$ 是如何变化的
+    Calculating optimal values: 计算最优值
 ---
 
 # 简单线性回归模型

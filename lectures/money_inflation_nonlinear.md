@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 通货膨胀税的拉弗曲线
+  headings:
+    Overview: 概述
+    The Model: 模型
+    Limiting Values of Inflation Rate: 通货膨胀率的极限
+    Steady State Laffer curve: 稳态拉弗曲线
+    Initial Price Levels: 初始价格水平的计算
+    Initial Price Levels::Verification: 验证
+    Computing an Equilibrium Sequence: 计算均衡序列
+    Slippery Side of Laffer Curve Dynamics: 拉弗曲线动态的不稳定性
+    Exercises: 练习
 ---
 
 # 通货膨胀税的拉弗曲线

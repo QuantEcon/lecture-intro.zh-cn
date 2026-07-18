@@ -7,6 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 索洛-斯旺增长模型
+  headings:
+    The model: 模型
+    A graphical perspective: 图形化视角
+    Growth in continuous time: 连续时间的增长
+    Exercises: 练习
 ---
 
 (solow)=

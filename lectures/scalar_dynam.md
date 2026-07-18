@@ -7,6 +7,23 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 一维动力学
+  headings:
+    Overview: 概述
+    Some definitions: 一些定义
+    Some definitions::Composition of functions: 函数组合
+    Some definitions::Dynamic systems: 动态系统
+    'Some definitions::Example: a linear model': 示例：线性模型
+    'Some definitions::Example: a nonlinear model': 示例：非线性模型
+    Stability: 稳定性
+    Stability::Steady states: 稳态
+    Stability::Global stability: 全局稳定性
+    Stability::Local stability: 局部稳定性
+    Graphical analysis: 图形分析
+    Graphical analysis::Trajectories: 轨迹
+    Graphical analysis::Complex dynamics: 复杂动态
+    Exercises: 练习
 ---
 
 ```{raw} html

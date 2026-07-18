@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 具有异质性的市场均衡
+  headings:
+    Overview: 概览
+    A simple example: 一个简单的例子
+    Pure exchange economy: 纯交换经济体
+    Pure exchange economy::Competitive equilibrium: 竞争均衡
+    Pure exchange economy::Designing some Python code: 编写一些 Python 代码
+    Implementation: 实践
+    Implementation::Two-person economy without production: 没有生产的两人经济体
+    Implementation::A dynamic economy: 动态经济体
+    Implementation::Risk economy with arrow securities: 具有阿罗证券的风险经济体
+    Deducing a representative consumer: 推导代表性消费者
 ---
 
 (supply_demand_heterogeneity)=

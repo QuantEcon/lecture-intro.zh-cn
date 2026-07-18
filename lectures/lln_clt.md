@@ -9,6 +9,22 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 大数定律与中心极限定理
+  headings:
+    Overview: 概述
+    The law of large numbers: 大数定律
+    The law of large numbers::The LLN in action: 大数定律的应用
+    The law of large numbers::Statement of the LLN: 大数定律的陈述
+    The law of large numbers::Comments on the theorem: 关于定理的评论
+    The law of large numbers::Illustration: 示例说明
+    Breaking the LLN: 打破大数定律
+    Breaking the LLN::Infinite first moment: 无限的一阶矩
+    Breaking the LLN::Failure of the IID condition: IID 条件的失效
+    Central limit theorem: 中心极限定理
+    Central limit theorem::Statement of the theorem: 定理的陈述
+    Central limit theorem::Simulation 1: 模拟 1
+    Exercises: 练习
 ---
 
 # 大数定律与中心极限定理

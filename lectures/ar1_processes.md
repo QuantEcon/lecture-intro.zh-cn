@@ -7,6 +7,17 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: AR(1) 过程
+  headings:
+    Overview: 概览
+    The AR(1) model: AR(1) 模型
+    The AR(1) model::Moving average representation: 移动平均表示
+    The AR(1) model::Distribution dynamics: 分布动态
+    Stationarity and asymptotic stability: 平稳性和渐近稳定性
+    Stationarity and asymptotic stability::Stationary distributions: 平稳分布
+    Ergodicity: 遍历性
+    Exercises: 练习
 ---
 
 (ar1)=

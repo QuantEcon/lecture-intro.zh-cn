@@ -9,6 +9,30 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 线性方程和矩阵代数
+  headings:
+    Overview: 概述
+    A two good example: 两种商品的例子
+    A two good example::Pencil and paper methods: 纸笔计算方法
+    A two good example::Looking forward: 展望未来
+    Vectors: 向量
+    Vectors::Vector operations: 向量运算
+    Vectors::Inner product and norm: 内积和范数
+    Matrix operations: 矩阵运算
+    Matrix operations::Addition and scalar multiplication: 加法和标量乘法
+    Matrix operations::Matrix multiplication: 矩阵乘法
+    Matrix operations::Matrices in NumPy: NumPy中的矩阵
+    Matrix operations::Two good model in matrix form: 矩阵形式的两种商品模型
+    Matrix operations::More goods: 更多商品
+    Matrix operations::General linear systems: 一般线性系统
+    Solving systems of equations: 解方程组
+    Solving systems of equations::No solution: 无解
+    Solving systems of equations::Many solutions: 多解
+    Solving systems of equations::Nonsingular matrices: 非奇异矩阵
+    Solving systems of equations::Linear equations with NumPy: 使用NumPy求解线性方程
+    Exercises: 练习
+    Exercises::Further reading: 延伸阅读
 ---
 
 # 线性方程和矩阵代数

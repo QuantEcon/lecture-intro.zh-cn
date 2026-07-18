@@ -9,6 +9,31 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 多种商品的供需关系
+  headings:
+    Overview: 概览
+    Formulas from linear algebra: 来自线性代数的公式
+    From utility function to demand curve: 从效用函数到需求曲线
+    From utility function to demand curve::Demand curve implied by constrained utility maximization: 隐含约束效用最大化的需求曲线
+    Endowment economy: 禀赋经济
+    'Digression: Marshallian and Hicksian demand curves': 题外话：马歇尔需求曲线与希克斯需求曲线
+    Dynamics and risk as special cases: 作为特殊情况的动态与风险
+    Dynamics and risk as special cases::Dynamics: 动态
+    Dynamics and risk as special cases::Risk and state-contingent claims: 风险与状态相关权益
+    Economies with endogenous supplies of goods: 具有内生供应的经济体
+    Economies with endogenous supplies of goods::Supply curve of a competitive firm: 竞争性公司的供给曲线
+    Economies with endogenous supplies of goods::Competitive equilibrium: 竞争均衡
+    Economies with endogenous supplies of goods::Competitive equilibrium::$\mu=1$ warmup: 热身：$\mu=1$
+    Economies with endogenous supplies of goods::Competitive equilibrium::General $\mu\neq 1$ case: 一般情况： $\mu \neq 1$
+    Economies with endogenous supplies of goods::Implementation: 实践
+    'Economies with endogenous supplies of goods::Implementation::Example: single agent with one good and production': 示例：单一商品与生产的单个主体
+    'Economies with endogenous supplies of goods::Implementation::Example: single agent two-good economy with production': 示例：单个主体、两种商品且包含生产的经济体系
+    'Economies with endogenous supplies of goods::Digression: a supplier who is a monopolist': 题外话：垄断供应商
+    Economies with endogenous supplies of goods::A monopolist: 垄断者
+    Economies with endogenous supplies of goods::A monopolist::A multiple good example: 多种商品的例子
+    Economies with endogenous supplies of goods::A monopolist::A single-good example: 单一商品的例子
+    Multi-good welfare maximization problem: 多种商品的福利最大化问题
 ---
 
 (supply_demand_multiple_goods)=

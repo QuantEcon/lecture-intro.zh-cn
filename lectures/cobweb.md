@@ -9,6 +9,15 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 蛛网模型
+  headings:
+    Overview: 概述
+    History: 历史
+    The model: 模型
+    Naive expectations: 简单预期
+    Adaptive expectations: 适应性预期
+    Exercises: 练习
 ---
 
 (cobweb)=

@@ -9,6 +9,16 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 种族隔离
+  headings:
+    Outline: 大纲
+    The model: 模型
+    The model::Set-Up: 设置
+    The model::Preferences: 偏好
+    The model::Behavior: 行为
+    Results: 结果
+    Exercises: 练习
 ---
 
 (schelling)=

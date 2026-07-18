@@ -9,6 +9,27 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 消费平滑
+  headings:
+    Overview: 概述
+    Analysis: 分析
+    Friedman-Hall consumption-smoothing model: 弗里德曼-霍尔消费平滑模型
+    Mechanics of consumption-smoothing model: 消费平滑模型的机制
+    Mechanics of consumption-smoothing model::Step 1: 步骤 1
+    Mechanics of consumption-smoothing model::Step 2: 步骤 2
+    Mechanics of consumption-smoothing model::Step 3: 步骤 3
+    Mechanics of consumption-smoothing model::Experiments: 实验
+    'Mechanics of consumption-smoothing model::Experiments::Experiment 1: one-time gain/loss': 实验1：一次性收益/损失
+    'Mechanics of consumption-smoothing model::Experiments::Experiment 2: permanent wage gain/loss': 实验2：永久性工资增加/减少
+    'Mechanics of consumption-smoothing model::Experiments::Experiment 3: a late starter': 实验3：晚期起步者
+    'Mechanics of consumption-smoothing model::Experiments::Experiment 4: geometric earner': 实验4：几何增长收入者
+    Mechanics of consumption-smoothing model::Feasible consumption variations: 可行的消费变化
+    Wrapping up the consumption-smoothing model: 消费平滑模型总结
+    'Appendix: solving difference equations with linear algebra': 附录：用线性代数解差分方程
+    'Appendix: solving difference equations with linear algebra::First-order difference equation': 一阶差分方程
+    'Appendix: solving difference equations with linear algebra::Second-order difference equation': 二阶差分方程
+    Exercises: 练习
 ---
 
 # 消费平滑

@@ -7,6 +7,26 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 线性规划
+  headings:
+    Overview: 概述
+    'Example 1: production problem': 示例 1：生产问题
+    'Example 1: production problem::A graphical solution': 图解法
+    'Example 2: investment problem': 示例 2：投资问题
+    Standard form: 标准形式
+    Standard form::Useful transformations: 有用的变换
+    'Standard form::Example 1: production problem': 示例 1：生产问题
+    'Standard form::Example 2: investment problem': 示例 2：投资问题
+    'Computation: solving with SciPy': 计算：使用 SciPy 求解
+    'Computation: solving with SciPy::Example 1: production problem': 示例 1：生产问题
+    'Computation: solving with SciPy::Example 2: investment problem': 示例 2：投资问题
+    Duality: 对偶
+    Duality::The dual of the production problem: 生产问题的对偶
+    Duality::Solving the dual: 求解对偶问题
+    Duality::Weak and strong duality: 弱对偶与强对偶
+    Duality::Shadow prices: 影子价格
+    Exercises: 练习
 ---
 
 (lp_intro)=

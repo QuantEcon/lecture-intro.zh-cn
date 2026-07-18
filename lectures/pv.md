@@ -9,6 +9,16 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 现值
+  headings:
+    Overview: 概述
+    Analysis: 分析
+    Representing sequences as vectors: 将序列表示为向量
+    Analytical expressions: 解析表达式
+    More about bubbles: 关于泡沫的更多内容
+    Gross rate of return: 总回报率
+    Exercises: 练习
 ---
 
 # 现值

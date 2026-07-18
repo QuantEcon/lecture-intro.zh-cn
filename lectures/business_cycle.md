@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 商业周期
+  headings:
+    Overview: 概览
+    Data acquisition: 数据获取
+    GDP growth rate: GDP 增长率
+    Unemployment: 失业
+    Synchronization: 同步化
+    Leading indicators and correlated factors: 领先指标和相关因素
+    Leading indicators and correlated factors::Consumption: 消费
+    Leading indicators and correlated factors::Production: 生产
+    Leading indicators and correlated factors::Credit level: 信贷水平
 ---
 
 # 商业周期

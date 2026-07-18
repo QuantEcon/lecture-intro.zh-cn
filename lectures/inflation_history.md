@@ -9,6 +9,17 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 通货膨胀的历史
+  headings:
+    Four centuries of price levels: 四个世纪的价格水平
+    Four big inflations: 四次大通胀
+    Four big inflations::Austria: 奥地利
+    Four big inflations::Hungary: 匈牙利
+    Four big inflations::Poland: 波兰
+    Four big inflations::Germany: 德国
+    Starting and stopping big inflations: 大通胀的开始和停止
+    Exercises: 练习
 ---
 
 # 通货膨胀的历史
