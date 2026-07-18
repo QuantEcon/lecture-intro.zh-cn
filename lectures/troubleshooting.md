@@ -59,7 +59,7 @@ kernelspec:
 
 ## 报告问题
 
-反馈的一种方式是通过我们的[问题跟踪器](https://github.com/QuantEcon/lecture-python/issues)提出问题。
+反馈的一种方式是通过我们的[问题跟踪器](https://github.com/QuantEcon/lecture-intro.zh-cn/issues)提出问题。
 
 请尽可能具体。告诉我们问题所在，以及尽可能多的关于你本地设置的细节。
 
