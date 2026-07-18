@@ -389,8 +389,8 @@ m0_arr = np.arange(10, 110, 10)
 ```{code-cell} ipython3
 plt.plot(m0_arr, [compute_fixed_point(m0, 1, msm) for m0 in m0_arr])
 
-plt.ylabel('$p_0$')
-plt.xlabel('$m_0$')
+plt.ylabel('价格水平 $p_0$')
+plt.xlabel('初始货币供应量 $m_0$')
 
 plt.show()
 ```
