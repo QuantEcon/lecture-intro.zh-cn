@@ -33,7 +33,7 @@ kernelspec:
 :width: 100%
 ```
 
-（这只是我们的图 {numref}`gdp1` 的副本。 我们将在本讲的稍后部分介绍如何绘制{numref}`gdp1`）。
+（这只是我们的图 {numref}`gdp1` 的副本。 我们将在本讲的稍后部分介绍如何绘制它。）
 
 {cite}`Tooze_2014`的第1章用他的图表说明了美国的GDP在19世纪初如何远远落后于大英帝国的GDP。
 
@@ -46,8 +46,7 @@ kernelspec:
 
 （如果读者们想提前了解答案，现在可以跳到后面看看图{numref}`gdp2`）。
 
-正如我们将看到的，通过类比推理，这张2014年或之后的图表或许为解释“某某国家的（21世纪）世纪”奠定了基础，而你可以自由填入你对某某国家的猜测。
-
+正如我们将看到的，通过类比推理，这张图表或许为解释“某某国家的（21世纪）世纪”奠定了基础，而你可以自由填入你对某某国家的猜测。
 
 在我们收集数据以构建这两个图表的过程中，我们还将研究很多国家在尽可能长的时间范围内的增长经历。
 
@@ -60,7 +59,7 @@ kernelspec:
 由于各国的人口数量不同，而且一个国家内部的人口数量也会随着时间的推移而变化。
 因此，描述一个国家的 GDP 总量和人均 GDP 的变化是非常有趣的。
 
-首先，让我们导入所需的库。
+首先，让我们导入探索长期增长数据所需的库
 
 ```{code-cell} ipython3
 import pandas as pd
@@ -97,7 +96,7 @@ data.head()
 
 我们可以看到，该数据集包含许多经济体和年份的人均国内生产总值（`gdppc`）和人口（`pop`）。
 
-让我们看看这个数据集中有多少经济体。
+让我们看看这个数据集中有多少经济体，都是哪些经济体。
 
 ```{code-cell} ipython3
 countries = data.country.unique()
@@ -106,7 +105,7 @@ len(countries)
 
 我们现在可以继续探索数据集里的169个经济体。
 
-我们可以遍历每个样本来了解每个样本可用的年份都有哪些。
+我们可以遍历每个经济体来了解每个经济体可用的年份都有哪些。
 
 ```{code-cell} ipython3
 country_years = []
@@ -123,10 +122,9 @@ country_years.head()
 
 我们可以在该数据集中的经济体代码（`countrycode`）和经济体名称（`country`）之间建立一个有用的映射关系。
 
-为了方便使用中文标签，我们导入地区代码与中文名对应的数据集
-
 ```{code-cell} ipython3
-code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
+code_to_name = data[
+    ['countrycode', 'country']].drop_duplicates().reset_index(drop=True).set_index(['countrycode'])
 ```
 
 现在，我们专注于人均 GDP (`gdppc`)，并生成一个宽格式的数据表。
@@ -182,7 +180,9 @@ gdp_pc[country].plot(
 ```
 
 :::{note}
-[国际元](https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%85%83) 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。它们也被称为 Geary-Khamis 元（GK 元）。
+[国际元](https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%85%83) 是一种假设的货币单位，在特定时间点与美元在美国的购买力平价相同。
+
+它们也被称为 Geary-Khamis 元（GK 元）。
 :::
 
 我们可以看到，在本千年的头 250 年中有长一段数据是不连续的，因此我们可以选择内插法得到连续的线图。
@@ -246,7 +246,7 @@ def draw_interp_plots(series,        # pandas 数据
                 lw=lw,
                 color=color_mapping[c],
                 alpha=0.8,
-                label=code_to_name.loc[c]['name_chinese'])
+                label=code_to_name.loc[c]['country'])
 
         if logscale:
             ax.set_yscale('log')
@@ -324,6 +324,8 @@ def draw_events(events, ax):
         ax.axvspan(*event.year_range, color=event.color, alpha=0.2)
         ax.axvline(event_mid, ymin=1, ymax=event.ymax, color=event.color,
                    clip_on=False, alpha=0.15)
+
+# 绘制事件
 draw_events(events, ax)
 plt.show()
 ```
@@ -475,7 +477,7 @@ gdp = data['gdp'].unstack('countrycode')
 
 ### 早期工业化（1820至1940年）
 
-我们首先可视化中国、俄罗斯/前苏联、日本、英国和美国的趋势。
+我们首先可视化中国、前苏联、日本、英国和美国的趋势。
 
 最显著的趋势是美国的崛起，在1860年代超过英国，并在1880年代超过中国。
 
@@ -516,9 +518,13 @@ gdp['BEM'] = gdp[BEM].loc[start_year-1:end_year].interpolate(method='index').sum
 
 
 ```{code-cell} ipython3
-color_mapping['BEM'] = color_mapping['GBR']  
+# 定义大英帝国的颜色映射和名称
+color_mapping['BEM'] = color_mapping['GBR']  # 将颜色设置为与英国相同
+# 将大英帝国加入到 code_to_name
+bem = pd.DataFrame(["British Empire"], index=["BEM"], columns=['country'])
+bem.index.name = 'countrycode'
+code_to_name = pd.concat([code_to_name, bem])
 ```
-
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(dpi=300)
@@ -560,7 +566,7 @@ draw_interp_plots(gdp[country].loc[start_year:end_year],
                   color_mapping, code_to_name, 2, False, ax)
 ```
 
-很自然的我们会将这个图表与图{numref}`gdp1`相比较，后者显示了美国在“美国世纪”开始时超过英国的情况。
+很自然的我们会将这个图表与图{numref}`gdp1`相比较，后者显示了美国在“美国世纪”开始时超过英国的情况，这一版本的图表出现在{cite}`Tooze_2014`的第1章中。
 
 ## 地区分析
 
@@ -587,7 +593,6 @@ regionalgdp_pc.index = pd.to_datetime(regionalgdp_pc.index, format='%Y')
 
 ```{code-cell} ipython3
 regionalgdp_pc.interpolate(method='time', inplace=True)
-regionalgdp_pc.columns = ['西欧', '东欧', '西方分支', '拉丁美洲', '东亚', '南亚和东南亚', '中东', '撒哈拉以南非洲', '世界人均GDP']
 ```
 
 进行更深入的研究，我们将西方分支（`Western Offshoots`）和撒哈拉以南非洲（`Sub-Saharan Africa`）的时间序列与世界各地多个不同地区进行比较。
