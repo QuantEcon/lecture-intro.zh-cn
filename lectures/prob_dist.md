@@ -11,12 +11,14 @@ kernelspec:
   name: python3
 ---
 
-# 分布和概率
+# 概率分布
 
-```{index} single: Distributions and Probabilities
+```{index} single: Common Distributions
 ```
 
 ## 概述
+
+在数据科学应用中，我们经常关注某个特定变量的数据。
 
 在本讲中，我们将使用 Python 快速介绍数据和概率分布。
 
@@ -40,6 +42,72 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
+为了引出下文，让我们从一个真实的例子开始：美国成年男性和女性的身高。
+
+数据来自美国[国家健康与营养检查调查](https://www.cdc.gov/nchs/nhanes/index.htm)（NHANES）。
+
+下图展示了这两个数据集的直方图，身高以厘米为单位。
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 美国成年人身高（NHANES）
+    name: fig:us-heights
+tags: [hide-input]
+---
+# Data file is stored in this repo for now; switch to the QuantEcon/datasets
+# URL once that repo exists (see QuantEcon/meta#336).
+url = '_static/lecture_specific/prob_dist/us_adult_heights.csv'
+heights = pd.read_csv(url)
+male = heights[heights['sex'] == 'male']['height_cm']
+female = heights[heights['sex'] == 'female']['height_cm']
+
+fig, ax = plt.subplots()
+ax.hist(male, bins=40, density=True, alpha=0.6, label='男性')
+ax.hist(female, bins=40, density=True, alpha=0.6, label='女性')
+ax.set_xlabel('身高（厘米）')
+ax.set_ylabel('密度')
+ax.legend()
+plt.show()
+```
+
+每个直方图都呈现出我们熟悉的"钟形"。
+
+这表明我们可以用**正态分布**来近似这些数据——这是一种具有钟形密度的连续分布，我们将在下面详细研究它。
+
+为此，我们对每个数据集拟合一个正态分布，选择其均值和标准差以匹配身高数据的样本均值和样本标准差。
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 正态分布拟合美国成年人身高
+    name: fig:us-heights-fit
+tags: [hide-input]
+---
+fig, ax = plt.subplots()
+x_grid = np.linspace(130, 205, 200)
+for sample, color, label in ((male, 'C0', '男性'), (female, 'C1', '女性')):
+    ax.hist(sample, bins=40, density=True, alpha=0.4, color=color)
+    u = scipy.stats.norm(sample.mean(), sample.std())
+    ax.plot(x_grid, u.pdf(x_grid), color=color, lw=2, label=label)
+ax.set_xlabel('身高（厘米）')
+ax.set_ylabel('密度')
+ax.legend()
+plt.show()
+```
+
+拟合效果非常好。
+
+请注意这实现了什么：每个包含约5,000个个体测量值的数据集，现在都可以用一个仅有**两个参数**的平滑密度函数来概括——均值 $\mu$（决定中心位置）和标准差 $\sigma$（决定离散程度）。
+
+这样的紧凑摘要极其有用。
+
+这也是我们研究**常见分布**的原因之一：这些是由少数几个参数控制的、已被证明对描述数据非常有用的一系列命名分布族。
+
+现在让我们来看看这些分布。
+
 ## 常见分布
 
 在本节中，我们将介绍几种常见概率分布的基本定义，并展示如何利用 SciPy 库来处理和分析这些分布。
@@ -53,6 +121,39 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 $$ 
 \sum_{i=1}^n p(x_i) = 1 
 $$
+
+例如，下图展示了2024年日本各年龄段人口（日本国籍）占总人口的比例，从0岁到100岁及以上。
+
+数据来自[日本统计局](https://www.stat.go.jp/english/data/jinsui/index.html)。
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 各年龄段人口比例，日本2024年
+    name: fig:japan-age
+tags: [hide-input]
+---
+# Data file is stored in this repo for now; switch to the QuantEcon/datasets
+# URL once that repo exists (see QuantEcon/meta#336).
+url = '_static/lecture_specific/prob_dist/japan_population_by_age.xlsx'
+# Column 14 holds the Japanese-national population (in thousands) by single year
+# of age; rows run from age 0 to "100 and over".
+data = pd.read_excel(url, sheet_name='第１表', header=None, skiprows=10,
+                     usecols=[14], names=['population'], nrows=101)
+population = data['population'].to_numpy()
+age = np.arange(101)     # 0, 1, ..., 100, where 100 means "100 and over"
+
+p = population / population.sum()
+
+fig, ax = plt.subplots()
+ax.bar(age, p)
+ax.set_xlabel('年龄')
+ax.set_ylabel('人口占比')
+plt.show()
+```
+
+这里每个 $x_i$ 是一个年龄，$p(x_i)$ 是该年龄段人口占总人口的比例，所有比例之和为一。
 
 我们说一个随机变量 $X$ **服从分布** $p$，如果 $X$ 取值为 $x_i$ 的概率是 $p(x_i)$。
 
@@ -68,7 +169,7 @@ $$
 \mathbb{E}[X] = \sum_{i=1}^n x_i p(x_i)
 $$
 
-期望值也被称为分布的*一阶矩*，是描述分布中心位置的重要统计量。
+期望值也被称为分布的*一阶矩*。
 
 我们也将这个数字称为分布（由 $p$ 表示）的均值。
 
@@ -94,9 +195,9 @@ $$
 
 #### 均匀分布
 
-一个简单的例子是**均匀分布**，它为每个可能的结果分配相同的概率，即 $p(x_i) = 1/n$ 对于所有 $i = 1, 2, \ldots, n$。
+一个简单的例子是**均匀分布**，其中 $p(x_i) = 1/n$ 对于所有 $i$ 都成立。
 
-在 Python 中，我们可以使用 SciPy 库来处理 $S = \{1, \ldots, n\}$ 上的均匀分布：
+我们可以像这样从 SciPy 中导入 $S = \{1, \ldots, n\}$ 上的均匀分布：
 
 ```{code-cell} ipython3
 n = 10
@@ -152,10 +253,11 @@ CDF 在$x_i$处跳升$p(x_i)$。
 ```{exercise}
 :label: prob_ex1
 
-使用均值公式 $(n+1)/2$ 和方差公式 $(n^2 - 1)/12$ 手动计算当 $n=10$ 时的均值和方差。
+直接使用上面给出的表达式，从PMF出发计算此参数化情形（即$n=10$）下的均值和方差。
 
-将你计算的结果与 Python 函数 `u.mean()` 和 `u.var()` 返回的值进行比较，确认它们是否一致。
+检查你的答案是否与`u.mean()`和`u.var()`一致。
 ```
+
 
 #### 伯努利分布
 
@@ -168,7 +270,7 @@ $$
 
 这里 $\theta \in [0,1]$ 是一个参数。
 
-我们可以将这个分布视为对一个只有两种可能结果的随机试验进行概率建模，其成功概率是 $\theta$。
+我们可以将这个分布视为对一个成功概率为 $\theta$ 的随机试验进行概率建模。
 
 * $p(1) = \theta$ 表示试验成功（取值1）的概率是 $\theta$
 * $p(0) = 1 - \theta$ 表示试验失败（取值0）的概率是 $1-\theta$
@@ -202,13 +304,13 @@ $$
 p(i) = \binom{n}{i} \theta^i (1-\theta)^{n-i}
 $$
 
-这里，$\theta \in [0,1]$ 仍然是表示成功概率的参数。
+同样，$\theta \in [0,1]$ 是一个参数。
 
-二项分布描述了在$n$次独立的伯努利试验中，恰好获得$i$次成功的概率，其中每次试验成功的概率都是$\theta$。
+$p(i)$ 的含义是：在成功概率为 $\theta$ 的 $n$ 次独立试验中，出现 $i$ 次成功的概率。
 
-一个直观的例子是：当$\theta=0.5$时，$p(i)$表示在$n$次公平硬币投掷中，恰好出现$i$次正面的概率。
+例如，如果 $\theta=0.5$，那么 $p(i)$ 就是在 $n$ 次抛掷一枚公平硬币中出现 $i$ 次正面的概率。
 
-二项分布的均值为$n\theta$，方差为$n\theta(1-\theta)$。
+均值的公式是 $n \theta$，方差的公式是 $n \theta (1-\theta)$。
 
 让我们通过一个具体例子来说明这个分布
 
@@ -270,7 +372,7 @@ plt.show()
 :class: dropdown
 ```
 
-答案：
+以下是一种解法：
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -290,23 +392,24 @@ plt.show()
 ```
 
 #### 几何分布
-几何分布是一种具有无限支持集 $S = \{0, 1, 2, \ldots\}$ 的离散概率分布，其概率质量函数（PMF）为
+
+几何分布具有无限支持集 $S = \{0, 1, 2, \ldots\}$，其 PMF 为
 
 $$
 p(i) = (1 - \theta)^i \theta
 $$
 
-其中参数 $\theta \in [0,1]$ 表示成功的概率。
+其中 $\theta \in [0,1]$ 是一个参数
 
-（当一个离散分布在无限多个点上赋予正概率时，我们称它具有无限支持。）
+（如果一个离散分布赋予正概率的点集是无限的，我们就说它具有无限支持。）
 
-几何分布通常用来描述在一系列独立的伯努利试验中，首次成功出现前所需的失败次数。每次试验成功的概率都是 $\theta$。
+要理解这个分布，可以设想反复进行独立的随机试验，每次试验成功的概率都是 $\theta$。
 
-因此，$p(i)$ 表示在第一次成功之前恰好发生 $i$ 次失败的概率。
+$p(i)$ 的含义是：在第一次成功之前恰好出现 $i$ 次失败的概率。
 
-这个分布的期望值（平均值）是 $(1-\theta)/\theta$，方差是 $(1-\theta)/\theta^2$。
+可以证明，该分布的均值为 $1/\theta$，方差为 $(1-\theta)/\theta$。
 
-让我们通过一个例子来说明：
+这里有一个例子。
 
 ```{code-cell} ipython3
 θ = 0.1
@@ -330,15 +433,15 @@ plt.show()
 
 #### 泊松分布
 
-泊松分布是一种常见的离散概率分布，定义在非负整数集 $S = \{0, 1, 2, \ldots\}$ 上。它由一个参数 $\lambda > 0$ 控制，其概率质量函数（PMF）为：
+参数为 $\lambda > 0$ 的 $S = \{0, 1, \ldots\}$ 上的泊松分布，其 PMF 为
 
 $$
 p(i) = \frac{\lambda^i}{i!} e^{-\lambda}
 $$
 
-泊松分布通常用于模拟在固定时间或空间内随机事件的发生次数。具体来说，$p(i)$ 表示在给定区间内事件恰好发生 $i$ 次的概率，其中事件以平均率 $\lambda$ 独立随机发生。
+$p(i)$ 的含义是：在一个固定时间区间内发生 $i$ 次事件的概率，其中事件以恒定的速率 $\lambda$ 独立发生。
 
-这个分布的一个有趣特性是其均值和方差都等于参数 $\lambda$。
+可以证明，均值为 $\lambda$，方差也为 $\lambda$。
 
 下面我们通过一个具体例子来展示泊松分布：
 
@@ -367,46 +470,48 @@ plt.show()
 
 ### 连续分布
 
-连续分布通过**概率密度函数**（PDF）来描述，这是一个定义在实数集 $\mathbb R$ 上的非负函数 $p$，满足
+连续分布通过**概率密度函数**来描述，这是一个定义在实数集 $\mathbb R$（所有实数的集合）上的函数 $p$，对所有 $x$ 满足 $p(x) \geq 0$，且
 
 $$ 
-\int_{-\infty}^\infty p(x) \, dx = 1 
+\int_{-\infty}^\infty p(x) dx = 1 
 $$
 
-当随机变量 $X$ 服从概率密度函数 $p$ 时，任意区间 $[a, b]$ 上的概率可以通过积分计算：
+我们说随机变量 $X$ 服从分布 $p$，如果
 
 $$
-\mathbb P\{a < X < b\} = \int_a^b p(x) \, dx
+\mathbb P\{a < X < b\} = \int_a^b p(x) dx
 $$
 
-与离散分布类似，连续随机变量的均值和方差也可以通过其概率密度函数计算，只需将求和替换为积分。
+对所有 $a \leq b$ 成立。
 
-例如，随机变量 $X$ 的均值计算为
+具有分布 $p$ 的随机变量 $X$ 的均值和方差的定义与离散情形相同，只需将求和替换为积分。
+
+例如，$X$ 的均值是
 
 $$
-\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) \, dx
+\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) dx
 $$
 
 $X$ 的**累积分布函数**（CDF）定义为
 
 $$
 F(x) = \mathbb P\{X \leq x\}
-        = \int_{-\infty}^x p(x) \, dx
+        = \int_{-\infty}^x p(x) dx
 $$
 
 
 #### 正态分布
 
-**正态分布**是统计学中最常见也最重要的分布之一，其概率密度函数为
+也许最著名的分布是**正态分布**，其密度为
 
 $$
 p(x) = \frac{1}{\sqrt{2\pi}\sigma}
             \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 $$
 
-正态分布由两个参数决定：$\mu \in \mathbb R$（均值参数）和 $\sigma \in (0, \infty)$（标准差参数）。
+正态分布由两个参数决定：$\mu \in \mathbb R$ 和 $\sigma \in (0, \infty)$。
 
-通过积分计算可以验证，当随机变量 $X$ 服从正态分布时，$\mathbb{E}[X] = \mu$，$\text{Var}(X) = \sigma^2$。
+通过微积分可以证明，对于该分布，均值为 $\mu$，方差为 $\sigma^2$。
 
 我们可以通过 SciPy 来计算正态分布的矩、PDF 和 CDF：
 
@@ -419,7 +524,7 @@ u = scipy.stats.norm(μ, σ)
 u.mean(), u.var()
 ```
 
-下面是密度的图像——著名的“钟形曲线”：
+下面是密度的图像——著名的"钟形曲线"：
 
 ```{code-cell} ipython3
 μ_vals = [-1, 0, 1]
@@ -431,7 +536,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\mu={μ}, \sigma={σ}$')
+    label=rf'$\mu={μ}, \sigma={σ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -446,7 +551,7 @@ for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\mu={μ}, \sigma={σ}$')
+    label=rf'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -456,23 +561,23 @@ plt.show()
 
 #### 对数正态分布
 
-**对数正态分布**是一个定义在正实数轴 $(0, \infty)$ 上的概率分布，其密度函数为
+**对数正态分布**是一个定义在 $\left(0, \infty\right)$ 上的分布，其密度为
 
 $$
 p(x) = \frac{1}{\sigma x \sqrt{2\pi}}
-    \exp \left(- \frac{(\log x - \mu)^2}{2 \sigma^2} \right)
+    \exp \left(- \frac{\left(\log x - \mu\right)^2}{2 \sigma^2} \right)
 $$
 
-该分布由两个参数 $\mu \in \mathbb{R}$ 和 $\sigma > 0$ 决定。
+该分布有两个参数，$\mu$ 和 $\sigma$。
 
-对于服从对数正态分布的随机变量 $X$，其期望值为 $\mathbb{E}[X] = \exp(\mu + \sigma^2/2)$，方差为 $\text{Var}(X) = [\exp(\sigma^2) - 1] \exp(2\mu + \sigma^2)$。
+可以证明，对于该分布，均值为 $\exp\left(\mu + \sigma^2/2\right)$，方差为 $\left[\exp\left(\sigma^2\right) - 1\right] \exp\left(2\mu + \sigma^2\right)$。
 
-对数正态分布与正态分布有着密切的关系：
+可以证明：
 
-* 如果随机变量 $X$ 服从对数正态分布，那么 $\log X$ 服从正态分布
-* 反之，如果 $Y$ 服从正态分布，那么 $\exp(Y)$ 服从对数正态分布
+* 如果 $X$ 服从对数正态分布，那么 $\log X$ 服从正态分布，并且
+* 如果 $X$ 服从正态分布，那么 $\exp X$ 服从对数正态分布。
 
-我们可以使用 SciPy 来计算对数正态分布的矩、PDF 和 CDF：
+我们可以按如下方式获得对数正态密度的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 μ, σ = 0.0, 1.0
@@ -507,7 +612,7 @@ for σ in σ_vals:
     u = scipy.stats.norm(μ, σ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\mu={μ}, \sigma={σ}$')
+    label=rf'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
     ax.set_xlim(0, 3)
 ax.set_xlabel('x')
@@ -518,20 +623,20 @@ plt.show()
 
 #### 指数分布
 
-**指数分布**是定义在 $\left(0, \infty\right)$ 上的分布，其密度函数为
+**指数分布**是定义在 $\left(0, \infty\right)$ 上的分布，其密度为
 
 $$
 p(x) = \lambda \exp \left( - \lambda x \right)
 \qquad (x > 0)
 $$
 
-指数分布由参数 $\lambda > 0$ 控制，它决定了分布的形状和尺度。
+该分布有一个参数 $\lambda$。
 
-在许多方面，指数分布可以被看作是几何分布在连续情境下的自然推广。
+指数分布可以看作是几何分布的连续对应形式。
 
-对于指数分布，其均值为 $1/\lambda$，方差为 $1/\lambda^2$。这意味着 $\lambda$ 越大，分布越集中在零附近。
+可以证明，对于该分布，均值为 $1/\lambda$，方差为 $1/\lambda^2$。
 
-下面我们使用SciPy来计算指数分布的统计特性并绘制其PDF和CDF：
+我们可以按如下方式获得指数密度的矩、PDF 和 CDF：
 
 ```{code-cell} ipython3
 λ = 1.0
@@ -551,7 +656,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\lambda={λ}$')
+    label=rf'$\lambda={λ}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -564,7 +669,7 @@ for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\lambda={λ}$')
+    label=rf'$\lambda={λ}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -610,7 +715,7 @@ for α, β in zip(α_vals, β_vals):
     u = scipy.stats.beta(α, β)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\alpha={α}, \beta={β}$')
+    label=rf'$\alpha={α}, \beta={β}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -623,7 +728,7 @@ for α, β in zip(α_vals, β_vals):
     u = scipy.stats.beta(α, β)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\alpha={α}, \beta={β}$')
+    label=rf'$\alpha={α}, \beta={β}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -633,18 +738,18 @@ plt.show()
 
 #### 伽马分布
 
-**伽马分布**是一种在正实数轴 $(0, \infty)$ 上的连续概率分布，其概率密度函数为
+**伽马分布**是一种在 $\left(0, \infty\right)$ 上的分布，其密度为
 
 $$
 p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
     x^{\alpha - 1} \exp(-\beta x)
 $$
 
-其中 $\alpha > 0$ 是形状参数，$\beta > 0$ 是速率参数，$\Gamma(\alpha)$ 是伽马函数。
+此分布有两个参数，$\alpha > 0$ 和 $\beta > 0$。
 
-伽马分布的均值为 $\alpha / \beta$，方差为 $\alpha / \beta^2$。
+可以证明，对于该分布，均值为 $\alpha / \beta$，方差为 $\alpha / \beta^2$。
 
-伽马分布有一个直观的解释：当 $\alpha$ 是正整数时，伽马分布随机变量可以看作是 $\alpha$ 个独立的、均值为 $1/\beta$ 的指数分布随机变量之和。这使得伽马分布在等待时间和可靠性分析中特别有用。
+一种解释是：如果 $X$ 服从伽马分布，且 $\alpha$ 是整数，那么 $X$ 就是 $\alpha$ 个独立的、均值为 $1/\beta$ 的指数分布随机变量之和。
 
 下面我们来计算伽马分布的矩、PDF 和 CDF：
 
@@ -667,7 +772,7 @@ for α, β in zip(α_vals, β_vals):
     u = scipy.stats.gamma(α, scale=1/β)
     ax.plot(x_grid, u.pdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\alpha={α}, \beta={β}$')
+    label=rf'$\alpha={α}, \beta={β}$')
 ax.set_xlabel('x')
 ax.set_ylabel('PDF')
 plt.legend()
@@ -680,7 +785,7 @@ for α, β in zip(α_vals, β_vals):
     u = scipy.stats.gamma(α, scale=1/β)
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
-    label=fr'$\alpha={α}, \beta={β}$')
+    label=rf'$\alpha={α}, \beta={β}$')
     ax.set_ylim(0, 1)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
@@ -690,7 +795,7 @@ plt.show()
 
 ## 观察到的分布
 
-有时候我们将观测到的数据或测量值称为“分布”。
+有时候我们将观测到的数据或测量值称为"分布"。
 
 例如，假设我们观察了10个人一年的收入：
 
@@ -710,26 +815,26 @@ df = pd.DataFrame(data, columns=['name', 'income'])
 df
 ```
 
-在这种情况下，我们通常将这组收入数据称为"收入分布"。
+在这种情况下，我们可能会将他们收入的集合称为"收入分布"。
 
-这个术语可能有点让人困惑，因为严格来说，这只是一组数值，而不是真正的概率分布。
+这个术语容易引起混淆，因为这个集合并不是一个概率分布——它只是一组数字。
 
-不过，正如我们接下来会看到的，这种观察到的数据分布（比如我们这里的收入数据）与理论上的概率分布有着密切的联系。
+不过，正如我们接下来会看到的，观察到的分布（即像上面收入分布这样的一组数字）与概率分布之间存在联系。
 
-下面让我们来探索一些观察到的数据分布的特性。
+下面让我们来探索一些观察到的数据分布。
 
 
 ### 描述性统计
 
-当我们分析一组数据 $\{x_1, \ldots, x_n\}$ 时，通常会计算一些基本的统计量来描述其特征。
+假设我们有一个观察到的分布，其值为 $\{x_1, \ldots, x_n\}$
 
-最常用的统计量之一是**样本均值**，它代表数据的平均水平：
+该分布的**样本均值**定义为
 
 $$
 \bar x = \frac{1}{n} \sum_{i=1}^n x_i
 $$
 
-另一个重要的统计量是**样本方差**，它衡量数据的离散程度：
+**样本方差**定义为
 
 $$
 \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2
@@ -745,10 +850,11 @@ x.mean(), x.var()
 ```{exercise}
 :label: prob_ex4
 
-如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 $1/(n-1)$ 而不是 $1/n$ 作为方差的前面的系数。（有些书籍就是这样定义样本方差的。）
+如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 $1/(n-1)$ 而不是 $1/n$ 作为方差公式前面的系数。（有些书籍就是这样定义样本方差的。）
 
-用纸笔确认这一点。
+请确认这一点。
 ```
+
 
 ### 可视化
 
@@ -773,25 +879,24 @@ ax.set_ylabel('密度')
 plt.show()
 ```
 
-现在让我们来分析一个真实世界的数据分布案例。
+现在让我们来看一个真实数据的分布。
 
-我们将研究亚马逊股票在2000年1月1日至2024年1月1日期间的月度收益率数据。
+具体而言，我们将查看亚马逊股票在2000年1月1日至2024年1月1日期间的月度收益率。
 
-月度收益率表示股票价格每月的百分比变化，这是金融分析中的一个常用指标。
+月度收益率的计算方式是每个月股票价格的百分比变化。
 
-这样，我们就能获得一个包含24年间每月观测值的时间序列数据集。
+因此我们每个月会有一个观测值。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('AMZN', '2000-1-1', '2024-1-1', 
-                    interval='1mo', auto_adjust=False)
-prices = df['Adj Close']
+df = yf.download('AMZN', '2000-1-1', '2024-1-1', interval='1mo')
+prices = df['Close']
 x_amazon = prices.pct_change()[1:] * 100
 x_amazon.head()
 ```
 
-第一个观察结果是2000年1月的月回报（百分比变化），即
+第一个观测值是2000年1月的月度收益率（百分比变化），即
 
 ```{code-cell} ipython3
 x_amazon.iloc[0]
@@ -808,11 +913,11 @@ plt.show()
 ```
 #### 核密度估计
 
-核密度估计（KDE）是一种更平滑地展示数据分布的方法，可以看作是直方图的进阶版本。
+核密度估计（KDE）提供了一种估计和可视化分布密度的简单方法。
 
-相比直方图的阶梯状外观，KDE生成连续的密度曲线，能更自然地反映数据的分布特征。
+如果你不熟悉 KDE，可以把它想象成一种平滑处理过的直方图。
 
-下面让我们用KDE来可视化亚马逊股票的月度收益率数据。
+下面让我们看一下由亚马逊回报数据构成的KDE。
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -853,16 +958,15 @@ ax.set_xlabel('KDE')
 plt.show()
 ```
 
-小提琴图在比较多个数据集的分布特征时特别有用，它能直观地展示数据的密度和范围。
+当我们想要比较不同的分布时，小提琴图特别有用。
 
-接下来，让我们用小提琴图来对比亚马逊和开市客这两家零售巨头的月度股票回报率分布情况。
+例如，让我们比较亚马逊股票和开市客股票的月度收益率。
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-df = yf.download('COST', '2000-1-1', '2024-1-1', 
-                 interval='1mo', auto_adjust=False)
-prices = df['Adj Close']
+df = yf.download('COST', '2000-1-1', '2024-1-1', interval='1mo')
+prices = df['Close']
 x_costco = prices.pct_change()[1:] * 100
 ```
 
@@ -879,58 +983,60 @@ plt.show()
 
 ### 与概率分布的联系
 
-现在让我们探讨观察数据分布与理论概率分布之间的关系。
+现在让我们探讨观察到的分布与概率分布之间的关系。
 
-在数据分析中，我们常常会假设观察到的数据来自某个特定的概率分布，这有助于我们理解和建模数据的行为。
+有时候，将观察到的分布想象成是由某个特定的概率分布生成的，会很有帮助。
 
-以亚马逊的股票回报为例，我们可以尝试用正态分布来拟合这些数据。
+例如，我们可以看看上面亚马逊的回报数据，设想它们是由正态分布生成的。
 
-（虽然股票回报通常不完全符合正态分布，但这种简化假设在初步分析中很有价值。）
+（尽管这并不完全正确，但这种想法*可能*有助于我们思考这些数据。）
 
-下面，我们将用亚马逊回报数据的样本均值和样本方差来构建一个匹配的正态分布，然后通过可视化比较理论分布与实际数据的吻合度。
+在这里，我们通过将样本均值设为正态分布的均值、样本方差设为正态分布的方差，来将正态分布与亚马逊的月度回报数据进行匹配。
+
+然后我们绘制密度曲线和直方图。
 
 ```{code-cell} ipython3
-μ = x_amazon.mean()  
-σ_squared = x_amazon.var()  
-σ = np.sqrt(σ_squared)  
-u = scipy.stats.norm(μ, σ)  
+μ = x_amazon.mean()
+σ_squared = x_amazon.var()
+σ = np.sqrt(σ_squared)
+u = scipy.stats.norm(μ, σ)
 ```
 
 ```{code-cell} ipython3
-x_grid = np.linspace(-50, 65, 200)  
-fig, ax = plt.subplots()  
-ax.plot(x_grid, u.pdf(x_grid))  
-ax.hist(x_amazon, density=True, bins=40)  
+x_grid = np.linspace(-50, 65, 200)
+fig, ax = plt.subplots()
+ax.plot(x_grid, u.pdf(x_grid))
+ax.hist(x_amazon, density=True, bins=40)
 ax.set_xlabel('月度回报（百分比变化）')
 ax.set_ylabel('密度')
 plt.show()
 ```
 
-可以看出，直方图与理论密度曲线的匹配度并不理想。
+直方图与密度曲线之间的匹配程度还算可以，但也不是特别好。
 
-这主要是因为亚马逊的股票回报数据并不完全符合正态分布 --- 我们将在{ref}`重尾分布<heavy_tail>`章节中详细探讨这个现象。
+其中一个原因是正态分布并不能很好地拟合这个观测数据——我们在讨论{ref}`重尾分布<heavy_tail>`时会再次谈到这一点。
 
-如果数据确实来自正态分布，拟合效果会好得多。
+当然，如果数据确实是由正态分布生成的，那么拟合效果会更好。
 
-为了验证这一点，我们可以做一个简单的实验：
+让我们通过实际操作来看看
 
-- 从标准正态分布中生成随机样本
-- 绘制这些样本的直方图，并与理论密度曲线进行比较
+- 首先我们从正态分布中生成随机抽样
+- 然后我们绘制它们的直方图并与密度曲线进行比较
 
 ```{code-cell} ipython3
-μ, σ = 0, 1  
-u = scipy.stats.norm(μ, σ)  
-N = 2000  
-x_draws = u.rvs(N)  
-x_grid = np.linspace(-4, 4, 200)  
-fig, ax = plt.subplots()  
-ax.plot(x_grid, u.pdf(x_grid))  
-ax.hist(x_draws, density=True, bins=40)  
+μ, σ = 0, 1
+u = scipy.stats.norm(μ, σ)
+N = 2000  # 观测数量
+x_draws = u.rvs(N)
+x_grid = np.linspace(-4, 4, 200)
+fig, ax = plt.subplots()
+ax.plot(x_grid, u.pdf(x_grid))
+ax.hist(x_draws, density=True, bins=40)
 ax.set_xlabel('x')
 ax.set_ylabel('密度')
 plt.show()
 ```
 
-值得注意的是，随着观测数量 $N$ 的增加，直方图与理论密度曲线的拟合效果会逐渐改善。
+请注意，如果你不断增加观测数量 $N$，拟合效果会越来越好。
 
-这种现象体现了"大数定律"的原理，我们将在{ref}`后续章节<lln_mr>`中深入探讨。
+这种收敛是"大数定律"的一种体现，我们将在{ref}`后面<lln_mr>`讨论这个定律。
