@@ -48,14 +48,15 @@ kernelspec:
 
 在这个讲座{doc}`money_inflation_nonlinear`中研究了模型的非线性版本，同样的定性结果也普遍存在。
 
-这些结果为将在这个讲座{doc}`laffer_adaptive`中呈现的分析奠定了基础，它研究了当前模型的非线性版本；它假定了一种“适应性预期”的版本，而不是理性预期。
+这些结果为将在这个讲座{doc}`laffer_adaptive`中呈现的分析奠定了基础，它研究了当前模型的非线性版本；它假定了一种"适应性预期"的版本，而不是理性预期。
 
-那个讲座将探讨：
+那个讲座将表明：
 
-* 通货膨胀率的两个静止均衡点保持不变，用适应性预期替代理性预期，但是 $\ldots$
-* 此模型违反了反常动力学因为它收敛的静止通货膨胀率比通常的系统*较低*
+* 用适应性预期替代理性预期，两个静止通货膨胀率保持不变，但是 $\ldots$
+* 它逆转了反常动力学，使得*较低*的静止通货膨胀率成为系统通常收敛到的那个
 * 出现了一种更可信的比较动态结果，即现在可以通过*降低*政府赤字来*降低*通货膨胀
-我们将在讲座 {doc}`unpleasant`使用这个结论来分析选择一个平稳通胀率的合理性。
+
+这一结果将被用来为将在讲座 {doc}`unpleasant` 中研究的令人不快的货币主义算术分析中所依据的平稳通胀率的选择提供依据。
 
 我们将使用这些线性代数工具：
 
@@ -96,7 +97,7 @@ $$ (eq:demandmoney)
   
 现在我们转向货币供给。
 
-我们假设 $m_0 >0$ 是模型外部决定的“初始条件”。
+我们假设 $m_0 >0$ 是模型外部决定的"初始条件"。
 
 我们将 $m_0$ 设定为一个任意的正值，比如说 \$100。
   
@@ -382,12 +383,12 @@ m_t & = b_{t-1} p_t
 $$ (eq:method1) 
     
 ```{prf:remark}
-:label: 方法一
+:label: method_1
 方法 1 采用间接计算均衡的策略：先求解货币回报率和实际余额的均衡序列 $\{R_t, b_t\}_{t=0}^\infty$，然后基于这些结果推导出价格水平和名义货币量的均衡序列 $\{p_t, m_t\}_{t=0}^\infty$。
 ```
 
 ```{prf:remark}
-:label: 初始条件
+:label: initial_condition
 
 需要注意的是，方法 1 要求我们首先从区间 $[\frac{\gamma_2}{\gamma_1}, R_u]$ 中选择一个**初始条件** $R_0$。
 
@@ -397,7 +398,7 @@ $$ (eq:method1)
 ```
 
 ```{prf:remark}
-:label: 挑选唯一值
+:label: unique_selection
 
 每个初始货币回报率 $R_0$ 都对应着一个唯一的初始价格水平 $p_0$，这种对应关系由方程 {eq}`eq:p0fromR0` 给出。
 ```
@@ -414,7 +415,7 @@ $$
 y_{t+1} = M y_t, \quad t \geq 0
 $$
 
-在这个框架下，我们需要指定初始状态 $y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ 作为计算的起点。
+在这个框架下，我们暂时将 $y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}$ 作为**初始条件**。
 
 解出的结果是
 
@@ -424,15 +425,15 @@ $$
 
 现在让我们思考初始条件 $y_0$。
 
-自然地，我们会将已知的初始货币存量 $m_0 > 0$ 作为初始条件的一部分。
+自然地，我们会将已知的初始货币存量 $m_0 > 0$ 作为初始条件。
 
 但对于 $p_0$ 应该如何确定呢？
 
 我们期望模型能够自行*决定*这个值，不是吗？
 
-确实如此，但问题在于可能存在多个与均衡相容的初始价格水平 $p_0$。
+确实如此，但有时我们要求得过多，因为事实上存在一个连续统的初始 $p_0$ 水平都与均衡的存在相容。
 
-事实上，我们很快就会看到，在方法2中选择初始价格水平 $p_0$ 与在方法1中选择初始货币回报率 $R_0$ 是密切相关的。
+正如我们很快将看到的，在方法2中选择初始价格水平 $p_0$ 与在方法1中选择初始货币回报率 $R_0$ 是密切相关的。
 
 ## 计算方法1
 
@@ -461,9 +462,11 @@ $$
 我们即将看到，货币回报率存在两个稳态值这一事实表明通货膨胀税率存在一条**拉弗曲线**，这条曲线描述了政府如何通过通货膨胀为其赤字 $g$ 融资。
 
 ```{note}
-拉弗曲线描述了税收收入与税率之间的关系，呈现典型的驼峰形状。这种形状意味着通常存在两个不同的税率能产生相同的税收收入。
+阿瑟·拉弗（Arthur Laffer）的曲线描绘了税收收入与税率之间的驼峰形关系。
 
-这一现象源于两种相互对立的力量：一方面，提高税率会增加单位税基的收入；另一方面，较高的税率往往会导致税基缩小，因为人们会调整自己的行为以减少税负。
+这种驼峰形状表明，通常存在两个不同的税率能产生相同的税收收入。
+
+这一现象源于两种相互对立的力量：其中一种是，提高税率通常会因为人们采取行动减少其应税范围，从而缩小税收的**税基**。
 ```
 
 ```{code-cell} ipython3
@@ -652,8 +655,8 @@ $$
 
 ```{code-cell} ipython3
 Λ, Q = np.linalg.eig(H)
-print('Λ = ', Λ)
-print('Q = ', Q)
+print('Λ = \n', Λ)
+print('Q = \n', Q)
 ```
 
 ```{code-cell} ipython3
@@ -694,7 +697,7 @@ $$
 那么
 
 $$
-\lim_{t \rightarrow + \infty} \frac{p_{t+1}}{p_t} = {R_l}^{-1}.
+\lim_{t \rightarrow + \infty} \frac{p_{t+1}}{p_t} = {R_\ell}^{-1}.
 $$
 
 让我们逐步验证这些声明。
@@ -721,7 +724,7 @@ def iterate_H(y_0, H, num_steps):
     return y
 ```
 
-对于几乎所有初始向量 $y_0$， 通货膨胀的总率 $\frac{p_{t+1}}{p_t}$ 最终会收敛到较大的特征值 ${R_l}^{-1}$。
+对于几乎所有初始向量 $y_0$， 通货膨胀的总率 $\frac{p_{t+1}}{p_t}$ 最终会收敛到较大的特征值 ${R_\ell}^{-1}$。
 
 避免这种结果的唯一方法是让 $p_0$ 取 {eq}`eq:magicp0` 中描述的特定值。
 
@@ -737,7 +740,7 @@ $$
 y^*_{t+1} = \Lambda^t y^*_t .
 $$ (eq:stardynamics)
 
-这个方程所表达的系统的动力可以帮助我们分离出导致通货膨胀趋向较低稳态通货膨胀率 $R_l$ 的逆值的力量。
+这个方程所表达的系统的动力可以帮助我们分离出导致通货膨胀趋向较低稳态通货膨胀率 $R_\ell$ 的逆值的力量。
 
 仔细观察{eq}`eq:stardynamics` 我们可以得出，除非
 
@@ -747,9 +750,9 @@ $$ (eq:stardynamics)
 y^*_0 = \begin{bmatrix} y^*_{1,0} \\ 0 \end{bmatrix}
 ```
 
-除非初始条件满足特定要求，否则$y^*_t$的路径，以及由$y_t = Q y^*_t$得到的$m_t$和$p_t$的路径，将随着$t \rightarrow +\infty$最终以$R_l^{-1}$的速率增长。
+否则$y^*_t$的路径，以及由$y_t = Q y^*_t$得到的$m_t$和$p_t$的路径，将随着$t \rightarrow +\infty$最终以${R_\ell}^{-1}$的速率增长。
 
-从方程{eq}`equation_11`我们可以推断出：存在一个唯一的初始向量$y_0$设置，使得系统的两个组件能够永远以较低的速率${R_u}^{-1}$增长。
+方程{eq}`equation_11`也使我们能够得出结论：存在一个唯一的初始向量$y_0$设置，使得系统的两个组件能够永远以较低的速率${R_u}^{-1}$增长。
 
 要实现这种情况，初始向量$y_0$必须满足以下条件：
 
@@ -920,22 +923,243 @@ ${R_\ell}^{-1}$。
 
 ## 均衡选择
 
-我们的模型在确定价格水平路径方面存在**不完整性**，因为有多条满足"实际货币余额等于供给"条件的"均衡"路径 $\{m_{t+1}, p_t\}_{t=0}^\infty$。
+我们发现，作为价格水平路径的模型是**不完整的**，因为对于 $\{m_{t+1}, p_t\}_{t=0}^\infty$ 存在一个连续统的"均衡"路径，都与实际余额需求始终等于供给相一致。
 
-通过前面介绍的两种计算方法，我们发现这些可能的均衡路径可以通过以下两个参数之一来确定：
+通过应用我们的计算方法1和方法2，我们了解到这个连续统可以通过以下两个标量之一的选择来索引：
 
-* 计算方法1中的初始回报率 $R_0$
-* 计算方法2中的初始价格水平 $p_0$
+* 对于计算方法1，是 $R_0$
+* 对于计算方法2，是 $p_0$
 
-要实际应用我们的模型，我们需要从这些可能的均衡路径中*选择*一条特定路径，从而*完成*我们的模型。
+要应用我们的模型，我们必须以某种方式*完成*它，即从这个连续统的可能路径中*选择*一条均衡路径。
 
-我们的分析表明：
+我们发现：
 
-* 几乎所有均衡路径最终都会收敛到两个可能的平稳通胀税率中较高的那个
-* 只有一条独特的均衡路径与"减少政府赤字会降低通胀率"这一直觉相符
+* 除了一条以外，所有均衡路径都收敛于极限，在这些极限中，两个可能的平稳通胀税率中较高的那个占主导地位
+* 存在一条唯一的均衡路径，它与关于政府赤字的减少如何影响平稳通胀率的"合理"论述相一致
 
-基于经济直觉和合理性考虑，我们倾向于采纳大多数宏观经济学家的观点，选择那条收敛到较低平稳通胀税率的独特均衡路径。
+基于合理性的考虑，我们建议效仿许多宏观经济学家的做法，选择那条收敛到较低平稳通胀税率的唯一均衡路径。
 
-在后续讲座 {doc}`unpleasant` 中，我们将进一步接受并应用这一观点。
+正如我们将看到的，我们将在讲座 {doc}`unpleasant` 中采纳这一建议。
 
-而在讲座 {doc}`laffer_adaptive` 中，我们将探讨 {cite}`bruno1990seigniorage` 等学者如何从不同角度支持这一选择。
+在讲座 {doc}`laffer_adaptive` 中，我们将探讨 {cite}`bruno1990seigniorage` 等学者如何以其他方式为此提供依据。
+
+## 练习
+
+```{exercise}
+:label: mi_ex1
+
+**铸币税拉弗曲线：峰值收入与财政限度。**
+
+本讲义指出，稳态铸币税
+
+$$
+S(\bar R) = (\gamma_1 + \gamma_2) - \frac{\gamma_2}{\bar R} - \gamma_1 \bar R
+$$
+
+在 $\bar R_{\rm max} = \sqrt{\gamma_2/\gamma_1}$ 处取得最大值。
+
+a. 通过对 $S(\bar R)$ 关于 $\bar R$ 求导，令导数为零，并求解 $\bar R$，从解析上验证这一结论。
+
+b. 使用默认模型 `msm`，计算 $\bar R_{\rm max}$ 及相应的最大收入 $g_{\rm max} = S(\bar R_{\rm max})$，然后将铸币税曲线与 $g_{\rm max}$ 处的水平线一起绘制出来。
+
+c. 对 $g = g_{\rm max} + 1$ 计算稳态二次方程 {eq}`eq:steadyquadratic` 的判别式，并解释如果政府试图为超过 $g_{\rm max}$ 的赤字 $g$ 融资会发生什么。
+```
+
+```{solution-start} mi_ex1
+:class: dropdown
+```
+
+**第a部分。** 对 $\bar R$ 求导：
+
+$$
+S'(\bar R) = \frac{\gamma_2}{\bar R^2} - \gamma_1 = 0
+\quad \Longrightarrow \quad
+\bar R^2 = \frac{\gamma_2}{\gamma_1}
+\quad \Longrightarrow \quad
+\bar R_{\rm max} = \sqrt{\frac{\gamma_2}{\gamma_1}}.
+$$
+
+由于 $S''(\bar R) = -2\gamma_2/\bar R^3 < 0$，这确实是一个最大值。
+
+```{code-cell} ipython3
+γ1, γ2 = msm.γ1, msm.γ2
+
+R_max = np.sqrt(γ2 / γ1)
+g_max = seign(R_max, msm)
+print(f"R_max = sqrt(γ2/γ1) = sqrt({γ2}/{γ1}) = {R_max:.4f}")
+print(f"g_max = S(R_max)     = {g_max:.4f}")
+
+R_plot = np.linspace(γ2/γ1, 1, 300)
+fig, ax = plt.subplots()
+ax.plot(R_plot, seign(R_plot, msm), label='$S(\\bar R)$')
+ax.axhline(g_max, color='red', linestyle='--', label=f'$g_{{\\rm max}}={g_max:.2f}$')
+ax.axvline(R_max, color='grey', linestyle=':', lw=1)
+ax.set_xlabel('$\\bar R$')
+ax.set_ylabel('铸币税')
+ax.set_title('铸币税拉弗曲线与峰值收入')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+**第c部分。** 稳态二次方程为 $-\gamma_1 \bar R^2 + (\gamma_1+\gamma_2-g)\bar R - \gamma_2 = 0$。
+
+其判别式为 $(\gamma_1+\gamma_2-g)^2 - 4\gamma_1\gamma_2$。
+
+```{code-cell} ipython3
+g_too_high = g_max + 1
+discriminant = (γ1 + γ2 - g_too_high)**2 - 4 * γ1 * γ2
+roots = np.roots((-γ1, γ1 + γ2 - g_too_high, -γ2))
+print(f"g = g_max + 1 = {g_too_high:.4f}")
+print(f"判别式  = {discriminant:.4f}  ({'负' if discriminant < 0 else '正'})")
+print(f"np.roots      = {roots}")
+print(f"根为实数: {np.all(np.isreal(roots))}")
+```
+
+当 $g > g_{\rm max}$ 时，判别式为负，不存在实数的稳态货币回报率。
+
+从经济学角度看，政府正试图为一个超过通货膨胀税无论选取何种通胀率都能筹集的最大铸币税数额的赤字融资。
+
+不存在平稳均衡。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: mi_ex2
+
+**稳态回报率如何随政府赤字变化。**
+
+二次方程 {eq}`eq:steadyquadratic` 的两个稳态根 $R_l < R_u$ 取决于政府赤字 $g$。
+
+a. 对于从接近 $0$ 的值到略低于 $g_{\rm max}$ 的 $g$，计算两个根 $R_l(g)$ 和 $R_u(g)$，并将它们与 $g$ 一起绘制在同一张图上。
+
+b. 从解析和数值两方面验证以下边界条件：
+
+    * 在 $g = 0$ 处：两个根应为 $R = 1$ 和 $R = \gamma_2/\gamma_1$。
+    * 当 $g \to g_{\rm max}$ 时：两个根应在 $\bar R_{\rm max} = \sqrt{\gamma_2/\gamma_1}$ 处汇合。
+
+c. 在你的图中标出基准赤字 $g = 3$，读出 $R_u$ 和 $R_l$，并检查你图中的数值是否与 `msm.R_u` 和 `msm.R_l` 一致。
+```
+
+```{solution-start} mi_ex2
+:class: dropdown
+```
+
+```{code-cell} ipython3
+R_max = np.sqrt(msm.γ2 / msm.γ1)
+g_max = seign(R_max, msm)
+
+g_grid = np.linspace(1e-6, g_max * (1 - 1e-4), 300)
+R_u_curve, R_l_curve = [], []
+
+for g in g_grid:
+    roots = np.sort(np.roots((-msm.γ1, msm.γ1 + msm.γ2 - g, -msm.γ2)).real)
+    R_l_curve.append(roots[0])
+    R_u_curve.append(roots[1])
+
+fig, ax = plt.subplots()
+ax.plot(g_grid, R_u_curve, label='$R_u(g)$ - 低通胀稳态')
+ax.plot(g_grid, R_l_curve, label='$R_l(g)$ - 高通胀稳态')
+ax.axvline(msm.g, color='grey', linestyle='--', lw=1,
+           label=f'基准 $g = {msm.g}$')
+ax.set_xlabel('政府赤字 $g$')
+ax.set_ylabel('稳态回报率 $\\bar R$')
+ax.set_title('稳态回报率与政府赤字的关系')
+ax.legend()
+plt.tight_layout()
+plt.show()
+
+# 边界条件
+print("边界检查：")
+print(f"  g -> 0:     R_u -> {R_u_curve[0]:.4f}  (预期为 1.0)")
+print(f"              R_l -> {R_l_curve[0]:.4f}  (预期为 γ2/γ1 = {msm.γ2/msm.γ1:.4f})")
+print(f"  g -> g_max: R_u -> {R_u_curve[-1]:.4f}")
+print(f"              R_l -> {R_l_curve[-1]:.4f}")
+print(f"             R_max = {R_max:.4f}  (根应在此处汇合)")
+print(f"\n在基准 g = {msm.g} 处：")
+print(f"  曲线中的 R_u = {R_u_curve[np.argmin(np.abs(g_grid - msm.g))]:.4f}，  "
+      f"msm.R_u = {msm.R_u:.4f}")
+print(f"  曲线中的 R_l = {R_l_curve[np.argmin(np.abs(g_grid - msm.g))]:.4f}，  "
+      f"msm.R_l = {msm.R_l:.4f}")
+```
+
+拉弗曲线的两个分支在 $g=0$ 处彼此分离，并在 $g = g_{\rm max}$ 处汇合。
+
+当 $g > g_{\rm max}$ 时，不存在实数稳态。
+
+随着 $g$ 增大，上分支 $R_u(g)$ 下降，下分支 $R_l(g)$ 上升，这反映了为筹措更大的赤字所需的通货膨胀税不断上升。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: mi_ex3
+
+**通过特征分解得到的货币数量论。**
+
+方法2确定了一个唯一的"神奇"初始价格水平
+
+$$
+\bar p_0 = \frac{Q_{21}}{Q_{11}} m_0
+$$
+
+（其中 $Q_{ij}$ 表示特征向量矩阵 $Q$ 的 $(i,j)$ 元素），
+它使经济处于低通胀均衡路径上。
+
+a. 使用 `iterate_H`，从 $y_0 = (m_0,\, \bar p_0)$ 出发模拟 $y_t = (m_t, p_t)$ 的路径，计算 $t = 0, \ldots, 10$ 时的 $R_t = p_t/p_{t+1}$，并验证它在每一步都等于 `msm.R_u`。
+
+b. 使用公式 $\bar p_0 = (Q_{21}/Q_{11})\, m_0$ 将初始价格水平解释为与货币供给成比例，计算 $m_0 \in [50, 300]$ 时的 $\bar p_0$，将 $\bar p_0$ 对 $m_0$ 作图，并报告斜率。
+
+c. 在方程 {eq}`eq:p0fromR0` 的方法1公式中设 $R_0 = R_u$，并确认你能得到 $\bar p_0$。
+```
+
+```{solution-start} mi_ex3
+:class: dropdown
+```
+
+```{code-cell} ipython3
+# 第a部分：验证沿神奇p0路径 R_t = R_u
+p0_bar = (Q[1, 0] / Q[0, 0]) * msm.M0
+y0 = np.array([msm.M0, p0_bar])
+num_steps = 12
+
+y_series = iterate_H(y0, H, num_steps)
+P = y_series[1, :]
+R_path = P[:-1] / P[1:]      # R_t = p_t / p_{t+1}
+
+print(f"沿神奇p0路径的 R_t（前 {num_steps-1} 期）：")
+print(np.round(R_path, 6))
+print(f"msm.R_u = {msm.R_u:.6f}")
+```
+
+```{code-cell} ipython3
+# 第b部分：绘制 p0_bar 与 m0 的关系
+m0_values = np.linspace(50, 300, 80)
+p0_bar_values = (Q[1, 0] / Q[0, 0]) * m0_values
+
+fig, ax = plt.subplots()
+ax.plot(m0_values, p0_bar_values)
+ax.set_xlabel('$m_0$')
+ax.set_ylabel('$\\bar p_0$')
+ax.set_title('数量论：$\\bar p_0$ 与 $m_0$ 成比例')
+plt.tight_layout()
+plt.show()
+
+slope = Q[1, 0] / Q[0, 0]
+print(f"斜率 = Q_21 / Q_11 = {slope:.6f}")
+
+# 第c部分：与方法1公式 eq:p0fromR0 进行比较
+p0_method1 = msm.M0 / (msm.γ1 - msm.g - msm.γ2 / msm.R_u)
+print(f"\n方法1公式（R_0 = R_u）：  p0 = {p0_method1:.6f}")
+print(f"特征分解公式：    p0 = {p0_bar:.6f}")
+```
+
+第a部分和第c部分证实了两种方法都精确地选择了同一个唯一的初始价格水平。
+
+第b部分展示了数量论的比例关系：$m_0$ 加倍恰好使 $\bar p_0$ 也加倍，斜率恒定为 $Q_{21}/Q_{11}$。
+
+这种线性关系是模型本身线性特征的直接结果。
+
+```{solution-end}
+```
