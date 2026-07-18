@@ -123,8 +123,7 @@ country_years.head()
 我们可以在该数据集中的经济体代码（`countrycode`）和经济体名称（`country`）之间建立一个有用的映射关系。
 
 ```{code-cell} ipython3
-code_to_name = data[
-    ['countrycode', 'country']].drop_duplicates().reset_index(drop=True).set_index(['countrycode'])
+code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
 ```
 
 现在，我们专注于人均 GDP (`gdppc`)，并生成一个宽格式的数据表。
@@ -246,7 +245,7 @@ def draw_interp_plots(series,        # pandas 数据
                 lw=lw,
                 color=color_mapping[c],
                 alpha=0.8,
-                label=code_to_name.loc[c]['country'])
+                label=code_to_name.loc[c]['name_chinese'])
 
         if logscale:
             ax.set_yscale('log')
@@ -518,12 +517,9 @@ gdp['BEM'] = gdp[BEM].loc[start_year-1:end_year].interpolate(method='index').sum
 
 
 ```{code-cell} ipython3
-# 定义大英帝国的颜色映射和名称
+# 定义大英帝国的颜色映射
+# (大英帝国 BEM 已包含在 country_code_cn.csv 的映射中)
 color_mapping['BEM'] = color_mapping['GBR']  # 将颜色设置为与英国相同
-# 将大英帝国加入到 code_to_name
-bem = pd.DataFrame(["British Empire"], index=["BEM"], columns=['country'])
-bem.index.name = 'countrycode'
-code_to_name = pd.concat([code_to_name, bem])
 ```
 
 ```{code-cell} ipython3
