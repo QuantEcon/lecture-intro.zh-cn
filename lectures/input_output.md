@@ -20,7 +20,7 @@ kernelspec:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install quantecon_book_networks
+!pip install quantecon_book_networks==1.6
 !pip install quantecon
 !pip install pandas-datareader
 ```
@@ -113,7 +113,7 @@ plt.show()
 
 经济的特征是存在许多这样的联系。
 
-分析这些联系的基本框架是[列昂惕夫](https://baike.baidu.com/item/%E5%8D%8E%E8%A5%BF%E9%87%8C%C2%B7%E5%88%97%E6%98%82%E6%83%95%E5%A4%AB/11051863)的投入产出模型。
+分析这些联系的基本框架是[列昂惕夫](https://en.wikipedia.org/wiki/Wassily_Leontief)的投入产出模型。
 
 在介绍投入产出模型之后，我们将描述它与{doc}`线性规划讲座 <lp_intro>`的一些联系。
 
@@ -193,7 +193,6 @@ $$
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
-ax.grid()
 
 # 绘制约束线
 ax.hlines(0, -1, 400)
@@ -216,12 +215,14 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(250, 120, "*", color="black")
-ax.text(260, 115, "解", size=10)
+ax.text(260, 115, "solution", size=10)
 
 plt.show()
 ```
 
-生产的约束条件是
++++ {"user_expressions": []}
+
+更一般地，生产的约束条件是
 
 $$
 \begin{aligned}
@@ -437,7 +438,6 @@ $$
 :tags: [hide-input]
 
 fig, ax = plt.subplots()
-ax.grid()
 
 # 绘制约束线
 ax.hlines(0, -1, 50)
@@ -459,7 +459,7 @@ ax.add_patch(feasible_set)
 
 # 绘制最优解
 ax.plot(17, 69, "*", color="black")
-ax.text(18, 60, "对偶解", size=10)
+ax.text(18, 60, "dual solution", size=10)
 
 plt.show()
 ```
@@ -471,6 +471,7 @@ plt.show()
 我们已经讨论过，总产出 $x$ 由公式 {eq}`eq:inout_2` 给出，其中 $L$ 被称为列昂惕夫逆矩阵。
 
 回顾 {doc}`诺伊曼级数引理 <eigen_II>`，它指出如果谱半径 $r(A)<1$，则 $L$ 存在。
+
 事实上
 
 $$
@@ -480,6 +481,7 @@ $$
 ### 需求冲击
 
 现在我们考虑需求冲击 $\Delta d$ 的影响，它将需求从 $d_0$ 转变为 $d_1 = d_0 + \Delta d$。
+
 总产出从 $x_0 = Ld_0$ 转变为 $x_1 = Ld_1$。
 
 如果 $r(A) < 1$，则存在解，且
@@ -523,7 +525,7 @@ $$
 
 fig, ax = plt.subplots()
 ax.bar(codes, centrality, color=color_list, alpha=0.6)
-ax.set_ylabel("特征向量中心性", fontsize=12)
+ax.set_ylabel("eigenvector centrality", fontsize=12)
 plt.show()
 ```
 
@@ -544,7 +546,7 @@ plt.show()
 因此，
 
 $$
-\mu_j = \sum_{j=1}^n l_{ij}
+\mu_j = \sum_{i=1}^n l_{ij}
 $$
 
 这可以写成 $\mu^\top = \mathbb{1}^\top L$ 或
@@ -570,7 +572,7 @@ omult = qbn_io.katz_centrality(A, authority=True)
 fig, ax = plt.subplots()
 omult_color_list = qbn_io.colorise_weights(omult,beta=False)
 ax.bar(codes, omult, color=omult_color_list, alpha=0.6)
-ax.set_ylabel("产出乘数", fontsize=12)
+ax.set_ylabel("Output multipliers", fontsize=12)
 plt.show()
 ```
 
@@ -613,13 +615,14 @@ z_0 = \begin{bmatrix} 10 & 40 \end{bmatrix}
 $$
 
 其中$z_0$是每个行业使用的劳动服务的向量。
+
 ```{exercise-end}
 ```
 
 ```{solution-start} io_ex1
 :class: dropdown
 ```
-For each $i = 0,1,2$ and $j = 1,2$
+对每个 $i = 0,1,2$ 和 $j = 1,2$
 
 $$
 a_{ij} = \frac{z_{ij}}{x_j}
