@@ -58,9 +58,9 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 ### 将向量映射到向量
 
-有两种思考矩阵的方式：
-1. 将矩阵视为一个矩形的数字集合。
-2. 将矩阵视为一个将向量转换为新向量的*映射*（即函数）。
+将矩阵理解为一个矩形的数字集合是一种思考矩阵的方式。
+
+将矩阵理解为一个将向量转换为新向量的*映射*（即函数）是另一种思考矩阵的方式。
 
 为了理解第二种观点，假设我们将一个 $n \times m$ 矩阵 $A$ 与一个 $m \times 1$ 列向量 $x$ 相乘，得到一个 $n \times 1$ 列向量 $y$：
 
@@ -83,8 +83,6 @@ $$
 在上述讨论中，这意味着 $m=n$，则 $A$ 将 $\mathbb R^n$ 映射到自身。
 
 这表示 $A$ 是一个 $n \times n$ 矩阵，它将 $\mathbb{R}^n$ 中的向量 $x$ 映射（或"变换"）为同样在 $\mathbb{R}^n$ 中的新向量 $y=Ax$。
-
-以下是一个例子
 
 ```{prf:example}
 :label: eigen1_ex_sq
@@ -165,7 +163,7 @@ plt.show()
 
 +++ {"user_expressions": []}
 
-我们可以这样理解 $A$： 
+理解这一变换的一种方式是，$A$
 
 * 首先将 $x$ 旋转某个角度 $\theta$，然后
 * 将其缩放某个标量 $\gamma$ 以获得 $x$ 的像 $y$。
@@ -176,7 +174,8 @@ plt.show()
 
 下面我们通过将向量视为点而不是箭头来可视化变换。
 
-我们将给定一个矩阵并观察它如何变换
+我们将考察给定矩阵如何变换
+
 * 一个点阵网格和
 * 位于 $\mathbb{R}^2$ 中单位圆上的一组点。
 
@@ -215,13 +214,11 @@ def grid_transform(A=np.array([[1, -1], [1, 1]])):
 
     # 绘制x-y格点
     ax[0].scatter(xygrid[0], xygrid[1], s=36, c=colors, edgecolor="none")
-    # ax[0].grid(True)
     # ax[0].axis("equal")
     ax[0].set_title(r"点 $x_1, x_2, \cdots, x_k$")
 
     # 绘制变换的格点
     ax[1].scatter(uvgrid[0], uvgrid[1], s=36, c=colors, edgecolor="none")
-    # ax[1].grid(True)
     # ax[1].axis("equal")
     ax[1].set_title(r"点 $Ax_1, Ax_2, \cdots, Ax_k$")
 
@@ -258,7 +255,7 @@ def circle_transform(A=np.array([[-1, 2], [0, 1]])):
     ax[0].plot(x, y, color='black', zorder=1)
     ax[0].scatter(a_1, b_1, c=colors, alpha=1, s=60,
                   edgecolors='black', zorder=2)
-    ax[0].set_title(r"在 $\mathbb{R}^2$的单位圆")
+    ax[0].set_title(r"在 $\mathbb{R}^2$ 中的单位圆")
 
     x1 = x.reshape(1, -1)
     y1 = y.reshape(1, -1)
@@ -334,7 +331,7 @@ $$
     \end{bmatrix}
 $$
 
-的矩阵被称为 *旋转矩阵* 。
+的矩阵被称为 _旋转矩阵_ 。
 
 这个矩阵将向量顺时针旋转角度 $\theta$ 。
 
@@ -367,7 +364,7 @@ grid_transform(A)
 
 +++ {"user_expressions": []}
 
-更多常见的变换矩阵示例可以在[这里](https://baike.baidu.com/item/%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5/9035701)找到。
+更多常见的变换矩阵示例可以在[这里](https://en.wikipedia.org/wiki/Transformation_matrix#Examples_in_2_dimensions)找到。
 
 ## 矩阵乘法作为组合
 
@@ -477,7 +474,8 @@ $$
 
 我们可以观察到，对向量 $x$ 应用变换 $AB$ 与先对 $x$ 应用 $B$，然后对向量 $Bx$ 应用 $A$ 是相同的。
 
-因此，矩阵乘积 $AB$ 是矩阵变换 $A$ 和 $B$ 的[复合函数](https://baike.baidu.com/item/%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0/6176286)。
+因此，矩阵乘积 $AB$ 是矩阵变换 $A$ 和 $B$ 的[复合函数](https://en.wikipedia.org/wiki/Function_composition)。
+
 这意味着先应用变换 $B$，然后应用变换 $A$。
 
 当我们将一个 $n \times m$ 矩阵 $A$ 与一个 $m \times k$ 矩阵 $B$ 相乘时，得到的矩阵乘积是一个 $n \times k$ 矩阵 $AB$。
@@ -562,7 +560,7 @@ grid_composition_transform(B, A)         # 变换 BA
 
 ## 对固定映射进行迭代
 
-在经济学（尤其是动态建模）中，我们经常对重复应用固定矩阵所产生的变换感兴趣。
+在经济学（尤其是动态建模）中，我们经常对重复应用固定矩阵所产生的行为分析感兴趣。
 
 例如，给定一个向量 $v$ 和一个矩阵 $A$，我们希望可以研究以下序列：
 
@@ -604,7 +602,7 @@ def plot_series(A, v, n):
     ax.plot(ellipse[0, :], ellipse[1, :], color='black',
             linestyle=(0, (5, 10)), linewidth=0.5)
 
-    #初始化轨迹容器
+    # 初始化轨迹容器
     colors = plt.cm.rainbow(np.linspace(0, 1, 20))
 
     for i in range(n):
@@ -635,7 +633,7 @@ plot_series(A, v, n)
 
 每次迭代后，向量变得更短，即更靠近原点。
 
-在这种情况下，重复将向量乘以$A$会使向量"螺旋式地向内"。
+在这种情况下，重复将向量乘以 $A$ 会使向量"螺旋式地向内"。
 
 ```{code-cell} ipython3
 B = np.array([[sqrt(3) + 1, -2],
@@ -651,7 +649,7 @@ plot_series(B, v, n)
 
 在这里，每次迭代向量不会变长或变短。
 
-在这种情况下，重复将向量乘以$A$只会使其"围绕一个椭圆旋转"。
+在这种情况下，重复将向量乘以 $A$ 只会使其"围绕一个椭圆旋转"。
 
 ```{code-cell} ipython3
 B = np.array([[sqrt(3) + 1, -2],
@@ -667,19 +665,18 @@ plot_series(B, v, n)
 
 在这里，每次迭代向量趋向于变长，即离原点更远。
 
-在这种情况下，重复将向量乘以$A$会使向量"螺旋式地向外"。
+在这种情况下，重复将向量乘以 $A$ 会使向量"螺旋式地向外"。
 
-因此，我们观察到序列$(A^kv)_{k \geq 0}$的行为取决于映射$A$本身。
+因此，我们观察到序列 $(A^kv)_{k \geq 0}$ 的行为取决于映射 $A$ 本身。
 
-现在我们讨论决定这种行为的$A$的性质。
-
+现在我们讨论决定这种行为的 $A$ 的性质。
 
 (la_eigenvalues)=
-
 ## 特征值
 
 ```{index} single: Linear Algebra; Eigenvalues
 ```
+
 在本节中，我们引入特征值和特征向量的概念。
 
 ### 定义
@@ -692,7 +689,7 @@ $$
 A v = \lambda v.
 $$
 
-则我们称 $\lambda$ 为 $A$的 *特征值* ，$v$ 为相应的 *特征向量*。
+则我们称 $\lambda$ 为 $A$ 的 *特征值* ，$v$ 为相应的 *特征向量*。
 
 因此，$A$ 的特征向量是一个非零向量 $v$，当映射 $A$ 应用于它时，$v$ 仅仅是被缩放。
 
@@ -717,7 +714,6 @@ for spine in ['left', 'bottom']:
     ax.spines[spine].set_position('zero')
 for spine in ['right', 'top']:
     ax.spines[spine].set_color('none')
-# ax.grid(alpha=0.4)
 
 xmin, xmax = -3, 3
 ymin, ymax = -3, 3
@@ -731,7 +727,7 @@ for v in evecs:
                 alpha=0.6,
                 width=0.5))
 
-# 绘制每个特征向量
+# 绘制每个特征向量的像
 for v in evecs:
     v = A @ v
     ax.annotate('', xy=v, xytext=(0, 0),
@@ -760,13 +756,15 @@ plt.show()
 在求解 $Av = \lambda v$ 时，
 
 * $\lambda$ 可以是复数，并且
-* $v$ 可以是一个包含 n 个复数的向量。
+* $v$ 可以是一个包含 $n$ 个复数的向量。
 
 我们将在下面看到一些例子。
 
 ### 一些数学细节
 
-我们为有兴趣的读者注明一些数学细节。（其他读者可以跳到下一节。）
+我们为更高级的读者注明一些数学细节。
+
+（其他读者可以跳到下一节。）
 
 特征值方程等价于 $(A - \lambda I) v = 0$。
 
@@ -776,20 +774,17 @@ plt.show()
 
 因此，要找到所有特征值，我们可以寻找使 $A - \lambda I$ 的行列式为零的 $\lambda$。
 
-这个问题可以表示为求解一个 $\lambda$ 的 n 次多项式的根。
+这个问题可以表示为求解一个 $\lambda$ 的 $n$ 次多项式的根。
 
-这进而意味着在复平面上存在 n 个解，尽管有些可能是重复的。
+这进而意味着在复平面上存在 $n$ 个解，尽管有些可能是重复的。
 
 ### 事实
 
 关于方阵 $A$ 的特征值，有一些很好的事实：
 
 1. $A$ 的行列式等于其特征值的乘积
-
 2. $A$ 的迹（主对角线上元素的和）等于其特征值的和
-
 3. 如果 $A$ 是对称的，那么它的所有特征值都是实数
-
 4. 如果 $A$ 可逆，且 $\lambda_1, \ldots, \lambda_n$ 是它的特征值，那么 $A^{-1}$ 的特征值是 $1/\lambda_1, \ldots, 1/\lambda_n$。
 
 最后一个陈述的一个推论是，当且仅当矩阵的所有特征值都非零时，该矩阵才是可逆的。
@@ -797,7 +792,6 @@ plt.show()
 ### 计算
 
 使用 NumPy，我们可以按如下方式求解矩阵的特征值和特征向量
-
 
 ```{code-cell} ipython3
 from numpy.linalg import eig
@@ -823,6 +817,7 @@ evecs  # 特征向量
 映射 $A$ 的特征向量和特征值决定了当我们反复乘以 $A$ 时，向量 $v$ 如何被变换。
 
 这一点将在后面进一步讨论。
+
 
 (la_neumann)=
 ## 诺伊曼级数引理
@@ -859,12 +854,11 @@ $$
 
 使用矩阵代数，我们可以得出这个方程组的解由以下给出：
 
-
 ```{math}
 :label: neumann_eqn
 
     x^{*} = (I-A)^{-1}b
-    
+
 ```
 
 什么条件保证了存在唯一的向量 $x^{*}$ 满足方程 {eq}`neumann_eqn`？
@@ -876,7 +870,9 @@ $$
 :label: neumann_series_lemma
 
 设 $A$ 为方阵，$A^k$ 为 $A$ 的 $k$ 次幂。
+
 设 $r(A)$ 为 $A$ 的**谱半径**，定义为 $\max_i |\lambda_i|$，其中
+
 * $\{\lambda_i\}_i$ 是 $A$ 的特征值集，且
 * $|\lambda_i|$ 是复数 $\lambda_i$ 的模
 
@@ -893,7 +889,7 @@ $$
 A = np.array([[0.4, 0.1],
               [0.7, 0.2]])
 
-evals, evecs = eig(A)   #求出特征值和特征向量
+evals, evecs = eig(A)   # 求出特征值和特征向量
 
 r = max(abs(λ) for λ in evals)    # 计算谱半径
 print(r)
@@ -922,12 +918,12 @@ for i in range(50):
 
 让我们检查求和方法和逆序方法的结果是否相等。
 
-
 ```{code-cell} ipython3
 np.allclose(A_sum, B_inverse)
 ```
 
 虽然我们在 $k = 50$ 时截断了无限级数，但两种方法给出了相同的结果，这体现了诺伊曼级数引理的结论。
+
 
 ## 练习
 
@@ -958,12 +954,6 @@ $$
 我们首先研究特征向量近似值与真实特征向量之间的距离。
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Power iteration
-    name: pow-dist
----
 # 定义矩阵A
 A = np.array([[1, 0, 3],
               [0, 2, 0],
@@ -972,7 +962,8 @@ A = np.array([[1, 0, 3],
 num_iters = 20
 
 # 定义一个随机的初始向量 b
-b = np.random.rand(A.shape[1])
+rng = np.random.default_rng()
+b = rng.random(A.shape[1])
 
 # 获取矩阵A的主特征向量
 eigenvector = np.linalg.eig(A)[1][:, 0]
@@ -982,7 +973,7 @@ res = []
 
 # 幂迭代循环
 for i in range(num_iters):
-    # Multiply b by A
+    # 将b乘以A
     b = A @ b
     # 归一化b
     b = b / np.linalg.norm(b)
@@ -999,22 +990,16 @@ print('真实的特征值是', np.linalg.eig(A)[0])
 
 # 绘制每次迭代的特征向量近似值
 plt.figure(figsize=(10, 6))
-plt.xlabel('次数')
+plt.xlabel('迭代次数')
 plt.ylabel('误差')
+plt.title('幂迭代')
 _ = plt.plot(errors)
 ```
-
-+++ {"user_expressions": []}
 
 然后我们可以观察特征向量近似值的轨迹。
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Power iteration trajectory
-    name: pow-trajectory
----
+
 # 设置3D图形和坐标轴
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -1042,10 +1027,10 @@ ax.legend(points, ['真正的特征向量',
                    r'近似的特征向量 ($b_k$)'])
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
+ax.set_title('幂迭代轨迹')
+
 plt.show()
 ```
-
-+++ {"user_expressions": []}
 
 ```{solution-end}
 ```
@@ -1068,8 +1053,8 @@ plt.show()
 ```{code-cell} ipython3
 A = np.array([[1, 2],
               [1, 1]])
-v = (0.4, -0.4)
-n = 11
+v = (2, -2)
+n = 4
 
 # 计算特征值和特征向量
 eigenvalues, eigenvectors = np.linalg.eig(A)
@@ -1080,25 +1065,19 @@ print(f'特征向量:\n {eigenvectors}')
 plot_series(A, v, n)
 ```
 
-+++ {"user_expressions": []}
+轨迹开始转向 $A$ 的最大特征值所对应的特征向量。
 
-结果似乎收敛于矩阵 $A$ 最大特征值对应的特征向量。
+让我们使用[向量场](https://en.wikipedia.org/wiki/Vector_field)来可视化矩阵 $A$ 带来的变换。
 
-让我们使用[向量场](https://baike.baidu.com/item/%E5%90%91%E9%87%8F%E5%9C%BA/9812041)来可视化矩阵 $A$ 带来的变换。
 （这是线性代数中的一个较高级话题，如果你对数学感到足够自信和感兴趣的话，可以继续往下学习。）
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: 收敛于特征向量
-    name: eigen-conv
----
+
 # 创建格点
 x, y = np.meshgrid(np.linspace(-5, 5, 15),
                    np.linspace(-5, 5, 20))
 
-#将矩阵A应用于向量场中的每个点
+# 将矩阵A应用于向量场中的每个点
 vec_field = np.stack([x, y])
 u, v = np.tensordot(A, vec_field, axes=1)
 
@@ -1125,18 +1104,16 @@ plt.legend(lines, labels, loc='center left',
 
 plt.xlabel("x")
 plt.ylabel("y")
-plt.grid()
+plt.title("收敛于特征向量")
 plt.gca().set_aspect('equal', adjustable='box')
 plt.show()
 ```
 
-+++ {"user_expressions": []}
+请注意，向量场收敛于 $A$ 的最大特征值对应的特征向量，并从 $A$ 的最小特征值对应的特征向量发散。
 
-请注意，向量场收敛于$A$的最大特征值对应的特征向量，并从$A$的最小特征值对应的特征向量发散。
+实际上，特征向量也是矩阵 $A$ 拉伸或压缩空间的方向。
 
-实际上，特征向量也是矩阵$A$拉伸或压缩空间的方向。
-
-具体来说，最大特征值对应的特征向量是矩阵$A$最大程度拉伸空间的方向。
+具体来说，最大特征值对应的特征向量是矩阵 $A$ 最大程度拉伸空间的方向。
 
 我们将在接下来的练习中看到更多有趣的例子。
 
@@ -1146,9 +1123,9 @@ plt.show()
 ```{exercise}
 :label: eig1_ex3
 
-{ref}`之前 <plot_series>`，我们展示了向量$v$被三种不同矩阵$A$变换后的轨迹。
+{ref}`之前 <plot_series>`，我们展示了向量 $v$ 被三种不同矩阵 $A$ 变换后的轨迹。
 
-使用前面练习中的可视化来解释向量$v$被这三种不同矩阵$A$变换后的轨迹。
+使用前面练习中的可视化来解释向量 $v$ 被这三种不同矩阵 $A$ 变换后的轨迹。
 
 ```
 
@@ -1157,16 +1134,11 @@ plt.show()
 :class: dropdown
 ```
 
-以下是其中一种解法。
+以下是其中一种解法
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: 三个不同矩阵的向量场
-    name: vector-field
----
-figure, ax = plt.subplots(1, 3, figsize=(15, 5))
+
+fig, ax = plt.subplots(1, 3, figsize=(15, 5))
 A = np.array([[sqrt(3) + 1, -2],
               [1, sqrt(3) - 1]])
 A = (1/(2*sqrt(2))) * A
@@ -1184,7 +1156,7 @@ examples = [A, B, C]
 for i, example in enumerate(examples):
     M = example
 
-    # 计算特征向量和特征值
+    # 计算右特征向量和特征值
     eigenvalues, eigenvectors = np.linalg.eig(M)
     print(f'实例 {i+1}:\n')
     print(f'特征值:\n {eigenvalues}')
@@ -1221,27 +1193,20 @@ for i, example in enumerate(examples):
 
     ax[i].set_xlabel("x-axis")
     ax[i].set_ylabel("y-axis")
-    ax[i].grid()
     ax[i].set_aspect('equal', adjustable='box')
 
+fig.suptitle("三个矩阵的向量场")
 plt.show()
 ```
 
-+++ {"user_expressions": []}
-
-这些向量场解释了为什么我们之前观察到向量$v$被矩阵$A$反复相乘后的轨迹。
+这些向量场解释了为什么我们之前观察到向量 $v$ 被矩阵 $A$ 反复相乘后的轨迹。
 
 这里展示的模式是因为我们有复数特征值和特征向量。
 
 我们可以使用从[stackoverflow](https://stackoverflow.com/questions/22867620/putting-arrowheads-on-vectors-in-a-3d-plot)获取的`Arrow3D`类来为其中一个矩阵绘制复平面。
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: 向量场的三维图（复平面）
-    name: 3d-vector-field
----
+
 class Arrow3D(FancyArrowPatch):
     def __init__(self, xs, ys, zs, *args, **kwargs):
         super().__init__((0, 0), (0, 0), *args, **kwargs)
@@ -1259,7 +1224,7 @@ class Arrow3D(FancyArrowPatch):
 
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
-#为向量场创建网格
+# 为向量场创建网格
 x, y = np.meshgrid(np.linspace(-2, 2, 15),
                    np.linspace(-2, 2, 15))
 
@@ -1294,11 +1259,10 @@ ax.set_ylabel('y')
 ax.set_zlabel('Im')
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
+plt.title("向量场的三维图")
 plt.draw()
 plt.show()
 ```
-
-+++ {"user_expressions": []}
 
 ```{solution-end}
 ```
