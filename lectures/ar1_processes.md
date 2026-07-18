@@ -95,7 +95,7 @@ X_t = a X_{t-1} + b +  c W_t
         = \cdots
 $$
 
-如果我们一直追溯到零时，我们得到
+如果我们一直追溯到零时刻，我们得到
 
 ```{math}
 :label: ar1_ma
@@ -114,16 +114,13 @@ X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
 
 ### 分布动态
 
-这个模型的一个好处是很容易追踪一系列分布 $\{ \psi_t \}$，这些分布对应于时间
-序列 $\{ X_t\}$ 。具体来说，我们可以在每个日期 $t$ 上追踪观测到的 $X_t$ 的边缘分布。
+这个模型的一个好处是很容易追踪一系列分布 $\{ \psi_t \}$，这些分布对应于时间序列 $\{ X_t\}$ 。
 
-让我们看看我们如何做到这一点。
-
-首先我们指出，对于每个时间 $t$，$X_t$ 是正态分布的。
+为了说明这一点，我们首先注意到对于每个时间 $t$，$X_t$ 都是正态分布的。
 
 这是从 {eq}`ar1_ma` 显见的，因为独立正态随机变量的线性组合是正态分布的。
 
-鉴于 $X_t$ 是正态分布的，如果我们能确定它的[一阶矩和二阶矩](https://en.wikipedia.org/wiki/Moment_(mathematics))，就可以知道完整的分布 $\psi_t$。
+鉴于 $X_t$ 是正态分布的，如果我们能确定它的前两[矩](https://en.wikipedia.org/wiki/Moment_(mathematics))，就可以知道完整的分布 $\psi_t$。
 
 设 $\mu_t$ 和 $v_t$ 分别表示 $X_t$ 的均值和方差。
 
@@ -133,7 +130,7 @@ X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
 :label: dyn_tm
 
 \mu_{t+1} = a \mu_t + b
-\quad 	ext{和} \quad
+\quad \text{和} \quad
 v_{t+1} = a^2 v_t + c^2
 ```
 
@@ -231,7 +228,7 @@ plt.show()
 :label: mu_sig_star
 
 \mu^* := \frac{b}{1-a}
-\quad 和 \quad
+\quad \text{和} \quad
 v^* = \frac{c^2}{1 - a^2}
 ```
 
@@ -243,7 +240,7 @@ v^* = \frac{c^2}{1 - a^2}
 :label: ar1_psi_star
 
 \psi_t \to \psi^* = N(\mu^*, v^*)
-\quad 当
+\quad \text{当 }
 t \to \infty
 ```
 
@@ -262,7 +259,7 @@ ax.legend()
 plt.show()
 ```
 
-请注意，根据上述参数，我们看到序列 $\{ \psi_t \}$ 收敛到 $\psi^*$。
+正如所声称的，序列 $\{ \psi_t \}$ 收敛到 $\psi^*$。
 
 我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。
 
@@ -272,7 +269,7 @@ plt.show()
 
 平稳分布是 AR(1) 过程更新规则的一个“不动点”。
 
-换句话说，如果 $\psi_t$ 是平稳的，那么对所有 $j$，$\psi_{t+j} = \psi_t$ 在 $\mathbb N$ 时成立。
+换句话说，如果 $\psi_t$ 是平稳的，那么对所有 $j \in \mathbb N$，$\psi_{t+j} = \psi_t$ 都成立。
 
 另一种针对当前情况的说法是：如果一个在 $\mathbb R$ 上的概率密度 $\psi$ 对 AR(1) 过程是**平稳的**，则有
 
@@ -295,7 +292,7 @@ $\psi^*$ 在 {eq}`ar1_psi_star` 中具有这一性质——验证这一点是留
 
 不同的作者使用遍历性这一概念有不同的方式。
 
-在当前情况中可以理解为：即使 $\{X_t\}$ 不是独立同分布的，大数定律也是有效的。
+在当前情况中可以理解为：即使 $\{X_t\}$ 不是独立同分布的，大数定律的某个版本也是有效的。
 
 特别是，时间序列的平均值收敛于平稳分布下的期望值。
 
@@ -306,7 +303,7 @@ $\psi^*$ 在 {eq}`ar1_psi_star` 中具有这一性质——验证这一点是留
 
 \frac{1}{m} \sum_{t = 1}^m h(X_t) \to
 \int h(x) \psi^*(x) dx
-    \quad 当 m \to \infty
+    \quad \text{当 } m \to \infty
 ```
 
 只要右侧的积分是有限且良定义的。
@@ -338,7 +335,7 @@ $$
 
 我们可以使用理论的 AR(1) 模型来计算右侧。
 
-如果 $\frac{1}{m} \sum_{t = 1}^m X_t$ 即使在大量观测下也不接近 $\psi^*(x)$，那么我们的理论便有可能是错误的，我们将需要修订它。
+如果 $\frac{1}{m} \sum_{t = 1}^m h(X_t)$ 即使在大量观测下也不接近 $\int h(x)\psi^*(x) dx$，那么我们的理论便有可能是错误的，我们将需要修订它。
 
 
 ## 练习
@@ -407,8 +404,8 @@ def true_moments_ar1(k):
         return 0
 
 k_vals = np.arange(6) + 1
-sample_moments = np.empty_like(k_vals)
-true_moments = np.empty_like(k_vals)
+sample_moments = np.empty(len(k_vals), dtype=float)
+true_moments = np.empty(len(k_vals), dtype=float)
 
 for k_idx, k in enumerate(k_vals):
     sample_moments[k_idx] = sample_moments_ar1(k)
@@ -562,25 +559,28 @@ c = 0.1
 μ = -3
 s = 0.2
 ```
-```python
-n = 2000  # 样本数
 
-# 理论上的分布
+```{code-cell} ipython3
 μ_next = a * μ + b
 s_next = np.sqrt(a**2 * s**2 + c**2)
+```
 
-# 理论密度
+```{code-cell} ipython3
+ψ = lambda x: K((x - μ) / s)
+ψ_next = lambda x: K((x - μ_next) / s_next)
+```
+
+```{code-cell} ipython3
 ψ = norm(μ, s)
 ψ_next = norm(μ_next, s_next)
+```
 
-# 使用仿真值来估计ψ_{t+1}
-x_draws = ψ.rvs(n)  # 从ψ生成样本
-x_draws_next = a * x_draws + b + c * np.random.randn(n)  # 更新规则
-
-# 对仿真结果进行核密度估计
+```{code-cell} ipython3
+n = 2000
+x_draws = ψ.rvs(n)
+x_draws_next = a * x_draws + b + c * np.random.randn(n)
 kde = KDE(x_draws_next)
 
-# 绘制结果
 x_grid = np.linspace(μ - 1, μ + 1, 100)
 fig, ax = plt.subplots()
 
