@@ -26,7 +26,7 @@ kernelspec:
 
 本讲使用矩阵来解决线性差分方程。
 
-作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 {cite}`Samuelson1939` 中的**二阶线性差分方程**，该文章引入了**乘数加速器**模型。
+作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 {cite}`Samuelson1939` 中的**二阶线性差分方程**，该文章引入了**乘数加速器模型**。
 
 这个模型对早期美国凯恩斯主义宏观经济学的计量经济学研究产生了重要影响。
 
@@ -38,17 +38,17 @@ kernelspec:
 
 我们还将研究一个涉及解“前瞻性”线性差分方程的“完全预见的”股票价格模型。
 
-让我们先导入所需的Python包：
+我们将使用以下импорты：
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-# 设置默认图形大小
+# 设置本讲座的自定义图形大小
 plt.rcParams["figure.figsize"] = (11, 5)
 
-# 设置打印的浮点数精度
+# 设置打印的浮点数精度为 3 位小数
 np.set_printoptions(precision=3, suppress=True)
 ```
 
@@ -167,7 +167,7 @@ A, b
 
 如果 $y_t$ 表示 $t$ 时期的国民生产总值，那么这就是萨缪尔森国民生产总值动态模型的一个版本。
 
-要求解 $y = A^{-1} b$，我们可以直接倒置 $A$
+要求解 $y = A^{-1} b$，我们可以直接求 $A$ 的逆矩阵，如下所示
 
 ```{code-cell} ipython3
 A_inv = np.linalg.inv(A)
@@ -181,13 +181,13 @@ y = A_inv @ b
 y_second_method = np.linalg.solve(A, b)
 ```
 
-我们确保这两种方法在一定精度下给出相同的结果：
+这里我们确保这两种方法在一定精度下给出相同的结果，至少在浮点精度范围内：
 
 ```{code-cell} ipython3
 np.allclose(y, y_second_method)
 ```
 
-$A$ 是可逆的，因为它是下三角且[其对角线条目非零](https://www.statlect.com/matrix-algebra/triangular-matrix)
+$A$ 是可逆的，因为它是下三角矩阵，且[其对角线条目非零](https://www.statlect.com/matrix-algebra/triangular-matrix)
 
 ```{code-cell} ipython3
 # Check if A is lower triangular
@@ -195,9 +195,8 @@ np.allclose(A, np.tril(A))
 ```
 
 ```{note}
-
-一般来说，`np.linalg.solve`比使用`np.linalg.solve`在数值上更稳定。
-然而，对于这个小例子来说，稳定性不是问题。此外，我们将下面重复使用`A_inv`，直接计算出它来会有比较好。
+一般来说，`np.linalg.solve`比直接使用`np.linalg.inv`在数值上更稳定。
+然而，对于这个小例子来说，稳定性不是问题。此外，我们在下文中会反复使用`A_inv`，所以直接计算出它会有额外的价值。
 ```
 
 现在我们可以绘制时间序列。
@@ -251,7 +250,7 @@ plt.show()
 y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t
 ```
 
-其中 $u_{t} \sim N\left(0, \sigma_{u}^{2}\right)$ 并且是 {ref}`独立同分布<IID-theorem>` -- 相互独立且服从相同分布。
+其中 $u_{t} \sim N\left(0, \sigma_{u}^{2}\right)$ 并且是 {ref}`独立同分布<iid-theorem>` 的，意味着独立且服从相同分布。
 
 我们将把这些 $T$ 个方程堆叠成一个以矩阵代数表示的系统。
 
@@ -283,8 +282,10 @@ $$ (eq:eqma)
 让我们在Python中尝试一下。
 
 ```{code-cell} ipython3
+rng = np.random.default_rng()
+
 σ_u = 2.
-u = np.random.normal(0, σ_u, size=T)
+u = rng.normal(0, σ_u, size=T)
 y = A_inv @ (b + u)
 ```
 
@@ -304,8 +305,8 @@ plt.show()
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
-    u = np.random.normal(0, σ_u, size=T)
+    col = cm.viridis(rng.random())  # 从 viridis 色系中随机选择一种颜色
+    u = rng.normal(0, σ_u, size=T)
     y = A_inv @ (b + u)
     plt.plot(np.arange(T)+1, y, lw=0.5, color=col)
 
@@ -321,8 +322,8 @@ plt.show()
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
-    u = np.random.normal(0, σ_u, size=T)
+    col = cm.viridis(rng.random())  # 从 viridis 色系中随机选择一种颜色
+    u = rng.normal(0, σ_u, size=T)
     y_steady = A_inv @ (b_steady + u)
     plt.plot(np.arange(T)+1, y_steady, lw=0.5, color=col)
 
@@ -334,21 +335,13 @@ plt.show()
 
 ## 计算总体矩
 
-我们可以应用多元正态分布的标准公式来计算我们的时间序列模型
+我们可以应用多元正态分布的标准公式来计算我们的时间序列模型的均值向量和协方差矩阵
 
 $$
 y = A^{-1} (b + u) .
 $$
 
 你可以在这篇讲义中阅读关于多元正态分布的内容 [多元正态分布](https://python.quantecon.org/multivariate_normal.html)。
-
-让我们将我们的模型写为
-
-$$ 
-y = \tilde A (b + u)
-$$
-
-其中 $\tilde A = A^{-1}$。
 
 因为正态随机变量的线性组合依然是正态的，我们知道
 
@@ -359,13 +352,13 @@ $$
 其中
 
 $$ 
-\mu_y = \tilde A b
+\mu_y = A^{-1} b
 $$
 
 以及
 
 $$
-\Sigma_y = \tilde A (\sigma_u^2 I_{T \times T} ) \tilde A^T
+\Sigma_y = A^{-1} (\sigma_u^2 I_{T \times T} ) (A^{-1})^T
 $$
 
 让我们编写一个Python类来计算均值向量 $\mu_y$ 和协方差矩阵 $\Sigma_y$。
@@ -373,10 +366,10 @@ $$
 ```{code-cell} ipython3
 class population_moments:
     """
-    计算人群矩 mu_y, Sigma_y.
+    计算总体矩 μ_y, Σ_y.
     ---------
     参数:
-    alpha0, alpha1, alpha2, T, y_1, y0
+    α_0, α_1, α_2, T, y_neg1, y_0
     """
     def __init__(self, α_0=10.0, 
                        α_1=1.53, 
@@ -406,12 +399,14 @@ class population_moments:
 
         self.A, self.b, self.A_inv, self.σ_u, self.T = A, b, A_inv, σ_u, T
     
-    def sample_y(self, n):
+    def sample_y(self, n, rng=None):
         """
         提供一个大小为 n 的 y 样本。
         """
+        if rng is None:
+            rng = np.random.default_rng()
         A_inv, σ_u, b, T = self.A_inv, self.σ_u, self.b, self.T
-        us = np.random.normal(0, σ_u, size=[n, T])
+        us = rng.normal(0, σ_u, size=[n, T])
         ys = np.vstack([A_inv @ (b + u) for u in us])
 
         return ys
@@ -435,19 +430,19 @@ series_process = population_moments()
 A_inv = series_process.A_inv
 ```
 
-接下来，让我们探索不同参数值对 $\mu_y$ 和 $\Sigma_y$ 的影响。
+研究不同参数值下所隐含的 $\mu_y, \Sigma_y$ 是很有启发意义的。
 
-这个分析也将帮助我们理解一个重要的性质：$y$ 序列的**统计平稳性**。我们会发现，只有在非常特定的初始条件下，这个序列才是平稳的。
+除此之外，我们还可以用这个类来展示 $y$ 的**统计平稳性**为什么只在非常特殊的初始条件下才成立。
 
-为了直观地理解这一点，我们先生成 $N$ 条 $y$ 序列的样本路径，并将它们与理论均值 $\mu_y$ 进行对比。
+让我们先生成 $N$ 条 $y$ 的时间实现路径，并将它们与总体均值 $\mu_y$ 一起绘制出来。
 
 ```{code-cell} ipython3
 # 绘制均值
 N = 100
 
 for i in range(N):
-    col = cm.viridis(np.random.rand())  # 从 viridis 色系中随机选择一种颜色
-    ys = series_process.sample_y(N)
+    col = cm.viridis(rng.random())  # 从 viridis 色系中随机选择一种颜色
+    ys = series_process.sample_y(N, rng=rng)
     plt.plot(ys[i,:], lw=0.5, color=col)
     plt.plot(μ_y, color='red')
 
@@ -457,9 +452,9 @@ plt.ylabel('y')
 plt.show()
 ```
 
-从图中可以观察到一个有趣的现象：随着时间 $t$ 的推移，不同样本路径之间的离散程度在逐渐减小。
+由于初始条件是固定的，且冲击随时间累积，$y_t$ 的总体方差会朝着其极限值不断增大。
 
-绘制总体方差 $\Sigma_y$ 对角线。
+让我们把 $y_t$ 的总体方差对 $t$ 作图。
 
 ```{code-cell} ipython3
 # 绘制方差
@@ -467,9 +462,11 @@ plt.plot(Σ_y.diagonal())
 plt.show()
 ```
 
-从图中我们可以看到，总体方差随时间增加，最终趋于一个稳定值。这种收敛行为反映了系统的内在稳定性。
+注意总体方差是如何增加并趋于渐近线的。
 
-为了进一步验证这一点，让我们通过模拟多条样本路径来计算样本方差，并将其与理论预测进行对比。
++++
+
+让我们打印出时间序列 $y$ 的协方差矩阵 $\Sigma_y$。
 
 ```{code-cell} ipython3
 series_process = population_moments(α_0=0, 
@@ -485,15 +482,15 @@ print("μ_y = ", μ_y)
 print("Σ_y = \n", Σ_y)
 ```
 
-观察 $y_t$ 和 $y_{t-1}$ 之间的协方差（即超对角线上的元素），我们发现它们并不相等。
+注意 $y_t$ 和 $y_{t-1}$ 之间的协方差——即超对角线上的元素——并 *不* 相同。
 
-这个特征告诉我们，由 $y$ 向量表示的时间序列不具有**平稳性**。
+这表明由我们的 $y$ 向量表示的时间序列并不是**平稳的**。
 
-要使序列变得平稳，我们需要对系统做一个关键的改变：不再将初始条件 $(y_0, y_{-1})$ 设为固定值，而是让它们服从一个特定的联合正态分布，这个分布具有合适的均值和协方差矩阵。
+要使其平稳，我们需要改变系统，使得*初始条件* $(y_0, y_{-1})$ 不再是固定数值，而是服从具有特定均值和协方差矩阵的联合正态分布的随机向量。
 
-如果你想了解如何实现这一点，可以参考我们在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中的详细讨论。
+我们在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中描述了如何做到这一点。
 
-在继续深入分析之前，让我们先来看看 $\Sigma_y$ 矩阵右下角的数值。
+不过，为了给那个分析做铺垫，让我们先打印出 $\Sigma_y$ 的右下角部分。
 
 ```{code-cell} ipython3
 series_process = population_moments()
@@ -502,23 +499,25 @@ series_process = population_moments()
 print("bottom right corner of Σ_y = \n", Σ_y[72:,72:])
 ```
 
-请注意，随着时间 $t$ 的增加，子对角线和超对角线上的元素似乎趋于收敛。
+请注意，次对角线和超对角线上的元素似乎已经收敛。
 
 这表明我们的过程是渐近平稳的。
 
-你可以在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中阅读更多关于更一般线性时间序列模型的平稳性。
+你可以在[线性状态空间模型](https://python.quantecon.org/linear_models.html)中阅读更多关于更一般线性时间序列模型平稳性的内容。
 
-通过观察不同时间段的$\Sigma_y$的非对角线元素，我们可以学到很多关于这个过程的知识，但我们在这里暂时先不展开。
+通过观察 $\Sigma_y$ 中对应不同时间段 $t$ 的非对角线元素，我们本可以学到很多关于该过程的知识，但我们在这里按下不表。
 
 +++
 
 ## 移动平均表示
 
-让我们来研究 $A^{-1}$ 矩阵的结构。这个矩阵的形状会告诉我们一些关于系统动态特性的重要信息。
+让我们打印出 $A^{-1}$ 并观察其结构
 
-  * 它是三角形矩阵、接近三角形，还是其他形式 $\ldots$？
+  * 它是三角形的、几乎是三角形的，还是 $\ldots$？
 
-为了便于观察，我们将打印 $A^{-1}$ 矩阵左上角的一部分，并将数值保留到小数点后三位。
+为了研究 $A^{-1}$ 的结构，我们将只打印到小数点后 3 位。
+
+让我们先打印出 $A^{-1}$ 左上角的部分。
 
 ```{code-cell} ipython3
 print(A_inv[0:7,0:7])
@@ -530,38 +529,36 @@ print(A_inv[0:7,0:7])
 
 由于 $A^{-1}$ 是下三角矩阵，每一行代表特定 $t$ 时的 $y_t$，作为以下两部分之和：
 
-- 与初始条件 $b$ 相关的时间依赖函数 $A^{-1} b$，以及
+- 一个与 $b$ 中包含的初始条件相关的、随时间变化的函数 $A^{-1} b$，以及
 - 当前和过去 IID 冲击 $\{u_t\}$ 的加权和。
-
-因此，设 $\tilde{A}=A^{-1}$。
 
 显然，对于 $t\geq0$，
 
 $$
-y_{t+1}=\sum_{i=1}^{t+1}\tilde{A}_{t+1,i}b_{i}+\sum_{i=1}^{t}\tilde{A}_{t+1,i}u_{i}+u_{t+1}
+y_{t+1}=\sum_{i=1}^{t+1}(A^{-1})_{t+1,i}b_{i}+\sum_{i=1}^{t}(A^{-1})_{t+1,i}u_{i}+u_{t+1}
 $$
 
 这是一个**移动平均**表示，其系数随时间变化。
 
-我们可以看到，系统既可以用移动平均形式 {eq}`eq:eqma` 表示，也可以用自回归形式 {eq}`eq:eqar` 表示。这两种表示方式描述了同一个随机过程，只是从不同的角度来看。
+正如系统 {eq}`eq:eqma` 构成了 $y$ 的一个**移动平均**表示一样，系统 {eq}`eq:eqar` 构成了 $y$ 的一个**自回归**表示。
 
-## 从后视到前瞻
+## 一个前瞻性模型
 
-到目前为止，我们分析的萨缪尔森模型是一个*后视(backward-looking)*模型 - 给定*初始条件*后，系统就会向前演化。
+萨缪尔森的模型是*向后看*的，因为我们给定它*初始条件*后让它自行运行。
 
-接下来让我们转向一个*前瞻(forward-looking)*模型，这类模型在宏观经济学和金融学中被广泛使用。
+现在让我们转向一个*向前看*的模型。
 
-我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的*完全预见*模型。
+我们应用类似的线性代数工具来研究一个在宏观经济学和金融学中被广泛用作基准的*完全预见*模型。
 
 例如，假设 $p_t$ 是股票价格，$y_t$ 是其股息。
 
-假设股息 $y_t$ 遵循我们前面分析的二阶差分方程，即
+我们假设 $y_t$ 由我们上面刚分析过的二阶差分方程决定，因此
 
 $$
 y = A^{-1} \left(b + u\right)
 $$
 
-我们的*完全预见*股票价格模型是
+我们的股票价格*完全预见*模型是
 
 $$
 p_{t} = \sum_{j=0}^{T-t} \beta^{j} y_{t+j}, \quad \beta \in (0,1)
@@ -569,7 +566,9 @@ $$
 
 其中 $\beta$ 是折现因子。
 
-该模型表明，股票在 $t$ 时刻的价格等于从当期开始直到终期所有未来股息的现值之和。每期股息都按折现因子 $\beta$ 进行贴现，期数越远贴现程度越大。
+该模型表明，股票在 $t$ 时刻的价格等于（完全预见到的）未来股息的贴现现值之和。
+
+写成如下形式
 
 $$
 \underset{\equiv p}{\underbrace{\left[\begin{array}{c}
@@ -611,7 +610,7 @@ print(B)
 
 ```{code-cell} ipython3
 σ_u = 0.
-u = np.random.normal(0, σ_u, size=T)
+u = rng.normal(0, σ_u, size=T)
 y = A_inv @ (b + u)
 y_steady = A_inv @ (b_steady + u)
 ```
