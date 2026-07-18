@@ -65,7 +65,6 @@ ax.plot(years, hog_prices, '-o', ms=4, label='猪肉价格')
 ax.set_xlabel('年')
 ax.set_ylabel('美元')
 ax.legend()
-ax.grid()
 plt.show()
 ```
 
@@ -201,7 +200,7 @@ $$
 ```{code-cell} ipython3
 def g(model, current_price):
     """
-  该函数在给定当前价格和市场模型的情况下找到下一期价格
+    该函数在给定当前价格和市场模型的情况下找到下一期价格
     """
     a, b = model.a, model.b
     next_price = - (model.supply(current_price) - a) / b
@@ -218,12 +217,18 @@ def g(model, current_price):
 def plot45(model, pmin, pmax, p0, num_arrows=5):
     """
     绘制 45 度图的函数
+
     参数
     ==========
+
     model: 市场模型
+
     pmin: 价格下限
+
     pmax: 价格上限
+
     p0: 价格初始值（用于模拟价格）
+
     num_arrows: 要绘制的模拟次数
     """
     pgrid = np.linspace(pmin, pmax, 200)
@@ -298,6 +303,7 @@ plot45(m, 0, 9, 2, num_arrows=3)
 由于 $p_{t+1} = g(p_t)$，我们让纵坐标为  $p_{t+1}$ 并画出函数 $g$ 的图形。
 
 显然，
+
 - 如果 $g$ 在 $p_t$ 处位于 45 度线上方，那么我们有 $p_{t+1} > p_t$。
 - 如果 $g$ 在 $p_t$ 处位于 45 度线下方，那么我们有 $p_{t+1} < p_t$。
 - 如果 $g$ 在 $p_t$ 处与 45 度线相交，那么我们有 $p_{t+1} = p_t$，也就是说 $p_t$ 是一个稳态。
@@ -344,11 +350,13 @@ def ts_plot_price(model,             # 市场模型
 ts_plot_price(m, 4, ts_length=15)
 ```
 
-我们看到一个循环已经形成，而且这个循环是持续的。（您可以通过绘制更长时间范围的图表来确认这一点。）
+我们看到一个循环已经形成，而且这个循环是持续的。
+
+（您可以通过绘制更长时间范围的图表来确认这一点。）
 
 这个循环是"稳定的"，意味着从大多数起始条件开始，价格都会收敛到这个循环。
-例如，
 
+例如，
 
 ```{code-cell} ipython3
 ts_plot_price(m, 10, ts_length=15)
@@ -380,6 +388,7 @@ p_t^e = p^e_{t-1} + \alpha (p_{t-1} - p_{t-1}^e)
 ```
 
 这个方程有助于说明预期会在以下情况下发生变化：
+
 1. 当上一期价格高于预期时，预期上调
 1. 当上一期价格低于预期时，预期下调
 
@@ -394,7 +403,7 @@ $$
 ```{code-cell} ipython3
 def find_next_price_adaptive(model, curr_price_exp):
     """
-   该函数是在给定当前价格预期和市场模型的情况下计算下一期的价格。
+    该函数是在给定当前价格预期和市场模型的情况下计算下一期的价格。
     """
     return - (model.supply(curr_price_exp) - model.a) / model.b
 ```
@@ -426,7 +435,9 @@ ts_price_plot_adaptive(m, 5, ts_length=30)
 ```
 
 请注意，如果$\alpha=1$，那么适应性预期就等同于简单预期。
+
 减小$\alpha$的值会使更多权重转移到先前的预期上，这会稳定预期价格。
+
 这种增加的稳定性可以在图表中看出。
 
 ## 练习
@@ -453,7 +464,7 @@ def ts_plot_supply(model, p0, ts_length=10):
     pe_last = p0
     s_values = np.empty(ts_length)
     for i in range(ts_length):
-        # 库存数量
+        # 存储数量
         s_values[i] = model.supply(pe_last)
         # 更新价格
         pe_last = - (s_values[i] - model.a) / model.b
@@ -469,8 +480,8 @@ def ts_plot_supply(model, p0, ts_length=10):
 
     ax.legend(loc='best', fontsize=10)
     ax.set_xticks(np.arange(ts_length))
-    ax.set_xlabel(r"时间")
-    ax.set_ylabel(r"数量")
+    ax.set_xlabel("时间")
+    ax.set_ylabel("数量")
     plt.show()
 ```
 
@@ -487,7 +498,7 @@ ts_plot_supply(m, 5, 15)
 ```
 **回顾平均预期**
 
-回顾平均预期是指生产者对下一期价格的预期为他们最后一次猜测和倒数第二次猜测的线性组合。
+回顾平均预期是指生产者对下一期价格的预期为他们最后一次观察到的价格和再往前一期观察到的价格的线性组合。
 
 也就是说，
 
@@ -517,7 +528,7 @@ def find_next_price_blae(model, curr_price_exp):
 ```{code-cell} ipython3
 def ts_plot_price_blae(model, p0, p1, alphas, ts_length=15):
     """
-   使用回顾性平均预期模拟并绘制价格时间序列的函数。
+    使用回顾性平均预期模拟并绘制价格时间序列的函数。
     """
     fig, axes = plt.subplots(len(alphas), 1, figsize=(8, 16))
 
@@ -542,9 +553,9 @@ def ts_plot_price_blae(model, p0, p1, alphas, ts_length=15):
 ```{code-cell} ipython3
 m = Market()
 ts_plot_price_blae(m, 
-                   p0=5, 
-                   p1=6, 
-                   alphas=[0.1, 0.3, 0.5, 0.8], 
+                   p0=1,
+                   p1=2.5,
+                   alphas=[0.1, 0.3, 0.5, 0.8],
                    ts_length=20)
 ```
 
