@@ -114,9 +114,11 @@ cols = ['UK', 'US', 'France', 'Castile']
 
 fig, ax = plt.subplots(figsize=(10,6))
 
-for col in cols:
+cols_cn = ['英国', '美国', '法国', '卡斯蒂利亚(西班牙)']
+
+for col, col_cn in zip(cols, cols_cn):
     ax.plot(df_fig5_befe1914.index,
-            df_fig5_befe1914[col], label=col, lw=2)
+            df_fig5_befe1914[col], label=col_cn, lw=2)
 
 ax.legend()
 ax.set_ylabel('指数 1913 = 100')
@@ -318,7 +320,7 @@ def pe_plot(p_seq, e_seq, index, labs, ax):
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
     ax.xaxis.set_major_formatter(
-        mdates.DateFormatter('%b %Y'))
+        mdates.DateFormatter('%Y年%m月'))
     for label in ax.get_xticklabels():
         label.set_rotation(45)
 
@@ -344,7 +346,7 @@ def pr_plot(p_seq, index, ax):
     ax.xaxis.set_major_locator(
         mdates.MonthLocator(interval=5))
     ax.xaxis.set_major_formatter(
-        mdates.DateFormatter('%b %Y'))
+        mdates.DateFormatter('%Y年%m月'))
 
     for label in ax.get_xticklabels():
         label.set_rotation(45)
@@ -881,7 +883,7 @@ ax.set_ylabel('对数水平（起始点归一化为0）')
 ax.set_title('购买力平价检验：德国 1919-1924')
 ax.legend()
 ax.xaxis.set_major_locator(mdates.MonthLocator(interval=5))
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 for lbl in ax.get_xticklabels():
     lbl.set_rotation(45)
 plt.tight_layout()
@@ -898,7 +900,7 @@ ax.plot(common, q, lw=2, color='tab:green')
 ax.set_ylabel(r'$q_t = \log e_t - \log p_t$')
 ax.set_title('实际汇率：德国 1919-1924')
 ax.xaxis.set_major_locator(mdates.MonthLocator(interval=5))
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y年%m月'))
 for lbl in ax.get_xticklabels():
     lbl.set_rotation(45)
 plt.tight_layout()
