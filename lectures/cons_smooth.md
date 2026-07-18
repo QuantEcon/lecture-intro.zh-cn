@@ -17,7 +17,9 @@ kernelspec:
 
 在本讲座中，我们将研究米尔顿·弗里德曼(Milton Friedman) {cite}`Friedman1956`和罗伯特霍尔(Robert Hall) {cite}`Hall1978`提出的一个著名的"消费函数"模型，该模型旨在拟合一些实证数据模式，这些模式是原始凯恩斯消费函数（参阅{doc}`几何级数 <geom_series>`）所忽略的。
 
-在本讲座中，我们将使用矩阵乘法和矩阵求逆来研究通常称为"消费平滑模型"的内容，这些工具与我们在QuantEcon讲座{doc}`现值 <pv>`中使用的工具相同。
+我们将研究这个通常被称为"消费平滑模型"的模型。
+
+我们将使用矩阵乘法和矩阵求逆，这些工具与我们在QuantEcon讲座{doc}`现值 <pv>`中使用的工具相同。
 
 {doc}`现值公式<pv>`中提出的公式是消费平滑模型的核心，因为我们将使用它们来定义消费者的"人力财富"。
 
@@ -44,9 +46,7 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-该模型描述了一个从生活在时间 $t=0, 1, \ldots, T$ 的消费者。
-
-消费者接收非金融收入流 $\{y_t\}_{t=0}^T$，并选择消费流 $\{c_t\}_{t=0}^T$。
+该模型描述了一个从时间 $t=0, 1, \ldots, T$ 生活的消费者，她接收非金融收入流 $\{y_t\}_{t=0}^T$，并选择消费流 $\{c_t\}_{t=0}^T$。
 
 我们通常认为非金融收入流来自于个人提供劳动的工资。
 
@@ -54,7 +54,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 消费者面临固定的总利率 $R >1$，她可以自由借贷，但有限制条件，我们将在下面描述。
 
-为设置模型，让：
+设：
 
  * $T \geq 2$ 为一个正整数，构成时间范围。
 
@@ -74,7 +74,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 金融财富序列 $a$ 由模型决定。
 
-它必须满足两个**边界条件**：
+我们要求它满足两个**边界条件**：
 
    * 在时间 0 时必须等于外生值 $a_0$
 
@@ -131,7 +131,9 @@ W = \sum_{t=0}^T \beta^t (g_1 c_t - \frac{g_2}{2} c_t^2 )
 
 模型中内置的对平滑消费路径的偏好使其被称为"消费平滑模型"。
 
-让我们深入进行一些计算，这将帮助我们理解模型的工作原理。
+我们将推迟验证我们的说法，即当 $\beta R=1$ 时恒定消费路径是最优的，我们将通过比较恒定路径带来的福利水平与涉及非恒定路径的福利水平来验证这一点。
+
+在此之前，让我们先深入进行一些计算，这将帮助我们理解当我们给消费者提供一些不同的非金融收入流时，该模型在实践中是如何运作的。
 
 这里我们使用默认参数 $R = 1.05$，$g_1 = 1$，$g_2 = 1/2$，以及 $T = 65$。
 
@@ -266,11 +268,12 @@ def compute_optimal(model, a0, y_seq):
     c0 = (1 - 1/R) / (1 - (1/R)**(T+1)) * (a0 + h0)
     c_seq = c0*np.ones(T+1)
 
+    # 验证
     A = np.diag(-R*np.ones(T), k=-1) + np.eye(T+1)
     b = y_seq - c_seq
     b[0] = b[0] + a0
 
-    a_seq = np.linalg.inv(A) @ b
+    a_seq = np.linalg.inv(A) @ (R * b)
     a_seq = np.concatenate([[a0], a_seq])
 
     return c_seq, a_seq, h0
@@ -278,7 +281,7 @@ def compute_optimal(model, a0, y_seq):
 
 我们使用一个例子，其中消费者继承了 $a_0<0$。
 
-这可以被解释为学生贷款。
+这可以被解释为消费者开始其工作生涯时的学生贷款。
 
 非金融过程 $\{y_t\}_{t=0}^{T}$ 在 $t=45$ 之前保持恒定且为正值，之后变为零。
 
@@ -297,25 +300,32 @@ c_seq, a_seq, h0 = compute_optimal(cs_model, a0, y_seq)
 print('检查 a_T+1=0:', 
       np.abs(a_seq[-1] - 0) <= 1e-8)
 ```
-下图展示了非金融收入，消费和金融资产的路径。
+
+下图展示了非金融收入、消费和金融资产的路径。
 
 ```{code-cell} ipython3
 # 序列长度
 T = cs_model.T
 
-plt.plot(range(T+1), y_seq, label='非金融收入')
-plt.plot(range(T+1), c_seq, label='消费')
-plt.plot(range(T+2), a_seq, label='金融财富')
-plt.plot(range(T+2), np.zeros(T+2), '--')
+fig, axes = plt.subplots(1, 2, figsize=(12,5))
 
-plt.legend()
-plt.xlabel(r'$t$')
-plt.ylabel(r'$c_t,y_t,a_t$')
+axes[0].plot(range(T+1), y_seq, label='非金融收入', lw=2)
+axes[0].plot(range(T+1), c_seq, label='消费', lw=2)
+axes[1].plot(range(T+2), a_seq, label='金融财富', color='green', lw=2)
+axes[0].set_ylabel(r'$c_t,y_t$')
+axes[1].set_ylabel(r'$a_t$')
+
+for ax in axes:
+    ax.plot(range(T+2), np.zeros(T+2), '--', lw=1, color='black')
+    ax.legend()
+    ax.set_xlabel(r'$t$')
+
 plt.show()
 ```
-如我们所预期的一样， $a_{T+1} = 0$。
 
-我们可以测量福利标准  {eq}`welfare`
+注意，正如预期的那样，$a_{T+1} = 0$。
+
+我们可以评估福利标准 {eq}`welfare`
 
 ```{code-cell} ipython3
 def welfare(model, c_seq):
@@ -345,16 +355,13 @@ def plot_cs(model,    # 消费平滑模型
     c_seq, a_seq, h0 = compute_optimal(model, a0, y_seq)
     
     # 序列长度
-    T = cs_model.T
-    
-    # 绘图
-    T = cs_model.T
+    T = model.T
     
     fig, axes = plt.subplots(1, 2, figsize=(12,5))
     
     axes[0].plot(range(T+1), y_seq, label='非金融收入', lw=2)
     axes[0].plot(range(T+1), c_seq, label='消费', lw=2)
-    axes[1].plot(range(T+2), a_seq, label='金融资产', color='green', lw=2)
+    axes[1].plot(range(T+2), a_seq, label='金融财富', color='green', lw=2)
     axes[0].set_ylabel(r'$c_t,y_t$')
     axes[1].set_ylabel(r'$a_t$')
     
@@ -410,7 +417,7 @@ plot_cs(cs_model, a0, y_seq_neg)
 ```
 #### 实验3：晚期起步者
 
-现在我们模拟一个$y$序列，其中一个人在前46年收入为零，然后在生命的最后20年工作并获得2的收入（一个"晚起步者"）。
+现在我们模拟一个$y$序列，其中一个人在前46年收入为零，然后在生命的最后20年工作并获得1的收入（一个"晚起步者"）。
 
 ```{code-cell} ipython3
 # 晚起步者
@@ -427,7 +434,7 @@ plot_cs(cs_model, a0, y_seq_late)
 我们首先尝试 $\lambda = 1.05$
 
 ```{code-cell} ipython3
-# 几何收入增长者 λ = 1.05
+# 几何收入增长者参数 λ = 1.05
 λ = 1.05
 y_0 = 1
 t_max = 46
@@ -440,7 +447,7 @@ y_seq_geo = np.concatenate(
 plot_cs(cs_model, a0, y_seq_geo)
 ```
 
-我现在我们展示当$\lambda = 0.95$的行为。
+现在我们展示当$\lambda = 0.95$的行为。
 
 ```{code-cell} ipython3
 λ = 0.95
@@ -466,9 +473,13 @@ plot_cs(cs_model, a0, y_seq_geo)
 
 ### 可行的消费变化
 
-我们之前说过本讲会证明恒定消费计划 $c_t = c_0$（对所有 $t$）是最优的。现在让我们来做这个证明。
+我们曾承诺证明我们的说法，即当 $\beta R =1$（弗里德曼所假设的）时，对所有 $t$ 都恒定的消费方案 $c_t = c_0$ 是最优的。
 
-我们将采用"变分法"。
+现在让我们来证明这一点。
+
+我们将采用的方法是"变分法"的一个基本例子。
+
+让我们深入研究一下关键思想是什么。
 
 为了探索哪些类型的消费路径能改善福利，我们将创建一个**可接受的消费路径变化序列** $\{v_t\}_{t=0}^T$，满足：
 
@@ -487,7 +498,7 @@ $$
 v_t = \xi_1 \phi^t - \xi_0
 $$
 
-我们说上面的式子是两个而不是三个参数类，因为 $\xi_0$ 将是 $(\phi, \xi_1; R)$ 的函数。
+我们说是两个参数类而不是三个参数类，因为 $\xi_0$ 将是 $(\phi, \xi_1; R)$ 的函数，以保证变化序列是可行的。
 
 让我们来计算这个函数。
 
@@ -500,7 +511,7 @@ $$
 这意味着：
 
 $$
-\xi_1 \sum_{t=0}^T \phi_t R^{-t} - \xi_0 \sum_{t=0}^T R^{-t} = 0
+\xi_1 \sum_{t=0}^T \phi^t R^{-t} - \xi_0 \sum_{t=0}^T R^{-t} = 0
 $$
 
 进而意味着：
@@ -527,11 +538,18 @@ $$
 def compute_variation(model, ξ1, ϕ, a0, y_seq, verbose=1):
     R, T, β_seq = model.R, model.T, model.β_seq
 
-    ξ0 = ξ1*((1 - 1/R) / (1 - (1/R)**(T+1))) * ((1 - (ϕ/R)**(T+1)) / (1 - ϕ/R))
+    growth = ϕ / R
+    if np.isclose(growth, 1):
+        pv_sum = T + 1
+    else:
+        pv_sum = (1 - growth**(T+1)) / (1 - growth)
+
+    annuity = (1 - 1/R) / (1 - (1/R)**(T+1))
+    ξ0 = ξ1 * annuity * pv_sum
     v_seq = np.array([(ξ1*ϕ**t - ξ0) for t in range(T+1)])
     
     if verbose == 1:
-        print('检查:', np.isclose(β_seq @ v_seq, 0))     # since β = 1/R
+        print('检查可行性:', np.isclose(β_seq @ v_seq, 0))     # since β = 1/R
 
     c_opt, _, _ = compute_optimal(model, a0, y_seq)
     cvar_seq = c_opt + v_seq
@@ -577,7 +595,7 @@ plt.show()
 
 我们甚至可以使用 Python 的 `np.gradient` 命令来计算福利对我们两个参数的导数。
 
-我们正在教授**变分法**背后的关键思想。
+（我们实际上正在发现**变分法**背后的关键思想。）
 
 首先，我们定义关于 $\xi_1$ 和 $\phi$ 的福利函数
 
@@ -636,9 +654,9 @@ plt.show()
 ```
 ## 消费平滑模型总结
 
-米尔顿·弗里德曼 {cite}`Friedman1956` 和罗伯特·霍尔 {cite}`Hall1978` 的消费平滑模型是现代宏观经济学的基石，对QuantEcon讲座 {doc}`几何级数 <geom_series>` 中简要描述的凯恩斯"财政政策乘数"的大小有重要影响。
+米尔顿·弗里德曼 {cite}`Friedman1956` 和罗伯特·霍尔 {cite}`Hall1978` 的消费平滑模型是现代经济学的基石，对我们在QuantEcon讲座 {doc}`几何级数 <geom_series>` 中描述的凯恩斯"财政政策乘数"的大小有重要影响。
 
-特别是，相对于 {doc}`几何级数 <geom_series>` 中提到的凯恩斯消费函数所给出的乘数，它**降低**了政府支出乘数。
+相对于 {doc}`几何级数 <geom_series>` 中给出的原始凯恩斯消费函数所隐含的乘数，消费平滑模型**降低**了政府支出乘数。
 
 弗里德曼的工作为研究总消费函数和相关政府支出乘数开辟了一个富有启发性的领域，这一领域至今仍然活跃。
 
@@ -708,6 +726,7 @@ y_1 \cr y_2 \cr y_3 \cr \vdots \cr y_T
 :label: consmooth_ex1
 
 为了得到 {eq}`fst_ord_inverse`，我们将 {eq}`eq:first_order_lin_diff` 的两边都乘以矩阵 $A$ 的逆矩阵。请确认
+
 $$
 \begin{bmatrix} 
 1 & 0 & 0 & \cdots & 0 & 0 \cr
@@ -717,9 +736,37 @@ $$
 \lambda^{T-1} & \lambda^{T-2} & \lambda^{T-3} & \cdots & \lambda & 1 
 \end{bmatrix}
 $$
+
 是 $A$ 的逆矩阵，并检查 $A A^{-1} = I$ 是否成立。
 
 ```
+
+```{solution-start} consmooth_ex1
+:class: dropdown
+```
+
+```{code-cell} ipython3
+λ = 0.9
+T = 6
+
+# 矩阵 A：对角线为1，第一条次对角线为 -λ
+A = np.eye(T) - λ * np.diag(np.ones(T-1), k=-1)
+
+# 猜想的逆矩阵：下三角矩阵，A_inv[i,j] = λ^(i-j)，其中 i >= j
+A_inv = np.zeros((T, T))
+for i in range(T):
+    for j in range(i + 1):
+        A_inv[i, j] = λ**(i - j)
+
+# 验证 A @ A_inv = I
+print("A @ A_inv（应为单位矩阵）：")
+print(np.round(A @ A_inv, 10))
+print("是否为单位矩阵:", np.allclose(A @ A_inv, np.eye(T)))
+```
+
+```{solution-end}
+```
+
 ### 二阶差分方程
 
 对于序列 $\{y_t\}_{t=0}^T$，二阶线性差分方程为：
@@ -757,4 +804,210 @@ $$
 作为练习，我们要求你表示并求解一个**三阶线性差分方程**。
 
 你必须指定多少个初始条件？
+```
+
+```{solution-start} consmooth_ex2
+:class: dropdown
+```
+
+三阶线性差分方程为
+
+$$
+y_t = \lambda_1 y_{t-1} + \lambda_2 y_{t-2} + \lambda_3 y_{t-3}, \quad t = 1, 2, \ldots, T
+$$
+
+需要三个初始条件：$y_0$、$y_{-1}$ 和 $y_{-2}$。
+
+矩阵表示将这 $T$ 个方程堆叠为
+
+$$
+\begin{bmatrix}
+1 & 0 & 0 & 0 & \cdots \\
+-\lambda_1 & 1 & 0 & 0 & \cdots \\
+-\lambda_2 & -\lambda_1 & 1 & 0 & \cdots \\
+-\lambda_3 & -\lambda_2 & -\lambda_1 & 1 & \cdots \\
+\vdots & \ddots & \ddots & \ddots & \ddots
+\end{bmatrix}
+\begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ \vdots \end{bmatrix}
+=
+\begin{bmatrix}
+\lambda_1 y_0 + \lambda_2 y_{-1} + \lambda_3 y_{-2} \\
+\lambda_2 y_0 + \lambda_3 y_{-1} \\
+\lambda_3 y_0 \\
+0 \\
+\vdots
+\end{bmatrix}
+$$
+
+```{code-cell} ipython3
+λ1, λ2, λ3 = 0.8, -0.3, 0.1
+y0, y_m1, y_m2 = 1.0, 0.5, 0.25
+T = 15
+
+# 构建三阶系数矩阵
+A3 = np.eye(T)
+for i in range(T):
+    if i >= 1:
+        A3[i, i-1] = -λ1
+    if i >= 2:
+        A3[i, i-2] = -λ2
+    if i >= 3:
+        A3[i, i-3] = -λ3
+
+# 右端向量
+b = np.zeros(T)
+b[0] = λ1 * y0  + λ2 * y_m1 + λ3 * y_m2
+b[1] = λ2 * y0  + λ3 * y_m1
+b[2] = λ3 * y0
+
+# 求解
+y = np.linalg.solve(A3, b)
+y_full = np.concatenate([[y_m2, y_m1, y0], y])
+
+fig, ax = plt.subplots()
+ax.plot(range(-2, T+1), y_full, 'o-')
+ax.axhline(0, linestyle='--', lw=1)
+ax.set_xlabel('$t$')
+ax.set_ylabel('$y_t$')
+ax.set_title('三阶线性差分方程')
+plt.show()
+```
+
+```{solution-end}
+```
+
+## 练习
+
+```{exercise}
+:label: consmooth_ex3
+
+使用 `compute_optimal`，针对初始金融财富值 $a_0 \in \{-4, -2, 0, 2\}$，
+计算最优恒定消费水平 $c_0$，同时固定收入序列
+
+$$
+y_t = \begin{cases} 1 & t = 0, 1, \ldots, 45 \\ 0 & t = 46, \ldots, 65 \end{cases}
+$$
+
+以及默认的模型参数。
+
+a. 将所有四条消费路径绘制在一张图上，并描述它们相对于彼此的形状。
+
+b. 绘制 $c_0$ 对 $a_0$ 的图像，计算所得直线的斜率，并验证该斜率等于
+    方程 {eq}`eq:conssmoothing` 中的年金因子
+    $\left(\frac{1-R^{-1}}{1-R^{-(T+1)}}\right)$。
+```
+
+```{solution-start} consmooth_ex3
+:class: dropdown
+```
+
+```{code-cell} ipython3
+cs_model = create_consumption_smoothing_model()
+T = cs_model.T
+y_seq = np.concatenate([np.ones(46), np.zeros(20)])
+
+a0_vals = [-4, -2, 0, 2]
+c0_vals = []
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+for a0 in a0_vals:
+    c_seq, a_seq, h0 = compute_optimal(cs_model, a0, y_seq)
+    c0_vals.append(c_seq[0])
+    axes[0].plot(range(T+1), c_seq, label=f'$a_0 = {a0}$')
+
+axes[0].set_xlabel('$t$')
+axes[0].set_ylabel('$c_t$')
+axes[0].set_title('不同 $a_0$ 下的消费路径')
+axes[0].legend()
+
+axes[1].plot(a0_vals, c0_vals, 'o-')
+axes[1].set_xlabel('$a_0$')
+axes[1].set_ylabel('$c_0$')
+axes[1].set_title('最优 $c_0$ 作为 $a_0$ 的函数')
+
+plt.tight_layout()
+plt.show()
+
+# 验证斜率是否等于年金因子
+R = cs_model.R
+slope = (c0_vals[-1] - c0_vals[0]) / (a0_vals[-1] - a0_vals[0])
+annuity = (1 - 1/R) / (1 - (1/R)**(T+1))
+print(f'c0 关于 a0 的数值斜率: {slope:.8f}')
+print(f'年金因子 (1 - R**(-1))/(1 - R**(-(T+1))): {annuity:.8f}')
+print(f'是否匹配: {np.isclose(slope, annuity)}')
+```
+
+四条路径都是平行的水平线，全部是平坦的，只是垂直方向上有所偏移。
+
+$c_0$ 关于 $a_0$ 的斜率恰好等于年金因子，
+这证实了初始财富每增加一美元，都会作为一份恒定的额外流量
+均匀分摊到所有 $T+1$ 期中。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: consmooth_ex4
+
+本讲座中的变分论证表明，在所有预算可行路径中，恒定消费路径能使福利 {eq}`welfare` 最大化。
+
+使用 $\xi_1 = 0.1$ 和实验1的收入序列（在 $t=21$ 时出现 $W_0 = 2.5$ 的意外收入，$a_0 = -2$），结合 `compute_variation`：
+
+a. 计算最优平坦路径的福利，以及 $\phi \in \{0.7,\, 0.9,\, 0.98,\, 1.02,\, 1.1\}$ 时各变化路径的福利。
+
+    将结果打印成表格。
+
+b. 在 $[0.7, 1.1]$ 的细网格上绘制福利关于 $\phi$ 的函数图像，并用一条虚线水平线标出最优平坦路径的福利，以确认它高于这些预算可行的变化路径。
+```
+
+```{solution-start} consmooth_ex4
+:class: dropdown
+```
+
+```{code-cell} ipython3
+a0 = -2
+y_seq_pos = np.concatenate(
+    [np.ones(21), np.array([2.5]), np.ones(24), np.zeros(20)])
+
+c_opt, _, _ = compute_optimal(cs_model, a0, y_seq_pos)
+w_opt = welfare(cs_model, c_opt)
+
+print(f'最优（平坦）福利: {w_opt:.6f}\n')
+
+ϕ_vals = [0.7, 0.9, 0.98, 1.02, 1.1]
+print(f'{"ϕ":>6} | {"福利":>12} | {"与最优值之差":>14}')
+print('-' * 38)
+for ϕ in ϕ_vals:
+    cvar = compute_variation(cs_model, ξ1=0.1, ϕ=ϕ, a0=a0,
+                             y_seq=y_seq_pos, verbose=0)
+    w = welfare(cs_model, cvar)
+    print(f'{ϕ:>6.2f} | {w:>12.6f} | {w - w_opt:>+14.6f}')
+
+# 细网格
+ϕ_grid = np.linspace(0.7, 1.1, 200)
+w_grid = np.array([
+    welfare(cs_model,
+            compute_variation(cs_model, ξ1=0.1, ϕ=ϕ, a0=a0,
+                              y_seq=y_seq_pos, verbose=0))
+    for ϕ in ϕ_grid
+])
+
+fig, ax = plt.subplots()
+ax.plot(ϕ_grid, w_grid, label='变化路径的福利')
+ax.axhline(w_opt, linestyle='--', color='red', label='最优平坦路径')
+ax.set_xlabel(r'$\phi$')
+ax.set_ylabel('福利')
+ax.set_title('消费路径变化的福利（$\\xi_1 = 0.1$）')
+ax.legend()
+plt.show()
+```
+
+在所绘制的这一族变化路径中，每一个非零变化所带来的福利都严格低于由水平虚线标出的平坦路径。
+
+更宽的区间 $(0.5, 1.5)$ 在这里没有参考意义，因为远大于1的 $\phi$ 值会使生命后期的变化项 $\xi_1\phi^t$ 变得非常大。
+
+这在数值上证实了变分原理：当 $\beta R = 1$ 时，恒定消费路径是全局福利最大化路径。
+
+```{solution-end}
 ```
