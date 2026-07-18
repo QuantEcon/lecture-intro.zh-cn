@@ -115,26 +115,64 @@ $$
                     \vdots & \vdots & \vdots & \vdots & \vdots & 0 & 0 \cr
                     0 & 0 & 0 & 0 & \cdots & 1 & -\delta \cr
                     0 & 0 & 0 & 0 & \cdots & 0 & 1 \end{bmatrix}
-    \begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T 
-    \end{bmatrix} 
-    =  \begin{bmatrix}  
+    \begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T
+    \end{bmatrix}
+    =  \begin{bmatrix}
     d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
     \end{bmatrix}
-    + \begin{bmatrix} 
+    + \begin{bmatrix}
     0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr \delta p_{T+1}^*
     \end{bmatrix}
 $$ (eq:pvpieq)
 
-
 +++
 
-```{exercise-start} 
+```{exercise-start}
 :label: pv_ex_1
 ```
 
 手动用矩阵乘法对[](eq:pvpieq)进行计算，然后用 [](eq:Euler_stack)确认。
 
 ```{exercise-end}
+```
+
+```{solution-start} pv_ex_1
+:class: dropdown
+```
+
+将矩阵的第$t$行（第$t$列为$1$，第$t+1$列为$-\delta$）与价格向量相乘，得到$p_t - \delta p_{t+1}$。
+
+最后一行只有第$T$列为$1$，得到$p_T$。
+
+令这些结果等于右边，就恰好得到了{eq}`eq:Euler_stack`中的方程。
+
+我们可以用数值方法验证这个结果。
+
+```{code-cell} ipython3
+T = 6
+δ = 0.99
+p_star = 10.0
+d = np.array([1.0 * 1.05**t for t in range(T+1)])
+
+# 构建 A
+A = np.zeros((T+1, T+1))
+for i in range(T+1):
+    A[i, i] = 1
+    if i < T:
+        A[i, i+1] = -δ
+
+b = np.zeros(T+1)
+b[-1] = δ * p_star
+
+# 求解 p
+p = np.linalg.solve(A, d + b)
+
+# 检验 A @ p == d + b（残差应为零）
+residual = A @ p - (d + b)
+print("最大残差 |A p - (d + b)|:", np.max(np.abs(residual)))
+```
+
+```{solution-end}
 ```
 
 用向量-矩阵表示法，我们可以将系统{eq}`eq:pvpieq`写成
@@ -146,7 +184,7 @@ $$ (eq:apdb)
 这里$A$是方程{eq}`eq:pvpieq`左侧的矩阵，而
 
 $$
-    p = 
+    p =
     \begin{bmatrix}
         p_0 \\
         p_1 \\
@@ -154,7 +192,7 @@ $$
         p_T
     \end{bmatrix},
     \quad
-    d = 
+    d =
     \begin{bmatrix}
         d_0 \\
         d_1 \\
@@ -162,12 +200,12 @@ $$
         d_T
     \end{bmatrix},
     \quad \text{and} \quad
-    b = 
+    b =
     \begin{bmatrix}
         0 \\
         0 \\
         \vdots \\
-        p^*_{T+1}
+        \delta p^*_{T+1}
     \end{bmatrix}
 $$
 
@@ -186,17 +224,12 @@ $$
 让我们编写Python代码来计算和绘制股息流。
 
 ```{code-cell} ipython3
-import matplotlib as mpl
-FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
-mpl.font_manager.fontManager.addfont(FONTPATH)
-plt.rcParams['font.family'] = ['Source Han Serif SC']
-
 T = 6
 current_d = 1.0
 d = []
 for t in range(T+1):
     d.append(current_d)
-    current_d = current_d * 1.05 
+    current_d = current_d * 1.05
 
 fig, ax = plt.subplots()
 ax.plot(d, 'o', label='股息')
@@ -266,11 +299,11 @@ ax.set_xlabel('时间')
 plt.show()
 ```
 
-```{exercise-start} 
+```{exercise-start}
 :label: pv_ex_cyc
 ```
 
-当$p^*_{T+1} = 0$ 和 $\delta = 0.98$ 时，计算相对应的价格序列。
+当$p^*_{T+1} = 0$ 和 $\delta = 0.98$ 时，计算相对应的资产价格序列。
 
 ```{exercise-end}
 ```
@@ -279,7 +312,7 @@ plt.show()
 :class: dropdown
 ```
 
-我们改变之前的参数和矩阵$A$。
+我们改变之前的参数以及相应的矩阵$A$，然后按上面的方法继续计算。
 
 ```{code-cell} ipython3
 δ = 0.98
@@ -305,16 +338,16 @@ plt.show()
 
 与现值计算相关的加权平均在很大程度上消除了周期。
 
-```{solution-end} 
+```{solution-end}
 ```
 
 ## 解析表达式
 
-根据逆矩阵定理，当$A B$是单位矩阵时，矩阵$B$是$A$的逆矩阵。
+根据[逆矩阵定理](https://en.wikipedia.org/wiki/Invertible_matrix)，当$A B$是单位矩阵时，矩阵$B$是$A$的逆矩阵。
 
 可以验证，{eq}`eq:pvpieq`中的矩阵$A$的逆矩阵是
 
-$$ A^{-1} = 
+$$ A^{-1} =
     \begin{bmatrix}
         1 & \delta & \delta^2 & \cdots & \delta^{T-1} & \delta^T \cr
         0 & 1 & \delta & \cdots & \delta^{T-2} & \delta^{T-1} \cr
@@ -324,13 +357,43 @@ $$ A^{-1} =
     \end{bmatrix}
 $$ (eq:Ainv)
 
-```{exercise-start} 
+```{exercise-start}
 :label: pv_ex_2
 ```
 
 通过证明$AA^{-1}$为单位矩阵来验证这一点。
 
 ```{exercise-end}
+```
+
+```{solution-start} pv_ex_2
+:class: dropdown
+```
+
+```{code-cell} ipython3
+T = 6
+δ = 0.99
+
+# 构建 A
+A = np.zeros((T+1, T+1))
+for i in range(T+1):
+    A[i, i] = 1
+    if i < T:
+        A[i, i+1] = -δ
+
+# 根据 eq:Ainv 构建解析逆矩阵：当 j >= i 时 A_inv[i,j] = δ^(j-i)，否则为 0
+A_inv = np.zeros((T+1, T+1))
+for i in range(T+1):
+    for j in range(i, T+1):
+        A_inv[i, j] = δ**(j - i)
+
+# 验证
+print("A @ A_inv（应为单位矩阵）：")
+print(np.round(A @ A_inv, 10))
+print("是否为单位矩阵：", np.allclose(A @ A_inv, np.eye(T+1)))
+```
+
+```{solution-end}
 ```
 
 如果我们在 {eq}`eq:apdb_sol` 中使用表达式 {eq}`eq:Ainv` 并执行所指示的矩阵乘法，我们将发现
@@ -368,10 +431,10 @@ $$
 让我们暂时考虑一个从不支付股息的资产这个特殊情况，在这种情况下
 
 $$
-\begin{bmatrix}  
+\begin{bmatrix}
 d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
-\end{bmatrix} = 
-\begin{bmatrix}  
+\end{bmatrix} =
+\begin{bmatrix}
 0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 $$
@@ -387,9 +450,9 @@ $$
                 \vdots & \vdots & \vdots & \vdots & \vdots & 0 & 0 \cr
                 0 & 0 & 0 & 0 & \cdots & 1 & -\delta \cr
                 0 & 0 & 0 & 0 & \cdots & 0 & 1 \end{bmatrix}
-\begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T 
+\begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T
 \end{bmatrix}  =
-\begin{bmatrix} 
+\begin{bmatrix}
 0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr \delta p_{T+1}^*
 \end{bmatrix}
 $$ (eq:pieq2)
@@ -399,7 +462,7 @@ $$ (eq:pieq2)
 但让我们通过设置以下条件来激活**泡沫**成分：
 
 $$
-p_{T+1}^* = c \delta^{-(T+1)} 
+p_{T+1}^* = c \delta^{-(T+1)}
 $$ (eq:eqbubbleterm)
 
 其中 $c$ 为某个正数。
@@ -426,19 +489,18 @@ $$
 
 ## 练习
 
-
-```{exercise-start} 
+```{exercise-start}
 :label: pv_ex_a
 ```
 
-给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的分析表达式：
+假设$g >1$且$\delta g \in (0,1)$。给出以下 $d$ 和 $p_{T+1}^*$ 设置下资产价格 $p_t$ 的解析表达式：
 
 1. $p_{T+1}^* = 0, d_t = g^t d_0$（戈登增长公式的修改版）
-2. $p_{T+1}^* = g^{T+1} d_0, d_t = g^t d_0$（普通的戈登增长公式）
+2. $p_{T+1}^* = \frac{g^{T+1} d_0}{1- \delta g},  d_t = g^t d_0$（普通的戈登增长公式）
 3. $p_{T+1}^* = 0, d_t = 0$（一个无价值股票的价格）
 4. $p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0$（一个纯泡沫股票的价格）
 
-```{exercise-end} 
+```{exercise-end}
 ```
 
 ```{solution-start} pv_ex_a
@@ -447,12 +509,164 @@ $$
 
 将上述每对 $p_{T+1}^*, d_t$ 代入方程 {eq}`eq:ptpveq` 得到：
 
-1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0$
-2. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \delta^{T+1-t} g^{T+1} d_0$
+1. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 = d_t \frac{1 - (\delta g)^{T+1-t}}{1 - \delta g}$
+2. $p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \frac{\delta^{T+1-t} g^{T+1} d_0}{1 - \delta g} = \frac{d_t}{1 - \delta g}$
 3. $p_t = 0$
 4. $p_t = c \delta^{-t}$
-
 
 ```{solution-end}
 ```
 
+```{exercise}
+:label: pv_ex_b
+
+针对讲座中股息增长的例子（$d_{t+1} = 1.05 d_t$，$d_0 = 1$，$T = 6$，$\delta = 0.99$，
+$p_{T+1}^* = 10$），用数值方法验证定价公式 {eq}`eq:ptpveq`。
+
+对于每个 $t = 0, 1, \ldots, T$，用以下两种方法计算 $p_t$：
+
+1. 求解线性方程组 $Ap = d + b$（如讲座中所示），以及
+2. 直接计算求和 $\sum_{s=t}^T \delta^{s-t} d_s + \delta^{T+1-t} p_{T+1}^*$。
+
+将两种结果并排打印出来，确认它们是否一致。
+```
+
+```{solution-start} pv_ex_b
+:class: dropdown
+```
+
+```{code-cell} ipython3
+T = 6
+δ = 0.99
+p_star = 10.0
+d = np.array([1.0 * 1.05**t for t in range(T+1)])
+
+A = np.zeros((T+1, T+1))
+for i in range(T+1):
+    A[i, i] = 1
+    if i < T:
+        A[i, i+1] = -δ
+b = np.zeros(T+1)
+b[-1] = δ * p_star
+p_matrix = np.linalg.solve(A, d + b)
+
+p_formula = np.array([
+    sum(δ**(s-t) * d[s] for s in range(t, T+1)) + δ**(T+1-t) * p_star
+    for t in range(T+1)
+])
+
+print(f"{'t':>3} | {'矩阵解':>12} | {'公式解':>12} | {'|差值|':>10}")
+print('-' * 44)
+for t in range(T+1):
+    diff = abs(p_matrix[t] - p_formula[t])
+    print(f'{t:>3} | {p_matrix[t]:>12.6f} | {p_formula[t]:>12.6f} | {diff:>10.2e}')
+```
+
+```{solution-end}
+```
+
+```{exercise}
+:label: pv_ex_c
+
+假设股息为常数：对所有 $t = 0, \ldots, T$，$d_t = d = 1$。
+
+将终端价格设为永续年金价值 $p_{T+1}^* = d / (1-\delta)$。
+
+a. 计算 $T = 100$、$\delta = 0.99$ 时的资产价格序列，并将 $p_t$ 与永续年金价值
+    $d/(1-\delta)$（用虚线表示）一起绘图。
+
+b. 用解析方法（利用公式 {eq}`eq:ptpveq`）验证对所有 $t$ 都有
+    $p_t = d / (1-\delta)$。
+```
+
+```{solution-start} pv_ex_c
+:class: dropdown
+```
+
+```{code-cell} ipython3
+T = 100
+δ = 0.99
+d_const = 1.0
+p_star_perp = d_const / (1 - δ)
+
+d = d_const * np.ones(T+1)
+A = np.zeros((T+1, T+1))
+for i in range(T+1):
+    A[i, i] = 1
+    if i < T:
+        A[i, i+1] = -δ
+
+b = np.zeros(T+1)
+b[-1] = δ * p_star_perp
+
+p = np.linalg.solve(A, d + b)
+
+fig, ax = plt.subplots()
+ax.plot(p, 'o-', ms=3, label='资产价格 $p_t$')
+ax.axhline(p_star_perp, linestyle='--', color='red',
+           label=f'永续年金价值 $d/(1 - δ) = {p_star_perp:.2f}$')
+ax.set_xlabel('时间')
+ax.set_title('常数股息：资产价格等于永续年金价值')
+ax.legend()
+plt.show()
+
+print(f'与 d/(1 - δ) 的最大偏差：{np.max(np.abs(p - p_star_perp)):.2e}')
+```
+
+对于b部分，将$d_s = d$和$p_{T+1}^* = d/(1-\delta)$代入{eq}`eq:ptpveq`得到
+
+$$
+p_t = d \frac{1 - \delta^{T+1-t}}{1-\delta} + \frac{d\delta^{T+1-t}}{1-\delta}
+     = \frac{d}{1-\delta}
+$$
+
+```{solution-end}
+```
+
+```{exercise}
+:label: pv_ex_d
+
+对于增长的股息流（$d_{t+1} = 1.05 d_t$，$d_0 = 1$，$T = 6$，
+$p_{T+1}^* = 10$），将$t = 0$时的资产价格绘制为折现因子
+$\delta \in [0.90,\, 0.99]$的函数。
+
+验证$p_0$在$\delta$上严格递增，并根据公式{eq}`eq:ptpveq`解释原因。
+```
+
+```{solution-start} pv_ex_d
+:class: dropdown
+```
+
+```{code-cell} ipython3
+T = 6
+p_star = 10.0
+d = np.array([1.0 * 1.05**t for t in range(T+1)])
+
+δ_vals = np.linspace(0.90, 0.99, 200)
+p0_vals = []
+
+for δ in δ_vals:
+    A = np.zeros((T+1, T+1))
+    for i in range(T+1):
+        A[i, i] = 1
+        if i < T:
+            A[i, i+1] = -δ
+    b = np.zeros(T+1)
+    b[-1] = δ * p_star
+    p = np.linalg.solve(A, d + b)
+    p0_vals.append(p[0])
+
+fig, ax = plt.subplots()
+ax.plot(δ_vals, p0_vals)
+ax.set_xlabel(r'$\delta$')
+ax.set_ylabel(r'$p_0$')
+ax.set_title('$t=0$时的资产价格作为$\\delta$的函数')
+plt.show()
+```
+
+基本面部分中的每一项 $\delta^{s-t} d_s$ 以及泡沫项 $\delta^{T+1-t} p_{T+1}^*$ 都随 $\delta$ 递增。
+
+因此，较高的折现因子会提高每一笔未来现金流的现值，从而推高 $p_0$。
+
+```{solution-end}
+```
