@@ -1,21 +1,37 @@
+# Review Translations — Quality check on translation PRs
+# When a PR is opened/updated that carries the 'action-translation' label,
+# this workflow runs a quality review and posts a comment.
+#
+# Mirrors the upstream template in action-translation
+# docs/user/tutorials/connect-existing.md — keep it in step with that.
 name: Review Translations
 
 on:
   pull_request:
     types: [opened, synchronize, labeled, reopened]
 
-permissions:
-  contents: read
-  pull-requests: write
-
-concurrency:
-  group: review-translations-pr-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
-
 jobs:
   review:
-    if: contains(github.event.pull_request.labels.*.name, 'action-translation')
+    # Ignore `labeled` events for every other label: a sync adds its labels in a single
+    # addLabels call, but GitHub emits one `labeled` event per label, and each would
+    # otherwise start a full (billed) review of the same diff.
+    if: >
+      contains(github.event.pull_request.labels.*.name, 'action-translation') &&
+      (github.event.action != 'labeled' || github.event.label.name == 'action-translation')
     runs-on: ubuntu-latest
+
+    # v0.17.0's review dedupe deletes superseded comments, which needs pull-requests: write.
+    permissions:
+      contents: read
+      pull-requests: write
+
+    # One review per PR — supersede an in-flight review instead of running both.
+    # Job-level (not workflow-level) on purpose: the group is entered only after the `if`
+    # above has passed, so a `labeled` event for 'automated' skips out without cancelling
+    # the real review. At workflow level it would cancel first and skip second, leaving none.
+    concurrency:
+      group: review-translations-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v7
