@@ -380,8 +380,8 @@ e = np.array([1, 1])
 dynamics = ExchangeEconomy(Π, b, e)
 p, c = dynamics.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 ### 风险与状态相关权益
@@ -467,8 +467,8 @@ e = np.array([1, 1])
 risk = ExchangeEconomy(Π, b, e)
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 ```{exercise}
@@ -501,8 +501,8 @@ risk.e = np.array([0.5, 0.5])
 
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 如果消费者更喜欢第一（或第二）种商品，那么我们可以为商品1设一个更大的最优满足值。
@@ -511,8 +511,8 @@ print('Competitive equilibrium allocation:', c)
 risk.b = np.array([np.sqrt(prob) * 6, np.sqrt(1 - prob) * 5])
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 增加状态 $1$ 发生的概率。
@@ -530,8 +530,8 @@ e = np.array([1, 1])
 risk = ExchangeEconomy(Π, b, e)
 p, c = risk.competitive_equilibrium()
 
-print('Competitive equilibrium price vector:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡价格向量:', p)
+print('竞争均衡分配:', c)
 ```
 
 ```{solution-end}
@@ -798,8 +798,8 @@ plot_competitive_equilibrium(PE)
 ```{code-cell} ipython3
 c_surplus, p_surplus = PE.compute_surplus()
 
-print('Consumer surplus:', c_surplus.item())
-print('Producer surplus:', p_surplus.item())
+print('消费者剩余:', c_surplus.item())
+print('生产者剩余:', p_surplus.item())
 ```
 
 通过提高 $\mu$ 来降低消费者的福利权重。
@@ -818,8 +818,8 @@ plot_competitive_equilibrium(PE)
 ```{code-cell} ipython3
 c_surplus, p_surplus = PE.compute_surplus()
 
-print('Consumer surplus:', c_surplus.item())
-print('Producer surplus:', p_surplus.item())
+print('消费者剩余:', c_surplus.item())
+print('生产者剩余:', p_surplus.item())
 ```
 
 现在我们改变最优满足点，使消费者从消费中获得更多的效用。
@@ -861,7 +861,7 @@ PE = ProductionEconomy(Π, b, h, J, μ)
 c, p = PE.competitive_equilibrium()
 
 print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡分配:', c)
 ```
 
 ```{code-cell} ipython3
@@ -870,7 +870,7 @@ PE.b = np.array([12, 10])
 c, p = PE.competitive_equilibrium()
 
 print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡分配:', c)
 ```
 
 ```{code-cell} ipython3
@@ -882,7 +882,7 @@ PE.b = np.array([10, 10])
 c, p = PE.competitive_equilibrium()
 
 print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡分配:', c)
 ```
 
 ```{code-cell} ipython3
@@ -890,7 +890,7 @@ PE.b = np.array([12, 10])
 c, p = PE.competitive_equilibrium()
 
 print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡分配:', c)
 ```
 
 ### 题外话：垄断供应商
@@ -1077,10 +1077,10 @@ c, p = M.competitive_equilibrium()
 q, pm = M.equilibrium_with_monopoly()
 
 print('Competitive equilibrium price:', p)
-print('Competitive equilibrium allocation:', c)
+print('竞争均衡分配:', c)
 
-print('Equilibrium with monopolist supplier price:', pm)
-print('Equilibrium with monopolist supplier allocation:', q)
+print('垄断供应商的均衡价格:', pm)
+print('垄断供应商的均衡分配:', q)
 ```
 
 #### 单一商品的例子
@@ -1099,8 +1099,8 @@ q, pm = M.equilibrium_with_monopoly()
 print('Competitive equilibrium price:', p.item())
 print('Competitive equilibrium allocation:', c.item())
 
-print('Equilibrium with monopolist supplier price:', pm.item())
-print('Equilibrium with monopolist supplier allocation:', q.item())
+print('垄断供应商的均衡价格:', pm.item())
+print('垄断供应商的均衡分配:', q.item())
 
 # plot
 plot_monopoly(M)
