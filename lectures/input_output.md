@@ -525,7 +525,7 @@ $$
 
 fig, ax = plt.subplots()
 ax.bar(codes, centrality, color=color_list, alpha=0.6)
-ax.set_ylabel("eigenvector centrality", fontsize=12)
+ax.set_ylabel("特征向量中心性", fontsize=12)
 plt.show()
 ```
 
@@ -572,7 +572,7 @@ omult = qbn_io.katz_centrality(A, authority=True)
 fig, ax = plt.subplots()
 omult_color_list = qbn_io.colorise_weights(omult,beta=False)
 ax.bar(codes, omult, color=omult_color_list, alpha=0.6)
-ax.set_ylabel("Output multipliers", fontsize=12)
+ax.set_ylabel("产出乘数", fontsize=12)
 plt.show()
 ```
 
