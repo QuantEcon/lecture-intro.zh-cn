@@ -98,7 +98,7 @@ $$
 我们定义这些常数如下
 
 ```{code-cell} ipython3
-A, s, alpha, delta = 2, 0.3, 0.3, 0.4
+A, s, α, δ = 2, 0.3, 0.3, 0.4
 x0 = 0.25
 xmin, xmax = 0, 3
 ```
@@ -106,8 +106,8 @@ xmin, xmax = 0, 3
 现在我们来定义函数$g$
 
 ```{code-cell} ipython3
-def g(A, s, alpha, delta, k):
-    return A * s * k**alpha + (1 - delta) * k
+def g(A, s, α, δ, k):
+    return A * s * k**α + (1 - δ) * k
 ```
 
 让我们来绘制函数$g$的45度图
@@ -120,7 +120,7 @@ def plot45(kstar=None):
 
     ax.set_xlim(xmin, xmax)
 
-    g_values = g(A, s, alpha, delta, xgrid)
+    g_values = g(A, s, α, δ, xgrid)
 
     ymin, ymax = np.min(g_values), np.max(g_values)
     ax.set_ylim(ymin, ymax)
@@ -167,23 +167,23 @@ plot45()
 
 （模型的{ref}`稳态<scalar-dynam:steady-state>`是映射 $g$ 的[不动点](https://baike.baidu.com/item/%E4%B8%8D%E5%8A%A8%E7%82%B9/8535695)。）
 
-从图中可以看出，$g$ 函数与45度线只有一个交点，这意味着在 $(0, \infty)$ 区间内存在唯一的稳态。
+从图中函数 $g$ 的形状可以看出，在 $(0, \infty)$ 区间内存在唯一的稳态。
 
-在稳态时，$k^* = g(k^*)$，即 $k^* = s A(k^*)^{\alpha} + (1-\delta)k^*$。解这个方程，我们得到
+该稳态求解方程 $k = s Ak^{\alpha} + (1-\delta)k$，因此可以表示为
 
 ```{math}
 :label: kstarss
     k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}
 ```
 
-当初始资本低于稳态值 $k^*$ 时，我们可以从图中看到 $g(k_t) > k_t$，这意味着资本存量会随时间增加，逐渐接近稳态。
+如果初始资本低于 $k^*$，则资本会随时间增加。
 
-相反，如果初始资本高于 $k^*$，则 $g(k_t) < k_t$，资本存量会随时间减少，同样趋向于稳态值。
+如果初始资本高于这一水平，则情况相反。
 
-让我们在45度图中标出这个稳态值 $k^*$，以便更直观地理解这一动态过程。
+让我们在45度图中标出这个稳态值 $k^*$。
 
 ```{code-cell} ipython3
-kstar = ((s * A) / delta)**(1/(1 - alpha))
+kstar = ((s * A) / δ)**(1/(1 - α))
 plot45(kstar)
 ```
 
@@ -198,7 +198,7 @@ plot45(kstar)
 让我们定义常数和三个不同的初始条件
 
 ```{code-cell} ipython3
-A, s, alpha, delta = 2, 0.3, 0.3, 0.4
+A, s, α, δ = 2, 0.3, 0.3, 0.4
 x0 = np.array([.25, 1.25, 3.25])
 
 ts_length = 20
@@ -209,7 +209,7 @@ ymin, ymax = 0, 3.5
 ```{code-cell} ipython3
 def simulate_ts(x0_values, ts_length):
 
-    k_star = (s * A / delta)**(1/(1-alpha))
+    k_star = (s * A / δ)**(1/(1-α))
     fig, ax = plt.subplots(figsize=[11, 5])
     ax.set_xlim(xmin, xmax)
     ax.set_ylim(ymin, ymax)
@@ -220,7 +220,7 @@ def simulate_ts(x0_values, ts_length):
     for x_init in x0_values:
         ts[0] = x_init
         for t in range(1, ts_length):
-            ts[t] = g(A, s, alpha, delta, ts[t-1])
+            ts[t] = g(A, s, α, δ, ts[t-1])
         ax.plot(np.arange(ts_length), ts, '-o', ms=4, alpha=0.6,
                 label=r'$k_0=%g$' %x_init)
     ax.plot(np.arange(ts_length), np.full(ts_length,k_star),
@@ -243,7 +243,7 @@ simulate_ts(x0, ts_length)
 
 在本节中，我们将研究索洛-斯旺增长模型的连续时间版本。
 
-连续时间框架提供了一种更为流畅的分析方法，使得模型的动态特性更容易理解。
+我们将看到，连续时间所提供的平滑性如何简化我们的分析。
 
 让我们回顾一下离散时间版本的资本动态方程：$k_{t+1} = s f(k_t) + (1 - \delta) k_t$。
 
@@ -255,7 +255,7 @@ $$
     \Delta k_t := k_{t+1}  - k_t
 $$
 
-当我们让时间间隔无限趋近于零时，这个离散变化自然过渡到连续时间的导数形式
+当我们让时间间隔趋于零时，便得到了连续时间极限
 
 ```{math}
 :label: solowc
@@ -276,19 +276,19 @@ $$
 
 将 $k'_t = g(k_t)$ 定义为 $g(k) = s Ak^\alpha - \delta k$，当 $g(k) > 0$ 时，$k'_t > 0$，此时资本存量处于增长状态。
 
-当 $g(k) < 0$ 时，资本存量将减少。这种动态机制源于两种力量的共同作用：低资本存量水平下的储蓄高边际回报与高资本存量水平下的低回报率相结合，最终形成系统的全局稳定性。
+当 $g(k) < 0$ 时，则情况相反。同样地，低资本存量水平下的储蓄高边际回报与高资本存量水平下的低回报率相结合，最终形成系统的全局稳定性。
 
 为了在图中看到这一点，让我们定义以下常数
 
 ```{code-cell} ipython3
-A, s, alpha, delta = 2, 0.3, 0.3, 0.4
+A, s, α, δ = 2, 0.3, 0.3, 0.4
 ```
 
 接下来，我们定义函数 $g$ 表示连续时间的增长
 
 ```{code-cell} ipython3
-def g_con(A, s, alpha, delta, k):
-    return A * s * k**alpha - delta * k
+def g_con(A, s, α, δ, k):
+    return A * s * k**α - δ * k
 ```
 
 ```{code-cell} ipython3
@@ -297,7 +297,7 @@ def plot_gcon(kstar=None):
     k_grid = np.linspace(0, 2.8, 10000)
 
     fig, ax = plt.subplots(figsize=[11, 5])
-    ax.plot(k_grid, g_con(A, s, alpha, delta, k_grid), label='$g(k)$')
+    ax.plot(k_grid, g_con(A, s, α, δ, k_grid), label='$g(k)$')
     ax.plot(k_grid, 0 * k_grid, label="$k'=0$")
 
     if kstar:
@@ -326,19 +326,19 @@ def plot_gcon(kstar=None):
 ```
 
 ```{code-cell} ipython3
-kstar = ((s * A) / delta)**(1/(1 - alpha))
+kstar = ((s * A) / δ)**(1/(1 - α))
 plot_gcon(kstar)
 ```
 
 上图直观地展示了特定参数下的全局稳定性，但我们如何严格证明这一性质对于所有合理参数都成立呢？
 
-在离散时间模型中，要得到 $k_t$ 的解析表达式相当困难。
+在离散时间模型中，要得到 $k_t$ 的简洁表达式相当困难。
 
-然而，转向连续时间框架可以大大简化分析。在连续时间下，我们能够推导出 $k_t$ 的简洁表达式，从而清晰地描述资本存量随时间的演化路径。
+而在连续时间下，这一过程要容易得多：我们可以得到一个相对简单的表达式，用以描述 $k_t$ 的完整路径。
 
-为此，我们引入变量替换 $x_t := k_t^{1-\alpha}$，这样 $x'_t = (1-\alpha) k_t^{-\alpha} k'_t$。
+第一步是引入变量替换 $x_t := k_t^{1-\alpha}$，这样 $x'_t = (1-\alpha) k_t^{-\alpha} k'_t$。
 
-将连续时间的动态方程 $k'_t = sAk_t^\alpha - \delta k_t$ 代入上式，我们得到一个线性微分方程
+将其代入 $k'_t = sAk_t^\alpha - \delta k_t$，可得到线性微分方程
 
 ```{math}
 :label: xsolow
@@ -346,6 +346,7 @@ plot_gcon(kstar)
 ```
 
 这个方程是一个[线性常微分方程](https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/12609971)，其解为
+
 $$
     x_t
     = \left(
@@ -402,14 +403,14 @@ $$
 
 ```{code-cell} ipython3
 A = 2.0
-alpha = 0.3
-delta = 0.5
+α = 0.3
+δ = 0.5
 ```
 
 ```{code-cell} ipython3
 s_grid = np.linspace(0, 1, 1000)
-k_star = ((s_grid * A) / delta)**(1/(1 - alpha))
-c_star = (1 - s_grid) * A * k_star ** alpha
+k_star = ((s_grid * A) / δ)**(1/(1 - α))
+c_star = (1 - s_grid) * A * k_star ** α
 ```
 
 让我们使用 [scipy.optimize.minimize_scalar](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar) 来找出使 $c^*$ 最大化的 $s$ 值。
@@ -423,8 +424,8 @@ from scipy.optimize import minimize_scalar
 
 ```{code-cell} ipython3
 def calc_c_star(s):
-    k = ((s * A) / delta)**(1/(1 - alpha))
-    return - (1 - s) * A * k ** alpha
+    k = ((s * A) / δ)**(1/(1 - α))
+    return - (1 - s) * A * k ** α
 ```
 
 ```{code-cell} ipython3
@@ -470,12 +471,12 @@ from sympy import solve, Symbol, Rational
 ```{code-cell} ipython3
 # 使用 Rational 进行精确符号计算
 A = Rational(2)
-alpha = Rational(3, 10)
-delta = Rational(1, 2)
+α = Rational(3, 10)
+δ = Rational(1, 2)
 
 s_symbol = Symbol('s', real=True)
-k = ((s_symbol * A) / delta)**(1/(1 - alpha))
-c = (1 - s_symbol) * A * k ** alpha
+k = ((s_symbol * A) / δ)**(1/(1 - α))
+c = (1 - s_symbol) * A * k ** α
 ```
 
 让我们对 $c$ 进行微分，并使用 [sympy.solve](https://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.solve) 求解。
@@ -500,7 +501,7 @@ print(f"s_star = {float(s_star)}")
 
 这样做会带来多方面的影响，其中之一是消除了人均产出 $y_t = A k^\alpha_t$ 收敛到常数 $y^* := A (k^*)^\alpha$ 这一不切实际的预测。
 
-接下来，我们将转向对离散时间模型的讨论。
+在接下来的讨论中，我们转向离散时间框架。
 
 一种方法是用某个随机序列 $(A_t)_{t \geq 1}$ 替代常数生产率。
 
@@ -530,23 +531,24 @@ print(f"s_star = {float(s_star)}")
 
 ```{code-cell} ipython3
 # 定义常数
-sig = 0.2
-mu = np.log(2) - sig**2 / 2
+σ = 0.2
+μ = np.log(2) - σ**2 / 2
 A = 2.0
 s = 0.6
-alpha = 0.3
-delta = 0.5
+α = 0.3
+δ = 0.5
 x0 = [.25, 3.25] # 用于模拟的初始值列表
+rng = np.random.default_rng()
 ```
 
 让我们定义函数 *k_next* 来找出 $k$ 的下一个值
 
 ```{code-cell} ipython3
 def lgnorm():
-    return np.exp(mu + sig * np.random.randn())
+    return np.exp(μ + σ * rng.standard_normal())
 
-def k_next(s, alpha, delta, k):
-    return lgnorm() * s * k**alpha + (1 - delta) * k
+def k_next(s, α, δ, k):
+    return lgnorm() * s * k**α + (1 - δ) * k
 ```
 
 ```{code-cell} ipython3
@@ -558,7 +560,7 @@ def ts_plot(x_values, ts_length):
     for x_init in x_values:
         ts[0] = x_init
         for t in range(1, ts_length):
-            ts[t] = k_next(s, alpha, delta, ts[t-1])
+            ts[t] = k_next(s, α, δ, ts[t-1])
         ax.plot(np.arange(ts_length), ts, '-o', ms=4,
                 alpha=0.6, label=r'$k_0=%g$' %x_init)
 
