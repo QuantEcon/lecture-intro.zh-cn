@@ -44,6 +44,9 @@ jobs:
           branch: main
           name: build-cache
           path: _build
+      - name: Clear stale Sphinx environment
+        shell: bash -l {0}
+        run: rm -rf _build/.doctrees
       # # Build Assets (Download Notebooks and PDF via LaTeX)
       # - name: Build PDF from LaTeX
       #   shell: bash -l {0}
@@ -60,13 +63,22 @@ jobs:
       - name: Build Download Notebooks (sphinx-tojupyter)
         shell: bash -l {0}
         run: |
-          jb build lectures --path-output ./ --builder=custom --custom-builder=jupyter
+          # `shell: bash -l {0}` is a custom shell spec, so GitHub does not inject
+          # `-eo pipefail` (it only does that for the bare `shell: bash` shorthand).
+          # Without this, a failing `jb build` would be masked by the trailing
+          # mkdir/cp, whose exit code becomes the step's — and `--keep-going`
+          # guarantees the .ipynb files exist for `cp` to succeed on.
+          set -eo pipefail
+          jb build lectures -n -W --keep-going --path-output ./ --builder=custom --custom-builder=jupyter
           mkdir -p _build/html/_notebooks
           cp -u _build/jupyter/*.ipynb _build/html/_notebooks
+      - name: Upload Execution Reports (Download Notebooks)
+        uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: execution-reports-notebooks
+          path: _build/jupyter/reports
       # Build HTML (Website)
-      # BUG: rm .doctress to remove `sphinx` rendering issues for ipywidget mimetypes
-      # and clear the sphinx cache for building final HTML documents.
-      #    rm -r _build/.doctrees
       - name: Build HTML
         shell: bash -l {0}
         run: |
@@ -75,7 +87,7 @@ jobs:
         uses: actions/upload-artifact@v6
         if: failure()
         with:
-          name: execution-reports
+          name: execution-reports-html
           path: _build/html/reports
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v4.0
