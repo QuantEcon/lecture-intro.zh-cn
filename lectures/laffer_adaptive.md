@@ -175,8 +175,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.ticker import MaxNLocator
-from matplotlib.cm import get_cmap
-from matplotlib.colors import to_rgba
 import matplotlib
 from scipy.optimize import root, fsolve
 
