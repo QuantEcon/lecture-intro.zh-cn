@@ -4,7 +4,7 @@
 # When a translation PR is merged, this workflow automatically rebases the
 # other open translation PRs against the updated main branch. It covers both
 # kinds this tool creates: `translation-sync-*` branches from the Action's sync
-# mode, and `resync/*` branches from the CLI's `forward --github`.
+# mode, and `resync/*` branches from the CLI's `translate forward --github`.
 #
 # This eliminates merge conflicts caused by multiple upstream PRs
 # modifying the same files. See: https://github.com/QuantEcon/action-translation/issues/63
@@ -20,7 +20,7 @@ on:
 jobs:
   rebase:
     # Only run when a translation PR is merged. Both prefixes must be listed:
-    # sync mode creates `translation-sync-*`, while the CLI's `forward --github`
+    # sync mode creates `translation-sync-*`, while the CLI's `translate forward --github`
     # creates `resync/*`, and a wave of resync PRs goes stale the same way.
     # Keep this in step with `isTranslationBranch` in the action's src/branch-naming.ts
     # — this `if` decides whether the job runs, that predicate decides which open PRs
