@@ -25,8 +25,13 @@ jobs:
     # Keep this in step with `isTranslationBranch` in the action's src/branch-naming.ts
     # — this `if` decides whether the job runs, that predicate decides which open PRs
     # it then rebases, so a prefix matching only one of them is a no-op run.
+    # The head-repo check is belt-and-braces: fork PRs never receive secrets, so
+    # the PAT is not exposed either way — but a merged fork PR whose branch happens
+    # to match a prefix would otherwise start this job with an empty token and fail
+    # red. Same-repo branches matching these prefixes only come from the tooling.
     if: >
       github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
       (startsWith(github.event.pull_request.head.ref, 'translation-sync-') ||
        startsWith(github.event.pull_request.head.ref, 'resync/'))
     runs-on: ubuntu-latest
