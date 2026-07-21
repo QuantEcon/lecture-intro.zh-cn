@@ -46,4 +46,11 @@ jobs:
         with:
           mode: rebase
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # PAT rather than the default GITHUB_TOKEN, deliberately: commits pushed
+          # with GITHUB_TOKEN trigger no workflows (GitHub's recursion guard), so a
+          # rebased branch ends up with a run-less head — force-pushed re-translated
+          # content lands unreviewed, and with required checks a run-less head blocks
+          # merging. Validated both ways on the test harness, 2026-07-21: zero runs
+          # under GITHUB_TOKEN, review triggered under the PAT.
+          # See QuantEcon/action-translation#125.
+          github-token: ${{ secrets.QUANTECON_SERVICES_PAT }}
