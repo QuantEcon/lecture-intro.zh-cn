@@ -3,6 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.4
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -37,7 +39,9 @@ translation:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install quantecon-book-networks==1.6 pandas-datareader
+!pip install quantecon
+!pip install quantecon-book-networks==1.6
+!pip install pandas-datareader
 ```
 
 ## 概述
