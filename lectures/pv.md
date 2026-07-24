@@ -98,6 +98,11 @@ from matplotlib import font_manager
 fontP = font_manager.FontProperties()
 fontP.set_family('SimHei')
 fontP.set_size(14)
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC', 'DejaVu Sans']
 ```
 
 +++

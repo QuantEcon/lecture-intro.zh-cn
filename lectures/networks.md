@@ -37,7 +37,9 @@ translation:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install quantecon-book-networks==1.6 pandas-datareader
+!pip install quantecon
+!pip install quantecon-book-networks==1.6
+!pip install pandas-datareader
 ```
 
 ## 概述
@@ -74,6 +76,11 @@ import quantecon_book_networks.input_output as qbn_io
 import quantecon_book_networks.data as qbn_data
 
 import matplotlib.patches as mpatches
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC', 'DejaVu Sans']
 ```
 
 ## 经济和金融网络
