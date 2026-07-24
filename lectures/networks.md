@@ -37,7 +37,7 @@ translation:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install quantecon-book-networks==1.6 pandas-datareader
+!pip install quantecon quantecon-book-networks==1.6 pandas-datareader
 ```
 
 ## 概述
