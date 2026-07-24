@@ -1047,7 +1047,7 @@ ax.plot(infl_grid, a_log + b_log * infl_grid,
         color='orange', lw=2,
         label=fr'对数线性拟合：$\hat{{\alpha}} = {α_hat:.1f}$')
 ax.set_xlabel('月度通货膨胀率 $\\pi_t$')
-ax.set_ylabel('$\\log(\\mathrm{实际余额})$')
+ax.set_ylabel('$\\log($实际余额$)$')
 ax.set_title('凯根货币需求 - 恶性通货膨胀时期')
 ax.legend()
 plt.tight_layout()
