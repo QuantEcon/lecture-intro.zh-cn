@@ -74,6 +74,11 @@ import quantecon_book_networks.input_output as qbn_io
 import quantecon_book_networks.data as qbn_data
 
 import matplotlib.patches as mpatches
+
+import matplotlib as mpl
+FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
+mpl.font_manager.fontManager.addfont(FONTPATH)
+plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
 ## 经济和金融网络
