@@ -43,7 +43,7 @@ from matplotlib.patches import Polygon
 import matplotlib as mpl
 FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
-plt.rcParams['font.family'] = ['Source Han Serif SC']
+plt.rcParams['font.family'] = ['Source Han Serif SC', 'DejaVu Sans']
 ```
 
 ## 概述
