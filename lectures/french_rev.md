@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.16.7
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -23,7 +23,6 @@ translation:
 ---
 
 # 法国大革命期间的通货膨胀
-
 
 ## 概览
 
@@ -65,14 +64,16 @@ translation:
 ## 数据来源
 
 本讲使用了 {cite}`sargent_velde1995` 中汇编的三个表格中的数据：
-  * [datasets/fig_3.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/fig_3.xlsx)
-  * [datasets/dette.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/dette.xlsx)
-  * [datasets/assignat.xlsx](https://github.com/QuantEcon/lecture-python-intro/blob/main/lectures/datasets/assignat.xlsx)
+  * [fig_3.xlsx](https://github.com/QuantEcon/data-lectures/blob/main/lectures/fig_3.xlsx)
+  * [dette.xlsx](https://github.com/QuantEcon/data-lectures/blob/main/lectures/dette.xlsx)
+  * [assignat.xlsx](https://github.com/QuantEcon/data-lectures/blob/main/lectures/assignat.xlsx)
 
 ```{code-cell} ipython3
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from io import BytesIO
+import requests
 plt.rcParams.update({'font.size': 12})
 
 import matplotlib as mpl
@@ -80,8 +81,8 @@ FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 
-base_url = 'https://github.com/QuantEcon/lecture-python-intro/raw/'\
-           + 'main/lectures/datasets/'
+base_url = 'https://github.com/QuantEcon/data-lectures/raw/'\
+           + 'main/lectures/'
 
 fig_3_url = f'{base_url}fig_3.xlsx'
 dette_url = f'{base_url}dette.xlsx'
@@ -667,8 +668,10 @@ def fit(x, y):
 
 ```{code-cell} ipython3
 # 加载数据
-caron = np.load('datasets/caron.npy')
-nom_balances = np.load('datasets/nom_balances.npy')
+caron_response = requests.get(f'{base_url}caron.npy')
+nom_balances_response = requests.get(f'{base_url}nom_balances.npy')
+caron = np.load(BytesIO(caron_response.content))
+nom_balances = np.load(BytesIO(nom_balances_response.content))
 
 infl = np.concatenate(([np.nan], 
       -np.log(caron[1:63, 1] / caron[0:62, 1])))
