@@ -103,7 +103,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 在这里，我们将 Maddison 的数据读入一个 pandas `DataFrame`：
 
 ```{code-cell} ipython3
-data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/mpd2020.xlsx"
+data_url = "https://github.com/QuantEcon/data-lectures/raw/main/lectures/mpd2020.xlsx"
 data = pd.read_excel(data_url, 
                      sheet_name='Full data')
 data.head()
@@ -138,7 +138,8 @@ country_years.head()
 我们可以在该数据集中的经济体代码（`countrycode`）和经济体名称（`country`）之间建立一个有用的映射关系。
 
 ```{code-cell} ipython3
-code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
+code_to_name = data[
+    ['countrycode', 'country']].drop_duplicates().reset_index(drop=True).set_index(['countrycode'])
 ```
 
 现在，我们专注于人均 GDP (`gdppc`)，并生成一个宽格式的数据表。
