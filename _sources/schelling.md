@@ -9,6 +9,16 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 种族隔离
+  headings:
+    Outline: 大纲
+    The model: 模型
+    The model::Set-Up: 设置
+    The model::Preferences: 偏好
+    The model::Behavior: 行为
+    Results: 结果
+    Exercises: 练习
 ---
 
 (schelling)=
@@ -97,7 +107,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 * 如果一个个体是橙色的，她最近的10个邻居中有5个是橙色的，那么她是满意（快乐）的。
 * 如果一个个体是绿色的，她最近的10个邻居中有8个是橙色的，那么她是不满意（不快乐）的。
 
-“最近”是指[欧几里得度量（欧几里得距离）](https://baike.baidu.com/item/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E5%BA%A6%E9%87%8F?fromtitle=%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB&fromid=2701459&fromModule=lemma_search-box)。
+“最近”是指[欧几里得度量（欧几里得距离）](https://en.wikipedia.org/wiki/Euclidean_distance)。
 
 要注意的是，个体**不**反对居住在混合区域。
 
@@ -120,7 +130,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 移动的算法如下：
 
-```{prf:algorithm} 跳转链算法
+```{prf:algorithm} 移动算法
 :label: move_algo
 
 1. 在 $S$ 中随机抽取一个位置
@@ -215,7 +225,7 @@ def plot_distribution(agents, cycle_num):
     "绘制经过cycle_num轮循环后的个体分布图。"
     x_values_0, y_values_0 = [], []
     x_values_1, y_values_1 = [], []
-    # == 获取每种类型的位置 == #
+    # 获取每种类型的位置
     for agent in agents:
         x, y = agent.location
         if agent.type == 0:
@@ -228,23 +238,25 @@ def plot_distribution(agents, cycle_num):
     plot_args = {'markersize': 8, 'alpha': 0.8}
     ax.set_facecolor('azure')
     ax.plot(x_values_0, y_values_0,
-        'o', markerfacecolor='orange', **plot_args)
+        'o', markerfacecolor='orange', label='Type 0', **plot_args)
     ax.plot(x_values_1, y_values_1,
-        'o', markerfacecolor='green', **plot_args)
+        'o', markerfacecolor='green', label='Type 1', **plot_args)
     ax.set_title(f'周期 {cycle_num-1}')
+    ax.legend()
     plt.show()
 ```
 
-这里有一段伪代码，它描述了主循环的过程，我们在这个过程中遍历每个个体，直到没有个体愿意移动为止。
+下面是主循环，我们在其中遍历各个个体，直到没有人愿意移动为止。
 
-伪代码如下
+```{prf:algorithm} 主循环
+:label: schelling_main_loop
 
-```{code-block} none
-绘制分布
-while 个体还在移动
-    for 每个个体 in 个体们
-        给予个体机会移动
-绘制分布
+1. 绘制分布图
+2. 当个体仍在移动时
+    1. 对于个体们中的每个个体
+        1. 给予该个体移动的机会
+3. 绘制分布图
+
 ```
 
 真实的代码如下
@@ -271,7 +283,6 @@ def run_simulation(num_of_type_0=600,
 
     # 循环直到没有个体愿意移动
     while count < max_iter:
-        print('进入循环 ', count)
         count += 1
         no_one_moved = True
         for agent in agents:
@@ -302,7 +313,7 @@ run_simulation()
 
 但经过几轮循环后，它们会被隔离到不同的区域。
 
-在这个例子中，程序在一组个体中循环了几个周期后就终止了，这表明所有个体都达到了幸福的状态。
+在这个例子中，程序在一组个体中循环了几个周期后就终止了，这表明所有个体都达到了满意（快乐）的状态。
 
 这些图片的惊人之处在于种族融合的瓦解速度是如此之快。
 
@@ -336,21 +347,22 @@ run_simulation()
 
 ```{exercise-end}
 ```
+
 ```{solution-start} schelling_ex1
 :class: dropdown
 ```
 解决方案如下
 
 ```{code-cell} ipython3
-from numpy.random import uniform, randint
-
 n = 1000                # 个体数量（个体编号从0到n-1）
 k = 10                  # 视为邻居的个体数量
 require_same_type = 5   # 希望 >= require_same_type 的邻居是相同类型
 
+rng = np.random.default_rng()
+
 def initialize_state():
-    locations = uniform(size=(n, 2))
-    types = randint(0, high=2, size=n)   # 标签为零或一
+    locations = rng.uniform(size=(n, 2))
+    types = rng.integers(0, 2, size=n)   # 标签为零或一
     return locations, types
 
 
@@ -387,7 +399,7 @@ def update_agent(i, locations, types):
     moved = False
     while not is_happy(i, locations, types):
         moved = True
-        locations[i, :] = uniform(), uniform()
+        locations[i, :] = rng.uniform(), rng.uniform()
     return moved
 
 def plot_distribution(locations, types, title, savepdf=False):
@@ -401,8 +413,10 @@ def plot_distribution(locations, types, title, savepdf=False):
                 'o',
                 markersize=8,
                 markerfacecolor=color,
-                alpha=0.8)
+                alpha=0.8,
+                label=f'Type {agent_type}')
     ax.set_title(title)
+    ax.legend()
     plt.show()
 
 def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
@@ -419,12 +433,12 @@ def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
     while current_iter <= max_iter:
 
         # 随机选择一个个体并更新其状态
-        i = randint(0, n)
+        i = rng.integers(0, n)
         moved = update_agent(i, locations, types)
 
         if flip_prob > 0:
             # 以概率 epsilon 翻转个体 i 的类型
-            U = uniform()
+            U = rng.uniform()
             if U < flip_prob:
                 current_type = types[i]
                 types[i] = 0 if current_type == 1 else 1
@@ -442,10 +456,6 @@ def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
     if current_iter > max_iter:
         print(f"在迭代 {current_iter} 时终止")
 ```
-```{solution-end}
-```
-
-+++
 
 当我们运行这个程序时，我们再次发现混合社区会瓦解，隔离现象会出现。
 
@@ -455,6 +465,5 @@ def sim_random_select(max_iter=100_000, flip_prob=0.01, test_freq=10_000):
 sim_random_select(max_iter=50_000, flip_prob=0.01, test_freq=10_000)
 ```
 
-```{code-cell} ipython3
-
+```{solution-end}
 ```

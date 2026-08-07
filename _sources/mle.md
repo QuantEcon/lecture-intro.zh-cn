@@ -4,11 +4,22 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.7
+    jupytext_version: 1.15.2
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 最大似然估计
+  headings:
+    Introduction: 介绍
+    Maximum likelihood estimation: 最大似然估计
+    Pareto distribution: 帕累托分布
+    What is the best distribution?: 最好的分布是怎样的？
+    What is the best distribution?::Lognormal distribution for the right hand tail: 用对数正态分布拟合右尾部
+    What is the best distribution?::Pareto distribution for the right hand tail: 用帕累托分布拟合右尾部
+    What is the best distribution?::So what is the best distribution?: 到底什么才是最好的分布？
+    Exercises: 练习
 ---
 
 # 最大似然估计
@@ -91,7 +102,7 @@ n = 10_000
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-url = 'https://media.githubusercontent.com/media/QuantEcon/high_dim_data/update_scf_noweights/SCF_plus/SCF_plus_mini_no_weights.csv'
+url = 'https://github.com/QuantEcon/high_dim_data/raw/main/SCF_plus/SCF_plus_mini_no_weights.csv'
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]

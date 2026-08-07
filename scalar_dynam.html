@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -212,8 +212,8 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">23.3. 稳定性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">23.3.1. 稳态</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">23.3.2. 全局稳定性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-dynam-steady-state">23.3.1. 稳态</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-dynam-global-stability">23.3.2. 全局稳定性</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">23.3.3. 局部稳定性</a></li>
 </ul>
 </li>
@@ -278,7 +278,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -289,11 +289,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -325,7 +325,7 @@
 <p>其中<span class="math notranslate nohighlight">\(f\)</span>是描述变量之间关系的某个函数。</p>
 <p>这个方程是一维离散时间动力系统的典型例子。</p>
 <p>在本讲中，我们将探讨一维离散时间动力学的基本原理。</p>
-<p>（虽然实际经济模型通常包含两个或更多状态变量，但一维框架为我们理解基础理论和掌握核心概念提供了绝佳的起点。）</p>
+<p>（虽然大多数量化模型通常包含两个或更多状态变量，但一维框架为我们理解基础理论和掌握核心概念提供了绝佳的起点。）</p>
 <p>让我们从一些标准导入开始：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -341,7 +341,7 @@
 <p>本节将介绍我们要研究的对象和关键概念。</p>
 <section id="id4">
 <h3><span class="section-number">23.2.1. </span>函数组合<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>首先，让我们回顾一下函数组合的概念：</p>
+<p>在本讲中你应该了解以下内容。</p>
 <p>如果</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(g\)</span> 是从集合 <span class="math notranslate nohighlight">\(A\)</span> 到集合 <span class="math notranslate nohighlight">\(B\)</span> 的函数，且</p></li>
@@ -358,13 +358,13 @@
 <li><p><span class="math notranslate nohighlight">\(g(x)=x^2\)</span> 且 <span class="math notranslate nohighlight">\(f(x)=\sqrt{x}\)</span></p></li>
 </ul>
 <p>那么 <span class="math notranslate nohighlight">\((f \circ g)(x) = \sqrt{x^2} = |x|\)</span></p>
-<p>当函数映射到自身的集合时，我们可以定义函数的多次组合。如果 <span class="math notranslate nohighlight">\(f\)</span> 是从集合 <span class="math notranslate nohighlight">\(A\)</span> 到自身的函数，那么 <span class="math notranslate nohighlight">\(f^2\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的组合。</p>
+<p>如果 <span class="math notranslate nohighlight">\(f\)</span> 是从 <span class="math notranslate nohighlight">\(A\)</span> 到自身的函数，那么 <span class="math notranslate nohighlight">\(f^2\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的组合。</p>
 <p>例如，当 <span class="math notranslate nohighlight">\(A = (0, \infty)\)</span>（正实数集）且 <span class="math notranslate nohighlight">\(f(x) = \sqrt{x}\)</span> 时，我们有</p>
 <div class="math notranslate nohighlight">
 \[
     f^2(x) = \sqrt{\sqrt{x}} = x^{1/4}
 \]</div>
-<p>更一般地，对于任意正整数 <span class="math notranslate nohighlight">\(n\)</span>，<span class="math notranslate nohighlight">\(f^n\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的 <span class="math notranslate nohighlight">\(n\)</span> 次组合。</p>
+<p>类似地，如果 <span class="math notranslate nohighlight">\(n\)</span> 是正整数，那么 <span class="math notranslate nohighlight">\(f^n\)</span> 表示 <span class="math notranslate nohighlight">\(f\)</span> 与自身的 <span class="math notranslate nohighlight">\(n\)</span> 次组合。</p>
 <p>在上面的例子中，<span class="math notranslate nohighlight">\(f^n(x) = x^{1/(2^n)}\)</span>。</p>
 </section>
 <section id="id5">
@@ -380,7 +380,7 @@
 <ul class="simple">
 <li><p>即 <span class="math notranslate nohighlight">\(g\)</span> 并不总是将 <span class="math notranslate nohighlight">\(S\)</span> 中的点映射回 <span class="math notranslate nohighlight">\(S\)</span>。</p></li>
 </ul>
-<p>研究动态系统的重要性在于它们能帮助我们理解和分析动态过程的基本特性。</p>
+<p>研究动态系统的重要性在于我们可以用它们来研究动态过程！</p>
 <p>给定由集合 <span class="math notranslate nohighlight">\(S\)</span> 和函数 <span class="math notranslate nohighlight">\(g\)</span> 组成的动态系统，我们可以通过设定</p>
 <div class="math notranslate nohighlight" id="equation-sdsod">
 <span class="eqno">(23.1)<a class="headerlink" href="#equation-sdsod" title="Link to this equation">#</a></span>\[    x_{t+1} = g(x_t)
@@ -408,7 +408,7 @@
 </section>
 <section id="id6">
 <h3><span class="section-number">23.2.3. </span>示例：线性模型<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<p>动态系统的一个典型例子是状态空间 <span class="math notranslate nohighlight">\(S=\mathbb R\)</span> 与映射函数 <span class="math notranslate nohighlight">\(g(x)=ax + b\)</span> ，其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是常数（有时称为”参数”）。</p>
+<p>动态系统的一个简单例子是 <span class="math notranslate nohighlight">\(S=\mathbb R\)</span> 且 <span class="math notranslate nohighlight">\(g(x)=ax + b\)</span>，其中 <span class="math notranslate nohighlight">\(a, b\)</span> 是常数（有时称为”参数”）。</p>
 <p>由此可得<strong>线性差分方程</strong></p>
 <div class="math notranslate nohighlight">
 \[
@@ -416,16 +416,16 @@
     \quad \text{其中}
     x_0 \text{已给定}。
 \]</div>
-<p>其中<span class="math notranslate nohighlight">\(x_0\)</span> 的轨迹是</p>
+<p><span class="math notranslate nohighlight">\(x_0\)</span> 的轨迹是</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodpath">
 <span class="eqno">(23.3)<a class="headerlink" href="#equation-sdslinmodpath" title="Link to this equation">#</a></span>\[x_0, \quad
 a x_0 + b, \quad
 a^2 x_0 + a b + b, \quad \text{等等}\]</div>
-<p>继续这样下去，并利用我们对几何级数的知识，我们发现，对于任何 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span>，</p>
+<p>继续这样下去，并利用我们对<a class="reference internal" href="geom_series.html"><span class="doc">几何级数</span></a>的知识，我们发现，对于任何 <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmod">
 <span class="eqno">(23.4)<a class="headerlink" href="#equation-sdslinmod" title="Link to this equation">#</a></span>\[    x_t = a^t x_0 + b \frac{1 - a^t}{1 - a}\]</div>
 <p>我们可以对任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 求出 <span class="math notranslate nohighlight">\(x_t\)</span> 的精确表达式，这让我们能够完全理解系统的动态特性。</p>
-<p>值得注意的是，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，根据上面的公式，我们得到</p>
+<p>值得注意的是，当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，根据 <a class="reference internal" href="#equation-sdslinmod">(23.4)</a>，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-sdslinmodc">
 <span class="eqno">(23.5)<a class="headerlink" href="#equation-sdslinmodc" title="Link to this equation">#</a></span>\[x_t \to  \frac{b}{1 - a} \text{ 当 } t \to \infty\]</div>
 <p>无论起点 <span class="math notranslate nohighlight">\(x_0\)</span> 为何值。</p>
@@ -436,20 +436,20 @@ a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 <p>在上面的线性例子中，我们得到了 <span class="math notranslate nohighlight">\(x_t\)</span> 关于任意非负整数 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(x_0\)</span> 的精确解析式。</p>
 <p>这使得动力学分析变得轻而易举。</p>
 <p>然而，当模型是非线性时，情况可能会大不相同。</p>
-<p>以索洛-斯旺增长模型为例（后续章节将深入分析），其动态规律由以下方程给出</p>
+<p>例如，在后面的<a class="reference internal" href="solow.html"><span class="doc">索洛-斯旺增长模型</span></a>一讲中，我们将研究索洛-斯旺增长模型，其动态规律由以下方程给出</p>
 <div class="math notranslate nohighlight" id="equation-solow-lom2">
 <span class="eqno">(23.6)<a class="headerlink" href="#equation-solow-lom2" title="Link to this equation">#</a></span>\[k_{t+1} = s A k_t^{\alpha} + (1 - \delta) k_t\]</div>
 <p>这里 <span class="math notranslate nohighlight">\(k=K/L\)</span> 表示人均资本存量，<span class="math notranslate nohighlight">\(s\)</span> 为储蓄率，<span class="math notranslate nohighlight">\(A\)</span> 表示全要素生产率，<span class="math notranslate nohighlight">\(\alpha\)</span> 为资本份额，<span class="math notranslate nohighlight">\(\delta\)</span> 为折旧率。</p>
 <p>所有这些参数都是正数，且 <span class="math notranslate nohighlight">\(0 &lt; \alpha, \delta &lt; 1\)</span>。</p>
-<p>如果你尝试像我们在线性模型中做的那样迭代，你会发现代数运算很快就变得复杂。</p>
+<p>如果你尝试像我们在 <a class="reference internal" href="#equation-sdslinmodpath">(23.3)</a> 中做的那样迭代，你会发现代数运算很快就变得复杂。</p>
 <p>分析这个模型的动态需要一种不同的方法（见下文）。</p>
 </section>
 </section>
 <section id="id8">
 <h2><span class="section-number">23.3. </span>稳定性<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>考虑这样一个动态系统，其由集合 <span class="math notranslate nohighlight">\(S \subset \mathbb R\)</span> 和将 <span class="math notranslate nohighlight">\(S\)</span> 映射到 <span class="math notranslate nohighlight">\(S\)</span> 的函数 <span class="math notranslate nohighlight">\(g\)</span> 组成。</p>
-<section id="id9">
-<h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="scalar-dynam-steady-state">
+<span id="id9"></span><h3><span class="section-number">23.3.1. </span>稳态<a class="headerlink" href="#scalar-dynam-steady-state" title="Link to this heading">#</a></h3>
 <p>该系统的<strong>稳态</strong>是 <span class="math notranslate nohighlight">\(S\)</span> 中的一个点 <span class="math notranslate nohighlight">\(x^*\)</span>，满足 <span class="math notranslate nohighlight">\(x^* = g(x^*)\)</span>。</p>
 <p>换句话说，<span class="math notranslate nohighlight">\(x^*\)</span> 是函数 <span class="math notranslate nohighlight">\(g\)</span> 在 <span class="math notranslate nohighlight">\(S\)</span> 中的一个<strong>不动点</strong>。</p>
 <p>例如，对于线性模型 <span class="math notranslate nohighlight">\(x_{t+1} = a x_t + b\)</span>，你可以使用定义来验证：</p>
@@ -459,8 +459,8 @@ a^2 x_0 + a b + b, \quad \text{等等}\]</div>
 <li><p>如果 <span class="math notranslate nohighlight">\(a = 1\)</span> 且 <span class="math notranslate nohighlight">\(b \not= 0\)</span>，那么这个线性模型在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 中没有稳态。</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="scalar-dynam-global-stability">
+<span id="id10"></span><h3><span class="section-number">23.3.2. </span>全局稳定性<a class="headerlink" href="#scalar-dynam-global-stability" title="Link to this heading">#</a></h3>
 <p>如果对于所有的 <span class="math notranslate nohighlight">\(x_0 \in S\)</span>，都有</p>
 <div class="math notranslate nohighlight">
 \[
@@ -620,7 +620,7 @@ x_t = g^t(x_0) \to x^* \text{ 当 } t \to \infty
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png"><img alt="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" src="_images/1b22e04db6d8942db7b7b74e0126e0c76310d3c6cd2e365188831b20f8401350.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f10d1a7253540ed20d65db9a74d1101299663c4f8688e1320fc2e8a449b26c32.png"><img alt="_images/f10d1a7253540ed20d65db9a74d1101299663c4f8688e1320fc2e8a449b26c32.png" src="_images/f10d1a7253540ed20d65db9a74d1101299663c4f8688e1320fc2e8a449b26c32.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -657,7 +657,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png"><img alt="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" src="_images/db010d4f718a925aa7e9f904c2fe8aaa879f33c54d291649a3cbba303217e635.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/898af20dd3d5d45d2a82619b3dad7b2ad059c2c5ab742d76cc0c7dacffbbba9e.png"><img alt="_images/898af20dd3d5d45d2a82619b3dad7b2ad059c2c5ab742d76cc0c7dacffbbba9e.png" src="_images/898af20dd3d5d45d2a82619b3dad7b2ad059c2c5ab742d76cc0c7dacffbbba9e.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -669,7 +669,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png"><img alt="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" src="_images/c9b9199822d7ab92fb684eb7ee9dcbfc45764908741fb6e5116403839372f076.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/0ba6ce6960451d09869ccc8d26ecdb21e9e661b368fc76be035ef0cf0fefdcfd.png"><img alt="_images/0ba6ce6960451d09869ccc8d26ecdb21e9e661b368fc76be035ef0cf0fefdcfd.png" src="_images/0ba6ce6960451d09869ccc8d26ecdb21e9e661b368fc76be035ef0cf0fefdcfd.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -681,7 +681,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png"><img alt="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" src="_images/14e16a3b15fc7f90dab9694bd42a6a1fbbfd9b968010d3d348e5058bf1890a86.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/20b777378145911c522f93d67faeb7e72f164fcaf8f52d2f7b39a24abb23a736.png"><img alt="_images/20b777378145911c522f93d67faeb7e72f164fcaf8f52d2f7b39a24abb23a736.png" src="_images/20b777378145911c522f93d67faeb7e72f164fcaf8f52d2f7b39a24abb23a736.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -695,7 +695,7 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png"><img alt="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" src="_images/629d30dddd51d46652a4fcd2ea87af943a855ab92861c341edcb290c41132adf.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/7461e2bd270bbd8a44e0dba22961f5d07f3aac643f6d70a7b76bec0923e5e527.png"><img alt="_images/7461e2bd270bbd8a44e0dba22961f5d07f3aac643f6d70a7b76bec0923e5e527.png" src="_images/7461e2bd270bbd8a44e0dba22961f5d07f3aac643f6d70a7b76bec0923e5e527.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -707,14 +707,14 @@ k^* = \left( \frac{sz}{\delta} \right)^{1/(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png"><img alt="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" src="_images/2c9ec639c951c47d880ec2128bb4f13bc701a14b7c092398c778481a50b1a07d.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/98d4115d23d72ba7ee79d492718c093f40eb16a4133fb63aa8023552e51c2cbc.png"><img alt="_images/98d4115d23d72ba7ee79d492718c093f40eb16a4133fb63aa8023552e51c2cbc.png" src="_images/98d4115d23d72ba7ee79d492718c093f40eb16a4133fb63aa8023552e51c2cbc.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 </section>
 <section id="id14">
 <h3><span class="section-number">23.4.2. </span>复杂动态<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
-<p>尽管索洛-斯旺模型是非线性的，它仍然能生成非常规律的动态。</p>
+<p>索洛-斯旺模型是非线性的，但仍然能生成非常规律的动态。</p>
 <p><strong>二次映射</strong>是一个能生成不规则动态的模型</p>
 <div class="math notranslate nohighlight">
 \[
@@ -733,11 +733,11 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png"><img alt="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" src="_images/c5ff7c0276bb777828cbc01d5519c3b81dee173633f74579bb98ea7ae3433dc0.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/5695fb712d077d36b51e282817ec20c4fcdb429d869482144dc805bdb4960f37.png"><img alt="_images/5695fb712d077d36b51e282817ec20c4fcdb429d869482144dc805bdb4960f37.png" src="_images/5695fb712d077d36b51e282817ec20c4fcdb429d869482144dc805bdb4960f37.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>现在让我们来看一个特定的轨迹。</p>
+<p>现在让我们来看一个典型的轨迹。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot45</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">num_arrows</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
@@ -745,11 +745,11 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png"><img alt="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" src="_images/7961d872f0961016407a9e95c8f89f6bd34f721a9f6b2873bcd309d4bce8d317.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/b05a993f10c6ebecea88b21c89f65ed3f5908f6f60f2f2e47292a58a62afeade.png"><img alt="_images/b05a993f10c6ebecea88b21c89f65ed3f5908f6f60f2f2e47292a58a62afeade.png" src="_images/b05a993f10c6ebecea88b21c89f65ed3f5908f6f60f2f2e47292a58a62afeade.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>注意这个轨迹的不规则性。这种混沌行为是二次映射的典型特征。</p>
+<p>注意这个轨迹是多么不规则。</p>
 <p>这是相应的时序图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -758,7 +758,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png"><img alt="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" src="_images/bad45f0dce1be39fffb7fa8135ca88e9f9a95eeb4c953e76843a344eed22b069.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/b78b147ffd51b26f5a38ad5965476af26e5c5b3d723c785430d55b8c8c9e5c10.png"><img alt="_images/b78b147ffd51b26f5a38ad5965476af26e5c5b3d723c785430d55b8c8c9e5c10.png" src="_images/b78b147ffd51b26f5a38ad5965476af26e5c5b3d723c785430d55b8c8c9e5c10.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -770,7 +770,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png"><img alt="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" src="_images/5d054a31ca9b57bc0c44ba64b2d1006856d40909b60eec2307af137ce2f2bc10.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/eb7c28daf85f008cd705ef5e8bc6878543031e98fbb5e704da02b94733f74ea4.png"><img alt="_images/eb7c28daf85f008cd705ef5e8bc6878543031e98fbb5e704da02b94733f74ea4.png" src="_images/eb7c28daf85f008cd705ef5e8bc6878543031e98fbb5e704da02b94733f74ea4.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -785,7 +785,7 @@ g(x) = 4 x (1 - x),
 <p>再次考虑线性模型 <span class="math notranslate nohighlight">\(x_{t+1} = a x_t + b\)</span>，其中 <span class="math notranslate nohighlight">\(a \not=1\)</span>。</p>
 <p>其唯一的稳态为 <span class="math notranslate nohighlight">\(b / (1 - a)\)</span>。</p>
 <p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，该稳态是全局稳定的。</p>
-<p>请通过选择不同的初始条件并绘制相应的图像来验证这一性质。</p>
+<p>请尝试通过考察一系列初始条件，用图形来展示这一点。</p>
 <p>在 <span class="math notranslate nohighlight">\(a \in (-1, 0)\)</span> 和 <span class="math notranslate nohighlight">\(a \in (0, 1)\)</span> 的情况下，你注意到了什么区别？</p>
 <p>使用 <span class="math notranslate nohighlight">\(a=0.5\)</span> 和 <span class="math notranslate nohighlight">\(a=-0.5\)</span> 并分别研究轨迹。</p>
 <p>在整个过程中设置 <span class="math notranslate nohighlight">\(b=1\)</span>。</p>
@@ -815,7 +815,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png"><img alt="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" src="_images/0a62931bb69d5cd6f8b563a361e8390257a1ce5ace662d24f1a6dce0e047d658.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/b08eac93e54618952b5096666f226fcf3b58a34d6ba0c01643da38c0d7076c55.png"><img alt="_images/b08eac93e54618952b5096666f226fcf3b58a34d6ba0c01643da38c0d7076c55.png" src="_images/b08eac93e54618952b5096666f226fcf3b58a34d6ba0c01643da38c0d7076c55.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -827,7 +827,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png"><img alt="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" src="_images/a5894d498bd38c37a99ec7fd1da7231fde3c063e04763b270c58b627147916db.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/3c676681c75125e3dc17df10e50bdf86d67936eba3a916763d7f2add38da0343.png"><img alt="_images/3c676681c75125e3dc17df10e50bdf86d67936eba3a916763d7f2add38da0343.png" src="_images/3c676681c75125e3dc17df10e50bdf86d67936eba3a916763d7f2add38da0343.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -851,7 +851,7 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png"><img alt="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" src="_images/d514ceb73f2f313a147955ec9f5b288d027c2e4f6f41c509b693307a39bd0698.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/e8549becf81d4504184b592ee671ac508d4ec5293dcbafbc41e76efd036e9bef.png"><img alt="_images/e8549becf81d4504184b592ee671ac508d4ec5293dcbafbc41e76efd036e9bef.png" src="_images/e8549becf81d4504184b592ee671ac508d4ec5293dcbafbc41e76efd036e9bef.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -863,13 +863,13 @@ g(x) = 4 x (1 - x),
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png"><img alt="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" src="_images/25f0acb334bc8deace12937e4711a541b3947d23ad09f879e103e51d3fad8859.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/1da252d87dceab6d1e37dc31d0f8a621354dc385a9438a8878a5a51a8a92a696.png"><img alt="_images/1da252d87dceab6d1e37dc31d0f8a621354dc385a9438a8878a5a51a8a92a696.png" src="_images/1da252d87dceab6d1e37dc31d0f8a621354dc385a9438a8878a5a51a8a92a696.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>我们同样观察到序列收敛到稳态，但收敛方式明显不同。</p>
-<p>这次时间序列不是单调收敛，而是在稳态值的上下来回波动，逐渐接近稳态。</p>
-<p>这种在接近稳态过程中振幅逐渐减小的波动模式，在动力系统中被称为<strong>阻尼振荡</strong>。</p>
+<p>特别地，时间序列从稳态上方跳到下方，再跳回来。</p>
+<p>在当前情境下，该序列被称为表现出<strong>阻尼振荡</strong>。</p>
 </section>
 </div>
 </section>
@@ -1054,7 +1054,7 @@ g(x) = 4 x (1 - x),
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

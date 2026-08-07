@@ -7,6 +7,8 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 参考文献
 ---
 
 (references)=

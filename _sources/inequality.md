@@ -9,6 +9,26 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 收入与财富不平等
+  headings:
+    Overview: 概览
+    Overview::Some history: 一些历史
+    Overview::Measurement: 测量
+    The Lorenz curve: 洛伦兹曲线
+    The Lorenz curve::Definition: 定义
+    The Lorenz curve::Lorenz curves of simulated data: 洛伦兹曲线的模拟数据
+    The Lorenz curve::Lorenz curves for US data: 洛伦兹曲线（美国数据）
+    The Gini coefficient: 基尼系数
+    The Gini coefficient::Definition: 定义
+    The Gini coefficient::Gini coefficient of simulated data: 模拟数据的基尼系数
+    The Gini coefficient::Gini coefficient for income (US data): 美国收入的基尼系数
+    The Gini coefficient::Gini coefficient for wealth: 财富的基尼系数
+    The Gini coefficient::Cross-country comparisons of income inequality: 跨国收入不平等的比较
+    The Gini coefficient::Gini Coefficient and GDP per capita (over time): 基尼系数与人均GDP（随时间变化）
+    Top shares: 前10%比例
+    Top shares::Definition: 定义
+    Exercises: 练习
 ---
 
 # 收入与财富不平等
@@ -211,7 +231,7 @@ sample = np.exp(np.random.randn(n))
 fig, ax = plt.subplots()
 
 f_vals, l_vals = lorenz_curve(sample)
-ax.plot(f_vals, l_vals, label='对数正态样本', lw=2)
+ax.plot(f_vals, l_vals, label=f'对数正态样本', lw=2)
 ax.plot(f_vals, f_vals, label='平等', lw=2)
 
 ax.vlines([0.8], [0.0], [0.43], alpha=0.5, colors='k', ls='--')
@@ -270,7 +290,8 @@ for var in varlist:
         # 根据他们的权重来重复这些观测值
         counts = list(round(df[df['year'] == year]['weights'] )) 
         y = df[df['year'] == year][var].repeat(counts)
-        y = np.asarray(y)
+        # `.copy()` 返回可写数组（pandas 3.0 返回的是只读数组）
+        y = np.asarray(y).copy()
         
         # 打乱y的序列来改善图形形状
         rd.shuffle(y)    
@@ -355,7 +376,7 @@ mystnb:
 fig, ax = plt.subplots()
 f_vals, l_vals = lorenz_curve(sample)
 ax.plot(f_vals, l_vals, label=f'对数正态样本', lw=2)
-ax.plot(f_vals, f_vals, label='平等线', lw=2)
+ax.plot(f_vals, f_vals, label='平等', lw=2)
 ax.fill_between(f_vals, l_vals, f_vals, alpha=0.06)
 ax.set_ylim((0, 1))
 ax.set_xlim((0, 1))
@@ -384,7 +405,7 @@ mystnb:
 fig, ax = plt.subplots()
 f_vals, l_vals = lorenz_curve(sample)
 ax.plot(f_vals, l_vals, label='对数正态样本', lw=2)
-ax.plot(f_vals, f_vals, label='平等线', lw=2)
+ax.plot(f_vals, f_vals, label='平等', lw=2)
 ax.fill_between(f_vals, l_vals, f_vals, alpha=0.06)
 ax.fill_between(f_vals, l_vals, np.zeros_like(f_vals), alpha=0.06)
 ax.set_ylim((0, 1))
@@ -468,11 +489,13 @@ for σ in σ_vals:
 让我们构建一个返回图形的函数（便于我们之后继续使用它）。
 
 ```{code-cell} ipython3
-def plot_inequality_measures(x, y, legend, xlabel, ylabel):
+def plot_inequality_measures(x, y, legend, xlabel, ylabel, title=None):
     fig, ax = plt.subplots()
     ax.plot(x, y, marker='o', label=legend)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    if title is not None:
+        ax.set_title(title)
     ax.legend()
     return fig, ax
 ```
@@ -536,7 +559,7 @@ plt.show()
 
 我们可以在 {numref}`gini_histogram` 中看到，根据50年所有国家的数据，该指标在20到65之间变化。
 
-现在，我们来看看美国在过去几十年的基尼系数变化。
+现在，我们来提取美国的数据 `DataFrame`。
 
 ```{code-cell} ipython3
 data = wb.data.DataFrame("SI.POV.GINI", "USA")
@@ -756,7 +779,7 @@ fig.show()
 
 另一个受欢迎的不平等衡量指标是前10%比例。
 
-在本节中，我们学习如何计算前10%比例。
+在本节中，我们展示如何计算前10%比例。
 
 ### 定义
 
@@ -867,14 +890,12 @@ plt.show()
 
 ```{code-cell} ipython3
 def calculate_top_share(s, p=0.1):
-    # 对 s 进行排序
+
     s = np.sort(s)
     n = len(s)
     index = int(n * (1 - p))
     return s[index:].sum() / s.sum()
 ```
-
-继续使用上面定义的 `calculate_top_share` 函数和之前定义的 `lorenz_curve` 以及 `gini_coefficient` 函数，我们可以为各个 $\sigma$ 值生成统计数据，并绘制变化趋势。
 
 ```{code-cell} ipython3
 k = 5
@@ -899,50 +920,44 @@ for σ in σ_vals:
 ```{code-cell} ipython3
 ---
 mystnb:
-  figure:
-    caption: "\u6A21\u62DF\u6570\u636E\u7684\u524D10%\u6BD4\u4F8B"
-    name: top_shares_simulated
   image:
     alt: top_shares_simulated
 ---
 fig, ax = plot_inequality_measures(σ_vals, 
                                   topshares, 
                                   "模拟数据", 
-                                  r"$\sigma$", 
-                                  r"前 $10\%$ 比例") 
+                                  "$\sigma$", 
+                                  "前 $10\%$ 比例",
+                                  "模拟数据的前10%比例")
 plt.show()
 ```
 
 ```{code-cell} ipython3
 ---
 mystnb:
-  figure:
-    caption: "\u6A21\u62DF\u6570\u636E\u7684\u57FA\u5C3C\u7CFB\u6570"
-    name: gini_coef_simulated
   image:
     alt: gini_coef_simulated
 ---
 fig, ax = plot_inequality_measures(σ_vals, 
                                   ginis, 
                                   "模拟数据", 
-                                  r"$\sigma$", 
-                                  "基尼系数")
+                                  "$\sigma$", 
+                                  "基尼系数",
+                                  "模拟数据的基尼系数")
 plt.show()
 ```
 
 ```{code-cell} ipython3
 ---
 mystnb:
-  figure:
-    caption: "\u6A21\u62DF\u6570\u636E\u7684\u6D1B\u4F26\u5179\u66F2\u7EBF"
-    name: lorenz_curve_simulated
   image:
     alt: lorenz_curve_simulated
 ---
 fig, ax = plt.subplots()
-ax.plot([0,1],[0,1], label=f"平等线")
+ax.plot([0,1],[0,1], label=f"平等")
 for i in range(len(f_vals)):
-    ax.plot(f_vals[i], l_vals[i], label=fr"$\sigma$ = {σ_vals[i]}")
+    ax.plot(f_vals[i], l_vals[i], label=f"$\sigma$ = {σ_vals[i]}")
+ax.set_title("模拟数据的洛伦兹曲线")
 plt.legend()
 plt.show()
 ```
@@ -982,20 +997,18 @@ for f_val, l_val in zip(f_vals_nw, l_vals_nw):
 ```{code-cell} ipython3
 ---
 mystnb:
-  figure:
-    caption: "\u7F8E\u56FD\u524D10%\u6BD4\u4F8B\uFF1A\u8FD1\u4F3C\u503C vs \u6D1B\u4F26\
-      \u5179\u66F2\u7EBF"
-    name: top_shares_us_al
   image:
     alt: top_shares_us_al
 ---
 fig, ax = plt.subplots()
 
-ax.plot(years, df_topshares["topshare_n_wealth"], marker='o',   label="净财富-近似值")
+ax.plot(years, df_topshares["topshare_n_wealth"], marker='o',\
+   label="净财富-近似值")
 ax.plot(years, top_shares_nw, marker='o', label="净财富-洛伦兹曲线")
 
 ax.set_xlabel("年份")
-ax.set_ylabel(r"前 $10\%$ 比例")
+ax.set_ylabel("前 $10\%$ 比例")
+ax.set_title('美国前10%比例：近似值 vs 洛伦兹曲线')
 ax.legend()
 plt.show()
 ```

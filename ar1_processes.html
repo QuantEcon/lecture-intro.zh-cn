@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -270,7 +270,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -281,11 +281,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -367,7 +367,7 @@ X_t = a X_{t-1} + b +  c W_t
         = a^3 X_{t-3} + a^2 b + a^2 c W_{t-2} + b + c W_t
         = \cdots
 \]</div>
-<p>如果我们一直追溯到零时，我们得到</p>
+<p>如果我们一直追溯到零时刻，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ma">
 <span class="eqno">(32.2)<a class="headerlink" href="#equation-ar1-ma" title="Link to this equation">#</a></span>\[X_t = a^t X_0 + b \sum_{j=0}^{t-1} a^j +
         c \sum_{j=0}^{t-1} a^j  W_{t-j}\]</div>
@@ -381,17 +381,15 @@ X_t = a X_{t-1} + b +  c W_t
 </section>
 <section id="id4">
 <h3><span class="section-number">32.2.2. </span>分布动态<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>这个模型的一个好处是很容易追踪一系列分布 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>，这些分布对应于时间
-序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 。具体来说，我们可以在每个日期 <span class="math notranslate nohighlight">\(t\)</span> 上追踪观测到的 <span class="math notranslate nohighlight">\(X_t\)</span> 的边缘分布。</p>
-<p>让我们看看我们如何做到这一点。</p>
-<p>首先我们指出，对于每个时间 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的。</p>
+<p>这个模型的一个好处是很容易追踪一系列分布 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span>，这些分布对应于时间序列 <span class="math notranslate nohighlight">\(\{ X_t\}\)</span> 。</p>
+<p>为了说明这一点，我们首先注意到对于每个时间 <span class="math notranslate nohighlight">\(t\)</span>，<span class="math notranslate nohighlight">\(X_t\)</span> 都是正态分布的。</p>
 <p>这是从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 显见的，因为独立正态随机变量的线性组合是正态分布的。</p>
-<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">一阶矩和二阶矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
+<p>鉴于 <span class="math notranslate nohighlight">\(X_t\)</span> 是正态分布的，如果我们能确定它的前两<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">矩</a>，就可以知道完整的分布 <span class="math notranslate nohighlight">\(\psi_t\)</span>。</p>
 <p>设 <span class="math notranslate nohighlight">\(\mu_t\)</span> 和 <span class="math notranslate nohighlight">\(v_t\)</span> 分别表示 <span class="math notranslate nohighlight">\(X_t\)</span> 的均值和方差。</p>
 <p>我们可以从 <a class="reference internal" href="#equation-ar1-ma">(32.2)</a> 确定这些值，或者我们可以使用以下递归表达式：</p>
 <div class="math notranslate nohighlight" id="equation-dyn-tm">
 <span class="eqno">(32.3)<a class="headerlink" href="#equation-dyn-tm" title="Link to this equation">#</a></span>\[\mu_{t+1} = a \mu_t + b
-\quad 	ext{和} \quad
+\quad \text{和} \quad
 v_{t+1} = a^2 v_t + c^2\]</div>
 <p>通过分别取等式两侧的期望和方差，从 <a class="reference internal" href="#equation-can-ar1">(32.1)</a> 得到这些表达式。</p>
 <p>在计算第二个表达式时，我们利用了 <span class="math notranslate nohighlight">\(X_t\)</span> 和 <span class="math notranslate nohighlight">\(W_{t+1}\)</span> 的独立性。</p>
@@ -436,7 +434,11 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png"><img alt="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png" src="_images/ec1937a7e974c38bb96b0cacf27b2e2f49d36496015d2616ab738d581254da88.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/e97ad8460b69c975f617cbc79118a1cf1bb297eb5375be6818ca5de9e8a4f9b4.png"><img alt="_images/e97ad8460b69c975f617cbc79118a1cf1bb297eb5375be6818ca5de9e8a4f9b4.png" src="_images/e97ad8460b69c975f617cbc79118a1cf1bb297eb5375be6818ca5de9e8a4f9b4.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -468,7 +470,7 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/53713afb5d43eb37fa8a8508e6fb1dad7a5abb060428622e9e8b996138aeb5cd.png"><img alt="_images/53713afb5d43eb37fa8a8508e6fb1dad7a5abb060428622e9e8b996138aeb5cd.png" src="_images/53713afb5d43eb37fa8a8508e6fb1dad7a5abb060428622e9e8b996138aeb5cd.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/46fe34b5e0977f8ccdc8f76f992a1607577b9628ae0d6dbbb061770a5ed4bc72.png"><img alt="_images/46fe34b5e0977f8ccdc8f76f992a1607577b9628ae0d6dbbb061770a5ed4bc72.png" src="_images/46fe34b5e0977f8ccdc8f76f992a1607577b9628ae0d6dbbb061770a5ed4bc72.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -483,7 +485,7 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/11646ff605e31d15004f525f702e66f2a15619a0b53ac65338c19b8c098bb439.png"><img alt="_images/11646ff605e31d15004f525f702e66f2a15619a0b53ac65338c19b8c098bb439.png" src="_images/11646ff605e31d15004f525f702e66f2a15619a0b53ac65338c19b8c098bb439.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/637d40193462cbd8283c9797b7f9213d6974f75605a86ff897f85ff2b2c936d5.png"><img alt="_images/637d40193462cbd8283c9797b7f9213d6974f75605a86ff897f85ff2b2c936d5.png" src="_images/637d40193462cbd8283c9797b7f9213d6974f75605a86ff897f85ff2b2c936d5.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -493,13 +495,13 @@ v_{t+1} = a^2 v_t + c^2\]</div>
 <p>当 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> 时，这些序列会收敛到各自的极限</p>
 <div class="math notranslate nohighlight" id="equation-mu-sig-star">
 <span class="eqno">(32.4)<a class="headerlink" href="#equation-mu-sig-star" title="Link to this equation">#</a></span>\[\mu^* := \frac{b}{1-a}
-\quad 和 \quad
+\quad \text{和} \quad
 v^* = \frac{c^2}{1 - a^2}\]</div>
 <p>（可以通过阅读我们的 <a class="reference internal" href="scalar_dynam.html"><span class="doc">一维动力学讲座</span></a>来了解确定性收敛的背景。）</p>
 <p>因此</p>
 <div class="math notranslate nohighlight" id="equation-ar1-psi-star">
 <span class="eqno">(32.5)<a class="headerlink" href="#equation-ar1-psi-star" title="Link to this equation">#</a></span>\[\psi_t \to \psi^* = N(\mu^*, v^*)
-\quad 当
+\quad \text{当 }
 t \to \infty\]</div>
 <p>我们可以使用以下代码确认这对于上面的序列是有效的。</p>
 <div class="cell docutils container">
@@ -518,17 +520,17 @@ t \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png"><img alt="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png" src="_images/76aa123a72f2b3168d14618c5e98fa814f90331d309f69f425aff25ccd62a992.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/87c468f76a7039127c4f159dac304b6cb3d3773f0e76b9d8656c3dbe39108875.png"><img alt="_images/87c468f76a7039127c4f159dac304b6cb3d3773f0e76b9d8656c3dbe39108875.png" src="_images/87c468f76a7039127c4f159dac304b6cb3d3773f0e76b9d8656c3dbe39108875.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>请注意，根据上述参数，我们看到序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 收敛到 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p>正如所声称的，序列 <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> 收敛到 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>我们看到，至少对于这些参数，AR(1) 模型具有很强的稳定性特性。</p>
 <section id="id6">
 <h3><span class="section-number">32.3.1. </span>平稳分布<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>让我们试着更深入地理解极限分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>平稳分布是 AR(1) 过程更新规则的一个“不动点”。</p>
-<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 在 <span class="math notranslate nohighlight">\(\mathbb N\)</span> 时成立。</p>
+<p>换句话说，如果 <span class="math notranslate nohighlight">\(\psi_t\)</span> 是平稳的，那么对所有 <span class="math notranslate nohighlight">\(j \in \mathbb N\)</span>，<span class="math notranslate nohighlight">\(\psi_{t+j} = \psi_t\)</span> 都成立。</p>
 <p>另一种针对当前情况的说法是：如果一个在 <span class="math notranslate nohighlight">\(\mathbb R\)</span> 上的概率密度 <span class="math notranslate nohighlight">\(\psi\)</span> 对 AR(1) 过程是<strong>平稳的</strong>，则有</p>
 <div class="math notranslate nohighlight">
 \[
@@ -546,18 +548,18 @@ a X_t + b + c W_{t+1} \sim \psi
 <section id="id7">
 <h2><span class="section-number">32.4. </span>遍历性<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>不同的作者使用遍历性这一概念有不同的方式。</p>
-<p>在当前情况中可以理解为：即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律也是有效的。</p>
+<p>在当前情况中可以理解为：即使 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 不是独立同分布的，大数定律的某个版本也是有效的。</p>
 <p>特别是，时间序列的平均值收敛于平稳分布下的期望值。</p>
 <p>实际上，可以证明，只要 <span class="math notranslate nohighlight">\(|a| &lt; 1\)</span>，我们就有</p>
 <div class="math notranslate nohighlight" id="equation-ar1-ergo">
 <span class="eqno">(32.6)<a class="headerlink" href="#equation-ar1-ergo" title="Link to this equation">#</a></span>\[\frac{1}{m} \sum_{t = 1}^m h(X_t) \to
 \int h(x) \psi^*(x) dx
-    \quad 当 m \to \infty\]</div>
+    \quad \text{当 } m \to \infty\]</div>
 <p>只要右侧的积分是有限且良定义的。</p>
 <p>注意：</p>
 <ul class="simple">
 <li><p>在 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 中，收敛性以概率1成立。</p></li>
-<li><p>由 <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span> 编写的教科书是关于遍历性的经典参考。</p></li>
+<li><p>由 <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id215" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span> 编写的教科书是关于遍历性的经典参考。</p></li>
 </ul>
 <div class="proof example admonition" id="ar1_ex_id">
 <p class="admonition-title"><span class="caption-number">Example 32.2 </span></p>
@@ -575,7 +577,7 @@ a X_t + b + c W_{t+1} \sim \psi
 <p>例如，<a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 可用来测试理论。</p>
 <p>在这个方程中，我们可以使用观测数据来评估 <a class="reference internal" href="#equation-ar1-ergo">(32.6)</a> 的左侧。</p>
 <p>我们可以使用理论的 AR(1) 模型来计算右侧。</p>
-<p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m X_t\)</span> 即使在大量观测下也不接近 <span class="math notranslate nohighlight">\(\psi^*(x)\)</span>，那么我们的理论便有可能是错误的，我们将需要修订它。</p>
+<p>如果 <span class="math notranslate nohighlight">\(\frac{1}{m} \sum_{t = 1}^m h(X_t)\)</span> 即使在大量观测下也不接近 <span class="math notranslate nohighlight">\(\int h(x)\psi^*(x) dx\)</span>，那么我们的理论便有可能是错误的，我们将需要修订它。</p>
 </section>
 <section id="id9">
 <h2><span class="section-number">32.5. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
@@ -637,8 +639,8 @@ M_k =
         <span class="k">return</span> <span class="mi">0</span>
 
 <span class="n">k_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">sample_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">k_vals</span><span class="p">)</span>
-<span class="n">true_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">k_vals</span><span class="p">)</span>
+<span class="n">sample_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_vals</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">true_moments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_vals</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k_idx</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k_vals</span><span class="p">):</span>
     <span class="n">sample_moments</span><span class="p">[</span><span class="n">k_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_moments_ar1</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
@@ -654,7 +656,7 @@ M_k =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2d6c88d23a52640e76d19179d7e817b5fa2c18a94c3b3b1b1a0eb1e18259876e.png"><img alt="_images/2d6c88d23a52640e76d19179d7e817b5fa2c18a94c3b3b1b1a0eb1e18259876e.png" src="_images/2d6c88d23a52640e76d19179d7e817b5fa2c18a94c3b3b1b1a0eb1e18259876e.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/ab4070ad9b98d50e0e360f5c8ce95ed1c23df1cec59b0054152e101051f46b91.png"><img alt="_images/ab4070ad9b98d50e0e360f5c8ce95ed1c23df1cec59b0054152e101051f46b91.png" src="_images/ab4070ad9b98d50e0e360f5c8ce95ed1c23df1cec59b0054152e101051f46b91.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -748,11 +750,11 @@ K \left( \frac{x-X_i}{h} \right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2a0b011ec45deaed9ab43cb4276b6766b6fc1c6ab8908ec0ee9528bf7f1cb326.png"><img alt="_images/2a0b011ec45deaed9ab43cb4276b6766b6fc1c6ab8908ec0ee9528bf7f1cb326.png" src="_images/2a0b011ec45deaed9ab43cb4276b6766b6fc1c6ab8908ec0ee9528bf7f1cb326.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/6c58f93b4e6d6d12d209340e545c7aec6e1cc2feb6148c844cf2764dca38bb95.png"><img alt="_images/6c58f93b4e6d6d12d209340e545c7aec6e1cc2feb6148c844cf2764dca38bb95.png" src="_images/6c58f93b4e6d6d12d209340e545c7aec6e1cc2feb6148c844cf2764dca38bb95.png" style="width: 80%;" />
 </a>
-<a class="reference internal image-reference" href="_images/58202402a34a38fda0e6b81b3c06591dc7ec7a1ec1411a6c69c836c85232b381.png"><img alt="_images/58202402a34a38fda0e6b81b3c06591dc7ec7a1ec1411a6c69c836c85232b381.png" src="_images/58202402a34a38fda0e6b81b3c06591dc7ec7a1ec1411a6c69c836c85232b381.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/40cbc891407175b82e8af773ee7c4a369cf5370cd6f5c304036dcc6b18f67389.png"><img alt="_images/40cbc891407175b82e8af773ee7c4a369cf5370cd6f5c304036dcc6b18f67389.png" src="_images/40cbc891407175b82e8af773ee7c4a369cf5370cd6f5c304036dcc6b18f67389.png" style="width: 80%;" />
 </a>
-<a class="reference internal image-reference" href="_images/00efc824f08eb9cd9d05fc0d094d4ec2a99a686c70dbd04d4311969290c17e5c.png"><img alt="_images/00efc824f08eb9cd9d05fc0d094d4ec2a99a686c70dbd04d4311969290c17e5c.png" src="_images/00efc824f08eb9cd9d05fc0d094d4ec2a99a686c70dbd04d4311969290c17e5c.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/c8b8f6ea97177d9629dc29aaa203dc4fe07cf2b95d0fa7c1fcd03c7342759679.png"><img alt="_images/c8b8f6ea97177d9629dc29aaa203dc4fe07cf2b95d0fa7c1fcd03c7342759679.png" src="_images/c8b8f6ea97177d9629dc29aaa203dc4fe07cf2b95d0fa7c1fcd03c7342759679.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -808,24 +810,37 @@ X_{t+1} = a X_t + b + c W_{t+1}
 </div>
 </div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># 样本数</span>
-
-<span class="c1"># 理论上的分布</span>
-<span class="n">μ_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">b</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">μ</span> <span class="o">+</span> <span class="n">b</span>
 <span class="n">s_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># 理论密度</span>
-<span class="n">ψ</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">ψ_next</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">K</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">μ_next</span><span class="p">)</span> <span class="o">/</span> <span class="n">s_next</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ψ</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 <span class="n">ψ_next</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">μ_next</span><span class="p">,</span> <span class="n">s_next</span><span class="p">)</span>
-
-<span class="c1"># 使用仿真值来估计ψ_{t+1}</span>
-<span class="n">x_draws</span> <span class="o">=</span> <span class="n">ψ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 从ψ生成样本</span>
-<span class="n">x_draws_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x_draws</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># 更新规则</span>
-
-<span class="c1"># 对仿真结果进行核密度估计</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">x_draws</span> <span class="o">=</span> <span class="n">ψ</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x_draws_next</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x_draws</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">kde</span> <span class="o">=</span> <span class="n">KDE</span><span class="p">(</span><span class="n">x_draws_next</span><span class="p">)</span>
 
-<span class="c1"># 绘制结果</span>
 <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">μ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">μ</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
@@ -836,6 +851,12 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f82b07eded8ab8650cfbf6746cbd7644c228597823d203fcf90abbc8cf67bc96.png"><img alt="_images/f82b07eded8ab8650cfbf6746cbd7644c228597823d203fcf90abbc8cf67bc96.png" src="_images/f82b07eded8ab8650cfbf6746cbd7644c228597823d203fcf90abbc8cf67bc96.png" style="width: 80%;" />
+</a>
+</div>
 </div>
 <p>正如预测的那样，模拟分布与理论分布大致吻合。</p>
 </section>
@@ -1022,7 +1043,7 @@ X_{t+1} = a X_t + b + c W_{t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

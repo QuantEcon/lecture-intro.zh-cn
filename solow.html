@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -262,7 +262,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -273,11 +273,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -357,7 +357,7 @@
 <p>我们定义这些常数如下</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="mf">0.25</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span>
 </pre></div>
@@ -367,8 +367,8 @@
 <p>现在我们来定义函数<span class="math notranslate nohighlight">\(g\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
 </div>
@@ -383,7 +383,7 @@
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
 
-    <span class="n">g_values</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">xgrid</span><span class="p">)</span>
+    <span class="n">g_values</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">xgrid</span><span class="p">)</span>
 
     <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">g_values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">g_values</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
@@ -425,7 +425,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png"><img alt="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" src="_images/eb2a0ba00ca8d7a87326646dfcc72fd65d591f85b30fd9993efc3e91ac1e034b.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/850df4939006c92da48fcaa64b9cde7dce09f98bea03e3570b0674f993fbbb4f.png"><img alt="_images/850df4939006c92da48fcaa64b9cde7dce09f98bea03e3570b0674f993fbbb4f.png" src="_images/850df4939006c92da48fcaa64b9cde7dce09f98bea03e3570b0674f993fbbb4f.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -433,34 +433,34 @@
 <p>那么我们有 <span class="math notranslate nohighlight">\(k_{t+1} = g(k_t) &gt; k_t\)</span>，则人均资本增加。</p>
 <p>如果 <span class="math notranslate nohighlight">\(g(k_t) &lt; k_t\)</span>，则人均资本下降。</p>
 <p>如果 <span class="math notranslate nohighlight">\(g(k_t) = k_t\)</span>，那么我们就处于<strong>稳态</strong>，<span class="math notranslate nohighlight">\(k_t\)</span> 保持不变。</p>
-<p>（模型的<a class="reference external" href="https://intro.quantecon.org/scalar_dynam.html#scalar-dynam-steady-state" title="(in Project name not set)"><span class="xref std std-ref">稳态</span></a>是映射 <span class="math notranslate nohighlight">\(g\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E4%B8%8D%E5%8A%A8%E7%82%B9/8535695">不动点</a>。）</p>
-<p>从图中可以看出，<span class="math notranslate nohighlight">\(g\)</span> 函数与45度线只有一个交点，这意味着在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 区间内存在唯一的稳态。</p>
-<p>在稳态时，<span class="math notranslate nohighlight">\(k^* = g(k^*)\)</span>，即 <span class="math notranslate nohighlight">\(k^* = s A(k^*)^{\alpha} + (1-\delta)k^*\)</span>。解这个方程，我们得到</p>
+<p>（模型的<a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">稳态</span></a>是映射 <span class="math notranslate nohighlight">\(g\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E4%B8%8D%E5%8A%A8%E7%82%B9/8535695">不动点</a>。）</p>
+<p>从图中函数 <span class="math notranslate nohighlight">\(g\)</span> 的形状可以看出，在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 区间内存在唯一的稳态。</p>
+<p>该稳态求解方程 <span class="math notranslate nohighlight">\(k = s Ak^{\alpha} + (1-\delta)k\)</span>，因此可以表示为</p>
 <div class="math notranslate nohighlight" id="equation-kstarss">
 <span class="eqno">(24.2)<a class="headerlink" href="#equation-kstarss" title="Link to this equation">#</a></span>\[    k^* := \left( \frac{s A}{\delta} \right)^{1/(1 - \alpha)}\]</div>
-<p>当初始资本低于稳态值 <span class="math notranslate nohighlight">\(k^*\)</span> 时，我们可以从图中看到 <span class="math notranslate nohighlight">\(g(k_t) &gt; k_t\)</span>，这意味着资本存量会随时间增加，逐渐接近稳态。</p>
-<p>相反，如果初始资本高于 <span class="math notranslate nohighlight">\(k^*\)</span>，则 <span class="math notranslate nohighlight">\(g(k_t) &lt; k_t\)</span>，资本存量会随时间减少，同样趋向于稳态值。</p>
-<p>让我们在45度图中标出这个稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>，以便更直观地理解这一动态过程。</p>
+<p>如果初始资本低于 <span class="math notranslate nohighlight">\(k^*\)</span>，则资本会随时间增加。</p>
+<p>如果初始资本高于这一水平，则情况相反。</p>
+<p>让我们在45度图中标出这个稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kstar</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kstar</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span>
 <span class="n">plot45</span><span class="p">(</span><span class="n">kstar</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png"><img alt="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" src="_images/fc30c38bacfd4aa9f3343cbf24614d332f18cc531cca19de891e9ba0d220de54.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/60c7d2365a2bf5cdceecafb6e56e7df7aa07db18c41a048869f275b70e99c03c.png"><img alt="_images/60c7d2365a2bf5cdceecafb6e56e7df7aa07db18c41a048869f275b70e99c03c.png" src="_images/60c7d2365a2bf5cdceecafb6e56e7df7aa07db18c41a048869f275b70e99c03c.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>根据图示分析，无论初始资本存量 <span class="math notranslate nohighlight">\(k_0\)</span> 如何，<span class="math notranslate nohighlight">\(k_t\)</span> 都将收敛于稳态值 <span class="math notranslate nohighlight">\(k^*\)</span>。</p>
-<p>这是一种<a class="reference external" href="https://intro.quantecon.org/scalar_dynam.html#scalar-dynam-global-stability" title="(in Project name not set)"><span class="xref std std-ref">全局稳定性</span></a>的形式。</p>
+<p>这是一种<a class="reference internal" href="scalar_dynam.html#scalar-dynam-global-stability"><span class="std std-ref">全局稳定性</span></a>的形式。</p>
 <p>下图显示了在上述参数设置条件下，从三个不同的初始条件出发的资本时间路径。</p>
 <p>在这种参数设置下，<span class="math notranslate nohighlight">\(k^* \approx 1.78\)</span>。</p>
 <p>让我们定义常数和三个不同的初始条件</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">])</span>
 
 <span class="n">ts_length</span> <span class="o">=</span> <span class="mi">20</span>
@@ -474,7 +474,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_ts</span><span class="p">(</span><span class="n">x0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
 
-    <span class="n">k_star</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span>
+    <span class="n">k_star</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">α</span><span class="p">))</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
@@ -485,7 +485,7 @@
     <span class="k">for</span> <span class="n">x_init</span> <span class="ow">in</span> <span class="n">x0_values</span><span class="p">:</span>
         <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_init</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
-            <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$k_0=</span><span class="si">%g</span><span class="s1">$&#39;</span> <span class="o">%</span><span class="k">x_init</span>)
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span><span class="n">k_star</span><span class="p">),</span>
@@ -507,7 +507,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png"><img alt="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" src="_images/cbc9f4786772249302319ae8e7a37935cad9515e3ec072122ccfb57cb38dadfe.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/a7d0f88b1c15303d5bad00e4405274bd8cc58c9ebbf360950eb091bd1fbc3cca.png"><img alt="_images/a7d0f88b1c15303d5bad00e4405274bd8cc58c9ebbf360950eb091bd1fbc3cca.png" src="_images/a7d0f88b1c15303d5bad00e4405274bd8cc58c9ebbf360950eb091bd1fbc3cca.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -516,7 +516,7 @@
 <section id="id4">
 <h2><span class="section-number">24.3. </span>连续时间的增长<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将研究索洛-斯旺增长模型的连续时间版本。</p>
-<p>连续时间框架提供了一种更为流畅的分析方法，使得模型的动态特性更容易理解。</p>
+<p>我们将看到，连续时间所提供的平滑性如何简化我们的分析。</p>
 <p>让我们回顾一下离散时间版本的资本动态方程：<span class="math notranslate nohighlight">\(k_{t+1} = s f(k_t) + (1 - \delta) k_t\)</span>。</p>
 <p>我们可以将其重新整理为单位时间内的变化量：</p>
 <div class="math notranslate nohighlight">
@@ -525,7 +525,7 @@
     \quad \text{其中} \quad
     \Delta k_t := k_{t+1}  - k_t
 \]</div>
-<p>当我们让时间间隔无限趋近于零时，这个离散变化自然过渡到连续时间的导数形式</p>
+<p>当我们让时间间隔趋于零时，便得到了连续时间极限</p>
 <div class="math notranslate nohighlight" id="equation-solowc">
 <span class="eqno">(24.3)<a class="headerlink" href="#equation-solowc" title="Link to this equation">#</a></span>\[    k'_t = s f(k_t) - \delta k_t
     \qquad \text{with} \qquad
@@ -536,11 +536,11 @@
 <p>解法与离散时间情况相同——参见 <a class="reference internal" href="#equation-kstarss">(24.2)</a>。</p>
 <p>动态过程将在下一图表中呈现，并沿用上文所述的参数设定。</p>
 <p>将 <span class="math notranslate nohighlight">\(k'_t = g(k_t)\)</span> 定义为 <span class="math notranslate nohighlight">\(g(k) = s Ak^\alpha - \delta k\)</span>，当 <span class="math notranslate nohighlight">\(g(k) &gt; 0\)</span> 时，<span class="math notranslate nohighlight">\(k'_t &gt; 0\)</span>，此时资本存量处于增长状态。</p>
-<p>当 <span class="math notranslate nohighlight">\(g(k) &lt; 0\)</span> 时，资本存量将减少。这种动态机制源于两种力量的共同作用：低资本存量水平下的储蓄高边际回报与高资本存量水平下的低回报率相结合，最终形成系统的全局稳定性。</p>
+<p>当 <span class="math notranslate nohighlight">\(g(k) &lt; 0\)</span> 时，则情况相反。同样地，低资本存量水平下的储蓄高边际回报与高资本存量水平下的低回报率相结合，最终形成系统的全局稳定性。</p>
 <p>为了在图中看到这一点，让我们定义以下常数</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span>
 </pre></div>
 </div>
 </div>
@@ -548,8 +548,8 @@
 <p>接下来，我们定义函数 <span class="math notranslate nohighlight">\(g\)</span> 表示连续时间的增长</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">k</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span> <span class="o">-</span> <span class="n">δ</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
 </div>
@@ -561,7 +561,7 @@
     <span class="n">k_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$g(k)$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">g_con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">k_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$g(k)$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">k_grid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k&#39;=0$&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">kstar</span><span class="p">:</span>
@@ -593,32 +593,33 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kstar</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kstar</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span>
 <span class="n">plot_gcon</span><span class="p">(</span><span class="n">kstar</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png"><img alt="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" src="_images/53d167007c17b9383b6f28b82560e13a18f37b38c767901492506b6912171ba3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/781b91ba2ecc249abacddaf34c9b5309db65e57bff4f374dd70b060335b12610.png"><img alt="_images/781b91ba2ecc249abacddaf34c9b5309db65e57bff4f374dd70b060335b12610.png" src="_images/781b91ba2ecc249abacddaf34c9b5309db65e57bff4f374dd70b060335b12610.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>上图直观地展示了特定参数下的全局稳定性，但我们如何严格证明这一性质对于所有合理参数都成立呢？</p>
-<p>在离散时间模型中，要得到 <span class="math notranslate nohighlight">\(k_t\)</span> 的解析表达式相当困难。</p>
-<p>然而，转向连续时间框架可以大大简化分析。在连续时间下，我们能够推导出 <span class="math notranslate nohighlight">\(k_t\)</span> 的简洁表达式，从而清晰地描述资本存量随时间的演化路径。</p>
-<p>为此，我们引入变量替换 <span class="math notranslate nohighlight">\(x_t := k_t^{1-\alpha}\)</span>，这样 <span class="math notranslate nohighlight">\(x'_t = (1-\alpha) k_t^{-\alpha} k'_t\)</span>。</p>
-<p>将连续时间的动态方程 <span class="math notranslate nohighlight">\(k'_t = sAk_t^\alpha - \delta k_t\)</span> 代入上式，我们得到一个线性微分方程</p>
+<p>在离散时间模型中，要得到 <span class="math notranslate nohighlight">\(k_t\)</span> 的简洁表达式相当困难。</p>
+<p>而在连续时间下，这一过程要容易得多：我们可以得到一个相对简单的表达式，用以描述 <span class="math notranslate nohighlight">\(k_t\)</span> 的完整路径。</p>
+<p>第一步是引入变量替换 <span class="math notranslate nohighlight">\(x_t := k_t^{1-\alpha}\)</span>，这样 <span class="math notranslate nohighlight">\(x'_t = (1-\alpha) k_t^{-\alpha} k'_t\)</span>。</p>
+<p>将其代入 <span class="math notranslate nohighlight">\(k'_t = sAk_t^\alpha - \delta k_t\)</span>，可得到线性微分方程</p>
 <div class="math notranslate nohighlight" id="equation-xsolow">
 <span class="eqno">(24.4)<a class="headerlink" href="#equation-xsolow" title="Link to this equation">#</a></span>\[    x'_t = (1-\alpha) (sA - \delta x_t)\]</div>
-<p>这个方程是一个<a class="reference external" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/12609971">线性常微分方程</a>，其解为
-$<span class="math notranslate nohighlight">\(
+<p>这个方程是一个<a class="reference external" href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/12609971">线性常微分方程</a>，其解为</p>
+<div class="math notranslate nohighlight">
+\[
     x_t
     = \left(
         k_0^{1-\alpha} - \frac{sA}{\delta}
       \right)
       \mathrm{e}^{-\delta (1-\alpha) t} +
     \frac{sA}{\delta}
-\)</span>$</p>
+\]</div>
 <p>（你可以通过对 <span class="math notranslate nohighlight">\(t\)</span> 求导来确认这个函数 <span class="math notranslate nohighlight">\(x_t\)</span> 满足方程<a class="reference internal" href="#equation-xsolow">(24.4)</a>。）</p>
 <p>代换回 <span class="math notranslate nohighlight">\(k_t\)</span> 得到</p>
 <div class="math notranslate nohighlight" id="equation-ssivs">
@@ -658,8 +659,8 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mf">2.0</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">α</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.5</span>
 </pre></div>
 </div>
 </div>
@@ -667,8 +668,8 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">k_star</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_grid</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
-<span class="n">c_star</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k_star</span> <span class="o">**</span> <span class="n">alpha</span>
+<span class="n">k_star</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_grid</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span>
+<span class="n">c_star</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_grid</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k_star</span> <span class="o">**</span> <span class="n">α</span>
 </pre></div>
 </div>
 </div>
@@ -685,8 +686,8 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc_c_star</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
-    <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">alpha</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">α</span>
 </pre></div>
 </div>
 </div>
@@ -736,23 +737,28 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png"><img alt="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" src="_images/9cb908e3ee7d14ec4cb105fa711466b47baa63cfbb08359009077feaf2bc65cb.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/1a74767da846e29a30c2acec03947ce72eb3f7d0acdbb8bb73f684fe532bc71e.png"><img alt="_images/1a74767da846e29a30c2acec03947ce72eb3f7d0acdbb8bb73f684fe532bc71e.png" src="_images/1a74767da846e29a30c2acec03947ce72eb3f7d0acdbb8bb73f684fe532bc71e.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>我们也可以尝试用数学方法解决这个问题，即对 <span class="math notranslate nohighlight">\(c^*(s)\)</span> 进行微分，并使用 <a class="reference external" href="https://www.sympy.org/en/index.html">sympy</a> 求解 <span class="math notranslate nohighlight">\(\frac{d}{ds}c^*(s)=0\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Symbol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Rational</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_symbol</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">k</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_symbol</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
-<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_symbol</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">alpha</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用 Rational 进行精确符号计算</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">α</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">s_symbol</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_symbol</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">δ</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_symbol</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">k</span> <span class="o">**</span> <span class="n">α</span>
 </pre></div>
 </div>
 </div>
@@ -762,12 +768,12 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用 sympy 求解</span>
 <span class="n">s_star</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">diff</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s_star = </span><span class="si">{</span><span class="n">s_star</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s_star = </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">s_star</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s_star = 0.300000000000000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s_star = 0.3
 </pre></div>
 </div>
 </div>
@@ -782,7 +788,7 @@ $<span class="math notranslate nohighlight">\(
 <p><strong>随机生产率</strong></p>
 <p>为了使索洛-斯旺模型更贴近实际数据，我们需要考虑如何处理总量中的随机波动。</p>
 <p>这样做会带来多方面的影响，其中之一是消除了人均产出 <span class="math notranslate nohighlight">\(y_t = A k^\alpha_t\)</span> 收敛到常数 <span class="math notranslate nohighlight">\(y^* := A (k^*)^\alpha\)</span> 这一不切实际的预测。</p>
-<p>接下来，我们将转向对离散时间模型的讨论。</p>
+<p>在接下来的讨论中，我们转向离散时间框架。</p>
 <p>一种方法是用某个随机序列 <span class="math notranslate nohighlight">\((A_t)_{t \geq 1}\)</span> 替代常数生产率。</p>
 <p>现在的动态方程变为</p>
 <div class="math notranslate nohighlight" id="equation-solowran">
@@ -801,13 +807,14 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义常数</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">sig</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">σ</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">μ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">σ</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">A</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">s</span> <span class="o">=</span> <span class="mf">0.6</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">α</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">]</span> <span class="c1"># 用于模拟的初始值列表</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -816,10 +823,10 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lgnorm</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span> <span class="o">+</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">μ</span> <span class="o">+</span> <span class="n">σ</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">())</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">lgnorm</span><span class="p">()</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lgnorm</span><span class="p">()</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
 </pre></div>
 </div>
 </div>
@@ -834,7 +841,7 @@ $<span class="math notranslate nohighlight">\(
     <span class="k">for</span> <span class="n">x_init</span> <span class="ow">in</span> <span class="n">x_values</span><span class="p">:</span>
         <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_init</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
-            <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_next</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">δ</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$k_0=</span><span class="si">%g</span><span class="s1">$&#39;</span> <span class="o">%</span><span class="k">x_init</span>)
 
@@ -856,7 +863,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png"><img alt="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png" src="_images/fa72b6b879f6942e924e06f119726a8f300f1ee63bc6e11b251199f14e29a6ae.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f186eb13962507c9df050e6cda24165e0c29de96b6950af1e1d6ce701e18368b.png"><img alt="_images/f186eb13962507c9df050e6cda24165e0c29de96b6950af1e1d6ce701e18368b.png" src="_images/f186eb13962507c9df050e6cda24165e0c29de96b6950af1e1d6ce701e18368b.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1044,7 +1051,7 @@ $<span class="math notranslate nohighlight">\(
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

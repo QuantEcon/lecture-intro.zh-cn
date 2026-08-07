@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -203,7 +203,7 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">44.1. 残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alpha-beta">44.1. 误差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slr-optimal-values">44.2. 计算最优值</a></li>
 </ul>
                             <p class="logo">
@@ -260,7 +260,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -271,11 +271,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -313,7 +313,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 表示最佳拟合线与给定 <span class="math notranslate nohighlight">\(x_i\)</span> 的样本值 <span class="math notranslate nohighlight">\(y_i\)</span> 之间的误差。</p>
 <p>我们的目标是选择 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的值来为一些适用于变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的数据构建一条“最佳”拟合线。</p>
-<p>让我们假设存在一个简单的数据集，其中包含 10 个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的观测值：</p>
+<p>让我们来看一个简单的数据集，其中包含 10 个变量 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(y_i\)</span> 的观测值：</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
@@ -369,7 +369,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">2500</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">900</span><span class="p">,</span><span class="mi">1100</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span> <span class="mi">250</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">]</span>
 <span class="n">df</span>
@@ -468,8 +468,11 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
 <figure class="align-default" id="sales-v-temp1">
-<a class="reference internal image-reference" href="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png"><img alt="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" src="_images/279b29dd784e43cef54622443b93d406a594a19a450a92702518347d4bb27aec.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/95976b6cf95e13866a3153594c8c7b21ded2aa7c2841d3e80f0bbccc881101c9.png"><img alt="_images/95976b6cf95e13866a3153594c8c7b21ded2aa7c2841d3e80f0bbccc881101c9.png" src="_images/95976b6cf95e13866a3153594c8c7b21ded2aa7c2841d3e80f0bbccc881101c9.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">散点图</span><a class="headerlink" href="#sales-v-temp1" title="Link to this image">#</a></p>
@@ -497,14 +500,14 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat Y$&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp2">
-<a class="reference internal image-reference" href="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png"><img alt="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" src="_images/468063cda355bbddd56f1b13ddc1a67f28c47f78cf8cc8dfb85b8029108263a7.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/e76160a97b241c10eae16c5b0ac9023f2514a3553d3d25b5a044dbd02c8d3131.png"><img alt="_images/e76160a97b241c10eae16c5b0ac9023f2514a3553d3d25b5a044dbd02c8d3131.png" src="_images/e76160a97b241c10eae16c5b0ac9023f2514a3553d3d25b5a044dbd02c8d3131.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.2 </span><span class="caption-text">带有拟合线的散点图</span><a class="headerlink" href="#sales-v-temp2" title="Link to this image">#</a></p>
@@ -513,7 +516,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 </div>
 <p>我们可以看到这个模型没法很好地估计两者的关系。</p>
-<p>我们可以继续猜测，并通过调整参数迭代出一条 “最佳 ”拟合线。</p>
+<p>我们可以继续猜测，并通过调整参数迭代出一条“最佳”拟合线</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="mi">100</span>
@@ -526,14 +529,14 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat Y$&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp3">
-<a class="reference internal image-reference" href="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png"><img alt="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" src="_images/24a9ea5ecff2e64e5e4b2990e38578a7a2b9ec6050f665a73b5673d0e8da99cf.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/7a58d3e82544ebaf55403ceac8e6fb47b2d8f1de3016d2fff0555dfd09af831f.png"><img alt="_images/7a58d3e82544ebaf55403ceac8e6fb47b2d8f1de3016d2fff0555dfd09af831f.png" src="_images/7a58d3e82544ebaf55403ceac8e6fb47b2d8f1de3016d2fff0555dfd09af831f.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.3 </span><span class="caption-text">带拟合线的散点图 #2</span><a class="headerlink" href="#sales-v-temp3" title="Link to this image">#</a></p>
@@ -553,14 +556,14 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">yax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat Y$&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="sales-v-temp4">
-<a class="reference internal image-reference" href="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png"><img alt="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" src="_images/f63b5c3ece86f59b82c8b04503b9cfdb737e92d07c925a576570bbcc7004eef1.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f8306ebaa911947e842fd070c4d3a711272b37786d1b84021e3d71e253957ef9.png"><img alt="_images/f8306ebaa911947e842fd070c4d3a711272b37786d1b84021e3d71e253957ef9.png" src="_images/f8306ebaa911947e842fd070c4d3a711272b37786d1b84021e3d71e253957ef9.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.4 </span><span class="caption-text">带拟合线的散点图 #3</span><a class="headerlink" href="#sales-v-temp4" title="Link to this image">#</a></p>
@@ -568,8 +571,8 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </figure>
 </div>
 </div>
-<p>与其不断猜测参数值，我们可以把这个问题转化为一个优化问题，用数学方法来求解最优的参数。</p>
-<p>为此，我们先来定义一个重要的概念：残差（residual）。残差 <span class="math notranslate nohighlight">\(\epsilon_i\)</span> 是实际观测值 <span class="math notranslate nohighlight">\(y_i\)</span> 与模型预测值 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> 之间的差异。</p>
+<p>不过，我们需要考虑把这个猜测过程形式化，将这个问题当作一个优化问题来处理。</p>
+<p>让我们来考虑误差 <span class="math notranslate nohighlight">\(\epsilon_i\)</span>，并定义观测值 <span class="math notranslate nohighlight">\(y_i\)</span> 与估计值 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> 之间的差异，我们称之为残差</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -694,7 +697,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">yax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat Y$&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -702,7 +705,7 @@ y_i = \alpha + \beta x_i + \epsilon_i, i = 1,2,...,N
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-residuals">
-<a class="reference internal image-reference" href="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png"><img alt="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" src="_images/9b40c1c9796b8cd275ca8bcee90a1dc046c31ef45605f0cd320d90a37b9122f0.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/5384212cf254a3d5eda2ae395ccfbaa00608506f3e9eea830becd3159fbafecc.png"><img alt="_images/5384212cf254a3d5eda2ae395ccfbaa00608506f3e9eea830becd3159fbafecc.png" src="_images/5384212cf254a3d5eda2ae395ccfbaa00608506f3e9eea830becd3159fbafecc.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.5 </span><span class="caption-text">残差图</span><a class="headerlink" href="#plt-residuals" title="Link to this image">#</a></p>
@@ -722,8 +725,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 \]</div>
 <p>我们希望通过调整参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 来最小化这个成本函数。</p>
 <section id="alpha-beta">
-<h2><span class="section-number">44.1. </span>残差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的<a class="headerlink" href="#alpha-beta" title="Link to this heading">#</a></h2>
-<p>首先，我们看看总残差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
+<h2><span class="section-number">44.1. </span>误差相对于 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是如何变化的<a class="headerlink" href="#alpha-beta" title="Link to this heading">#</a></h2>
+<p>首先，我们看看总误差相对于 <span class="math notranslate nohighlight">\(\beta\)</span> 的变化（保持截距 <span class="math notranslate nohighlight">\(\alpha\)</span> 不变）</p>
 <p>我们从<a class="reference internal" href="#slr-optimal-values"><span class="std std-ref">下一节</span></a>可以知道 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值是：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -733,7 +736,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>我们可以计算一系列 <span class="math notranslate nohighlight">\(\beta\)</span> 值的残差</p>
+<p>我们可以计算一系列 <span class="math notranslate nohighlight">\(\beta\)</span> 值的误差</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
@@ -743,7 +746,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>绘制残差图</p>
+<p>绘制误差图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;β&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;残差&#39;</span><span class="p">)</span>
@@ -753,10 +756,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors">
-<a class="reference internal image-reference" href="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png"><img alt="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" src="_images/233a641767a74e980b7239f1c74007309d7db6a2ef1ca9855e667efdeb374112.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/033b9f3cf07c43f970f13bc8538056d151cc1cd07de4695cef7bbbfd98e3468c.png"><img alt="_images/033b9f3cf07c43f970f13bc8538056d151cc1cd07de4695cef7bbbfd98e3468c.png" src="_images/033b9f3cf07c43f970f13bc8538056d151cc1cd07de4695cef7bbbfd98e3468c.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.6 </span><span class="caption-text">绘制残差图</span><a class="headerlink" href="#plt-errors" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.6 </span><span class="caption-text">绘制误差图</span><a class="headerlink" href="#plt-errors" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -771,7 +774,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>绘制残差图</p>
+<p>绘制误差图</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;α&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;残差&#39;</span><span class="p">)</span>
@@ -781,10 +784,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-errors-2">
-<a class="reference internal image-reference" href="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png"><img alt="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" src="_images/edd915afb3bf4d63fe48fe30a95a3935a7df289c89b10f6a0d385c282d367870.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/5621e3d9154635926f4d4c618225f2f9fde879df2e48130f37ccc6e6f6aa636c.png"><img alt="_images/5621e3d9154635926f4d4c618225f2f9fde879df2e48130f37ccc6e6f6aa636c.png" src="_images/5621e3d9154635926f4d4c618225f2f9fde879df2e48130f37ccc6e6f6aa636c.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.7 </span><span class="caption-text">绘制残差图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 44.7 </span><span class="caption-text">绘制误差图 (2)</span><a class="headerlink" href="#plt-errors-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -828,7 +831,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <span class="eqno">(44.1)<a class="headerlink" href="#equation-eq-optimal-alpha" title="Link to this equation">#</a></span>\[
 \alpha = \bar{y_i} - \beta\bar{x_i}
 \]</div>
-<p>回到成本函数 <span class="math notranslate nohighlight">\(C\)</span> ，现在我们对 <span class="math notranslate nohighlight">\(\beta\)</span> 取偏导</p>
+<p>现在让我们对成本函数 <span class="math notranslate nohighlight">\(C\)</span> 关于 <span class="math notranslate nohighlight">\(\beta\)</span> 取偏导</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial C}{\partial \beta}[\sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}]
@@ -868,8 +871,8 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <span class="eqno">(44.2)<a class="headerlink" href="#equation-eq-optimal-beta" title="Link to this equation">#</a></span>\[
 \beta = \frac{\sum_{i=1}^{N}(x_i y_i - \bar{y_i} x_i)}{\sum_{i=1}^{N}(x_i^2 - \bar{x_i} x_i)}
 \]</div>
-<p>我们现在可以使用<a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a> 来计算<span class="math notranslate nohighlight">\(\alpha\)</span>和<span class="math notranslate nohighlight">\(\beta\)</span>的最优值</p>
-<p>计算<span class="math notranslate nohighlight">\(\beta\)</span></p>
+<p>我们现在可以使用 <a class="reference internal" href="#equation-eq-optimal-alpha">(44.1)</a> 和 <a class="reference internal" href="#equation-eq-optimal-beta">(44.2)</a> 来计算 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 的最优值</p>
+<p>计算 <span class="math notranslate nohighlight">\(\beta\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># 原始数据</span>
@@ -898,7 +901,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 </div>
-<p>计算<span class="math notranslate nohighlight">\(\alpha\)</span></p>
+<p>计算 <span class="math notranslate nohighlight">\(\alpha\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="n">y_bar</span> <span class="o">-</span> <span class="n">β</span> <span class="o">*</span> <span class="n">x_bar</span>
@@ -920,14 +923,14 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">yax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat Y$&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y_hat&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="plt-ols">
-<a class="reference internal image-reference" href="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png"><img alt="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" src="_images/b354f127d932a904b93d5c2bd44d6524ced7770ad67006ed938a340d65f0f721.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/6b346945a0bac4220a2fae9cb9c43bae47ca2c9ab1b719e6c0a35b4a5d110f75.png"><img alt="_images/6b346945a0bac4220a2fae9cb9c43bae47ca2c9ab1b719e6c0a35b4a5d110f75.png" src="_images/6b346945a0bac4220a2fae9cb9c43bae47ca2c9ab1b719e6c0a35b4a5d110f75.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 44.8 </span><span class="caption-text">OLS最佳拟合线</span><a class="headerlink" href="#plt-ols" title="Link to this image">#</a></p>
@@ -939,7 +942,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 
 <p class="admonition-title"><span class="caption-number">Exercise 44.1 </span></p>
 <section id="exercise-content">
-<p>现在你已经知道了使用OLS解决简单线性回归模型的方程，你可以开始运行自己的回归来构建<span class="math notranslate nohighlight">\(y\)</span>和<span class="math notranslate nohighlight">\(x\)</span>之间的模型了。</p>
+<p>现在你已经知道了使用OLS解决简单线性回归模型的方程，你可以开始运行自己的回归来构建 <span class="math notranslate nohighlight">\(y\)</span> 和 <span class="math notranslate nohighlight">\(x\)</span> 之间的模型了。</p>
 <p>让我们考虑两个经济变量，人均GDP和预期寿命。</p>
 <ol class="arabic simple">
 <li><p>你认为它们之间的关系会是怎样的？</p></li>
@@ -951,7 +954,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </ol>
 </section>
 </div>
-<div class="solution dropdown admonition" id="simple_linear_regression-solution-1">
+<div class="solution admonition" id="simple_linear_regression-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#slr-ex1"> Exercise 44.1</a></p>
 <section id="solution-content">
@@ -1117,9 +1120,9 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div></div></div>
 </div>
 <p>从Our World in Data下载的数据包含了全球各国的人均GDP和预期寿命数据。</p>
-<p>在导入完整数据集之前，我们先看看前几行数据来了解其结构。这样可以帮助我们确定哪些列是我们真正需要的。</p>
+<p>通常最好的做法是先从csv文件中导入几行数据来了解其结构，这样你就可以选择你想要读入DataFrame的列。</p>
 <p>我们可以看到数据集中包含了一些不必要的列，比如<code class="docutils literal notranslate"><span class="pre">Continent</span></code>。</p>
-<p>让我们选择我们需要的列来创建一个更简洁的数据集：</p>
+<p>让我们建立一个我们想要导入的列的列表</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Life expectancy at birth (historical)&#39;</span><span class="p">,</span> <span class="s1">&#39;GDP per capita&#39;</span><span class="p">]</span>
@@ -1236,7 +1239,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>62156 rows × 4 columns</p>
 </div></div></div>
 </div>
-<p>有时候重命名列名可以让我们在DataFrame中更方便进行操作</p>
+<p>有时候重命名列名可以让我们在DataFrame中更方便地进行操作</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cntry&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;life_expectancy&quot;</span><span class="p">,</span> <span class="s2">&quot;gdppc&quot;</span><span class="p">]</span>
@@ -1474,10 +1477,11 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <p>12445 rows × 4 columns</p>
 </div></div></div>
 </div>
-<p>通过删除缺失值，我们的数据集从62156行减少到了12445行。</p>
-<p>现在我们有了一个清理过的数据集，包含了不同国家在不同年份的预期寿命和人均GDP数据。</p>
-<p>在进行任何分析之前，我们应该先仔细了解数据的特点。一个重要的问题是: 不同国家在不同时期的数据是否完整?</p>
-<p>让我们先来看看预期寿命数据的分布情况</p>
+<p>我们现在已经把DataFrame的行数从62156行减少到了12445行，移除了许多空的数据关系。</p>
+<p>现在我们有了一个数据集，包含了一系列年份的预期寿命和人均GDP。</p>
+<p>花一些时间去了解你实际拥有的数据总是一个好主意。</p>
+<p>例如，你可能想探索这个数据，看看各国在各年份是否有一致的报告</p>
+<p>让我们先看看预期寿命数据</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le_years</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;cntry&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;life_expectancy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;cntry&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">()[</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">]</span>
@@ -1937,7 +1941,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;年份&#39;&gt;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png"><img alt="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" src="_images/5579f352786dc625be43615dbe51327a29b810e7ecb2586708e8ca9802c6a319.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/36de0b7bcf5c17ab616e211d789a922ec61f6d313918540bf2c1577b8ff33c9b.png"><img alt="_images/36de0b7bcf5c17ab616e211d789a922ec61f6d313918540bf2c1577b8ff33c9b.png" src="_images/36de0b7bcf5c17ab616e211d789a922ec61f6d313918540bf2c1577b8ff33c9b.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1949,12 +1953,12 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png"><img alt="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" src="_images/ad6a988ec96196da5e333b12c5d6e0d8e167b81e2947415ea6133abc75afad37.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/5cc03a9c465117decf81fec6ed7fa3f22e732bf406e48e18bffb94bca6f26ea2.png"><img alt="_images/5cc03a9c465117decf81fec6ed7fa3f22e732bf406e48e18bffb94bca6f26ea2.png" src="_images/5cc03a9c465117decf81fec6ed7fa3f22e732bf406e48e18bffb94bca6f26ea2.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>所以很明显，如果你进行横断面比较，那么最近的数据将包括更广泛的国家</p>
-<p>现在让我们考虑数据集中最近的一年，也就是2018</p>
+<p>现在让我们考虑数据集中最近的一年，也就是2018年</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2018</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1964,22 +1968,22 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdppc&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;人均GDP&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;预期寿命（年）&quot;</span><span class="p">,);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdppc&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span>  <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;人均GDP&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;预期寿命（年）&quot;</span><span class="p">,);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png"><img alt="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" src="_images/eae193ff5d2b4ed74d2de5a484ee871d0b7598be61e8f4da6c5c19d987dff7be.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/2b1a9282237cb1a91e4b7fc99e4713a9e6c40ad97f2aa2afc7f723c106d717d1.png"><img alt="_images/2b1a9282237cb1a91e4b7fc99e4713a9e6c40ad97f2aa2afc7f723c106d717d1.png" src="_images/2b1a9282237cb1a91e4b7fc99e4713a9e6c40ad97f2aa2afc7f723c106d717d1.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>这些数据显示了一些有趣的关系。</p>
 <ol class="arabic simple">
-<li><p>许多国家的人均GDP相近，但预期寿命差别很大</p></li>
+<li><p>许多国家的人均GDP水平相近，但预期寿命差别很大</p></li>
 <li><p>人均GDP与预期寿命之间似乎存在正向关系。人均GDP较高的国家往往拥有更高的预期寿命</p></li>
 </ol>
-<p>虽然普通最小二乘法（OLS）主要用于线性关系，但我们可以通过对变量进行适当的转换（比如取对数），使非线性关系转化为线性关系，从而仍然可以使用OLS方法。</p>
-<p>通过指定 <code class="docutils literal notranslate"><span class="pre">logx</span></code> 你可以在对数尺度上绘制人均GDP数据</p>
+<p>尽管OLS求解的是线性方程——我们可以选择的一个方法是对变量进行变换，比如通过对数变换，然后使用OLS来估计变换后的变量。</p>
+<p>通过指定<code class="docutils literal notranslate"><span class="pre">logx</span></code>，你可以在对数刻度上绘制人均GDP数据</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdppc&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_expectancy&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span>  <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;人均GDP&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;预期寿命（年）&quot;</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
@@ -1987,11 +1991,14 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png"><img alt="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" src="_images/2afe42f3eff5cd374569030663c50ded6aa924aa677b07cd6e36dd48913f3f49.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/d258f3214f8311d3d2684dcdb4ef05aba966ff058f4cd88e176d80db53f2f25a.png"><img alt="_images/d258f3214f8311d3d2684dcdb4ef05aba966ff058f4cd88e176d80db53f2f25a.png" src="_images/d258f3214f8311d3d2684dcdb4ef05aba966ff058f4cd88e176d80db53f2f25a.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>从这次转换可以看出，线性模型更贴近数据的形状。</p>
+<p>从这次转换可以看出——线性模型更贴近数据的形状。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;log_gdppc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gdppc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">)</span>
@@ -2238,7 +2245,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.643730292819708
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.643730292819704
 </pre></div>
 </div>
 </div>
@@ -2251,7 +2258,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.70209670138904
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.702096701389053
 </pre></div>
 </div>
 </div>
@@ -2270,10 +2277,10 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7fe040bd9c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.LineCollection at 0x7f5959979f90&gt;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png"><img alt="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" src="_images/7263b0d93b150584ac85c2010cf8731c8adfb863ae775b11d0deae8c4610f93e.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/dd32d7ee64c5d3d40d4403cefea86fd2c77013ab7951f9418b4d1ca8b4e75838.png"><img alt="_images/dd32d7ee64c5d3d40d4403cefea86fd2c77013ab7951f9418b4d1ca8b4e75838.png" src="_images/dd32d7ee64c5d3d40d4403cefea86fd2c77013ab7951f9418b4d1ca8b4e75838.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -2470,7 +2477,7 @@ C = \sum_{i=1}^{N}{(y_i - \alpha - \beta x_i)^2}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

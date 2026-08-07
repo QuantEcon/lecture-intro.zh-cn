@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -206,13 +206,13 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 概述</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.2. 无差异条件</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.2.1. 不上大学直接工作的现值</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.2.2. 上大学后工作的现值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.2.2. 上大学后工作的高中毕业生的现值</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.3. 重新解读模型：打工人和企业家</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.4. 计算</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.5. 企业家和打工人</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6. 微积分的应用</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.3. 计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.4. 企业家与打工人的解读</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.5. 微积分的应用</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -268,7 +268,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -279,11 +279,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -304,26 +304,29 @@
 <h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座介绍了一个研究大学与高中毕业生工资差距的模型，其中获得大学学历所需的时间是关键因素。</p>
 <p>这个模型最初由米尔顿·弗里德曼创建，用于研究美国牙医和医生的收入差异——他想弄清这种差异是竞争性劳动力市场的自然结果，还是源于政府与医疗专业组织设置的准入门槛。</p>
-<p>詹妮弗·伯恩斯在其著作<span id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章中，详细描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，这项研究最终促成了<span id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
+<p>詹妮弗·伯恩斯在其著作<span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章中，详细描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，这项研究最终促成了<span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
 <p>我们可以将弗里德曼的模型对应到我们的研究中：把高中毕业生对应于牙医，把大学毕业生对应于医生。</p>
-<p>我们提供的是一个简化模型，仅包含一个方程。在更完整的模型中，这个方程将是多个均衡条件之一。</p>
+<p>我们提供的是一个”不完整”的模型，因为它只包含一个方程，而这个方程只是一个更完整模型的均衡条件集合中的一部分。</p>
 <p>这个”均衡差异”方程确定了使高中和大学毕业生终身收入现值相等的工资比率。</p>
-<p>其基本思想是：工资水平会自动调整，直到高中应届毕业生在”直接工作”和”继续上大学”这两个选择之间无差别。</p>
-<p>（在更完整的模型中，其他方程会解释是什么因素推动了这种调整。）</p>
-<p>我们的模型是相对工资”均衡差异”理论的一个具体应用。这类理论可以追溯到亚当·斯密的《国富论》<span id="id6">[<a class="reference internal" href="zreferences.html#id11" title="Adam Smith. The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations. Harriman House Limited, 2010.">Smith, 2010</a>]</span>。</p>
-<p>本讲座主要使用线性代数知识，特别是矩阵乘法和矩阵求逆。</p>
-<p>在讲座末尾，我们会引入一些微积分内容，展示如何用偏导数更简洁地表达某些结论。</p>
-<p>这也让我们有机会展示Python在处理微积分计算时的强大功能！</p>
-<p>不过即使不懂微积分，掌握线性代数知识也足以理解核心内容。</p>
-<p>首先，让我们导入所需的Python模块。</p>
+<p>其基本思想是：终身收入水平会以某种方式自动调整，直到高中应届毕业生在”直接工作”和”继续上大学”这两个选择之间无差别。</p>
+<p>（在更完整的模型中，其他方程的作用就是解释是什么因素推动了这种调整。）</p>
+<p>我们的模型只是相对工资”均衡差异”理论的一个例子，这类理论至少可以追溯到亚当·斯密的《国富论》<span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id11" title="Adam Smith. The Wealth of Nations: An inquiry into the nature and causes of the Wealth of Nations. Harriman House Limited, 2010.">Smith, 2010</a>]</span>。</p>
+<p>本讲座大部分内容只使用线性代数工具，特别是矩阵乘法和矩阵求逆。</p>
+<p>不过，在讲座末尾，我们会用到一些微积分知识，以防读者想了解如何通过计算偏导数来更简洁地呈现某些结论。</p>
+<p>这样做也能让我们展示Python在处理微积分计算方面的强大功能！</p>
+<p>不过即使不懂微积分，我们所用的线性代数工具也完全足够理解本讲座内容。</p>
+<p>和往常一样，我们先导入一些Python模块。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -331,7 +334,7 @@
 </section>
 <section id="id7">
 <h2><span class="section-number">13.2. </span>无差异条件<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>这个模型的关键在于：大学教育带来的额外工资收益会达到一个均衡点，在这个点上，普通工人选择上大学或直接工作的预期收益是相等的。</p>
+<p>这个模型的关键思想是：大学入门级工资溢价必须调整，直到具有代表性的工人在上大学和不上大学之间感到无差异。</p>
 <p>设：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(R &gt; 1\)</span> 为一期债券的总回报率</p></li>
@@ -344,20 +347,19 @@
 <span class="math notranslate nohighlight">\( w_t^h = w_0^h \gamma_h^t\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma_c &gt; 1\)</span> 为大学毕业生工资的（总）增长率，使得
 <span class="math notranslate nohighlight">\( w_t^c = w_0^c \gamma_c^t\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(D\)</span> 为上大学所需的成本</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> 为上大学所需的前期货币成本</p></li>
 </ul>
-<p>现在我们考虑一个新的高中毕业生所面临的两个选择：</p>
+<p>现在我们计算一个新的高中毕业生所能获得的现值，如果：</p>
 <ul class="simple">
-<li><p>立即工作并赚取高中毕业生的工资</p></li>
-<li><p>上大学四年，毕业后赚取大学毕业生的工资</p></li>
+<li><p>她立即工作并赚取没有大学学历者所领取的工资</p></li>
+<li><p>她上大学四年，毕业后赚取大学毕业生的工资</p></li>
 </ul>
-<p>并计算这位毕业生所能获得的现值</p>
 <section id="id8">
 <h3><span class="section-number">13.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>如果某人高中毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots, T\)</span> 的 <span class="math notranslate nohighlight">\(T+1\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
-h_0 = \sum_{t=0}^T R^{-t} w_t^h = w_0^h \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right] \equiv w_0^h A_h 
+h_0 = \sum_{t=0}^T R^{-t} w_t^h = w_0^h \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right] \equiv w_0^h A_h
 \]</div>
 <p>其中</p>
 <div class="math notranslate nohighlight">
@@ -367,7 +369,7 @@ A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
 <p>现值 <span class="math notranslate nohighlight">\(h_0\)</span> 是选择不上大学而是立即以高中毕业生的工资开始工作的人在时间 <span class="math notranslate nohighlight">\(0\)</span> 开始时的”人力财富”。</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">13.2.2. </span>上大学后工作的现值<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.2.2. </span>上大学后工作的高中毕业生的现值<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>如果某人在 <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> 的四年内上大学，期间收入为 <span class="math notranslate nohighlight">\(0\)</span>，但在大学毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=4, 5, \ldots ,T\)</span> 的 <span class="math notranslate nohighlight">\(T-3\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -382,23 +384,23 @@ A_c = (R^{-1} \gamma_c)^4  \left[ \frac{1 - (R^{-1} \gamma_c)^{T-3} }{1 - R^{-1}
 <p>假设大学学费加上四年的食宿费用总计为 <span class="math notranslate nohighlight">\(D\)</span>，必须在时间 <span class="math notranslate nohighlight">\(0\)</span> 付清。</p>
 <p>因此，扣除上大学的货币成本后，高中毕业后第一个时期上大学的现值为：</p>
 <div class="math notranslate nohighlight">
-\[ 
+\[
 c_0 - D
 \]</div>
-<p>现在我们制定一个纯<strong>均衡差异</strong>模型，用于设定大学-高中工资的初始差距 <span class="math notranslate nohighlight">\(\phi\)</span>，其中：</p>
+<p>现在我们制定一个纯<strong>均衡差异</strong>模型，用于验证大学-高中工资的初始差距 <span class="math notranslate nohighlight">\(\phi\)</span>，其中：</p>
 <div class="math notranslate nohighlight">
 \[
-w_0^c = \phi w_0^h 
+w_0^c = \phi w_0^h
 \]</div>
 <p>我们假设 <span class="math notranslate nohighlight">\(R, \gamma_h, \gamma_c, T\)</span> 以及 <span class="math notranslate nohighlight">\(w_0^h\)</span> 是固定参数。</p>
-<p>首先，均衡差异模型揭示了一个重要关系：大学与高中毕业生的工资差距 <span class="math notranslate nohighlight">\(\phi\)</span> 需要满足一个”均衡”方程。在这个方程中，选择不上大学直接工作的终身收入现值，应该等于选择上大学后工作的终身收入现值：</p>
+<p>首先，我们注意到，这个纯均衡差异模型认为，大学-高中工资差距 <span class="math notranslate nohighlight">\(\phi\)</span> 由一个”均衡”方程决定，该方程使不上大学的现值等于上大学的现值：</p>
 <div class="math notranslate nohighlight">
 \[
 h_0 = c_0 - D
 \]</div>
 <p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-equalize">
-<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Link to this equation">#</a></span>\[
 w_0^h A_h  = \phi w_0^h A_c - D .
 \]</div>
 <p>这个”无差异条件”是模型的核心。</p>
@@ -412,14 +414,147 @@ w_0^h A_h  = \phi w_0^h A_c - D .
 <p>因此，</p>
 <div class="math notranslate nohighlight">
 \[
-\phi  = \frac{A_h}{A_c} . 
+\phi  = \frac{A_h}{A_c} .
 \]</div>
-<p>我们很快将编写 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制它的函数图。</p>
-<p>但首先，我们重新解读这些变量并描述我们模型的一种新的解释。</p>
+<p>在下一节中，我们将编写 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制它随决定因素变化的函数图。</p>
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">13.3. </span>重新解读模型：打工人和企业家<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>计算<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>我们可以尝试改变各种参数，特别是 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>，来构造一些有趣的例子。</p>
+<p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制其与某些决定因素的关系。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 为均衡差异模型定义 namedtuple</span>
+<span class="n">EqDiffModel</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;EqDiffModel&#39;</span><span class="p">,</span> <span class="s1">&#39;R T γ_h γ_c w_h0 D&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_edm</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>   <span class="c1"># 总回报率</span>
+               <span class="n">T</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>     <span class="c1"># 时间跨度</span>
+               <span class="n">γ_h</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># 高中工资增长率</span>
+               <span class="n">γ_c</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># 大学工资增长率</span>
+               <span class="n">w_h0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>   <span class="c1"># 初始工资（高中）</span>
+               <span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>     <span class="c1"># 上大学的成本</span>
+              <span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">EqDiffModel</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="n">A_h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span>
+    <span class="n">ϕ</span> <span class="o">=</span> <span class="n">A_h</span> <span class="o">/</span> <span class="n">A_c</span> <span class="o">+</span> <span class="n">D</span> <span class="o">/</span> <span class="p">(</span><span class="n">w_h0</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ϕ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们使用向量化而非循环，构建一些函数来帮助我们进行比较静态分析。</p>
+<p>对于给定的一个实例，我们想在一个参数变化而其他参数保持固定时重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>举个例子：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span> <span class="o">=</span> <span class="n">create_edm</span><span class="p">()</span>
+<span class="n">gap1</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex1</span><span class="p">)</span>
+
+<span class="n">gap1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8041412724969135
+</pre></div>
+</div>
+</div>
+</div>
+<p>假设大学不收费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
+<p>初始的大学工资溢价应该会降低。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 免费大学</span>
+<span class="n">ex2</span> <span class="o">=</span> <span class="n">create_edm</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gap2</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex2</span><span class="p">)</span>
+<span class="n">gap2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2204649517903732
+</pre></div>
+</div>
+</div>
+</div>
+<p>让我们构建一些图表，展示如果初始大学-高中工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 的某个决定因素发生变化，<span class="math notranslate nohighlight">\(\phi\)</span> 将如何改变。</p>
+<p>我们先从总利率 <span class="math notranslate nohighlight">\(R\)</span> 开始。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/c5d66b5505a84e3413b6135ce8dad36cb5436ee88289e641097eb629c2bb4af2.png"><img alt="_images/c5d66b5505a84e3413b6135ce8dad36cb5436ee88289e641097eb629c2bb4af2.png" src="_images/c5d66b5505a84e3413b6135ce8dad36cb5436ee88289e641097eb629c2bb4af2.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>显然，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 必须上升，以补偿一位未来的高中毕业生因<strong>等待</strong>开始获得收入而遭受的损失——记住，在 <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> 这几年里，她什么都赚不到，而这段时间高中毕业的工人却在领取工资。</p>
+<p>现在让我们研究，在其他决定 <span class="math notranslate nohighlight">\(\phi\)</span> 的因素保持不变的情况下，大学工资的增长率上升时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γc_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">γ_c</span><span class="o">=</span><span class="n">γ_c</span><span class="p">)</span> <span class="k">for</span> <span class="n">γ_c</span> <span class="ow">in</span> <span class="n">γc_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">γc_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\gamma_c$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/544bb41a13c259e6c01ac291879c641c042630a4d8146ced73b57ea358b3f45e.png"><img alt="_images/544bb41a13c259e6c01ac291879c641c042630a4d8146ced73b57ea358b3f45e.png" src="_images/544bb41a13c259e6c01ac291879c641c042630a4d8146ced73b57ea358b3f45e.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。</p>
+<p>工资差距下降是为了”平衡”两种职业类型的现值，一种是高中工人，另一种是大学工人。</p>
+<p>给定其它参数不变，你能猜到我们改变高中学历工人的工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？</p>
+<p>下图显示了会发生什么。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γh_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm</span><span class="p">(</span><span class="n">γ_h</span><span class="o">=</span><span class="n">γ_h</span><span class="p">)</span> <span class="k">for</span> <span class="n">γ_h</span> <span class="ow">in</span> <span class="n">γh_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">γh_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\gamma_h$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/705f077c619052c0171f9631c2b710c5946b871fc91b1c8091a85c067fe94223.png"><img alt="_images/705f077c619052c0171f9631c2b710c5946b871fc91b1c8091a85c067fe94223.png" src="_images/705f077c619052c0171f9631c2b710c5946b871fc91b1c8091a85c067fe94223.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+</section>
+<section id="id11">
+<h2><span class="section-number">13.4. </span>企业家与打工人的解读<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>我们可以通过添加一个参数并重新解读变量来获得一个有关企业家和打工人的模型。</p>
 <p>现在让 <span class="math notranslate nohighlight">\(h\)</span> 表示”打工人”的现值。</p>
 <p>我们将企业家的现值定义为：</p>
@@ -434,169 +569,51 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 成功企业家收入与打工人收入的比率。</p>
 <p>我们会发现，随着 <span class="math notranslate nohighlight">\(\pi\)</span> 的减少，<span class="math notranslate nohighlight">\(\phi\)</span> 会增加，这表明
 成为企业家的风险越大，成功项目的回报就必须越高。</p>
-</section>
-<section id="id11">
-<h2><span class="section-number">13.4. </span>计算<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-<p>通过变动参数 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>， 我们可以创建出一些有趣的例子。</p>
-<p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制其与某些决定因素的关系。</p>
+<p>现在让我们用企业家-打工人的视角来解读这个模型</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">equalizing_diff</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    均等差异模型的一个类</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="c1"># 通过设置 π 切换到弱模型</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> <span class="n">π</span>
-    
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_gap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">R</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span>
-        <span class="n">T</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span>
-        
-        <span class="n">A_h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
-        <span class="n">A_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span>
-        
-        <span class="c1"># 调整后的模型</span>
-        <span class="k">if</span> <span class="n">π</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-            <span class="n">A_c</span> <span class="o">=</span> <span class="n">π</span><span class="o">*</span><span class="n">A_c</span> 
-        
-        <span class="n">ϕ</span> <span class="o">=</span> <span class="n">A_h</span><span class="o">/</span><span class="n">A_c</span> <span class="o">+</span> <span class="n">D</span><span class="o">/</span><span class="p">(</span><span class="n">w_h0</span><span class="o">*</span><span class="n">A_c</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ϕ</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义企业家-打工人解读下的模型</span>
+<span class="n">EqDiffModel</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;EqDiffModel&#39;</span><span class="p">,</span> <span class="s1">&#39;R T γ_h γ_c w_h0 D π&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_edm_π</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>   <span class="c1"># 总回报率</span>
+                 <span class="n">T</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>     <span class="c1"># 时间跨度</span>
+                 <span class="n">γ_h</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># 高中工资增长率</span>
+                 <span class="n">γ_c</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="c1"># 大学工资增长率</span>
+                 <span class="n">w_h0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>   <span class="c1"># 初始工资（高中）</span>
+                 <span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>     <span class="c1"># 上大学的成本</span>
+                 <span class="n">π</span><span class="o">=</span><span class="mi">0</span>       <span class="c1"># 创业成功的概率</span>
+              <span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">EqDiffModel</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">π</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="n">A_h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">γ_c</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span>
+
+    <span class="c1"># 纳入成功的概率</span>
+    <span class="n">A_c</span> <span class="o">=</span> <span class="n">π</span> <span class="o">*</span> <span class="n">A_c</span>
+
+    <span class="n">ϕ</span> <span class="o">=</span> <span class="n">A_h</span> <span class="o">/</span> <span class="n">A_c</span> <span class="o">+</span> <span class="n">D</span> <span class="o">/</span> <span class="p">(</span><span class="n">w_h0</span> <span class="o">*</span> <span class="n">A_c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ϕ</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>为了帮助我们进行比较静态分析，我们使用向量化而不是循环来构建一些函数。</p>
-<p>对于类的给定实例，我们想在一个参数变化而其他参数保持固定时重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
-<p>举个例子：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ϕ_R</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_R</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">R_new</span><span class="p">):</span>
-    <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">R_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-
-<span class="n">ϕ_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_R</span><span class="p">)</span>
-
-<span class="c1"># ϕ_γh</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_γh</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γh_new</span><span class="p">):</span>
-    <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">γh_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-
-<span class="n">ϕ_γh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_γh</span><span class="p">)</span>
-
-<span class="c1"># ϕ_γc</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_γc</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">γc_new</span><span class="p">):</span>
-    <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γc_new</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">π</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-
-<span class="n">ϕ_γc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_γc</span><span class="p">)</span>
-
-<span class="c1"># ϕ_π</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ϕ_π</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">π_new</span><span class="p">):</span>
-    <span class="n">mc_new</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">mc</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">π_new</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mc_new</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-
-<span class="n">ϕ_π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ϕ_π</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设定标准参数</span>
-<span class="n">R</span> <span class="o">=</span> <span class="mf">1.05</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span> <span class="o">=</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">1.01</span>
-<span class="n">w_h0</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">D</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="c1"># 创建一个例子</span>
-<span class="n">ex1</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="o">=</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="o">=</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="o">=</span><span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">)</span>
-<span class="n">gap1</span> <span class="o">=</span> <span class="n">ex1</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">gap1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8041412724969135
-</pre></div>
-</div>
-</div>
-</div>
-<p>假设大学不收费，然后重新计算 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
-<p>初始的大学工资溢价应该会降低。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 免费大学</span>
-<span class="n">ex2</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">gap2</span> <span class="o">=</span> <span class="n">ex2</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">gap2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2204649517903732
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们构建一些图表，展示如果初始大学-高中工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 的某个决定因素发生变化，<span class="math notranslate nohighlight">\(\phi\)</span> 将如何改变。</p>
-<p>我们先从总利率 <span class="math notranslate nohighlight">\(R\)</span> 开始。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R_arr</span><span class="p">,</span> <span class="n">φ_R</span><span class="p">(</span><span class="n">ex1</span><span class="p">,</span> <span class="n">R_arr</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png"><img alt="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" src="_images/a7ddf47b3931b8616096007970398f8cf67fc6716861b19bd96797f57e2b56fc.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>注意当大学工资增长率 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 上升时，初始工资差距是如何下降的。</p>
-<p>工资差距下降是为了”平衡”两种职业类型的现值，一种是高中工人，另一种是大学工人。</p>
-<p>给定其它参数不变，你能猜到我们改变高中学历工人的工资的增长率时，初始工资比率 <span class="math notranslate nohighlight">\(\phi\)</span> 会发生什么变化吗？</p>
-<p>下图显示了会发生什么。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γh_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">γh_arr</span><span class="p">,</span> <span class="n">φ_γh</span><span class="p">(</span><span class="n">ex1</span><span class="p">,</span> <span class="n">γh_arr</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\gamma_h$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png"><img alt="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" src="_images/7188d4af0882dd4a941129f6d157c796b55231f73a106ba84c2f9006dbed88f8.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-</section>
-<section id="id12">
-<h2><span class="section-number">13.5. </span>企业家和打工人<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
-<p>现在让我们用企业家-打工人的视角来解读这个模型。</p>
 <p>如果一个新企业成功的概率是 <span class="math notranslate nohighlight">\(0.2\)</span>，让我们计算成功企业家的初始工资溢价。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 企业家模型</span>
-<span class="n">ex3</span> <span class="o">=</span> <span class="n">equalizing_diff</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">gap3</span> <span class="o">=</span> <span class="n">ex3</span><span class="o">.</span><span class="n">compute_gap</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex3</span> <span class="o">=</span> <span class="n">create_edm_π</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">gap3</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">ex3</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">gap3</span><span class="p">)</span>
+<span class="n">gap3</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.102324758951866
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.020706362484567
 </pre></div>
 </div>
 </div>
@@ -605,7 +622,10 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">π_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">π_arr</span><span class="p">,</span> <span class="n">φ_π</span><span class="p">(</span><span class="n">ex3</span><span class="p">,</span> <span class="n">π_arr</span><span class="p">))</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="n">π</span><span class="p">)</span> <span class="k">for</span> <span class="n">π</span> <span class="ow">in</span> <span class="n">π_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">π_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;工资差距&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -613,37 +633,30 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png"><img alt="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" src="_images/09df9f803b6b8c63ce74170b774d1fb1d347fcd2d000d9b0fbc2327793f90c76.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/97e4143a4fab837373bbaf6c6b24cb265c7158597cffe5e8d8d9ff0d1cc0590a.png"><img alt="_images/97e4143a4fab837373bbaf6c6b24cb265c7158597cffe5e8d8d9ff0d1cc0590a.png" src="_images/97e4143a4fab837373bbaf6c6b24cb265c7158597cffe5e8d8d9ff0d1cc0590a.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>这个图表是不是符合你的猜想呢？</p>
 </section>
-<section id="id13">
-<h2><span class="section-number">13.6. </span>微积分的应用<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h2><span class="section-number">13.5. </span>微积分的应用<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。</p>
 <p>然而，懂得微积分的人可能会希望我们直接求偏导数。</p>
+<p>我们现在就来做这件事。</p>
 <p>还不会微积分的读者可以不用继续往下读，因为线性代数已经让我们了解了模型的主要特性。</p>
-<p>但对于那些有兴趣了解我们如何让 Python 计算偏导数的读者，我们接下来会讲解这些内容。</p>
+<p>但对于那些有兴趣了解我们如何让 Python 计算偏导数所涉及的所有繁琐工作的读者，我们接下来会讲解这些内容。</p>
 <p>我们将使用 Python 模块 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 对决定它的参数的偏导数。</p>
-<p>让我们从 <code class="docutils literal notranslate"><span class="pre">sympy</span></code> 导入关键函数。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">symbols</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>设定符号</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\gamma_h, \gamma_h_c, w_0^h, D&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\gamma_h, \gamma_c, w_0^h, D&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">R</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>设定函数<span class="math notranslate nohighlight">\(A_h\)</span></p>
+<p>设定函数 <span class="math notranslate nohighlight">\(A_h\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_h</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">γ_h</span><span class="o">/</span><span class="n">R</span><span class="p">))</span>
@@ -666,10 +679,10 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left( \left( \gamma_{h c}, \  R, \  T\right) \mapsto \frac{\gamma_{h c}^{4} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)}{R^{4} \left(1 - \frac{\gamma_{h c}}{R}\right)} \right)\]</div>
+\[\displaystyle \left( \left( \gamma_{c}, \  R, \  T\right) \mapsto \frac{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)}{R^{4} \left(1 - \frac{\gamma_{c}}{R}\right)} \right)\]</div>
 </div>
 </div>
-<p>设定 <span class="math notranslate nohighlight">\(\phi\)</span></p>
+<p>现在，设定 <span class="math notranslate nohighlight">\(\phi\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">A_h</span><span class="p">(</span><span class="n">γ_h</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">A_c</span><span class="p">(</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">/</span><span class="p">(</span><span class="n">w_h0</span><span class="o">*</span><span class="n">A_c</span><span class="p">(</span><span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">)))</span>
@@ -685,7 +698,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left( \left( D, \  \gamma_{h}, \  \gamma_{h c}, \  R, \  T, \  w^{h}_{0}\right) \mapsto \frac{D R^{4} \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} \right)\]</div>
+\[\displaystyle \left( \left( D, \  \gamma_{h}, \  \gamma_{c}, \  R, \  T, \  w^{h}_{0}\right) \mapsto \frac{D R^{4} \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} \right)\]</div>
 </div>
 </div>
 <p>我们开始设定默认的参数值。</p>
@@ -700,7 +713,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 </div>
-<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> 然后计算其给定默认参数的值</p>
+<p>现在让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial D}\)</span> 然后计算其在默认参数值下的值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_D</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -710,12 +723,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{R^{4} \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)}\]</div>
+\[\displaystyle \frac{R^{4} \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 给定默认参数的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认参数下的数值</span>
 <span class="n">ϕ_D_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_D</span><span class="p">)</span>
 <span class="n">ϕ_D_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -737,12 +750,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{h c}}{R}\right) \log{\left(\frac{\gamma_{h c}}{R} \right)}}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}} - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{h c}}{R}\right) \log{\left(\frac{\gamma_{h}}{R} \right)}}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right) \log{\left(\frac{\gamma_{h c}}{R} \right)}}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}}\]</div>
+\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \log{\left(\frac{\gamma_{c}}{R} \right)}}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} + \frac{R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \log{\left(\frac{\gamma_{c}}{R} \right)}}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{c}}{R}\right) \log{\left(\frac{\gamma_{h}}{R} \right)}}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在默认值的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认参数下的数值</span>
 <span class="n">ϕ_T_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_T</span><span class="p">)</span>
 <span class="n">ϕ_T_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -755,7 +768,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(T\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>。</p>
 <p>这是因为大学毕业生现在有更长的职业生涯来”收回”他们为上大学付出的时间和其他成本。</p>
-<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_h}\)</span> 并代入默认参数值</p>
+<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_h}\)</span> 并代入默认参数值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_h</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_h</span><span class="p">)</span>
@@ -765,12 +778,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T + 1\right)}{\gamma_{h} \gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right)^{2} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)}\]</div>
+\[\displaystyle - \frac{R^{4} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{c}}{R}\right) \left(T + 1\right)}{\gamma_{c}^{4} \gamma_{h} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)^{2}}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在默认值的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认参数下的数值</span>
 <span class="n">ϕ_γ_h_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_γ_h</span><span class="p">)</span>
 <span class="n">ϕ_γ_h_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -782,7 +795,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(\gamma_h\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这与我们之前的图形分析结果一致。</p>
-<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_c}\)</span> 并代入默认参数值</p>
+<p>计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial \gamma_c}\)</span> 并在默认参数值下进行数值计算</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_γ_c</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">γ_c</span><span class="p">)</span>
@@ -792,12 +805,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T - 3\right)}{\gamma_{h c}^{5} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}} - \frac{4 D R^{4} \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{5} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} - \frac{D R^{3}}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T - 3\right)}{\gamma_{h c}^{5} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}} - \frac{4 R^{4} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{5} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} - \frac{R^{3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)}\]</div>
+\[\displaystyle \frac{D R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(T - 3\right)}{\gamma_{c}^{5} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} - \frac{4 D R^{4} \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{5} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} - \frac{D R^{3}}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{R^{4} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(T - 3\right)}{\gamma_{c}^{5} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{4 R^{4} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{5} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在默认值的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认参数下的数值</span>
 <span class="n">ϕ_γ_c_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_γ_c</span><span class="p">)</span>
 <span class="n">ϕ_γ_c_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -809,7 +822,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>我们发现提高 <span class="math notranslate nohighlight">\(\gamma_c\)</span> 会降低初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这与我们之前的图形分析结果一致。</p>
-<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial R}\)</span> 并代入默认参数值</p>
+<p>让我们计算 <span class="math notranslate nohighlight">\(\frac{\partial \phi}{\partial R}\)</span> 并在默认参数值下进行数值计算</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϕ_R</span> <span class="o">=</span> <span class="n">ϕ</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
@@ -819,12 +832,12 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \frac{D R^{3} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T - 3\right)}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}} + \frac{4 D R^{3} \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{D R^{2}}{\gamma_{h c}^{3} w^{h}_{0} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{3} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T + 1\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} - \frac{R^{3} \left(\frac{\gamma_{h c}}{R}\right)^{T - 3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right) \left(T - 3\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)^{2}} + \frac{4 R^{3} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} - \frac{R^{2} \gamma_{h} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(1 - \frac{\gamma_{h c}}{R}\right)}{\gamma_{h c}^{4} \left(1 - \frac{\gamma_{h}}{R}\right)^{2} \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)} + \frac{R^{2} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{h c}^{3} \left(1 - \frac{\gamma_{h}}{R}\right) \left(1 - \left(\frac{\gamma_{h c}}{R}\right)^{T - 3}\right)}\]</div>
+\[\displaystyle - \frac{D R^{3} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(T - 3\right)}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2}} + \frac{4 D R^{3} \left(1 - \frac{\gamma_{c}}{R}\right)}{\gamma_{c}^{4} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} + \frac{D R^{2}}{\gamma_{c}^{3} w^{h}_{0} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)} - \frac{R^{3} \left(\frac{\gamma_{c}}{R}\right)^{T - 3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right) \left(T - 3\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right)^{2} \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{3} \left(\frac{\gamma_{h}}{R}\right)^{T + 1} \left(1 - \frac{\gamma_{c}}{R}\right) \left(T + 1\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{4 R^{3} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} + \frac{R^{2} \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{3} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)} - \frac{R^{2} \gamma_{h} \left(1 - \frac{\gamma_{c}}{R}\right) \left(1 - \left(\frac{\gamma_{h}}{R}\right)^{T + 1}\right)}{\gamma_{c}^{4} \left(1 - \left(\frac{\gamma_{c}}{R}\right)^{T - 3}\right) \left(1 - \frac{\gamma_{h}}{R}\right)^{2}}\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在默认值的值</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认参数下的数值</span>
 <span class="n">ϕ_R_func</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">D</span><span class="p">,</span> <span class="n">γ_h</span><span class="p">,</span> <span class="n">γ_c</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">w_h0</span><span class="p">),</span> <span class="n">ϕ_R</span><span class="p">)</span>
 <span class="n">ϕ_R_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">)</span>
 </pre></div>
@@ -836,6 +849,206 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 </div>
 <p>我们发现提高总利率 <span class="math notranslate nohighlight">\(R\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这也与我们之前的图形分析结果一致。</p>
+</section>
+<section id="id13">
+<h2><span class="section-number">13.6. </span>练习<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="eq_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 13.1 </span></p>
+<section id="exercise-content">
+<p>使用 <code class="docutils literal notranslate"><span class="pre">compute_gap</span></code>，绘制大学-高中工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随学费成本 <span class="math notranslate nohighlight">\(D \in [0, 30]\)</span> 变化的函数图，其他参数均保持默认值。</p>
+<p>a. 在 <span class="math notranslate nohighlight">\(\phi = 1\)</span> 处添加一条水平虚线，并根据免费大学公式 <span class="math notranslate nohighlight">\(\phi = A_h / A_c\)</span>，解释在这个范围内 <span class="math notranslate nohighlight">\(\phi\)</span> 是否会达到 1。</p>
+<p>b. 将图中直线的斜率作为 <span class="math notranslate nohighlight">\(\partial\phi/\partial D\)</span> 的数值估计，并将其与本讲座中使用 SymPy 计算得到的符号导数 <span class="math notranslate nohighlight">\(\phi_D\)</span> 进行比较。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="equalizing_difference-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex1"> Exercise 13.1</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="c1"># 使用 π=1（确定性）的 create_edm_π，这样 compute_gap 可以处理这个7个字段的模型</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">D_arr</span><span class="p">]</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">models</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">D_arr</span><span class="p">,</span> <span class="n">gaps</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\phi(D)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\phi = 1$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$D$（学费成本）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;大学工资溢价 $\phi$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;大学工资溢价与学费成本的关系&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 数值斜率（有限差分）</span>
+<span class="n">slope_num</span> <span class="o">=</span> <span class="p">(</span><span class="n">gaps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">gaps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">D_arr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">D_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># 与本讲座中已经计算好的 SymPy ϕ_D_func 进行比较</span>
+<span class="n">slope_sympy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ϕ_D_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;数值 dϕ/dD: </span><span class="si">{</span><span class="n">slope_num</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SymPy     dϕ/dD: </span><span class="si">{</span><span class="n">slope_sympy</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;一致: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">slope_num</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">slope_sympy</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1e-4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/149b9c782eed4f6d8d9f170f9760d2ecce1594c12aabbeba516b20d3e39907f6.png"><img alt="_images/149b9c782eed4f6d8d9f170f9760d2ecce1594c12aabbeba516b20d3e39907f6.png" src="_images/149b9c782eed4f6d8d9f170f9760d2ecce1594c12aabbeba516b20d3e39907f6.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>数值 dϕ/dD: 0.058368
+SymPy     dϕ/dD: 0.058368
+一致: True
+</pre></div>
+</div>
+</div>
+</div>
+<p>由于 <span class="math notranslate nohighlight">\(A_h &gt; A_c\)</span>（即使 <span class="math notranslate nohighlight">\(D=0\)</span>，放弃的收入依然占主导），免费大学的溢价 <span class="math notranslate nohighlight">\(A_h/A_c &gt; 1\)</span>，所以对于所有 <span class="math notranslate nohighlight">\(D \geq 0\)</span>，<span class="math notranslate nohighlight">\(\phi\)</span> 都大于 1。</p>
+</section>
+</div>
+<div class="exercise admonition" id="eq_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 13.2 </span></p>
+<section id="exercise-content">
+<p>绘制大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随职业生涯长度 <span class="math notranslate nohighlight">\(T \in \{10, 15, 20, \ldots, 60\}\)</span> 变化的函数图，考虑以下两种情况：</p>
+<ol class="arabic simple">
+<li><p>免费大学：<span class="math notranslate nohighlight">\(D = 0\)</span>。</p></li>
+<li><p>收费大学：<span class="math notranslate nohighlight">\(D = 10\)</span>。</p></li>
+</ol>
+<p>在同一张图上绘制两条曲线，在 <span class="math notranslate nohighlight">\(\phi = 1\)</span> 处添加一条水平虚线，并根据现值因子 <span class="math notranslate nohighlight">\(A_h\)</span> 和 <span class="math notranslate nohighlight">\(A_c\)</span>，解释 <span class="math notranslate nohighlight">\(T\)</span> 与 <span class="math notranslate nohighlight">\(\phi\)</span> 之间关系的方向。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="equalizing_difference-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex2"> Exercise 13.2</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">gaps_free</span>   <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">π</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T_arr</span><span class="p">]</span>
+<span class="n">gaps_costly</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T_arr</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_arr</span><span class="p">,</span> <span class="n">gaps_free</span><span class="p">,</span>   <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$D = 0$（免费大学）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_arr</span><span class="p">,</span> <span class="n">gaps_costly</span><span class="p">,</span> <span class="s1">&#39;s-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$D = 10$（收费大学）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\phi = 1$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;职业生涯长度 $T$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;大学工资溢价 $\phi$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;大学工资溢价与职业生涯长度的关系&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c646f04e1028bd1a9f0337c21e7b85297ad9f677aae9c638acecb9b7d93b013d.png"><img alt="_images/c646f04e1028bd1a9f0337c21e7b85297ad9f677aae9c638acecb9b7d93b013d.png" src="_images/c646f04e1028bd1a9f0337c21e7b85297ad9f677aae9c638acecb9b7d93b013d.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>随着 <span class="math notranslate nohighlight">\(T\)</span> 增大，大学毕业生有更多年份来”收回”因推迟四年开始工作而付出的成本，因为当四年折现因子 <span class="math notranslate nohighlight">\((R^{-1}\gamma_c)^4\)</span> 被摊销到更多期数上时，<span class="math notranslate nohighlight">\(A_c\)</span> 的增长速度比 <span class="math notranslate nohighlight">\(A_h\)</span> 更快。</p>
+<p>这会使 <span class="math notranslate nohighlight">\(A_h/A_c\)</span> 缩小，从而使 <span class="math notranslate nohighlight">\(\phi\)</span> 也缩小。</p>
+</section>
+</div>
+<div class="exercise admonition" id="eq_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 13.3 </span></p>
+<section id="exercise-content">
+<p>使用<strong>中心有限差分</strong>近似方法，数值验证 SymPy 得到的偏导数 <span class="math notranslate nohighlight">\(\partial\phi/\partial R\)</span>：</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\phi}{\partial R}\bigg|_{R=R_0} \approx
+\frac{\phi(R_0 + \varepsilon) - \phi(R_0 - \varepsilon)}{2\varepsilon}
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\varepsilon = 10^{-5}\)</span>，在默认参数值下进行评估，并与本讲座中计算得到的符号结果进行比较。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="equalizing_difference-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex3"> Exercise 13.3</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ε</span> <span class="o">=</span> <span class="mf">1e-5</span>
+
+<span class="c1"># 使用 create_edm_π 进行有限差分估计（标准模型下 π=1）</span>
+<span class="n">gap_plus</span>  <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="n">R_value</span> <span class="o">+</span> <span class="n">ε</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">gap_minus</span> <span class="o">=</span> <span class="n">compute_gap</span><span class="p">(</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="n">R_value</span> <span class="o">-</span> <span class="n">ε</span><span class="p">,</span> <span class="n">π</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">dϕ_dR_fd</span>  <span class="o">=</span> <span class="p">(</span><span class="n">gap_plus</span> <span class="o">-</span> <span class="n">gap_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ε</span><span class="p">)</span>
+
+<span class="c1"># 本讲座中已经计算好的 SymPy 结果 ϕ_R_func</span>
+<span class="n">dϕ_dR_sym</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ϕ_R_func</span><span class="p">(</span><span class="n">D_value</span><span class="p">,</span> <span class="n">γ_h_value</span><span class="p">,</span> <span class="n">γ_c_value</span><span class="p">,</span> <span class="n">R_value</span><span class="p">,</span> <span class="n">T_value</span><span class="p">,</span> <span class="n">w_h0_value</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;有限差分 dϕ/dR: </span><span class="si">{</span><span class="n">dϕ_dR_fd</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SymPy    dϕ/dR: </span><span class="si">{</span><span class="n">dϕ_dR_sym</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;绝对误差:        </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">dϕ_dR_fd</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dϕ_dR_sym</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>有限差分 dϕ/dR: 13.264274
+SymPy    dϕ/dR: 13.264274
+绝对误差:        1.89e-09
+</pre></div>
+</div>
+</div>
+</div>
+<p>这两种估计至少在五位有效数字上是一致的，这证实了符号微积分计算与数值计算是相互吻合的。</p>
+</section>
+</div>
+<div class="exercise admonition" id="eq_ex4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 13.4 </span></p>
+<section id="exercise-content">
+<p>使用模型的企业家-打工人版本（<code class="docutils literal notranslate"><span class="pre">create_edm_π</span></code>），回答以下问题。</p>
+<p>a. 绘制成功企业家所需的工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随成功概率 <span class="math notranslate nohighlight">\(\pi \in [0.10, 1.00]\)</span> 变化的函数图，并用虚线标出 <span class="math notranslate nohighlight">\(\phi = 2\)</span> 的水平线。</p>
+<p>b. 溢价大约在 <span class="math notranslate nohighlight">\(\pi\)</span> 取什么值时越过 2？在这个阈值的哪一侧，溢价高于 2？</p>
+<p>c. 直观地解释为什么当 <span class="math notranslate nohighlight">\(\pi \to 0\)</span> 时溢价会上升。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="equalizing_difference-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex4"> Exercise 13.4</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">π_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="c1"># create_edm_π 和 compute_gap 已经在本讲座中定义</span>
+<span class="n">ϕ_arr_π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">compute_gap</span><span class="p">(</span><span class="n">create_edm_π</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">π_arr</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">π_arr</span><span class="p">,</span> <span class="n">ϕ_arr_π</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\phi(\pi)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\phi = 2$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;成功概率 $\pi$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;所需工资溢价 $\phi$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;企业家溢价与成功概率的关系&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 在递减曲线 ϕ(π) 上插值求出交叉点</span>
+<span class="n">crossing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ϕ_arr_π</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">π_arr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">above_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ϕ_arr_π</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;当 π 大约为 </span><span class="si">{</span><span class="n">crossing</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> 时，溢价等于 2&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;在网格上，当 π 低于大约 </span><span class="si">{</span><span class="n">π_arr</span><span class="p">[</span><span class="n">above_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> 时，溢价超过 2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/779b3c2f9ead33f62a09176683ce66d14218ffee3f6692c6115fd2a92d874697.png"><img alt="_images/779b3c2f9ead33f62a09176683ce66d14218ffee3f6692c6115fd2a92d874697.png" src="_images/779b3c2f9ead33f62a09176683ce66d14218ffee3f6692c6115fd2a92d874697.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>当 π 大约为 0.902 时，溢价等于 2
+在网格上，当 π 低于大约 0.901 时，溢价超过 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>当 <span class="math notranslate nohighlight">\(\pi \to 0\)</span> 时，无论 <span class="math notranslate nohighlight">\(\phi\)</span> 取何值，企业家的预期终身收入都趋近于零，因此 <span class="math notranslate nohighlight">\(\phi\)</span> 必须无限增大，才能使企业家在创业和打工之间保持无差异。</p>
+</section>
+</div>
 </section>
 </section>
 
@@ -1018,7 +1231,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

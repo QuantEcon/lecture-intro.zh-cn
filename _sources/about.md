@@ -1,3 +1,13 @@
+---
+translation:
+  title: 关于这些讲座
+  headings:
+    About: 简介
+    Level: 难度层级
+    Credits: 致谢
+---
+
+---
 # 关于这些讲座
 
 ## 简介
@@ -30,16 +40,19 @@
 
 ## 致谢
 
-这个讲座系列的完成离不开QuantEcon研究助理团队和众多同事的宝贵帮助。
+这个讲座系列的完成离不开QuantEcon研究助理团队和众多同事的宝贵帮助。没有他们的帮助，这个系列不可能完成。
 
 特别感谢并致谢
 
 - [Aakash Gupta](https://github.com/AakashGfude)
 - [Shu Hu](https://github.com/shlff)
 - Jiacheng Li
+- [Jiarui Zhang](https://github.com/Jiarui-ZH)
 - [Smit Lunagariya](https://github.com/Smit-create)
-- [Matthew McKay](https://github.com/mmcky)
 - [Maanasee Sharma](https://github.com/maanasee)
+- [Matthew McKay](https://github.com/mmcky)
+- [Margaret Beisenbek](https://github.com/mbek0605)
+- [Phoebe Grosser](https://github.com/pgrosser1)
 - [Longye Tian](https://github.com/longye-tian)
 - [Humphrey Yang](https://github.com/HumphreyYang)
 - [Sylvia Zhao](https://github.com/SylviaZhaooo)

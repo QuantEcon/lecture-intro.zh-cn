@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -206,14 +206,15 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">31.1. 概览</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">31.2. 模型</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">31.3. 计算均衡序列</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">31.4. 主要结论</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">31.5. 稳态通货膨胀率的计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">31.4. 结论或猜想</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">31.5. 通货膨胀率的极限值</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">31.6. 稳态拉弗曲线</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">31.7. 初始价格水平的计算</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">31.7. 相关的初始价格水平</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">31.7.1. 验证</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">31.8. 拉弗曲线动态的不稳定性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">31.8. 拉弗曲线动态的不稳定一侧</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">31.9. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -269,7 +270,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -280,11 +281,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -304,26 +305,26 @@
 <section id="id2">
 <h2><span class="section-number">31.1. </span>概览<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座研究了在通货膨胀税率下的静态和动态<strong>拉弗曲线</strong>，其采用的模型为此讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中研究的非线性版本。</p>
-<p>与讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中一样，此讲座使用了<span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中使用的线性需求函数。</p>
-<p>但在本讲中，我们将不采用”理性预期”的”完全预见”形式，而是采用<span id="id4">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>和<span id="id5">[<a class="reference internal" href="zreferences.html#id183" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span>使用的”自适应预期”假设。</p>
+<p>与讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中一样，此讲座使用了<span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>在其经典论文中使用的对数线性货币需求函数版本，而不是此讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>中使用的线性需求函数。</p>
+<p>但在本讲中，我们将不采用”理性预期”的”完全预见”形式，而是采用<span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>和<span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id183" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span>使用的”自适应预期”假设。</p>
 <p>这意味着，我们不再假设预期通货膨胀<span class="math notranslate nohighlight">\(\pi_t^*\)</span>遵循”完全预见”或”理性预期”</p>
 <div class="math notranslate nohighlight">
 \[
 \pi_t^* = p_{t+1} - p_t
 \]</div>
-<p>我们现在不再采用讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>中的假设，而是假设<span class="math notranslate nohighlight">\(\pi_t^*\)</span>遵循下文中的自适应预期假设<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>。</p>
-<p>这种预期形成机制的改变会带来一些重要的影响。具体来说:</p>
+<p>我们现在不再采用讲座<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a>和讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>中的假设，而是假设<span class="math notranslate nohighlight">\(\pi_t^*\)</span>遵循下文中方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>所描述的自适应预期假设。</p>
+<p>我们将发现，以这种方式改变我们关于预期形成的假设，将改变我们的一些结论，同时保留另一些结论不变。具体而言，我们将发现：</p>
 <ul class="simple">
-<li><p>两个静态通货膨胀率水平保持不变</p></li>
-<li><p>但系统的动态行为发生了变化 - 它现在倾向于收敛到<strong>较低</strong>的通货膨胀率水平</p></li>
-<li><p>政策效果变得更符合直觉 - <strong>降低</strong>政府赤字能够<strong>降低</strong>通货膨胀</p></li>
+<li><p>用自适应预期替代理性预期不会改变两个静态通货膨胀率，但是<span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
+<li><p>它扭转了反常的动态特征，使得<strong>较低</strong>的静态通货膨胀率成为系统通常收敛到的那个值</p></li>
+<li><p>一个更符合直觉的比较动态结果由此产生：现在，通货膨胀可以通过<strong>降低</strong>政府赤字来<strong>降低</strong></p></li>
 </ul>
-<p>这些结果更符合传统的经济学观点,即通货膨胀主要由政府赤字驱动。</p>
-<p><span id="id6">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span>对这些问题进行了研究。他们认为理性预期(完全预见)模型的预测有悖直觉,因此提出用自适应预期来替代。在自适应预期下,人们根据下文的方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>来形成对未来通货膨胀的预期。</p>
+<p>这些更符合直觉的比较动态特征支撑了”老派信条”，即”通货膨胀总是且无论何处都是由政府赤字引起的”。</p>
+<p><span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id296" title="Michael Bruno and Stanley Fischer. Seigniorage, operating rules, and the high inflation trap. The Quarterly Journal of Economics, 105(2):353–374, 1990.">Bruno and Fischer, 1990</a>]</span>对这些问题进行了研究。他们的目的是通过放弃理性预期，转而假设人们按照下文所描述的”自适应预期”方案<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>来形成对未来通货膨胀率的预期，从而扭转他们认为在理性预期下（在此背景下即完全预见）模型所做出的违反直觉的预测。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><span id="id7">[<a class="reference internal" href="zreferences.html#id297" title="Albert Marcet and Thomas J Sargent. Least squares learning and the dynamics of hyperinflation. In William Barnett, John Geweke and Karl Shell, editors, Sunspots, Complexity, and Chaos. Cambridge University Press, 1989.">Marcet and Sargent, 1989</a>]</span> 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
-<span id="id8">[<a class="reference internal" href="zreferences.html#id295" title="Albert Marcet and Juan P Nicolini. Recurrent hyperinflations and learning. American Economic Review, 93(5):1476–1498, 2003.">Marcet and Nicolini, 2003</a>]</span> 和 <span id="id9">[<a class="reference internal" href="zreferences.html#id294" title="Thomas Sargent, Noah Williams, and Tao Zha. The conquest of south american inflation. Journal of Political Economy, 117(2):211–256, 2009.">Sargent <em>et al.</em>, 2009</a>]</span> 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。</p>
+<p><span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id297" title="Albert Marcet and Thomas J Sargent. Least squares learning and the dynamics of hyperinflation. In William Barnett, John Geweke and Karl Shell, editors, Sunspots, Complexity, and Chaos. Cambridge University Press, 1989.">Marcet and Sargent, 1989</a>]</span> 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。</p>
+<p><span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id295" title="Albert Marcet and Juan P Nicolini. Recurrent hyperinflations and learning. American Economic Review, 93(5):1476–1498, 2003.">Marcet and Nicolini, 2003</a>]</span> 和 <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id294" title="Thomas Sargent, Noah Williams, and Tao Zha. The conquest of south american inflation. Journal of Political Economy, 117(2):211–256, 2009.">Sargent <em>et al.</em>, 2009</a>]</span> 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。</p>
 </div>
 </section>
 <section id="id10">
@@ -360,43 +361,46 @@ m_{t+1} - p_t = -\alpha \pi_t^*
 </section>
 <section id="id11">
 <h2><span class="section-number">31.3. </span>计算均衡序列<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-<p>我们可以通过以下步骤求解均衡序列。首先，将方程<a class="reference internal" href="#equation-eq-ada-mdemand">(31.3)</a>和<a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a>中的<span class="math notranslate nohighlight">\(m_{t+1}\)</span>表达式结合，并使用方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>消除<span class="math notranslate nohighlight">\(\pi_t^*\)</span>，得到关于<span class="math notranslate nohighlight">\(p_t\)</span>的方程：</p>
+<p>将方程<a class="reference internal" href="#equation-eq-ada-mdemand">(31.3)</a>和<a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a>中关于<span class="math notranslate nohighlight">\(m_{t+1}\)</span>的表达式相等，并使用方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>消去<span class="math notranslate nohighlight">\(\pi_t^*\)</span>，可以得到如下关于<span class="math notranslate nohighlight">\(p_t\)</span>的方程：</p>
 <div class="math notranslate nohighlight" id="equation-eq-pequation">
 <span class="eqno">(31.5)<a class="headerlink" href="#equation-eq-pequation" title="Link to this equation">#</a></span>\[
 \log[ \exp(m_t) + g \exp(p_t)] - p_t = -\alpha [(1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*]
 \]</div>
-<p>给定初始条件<span class="math notranslate nohighlight">\((m_0, \pi_{-1}^*, p_{-1})\)</span>，我们可以按照以下步骤求解均衡序列：</p>
-<ol class="arabic simple">
-<li><p>求解方程<a class="reference internal" href="#equation-eq-pequation">(31.5)</a>得到<span class="math notranslate nohighlight">\(p_t\)</span></p></li>
-<li><p>使用方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>计算<span class="math notranslate nohighlight">\(\pi_t^*\)</span></p></li>
-<li><p>使用方程<a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a>计算<span class="math notranslate nohighlight">\(m_{t+1}\)</span></p></li>
-<li><p>重复步骤1-3</p></li>
-</ol>
+<p><strong>伪代码</strong></p>
+<p>以下是我们算法的伪代码。</p>
+<p>在时间<span class="math notranslate nohighlight">\(0\)</span>，给定初始条件<span class="math notranslate nohighlight">\((m_0, \pi_{-1}^*, p_{-1})\)</span>，对于每个<span class="math notranslate nohighlight">\(t \geq 0\)</span>，依次执行以下步骤：</p>
+<ul class="simple">
+<li><p>求解<a class="reference internal" href="#equation-eq-pequation">(31.5)</a>得到<span class="math notranslate nohighlight">\(p_t\)</span></p></li>
+<li><p>求解方程<a class="reference internal" href="#equation-eq-adaptex">(31.4)</a>得到<span class="math notranslate nohighlight">\(\pi_t^*\)</span></p></li>
+<li><p>求解方程<a class="reference internal" href="#equation-eq-ada-msupply2">(31.2)</a>得到<span class="math notranslate nohighlight">\(m_{t+1}\)</span></p></li>
+</ul>
+<p>至此算法完成。</p>
 </section>
 <section id="id12">
-<h2><span class="section-number">31.4. </span>主要结论<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
-<p>通过分析模型,我们可以得出以下几个重要结论:</p>
-<ol class="arabic simple">
-<li><p>如果存在稳态,通货膨胀率<span class="math notranslate nohighlight">\(\overline \pi\)</span>将等于货币增长率<span class="math notranslate nohighlight">\(\overline \mu\)</span></p></li>
-<li><p>模型存在两个可能的稳态通货膨胀率 - 一个高值和一个低值</p></li>
-<li><p>与<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>中的理性预期模型不同,在大多数初始条件<span class="math notranslate nohighlight">\((p_0, \pi_{t}^*)\)</span>下,系统会收敛到<strong>较低</strong>的稳态通货膨胀率</p></li>
-<li><p>对于每个稳态通货膨胀率<span class="math notranslate nohighlight">\(\overline \pi\)</span>,都存在唯一的初始价格水平<span class="math notranslate nohighlight">\(p_0\)</span>使得系统立即进入稳态(<span class="math notranslate nohighlight">\(\pi_t = \mu_t = \overline \mu\)</span> 对所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span>)</p>
+<h2><span class="section-number">31.4. </span>结论或猜想<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>我们将会发现</p>
 <ul class="simple">
-<li><p>这个<span class="math notranslate nohighlight">\(p_0\)</span>满足方程:<span class="math notranslate nohighlight">\(\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \overline \pi\)</span></p></li>
-<li><p>该方程来自稳态条件<span class="math notranslate nohighlight">\(m_1 - p_0 = - \alpha \overline \pi\)</span></p></li>
+<li><p>如果存在，极限值<span class="math notranslate nohighlight">\(\overline \pi\)</span>和<span class="math notranslate nohighlight">\(\overline \mu\)</span>将相等</p></li>
+<li><p>如果存在极限值，则存在两个可能的极限值，一个高，一个低</p></li>
+<li><p>与讲座<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>中的结果不同，对于几乎所有的初始对数价格水平和预期通货膨胀率<span class="math notranslate nohighlight">\(p_0, \pi_{t}^*\)</span>，极限值<span class="math notranslate nohighlight">\(\overline \pi = \overline \mu\)</span>都是<strong>较低</strong>的稳态值</p></li>
+<li><p>对于两个可能的极限值<span class="math notranslate nohighlight">\(\bar \pi\)</span>中的每一个，都存在唯一的初始对数价格水平<span class="math notranslate nohighlight">\(p_0\)</span>，使得对所有<span class="math notranslate nohighlight">\(t \geq 0\)</span>都有<span class="math notranslate nohighlight">\(\pi_t = \mu_t = \bar \mu\)</span></p>
+<ul>
+<li><p>这个唯一的初始对数价格水平满足<span class="math notranslate nohighlight">\(\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \bar \pi\)</span></p></li>
+<li><p>前面关于<span class="math notranslate nohighlight">\(p_0\)</span>的方程来自<span class="math notranslate nohighlight">\(m_1 - p_0 = -  \alpha \bar \pi\)</span></p></li>
 </ul>
 </li>
-</ol>
+</ul>
 </section>
 <section id="id13">
-<h2><span class="section-number">31.5. </span>稳态通货膨胀率的计算<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
-<p>正如我们在早前的讲座 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a> 中讨论的，我们可以通过研究稳态劳动曲线来计算 <span class="math notranslate nohighlight">\(\bar \pi\)</span> 的两个潜在的限制值。</p>
-<p>因此，在一个<strong>稳态</strong>中
-$<span class="math notranslate nohighlight">\(
+<h2><span class="section-number">31.5. </span>通货膨胀率的极限值<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p>正如我们在早前的讲座 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a> 中所做的那样，我们可以通过研究稳态拉弗曲线来计算 <span class="math notranslate nohighlight">\(\bar \pi\)</span> 的两个潜在的极限值。</p>
+<p>因此，在一个<strong>稳态</strong>中</p>
+<div class="math notranslate nohighlight">
+\[
 m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
-\)</span>$</p>
+\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(x &gt; 0\)</span> 是货币供应量和价格水平的对数的共同增长率。</p>
-<p>几行代数可以得出满足 <span class="math notranslate nohighlight">\(x\)</span> 的以下方程</p>
+<p>几行代数运算可以得出满足 <span class="math notranslate nohighlight">\(x\)</span> 的以下方程</p>
 <div class="math notranslate nohighlight" id="equation-eq-ada-steadypi">
 <span class="eqno">(31.6)<a class="headerlink" href="#equation-eq-ada-steadypi" title="Link to this equation">#</a></span>\[
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
@@ -406,9 +410,9 @@ m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 <span class="eqno">(31.7)<a class="headerlink" href="#equation-eq-ada-revmax" title="Link to this equation">#</a></span>\[
 g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,  
 \]</div>
-<p>这样就可以通过印钞来财务支持 <span class="math notranslate nohighlight">\(g\)</span>。</p>
-<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的左侧是通过印钞筹集的稳定状态收入。</p>
-<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的右侧是政府通过印钞筹集的 <span class="math notranslate nohighlight">\(t\)</span> 时刻的商品数量。</p>
+<p>这样才有可能通过印钞来为 <span class="math notranslate nohighlight">\(g\)</span> 提供资金。</p>
+<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的左侧是通过印钞筹集的稳态收入。</p>
+<p><a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的右侧是政府通过印钞筹集的时刻 <span class="math notranslate nohighlight">\(t\)</span> 的商品数量。</p>
 <p>很快我们将绘制方程 <a class="reference internal" href="#equation-eq-ada-steadypi">(31.6)</a> 的左右两侧。</p>
 <p>但首先，我们将编写代码来计算稳态的
 <span class="math notranslate nohighlight">\(\bar \pi\)</span>。</p>
@@ -420,8 +424,6 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaxNLocator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cmap</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_rgba</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">root</span><span class="p">,</span> <span class="n">fsolve</span>
 
@@ -469,7 +471,7 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>两个稳态的π是: (0.6737147075333032, 1.6930797322614812)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>两个稳态的π是: (np.float64(0.6737147075333034), np.float64(1.6930797322614817))
 </pre></div>
 </div>
 </div>
@@ -506,7 +508,6 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi$&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;铸币税&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># 稳态拉弗曲线</span>
@@ -515,8 +516,12 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
 <figure class="align-default" id="laffer-curve-adaptive">
-<a class="reference internal image-reference" href="_images/a76632c39d8d60d939eb5fe083173d0bab423d173c818b495c505e73f9a93e16.png"><img alt="_images/a76632c39d8d60d939eb5fe083173d0bab423d173c818b495c505e73f9a93e16.png" src="_images/a76632c39d8d60d939eb5fe083173d0bab423d173c818b495c505e73f9a93e16.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/b795da8669ea5e9d474f62bc48197a048ba4ffb14bdd439038221d7d5ee7e185.png"><img alt="_images/b795da8669ea5e9d474f62bc48197a048ba4ffb14bdd439038221d7d5ee7e185.png" src="_images/b795da8669ea5e9d474f62bc48197a048ba4ffb14bdd439038221d7d5ee7e185.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 31.1 </span><span class="caption-text">稳态通胀下的铸币税函数。棕色虚线代表<span class="math notranslate nohighlight">\(\pi_l\)</span>和<span class="math notranslate nohighlight">\(\pi_u\)</span>。</span><a class="headerlink" href="#laffer-curve-adaptive" title="Link to this image">#</a></p>
@@ -526,15 +531,13 @@ g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,
 </div>
 </section>
 <section id="id15">
-<h2><span class="section-number">31.7. </span>初始价格水平的计算<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
-<p>既然我们已经找到了两个可能的稳态通货膨胀率，接下来我们需要计算与每个稳态相对应的初始价格水平 <span class="math notranslate nohighlight">\(p_{-1}\)</span>。</p>
-<p>这些初始价格水平很重要，因为它们能让系统从一开始就处于稳态，也就是说，如果我们从正确的 <span class="math notranslate nohighlight">\(p_{-1}\)</span> 开始，那么通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 会在所有时期 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 保持在稳态值 <span class="math notranslate nohighlight">\(\bar \pi\)</span> 不变。</p>
-<p>根据货币需求方程，初始价格水平应满足:</p>
+<h2><span class="section-number">31.7. </span>相关的初始价格水平<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<p>既然我们已经找到了两个可能的稳态，接下来我们可以计算两个初始对数价格水平 <span class="math notranslate nohighlight">\(p_{-1}\)</span>，作为初始条件，它们意味着对所有 <span class="math notranslate nohighlight">\(t \geq 0\)</span> 都有 <span class="math notranslate nohighlight">\(\pi_t = \bar \pi\)</span>。</p>
+<p>特别地，为了启动动态拉弗曲线的不动点，我们设定</p>
 <div class="math notranslate nohighlight">
 \[
 p_{-1} = m_0 + \alpha \pi^*
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(m_0\)</span> 是初始货币供应量的对数，<span class="math notranslate nohighlight">\(\alpha\)</span> 是货币需求对预期通货膨胀的敏感度，<span class="math notranslate nohighlight">\(\pi^*\)</span> 是稳态通货膨胀率。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_p_init</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">π_star</span><span class="p">):</span>
@@ -543,12 +546,12 @@ p_{-1} = m_0 + \alpha \pi^*
 
 <span class="c1"># 计算与 π_l 和 π_u 相关联的两个初始价格水平</span>
 <span class="n">p_l</span><span class="p">,</span> <span class="n">p_u</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">π</span><span class="p">:</span> <span class="n">solve_p_init</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">π</span><span class="p">),</span> <span class="p">(</span><span class="n">π_l</span><span class="p">,</span> <span class="n">π_u</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;初始 p_{-1}&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;为: </span><span class="si">{</span><span class="n">p_l</span><span class="p">,</span><span class="w"> </span><span class="n">p_u</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;相关的初始 p_{-1}&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;为: </span><span class="si">{</span><span class="n">p_l</span><span class="p">,</span><span class="w"> </span><span class="n">p_u</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>初始 p_{-1} 为: (4.9420275397547435, 5.451710052118832)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>相关的初始 p_{-1} 为: (np.float64(4.9420275397547435), np.float64(5.451710052118832))
 </pre></div>
 </div>
 </div>
@@ -592,7 +595,7 @@ p_{-1} = m_0 + \alpha \pi^*
 </div>
 </div>
 </div>
-<p>计算从 <span class="math notranslate nohighlight">\(p_{-1}\)</span> 开始，与 <span class="math notranslate nohighlight">\(\pi_l\)</span> 相关联的极限值</p>
+<p>计算从与 <span class="math notranslate nohighlight">\(\pi_l\)</span> 相关联的 <span class="math notranslate nohighlight">\(p_{-1}\)</span> 开始的极限值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">π_seq</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span> <span class="o">=</span> <span class="n">solve_laffer_adapt</span><span class="p">(</span><span class="n">p_l</span><span class="p">,</span> <span class="n">π_l</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
@@ -616,7 +619,7 @@ eq_g == g: True
 </div>
 </div>
 </div>
-<p>现在计算从初始价格水平 <span class="math notranslate nohighlight">\(p_{-1}\)</span> 开始，收敛到高通胀稳态 <span class="math notranslate nohighlight">\(\pi_u\)</span> 的动态路径</p>
+<p>计算从与 <span class="math notranslate nohighlight">\(\pi_u\)</span> 相关联的 <span class="math notranslate nohighlight">\(p_{-1}\)</span> 开始的极限值</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">π_seq</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span> <span class="o">=</span> <span class="n">solve_laffer_adapt</span><span class="p">(</span><span class="n">p_u</span><span class="p">,</span> <span class="n">π_u</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
@@ -633,8 +636,8 @@ eq_g == g: True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m_{t+1} - m_t: 1.69307973225105
-p_{t+1} - p_t: 1.6930797322506947
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m_{t+1} - m_t: 1.6930797322452094
+p_{t+1} - p_t: 1.6930797322446836
 eq_g == g: True
 </pre></div>
 </div>
@@ -643,13 +646,13 @@ eq_g == g: True
 </section>
 </section>
 <section id="id17">
-<h2><span class="section-number">31.8. </span>拉弗曲线动态的不稳定性<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
-<p>与<a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 和<a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a>类似，我们现在已经具备了从不同的 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 设置开始计算时间序列的能力。</p>
-<p>现在我们将研究当初始条件 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 偏离稳态值 <span class="math notranslate nohighlight">\(\pi_u\)</span> 或 <span class="math notranslate nohighlight">\(\pi_l\)</span> 时，系统的动态演化过程。</p>
-<p>为了生成不同的初始条件，我们将:</p>
+<h2><span class="section-number">31.8. </span>拉弗曲线动态的不稳定一侧<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
+<p>现在我们已经具备了从不同的 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 设置开始计算时间序列的能力，这与讲座 <a class="reference internal" href="money_inflation.html"><span class="doc">通过货币资助的政府赤字和价格水平</span></a> 和讲座 <a class="reference internal" href="money_inflation_nonlinear.html"><span class="doc">通货膨胀税的拉弗曲线</span></a> 中的做法类似。</p>
+<p>现在我们将研究当我们从偏离动态拉弗曲线静态点（即偏离 <span class="math notranslate nohighlight">\(\pi_u\)</span> 或 <span class="math notranslate nohighlight">\(\pi_l\)</span>）的 <span class="math notranslate nohighlight">\(p_{-1}, \pi_{-1}^*\)</span> 出发时，结果是如何展开的。</p>
+<p>为了构造一对扰动 <span class="math notranslate nohighlight">\(\check p_{-1}, \check \pi_{-1}^*\)</span>，我们将实施以下伪代码：</p>
 <ul class="simple">
-<li><p>选择一系列不同于稳态值的初始预期通胀率 <span class="math notranslate nohighlight">\(\pi_{-1}^*\)</span></p></li>
-<li><p>根据货币需求方程，计算对应的初始价格水平 <span class="math notranslate nohighlight">\(p_{-1} = m_0 + \alpha \pi_{-1}^*\)</span></p></li>
+<li><p>设定 <span class="math notranslate nohighlight">\(\check \pi_{-1}^*\)</span> 不等于静态点 <span class="math notranslate nohighlight">\(\pi_u\)</span> 或 <span class="math notranslate nohighlight">\(\pi_l\)</span> 中的任何一个。</p></li>
+<li><p>设定 <span class="math notranslate nohighlight">\(\check p_{-1} = m_0 + \alpha \check \pi_{-1}^*\)</span></p></li>
 </ul>
 <div class="cell tag_hide-cell docutils container">
 <details class="admonition hide above-input">
@@ -710,13 +713,205 @@ eq_g == g: True
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="pi0-path">
-<a class="reference internal image-reference" href="_images/e5410dc11828131fced66d64437f653fdc8fea67ff96038c6acddbe2267fc225.png"><img alt="_images/e5410dc11828131fced66d64437f653fdc8fea67ff96038c6acddbe2267fc225.png" src="_images/e5410dc11828131fced66d64437f653fdc8fea67ff96038c6acddbe2267fc225.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/d916ba3cf631bcba61a9feae785caa3e7c540aab774103ec7897f9a06afd1ac8.png"><img alt="_images/d916ba3cf631bcba61a9feae785caa3e7c540aab774103ec7897f9a06afd1ac8.png" src="_images/d916ba3cf631bcba61a9feae785caa3e7c540aab774103ec7897f9a06afd1ac8.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 31.2 </span><span class="caption-text">从不同的 <span class="math notranslate nohighlight">\(\pi_0\)</span> 初始值开始，<span class="math notranslate nohighlight">\(m_t\)</span> 的路径（顶部图，<span class="math notranslate nohighlight">\(m\)</span> 的对数标度），<span class="math notranslate nohighlight">\(p_t\)</span>（第二副图，<span class="math notranslate nohighlight">\(p\)</span> 的对数标度），<span class="math notranslate nohighlight">\(\pi_t\)</span>（第三副图），和 <span class="math notranslate nohighlight">\(\mu_t\)</span>（底部图）</span><a class="headerlink" href="#pi0-path" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
+</div>
+</section>
+<section id="id18">
+<h2><span class="section-number">31.9. </span>练习<a class="headerlink" href="#id18" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="la_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 31.1 </span></p>
+<section id="exercise-content">
+<p><strong>比较静态分析：稳态通货膨胀率如何随政府赤字 <span class="math notranslate nohighlight">\(g\)</span> 变化？</strong></p>
+<p>本讲称，在自适应预期下，”老派信条”成立：
+降低政府赤字 <span class="math notranslate nohighlight">\(g\)</span> 会降低低通胀稳态 <span class="math notranslate nohighlight">\(\pi_l\)</span>。</p>
+<p>a. 通过使用 <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize_scalar</span></code> 找到使 <span class="math notranslate nohighlight">\(\exp(-\alpha x) - \exp(-(1+\alpha)x)\)</span> 最大化的 <span class="math notranslate nohighlight">\(x\)</span>，
+计算最大铸币税收入 <span class="math notranslate nohighlight">\(g_{\rm max}\)</span> 及相应的 <span class="math notranslate nohighlight">\(x_{\rm max}\)</span>。</p>
+<p>b. 对于从一个较小的正值到 <span class="math notranslate nohighlight">\(0.999 \times g_{\rm max}\)</span> 范围内的 <span class="math notranslate nohighlight">\(g\)</span>，
+计算 <span class="math notranslate nohighlight">\(\pi_l(g)\)</span> 和 <span class="math notranslate nohighlight">\(\pi_u(g)\)</span>，并在同一坐标轴上绘制它们随 <span class="math notranslate nohighlight">\(g\)</span> 变化的图像。</p>
+<p>c. 验证当 <span class="math notranslate nohighlight">\(g \to g_{\rm max}\)</span> 时两个根是否合并，以及当 <span class="math notranslate nohighlight">\(g\)</span> 从基准值 <span class="math notranslate nohighlight">\(g = 0.35\)</span>
+减少到 <span class="math notranslate nohighlight">\(g/2\)</span> 时 <span class="math notranslate nohighlight">\(\pi_l\)</span> 是否下降，然后将其与本讲中的”老派信条”论断联系起来。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="laffer_adaptive-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#la_ex1"> Exercise 31.1</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
+
+<span class="c1"># 第 a 部分：求 g_max</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">minimize_scalar</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">compute_seign</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">),</span>
+                      <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bounded&#39;</span><span class="p">)</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+<span class="n">g_max</span> <span class="o">=</span> <span class="n">compute_seign</span><span class="p">(</span><span class="n">x_max</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_max  = </span><span class="si">{</span><span class="n">x_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;g_max  = </span><span class="si">{</span><span class="n">g_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_max  = 1.0986
+g_max  = 0.3849
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 第 b 部分：追踪 π_l(g) 和 π_u(g)</span>
+<span class="n">g_grid</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">g_max</span> <span class="o">*</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">πl_list</span><span class="p">,</span> <span class="n">πu_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_grid</span><span class="p">:</span>
+    <span class="n">mod_g</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">πl_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve_π_bar</span><span class="p">(</span><span class="n">mod_g</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+    <span class="n">πu_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solve_π_bar</span><span class="p">(</span><span class="n">mod_g</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">4.0</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_grid</span><span class="p">,</span> <span class="n">πl_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_l(g)$ - 低通胀稳态&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_grid</span><span class="p">,</span> <span class="n">πu_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_u(g)$ - 高通胀稳态&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;基准 $g = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;政府赤字 $g$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;稳态通货膨胀率 $\bar\pi$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;稳态通货膨胀率与政府赤字的关系&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/df03909e73965be9f7c19b397e5e8cbbb7f8dbd4ab237bfaa0dccd2b2baff4e1.png"><img alt="_images/df03909e73965be9f7c19b397e5e8cbbb7f8dbd4ab237bfaa0dccd2b2baff4e1.png" src="_images/df03909e73965be9f7c19b397e5e8cbbb7f8dbd4ab237bfaa0dccd2b2baff4e1.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 第 c 部分：验证&quot;老派信条&quot;</span>
+<span class="n">π_l_bench</span> <span class="o">=</span> <span class="n">solve_π_bar</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">π_l_half</span>  <span class="o">=</span> <span class="n">solve_π_bar</span><span class="p">(</span><span class="n">create_model</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;当 g = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> 时 π_l:      </span><span class="si">{</span><span class="n">π_l_bench</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;当 g = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> 时 π_l:   </span><span class="si">{</span><span class="n">π_l_half</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;将 g 减半使 π_l 降低了 </span><span class="si">{</span><span class="n">π_l_bench</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">π_l_half</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>当 g = 0.35 时 π_l:      0.6737
+当 g = 0.175 时 π_l:   0.2170
+将 g 减半使 π_l 降低了 0.4567
+</pre></div>
+</div>
+</div>
+</div>
+<p>这两条曲线在 <span class="math notranslate nohighlight">\(g_{\rm max}\)</span> 处合并，因为拉弗曲线在该处达到峰值，
+无法再支持两个不同的通货膨胀率。</p>
+<p>随着 <span class="math notranslate nohighlight">\(g\)</span> 的下降，<span class="math notranslate nohighlight">\(\pi_l\)</span> 单调下降，而 <span class="math notranslate nohighlight">\(\pi_u\)</span> 上升，这证实了”老派信条”：
+自适应预期选择了低通胀均衡，在这个均衡中，较低的赤字直接意味着较低的通货膨胀。</p>
+</section>
+</div>
+<div class="exercise admonition" id="la_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 31.2 </span></p>
+<section id="exercise-content">
+<p><strong>预期调整速度 <span class="math notranslate nohighlight">\(\delta\)</span> 如何影响收敛。</strong></p>
+<p>参数 <span class="math notranslate nohighlight">\(\delta \in (0,1)\)</span> 控制公众更新其通货膨胀预期的速度：<span class="math notranslate nohighlight">\(\delta\)</span> 接近 <span class="math notranslate nohighlight">\(1\)</span>
+意味着预期非常缓慢（严重依赖过去信息），而 <span class="math notranslate nohighlight">\(\delta\)</span> 接近 <span class="math notranslate nohighlight">\(0\)</span> 意味着预期
+几乎瞬时调整。</p>
+<p>固定一个介于 <span class="math notranslate nohighlight">\(\pi_l\)</span> 和 <span class="math notranslate nohighlight">\(\pi_u\)</span> 之间的初始值 <span class="math notranslate nohighlight">\(\pi_0\)</span>，即
+<span class="math notranslate nohighlight">\(\pi_0 = (\pi_l + \pi_u)/2\)</span>，并设定 <span class="math notranslate nohighlight">\(p_{-1} = m_0 + \alpha \pi_0\)</span>。</p>
+<p>a. 使用 <code class="docutils literal notranslate"><span class="pre">create_model</span></code> 和 <code class="docutils literal notranslate"><span class="pre">solve_laffer_adapt</span></code>，对每个
+<span class="math notranslate nohighlight">\(\delta \in \{0.3,\, 0.6,\, 0.9\}\)</span> 模拟 80 个时间步，在同一个图上绘制
+得到的 <span class="math notranslate nohighlight">\(\pi_t\)</span> 路径，并添加一条位于 <span class="math notranslate nohighlight">\(\pi_l\)</span> 处的水平虚线作为参考。</p>
+<p>b. 对每个 <span class="math notranslate nohighlight">\(\delta\)</span> 值，报告 <span class="math notranslate nohighlight">\(\pi_t\)</span> 达到 <span class="math notranslate nohighlight">\(\pi_l\)</span> 的 <span class="math notranslate nohighlight">\(0.01\)</span> 范围内所需的时间步数。</p>
+<p>c. 直观地解释为什么较大的 <span class="math notranslate nohighlight">\(\delta\)</span> 会导致收敛速度较慢。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="laffer_adaptive-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#la_ex2"> Exercise 31.2</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">δ_values</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">π0</span> <span class="o">=</span> <span class="p">(</span><span class="n">π_l</span> <span class="o">+</span> <span class="n">π_u</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>          <span class="c1"># 从两个稳态的中间值开始</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">δ</span> <span class="ow">in</span> <span class="n">δ_values</span><span class="p">:</span>
+    <span class="n">mod_δ</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="n">δ</span><span class="o">=</span><span class="n">δ</span><span class="p">)</span>
+    <span class="c1"># 重新计算此 δ 下的稳态（它们不会改变，但需确认）</span>
+    <span class="n">π_l_δ</span> <span class="o">=</span> <span class="n">solve_π_bar</span><span class="p">(</span><span class="n">mod_δ</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">p0</span>    <span class="o">=</span> <span class="n">mod_δ</span><span class="o">.</span><span class="n">m0</span> <span class="o">+</span> <span class="n">mod_δ</span><span class="o">.</span><span class="n">α</span> <span class="o">*</span> <span class="n">π0</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">solve_laffer_adapt</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">π0</span><span class="p">,</span> <span class="n">mod_δ</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_steps</span><span class="p">),</span> <span class="n">π_seq</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">delta=</span><span class="si">{</span><span class="n">δ</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">π_l</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_l$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;不同调整速度 $</span><span class="se">\\</span><span class="s1">delta$ 下向 $</span><span class="se">\\</span><span class="s1">pi_l$ 收敛的过程&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/a5e48f5d3f2af29673edb6ad468fd44c2c1e43646fdee1cd881c667d85bb64a9.png"><img alt="_images/a5e48f5d3f2af29673edb6ad468fd44c2c1e43646fdee1cd881c667d85bb64a9.png" src="_images/a5e48f5d3f2af29673edb6ad468fd44c2c1e43646fdee1cd881c667d85bb64a9.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 第 b 部分：达到 |π_t - π_l| &lt; 0.01 所需的步数</span>
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;δ&#39;</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;达到 |π_t - π_l| &lt; 0.01 所需步数&#39;</span><span class="si">:</span><span class="s2">&gt;30</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">δ</span> <span class="ow">in</span> <span class="n">δ_values</span><span class="p">:</span>
+    <span class="n">mod_δ</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="n">δ</span><span class="o">=</span><span class="n">δ</span><span class="p">)</span>
+    <span class="n">p0</span>    <span class="o">=</span> <span class="n">mod_δ</span><span class="o">.</span><span class="n">m0</span> <span class="o">+</span> <span class="n">mod_δ</span><span class="o">.</span><span class="n">α</span> <span class="o">*</span> <span class="n">π0</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">solve_laffer_adapt</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">π0</span><span class="p">,</span> <span class="n">mod_δ</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+    <span class="n">hits</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">π_seq</span> <span class="o">-</span> <span class="n">π_l</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">hits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&gt;80&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">δ</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;30</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    δ      达到 |π_t - π_l| &lt; 0.01 所需步数
+----------------------------------------
+  0.3                               3
+  0.6                              10
+  0.9                              72
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>第 c 部分。</strong> 当 <span class="math notranslate nohighlight">\(\delta\)</span> 较大时，每期 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 的修正只是预测误差的一小部分
+<span class="math notranslate nohighlight">\((1-\delta)\)</span>，因此预期是有黏性的。</p>
+<p>这意味着推动经济朝向 <span class="math notranslate nohighlight">\(\pi_l\)</span> 的预期信号每期只能微弱地传递，因此实际通货膨胀率
+<span class="math notranslate nohighlight">\(\pi_t\)</span> 是缓慢地向稳态爬行，而不是迅速跳跃到那里。</p>
+<p>较小的 <span class="math notranslate nohighlight">\(\delta\)</span> 会给予预测误差全部或接近全部的权重，使预期迅速贴合当前观测值，
+并在短短几期内将 <span class="math notranslate nohighlight">\(\pi_t\)</span> 拉向 <span class="math notranslate nohighlight">\(\pi_l\)</span>。</p>
+</section>
 </div>
 </section>
 </section>
@@ -900,7 +1095,7 @@ eq_g == g: True
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

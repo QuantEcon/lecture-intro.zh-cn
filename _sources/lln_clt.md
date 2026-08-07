@@ -9,6 +9,22 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 大数定律与中心极限定理
+  headings:
+    Overview: 概述
+    The law of large numbers: 大数定律
+    The law of large numbers::The LLN in action: 大数定律的应用
+    The law of large numbers::Statement of the LLN: 大数定律的陈述
+    The law of large numbers::Comments on the theorem: 关于定理的评论
+    The law of large numbers::Illustration: 示例说明
+    Breaking the LLN: 打破大数定律
+    Breaking the LLN::Infinite first moment: 无限的一阶矩
+    Breaking the LLN::Failure of the IID condition: IID 条件的失效
+    Central limit theorem: 中心极限定理
+    Central limit theorem::Statement of the theorem: 定理的陈述
+    Central limit theorem::Simulation 1: 模拟 1
+    Exercises: 练习
 ---
 
 # 大数定律与中心极限定理
@@ -57,7 +73,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```{prf:example}
 :label: lln_ex_ber
 
-考虑一个参数为 $p$ 的[伯努利随机变量](https://baike.baidu.com/item/%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83/1442377) $X$。
+考虑一个参数为 $p$ 的[伯努利随机变量](https://en.wikipedia.org/wiki/Bernoulli_distribution) $X$。
 
 这意味着 $X$ 的取值在 $\{0,1\}$ 中，且 $\mathbb P\{X=1\} = p$。
 
@@ -107,6 +123,8 @@ print(X_draws.mean())
 让我们将这个讨论与我们前面说的样本均值收敛于“总体均值”联系起来。
 
 想象 $X_1, \ldots, X_n$ 是独立的投掷硬币行为。
+
+* 独立意味着第 $i$ 次投掷的结果不会影响任何其他投掷的结果
 
 总体均值是在无限样本中的平均值，等于期望 $\mathbb E X$。
 
@@ -174,21 +192,23 @@ $$
 ```{math}
 :label: lln_as
 
-\mathbb P \left\{ \overline{X}_n \to \mu \text{ 当 } n \to \infty \right\} = 1
+\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1
 ```
 ````
 
 这里
 
-* IID 表示独立同分布，并且
+* IID 表示[独立同分布](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
 * $\mathbb E |X| = \int_{-\infty}^\infty |x| f(x) dx$
+
+
 
 
 ### 关于定理的评论
 
 定理中的概率为一是什么意思？
 
-我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这[并非严格真实](https://baike.baidu.com/item/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%8F%91%E7%94%9F%E5%99%A8/20835345)）。
+我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这[并非严格真实](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)）。
 
 同时假设我们可以生成无限序列，从而使得 $\bar X_n \to \mu$ 能够得到评估。
 
@@ -339,7 +359,7 @@ means_violin_plot(st.beta(6, 6))
 
 如定理所示，当 $\mathbb E |X|$ 不是有限的时候，大数定律可以不成立。
 
-我们可以使用[柯西分布](https://baike.baidu.com/item/%E6%9F%AF%E8%A5%BF%E5%88%86%E5%B8%83/5021907)来证明这一点。
+我们可以使用[柯西分布](https://en.wikipedia.org/wiki/Cauchy_distribution)来证明这一点。
 
 柯西分布具有以下性质：
 
@@ -353,6 +373,7 @@ means_violin_plot(st.beta(6, 6))
 
 +++
 
+
 ### IID 条件的失效
 
 大数定律可能因违反 IID 假设而不成立。
@@ -362,24 +383,25 @@ means_violin_plot(st.beta(6, 6))
 
 $$
     X_0 \sim N(0,1)
-    \quad \text{和} \quad
-    X_i = X_{i-1} \quad \text{对于} \quad i = 1, ..., n
+    \quad \text{and} \quad
+    X_i = X_{i-1} \quad \text{for} \quad i = 1, ..., n
 $$
 
 在这种情况下，
 
 $$
-    \bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
+    \bar X_n = \frac{1}{n} \sum_{i=1}^n X_i = X_0 \sim N(0,1)
 $$
 
-因此，对所有 $n$ ，$\bar{X}_n$ 的分布都是 $N(0,1)$！
+因此，对所有 $n$ ，$\bar X_n$ 的分布都是 $N(0,1)$！
 ```
 
-这是否与表明 $\bar{X}_n$ 的分布将收敛至单点 $\mu$ 的大数定律相矛盾？
+这是否与表明 $\bar X_n$ 的分布将收敛至单点 $\mu$ 的大数定律相矛盾？
 
 不，LLN 是正确的——问题在于其假设未被满足。
 
 特别是，序列 $X_1, \ldots, X_n$ 不是独立的。
+
 
 ```{note}
 :name: iid_violation
@@ -396,13 +418,15 @@ $$
 ```{index} single: Central Limit Theorem
 ```
 
-接下来，我们来讨论中心极限定理（Central Limit Theorem, CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
+接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
+
 
 ### 定理的陈述
 
 中心极限定理是数学中最了不起的结果之一。
 
 在独立同分布（IID）的设定下，它告诉我们以下内容：
+
 
 ````{prf:theorem}
 :label: statement_clt
@@ -412,15 +436,16 @@ $$
 ```{math}
 :label: lln_clt
 
-\sqrt{n} (\bar X_n - \mu ) \stackrel { d } { \to } N(0, \sigma^2)
+\sqrt{n} ( \bar X_n - \mu ) \stackrel { d } {\to} N(0, \sigma^2)
 \quad \text{as} \quad
 n \to \infty
 ```
 ````
 
-这里的 $\stackrel { d } { \to } N(0, \sigma^2)$ 表示[分布收敛](https://baike.baidu.com/item/%E4%BE%9D%E5%88%86%E5%B8%83%E6%94%B6%E6%95%9B/19127365)到以 0 为均值且标准差为 $\sigma$ 的正态分布。
+这里的 $\stackrel { d } {\to} N(0, \sigma^2)$ 表示[分布收敛](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution)到以 0 为均值且标准差为 $\sigma$ 的正态分布。
 
-CLT 的惊人含义是，对于任何具有有限[二阶矩](https://baike.baidu.com/item/%E7%9F%A9/22856460)的分布，简单地添加独立样本总是会得到高斯（正态）曲线。
+
+CLT 的惊人含义是，对于任何具有有限[二阶矩](https://en.wikipedia.org/wiki/Moment_(mathematics))的分布，简单地添加独立样本总是会得到高斯（正态）曲线。
 
 
 
@@ -432,26 +457,26 @@ CLT 的惊人含义是，对于任何具有有限[二阶矩](https://baike.baidu
 为此，我们现在进行以下模拟：
 
 1. 为基本观察值 $X_i$ 选择一个任意分布 $F$。
-1. 生成独立的 $Y_n := \sqrt{n} (\bar{X}_n - \mu)$ 的抽取。
+1. 生成独立的 $Y_n := \sqrt{n} ( \bar X_n - \mu )$ 的抽取。
 1. 使用这些抽取来计算它们的分布的某些度量值——例如直方图。
 1. 将后者与 $N(0, \sigma^2)$ 进行比较。
 
 下面的代码正是为指数分布 $F(x) = 1 - e^{- \lambda x}$ 执行了这一操作。
 
-（请尝试使用其他分布$F$ ，但请记住，为了符合中心极限定理的条件，分布必须有有限的二阶矩。）
+（请尝试使用其他分布 $F$，但请记住，为了符合中心极限定理的条件，分布必须有有限的二阶矩。）
 
 (sim_one)=
 
 ```{code-cell} ipython3
-# 设定参数
-n = 250               # n 的选择
-k = 1_000_000         # Y_n 的抽取次数
-distribution = st.expon(2) # 指数分布，λ = 1/2
+# 设置参数
+n = 250         # n 的选择
+k = 1_000_000        # Y_n 的抽取次数
+distribution = st.expon(scale=2) # 指数分布，λ = 1/2
 μ, σ = distribution.mean(), distribution.std()
 
-# 抽取底层随机变量。每行包含一次抽取的 X_1, ..., X_n
+# 抽取底层随机变量。每行包含一次抽取的 X_1,..,X_n
 data = distribution.rvs((k, n))
-# 计算每行的均值，生成 k 次抽取的 \bar{X}_n
+# 计算每行的均值，生成 k 次抽取的 \bar X_n
 sample_means = data.mean(axis=1)
 # 生成 Y_n 的观察值
 Y = np.sqrt(n) * (sample_means - μ)
@@ -462,7 +487,7 @@ xmin, xmax = -3 * σ, 3 * σ
 ax.set_xlim(xmin, xmax)
 ax.hist(Y, bins=60, alpha=0.4, density=True)
 xgrid = np.linspace(xmin, xmax, 200)
-ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ), 
+ax.plot(xgrid, st.norm.pdf(xgrid, scale=σ),
         'k-', lw=2, label=r'$N(0, \sigma^2)$')
 ax.set_xlabel(r"$Y_n$", size=12)
 ax.set_ylabel("密度", size=12)
@@ -474,17 +499,17 @@ plt.show()
 
 （注意这里没有 for 循环——所有的操作都是矢量化的，意味着主要计算都转移到了快速的 C 代码上。）
 
-通过增加 `n`，我们会越来越接近正态分布。
+拟合正态密度的效果已经很紧密了，并且可以通过增加 `n` 来进一步改善。
 
 
 ## 练习
 
 
 
-```{exercise} 
+```{exercise}
 :label: lln_ex1
 
-用[贝塔分布](https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83/8994021)重复[上面](sim_one)的模拟。
+用[贝塔分布](https://en.wikipedia.org/wiki/Beta_distribution)重复[上面](sim_one)的模拟。
 
 你可以选择任何 $\alpha > 0$ 和 $\beta > 0$。
 ```
@@ -524,51 +549,54 @@ plt.show()
 ```{solution-end}
 ```
 
-````{exercise} 
+````{exercise}
 :label: lln_ex2
 
 在这次讲座开始时，我们讨论了伯努利随机变量。
 
-NumPy没有提供我们可以从中采样的`bernoulli`函数。
+NumPy 没有提供我们可以从中采样的 `bernoulli` 函数。
 
-但是，我们可以通过NumPy生成伯努利$X$的抽样，使用以下方式：
+但是，我们可以通过 NumPy 生成伯努利 $X$ 的抽样，使用以下方式：
 
 ```python3
-U = np.random.rand()
+rng = np.random.default_rng()
+U = rng.random()
 X = 1 if U < p else 0
 print(X)
 ```
 
-解释为什么这行代码可以提供一个具有正确分布的随机变量$X$。
+解释为什么这行代码可以提供一个具有正确分布的随机变量 $X$。
 ````
 
 ```{solution-start} lln_ex2
 :class: dropdown
 ```
 
-我们可以将$X$写为$X = \mathbf 1\{U < p\}$，其中$\mathbf 1$是
+我们可以将 $X$ 写为 $X = \mathbf 1\{U < p\}$，其中 $\mathbf 1$ 是
 [指示函数](https://en.wikipedia.org/wiki/Indicator_function)（即，
 如果语句为真则为1，否则为0）。
 
-这里我们生成了一个在$[0,1]$上均匀分布的$U$，然后使用了以下事实：
+这里我们生成了一个在 $[0,1]$ 上均匀分布的 $U$，然后使用了以下事实：
 
 $$
 \mathbb P\{0 \leq U < p\} = p - 0 = p
 $$
 
-这意味着$X = \mathbf 1\{U < p\}$具有正确的分布。
+这意味着 $X = \mathbf 1\{U < p\}$ 具有正确的分布。
 
 ```{solution-end}
 ```
 
+
+
 ```{exercise}
 :label: lln_ex3
 
-我们上面提到即使违反IID条件，大数定律有时仍然成立。
+我们上面提到即使违反 IID 条件，大数定律有时仍然成立。
 
 让我们进一步探讨这个说法。
 
-考虑AR(1)过程
+考虑 AR(1) 过程
 
 $$
     X_{t+1} = \alpha + \beta X_t + \sigma \epsilon _{t+1}
@@ -585,10 +613,11 @@ $$
 
 这个过程违反了大数定律的独立性假设
 （因为 $X_{t+1}$ 依赖于 $X_t$ 的值）。
-与大数定律类似的收敛仍然会发生。
+
+然而，接下来的练习告诉我们样本均值向总体均值的大数定律型收敛仍然会发生。
 
 1. 证明序列 $X_1, X_2, \ldots$ 是同分布的。
-2. 使用模拟证明大数定律类似的收敛成立，其中 $\alpha = 0.8$, $\beta = 0.2$。
+2. 使用模拟证明大数定律的收敛成立，其中 $\alpha = 0.8$, $\beta = 0.2$，$\sigma = 10$。
 
 ```
 
@@ -633,7 +662,7 @@ $$
     N \left(\frac{\alpha}{1-\beta}, \frac{\sigma^2}{1-\beta^2}\right) 
 $$ 
 
-我们可以得出结论，这个AR(1)过程违反了独立性假设，但是分布相同。
+我们可以得出结论，这个 AR(1) 过程违反了独立性假设，但是分布相同。
 
 **第二题答案**
 
@@ -645,7 +674,7 @@ n = 100_000
 
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.ones(n)
-x[0] = st.norm.rvs(α/(1-β), α**2/(1-β**2))
+x[0] = st.norm.rvs(loc=α/(1-β), scale=σ / np.sqrt(1-β**2))
 ϵ = st.norm.rvs(size=n+1)
 means = np.ones(n)
 means[0] = x[0]
@@ -657,7 +686,7 @@ for t in range(n-1):
 ax.scatter(range(100, n), means[100:n], s=10, alpha=0.5)
 
 ax.set_xlabel(r"$n$", size=12)
-ax.set_ylabel(r"$\bar{X}_n$", size=12)
+ax.set_ylabel(r"$\bar X_n$", size=12)
 yabs_max = max(ax.get_ylim(), key=abs)
 ax.axhline(y=α/(1-β), ls="--", lw=3, 
            label=r"$\mu = \frac{\alpha}{1-\beta}$", 
@@ -667,7 +696,8 @@ plt.legend()
 plt.show()
 ```
 
-我们看到在独立性假设被违反的情况下，$\bar{x}$ 仍然收敛于 $\mu$。
+我们看到即使在独立性假设被违反的情况下，$\bar x$ 仍然收敛于 $\mu$。
+
 
 ```{solution-end}
 ```

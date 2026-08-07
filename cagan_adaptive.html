@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -205,14 +205,16 @@
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">15.1. 引言</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">15.2. 模型结构</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">15.3. 关键方程的矩阵表示</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">15.4. 求解模型</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">15.5. 预期与实际通货膨胀的差异</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">15.6. 稳定性的条件</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">15.6.1. 实验1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">15.6.2. 实验2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">15.3. 关键方程的矩阵表示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">15.4. 从矩阵表述中获取洞见</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">15.5. 预测误差与模型计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">15.6. 稳定性的技术条件</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">15.7. 实验</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">15.7.1. 实验1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">15.7.2. 实验2</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">15.8. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -268,7 +270,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -279,11 +281,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -305,12 +307,12 @@
 <p>本讲座可以被看作是 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 的续篇或前传。</p>
 <p>我们将运用线性代数来探讨另一种”货币主义”或”财政”价格水平理论。</p>
 <p>与 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中的模型类似，本模型认为，当政府实施持续性的财政赤字并通过印钞来弥补时，会推高价格水平并导致持续通货膨胀。</p>
-<p>不同于 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中的”完全预见”或”理性预期”版本，本讲座介绍的是菲利普·凯根 <span id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> 用于研究恶性通货膨胀动态的”自适应预期”版本。</p>
+<p>不同于 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中的”完全预见”或”理性预期”版本，本讲座介绍的是 <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> 用于研究恶性通货膨胀动态的”自适应预期”版本模型。</p>
 <p>该模型包含以下几个要素：</p>
 <ul class="simple">
 <li><p>一个实际货币需求函数，表明所需实际货币余额的对数与公众预期通胀率呈负相关</p></li>
-<li><p>一个<strong>自适应预期</strong>模型，描述公众如何根据过去的实际通胀率调整其通胀预期</p></li>
-<li><p>一个货币供需均衡条件</p></li>
+<li><p>一个<strong>自适应预期</strong>模型，描述公众预期通胀率如何随过去实际通胀率的变化而调整</p></li>
+<li><p>一个使货币需求等于货币供给的均衡条件</p></li>
 <li><p>一个外生的货币供应增长率序列</p></li>
 </ul>
 <p>我们的模型与凯根的原始模型非常接近。</p>
@@ -329,33 +331,33 @@
 <li><p><span class="math notranslate nohighlight">\(T\)</span> 为时间跨度 – 即模型确定 <span class="math notranslate nohighlight">\(p_t\)</span> 的最后一期</p></li>
 <li><p><span class="math notranslate nohighlight">\(\pi_0^*\)</span> 为公众对第0期到第1期通胀率的初始预期</p></li>
 </ul>
-<p>实际货币余额 <span class="math notranslate nohighlight">\(\exp\left(\frac{m_t^d}{p_t}\right)\)</span> 的需求由以下凯根需求函数决定：</p>
+<p>实际货币余额 <span class="math notranslate nohighlight">\(\exp\left(m_t^d-p_t\right)\)</span> 的需求由以下版本的凯根需求函数决定：</p>
 <div class="math notranslate nohighlight" id="equation-eq-caganmd-ad">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-eq-caganmd-ad" title="Link to this equation">#</a></span>\[  
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-eq-caganmd-ad" title="Link to this equation">#</a></span>\[
 m_t^d - p_t = -\alpha \pi_t^* \: , \: \alpha &gt; 0 ; \quad t = 0, 1, \ldots, T .
 \]</div>
-<p>该方程表明，实际货币余额需求与预期通胀率成反比。</p>
+<p>该方程表明，实际货币余额需求与公众预期通胀率成反比，其敏感程度由 <span class="math notranslate nohighlight">\(\alpha\)</span> 衡量。</p>
 <p>将方程 <a class="reference internal" href="#equation-eq-caganmd-ad">(15.1)</a> 中的货币需求对数 <span class="math notranslate nohighlight">\(m_t^d\)</span> 设为等于货币供给对数 <span class="math notranslate nohighlight">\(m_t\)</span>，并求解价格水平对数 <span class="math notranslate nohighlight">\(p_t\)</span>，得到：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqfiscth1">
 <span class="eqno">(15.2)<a class="headerlink" href="#equation-eq-eqfiscth1" title="Link to this equation">#</a></span>\[
 p_t = m_t + \alpha \pi_t^*
 \]</div>
-<p>对方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 求时间差分，得到：</p>
+<p>对方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 在 <span class="math notranslate nohighlight">\(t+1\)</span> 时刻与 <span class="math notranslate nohighlight">\(t\)</span> 时刻取差分，得到：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqpipi">
 <span class="eqno">(15.3)<a class="headerlink" href="#equation-eq-eqpipi" title="Link to this equation">#</a></span>\[
 \pi_t = \mu_t + \alpha \pi_{t+1}^* - \alpha \pi_t^*
 \]</div>
-<p>我们假设预期通胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 遵循弗里德曼-凯根的自适应预期机制：</p>
+<p>我们假设预期通胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 遵循由 <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id183" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span> 和 <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id112" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> 提出的以下自适应预期机制，其中 <span class="math notranslate nohighlight">\(\lambda\in [0,1]\)</span> 表示预期通胀的权重。</p>
 <div class="math notranslate nohighlight" id="equation-eq-adaptexpn">
 <span class="eqno">(15.4)<a class="headerlink" href="#equation-eq-adaptexpn" title="Link to this equation">#</a></span>\[
-\pi_{t+1}^* = \lambda \pi_t^* + (1 -\lambda) \pi_t 
+\pi_{t+1}^* = \lambda \pi_t^* + (1 -\lambda) \pi_t
 \]</div>
-<p>模型的外生输入包括初始条件 <span class="math notranslate nohighlight">\(m_0, \pi_0^*\)</span> 和货币增长序列 <span class="math notranslate nohighlight">\(\mu = \{\mu_t\}_{t=0}^T\)</span>。</p>
-<p>模型的内生输出是序列 <span class="math notranslate nohighlight">\(\pi = \{\pi_t\}_{t=0}^T\)</span> 和 <span class="math notranslate nohighlight">\(p = \{p_t\}_{t=0}^T\)</span>，它们是外生输入的函数。</p>
+<p>作为模型的外生输入，我们取初始条件 <span class="math notranslate nohighlight">\(m_0, \pi_0^*\)</span> 以及货币增长序列 <span class="math notranslate nohighlight">\(\mu = \{\mu_t\}_{t=0}^T\)</span>。</p>
+<p>作为模型的内生输出，我们想求出序列 <span class="math notranslate nohighlight">\(\pi = \{\pi_t\}_{t=0}^T, p = \{p_t\}_{t=0}^T\)</span> 作为外生输入的函数。</p>
 <p>我们将通过研究模型输出如何随输入变化而变化来进行一些思想实验。</p>
 </section>
-<section id="id5">
-<h2><span class="section-number">15.3. </span>关键方程的矩阵表示<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h2><span class="section-number">15.3. </span>关键方程的矩阵表示<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>首先，我们将方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 中的自适应预期模型写成 <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span> 的矩阵形式：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -369,9 +371,9 @@ p_t = m_t + \alpha \pi_t^*
   \pi_1^* \cr
   \pi_2^* \cr
   \vdots \cr
-  \pi_{T+1}^* 
+  \pi_{T+1}^*
   \end{bmatrix} =
-  (1-\lambda) \begin{bmatrix} 
+  (1-\lambda) \begin{bmatrix}
   0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0  \cr
   1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0   \cr
    0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0  \cr
@@ -381,15 +383,15 @@ p_t = m_t + \alpha \pi_t^*
   \end{bmatrix} +
   \begin{bmatrix} \pi_0^* \cr 0 \cr 0 \cr \vdots \cr 0 \end{bmatrix}
 \]</div>
-<p>让我们将上述方程简洁地写成矩阵形式：</p>
+<p>让我们将上述方程写成：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq1">
 <span class="eqno">(15.5)<a class="headerlink" href="#equation-eq-eq1" title="Link to this equation">#</a></span>\[
  A \pi^* = (1-\lambda) B \pi + \pi_0^*
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2) \times (T+2)\)</span> 矩阵，<span class="math notranslate nohighlight">\(B\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2)\times (T+1)\)</span> 矩阵，<span class="math notranslate nohighlight">\(\pi^*\)</span>、<span class="math notranslate nohighlight">\(\pi\)</span> 和 <span class="math notranslate nohighlight">\(\pi_0^*\)</span> 是相应的向量。这些矩阵和向量的具体形式可以通过比较上述两个等式得到。</p>
-<p>现在，让我们将方程 <a class="reference internal" href="#equation-eq-eqpipi">(15.3)</a> 表示为矩阵形式</p>
+<p>其中 <span class="math notranslate nohighlight">\(A\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2) \times (T+2)\)</span> 矩阵，<span class="math notranslate nohighlight">\(B\)</span> 是一个 <span class="math notranslate nohighlight">\((T+2)\times (T+1)\)</span> 矩阵，<span class="math notranslate nohighlight">\(\pi^*\)</span>、<span class="math notranslate nohighlight">\(\pi_0\)</span> 和 <span class="math notranslate nohighlight">\(\pi_0^*\)</span> 是相应的向量。这些矩阵和向量的具体形式可以通过对齐上述两个等式隐式地得到。</p>
+<p>接下来，我们将关键方程 <a class="reference internal" href="#equation-eq-eqpipi">(15.3)</a> 表示为矩阵形式</p>
 <div class="math notranslate nohighlight">
-\[ 
+\[
 \begin{bmatrix}
 \pi_0 \cr \pi_1 \cr \pi_1 \cr \vdots \cr \pi_T \end{bmatrix}
 = \begin{bmatrix}
@@ -398,26 +400,26 @@ p_t = m_t + \alpha \pi_t^*
 0 &amp; -\alpha &amp; \alpha &amp; \cdots &amp; 0 &amp; 0 \cr
 0 &amp; 0 &amp; -\alpha &amp; \cdots &amp; 0 &amp; 0 \cr
 \vdots &amp; \vdots &amp; \vdots &amp; \cdots &amp; \alpha &amp; 0 \cr
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; -\alpha  &amp; \alpha 
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; -\alpha  &amp; \alpha
 \end{bmatrix}
 \begin{bmatrix} \pi_0^* \cr
   \pi_1^* \cr
   \pi_2^* \cr
   \vdots \cr
-  \pi_{T+1}^* 
+  \pi_{T+1}^*
   \end{bmatrix}
 \]</div>
-<p>让我们用向量和矩阵简洁地表示上述方程系统:</p>
+<p>让我们用向量和矩阵将上述方程系统表示为:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq2">
 <span class="eqno">(15.6)<a class="headerlink" href="#equation-eq-eq2" title="Link to this equation">#</a></span>\[
 \pi = \mu + C \pi^*
 \]</div>
-<p>其中 <span class="math notranslate nohighlight">\(C\)</span> 是一个 <span class="math notranslate nohighlight">\((T+1) \times (T+2)\)</span> 矩阵,其形式可以从前面的方程系统中看出。</p>
+<p>其中 <span class="math notranslate nohighlight">\(C\)</span> 是一个 <span class="math notranslate nohighlight">\((T+1) \times (T+2)\)</span> 矩阵，其具体形式通过对齐本式与前述方程系统隐式地确定。</p>
 </section>
-<section id="id6">
-<h2><span class="section-number">15.4. </span>求解模型<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2><span class="section-number">15.4. </span>从矩阵表述中获取洞见<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>现在我们有了求解 <span class="math notranslate nohighlight">\(\pi\)</span> 作为 <span class="math notranslate nohighlight">\(\mu, \pi_0, \pi_0^*\)</span> 函数所需的所有要素。</p>
-<p>将方程 <a class="reference internal" href="#equation-eq-eq1">(15.5)</a> 和 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 结合:</p>
+<p>将方程 <a class="reference internal" href="#equation-eq-eq1">(15.5)</a> 和 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 结合，得到:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -425,31 +427,31 @@ A \pi^* &amp; = (1-\lambda) B \pi + \pi_0^* \cr
  &amp; = (1-\lambda) B \left[ \mu + C \pi^* \right] + \pi_0^*
 \end{aligned}
 \]</div>
-<p>整理得到:</p>
+<p>这意味着:</p>
 <div class="math notranslate nohighlight">
 \[
 \left[ A - (1-\lambda) B C \right] \pi^* = (1-\lambda) B \mu+ \pi_0^*
 \]</div>
-<p>求解 <span class="math notranslate nohighlight">\(\pi^*\)</span>:</p>
+<p>将上述方程两边乘以左边矩阵的逆矩阵，得到:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq4">
 <span class="eqno">(15.7)<a class="headerlink" href="#equation-eq-eq4" title="Link to this equation">#</a></span>\[
 \pi^* = \left[ A - (1-\lambda) B C \right]^{-1} \left[ (1-\lambda) B \mu+ \pi_0^* \right]
 \]</div>
-<p>有了 <span class="math notranslate nohighlight">\(\pi^*\)</span>,我们就可以从方程 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 求出 <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
+<p>求解出方程 <a class="reference internal" href="#equation-eq-eq4">(15.7)</a> 中的 <span class="math notranslate nohighlight">\(\pi^*\)</span> 后，我们就可以利用方程 <a class="reference internal" href="#equation-eq-eq2">(15.6)</a> 求出 <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \pi = \mu + C \pi^*
 \]</div>
-<p>这样我们就解出了模型的两个关键内生变量序列:预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi^*\)</span> 和实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi\)</span>。</p>
-<p>有了这些,我们就可以从方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 计算出价格水平对数序列 <span class="math notranslate nohighlight">\(p\)</span>。</p>
-<p>让我们来看看具体步骤。</p>
-<p>首先,已知 <span class="math notranslate nohighlight">\(\mu\)</span>,我们可以计算货币供应 <span class="math notranslate nohighlight">\(m\)</span>。</p>
-<p>注意到方程</p>
+<p>这样，我们就解出了模型确定的两个关键内生时间序列，即预期通货膨胀率序列 <span class="math notranslate nohighlight">\(\pi^*\)</span> 和实际通货膨胀率序列 <span class="math notranslate nohighlight">\(\pi\)</span>。</p>
+<p>有了这些结果，我们就可以借助方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 迅速计算出价格水平对数序列 <span class="math notranslate nohighlight">\(p\)</span>。</p>
+<p>让我们来看看这一步的具体细节。</p>
+<p>由于我们现在已知 <span class="math notranslate nohighlight">\(\mu\)</span>，很容易计算出 <span class="math notranslate nohighlight">\(m\)</span>。</p>
+<p>因此，注意到我们可以将方程</p>
 <div class="math notranslate nohighlight">
-\[ 
+\[
 m_{t+1} = m_t + \mu_t , \quad t = 0, 1, \ldots, T
 \]</div>
-<p>可以写成矩阵形式:</p>
+<p>表示为矩阵形式:</p>
 <div class="math notranslate nohighlight" id="equation-eq-eq101-ad">
 <span class="eqno">(15.8)<a class="headerlink" href="#equation-eq-eq101-ad" title="Link to this equation">#</a></span>\[
 \begin{bmatrix}
@@ -458,15 +460,15 @@ m_{t+1} = m_t + \mu_t , \quad t = 0, 1, \ldots, T
 0  &amp; -1 &amp; 1 &amp; \cdots &amp; 0 &amp; 0 \cr
 \vdots  &amp; \vdots &amp; \vdots &amp; \vdots &amp; 0 &amp; 0 \cr
 0  &amp; 0 &amp; 0 &amp; \cdots &amp; 1 &amp; 0 \cr
-0  &amp; 0 &amp; 0 &amp; \cdots &amp; -1 &amp; 1 
+0  &amp; 0 &amp; 0 &amp; \cdots &amp; -1 &amp; 1
 \end{bmatrix}
-\begin{bmatrix}  
+\begin{bmatrix}
 m_1 \cr m_2 \cr m_3 \cr \vdots \cr m_T \cr m_{T+1}
 \end{bmatrix}
-= \begin{bmatrix}  
+= \begin{bmatrix}
 \mu_0 \cr \mu_1 \cr \mu_2 \cr \vdots \cr \mu_{T-1} \cr \mu_T
 \end{bmatrix}
-+ \begin{bmatrix}  
++ \begin{bmatrix}
 m_0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 \]</div>
@@ -477,10 +479,11 @@ m_t = m_0 + \sum_{s=0}^{t-1} \mu_s, \quad t =1, \ldots, T+1
 \]</div>
 <p>方程 <a class="reference internal" href="#equation-eq-mcum-ad">(15.9)</a> 表明，时间 <span class="math notranslate nohighlight">\(t\)</span> 的货币供应对数等于初始货币供应对数 <span class="math notranslate nohighlight">\(m_0\)</span> 加上 <span class="math notranslate nohighlight">\(0\)</span> 到 <span class="math notranslate nohighlight">\(t\)</span> 时间之间货币增长率的累积。</p>
 <p>然后我们可以从方程 <a class="reference internal" href="#equation-eq-eqfiscth1">(15.2)</a> 计算每个 <span class="math notranslate nohighlight">\(t\)</span> 的 <span class="math notranslate nohighlight">\(p_t\)</span>。</p>
-<p>我们可以为 <span class="math notranslate nohighlight">\(p\)</span> 写一个紧凑的公式
-$<span class="math notranslate nohighlight">\( 
+<p>我们可以为 <span class="math notranslate nohighlight">\(p\)</span> 写一个紧凑的公式：</p>
+<div class="math notranslate nohighlight">
+\[
 p = m + \alpha \hat \pi^*
-\)</span>$</p>
+\]</div>
 <p>其中</p>
 <div class="math notranslate nohighlight">
 \[
@@ -488,89 +491,77 @@ p = m + \alpha \hat \pi^*
   \pi_1^* \cr
   \pi_2^* \cr
   \vdots \cr
-  \pi_{T}^* 
+  \pi_{T}^*
   \end{bmatrix},
  \]</div>
-<p>这是去掉最后一个元素的 <span class="math notranslate nohighlight">\(\pi^*\)</span>。</p>
+<p>这就是去掉最后一个元素的 <span class="math notranslate nohighlight">\(\pi^*\)</span>。</p>
 </section>
-<section id="id7">
-<h2><span class="section-number">15.5. </span>预期与实际通货膨胀的差异<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>在这个适应性预期模型中，人们的通货膨胀预期通常会与实际通货膨胀率不同。具体来说，我们的计算将显示：</p>
+<section id="id9">
+<h2><span class="section-number">15.5. </span>预测误差与模型计算<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>我们的计算将验证</p>
 <div class="math notranslate nohighlight">
 \[
 \hat \pi^* \neq  \pi,
 \]</div>
-<p>也就是说，对于任意时期 <span class="math notranslate nohighlight">\(t\)</span>，预期通货膨胀率与实际通货膨胀率不相等：</p>
+<p>因此一般来说</p>
 <div class="math notranslate nohighlight" id="equation-eq-notre">
-<span class="eqno">(15.10)<a class="headerlink" href="#equation-eq-notre" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(15.10)<a class="headerlink" href="#equation-eq-notre" title="Link to this equation">#</a></span>\[
 \pi_t^* \neq \pi_t, \quad t = 0, 1, \ldots , T
 \]</div>
-<p>这种预期误差是适应性预期模型的一个典型特征。在这类模型中，人们根据过去的经验逐步调整他们的预期，如方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 所示。</p>
-<p>这与我们在 <a class="reference internal" href="cagan_ree.html"><span class="doc">价格水平的货币主义理论</span></a> 中研究的”完美预见”或”理性预期”版本形成对比。在那个版本中，人们能够完全准确地预测通货膨胀。</p>
-<p>让我们通过一些数值实验来探索这个适应性预期版本的具体表现。首先，我们需要导入必要的Python模块：</p>
+<p>在包含类似方程 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a> 的自适应预期假设作为其组成部分的模型中，这种结果是典型的。</p>
+<p>在 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中，我们研究了该模型的一个版本，用”完全预见”或”理性预期”假设替代了假设 <a class="reference internal" href="#equation-eq-adaptexpn">(15.4)</a>。</p>
+<p>但现在，让我们深入研究一下，用该模型的自适应预期版本进行一些计算。</p>
+<p>像往常一样，我们将从导入一些 Python 模块开始。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Cagan_Adaptive</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Cagan_Adaptive&quot;</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Cagan_Adaptive</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Cagan_Adaptive&quot;</span><span class="p">,</span>
                         <span class="p">[</span><span class="s2">&quot;α&quot;</span><span class="p">,</span> <span class="s2">&quot;m0&quot;</span><span class="p">,</span> <span class="s2">&quot;Eπ0&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;λ&quot;</span><span class="p">])</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">create_cagan_model</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">λ</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_cagan_adaptive_model</span><span class="p">(</span><span class="n">α</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">m0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Eπ0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Cagan_Adaptive</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+
+<span class="n">md</span> <span class="o">=</span> <span class="n">create_cagan_adaptive_model</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>这里我们定义这些参数。</p>
+<p>我们用以下的函数来求解模型并且绘制我们感兴趣的变量。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 参数</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="n">T1</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="n">α</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">m0</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_cagan_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">):</span>
+    <span class="s2">&quot; 在有限时间内求解凯根模型。&quot;</span>
+    <span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="n">model</span>
 
-<span class="n">μ0</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">μ_star</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">md</span> <span class="o">=</span> <span class="n">create_cagan_model</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="o">=</span><span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="o">=</span><span class="n">μ0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="n">λ</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>我们用以下的函数来求解模型并且绘制这些变量。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">):</span>
-    <span class="s2">&quot;在求解有限视界的凯根模型&quot;</span>
-    
-    <span class="n">model_params</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">m0</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">Eπ0</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">λ</span>
-    <span class="n">α</span><span class="p">,</span> <span class="n">m0</span><span class="p">,</span> <span class="n">Eπ0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="n">model_params</span>
-    
     <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">λ</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">C</span> <span class="o">=</span> <span class="o">-</span><span class="n">α</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">α</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">Eπ0_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Eπ0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># Eπ_seq 的长度为 T+2</span>
-    <span class="n">Eπ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">)</span><span class="o">*</span><span class="n">B</span> <span class="o">@</span> <span class="n">C</span><span class="p">)</span> <span class="o">@</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span> <span class="o">@</span> <span class="n">μ_seq</span> <span class="o">+</span> <span class="n">Eπ0_seq</span><span class="p">)</span>
+    <span class="n">Eπ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">)</span><span class="o">*</span><span class="n">B</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span> <span class="o">@</span> <span class="n">μ_seq</span> <span class="o">+</span> <span class="n">Eπ0_seq</span><span class="p">)</span>
 
     <span class="c1"># π_seq 的长度为 T+1</span>
     <span class="n">π_seq</span> <span class="o">=</span> <span class="n">μ_seq</span> <span class="o">+</span> <span class="n">C</span> <span class="o">@</span> <span class="n">Eπ_seq</span>
 
-    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># D 是方程 (14.8) 中的系数矩阵</span>
     <span class="n">m0_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
 
     <span class="c1"># m_seq 的长度为 T+2</span>
-    <span class="n">m_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">@</span> <span class="p">(</span><span class="n">μ_seq</span> <span class="o">+</span> <span class="n">m0_seq</span><span class="p">)</span>
+    <span class="n">m_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">μ_seq</span> <span class="o">+</span> <span class="n">m0_seq</span><span class="p">)</span>
     <span class="n">m_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">)</span>
 
     <span class="c1"># p_seq 的长度为 T+2</span>
@@ -584,11 +575,11 @@ p = m + \alpha \hat \pi^*
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_and_plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">):</span>
-    
-    <span class="n">π_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
-    
+
+    <span class="n">π_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+
     <span class="n">T_seq</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">T</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
-    
+
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">μ_seq</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">π_seq</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_t$&#39;</span><span class="p">)</span>
@@ -596,25 +587,27 @@ p = m + \alpha \hat \pi^*
     <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq</span> <span class="o">-</span> <span class="n">p_seq</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_seq</span><span class="p">,</span> <span class="n">p_seq</span><span class="p">)</span>
-    
+
     <span class="n">y_labs</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\pi$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$m - p$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$m$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">]</span>
+    <span class="n">subplot_title</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;货币供应增长率&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;通货膨胀率&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;实际货币余额&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;货币供应量&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;价格水平&#39;</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_labs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">subplot_title</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
+
     <span class="k">return</span> <span class="n">π_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">,</span> <span class="n">m_seq</span><span class="p">,</span> <span class="n">p_seq</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="id8">
-<h2><span class="section-number">15.6. </span>稳定性的条件<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h2><span class="section-number">15.6. </span>稳定性的技术条件<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>在构建我们的示例时，我们假设 <span class="math notranslate nohighlight">\((\lambda, \alpha)\)</span> 满足</p>
 <div class="math notranslate nohighlight" id="equation-eq-suffcond">
 <span class="eqno">(15.11)<a class="headerlink" href="#equation-eq-suffcond" title="Link to this equation">#</a></span>\[
@@ -628,10 +621,10 @@ p = m + \alpha \hat \pi^*
 \end{aligned}
 \end{split}\]</div>
 <p>通过确保 <span class="math notranslate nohighlight">\(\pi_t\)</span> 的系数绝对值小于1，条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>保证了由我们推导过程最后一行描述的 <span class="math notranslate nohighlight">\(\{\pi_t\}\)</span> 动态的稳定性。</p>
-<p>读者可以尝试探索当条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>不满足时会发生什么情况。</p>
+<p>读者可以自由地探索违反条件<a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>的示例中的结果。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">λ</span> <span class="o">-</span> <span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">))))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">md</span><span class="o">.</span><span class="n">λ</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">md</span><span class="o">.</span><span class="n">λ</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">md</span><span class="o">.</span><span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">md</span><span class="o">.</span><span class="n">λ</span><span class="p">))))</span>
 </pre></div>
 </div>
 </div>
@@ -641,34 +634,32 @@ p = m + \alpha \hat \pi^*
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">λ</span> <span class="o">-</span> <span class="n">α</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.40000000000000013
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="id11">
+<h2><span class="section-number">15.7. </span>实验<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>现在我们来看一些实验。</p>
-<section id="id9">
-<h3><span class="section-number">15.6.1. </span>实验1<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
-<p>让我们研究一个简单的货币政策变化场景：货币供应增长率最初维持在较高水平<span class="math notranslate nohighlight">\(\mu_0\)</span>，直到时间<span class="math notranslate nohighlight">\(T_1\)</span>时突然降至较低水平<span class="math notranslate nohighlight">\(\mu^*\)</span>并保持不变。</p>
-<p>具体来说，假设<span class="math notranslate nohighlight">\(T_1\)</span>是介于0和<span class="math notranslate nohighlight">\(T\)</span>之间的某个时点，且<span class="math notranslate nohighlight">\(\mu_0 &gt; \mu^*\)</span>。货币供应增长率的路径可以写为：</p>
+<section id="id12">
+<h3><span class="section-number">15.7.1. </span>实验1<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>我们将研究这样一种情形：货币供应增长率在 <span class="math notranslate nohighlight">\(t=0\)</span> 到 <span class="math notranslate nohighlight">\(t= T_1\)</span> 期间保持为 <span class="math notranslate nohighlight">\(\mu_0\)</span>，然后在 <span class="math notranslate nohighlight">\(t=T_1\)</span> 时永久下降到 <span class="math notranslate nohighlight">\(\mu^*\)</span>。</p>
+<p>因此，令 <span class="math notranslate nohighlight">\(T_1 \in (0, T)\)</span>。</p>
+<p>于是，在 <span class="math notranslate nohighlight">\(\mu_0 &gt; \mu^*\)</span> 的情况下，我们假设</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\mu_{t+1} = \begin{cases}
+\mu_{t} = \begin{cases}
     \mu_0  , &amp; t = 0, \ldots, T_1 -1 \\
      \mu^* , &amp; t \geq T_1
      \end{cases}
 \end{split}\]</div>
-<p>这个实验与我们在<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>讲座中分析的情形完全相同。通过对比两个讲座的结果，我们可以清楚地看到采用适应性预期（本讲座）和理性预期（前一讲座）这两种不同预期机制的影响。</p>
+<p>请注意，我们在 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中理性预期版本的模型中正好研究了同样的实验。</p>
+<p>因此，通过比较两个讲座中的结果，我们可以了解假设自适应预期（如本讲座）而不是假设理性预期（如另一讲座）所带来的影响。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_seq_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">T1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 实验1的参数</span>
+<span class="n">T1</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">μ0</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">μ_star</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">μ_seq_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">T1</span><span class="p">))</span>
 
 <span class="c1"># 求解并绘图</span>
 <span class="n">π_seq_1</span><span class="p">,</span> <span class="n">Eπ_seq_1</span><span class="p">,</span> <span class="n">m_seq_1</span><span class="p">,</span> <span class="n">p_seq_1</span> <span class="o">=</span> <span class="n">solve_and_plot</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">μ_seq_1</span><span class="p">)</span>
@@ -676,23 +667,30 @@ p = m + \alpha \hat \pi^*
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png"><img alt="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png" src="_images/95da5f4112bcab78f33ff13824267603bca24300feb28c48a8872418e95f0056.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/05fb2aec71f8b236044b29cf7adedfbf4b73925e3d06756ddd404c47b8164930.png"><img alt="_images/05fb2aec71f8b236044b29cf7adedfbf4b73925e3d06756ddd404c47b8164930.png" src="_images/05fb2aec71f8b236044b29cf7adedfbf4b73925e3d06756ddd404c47b8164930.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>让我们将这些结果与<a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a>讲座中的理性预期情形进行对比。</p>
-<p>值得注意的是,当货币供应增长率在时间<span class="math notranslate nohighlight">\(T_1\)</span>突然下降时,实际通货膨胀率<span class="math notranslate nohighlight">\(\pi_t\)</span>会”超调”其最终稳态值。这种超调现象在理性预期版本中并不存在,读者可以思考其背后的原因。</p>
+<p>我们邀请读者将这里的结果与 <a class="reference internal" href="cagan_ree.html"><span class="doc">货币主义价格水平理论</span></a> 中研究的理性预期下的结果进行比较。</p>
+<p>请注意，在时间 <span class="math notranslate nohighlight">\(T_1\)</span> 货币供应增长率突然下降时，实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 是如何”超调”其最终稳态值的。</p>
+<p>我们邀请你自己解释这种超调现象的根源，以及为什么它不会出现在该模型的理性预期版本中。</p>
 </section>
-<section id="id10">
-<h3><span class="section-number">15.6.2. </span>实验2<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
-<p>接下来我们考虑一个渐进式稳定化的情形,即货币供应增长率从高水平逐步平稳下降到一个较低的水平。</p>
-<p>在这种情况下,我们观察到价格水平的通货膨胀率虽然最终会下降,但其下降速度要慢于货币供应增长率的下降速度。</p>
-<p>这种通货膨胀率下降缓慢的现象可以归因于从高通胀向低通胀过渡期间,公众的预期通货膨胀率<span class="math notranslate nohighlight">\(\pi_t^*\)</span>始终高于实际通货膨胀率<span class="math notranslate nohighlight">\(\pi_t\)</span>。</p>
+<section id="id13">
+<h3><span class="section-number">15.7.2. </span>实验2<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>现在我们来做一个不同的实验，即一个渐进式的稳定化过程，其中货币供应增长率从一个较高的值平稳地下降到一个持续较低的值。</p>
+<p>虽然价格水平的通货膨胀率最终会下降，但它下降的速度比最终导致其下降的驱动力——即下降的货币供应增长率——要慢。</p>
+<p>通货膨胀率下降迟缓的原因在于，在从高通胀向低通胀过渡的过程中，预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 持续高于实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 参数</span>
 <span class="n">ϕ</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">μ_seq_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="n">μ0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">μ_star</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">)])</span>
+<span class="n">μ_seq_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="n">μ0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">μ_star</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
 <span class="n">μ_seq_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ_seq_2</span><span class="p">,</span> <span class="n">μ_star</span><span class="p">)</span>
 
 
@@ -702,11 +700,336 @@ p = m + \alpha \hat \pi^*
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/21b9481f5b799e289de5ebacbec3e3a5af5b762661d212e5744ed71d9976b226.png"><img alt="_images/21b9481f5b799e289de5ebacbec3e3a5af5b762661d212e5744ed71d9976b226.png" src="_images/21b9481f5b799e289de5ebacbec3e3a5af5b762661d212e5744ed71d9976b226.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/8db544134033aabf8174ff8841fbe0584b4a57bad337c23072922fb1ac07d624.png"><img alt="_images/8db544134033aabf8174ff8841fbe0584b4a57bad337c23072922fb1ac07d624.png" src="_images/8db544134033aabf8174ff8841fbe0584b4a57bad337c23072922fb1ac07d624.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 </section>
+</section>
+<section id="id14">
+<h2><span class="section-number">15.8. </span>练习<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="ca_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 15.1 </span></p>
+<section id="exercise-content">
+<p><strong>超调现象对学习速度 <span class="math notranslate nohighlight">\(\lambda\)</span> 的敏感性。</strong></p>
+<p>对于实验1（在 <span class="math notranslate nohighlight">\(T_1 = 60\)</span> 时从 <span class="math notranslate nohighlight">\(\mu_0 = 0.5\)</span> 突然稳定化到 <span class="math notranslate nohighlight">\(\mu^* = 0\)</span>），针对 <span class="math notranslate nohighlight">\(\lambda \in \{0.86,\, 0.90,\, 0.95,\, 0.98\}\)</span> 求解模型，并在同一张图上绘制每个值对应的实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span>。</p>
+<p>a. 在稳定区域内，随着 <span class="math notranslate nohighlight">\(\lambda\)</span> 的变化，稳定化后收敛的符号和速度如何变化？</p>
+<p>b. 对每个 <span class="math notranslate nohighlight">\(\lambda\)</span>，输出 <span class="math notranslate nohighlight">\(\rho\)</span> 以及 <span class="math notranslate nohighlight">\(t \geq T_1\)</span> 时 <span class="math notranslate nohighlight">\(\pi_t\)</span> 绝对值的峰值。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="cagan_adaptive-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ca_ex1"> Exercise 15.1</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">μ0</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">μ_star</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">λ_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.86</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_vals</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">create_cagan_adaptive_model</span><span class="p">(</span><span class="n">λ</span><span class="o">=</span><span class="n">λ</span><span class="p">)</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">T1</span><span class="p">))</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">π_seq</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;λ = </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;稳定化时点 $T_1$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">μ_star</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;不同 λ 下的通货膨胀路径（突然稳定化）&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;λ&quot;</span><span class="si">:</span><span class="s1">&gt;6</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;ρ&quot;</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;|ρ|&lt;1&quot;</span><span class="si">:</span><span class="s1">&gt;8</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;T1之后 |π| 的峰值&quot;</span><span class="si">:</span><span class="s1">&gt;20</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">56</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_vals</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">create_cagan_adaptive_model</span><span class="p">(</span><span class="n">λ</span><span class="o">=</span><span class="n">λ</span><span class="p">)</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">T1</span><span class="p">))</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+    <span class="n">ρ</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span>
+    <span class="n">peak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">π_seq</span><span class="p">[</span><span class="n">T1</span><span class="p">:]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">λ</span><span class="si">:</span><span class="s1">&gt;6.2f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">ρ</span><span class="si">:</span><span class="s1">&gt;10.4f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ρ</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;8</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">peak</span><span class="si">:</span><span class="s1">&gt;20.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c03965d8a975526e33693f892580d918fb8ee994a65c724db225f51ed28205ba.png"><img alt="_images/c03965d8a975526e33693f892580d918fb8ee994a65c724db225f51ed28205ba.png" src="_images/c03965d8a975526e33693f892580d918fb8ee994a65c724db225f51ed28205ba.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     λ |          ρ |    |ρ|&lt;1 |         T1之后 |π| 的峰值
+--------------------------------------------------------
+  0.86 |     0.5333 |     True |               1.1667
+  0.90 |     0.8000 |     True |               0.5000
+  0.95 |     0.9333 |     True |               0.1667
+  0.98 |     0.9778 |     True |               0.0556
+</pre></div>
+</div>
+</div>
+</div>
+<p>对于默认的 <span class="math notranslate nohighlight">\(\alpha = 5\)</span>，这四个值都满足稳定性条件 <span class="math notranslate nohighlight">\(|\rho| &lt; 1\)</span>，且都有 <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>。</p>
+<p>在这四个值中，<span class="math notranslate nohighlight">\(\lambda = 0.86\)</span> 的情形具有最大的初始超调，随后收敛速度最快。</p>
+<p>随着 <span class="math notranslate nohighlight">\(\lambda\)</span> 趋近于1，预期变得更具惯性，因此稳定化后的响应衰减得更慢，但起始跳跃幅度更小。</p>
+<p>对于 <span class="math notranslate nohighlight">\(\alpha = 5\)</span>，若要出现振荡式的稳定响应，则需要 <span class="math notranslate nohighlight">\(0.8 &lt; \lambda &lt; 5/6\)</span>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="ca_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 15.2 </span></p>
+<section id="exercise-content">
+<p><strong>自适应预期下的系统性预测误差。</strong></p>
+<p>讲座中指出，在自适应预期下，一般而言 <span class="math notranslate nohighlight">\(\pi_t^* \neq \pi_t\)</span>，这与理性预期均衡形成对比。</p>
+<p>对于默认模型（<code class="docutils literal notranslate"><span class="pre">md</span></code>）以及两个实验：</p>
+<p>a. 计算并绘制预测误差 <span class="math notranslate nohighlight">\(e_t = \pi_t^* - \pi_t\)</span>，其中
+<span class="math notranslate nohighlight">\(t = 0, 1, \ldots, T\)</span>。</p>
+<p>b. 对于每个实验，判断在反通胀过程中 <span class="math notranslate nohighlight">\(e_t\)</span> 是系统性地为正还是为负，并解释为什么在理性预期下这种系统性偏差无法持续存在。</p>
+<p>（注意 <code class="docutils literal notranslate"><span class="pre">solve_cagan_adaptive</span></code> 返回的 <code class="docutils literal notranslate"><span class="pre">Eπ_seq</span></code> 长度为 <span class="math notranslate nohighlight">\(T+2\)</span>，而 <code class="docutils literal notranslate"><span class="pre">π_seq</span></code> 的长度为 <span class="math notranslate nohighlight">\(T+1\)</span>；使用 <code class="docutils literal notranslate"><span class="pre">Eπ_seq[:-1]</span></code> 使二者对齐。）</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="cagan_adaptive-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ca_ex2"> Exercise 15.2</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span>  <span class="o">=</span> <span class="mi">60</span>
+<span class="n">μ0</span>  <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">μ_star</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># 实验1的序列</span>
+<span class="n">μ_seq_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">T1</span><span class="p">))</span>
+<span class="n">π1</span><span class="p">,</span> <span class="n">Eπ1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">μ_seq_1</span><span class="p">)</span>
+
+<span class="c1"># 实验2的序列</span>
+<span class="n">ϕ</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">μ_seq_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="n">μ0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ϕ</span><span class="o">**</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ_star</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
+<span class="n">μ_seq_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ_seq_2</span><span class="p">,</span> <span class="n">μ_star</span><span class="p">)</span>
+<span class="n">π2</span><span class="p">,</span> <span class="n">Eπ2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">μ_seq_2</span><span class="p">)</span>
+
+<span class="n">t_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">Eπ1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">π1</span>   <span class="c1"># 预测误差，长度为 T+1</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">Eπ2</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">π2</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_seq</span><span class="p">,</span> <span class="n">e1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;预测误差：实验1（突然稳定化）&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_t^* - \pi_t$&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_seq</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;预测误差：实验2（渐进式）&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_t^* - \pi_t$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;实验1：t &lt; T1 时的平均预测误差：  </span><span class="si">{</span><span class="n">e1</span><span class="p">[:</span><span class="n">T1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;实验1：t &gt;= T1 时的平均预测误差： </span><span class="si">{</span><span class="n">e1</span><span class="p">[</span><span class="n">T1</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;实验2：整体的平均预测误差：       </span><span class="si">{</span><span class="n">e2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/a7d025e0517fd9a2497852da109250d2303b721bee87c581d1e5372d470f8e67.png"><img alt="_images/a7d025e0517fd9a2497852da109250d2303b721bee87c581d1e5372d470f8e67.png" src="_images/a7d025e0517fd9a2497852da109250d2303b721bee87c581d1e5372d470f8e67.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>实验1：t &lt; T1 时的平均预测误差：  0.0000
+实验1：t &gt;= T1 时的平均预测误差： 0.2359
+实验2：整体的平均预测误差：       0.0617
+</pre></div>
+</div>
+</div>
+</div>
+<p>在反通胀过程中，实际通货膨胀率会<em>低于</em>预期通货膨胀率，因此在整个过渡期间 <span class="math notranslate nohighlight">\(e_t = \pi_t^* - \pi_t &gt; 0\)</span>，也就是说公众系统性地<strong>高估</strong>了通货膨胀率。</p>
+<p>在理性预期下，这种持续的单边偏差会立即被套利消除，因为主体会调整其预测规则，直到 <span class="math notranslate nohighlight">\(e_t\)</span> 的均值为零。</p>
+</section>
+</div>
+<div class="exercise admonition" id="ca_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 15.3 </span></p>
+<section id="exercise-content">
+<p><strong>稳定化后的收敛速度。</strong></p>
+<p>讲座推导出，在货币增长率永久设定为 <span class="math notranslate nohighlight">\(\mu^*\)</span> 之后，实际通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 以几何级数衰减：</p>
+<div class="math notranslate nohighlight">
+\[
+\pi_{t+1} = \rho\, \pi_t, \qquad
+\rho \equiv \frac{\lambda - \alpha(1-\lambda)}{1 - \alpha(1-\lambda)}.
+\]</div>
+<p>利用实验1和默认模型 <code class="docutils literal notranslate"><span class="pre">md</span></code>：</p>
+<p>a. 根据模型参数解析地计算 <span class="math notranslate nohighlight">\(\rho\)</span>，并验证
+<span class="math notranslate nohighlight">\(|\rho| &lt; 1\)</span>（稳定性条件 <a class="reference internal" href="#equation-eq-suffcond">(15.11)</a>）。</p>
+<p>b. 从求解得到的路径 <code class="docutils literal notranslate"><span class="pre">π_seq</span></code> 出发，计算 <span class="math notranslate nohighlight">\(t = T_1 + 1, \ldots, T_1 + 10\)</span> 时的
+经验比率 <span class="math notranslate nohighlight">\(\pi_{t+1}/\pi_t\)</span>，并将其与
+<span class="math notranslate nohighlight">\(\rho\)</span> 进行比较。</p>
+<p>c. 对 <span class="math notranslate nohighlight">\(t \geq T_1\)</span> 绘制 <span class="math notranslate nohighlight">\(\log|\pi_t|\)</span> 关于 <span class="math notranslate nohighlight">\(t\)</span> 的图形，验证其是斜率为 <span class="math notranslate nohighlight">\(\log|\rho|\)</span> 的
+直线。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="cagan_adaptive-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ca_ex3"> Exercise 15.3</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">μ0</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">μ_star</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">α</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">λ</span>
+<span class="n">ρ</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ</span> <span class="o">-</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;α = </span><span class="si">{</span><span class="n">α</span><span class="si">}</span><span class="s1">,  λ = </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ρ = </span><span class="si">{</span><span class="n">ρ</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">   (|ρ| &lt; 1: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">ρ</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span> <span class="n">μ_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">T1</span><span class="p">))</span>
+<span class="n">π_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+
+<span class="c1"># 第b部分：经验的相继比率</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;t&quot;</span><span class="si">:</span><span class="s1">&gt;5</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;π_t&quot;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;π_{t+1}/π_t&quot;</span><span class="si">:</span><span class="s1">&gt;14</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;ρ&quot;</span><span class="si">:</span><span class="s1">&gt;8</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">46</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="n">T1</span> <span class="o">+</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">π_seq</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">π_seq</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s1">&gt;5</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">π_seq</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;12.6f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">ratio</span><span class="si">:</span><span class="s1">&gt;14.6f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">ρ</span><span class="si">:</span><span class="s1">&gt;8.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>α = 5,  λ = 0.9
+ρ = 0.800000   (|ρ| &lt; 1: True)
+
+    t |          π_t |    π_{t+1}/π_t |        ρ
+----------------------------------------------
+   60 |    -0.500000 |       0.800000 | 0.800000
+   61 |    -0.400000 |       0.800000 | 0.800000
+   62 |    -0.320000 |       0.800000 | 0.800000
+   63 |    -0.256000 |       0.800000 | 0.800000
+   64 |    -0.204800 |       0.800000 | 0.800000
+   65 |    -0.163840 |       0.800000 | 0.800000
+   66 |    -0.131072 |       0.800000 | 0.800000
+   67 |    -0.104858 |       0.800000 | 0.800000
+   68 |    -0.083886 |       0.800000 | 0.800000
+   69 |    -0.067109 |       0.800000 | 0.800000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 第c部分：T1 之后 log|π_t| 是线性的</span>
+<span class="n">t_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="n">md</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">log_π</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">π_seq</span><span class="p">[</span><span class="n">T1</span><span class="p">:]))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_post</span><span class="p">,</span> <span class="n">log_π</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\log|\pi_t|$&#39;</span><span class="p">)</span>
+<span class="c1"># 叠加理论斜率</span>
+<span class="n">slope_theory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ρ</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_post</span><span class="p">,</span>
+        <span class="n">log_π</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">slope_theory</span> <span class="o">*</span> <span class="p">(</span><span class="n">t_post</span> <span class="o">-</span> <span class="n">T1</span><span class="p">),</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;斜率 = log|ρ| = </span><span class="si">{</span><span class="n">slope_theory</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log|\pi_t|$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;稳定化后通货膨胀的几何衰减&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/9fff626b07853c1835e1d8391b5592c36831e4492d6a08e7461300e5c5ead3a6.png"><img alt="_images/9fff626b07853c1835e1d8391b5592c36831e4492d6a08e7461300e5c5ead3a6.png" src="_images/9fff626b07853c1835e1d8391b5592c36831e4492d6a08e7461300e5c5ead3a6.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>经验比率在 <span class="math notranslate nohighlight">\(T_1\)</span> 之后立即收敛到 <span class="math notranslate nohighlight">\(\rho = 0.8\)</span>，证实了
+解析推导出的一阶差分方程。</p>
+<p>对数图与理论斜率完全一致地呈线性，反映了
+<span class="math notranslate nohighlight">\(t \geq T_1\)</span> 时 <span class="math notranslate nohighlight">\(\pi_t = \rho^{t-T_1} \pi_{T_1}\)</span> 的精确几何收敛特性。</p>
+</section>
+</div>
+<div class="exercise admonition" id="ca_ex4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 15.4 </span></p>
+<section id="exercise-content">
+<p><strong>渐进式稳定化下学习速度快慢的比较。</strong></p>
+<p>实验2采用了货币增长率的渐进式下降
+<span class="math notranslate nohighlight">\(\mu_t = \phi^t \mu_0 + (1-\phi^t)\mu^*\)</span>，其中 <span class="math notranslate nohighlight">\(\phi = 0.9\)</span>。</p>
+<p>a. 对于同样的渐进式 <span class="math notranslate nohighlight">\(\mu\)</span> 路径，比较两种稳定情形下的通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t\)</span> 与预期通货膨胀率 <span class="math notranslate nohighlight">\(\pi_t^*\)</span> 路径：</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* **更快调整**：$\lambda = 0.86$
+* **更慢调整**：$\lambda = 0.95$
+
+在并排的图中为每种情形绘制 $\pi_t$、$\pi_t^*$ 和 $\mu_t$。
+</pre></div>
+</div>
+<p>b. 对每种情形，计算平均绝对预测误差 <span class="math notranslate nohighlight">\(\bar{e} = \frac{1}{T+1}\sum_{t=0}^T |\pi_t^* - \pi_t|\)</span>。</p>
+<p>c. 解释为什么更快调整的情形可能会低于货币增长率路径，而更慢调整的情形则表现出更持久的预测误差。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="cagan_adaptive-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ca_ex4"> Exercise 15.4</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ0</span>    <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">μ_star</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">ϕ</span>     <span class="o">=</span> <span class="mf">0.9</span>
+
+<span class="n">λ_cases</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;更快调整 (λ=0.86)&#39;</span><span class="p">:</span> <span class="mf">0.86</span><span class="p">,</span>
+           <span class="s1">&#39;更慢调整 (λ=0.95)&#39;</span><span class="p">:</span> <span class="mf">0.95</span><span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">λ_cases</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">create_cagan_adaptive_model</span><span class="p">(</span><span class="n">λ</span><span class="o">=</span><span class="n">λ</span><span class="p">)</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="n">μ0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ϕ</span><span class="o">**</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ_star</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ_seq</span><span class="p">,</span> <span class="n">μ_star</span><span class="p">)</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+
+    <span class="n">t_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_seq</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">,</span>          <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu_t$&#39;</span><span class="p">,</span>   <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_seq</span><span class="p">,</span> <span class="n">π_seq</span><span class="p">,</span>          <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_t$&#39;</span><span class="p">,</span>   <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi_t^*$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;情形&quot;</span><span class="si">:</span><span class="s1">&gt;30</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="s2">&quot;平均 |预测误差|&quot;</span><span class="si">:</span><span class="s1">&gt;22</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">56</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_cases</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">create_cagan_adaptive_model</span><span class="p">(</span><span class="n">λ</span><span class="o">=</span><span class="n">λ</span><span class="p">)</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ϕ</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="n">μ0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ϕ</span><span class="o">**</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ_star</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
+    <span class="n">μ_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">μ_seq</span><span class="p">,</span> <span class="n">μ_star</span><span class="p">)</span>
+    <span class="n">π_seq</span><span class="p">,</span> <span class="n">Eπ_seq</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_cagan_adaptive</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">μ_seq</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Eπ_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">π_seq</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">:</span><span class="s1">&gt;30</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s1">&gt;22.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/14225d769c9eed3cdd358affe2efd488e112db10f8f3bc65c33c0a7677776da6.png"><img alt="_images/14225d769c9eed3cdd358affe2efd488e112db10f8f3bc65c33c0a7677776da6.png" src="_images/14225d769c9eed3cdd358affe2efd488e112db10f8f3bc65c33c0a7677776da6.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            情形 |              平均 |预测误差|
+--------------------------------------------------------
+                 更快调整 (λ=0.86) |               0.044085
+                 更慢调整 (λ=0.95) |               0.122122
+</pre></div>
+</div>
+</div>
+</div>
+<p>在调整更快的情形下，预期的下调更为激进，通货膨胀率在过渡期间可能会低于货币增长率路径。</p>
+<p>在调整更慢的情形下，预期在更长时间内保持较高水平，预测误差更大且消失得更慢。</p>
+</section>
+</div>
 </section>
 </section>
 
@@ -889,7 +1212,7 @@ p = m + \alpha \hat \pi^*
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

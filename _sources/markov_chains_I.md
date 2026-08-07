@@ -9,6 +9,31 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 马尔科夫链：基本概念
+  headings:
+    Overview: 概述
+    Definitions and examples: 定义与示例
+    Definitions and examples::Stochastic matrices: 随机矩阵
+    Definitions and examples::Markov chains: 马尔科夫链
+    'Definitions and examples::Markov chains::Example 1: Economic states': 示例 1：经济状态
+    'Definitions and examples::Markov chains::Example 2: Unemployment': 示例 2：失业
+    'Definitions and examples::Markov chains::Example 3: Political transition dynamics': 示例 3：政治转型动态
+    Definitions and examples::Defining Markov chains: 定义马尔科夫链
+    Simulation: 模拟
+    Simulation::Writing our own simulation code: 编写我们自己的模拟代码
+    Simulation::Using QuantEcon's routines: 使用 QuantEcon 的例程
+    Simulation::Using QuantEcon's routines::Adding state values and initial conditions: 添加状态值和初始条件
+    Distributions over time: 随时间分布
+    Distributions over time::Multiple step transition probabilities: 多步转移概率
+    Stationary distributions: 平稳分布
+    Stationary distributions::Calculating stationary distributions: 计算平稳分布
+    Stationary distributions::Asymptotic stationarity: 渐进平稳性
+    'Stationary distributions::Asymptotic stationarity::Example: Hamilton''s chain': 示例：汉密尔顿链
+    'Stationary distributions::Asymptotic stationarity::Example: failure of convergence': 示例：收敛失败
+    Computing expectations: 计算期望
+    Computing expectations::Expectations of geometric sums: 几何和的期望
+    Draw the plot: 绘制图像
 ---
 
 # 马尔科夫链：基本概念
@@ -69,11 +94,11 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 (finite_dp_stoch_mat)=
 ### 随机矩阵
 
-**概率质量函数**是一个 $n$ 个可能结果上的非负 $n$-维向量 $p$，向量内所有元素总和为 1。
+回想一下，$n$ 个可能结果上的**概率质量函数**是一个非负 $n$-维向量 $p$，向量内所有元素总和为 1。
 
 例如，$p = (0.2, 0.2, 0.6)$ 是一个三个结果上的概率质量函数。
 
-**随机矩阵**（或**马尔科夫矩阵**）是一个 $n \times n$ 的矩阵 $P$，其中 $P$ 的每一行都是一个 $n$ 个结果上的概率质量函数。
+**随机矩阵**（或**马尔科夫矩阵**）是一个 $n \times n$ 的矩阵 $P$，其中 $P$ 的每一行都是一个概率质量函数。
 
 也就是说，
 
@@ -91,7 +116,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 在严格定义马尔科夫链之前，我们先给出一些示例。
 
 (mc_eg2)=
-#### 示例 1
+#### 示例 1：经济状态
 
 根据美国失业数据，Hamilton {cite}`Hamilton2005` 估算了以下动态变化。
 
@@ -157,7 +182,7 @@ $$
 在此之中，$P(i,j)$ 是在一个月后从状态 $i$ 转移到状态 $j$ 的概率。
 
 (mc_eg1)=
-#### 示例 2
+#### 示例 2：失业
 
 考虑一个工人，在任何给定时间 $t$，他要么处于失业状态（状态 0），要么处于就业状态（状态 1）。
 
@@ -204,7 +229,7 @@ $$
 我们将在下面讨论其中一些应用。
 
 (mc_eg3)=
-#### 示例 3
+#### 示例 3：政治转型动态
 
 Imam 和 Temple {cite}`imampolitical` 将政治制度分类为三种类型：民主 $\text{(D)}$，专制 $\text{(A)}$ 和一个称为无政府状态的中间状态 $\text{(N)}$。
 
@@ -213,15 +238,16 @@ Imam 和 Temple {cite}`imampolitical` 将政治制度分类为三种类型：民
 Imam 和 Temple {cite}`imampolitical` 估计了以下转移概率：
 
 $$
-P :=
-\begin{bmatrix}
-0.86 & 0.11 & 0.03 & 0.00 & 0.00 & 0.00 \\
-0.52 & 0.33 & 0.13 & 0.02 & 0.00 & 0.00 \\
-0.12 & 0.03 & 0.70 & 0.11 & 0.03 & 0.01 \\
-0.13 & 0.02 & 0.35 & 0.36 & 0.10 & 0.04 \\
-0.00 & 0.00 & 0.09 & 0.11 & 0.55 & 0.25 \\
-0.00 & 0.00 & 0.09 & 0.15 & 0.26 & 0.50
-\end{bmatrix}
+\begin{array}{c|cccccc}
+ & \text{DG} & \text{DC} & \text{NG} & \text{NC} & \text{AG} & \text{AC} \\
+\hline
+\text{DG} & 0.86 & 0.11 & 0.03 & 0.00 & 0.00 & 0.00 \\
+\text{DC} & 0.52 & 0.33 & 0.13 & 0.02 & 0.00 & 0.00 \\
+\text{NG} & 0.12 & 0.03 & 0.70 & 0.11 & 0.03 & 0.01 \\
+\text{NC} & 0.13 & 0.02 & 0.35 & 0.36 & 0.10 & 0.04 \\
+\text{AG} & 0.00 & 0.00 & 0.09 & 0.11 & 0.55 & 0.25 \\
+\text{AC} & 0.00 & 0.00 & 0.09 & 0.15 & 0.26 & 0.50 \\
+\end{array}
 $$
 
 ```{code-cell} ipython3
@@ -265,6 +291,20 @@ plt.colorbar(pc, ax=ax)
 plt.show()
 ```
 
+这些概率可以用矩阵形式表示如下
+
+$$
+P :=
+\begin{bmatrix}
+0.86 & 0.11 & 0.03 & 0.00 & 0.00 & 0.00 \\
+0.52 & 0.33 & 0.13 & 0.02 & 0.00 & 0.00 \\
+0.12 & 0.03 & 0.70 & 0.11 & 0.03 & 0.01 \\
+0.13 & 0.02 & 0.35 & 0.36 & 0.10 & 0.04 \\
+0.00 & 0.00 & 0.09 & 0.11 & 0.55 & 0.25 \\
+0.00 & 0.00 & 0.09 & 0.15 & 0.26 & 0.50
+\end{bmatrix}
+$$
+
 查看数据后，我们发现民主政体的增长期通常比专制政体更长（这体现在专制政体中从增长到增长的转移概率较低）。
 
 我们还可以发现，在民主政体中，从崩溃到增长的概率较高。
@@ -279,7 +319,7 @@ plt.show()
 
 集合 $S$ 被称为**状态空间**，$x_1, \ldots, x_n$ 被称为**状态值**。
 
-一个分布 $\psi$ 在 $S$ 上是一个长度为 $n$ 的概率质量函数，其中 $\psi(i)$ 是分配给状态 $x_i$ 的概率。
+$S$ 上的一个**分布** $\psi$ 是一个长度为 $n$ 的概率质量函数，其中 $\psi(i)$ 是分配给状态 $x_i$ 的概率。
 
 在 $S$ 上的**马尔科夫链** $\{X_t\}$ 是一个取值于 $S$ 的随机变量序列，且具有**马尔科夫性质**。
 
@@ -306,7 +346,7 @@ P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
 根据构造，
 
 * $P(x, y)$ 是从 $x$ 到 $y$ 在一个时间单位（一步）内的转移概率
-* $P(x, \cdot)$ 是给定 $X_t = x$ 时，$X_{t+1}$ 的条件分布
+* $P(x, \cdot)$ 是给定 $X_t = x$ 时，$X_{t+1}$ 的条件分布（概率质量函数）
 
 我们可以将 $P$ 视为一个随机矩阵，其中
 
@@ -342,12 +382,12 @@ $$
 要模拟一个马尔科夫链，我们需要
 
 1. 一个随机矩阵 $P$ 和
-2. 一个长度为 $n$ 的概率质量函数 $\psi_0$，从中抽取 $X_0$ 的初始实现。
+1. 一个长度为 $n$ 的概率质量函数 $\psi_0$，从中抽取 $X_0$ 的初始实现。
 
 然后按照如下方式构建马尔科夫链：
 
 1. 在时间 $t=0$，从分布 $\psi_0$ 中抽取 $X_0$ 的一个实现。
-2. 在每个后续时间 $t$，从 $P(X_t, \cdot)$ 中抽取一个新状态 $X_{t+1}$ 的实现。
+1. 在每个后续时间 $t$，从 $P(X_t, \cdot)$ 中抽取一个新状态 $X_{t+1}$ 的实现。
 
 （也就是说，从 $P$ 的第 $X_t$ 行中抽取。）
 
@@ -424,7 +464,7 @@ np.mean(X == 0)
 
 ### 使用 QuantEcon 的例程
 
-[QuantEcon.py](http://quantecon.org/quantecon-py) 提供了一些处理马尔科夫链包括模拟的步骤。
+[QuantEcon.py](http://quantecon.org/quantecon-py) 提供了一些处理马尔科夫链包括模拟的例程。
 
 以下是使用与前例相同的 $P$ 的说明
 
@@ -477,7 +517,7 @@ mc.simulate_indices(ts_length=4)
 我们了解到
 
 1. $\{X_t\}$ 是一个具有随机矩阵 $P$ 的马尔科夫链
-2. $X_t$ 的分布已知为 $\psi_t$
+1. $X_t$ 的分布已知为 $\psi_t$
 
 那么，$X_{t+1}$ 的分布是什么？更一般地，$X_{t+m}$ 的分布是什么？
 
@@ -563,12 +603,13 @@ $$
 $$
 
 
-### 示例：衰退概率
-
 ```{index} single: 马尔科夫链; 未来概率
 ```
 
-回顾我们{ref}`之前讨论的<mc_eg2>`关于衰退和增长的随机矩阵 $P$ 。
+```{prf:example} 衰退概率
+:label: prob-recession
+
+回顾我们在{ref}`示例 1：经济状态 <mc_eg2>`中考虑的关于衰退和增长的随机矩阵 $P$ 。
 
 假设当前状态未知——也许统计数据只能在当前月份*结束*时获得。
 
@@ -580,21 +621,24 @@ $$
 (\psi_t P^6)(1) + (\psi_t P^6)(2)
 $$
 
+```
 
+```{index} single: 马尔科夫链; 横截面分布
+```
 
-(mc_eg1-1)=
-### 示例 2：横截面分布
+````{prf:example} 横截面分布
+:label: cross-sectional-distributions
 
 我们研究的分布可以视为
 
 1. 概率，或
 2. 横截面频率，即根据大数法则我们预期的大样本中的结果。
 
-为了解释这一点，请回顾我们之前讨论的关于单个工人就业/失业动态的模型 {ref}`上面讨论过的 <mc_eg1>`。
+为了解释这一点，请回顾我们在{ref}`示例 2：失业 <mc_eg1>`中讨论的关于给定工人就业/失业动态的模型。
 
-现在考虑一个大的工人群体，每个工人的一生经历都符合指定的动态，每个工人的结果都是与其他工人独立的过程的实现。
+现在考虑一个大的工人群体，每个工人的一生经历都符合指定的动态，每个工人的结果都是与其他工人统计独立的过程的实现。
 
-令 $\psi_t$ 为 $\{0, 1\}$ 上的*横截面*分布。
+令 $\psi_t$ 为 $\{0, 1\}$ 上的当前*横截面*分布。
 
 横截面分布记录了某一时刻 $t$ 工人的就业和失业比例。
 
@@ -612,6 +656,12 @@ $$
 
 这正是横截面分布。
 
+```{note}
+横截面频率衡量的是特定变量（例如就业状态）在某一特定时刻在一个群体中的分布情况，提供了该变量各个可能状态下个体所占比例的信息。
+```
+
+````
+
 (stationary)=
 ## 平稳分布
 
@@ -626,12 +676,12 @@ P = np.array([[0.4, 0.6],
 ψ @ P
 ```
 
-注意，`ψ @ P` 与 `ψ` 相同（可以验证$\psi P = \psi$）。
+注意，`ψ @ P` 与 `ψ` 相同。
 
 这样的分布被称为**平稳**或**不变**分布。
 
 (mc_stat_dd)=
-严格的表述如下，如果分布 $\psi^*$ 满足 $\psi^* P = \psi^*$，则称其为 $P$ 的**平稳**分布。
+严格的表述如下，如果 $S$ 上的分布 $\psi^*$ 满足 $\psi^* P = \psi^*$，则称其为 $P$ 的**平稳**分布。
 
 注意，通过右乘 $P$，我们有 $\psi^* P^2 = \psi^* P = \psi^*$。
 
@@ -665,24 +715,28 @@ P = np.array([[0.4, 0.6],
 我们将在 {doc}`下一讲 <markov_chains_II>` 中引入不可约性时回到这一点。
 
 
+```{prf:example} 失业概率的稳态
+:label: steady-state-unemployment
 
-### 示例
-
-回顾我们之前讨论的关于特定工人的就业/失业动态的模型 {ref}`在上面讨论过的 <mc_eg1>`。
+回顾我们在{ref}`示例 2：失业 <mc_eg1>`中讨论的关于特定工人的就业/失业动态的模型。
 
 如果 $\alpha \in (0,1)$ 且 $\beta \in (0,1)$，则转移矩阵在各处为正。
 
-设 $\psi^* = (p, 1-p)$ 为该转移矩阵的平稳分布，其中 $p$ 对应失业（状态 0）。
+设 $\psi^* = (p, 1-p)$ 为该平稳分布，其中 $p$ 对应失业（状态 0）。
 
 使用 $\psi^* = \psi^* P$ 和一些代数推导得到
 
 $$
-    p = \frac{\beta}{\alpha + \beta}
+p = \frac{\beta}{\alpha + \beta}
 $$
 
 从某种意义上说，这是失业的稳态概率。
 
 不出所料，当 $\beta \to 0$ 时它趋于 0，当 $\alpha \to 0$ 时它趋于 1。
+```
+
+
+
 
 
 
@@ -700,11 +754,16 @@ mc = qe.MarkovChain(P)
 mc.stationary_distributions  # 显示所有平稳分布
 ```
 
+
+
+
+
+
 ### 渐进平稳性
 
 考虑一个处处为正的随机矩阵，具有唯一的平稳分布 $\psi^*$。
 
-有时，无论初始分布 $\psi_0$ 如何，$\psi_t = \psi_0 P^t$ 都会收敛到 $\psi^*$。
+有时，无论初始分布 $\psi_0$ 如何，$X_t$ 的分布 $\psi_t = \psi_0 P^t$ 都会收敛到 $\psi^*$。
 
 例如，我们有以下结果
 
@@ -725,6 +784,7 @@ $$
 这种情况通常称为**渐进平稳性**或**全局稳定性**。
 
 该定理的证明可以在 {cite}`sargent2023economic` 的第4章或许多其他来源中找到。
+
 
 
 
@@ -808,7 +868,7 @@ HTML(anim.to_jshtml())
 
 在这里
 
-* $P$ 是 {ref}`之前讨论的<mc_eg2>` 衰退和增长的随机矩阵。
+* $P$ 是{ref}`示例 1：经济状态 <mc_eg2>`中考虑的关于衰退和增长的随机矩阵。
 * 红色、蓝色和绿色的点是初始边缘概率分布 $\psi_1, \psi_2, \psi_3$，它们分别表示为 $\mathbb R^3$ 中的向量。
 * 各种颜色的透明点是边际分布 $\psi_i P^t$ 对于 $t = 1, 2, \ldots$，$i=1,2,3.$。
 * 黄色点是 $\psi^*$。
@@ -898,7 +958,6 @@ anim = FuncAnimation(fig, update, frames=range(20), blit=False, repeat=False)
 plt.close()
 HTML(anim.to_jshtml())
 ```
-
 该动画展示了一个不可约但具有周期性的随机矩阵的行为。
 
 红色、黄色和绿色的点表示不同的初始概率分布。
@@ -907,7 +966,8 @@ HTML(anim.to_jshtml())
 
 与汉密尔顿的马尔科夫链不同，这些初始分布不会收敛到唯一的平稳分布。
 
-相反，它们周期性地在概率单纯形上循环，说明了此时渐进稳定性失败的。
+相反，它们周期性地在概率单纯形上循环，说明了渐进稳定性在此失败。
+
 
 (finite_mc_expec)=
 ## 计算期望
@@ -986,7 +1046,7 @@ $$
         \sum_{j=0}^\infty \beta^j h(X_{t+j}) \mid X_t
         = x
     \right]
-    = x + \beta (Ph)(x) + \beta^2 (P^2 h)(x) + \cdots
+    = h(x) + \beta (Ph)(x) + \beta^2 (P^2 h)(x) + \cdots
 $$
 
 根据 {ref}`Neumann 级数引理 <la_neumann>`，该和可以使用以下公式计算
@@ -1017,8 +1077,8 @@ $$
 在本练习中，
 
 1. 可视化转移矩阵，并证明该过程是渐进平稳的
-2. 使用模拟计算平稳分布
-3. 可视化 $(\psi_0 P^t)(i)$ 的动态过程，其中 $t \in 0, ..., 25$，并将收敛路径与之前的转移矩阵进行比较
+1. 使用矩阵幂和 QuantEcon 包计算平稳分布
+1. 可视化 $(\psi_0 P^t)(i)$ 的动态过程，其中 $t \in 0, ..., 25$，并将收敛路径与之前的转移矩阵进行比较
 
 将您的解答与论文进行比较。
 ```
@@ -1168,4 +1228,3 @@ plt.show()
 
 ```{solution-end}
 ```
-

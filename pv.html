@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -265,7 +265,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -276,11 +276,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -352,6 +352,11 @@
 <span class="n">fontP</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">()</span>
 <span class="n">fontP</span><span class="o">.</span><span class="n">set_family</span><span class="p">(</span><span class="s1">&#39;SimHei&#39;</span><span class="p">)</span>
 <span class="n">fontP</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -379,12 +384,12 @@
                     \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; 0 &amp; 0 \cr
                     0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -\delta \cr
                     0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1 \end{bmatrix}
-    \begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T 
-    \end{bmatrix} 
-    =  \begin{bmatrix}  
+    \begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T
+    \end{bmatrix}
+    =  \begin{bmatrix}
     d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
     \end{bmatrix}
-    + \begin{bmatrix} 
+    + \begin{bmatrix}
     0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr \delta p_{T+1}^*
     \end{bmatrix}
 \]</div>
@@ -395,6 +400,48 @@
 <p>手动用矩阵乘法对<a class="reference internal" href="#equation-eq-pvpieq">(11.3)</a>进行计算，然后用 <a class="reference internal" href="#equation-eq-euler-stack">(11.2)</a>确认。</p>
 </section>
 </div>
+<div class="solution dropdown admonition" id="pv-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_1"> Exercise 11.1</a></p>
+<section id="solution-content">
+<p>将矩阵的第<span class="math notranslate nohighlight">\(t\)</span>行（第<span class="math notranslate nohighlight">\(t\)</span>列为<span class="math notranslate nohighlight">\(1\)</span>，第<span class="math notranslate nohighlight">\(t+1\)</span>列为<span class="math notranslate nohighlight">\(-\delta\)</span>）与价格向量相乘，得到<span class="math notranslate nohighlight">\(p_t - \delta p_{t+1}\)</span>。</p>
+<p>最后一行只有第<span class="math notranslate nohighlight">\(T\)</span>列为<span class="math notranslate nohighlight">\(1\)</span>，得到<span class="math notranslate nohighlight">\(p_T\)</span>。</p>
+<p>令这些结果等于右边，就恰好得到了<a class="reference internal" href="#equation-eq-euler-stack">(11.2)</a>中的方程。</p>
+<p>我们可以用数值方法验证这个结果。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">p_star</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">*</span> <span class="mf">1.05</span><span class="o">**</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="c1"># 构建 A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">δ</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">δ</span> <span class="o">*</span> <span class="n">p_star</span>
+
+<span class="c1"># 求解 p</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># 检验 A @ p == d + b（残差应为零）</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">p</span> <span class="o">-</span> <span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最大残差 |A p - (d + b)|:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最大残差 |A p - (d + b)|: 1.1102230246251565e-15
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
 <p>用向量-矩阵表示法，我们可以将系统<a class="reference internal" href="#equation-eq-pvpieq">(11.3)</a>写成</p>
 <div class="math notranslate nohighlight" id="equation-eq-apdb">
 <span class="eqno">(11.4)<a class="headerlink" href="#equation-eq-apdb" title="Link to this equation">#</a></span>\[
@@ -403,7 +450,7 @@
 <p>这里<span class="math notranslate nohighlight">\(A\)</span>是方程<a class="reference internal" href="#equation-eq-pvpieq">(11.3)</a>左侧的矩阵，而</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    p = 
+    p =
     \begin{bmatrix}
         p_0 \\
         p_1 \\
@@ -411,7 +458,7 @@
         p_T
     \end{bmatrix},
     \quad
-    d = 
+    d =
     \begin{bmatrix}
         d_0 \\
         d_1 \\
@@ -419,12 +466,12 @@
         d_T
     \end{bmatrix},
     \quad \text{and} \quad
-    b = 
+    b =
     \begin{bmatrix}
         0 \\
         0 \\
         \vdots \\
-        p^*_{T+1}
+        \delta p^*_{T+1}
     \end{bmatrix}
 \end{split}\]</div>
 <p>价格向量的解是</p>
@@ -440,17 +487,12 @@
 <p>让我们编写Python代码来计算和绘制股息流。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
-<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
-
-<span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">current_d</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_d</span><span class="p">)</span>
-    <span class="n">current_d</span> <span class="o">=</span> <span class="n">current_d</span> <span class="o">*</span> <span class="mf">1.05</span> 
+    <span class="n">current_d</span> <span class="o">=</span> <span class="n">current_d</span> <span class="o">*</span> <span class="mf">1.05</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;股息&#39;</span><span class="p">)</span>
@@ -461,7 +503,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png"><img alt="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png" src="_images/25cf8a5a1bdc80851a67c321d1b84512a087d17bdeddbc988ede3f834bd6e373.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/2e01eacdba3c3cc211944aaad33912ddce1a392f01f15ac31ff1044e7a6b70b1.png"><img alt="_images/2e01eacdba3c3cc211944aaad33912ddce1a392f01f15ac31ff1044e7a6b70b1.png" src="_images/2e01eacdba3c3cc211944aaad33912ddce1a392f01f15ac31ff1044e7a6b70b1.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -523,7 +569,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png"><img alt="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png" src="_images/e9b9791aa9fdf2d95e7032d09ce2f431288c25b41413c0b7b8f911b233be7470.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/58f1104680971f92b2a11a922869d2d92fc9bc451446fb4cc593622da8e66b50.png"><img alt="_images/58f1104680971f92b2a11a922869d2d92fc9bc451446fb4cc593622da8e66b50.png" src="_images/58f1104680971f92b2a11a922869d2d92fc9bc451446fb4cc593622da8e66b50.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -550,7 +596,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png"><img alt="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png" src="_images/4a5a86db37f6b3f8799746ea58955b55988370900ee2fef4b99f895d1153f2a1.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f41aa9a0f38ab82cc127361d9cc79a952cd9bcacbd90d72480987e9a829a13c8.png"><img alt="_images/f41aa9a0f38ab82cc127361d9cc79a952cd9bcacbd90d72480987e9a829a13c8.png" src="_images/f41aa9a0f38ab82cc127361d9cc79a952cd9bcacbd90d72480987e9a829a13c8.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -558,14 +604,14 @@
 
 <p class="admonition-title"><span class="caption-number">Exercise 11.2 </span></p>
 <section id="exercise-content">
-<p>当<span class="math notranslate nohighlight">\(p^*_{T+1} = 0\)</span> 和 <span class="math notranslate nohighlight">\(\delta = 0.98\)</span> 时，计算相对应的价格序列。</p>
+<p>当<span class="math notranslate nohighlight">\(p^*_{T+1} = 0\)</span> 和 <span class="math notranslate nohighlight">\(\delta = 0.98\)</span> 时，计算相对应的资产价格序列。</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="pv-solution-2">
+<div class="solution dropdown admonition" id="pv-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_cyc"> Exercise 11.2</a></p>
 <section id="solution-content">
-<p>我们改变之前的参数和矩阵<span class="math notranslate nohighlight">\(A\)</span>。</p>
+<p>我们改变之前的参数以及相应的矩阵<span class="math notranslate nohighlight">\(A\)</span>，然后按上面的方法继续计算。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">δ</span> <span class="o">=</span> <span class="mf">0.98</span>
@@ -590,7 +636,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png"><img alt="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png" src="_images/08faac744362d81f6a01cd54a4abd9a8b6a98b8e0cec3eaddc70aea6a87d791e.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/b6e0bbb363dbe556a3c2aa039c9d8bb640f21300a2d879f27b0571c8747500ee.png"><img alt="_images/b6e0bbb363dbe556a3c2aa039c9d8bb640f21300a2d879f27b0571c8747500ee.png" src="_images/b6e0bbb363dbe556a3c2aa039c9d8bb640f21300a2d879f27b0571c8747500ee.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -600,10 +646,10 @@
 </section>
 <section id="id5">
 <h2><span class="section-number">11.4. </span>解析表达式<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>根据逆矩阵定理，当<span class="math notranslate nohighlight">\(A B\)</span>是单位矩阵时，矩阵<span class="math notranslate nohighlight">\(B\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的逆矩阵。</p>
+<p>根据<a class="reference external" href="https://en.wikipedia.org/wiki/Invertible_matrix">逆矩阵定理</a>，当<span class="math notranslate nohighlight">\(A B\)</span>是单位矩阵时，矩阵<span class="math notranslate nohighlight">\(B\)</span>是<span class="math notranslate nohighlight">\(A\)</span>的逆矩阵。</p>
 <p>可以验证，<a class="reference internal" href="#equation-eq-pvpieq">(11.3)</a>中的矩阵<span class="math notranslate nohighlight">\(A\)</span>的逆矩阵是</p>
 <div class="math notranslate nohighlight" id="equation-eq-ainv">
-<span class="eqno">(11.6)<a class="headerlink" href="#equation-eq-ainv" title="Link to this equation">#</a></span>\[ A^{-1} = 
+<span class="eqno">(11.6)<a class="headerlink" href="#equation-eq-ainv" title="Link to this equation">#</a></span>\[ A^{-1} =
     \begin{bmatrix}
         1 &amp; \delta &amp; \delta^2 &amp; \cdots &amp; \delta^{T-1} &amp; \delta^T \cr
         0 &amp; 1 &amp; \delta &amp; \cdots &amp; \delta^{T-2} &amp; \delta^{T-1} \cr
@@ -617,6 +663,51 @@
 <p class="admonition-title"><span class="caption-number">Exercise 11.3 </span></p>
 <section id="exercise-content">
 <p>通过证明<span class="math notranslate nohighlight">\(AA^{-1}\)</span>为单位矩阵来验证这一点。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="pv-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_2"> Exercise 11.3</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.99</span>
+
+<span class="c1"># 构建 A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">δ</span>
+
+<span class="c1"># 根据 eq:Ainv 构建解析逆矩阵：当 j &gt;= i 时 A_inv[i,j] = δ^(j-i)，否则为 0</span>
+<span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A_inv</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">δ</span><span class="o">**</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># 验证</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A @ A_inv（应为单位矩阵）：&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">A_inv</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;是否为单位矩阵：&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">A_inv</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A @ A_inv（应为单位矩阵）：
+[[ 1.  0.  0.  0. -0.  0.  0.]
+ [ 0.  1.  0.  0.  0. -0.  0.]
+ [ 0.  0.  1.  0.  0.  0. -0.]
+ [ 0.  0.  0.  1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  1.  0.  0.]
+ [ 0.  0.  0.  0.  0.  1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  1.]]
+是否为单位矩阵： True
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </div>
 <p>如果我们在 <a class="reference internal" href="#equation-eq-apdb-sol">(11.5)</a> 中使用表达式 <a class="reference internal" href="#equation-eq-ainv">(11.6)</a> 并执行所指示的矩阵乘法，我们将发现</p>
@@ -647,10 +738,10 @@ c \equiv \delta^{T+1}p_{T+1}^*
 <p>让我们暂时考虑一个从不支付股息的资产这个特殊情况，在这种情况下</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{bmatrix}  
+\begin{bmatrix}
 d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
-\end{bmatrix} = 
-\begin{bmatrix}  
+\end{bmatrix} =
+\begin{bmatrix}
 0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr 0
 \end{bmatrix}
 \]</div>
@@ -663,9 +754,9 @@ d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
                 \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; 0 &amp; 0 \cr
                 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -\delta \cr
                 0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1 \end{bmatrix}
-\begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T 
+\begin{bmatrix} p_0 \cr p_1 \cr p_2 \cr \vdots \cr p_{T-1} \cr p_T
 \end{bmatrix}  =
-\begin{bmatrix} 
+\begin{bmatrix}
 0 \cr 0 \cr 0 \cr \vdots \cr 0 \cr \delta p_{T+1}^*
 \end{bmatrix}
 \]</div>
@@ -673,7 +764,7 @@ d_0 \cr d_1 \cr d_2 \cr \vdots \cr d_{T-1} \cr d_T
 <p>但让我们通过设置以下条件来激活<strong>泡沫</strong>成分：</p>
 <div class="math notranslate nohighlight" id="equation-eq-eqbubbleterm">
 <span class="eqno">(11.9)<a class="headerlink" href="#equation-eq-eqbubbleterm" title="Link to this equation">#</a></span>\[
-p_{T+1}^* = c \delta^{-(T+1)} 
+p_{T+1}^* = c \delta^{-(T+1)}
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(c\)</span> 为某个正数。</p>
 <p>在这种情况下，当我们用方程 <a class="reference internal" href="#equation-eq-ainv">(11.6)</a> 中的矩阵 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 乘以 <a class="reference internal" href="#equation-eq-pieq2">(11.8)</a> 的两边时，我们发现：</p>
@@ -701,26 +792,212 @@ R_t = \delta^{-1} &gt; 1 , t = 0, 1, \ldots, T
 
 <p class="admonition-title"><span class="caption-number">Exercise 11.4 </span></p>
 <section id="exercise-content">
-<p>给出以下 <span class="math notranslate nohighlight">\(d\)</span> 和 <span class="math notranslate nohighlight">\(p_{T+1}^*\)</span> 设置下资产价格 <span class="math notranslate nohighlight">\(p_t\)</span> 的分析表达式：</p>
+<p>假设<span class="math notranslate nohighlight">\(g &gt;1\)</span>且<span class="math notranslate nohighlight">\(\delta g \in (0,1)\)</span>。给出以下 <span class="math notranslate nohighlight">\(d\)</span> 和 <span class="math notranslate nohighlight">\(p_{T+1}^*\)</span> 设置下资产价格 <span class="math notranslate nohighlight">\(p_t\)</span> 的解析表达式：</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(p_{T+1}^* = 0, d_t = g^t d_0\)</span>（戈登增长公式的修改版）</p></li>
-<li><p><span class="math notranslate nohighlight">\(p_{T+1}^* = g^{T+1} d_0, d_t = g^t d_0\)</span>（普通的戈登增长公式）</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{T+1}^* = \frac{g^{T+1} d_0}{1- \delta g},  d_t = g^t d_0\)</span>（普通的戈登增长公式）</p></li>
 <li><p><span class="math notranslate nohighlight">\(p_{T+1}^* = 0, d_t = 0\)</span>（一个无价值股票的价格）</p></li>
 <li><p><span class="math notranslate nohighlight">\(p_{T+1}^* = c \delta^{-(T+1)}, d_t = 0\)</span>（一个纯泡沫股票的价格）</p></li>
 </ol>
 </section>
 </div>
-<div class="solution dropdown admonition" id="pv-solution-5">
+<div class="solution dropdown admonition" id="pv-solution-7">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_a"> Exercise 11.4</a></p>
 <section id="solution-content">
 <p>将上述每对 <span class="math notranslate nohighlight">\(p_{T+1}^*, d_t\)</span> 代入方程 <a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a> 得到：</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \delta^{T+1-t} g^{T+1} d_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 = d_t \frac{1 - (\delta g)^{T+1-t}}{1 - \delta g}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_t = \sum^T_{s=t} \delta^{s-t} g^s d_0 + \frac{\delta^{T+1-t} g^{T+1} d_0}{1 - \delta g} = \frac{d_t}{1 - \delta g}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p_t = 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p_t = c \delta^{-t}\)</span></p></li>
 </ol>
+</section>
+</div>
+<div class="exercise admonition" id="pv_ex_b">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.5 </span></p>
+<section id="exercise-content">
+<p>针对讲座中股息增长的例子（<span class="math notranslate nohighlight">\(d_{t+1} = 1.05 d_t\)</span>，<span class="math notranslate nohighlight">\(d_0 = 1\)</span>，<span class="math notranslate nohighlight">\(T = 6\)</span>，<span class="math notranslate nohighlight">\(\delta = 0.99\)</span>，
+<span class="math notranslate nohighlight">\(p_{T+1}^* = 10\)</span>），用数值方法验证定价公式 <a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a>。</p>
+<p>对于每个 <span class="math notranslate nohighlight">\(t = 0, 1, \ldots, T\)</span>，用以下两种方法计算 <span class="math notranslate nohighlight">\(p_t\)</span>：</p>
+<ol class="arabic simple">
+<li><p>求解线性方程组 <span class="math notranslate nohighlight">\(Ap = d + b\)</span>（如讲座中所示），以及</p></li>
+<li><p>直接计算求和 <span class="math notranslate nohighlight">\(\sum_{s=t}^T \delta^{s-t} d_s + \delta^{T+1-t} p_{T+1}^*\)</span>。</p></li>
+</ol>
+<p>将两种结果并排打印出来，确认它们是否一致。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="pv-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_b"> Exercise 11.5</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">p_star</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">*</span> <span class="mf">1.05</span><span class="o">**</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">δ</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">δ</span> <span class="o">*</span> <span class="n">p_star</span>
+<span class="n">p_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">p_formula</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="nb">sum</span><span class="p">(</span><span class="n">δ</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">δ</span><span class="o">**</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">p_star</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;t&#39;</span><span class="si">:</span><span class="s2">&gt;3</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;矩阵解&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;公式解&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;|差值|&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">44</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p_matrix</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_formula</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s1">&gt;3</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">p_matrix</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;12.6f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">p_formula</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="si">:</span><span class="s1">&gt;12.6f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s1">&gt;10.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  t |          矩阵解 |          公式解 |       |差值|
+--------------------------------------------
+  0 |    17.206971 |    17.206971 |   3.55e-15
+  1 |    16.370678 |    16.370678 |   0.00e+00
+  2 |    15.475432 |    15.475432 |   3.55e-15
+  3 |    14.518113 |    14.518113 |   1.78e-15
+  4 |    13.495443 |    13.495443 |   1.78e-15
+  5 |    12.403976 |    12.403976 |   1.78e-15
+  6 |    11.240096 |    11.240096 |   0.00e+00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="pv_ex_c">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.6 </span></p>
+<section id="exercise-content">
+<p>假设股息为常数：对所有 <span class="math notranslate nohighlight">\(t = 0, \ldots, T\)</span>，<span class="math notranslate nohighlight">\(d_t = d = 1\)</span>。</p>
+<p>将终端价格设为永续年金价值 <span class="math notranslate nohighlight">\(p_{T+1}^* = d / (1-\delta)\)</span>。</p>
+<p>a. 计算 <span class="math notranslate nohighlight">\(T = 100\)</span>、<span class="math notranslate nohighlight">\(\delta = 0.99\)</span> 时的资产价格序列，并将 <span class="math notranslate nohighlight">\(p_t\)</span> 与永续年金价值
+<span class="math notranslate nohighlight">\(d/(1-\delta)\)</span>（用虚线表示）一起绘图。</p>
+<p>b. 用解析方法（利用公式 <a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a>）验证对所有 <span class="math notranslate nohighlight">\(t\)</span> 都有
+<span class="math notranslate nohighlight">\(p_t = d / (1-\delta)\)</span>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="pv-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_c"> Exercise 11.6</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">δ</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">d_const</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">p_star_perp</span> <span class="o">=</span> <span class="n">d_const</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">d_const</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">δ</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">δ</span> <span class="o">*</span> <span class="n">p_star_perp</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;资产价格 $p_t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">p_star_perp</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;永续年金价值 $d/(1 - δ) = </span><span class="si">{</span><span class="n">p_star_perp</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;时间&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;常数股息：资产价格等于永续年金价值&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;与 d/(1 - δ) 的最大偏差：</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p_star_perp</span><span class="p">))</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/f9d0a50cc63b2090385a26f8ee0da2c34300668d912d7523bf4dd9e5e8311cbc.png"><img alt="_images/f9d0a50cc63b2090385a26f8ee0da2c34300668d912d7523bf4dd9e5e8311cbc.png" src="_images/f9d0a50cc63b2090385a26f8ee0da2c34300668d912d7523bf4dd9e5e8311cbc.png" style="width: 80%;" />
+</a>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>与 d/(1 - δ) 的最大偏差：0.00e+00
+</pre></div>
+</div>
+</div>
+</div>
+<p>对于b部分，将<span class="math notranslate nohighlight">\(d_s = d\)</span>和<span class="math notranslate nohighlight">\(p_{T+1}^* = d/(1-\delta)\)</span>代入<a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a>得到</p>
+<div class="math notranslate nohighlight">
+\[
+p_t = d \frac{1 - \delta^{T+1-t}}{1-\delta} + \frac{d\delta^{T+1-t}}{1-\delta}
+     = \frac{d}{1-\delta}
+\]</div>
+</section>
+</div>
+<div class="exercise admonition" id="pv_ex_d">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.7 </span></p>
+<section id="exercise-content">
+<p>对于增长的股息流（<span class="math notranslate nohighlight">\(d_{t+1} = 1.05 d_t\)</span>，<span class="math notranslate nohighlight">\(d_0 = 1\)</span>，<span class="math notranslate nohighlight">\(T = 6\)</span>，
+<span class="math notranslate nohighlight">\(p_{T+1}^* = 10\)</span>），将<span class="math notranslate nohighlight">\(t = 0\)</span>时的资产价格绘制为折现因子
+<span class="math notranslate nohighlight">\(\delta \in [0.90,\, 0.99]\)</span>的函数。</p>
+<p>验证<span class="math notranslate nohighlight">\(p_0\)</span>在<span class="math notranslate nohighlight">\(\delta\)</span>上严格递增，并根据公式<a class="reference internal" href="#equation-eq-ptpveq">(11.7)</a>解释原因。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="pv-solution-13">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#pv_ex_d"> Exercise 11.7</a></p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">p_star</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">*</span> <span class="mf">1.05</span><span class="o">**</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">δ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">p0_vals</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">δ</span> <span class="ow">in</span> <span class="n">δ_vals</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">δ</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">δ</span> <span class="o">*</span> <span class="n">p_star</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">p0_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">δ_vals</span><span class="p">,</span> <span class="n">p0_vals</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_0$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$t=0$时的资产价格作为$</span><span class="se">\\</span><span class="s1">delta$的函数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/ded72feada7332653f8443469f643e5dc6ee8197328b5b4c650952cc03292370.png"><img alt="_images/ded72feada7332653f8443469f643e5dc6ee8197328b5b4c650952cc03292370.png" src="_images/ded72feada7332653f8443469f643e5dc6ee8197328b5b4c650952cc03292370.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>基本面部分中的每一项 <span class="math notranslate nohighlight">\(\delta^{s-t} d_s\)</span> 以及泡沫项 <span class="math notranslate nohighlight">\(\delta^{T+1-t} p_{T+1}^*\)</span> 都随 <span class="math notranslate nohighlight">\(\delta\)</span> 递增。</p>
+<p>因此，较高的折现因子会提高每一笔未来现金流的现值，从而推高 <span class="math notranslate nohighlight">\(p_0\)</span>。</p>
 </section>
 </div>
 </section>
@@ -905,7 +1182,7 @@ R_t = \delta^{-1} &gt; 1 , t = 0, 1, \ldots, T
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

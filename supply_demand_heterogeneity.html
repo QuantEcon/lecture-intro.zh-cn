@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -272,7 +272,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -283,11 +283,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -310,8 +310,8 @@
 <p>虽然这种分析很有启发性，但我们做了一个很强的简化假设 - 所有经济主体都是完全相同的。</p>
 <p>然而在现实世界中，家庭、企业和其他经济主体在很多方面都存在差异。</p>
 <p>本讲座将通过引入消费者偏好和禀赋的差异性，来探讨这种异质性。</p>
-<p>我们将分析在这种更现实的设定下，竞争均衡是如何形成的。</p>
-<p>我们还会展示如何构建一个”代表性消费者”来简化分析。</p>
+<p>我们将分析在这种设定下的竞争均衡。</p>
+<p>我们还会展示如何构建一个”代表性消费者”。</p>
 <p>让我们先导入需要用到的包：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -335,23 +335,23 @@ c_1 + c_2 = e_1 + e_2
 <p>假设需求曲线为</p>
 <div class="math notranslate nohighlight">
 \[
-    c_i = (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} b_i -  \mu_i p )
+    c_i = (\Pi^\top \Pi )^{-1}(\Pi^\top b_i -  \mu_i p )
 \]</div>
 <p>那么竞争均衡还需要满足</p>
 <div class="math notranslate nohighlight">
 \[
 e_1 + e_2 =
-    (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} (b_1 + b_2) - (\mu_1 + \mu_2) p )
+    (\Pi^\top \Pi)^{-1}(\Pi^\top (b_1 + b_2) - (\mu_1 + \mu_2) p )
 \]</div>
 <p>通过一两行线性代数计算，可以推出</p>
 <div class="math notranslate nohighlight" id="equation-eq-old6">
 <span class="eqno">(43.1)<a class="headerlink" href="#equation-eq-old6" title="Link to this equation">#</a></span>\[
-(\mu_1 + \mu_2) p = \Pi^{\top}(b_1+ b_2) - \Pi^{\top} \Pi (e_1 + e_2)
+(\mu_1 + \mu_2) p = \Pi^\top(b_1+ b_2) - \Pi^\top \Pi (e_1 + e_2)
 \]</div>
 <p>我们可以使 <span class="math notranslate nohighlight">\(\mu_1 + \mu_2 =1\)</span> 来对价格进行归一化处理，然后解方程</p>
 <div class="math notranslate nohighlight" id="equation-eq-old7">
 <span class="eqno">(43.2)<a class="headerlink" href="#equation-eq-old7" title="Link to this equation">#</a></span>\[
-\mu_i(p,e) = \frac{p^{\top} (\Pi^{-1} b_i - e_i)}{p^{\top} (\Pi^{\top} \Pi)^{-1} p}
+\mu_i(p,e) = \frac{p^\top (\Pi^{-1} b_i - e_i)}{p^\top (\Pi^\top \Pi )^{-1} p}
 \]</div>
 <p>求得 <span class="math notranslate nohighlight">\(\mu_i, 其中 i = 1,2\)</span>。</p>
 <div class="exercise admonition" id="sdh_ex1">
@@ -361,9 +361,9 @@ e_1 + e_2 =
 <p>证明，在正标量的归一化下，你在前面两消费者经济中计算出的同一竞争均衡价格向量，在只有一个代表性消费者的单一消费者经济中依旧适用，其中这个<strong>代表性消费者</strong>的效用函数为：</p>
 <div class="math notranslate nohighlight">
 \[
--.5 (\Pi c -b) ^2 (\Pi c -b )
+-.5 (\Pi c -b) ^\top (\Pi c -b )
 \]</div>
-<p>其初始禀赋向量为 <span class="math notranslate nohighlight">\(e\)</span>，其中</p>
+<p>其禀赋向量为 <span class="math notranslate nohighlight">\(e\)</span>，其中</p>
 <div class="math notranslate nohighlight">
 \[
 b = b_1 + b_2
@@ -393,14 +393,13 @@ e = e_1 + e_2 .
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\mu_{i}=\frac{-W_{i}+p^{T}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
-\]</div>
+\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}\]</div>
 <ul class="simple">
 <li><p>最后我们利用需求曲线来计算竞争均衡分配：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
+c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p
 \]</div>
 </section>
 <section id="python">
@@ -420,13 +419,11 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
 </ul>
 </li>
 </ul>
-<p>这个类会检查每个消费者的餍足点是否充分大于其禀赋的转换值(即 <span class="math notranslate nohighlight">\(b \gg \Pi e\)</span>)。如果不满足这个条件，类会抛出异常。</p>
-<p>类的结构如下:</p>
+<p>这个类会包含一项检验，用以确保 <span class="math notranslate nohighlight">\(b \gg \Pi e\)</span>，如果违反了这一条件（在某个我们需要设定的阈值水平下），类会抛出异常。</p>
 <ul class="simple">
-<li><p><strong>个体消费者</strong> 由以下要素刻画:</p>
+<li><p><strong>一个人</strong> 由以下要素构成的一对组成：</p>
 <ul>
-<li><p>偏好参数(包括替代矩阵 <span class="math notranslate nohighlight">\(\Pi\)</span> 和餍足点 <span class="math notranslate nohighlight">\(b\)</span>)</p></li>
-<li><p>初始禀赋 <span class="math notranslate nohighlight">\(e\)</span> 和财富 <span class="math notranslate nohighlight">\(W\)</span></p></li>
+<li><p><strong>偏好</strong> 和 <strong>禀赋</strong></p></li>
 </ul>
 </li>
 <li><p><strong>纯交换经济体</strong> 包括：</p>
@@ -660,13 +657,13 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
 <span class="n">EE_DE</span> <span class="o">=</span> <span class="n">ExchangeEconomy</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">es</span><span class="p">)</span>
 <span class="n">p</span><span class="p">,</span> <span class="n">c_s</span><span class="p">,</span> <span class="n">μ_s</span> <span class="o">=</span> <span class="n">EE_DE</span><span class="o">.</span><span class="n">competitive_equilibrium</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡的价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡价格向量:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;竞争均衡分配:&#39;</span><span class="p">,</span> <span class="n">c_s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡的价格向量: [1.   0.95]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>竞争均衡价格向量: [1.   0.95]
 竞争均衡分配: [array([1., 1.])]
 </pre></div>
 </div>
@@ -710,21 +707,21 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
 <h2><span class="section-number">43.5. </span>推导代表性消费者<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>在我们研究的这类多消费者经济体中，事实上存在一个单一的<strong>代表性消费者</strong>，其偏好和禀赋可以从众多单独的个体消费者的偏好和禀赋中推导出来。</p>
 <p>考虑一个具有初始财富分配 <span class="math notranslate nohighlight">\(W_i\)</span> 的多消费者经济体，其中初始财富满足 <span class="math notranslate nohighlight">\(\sum_i W_{i}=0\)</span></p>
-<p>我们假设初始财富可以重新分配。</p>
+<p>我们允许初始财富的重新分配。</p>
 <p>我们有以下对象</p>
 <ul class="simple">
 <li><p>需求曲线：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
-c_{i}=\Pi^{-1}b_{i}-(\Pi^T\Pi)^{-1}\mu_{i}p 
+c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p 
 \]</div>
 <ul class="simple">
 <li><p>财富的边际效用：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
-\mu_{i}=\frac{-W_{i}+p^T\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^T(\Pi^T\Pi)^{-1}p}
+\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
 \]</div>
 <ul class="simple">
 <li><p>市场出清：</p></li>
@@ -733,38 +730,38 @@ c_{i}=\Pi^{-1}b_{i}-(\Pi^T\Pi)^{-1}\mu_{i}p
 \[ 
 \sum c_{i}=\sum e_{i}
 \]</div>
-<p>表示总消费 <span class="math notranslate nohighlight">\(\sum_i c_{i}=c\)</span> 和 <span class="math notranslate nohighlight">\(\sum_i \mu_i = \mu\)</span>。</p>
+<p>记总消费为 <span class="math notranslate nohighlight">\(\sum_i c_{i}=c\)</span>，<span class="math notranslate nohighlight">\(\sum_i \mu_i = \mu\)</span>。</p>
 <p>市场出清需要</p>
 <div class="math notranslate nohighlight">
 \[ 
-\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{T}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
+\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{\top}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
 \]</div>
 <p>经过几步计算后得到</p>
 <div class="math notranslate nohighlight">
 \[
-p=\mu^{-1}\left(\Pi^{T}b-\Pi^{T}\Pi e\right)
+p=\mu^{-1}\left(\Pi^{\top}b-\Pi^{\top}\Pi e\right)
 \]</div>
 <p>其中</p>
 <div class="math notranslate nohighlight">
 \[ 
-\mu = \sum_i\mu_{i}=\frac{0 + p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}.
+\mu = \sum_i\mu_{i}=\frac{0 + p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}.
 \]</div>
 <p>现在考虑上述的代表性消费者经济体。</p>
 <p>用 <span class="math notranslate nohighlight">\(\tilde{\mu}\)</span> 表示代表性消费者的财富边际效用。</p>
 <p>需求函数是</p>
 <div class="math notranslate nohighlight">
 \[
-c=\Pi^{-1}b-(\Pi^{T}\Pi)^{-1}\tilde{\mu} p
+c=\Pi^{-1}b-(\Pi^{\top}\Pi)^{-1}\tilde{\mu} p
 \]</div>
 <p>将这个代入预算约束得到</p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{\mu}=\frac{p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
+\tilde{\mu}=\frac{p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
 \]</div>
 <p>在均衡状态下 <span class="math notranslate nohighlight">\(c=e\)</span>，所以</p>
 <div class="math notranslate nohighlight">
 \[
-p=\tilde{\mu}^{-1}(\Pi^{T}b-\Pi^{T}\Pi e)
+p=\tilde{\mu}^{-1}(\Pi^{\top}b-\Pi^{\top}\Pi e)
 \]</div>
 <p>因此，我们证明了：在选定一个计价单位来表达绝对价格后，代表性消费者经济体中的价格向量与具有多个消费者的基础经济体中的价格向量相同。</p>
 </section>
@@ -949,7 +946,7 @@ p=\tilde{\mu}^{-1}(\Pi^{T}b-\Pi^{T}\Pi e)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

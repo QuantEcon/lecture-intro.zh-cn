@@ -7,6 +7,21 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+translation:
+  title: 复数和三角函数
+  headings:
+    Overview: 概述
+    Overview::Complex Numbers: 复数
+    Overview::An Example: 一个例子
+    De Moivre's Theorem: 德莫瓦定理
+    Applications of de Moivre's Theorem: 德莫瓦定理的应用
+    Applications of de Moivre's Theorem::Example 1: 例1
+    Applications of de Moivre's Theorem::Example 2: 例2
+    Applications of de Moivre's Theorem::Example 3: 例3
+    'Note: we choose the solution near 0': 注意：我们选择在 0 附近的解
+    'Note: we choose the solution near 0::Trigonometric Identities': 三角恒等式
+    'Note: we choose the solution near 0::Trigonometric Integrals': 三角积分
+    'Note: we choose the solution near 0::Exercises': 练习
 ---
 
 (complex_and_trig)=
@@ -31,13 +46,15 @@ kernelspec:
 
 例如，这些工具是理解Paul Samuelson（1939年）{cite}`Samuelson1939`在其经典论文中关于投资加速数与凯恩斯消费函数相互作用的成果的关键，这是我们在讲座{doc}`Samuelson乘数加速数<dynam:samuelson>`中的主题。
 
-除了为Samuelson的工作及其扩展提供基础外，本讲座也是对高中基础三角函数知识的复习。
+除了为Samuelson的工作及其扩展提供基础外，本讲座也可以作为对高中基础三角函数关键结果的独立速览复习。
 
 那么让我们开始吧。
 
 ### 复数
 
 复数有一个**实部**$x$和一个纯**虚部**$y$。
+
+这里，$i$表示虚数单位，满足$i^2 = -1$。
 
 复数$z$的欧几里得形式、极坐标形式和三角形式是：
 
@@ -100,11 +117,15 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 ### 一个例子
 
+```{prf:example}
+:label: ct_ex_com
+
 考虑复数 $z = 1 + \sqrt{3} i$。
 
 对于 $z = 1 + \sqrt{3} i$，$x = 1$，$y = \sqrt{3}$。
 
 由此可得 $r = 2$ 且$\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o$。
+```
 
 让我们使用Python来绘制复数 $z = 1 + \sqrt{3} i$ 的三角形式。
 
@@ -124,9 +145,9 @@ x_range = np.linspace(0, x, 1000)
 fig = plt.figure(figsize=(8, 8))
 ax = plt.subplot(111, projection='polar')
 
-ax.plot((0, θ), (0, r), marker='o', color='b')            # 绘制 r
-ax.plot(np.zeros(x_range.shape), x_range, color='b')      # 绘制 x
-ax.plot(θ_range, x / np.cos(θ_range), color='b')          # 绘制 y
+ax.plot((0, θ), (0, r), marker='o', color='b')          # 绘制 r
+ax.plot(np.zeros(x_range.shape), x_range, color='b')       # 绘制 x
+ax.plot(θ_range, x / np.cos(θ_range), color='b')        # 绘制 y
 ax.plot(θ_range, np.full(θ_range.shape, 0.1), color='r')  # 绘制 θ
 
 ax.margins(0) # 从原点开始绘制
@@ -144,7 +165,6 @@ ax.text(0-0.2, 0.5, '$x = 1$')                            # 标记 x
 ax.text(0.5, 1.2, r'$y = \sqrt{3}$')                      # 标记 y
 ax.text(0.25, 0.15, r'$\theta = 60^o$')                   # 标记 θ
 
-ax.grid(True)
 plt.show()
 ```
 
@@ -336,7 +356,6 @@ ticklab = ax.yaxis.get_ticklabels()[0] # 设定y标记的位置
 trans = ticklab.get_transform()
 ax.yaxis.set_label_coords(0, 5, transform=trans)
 
-ax.grid()
 plt.show()
 ```
 
@@ -497,6 +516,204 @@ print('sin(ω)**2 从 -π 到 π 的积分的解析解为：')
 
 integrate(sin(ω)**2, (ω, -pi, pi))
 ```
+
+```{solution-end}
+```
+
+```{exercise}
+:label: complex_ex2
+
+**通过德莫瓦定理推导二倍角恒等式。**
+
+将德莫瓦定理应用于 $n = 2$ 的情形：
+
+$$
+(\cos\theta + i\sin\theta)^2 = \cos 2\theta + i\sin 2\theta
+$$
+
+将左边展开为复数的平方，并令实部与虚部分别相等，从而推导出两个**二倍角恒等式**
+
+$$
+\cos 2\theta = \cos^2\theta - \sin^2\theta, \qquad
+\sin 2\theta = 2\sin\theta\cos\theta.
+$$
+
+然后利用勾股恒等式 $\cos^2\theta + \sin^2\theta = 1$ 写出余弦恒等式的两种替代形式：
+
+$$
+\cos 2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta.
+$$
+
+使用`sympy`中的`simplify`验证这四个恒等式。
+```
+
+```{solution-start} complex_ex2
+:class: dropdown
+```
+
+当 $n = 2$ 时，德莫瓦定理给出
+$(\cos\theta + i\sin\theta)^2 = \cos 2\theta + i\sin 2\theta$。
+展开左边：
+
+$$
+\cos^2\theta - \sin^2\theta \;+\; i\,(2\sin\theta\cos\theta)
+= \cos 2\theta + i\sin 2\theta.
+$$
+
+令实部相等，得到 $\cos 2\theta = \cos^2\theta - \sin^2\theta$。
+
+令虚部相等，得到 $\sin 2\theta = 2\sin\theta\cos\theta$。
+
+将 $\sin^2\theta = 1 - \cos^2\theta$ 代入余弦公式，得到
+$\cos 2\theta = 2\cos^2\theta - 1$；将 $\cos^2\theta = 1 - \sin^2\theta$ 代入，
+则得到 $\cos 2\theta = 1 - 2\sin^2\theta$。
+
+```{code-cell} ipython3
+from sympy import Symbol, cos, sin, simplify
+
+θ = Symbol('θ', real=True)
+
+print("cos(2θ) = cos(θ)**2 - sin(θ)**2:",
+      simplify(cos(2*θ) - (cos(θ)**2 - sin(θ)**2)))
+
+print("sin(2θ) = 2sinθcosθ:",
+      simplify(sin(2*θ) - 2*sin(θ)*cos(θ)))
+
+print("cos(2θ) = 2*cos(θ)**2 - 1:",
+      simplify(cos(2*θ) - (2*cos(θ)**2 - 1)))
+
+print("cos(2θ) = 1 - 2*sin(θ)**2:",
+      simplify(cos(2*θ) - (1 - 2*sin(θ)**2)))
+```
+
+每个`simplify`调用都返回0，证实了这四个恒等式。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: complex_ex3
+
+**通过"适当相加成对项"推导积化和差公式。**
+
+本讲中推导的角和恒等式为：
+
+$$
+\cos(\theta + w) = \cos\theta\cos w - \sin\theta\sin w
+$$ (ct-cos-sum)
+
+$$
+\cos(\theta - w) = \cos\theta\cos w + \sin\theta\sin w
+$$ (ct-cos-diff)
+
+$$
+\sin(\theta + w) = \sin\theta\cos w + \cos\theta\sin w
+$$ (ct-sin-sum)
+
+$$
+\sin(\theta - w) = \sin\theta\cos w - \cos\theta\sin w
+$$ (ct-sin-diff)
+
+通过对方程{eq}`ct-cos-sum`--{eq}`ct-sin-diff`中适当的成对项进行相加和相减，推导出三个**积化和差公式**：
+
+$$
+\cos\theta\cos w = \frac{\cos(\theta+w) + \cos(\theta-w)}{2}
+$$
+
+$$
+\sin\theta\sin w = \frac{\cos(\theta-w) - \cos(\theta+w)}{2}
+$$
+
+$$
+\sin\theta\cos w = \frac{\sin(\theta+w) + \sin(\theta-w)}{2}
+$$
+
+使用`sympy`中的`simplify`验证这三个公式。
+```
+
+```{solution-start} complex_ex3
+:class: dropdown
+```
+
+将(i)和(ii)相加，得到 $\cos(\theta+w) + \cos(\theta-w) = 2\cos\theta\cos w$。
+
+用(ii)减去(i)，得到 $\cos(\theta-w) - \cos(\theta+w) = 2\sin\theta\sin w$。
+
+将(iii)和(iv)相加，得到 $\sin(\theta+w) + \sin(\theta-w) = 2\sin\theta\cos w$。
+
+将每个结果除以2，即得三个积化和差公式。
+
+```{code-cell} ipython3
+from sympy import symbols, cos, sin, simplify
+
+θ, w = symbols('θ w', real=True)
+
+print("cos(θ+w) + cos(θ-w) - 2cos(θ)cos(w) =",
+      simplify(cos(θ+w) + cos(θ-w) - 2*cos(θ)*cos(w)))
+
+print("cos(θ-w) - cos(θ+w) - 2sin(θ)sin(w) =",
+      simplify(cos(θ-w) - cos(θ+w) - 2*sin(θ)*sin(w)))
+
+print("sin(θ+w) + sin(θ-w) - 2sin(θ)cos(w) =",
+      simplify(sin(θ+w) + sin(θ-w) - 2*sin(θ)*cos(w)))
+```
+
+这三个表达式都化简为0。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: complex_ex4
+
+**余弦函数的正交性。**
+
+将 {ref}`complex_ex3` 中的积化和差公式应用于 $\theta = m\phi$ 和 $w = n\phi$ 的情形：
+
+$$
+\cos(m\phi)\cos(n\phi) = \frac{\cos((m-n)\phi) + \cos((m+n)\phi)}{2}.
+$$
+
+利用这一恒等式，以及对任意非零整数 $k$ 都有 $\int_{-\pi}^{\pi} \cos(k\phi)\,d\phi = 0$ 这一事实，证明对于正整数 $m$ 和 $n$
+
+$$
+\int_{-\pi}^{\pi} \cos(m\phi)\cos(n\phi)\,d\phi =
+\begin{cases} \pi & \text{if } m = n \\ 0 & \text{if } m \neq n. \end{cases}
+$$
+
+使用`sympy`中的`integrate`对 $m, n \in \{1, 2, 3\}$ 数值验证这个**正交表**。
+```
+
+```{solution-start} complex_ex4
+:class: dropdown
+```
+
+**情形 $m \neq n$：** $m - n$ 和 $m + n$ 都是非零整数，因此
+$\int_{-\pi}^{\pi} \cos((m-n)\phi)\,d\phi = \int_{-\pi}^{\pi} \cos((m+n)\phi)\,d\phi = 0$，
+总和为0。
+
+**情形 $m = n$：** 公式变为
+$\cos(m\phi)^2 = \tfrac{1}{2}[1 + \cos(2m\phi)]$。
+
+由于对非零整数 $m$ 有 $\int_{-\pi}^{\pi} \cos(2m\phi)\,d\phi = 0$，
+该积分等于 $\tfrac{1}{2} \cdot 2\pi = \pi$。
+
+```{code-cell} ipython3
+from sympy import Symbol, cos, integrate, pi
+
+ϕ = Symbol('ϕ', real=True)
+
+print(f"{'m':>3}  {'n':>3}  {'integral':>10}")
+print('-' * 22)
+for m in [1, 2, 3]:
+    for n in [1, 2, 3]:
+        val = integrate(cos(m*ϕ) * cos(n*ϕ), (ϕ, -pi, pi))
+        print(f"{m:>3}  {n:>3}  {str(val):>10}")
+```
+
+该表格证实了这一规律：对角线上的项（即 $m = n$ 时）都等于 $\pi$，而所有非对角线上的项都等于 $0$。
+
+这种正交性是傅里叶级数的基础，因为当我们将信号分解为其频率分量时，不同频率的正弦函数不会相互"干扰"。
 
 ```{solution-end}
 ```

@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -205,21 +205,29 @@
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">36.1. 概述</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">36.2. 示例 1：生产问题</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-tools">36.2.1. 计算：使用 OR-Tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">36.2.1. 图解法</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">36.3. 示例 2：投资问题</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">36.3.1. 计算：使用 OR-Tools</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">36.3. 示例 2：投资问题</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">36.4. 标准形式</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">36.4.1. 有用的变换</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">36.4.2. 示例 1：生产问题</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy">36.4.3. 计算：使用 SciPy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">36.4.4. 示例 2：投资问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">36.4.3. 示例 2：投资问题</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">36.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scipy">36.5. 计算：使用 SciPy 求解</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">36.5.1. 示例 1：生产问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">36.5.2. 示例 2：投资问题</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">36.6. 对偶</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">36.6.1. 生产问题的对偶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">36.6.2. 求解对偶问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">36.6.3. 弱对偶与强对偶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">36.6.4. 影子价格</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">36.7. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -275,7 +283,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -286,11 +294,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -307,59 +315,21 @@
                         
   <section class="tex2jax_ignore mathjax_ignore" id="lp-intro">
 <span id="id1"></span><h1><span class="section-number">36. </span>线性规划<a class="headerlink" href="#lp-intro" title="Link to this heading">#</a></h1>
-<p>在本讲中，我们将需要以下库并使用 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <a class="reference external" href="https://developers.google.com/optimization">ortools</a>。</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ortools
+<p>在本讲中，我们将需要以下导入。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linprog</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<details class="admonition hide below-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show output</p>
-<p class="expanded admonition-title">Hide code cell output</p>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ortools
-  Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
-Collecting absl-py&gt;=2.0.0 (from ortools)
-  Downloading absl_py-2.3.1-py3-none-any.whl.metadata (3.3 kB)
-Requirement already satisfied: numpy&gt;=1.13.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (1.26.4)
-Requirement already satisfied: pandas&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from ortools) (2.2.2)
-Collecting protobuf&lt;6.32,&gt;=6.31.1 (from ortools)
-  Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
-Collecting typing-extensions&gt;=4.12 (from ortools)
-  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
-Collecting immutabledict&gt;=3.0.0 (from ortools)
-  Downloading immutabledict-4.2.2-py3-none-any.whl.metadata (3.5 kB)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2024.1)
-Requirement already satisfied: tzdata&gt;=2022.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from pandas&gt;=2.0.0-&gt;ortools) (2023.3)
-Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=2.0.0-&gt;ortools) (1.16.0)
-Downloading ortools-9.14.6206-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (27.7 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/27.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/27.7 MB</span> <span class=" -Color -Color-Red">96.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">27.7/27.7 MB</span> <span class=" -Color -Color-Red">74.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading absl_py-2.3.1-py3-none-any.whl (135 kB)
-Downloading immutabledict-4.2.2-py3-none-any.whl (4.7 kB)
-Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl (321 kB)
-Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
-Installing collected packages: typing-extensions, protobuf, immutabledict, absl-py, ortools
-  Attempting uninstall: typing-extensions
-    Found existing installation: typing_extensions 4.11.0
-    Uninstalling typing_extensions-4.11.0:
-      Successfully uninstalled typing_extensions-4.11.0
-  Attempting uninstall: protobuf
-    Found existing installation: protobuf 4.25.3
-    Uninstalling protobuf-4.25.3:
-      Successfully uninstalled protobuf-4.25.3
-<span class=" -Color -Color-Red">ERROR: pip&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
-<span class=" -Color -Color-Red">streamlit 1.37.1 requires protobuf&lt;6,&gt;=3.20, but you have protobuf 6.31.1 which is incompatible.</span>
-Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 protobuf-6.31.1 typing-extensions-4.15.0
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <section id="id2">
 <h2><span class="section-number">36.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
@@ -371,34 +341,23 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </ul>
 <p>如果原始问题涉及 <em>最大化</em>，则对偶问题涉及 <em>最小化</em>。</p>
 <p>如果原始问题涉及 <em>最小化</em>，则对偶问题涉及 <em>最大化</em>。</p>
-<p>我们提供线性规划的标准形式，以及将其他形式的线性规划问题转化为标准形式的方法。</p>
-<p>我们将说明如何使用 <a class="reference external" href="https://scipy.org/">SciPy</a> 和 <a class="reference external" href="https://developers.google.com/optimization">Google OR-Tools</a> 来解决线性规划问题。</p>
+<p>在本讲中我们将</p>
+<ul class="simple">
+<li><p>介绍两个示例问题，</p></li>
+<li><p>描述一种 <strong>标准形式</strong>，使我们能够将任何线性规划问题交给黑箱求解器处理，</p></li>
+<li><p>使用 <a class="reference external" href="https://scipy.org/">SciPy</a> 求解这两个示例，以及</p></li>
+<li><p>研究 <strong>对偶</strong> 问题及其在影子价格方面的经济学解释。</p></li>
+</ul>
+<p>我们将使用 SciPy 的 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 函数来求解我们的线性规划问题，该函数调用高性能的 <a class="reference external" href="https://highs.dev/">HiGHS</a> 求解器。</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>在另一讲中，我们将使用线性规划方法来解决 <a class="reference external" href="https://tools-techniques.quantecon.org/opt_transport.html" title="(in Python)"><span class="xref std std-doc">最优运输问题</span></a>。</p>
-</div>
-<p>让我们先进行一些导入。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ortools.linear_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pywraplp</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linprog</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
-<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>让我们从一些线性规划问题的例子开始。</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">36.2. </span>示例 1：生产问题<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<p>这个例子由 <span id="id4">[<a class="reference internal" href="zreferences.html#id63" title="J. N. Bertsimas, D. &amp; Tsitsiklis. Introduction to linear optimization. Athena Scientific, 1997.">Bertsimas, 1997</a>]</span> 创建。</p>
+<p>这个例子由 <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id63" title="J. N. Bertsimas, D. &amp; Tsitsiklis. Introduction to linear optimization. Athena Scientific, 1997.">Bertsimas, 1997</a>]</span> 创建。</p>
 <p>假设一个工厂可以生产两种商品，称为产品 <span class="math notranslate nohighlight">\(1\)</span> 和产品 <span class="math notranslate nohighlight">\(2\)</span>。</p>
 <p>生产每种产品都需要材料和劳动。</p>
 <p>销售每种产品会产生收入。</p>
@@ -439,8 +398,14 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 &amp; x_1, x_2 \ge 0 \\
 \end{aligned}
 \end{split}\]</div>
+<p>我们允许 <span class="math notranslate nohighlight">\(x_1\)</span> 和 <span class="math notranslate nohighlight">\(x_2\)</span> 取任何非负 <em>实数</em> 值。</p>
+<p>如果我们转而要求它们必须是整数，那么这个问题将变成一个 <em>整数规划</em> 问题，这通常要难解得多。</p>
+<p>允许取实数值使可行集保持凸性，而这种凸性正是线性规划如此易于处理的原因。</p>
+<section id="id5">
+<h3><span class="section-number">36.2.1. </span>图解法<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>由于这个问题只有两个决策变量，我们可以用图解法求解。</p>
 <p>下图说明了公司的约束条件和等收入线。</p>
-<p>等收入线显示了产生相同收入的材料和劳动的所有组合。</p>
+<p>等收入线显示了产生相同收入的产品 1 和产品 2 的所有组合。</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -449,8 +414,7 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-<span class="c1">#绘制约束</span>
+<span class="c1"># 绘制约束线</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -479,89 +443,28 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png"><img alt="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" src="_images/4a677b349f69f4a316aa6e1abfe4f02e3a1bb7310367247e0c810dd063993b61.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/b3d5b763e114e96b426d42138b94b2358c8e8b4417a0950af4ccc10f10061c10.png"><img alt="_images/b3d5b763e114e96b426d42138b94b2358c8e8b4417a0950af4ccc10f10061c10.png" src="_images/b3d5b763e114e96b426d42138b94b2358c8e8b4417a0950af4ccc10f10061c10.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>蓝色区域是可行集合，在该集合内所有约束都得到了满足。</p>
 <p>平行的黑线是等收入线。</p>
-<p>公司的目标是找到与可行集合上边界平行的黑线。</p>
-<p>可行集合与最高黑线的交点界定了最优集合。</p>
-<p>在这个例子中，最优集合是点 <span class="math notranslate nohighlight">\((2.5, 5)\)</span>。</p>
-<section id="or-tools">
-<h3><span class="section-number">36.2.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#or-tools" title="Link to this heading">#</a></h3>
-<p>让我们尝试使用 <code class="docutils literal notranslate"><span class="pre">ortools.linear_solver</span></code> 包来解决同样的问题。</p>
-<p>下面的单元格实例化一个求解器，并创建两个变量，指定它们可以具有的值范围。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 实例化一个 GLOP（Google 线性优化包）求解器。</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">CreateSolver</span><span class="p">(</span><span class="s1">&#39;GLOP&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们创建两个变量 <span class="math notranslate nohighlight">\(x_1\)</span> 和 <span class="math notranslate nohighlight">\(x_2\)</span>，使它们只能取非负值。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建这两个变量，并让它们可以取任何非负值。</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x1&#39;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>向问题中添加约束条件。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 约束 1: 2x_1 + 5x_2 &lt;= 30.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mf">30.0</span><span class="p">)</span>
-
-<span class="c1"># 约束 2: 4x_1 + 2x_2 &lt;= 20.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mf">20.0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08e399920&gt; &gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们指定目标函数。我们在希望最大化目标函数时使用 <code class="docutils literal notranslate"><span class="pre">solver.Maximize</span></code> 方法，而在希望最小化时可以使用 <code class="docutils literal notranslate"><span class="pre">solver.Minimize</span></code>。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 目标函数: 3x_1 + 4x_2</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>一旦我们解决了问题，就可以检查求解器是否成功解决了问题，方法是查看其状态。如果成功，则状态将等于 <code class="docutils literal notranslate"><span class="pre">pywraplp.Solver.OPTIMAL</span></code>。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 求解系统</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;目标值 =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): (</span><span class="si">{</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">()</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">()</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>目标值 = 27.5
-(x1, x2): (2.5, 5.0)
-</pre></div>
-</div>
-</div>
-</div>
+<p>公司的目标是在保持处于可行集合内的同时，将等收入线尽可能地向上推。</p>
+<p>可行集合与最高等收入线的交点界定了最优集合。</p>
+<p>在这个例子中，最优集合是点 <span class="math notranslate nohighlight">\((2.5, 5)\)</span>，它产生的收入为 <span class="math notranslate nohighlight">\(z = 3 \times 2.5 + 4 \times 5 = 27.5\)</span>。</p>
+<p>这种图解法在二维情形下运作得很好。</p>
+<p>但它无法扩展：当决策变量超过两个或三个时，我们就无法再画出可行集合了。</p>
+<p>我们的下一个例子有五个决策变量，因此我们需要一种系统化的计算方法。</p>
 </section>
 </section>
-<section id="id5">
-<h2><span class="section-number">36.3. </span>示例 2：投资问题<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>我们现在考虑一个由 <span id="id6">[<a class="reference internal" href="zreferences.html#id64" title="Y. Hu, Y. &amp; Guo. Operations research. Tsinghua University Press, 5th edition, 2018.">Hu, 2018</a>]</span> 提出的并解决的问题。</p>
+<section id="id6">
+<h2><span class="section-number">36.3. </span>示例 2：投资问题<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>我们现在考虑一个由 <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id64" title="Y. Hu, Y. &amp; Guo. Operations research. Tsinghua University Press, 5th edition, 2018.">Hu, 2018</a>]</span> 提出并解决的问题。</p>
 <p>一个共同基金有 $100,000 美元 可在三年内投资。</p>
 <p>有三种投资选择可供选择：</p>
 <ol class="arabic simple">
@@ -640,104 +543,19 @@ Successfully installed absl-py-2.3.1 immutabledict-4.2.2 ortools-9.14.6206 proto
  &amp; x_4 \ge -20,000\\
  &amp; x_5 \le 50,000\\
  &amp; x_j \ge 0, \quad j = 1,5\\
- &amp; x_j \ \text{无界}, \quad j = 2,3,4\\
+ &amp; x_j \ \text{无约束}, \quad j = 2,3,4\\
 \end{aligned}
 \end{split}\]</div>
-<section id="id7">
-<h3><span class="section-number">36.3.1. </span>计算：使用 OR-Tools<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>让我们尝试使用 <code class="docutils literal notranslate"><span class="pre">ortools.linear_solver</span></code> 包来解决上述问题。</p>
-<p>以下代码实例化一个求解器，并创建两个变量，指定它们可以拥有的值范围。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#实例化一个 GLOP（Google 线性优化包）求解器。</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">CreateSolver</span><span class="p">(</span><span class="s1">&#39;GLOP&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们创建五个变量 <span class="math notranslate nohighlight">\(x_1, x_2, x_3, x_4\)</span> 和 <span class="math notranslate nohighlight">\(x_5\)</span>，使它们只能取上述约束中定义的值。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用约束中可用的范围创建变量。</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x1&#39;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="o">-</span><span class="mi">20_000</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x2&#39;</span><span class="p">)</span>
-<span class="n">x3</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="o">-</span><span class="mi">20_000</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x3&#39;</span><span class="p">)</span>
-<span class="n">x4</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="o">-</span><span class="mi">20_000</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x4&#39;</span><span class="p">)</span>
-<span class="n">x5</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50_000</span><span class="p">,</span> <span class="s1">&#39;x5&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>将约束添加到问题中。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 约束 1: x_1 + x_2 = 100,000</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">==</span> <span class="mf">100_000.0</span><span class="p">)</span>
-
-<span class="c1"># 约束 2: x_1 - 1.06 * x_2 + x_3 + x_5 = 0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="mf">1.06</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">x3</span> <span class="o">+</span> <span class="n">x5</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">)</span>
-
-<span class="c1"># 约束 3: x_1 - 1.06 * x_3 + x_4 = 0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="mf">1.06</span> <span class="o">*</span> <span class="n">x3</span> <span class="o">+</span> <span class="n">x4</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d9cad90&gt; &gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们指定目标函数。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 目标函数: 1.30 * 3 * x_1 + 1.06 * x_4 + 1.30 * x_5</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="mf">1.30</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mf">1.06</span> <span class="o">*</span> <span class="n">x4</span> <span class="o">+</span> <span class="mf">1.30</span> <span class="o">*</span> <span class="n">x5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们解决问题，并使用 <code class="docutils literal notranslate"><span class="pre">pywraplp.Solver.OPTIMAL</span></code> 检查状态。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 求解系统</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;目标值 = </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">()</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">x1_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">x2_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">x3_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">x4_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">x5_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2, x3, x4, x5): (</span><span class="si">{</span><span class="n">x1_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x2_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x3_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x4_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x5_sol</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>目标值 = 141018.243
-(x1, x2, x3, x4, x5): (24927.755, 75072.245, 24927.755, 75072.245, 24927.755)
-</pre></div>
-</div>
-</div>
-</div>
-<p>OR-Tools 告诉我们，最佳投资策略是：</p>
-<ol class="arabic simple">
-<li><p>在第一年的开始，互助基金应该购买 <span class="math notranslate nohighlight">\( \$24,927.755\)</span> 的年金。其银行账户余额应为 <span class="math notranslate nohighlight">\( \$75,072.245\)</span>。</p></li>
-<li><p>在第二年的开始，互助基金应该购买 <span class="math notranslate nohighlight">\( \$24,927.755\)</span> 的公司债券，并继续投资于年金。其银行余额应为 <span class="math notranslate nohighlight">\( \$24,927.755\)</span>。</p></li>
-<li><p>在第三年的开始，银行余额应为 <span class="math notranslate nohighlight">\( \$75,072.245\)</span>。</p></li>
-<li><p>在第三年结束时，互助基金将从年金和公司债券中获得收益，并偿还其银行贷款。最终，它将拥有 <span class="math notranslate nohighlight">\( \$141,018.24 \)</span>，因此在这三个期间的总净收益率为 <span class="math notranslate nohighlight">\( 41.02\%\)</span>。</p></li>
-</ol>
-</section>
+<p>这个问题有五个决策变量和三个等式约束，以及若干界约束。</p>
+<p>与示例 1 不同，我们无法用二维图形表示它并读出解。</p>
+<p>为了解决这类问题，我们首先将其转化为 <strong>标准形式</strong>，然后再交给求解器处理。</p>
 </section>
 <section id="id8">
 <h2><span class="section-number">36.4. </span>标准形式<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>为了</p>
 <ul class="simple">
 <li><p>统一最初以表面不同形式表述的线性规划问题，以及</p></li>
-<li><p>拥有一种便于放入程序的统一形式，</p></li>
+<li><p>拥有一种便于放入黑箱软件包的形式，</p></li>
 </ul>
 <p>花一些精力来描述 <strong>标准形式</strong> 是很有用的。</p>
 <p>我们的标准形式是：</p>
@@ -783,7 +601,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <ol class="arabic simple">
 <li><p>目标函数：如果一个问题最初是一个受限的 <em>最大化</em> 问题，我们可以构建一个新的目标函数，该函数是原始目标函数的加法逆。然后转换的问题是一个 <em>最小化</em> 问题。</p></li>
 <li><p>决策变量：对于一个变量 <span class="math notranslate nohighlight">\(x_j\)</span> 满足 <span class="math notranslate nohighlight">\(x_j \le 0\)</span>，我们可以引入一个新变量 <span class="math notranslate nohighlight">\(x_j' = - x_j\)</span> 并将其代入原始问题。对于一个对符号没有限制的自由变量 <span class="math notranslate nohighlight">\(x_i\)</span>，我们可以引入两个新变量 <span class="math notranslate nohighlight">\(x_j^+\)</span> 和 <span class="math notranslate nohighlight">\(x_j^-\)</span>，使得 <span class="math notranslate nohighlight">\(x_j^+, x_j^- \ge 0\)</span>，并用 <span class="math notranslate nohighlight">\(x_j^+ - x_j^-\)</span> 替换 <span class="math notranslate nohighlight">\(x_j\)</span>。</p></li>
-<li><p>不等式约束：对于一个不等式约束 <span class="math notranslate nohighlight">\(\sum_{j=1}^n a_{ij}x_j \le 0\)</span>，我们可以引入一个新变量 <span class="math notranslate nohighlight">\(s_i\)</span>，称为 <strong>松弛变量</strong>，使得 <span class="math notranslate nohighlight">\(s_i \ge 0\)</span>，并用 <span class="math notranslate nohighlight">\(\sum_{j=1}^n a_{ij}x_j + s_i = 0\)</span> 替换原始约束。</p></li>
+<li><p>不等式约束：对于一个不等式约束 <span class="math notranslate nohighlight">\(\sum_{j=1}^n a_{ij}x_j \le b_i\)</span>，我们可以引入一个新变量 <span class="math notranslate nohighlight">\(s_i\)</span>，称为 <strong>松弛变量</strong>，使得 <span class="math notranslate nohighlight">\(s_i \ge 0\)</span>，并用 <span class="math notranslate nohighlight">\(\sum_{j=1}^n a_{ij}x_j + s_i = b_i\)</span> 替换原始约束。</p></li>
 </ol>
 <p>让我们将上述步骤应用于上面描述的两个示例。</p>
 </section>
@@ -810,73 +628,8 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 \end{aligned}
 \end{split}\]</div>
 </section>
-<section id="scipy">
-<h3><span class="section-number">36.4.3. </span>计算：使用 SciPy<a class="headerlink" href="#scipy" title="Link to this heading">#</a></h3>
-<p>包 <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> 提供了一个函数 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 用于求解以下形式的线性规划问题：</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-\min_{x} \ &amp; c' x  \\
-\mbox{受以下约束} \ &amp; A_{ub}x \le b_{ub} \\
- &amp; A_{eq}x = b_{eq} \\
- &amp; l \le x \le u \\
-\end{aligned}
-\end{split}\]</div>
-<p><span class="math notranslate nohighlight">\(A_{eq}, b_{eq}\)</span> 表示等式约束矩阵和向量，<span class="math notranslate nohighlight">\(A_{ub}, b_{ub}\)</span> 表示不等式约束矩阵和向量。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>默认情况下，<span class="math notranslate nohighlight">\(l = 0\)</span> 且 <span class="math notranslate nohighlight">\(u = \text{None}\)</span>，除非通过参数 <code class="docutils literal notranslate"><span class="pre">bounds</span></code> 明确指定。</p>
-</div>
-<p>现在让我们尝试使用 SciPy 解决问题 1。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构造参数</span>
-<span class="n">c_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-
-<span class="c1"># 不等式约束</span>
-<span class="n">A_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
-<span class="n">b_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>一旦我们解决了问题，就可以使用布尔属性 <code class="docutils literal notranslate"><span class="pre">success</span></code> 查看求解器是否成功解决了该问题。如果成功，则 <code class="docutils literal notranslate"><span class="pre">success</span></code> 属性被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解决问题</span>
-<span class="c1"># 我们在目标上加上负号，因为 linprog 进行最小化</span>
-<span class="n">res_ex1</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="o">-</span><span class="n">c_ex1</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_ex1</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_ex1</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">res_ex1</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="c1"># 我们使用负号来获得最优值（最大化值）</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;最优值:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res_ex1</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): </span><span class="si">{</span><span class="n">res_ex1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">res_ex1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最优值: 27.5
-(x1, x2): (2.5, 5.0)
-</pre></div>
-</div>
-</div>
-</div>
-<p>最优计划告诉工厂生产 <span class="math notranslate nohighlight">\(2.5\)</span> 单位的产品 1 和 <span class="math notranslate nohighlight">\(5\)</span> 单位的产品 2；这将产生最大化的收入值为 <span class="math notranslate nohighlight">\(27.5\)</span>。</p>
-<p>我们将 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 函数视为一个 <em>黑箱</em>。</p>
-<p>在内部，Python 首先将问题转换为标准形式。</p>
-<p>为此，对于每个不等式约束，它生成一个松弛变量。</p>
-<p>这里，松弛变量的向量是一个二维 NumPy 数组，等于 <span class="math notranslate nohighlight">\(b_{ub} - A_{ub}x\)</span>。</p>
-<p>有关更多详细信息，请参见 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog">官方文档</a>。</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>这个问题是为了最大化目标，因此我们需要在参数向量 <span class="math notranslate nohighlight">\(c\)</span> 前面加上负号。</p>
-</div>
-</section>
 <section id="id11">
-<h3><span class="section-number">36.4.4. </span>示例 2：投资问题<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">36.4.3. </span>示例 2：投资问题<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>原始问题是：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -910,6 +663,92 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
  &amp; s_j \ge 0, \quad j = 1,2,3,4\\
 \end{aligned}
 \end{split}\]</div>
+</section>
+</section>
+<section id="scipy">
+<h2><span class="section-number">36.5. </span>计算：使用 SciPy 求解<a class="headerlink" href="#scipy" title="Link to this heading">#</a></h2>
+<p>包 <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> 提供了一个函数 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 用于求解以下形式的线性规划问题：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\min_{x} \ &amp; c' x  \\
+\mbox{受以下约束} \ &amp; A_{ub}x \le b_{ub} \\
+ &amp; A_{eq}x = b_{eq} \\
+ &amp; l \le x \le u \\
+\end{aligned}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(A_{eq}, b_{eq}\)</span> 表示等式约束矩阵和向量，<span class="math notranslate nohighlight">\(A_{ub}, b_{ub}\)</span> 表示不等式约束矩阵和向量。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>默认情况下，<span class="math notranslate nohighlight">\(l = 0\)</span> 且 <span class="math notranslate nohighlight">\(u = \text{None}\)</span>，除非通过参数 <code class="docutils literal notranslate"><span class="pre">bounds</span></code> 明确指定。</p>
+</div>
+<p>请注意，我们不需要自己将问题转换为标准形式。</p>
+<p><code class="docutils literal notranslate"><span class="pre">linprog</span></code> 可以直接接受不等式约束、等式约束和变量的界。</p>
+<p>不过，理解标准形式仍然是有帮助的，因为求解器内部正是使用这种形式。</p>
+<p>默认情况下，<code class="docutils literal notranslate"><span class="pre">linprog</span></code> 使用 <code class="docutils literal notranslate"><span class="pre">highs</span></code> 方法，该方法调用高性能的 HiGHS 求解器。</p>
+<p>我们将 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 当作一个 <em>黑箱</em> 来使用：我们用 <span class="math notranslate nohighlight">\(c\)</span>、<span class="math notranslate nohighlight">\(A\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 来描述问题，求解器则返回一个最优解。</p>
+<section id="id12">
+<h3><span class="section-number">36.5.1. </span>示例 1：生产问题<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>现在让我们使用 SciPy 来求解示例 1。</p>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 是对目标函数进行 <em>最小化</em>，而我们的问题是 <em>最大化</em> 问题，因此我们传入 <span class="math notranslate nohighlight">\(-c\)</span>，并对结果取负。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构造参数</span>
+<span class="n">c_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># 不等式约束</span>
+<span class="n">A_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">b_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>一旦我们解决了问题，就可以使用布尔属性 <code class="docutils literal notranslate"><span class="pre">success</span></code> 查看求解器是否成功解决了该问题。如果成功，则 <code class="docutils literal notranslate"><span class="pre">success</span></code> 属性被设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解决问题</span>
+<span class="c1"># 我们在目标上加上负号，因为 linprog 进行最小化</span>
+<span class="n">res_ex1</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="o">-</span><span class="n">c_ex1</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_ex1</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_ex1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">res_ex1</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="c1"># 我们使用负号来获得最优值（最大化值）</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;最优值:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res_ex1</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): </span><span class="si">{</span><span class="n">res_ex1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">res_ex1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最优值: 27.5
+(x1, x2): (np.float64(2.5), np.float64(5.0))
+</pre></div>
+</div>
+</div>
+</div>
+<p>这证实了我们通过图解法得到的答案：生产 <span class="math notranslate nohighlight">\(2.5\)</span> 单位的产品 1 和 <span class="math notranslate nohighlight">\(5\)</span> 单位的产品 2，产生最大收入 <span class="math notranslate nohighlight">\(27.5\)</span>。</p>
+<p><code class="docutils literal notranslate"><span class="pre">linprog</span></code> 返回的松弛值是一个一维 NumPy 数组，其中每个元素度量每个不等式约束的差值 <span class="math notranslate nohighlight">\(b_{ub} - A_{ub}x\)</span>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_ex1</span><span class="o">.</span><span class="n">slack</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>两个松弛值都为零，这说明在最优解处材料约束和劳动约束都恰好取等（都是紧约束）。</p>
+<p>有关更多详细信息，请参见 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog">官方文档</a>。</p>
+</section>
+<section id="id13">
+<h3><span class="section-number">36.5.2. </span>示例 2：投资问题<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>现在让我们求解投资问题。</p>
+<p>这次我们使用等式约束 <code class="docutils literal notranslate"><span class="pre">A_eq</span></code>、<code class="docutils literal notranslate"><span class="pre">b_eq</span></code>，并为每个变量提供界。</p>
+<p>这些界刻画了借款限额（<span class="math notranslate nohighlight">\(x_2, x_3, x_4 \ge -20{,}000\)</span>）和企业债券的上限（<span class="math notranslate nohighlight">\(0 \le x_5 \le 50{,}000\)</span>）。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构造参数</span>
@@ -918,13 +757,13 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <span class="c1"># 目标函数参数</span>
 <span class="n">c_ex2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.30</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.06</span><span class="p">,</span> <span class="mf">1.30</span><span class="p">])</span>
 
-<span class="c1"># 不等式约束</span>
+<span class="c1"># 等式约束</span>
 <span class="n">A_ex2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">rate</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">rate</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 <span class="n">b_ex2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100_000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
-<span class="c1"># 决策变量的约束</span>
+<span class="c1"># 决策变量的界</span>
 <span class="n">bounds_ex2</span> <span class="o">=</span> <span class="p">[(</span>  <span class="mi">0</span><span class="p">,</span>    <span class="kc">None</span><span class="p">),</span>
               <span class="p">(</span><span class="o">-</span><span class="mi">20_000</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
               <span class="p">(</span><span class="o">-</span><span class="mi">20_000</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
@@ -951,13 +790,13 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
     <span class="n">x5_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">res_ex2</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2, x3, x4, x5): </span><span class="si">{</span><span class="n">x1_sol</span><span class="p">,</span><span class="w"> </span><span class="n">x2_sol</span><span class="p">,</span><span class="w"> </span><span class="n">x3_sol</span><span class="p">,</span><span class="w"> </span><span class="n">x4_sol</span><span class="p">,</span><span class="w"> </span><span class="n">x5_sol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最优值: 141018.24349792697
-(x1, x2, x3, x4, x5): (24927.755, 75072.245, 4648.825, -20000.0, 50000.0)
+(x1, x2, x3, x4, x5): (np.float64(24927.755), np.float64(75072.245), np.float64(4648.825), np.float64(-20000.0), np.float64(50000.0))
 </pre></div>
 </div>
 </div>
@@ -969,19 +808,151 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <li><p>在第三年的开始，互助基金应从银行借款 <span class="math notranslate nohighlight">\( \$20,000\)</span> 并投资于年金。</p></li>
 <li><p>在第三年末，互助基金将从年金和公司债券中获得收益，并偿还银行贷款。最终将拥有 <span class="math notranslate nohighlight">\( \$141,018.24 \)</span>，因此其在三个时期内的总净回报率为 <span class="math notranslate nohighlight">\( 41.02\% \)</span>。</p></li>
 </ol>
+</section>
+</section>
+<section id="id14">
+<h2><span class="section-number">36.6. </span>对偶<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<p>每一个线性规划问题（我们称之为 <strong>原始</strong> 问题）都有一个与之相关的线性规划问题，称为它的 <strong>对偶</strong> 问题。</p>
+<p>对偶问题为原始问题提供了有价值的信息，并且它的变量具有重要的经济学解释——<strong>影子价格</strong>。</p>
+<p>让我们用示例 1 中的生产问题来阐述这些思想。</p>
+<section id="id15">
+<h3><span class="section-number">36.6.1. </span>生产问题的对偶<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p>回顾原始的生产问题：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\max_{x_1,x_2} \ &amp; 3 x_1 + 4 x_2 \\
+\mbox{受以下约束 } \ &amp; 2 x_1 + 5 x_2 \le 30 \\
+&amp; 4 x_1 + 2 x_2 \le 20 \\
+&amp; x_1, x_2 \ge 0 \\
+\end{aligned}
+\end{split}\]</div>
+<p>设想有一位外部投资者想购买该公司的全部材料和劳动。</p>
+<p>投资者必须为每单位材料选定一个价格 <span class="math notranslate nohighlight">\(y_1\)</span>，为每单位劳动选定一个价格 <span class="math notranslate nohighlight">\(y_2\)</span>。</p>
+<p>为了说服公司出售而不是自行生产，这些价格必须使得每种产品作为原材料出售时至少和转化为产出时一样值钱。</p>
+<p>产品 1 使用 2 单位材料和 4 单位劳动，产生收入 3，因此投资者需要满足</p>
+<div class="math notranslate nohighlight">
+\[
+2 y_1 + 4 y_2 \ge 3 .
+\]</div>
+<p>产品 2 使用 5 单位材料和 2 单位劳动，产生收入 4，因此投资者需要满足</p>
+<div class="math notranslate nohighlight">
+\[
+5 y_1 + 2 y_2 \ge 4 .
+\]</div>
+<p>在满足这些约束的前提下，投资者希望最小化为该公司的 30 单位材料和 20 单位劳动所支付的总金额。</p>
+<p>这就给出了 <strong>对偶</strong> 问题：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\min_{y_1,y_2} \ &amp; 30 y_1 + 20 y_2 \\
+\mbox{受以下约束 } \ &amp; 2 y_1 + 4 y_2 \ge 3 \\
+&amp; 5 y_1 + 2 y_2 \ge 4 \\
+&amp; y_1, y_2 \ge 0 \\
+\end{aligned}
+\end{split}\]</div>
+<p>一般来说，标准的原始-对偶配对是</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{x} \ c'x \ \text{ s.t. } \ Ax \le b, \ x \ge 0
+\qquad \Longleftrightarrow \qquad
+\min_{y} \ b'y \ \text{ s.t. } \ A'y \ge c, \ y \ge 0 .
+\]</div>
+<p>请注意，原始问题中每个 <em>产品</em> 对应一个变量，每种 <em>资源</em> 对应一个约束，而对偶问题中每种 <em>资源</em> 对应一个变量，每个 <em>产品</em> 对应一个约束。</p>
+</section>
+<section id="id16">
+<h3><span class="section-number">36.6.2. </span>求解对偶问题<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p>让我们用 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 来求解对偶问题。</p>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 要求不等式以 <span class="math notranslate nohighlight">\(A_{ub} y \le b_{ub}\)</span> 的形式给出，我们通过乘以 <span class="math notranslate nohighlight">\(-1\)</span> 把 <span class="math notranslate nohighlight">\(\ge\)</span> 约束改写成 <span class="math notranslate nohighlight">\(\le\)</span> 约束。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 目标：最小化 30 y1 + 20 y2</span>
+<span class="n">b_dual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c1"># 约束 A&#39; y &gt;= c 改写为 -A&#39; y &lt;= -c</span>
+<span class="n">A_dual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span>
+                   <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">c_dual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="n">res_dual</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="n">b_dual</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_dual</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">c_dual</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;对偶最优值:&#39;</span><span class="p">,</span> <span class="n">res_dual</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(y1, y2): </span><span class="si">{</span><span class="n">res_dual</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">res_dual</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>对偶最优值: 27.5
+(y1, y2): (np.float64(0.625), np.float64(0.43749999999999994))
+</pre></div>
+</div>
+</div>
+</div>
+<p>对偶最优值为 <span class="math notranslate nohighlight">\(27.5\)</span>——恰好等于原始最优值。</p>
+<p>这并非巧合。</p>
+</section>
+<section id="id17">
+<h3><span class="section-number">36.6.3. </span>弱对偶与强对偶<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>对于上述标准配对，有两个关键事实成立。</p>
+<p><strong>弱对偶：</strong> 对任意原始可行的 <span class="math notranslate nohighlight">\(x\)</span> 和任意对偶可行的 <span class="math notranslate nohighlight">\(y\)</span>，都有 <span class="math notranslate nohighlight">\(c'x \le b'y\)</span>。</p>
+<p>因此每一个对偶可行点都为原始问题的最大值提供了一个 <em>上界</em>。</p>
+<p><strong>强对偶：</strong> 如果两个问题之一存在最优解，那么另一个问题也存在最优解，且它们的最优值相等。</p>
+<p>强对偶正是两次 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 调用都返回 <span class="math notranslate nohighlight">\(27.5\)</span> 的原因。</p>
+</section>
+<section id="id18">
+<h3><span class="section-number">36.6.4. </span>影子价格<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p>对偶解为 <span class="math notranslate nohighlight">\((y_1, y_2) = (0.625, 0.4375)\)</span>。</p>
+<p>这些数值就是材料和劳动的 <strong>影子价格</strong>。</p>
+<p>一种资源的影子价格衡量的是：如果我们多拥有一单位该资源，最优收入会增加多少。</p>
+<p>让我们通过将材料约束从 <span class="math notranslate nohighlight">\(30\)</span> 放松到 <span class="math notranslate nohighlight">\(31\)</span>，重新求解原始问题来验证这一点。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_relaxed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">res_relaxed</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="o">-</span><span class="n">c_ex1</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_ex1</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_relaxed</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;拥有 31 单位材料时的收入:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res_relaxed</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;收入的增加量:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res_relaxed</span><span class="o">.</span><span class="n">fun</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">res_ex1</span><span class="o">.</span><span class="n">fun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>拥有 31 单位材料时的收入: 28.125
+收入的增加量: 0.625
+</pre></div>
+</div>
+</div>
+</div>
+<p>收入恰好增加了 <span class="math notranslate nohighlight">\(0.625\)</span>，即材料的影子价格。</p>
+<p>换句话说，多一单位材料对该公司来说价值 <span class="math notranslate nohighlight">\(0.625\)</span>，多一单位劳动的价值则是 <span class="math notranslate nohighlight">\(0.4375\)</span>。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>你可能会注意到使用 OR-Tools 和 SciPy 得到的最优解值有所不同，但最优值是相同的。这是因为同一个问题可能有多个最优解。</p>
+<p>我们无需手工构建并求解对偶问题就能得到影子价格。
+<code class="docutils literal notranslate"><span class="pre">linprog</span></code> 会直接报告它们：对于原始问题的求解结果 <code class="docutils literal notranslate"><span class="pre">res_ex1</span></code>，数组 <code class="docutils literal notranslate"><span class="pre">res_ex1.ineqlin.marginals</span></code> 存放了各不等式约束的（带符号的）影子价格。</p>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_ex1</span><span class="o">.</span><span class="n">ineqlin</span><span class="o">.</span><span class="n">marginals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.625 , -0.4375])
+</pre></div>
+</div>
+</div>
+</div>
+<p>这些值是我们之前计算出的影子价格的相反数，因为 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 求解的是 <span class="math notranslate nohighlight">\(-c'x\)</span> 的最小化问题。</p>
+<p>取绝对值后即得到 <span class="math notranslate nohighlight">\(0.625\)</span> 和 <span class="math notranslate nohighlight">\(0.4375\)</span>，与预期一致。</p>
 </section>
 </section>
-<section id="id12">
-<h2><span class="section-number">36.5. </span>练习<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<section id="id19">
+<h2><span class="section-number">36.7. </span>练习<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="lp_intro_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 36.1 </span></p>
 <section id="exercise-content">
-<p>为问题 1 实现一个新的扩展解，其中工厂所有者决定产品 1 的单位数量不得少于产品 2 的单位数量。</p>
+<p>为生产问题（示例 1）实现一个新的扩展解，其中工厂所有者决定产品 1 的单位数量不得少于产品 2 的单位数量。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 求解。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="lp_intro-solution-1">
@@ -993,68 +964,37 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 \[\begin{split}
 \begin{aligned}
 \max_{x_1,x_2} \ &amp; z = 3 x_1 + 4 x_2 \\
-\mbox{受以下约束} \ &amp; 2 x_1 + 5 x_2 \le 30 \\
+\mbox{受以下约束 } \ &amp; 2 x_1 + 5 x_2 \le 30 \\
 &amp; 4 x_1 + 2 x_2 \le 20 \\
 &amp; x_1 \ge x_2 \\
 &amp; x_1, x_2 \ge 0 \\
 \end{aligned}
 \end{split}\]</div>
+<p>新的要求 <span class="math notranslate nohighlight">\(x_1 \ge x_2\)</span> 即为不等式 <span class="math notranslate nohighlight">\(-x_1 + x_2 \le 0\)</span>，我们将其作为 <span class="math notranslate nohighlight">\(A_{ub}\)</span> 的第三行加入。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 实例化一个 GLOP（Google 线性优化包）求解器</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">CreateSolver</span><span class="p">(</span><span class="s1">&#39;GLOP&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构造参数</span>
+<span class="n">c_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
-<span class="c1"># 创建两个变量，并让它们取任何非负值。</span>
-<span class="n">x1</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x1&#39;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 约束 1: 2x_1 + 5x_2 &lt;= 30.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mf">30.0</span><span class="p">)</span>
+<span class="c1"># 不等式约束（第三行编码了 -x1 + x2 &lt;= 0）</span>
+<span class="n">A_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                  <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                  <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">b_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 
-<span class="c1"># 约束 2: 4x_1 + 2x_2 &lt;= 20.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mf">20.0</span><span class="p">)</span>
+<span class="c1"># 求解问题</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="o">-</span><span class="n">c_ex1</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_ex1</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_ex1</span><span class="p">)</span>
 
-<span class="c1"># 约束 3: x_1 &gt;= x_2</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;=</span> <span class="n">x2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d846eb0&gt; &gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 目标函数: 3x_1 + 4x_2</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 求解问题</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;目标值 =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
-    <span class="n">x1_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">x2_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): (</span><span class="si">{</span><span class="n">x1_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">x2_sol</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;最优值:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x1, x2): (</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>目标值 = 23.333333333333336
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最优值: 23.333333333333336
 (x1, x2): (3.33, 3.33)
 </pre></div>
 </div>
@@ -1071,6 +1011,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <p>生产 A 需要 2 小时，生产 B 需要 0.8 小时。</p>
 <p>此外，他每周不能花费超过 25 小时，并且 A 和 B 的总数量不能超过 20 个单位。</p>
 <p>找出他应该制造的 A 和 B 的数量，以最大化他的利润。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">linprog</span></code> 求解。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="lp_intro-solution-3">
@@ -1085,67 +1026,32 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 \max_{x,y} \ &amp; z = 23 x + 10 y \\
 \mbox{受以下约束} \ &amp; x + y \le 20 \\
 &amp; 2 x + 0.8 y \le 25 \\
+&amp; x, y \ge 0 \\
 \end{aligned}
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 实例化一个GLOP（谷歌线性优化包）求解器</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">CreateSolver</span><span class="p">(</span><span class="s1">&#39;GLOP&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们创建两个变量 <span class="math notranslate nohighlight">\(x_1\)</span> 和 <span class="math notranslate nohighlight">\(x_2\)</span>，使它们只能取非负值。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建这两个变量，并让它们取任何非负值。</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">NumVar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">infinity</span><span class="p">(),</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 约束 1: x + y &lt;= 20.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">20.0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构造参数</span>
+<span class="n">c_carpenter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">23</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 
-<span class="c1"># 约束 2: 2x + 0.8y &lt;= 25.0</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">25.0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ortools.linear_solver.pywraplp.Constraint; proxy of &lt;Swig Object of type &#39;operations_research::MPConstraint *&#39; at 0x7fe08d847180&gt; &gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 目标函数: 23x + 10y</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="mi">23</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 求解问题</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">Solve</span><span class="p">()</span>
+<span class="c1"># 不等式约束</span>
+<span class="n">A_carpenter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">b_carpenter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
 
-<span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">pywraplp</span><span class="o">.</span><span class="n">Solver</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;最大利润 =&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">Objective</span><span class="p">()</span><span class="o">.</span><span class="n">Value</span><span class="p">())</span>
-    <span class="n">x_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">y_sol</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">solution_value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x, y): (</span><span class="si">{</span><span class="n">x_sol</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">y_sol</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="c1"># 求解问题</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="o">-</span><span class="n">c_carpenter</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A_carpenter</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b_carpenter</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;最大利润:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x, y): (</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;该问题没有最优解。&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最大利润 = 297.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最大利润: 297.5
 (x, y): (7.5, 12.5)
 </pre></div>
 </div>
@@ -1335,7 +1241,7 @@ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ \end{bmatrix}. \quad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -271,7 +271,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -282,11 +282,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -377,8 +377,8 @@ x_t =
 <p>假设在 <span class="math notranslate nohighlight">\(t=0\)</span> 时，我们有 <span class="math notranslate nohighlight">\(x_0 = \begin{bmatrix} u_0 &amp; e_0 \end{bmatrix}^\top\)</span>。</p>
 <p>那么，<span class="math notranslate nohighlight">\(x_1=Ax_0\)</span>，<span class="math notranslate nohighlight">\(x_2=Ax_1=A^2x_0\)</span>，因此 <span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span>。</p>
 <p>因此，该系统的长期结果可能取决于初始条件 <span class="math notranslate nohighlight">\(x_0\)</span> 和矩阵 <span class="math notranslate nohighlight">\(A\)</span>。</p>
-<p>我们关心 <span class="math notranslate nohighlight">\(u_t\)</span> 和 <span class="math notranslate nohighlight">\(e_t\)</span> 如何随时间如何演变。</p>
-<p>失业率和就业率从长期来看会如何变化？</p>
+<p>我们关心 <span class="math notranslate nohighlight">\(u_t\)</span> 和 <span class="math notranslate nohighlight">\(e_t\)</span> 如何随时间演变。</p>
+<p>我们应该预期长期失业率和就业率会是多少？</p>
 <p>长期结果是否取决于初始值 <span class="math notranslate nohighlight">\((u_0, e_o)\)</span>？</p>
 <section id="id5">
 <h3><span class="section-number">40.3.1. </span>可视化长期结果<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
@@ -411,8 +411,8 @@ x_t =
                            <span class="p">[</span>        <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">λ</span><span class="p">,</span>   <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">α</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">d</span><span class="p">)]])</span>
 
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ū</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">λ</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ē</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ū</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_bar</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">λ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_bar</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_bar</span>
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">simulate_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -465,16 +465,17 @@ x_t =
 <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_path</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;劳动力&#39;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png"><img alt="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png" src="_images/66259cd8df2af714ee082f65f180aa0c1c74a5d443cbfe3bc8618d3078d63eb5.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/16bc097ba1a3716ad24f2458c3578f86d6ef93fb1f345eace514b588981cced5.png"><img alt="_images/16bc097ba1a3716ad24f2458c3578f86d6ef93fb1f345eace514b588981cced5.png" src="_images/16bc097ba1a3716ad24f2458c3578f86d6ef93fb1f345eace514b588981cced5.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -500,15 +501,15 @@ x_t =
 <h3><span class="section-number">40.3.2. </span>佩龙-弗罗贝尼乌斯定理的应用<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>从直觉上讲，如果我们将失业池和就业池视为一个封闭系统，其增长应该与劳动力相似。</p>
 <p>接下来我们要问，<span class="math notranslate nohighlight">\(e_t\)</span> 和 <span class="math notranslate nohighlight">\(u_t\)</span> 的长期增长率
-是否也像劳动力一样主要由 <span class="math notranslate nohighlight">\(1+b-d\)</span> 决定？</p>
+是否也像劳动力一样主要由 <span class="math notranslate nohighlight">\(1+b-d\)</span> 决定。</p>
 <p>如果我们应用<a class="reference internal" href="eigen_II.html#perron-frobe"><span class="std std-ref">佩龙-弗罗贝尼乌斯定理</span></a>，答案将更加清晰。</p>
 <p>佩龙-弗罗贝尼乌斯定理的重要性源于以下事实：</p>
 <p>首先，在现实世界中，我们遇到的大多数矩阵都是非负矩阵。</p>
-<p>其次，许多重要模型只是线性迭代模型，它们从初始条件<span class="math notranslate nohighlight">\(x_0\)</span>开始，然后通过规则<span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span>或简写为<span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span>递归演化。</p>
-<p>这个定理有助于描述主特征值<span class="math notranslate nohighlight">\(r(A)\)</span>，它决定了这个迭代过程的行为。</p>
+<p>其次，许多重要模型只是线性迭代模型，它们从初始条件 <span class="math notranslate nohighlight">\(x_0\)</span> 开始，然后通过规则 <span class="math notranslate nohighlight">\(x_{t+1} = Ax_t\)</span> 或简写为 <span class="math notranslate nohighlight">\(x_t = A^tx_0\)</span> 递归演化。</p>
+<p>这个定理有助于描述主特征值 <span class="math notranslate nohighlight">\(r(A)\)</span>，它决定了这个迭代过程的行为。</p>
 <section id="id7">
 <h4><span class="section-number">40.3.2.1. </span>主导特征向量<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
-<p>现在我们学习如何运用佩龙-弗罗贝尼乌斯定理来帮助我们分析湖泊模型。</p>
+<p>现在我们通过展示佩龙-弗罗贝尼乌斯定理如何帮助我们分析湖泊模型，来说明该定理的作用。</p>
 <p>由于 <span class="math notranslate nohighlight">\(A\)</span> 是非负且不可约的矩阵，佩龙-弗罗贝尼乌斯定理意味着：</p>
 <ul class="simple">
 <li><p>谱半径 <span class="math notranslate nohighlight">\(r(A)\)</span> 是 <span class="math notranslate nohighlight">\(A\)</span> 的一个特征值，其中</p></li>
@@ -519,7 +520,7 @@ x_t =
 \]</div>
 <ul class="simple">
 <li><p>任何其他特征值 <span class="math notranslate nohighlight">\(\lambda\)</span> 的绝对值都严格小于 <span class="math notranslate nohighlight">\(r(A)\)</span>：<span class="math notranslate nohighlight">\(|\lambda|&lt; r(A)\)</span>，</p></li>
-<li><p>存在唯一且处处正的右特征向量 <span class="math notranslate nohighlight">\(\phi\)</span>（列向量）和左特征向量 <span class="math notranslate nohighlight">\(\psi\)</span>（行向量）：</p></li>
+<li><p>存在唯一且处处为正的右特征向量 <span class="math notranslate nohighlight">\(\phi\)</span>（列向量）和左特征向量 <span class="math notranslate nohighlight">\(\psi\)</span>（行向量）：</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -537,7 +538,7 @@ x_t =
 <p>回想一下，谱半径受列和的约束：对于 <span class="math notranslate nohighlight">\(A \geq 0\)</span>，我们有</p>
 <div class="math notranslate nohighlight" id="equation-pf-bounds">
 <span class="eqno">(40.2)<a class="headerlink" href="#equation-pf-bounds" title="Link to this equation">#</a></span>\[\min_j \text{colsum}_j (A) \leq r(A) \leq \max_j \text{colsum}_j (A)\]</div>
-<p>注意，对于 <span class="math notranslate nohighlight">\(j=1,2\)</span>，有<span class="math notranslate nohighlight">\(\text{colsum}_j(A) = 1 + b - d\)</span>，且根据<a class="reference internal" href="#equation-pf-bounds">(40.2)</a>，我们可以得出主特征值为 <span class="math notranslate nohighlight">\(r(A) = 1 + b - d\)</span>。</p>
+<p>注意，对于 <span class="math notranslate nohighlight">\(j=1,2\)</span>，有 <span class="math notranslate nohighlight">\(\text{colsum}_j(A) = 1 + b - d\)</span>，且根据<a class="reference internal" href="#equation-pf-bounds">(40.2)</a>，我们可以得出主特征值为 <span class="math notranslate nohighlight">\(r(A) = 1 + b - d\)</span>。</p>
 <p>令 <span class="math notranslate nohighlight">\(g = b - d\)</span> 表示总劳动力的整体增长率，因此 <span class="math notranslate nohighlight">\(r(A) = 1 + g\)</span>。</p>
 <p>佩龙-弗罗贝尼乌斯定理意味着存在唯一的正特征向量 <span class="math notranslate nohighlight">\(\bar{x} = \begin{bmatrix} \bar{u} \\ \bar{e} \end{bmatrix}\)</span>，
 使得 <span class="math notranslate nohighlight">\(A\bar{x} = r(A)\bar{x}\)</span> 且 <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 1 \end{bmatrix} \bar{x} = 1\)</span>：</p>
@@ -553,6 +554,7 @@ x_t =
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_time_paths</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        绘制模拟的时间序列图。</span>
+
 <span class="sd">        参数</span>
 <span class="sd">        ----------</span>
 <span class="sd">        lm : 类</span>
@@ -568,15 +570,15 @@ x_t =
         <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]])</span>
 
-        <span class="n">ū</span><span class="p">,</span> <span class="n">ē</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">ū</span><span class="p">,</span> <span class="n">lm</span><span class="o">.</span><span class="n">ē</span>
+        <span class="n">u_bar</span><span class="p">,</span> <span class="n">e_bar</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">u_bar</span><span class="p">,</span> <span class="n">lm</span><span class="o">.</span><span class="n">e_bar</span>
 
         <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-            <span class="c1"># 绘制线$D$</span>
+            <span class="c1"># 绘制线 D</span>
             <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;设置$D$&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">u_bar</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">e_bar</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;集合 $D$&#39;</span><span class="p">)</span>
 
         <span class="c1"># 设置通过原点的坐标轴</span>
         <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">]:</span>
@@ -590,6 +592,9 @@ x_t =
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;就业人群&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+
+
 
         <span class="c1"># 绘制时间序列</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x0</span><span class="p">:</span>
@@ -606,9 +611,9 @@ x_t =
                         <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
                         <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span> <span class="o">=</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">))</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;ko&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">u_bar</span><span class="p">],</span> <span class="p">[</span><span class="n">e_bar</span><span class="p">],</span> <span class="s2">&quot;ko&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\bar</span><span class="si">{x}</span><span class="s1">$&#39;</span><span class="p">,</span>
-                <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">ū</span><span class="p">,</span> <span class="n">ē</span><span class="p">),</span>
+                <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">u_bar</span><span class="p">,</span> <span class="n">e_bar</span><span class="p">),</span>
                 <span class="n">xycoords</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
                 <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>
                 <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
@@ -629,7 +634,10 @@ x_t =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1308ef4a9bf6793a3439188c70bd2d883635d21f2155cb482091835ad17cce84.png"><img alt="_images/1308ef4a9bf6793a3439188c70bd2d883635d21f2155cb482091835ad17cce84.png" src="_images/1308ef4a9bf6793a3439188c70bd2d883635d21f2155cb482091835ad17cce84.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/4f7eff17265c94c9ba0297dffb8275fc8ede6274ae16f602256e88d8b2283586.png"><img alt="_images/4f7eff17265c94c9ba0297dffb8275fc8ede6274ae16f602256e88d8b2283586.png" src="_images/4f7eff17265c94c9ba0297dffb8275fc8ede6274ae16f602256e88d8b2283586.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -654,7 +662,7 @@ x_t =
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/19385002d4e800f771ef58273a8a36b84360cb0278f7762a60778ad6fae77fbd.png"><img alt="_images/19385002d4e800f771ef58273a8a36b84360cb0278f7762a60778ad6fae77fbd.png" src="_images/19385002d4e800f771ef58273a8a36b84360cb0278f7762a60778ad6fae77fbd.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/5a4a260e178c07a1cc6429e67e26349c518d0d95f01acabce4e6070c559bba83.png"><img alt="_images/5a4a260e178c07a1cc6429e67e26349c518d0d95f01acabce4e6070c559bba83.png" src="_images/5a4a260e178c07a1cc6429e67e26349c518d0d95f01acabce4e6070c559bba83.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -700,7 +708,7 @@ r_{t+1} = \frac{x_{t+1}}{n_{t+1}} = \frac{x_{t+1}}{(1+g) n_{t}} = \frac{A x_t}{(
 \[\begin{split}
 r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix} \bar{u} &amp; \bar{u} \\ \bar{e} &amp; \bar{e} \end{bmatrix} r_0 = \begin{bmatrix} \bar{u} \\  \bar{e} \end{bmatrix}. 
 \end{split}\]</div>
-<p>我们用下面的代码来说明</p>
+<p>下图对此进行了说明。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">()</span>
@@ -718,9 +726,9 @@ r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix}
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
-<span class="c1"># 绘制稳态 ū 和 ē</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">ū</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ū&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">ē</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ē&#39;</span><span class="p">)</span>
+<span class="c1"># 绘制稳态比率</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">u_bar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;u_bar&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">e_bar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;e_bar&#39;</span><span class="p">)</span>
 
 <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;失业率&#39;</span><span class="p">,</span> <span class="s1">&#39;就业率&#39;</span><span class="p">]</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="s1">&#39;upper right&#39;</span><span class="p">]</span>
@@ -729,7 +737,6 @@ r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix}
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rate_path</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">locations</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 
@@ -739,7 +746,7 @@ r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png"><img alt="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png" src="_images/91ed62f3dda4b63335a4dec6926f76c4fd1e9a7a78d173e0aa3152652b36635a.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/2c35e601fe5fd9cd39f230d00aba09a4778da491d137e37dc29e035813857b51.png"><img alt="_images/2c35e601fe5fd9cd39f230d00aba09a4778da491d137e37dc29e035813857b51.png" src="_images/2c35e601fe5fd9cd39f230d00aba09a4778da491d137e37dc29e035813857b51.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -782,27 +789,39 @@ r_t = P z_t = \begin{bmatrix} v_1 &amp; v_2 \end{bmatrix}  \begin{bmatrix} \gamm
 <p>方程 <a class="reference internal" href="#equation-steady-x">(40.3)</a> 表明，如果 <span class="math notranslate nohighlight">\(\alpha\)</span> 增加或 <span class="math notranslate nohighlight">\(\lambda\)</span> 减少，长期失业率将会上升，而就业率将会下降。</p>
 <p>首先假设 <span class="math notranslate nohighlight">\(\alpha=0.01, \lambda=0.1, d=0.02, b=0.025\)</span>。</p>
 <p>假设 <span class="math notranslate nohighlight">\(\alpha\)</span> 增加到 <span class="math notranslate nohighlight">\(0.04\)</span>。</p>
-<p>下图说明了直线 <span class="math notranslate nohighlight">\(D\)</span> 顺时针向下移动，这表明随着分离率的增加，失业人口的比例上升。</p>
+<p>然后将其与 <span class="math notranslate nohighlight">\(\lambda\)</span> 从 <span class="math notranslate nohighlight">\(0.1\)</span> 下降到 <span class="math notranslate nohighlight">\(0.04\)</span> 的情况进行比较。</p>
+<p>图表显示，两种变化都使直线 <span class="math notranslate nohighlight">\(D\)</span> 顺时针向下旋转，这表明长期失业率上升。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">lm</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
-<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">s</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;固定 $D$, α=0.01&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_D_line</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">lm</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">u_bar</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">e_bar</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
-<span class="n">lm</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
-<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">ū</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">lm</span><span class="o">.</span><span class="n">ē</span><span class="p">],</span> <span class="s2">&quot;r--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;固定 $D$, α=0.04&#39;</span><span class="p">)</span>
+<span class="n">lm_base</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="n">lm_high_α</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm_base</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">add_D_line</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lm_base</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;集合 $D$, $\alpha=0.01$&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm_high_α</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">add_D_line</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lm_high_α</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;集合 $D$, $\alpha=0.04$&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">lm_low_λ</span> <span class="o">=</span> <span class="n">LakeModel</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">λ</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm_base</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">add_D_line</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lm_base</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;集合 $D$, $\lambda=0.1$&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plot_time_paths</span><span class="p">(</span><span class="n">lm_low_λ</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">add_D_line</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lm_low_λ</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;集合 $D$, $\lambda=0.04$&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5f40d63ac37529dffa1c2be6dd8bc42b3e02008c7f1b10090b3299b7a665d93a.png"><img alt="_images/5f40d63ac37529dffa1c2be6dd8bc42b3e02008c7f1b10090b3299b7a665d93a.png" src="_images/5f40d63ac37529dffa1c2be6dd8bc42b3e02008c7f1b10090b3299b7a665d93a.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/2842f1adc0432eb7c6033583c976a8b40cb694c97beccec26e55868cdbe29dcd.png"><img alt="_images/2842f1adc0432eb7c6033583c976a8b40cb694c97beccec26e55868cdbe29dcd.png" src="_images/2842f1adc0432eb7c6033583c976a8b40cb694c97beccec26e55868cdbe29dcd.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -990,7 +1009,7 @@ r_t = P z_t = \begin{bmatrix} v_1 &amp; v_2 \end{bmatrix}  \begin{bmatrix} \gamm
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

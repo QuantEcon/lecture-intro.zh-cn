@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 拉弗曲线与自适应预期
+  headings:
+    Overview: 概览
+    The model: 模型
+    Computing an equilibrium sequence: 计算均衡序列
+    Claims or conjectures: 结论或猜想
+    Limiting values of inflation rate: 通货膨胀率的极限值
+    Steady-state Laffer curve: 稳态拉弗曲线
+    Associated initial price levels: 相关的初始价格水平
+    Associated initial price levels::Verification: 验证
+    Slippery side of Laffer curve dynamics: 拉弗曲线动态的不稳定一侧
+    Exercises: 练习
 ---
 
 # 拉弗曲线与自适应预期
@@ -27,22 +40,23 @@ $$
 \pi_t^* = p_{t+1} - p_t
 $$
 
-我们现在不再采用讲座{doc}`money_inflation`和讲座{doc}`money_inflation_nonlinear`中的假设，而是假设$\pi_t^*$遵循下文中的自适应预期假设{eq}`eq:adaptex`。
+我们现在不再采用讲座{doc}`money_inflation`和讲座{doc}`money_inflation_nonlinear`中的假设，而是假设$\pi_t^*$遵循下文中方程{eq}`eq:adaptex`所描述的自适应预期假设。
 
-这种预期形成机制的改变会带来一些重要的影响。具体来说:
+我们将发现，以这种方式改变我们关于预期形成的假设，将改变我们的一些结论，同时保留另一些结论不变。具体而言，我们将发现：
 
-* 两个静态通货膨胀率水平保持不变
-* 但系统的动态行为发生了变化 - 它现在倾向于收敛到**较低**的通货膨胀率水平
-* 政策效果变得更符合直觉 - **降低**政府赤字能够**降低**通货膨胀
+* 用自适应预期替代理性预期不会改变两个静态通货膨胀率，但是$\ldots$
+* 它扭转了反常的动态特征，使得**较低**的静态通货膨胀率成为系统通常收敛到的那个值
+* 一个更符合直觉的比较动态结果由此产生：现在，通货膨胀可以通过**降低**政府赤字来**降低**
 
-这些结果更符合传统的经济学观点,即通货膨胀主要由政府赤字驱动。
+这些更符合直觉的比较动态特征支撑了"老派信条"，即"通货膨胀总是且无论何处都是由政府赤字引起的"。
 
-{cite}`bruno1990seigniorage`对这些问题进行了研究。他们认为理性预期(完全预见)模型的预测有悖直觉,因此提出用自适应预期来替代。在自适应预期下,人们根据下文的方程{eq}`eq:adaptex`来形成对未来通货膨胀的预期。
+{cite}`bruno1990seigniorage`对这些问题进行了研究。他们的目的是通过放弃理性预期，转而假设人们按照下文所描述的"自适应预期"方案{eq}`eq:adaptex`来形成对未来通货膨胀率的预期，从而扭转他们认为在理性预期下（在此背景下即完全预见）模型所做出的违反直觉的预测。
 
 ```{note}
 {cite}`sargent1989least` 研究了另一种选择静态均衡的方法，涉及用通过最小二乘回归学习的模型替换理性预期。
+
 {cite}`marcet2003recurrent` 和 {cite}`sargent2009conquest` 扩展了这项工作，并将其应用于研究拉丁美洲反复出现的高通胀情节。
-```  
+```
 
 ## 模型
 
@@ -84,45 +98,53 @@ $$ (eq:adaptex)
 
 ## 计算均衡序列
 
-我们可以通过以下步骤求解均衡序列。首先，将方程{eq}`eq:ada_mdemand`和{eq}`eq:ada_msupply2`中的$m_{t+1}$表达式结合，并使用方程{eq}`eq:adaptex`消除$\pi_t^*$，得到关于$p_t$的方程：
+将方程{eq}`eq:ada_mdemand`和{eq}`eq:ada_msupply2`中关于$m_{t+1}$的表达式相等，并使用方程{eq}`eq:adaptex`消去$\pi_t^*$，可以得到如下关于$p_t$的方程：
 
 $$
 \log[ \exp(m_t) + g \exp(p_t)] - p_t = -\alpha [(1-\delta) (p_t - p_{t-1}) + \delta \pi_{t-1}^*]
 $$ (eq:pequation)
 
-给定初始条件$(m_0, \pi_{-1}^*, p_{-1})$，我们可以按照以下步骤求解均衡序列：
+**伪代码**
 
-1. 求解方程{eq}`eq:pequation`得到$p_t$
-2. 使用方程{eq}`eq:adaptex`计算$\pi_t^*$ 
-3. 使用方程{eq}`eq:ada_msupply2`计算$m_{t+1}$
-4. 重复步骤1-3
+以下是我们算法的伪代码。
 
-## 主要结论
+在时间$0$，给定初始条件$(m_0, \pi_{-1}^*, p_{-1})$，对于每个$t \geq 0$，依次执行以下步骤：
 
-通过分析模型,我们可以得出以下几个重要结论:
+* 求解{eq}`eq:pequation`得到$p_t$
+* 求解方程{eq}`eq:adaptex`得到$\pi_t^*$
+* 求解方程{eq}`eq:ada_msupply2`得到$m_{t+1}$
 
-1. 如果存在稳态,通货膨胀率$\overline \pi$将等于货币增长率$\overline \mu$
+至此算法完成。
 
-2. 模型存在两个可能的稳态通货膨胀率 - 一个高值和一个低值
+## 结论或猜想
 
-3. 与{doc}`money_inflation_nonlinear`中的理性预期模型不同,在大多数初始条件$(p_0, \pi_{t}^*)$下,系统会收敛到**较低**的稳态通货膨胀率
+我们将会发现
 
-4. 对于每个稳态通货膨胀率$\overline \pi$,都存在唯一的初始价格水平$p_0$使得系统立即进入稳态($\pi_t = \mu_t = \overline \mu$ 对所有 $t \geq 0$)
-   - 这个$p_0$满足方程:$\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \overline \pi$
-   - 该方程来自稳态条件$m_1 - p_0 = - \alpha \overline \pi$
+* 如果存在，极限值$\overline \pi$和$\overline \mu$将相等
 
-## 稳态通货膨胀率的计算
+* 如果存在极限值，则存在两个可能的极限值，一个高，一个低
 
-正如我们在早前的讲座 {doc}`money_inflation_nonlinear` 中讨论的，我们可以通过研究稳态劳动曲线来计算 $\bar \pi$ 的两个潜在的限制值。
+* 与讲座{doc}`money_inflation_nonlinear`中的结果不同，对于几乎所有的初始对数价格水平和预期通货膨胀率$p_0, \pi_{t}^*$，极限值$\overline \pi = \overline \mu$都是**较低**的稳态值
+
+* 对于两个可能的极限值$\bar \pi$中的每一个，都存在唯一的初始对数价格水平$p_0$，使得对所有$t \geq 0$都有$\pi_t = \mu_t = \bar \mu$
+
+  * 这个唯一的初始对数价格水平满足$\log(\exp(m_0) + g \exp(p_0)) - p_0 = - \alpha \bar \pi$
+
+  * 前面关于$p_0$的方程来自$m_1 - p_0 = -  \alpha \bar \pi$
+
+## 通货膨胀率的极限值
+
+正如我们在早前的讲座 {doc}`money_inflation_nonlinear` 中所做的那样，我们可以通过研究稳态拉弗曲线来计算 $\bar \pi$ 的两个潜在的极限值。
 
 因此，在一个**稳态**中
+
 $$
 m_{t+1} - m_t = p_{t+1} - p_t =  x \quad \forall t ,
 $$
 
 其中 $x > 0$ 是货币供应量和价格水平的对数的共同增长率。
 
-几行代数可以得出满足 $x$ 的以下方程
+几行代数运算可以得出满足 $x$ 的以下方程
 
 $$
 \exp(-\alpha x) - \exp(-(1 + \alpha) x) = g 
@@ -134,11 +156,11 @@ $$
 g \leq \max_{x: x \geq 0} \exp(-\alpha x) - \exp(-(1 + \alpha) x) ,  
 $$ (eq:ada_revmax)
 
-这样就可以通过印钞来财务支持 $g$。
+这样才有可能通过印钞来为 $g$ 提供资金。
 
-{eq}`eq:ada_steadypi` 的左侧是通过印钞筹集的稳定状态收入。
+{eq}`eq:ada_steadypi` 的左侧是通过印钞筹集的稳态收入。
 
-{eq}`eq:ada_steadypi` 的右侧是政府通过印钞筹集的 $t$ 时刻的商品数量。
+{eq}`eq:ada_steadypi` 的右侧是政府通过印钞筹集的时刻 $t$ 的商品数量。
 
 很快我们将绘制方程 {eq}`eq:ada_steadypi` 的左右两侧。
 
@@ -153,8 +175,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.ticker import MaxNLocator
-from matplotlib.cm import get_cmap
-from matplotlib.colors import to_rgba
 import matplotlib
 from scipy.optimize import root, fsolve
 
@@ -237,26 +257,21 @@ def plot_laffer(model, πs):
     plt.xlabel(r'$\pi$')
     plt.ylabel('铸币税')
     plt.legend()
-    plt.grid(True)
     plt.show()
 
 # 稳态拉弗曲线
 plot_laffer(model, (π_l, π_u))
 ```
 
-## 初始价格水平的计算
+## 相关的初始价格水平
 
-既然我们已经找到了两个可能的稳态通货膨胀率，接下来我们需要计算与每个稳态相对应的初始价格水平 $p_{-1}$。
+既然我们已经找到了两个可能的稳态，接下来我们可以计算两个初始对数价格水平 $p_{-1}$，作为初始条件，它们意味着对所有 $t \geq 0$ 都有 $\pi_t = \bar \pi$。
 
-这些初始价格水平很重要，因为它们能让系统从一开始就处于稳态，也就是说，如果我们从正确的 $p_{-1}$ 开始，那么通货膨胀率 $\pi_t$ 会在所有时期 $t \geq 0$ 保持在稳态值 $\bar \pi$ 不变。
-
-根据货币需求方程，初始价格水平应满足:
+特别地，为了启动动态拉弗曲线的不动点，我们设定
 
 $$
 p_{-1} = m_0 + \alpha \pi^*
 $$
-
-其中 $m_0$ 是初始货币供应量的对数，$\alpha$ 是货币需求对预期通货膨胀的敏感度，$\pi^*$ 是稳态通货膨胀率。
 
 ```{code-cell} ipython3
 def solve_p_init(model, π_star):
@@ -265,7 +280,7 @@ def solve_p_init(model, π_star):
 
 # 计算与 π_l 和 π_u 相关联的两个初始价格水平
 p_l, p_u = map(lambda π: solve_p_init(model, π), (π_l, π_u))
-print('初始 p_{-1}', f'为: {p_l, p_u}')
+print('相关的初始 p_{-1}', f'为: {p_l, p_u}')
 ```
 
 ### 验证
@@ -306,7 +321,7 @@ def solve_laffer_adapt(p_init, π_init, model, num_steps):
     return π_seq, μ_seq, m_seq, p_seq
 ```
 
-计算从 $p_{-1}$ 开始，与 $\pi_l$ 相关联的极限值
+计算从与 $\pi_l$ 相关联的 $p_{-1}$ 开始的极限值
 
 ```{code-cell} ipython3
 π_seq, μ_seq, m_seq, p_seq = solve_laffer_adapt(p_l, π_l, model, 50)
@@ -321,7 +336,7 @@ eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-现在计算从初始价格水平 $p_{-1}$ 开始，收敛到高通胀稳态 $\pi_u$ 的动态路径
+计算从与 $\pi_u$ 相关联的 $p_{-1}$ 开始的极限值
 
 ```{code-cell} ipython3
 π_seq, μ_seq, m_seq, p_seq = solve_laffer_adapt(p_u, π_u, model, 50)
@@ -336,16 +351,16 @@ eq_g = lambda x: np.exp(-model.α * x) - np.exp(-(1 + model.α) * x)
 print('eq_g == g:', np.isclose(eq_g(m_seq[-1] - m_seq[-2]), model.g))
 ```
 
-## 拉弗曲线动态的不稳定性
+## 拉弗曲线动态的不稳定一侧
 
-与{doc}`money_inflation` 和{doc}`money_inflation_nonlinear`类似，我们现在已经具备了从不同的 $p_{-1}, \pi_{-1}^*$ 设置开始计算时间序列的能力。
+现在我们已经具备了从不同的 $p_{-1}, \pi_{-1}^*$ 设置开始计算时间序列的能力，这与讲座 {doc}`money_inflation` 和讲座 {doc}`money_inflation_nonlinear` 中的做法类似。
 
-现在我们将研究当初始条件 $p_{-1}, \pi_{-1}^*$ 偏离稳态值 $\pi_u$ 或 $\pi_l$ 时，系统的动态演化过程。
+现在我们将研究当我们从偏离动态拉弗曲线静态点（即偏离 $\pi_u$ 或 $\pi_l$）的 $p_{-1}, \pi_{-1}^*$ 出发时，结果是如何展开的。
 
-为了生成不同的初始条件，我们将:
+为了构造一对扰动 $\check p_{-1}, \check \pi_{-1}^*$，我们将实施以下伪代码：
 
-* 选择一系列不同于稳态值的初始预期通胀率 $\pi_{-1}^*$
-* 根据货币需求方程，计算对应的初始价格水平 $p_{-1} = m_0 + \alpha \pi_{-1}^*$
+* 设定 $\check \pi_{-1}^*$ 不等于静态点 $\pi_u$ 或 $\pi_l$ 中的任何一个。
+* 设定 $\check p_{-1} = m_0 + \alpha \check \pi_{-1}^*$
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -401,4 +416,158 @@ line_params = {'lw': 1.5,
               
 π_bars = (π_l, π_u)
 draw_iterations(πs, model, line_params, π_bars, num_steps=80)
+```
+
+## 练习
+
+```{exercise}
+:label: la_ex1
+
+**比较静态分析：稳态通货膨胀率如何随政府赤字 $g$ 变化？**
+
+本讲称，在自适应预期下，"老派信条"成立：
+降低政府赤字 $g$ 会降低低通胀稳态 $\pi_l$。
+
+a. 通过使用 `scipy.optimize.minimize_scalar` 找到使 $\exp(-\alpha x) - \exp(-(1+\alpha)x)$ 最大化的 $x$，
+    计算最大铸币税收入 $g_{\rm max}$ 及相应的 $x_{\rm max}$。
+
+b. 对于从一个较小的正值到 $0.999 \times g_{\rm max}$ 范围内的 $g$，
+    计算 $\pi_l(g)$ 和 $\pi_u(g)$，并在同一坐标轴上绘制它们随 $g$ 变化的图像。
+
+c. 验证当 $g \to g_{\rm max}$ 时两个根是否合并，以及当 $g$ 从基准值 $g = 0.35$
+    减少到 $g/2$ 时 $\pi_l$ 是否下降，然后将其与本讲中的"老派信条"论断联系起来。
+```
+
+```{solution-start} la_ex1
+:class: dropdown
+```
+
+```{code-cell} ipython3
+from scipy.optimize import minimize_scalar
+
+# 第 a 部分：求 g_max
+res = minimize_scalar(lambda x: -compute_seign(x, model.α),
+                      bounds=(0, 10), method='bounded')
+x_max = res.x
+g_max = compute_seign(x_max, model.α)
+print(f"x_max  = {x_max:.4f}")
+print(f"g_max  = {g_max:.4f}")
+```
+
+```{code-cell} ipython3
+# 第 b 部分：追踪 π_l(g) 和 π_u(g)
+g_grid  = np.linspace(0.01, g_max * 0.999, 300)
+πl_list, πu_list = [], []
+
+for g in g_grid:
+    mod_g = create_model(g=g)
+    πl_list.append(solve_π_bar(mod_g, x0=0.3))
+    πu_list.append(solve_π_bar(mod_g, x0=4.0))
+
+fig, ax = plt.subplots()
+ax.plot(g_grid, πl_list, label=r'$\pi_l(g)$ - 低通胀稳态')
+ax.plot(g_grid, πu_list, label=r'$\pi_u(g)$ - 高通胀稳态')
+ax.axvline(model.g, color='grey', linestyle='--', lw=1,
+           label=f'基准 $g = {model.g}$')
+ax.set_xlabel('政府赤字 $g$')
+ax.set_ylabel(r'稳态通货膨胀率 $\bar\pi$')
+ax.set_title('稳态通货膨胀率与政府赤字的关系')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+```{code-cell} ipython3
+# 第 c 部分：验证"老派信条"
+π_l_bench = solve_π_bar(model, x0=0.3)
+π_l_half  = solve_π_bar(create_model(g=model.g / 2), x0=0.3)
+print(f"当 g = {model.g:.2f} 时 π_l:      {π_l_bench:.4f}")
+print(f"当 g = {model.g/2:.3f} 时 π_l:   {π_l_half:.4f}")
+print(f"将 g 减半使 π_l 降低了 {π_l_bench - π_l_half:.4f}")
+```
+
+这两条曲线在 $g_{\rm max}$ 处合并，因为拉弗曲线在该处达到峰值，
+无法再支持两个不同的通货膨胀率。
+
+随着 $g$ 的下降，$\pi_l$ 单调下降，而 $\pi_u$ 上升，这证实了"老派信条"：
+自适应预期选择了低通胀均衡，在这个均衡中，较低的赤字直接意味着较低的通货膨胀。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: la_ex2
+
+**预期调整速度 $\delta$ 如何影响收敛。**
+
+参数 $\delta \in (0,1)$ 控制公众更新其通货膨胀预期的速度：$\delta$ 接近 $1$
+意味着预期非常缓慢（严重依赖过去信息），而 $\delta$ 接近 $0$ 意味着预期
+几乎瞬时调整。
+
+固定一个介于 $\pi_l$ 和 $\pi_u$ 之间的初始值 $\pi_0$，即
+$\pi_0 = (\pi_l + \pi_u)/2$，并设定 $p_{-1} = m_0 + \alpha \pi_0$。
+
+a. 使用 `create_model` 和 `solve_laffer_adapt`，对每个
+    $\delta \in \{0.3,\, 0.6,\, 0.9\}$ 模拟 80 个时间步，在同一个图上绘制
+    得到的 $\pi_t$ 路径，并添加一条位于 $\pi_l$ 处的水平虚线作为参考。
+
+b. 对每个 $\delta$ 值，报告 $\pi_t$ 达到 $\pi_l$ 的 $0.01$ 范围内所需的时间步数。
+
+c. 直观地解释为什么较大的 $\delta$ 会导致收敛速度较慢。
+```
+
+```{solution-start} la_ex2
+:class: dropdown
+```
+
+```{code-cell} ipython3
+δ_values  = [0.3, 0.6, 0.9]
+num_steps = 80
+π0 = (π_l + π_u) / 2          # 从两个稳态的中间值开始
+
+fig, ax = plt.subplots(figsize=(8, 4))
+
+for δ in δ_values:
+    mod_δ = create_model(δ=δ)
+    # 重新计算此 δ 下的稳态（它们不会改变，但需确认）
+    π_l_δ = solve_π_bar(mod_δ, x0=0.6)
+    p0    = mod_δ.m0 + mod_δ.α * π0
+    π_seq, *_ = solve_laffer_adapt(p0, π0, mod_δ, num_steps)
+    ax.plot(np.arange(num_steps), π_seq, lw=1.5, marker='o',
+            markersize=2, label=f'$\\delta={δ}$')
+
+ax.axhline(π_l, color='grey', linestyle='--', lw=1.5, alpha=0.7,
+           label=r'$\pi_l$')
+ax.set_xlabel('时间')
+ax.set_ylabel(r'$\pi_t$')
+ax.set_title('不同调整速度 $\\delta$ 下向 $\\pi_l$ 收敛的过程')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+```{code-cell} ipython3
+# 第 b 部分：达到 |π_t - π_l| < 0.01 所需的步数
+tol = 0.01
+print(f"{'δ':>5}  {'达到 |π_t - π_l| < 0.01 所需步数':>30}")
+print('-' * 40)
+for δ in δ_values:
+    mod_δ = create_model(δ=δ)
+    p0    = mod_δ.m0 + mod_δ.α * π0
+    π_seq, *_ = solve_laffer_adapt(p0, π0, mod_δ, num_steps)
+    hits  = np.where(np.abs(π_seq - π_l) < tol)[0]
+    steps = hits[0] if len(hits) > 0 else ">80"
+    print(f"{δ:>5}  {str(steps):>30}")
+```
+
+**第 c 部分。** 当 $\delta$ 较大时，每期 $\pi_t^*$ 的修正只是预测误差的一小部分
+$(1-\delta)$，因此预期是有黏性的。
+
+这意味着推动经济朝向 $\pi_l$ 的预期信号每期只能微弱地传递，因此实际通货膨胀率
+$\pi_t$ 是缓慢地向稳态爬行，而不是迅速跳跃到那里。
+
+较小的 $\delta$ 会给予预测误差全部或接近全部的权重，使预期迅速贴合当前观测值，
+并在短短几期内将 $\pi_t$ 拉向 $\pi_l$。
+
+```{solution-end}
 ```

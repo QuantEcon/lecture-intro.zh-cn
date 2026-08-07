@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 马尔科夫链：不可约性与遍历性
+  headings:
+    Overview: 概述
+    Irreducibility: 不可约性
+    Irreducibility::Irreducibility and stationarity: 不可约性与平稳性
+    Ergodicity: 遍历性
+    'Ergodicity::Example: ergodicity and unemployment': 示例：遍历性与失业
+    'Ergodicity::Example: Hamilton dynamics': 示例：汉密尔顿动力学
+    'Ergodicity::Example: a periodic chain': 示例：一个周期链
+    'Ergodicity::Example:  political institutions': 示例：政治制度
+    Exercises: 练习
 ---
 
 # 马尔科夫链：不可约性与遍历性

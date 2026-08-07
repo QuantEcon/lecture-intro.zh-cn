@@ -9,6 +9,25 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 基础经济学中的几何级数
+  headings:
+    Overview: 概述
+    Key formulas: 关键公式
+    Key formulas::Infinite geometric series: 无限几何级数
+    Key formulas::Finite geometric series: 有限几何级数
+    'Example: The Money Multiplier in Fractional Reserve Banking': 示例：部分准备金银行制度中的货币乘数
+    'Example: The Money Multiplier in Fractional Reserve Banking::A simple model': 一个简单的模型
+    'Example: The Money Multiplier in Fractional Reserve Banking::Money multiplier': 货币乘数
+    'Example: The Keynesian Multiplier': 示例：凯恩斯乘数
+    'Example: The Keynesian Multiplier::Static version': 静态版本
+    'Example: The Keynesian Multiplier::Dynamic version': 动态版本
+    'Example: Interest Rates and Present Values': 示例：利率和现值
+    'Example: Interest Rates and Present Values::Accumulation': 累积
+    'Example: Interest Rates and Present Values::Discounting': 折现
+    'Example: Interest Rates and Present Values::Application to asset pricing': 资产定价的应用
+    Back to the Keynesian multiplier: 回到凯恩斯乘数
+    Exercises: 练习
 ---
 
 (geom_series)=
@@ -86,6 +105,7 @@ $$
 
 ```{math}
 :label: infinite
+
 1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }
 ```
 
@@ -108,8 +128,11 @@ $$
 1 + c + c^2 + c^3 + \cdots + c^T  = \frac{1 - c^{T+1}}{1-c}
 $$
 
-**备注：** 上述公式适用于任何标量 $c$ 的值。我们不必将 $c$ 限制在
+```{prf:remark}
+:label: geom_formula
+上述公式适用于任何标量 $c$ 的值。我们不必将 $c$ 限制在
 集合 $(-1,1)$ 中。
+```
 
 我们现在继续描述一些几何级数的著名经济应用。
 
@@ -504,7 +527,7 @@ $$
 和 $r > g$ 并且 $r$ 和 $g$ 通常是小
 数，例如 .05 或 .03。
 
-使用 $r=0$ 附近的 $\frac{1}{1+r}$ 的泰勒级数，
+使用 $r=0$ 附近的 $\frac{1}{1+r}$ 的[泰勒级数](https://en.wikipedia.org/wiki/Taylor_series)，
 即，
 
 $$
@@ -571,7 +594,7 @@ $$
 展开可得：
 
 $$
-\begin{aligned} p_0 &=\frac{x_0(1-1+(T+1)^2 rg -r(T+1)+g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\ &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{aligned}
+\begin{aligned} p_0 &=\frac{x_0(1-1+(T+1)^2 rg +r(T+1)-g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &= \frac{x_0(T+1)(r-g)}{r-g + rg}+\frac{x_0rg(T+1)^2}{r-g+rg}\\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\  &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{aligned}
 $$
 
 当 $T$ 相对于 $1/(rg)$ 较小时，我们也可以通过去除第二项 $rgx_0(T+1)$ 来近似，以获得有限流近似中的 $x_0(T+1)$。
@@ -586,8 +609,8 @@ def finite_lease_pv_true(T, g, r, x_0):
     G = (1 + g)
     R = (1 + r)
     return (x_0 * (1 - G**(T + 1) * R**(-T - 1))) / (1 - G * R**(-1))
-
 # 有限租赁的第一次近似
+
 def finite_lease_pv_approx_1(T, g, r, x_0):
     p = x_0 * (T + 1) + x_0 * r * g * (T + 1) / (r - g)
     return p
@@ -685,7 +708,7 @@ T_max = 10
 T=np.arange(0, T_max+1)
 
 rs, gs = (0.9, 0.5, 0.4001, 0.4), (0.4, 0.4, 0.4, 0.5),
-comparisons = (r'$\gg$', r'$>$', r'$\approx$', r'$<$')
+comparisons = (r'$\gg$', '$>$', r'$\approx$', '$<$')
 for r, g, comp in zip(rs, gs, comparisons):
     ax.plot(finite_lease_pv_true(T, g, r, x_0), label=f'r(={r}) {comp} g(={g})')
 
@@ -729,7 +752,7 @@ plt.show()
 ```
 我们可以用一些微积分来研究租赁现值 $p_0$ 如何随 $r$ 和 $g$ 变化。
 
-我们将使用一个名为 SymPy 的库。
+我们将使用一个名为 [SymPy](https://www.sympy.org/) 的库。
 
 SymPy 使我们能够进行符号数学计算，包括计算代数方程的导数。
 
@@ -858,3 +881,247 @@ for ax, param in zip(axes, param_labels):
 plt.show()
 ```
 请注意，无论政府支出从 0.3 增加到 0.4，还是投资从 0.3 增加到 0.4，图表中的变化都是相同的。
+
+## 练习
+
+```{exercise}
+:label: geom_ex1
+
+用数值方法验证无限几何级数公式
+
+$$
+1 + c + c^2 + \cdots = \frac{1}{1-c}
+$$
+
+其中 $c = 0.9$。
+
+计算部分和 $S_T = \sum_{t=0}^{T} c^t$，其中 $T = 0, 1, \ldots, 80$，
+并将其与理论极限 $\frac{1}{1-c}$ 一起绘制出来。
+
+在第二个子图中，以对数刻度绘制绝对误差 $\left|S_T - \frac{1}{1-c}\right|$，
+以说明收敛速度。
+```
+
+```{solution-start} geom_ex1
+:class: dropdown
+```
+
+```{code-cell} ipython3
+c = 0.9
+T_max = 80
+T = np.arange(0, T_max + 1)
+
+# 部分和：S_T = sum_{t=0}^{T} c^t
+S = np.cumsum(c**T)
+
+# 理论极限
+limit = 1 / (1 - c)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+# 左图：部分和收敛于极限
+axes[0].plot(T, S, label='部分和 $S_T$')
+axes[0].axhline(limit, linestyle='--', color='red',
+                label=f'极限 $1/(1-c) = {limit:.1f}$')
+axes[0].set_xlabel('$T$')
+axes[0].set_ylabel('$S_T$')
+axes[0].set_title('部分和的收敛')
+axes[0].legend()
+
+# 右图：对数刻度下的绝对误差
+error = np.abs(S - limit)
+axes[1].semilogy(T, error)
+axes[1].set_xlabel('$T$')
+axes[1].set_ylabel(r'$|S_T - 1/(1-c)|$')
+axes[1].set_title('绝对误差（对数刻度）')
+
+plt.tight_layout()
+plt.show()
+```
+
+左图证实了 $S_T$ 平滑地收敛到 $1/(1-c) = 10$。
+
+右图显示误差以几何速度衰减，在对数刻度上呈一条直线，反映了 $T$ 项之后的余项等于 $c^{T+1}/(1-c)$ 这一事实。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: geom_ex2
+
+使用本讲中的部分准备金银行模型，假设初始存款为 $D_0 = 1$。
+
+a. 对于每个准备金率 $r \in \{0.05, 0.10, 0.20, 0.40\}$，绘制 **累计存款**
+    $\sum_{i=0}^{N} D_i$ 作为银行数量 $N$（对于 $N = 0, 1, \ldots, 50$）的函数，
+    并在每种情况下的理论极限 $D_0/r$ 处添加一条虚线水平线。
+
+b. 打印每个准备金率对应的理论货币乘数 $1/r$。
+```
+
+```{solution-start} geom_ex2
+:class: dropdown
+```
+
+```{code-cell} ipython3
+D_0 = 1
+N_max = 50
+N = np.arange(0, N_max + 1)
+reserve_ratios = [0.05, 0.10, 0.20, 0.40]
+
+fig, ax = plt.subplots()
+for r in reserve_ratios:
+    # D_i = (1 - r)^i * D_0
+    D = D_0 * (1 - r)**N
+    cumulative = np.cumsum(D)
+    ax.plot(N, cumulative, label=f'$r = {r}$')
+    ax.axhline(D_0 / r, linestyle='--', alpha=0.4)
+
+ax.set_xlabel('银行数量 $N$')
+ax.set_ylabel('累计存款')
+ax.set_title('收敛到货币乘数 $D_0/r$')
+ax.legend()
+plt.show()
+
+# 第 b 部分
+print(f"{'准备金率':>15} | {'货币乘数 1/r':>20}")
+print('-' * 40)
+for r in reserve_ratios:
+    print(f"{r:>15.2f} | {1/r:>20.2f}")
+```
+
+较低的准备金率意味着银行放贷出每笔存款中更大的比例，因此货币创造过程需要更长时间才能耗尽，创造的存款总额也会大得多。
+
+虚线标记了理论极限 $D_0/r$，累计序列从下方逐渐逼近这一极限。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: geom_ex3
+
+**戈登公式** 将无限期租赁的现值近似为
+
+$$
+p_0 \approx \frac{x_0}{r - g}
+$$
+
+使用前面定义的 `infinite_lease` 函数，设 $x_0 = 1$ 且
+$r = 0.05$，让 $g$ 在 $[0,\, 0.045]$ 范围内取值。
+
+a. 在同一张图上绘制精确现值和戈登近似值作为 $g$ 的函数。
+
+b. 在第二个子图中，绘制百分比近似误差
+
+$$
+\text{误差}(\%) = \frac{|\text{戈登} - \text{精确值}|}{\text{精确值}} \times 100
+$$
+
+并评论百分比误差是否随 $g$ 变化。
+```
+
+```{solution-start} geom_ex3
+:class: dropdown
+```
+
+```{code-cell} ipython3
+r_val = 0.05
+x_0 = 1
+g_vals = np.linspace(0, 0.045, 300)
+
+exact = infinite_lease(g_vals, r_val, x_0)
+gordon = x_0 / (r_val - g_vals)
+pct_error = np.abs(gordon - exact) / exact * 100
+pct_error_formula = 100 * r_val / (1 + r_val)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+axes[0].plot(g_vals, exact, label='精确 $p_0$')
+axes[0].plot(g_vals, gordon, '--', label='戈登近似')
+axes[0].set_xlabel('$g$')
+axes[0].set_ylabel('$p_0$')
+axes[0].set_title(f'无限期租赁现值（$r = {r_val}$）')
+axes[0].legend()
+
+axes[1].plot(g_vals, pct_error)
+axes[1].axhline(pct_error_formula, linestyle='--', color='red',
+                label=fr'$100r/(1+r) = {pct_error_formula:.2f}\%$')
+axes[1].set_xlabel('$g$')
+axes[1].set_ylabel('百分比误差（%）')
+axes[1].set_title('戈登公式近似误差')
+axes[1].legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+对于固定的 $r$，百分比误差不随 $g$ 变化而恒定，这是因为精确值为 $x_0(1+r)/(r-g)$，而戈登近似为 $x_0/(r-g)$。
+
+当 $r$ 较小时，近似变得准确，因为精确值与戈登公式相差一个因子 $1+r$。
+
+```{solution-end}
+```
+
+```{exercise}
+:label: geom_ex4
+
+`calculate_y` 函数模拟了凯恩斯动态模型。
+
+a. 对于 $i = 0.3$、$g = 0.3$、$y_{-1} = 0$ 和 $T = 60$，绘制每个
+    $b \in \{0.25,\, 0.50,\, 0.75,\, 0.90\}$ 对应的国民收入 $y_t$ 的路径，
+    并为每个 $b$ 用虚线水平线标出长期均衡 $y^* = (i + g)/(1 - b)$。
+
+b. 对于每个 $b$ 值，找出 $y_t$ 首次达到 $y^*$ 的 95% 的时期 $T^*$，
+    将 $T^*$ 相对于 $b$ 绘制出来，并评论收敛速度与凯恩斯乘数大小之间的关系。
+```
+
+```{solution-start} geom_ex4
+:class: dropdown
+```
+
+```{code-cell} ipython3
+i_0, g_0, y_init = 0.3, 0.3, 0
+bs = [0.25, 0.50, 0.75, 0.90]
+T = 60
+
+# 第 a 部分
+fig, ax = plt.subplots()
+for b in bs:
+    y = calculate_y(i_0, b, g_0, T, y_init)
+    y_star = (i_0 + g_0) / (1 - b)
+    ax.plot(np.arange(T + 1), y, label=f'$b = {b}$, $y^* = {y_star:.1f}$')
+    ax.axhline(y_star, linestyle='--', alpha=0.4)
+
+ax.set_xlabel('$t$')
+ax.set_ylabel('$y_t$')
+ax.set_title('不同 $b$ 值下的国民收入路径')
+ax.legend()
+plt.show()
+
+# 第 b 部分
+T_long = 1000
+T_star_vals = []
+for b in bs:
+    y = calculate_y(i_0, b, g_0, T_long, y_init)
+    y_star = (i_0 + g_0) / (1 - b)
+    idx = np.where(y >= 0.95 * y_star)[0]
+    T_star_vals.append(int(idx[0]) if len(idx) > 0 else T_long)
+
+fig, ax = plt.subplots()
+ax.bar([str(b) for b in bs], T_star_vals)
+ax.set_xlabel('边际消费倾向 $b$')
+ax.set_ylabel('达到 $y^*$ 的 95% 所需的期数')
+ax.set_title('向长期均衡收敛的速度')
+plt.show()
+
+print(f"{'b':>6} | {'乘数 1/(1-b)':>20} | {'T*（期数）':>14}")
+print('-' * 46)
+for b, T_star in zip(bs, T_star_vals):
+    print(f"{b:>6.2f} | {1/(1-b):>20.2f} | {T_star:>14}")
+```
+
+随着 $b$ 趋近于 1，凯恩斯乘数 $1/(1-b)$ 变得很大，收敛速度明显减慢。
+
+这反映了几何级数 $\sum_{t=0}^\infty b^t$ 在 $b$ 接近 1 时收敛得更慢，因为每一轮额外支出增加的项 $b^t$ 只是逐渐缩小。
+
+```{solution-end}
+```

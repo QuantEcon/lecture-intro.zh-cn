@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -207,11 +207,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">26.2. 环境</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">26.3. 资本供给</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">26.3.1. 消费者问题</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">26.3.2. 示例：对数偏好</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">26.3.2. 特殊情形：对数偏好</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">26.3.3. 储蓄与投资的关系</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">26.4. 资本需求分析</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">26.4. 资本需求</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">26.4.1. 企业问题</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">26.4.2. 需求</a></li>
 </ul>
@@ -288,7 +288,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -299,11 +299,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -327,18 +327,21 @@
 <li><p>长期增长</p></li>
 </ul>
 <p>以及许多其他主题。</p>
-<p>世代交叠模型的第一个严谨版本由保罗·萨缪尔森(Paul Samuelson)在1958年提出<span id="id2">[<a class="reference internal" href="zreferences.html#id23" title="Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. Journal of political economy, 66(6):467–482, 1958.">Samuelson, 1958</a>]</span>，此后成为经济学中研究代际问题的基础框架。</p>
-<p>在这一讲中，我们将深入探讨世代交叠模型的一个简单版本，帮助大家理解其核心机制和应用。</p>
+<p>世代交叠模型的第一个严谨版本由保罗·萨缪尔森(Paul Samuelson)提出<span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id23" title="Paul A Samuelson. An exact consumption-loan model of interest with or without the social contrivance of money. Journal of political economy, 66(6):467–482, 1958.">Samuelson, 1958</a>]</span>。</p>
+<p>我们的目标是深入理解世代交叠模型的一个简单版本。</p>
 <section id="id3">
 <h2><span class="section-number">26.1. </span>概述<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>OLG模型的动态与<a class="reference external" href="https://intro.quantecon.org/solow.html">索洛-斯旺增长模型</a>非常相似。</p>
-<p>与索洛-斯旺模型相比，OLG模型的一个关键区别是储蓄决策是内生的。</p>
-<p>这一特征为什么重要呢？考虑我们想要分析一项新税收政策对经济增长的影响。</p>
-<p>在索洛-斯旺模型中，我们可以引入税收并观察稳态如何变化。但这种方法忽略了一个重要现实：税收政策会改变家庭的储蓄和消费行为。</p>
-<p>当家庭面对新的税率时，他们会调整自己的经济决策，这些调整可能会显著影响模型的预测结果。</p>
-<p>因此，为了获得更准确的预测，我们需要明确建模个人的决策过程。在OLG模型中，家庭会根据他们所处的经济环境（包括技术水平、税收政策和市场价格等）来优化他们的储蓄和消费选择。</p>
+<p>与此同时，OLG模型增加了一个重要的新特征：储蓄多少的选择是内生的。</p>
+<p>这一特征为什么重要呢？举例来说，假设我们想要预测一项新税收政策对长期增长的影响。</p>
+<p>我们可以在索洛-斯旺模型中引入税收，然后观察稳态的变化。</p>
+<p>但这种方法忽略了一个事实：当家庭面对新的税率时，他们会改变自己的储蓄和消费行为。</p>
+<p>这样的变化可能会显著改变模型的预测结果。</p>
+<p>因此，如果我们关心预测的准确性，就应该对经济主体的决策问题进行建模。</p>
+<p>具体而言，模型中的家庭应该根据他们所面临的环境（技术、税收、
+价格等）来决定储蓄多少、消费多少。</p>
 <p>OLG模型正是为解决这类问题而设计的。</p>
-<p>在接下来的内容中，我们将探讨OLG模型的基本版本，详细说明家庭如何做出决策，并分析这些决策如何影响经济的长期增长。</p>
+<p>我们将介绍一个简单版本的OLG模型，阐明家庭的决策问题，并研究其对长期增长的影响。</p>
 <p>首先，让我们导入需要的库。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -358,7 +361,7 @@
 </section>
 <section id="id4">
 <h2><span class="section-number">26.2. </span>环境<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>我们假设时间是离散的，因此 <span class="math notranslate nohighlight">\(t=0, 1, \ldots\)</span>。</p>
+<p>我们假设时间是离散的，因此 <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots\)</span>。</p>
 <p>在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体存活两个时期，<span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(t + 1\)</span>。</p>
 <p>我们称一个个体</p>
 <ul class="simple">
@@ -368,11 +371,11 @@
 <p>年轻人工作，提供劳动并赚取劳动收入。</p>
 <p>他们还决定存多少钱。</p>
 <p>老年人不工作，所以所有收入都是金融收入。</p>
-<p>他们的金融收入来自工资收入的储蓄利息，
-这些储蓄随后与 <span class="math notranslate nohighlight">\(t+1\)</span> 时期新的年轻一代的劳动相结合。</p>
-<p>在均衡状态下，工资和利率由市场供求关系决定。</p>
+<p>他们此前工资的储蓄转化为资本，
+这些资本会在与 <span class="math notranslate nohighlight">\(t+1\)</span> 时期新的年轻一代的劳动相结合时获得利息收入。</p>
+<p>工资率和利率由市场供求关系在均衡中决定。</p>
 <p>为了使代数计算稍微简单一些，我们假设人口规模恒定。</p>
-<p>我们将每个时期的恒定人口规模标准化为1。</p>
+<p>我们将人口规模标准化为1。</p>
 <p>我们还假设每个个体提供一个”单位”的劳动时间，因此总劳动供给为1。</p>
 </section>
 <section id="id5">
@@ -386,12 +389,12 @@
 <p>其中</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(u: \mathbb R_+ \to \mathbb R\)</span> 是”瞬时”效用函数（或”流”效用函数）</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 是时间偏好的贴现因子</p></li>
-<li><p><span class="math notranslate nohighlight">\(c_t\)</span> 表示 <span class="math notranslate nohighlight">\(t\)</span> 期出生的个体在年轻时期（即 <span class="math notranslate nohighlight">\(t\)</span> 期）的消费</p></li>
-<li><p><span class="math notranslate nohighlight">\(c_{t+1}\)</span> 表示该个体在老年时期（即 <span class="math notranslate nohighlight">\(t+1\)</span> 期）的消费</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta \in (0, 1)\)</span> 是贴现因子</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_t\)</span> 表示在时间 <span class="math notranslate nohighlight">\(t\)</span> 出生的个体在时间 <span class="math notranslate nohighlight">\(t\)</span> 的消费</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{t+1}\)</span> 表示同一个体在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 的消费</p></li>
 </ul>
 <p>我们假设效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的。</p>
-<p>个体的储蓄决策来自于解决以下效用最大化问题</p>
+<p>个体的储蓄决策来自于解决以下最优化问题</p>
 <div class="math notranslate nohighlight" id="equation-max-sav-olg">
 <span class="eqno">(26.2)<a class="headerlink" href="#equation-max-sav-olg" title="Link to this equation">#</a></span>\[    \max_{c_t, c_{t+1}} 
     \,  \left \{ u(c_t) + \beta u(c_{t+1}) \right \} \]</div>
@@ -406,13 +409,14 @@
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(s_t\)</span> 是出生于时间 <span class="math notranslate nohighlight">\(t\)</span> 的个人的储蓄</p></li>
 <li><p><span class="math notranslate nohighlight">\(w_t\)</span> 是时间 <span class="math notranslate nohighlight">\(t\)</span> 的工资率</p></li>
-<li><p><span class="math notranslate nohighlight">\(R_{t+1}\)</span> 是在时间 <span class="math notranslate nohighlight">\(t\)</span> 投资的储蓄在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 支付的总利率</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{t+1}\)</span> 是时间 <span class="math notranslate nohighlight">\(t\)</span> 投资的储蓄在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 支付的总利率（即 <span class="math notranslate nohighlight">\(R_{t+1} = 1 + r_{t+1}\)</span>，其中 <span class="math notranslate nohighlight">\(r_{t+1}\)</span> 是净利率）</p></li>
 </ul>
-<p>由于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的，消费者会完全用尽预算约束，使两个约束等式成立。</p>
-<p>将第一个约束改写为 <span class="math notranslate nohighlight">\(s_t = w_t - c_t\)</span>，并代入第二个约束，我们得到
+<p>由于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 是严格递增的，在最大化时这两个约束都会以等式成立。</p>
+<p>利用这一事实，将第一个约束中的 <span class="math notranslate nohighlight">\(s_t\)</span> 代入第二个约束，我们得到
 <span class="math notranslate nohighlight">\(c_{t+1} = R_{t+1}(w_t - c_t)\)</span>。</p>
-<p>为了求解最大化问题，我们将 <span class="math notranslate nohighlight">\(c_{t+1} = R_{t+1}(w_t - c_t)\)</span> 代入目标函数，然后对 <span class="math notranslate nohighlight">\(c_t\)</span> 求导并设为零。</p>
-<p>这给出了OLG模型的<strong>欧拉方程</strong>，它刻画了消费者在不同时期之间如何优化分配消费：</p>
+<p>最大化的一阶条件可以通过将 <span class="math notranslate nohighlight">\(c_{t+1}\)</span> 代入目标函数，
+对 <span class="math notranslate nohighlight">\(c_t\)</span> 求导并令其等于零得到。</p>
+<p>这给出了OLG模型的<strong>欧拉方程</strong>，它刻画了最优的跨期消费动态：</p>
 <div class="math notranslate nohighlight" id="equation-euler-1-olg">
 <span class="eqno">(26.3)<a class="headerlink" href="#equation-euler-1-olg" title="Link to this equation">#</a></span>\[    u'(c_t) = \beta R_{t+1}  u'( R_{t+1} (w_t - c_t))\]</div>
 <p>从第一个约束我们得到 <span class="math notranslate nohighlight">\(c_t = w_t - s_t\)</span>，所以欧拉方程
@@ -424,36 +428,38 @@
 <p>我们将其表示为</p>
 <div class="math notranslate nohighlight" id="equation-saving-1-olg">
 <span class="eqno">(26.5)<a class="headerlink" href="#equation-saving-1-olg" title="Link to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1})\]</div>
-<p><span class="math notranslate nohighlight">\(s\)</span> 函数的具体形式将取决于效用函数 <span class="math notranslate nohighlight">\(u\)</span> 的选择。</p>
+<p>函数 <span class="math notranslate nohighlight">\(s\)</span> 的具体形式将取决于流效用函数 <span class="math notranslate nohighlight">\(u\)</span> 的选择。</p>
+<p>更高的工资会增加可用于储蓄的资源，而利率则影响今天消费与为明天储蓄之间的权衡。</p>
 <p><span class="math notranslate nohighlight">\(w_t\)</span> 和 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 共同代表经济中的<em>价格</em>（劳动力价格和资本租赁率）。</p>
 <p>因此，<a class="reference internal" href="#equation-saving-1-olg">(26.5)</a> 表示给定价格下的储蓄量。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">26.3.2. </span>示例：对数偏好<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">26.3.2. </span>特殊情形：对数偏好<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>在特殊情况 <span class="math notranslate nohighlight">\(u(c) = \log c\)</span> 下，欧拉方程简化为 <span class="math notranslate nohighlight">\(s_t= \beta (w_t - s_t)\)</span>。</p>
 <p>求解储蓄，我们得到</p>
 <div class="math notranslate nohighlight" id="equation-saving-log-2-olg">
 <span class="eqno">(26.6)<a class="headerlink" href="#equation-saving-log-2-olg" title="Link to this equation">#</a></span>\[    s_t = s(w_t, R_{t+1}) = \frac{\beta}{1+\beta} w_t\]</div>
-<p>在这种特殊情况下，储蓄完全不受利率影响。</p>
+<p>在这种特殊情况下，储蓄不依赖于利率。</p>
 </section>
 <section id="id8">
 <h3><span class="section-number">26.3.3. </span>储蓄与投资的关系<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
-<p>由于我们将人口规模标准化为1，<span class="math notranslate nohighlight">\(s_t\)</span>不仅代表个人储蓄，也代表了<span class="math notranslate nohighlight">\(t\)</span>时期整个经济的总储蓄。</p>
-<p>在我们考虑的封闭经济模型中，不存在国际资本流动，因此国内净储蓄必然等于总投资，这构成了企业的资本供给。</p>
-<p>接下来，我们将转向分析资本需求。</p>
-<p>当我们将资本供给与需求相匹配时，就能确定OLG经济中的均衡状态。</p>
+<p>由于人口规模标准化为1，<span class="math notranslate nohighlight">\(s_t\)</span>也是<span class="math notranslate nohighlight">\(t\)</span>时刻整个经济的总储蓄。</p>
+<p>在我们考虑的封闭经济中，不存在外国投资，因此净储蓄等于总投资，这可以理解为对企业的资本供给。</p>
+<p>在下一节，我们将研究资本需求。</p>
+<p>使供给与需求相等，将使我们能够确定OLG经济中的均衡状态。</p>
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">26.4. </span>资本需求分析<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<p>下面我们先详细描述企业的最优化问题，然后推导出一个方程，用于表示在给定价格条件下的资本需求。</p>
+<h2><span class="section-number">26.4. </span>资本需求<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>下面我们先描述企业的问题，然后写出一个方程，用于描述给定价格条件下的资本需求。</p>
 <section id="id10">
 <h3><span class="section-number">26.4.1. </span>企业问题<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>对于每个整数 <span class="math notranslate nohighlight">\(t \geq 0\)</span>，t期的产出 <span class="math notranslate nohighlight">\(y_t\)</span> 由**<a class="reference external" href="https://baike.baidu.com/item/%E6%9F%AF%E5%B8%83-%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%E7%94%9F%E4%BA%A7%E5%87%BD%E6%95%B0/8250187">柯布-道格拉斯生产函数</a>**给出</p>
 <div class="math notranslate nohighlight" id="equation-cobb-douglas">
 <span class="eqno">(26.7)<a class="headerlink" href="#equation-cobb-douglas" title="Link to this equation">#</a></span>\[    y_t = k_t^{\alpha} \ell_t^{1-\alpha}\]</div>
-<p>在这里，<span class="math notranslate nohighlight">\(k_t\)</span> 表示资本投入，<span class="math notranslate nohighlight">\(\ell_t\)</span> 表示劳动投入，而 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个介于0和1之间的参数，通常被解释为”资本的产出弹性”。
-企业面临的利润最大化问题是</p>
+<p>在这里，<span class="math notranslate nohighlight">\(k_t\)</span> 表示资本，<span class="math notranslate nohighlight">\(\ell_t\)</span> 表示劳动，而 <span class="math notranslate nohighlight">\(\alpha\)</span> 是一个参数
+（有时被称为”资本的产出弹性”）。</p>
+<p>企业面临的利润最大化问题是</p>
 <div class="math notranslate nohighlight" id="equation-opt-profit-olg">
 <span class="eqno">(26.8)<a class="headerlink" href="#equation-opt-profit-olg" title="Link to this equation">#</a></span>\[    \max_{k_t, \ell_t} \{ k^{\alpha}_t \ell_t^{1-\alpha} - R_t k_t -w_t \ell_t  \}\]</div>
 <p>一阶条件是通过对资本和劳动分别求导，并令导数等于零得到的：</p>
@@ -461,6 +467,7 @@
 \[    (1-\alpha)(k_t / \ell_t)^{\alpha} = w_t
     \quad \text{and} \quad
     \alpha (k_t / \ell_t)^{\alpha - 1} = R_t\]</div>
+<p>这些条件将工资 <span class="math notranslate nohighlight">\(w_t\)</span> 等同于劳动的边际产出，将利率 <span class="math notranslate nohighlight">\(R_t\)</span> 等同于资本的边际产出。</p>
 </section>
 <section id="id11">
 <h3><span class="section-number">26.4.2. </span>需求<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
@@ -475,7 +482,9 @@
 <div class="math notranslate nohighlight" id="equation-aggregate-demand-capital-olg">
 <span class="eqno">(26.11)<a class="headerlink" href="#equation-aggregate-demand-capital-olg" title="Link to this equation">#</a></span>\[    k^d (R_{t+1}) 
     := \left (\frac{\alpha}{R_{t+1}} \right )^{1/(1-\alpha)}\]</div>
-<p>在Python中</p>
+<p>这里 <span class="math notranslate nohighlight">\(k^d(R_{t+1})\)</span> 是当总利率为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 时，企业希望使用的资本量。</p>
+<p>由于资本的边际产出是递减的，资本需求是其成本 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 的递减函数。</p>
+<p>在Python中这可以表示为</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
@@ -493,8 +502,6 @@
 </div>
 </div>
 </div>
-<p>下图绘制了资本供给曲线（如<a class="reference internal" href="#equation-saving-log-2-olg">(26.6)</a>所示）以及资本需求曲线（如<a class="reference internal" href="#equation-aggregate-demand-capital-olg">(26.11)</a>所示），这两条曲线都是利率<span class="math notranslate nohighlight">\(R_{t+1}\)</span>的函数。
-（对于对数效用这一特殊情况，供给不依赖于利率，因此我们得到一个常数函数。）</p>
 </section>
 </section>
 <section id="id12">
@@ -541,7 +548,7 @@
 <p>也就是说，</p>
 <div class="math notranslate nohighlight" id="equation-equilibrium-quantity">
 <span class="eqno">(26.15)<a class="headerlink" href="#equation-equilibrium-quantity" title="Link to this equation">#</a></span>\[    k_{t+1} = s(w_t, R_{t+1}) = \frac{\beta }{1+\beta} w_t\]</div>
-<p>我们重新绘制上面的图，但这次加入均衡数量和价格。</p>
+<p>下图绘制了资本供给和需求作为利率 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 的函数，同时标出了均衡数量和均衡价格。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -568,7 +575,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png"><img alt="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" src="_images/fcd63ab509c745d630b77224a5b881f88d419979e35bab9000f768b7c3062875.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/fdcddef84c2dd0e85602a7279f7c00e356feca42fb44bfaa66be2bc43dfec909.png"><img alt="_images/fdcddef84c2dd0e85602a7279f7c00e356feca42fb44bfaa66be2bc43dfec909.png" src="_images/fdcddef84c2dd0e85602a7279f7c00e356feca42fb44bfaa66be2bc43dfec909.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -576,13 +587,13 @@
 </section>
 <section id="id15">
 <h2><span class="section-number">26.6. </span>动态分析<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
-<p>在本节中，我们将研究模型的动态行为。</p>
-<p>我们主要关注对数效用的情况，此时均衡由方程<a class="reference internal" href="#equation-equilibrium-quantity">(26.15)</a>确定。</p>
+<p>在本节中，我们将讨论动态问题。</p>
+<p>目前我们将专注于对数效用的情况，此时均衡由<a class="reference internal" href="#equation-equilibrium-quantity">(26.15)</a>确定。</p>
 <section id="id16">
 <h3><span class="section-number">26.6.1. </span>资本积累过程<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
-<p>前面我们已经分析了如何根据当期工资<span class="math notranslate nohighlight">\(w_t\)</span>确定下一期的均衡资本<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
-<p>现在，我们可以利用<a class="reference internal" href="#equation-wage-one">(26.9)</a>中的工资决定方程，将资本积累表示为一个关于当期资本<span class="math notranslate nohighlight">\(k_t\)</span>的函数。</p>
-<p>具体来说，由于工资由<span class="math notranslate nohighlight">\(w_t = (1-\alpha)k_t^\alpha\)</span>给出，我们可以得到资本的演化方程</p>
+<p>前面我们已经展示了如何根据<span class="math notranslate nohighlight">\(w_t\)</span>得到均衡的<span class="math notranslate nohighlight">\(k_{t+1}\)</span>。</p>
+<p>根据<a class="reference internal" href="#equation-wage-one">(26.9)</a>，我们可以将其转化为<span class="math notranslate nohighlight">\(k_{t+1}\)</span>作为<span class="math notranslate nohighlight">\(k_t\)</span>的函数。</p>
+<p>具体来说，由于<span class="math notranslate nohighlight">\(w_t = (1-\alpha)k_t^\alpha\)</span>，我们有</p>
 <div class="math notranslate nohighlight" id="equation-law-of-motion-capital">
 <span class="eqno">(26.16)<a class="headerlink" href="#equation-law-of-motion-capital" title="Link to this equation">#</a></span>\[    k_{t+1} = \frac{\beta}{1+\beta} (1-\alpha)(k_t)^{\alpha}\]</div>
 <p>如果我们对这个方程进行迭代，我们将得到一个资本存量序列。</p>
@@ -611,8 +622,6 @@
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">k_grid_next</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">k_grid_next</span><span class="p">)</span>
-
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid_next</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$g$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$45^{\circ}$&#39;</span><span class="p">)</span>
 
@@ -626,7 +635,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png"><img alt="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" src="_images/f6c2c502e59e8e1f0dd4b45281428d767754070cb73b14ddedd179f8bb9842aa.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/7bb1b5f7714a447368c54efa7e5926d2dc94b6b53db99b8cf4e29947f98f315f.png"><img alt="_images/7bb1b5f7714a447368c54efa7e5926d2dc94b6b53db99b8cf4e29947f98f315f.png" src="_images/7bb1b5f7714a447368c54efa7e5926d2dc94b6b53db99b8cf4e29947f98f315f.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -670,7 +683,7 @@
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_series</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;资本序列&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">k_star</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k^*$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">ts_length</span><span class="p">,</span> <span class="n">k_star</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$k^* = </span><span class="si">{</span><span class="n">k_star</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;资本&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
@@ -680,7 +693,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png"><img alt="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" src="_images/9316b4d69e3050dbd566c4ff67af16c174e931ed6e838f922e9c6b3fd718b1c8.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f509a37f20126f262b40ef4c48432c07adce7ba485222b70d103b4d750e57653.png"><img alt="_images/f509a37f20126f262b40ef4c48432c07adce7ba485222b70d103b4d750e57653.png" src="_images/f509a37f20126f262b40ef4c48432c07adce7ba485222b70d103b4d750e57653.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -702,7 +715,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png"><img alt="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" src="_images/495fdd1bd3d133cef2e373e4184298a8aba0a6d9e5628626ba08e6a0a974548e.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/4ab611b3c93e64d1769707106c9d889eb061d571ae224099c1b0e66e03f39359.png"><img alt="_images/4ab611b3c93e64d1769707106c9d889eb061d571ae224099c1b0e66e03f39359.png" src="_images/4ab611b3c93e64d1769707106c9d889eb061d571ae224099c1b0e66e03f39359.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -711,12 +724,17 @@
 </section>
 <section id="crra">
 <h2><span class="section-number">26.7. </span>CRRA偏好<a class="headerlink" href="#crra" title="Link to this heading">#</a></h2>
-<p>到目前为止，我们一直使用对数效用函数来分析模型。现在让我们扩展到更一般的情况。</p>
-<p>对数效用实际上是常相对风险厌恶(CRRA)效用函数的一个特例，当风险厌恶参数<span class="math notranslate nohighlight">\(\gamma\)</span>趋近于1时得到。</p>
-<p>在本节中，我们假设<span class="math notranslate nohighlight">\(u(c) = \frac{ c^{1-\gamma}-1}{1-\gamma}\)</span>，其中<span class="math notranslate nohighlight">\(\gamma &gt;0, \gamma\neq 1\)</span>。</p>
-<p>这个函数被称为CRRA效用函数。</p>
-<p>在这一节中，我们将采用这种更一般的效用函数，同时保持模型的其他方面不变。</p>
-<p>首先，让我们在Python中实现CRRA效用函数，并创建一个包含所有模型参数的数据结构。</p>
+<p>在本节中，我们将对数效用推广为CRRA（常相对风险厌恶）效用函数</p>
+<div class="math notranslate nohighlight">
+\[
+u(c) = \frac{ c^{1-\gamma}-1}{1-\gamma}
+\]</div>
+<p>其中<span class="math notranslate nohighlight">\(\gamma &gt;0, \gamma\neq 1\)</span>。</p>
+<p>CRRA效用在宏观经济学中很受欢迎，因为参数<span class="math notranslate nohighlight">\(\gamma\)</span>控制着相对风险厌恶系数。</p>
+<p>它还控制着跨期替代弹性，后者决定了个体在利率变化时愿意在不同时期之间调整消费的程度。</p>
+<p>上面研究的对数效用情形是一个特例，当<span class="math notranslate nohighlight">\(\gamma \to 1\)</span>时得到。</p>
+<p>在其他方面，模型是相同的。</p>
+<p>下面我们在Python中定义效用函数，并构造一个<code class="docutils literal notranslate"><span class="pre">namedtuple</span></code>来存储参数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crra</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">γ</span><span class="p">):</span>
@@ -737,7 +755,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capital_demand</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">α</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">))</span> 
+    <span class="k">return</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="o">/</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">α</span><span class="p">))</span> 
 </pre></div>
 </div>
 </div>
@@ -784,7 +802,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png"><img alt="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" src="_images/00dab6cdec86120c56f87aeee2d5a884af2a03231bb179ea2d2919abc1bfba0f.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/7120a31363ee590e10e8887685fc601abeea418bae78020152d1de07daa133ab.png"><img alt="_images/7120a31363ee590e10e8887685fc601abeea418bae78020152d1de07daa133ab.png" src="_images/7120a31363ee590e10e8887685fc601abeea418bae78020152d1de07daa133ab.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -868,8 +886,6 @@
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">k_grid_next</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">k_grid_next</span><span class="p">)</span>
-
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid_next</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$g$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$45^{\circ}$&#39;</span><span class="p">)</span>
 
@@ -883,7 +899,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png"><img alt="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" src="_images/15693f7edb21d30017894451b377db3d9ae5d663fcaeca0e1e5bc0b0ecd8881e.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/ae34f62d85b2595585262a943eecfc2285367f1265492192bc8df30ebd18415b.png"><img alt="_images/ae34f62d85b2595585262a943eecfc2285367f1265492192bc8df30ebd18415b.png" src="_images/ae34f62d85b2595585262a943eecfc2285367f1265492192bc8df30ebd18415b.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -916,7 +932,7 @@
     \left [ 
         1 + \beta^{-1/\gamma} (\alpha (k^*)^{\alpha-1})^{(\gamma-1)/\gamma} 
     \right ] - (1-\alpha)(k^*)^{\alpha}\]</div>
-<p>现在让我们用Python实现这个函数：</p>
+<p>下面是Python代码实现</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">k_star</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -958,7 +974,7 @@
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#olg_ex3"> Exercise 26.3</a></p>
 <section id="solution-content">
-<p>让我们定义常数和三个不同的初始条件。</p>
+<p>让我们定义常数和三个不同的初始条件</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">10</span>
@@ -967,7 +983,6 @@
 </div>
 </div>
 </div>
-<p>现在我们定义一个函数来模拟时间序列。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0_values</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
@@ -976,7 +991,7 @@
 
     <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ts_length</span><span class="p">)</span>
 
-    <span class="c1"># 模拟并且绘制时间序列</span>
+    <span class="c1"># 模拟并绘制时间序列</span>
     <span class="k">for</span> <span class="n">k_init</span> <span class="ow">in</span> <span class="n">k0_values</span><span class="p">:</span>
         <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_init</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">):</span>
@@ -995,7 +1010,6 @@
 </div>
 </div>
 </div>
-<p>现在我们可以模拟时间序列并绘制结果。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulate_ts</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k0</span><span class="p">,</span> <span class="n">ts_length</span><span class="p">)</span>
@@ -1003,7 +1017,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png"><img alt="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" src="_images/f91d14df8ba68179557a9661c40a524ad040b367b5e620637ea7e30036ad52a3.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/846e58d2ddb4d2b9a4bbf06a52dd0ef1fc9e1f594f54f2528344926029460456.png"><img alt="_images/846e58d2ddb4d2b9a4bbf06a52dd0ef1fc9e1f594f54f2528344926029460456.png" src="_images/846e58d2ddb4d2b9a4bbf06a52dd0ef1fc9e1f594f54f2528344926029460456.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1191,7 +1209,7 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

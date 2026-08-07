@@ -9,6 +9,18 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 就业的湖泊模型
+  headings:
+    Outline: 大纲
+    The Lake model: 湖泊模型
+    Dynamics: 动态变化
+    Dynamics::Visualising the long-run outcomes: 可视化长期结果
+    Dynamics::The application of Perron-Frobenius theorem: 佩龙-弗罗贝尼乌斯定理的应用
+    Dynamics::The application of Perron-Frobenius theorem::Dominant eigenvector: 主导特征向量
+    Dynamics::The application of Perron-Frobenius theorem::Negative growth rate: 负增长率
+    Dynamics::Properties: 性质
+    Exercise: 练习
 ---
 
 # 就业的湖泊模型
@@ -93,9 +105,9 @@ $$
 
 因此，该系统的长期结果可能取决于初始条件 $x_0$ 和矩阵 $A$。
 
-我们关心 $u_t$ 和 $e_t$ 如何随时间如何演变。
+我们关心 $u_t$ 和 $e_t$ 如何随时间演变。
 
-失业率和就业率从长期来看会如何变化？
+我们应该预期长期失业率和就业率会是多少？
 
 长期结果是否取决于初始值 $(u_0, e_o)$？
 
@@ -130,8 +142,8 @@ class LakeModel:
                            [        (1-d)*λ,   (1-α)*(1-d)]])
 
 
-        self.ū = (1 + g - (1 - d) * (1 - α)) / (1 + g - (1 - d) * (1 - α) + (1 - d) * λ)
-        self.ē = 1 - self.ū
+        self.u_bar = (1 + g - (1 - d) * (1 - α)) / (1 + g - (1 - d) * (1 - α) + (1 - d) * λ)
+        self.e_bar = 1 - self.u_bar
 
 
     def simulate_path(self, x0, T=1000):
@@ -181,12 +193,10 @@ axes[1].set_title('就业')
 axes[2].plot(x_path.sum(0), lw=2)
 axes[2].set_title('劳动力')
 
-for ax in axes:
-    ax.grid()
-
 plt.tight_layout()
 plt.show()
 ```
+
 不出所料，我们观察到劳动力$n_t$以恒定的速率增长。
 
 这与只有一个流入源（新进入者池）流向失业和就业池的事实相吻合。
@@ -216,7 +226,7 @@ $$
 从直觉上讲，如果我们将失业池和就业池视为一个封闭系统，其增长应该与劳动力相似。
 
 接下来我们要问，$e_t$ 和 $u_t$ 的长期增长率
-是否也像劳动力一样主要由 $1+b-d$ 决定？
+是否也像劳动力一样主要由 $1+b-d$ 决定。
 
 如果我们应用{ref}`佩龙-弗罗贝尼乌斯定理<perron-frobe>`，答案将更加清晰。
 
@@ -224,13 +234,13 @@ $$
 
 首先，在现实世界中，我们遇到的大多数矩阵都是非负矩阵。
 
-其次，许多重要模型只是线性迭代模型，它们从初始条件$x_0$开始，然后通过规则$x_{t+1} = Ax_t$或简写为$x_t = A^tx_0$递归演化。
+其次，许多重要模型只是线性迭代模型，它们从初始条件 $x_0$ 开始，然后通过规则 $x_{t+1} = Ax_t$ 或简写为 $x_t = A^tx_0$ 递归演化。
 
-这个定理有助于描述主特征值$r(A)$，它决定了这个迭代过程的行为。
+这个定理有助于描述主特征值 $r(A)$，它决定了这个迭代过程的行为。
 
 #### 主导特征向量
 
-现在我们学习如何运用佩龙-弗罗贝尼乌斯定理来帮助我们分析湖泊模型。
+现在我们通过展示佩龙-弗罗贝尼乌斯定理如何帮助我们分析湖泊模型，来说明该定理的作用。
 
 由于 $A$ 是非负且不可约的矩阵，佩龙-弗罗贝尼乌斯定理意味着：
 
@@ -241,7 +251,7 @@ $$
 $$
 
 - 任何其他特征值 $\lambda$ 的绝对值都严格小于 $r(A)$：$|\lambda|< r(A)$，
-- 存在唯一且处处正的右特征向量 $\phi$（列向量）和左特征向量 $\psi$（行向量）：
+- 存在唯一且处处为正的右特征向量 $\phi$（列向量）和左特征向量 $\psi$（行向量）：
 
 $$
     A \phi = r(A) \phi, \quad  \psi A = r(A) \psi
@@ -265,7 +275,7 @@ $$
 \min_j \text{colsum}_j (A) \leq r(A) \leq \max_j \text{colsum}_j (A)
 ```
 
-注意，对于 $j=1,2$，有$\text{colsum}_j(A) = 1 + b - d$，且根据{eq}`PF_bounds`，我们可以得出主特征值为 $r(A) = 1 + b - d$。
+注意，对于 $j=1,2$，有 $\text{colsum}_j(A) = 1 + b - d$，且根据{eq}`PF_bounds`，我们可以得出主特征值为 $r(A) = 1 + b - d$。
 
 令 $g = b - d$ 表示总劳动力的整体增长率，因此 $r(A) = 1 + g$。
 
@@ -289,6 +299,7 @@ $$
 def plot_time_paths(lm, x0=None, T=1000, ax=None):
         """
         绘制模拟的时间序列图。
+
         参数
         ----------
         lm : 类
@@ -304,15 +315,15 @@ def plot_time_paths(lm, x0=None, T=1000, ax=None):
         if x0 is None:
             x0 = np.array([[5.0, 0.1]])
 
-        ū, ē = lm.ū, lm.ē
+        u_bar, e_bar = lm.u_bar, lm.e_bar
 
         x0 = np.atleast_2d(x0)
 
         if ax is None:
             fig, ax = plt.subplots(figsize=(10, 8))
-            # 绘制线$D$
+            # 绘制线 D
             s = 10
-            ax.plot([0, s * ū], [0, s * ē], "k--", lw=1, label='设置$D$')
+            ax.plot([0, s * u_bar], [0, s * e_bar], "k--", lw=1, label='集合 $D$')
 
         # 设置通过原点的坐标轴
         for spine in ["left", "bottom"]:
@@ -326,6 +337,9 @@ def plot_time_paths(lm, x0=None, T=1000, ax=None):
         ax.set_ylabel("就业人群")
         ax.set_xticks((0, 6))
         ax.set_yticks((0, 6))
+
+
+
 
         # 绘制时间序列
         for x in x0:
@@ -342,9 +356,9 @@ def plot_time_paths(lm, x0=None, T=1000, ax=None):
                         textcoords="offset points",
                         arrowprops=dict(arrowstyle = "->"))
 
-        ax.plot([ū], [ē], "ko", ms=4, alpha=0.6)
+        ax.plot([u_bar], [e_bar], "ko", ms=4, alpha=0.6)
         ax.annotate(r'$\bar{x}$',
-                xy=(ū, ē),
+                xy=(u_bar, e_bar),
                 xycoords="data",
                 xytext=(20, -20),
                 textcoords="offset points",
@@ -442,7 +456,7 @@ $$
 r_t = \hat{A}^t r_0 = (1+g)^{-t} A^t r_0 = r(A)^{-t} A^t r_0 \to \begin{bmatrix} \bar{u} & \bar{u} \\ \bar{e} & \bar{e} \end{bmatrix} r_0 = \begin{bmatrix} \bar{u} \\  \bar{e} \end{bmatrix}. 
 $$
 
-我们用下面的代码来说明
+下图对此进行了说明。
 
 ```{code-cell} ipython3
 lm = LakeModel()
@@ -460,9 +474,9 @@ rate_path = x_path / x_path.sum(0)
 
 fig, axes = plt.subplots(2, 1, figsize=(10, 8))
 
-# 绘制稳态 ū 和 ē
-axes[0].hlines(lm.ū, 0, T, 'r', '--', lw=2, label='ū')
-axes[1].hlines(lm.ē, 0, T, 'r', '--', lw=2, label='ē')
+# 绘制稳态比率
+axes[0].hlines(lm.u_bar, 0, T, 'r', '--', lw=2, label='u_bar')
+axes[1].hlines(lm.e_bar, 0, T, 'r', '--', lw=2, label='e_bar')
 
 titles = ['失业率', '就业率']
 locations = ['lower right', 'upper right']
@@ -471,7 +485,6 @@ locations = ['lower right', 'upper right']
 for i, ax in enumerate(axes):
     ax.plot(rate_path[i, :], lw=2, alpha=0.6)
     ax.set_title(titles[i])
-    ax.grid()
     ax.legend(loc=locations[i])
 
 
@@ -509,6 +522,7 @@ $$
 在这种情况下，$c_1 v_1$ 必须是一个归一化的特征向量，所以 $c_1 v_1 = \bar{x}$，然后 $r_t \to \bar{x}$。
 
 ## 练习
+
 ```{exercise-start} 失业率和就业率的演化
 :label: lake_model_ex1
 ```
@@ -533,21 +547,34 @@ $$
 
 假设 $\alpha$ 增加到 $0.04$。
 
-下图说明了直线 $D$ 顺时针向下移动，这表明随着分离率的增加，失业人口的比例上升。
+然后将其与 $\lambda$ 从 $0.1$ 下降到 $0.04$ 的情况进行比较。
+
+图表显示，两种变化都使直线 $D$ 顺时针向下旋转，这表明长期失业率上升。
 
 ```{code-cell} ipython3
-fig, ax = plt.subplots(figsize=(10, 8))
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+s = 10
 
-lm = LakeModel(α=0.01, λ=0.1, d=0.02, b=0.025)
-plot_time_paths(lm, ax=ax)
-s=10
-ax.plot([0, s * lm.ū], [0, s * lm.ē], "k--", lw=1, label='固定 $D$, α=0.01')
+def add_D_line(ax, lm, label, color):
+    ax.plot([0, s * lm.u_bar], [0, s * lm.e_bar],
+            color=color, linestyle='--', lw=2, label=label)
 
-lm = LakeModel(α=0.04, λ=0.1, d=0.02, b=0.025)
-plot_time_paths(lm, ax=ax)
-ax.plot([0, s * lm.ū], [0, s * lm.ē], "r--", lw=1, label='固定 $D$, α=0.04')
+lm_base = LakeModel(α=0.01, λ=0.1, d=0.02, b=0.025)
+lm_high_α = LakeModel(α=0.04, λ=0.1, d=0.02, b=0.025)
+plot_time_paths(lm_base, ax=axes[0])
+add_D_line(axes[0], lm_base, r'集合 $D$, $\alpha=0.01$', 'black')
+plot_time_paths(lm_high_α, ax=axes[0])
+add_D_line(axes[0], lm_high_α, r'集合 $D$, $\alpha=0.04$', 'red')
+axes[0].legend(loc='best')
 
-ax.legend(loc='best')
+lm_low_λ = LakeModel(α=0.01, λ=0.04, d=0.02, b=0.025)
+plot_time_paths(lm_base, ax=axes[1])
+add_D_line(axes[1], lm_base, r'集合 $D$, $\lambda=0.1$', 'black')
+plot_time_paths(lm_low_λ, ax=axes[1])
+add_D_line(axes[1], lm_low_λ, r'集合 $D$, $\lambda=0.04$', 'red')
+axes[1].legend(loc='best')
+
+plt.tight_layout()
 plt.show()
 ```
 

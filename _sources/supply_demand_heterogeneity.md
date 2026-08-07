@@ -9,6 +9,19 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 具有异质性的市场均衡
+  headings:
+    Overview: 概览
+    A simple example: 一个简单的例子
+    Pure exchange economy: 纯交换经济体
+    Pure exchange economy::Competitive equilibrium: 竞争均衡
+    Pure exchange economy::Designing some Python code: 编写一些 Python 代码
+    Implementation: 实践
+    Implementation::Two-person economy without production: 没有生产的两人经济体
+    Implementation::A dynamic economy: 动态经济体
+    Implementation::Risk economy with arrow securities: 具有阿罗证券的风险经济体
+    Deducing a representative consumer: 推导代表性消费者
 ---
 
 (supply_demand_heterogeneity)=
@@ -24,9 +37,9 @@ kernelspec:
 
 本讲座将通过引入消费者偏好和禀赋的差异性，来探讨这种异质性。
 
-我们将分析在这种更现实的设定下，竞争均衡是如何形成的。
+我们将分析在这种设定下的竞争均衡。
 
-我们还会展示如何构建一个"代表性消费者"来简化分析。
+我们还会展示如何构建一个"代表性消费者"。
 
 让我们先导入需要用到的包：
 
@@ -52,26 +65,26 @@ $$
 假设需求曲线为
 
 $$
-    c_i = (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} b_i -  \mu_i p )
+    c_i = (\Pi^\top \Pi )^{-1}(\Pi^\top b_i -  \mu_i p )
 $$
 
 那么竞争均衡还需要满足
 
 $$
 e_1 + e_2 =
-    (\Pi^{\top} \Pi)^{-1}(\Pi^{\top} (b_1 + b_2) - (\mu_1 + \mu_2) p )
+    (\Pi^\top \Pi)^{-1}(\Pi^\top (b_1 + b_2) - (\mu_1 + \mu_2) p )
 $$
 
 通过一两行线性代数计算，可以推出
 
 $$
-(\mu_1 + \mu_2) p = \Pi^{\top}(b_1+ b_2) - \Pi^{\top} \Pi (e_1 + e_2)
+(\mu_1 + \mu_2) p = \Pi^\top(b_1+ b_2) - \Pi^\top \Pi (e_1 + e_2)
 $$ (eq:old6)
 
 我们可以使 $\mu_1 + \mu_2 =1$ 来对价格进行归一化处理，然后解方程
 
 $$
-\mu_i(p,e) = \frac{p^{\top} (\Pi^{-1} b_i - e_i)}{p^{\top} (\Pi^{\top} \Pi)^{-1} p}
+\mu_i(p,e) = \frac{p^\top (\Pi^{-1} b_i - e_i)}{p^\top (\Pi^\top \Pi )^{-1} p}
 $$ (eq:old7)
 
 求得 $\mu_i, 其中 i = 1,2$。
@@ -83,10 +96,10 @@ $$ (eq:old7)
 证明，在正标量的归一化下，你在前面两消费者经济中计算出的同一竞争均衡价格向量，在只有一个代表性消费者的单一消费者经济中依旧适用，其中这个**代表性消费者**的效用函数为：
 
 $$
--.5 (\Pi c -b) ^2 (\Pi c -b )
+-.5 (\Pi c -b) ^\top (\Pi c -b )
 $$
 
-其初始禀赋向量为 $e$，其中
+其禀赋向量为 $e$，其中
 
 $$
 b = b_1 + b_2
@@ -120,13 +133,12 @@ $$
 - 接下来我们使用竞争均衡价格来计算每个消费者的财富边际效用：
 
 $$
-\mu_{i}=\frac{-W_{i}+p^{T}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
-$$
+\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}$$
 
 - 最后我们利用需求曲线来计算竞争均衡分配：
 
 $$
-c_{i}=\Pi^{-1}b_{i}-(\Pi^{T}\Pi)^{-1}\mu_{i}p
+c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p
 $$
 
 ### 编写一些 Python 代码
@@ -143,13 +155,11 @@ $$
    * 一个 $n \times 1$ 的向量 $e$
    * 一个默认值为 $0$ 的标量 "财富" $W$
 
-这个类会检查每个消费者的餍足点是否充分大于其禀赋的转换值(即 $b \gg \Pi e$)。如果不满足这个条件，类会抛出异常。
+这个类会包含一项检验，用以确保 $b \gg \Pi e$，如果违反了这一条件（在某个我们需要设定的阈值水平下），类会抛出异常。
 
-类的结构如下:
+ * **一个人** 由以下要素构成的一对组成：
 
-* **个体消费者** 由以下要素刻画:
-    * 偏好参数(包括替代矩阵 $\Pi$ 和餍足点 $b$)
-    * 初始禀赋 $e$ 和财富 $W$
+    * **偏好** 和 **禀赋**
 
  * **纯交换经济体** 包括：
 
@@ -334,7 +344,7 @@ es = [np.array([1, 1])]
 EE_DE = ExchangeEconomy(Π, bs, es)
 p, c_s, μ_s = EE_DE.competitive_equilibrium()
 
-print('竞争均衡的价格向量:', p)
+print('竞争均衡价格向量:', p)
 print('竞争均衡分配:', c_s)
 ```
 
@@ -367,7 +377,7 @@ print('竞争均衡分配:', c_s)
 
 考虑一个具有初始财富分配 $W_i$ 的多消费者经济体，其中初始财富满足 $\sum_i W_{i}=0$
 
-我们假设初始财富可以重新分配。
+我们允许初始财富的重新分配。
 
 我们有以下对象
 
@@ -375,13 +385,13 @@ print('竞争均衡分配:', c_s)
 - 需求曲线：
   
 $$ 
-c_{i}=\Pi^{-1}b_{i}-(\Pi^T\Pi)^{-1}\mu_{i}p 
+c_{i}=\Pi^{-1}b_{i}-(\Pi^{\top}\Pi)^{-1}\mu_{i}p 
 $$
 
 - 财富的边际效用：
   
 $$ 
-\mu_{i}=\frac{-W_{i}+p^T\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^T(\Pi^T\Pi)^{-1}p}
+\mu_{i}=\frac{-W_{i}+p^{\top}\left(\Pi^{-1}b_{i}-e_{i}\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
 $$
 
 - 市场出清：
@@ -390,24 +400,24 @@ $$
 \sum c_{i}=\sum e_{i}
 $$
 
-表示总消费 $\sum_i c_{i}=c$ 和 $\sum_i \mu_i = \mu$。
+记总消费为 $\sum_i c_{i}=c$，$\sum_i \mu_i = \mu$。
 
 市场出清需要
 
 $$ 
-\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{T}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
+\Pi^{-1}\left(\sum_{i}b_{i}\right)-(\Pi^{\top}\Pi)^{-1}p\left(\sum_{i}\mu_{i}\right)=\sum_{i}e_{i}
 $$
 
 经过几步计算后得到
 
 $$
-p=\mu^{-1}\left(\Pi^{T}b-\Pi^{T}\Pi e\right)
+p=\mu^{-1}\left(\Pi^{\top}b-\Pi^{\top}\Pi e\right)
 $$
 
 其中
 
 $$ 
-\mu = \sum_i\mu_{i}=\frac{0 + p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}.
+\mu = \sum_i\mu_{i}=\frac{0 + p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}.
 $$
 
 现在考虑上述的代表性消费者经济体。
@@ -417,19 +427,19 @@ $$
 需求函数是
 
 $$
-c=\Pi^{-1}b-(\Pi^{T}\Pi)^{-1}\tilde{\mu} p
+c=\Pi^{-1}b-(\Pi^{\top}\Pi)^{-1}\tilde{\mu} p
 $$
 
 将这个代入预算约束得到
 
 $$
-\tilde{\mu}=\frac{p^{T}\left(\Pi^{-1}b-e\right)}{p^{T}(\Pi^{T}\Pi)^{-1}p}
+\tilde{\mu}=\frac{p^{\top}\left(\Pi^{-1}b-e\right)}{p^{\top}(\Pi^{\top}\Pi)^{-1}p}
 $$
 
 在均衡状态下 $c=e$，所以
 
 $$
-p=\tilde{\mu}^{-1}(\Pi^{T}b-\Pi^{T}\Pi e)
+p=\tilde{\mu}^{-1}(\Pi^{\top}b-\Pi^{\top}\Pi e)
 $$
 
 因此，我们证明了：在选定一个计价单位来表达绝对价格后，代表性消费者经济体中的价格向量与具有多个消费者的基础经济体中的价格向量相同。

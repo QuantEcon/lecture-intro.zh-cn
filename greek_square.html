@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -120,7 +120,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. 分布和概率" href="prob_dist.html" />
+    <link rel="next" title="18. 概率分布" href="prob_dist.html" />
     <link rel="prev" title="16. 特征值和特征向量" href="eigen_I.html" />
 
 <!-- Normal Meta Tags -->
@@ -267,7 +267,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -278,11 +278,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -301,7 +301,7 @@
 <h1><span class="section-number">17. </span>求解平方根<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">17.1. </span>引言<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Bertrand Russell. History of western philosophy. Routledge, 2004.">Russell, 2004</a>]</span> 在第24章讨论早期希腊数学和天文学时，提到了以下这段引人入胜的内容：</p>
+<p><span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Bertrand Russell. History of western philosophy. Routledge, 2004.">Russell, 2004</a>]</span> 在第24章讨论早期希腊数学和天文学时，提到了以下这段引人入胜的内容：</p>
 <blockquote class="epigraph">
 <div><p>早期的毕达哥拉斯学派发现了第一个无理数——2的平方根，并发明了一种巧妙的方法来逼近它的值。</p>
 <p>其中最佳方法如下：构造两列数字，分别称为 <span class="math notranslate nohighlight">\(a\)</span> 列和 <span class="math notranslate nohighlight">\(b\)</span> 列，两列均从1开始。在每一步中，新的 <span class="math notranslate nohighlight">\(a\)</span> 值是通过将上一个 <span class="math notranslate nohighlight">\(a\)</span> 值与当前的 <span class="math notranslate nohighlight">\(b\)</span> 值相加得到的；新的 <span class="math notranslate nohighlight">\(b\)</span> 值则是通过将上一个 <span class="math notranslate nohighlight">\(a\)</span> 值的两倍与上一个 <span class="math notranslate nohighlight">\(b\)</span> 值相加得到的。</p>
@@ -789,7 +789,13 @@ y_{t} = \lambda_i y_{t-1}, \quad i = 1, 2
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/fd5e5e715482f9a33ea753f0fe5b859e5243247b950ea4eadab01600da429dae.png"><img alt="_images/fd5e5e715482f9a33ea753f0fe5b859e5243247b950ea4eadab01600da429dae.png" src="_images/fd5e5e715482f9a33ea753f0fe5b859e5243247b950ea4eadab01600da429dae.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/105ee57326e258c4fef9ecdf83814d466ccc211d2c4e819908ef7d431554fd70.png"><img alt="_images/105ee57326e258c4fef9ecdf83814d466ccc211d2c4e819908ef7d431554fd70.png" src="_images/105ee57326e258c4fef9ecdf83814d466ccc211d2c4e819908ef7d431554fd70.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -955,7 +961,13 @@ x_{2,0} = -(V^{2,2})^{-1} V^{2,1} x_{1,0} = V_{2,1} V_{1,1}^{-1} x_{1,0}.
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f1d3553105fb0aff74c7a1d47a6b3adafe5fdd0c31906cfea20be4bd3b4f91d8.png"><img alt="_images/f1d3553105fb0aff74c7a1d47a6b3adafe5fdd0c31906cfea20be4bd3b4f91d8.png" src="_images/f1d3553105fb0aff74c7a1d47a6b3adafe5fdd0c31906cfea20be4bd3b4f91d8.png" style="width: 80%;" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/3b2bb64fad273eead4a1ece19aa447067ace30f2286629431b4b1e9d9685de5d.png"><img alt="_images/3b2bb64fad273eead4a1ece19aa447067ace30f2286629431b4b1e9d9685de5d.png" src="_images/3b2bb64fad273eead4a1ece19aa447067ace30f2286629431b4b1e9d9685de5d.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1235,7 +1247,7 @@ A = \begin{bmatrix} 1 &amp; 1 \cr
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">

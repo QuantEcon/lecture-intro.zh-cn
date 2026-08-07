@@ -9,8 +9,31 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+translation:
+  title: 蒙特卡罗方法与期权定价
+  headings:
+    Overview: 概览
+    An introduction to Monte Carlo: 蒙特卡罗简介
+    An introduction to Monte Carlo::Share price with known distribution: 给定分布的股票价格
+    An introduction to Monte Carlo::Share price with unknown distribution: 未知分布的股票价格
+    An introduction to Monte Carlo::Share price with unknown distribution::A routine using loops in python: 使用Python循环的一种例程
+    An introduction to Monte Carlo::A vectorized routine: 一种向量化的例程
+    Pricing a European call option under risk neutrality: 利用风险中性定价欧式看涨期权
+    Pricing a European call option under risk neutrality::Risk-neutral pricing: 风险中性定价
+    Pricing a European call option under risk neutrality::A comment on risk: 关于风险的提示
+    Pricing a European call option under risk neutrality::Discounting: 贴现
+    Pricing a European call option under risk neutrality::European call options: 欧式看涨期权
+    Pricing via a dynamic model: 通过动态模型定价
+    Pricing via a dynamic model::Simple dynamics: 简单动态
+    Pricing via a dynamic model::Problems with simple dynamics: 简单动态问题
+    Pricing via a dynamic model::More realistic dynamics: 更加贴合实际的动态模型
+    Pricing via a dynamic model::Default parameters: 默认参数
+    Pricing via a dynamic model::Visualizations: 可视化
+    Pricing via a dynamic model::Computing the price: 计算价格
+    Exercises: 练习
 ---
 
+(monte-carlo)=
 # 蒙特卡罗方法与期权定价
 
 ## 概览
@@ -141,6 +164,12 @@ p = 0.5
 σ_1, σ_2, σ_3 = 0.1, 0.05, 0.2
 ```
 
+在开始之前，我们先设置一个随机数生成器。
+
+```{code-cell} ipython3
+rng = np.random.default_rng()
+```
+
 #### 使用Python循环的一种例程
 
 这里是一个使用Python原生循环，计算期望平均值的例程
@@ -155,9 +184,9 @@ $$
 
 S = 0.0
 for i in range(n):
-    X_1 = np.exp(μ_1 + σ_1 * randn())
-    X_2 = np.exp(μ_2 + σ_2 * randn())
-    X_3 = np.exp(μ_3 + σ_3 * randn())
+    X_1 = np.exp(μ_1 + σ_1 * rng.standard_normal())
+    X_2 = np.exp(μ_2 + σ_2 * rng.standard_normal())
+    X_3 = np.exp(μ_3 + σ_3 * rng.standard_normal())
     S += (X_1 + X_2 + X_3)**p
 S / n
 ```
@@ -166,12 +195,15 @@ S / n
 我们还可以构建一个包含这些操作的函数：
 
 ```{code-cell} ipython3
-def compute_mean(n=1_000_000):
+def compute_mean(
+        n=1_000_000,   # 样本量
+        rng=rng        # 默认为上面实例化的生成器
+    ):
     S = 0.0
     for i in range(n):
-        X_1 = np.exp(μ_1 + σ_1 * randn())
-        X_2 = np.exp(μ_2 + σ_2 * randn())
-        X_3 = np.exp(μ_3 + σ_3 * randn())
+        X_1 = np.exp(μ_1 + σ_1 * rng.standard_normal())
+        X_2 = np.exp(μ_2 + σ_2 * rng.standard_normal())
+        X_3 = np.exp(μ_3 + σ_3 * rng.standard_normal())
         S += (X_1 + X_2 + X_3)**p
     return (S / n)
 ```
@@ -193,10 +225,10 @@ compute_mean()
 为了让它运行更快，我们使用 NumPy 来实现向量化例程。
 
 ```{code-cell} ipython3
-def compute_mean_vectorized(n=1_000_000):
-    X_1 = np.exp(μ_1 + σ_1 * randn(n))
-    X_2 = np.exp(μ_2 + σ_2 * randn(n))
-    X_3 = np.exp(μ_3 + σ_3 * randn(n))
+def compute_mean_vectorized(n=1_000_000, rng=rng):
+    X_1 = np.exp(μ_1 + σ_1 * rng.standard_normal(n))
+    X_2 = np.exp(μ_2 + σ_2 * rng.standard_normal(n))
+    X_3 = np.exp(μ_3 + σ_3 * rng.standard_normal(n))
     S = (X_1 + X_2 + X_3)**p
     return S.mean()
 ```
@@ -356,7 +388,7 @@ M = 10_000_000
 以下是计算该期权价格的代码
 
 ```{code-cell} ipython3
-S = np.exp(μ + σ * np.random.randn(M))
+S = np.exp(μ + σ * rng.standard_normal(M))
 return_draws = np.maximum(S - K, 0)
 P = β**n * np.mean(return_draws)
 print(f"蒙特卡洛期权价格约为 {P:3f}")
@@ -460,14 +492,20 @@ $$ s_{t+1} = s_t + \mu + \exp(h_t) \xi_{t+1} $$
 以下是使用这个方程模拟路径的函数：
 
 ```{code-cell} ipython3
-def simulate_asset_price_path(μ=default_μ, S0=default_S0, h0=default_h0, n=default_n, ρ=default_ρ, ν=default_ν):
+def simulate_asset_price_path(μ=default_μ,
+                               S0=default_S0,
+                               h0=default_h0,
+                               n=default_n,
+                               ρ=default_ρ,
+                               ν=default_ν,
+                               rng=rng):
     s = np.empty(n+1)
     s[0] = np.log(S0)
 
     h = h0
     for t in range(n):
-        s[t+1] = s[t] + μ + np.exp(h) * randn()
-        h = ρ * h + ν * randn()
+        s[t+1] = s[t] + μ + np.exp(h) * rng.standard_normal()
+        h = ρ * h + ν * rng.standard_normal()
 
     return np.exp(s)
 ```
@@ -515,7 +553,8 @@ def compute_call_price(β=default_β,
                        n=default_n,
                        ρ=default_ρ,
                        ν=default_ν,
-                       M=10_000):
+                       M=10_000,
+                       rng=rng):
     current_sum = 0.0
     # 对每一个样本路径
     for m in range(M):
@@ -523,8 +562,8 @@ def compute_call_price(β=default_β,
         h = h0
         # 模拟时间前进
         for t in range(n):
-            s = s + μ + np.exp(h) * randn()
-            h = ρ * h + ν * randn()
+            s = s + μ + np.exp(h) * rng.standard_normal()
+            h = ρ * h + ν * rng.standard_normal()
         # 并将值 max{S_n - K, 0} 加到 current_sum
         current_sum += np.maximum(np.exp(s) - K, 0)
 
@@ -562,12 +601,12 @@ def compute_call_price_vector(β=default_β,
                        n=default_n,
                        ρ=default_ρ,
                        ν=default_ν,
-                       M=10_000):
-
+                       M=10_000,
+                       rng=rng):
     s = np.full(M, np.log(S0))
     h = np.full(M, h0)
     for t in range(n):
-        Z = np.random.randn(2, M)
+        Z = rng.standard_normal((2, M))
         s = s + μ + np.exp(h) * Z[0, :]
         h = ρ * h + ν * Z[1, :]
     expectation = np.mean(np.maximum(np.exp(s) - K, 0))
@@ -604,7 +643,7 @@ compute_call_price(M=10_000_000)
 
 注意，如果现货价格再次跌破120美元，期权不会重新激活。
 
-使用在{eq}`s_mc_dyms`问题中定义的动态，定价这个欧式看涨期权。
+使用在{eq}`s_mc_dyms`中定义的动态，为这个欧式看涨期权定价。
 ```
 
 ```{solution-start} monte_carlo_ex2
@@ -634,7 +673,8 @@ def compute_call_price_with_barrier(β=default_β,
                                     ρ=default_ρ,
                                     ν=default_ν,
                                     bp=default_bp,
-                                    M=50_000):
+                                    M=50_000,
+                                    rng=rng):
     current_sum = 0.0
     # 对每个样本路径进行模拟
     for m in range(M):
@@ -644,8 +684,8 @@ def compute_call_price_with_barrier(β=default_β,
         option_is_null = False
         # 模拟时间发展
         for t in range(n):
-            s = s + μ + np.exp(h) * randn()
-            h = ρ * h + ν * randn()
+            s = s + μ + np.exp(h) * rng.standard_normal()
+            h = ρ * h + ν * rng.standard_normal()
             if np.exp(s) > bp:
                 payoff = 0
                 option_is_null = True
@@ -675,12 +715,13 @@ def compute_call_price_with_barrier_vector(β=default_β,
                                            ρ=default_ρ,
                                            ν=default_ν,
                                            bp=default_bp,
-                                           M=50_000):
+                                           M=50_000,
+                                           rng=rng):
     s = np.full(M, np.log(S0))
     h = np.full(M, h0)
     option_is_null = np.full(M, False)
     for t in range(n):
-        Z = np.random.randn(2, M)
+        Z = rng.standard_normal((2, M))
         s = s + μ + np.exp(h) * Z[0, :]
         h = ρ * h + ν * Z[1, :]
         # 标记所有股价高于敲出障碍价格的期权为无效

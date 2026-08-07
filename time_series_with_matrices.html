@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3355220bfb204a7ac1b0ca03dac108f0437ded6f" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -208,7 +208,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">35.3. 添加随机项</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">35.4. 计算总体矩</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">35.5. 移动平均表示</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">35.6. 从后视到前瞻</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">35.6. 一个前瞻性模型</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -264,7 +264,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 09, 2026
+                            Last changed: Aug 04, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -275,11 +275,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/6e1638e" class="changelog-hash">6e1638e</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/0466562" class="changelog-hash">0466562</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 minutes ago</span>
-                                <span class="changelog-message">UPD: upgrade dependencies to align with lecture-python-intro (#209)</span>
+                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-message">Run the review auto-merge gate in shadow mode — Stage 4 calibration (#284)</span>
                             </li>
                             
                         </ul>
@@ -299,23 +299,23 @@
 <section id="id2">
 <h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲使用矩阵来解决线性差分方程。</p>
-<p>作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 <span id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span> 中的<strong>二阶线性差分方程</strong>，该文章引入了<strong>乘数加速器</strong>模型。</p>
+<p>作为一个实际例子，我们将研究一个保罗·萨缪尔森 1939 年文章 <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id107" title="Paul A. Samuelson. Interactions between the multiplier analysis and the principle of acceleration. Review of Economic Studies, 21(2):75–78, 1939.">Samuelson, 1939</a>]</span> 中的<strong>二阶线性差分方程</strong>，该文章引入了<strong>乘数加速器模型</strong>。</p>
 <p>这个模型对早期美国凯恩斯主义宏观经济学的计量经济学研究产生了重要影响。</p>
 <p>如果你想了解更多关于这个模型的细节，可以参考<a class="reference external" href="https://python.quantecon.org/samuelson.html" title="(in Project name not set)"><span>Samuelson Multiplier-Accelerator</span></a>。</p>
 <p>（该讲座也包含了二阶线性差分方程的一些技术细节。）</p>
 <p>在本讲座中，我们将探讨如何用两种不同的方式来表示非平稳时间序列 <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span>：<strong>自回归</strong>表示和<strong>移动平均</strong>表示。</p>
 <p>我们还将研究一个涉及解“前瞻性”线性差分方程的“完全预见的”股票价格模型。</p>
-<p>让我们先导入所需的Python包：</p>
+<p>我们将使用以下импорты：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
 
-<span class="c1"># 设置默认图形大小</span>
+<span class="c1"># 设置本讲座的自定义图形大小</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="c1"># 设置打印的浮点数精度</span>
+<span class="c1"># 设置打印的浮点数精度为 3 位小数</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -429,7 +429,7 @@ y = A^{-1} b
         ...,
         [ 0.  ,  0.  ,  0.  , ...,  1.  ,  0.  ,  0.  ],
         [ 0.  ,  0.  ,  0.  , ..., -1.53,  1.  ,  0.  ],
-        [ 0.  ,  0.  ,  0.  , ...,  0.9 , -1.53,  1.  ]]),
+        [ 0.  ,  0.  ,  0.  , ...,  0.9 , -1.53,  1.  ]], shape=(80, 80)),
  array([ 21.52, -11.6 ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,
          10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,
          10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,  10.  ,
@@ -446,7 +446,7 @@ y = A^{-1} b
 </div>
 <p>现在我们来求解 <span class="math notranslate nohighlight">\(y\)</span> 的路径。</p>
 <p>如果 <span class="math notranslate nohighlight">\(y_t\)</span> 表示 <span class="math notranslate nohighlight">\(t\)</span> 时期的国民生产总值，那么这就是萨缪尔森国民生产总值动态模型的一个版本。</p>
-<p>要求解 <span class="math notranslate nohighlight">\(y = A^{-1} b\)</span>，我们可以直接倒置 <span class="math notranslate nohighlight">\(A\)</span></p>
+<p>要求解 <span class="math notranslate nohighlight">\(y = A^{-1} b\)</span>，我们可以直接求 <span class="math notranslate nohighlight">\(A\)</span> 的逆矩阵，如下所示</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -464,7 +464,7 @@ y = A^{-1} b
 </div>
 </div>
 </div>
-<p>我们确保这两种方法在一定精度下给出相同的结果：</p>
+<p>这里我们确保这两种方法在一定精度下给出相同的结果，至少在浮点精度范围内：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_second_method</span><span class="p">)</span>
@@ -477,7 +477,7 @@ y = A^{-1} b
 </div>
 </div>
 </div>
-<p><span class="math notranslate nohighlight">\(A\)</span> 是可逆的，因为它是下三角且<a class="reference external" href="https://www.statlect.com/matrix-algebra/triangular-matrix">其对角线条目非零</a></p>
+<p><span class="math notranslate nohighlight">\(A\)</span> 是可逆的，因为它是下三角矩阵，且<a class="reference external" href="https://www.statlect.com/matrix-algebra/triangular-matrix">其对角线条目非零</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if A is lower triangular</span>
@@ -493,8 +493,8 @@ y = A^{-1} b
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>一般来说，<code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>比使用<code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>在数值上更稳定。
-然而，对于这个小例子来说，稳定性不是问题。此外，我们将下面重复使用<code class="docutils literal notranslate"><span class="pre">A_inv</span></code>，直接计算出它来会有比较好。</p>
+<p>一般来说，<code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>比直接使用<code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code>在数值上更稳定。
+然而，对于这个小例子来说，稳定性不是问题。此外，我们在下文中会反复使用<code class="docutils literal notranslate"><span class="pre">A_inv</span></code>，所以直接计算出它会有额外的价值。</p>
 </div>
 <p>现在我们可以绘制时间序列。</p>
 <div class="cell docutils container">
@@ -508,11 +508,11 @@ y = A^{-1} b
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png"><img alt="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" src="_images/f28b75dd7016499bc59f08d74a2f60c65dc4609fe3feefb3dbaae91a1536e73a.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/0e334fdc1c31bbe1fc588dae0f344f9efd649c5b1cf30112c6b96a01948456b1.png"><img alt="_images/0e334fdc1c31bbe1fc588dae0f344f9efd649c5b1cf30112c6b96a01948456b1.png" src="_images/0e334fdc1c31bbe1fc588dae0f344f9efd649c5b1cf30112c6b96a01948456b1.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>通过在<a class="reference internal" href="#equation-tswm-1">(35.1)</a>中设 <span class="math notranslate nohighlight">\(y_t = y_{t-1} = y_{t-2} = y^*\)</span>，可以得到 <span class="math notranslate nohighlight">\(y_t\)</span> 的 <a class="reference external" href="https://intro.quantecon.org/scalar_dynam.html#scalar-dynam-steady-state" title="(in Project name not set)"><span class="xref std std-ref">*稳态*</span></a> 值 <span class="math notranslate nohighlight">\(y^*\)</span>。</p>
+<p>通过在<a class="reference internal" href="#equation-tswm-1">(35.1)</a>中设 <span class="math notranslate nohighlight">\(y_t = y_{t-1} = y_{t-2} = y^*\)</span>，可以得到 <span class="math notranslate nohighlight">\(y_t\)</span> 的 <a class="reference internal" href="scalar_dynam.html#scalar-dynam-steady-state"><span class="std std-ref">*稳态*</span></a> 值 <span class="math notranslate nohighlight">\(y^*\)</span>。</p>
 <div class="math notranslate nohighlight">
 \[
 y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
@@ -549,7 +549,7 @@ y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png"><img alt="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" src="_images/7c7243db82010ab09792f49b66a7667ec4693c9718ae53d4da6dbf7a50fc5b3b.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/056bdf1f99843eb1c4863a4e791fd73553324afc6d62ddef15abf45eb0c2be71.png"><img alt="_images/056bdf1f99843eb1c4863a4e791fd73553324afc6d62ddef15abf45eb0c2be71.png" src="_images/056bdf1f99843eb1c4863a4e791fd73553324afc6d62ddef15abf45eb0c2be71.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -559,7 +559,7 @@ y^* = \frac{\alpha_{0}}{1 - \alpha_{1} - \alpha_{2}}
 <p>为了让这个例子有趣一些，我们将遵循经济学家<a class="reference external" href="https://baike.baidu.com/item/%E5%B0%A4%E9%87%91%C2%B7%E6%96%AF%E5%8B%92%E8%8C%A8%E5%9F%BA/15727527">尤金·斯卢茨基</a>和<a class="reference external" href="https://baike.baidu.com/item/%E6%8B%89%E6%A0%BC%E7%BA%B3%C2%B7%E5%BC%97%E9%87%8C%E5%B8%8C/11051879">拉格纳·弗里希</a>的方法，用以下<strong>二阶随机线性差分方程</strong>替换我们原来的二阶差分方程：</p>
 <div class="math notranslate nohighlight" id="equation-tswm-2">
 <span class="eqno">(35.2)<a class="headerlink" href="#equation-tswm-2" title="Link to this equation">#</a></span>\[y_{t} = \alpha_{0} + \alpha_{1} y_{t-1} + \alpha_{2} y_{t-2} + u_t\]</div>
-<p>其中 <span class="math notranslate nohighlight">\(u_{t} \sim N\left(0, \sigma_{u}^{2}\right)\)</span> 并且是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> – 相互独立且服从相同分布。</p>
+<p>其中 <span class="math notranslate nohighlight">\(u_{t} \sim N\left(0, \sigma_{u}^{2}\right)\)</span> 并且是 <a class="reference internal" href="lln_clt.html#iid-theorem"><span class="std std-ref">独立同分布</span></a> 的，意味着独立且服从相同分布。</p>
 <p>我们将把这些 <span class="math notranslate nohighlight">\(T\)</span> 个方程堆叠成一个以矩阵代数表示的系统。</p>
 <p>让我们定义随机向量</p>
 <div class="math notranslate nohighlight">
@@ -585,8 +585,10 @@ y = A^{-1} \left(b + u\right)
 <p>让我们在Python中尝试一下。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">σ_u</span> <span class="o">=</span> <span class="mf">2.</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+<span class="n">σ_u</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -603,7 +605,7 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png"><img alt="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png" src="_images/4deb52529c25a730d4736687498048badb3b7bb1c78a5e396d7cd9fcfef3c8d3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/4bd601c4ce3a0bd61eadc318cb627c0d234c35fe4bf8905bd3035ff6892b42c7.png"><img alt="_images/4bd601c4ce3a0bd61eadc318cb627c0d234c35fe4bf8905bd3035ff6892b42c7.png" src="_images/4bd601c4ce3a0bd61eadc318cb627c0d234c35fe4bf8905bd3035ff6892b42c7.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -614,8 +616,8 @@ y = A^{-1} \left(b + u\right)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
 
@@ -627,7 +629,7 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png"><img alt="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png" src="_images/0a3664790c791901cfc87374801bd01ff7cecc5321620dc475e5714481ba500a.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/ae0d542ac975183dd44deaa035b31fc510ec0d7873c4467c189877e350f5c704.png"><img alt="_images/ae0d542ac975183dd44deaa035b31fc510ec0d7873c4467c189877e350f5c704.png" src="_images/ae0d542ac975183dd44deaa035b31fc510ec0d7873c4467c189877e350f5c704.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -637,8 +639,8 @@ y = A^{-1} \left(b + u\right)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
     <span class="n">y_steady</span> <span class="o">=</span> <span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b_steady</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_steady</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
 
@@ -650,25 +652,19 @@ y = A^{-1} \left(b + u\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png"><img alt="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png" src="_images/92192f3f56de7de1c0d1a2553a36cc4bf1d5af2203670cc06c33983ec5ffaebd.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/28645b9fe8180b0d30bec56eb914a93db99b6426ac05bc994a68ae0d498e6e1d.png"><img alt="_images/28645b9fe8180b0d30bec56eb914a93db99b6426ac05bc994a68ae0d498e6e1d.png" src="_images/28645b9fe8180b0d30bec56eb914a93db99b6426ac05bc994a68ae0d498e6e1d.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 </section>
 <section id="id6">
 <h2><span class="section-number">35.4. </span>计算总体矩<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>我们可以应用多元正态分布的标准公式来计算我们的时间序列模型</p>
+<p>我们可以应用多元正态分布的标准公式来计算我们的时间序列模型的均值向量和协方差矩阵</p>
 <div class="math notranslate nohighlight">
 \[
 y = A^{-1} (b + u) .
 \]</div>
 <p>你可以在这篇讲义中阅读关于多元正态分布的内容 <a class="reference external" href="https://python.quantecon.org/multivariate_normal.html">多元正态分布</a>。</p>
-<p>让我们将我们的模型写为</p>
-<div class="math notranslate nohighlight">
-\[ 
-y = \tilde A (b + u)
-\]</div>
-<p>其中 <span class="math notranslate nohighlight">\(\tilde A = A^{-1}\)</span>。</p>
 <p>因为正态随机变量的线性组合依然是正态的，我们知道</p>
 <div class="math notranslate nohighlight">
 \[
@@ -677,22 +673,22 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 <p>其中</p>
 <div class="math notranslate nohighlight">
 \[ 
-\mu_y = \tilde A b
+\mu_y = A^{-1} b
 \]</div>
 <p>以及</p>
 <div class="math notranslate nohighlight">
 \[
-\Sigma_y = \tilde A (\sigma_u^2 I_{T \times T} ) \tilde A^T
+\Sigma_y = A^{-1} (\sigma_u^2 I_{T \times T} ) (A^{-1})^T
 \]</div>
 <p>让我们编写一个Python类来计算均值向量 <span class="math notranslate nohighlight">\(\mu_y\)</span> 和协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma_y\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">population_moments</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    计算人群矩 mu_y, Sigma_y.</span>
+<span class="sd">    计算总体矩 μ_y, Σ_y.</span>
 <span class="sd">    ---------</span>
 <span class="sd">    参数:</span>
-<span class="sd">    alpha0, alpha1, alpha2, T, y_1, y0</span>
+<span class="sd">    α_0, α_1, α_2, T, y_neg1, y_0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α_0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> 
                        <span class="n">α_1</span><span class="o">=</span><span class="mf">1.53</span><span class="p">,</span> 
@@ -722,12 +718,14 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A_inv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A_inv</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">T</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">sample_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        提供一个大小为 n 的 y 样本。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rng</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
         <span class="n">A_inv</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A_inv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">σ_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
-        <span class="n">us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
+        <span class="n">us</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">])</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">us</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">ys</span>
@@ -753,17 +751,17 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>接下来，让我们探索不同参数值对 <span class="math notranslate nohighlight">\(\mu_y\)</span> 和 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 的影响。</p>
-<p>这个分析也将帮助我们理解一个重要的性质：<span class="math notranslate nohighlight">\(y\)</span> 序列的<strong>统计平稳性</strong>。我们会发现，只有在非常特定的初始条件下，这个序列才是平稳的。</p>
-<p>为了直观地理解这一点，我们先生成 <span class="math notranslate nohighlight">\(N\)</span> 条 <span class="math notranslate nohighlight">\(y\)</span> 序列的样本路径，并将它们与理论均值 <span class="math notranslate nohighlight">\(\mu_y\)</span> 进行对比。</p>
+<p>研究不同参数值下所隐含的 <span class="math notranslate nohighlight">\(\mu_y, \Sigma_y\)</span> 是很有启发意义的。</p>
+<p>除此之外，我们还可以用这个类来展示 <span class="math notranslate nohighlight">\(y\)</span> 的<strong>统计平稳性</strong>为什么只在非常特殊的初始条件下才成立。</p>
+<p>让我们先生成 <span class="math notranslate nohighlight">\(N\)</span> 条 <span class="math notranslate nohighlight">\(y\)</span> 的时间实现路径，并将它们与总体均值 <span class="math notranslate nohighlight">\(\mu_y\)</span> 一起绘制出来。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制均值</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
-    <span class="n">ys</span> <span class="o">=</span> <span class="n">series_process</span><span class="o">.</span><span class="n">sample_y</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>  <span class="c1"># 从 viridis 色系中随机选择一种颜色</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">series_process</span><span class="o">.</span><span class="n">sample_y</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ys</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">μ_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
@@ -775,12 +773,12 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png"><img alt="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png" src="_images/e960b232086cd9ee658b8a025132f94585b3f3b8a3b44bff03c08daa131b18c4.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/a3c8938210f86eac55ec8f84c9a81f6a191e1bd6109e0ee80e025cfc1d722689.png"><img alt="_images/a3c8938210f86eac55ec8f84c9a81f6a191e1bd6109e0ee80e025cfc1d722689.png" src="_images/a3c8938210f86eac55ec8f84c9a81f6a191e1bd6109e0ee80e025cfc1d722689.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>从图中可以观察到一个有趣的现象：随着时间 <span class="math notranslate nohighlight">\(t\)</span> 的推移，不同样本路径之间的离散程度在逐渐减小。</p>
-<p>绘制总体方差 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 对角线。</p>
+<p>由于初始条件是固定的，且冲击随时间累积，<span class="math notranslate nohighlight">\(y_t\)</span> 的总体方差会朝着其极限值不断增大。</p>
+<p>让我们把 <span class="math notranslate nohighlight">\(y_t\)</span> 的总体方差对 <span class="math notranslate nohighlight">\(t\)</span> 作图。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制方差</span>
@@ -790,12 +788,12 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png"><img alt="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" src="_images/ba7acb839681a83e250f47983bc704e95b6fd1201f2260d3d9f26669189b8aee.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/e645d404e477e0d760d93e5d0105bea80d5c06452569429b4dda5e8f1dcb18b5.png"><img alt="_images/e645d404e477e0d760d93e5d0105bea80d5c06452569429b4dda5e8f1dcb18b5.png" src="_images/e645d404e477e0d760d93e5d0105bea80d5c06452569429b4dda5e8f1dcb18b5.png" style="width: 80%;" />
 </a>
 </div>
 </div>
-<p>从图中我们可以看到，总体方差随时间增加，最终趋于一个稳定值。这种收敛行为反映了系统的内在稳定性。</p>
-<p>为了进一步验证这一点，让我们通过模拟多条样本路径来计算样本方差，并将其与理论预测进行对比。</p>
+<p>注意总体方差是如何增加并趋于渐近线的。</p>
+<p>让我们打印出时间序列 <span class="math notranslate nohighlight">\(y\)</span> 的协方差矩阵 <span class="math notranslate nohighlight">\(\Sigma_y\)</span>。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series_process</span> <span class="o">=</span> <span class="n">population_moments</span><span class="p">(</span><span class="n">α_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
@@ -825,11 +823,11 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>观察 <span class="math notranslate nohighlight">\(y_t\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 之间的协方差（即超对角线上的元素），我们发现它们并不相等。</p>
-<p>这个特征告诉我们，由 <span class="math notranslate nohighlight">\(y\)</span> 向量表示的时间序列不具有<strong>平稳性</strong>。</p>
-<p>要使序列变得平稳，我们需要对系统做一个关键的改变：不再将初始条件 <span class="math notranslate nohighlight">\((y_0, y_{-1})\)</span> 设为固定值，而是让它们服从一个特定的联合正态分布，这个分布具有合适的均值和协方差矩阵。</p>
-<p>如果你想了解如何实现这一点，可以参考我们在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中的详细讨论。</p>
-<p>在继续深入分析之前，让我们先来看看 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 矩阵右下角的数值。</p>
+<p>注意 <span class="math notranslate nohighlight">\(y_t\)</span> 和 <span class="math notranslate nohighlight">\(y_{t-1}\)</span> 之间的协方差——即超对角线上的元素——并 <em>不</em> 相同。</p>
+<p>这表明由我们的 <span class="math notranslate nohighlight">\(y\)</span> 向量表示的时间序列并不是<strong>平稳的</strong>。</p>
+<p>要使其平稳，我们需要改变系统，使得<em>初始条件</em> <span class="math notranslate nohighlight">\((y_0, y_{-1})\)</span> 不再是固定数值，而是服从具有特定均值和协方差矩阵的联合正态分布的随机向量。</p>
+<p>我们在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中描述了如何做到这一点。</p>
+<p>不过，为了给那个分析做铺垫，让我们先打印出 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 的右下角部分。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series_process</span> <span class="o">=</span> <span class="n">population_moments</span><span class="p">()</span>
@@ -853,18 +851,19 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 </div>
 </div>
 </div>
-<p>请注意，随着时间 <span class="math notranslate nohighlight">\(t\)</span> 的增加，子对角线和超对角线上的元素似乎趋于收敛。</p>
+<p>请注意，次对角线和超对角线上的元素似乎已经收敛。</p>
 <p>这表明我们的过程是渐近平稳的。</p>
-<p>你可以在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中阅读更多关于更一般线性时间序列模型的平稳性。</p>
-<p>通过观察不同时间段的<span class="math notranslate nohighlight">\(\Sigma_y\)</span>的非对角线元素，我们可以学到很多关于这个过程的知识，但我们在这里暂时先不展开。</p>
+<p>你可以在<a class="reference external" href="https://python.quantecon.org/linear_models.html">线性状态空间模型</a>中阅读更多关于更一般线性时间序列模型平稳性的内容。</p>
+<p>通过观察 <span class="math notranslate nohighlight">\(\Sigma_y\)</span> 中对应不同时间段 <span class="math notranslate nohighlight">\(t\)</span> 的非对角线元素，我们本可以学到很多关于该过程的知识，但我们在这里按下不表。</p>
 </section>
 <section id="id7">
 <h2><span class="section-number">35.5. </span>移动平均表示<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>让我们来研究 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 矩阵的结构。这个矩阵的形状会告诉我们一些关于系统动态特性的重要信息。</p>
+<p>让我们打印出 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 并观察其结构</p>
 <ul class="simple">
-<li><p>它是三角形矩阵、接近三角形，还是其他形式 <span class="math notranslate nohighlight">\(\ldots\)</span>？</p></li>
+<li><p>它是三角形的、几乎是三角形的，还是 <span class="math notranslate nohighlight">\(\ldots\)</span>？</p></li>
 </ul>
-<p>为了便于观察，我们将打印 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 矩阵左上角的一部分，并将数值保留到小数点后三位。</p>
+<p>为了研究 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 的结构，我们将只打印到小数点后 3 位。</p>
+<p>让我们先打印出 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 左上角的部分。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A_inv</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
@@ -887,36 +886,36 @@ y \sim {\mathcal N}(\mu_y, \Sigma_y)
 <p>注意每一行的结尾都与前一行的前对角线元素相同。</p>
 <p>由于 <span class="math notranslate nohighlight">\(A^{-1}\)</span> 是下三角矩阵，每一行代表特定 <span class="math notranslate nohighlight">\(t\)</span> 时的 <span class="math notranslate nohighlight">\(y_t\)</span>，作为以下两部分之和：</p>
 <ul class="simple">
-<li><p>与初始条件 <span class="math notranslate nohighlight">\(b\)</span> 相关的时间依赖函数 <span class="math notranslate nohighlight">\(A^{-1} b\)</span>，以及</p></li>
+<li><p>一个与 <span class="math notranslate nohighlight">\(b\)</span> 中包含的初始条件相关的、随时间变化的函数 <span class="math notranslate nohighlight">\(A^{-1} b\)</span>，以及</p></li>
 <li><p>当前和过去 IID 冲击 <span class="math notranslate nohighlight">\(\{u_t\}\)</span> 的加权和。</p></li>
 </ul>
-<p>因此，设 <span class="math notranslate nohighlight">\(\tilde{A}=A^{-1}\)</span>。</p>
 <p>显然，对于 <span class="math notranslate nohighlight">\(t\geq0\)</span>，</p>
 <div class="math notranslate nohighlight">
 \[
-y_{t+1}=\sum_{i=1}^{t+1}\tilde{A}_{t+1,i}b_{i}+\sum_{i=1}^{t}\tilde{A}_{t+1,i}u_{i}+u_{t+1}
+y_{t+1}=\sum_{i=1}^{t+1}(A^{-1})_{t+1,i}b_{i}+\sum_{i=1}^{t}(A^{-1})_{t+1,i}u_{i}+u_{t+1}
 \]</div>
 <p>这是一个<strong>移动平均</strong>表示，其系数随时间变化。</p>
-<p>我们可以看到，系统既可以用移动平均形式 <a class="reference internal" href="#equation-eq-eqma">(35.4)</a> 表示，也可以用自回归形式 <a class="reference internal" href="#equation-eq-eqar">(35.3)</a> 表示。这两种表示方式描述了同一个随机过程，只是从不同的角度来看。</p>
+<p>正如系统 <a class="reference internal" href="#equation-eq-eqma">(35.4)</a> 构成了 <span class="math notranslate nohighlight">\(y\)</span> 的一个<strong>移动平均</strong>表示一样，系统 <a class="reference internal" href="#equation-eq-eqar">(35.3)</a> 构成了 <span class="math notranslate nohighlight">\(y\)</span> 的一个<strong>自回归</strong>表示。</p>
 </section>
 <section id="id8">
-<h2><span class="section-number">35.6. </span>从后视到前瞻<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<p>到目前为止，我们分析的萨缪尔森模型是一个<em>后视(backward-looking)<em>模型 - 给定</em>初始条件</em>后，系统就会向前演化。</p>
-<p>接下来让我们转向一个*前瞻(forward-looking)*模型，这类模型在宏观经济学和金融学中被广泛使用。</p>
-<p>我们应用类似的线性代数工具来研究一个广泛用作宏观经济学和金融学基准的<em>完全预见</em>模型。</p>
+<h2><span class="section-number">35.6. </span>一个前瞻性模型<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>萨缪尔森的模型是<em>向后看</em>的，因为我们给定它<em>初始条件</em>后让它自行运行。</p>
+<p>现在让我们转向一个<em>向前看</em>的模型。</p>
+<p>我们应用类似的线性代数工具来研究一个在宏观经济学和金融学中被广泛用作基准的<em>完全预见</em>模型。</p>
 <p>例如，假设 <span class="math notranslate nohighlight">\(p_t\)</span> 是股票价格，<span class="math notranslate nohighlight">\(y_t\)</span> 是其股息。</p>
-<p>假设股息 <span class="math notranslate nohighlight">\(y_t\)</span> 遵循我们前面分析的二阶差分方程，即</p>
+<p>我们假设 <span class="math notranslate nohighlight">\(y_t\)</span> 由我们上面刚分析过的二阶差分方程决定，因此</p>
 <div class="math notranslate nohighlight">
 \[
 y = A^{-1} \left(b + u\right)
 \]</div>
-<p>我们的<em>完全预见</em>股票价格模型是</p>
+<p>我们的股票价格<em>完全预见</em>模型是</p>
 <div class="math notranslate nohighlight">
 \[
 p_{t} = \sum_{j=0}^{T-t} \beta^{j} y_{t+j}, \quad \beta \in (0,1)
 \]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\beta\)</span> 是折现因子。</p>
-<p>该模型表明，股票在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的价格等于从当期开始直到终期所有未来股息的现值之和。每期股息都按折现因子 <span class="math notranslate nohighlight">\(\beta\)</span> 进行贴现，期数越远贴现程度越大。</p>
+<p>该模型表明，股票在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的价格等于（完全预见到的）未来股息的贴现现值之和。</p>
+<p>写成如下形式</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \underset{\equiv p}{\underbrace{\left[\begin{array}{c}
@@ -978,7 +977,7 @@ y_{T}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">σ_u</span> <span class="o">=</span> <span class="mf">0.</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">σ_u</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>
 <span class="n">y_steady</span> <span class="o">=</span> <span class="n">A_inv</span> <span class="o">@</span> <span class="p">(</span><span class="n">b_steady</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>
 </pre></div>
@@ -1005,7 +1004,7 @@ y_{T}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png"><img alt="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" src="_images/c17f463d6ea660493cc63382adbca8c66bc703f270681b053bd8ce7f2a17f6e4.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/a0a4fab478292a4b602da96266153f007757ce191a0a4fb6e2221b7c40f26f7a.png"><img alt="_images/a0a4fab478292a4b602da96266153f007757ce191a0a4fb6e2221b7c40f26f7a.png" src="_images/a0a4fab478292a4b602da96266153f007757ce191a0a4fb6e2221b7c40f26f7a.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1026,7 +1025,7 @@ y_{T}
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png"><img alt="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" src="_images/b38fbda4ac5c7c8b13ac5741366eb1253d339b0dc6c01e0eadbfdc44f07b56c1.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/f267abfe3d3d0940ed585930b7bf616b745c942b7f1548b7f4b8f4c482dc32b9.png"><img alt="_images/f267abfe3d3d0940ed585930b7bf616b745c942b7f1548b7f4b8f4c482dc32b9.png" src="_images/f267abfe3d3d0940ed585930b7bf616b745c942b7f1548b7f4b8f4c482dc32b9.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1212,7 +1211,7 @@ y_{T}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 分布和概率
+   18. 概率分布
   </a>
  </li>
  <li class="toctree-l1">
