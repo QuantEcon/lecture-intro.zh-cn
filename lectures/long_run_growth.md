@@ -138,8 +138,7 @@ country_years.head()
 我们可以在该数据集中的经济体代码（`countrycode`）和经济体名称（`country`）之间建立一个有用的映射关系。
 
 ```{code-cell} ipython3
-code_to_name = data[
-    ['countrycode', 'country']].drop_duplicates().reset_index(drop=True).set_index(['countrycode'])
+code_to_name = pd.read_csv("../lectures/datasets/country_code_cn.csv").set_index('code')
 ```
 
 现在，我们专注于人均 GDP (`gdppc`)，并生成一个宽格式的数据表。
