@@ -103,7 +103,7 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 在这里，我们将 Maddison 的数据读入一个 pandas `DataFrame`：
 
 ```{code-cell} ipython3
-data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/mpd2020.xlsx"
+data_url = "https://github.com/QuantEcon/data-lectures/raw/main/lectures/mpd2020.xlsx"
 data = pd.read_excel(data_url, 
                      sheet_name='Full data')
 data.head()
