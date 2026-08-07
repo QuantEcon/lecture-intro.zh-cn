@@ -95,11 +95,11 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 在金本位或银本位制下，一些货币还包括"仓单"，即代表对金币或银币索赔权的纸质凭证。政府或私人银行发行的钞票可以被视为这种"仓单"的例子。
 ```
 
-我们将数据从[托管在github上](https://github.com/QuantEcon/lecture-python-intro/tree/main/lectures/datasets)的电子表格导入pandas。
+我们将数据从[托管在 GitHub 上](https://github.com/QuantEcon/data-lectures/blob/main/CATALOG.md)的电子表格导入pandas。
 
 ```{code-cell} ipython3
 # 导入数据并清理索引
-data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/longprices.xls"
+data_url = "https://github.com/QuantEcon/data-lectures/raw/main/lectures/longprices.xls"
 df_fig5 = pd.read_excel(data_url,
                         sheet_name='all',
                         header=2,
@@ -242,7 +242,7 @@ plt.show()
 我们在四幅图中的每一幅都加上了相对美元汇率的对数，均出自{cite}`sargent2013rational`第3章。
 
 图表的基础数据载于{cite}`sargent2013rational`第3章附录中的表格。
-我们将所有这些数据转录到电子表格 {download}`chapter_3.xlsx <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx>` 中，并将其读入 pandas。
+我们将所有这些数据转录到电子表格 {download}`chapter_3.xlsx <https://github.com/QuantEcon/data-lectures/raw/main/lectures/chapter_3.xlsx>` 中，并将其读入 pandas。
 
 在下面的代码单元中，我们将清理数据并构建一个 `pandas.dataframe`。
 
@@ -371,7 +371,7 @@ def pr_plot(p_seq, index, ax):
 
 ```{code-cell} ipython3
 # 导入数据
-data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/datasets/chapter_3.xlsx"
+data_url = "https://github.com/QuantEcon/data-lectures/raw/main/lectures/chapter_3.xlsx"
 xls = pd.ExcelFile(data_url)
 
 # 选择相关的数据表
