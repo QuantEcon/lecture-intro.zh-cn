@@ -39,6 +39,12 @@ translation:
 
 在本讲中，我们将使用 Python 快速介绍数据和概率分布。
 
+本讲是三讲中的第一讲。
+
+第二讲 {doc}`observed_distributions` 讨论观测数据——即我们测量或收集的一组数字——以及它与本讲所研究的概率分布之间的联系。
+
+第三讲 {doc}`fitting_distributions` 探讨哪个概率分布最适合描述给定的数据集这一问题。
+
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import matplotlib as mpl
