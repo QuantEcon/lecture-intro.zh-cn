@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.16.7
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -23,7 +23,7 @@ translation:
     Visual comparisons::Nonnegative distributions: 非负分布
     Visual comparisons::Counter CDFs: 互补累积分布函数
     Visual comparisons::Empirical CCDFs: 经验 CCDFs
-    Visual comparisons::Empirical CCDFs::Q-Q Plots: Q-Q图
+    Visual comparisons::Empirical CCDFs::Q-Q plots: Q-Q图
     Visual comparisons::Power laws: 幂律
     Heavy tails in economic cross-sections: 经济数据中的重尾分布
     Heavy tails in economic cross-sections::Firm size: 公司规模
@@ -39,6 +39,7 @@ translation:
     Further reading: 延伸阅读
     Exercises: 练习
 ---
+
 (heavy_tail)=
 # 重尾分布
 
@@ -81,7 +82,6 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 事实上，经济学中的许多重要分布——可能是大多数——都具有重尾特性。
 
 在本讲中，我们将探讨重尾分布的本质，以及为什么它们在经济分析中扮演着如此重要的角色。
-
 
 ### 引言：轻尾分布
 
@@ -188,7 +188,6 @@ plt.show()
 从本质上讲，我们之所以没有观测到这样的极端值，是因为人类身高分布具有非常轻的尾部。
 
 实际上，人类身高的分布遵循类似正态分布的钟形曲线。
-
 
 ### 资产回报率分析
 
@@ -338,7 +337,6 @@ plt.show()
 
 但现在，让我们先做一些视觉比较，以帮助我们建立对这两类分布之间差异的直观理解。
 
-
 ### 模拟
 
 下图显示了一次模拟。
@@ -389,7 +387,6 @@ plt.show()
 底部的子图中，柯西的样本显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。
 
 这是典型的重尾分布特征。
-
 
 ### 非负分布
 
@@ -643,7 +640,11 @@ plt.show()
 
 #### Q-Q图
 
-我们也可以使用[Q-Q图](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot)来可视化比较两个概率分布。
+另一种视觉比较方式是{ref}`Q-Q图 <qq_plots>`，我们曾在 {doc}`fitting_distributions` 中介绍过。
+
+在那里，我们将一个数据集与拟合于它的分布进行了比较，并将与45度线的偏离解读为拟合失败程度的诊断依据。
+
+这里我们同样以正态分布作为参照进行比较，因为我们关心的是这些分布与正态分布的偏离程度。
 
 [statsmodels](https://www.statsmodels.org/stable/index.html)包提供了一个方便的[qqplot](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html)函数，该函数默认将样本数据与正态分布的分位数进行比较。
 
@@ -929,7 +930,6 @@ plt.show()
 
 平均化过程往往会消除极端结果。
 
-
 ## 大数定律的失效
 
 重尾分布的一个重要影响是样本平均值可能无法准确估计真实的总体均值。
@@ -1096,7 +1096,6 @@ $$
 
 例如，对数正态分布是重尾的，但它的所有矩都是有限的。
 
-
 ## 延伸阅读
 
 想了解更多关于财富分布中的重尾，可以参考文献 {cite}`pareto1896cours` 和 {cite}`benhabib2018skewed`。
@@ -1110,7 +1109,6 @@ $$
 例如，收入和财富中的重尾会影响生产力增长、商业周期和政治经济学。
 
 欲了解更多，请参阅 {cite}`acemoglu2002political`, {cite}`glaeser2003injustice`, {cite}`bhandari2018inequality` 或 {cite}`ahn2018inequality`。
-
 
 ## 练习
 
