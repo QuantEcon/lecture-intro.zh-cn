@@ -85,7 +85,6 @@ df
 
 下面我们来探讨一些观测分布。
 
-
 ## 样本矩
 
 假设我们有一个取值为 $\{x_1, \ldots, x_n\}$ 的观测分布。
@@ -227,7 +226,6 @@ Pandas 的方法 `x.skew()` 和 `x.kurt()` 采用了这类调整，因此它们�
 还要记住，`scipy.stats.kurtosis` 返回的是 $\hat K - 3$ 而不是 $\hat K$，这也是我们将其输出解读为超额峰度的原因。
 ```
 
-
 ## 样本分位数
 
 并非每个有用的汇总统计量都是矩。
@@ -283,7 +281,6 @@ age_at_death.mean(), age_at_death.median()
 
 我们将在 {doc}`heavy_tails` 中再回到这一点。
 
-
 ## 可视化
 
 汇总统计量将一个数据集压缩为几个数字。
@@ -298,12 +295,17 @@ age_at_death.mean(), age_at_death.median()
 - 箱线图
 - 小提琴图
 
-
 ### 直方图
 
 我们可以按如下方式对刚构建的收入分布绘制直方图
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Histogram of the income data
+    name: fig:income-hist
+---
 fig, ax = plt.subplots()
 ax.hist(x, bins=5, density=True, histtype='bar')
 ax.set_xlabel('income')
@@ -314,6 +316,12 @@ plt.show()
 以下是艾姆斯市房价的直方图。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Histogram of house prices
+    name: fig:price-hist
+---
 fig, ax = plt.subplots()
 ax.hist(price, bins=50, density=True)
 ax.set_xlabel('sale price (US$)')
@@ -326,6 +334,12 @@ plt.show()
 让我们将其与对数价格的直方图进行比较。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Histogram of log house prices
+    name: fig:log-price-hist
+---
 fig, ax = plt.subplots()
 ax.hist(log_price, bins=50, density=True)
 ax.set_xlabel('log of sale price')
@@ -338,6 +352,12 @@ plt.show()
 以下是死亡年龄数据，我们发现其偏度为负。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Histogram of age at death
+    name: fig:age-hist
+---
 fig, ax = plt.subplots()
 ax.hist(age_at_death, bins=101, density=True)
 ax.set_xlabel('age at death')
@@ -350,6 +370,12 @@ plt.show()
 让我们也利用数据集中按性别分列的计数，比较男性和女性。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Age at death by sex
+    name: fig:age-hist-sex
+---
 fig, ax = plt.subplots()
 for sex in ('male', 'female'):
     ax.hist(deaths['age'], weights=deaths[f'deaths_{sex}'], 
@@ -394,6 +420,12 @@ x_amazon.iloc[0]
 让我们把收益率观测值转换为数组并绘制直方图。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Histogram of Amazon monthly returns
+    name: fig:amazon-hist
+---
 fig, ax = plt.subplots()
 ax.hist(x_amazon, bins=20)
 ax.set_xlabel('monthly return (percent change)')
@@ -429,6 +461,12 @@ def plot_ecdf(sample, ax, **kwargs):
 让我们将它应用于房价数据。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: ECDF of house prices
+    name: fig:price-ecdf
+---
 fig, ax = plt.subplots()
 plot_ecdf(price, ax)
 ax.set_xlabel('sale price (US$)')
@@ -443,6 +481,12 @@ plt.show()
 让我们将对数价格与均值和标准差相同的正态分布的 CDF 进行比较。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Log prices against a normal CDF
+    name: fig:log-price-ecdf
+---
 u = scipy.stats.norm(log_price.mean(), log_price.std())
 x_grid = np.linspace(log_price.min(), log_price.max(), 200)
 
@@ -459,7 +503,6 @@ plt.show()
 
 （Seaborn 提供了 `sns.ecdfplot`，用更少的代码即可生成同样的图形。）
 
-
 ### 核密度估计
 
 核密度估计（KDE）为估计和可视化分布的密度提供了一种简单的方法。
@@ -469,6 +512,12 @@ plt.show()
 让我们看一下由亚马逊收益率数据构建的 KDE。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: KDE of Amazon monthly returns
+    name: fig:amazon-kde
+---
 fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax)
 ax.set_xlabel('monthly return (percent change)')
@@ -479,6 +528,12 @@ plt.show()
 KDE 的平滑程度取决于我们如何选择带宽。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: KDE at three different bandwidths
+    name: fig:amazon-kde-bw
+---
 fig, ax = plt.subplots()
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.1, alpha=0.5, label="bw=0.1")
 sns.kdeplot(x_amazon, ax=ax, bw_adjust=0.5, alpha=0.5, label="bw=0.5")
@@ -498,6 +553,12 @@ plt.show()
 以下是对数销售价格的数据，直方图以淡化的方式作为背景显示。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: KDE and histogram of log prices
+    name: fig:log-price-kde
+---
 fig, ax = plt.subplots()
 ax.hist(log_price, bins=50, density=True, alpha=0.25, color='C0')
 sns.kdeplot(log_price, ax=ax, color='C0', lw=2)
@@ -507,7 +568,6 @@ plt.show()
 ```
 
 KDE 描绘出了直方图的形态，同时平滑掉了箱与箱之间的波动。
-
 
 ### 箱线图
 
@@ -522,6 +582,12 @@ KDE 描绘出了直方图的形态，同时平滑掉了箱与箱之间的波动�
 例如，让我们比较不同卧室数量的房屋的价格。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: House prices by number of bedrooms
+    name: fig:price-box-bedrooms
+---
 bedroom_counts = (1, 2, 3, 4, 5)
 groups = [price[houses['bedrooms'] == b] for b in bedroom_counts]
 
@@ -587,6 +653,12 @@ plt.show()
 展示观测分布的另一种方式是小提琴图。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Violin plot of Amazon returns
+    name: fig:amazon-violin
+---
 fig, ax = plt.subplots()
 ax.violinplot(x_amazon)
 ax.set_ylabel('monthly return (percent change)')
@@ -607,6 +679,12 @@ x_costco = prices.pct_change()[1:] * 100
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Amazon and Costco monthly returns
+    name: fig:retailer-violin
+---
 fig, ax = plt.subplots()
 ax.violinplot([x_amazon['AMZN'], x_costco['COST']])
 ax.set_ylabel('monthly return (percent change)')
@@ -620,6 +698,12 @@ plt.show()
 作为第二个比较，让我们回到死亡年龄数据，将男性和女性分开来看。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Age at death, male and female
+    name: fig:age-violin
+---
 male_deaths = np.repeat(deaths['age'], deaths['deaths_male'])
 female_deaths = np.repeat(deaths['age'], deaths['deaths_female'])
 
@@ -659,6 +743,12 @@ u = scipy.stats.norm(μ, σ)
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Amazon returns and a fitted normal
+    name: fig:amazon-normal-fit
+---
 x_grid = np.linspace(-50, 65, 200)
 fig, ax = plt.subplots()
 ax.plot(x_grid, u.pdf(x_grid))
@@ -680,6 +770,12 @@ plt.show()
 - 然后我们绘制它们的直方图并与密度进行比较。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Draws from the normal distribution
+    name: fig:normal-draws
+---
 μ, σ = 0, 1
 u = scipy.stats.norm(μ, σ)
 N = 2000  # Number of observations
@@ -697,7 +793,6 @@ plt.show()
 
 我们将在下一节中探讨这种收敛性。
 
-
 ## 更大的样本
 
 在本讲座中，我们一直在利用观测数据来说明潜在分布的一些性质。
@@ -709,6 +804,12 @@ plt.show()
 我们从一个固定分布中抽取规模逐渐增大的样本，并将每个 ECDF 与生成它的 CDF 进行比较。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: ECDFs converge to the true CDF
+    name: fig:ecdf-convergence
+---
 u = scipy.stats.lognorm(s=0.5)
 x_grid = np.linspace(0, 5, 200)
 
@@ -735,7 +836,6 @@ print(f'{"":16}population mean = {u.mean():.4f}')
 
 这种收敛是*大数定律*的一种体现，我们将在 {doc}`lln_clt` 中讨论。
 
-
 ### 独立性的作用
 
 上述收敛并不是自动发生的。
@@ -756,6 +856,12 @@ $$
 但正如下图所示，它们作为样本毫无用处。
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Repeated draws of a single value
+    name: fig:ecdf-degenerate
+---
 x = u.rvs(random_state=1234)         # a single draw
 
 fig, ax = plt.subplots()
