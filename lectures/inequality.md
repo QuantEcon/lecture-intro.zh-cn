@@ -253,7 +253,7 @@ plt.show()
 该数据集来源于[消费者财务调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances)（SCF）。
 
 ```{code-cell} ipython3
-url = 'https://github.com/QuantEcon/high_dim_data/raw/main/SCF_plus/SCF_plus_mini.csv'
+url = 'https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/SCF_plus_mini.csv'
 df = pd.read_csv(url)
 df_income_wealth = df.dropna()
 ```
