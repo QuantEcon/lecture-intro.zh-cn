@@ -1,0 +1,1906 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>20. 为数据拟合分布 &#8212; Python量化经济学入门</title>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fitting_distributions';</script>
+    <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/fitting_distributions.html" />
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="21. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="prev" title="19. 观测分布" href="observed_distributions.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="为数据拟合分布"/>
+<meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="为数据拟合分布" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/fitting_distributions.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
+<meta property="og:site_name" content="Python量化经济学入门" />
+<meta name="theme-color" content="#ffffff" />
+
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/fitting_distributions.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/fitting_distributions.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/fitting_distributions.html" />
+
+
+  </head>
+<body>
+
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=fitting_distributions>
+
+                <div class="qe-page__toc">
+
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">20.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">20.2. 矩方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-q">20.3. Q-Q 图</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">20.4. 科尔莫戈罗夫-斯米尔诺夫统计量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-class">20.5. 选择参数类</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">20.6. 计数数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">20.7. 当正态分布失效时</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">20.7.1. 一个尾部更重的候选者</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">20.8. 练习</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    <a href=https://quantecon.org><img src="_static/quantecon-logo-transparent.png" class="dark-logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            
+                            
+                            
+                        </div>
+
+                    </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
+
+                    </div>
+
+                    <!-- Authors section -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>托马斯·萨金特（Thomas J. Sargent）</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>约翰·斯塔胡斯基（John Stachurski）</span></a>
+                                
+                            
+                        </p>
+
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Aug 11, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/fitting_distributions.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/9114875" class="changelog-hash">9114875</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">18 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Read the six folded datasets from data-lectures, not high_dim_data (#293)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="fitting-distributions">
+<span id="id1"></span><h1><span class="section-number">20. </span>为数据拟合分布<a class="headerlink" href="#fitting-distributions" title="Link to this heading">#</a></h1>
+<section id="index-0">
+<span id="id2"></span><h2><span class="section-number">20.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
+<p>在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中，我们研究了一系列常见的概率分布。</p>
+<p>在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中，我们研究了观测数据。</p>
+<p>在本讲座中，我们将两者联系起来，探讨一个在应用工作中不断出现的问题：</p>
+<p><em>给定一个数据集，我们应该用哪种概率分布来描述它？</em></p>
+<p>这个问题包含两个部分。</p>
+<p>首先，我们必须选择一个<strong>参数类</strong>——一组由少量参数索引的分布。</p>
+<p>例如，正态分布族就是一个参数类，由均值 <span class="math notranslate nohighlight">\(\mu\)</span> 和标准差 <span class="math notranslate nohighlight">\(\sigma\)</span> 索引。</p>
+<p>泊松分布族则是另一个参数类，由单一参数 <span class="math notranslate nohighlight">\(\lambda\)</span> 索引。</p>
+<p>其次，在选定一个类别之后，我们必须在其中选择使拟合尽可能接近的<strong>参数</strong>。</p>
+<p>本讲座主要讨论第一部分。</p>
+<p>对于第二部分，我们只使用一种技术，称为矩方法，更全面的处理留给 <a class="reference internal" href="mle.html"><span class="doc">最大似然估计</span></a>。</p>
+<p>即便如此，我们还是从参数开始讲起，因为要评判一个类别，我们首先必须能够对其进行拟合。</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>yfinance
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting yfinance
+  Downloading yfinance-1.5.2-py2.py3-none-any.whl.metadata (6.2 kB)
+Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (3.0.3)
+Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.4.6)
+Requirement already satisfied: requests&gt;=2.31 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.34.2)
+Collecting multitasking&gt;=0.0.7 (from yfinance)
+  Downloading multitasking-0.0.13-py3-none-any.whl.metadata (16 kB)
+Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.9.4)
+Collecting pytz&gt;=2022.5 (from yfinance)
+  Downloading pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+Collecting peewee&gt;=3.16.2 (from yfinance)
+  Downloading peewee-4.3.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.15.0)
+Collecting curl_cffi&gt;=0.15 (from yfinance)
+  Downloading curl_cffi-0.16.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (17 kB)
+Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (6.33.5)
+Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (16.0)
+Requirement already satisfied: soupsieve&gt;=1.6.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.8.4)
+Requirement already satisfied: typing-extensions&gt;=4.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (4.16.0)
+Requirement already satisfied: cffi&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from curl_cffi&gt;=0.15-&gt;yfinance) (2.1.0)
+Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from curl_cffi&gt;=0.15-&gt;yfinance) (2026.6.17)
+Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from cffi&gt;=2.0.0-&gt;curl_cffi&gt;=0.15-&gt;yfinance) (3.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
+Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.3.0-&gt;yfinance) (1.17.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.4.7)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.18)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.7.0)
+Downloading yfinance-1.5.2-py2.py3-none-any.whl (144 kB)
+Downloading curl_cffi-0.16.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (13.5 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/13.5 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">13.5/13.5 MB</span> <span class=" -Color -Color-Red">64.3 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
+Downloading multitasking-0.0.13-py3-none-any.whl (16 kB)
+Downloading peewee-4.3.0-py3-none-any.whl (179 kB)
+Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+Installing collected packages: pytz, multitasking, peewee, curl_cffi, yfinance
+?25l
+   ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/5</span> [peewee]
+   ━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/5</span> [curl_cffi]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5/5</span> [yfinance]
+
+Successfully installed curl_cffi-0.16.0 multitasking-0.0.13 peewee-4.3.0 pytz-2026.3.post1 yfinance-1.5.2
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">legacy</span><span class="o">=</span><span class="s1">&#39;1.25&#39;</span><span class="p">)</span>   <span class="c1"># print scalars as plain numbers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>让我们使用我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中接触过的埃姆斯（Ames）房价数据。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/data-lectures/raw/main/&#39;</span>
+       <span class="s1">&#39;lectures/ames_house_prices.csv&#39;</span><span class="p">)</span>
+<span class="n">houses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">houses</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">20.2. </span>矩方法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>假设我们已经确定了一个参数类，现在想选择其参数。</p>
+<p>一种简单而通用的策略是<strong>矩方法</strong>。</p>
+<p>如果该类别有 <span class="math notranslate nohighlight">\(k\)</span> 个参数，我们</p>
+<ol class="arabic simple">
+<li><p>计算数据的前 <span class="math notranslate nohighlight">\(k\)</span> 个样本矩，</p></li>
+<li><p>将相应的总体矩写成参数的函数，并且</p></li>
+<li><p>选择使这两组数值相等的参数。</p></li>
+</ol>
+<p>实际上，我们是在要求分布重现我们认为最重要的数据特征。</p>
+<p>我们在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中已经使用过一次这种思路，当时我们为美国成年人的身高拟合了一个正态分布。</p>
+<p>正态分布有两个参数，所以我们使用了两个矩：将 <span class="math notranslate nohighlight">\(\mu\)</span> 设为样本均值，将 <span class="math notranslate nohighlight">\(\sigma\)</span> 设为样本标准差。</p>
+<p>让我们把同样的思路应用到房价数据上，使用两个定义在 <span class="math notranslate nohighlight">\((0, \infty)\)</span> 上的类别，从而尊重价格为正这一事实。</p>
+<p><strong>对数正态</strong>分布有参数 <span class="math notranslate nohighlight">\(\mu\)</span> 和 <span class="math notranslate nohighlight">\(\sigma\)</span>，满足</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[X] = \exp \left( \mu + \frac{\sigma^2}{2} \right)
+\qquad \text{and} \qquad
+\mathbb{V}[X] = \left[ \exp(\sigma^2) - 1 \right] \exp(2\mu + \sigma^2)
+\]</div>
+<p>将它们分别设为样本均值 <span class="math notranslate nohighlight">\(\bar x\)</span> 和样本方差 <span class="math notranslate nohighlight">\(s^2\)</span> 并求解，得到</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \sigma^2 = \ln \left( 1 + \frac{s^2}{\bar x^2} \right)
+\qquad \text{and} \qquad
+\hat \mu = \ln \bar x - \frac{\hat \sigma^2}{2}
+\]</div>
+<p><strong>伽马</strong>分布有参数 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span>，均值为 <span class="math notranslate nohighlight">\(\alpha / \beta\)</span>，方差为 <span class="math notranslate nohighlight">\(\alpha / \beta^2\)</span>。</p>
+<p>以同样的方式求解在这里更简单：</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \alpha = \frac{\bar x^2}{s^2}
+\qquad \text{and} \qquad
+\hat \beta = \frac{\bar x}{s^2}
+\]</div>
+<p>让我们实现全部三种拟合。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_normal</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_lognormal</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">σ_squared</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">v</span> <span class="o">/</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">-</span> <span class="n">σ_squared</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_squared</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">μ</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_gamma</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">v</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">v</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>每个函数返回的都是我们在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中使用过的那种分布对象。</p>
+<p>让我们检查一下，拟合出的对数正态分布是否如设计那样重现了数据的均值和方差。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">fit_lognormal</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+<span class="n">u</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">price</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(180796.06006825934, 180796.0600682594)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">var</span><span class="p">(),</span> <span class="n">price</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6381883615.688435, 6381883615.6884365)
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在，让我们把三个拟合密度绘制在数据的直方图上进行对比。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;normal&#39;</span><span class="p">:</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">price</span><span class="p">),</span>
+        <span class="s1">&#39;lognormal&#39;</span><span class="p">:</span> <span class="n">fit_lognormal</span><span class="p">(</span><span class="n">price</span><span class="p">),</span>
+        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">fit_gamma</span><span class="p">(</span><span class="n">price</span><span class="p">)}</span>
+
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">price</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">fits</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;sale price (US$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-price-densities">
+<a class="reference internal image-reference" href="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png"><img alt="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png" src="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">Three fitted densities for house prices</span><a class="headerlink" href="#fig-price-densities" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>正态密度显然是错的：它是对称的，而数据并不对称，而且它还在负价格上赋予了权重。</p>
+<p>另外两个看起来是合理的。</p>
+<p>要在它们之间做出选择，我们需要比看一眼图形更精确的方法。</p>
+</section>
+<section id="q-q">
+<span id="qq-plots"></span><h2><span class="section-number">20.3. </span>Q-Q 图<a class="headerlink" href="#q-q" title="Link to this heading">#</a></h2>
+<p><strong>Q-Q 图</strong>（分位数-分位数图的简称）通过将两个分布的分位数相互对照绘图来比较它们。</p>
+<p>要将样本与拟合分布进行比较，我们先对数据排序</p>
+<div class="math notranslate nohighlight">
+\[
+x_{(1)} \leq x_{(2)} \leq \cdots \leq x_{(n)}
+\]</div>
+<p><span class="math notranslate nohighlight">\(x_{(i)}\)</span> 估计的是哪个分位数？</p>
+<p>回想一下 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中的内容，ECDF 在每个观测点处跳升 <span class="math notranslate nohighlight">\(1/n\)</span>。</p>
+<p>在 <span class="math notranslate nohighlight">\(x_{(i)}\)</span> 处，它从 <span class="math notranslate nohighlight">\((i-1)/n\)</span> 跳升到 <span class="math notranslate nohighlight">\(i/n\)</span>。</p>
+<p>换句话说，有一部分 <span class="math notranslate nohighlight">\((i-1)/n\)</span> 的观测值严格小于 <span class="math notranslate nohighlight">\(x_{(i)}\)</span>，而有一部分 <span class="math notranslate nohighlight">\(i/n\)</span> 的观测值小于或等于它。</p>
+<p>所以数据并没有唯一确定 <span class="math notranslate nohighlight">\(x_{(i)}\)</span> 所要估计的那个分位数——它们提供的是一个小区间。</p>
+<p>通常的折中做法是取中间值，将 <span class="math notranslate nohighlight">\(x_{(i)}\)</span> 视为阶数为 <span class="math notranslate nohighlight">\((i - 0.5)/n\)</span> 的分位数的估计值。</p>
+<p>这种选择还避免了样本顶端的一个问题。</p>
+<p>如果我们使用 <span class="math notranslate nohighlight">\(i/n\)</span>，那么最大的观测值会与阶数为 <span class="math notranslate nohighlight">\(n/n = 1\)</span> 的分位数相匹配，而对于正态分布、对数正态分布以及我们所使用的其他无界分布，该分位数为 <span class="math notranslate nohighlight">\(+\infty\)</span>。</p>
+<p>如果拟合分布很好地描述了数据，那么 <span class="math notranslate nohighlight">\(x_{(i)}\)</span> 应该接近该分布对应的分位数，即</p>
+<div class="math notranslate nohighlight">
+\[
+F^{-1} \left( \frac{i - 0.5}{n} \right)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>还有其他惯例在使用，例如 <span class="math notranslate nohighlight">\(i/(n+1)\)</span> 和 <span class="math notranslate nohighlight">\((i - 0.375)/(n + 0.25)\)</span>。</p>
+<p>它们被称为<em>绘图位置</em>，不同的选择只会影响图形的两端，且随着 <span class="math notranslate nohighlight">\(n\)</span> 的增长，其影响会缩小。</p>
+</div>
+<p>因此，我们将拟合出的分位数绘制在横轴上，样本值绘制在纵轴上。</p>
+<p>一个良好的拟合会将点落在 45 度线上。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">qq_plot</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="s2">&quot;Plot sample quantiles against the quantiles of the distribution u.&quot;</span>
+    <span class="n">x_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">x_sorted</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">u</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">],</span> <span class="p">[</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;fitted quantiles&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;sample quantiles&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>让我们从一个我们预期会拟合良好的例子开始。</p>
+<p>在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中，我们发现美国成年女性的身高样本偏度和超额峰度都接近于零。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/data-lectures/raw/main/&#39;</span>
+       <span class="s1">&#39;lectures/us_adult_heights.csv&#39;</span><span class="p">)</span>
+<span class="n">heights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">female</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">heights</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;female&#39;</span><span class="p">][</span><span class="s1">&#39;height_cm&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">female</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-qq-heights">
+<a class="reference internal image-reference" href="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png"><img alt="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png" src="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.2 </span><span class="caption-text">Female heights against a fitted normal</span><a class="headerlink" href="#fig-qq-heights" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>这些点几乎完全落在直线上，只是在两端有轻微的偏离，因为样本中在这些区域的观测值较少，分位数估计带有噪声。</p>
+<p>现在让我们尝试将房价数据与拟合的正态分布进行比较。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">price</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-qq-prices">
+<a class="reference internal image-reference" href="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png"><img alt="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png" src="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.3 </span><span class="caption-text">House prices against a fitted normal</span><a class="headerlink" href="#fig-qq-prices" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>这是一幅截然不同的图景。</p>
+<p>点偏离了直线，而且这种偏离有明确的含义：靠右侧的样本分位数远大于拟合分位数，这说明数据的右尾比正态分布所允许的要长得多。</p>
+<p>偏离的形状告诉我们拟合失败的方式。</p>
+<ul class="simple">
+<li><p>像这里一样向上弯曲的点表示右偏。</p></li>
+<li><p>呈 S 形的点——左侧在直线下方，右侧在直线上方——表示数据的<em>两侧</em>尾部都比拟合分布更重。</p></li>
+</ul>
+<p>让我们通过取对数来检验第二种情况，我们知道取对数会使房价数据大致对称。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">log_price</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">log_price</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-qq-log-prices">
+<a class="reference internal image-reference" href="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png"><img alt="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png" src="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.4 </span><span class="caption-text">Log house prices against a normal</span><a class="headerlink" href="#fig-qq-log-prices" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>弯曲消失了，这证实了我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中通过样本偏度得到的结论。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> 包提供了 <code class="docutils literal notranslate"><span class="pre">sm.qqplot</span></code>，它可以用一行代码生成此类图形，默认将数据与正态分布进行比较。</p>
+<p>我们之所以自己构建了一个版本，部分原因是这种构造本身值得理解，部分原因是我们的版本可以将数据与我们选择的任何分布进行比较，正如我们下面所做的那样。</p>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">20.4. </span>科尔莫戈罗夫-斯米尔诺夫统计量<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>Q-Q 图很有信息量，但它们需要我们对图形做出判断。</p>
+<p>有时我们想要一个单一的数字来衡量数据与拟合分布之间的差距。</p>
+<p>一种自然的度量方法是，将我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中接触过的数据的 ECDF 与拟合分布的 CDF 进行比较。</p>
+<p><strong>科尔莫戈罗夫-斯米尔诺夫统计量</strong>是两者之间最大的垂直差距：</p>
+<div class="math notranslate nohighlight">
+\[
+D = \max_x \, | F_n(x) - F(x) |
+\]</div>
+<p>由于 <span class="math notranslate nohighlight">\(F_n\)</span> 只在观测值处跳跃，我们可以通过检查每次跳跃前后的差距来计算 <span class="math notranslate nohighlight">\(D\)</span>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ks_statistic</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="s2">&quot;Largest vertical distance between the ECDF of the sample and the CDF of u.&quot;</span>
+    <span class="n">x_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">)</span>
+    <span class="n">above</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">-</span> <span class="n">F</span>     <span class="c1"># gap just after each jump</span>
+    <span class="n">below</span> <span class="o">=</span> <span class="n">F</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>       <span class="c1"># gap just before each jump</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">above</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">below</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>让我们通过绘制对数价格的 ECDF 与拟合 CDF，以及取得最大值的那个差距，来看看它衡量的是什么。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">log_price</span><span class="p">)</span>
+<span class="n">x_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">log_price</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">)</span>
+
+<span class="c1"># locate the largest gap</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">-</span> <span class="n">F</span><span class="p">,</span> <span class="n">F</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">gaps</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ECDF&#39;</span><span class="p">)</span>
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_sorted</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted normal CDF&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x_sorted</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;largest gap&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;log of sale price&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-ks-gap">
+<a class="reference internal image-reference" href="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png"><img alt="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png" src="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.5 </span><span class="caption-text">Largest gap between ECDF and CDF</span><a class="headerlink" href="#fig-ks-gap" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks_statistic</span><span class="p">(</span><span class="n">log_price</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.041302695555679836
+</pre></div>
+</div>
+</div>
+</div>
+<p>这个统计量很小，这告诉我们 ECDF 从未与拟合的 CDF 相差太远。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>你可能会认为，现在我们可以<em>检验</em>数据是否来自拟合的分布，只需判断 <span class="math notranslate nohighlight">\(D\)</span> 是否大于纯粹由随机性所能产生的值。</p>
+<p>这正是科尔莫戈罗夫-斯米尔诺夫检验所做的事情，<code class="docutils literal notranslate"><span class="pre">scipy</span></code> 将其实现为 <code class="docutils literal notranslate"><span class="pre">scipy.stats.kstest</span></code>。</p>
+<p>我们在这里不深入讨论它，因为它需要知道当分布确实是正确的时候 <span class="math notranslate nohighlight">\(D\)</span> 的行为方式，而这需要比我们目前所展开的更多理论。</p>
+<p>这里还有一个陷阱：通常的理论假设分布是事先指定的，而我们却是用同一份数据来选择其参数的。</p>
+</div>
+</section>
+<section id="choosing-class">
+<span id="id5"></span><h2><span class="section-number">20.5. </span>选择参数类<a class="headerlink" href="#choosing-class" title="Link to this heading">#</a></h2>
+<p>现在我们有了一种在候选类别之间做出选择的方法。</p>
+<p>对于每个类别，我们通过矩方法拟合参数，然后计算 <span class="math notranslate nohighlight">\(D\)</span>。</p>
+<p><span class="math notranslate nohighlight">\(D\)</span> 最小的类别就是其 CDF 最接近数据的那个。</p>
+<p>让我们将其应用到房价数据上。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">label</span><span class="p">:</span> <span class="n">ks_statistic</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">fits</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lognormal    0.053044
+gamma        0.070460
+normal       0.123422
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>对数正态分布胜出，伽马分布位居第二，正态分布则远远落后于第三。</p>
+<p>这与我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中的发现一致，当时对价格数据取对数后得到的样本偏度几乎恰好为零。</p>
+<p>以下是三个拟合的 CDF 与数据的 ECDF 的对比，展示了同样的排名。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">price</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">price</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">price</span><span class="p">),</span>
+        <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ECDF&#39;</span><span class="p">)</span>
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">price</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">price</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">400</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">fits</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;sale price (US$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-price-cdfs">
+<a class="reference internal image-reference" href="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png"><img alt="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png" src="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.6 </span><span class="caption-text">Fitted CDFs against the ECDF</span><a class="headerlink" href="#fig-price-cdfs" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>这里有三点需要提醒。</p>
+<p>首先，只有当各个类别拥有相同数量的参数时，这种比较才是公平的，正如本例中的情形。</p>
+<p>参数更多的类别可以将自己弯曲得更贴近任何数据集，而 <span class="math notranslate nohighlight">\(D\)</span> 并不会因此对它做出惩罚。</p>
+<p>特别是，如果一个类别是另一个类别的特例，那么较大的类别永远不会表现得更差。</p>
+<p>其次，<span class="math notranslate nohighlight">\(D\)</span> 在分布的中部最为敏感，因为那里的 CDF 变化很快，而在尾部最不敏感。</p>
+<p>如果我们主要关心极端结果——这在经济学和金融学中经常出现——那么一个较小的 <span class="math notranslate nohighlight">\(D\)</span> 可能会产生误导。</p>
+<p>第三，胜出者只是我们恰好尝试过的候选者中最好的一个。</p>
+<p>这里的结果并不能告诉我们胜出的类别是对数据的良好描述——只能说明它比其他备选方案更好。</p>
+<p>我们在下面进一步讨论这一点。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">20.6. </span>计数数据<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>到目前为止，我们的数据都是连续型的。</p>
+<p>矩方法同样适用于离散数据。</p>
+<p>考虑<strong>泊松</strong>分布，我们在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中将其作为固定时间间隔内事件数量的模型接触过。</p>
+<p>它只有一个参数 <span class="math notranslate nohighlight">\(\lambda\)</span>，其均值为 <span class="math notranslate nohighlight">\(\lambda\)</span>，因此矩方法给出</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \lambda = \bar x
+\]</div>
+<p>让我们把它应用到足球比赛中的进球数上。</p>
+<p>该数据集包含英格兰超级联赛十个赛季中每场比赛的全场比分。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/data-lectures/raw/main/&#39;</span>
+       <span class="s1">&#39;lectures/epl_match_goals.csv&#39;</span><span class="p">)</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">matches</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>season</th>
+      <th>date</th>
+      <th>home_team</th>
+      <th>away_team</th>
+      <th>home_goals</th>
+      <th>away_goals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-16</td>
+      <td>2015-08-08</td>
+      <td>Manchester United</td>
+      <td>Tottenham Hotspur</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-16</td>
+      <td>2015-08-08</td>
+      <td>AFC Bournemouth</td>
+      <td>Aston Villa</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-16</td>
+      <td>2015-08-08</td>
+      <td>Everton FC</td>
+      <td>Watford FC</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-16</td>
+      <td>2015-08-08</td>
+      <td>Leicester City</td>
+      <td>Sunderland AFC</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-16</td>
+      <td>2015-08-08</td>
+      <td>Norwich City</td>
+      <td>Crystal Palace</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>我们关心的是每场比赛的总进球数。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">goals</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="s1">&#39;home_goals&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">matches</span><span class="p">[</span><span class="s1">&#39;away_goals&#39;</span><span class="p">]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">goals</span><span class="p">),</span> <span class="n">goals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3800, 2.83)
+</pre></div>
+</div>
+</div>
+</div>
+<p>泊松分布有一个不寻常的性质：其方差等于均值。</p>
+<p>这为我们提供了一个可以在拟合之前使用的诊断方法。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">goals</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">goals</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.83, 2.7770939720979206)
+</pre></div>
+</div>
+</div>
+</div>
+<p>这两个值很接近，这是令人鼓舞的。</p>
+<p>让我们拟合分布，并将拟合的概率与观测频率进行比较。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">goals</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="n">goals</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">frequencies</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;observed frequency&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted Poisson&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;goals per match&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-goals-poisson">
+<a class="reference internal image-reference" href="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png"><img alt="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png" src="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.7 </span><span class="caption-text">Goals per match and fitted Poisson</span><a class="headerlink" href="#fig-goals-poisson" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>拟合效果良好。</p>
+<p>这是一个众所周知的经验规律，其原因值得说明：进球是罕见事件，在整场比赛过程中以大致恒定的速率发生，并且彼此之间基本独立。</p>
+<p>这些正是泊松分布产生所需要的条件。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">20.7. </span>当正态分布失效时<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>当我们在上面 <a class="reference internal" href="#choosing-class"><span class="std std-ref">比较各个类别</span></a> 时，我们列出了一系列候选类别，对每一个进行拟合，并保留 KS 距离最小的那个。</p>
+<p>这样的程序总能产生一个胜出者。</p>
+<p>但重要的是要记住，胜出者仍然可能是对数据的糟糕描述，因为它只是我们恰好尝试过的候选者中最好的一个。</p>
+<p>补救的方法是既要评估拟合的排名，也要观察拟合本身，当它失败时，用它失败的方式来启发我们找到更好的候选方案。</p>
+<p>让我们回到我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中研究过的亚马逊股票的月度收益率，看看这如何发挥作用。</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1mo&#39;</span><span class="p">)</span>
+<span class="n">prices</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="s1">&#39;AMZN&#39;</span><span class="p">]</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>收益率有正有负，所以在我们的连续型类别中，只有正态分布可用。</p>
+<p>让我们看看 Q-Q 图。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">returns</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-qq-returns">
+<a class="reference internal image-reference" href="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png"><img alt="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png" src="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.8 </span><span class="caption-text">Amazon returns against a fitted normal</span><a class="headerlink" href="#fig-qq-returns" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>这就是上面描述过的 S 形：最小的收益率比拟合的正态分布所预测的更负，而最大的收益率则更正。</p>
+<p>换句话说，数据的两个尾部都比正态分布所允许的更重。</p>
+<p>现在让我们计算 KS 统计量。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks_statistic</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">returns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06799509014059524
+</pre></div>
+</div>
+</div>
+</div>
+<p>单独来看，这个数字看起来并不显眼。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>不应该在不同大小的数据集之间比较 <span class="math notranslate nohighlight">\(D\)</span> 的值。</p>
+<p>即使拟合分布完全正确，<span class="math notranslate nohighlight">\(D\)</span> 也会随着 <span class="math notranslate nohighlight">\(n\)</span> 的增长而缩小，所以来自小样本的一个小数值的意义不如来自大样本的相同数值。</p>
+<p>这里的重点不是 <span class="math notranslate nohighlight">\(D\)</span> 比之前某个数字更小或更大，而是它完全没有暗示 Q-Q 图所清楚展示出来的问题。</p>
+</div>
+<p>这说明了上面提到的第二个警告。</p>
+<p>正态分布对收益率数据的中部描述得相当不错，而这正是 KS 统计量所关注的区域。</p>
+<p>问题出在尾部，而尾部恰恰是资产收益率研究最关心的部分，因为它们包含着巨大的损失。</p>
+<p>这里的教训是，单一的汇总数字永远无法替代对数据本身的观察。</p>
+<section id="id8">
+<h3><span class="section-number">20.7.1. </span>一个尾部更重的候选者<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>Q-Q 图不仅告诉我们正态分布失效了。</p>
+<p>它还告诉我们它<em>是如何</em>失效的：数据的尾部比拟合的正态分布更重。</p>
+<p>这指向了一个补救办法，即尝试一个尾部更重的类别。</p>
+<p>其中一个这样的类别是<strong>学生 t 分布</strong>，它像正态分布一样对称且呈钟形，但带有一个额外的参数 <span class="math notranslate nohighlight">\(\nu &gt; 0\)</span>，称为<em>自由度</em>，用于控制尾部的权重。</p>
+<p>较小的 <span class="math notranslate nohighlight">\(\nu\)</span> 值会产生重尾，而当 <span class="math notranslate nohighlight">\(\nu \to \infty\)</span> 时，该分布收敛到正态分布。</p>
+<p>平移和缩放使我们得到一个三参数类别，因此矩方法需要用到三个矩。</p>
+<p>前两个是均值和方差，如前所述。</p>
+<p>第三个矩在这里没有用，因为该类别的每个成员都是对称的，因此无论 <span class="math notranslate nohighlight">\(\nu\)</span> 取何值，偏度都为零。</p>
+<p>所以我们改用第四个矩，利用该类别的成员在 <span class="math notranslate nohighlight">\(\nu &gt; 4\)</span> 时具有超额峰度 <span class="math notranslate nohighlight">\(6/(\nu - 4)\)</span> 这一事实。</p>
+<p>将其与样本超额峰度 <span class="math notranslate nohighlight">\(\hat K\)</span> 匹配，得到</p>
+<div class="math notranslate nohighlight">
+\[
+\hat \nu = 4 + \frac{6}{\hat K}
+\]</div>
+<p>然后方差 <span class="math notranslate nohighlight">\(\nu \sigma^2 / (\nu - 2)\)</span> 便确定了尺度参数。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_t</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sample</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="n">ν</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">/</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">ν</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">ν</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">ν</span><span class="p">))</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">fit_t</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="n">u</span><span class="o">.</span><span class="n">kwds</span><span class="p">[</span><span class="s1">&#39;df&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.804215121689082
+</pre></div>
+</div>
+</div>
+</div>
+<p>让我们看看它是否表现得更好。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-qq-returns-t">
+<a class="reference internal image-reference" href="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png"><img alt="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png" src="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 20.9 </span><span class="caption-text">Amazon returns against a fitted t</span><a class="headerlink" href="#fig-qq-returns-t" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>系统性的 S 形消失了。</p>
+<p>除了少数极端观测值——此时拟合的分位数略微超出——其余的点都紧贴在直线上。</p>
+<p>KS 距离也下降了约 40%。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks_statistic</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04114771740390599
+</pre></div>
+</div>
+</div>
+</div>
+<p>所以，并非没有什么分布能拟合这些数据——我们只是还没有尝试一个允许重尾的类别。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>我们不应对拟合出的 <span class="math notranslate nohighlight">\(\nu\)</span> 值给予过多的重视。</p>
+<p>我们对它的估计来自样本峰度，这是一个四阶矩，而正是在尾部较重的情况下，高阶矩的估计才会变得不精确。</p>
+<p>改用最大似然法来拟合这个分布，正如我们在 <a class="reference internal" href="mle.html"><span class="doc">最大似然估计</span></a> 中所做的那样，会得到 <span class="math notranslate nohighlight">\(\nu \approx 3.6\)</span> 而不是 <span class="math notranslate nohighlight">\(5.8\)</span>，且 KS 距离会更小。</p>
+<p>矩方法简单而通用，但它并不总是对数据的最佳利用方式。</p>
+</div>
+<p>具有重尾的分布，以及它们如何改变我们对风险的思考方式，是 <a class="reference internal" href="heavy_tails.html"><span class="doc">重尾分布</span></a> 的主题。</p>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">20.8. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>下一个数据集记录了 2000 年至 2024 年间日本周边地区发生的所有 5 级及以上地震，数据来源为
+<a class="reference external" href="https://earthquake.usgs.gov/earthquakes/search/">美国地质调查局</a>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/data-lectures/raw/main/&#39;</span>
+       <span class="s1">&#39;lectures/japan_earthquakes.csv&#39;</span><span class="p">)</span>
+<span class="n">quakes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">quakes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>magnitude</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>depth_km</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-09T04:02:23.680Z</td>
+      <td>5.4</td>
+      <td>37.280</td>
+      <td>141.515</td>
+      <td>56.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-01-10T16:40:42.240Z</td>
+      <td>5.7</td>
+      <td>27.350</td>
+      <td>139.979</td>
+      <td>453.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-01-11T23:43:56.450Z</td>
+      <td>5.1</td>
+      <td>40.498</td>
+      <td>122.994</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-01-13T18:52:12.030Z</td>
+      <td>5.2</td>
+      <td>44.393</td>
+      <td>149.492</td>
+      <td>48.9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-01-23T07:40:04.900Z</td>
+      <td>5.5</td>
+      <td>30.239</td>
+      <td>130.768</td>
+      <td>42.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="exercise admonition" id="fit_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 20.1 </span></p>
+<section id="exercise-content">
+<p>地震常常被建模为以某个恒定速率随机且独立地发生。</p>
+<p>如果这是真的，那么连续两次地震之间的时间间隔应服从指数分布。</p>
+<p>利用上面的数据，计算连续两次地震之间的天数间隔，用矩方法拟合一个指数分布，并评估其拟合效果。</p>
+<p>（指数分布有一个参数 <span class="math notranslate nohighlight">\(\lambda\)</span>，均值为 <span class="math notranslate nohighlight">\(1/\lambda\)</span>。）</p>
+<p>这个模型是否成立？</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="fitting_distributions-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex1"> Exercise 20.1</a></p>
+<section id="solution-content">
+<p>以下是一种解法。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quakes</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ISO8601&#39;</span><span class="p">)</span>
+<span class="n">gaps</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">gaps</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">gaps</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/2c6ad2f3c3c3fe9e91808c68e8e5f00bcc737e3b0465660f3d5164363b268132.png"><img alt="_images/2c6ad2f3c3c3fe9e91808c68e8e5f00bcc737e3b0465660f3d5164363b268132.png" src="_images/2c6ad2f3c3c3fe9e91808c68e8e5f00bcc737e3b0465660f3d5164363b268132.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>拟合效果很差，最大的间隔时间远远超出了指数分布所预测的值。</p>
+<p>第二个诊断方法让问题更加清晰。</p>
+<p>对于指数分布，标准差等于均值。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaps</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">gaps</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.5645754636399616, 3.765224536996305)
+</pre></div>
+</div>
+</div>
+</div>
+<p>标准差约为均值的一倍半，因此数据的变异性远大于该模型所允许的程度。</p>
+<p>原因在于地震<em>并非</em>相互独立。</p>
+<p>大地震之后会有余震，因此事件是成簇到来的，中间穿插着长时间的平静期。</p>
+<p>我们可以通过统计每月的事件数直接看到这一点。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monthly</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">monthly</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">monthly</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5979/2771413300.py:1: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  monthly = times.dt.to_period(&#39;M&#39;).value_counts().sort_index()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11.856666666666667, 1148.9793868450386)
+</pre></div>
+</div>
+</div>
+</div>
+<p>如果到达过程是泊松过程，这两个数字应该大致相等。</p>
+<p>而这里方差是均值的许多倍，这正是聚集性的标志。</p>
+<p>这与 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中关于独立性的讨论相呼应：只有当观测值带来新信息时，样本才能告诉我们关于分布的信息，而余震大多只是告诉我们主震已经告诉过我们的事情。</p>
+</section>
+</div>
+<div class="exercise admonition" id="fit_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 20.2 </span></p>
+<section id="exercise-content">
+<p>在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中，我们发现日本的死亡年龄的样本偏度约为 <span class="math notranslate nohighlight">\(-1.6\)</span>。</p>
+<p>用矩方法为该数据拟合一个正态分布，并用 Q-Q 图展示其失效之处。</p>
+<p>点向哪个方向弯曲？为什么？</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="fitting_distributions-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex2"> Exercise 20.2</a></p>
+<section id="solution-content">
+<p>以下是一种解法。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/data-lectures/raw/main/&#39;</span>
+       <span class="s1">&#39;lectures/japan_deaths_by_age.csv&#39;</span><span class="p">)</span>
+<span class="n">deaths</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">age_at_death</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">deaths</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">deaths</span><span class="p">[</span><span class="s1">&#39;deaths_total&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">qq_plot</span><span class="p">(</span><span class="n">age_at_death</span><span class="p">,</span> <span class="n">fit_normal</span><span class="p">(</span><span class="n">age_at_death</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/a730302a2795c26c4fde6b740c0a73bc02d786aff0d30d77ceef111af60a2185.png"><img alt="_images/a730302a2795c26c4fde6b740c0a73bc02d786aff0d30d77ceef111af60a2185.png" src="_images/a730302a2795c26c4fde6b740c0a73bc02d786aff0d30d77ceef111af60a2185.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>点向下弯曲，这与房价图形的情形正好相反。</p>
+<p>在左端，样本分位数远低于拟合分位数，因为数据在年轻年龄段有一条正态分布无法重现的长左尾。</p>
+<p>图中还显示了第二个、与此无关的问题：右端的点沿 <span class="math notranslate nohighlight">\(y = 100\)</span> 呈水平延伸。</p>
+<p>这就是 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中讨论过的“100 岁及以上”类别，它将所有年龄都限定为 100。</p>
+<p>Q-Q 图能非常清楚地展示这类记录惯例，因为它们表现为许多观测值共享同一个数值所形成的平坦区段。</p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  导言
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. 关于这些讲座
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  经济数据
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. 长期增长
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. 商业周期
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. 通货膨胀的历史
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   5. 法国大革命期间的通货膨胀
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. 收入与财富不平等
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   7. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   9. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   10. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. 现值
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. 消费平滑
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   13. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   16. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   17. 求解平方根
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  概率与分布
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   18. 概率分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   20. 为数据拟合分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   21. 大数定律与中心极限定理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   22. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   23. 重尾分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   24. 种族隔离
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  非线性动态
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   25. 一维动力学
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   26. 索洛-斯旺增长模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   27. 蛛网模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   28. 世代交叠模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   29. 商品价格
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  货币政策与财政政策的相互作用
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation.html">
+   30. 通过货币资助的政府赤字和价格水平
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unpleasant.html">
+   31. 一些不愉快的货币主义算术
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation_nonlinear.html">
+   32. 通货膨胀税的拉弗曲线
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laffer_adaptive.html">
+   33. 拉弗曲线与自适应预期
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  随机动态
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   34. AR(1) 过程
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   35. 马尔科夫链：基本概念
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   36. 马尔科夫链：不可约性与遍历性
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   37. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  优化
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   38. 线性规划
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   39. 最短路径
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  高维建模
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   40. 佩龙-弗罗贝尼乌斯定理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   41. 输入-输出模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   42. 就业的湖泊模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   43. 网络
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  市场与竞争性均衡
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   44. 多种商品的供需关系
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   45. 具有异质性的市场均衡
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   46. 简单线性回归模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   47. 最大似然估计
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  其它
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   48. 故障排除
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   49. 参考文献
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   50. 执行统计数据
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="https://quantecon.github.io/lecture-intro.zh-cn/_notebooks/fitting_distributions.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/fitting_distributions.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/fitting_distributions.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/fitting_distributions.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-intro.zh-cn.notebooks/main?urlpath=tree/fitting_distributions.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-intro.zh-cn.notebooks/blob/main/fitting_distributions.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-intro.zh-cn.notebooks" data-urlpath="tree/lecture-intro.zh-cn.notebooks/fitting_distributions.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-intro.zh-cn.notebooks/blob/main/fitting_distributions.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "fitting_distributions";
+                const repoURL = "https://github.com/QuantEcon/lecture-intro.zh-cn.notebooks";
+                const urlPath = "tree/lecture-intro.zh-cn.notebooks/fitting_distributions.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

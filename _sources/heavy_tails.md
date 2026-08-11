@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.16.7
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -23,7 +23,7 @@ translation:
     Visual comparisons::Nonnegative distributions: 非负分布
     Visual comparisons::Counter CDFs: 互补累积分布函数
     Visual comparisons::Empirical CCDFs: 经验 CCDFs
-    Visual comparisons::Empirical CCDFs::Q-Q Plots: Q-Q图
+    Visual comparisons::Empirical CCDFs::Q-Q plots: Q-Q图
     Visual comparisons::Power laws: 幂律
     Heavy tails in economic cross-sections: 经济数据中的重尾分布
     Heavy tails in economic cross-sections::Firm size: 公司规模
@@ -39,6 +39,7 @@ translation:
     Further reading: 延伸阅读
     Exercises: 练习
 ---
+
 (heavy_tail)=
 # 重尾分布
 
@@ -81,7 +82,6 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 事实上，经济学中的许多重要分布——可能是大多数——都具有重尾特性。
 
 在本讲中，我们将探讨重尾分布的本质，以及为什么它们在经济分析中扮演着如此重要的角色。
-
 
 ### 引言：轻尾分布
 
@@ -188,7 +188,6 @@ plt.show()
 从本质上讲，我们之所以没有观测到这样的极端值，是因为人类身高分布具有非常轻的尾部。
 
 实际上，人类身高的分布遵循类似正态分布的钟形曲线。
-
 
 ### 资产回报率分析
 
@@ -338,7 +337,6 @@ plt.show()
 
 但现在，让我们先做一些视觉比较，以帮助我们建立对这两类分布之间差异的直观理解。
 
-
 ### 模拟
 
 下图显示了一次模拟。
@@ -389,7 +387,6 @@ plt.show()
 底部的子图中，柯西的样本显示出一种不同的模式：大多数观察值紧密围绕均值聚集，但偶有几个从均值突然大偏差。
 
 这是典型的重尾分布特征。
-
 
 ### 非负分布
 
@@ -643,7 +640,11 @@ plt.show()
 
 #### Q-Q图
 
-我们也可以使用[Q-Q图](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot)来可视化比较两个概率分布。
+另一种视觉比较方式是{ref}`Q-Q图 <qq_plots>`，我们曾在 {doc}`fitting_distributions` 中介绍过。
+
+在那里，我们将一个数据集与拟合于它的分布进行了比较，并将与45度线的偏离解读为拟合失败程度的诊断依据。
+
+这里我们同样以正态分布作为参照进行比较，因为我们关心的是这些分布与正态分布的偏离程度。
 
 [statsmodels](https://www.statsmodels.org/stable/index.html)包提供了一个方便的[qqplot](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html)函数，该函数默认将样本数据与正态分布的分位数进行比较。
 
@@ -807,12 +808,12 @@ mystnb:
     name: firm-size-dist
 tags: [hide-input]
 ---
-df_fs = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/forbes-global2000.csv')
+df_fs = pd.read_csv('https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/forbes-global2000.csv')
 df_fs = df_fs[['Country', 'Sales', 'Profits', 'Assets', 'Market Value']]
 fig, ax = plt.subplots(figsize=(6.4, 3.5))
 
-label="公司规模（市值）"
-top = 500 # 设置排名前500的切断点
+label="公司规模（市值）"  # i18n
+top = 500 # 设置排名前500的切断点  # i18n
 d = df_fs.sort_values('Market Value', ascending=False)
 empirical_ccdf(np.asarray(d['Market Value'])[:top], ax, label=label, add_reg_line=True)
 
@@ -833,9 +834,9 @@ mystnb:
     name: city-size-dist
 tags: [hide-input]
 ---
-# 导入2023年美国和2023年巴西城市的人口数据
-df_cs_us = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_us.csv')
-df_cs_br = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_brazil.csv')
+# 导入2023年美国和2023年巴西城市的人口数据  # i18n
+df_cs_us = pd.read_csv('https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/cities_us.csv')
+df_cs_br = pd.read_csv('https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/cities_brazil.csv')
 
 fig, axes = plt.subplots(1, 2, figsize=(8.8, 3.6))
 
@@ -859,12 +860,12 @@ mystnb:
     name: wealth-dist
 tags: [hide-input]
 ---
-df_w = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/forbes-billionaires.csv')
+df_w = pd.read_csv('https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/forbes-billionaires.csv')
 df_w = df_w[['country', 'realTimeWorth', 'realTimeRank']].dropna()
 df_w = df_w.astype({'realTimeRank': int})
 df_w = df_w.sort_values('realTimeRank', ascending=True).copy()
 countries = ['United States', 'Japan', 'India', 'Italy']  
-country_names = ['美国', '日本', '印度', '意大利']
+country_names = ['美国', '日本', '印度', '意大利']  # i18n
 N = len(countries)
 
 fig, axs = plt.subplots(2, 2, figsize=(8, 6))
@@ -874,11 +875,11 @@ for i, c in enumerate(countries):
     df_w_c = df_w[df_w['country'] == c].reset_index()
     z = np.asarray(df_w_c['realTimeWorth'])
     # print('number of the global richest 2000 from '+ c, len(z))
-    top = 500           # 截止数：前500名
+    top = 500           # 截止数：前500名  # i18n
     if len(z) <= top:    
         z = z[:top]
 
-    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)
+    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)  # i18n
     
 fig.tight_layout()
 
@@ -928,7 +929,6 @@ plt.show()
 原因之一是这是关于总量变量的数据，其定义中涉及某种平均化过程。
 
 平均化过程往往会消除极端结果。
-
 
 ## 大数定律的失效
 
@@ -1096,7 +1096,6 @@ $$
 
 例如，对数正态分布是重尾的，但它的所有矩都是有限的。
 
-
 ## 延伸阅读
 
 想了解更多关于财富分布中的重尾，可以参考文献 {cite}`pareto1896cours` 和 {cite}`benhabib2018skewed`。
@@ -1110,7 +1109,6 @@ $$
 例如，收入和财富中的重尾会影响生产力增长、商业周期和政治经济学。
 
 欲了解更多，请参阅 {cite}`acemoglu2002political`, {cite}`glaeser2003injustice`, {cite}`bhandari2018inequality` 或 {cite}`ahn2018inequality`。
-
 
 ## 练习
 

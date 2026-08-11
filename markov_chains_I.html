@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>33. 马尔科夫链：基本概念 &#8212; Python量化经济学入门</title>
+    <title>35. 马尔科夫链：基本概念 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="34. 马尔科夫链：不可约性与遍历性" href="markov_chains_II.html" />
-    <link rel="prev" title="32. AR(1) 过程" href="ar1_processes.html" />
+    <link rel="next" title="36. 马尔科夫链：不可约性与遍历性" href="markov_chains_II.html" />
+    <link rel="prev" title="34. AR(1) 过程" href="ar1_processes.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -216,41 +216,41 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">33.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">33.2. 定义与示例</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-dp-stoch-mat">33.2.1. 随机矩阵</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">33.2.2. 马尔科夫链</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg2">33.2.2.1. 示例 1：经济状态</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg1">33.2.2.2. 示例 2：失业</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg3">33.2.2.3. 示例 3：政治转型动态</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">35.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">35.2. 定义与示例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-dp-stoch-mat">35.2.1. 随机矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">35.2.2. 马尔科夫链</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg2">35.2.2.1. 示例 1：经济状态</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg1">35.2.2.2. 示例 2：失业</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-eg3">35.2.2.3. 示例 3：政治转型动态</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">33.2.3. 定义马尔科夫链</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">35.2.3. 定义马尔科夫链</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">33.3. 模拟</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">33.3.1. 编写我们自己的模拟代码</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantecon">33.3.2. 使用 QuantEcon 的例程</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">33.3.2.1. 添加状态值和初始条件</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-md">33.4. 随时间分布</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-mc-mstp">33.4.1. 多步转移概率</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary">33.5. 平稳分布</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">33.5.1. 计算平稳分布</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">33.5.2. 渐进平稳性</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hamilton">33.5.2.1. 示例：汉密尔顿链</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">33.5.2.2. 示例：收敛失败</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">35.3. 模拟</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">35.3.1. 编写我们自己的模拟代码</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantecon">35.3.2. 使用 QuantEcon 的例程</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">35.3.2.1. 添加状态值和初始条件</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-mc-expec">33.6. 计算期望</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">33.6.1. 几何和的期望</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-md">35.4. 随时间分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-mc-mstp">35.4.1. 多步转移概率</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stationary">35.5. 平稳分布</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">35.5.1. 计算平稳分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">35.5.2. 渐进平稳性</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hamilton">35.5.2.1. 示例：汉密尔顿链</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">35.5.2.2. 示例：收敛失败</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-mc-expec">35.6. 计算期望</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">35.6.1. 几何和的期望</a></li>
 </ul>
 </li>
 </ul>
@@ -308,7 +308,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 07, 2026
+                            Last changed: Aug 11, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -319,11 +319,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/f3acb7d" class="changelog-hash">f3acb7d</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/9114875" class="changelog-hash">9114875</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">7 minutes ago</span>
-                                <span class="changelog-message">Enable Google Analytics (#289)</span>
+                                <span class="changelog-time">18 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Read the six folded datasets from data-lectures, not high_dim_data (#293)</span>
                             </li>
                             
                         </ul>
@@ -339,7 +339,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">33. </span>马尔科夫链：基本概念<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">35. </span>马尔科夫链：基本概念<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p id="index-0">除了 Anaconda 中的自带函数库之外，本讲还需要以下函数库，可以通过以下指令下载：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -371,7 +371,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="id2">
-<h2><span class="section-number">33.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">35.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>马尔科夫链提供了一种在过去对未来有影响的情况下进行建模的方法。</p>
 <p>也就是说，观察当前情况的一些指标可以帮助我们预测未来的情况。</p>
 <p>当在不同时间点对某事物的指标之间存在统计依赖时，这样的作法是可行的。</p>
@@ -407,10 +407,10 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">33.2. </span>定义与示例<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">35.2. </span>定义与示例<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>在本节中，我们将提供一些定义和基本示例。</p>
 <section id="finite-dp-stoch-mat">
-<span id="id4"></span><h3><span class="section-number">33.2.1. </span>随机矩阵<a class="headerlink" href="#finite-dp-stoch-mat" title="Link to this heading">#</a></h3>
+<span id="id4"></span><h3><span class="section-number">35.2.1. </span>随机矩阵<a class="headerlink" href="#finite-dp-stoch-mat" title="Link to this heading">#</a></h3>
 <p>回想一下，<span class="math notranslate nohighlight">\(n\)</span> 个可能结果上的<strong>概率质量函数</strong>是一个非负 <span class="math notranslate nohighlight">\(n\)</span>-维向量 <span class="math notranslate nohighlight">\(p\)</span>，向量内所有元素总和为 1。</p>
 <p>例如，<span class="math notranslate nohighlight">\(p = (0.2, 0.2, 0.6)\)</span> 是一个三个结果上的概率质量函数。</p>
 <p><strong>随机矩阵</strong>（或<strong>马尔科夫矩阵</strong>）是一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的矩阵 <span class="math notranslate nohighlight">\(P\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 的每一行都是一个概率质量函数。</p>
@@ -423,11 +423,11 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>你将在<a class="reference internal" href="#mc1_ex_3"><span class="std std-ref">一个练习</span></a>中验证这一点。</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">33.2.2. </span>马尔科夫链<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.2.2. </span>马尔科夫链<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>现在我们可以引入马尔科夫链。</p>
 <p>在严格定义马尔科夫链之前，我们先给出一些示例。</p>
 <section id="mc-eg2">
-<span id="id6"></span><h4><span class="section-number">33.2.2.1. </span>示例 1：经济状态<a class="headerlink" href="#mc-eg2" title="Link to this heading">#</a></h4>
+<span id="id6"></span><h4><span class="section-number">35.2.2.1. </span>示例 1：经济状态<a class="headerlink" href="#mc-eg2" title="Link to this heading">#</a></h4>
 <p>根据美国失业数据，Hamilton <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id187" title="James D Hamilton. What's real about the business cycle? Federal Reserve Bank of St. Louis Review, pages 435–452, 2005.">Hamilton, 2005</a>]</span> 估算了以下动态变化。</p>
 <img alt="_images/Hamilton.png" class="align-center" id="mc-hamilton" src="_images/Hamilton.png" />
 <p>这里可以分为三个<strong>状态</strong>：</p>
@@ -475,7 +475,7 @@ P =
 <p>在此之中，<span class="math notranslate nohighlight">\(P(i,j)\)</span> 是在一个月后从状态 <span class="math notranslate nohighlight">\(i\)</span> 转移到状态 <span class="math notranslate nohighlight">\(j\)</span> 的概率。</p>
 </section>
 <section id="mc-eg1">
-<span id="id8"></span><h4><span class="section-number">33.2.2.2. </span>示例 2：失业<a class="headerlink" href="#mc-eg1" title="Link to this heading">#</a></h4>
+<span id="id8"></span><h4><span class="section-number">35.2.2.2. </span>示例 2：失业<a class="headerlink" href="#mc-eg1" title="Link to this heading">#</a></h4>
 <p>考虑一个工人，在任何给定时间 <span class="math notranslate nohighlight">\(t\)</span>，他要么处于失业状态（状态 0），要么处于就业状态（状态 1）。</p>
 <p>假设在一个月内，</p>
 <ol class="arabic simple">
@@ -484,7 +484,7 @@ P =
 </ol>
 <p>根据上述信息，我们可以将转移概率写成矩阵形式</p>
 <div class="math notranslate nohighlight" id="equation-p-unempemp">
-<span class="eqno">(33.1)<a class="headerlink" href="#equation-p-unempemp" title="Link to this equation">#</a></span>\[\begin{split}P =
+<span class="eqno">(35.1)<a class="headerlink" href="#equation-p-unempemp" title="Link to this equation">#</a></span>\[\begin{split}P =
 \begin{bmatrix}
     1 - \alpha &amp; \alpha \\
     \beta &amp; 1 - \beta
@@ -513,7 +513,7 @@ P =
 <p>我们将在下面讨论其中一些应用。</p>
 </section>
 <section id="mc-eg3">
-<span id="id9"></span><h4><span class="section-number">33.2.2.3. </span>示例 3：政治转型动态<a class="headerlink" href="#mc-eg3" title="Link to this heading">#</a></h4>
+<span id="id9"></span><h4><span class="section-number">35.2.2.3. </span>示例 3：政治转型动态<a class="headerlink" href="#mc-eg3" title="Link to this heading">#</a></h4>
 <p>Imam 和 Temple <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id289" title="Patrick Imam and Jonathan RW Temple. Political institutions and output collapses. IMF Working Paper, 2023.">Imam and Temple, 2023</a>]</span> 将政治制度分类为三种类型：民主 <span class="math notranslate nohighlight">\(\text{(D)}\)</span>，专制 <span class="math notranslate nohighlight">\(\text{(A)}\)</span> 和一个称为无政府状态的中间状态 <span class="math notranslate nohighlight">\(\text{(N)}\)</span>。</p>
 <p>每种制度都可以有两种可能的发展模式：崩溃 <span class="math notranslate nohighlight">\(\text{(C)}\)</span> 和增长 <span class="math notranslate nohighlight">\(\text{(G)}\)</span>。这导致了六种可能的状态：<span class="math notranslate nohighlight">\(\text{DG, DC, NG, NC, AG}\)</span> 和 <span class="math notranslate nohighlight">\(\text{AC}\)</span>。</p>
 <p>Imam 和 Temple <span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id289" title="Patrick Imam and Jonathan RW Temple. Political institutions and output collapses. IMF Working Paper, 2023.">Imam and Temple, 2023</a>]</span> 估计了以下转移概率：</p>
@@ -602,7 +602,7 @@ P :=
 </section>
 </section>
 <section id="id12">
-<h3><span class="section-number">33.2.3. </span>定义马尔科夫链<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.2.3. </span>定义马尔科夫链<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>到目前为止，我们已经给出了马尔科夫链的示例，但还没有对其进行定义。</p>
 <p>现在让我们进行定义。</p>
 <p>首先，设 <span class="math notranslate nohighlight">\(S\)</span> 是一个有限集合 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span>，其中包含 <span class="math notranslate nohighlight">\(n\)</span> 个元素。</p>
@@ -611,12 +611,12 @@ P :=
 <p>在 <span class="math notranslate nohighlight">\(S\)</span> 上的<strong>马尔科夫链</strong> <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是一个取值于 <span class="math notranslate nohighlight">\(S\)</span> 的随机变量序列，且具有<strong>马尔科夫性质</strong>。</p>
 <p>也就是，对于任何时间 <span class="math notranslate nohighlight">\(t\)</span> 和任何状态 <span class="math notranslate nohighlight">\(y \in S\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-fin-markov-mp">
-<span class="eqno">(33.2)<a class="headerlink" href="#equation-fin-markov-mp" title="Link to this equation">#</a></span>\[\mathbb P \{ X_{t+1} = y  \,|\, X_t \}
+<span class="eqno">(35.2)<a class="headerlink" href="#equation-fin-markov-mp" title="Link to this equation">#</a></span>\[\mathbb P \{ X_{t+1} = y  \,|\, X_t \}
 = \mathbb P \{ X_{t+1}  = y \,|\, X_t, X_{t-1}, \ldots \}\]</div>
 <p>这意味着一旦我们知道当前状态 <span class="math notranslate nohighlight">\(X_t\)</span>，添加之前状态 <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}\)</span> 不会对未来状态的概率提供额外信息。</p>
 <p>因此，马尔科夫链的动态完全由<strong>条件概率</strong>的集合决定：</p>
 <div class="math notranslate nohighlight" id="equation-mpp">
-<span class="eqno">(33.3)<a class="headerlink" href="#equation-mpp" title="Link to this equation">#</a></span>\[P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
+<span class="eqno">(35.3)<a class="headerlink" href="#equation-mpp" title="Link to this equation">#</a></span>\[P(x, y) := \mathbb P \{ X_{t+1} = y \,|\, X_t = x \}
 \qquad (x, y \in S)\]</div>
 <p>根据构造，</p>
 <ul class="simple">
@@ -634,17 +634,17 @@ P :=
 <li><p>从 <span class="math notranslate nohighlight">\(S\)</span> 上的分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 中抽取 <span class="math notranslate nohighlight">\(X_0\)</span></p></li>
 <li><p>对于每个 <span class="math notranslate nohighlight">\(t = 0, 1, \ldots\)</span>，从 <span class="math notranslate nohighlight">\(P(X_t, \cdot)\)</span> 中抽取 <span class="math notranslate nohighlight">\(X_{t+1}\)</span></p></li>
 </ul>
-<p>通过构造，所得的过程满足 <a class="reference internal" href="#equation-mpp">(33.3)</a>。</p>
+<p>通过构造，所得的过程满足 <a class="reference internal" href="#equation-mpp">(35.3)</a>。</p>
 </section>
 </section>
 <section id="id13">
-<h2><span class="section-number">33.3. </span>模拟<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">35.3. </span>模拟<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <p id="index-1">学习马尔科夫链的一个好方法是模拟它们。</p>
 <p>让我们先自己独立试着模拟，然后再使用能够帮助我们的函数库进行模拟。</p>
 <p>在接下来的练习中，我们将状态空间设为 <span class="math notranslate nohighlight">\(S = 0,\ldots, n-1\)</span>。</p>
 <p>（我们从 <span class="math notranslate nohighlight">\(0\)</span> 开始，因为 Python 数组是从 <span class="math notranslate nohighlight">\(0\)</span> 索引的。）</p>
 <section id="id14">
-<h3><span class="section-number">33.3.1. </span>编写我们自己的模拟代码<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.3.1. </span>编写我们自己的模拟代码<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>要模拟一个马尔科夫链，我们需要</p>
 <ol class="arabic simple">
 <li><p>一个随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 和</p></li>
@@ -668,7 +668,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 0, 1, 0, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, 0, 0])
 </pre></div>
 </div>
 </div>
@@ -723,7 +723,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, 1, 1, 1, 1, 0, 1, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, 1, 0, 1, 1, 1, 1, 1])
 </pre></div>
 </div>
 </div>
@@ -740,7 +740,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.249984)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.250527)
 </pre></div>
 </div>
 </div>
@@ -748,7 +748,7 @@ P :=
 <p>您可以尝试更改初始分布，以确认输出总是接近 0.25（对于上述矩阵 <code class="docutils literal notranslate"><span class="pre">P</span></code>）。</p>
 </section>
 <section id="quantecon">
-<h3><span class="section-number">33.3.2. </span>使用 QuantEcon 的例程<a class="headerlink" href="#quantecon" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.3.2. </span>使用 QuantEcon 的例程<a class="headerlink" href="#quantecon" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 提供了一些处理马尔科夫链包括模拟的例程。</p>
 <p>以下是使用与前例相同的 <span class="math notranslate nohighlight">\(P\)</span> 的说明</p>
 <div class="cell docutils container">
@@ -760,7 +760,7 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.24938)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.250855)
 </pre></div>
 </div>
 </div>
@@ -773,11 +773,11 @@ P :=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.68 s, sys: 3.25 ms, total: 1.68 s
-Wall time: 1.68 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.21 s, sys: 0 ns, total: 2.21 s
+Wall time: 2.2 s
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, ..., 1, 1, 0], shape=(1000000,))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, ..., 1, 1, 1], shape=(1000000,))
 </pre></div>
 </div>
 </div>
@@ -789,17 +789,17 @@ Wall time: 1.68 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.16 ms, sys: 3 ms, total: 12.2 ms
-Wall time: 12 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.9 ms, sys: 3.38 ms, total: 14.3 ms
+Wall time: 14 ms
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, ..., 0, 1, 1], shape=(1000000,))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 0, 0, ..., 0, 1, 1], shape=(1000000,))
 </pre></div>
 </div>
 </div>
 </div>
 <section id="id15">
-<h4><span class="section-number">33.3.2.1. </span>添加状态值和初始条件<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">35.3.2.1. </span>添加状态值和初始条件<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
 <p>如果需要，我们可以向 <code class="docutils literal notranslate"><span class="pre">MarkovChain</span></code> 提供表示状态的值的规范。</p>
 <p>这些状态值可以是整数、浮点数，甚至是字符串。</p>
 <p>以下代码说明了这一点</p>
@@ -811,7 +811,7 @@ Wall time: 12 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;就业&#39;, &#39;就业&#39;, &#39;失业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -823,7 +823,7 @@ Wall time: 12 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -835,7 +835,7 @@ Wall time: 12 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;就业&#39;], dtype=&#39;&lt;U2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;失业&#39;, &#39;就业&#39;, &#39;就业&#39;, &#39;失业&#39;], dtype=&#39;&lt;U2&#39;)
 </pre></div>
 </div>
 </div>
@@ -848,7 +848,7 @@ Wall time: 12 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 0])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 0, 1])
 </pre></div>
 </div>
 </div>
@@ -857,7 +857,7 @@ Wall time: 12 ms
 </section>
 </section>
 <section id="mc-md">
-<span id="id16"></span><h2><span class="section-number">33.4. </span>随时间分布<a class="headerlink" href="#mc-md" title="Link to this heading">#</a></h2>
+<span id="id16"></span><h2><span class="section-number">35.4. </span>随时间分布<a class="headerlink" href="#mc-md" title="Link to this heading">#</a></h2>
 <p>我们了解到</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是一个具有随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 的马尔科夫链</p></li>
@@ -884,32 +884,32 @@ Wall time: 12 ms
 <p>有 <span class="math notranslate nohighlight">\(n\)</span> 个这样的方程，每个 <span class="math notranslate nohighlight">\(y \in S\)</span> 对应一个方程。</p>
 <p>如果我们将 <span class="math notranslate nohighlight">\(\psi_{t+1}\)</span> 和 <span class="math notranslate nohighlight">\(\psi_t\)</span> 视为行向量，则这 <span class="math notranslate nohighlight">\(n\)</span> 个方程可通过矩阵表达式总结为</p>
 <div class="math notranslate nohighlight" id="equation-fin-mc-fr">
-<span class="eqno">(33.4)<a class="headerlink" href="#equation-fin-mc-fr" title="Link to this equation">#</a></span>\[\psi_{t+1} = \psi_t P\]</div>
+<span class="eqno">(35.4)<a class="headerlink" href="#equation-fin-mc-fr" title="Link to this equation">#</a></span>\[\psi_{t+1} = \psi_t P\]</div>
 <p>因此，我们通过右乘 <span class="math notranslate nohighlight">\(P\)</span> 将分布向前移动一个时间单位。</p>
 <p>通过右乘 <span class="math notranslate nohighlight">\(m\)</span> 次，我们将分布向前移动 <span class="math notranslate nohighlight">\(m\)</span> 步进入未来。</p>
-<p>因此，迭代 <a class="reference internal" href="#equation-fin-mc-fr">(33.4)</a>，表达式 <span class="math notranslate nohighlight">\(\psi_{t+m} = \psi_t P^m\)</span> 也是有效的——这里 <span class="math notranslate nohighlight">\(P^m\)</span> 是 <span class="math notranslate nohighlight">\(P\)</span> 的第 <span class="math notranslate nohighlight">\(m\)</span> 次幂。</p>
+<p>因此，迭代 <a class="reference internal" href="#equation-fin-mc-fr">(35.4)</a>，表达式 <span class="math notranslate nohighlight">\(\psi_{t+m} = \psi_t P^m\)</span> 也是有效的——这里 <span class="math notranslate nohighlight">\(P^m\)</span> 是 <span class="math notranslate nohighlight">\(P\)</span> 的第 <span class="math notranslate nohighlight">\(m\)</span> 次幂。</p>
 <p>作为一个特例，我们看到，如果 <span class="math notranslate nohighlight">\(\psi_0\)</span> 是从中抽取 <span class="math notranslate nohighlight">\(X_0\)</span> 的初始分布，则 <span class="math notranslate nohighlight">\(\psi_0 P^m\)</span> 是 <span class="math notranslate nohighlight">\(X_m\)</span> 的概率分布。</p>
 <p>这非常重要，所以我们重复一下</p>
 <div class="math notranslate nohighlight" id="equation-mdfmc">
-<span class="eqno">(33.5)<a class="headerlink" href="#equation-mdfmc" title="Link to this equation">#</a></span>\[X_0 \sim \psi_0 \quad \implies \quad X_m \sim \psi_0 P^m\]</div>
+<span class="eqno">(35.5)<a class="headerlink" href="#equation-mdfmc" title="Link to this equation">#</a></span>\[X_0 \sim \psi_0 \quad \implies \quad X_m \sim \psi_0 P^m\]</div>
 <p>一般规则是通过右乘 <span class="math notranslate nohighlight">\(P^m\)</span> 将分布向前移动 <span class="math notranslate nohighlight">\(m\)</span> 个时间单位。</p>
 <p>因此，以下推断也是有效的。</p>
 <div class="math notranslate nohighlight" id="equation-mdfmc2">
-<span class="eqno">(33.6)<a class="headerlink" href="#equation-mdfmc2" title="Link to this equation">#</a></span>\[X_t \sim \psi_t \quad \implies \quad X_{t+m} \sim \psi_t P^m\]</div>
+<span class="eqno">(35.6)<a class="headerlink" href="#equation-mdfmc2" title="Link to this equation">#</a></span>\[X_t \sim \psi_t \quad \implies \quad X_{t+m} \sim \psi_t P^m\]</div>
 <section id="finite-mc-mstp">
-<span id="id17"></span><h3><span class="section-number">33.4.1. </span>多步转移概率<a class="headerlink" href="#finite-mc-mstp" title="Link to this heading">#</a></h3>
+<span id="id17"></span><h3><span class="section-number">35.4.1. </span>多步转移概率<a class="headerlink" href="#finite-mc-mstp" title="Link to this heading">#</a></h3>
 <p>我们已知从 <span class="math notranslate nohighlight">\(x\)</span> 到 <span class="math notranslate nohighlight">\(y\)</span> 的一步转移概率是 <span class="math notranslate nohighlight">\(P(x,y)\)</span>。</p>
 <p>实际上，从 <span class="math notranslate nohighlight">\(x\)</span> 到 <span class="math notranslate nohighlight">\(y\)</span> 的 <span class="math notranslate nohighlight">\(m\)</span> 步转移概率是 <span class="math notranslate nohighlight">\(P^m(x,y)\)</span>，即 <span class="math notranslate nohighlight">\(P\)</span> 的 <span class="math notranslate nohighlight">\(m\)</span> 次方的 <span class="math notranslate nohighlight">\((x,y)\)</span> 元素。</p>
-<p>要理解为什么是这样，请再次考虑 <a class="reference internal" href="#equation-mdfmc2">(33.6)</a>，但现在设 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将所有可能的结果概率都放在状态 <span class="math notranslate nohighlight">\(x\)</span> 上。</p>
+<p>要理解为什么是这样，请再次考虑 <a class="reference internal" href="#equation-mdfmc2">(35.6)</a>，但现在设 <span class="math notranslate nohighlight">\(\psi_t\)</span> 将所有可能的结果概率都放在状态 <span class="math notranslate nohighlight">\(x\)</span> 上。</p>
 <p>此时，<span class="math notranslate nohighlight">\(\psi_t\)</span> 是一个在 <span class="math notranslate nohighlight">\(x\)</span> 位置为 <span class="math notranslate nohighlight">\(1\)</span>，在其他地方为 <span class="math notranslate nohighlight">\(0\)</span> 的向量。</p>
-<p>将其代入 <a class="reference internal" href="#equation-mdfmc2">(33.6)</a>，我们看到，条件 <span class="math notranslate nohighlight">\(X_t = x\)</span> 的情况下，<span class="math notranslate nohighlight">\(X_{t+m}\)</span> 的分布是 <span class="math notranslate nohighlight">\(P^m\)</span> 的第 <span class="math notranslate nohighlight">\(x\)</span> 行。</p>
+<p>将其代入 <a class="reference internal" href="#equation-mdfmc2">(35.6)</a>，我们看到，条件 <span class="math notranslate nohighlight">\(X_t = x\)</span> 的情况下，<span class="math notranslate nohighlight">\(X_{t+m}\)</span> 的分布是 <span class="math notranslate nohighlight">\(P^m\)</span> 的第 <span class="math notranslate nohighlight">\(x\)</span> 行。</p>
 <p>特别地，</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb P \{X_{t+m} = y \,|\, X_t = x \} = P^m(x, y) = P^m 的第 (x, y) 元素
 \]</div>
 <div class="proof example admonition" id="prob-recession">
-<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Example 33.1 </span> (衰退概率)</p>
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Example 35.1 </span> (衰退概率)</p>
 <section class="example-content" id="proof-content">
 <p>回顾我们在<a class="reference internal" href="#mc-eg2"><span class="std std-ref">示例 1：经济状态</span></a>中考虑的关于衰退和增长的随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 。</p>
 <p>假设当前状态未知——也许统计数据只能在当前月份<em>结束</em>时获得。</p>
@@ -921,7 +921,7 @@ Wall time: 12 ms
 \]</div>
 </section>
 </div><div class="proof example admonition" id="cross-sectional-distributions">
-<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Example 33.2 </span> (横截面分布)</p>
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Example 35.2 </span> (横截面分布)</p>
 <section class="example-content" id="proof-content">
 <p>我们研究的分布可以视为</p>
 <ol class="arabic simple">
@@ -936,7 +936,7 @@ Wall time: 12 ms
 <li><p>例如，<span class="math notranslate nohighlight">\(\psi_t(0)\)</span> 是时间 <span class="math notranslate nohighlight">\(t\)</span> 的失业率。</p></li>
 </ul>
 <p>10 个周期之后，横截面分布会是什么样子？</p>
-<p>答案是 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 是 <a class="reference internal" href="#equation-p-unempemp">(33.1)</a> 中的随机矩阵。</p>
+<p>答案是 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span>，其中 <span class="math notranslate nohighlight">\(P\)</span> 是 <a class="reference internal" href="#equation-p-unempemp">(35.1)</a> 中的随机矩阵。</p>
 <p>这是因为每个工人的状态都根据 <span class="math notranslate nohighlight">\(P\)</span> 变化，因此 <span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 是单个随机选择的工人的<a class="reference external" href="https://en.wikipedia.org/wiki/Marginal_distribution">边缘分布</a>。</p>
 <p>但当样本很大时，结果和概率大致相等（通过应用大数法则）。</p>
 <p>因此，对于一个非常大的（趋向于无限）群体，<span class="math notranslate nohighlight">\(\psi_t P^{10}\)</span> 也代表处于每个状态的工人比例。</p>
@@ -949,8 +949,8 @@ Wall time: 12 ms
 </div></section>
 </section>
 <section id="stationary">
-<span id="id18"></span><h2><span class="section-number">33.5. </span>平稳分布<a class="headerlink" href="#stationary" title="Link to this heading">#</a></h2>
-<p>如 <a class="reference internal" href="#equation-fin-mc-fr">(33.4)</a> 所示，我们可以通过右乘 <span class="math notranslate nohighlight">\(P\)</span> 将分布向前移动一个时间单位。</p>
+<span id="id18"></span><h2><span class="section-number">35.5. </span>平稳分布<a class="headerlink" href="#stationary" title="Link to this heading">#</a></h2>
+<p>如 <a class="reference internal" href="#equation-fin-mc-fr">(35.4)</a> 所示，我们可以通过右乘 <span class="math notranslate nohighlight">\(P\)</span> 将分布向前移动一个时间单位。</p>
 <p>一些分布在此更新过程中是不变的——例如，</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -975,7 +975,7 @@ Wall time: 12 ms
 <p>这告诉我们一个重要的事实：如果分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 是平稳分布，那么对于所有 <span class="math notranslate nohighlight">\(t \ge 0\)</span>，<span class="math notranslate nohighlight">\(\psi_t\)</span> 将具有相同的分布。</p>
 <p>以下定理在 <span class="bibtex-citation" id="id19">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> 的第 4 章及其他许多来源中得到了证明。</p>
 <div class="proof theorem admonition" id="unique_stat">
-<p class="admonition-title"><span class="caption-number">Theorem 33.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 35.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>每个随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 至少有一个平稳分布。</p>
 </section>
@@ -986,13 +986,13 @@ Wall time: 12 ms
 <p>为了获得唯一性，我们需要马尔科夫链“混合”，以便状态不会卡在状态空间的某一部分。</p>
 <p>这为以下定理提供了一些直觉。</p>
 <div class="proof theorem admonition" id="mc_po_conv_thm">
-<p class="admonition-title"><span class="caption-number">Theorem 33.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 35.2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果 <span class="math notranslate nohighlight">\(P\)</span> 是各处正的，那么 <span class="math notranslate nohighlight">\(P\)</span> 恰好有一个平稳分布。</p>
 </section>
 </div><p>我们将在 <a class="reference internal" href="markov_chains_II.html"><span class="doc">下一讲</span></a> 中引入不可约性时回到这一点。</p>
 <div class="proof example admonition" id="steady-state-unemployment">
-<p class="admonition-title"><span class="caption-number">Example 33.3 </span> (失业概率的稳态)</p>
+<p class="admonition-title"><span class="caption-number">Example 35.3 </span> (失业概率的稳态)</p>
 <section class="example-content" id="proof-content">
 <p>回顾我们在<a class="reference internal" href="#mc-eg1"><span class="std std-ref">示例 2：失业</span></a>中讨论的关于特定工人的就业/失业动态的模型。</p>
 <p>如果 <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>，则转移矩阵在各处为正。</p>
@@ -1006,7 +1006,7 @@ p = \frac{\beta}{\alpha + \beta}
 <p>不出所料，当 <span class="math notranslate nohighlight">\(\beta \to 0\)</span> 时它趋于 0，当 <span class="math notranslate nohighlight">\(\alpha \to 0\)</span> 时它趋于 1。</p>
 </section>
 </div><section id="id20">
-<h3><span class="section-number">33.5.1. </span>计算平稳分布<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.5.1. </span>计算平稳分布<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> 实现了计算平稳分布的稳定算法。</p>
 <p>这里是一个示例</p>
 <div class="cell docutils container">
@@ -1027,12 +1027,12 @@ p = \frac{\beta}{\alpha + \beta}
 </div>
 </section>
 <section id="id21">
-<h3><span class="section-number">33.5.2. </span>渐进平稳性<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.5.2. </span>渐进平稳性<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
 <p>考虑一个处处为正的随机矩阵，具有唯一的平稳分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>有时，无论初始分布 <span class="math notranslate nohighlight">\(\psi_0\)</span> 如何，<span class="math notranslate nohighlight">\(X_t\)</span> 的分布 <span class="math notranslate nohighlight">\(\psi_t = \psi_0 P^t\)</span> 都会收敛到 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p>例如，我们有以下结果</p>
 <div class="proof theorem admonition" id="mc_gs_thm">
-<span id="strict-stationary"></span><p class="admonition-title"><span class="caption-number">Theorem 33.3 </span></p>
+<span id="strict-stationary"></span><p class="admonition-title"><span class="caption-number">Theorem 35.3 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果存在一个整数 <span class="math notranslate nohighlight">\(m\)</span>，使得 <span class="math notranslate nohighlight">\(P^m\)</span> 的所有元素都为严格正数，则</p>
 <div class="math notranslate nohighlight">
@@ -1045,7 +1045,7 @@ p = \frac{\beta}{\alpha + \beta}
 </div><p>这种情况通常称为<strong>渐进平稳性</strong>或<strong>全局稳定性</strong>。</p>
 <p>该定理的证明可以在 <span class="bibtex-citation" id="id22">[<a class="reference internal" href="zreferences.html#id24" title="Thomas J Sargent and John Stachurski. Economic networks: theory and computation. arXiv preprint arXiv:2203.11972, 2023.">Sargent and Stachurski, 2023</a>]</span> 的第4章或许多其他来源中找到。</p>
 <section id="hamilton">
-<span id="id23"></span><h4><span class="section-number">33.5.2.1. </span>示例：汉密尔顿链<a class="headerlink" href="#hamilton" title="Link to this heading">#</a></h4>
+<span id="id23"></span><h4><span class="section-number">35.5.2.1. </span>示例：汉密尔顿链<a class="headerlink" href="#hamilton" title="Link to this heading">#</a></h4>
 <p>汉密尔顿链满足定理的条件，因为 <span class="math notranslate nohighlight">\(P^2\)</span> 处处为正：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1321,42 +1321,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgd9946b5efa064fc591bd52f3e3c0086e">
+  <img id="_anim_imge442136d2c8f4c0190a2de779efa7112">
   <div class="anim-controls">
-    <input id="_anim_sliderd9946b5efa064fc591bd52f3e3c0086e" type="range" class="anim-slider"
+    <input id="_anim_slidere442136d2c8f4c0190a2de779efa7112" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="animd9946b5efa064fc591bd52f3e3c0086e.set_frame(parseInt(this.value));">
+           oninput="anime442136d2c8f4c0190a2de779efa7112.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animd9946b5efa064fc591bd52f3e3c0086e.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anime442136d2c8f4c0190a2de779efa7112.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animd9946b5efa064fc591bd52f3e3c0086e.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anime442136d2c8f4c0190a2de779efa7112.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animd9946b5efa064fc591bd52f3e3c0086e.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anime442136d2c8f4c0190a2de779efa7112.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animd9946b5efa064fc591bd52f3e3c0086e.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anime442136d2c8f4c0190a2de779efa7112.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animd9946b5efa064fc591bd52f3e3c0086e.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anime442136d2c8f4c0190a2de779efa7112.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animd9946b5efa064fc591bd52f3e3c0086e.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anime442136d2c8f4c0190a2de779efa7112.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animd9946b5efa064fc591bd52f3e3c0086e.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anime442136d2c8f4c0190a2de779efa7112.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animd9946b5efa064fc591bd52f3e3c0086e.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anime442136d2c8f4c0190a2de779efa7112.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animd9946b5efa064fc591bd52f3e3c0086e.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anime442136d2c8f4c0190a2de779efa7112.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectd9946b5efa064fc591bd52f3e3c0086e"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selecte442136d2c8f4c0190a2de779efa7112"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_d9946b5efa064fc591bd52f3e3c0086e"
+      <input type="radio" name="state" value="once" id="_anim_radio1_e442136d2c8f4c0190a2de779efa7112"
              checked>
-      <label for="_anim_radio1_d9946b5efa064fc591bd52f3e3c0086e">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_d9946b5efa064fc591bd52f3e3c0086e"
+      <label for="_anim_radio1_e442136d2c8f4c0190a2de779efa7112">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_e442136d2c8f4c0190a2de779efa7112"
              >
-      <label for="_anim_radio2_d9946b5efa064fc591bd52f3e3c0086e">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_d9946b5efa064fc591bd52f3e3c0086e"
+      <label for="_anim_radio2_e442136d2c8f4c0190a2de779efa7112">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_e442136d2c8f4c0190a2de779efa7112"
              >
-      <label for="_anim_radio3_d9946b5efa064fc591bd52f3e3c0086e">Reflect</label>
+      <label for="_anim_radio3_e442136d2c8f4c0190a2de779efa7112">Reflect</label>
     </form>
   </div>
 </div>
@@ -1366,9 +1366,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgd9946b5efa064fc591bd52f3e3c0086e";
-    var slider_id = "_anim_sliderd9946b5efa064fc591bd52f3e3c0086e";
-    var loop_select_id = "_anim_loop_selectd9946b5efa064fc591bd52f3e3c0086e";
+    var img_id = "_anim_imge442136d2c8f4c0190a2de779efa7112";
+    var slider_id = "_anim_slidere442136d2c8f4c0190a2de779efa7112";
+    var loop_select_id = "_anim_loop_selecte442136d2c8f4c0190a2de779efa7112";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -26293,7 +26293,7 @@ RU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animd9946b5efa064fc591bd52f3e3c0086e = new Animation(frames, img_id, slider_id, 200.0,
+        anime442136d2c8f4c0190a2de779efa7112 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -26310,7 +26310,7 @@ RU5ErkJggg==\
 <p>你可以尝试不同的初始条件来进行实验。</p>
 </section>
 <section id="id24">
-<h4><span class="section-number">33.5.2.2. </span>示例：收敛失败<a class="headerlink" href="#id24" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">35.5.2.2. </span>示例：收敛失败<a class="headerlink" href="#id24" title="Link to this heading">#</a></h4>
 <p>考虑一个具有以下随机矩阵的周期链</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -26575,42 +26575,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img854075ef9cb047e280a4db1043c56e02">
+  <img id="_anim_img47eda340ccaa42fda76e2840b0319a7b">
   <div class="anim-controls">
-    <input id="_anim_slider854075ef9cb047e280a4db1043c56e02" type="range" class="anim-slider"
+    <input id="_anim_slider47eda340ccaa42fda76e2840b0319a7b" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim854075ef9cb047e280a4db1043c56e02.set_frame(parseInt(this.value));">
+           oninput="anim47eda340ccaa42fda76e2840b0319a7b.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim854075ef9cb047e280a4db1043c56e02.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim47eda340ccaa42fda76e2840b0319a7b.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim854075ef9cb047e280a4db1043c56e02.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim47eda340ccaa42fda76e2840b0319a7b.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim854075ef9cb047e280a4db1043c56e02.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim47eda340ccaa42fda76e2840b0319a7b.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim854075ef9cb047e280a4db1043c56e02.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim47eda340ccaa42fda76e2840b0319a7b.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim854075ef9cb047e280a4db1043c56e02.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim47eda340ccaa42fda76e2840b0319a7b.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim854075ef9cb047e280a4db1043c56e02.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim47eda340ccaa42fda76e2840b0319a7b.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim854075ef9cb047e280a4db1043c56e02.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim47eda340ccaa42fda76e2840b0319a7b.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim854075ef9cb047e280a4db1043c56e02.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim47eda340ccaa42fda76e2840b0319a7b.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim854075ef9cb047e280a4db1043c56e02.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim47eda340ccaa42fda76e2840b0319a7b.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select854075ef9cb047e280a4db1043c56e02"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select47eda340ccaa42fda76e2840b0319a7b"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_854075ef9cb047e280a4db1043c56e02"
+      <input type="radio" name="state" value="once" id="_anim_radio1_47eda340ccaa42fda76e2840b0319a7b"
              checked>
-      <label for="_anim_radio1_854075ef9cb047e280a4db1043c56e02">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_854075ef9cb047e280a4db1043c56e02"
+      <label for="_anim_radio1_47eda340ccaa42fda76e2840b0319a7b">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_47eda340ccaa42fda76e2840b0319a7b"
              >
-      <label for="_anim_radio2_854075ef9cb047e280a4db1043c56e02">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_854075ef9cb047e280a4db1043c56e02"
+      <label for="_anim_radio2_47eda340ccaa42fda76e2840b0319a7b">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_47eda340ccaa42fda76e2840b0319a7b"
              >
-      <label for="_anim_radio3_854075ef9cb047e280a4db1043c56e02">Reflect</label>
+      <label for="_anim_radio3_47eda340ccaa42fda76e2840b0319a7b">Reflect</label>
     </form>
   </div>
 </div>
@@ -26620,9 +26620,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img854075ef9cb047e280a4db1043c56e02";
-    var slider_id = "_anim_slider854075ef9cb047e280a4db1043c56e02";
-    var loop_select_id = "_anim_loop_select854075ef9cb047e280a4db1043c56e02";
+    var img_id = "_anim_img47eda340ccaa42fda76e2840b0319a7b";
+    var slider_id = "_anim_slider47eda340ccaa42fda76e2840b0319a7b";
+    var loop_select_id = "_anim_loop_select47eda340ccaa42fda76e2840b0319a7b";
     var frames = new Array(20);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -52164,7 +52164,7 @@ AAAAkyEAAgAAmAwBEAAAwGQIgAAAACZDAAQAADCZ/wCoaqqHm9cnMQAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim854075ef9cb047e280a4db1043c56e02 = new Animation(frames, img_id, slider_id, 200.0,
+        anim47eda340ccaa42fda76e2840b0319a7b = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -52180,13 +52180,13 @@ AAAAkyEAAgAAmAwBEAAAwGQIgAAAACZDAAQAADCZ/wCoaqqHm9cnMQAAAABJRU5ErkJggg==\
 </section>
 </section>
 <section id="finite-mc-expec">
-<span id="id25"></span><h2><span class="section-number">33.6. </span>计算期望<a class="headerlink" href="#finite-mc-expec" title="Link to this heading">#</a></h2>
+<span id="id25"></span><h2><span class="section-number">35.6. </span>计算期望<a class="headerlink" href="#finite-mc-expec" title="Link to this heading">#</a></h2>
 <p id="index-4">我们有时需要计算形式为 <span class="math notranslate nohighlight">\(X_t\)</span> 的函数的数学期望</p>
 <div class="math notranslate nohighlight" id="equation-mc-une">
-<span class="eqno">(33.7)<a class="headerlink" href="#equation-mc-une" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_t) ]\]</div>
+<span class="eqno">(35.7)<a class="headerlink" href="#equation-mc-une" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_t) ]\]</div>
 <p>以及条件期望，例如</p>
 <div class="math notranslate nohighlight" id="equation-mc-cce">
-<span class="eqno">(33.8)<a class="headerlink" href="#equation-mc-cce" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_{t + k})  \mid X_t = x]\]</div>
+<span class="eqno">(35.8)<a class="headerlink" href="#equation-mc-cce" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_{t + k})  \mid X_t = x]\]</div>
 <p>其中</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\{X_t\}\)</span> 是由 <span class="math notranslate nohighlight">\(n \times n\)</span> 随机矩阵 <span class="math notranslate nohighlight">\(P\)</span> 生成的马尔科夫链。</p></li>
@@ -52201,7 +52201,7 @@ h =
     h(x_n)
 \end{bmatrix}.
 \end{split}\]</div>
-<p>计算无条件期望 <a class="reference internal" href="#equation-mc-une">(33.7)</a> 非常简单。</p>
+<p>计算无条件期望 <a class="reference internal" href="#equation-mc-une">(35.7)</a> 非常简单。</p>
 <p>我们只需对 <span class="math notranslate nohighlight">\(X_t\)</span> 的边缘分布进行求和，得到</p>
 <div class="math notranslate nohighlight">
 \[
@@ -52215,13 +52215,13 @@ h =
 \mathbb E [ h(X_t) ]
 =  \psi P^t h
 \]</div>
-<p>对于条件期望 <a class="reference internal" href="#equation-mc-cce">(33.8)</a>，我们需要对 <span class="math notranslate nohighlight">\(X_{t + k}\)</span> 给定 <span class="math notranslate nohighlight">\(X_t = x\)</span> 的条件分布进行求和。</p>
+<p>对于条件期望 <a class="reference internal" href="#equation-mc-cce">(35.8)</a>，我们需要对 <span class="math notranslate nohighlight">\(X_{t + k}\)</span> 给定 <span class="math notranslate nohighlight">\(X_t = x\)</span> 的条件分布进行求和。</p>
 <p>我们已经知道这是 <span class="math notranslate nohighlight">\(P^k(x, \cdot)\)</span>，因此</p>
 <div class="math notranslate nohighlight" id="equation-mc-cce2">
-<span class="eqno">(33.9)<a class="headerlink" href="#equation-mc-cce2" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_{t + k})  \mid X_t = x]
+<span class="eqno">(35.9)<a class="headerlink" href="#equation-mc-cce2" title="Link to this equation">#</a></span>\[\mathbb E [ h(X_{t + k})  \mid X_t = x]
 = (P^k h)(x)\]</div>
 <section id="id26">
-<h3><span class="section-number">33.6.1. </span>几何和的期望<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">35.6.1. </span>几何和的期望<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
 <p>有时我们需要计算几何和的数学期望，例如 <span class="math notranslate nohighlight">\(\sum_t \beta^t h(X_t)\)</span>。</p>
 <p>根据前面的讨论，这是</p>
 <div class="math notranslate nohighlight">
@@ -52241,7 +52241,7 @@ h =
 <p>向量 <span class="math notranslate nohighlight">\(P^k h\)</span> 储存了所有 <span class="math notranslate nohighlight">\(x\)</span> 的条件期望 <span class="math notranslate nohighlight">\(\mathbb E [ h(X_{t + k})  \mid X_t = x]\)</span>。</p>
 <div class="exercise admonition" id="mc1_ex_1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 35.1 </span></p>
 <section id="exercise-content">
 <p>Imam 和 Temple <span class="bibtex-citation" id="id27">[<a class="reference internal" href="zreferences.html#id289" title="Patrick Imam and Jonathan RW Temple. Political institutions and output collapses. IMF Working Paper, 2023.">Imam and Temple, 2023</a>]</span> 使用了一个三状态转移矩阵来描述政权的三种状态：增长、停滞和崩溃</p>
 <div class="math notranslate nohighlight">
@@ -52265,7 +52265,7 @@ P :=
 </div>
 <div class="solution dropdown admonition" id="markov_chains_I-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_1"> Exercise 33.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_1"> Exercise 35.1</a></p>
 <section id="solution-content">
 <p>解答 1：</p>
 <img alt="_images/Temple.png" class="align-center" id="mc-temple" src="_images/Temple.png" />
@@ -52322,7 +52322,7 @@ P :=
 </div>
 <div class="exercise admonition" id="mc1_ex_2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 35.2 </span></p>
 <section id="exercise-content">
 <p>我们之前 <a class="reference internal" href="#mc-eg3"><span class="std std-ref">讨论过</span></a> 的 Imam &amp; Temple <span class="bibtex-citation" id="id28">[<a class="reference internal" href="zreferences.html#id289" title="Patrick Imam and Jonathan RW Temple. Political institutions and output collapses. IMF Working Paper, 2023.">Imam and Temple, 2023</a>]</span> 估计的六状态转移矩阵。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DG&#39;</span><span class="p">,</span> <span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="s1">&#39;NG&#39;</span><span class="p">,</span> <span class="s1">&#39;NC&#39;</span><span class="p">,</span> <span class="s1">&#39;AG&#39;</span><span class="p">,</span> <span class="s1">&#39;AC&#39;</span><span class="p">]</span>
@@ -52344,7 +52344,7 @@ P :=
 </div>
 <div class="solution dropdown admonition" id="markov_chains_I-solution-9">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_2"> Exercise 33.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_2"> Exercise 35.2</a></p>
 <section id="solution-content">
 <p>解答 1:</p>
 <p>虽然 <span class="math notranslate nohighlight">\(P\)</span> 不是处处为正的，但当 <span class="math notranslate nohighlight">\(m=3\)</span> 时，<span class="math notranslate nohighlight">\(P^m\)</span> 是处处为正的。</p>
@@ -52413,14 +52413,14 @@ P :=
 </div>
 <div class="exercise admonition" id="mc1_ex_3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 33.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 35.3 </span></p>
 <section id="exercise-content">
 <p>证明以下命题：如果 <span class="math notranslate nohighlight">\(P\)</span> 是一个随机矩阵，那么对于所有 <span class="math notranslate nohighlight">\(k \in \mathbb N\)</span>，<span class="math notranslate nohighlight">\(P^k\)</span> 也是随机矩阵。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="markov_chains_I-solution-11">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_3"> Exercise 33.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mc1_ex_3"> Exercise 35.3</a></p>
 <section id="solution-content">
 <p>假设 <span class="math notranslate nohighlight">\(P\)</span> 是随机矩阵，且 <span class="math notranslate nohighlight">\(P^k\)</span> 是某个整数 <span class="math notranslate nohighlight">\(k\)</span> 的随机矩阵。</p>
 <p>我们将证明 <span class="math notranslate nohighlight">\(P^{k+1} = P P^k\)</span> 也是随机矩阵。</p>
@@ -52618,23 +52618,33 @@ P :=
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fitting_distributions.html">
+   20. 为数据拟合分布
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. 大数定律与中心极限定理
+   21. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. 蒙特卡罗方法与期权定价
+   22. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. 重尾分布
+   23. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. 种族隔离
+   24. 种族隔离
   </a>
  </li>
 </ul>
@@ -52646,27 +52656,27 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   23. 一维动力学
+   25. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. 索洛-斯旺增长模型
+   26. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. 蛛网模型
+   27. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. 世代交叠模型
+   28. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. 商品价格
+   29. 商品价格
   </a>
  </li>
 </ul>
@@ -52678,22 +52688,22 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. 通过货币资助的政府赤字和价格水平
+   30. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. 一些不愉快的货币主义算术
+   31. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. 通货膨胀税的拉弗曲线
+   32. 通货膨胀税的拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. 拉弗曲线与自适应预期
+   33. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -52705,22 +52715,22 @@ P :=
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) 过程
+   34. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   33. 马尔科夫链：基本概念
+   35. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. 马尔科夫链：不可约性与遍历性
+   36. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. 用矩阵代数表示的单变量时间序列
+   37. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -52732,12 +52742,12 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. 线性规划
+   38. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. 最短路径
+   39. 最短路径
   </a>
  </li>
 </ul>
@@ -52749,22 +52759,22 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. 佩龙-弗罗贝尼乌斯定理
+   40. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. 输入-输出模型
+   41. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. 就业的湖泊模型
+   42. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. 网络
+   43. 网络
   </a>
  </li>
 </ul>
@@ -52776,12 +52786,12 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. 多种商品的供需关系
+   44. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. 具有异质性的市场均衡
+   45. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -52793,12 +52803,12 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. 简单线性回归模型
+   46. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. 最大似然估计
+   47. 最大似然估计
   </a>
  </li>
 </ul>
@@ -52810,17 +52820,17 @@ P :=
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. 故障排除
+   48. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. 参考文献
+   49. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. 执行统计数据
+   50. 执行统计数据
   </a>
  </li>
 </ul>

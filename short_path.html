@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>37. 最短路径 &#8212; Python量化经济学入门</title>
+    <title>39. 最短路径 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="38. 佩龙-弗罗贝尼乌斯定理" href="eigen_II.html" />
-    <link rel="prev" title="36. 线性规划" href="lp_intro.html" />
+    <link rel="next" title="40. 佩龙-弗罗贝尼乌斯定理" href="eigen_II.html" />
+    <link rel="prev" title="38. 线性规划" href="lp_intro.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -216,15 +216,15 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">37.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">37.2. 问题概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">37.3. 寻找最低成本路径</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">37.4. 求解最小成本函数</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">37.4.1. 算法</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">37.4.2. 实现</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">39.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">39.2. 问题概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">39.3. 寻找最低成本路径</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">39.4. 求解最小成本函数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">39.4.1. 算法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">39.4.2. 实现</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">37.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">39.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -280,7 +280,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 07, 2026
+                            Last changed: Aug 11, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -291,11 +291,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/f3acb7d" class="changelog-hash">f3acb7d</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/9114875" class="changelog-hash">9114875</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">7 minutes ago</span>
-                                <span class="changelog-message">Enable Google Analytics (#289)</span>
+                                <span class="changelog-time">18 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Read the six folded datasets from data-lectures, not high_dim_data (#293)</span>
                             </li>
                             
                         </ul>
@@ -315,9 +315,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">37. </span>最短路径<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">39. </span>最短路径<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="index-0">
-<span id="id2"></span><h2><span class="section-number">37.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">39.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
 <p>最短路径问题是数学和计算机科学中的一个经典问题，其应用包括：</p>
 <ul class="simple">
 <li><p>经济学（顺序决策、社会网络分析等）</p></li>
@@ -343,7 +343,7 @@
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">37.2. </span>问题概述<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">39.2. </span>问题概述<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>最短路径问题是寻找如何以最小成本从<a class="reference external" href="https://baike.baidu.com/item/%E5%9B%BE/13018767">图</a>中的一个指定节点遍历到另一个节点。</p>
 <p>考虑下面这个图</p>
 <figure class="align-default">
@@ -376,7 +376,7 @@
 </figure>
 </section>
 <section id="id4">
-<h2><span class="section-number">37.3. </span>寻找最低成本路径<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">39.3. </span>寻找最低成本路径<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>对于更大的图，我们需要一个系统性的解决方案。</p>
 <p>让 <span class="math notranslate nohighlight">\(J(v)\)</span> 表示从节点 <span class="math notranslate nohighlight">\(v\)</span> 出发的最小成本，理解为如果我们选择最佳路线，从 <span class="math notranslate nohighlight">\(v\)</span> 出发的总成本。</p>
 <p>假设我们知道每个节点 <span class="math notranslate nohighlight">\(v\)</span> 的 <span class="math notranslate nohighlight">\(J(v)\)</span>，如下图所示（基于前面示例中的图）。</p>
@@ -390,7 +390,7 @@
 <li><p>从当前节点 <span class="math notranslate nohighlight">\(v\)</span>，移动到解决以下问题的任何节点</p></li>
 </ol>
 <div class="math notranslate nohighlight" id="equation-spprebell">
-<span class="eqno">(37.1)<a class="headerlink" href="#equation-spprebell" title="Link to this equation">#</a></span>\[\min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
+<span class="eqno">(39.1)<a class="headerlink" href="#equation-spprebell" title="Link to this equation">#</a></span>\[\min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
 <p>其中</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F_v\)</span> 是可以从 <span class="math notranslate nohighlight">\(v\)</span> 一步到达的节点集合。</p></li>
@@ -402,21 +402,21 @@
 <p>经过一些思考，你会确信对于每个节点 <span class="math notranslate nohighlight">\(v\)</span>，
 函数 <span class="math notranslate nohighlight">\(J\)</span> 满足</p>
 <div class="math notranslate nohighlight" id="equation-spbell">
-<span class="eqno">(37.2)<a class="headerlink" href="#equation-spbell" title="Link to this equation">#</a></span>\[J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
+<span class="eqno">(39.2)<a class="headerlink" href="#equation-spbell" title="Link to this equation">#</a></span>\[J(v) = \min_{w \in F_v} \{ c(v, w) + J(w) \}\]</div>
 <p>这被称为<strong>贝尔曼方程</strong>，以数学家<a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%96%B9%E7%A8%8B/5500990">理查德·贝尔曼</a>的名字命名。</p>
 <p>贝尔曼方程可以被理解为<span class="math notranslate nohighlight">\(J\)</span>必须满足的一个限制条件。</p>
 <p>我们现在想要做的是利用这个限制条件来计算<span class="math notranslate nohighlight">\(J\)</span>。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">37.4. </span>求解最小成本函数<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">39.4. </span>求解最小成本函数<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>让我们一起学习一个计算<span class="math notranslate nohighlight">\(J\)</span>的算法，然后思考如何实现它。</p>
 <section id="id6">
-<h3><span class="section-number">37.4.1. </span>算法<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">39.4.1. </span>算法<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>找到<span class="math notranslate nohighlight">\(J\)</span>的标准算法是从一个初始猜测开始，然后进行迭代。</p>
 <p>这是解决非线性方程的标准方法，通常被称为<strong>连续近似法</strong>。</p>
 <p>我们的初始猜测将是</p>
 <div class="math notranslate nohighlight" id="equation-spguess">
-<span class="eqno">(37.3)<a class="headerlink" href="#equation-spguess" title="Link to this equation">#</a></span>\[J_0(v) = 0 \text{ for all } v\]</div>
+<span class="eqno">(39.3)<a class="headerlink" href="#equation-spguess" title="Link to this equation">#</a></span>\[J_0(v) = 0 \text{ for all } v\]</div>
 <p>现在</p>
 <ol class="arabic simple">
 <li><p>设 <span class="math notranslate nohighlight">\(n = 0\)</span></p></li>
@@ -427,7 +427,7 @@
 <p>虽然我们在此省略了证明，但我们将在其他动态规划讲座中证明类似的结论。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">37.4.2. </span>实现<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">39.4.2. </span>实现<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>有了算法是一个好的开始，但我们还需要考虑如何在计算机上实现它。</p>
 <p>首先，对于成本函数 <span class="math notranslate nohighlight">\(c\)</span>，我们将其实现为矩阵 <span class="math notranslate nohighlight">\(Q\)</span>，其中典型元素为</p>
 <div class="math notranslate nohighlight">
@@ -505,10 +505,10 @@ Q(1, 2)
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">37.5. </span>练习<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">39.5. </span>练习<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="short_path_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 37.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 39.1 </span></p>
 <section id="exercise-content">
 <p>以下文本描述了一个加权有向图。</p>
 <p>行 <code class="docutils literal notranslate"><span class="pre">node0,</span> <span class="pre">node1</span> <span class="pre">0.04,</span> <span class="pre">node8</span> <span class="pre">11.11,</span> <span class="pre">node14</span> <span class="pre">72.21</span></code> 表示从node0我们可以到达：</p>
@@ -640,7 +640,7 @@ Q(1, 2)
 </div>
 <div class="solution dropdown admonition" id="short_path-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#short_path_ex1"> Exercise 37.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#short_path_ex1"> Exercise 39.1</a></p>
 <section id="solution-content">
 <p>首先，让我们编写一个函数，读取上面的图数据并构建一个距离矩阵。</p>
 <div class="cell docutils container">
@@ -962,23 +962,33 @@ Q(1, 2)
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fitting_distributions.html">
+   20. 为数据拟合分布
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. 大数定律与中心极限定理
+   21. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. 蒙特卡罗方法与期权定价
+   22. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. 重尾分布
+   23. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. 种族隔离
+   24. 种族隔离
   </a>
  </li>
 </ul>
@@ -990,27 +1000,27 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   23. 一维动力学
+   25. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. 索洛-斯旺增长模型
+   26. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. 蛛网模型
+   27. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. 世代交叠模型
+   28. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. 商品价格
+   29. 商品价格
   </a>
  </li>
 </ul>
@@ -1022,22 +1032,22 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. 通过货币资助的政府赤字和价格水平
+   30. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. 一些不愉快的货币主义算术
+   31. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. 通货膨胀税的拉弗曲线
+   32. 通货膨胀税的拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. 拉弗曲线与自适应预期
+   33. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1049,22 +1059,22 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) 过程
+   34. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. 马尔科夫链：基本概念
+   35. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. 马尔科夫链：不可约性与遍历性
+   36. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. 用矩阵代数表示的单变量时间序列
+   37. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1076,12 +1086,12 @@ Q(1, 2)
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. 线性规划
+   38. 线性规划
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   37. 最短路径
+   39. 最短路径
   </a>
  </li>
 </ul>
@@ -1093,22 +1103,22 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. 佩龙-弗罗贝尼乌斯定理
+   40. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. 输入-输出模型
+   41. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. 就业的湖泊模型
+   42. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. 网络
+   43. 网络
   </a>
  </li>
 </ul>
@@ -1120,12 +1130,12 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. 多种商品的供需关系
+   44. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. 具有异质性的市场均衡
+   45. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -1137,12 +1147,12 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. 简单线性回归模型
+   46. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. 最大似然估计
+   47. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1154,17 +1164,17 @@ Q(1, 2)
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. 故障排除
+   48. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. 参考文献
+   49. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. 执行统计数据
+   50. 执行统计数据
   </a>
  </li>
 </ul>

@@ -201,9 +201,6 @@ $$
 * IID 表示[独立同分布](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
 * $\mathbb E |X| = \int_{-\infty}^\infty |x| f(x) dx$
 
-
-
-
 ### 关于定理的评论
 
 定理中的概率为一是什么意思？
@@ -298,7 +295,7 @@ generate_histogram(X_distribution, n=1_000, m=1000)
 
 让我们改变 `n` 来看样本均值的分布是如何变化的。
 
-我们将使用[小提琴图](https://intro.quantecon.org/prob_dist.html#violin-plots)来显示不同的分布。
+我们将使用 {ref}`小提琴图 <violin_plots>` 来显示不同的分布。
 
 小提琴图中的每一个分布代表着通过模拟计算得到的某个 $n$ 的 $X_n$ 分布。
 
@@ -373,7 +370,6 @@ means_violin_plot(st.beta(6, 6))
 
 +++
 
-
 ### IID 条件的失效
 
 大数定律可能因违反 IID 假设而不成立。
@@ -420,7 +416,6 @@ $$
 
 接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。
 
-
 ### 定理的陈述
 
 中心极限定理是数学中最了不起的结果之一。
@@ -446,9 +441,6 @@ n \to \infty
 
 
 CLT 的惊人含义是，对于任何具有有限[二阶矩](https://en.wikipedia.org/wiki/Moment_(mathematics))的分布，简单地添加独立样本总是会得到高斯（正态）曲线。
-
-
-
 
 ### 模拟 1
 
@@ -500,7 +492,6 @@ plt.show()
 （注意这里没有 for 循环——所有的操作都是矢量化的，意味着主要计算都转移到了快速的 C 代码上。）
 
 拟合正态密度的效果已经很紧密了，并且可以通过增加 `n` 来进一步改善。
-
 
 ## 练习
 

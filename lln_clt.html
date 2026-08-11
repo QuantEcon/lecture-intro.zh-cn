@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>19. 大数定律与中心极限定理 &#8212; Python量化经济学入门</title>
+    <title>21. 大数定律与中心极限定理 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="20. 蒙特卡罗方法与期权定价" href="monte_carlo.html" />
-    <link rel="prev" title="18. 概率分布" href="prob_dist.html" />
+    <link rel="next" title="22. 蒙特卡罗方法与期权定价" href="monte_carlo.html" />
+    <link rel="prev" title="20. 为数据拟合分布" href="fitting_distributions.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -216,25 +216,25 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">19.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lln-mr">19.2. 大数定律</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">19.2.1. 大数定律的应用</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lln-ksl">19.2.2. 大数定律的陈述</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">19.2.3. 关于定理的评论</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">19.2.4. 示例说明</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">21.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lln-mr">21.2. 大数定律</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">21.2.1. 大数定律的应用</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lln-ksl">21.2.2. 大数定律的陈述</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">21.2.3. 关于定理的评论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">21.2.4. 示例说明</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">19.3. 打破大数定律</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">19.3.1. 无限的一阶矩</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iid">19.3.2. IID 条件的失效</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">21.3. 打破大数定律</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">21.3.1. 无限的一阶矩</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iid">21.3.2. IID 条件的失效</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">19.4. 中心极限定理</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">19.4.1. 定理的陈述</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">19.4.2. 模拟 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">21.4. 中心极限定理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">21.4.1. 定理的陈述</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">21.4.2. 模拟 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">19.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">21.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -290,7 +290,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 07, 2026
+                            Last changed: Aug 11, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -301,11 +301,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/f3acb7d" class="changelog-hash">f3acb7d</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/9114875" class="changelog-hash">9114875</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">7 minutes ago</span>
-                                <span class="changelog-message">Enable Google Analytics (#289)</span>
+                                <span class="changelog-time">18 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Read the six folded datasets from data-lectures, not high_dim_data (#293)</span>
                             </li>
                             
                         </ul>
@@ -321,9 +321,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">19. </span>大数定律与中心极限定理<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">21. </span>大数定律与中心极限定理<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">19.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">21.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座展示了概率统计中两个最重要的结果：</p>
 <ol class="arabic simple">
 <li><p>大数定律（LLN）和</p></li>
@@ -351,13 +351,13 @@
 </div>
 </section>
 <section id="lln-mr">
-<span id="id3"></span><h2><span class="section-number">19.2. </span>大数定律<a class="headerlink" href="#lln-mr" title="Link to this heading">#</a></h2>
+<span id="id3"></span><h2><span class="section-number">21.2. </span>大数定律<a class="headerlink" href="#lln-mr" title="Link to this heading">#</a></h2>
 <p id="index-0">我们从大数定律开始讲起，该定律说明在什么条件下样本均值会收敛到它们的总体均值。</p>
 <section id="id4">
-<h3><span class="section-number">19.2.1. </span>大数定律的应用<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.2.1. </span>大数定律的应用<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>在我们进一步讨论之前，让我们看一个大数定律的例子。</p>
 <div class="proof example admonition" id="lln_ex_ber">
-<p class="admonition-title"><span class="caption-number">Example 19.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 21.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>考虑一个参数为 <span class="math notranslate nohighlight">\(p\)</span> 的<a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">伯努利随机变量</a> <span class="math notranslate nohighlight">\(X\)</span>。</p>
 <p>这意味着 <span class="math notranslate nohighlight">\(X\)</span> 的取值在 <span class="math notranslate nohighlight">\(\{0,1\}\)</span> 中，且 <span class="math notranslate nohighlight">\(\mathbb P\{X=1\} = p\)</span>。</p>
@@ -401,7 +401,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.800397
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.799757
 </pre></div>
 </div>
 </div>
@@ -416,7 +416,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.300498
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.300059
 </pre></div>
 </div>
 </div>
@@ -435,12 +435,12 @@
 <p>在这种情况下，它是等于一的抽样的比例（硬币落在“正面”的次数除以 <span class="math notranslate nohighlight">\(n\)</span>）。</p>
 <p>因此，大数定律告诉我们对于上述伯努利试验</p>
 <div class="math notranslate nohighlight" id="equation-exp">
-<span class="eqno">(19.1)<a class="headerlink" href="#equation-exp" title="Link to this equation">#</a></span>\[    \bar X_n \to \mathbb E X = p
+<span class="eqno">(21.1)<a class="headerlink" href="#equation-exp" title="Link to this equation">#</a></span>\[    \bar X_n \to \mathbb E X = p
     \qquad (n \to \infty)\]</div>
 <p>这正是我们在代码中演示的。</p>
 </section>
 <section id="lln-ksl">
-<span id="id5"></span><h3><span class="section-number">19.2.2. </span>大数定律的陈述<a class="headerlink" href="#lln-ksl" title="Link to this heading">#</a></h3>
+<span id="id5"></span><h3><span class="section-number">21.2.2. </span>大数定律的陈述<a class="headerlink" href="#lln-ksl" title="Link to this heading">#</a></h3>
 <p>让我们更仔细地阐述大数定律(Law of Large Number, LLN)。</p>
 <p>设 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是随机变量，它们都具有相同的分布。</p>
 <p>这些随机变量可以是连续的或离散的。</p>
@@ -468,11 +468,11 @@
 \]</div>
 <p>接下来的定理称为柯尔莫哥洛夫强大数律。</p>
 <div class="proof theorem admonition" id="theorem-1">
-<span id="iid-theorem"></span><p class="admonition-title"><span class="caption-number">Theorem 19.1 </span></p>
+<span id="iid-theorem"></span><p class="admonition-title"><span class="caption-number">Theorem 21.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是独立同分布(IID)的，且 <span class="math notranslate nohighlight">\(\mathbb E |X|\)</span> 是有限的，则</p>
 <div class="math notranslate nohighlight" id="equation-lln-as">
-<span class="eqno">(19.2)<a class="headerlink" href="#equation-lln-as" title="Link to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
+<span class="eqno">(21.2)<a class="headerlink" href="#equation-lln-as" title="Link to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
 </section>
 </div><p>这里</p>
 <ul class="simple">
@@ -481,14 +481,14 @@
 </ul>
 </section>
 <section id="id6">
-<h3><span class="section-number">19.2.3. </span>关于定理的评论<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.2.3. </span>关于定理的评论<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>定理中的概率为一是什么意思？</p>
 <p>我们尝试从模拟的角度来考虑，假设一下我们的计算机可以生成完美的随机样本（尽管事实上这<a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">并非严格真实</a>）。</p>
 <p>同时假设我们可以生成无限序列，从而使得 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 能够得到评估。</p>
-<p>在这种设置下，<a class="reference internal" href="#equation-lln-as">(19.2)</a> 应该被理解为计算机生成一个没有满足 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 的序列的概率是零。</p>
+<p>在这种设置下，<a class="reference internal" href="#equation-lln-as">(21.2)</a> 应该被理解为计算机生成一个没有满足 <span class="math notranslate nohighlight">\(\bar X_n \to \mu\)</span> 的序列的概率是零。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">19.2.4. </span>示例说明<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.2.4. </span>示例说明<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p id="index-1">让我们使用模拟来说明大数定律。</p>
 <p>在说明它时，我们将使用一个关键思想：样本均值 <span class="math notranslate nohighlight">\(\bar X_n\)</span> 本身是一个随机变量。</p>
 <p><span class="math notranslate nohighlight">\(\bar X_n\)</span> 是随机变量的原因是它是随机变量 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 的函数。</p>
@@ -567,13 +567,13 @@ findfont: Failed to find font weight normal, now using 600.
 findfont: Failed to find font weight normal, now using 600.
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/04611dbdea7f9baeb23d0838bc5da1e2b6aedde6effdcd3ca657f27c97df9acb.png"><img alt="_images/04611dbdea7f9baeb23d0838bc5da1e2b6aedde6effdcd3ca657f27c97df9acb.png" src="_images/04611dbdea7f9baeb23d0838bc5da1e2b6aedde6effdcd3ca657f27c97df9acb.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/8a084bcccfc7b9bfa0f1a7e8560bcbc5e20f59dbe5c1310d97fc7f08f89df8f6.png"><img alt="_images/8a084bcccfc7b9bfa0f1a7e8560bcbc5e20f59dbe5c1310d97fc7f08f89df8f6.png" src="_images/8a084bcccfc7b9bfa0f1a7e8560bcbc5e20f59dbe5c1310d97fc7f08f89df8f6.png" style="width: 80%;" />
 </a>
 </div>
 </div>
 <p>我们可以看到 <span class="math notranslate nohighlight">\(\bar X\)</span> 的分布像预期的那样围绕 <span class="math notranslate nohighlight">\(\mathbb E X\)</span> 聚集。</p>
 <p>让我们改变 <code class="docutils literal notranslate"><span class="pre">n</span></code> 来看样本均值的分布是如何变化的。</p>
-<p>我们将使用<a class="reference external" href="https://intro.quantecon.org/prob_dist.html#violin-plots">小提琴图</a>来显示不同的分布。</p>
+<p>我们将使用 <a class="reference internal" href="observed_distributions.html#violin-plots"><span class="std std-ref">小提琴图</span></a> 来显示不同的分布。</p>
 <p>小提琴图中的每一个分布代表着通过模拟计算得到的某个 <span class="math notranslate nohighlight">\(n\)</span> 的 <span class="math notranslate nohighlight">\(X_n\)</span> 分布。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -615,7 +615,7 @@ findfont: Failed to find font weight normal, now using 600.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1ba8d330194900ac14c3c7420a6b06f16d4dcd0973c66ad7b407e70188e9b74a.png"><img alt="_images/1ba8d330194900ac14c3c7420a6b06f16d4dcd0973c66ad7b407e70188e9b74a.png" src="_images/1ba8d330194900ac14c3c7420a6b06f16d4dcd0973c66ad7b407e70188e9b74a.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/631b9a183de4b156cad6a07b1d9c88a0c485ba4ba43a4ead61f7abfa13690a9b.png"><img alt="_images/631b9a183de4b156cad6a07b1d9c88a0c485ba4ba43a4ead61f7abfa13690a9b.png" src="_images/631b9a183de4b156cad6a07b1d9c88a0c485ba4ba43a4ead61f7abfa13690a9b.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -628,7 +628,7 @@ findfont: Failed to find font weight normal, now using 600.
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/80b4ee75486fc27610d5f7b7d3ef01ec09cb087f63bbd8a369f5ae2c28a1853b.png"><img alt="_images/80b4ee75486fc27610d5f7b7d3ef01ec09cb087f63bbd8a369f5ae2c28a1853b.png" src="_images/80b4ee75486fc27610d5f7b7d3ef01ec09cb087f63bbd8a369f5ae2c28a1853b.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/1919d3aadce8a0821465ed3f7630bd6ec9b8d5d68e309d44d60020b4c1dd7b92.png"><img alt="_images/1919d3aadce8a0821465ed3f7630bd6ec9b8d5d68e309d44d60020b4c1dd7b92.png" src="_images/1919d3aadce8a0821465ed3f7630bd6ec9b8d5d68e309d44d60020b4c1dd7b92.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -636,11 +636,11 @@ findfont: Failed to find font weight normal, now using 600.
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">19.3. </span>打破大数定律<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">21.3. </span>打破大数定律<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>我们必须关注大数定律陈述中的假设。</p>
 <p>如果这些假设不成立，那么大数定律可能会不成立。</p>
 <section id="id9">
-<h3><span class="section-number">19.3.1. </span>无限的一阶矩<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.3.1. </span>无限的一阶矩<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>如定理所示，当 <span class="math notranslate nohighlight">\(\mathbb E |X|\)</span> 不是有限的时候，大数定律可以不成立。</p>
 <p>我们可以使用<a class="reference external" href="https://en.wikipedia.org/wiki/Cauchy_distribution">柯西分布</a>来证明这一点。</p>
 <p>柯西分布具有以下性质：</p>
@@ -650,10 +650,10 @@ findfont: Failed to find font weight normal, now using 600.
 <p>这里大数定律不成立是因为柯西分布违反了假设 <span class="math notranslate nohighlight">\(\mathbb E|X| &lt; \infty\)</span>。</p>
 </section>
 <section id="iid">
-<h3><span class="section-number">19.3.2. </span>IID 条件的失效<a class="headerlink" href="#iid" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.3.2. </span>IID 条件的失效<a class="headerlink" href="#iid" title="Link to this heading">#</a></h3>
 <p>大数定律可能因违反 IID 假设而不成立。</p>
 <div class="proof example admonition" id="lln_ex_fail">
-<p class="admonition-title"><span class="caption-number">Example 19.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 21.2 </span></p>
 <section class="example-content" id="proof-content">
 <div class="math notranslate nohighlight">
 \[
@@ -679,18 +679,18 @@ findfont: Failed to find font weight normal, now using 600.
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">19.4. </span>中心极限定理<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">21.4. </span>中心极限定理<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p id="index-2">接下来，我们来讨论中心极限定理（CLT），它告诉我们样本均值与总体均值之间的偏差的分布情况。</p>
 <section id="id11">
-<h3><span class="section-number">19.4.1. </span>定理的陈述<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.4.1. </span>定理的陈述<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <p>中心极限定理是数学中最了不起的结果之一。</p>
 <p>在独立同分布（IID）的设定下，它告诉我们以下内容：</p>
 <div class="proof theorem admonition" id="statement_clt">
-<p class="admonition-title"><span class="caption-number">Theorem 19.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 21.2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>如果 <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> 是 IID，具有共同的均值 <span class="math notranslate nohighlight">\(\mu\)</span> 和共同的方差 <span class="math notranslate nohighlight">\(\sigma^2 \in (0, \infty)\)</span>，那么</p>
 <div class="math notranslate nohighlight" id="equation-lln-clt">
-<span class="eqno">(19.3)<a class="headerlink" href="#equation-lln-clt" title="Link to this equation">#</a></span>\[\sqrt{n} ( \bar X_n - \mu ) \stackrel { d } {\to} N(0, \sigma^2)
+<span class="eqno">(21.3)<a class="headerlink" href="#equation-lln-clt" title="Link to this equation">#</a></span>\[\sqrt{n} ( \bar X_n - \mu ) \stackrel { d } {\to} N(0, \sigma^2)
 \quad \text{as} \quad
 n \to \infty\]</div>
 </section>
@@ -698,7 +698,7 @@ n \to \infty\]</div>
 <p>CLT 的惊人含义是，对于任何具有有限<a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(mathematics)">二阶矩</a>的分布，简单地添加独立样本总是会得到高斯（正态）曲线。</p>
 </section>
 <section id="id12">
-<h3><span class="section-number">19.4.2. </span>模拟 1<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">21.4.2. </span>模拟 1<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <p>由于中心极限定理几乎像魔法一样，运行验证其含义的模拟是辅助理解的好方法。</p>
 <p>为此，我们现在进行以下模拟：</p>
 <ol class="arabic simple">
@@ -742,7 +742,7 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e611e781f953cbdbaaa3d0702d7626b631e6103385b96e0d0fe181dbf7b15dc3.png"><img alt="_images/e611e781f953cbdbaaa3d0702d7626b631e6103385b96e0d0fe181dbf7b15dc3.png" src="_images/e611e781f953cbdbaaa3d0702d7626b631e6103385b96e0d0fe181dbf7b15dc3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/3d14353e23b4e6a2589ff1c6ac23942a89968fe49f699cd5dce7c8d92d9cc653.png"><img alt="_images/3d14353e23b4e6a2589ff1c6ac23942a89968fe49f699cd5dce7c8d92d9cc653.png" src="_images/3d14353e23b4e6a2589ff1c6ac23942a89968fe49f699cd5dce7c8d92d9cc653.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -751,10 +751,10 @@ n \to \infty\]</div>
 </section>
 </section>
 <section id="id13">
-<h2><span class="section-number">19.5. </span>练习<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">21.5. </span>练习<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="lln_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 19.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 21.1 </span></p>
 <section id="exercise-content">
 <p>用<a class="reference external" href="https://en.wikipedia.org/wiki/Beta_distribution">贝塔分布</a>重复<a class="reference internal" href="#sim-one"><span class="std std-ref">上面</span></a>的模拟。</p>
 <p>你可以选择任何 <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> 和 <span class="math notranslate nohighlight">\(\beta &gt; 0\)</span>。</p>
@@ -762,7 +762,7 @@ n \to \infty\]</div>
 </div>
 <div class="solution dropdown admonition" id="lln_clt-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex1"> Exercise 19.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex1"> Exercise 21.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -795,7 +795,7 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/3779d4520c4b4f9e28bf454076c7e54f8a2ee745d77932a493c8cd14e0115dd7.png"><img alt="_images/3779d4520c4b4f9e28bf454076c7e54f8a2ee745d77932a493c8cd14e0115dd7.png" src="_images/3779d4520c4b4f9e28bf454076c7e54f8a2ee745d77932a493c8cd14e0115dd7.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/251a4b7356f85835c1fc9b2fd2c05d5d18d7caedc9baa26ad3e2e791bd7703e9.png"><img alt="_images/251a4b7356f85835c1fc9b2fd2c05d5d18d7caedc9baa26ad3e2e791bd7703e9.png" src="_images/251a4b7356f85835c1fc9b2fd2c05d5d18d7caedc9baa26ad3e2e791bd7703e9.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -803,7 +803,7 @@ n \to \infty\]</div>
 </div>
 <div class="exercise admonition" id="lln_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 19.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 21.2 </span></p>
 <section id="exercise-content">
 <p>在这次讲座开始时，我们讨论了伯努利随机变量。</p>
 <p>NumPy 没有提供我们可以从中采样的 <code class="docutils literal notranslate"><span class="pre">bernoulli</span></code> 函数。</p>
@@ -819,7 +819,7 @@ n \to \infty\]</div>
 </div>
 <div class="solution dropdown admonition" id="lln_clt-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex2"> Exercise 19.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex2"> Exercise 21.2</a></p>
 <section id="solution-content">
 <p>我们可以将 <span class="math notranslate nohighlight">\(X\)</span> 写为 <span class="math notranslate nohighlight">\(X = \mathbf 1\{U &lt; p\}\)</span>，其中 <span class="math notranslate nohighlight">\(\mathbf 1\)</span> 是
 <a class="reference external" href="https://en.wikipedia.org/wiki/Indicator_function">指示函数</a>（即，
@@ -834,7 +834,7 @@ n \to \infty\]</div>
 </div>
 <div class="exercise admonition" id="lln_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 19.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 21.3 </span></p>
 <section id="exercise-content">
 <p>我们上面提到即使违反 IID 条件，大数定律有时仍然成立。</p>
 <p>让我们进一步探讨这个说法。</p>
@@ -861,7 +861,7 @@ n \to \infty\]</div>
 </div>
 <div class="solution dropdown admonition" id="lln_clt-solution-9">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex3"> Exercise 19.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#lln_ex3"> Exercise 21.3</a></p>
 <section id="solution-content">
 <p><strong>第一题答案</strong></p>
 <p>关于第一部分，我们认为 <span class="math notranslate nohighlight">\(X_t\)</span> 在所有 <span class="math notranslate nohighlight">\(t\)</span> 时刻的分布与 <span class="math notranslate nohighlight">\(X_0\)</span> 相同。</p>
@@ -927,7 +927,7 @@ n \to \infty\]</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/aaf9b9f72a2f34d7f6a118b49358f2a43af609c51ca06f832ec665e130f73759.png"><img alt="_images/aaf9b9f72a2f34d7f6a118b49358f2a43af609c51ca06f832ec665e130f73759.png" src="_images/aaf9b9f72a2f34d7f6a118b49358f2a43af609c51ca06f832ec665e130f73759.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/2ec576dea4f216040a924ac701e14b1508a3188cfd9ed9f38229ca6175d499ab.png"><img alt="_images/2ec576dea4f216040a924ac701e14b1508a3188cfd9ed9f38229ca6175d499ab.png" src="_images/2ec576dea4f216040a924ac701e14b1508a3188cfd9ed9f38229ca6175d499ab.png" style="width: 80%;" />
 </a>
 </div>
 </div>
@@ -1119,24 +1119,34 @@ n \to \infty\]</div>
    18. 概率分布
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fitting_distributions.html">
+   20. 为数据拟合分布
+  </a>
+ </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   19. 大数定律与中心极限定理
+   21. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. 蒙特卡罗方法与期权定价
+   22. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. 重尾分布
+   23. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. 种族隔离
+   24. 种族隔离
   </a>
  </li>
 </ul>
@@ -1148,27 +1158,27 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   23. 一维动力学
+   25. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. 索洛-斯旺增长模型
+   26. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. 蛛网模型
+   27. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. 世代交叠模型
+   28. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. 商品价格
+   29. 商品价格
   </a>
  </li>
 </ul>
@@ -1180,22 +1190,22 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. 通过货币资助的政府赤字和价格水平
+   30. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. 一些不愉快的货币主义算术
+   31. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. 通货膨胀税的拉弗曲线
+   32. 通货膨胀税的拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. 拉弗曲线与自适应预期
+   33. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -1207,22 +1217,22 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) 过程
+   34. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. 马尔科夫链：基本概念
+   35. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. 马尔科夫链：不可约性与遍历性
+   36. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. 用矩阵代数表示的单变量时间序列
+   37. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -1234,12 +1244,12 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. 线性规划
+   38. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. 最短路径
+   39. 最短路径
   </a>
  </li>
 </ul>
@@ -1251,22 +1261,22 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. 佩龙-弗罗贝尼乌斯定理
+   40. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. 输入-输出模型
+   41. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. 就业的湖泊模型
+   42. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. 网络
+   43. 网络
   </a>
  </li>
 </ul>
@@ -1278,12 +1288,12 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. 多种商品的供需关系
+   44. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. 具有异质性的市场均衡
+   45. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -1295,12 +1305,12 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. 简单线性回归模型
+   46. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. 最大似然估计
+   47. 最大似然估计
   </a>
  </li>
 </ul>
@@ -1312,17 +1322,17 @@ n \to \infty\]</div>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. 故障排除
+   48. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. 参考文献
+   49. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. 执行统计数据
+   50. 执行统计数据
   </a>
  </li>
 </ul>

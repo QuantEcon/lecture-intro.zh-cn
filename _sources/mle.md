@@ -102,11 +102,11 @@ n = 10_000
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-url = 'https://github.com/QuantEcon/high_dim_data/raw/main/SCF_plus/SCF_plus_mini_no_weights.csv'
+url = 'https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/SCF_plus_mini_no_weights.csv'
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]
-df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据
+df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据  # i18n
 rv = df['n_wealth'].sample(n=n, random_state=1234)
 rv = rv.to_numpy() / 100_000
 sample = rv
@@ -158,6 +158,8 @@ $$ (eq:est_rev)
 
 1. 猜测潜在分布是什么（例如，均值为 $\mu$，标准差为 $\sigma$ 的正态分布）。
 2. 估计参数值（例如，估计正态分布的 $\mu$ 和 $\sigma$）。
+
+这与 {doc}`fitting_distributions` 中讨论的两个步骤是一样的，不过那里是用矩方法来选择参数，并且还展示了如何判断拟合结果的好坏。
 
 对于财富而言，一种假设是每个 $w_i$ 都符合[对数正态分布](https://baike.baidu.com/item/对数正态分布/8976782)的，其中参数 $\mu \in (-\infty, \infty)$，$\sigma \in (0, \infty)$。
 

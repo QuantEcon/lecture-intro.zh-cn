@@ -133,7 +133,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="next" title="19. 观测分布" href="observed_distributions.html" />
     <link rel="prev" title="17. 求解平方根" href="greek_square.html" />
 
 <!-- Normal Meta Tags -->
@@ -236,17 +236,6 @@
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">18.3. 观察到的分布</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">18.3.1. 描述性统计</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">18.3.2. 可视化</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">18.3.2.1. 直方图</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">18.3.2.2. 核密度估计</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">18.3.2.3. 小提琴图</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">18.3.3. 与概率分布的联系</a></li>
-</ul>
-</li>
 </ul>
                             <p class="logo">
                                 
@@ -302,7 +291,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 07, 2026
+                            Last changed: Aug 11, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -313,11 +302,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/f3acb7d" class="changelog-hash">f3acb7d</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/9114875" class="changelog-hash">9114875</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">7 minutes ago</span>
-                                <span class="changelog-message">Enable Google Analytics (#289)</span>
+                                <span class="changelog-time">18 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Read the six folded datasets from data-lectures, not high_dim_data (#293)</span>
                             </li>
                             
                         </ul>
@@ -338,54 +327,16 @@
 <span id="id2"></span><h2><span class="section-number">18.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
 <p>在数据科学应用中，我们经常关注某个特定变量的数据。</p>
 <p>在本讲中，我们将使用 Python 快速介绍数据和概率分布。</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>yfinance<span class="w">  </span>
-</pre></div>
-</div>
-</div>
-<details class="admonition hide below-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show output</p>
-<p class="expanded admonition-title">Hide code cell output</p>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yfinance in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (1.5.2)
-Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (3.0.3)
-Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.4.6)
-Requirement already satisfied: requests&gt;=2.31 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.34.2)
-Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (0.0.13)
-Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.9.4)
-Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2026.3.post1)
-Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.3.0)
-Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.15.0)
-Requirement already satisfied: curl_cffi&gt;=0.15 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (0.16.0)
-Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (6.33.5)
-Requirement already satisfied: websockets&gt;=13.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (16.0)
-Requirement already satisfied: soupsieve&gt;=1.6.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.8.4)
-Requirement already satisfied: typing-extensions&gt;=4.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (4.16.0)
-Requirement already satisfied: cffi&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from curl_cffi&gt;=0.15-&gt;yfinance) (2.1.0)
-Requirement already satisfied: certifi&gt;=2024.2.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from curl_cffi&gt;=0.15-&gt;yfinance) (2026.6.17)
-Requirement already satisfied: pycparser in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from cffi&gt;=2.0.0-&gt;curl_cffi&gt;=0.15-&gt;yfinance) (3.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.9.0.post0)
-Requirement already satisfied: six&gt;=1.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.3.0-&gt;yfinance) (1.17.0)
-Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.4.7)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.18)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests&gt;=2.31-&gt;yfinance) (2.7.0)
-</pre></div>
-</div>
-</div>
-</details>
-</div>
+<p>本讲是三讲中的第一讲。</p>
+<p>第二讲 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 讨论观测数据——即我们测量或收集的一组数字——以及它与本讲所研究的概率分布之间的联系。</p>
+<p>第三讲 <a class="reference internal" href="fitting_distributions.html"><span class="doc">为数据拟合分布</span></a> 探讨哪个概率分布最适合描述给定的数据集这一问题。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yf</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
 <span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
@@ -1368,448 +1319,6 @@ p(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}
 </section>
 </section>
 </section>
-<section id="id16">
-<h2><span class="section-number">18.3. </span>观察到的分布<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
-<p>有时候我们将观测到的数据或测量值称为”分布”。</p>
-<p>例如，假设我们观察了10个人一年的收入：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Hiroshi&#39;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">],</span> 
-        <span class="p">[</span><span class="s1">&#39;Ako&#39;</span><span class="p">,</span> <span class="mi">1210</span><span class="p">],</span> 
-        <span class="p">[</span><span class="s1">&#39;Emi&#39;</span><span class="p">,</span> <span class="mi">1400</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Daiki&#39;</span><span class="p">,</span> <span class="mi">990</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Chiyo&#39;</span><span class="p">,</span> <span class="mi">1530</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Taka&#39;</span><span class="p">,</span> <span class="mi">1210</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Katsuhiko&#39;</span><span class="p">,</span> <span class="mi">1240</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Daisuke&#39;</span><span class="p">,</span> <span class="mi">1124</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Yoshi&#39;</span><span class="p">,</span> <span class="mi">1330</span><span class="p">],</span>
-        <span class="p">[</span><span class="s1">&#39;Rie&#39;</span><span class="p">,</span> <span class="mi">1340</span><span class="p">]]</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;income&#39;</span><span class="p">])</span>
-<span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>name</th>
-      <th>income</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Hiroshi</td>
-      <td>1200</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Ako</td>
-      <td>1210</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Emi</td>
-      <td>1400</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Daiki</td>
-      <td>990</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Chiyo</td>
-      <td>1530</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Taka</td>
-      <td>1210</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Katsuhiko</td>
-      <td>1240</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Daisuke</td>
-      <td>1124</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Yoshi</td>
-      <td>1330</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Rie</td>
-      <td>1340</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>在这种情况下，我们可能会将他们收入的集合称为”收入分布”。</p>
-<p>这个术语容易引起混淆，因为这个集合并不是一个概率分布——它只是一组数字。</p>
-<p>不过，正如我们接下来会看到的，观察到的分布（即像上面收入分布这样的一组数字）与概率分布之间存在联系。</p>
-<p>下面让我们来探索一些观察到的数据分布。</p>
-<section id="id17">
-<h3><span class="section-number">18.3.1. </span>描述性统计<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
-<p>假设我们有一个观察到的分布，其值为 <span class="math notranslate nohighlight">\(\{x_1, \ldots, x_n\}\)</span></p>
-<p>该分布的<strong>样本均值</strong>定义为</p>
-<div class="math notranslate nohighlight">
-\[
-\bar x = \frac{1}{n} \sum_{i=1}^n x_i
-\]</div>
-<p><strong>样本方差</strong>定义为</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2
-\]</div>
-<p>对于上面给出的收入分布，我们可以通过下面的方式计算这些数字：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span>
-<span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1257.4), np.float64(22680.93333333333))
-</pre></div>
-</div>
-</div>
-</div>
-<div class="exercise admonition" id="prob_ex4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 18.3 </span></p>
-<section id="exercise-content">
-<p>如果你尝试检查上述给出的样本均值和样本方差的公式是否能产生相同的数字，你会发现方差并不完全正确。这是因为SciPy使用的是 <span class="math notranslate nohighlight">\(1/(n-1)\)</span> 而不是 <span class="math notranslate nohighlight">\(1/n\)</span> 作为方差公式前面的系数。（有些书籍就是这样定义样本方差的。）</p>
-<p>请确认这一点。</p>
-</section>
-</div>
-</section>
-<section id="id18">
-<h3><span class="section-number">18.3.2. </span>可视化<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
-<p>让我们来看看我们可以用哪些方式来可视化一个或多个观察到的分布。</p>
-<p>我们将讲解</p>
-<ul class="simple">
-<li><p>直方图</p></li>
-<li><p>核密度估计</p></li>
-<li><p>小提琴图</p></li>
-</ul>
-<section id="id19">
-<h4><span class="section-number">18.3.2.1. </span>直方图<a class="headerlink" href="#id19" title="Link to this heading">#</a></h4>
-<p>下面我们来绘制刚才创建的收入分布直方图：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;收入&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/0c7f927abbbb7af45d367f1b106d623c920b8061825c012d7db4d9d4415a6d96.png"><img alt="_images/0c7f927abbbb7af45d367f1b106d623c920b8061825c012d7db4d9d4415a6d96.png" src="_images/0c7f927abbbb7af45d367f1b106d623c920b8061825c012d7db4d9d4415a6d96.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>现在让我们来看一个真实数据的分布。</p>
-<p>具体而言，我们将查看亚马逊股票在2000年1月1日至2024年1月1日期间的月度收益率。</p>
-<p>月度收益率的计算方式是每个月股票价格的百分比变化。</p>
-<p>因此我们每个月会有一个观测值。</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1mo&#39;</span><span class="p">)</span>
-<span class="n">prices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
-<span class="n">x_amazon</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">x_amazon</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<details class="admonition hide below-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show output</p>
-<p class="expanded admonition-title">Hide code cell output</p>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Ticker</th>
-      <th>AMZN</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2000-02-01</th>
-      <td>6.679568</td>
-    </tr>
-    <tr>
-      <th>2000-03-01</th>
-      <td>-2.722323</td>
-    </tr>
-    <tr>
-      <th>2000-04-01</th>
-      <td>-17.630592</td>
-    </tr>
-    <tr>
-      <th>2000-05-01</th>
-      <td>-12.457531</td>
-    </tr>
-    <tr>
-      <th>2000-06-01</th>
-      <td>-24.838297</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</details>
-</div>
-<p>第一个观测值是2000年1月的月度收益率（百分比变化），即</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_amazon</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ticker
-AMZN    6.679568
-Name: 2000-02-01 00:00:00, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<p>让我们将回报观测值转换成数组并制作直方图。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月收益率（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c65a6f8a27e4a981b10286b42d0a5b780c10ffc430ee7fcd2b957c45cdaf7400.png"><img alt="_images/c65a6f8a27e4a981b10286b42d0a5b780c10ffc430ee7fcd2b957c45cdaf7400.png" src="_images/c65a6f8a27e4a981b10286b42d0a5b780c10ffc430ee7fcd2b957c45cdaf7400.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-</section>
-<section id="id20">
-<h4><span class="section-number">18.3.2.2. </span>核密度估计<a class="headerlink" href="#id20" title="Link to this heading">#</a></h4>
-<p>核密度估计（KDE）提供了一种估计和可视化分布密度的简单方法。</p>
-<p>如果你不熟悉 KDE，可以把它想象成一种平滑处理过的直方图。</p>
-<p>下面让我们看一下由亚马逊回报数据构成的KDE。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cef8469bef7c86c0a14f3279146b41e4217824faa7133d48c5fb6a28b5e0829d.png"><img alt="_images/cef8469bef7c86c0a14f3279146b41e4217824faa7133d48c5fb6a28b5e0829d.png" src="_images/cef8469bef7c86c0a14f3279146b41e4217824faa7133d48c5fb6a28b5e0829d.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>KDE的平滑程度取决于我们选择带宽的方式。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=0.1&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=0.5&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;bw=1&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7ee1f03e30be50689d60986c9a8a2d416720402158aa95f5feb3981e182b5a54.png"><img alt="_images/7ee1f03e30be50689d60986c9a8a2d416720402158aa95f5feb3981e182b5a54.png" src="_images/7ee1f03e30be50689d60986c9a8a2d416720402158aa95f5feb3981e182b5a54.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>当我们使用较大的带宽时，KDE更加平滑。</p>
-<p>一个合适的带宽既不应过于平滑（欠拟合），也不应过于曲折（过拟合）。</p>
-</section>
-<section id="id21">
-<h4><span class="section-number">18.3.2.3. </span>小提琴图<a class="headerlink" href="#id21" title="Link to this heading">#</a></h4>
-<p>通过小提琴图展示观察到的分布是另一种方式。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;KDE&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/908e1a8d0b7cba75549b4fb659ff4ddd7fe0938a1bdb920d2c02a1703d0d65e4.png"><img alt="_images/908e1a8d0b7cba75549b4fb659ff4ddd7fe0938a1bdb920d2c02a1703d0d65e4.png" src="_images/908e1a8d0b7cba75549b4fb659ff4ddd7fe0938a1bdb920d2c02a1703d0d65e4.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>当我们想要比较不同的分布时，小提琴图特别有用。</p>
-<p>例如，让我们比较亚马逊股票和开市客股票的月度收益率。</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;COST&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-1-1&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1mo&#39;</span><span class="p">)</span>
-<span class="n">prices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
-<span class="n">x_costco</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">*</span> <span class="mi">100</span>
-</pre></div>
-</div>
-</div>
-<details class="admonition hide below-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show output</p>
-<p class="expanded admonition-title">Hide code cell output</p>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">violinplot</span><span class="p">([</span><span class="n">x_amazon</span><span class="p">[</span><span class="s1">&#39;AMZN&#39;</span><span class="p">],</span> <span class="n">x_costco</span><span class="p">[</span><span class="s1">&#39;COST&#39;</span><span class="p">]])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;月度回报率（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;零售商&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;亚马逊&#39;</span><span class="p">,</span> <span class="s1">&#39;开市客&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/af4f17a1d3eed2dffba00894a079accf702f105e8740355439f96464f53dae6e.png"><img alt="_images/af4f17a1d3eed2dffba00894a079accf702f105e8740355439f96464f53dae6e.png" src="_images/af4f17a1d3eed2dffba00894a079accf702f105e8740355439f96464f53dae6e.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-</section>
-</section>
-<section id="id22">
-<h3><span class="section-number">18.3.3. </span>与概率分布的联系<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
-<p>现在让我们探讨观察到的分布与概率分布之间的关系。</p>
-<p>有时候，将观察到的分布想象成是由某个特定的概率分布生成的，会很有帮助。</p>
-<p>例如，我们可以看看上面亚马逊的回报数据，设想它们是由正态分布生成的。</p>
-<p>（尽管这并不完全正确，但这种想法<em>可能</em>有助于我们思考这些数据。）</p>
-<p>在这里，我们通过将样本均值设为正态分布的均值、样本方差设为正态分布的方差，来将正态分布与亚马逊的月度回报数据进行匹配。</p>
-<p>然后我们绘制密度曲线和直方图。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">σ_squared</span> <span class="o">=</span> <span class="n">x_amazon</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
-<span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_squared</span><span class="p">)</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_amazon</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;月度回报（百分比变化）&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/7deef6dd698bde5dcc44513ff13d3cffb8c0eb59910c64e381ac8554a334fd89.png"><img alt="_images/7deef6dd698bde5dcc44513ff13d3cffb8c0eb59910c64e381ac8554a334fd89.png" src="_images/7deef6dd698bde5dcc44513ff13d3cffb8c0eb59910c64e381ac8554a334fd89.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>直方图与密度曲线之间的匹配程度还算可以，但也不是特别好。</p>
-<p>其中一个原因是正态分布并不能很好地拟合这个观测数据——我们在讨论<a class="reference internal" href="heavy_tails.html#heavy-tail"><span class="std std-ref">重尾分布</span></a>时会再次谈到这一点。</p>
-<p>当然，如果数据确实是由正态分布生成的，那么拟合效果会更好。</p>
-<p>让我们通过实际操作来看看</p>
-<ul class="simple">
-<li><p>首先我们从正态分布中生成随机抽样</p></li>
-<li><p>然后我们绘制它们的直方图并与密度曲线进行比较</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">σ</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">2000</span>  <span class="c1"># 观测数量</span>
-<span class="n">x_draws</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_grid</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_draws</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;密度&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/a86e35724a684c50bf6e9c105af4266ddd7ae51b13b7fb4e24d3e270750979ce.png"><img alt="_images/a86e35724a684c50bf6e9c105af4266ddd7ae51b13b7fb4e24d3e270750979ce.png" src="_images/a86e35724a684c50bf6e9c105af4266ddd7ae51b13b7fb4e24d3e270750979ce.png" style="width: 80%;" />
-</a>
-</div>
-</div>
-<p>请注意，如果你不断增加观测数量 <span class="math notranslate nohighlight">\(N\)</span>，拟合效果会越来越好。</p>
-<p>这种收敛是”大数定律”的一种体现，我们将在<a class="reference internal" href="lln_clt.html#lln-mr"><span class="std std-ref">后面</span></a>讨论这个定律。</p>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1995,23 +1504,33 @@ Name: 2000-02-01 00:00:00, dtype: float64
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fitting_distributions.html">
+   20. 为数据拟合分布
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   19. 大数定律与中心极限定理
+   21. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="monte_carlo.html">
-   20. 蒙特卡罗方法与期权定价
+   22. 蒙特卡罗方法与期权定价
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   21. 重尾分布
+   23. 重尾分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="schelling.html">
-   22. 种族隔离
+   24. 种族隔离
   </a>
  </li>
 </ul>
@@ -2023,27 +1542,27 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   23. 一维动力学
+   25. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   24. 索洛-斯旺增长模型
+   26. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   25. 蛛网模型
+   27. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   26. 世代交叠模型
+   28. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="commod_price.html">
-   27. 商品价格
+   29. 商品价格
   </a>
  </li>
 </ul>
@@ -2055,22 +1574,22 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
-   28. 通过货币资助的政府赤字和价格水平
+   30. 通过货币资助的政府赤字和价格水平
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unpleasant.html">
-   29. 一些不愉快的货币主义算术
+   31. 一些不愉快的货币主义算术
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation_nonlinear.html">
-   30. 通货膨胀税的拉弗曲线
+   32. 通货膨胀税的拉弗曲线
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="laffer_adaptive.html">
-   31. 拉弗曲线与自适应预期
+   33. 拉弗曲线与自适应预期
   </a>
  </li>
 </ul>
@@ -2082,22 +1601,22 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   32. AR(1) 过程
+   34. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   33. 马尔科夫链：基本概念
+   35. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   34. 马尔科夫链：不可约性与遍历性
+   36. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   35. 用矩阵代数表示的单变量时间序列
+   37. 用矩阵代数表示的单变量时间序列
   </a>
  </li>
 </ul>
@@ -2109,12 +1628,12 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   36. 线性规划
+   38. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   37. 最短路径
+   39. 最短路径
   </a>
  </li>
 </ul>
@@ -2126,22 +1645,22 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   38. 佩龙-弗罗贝尼乌斯定理
+   40. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   39. 输入-输出模型
+   41. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   40. 就业的湖泊模型
+   42. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   41. 网络
+   43. 网络
   </a>
  </li>
 </ul>
@@ -2153,12 +1672,12 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   42. 多种商品的供需关系
+   44. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   43. 具有异质性的市场均衡
+   45. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -2170,12 +1689,12 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="simple_linear_regression.html">
-   44. 简单线性回归模型
+   46. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mle.html">
-   45. 最大似然估计
+   47. 最大似然估计
   </a>
  </li>
 </ul>
@@ -2187,17 +1706,17 @@ Name: 2000-02-01 00:00:00, dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. 故障排除
+   48. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. 参考文献
+   49. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. 执行统计数据
+   50. 执行统计数据
   </a>
  </li>
 </ul>
