@@ -812,8 +812,8 @@ df_fs = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_di
 df_fs = df_fs[['Country', 'Sales', 'Profits', 'Assets', 'Market Value']]
 fig, ax = plt.subplots(figsize=(6.4, 3.5))
 
-label="公司规模（市值）"
-top = 500 # 设置排名前500的切断点
+label="公司规模（市值）"  # i18n
+top = 500 # 设置排名前500的切断点  # i18n
 d = df_fs.sort_values('Market Value', ascending=False)
 empirical_ccdf(np.asarray(d['Market Value'])[:top], ax, label=label, add_reg_line=True)
 
@@ -834,7 +834,7 @@ mystnb:
     name: city-size-dist
 tags: [hide-input]
 ---
-# 导入2023年美国和2023年巴西城市的人口数据
+# 导入2023年美国和2023年巴西城市的人口数据  # i18n
 df_cs_us = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_us.csv')
 df_cs_br = pd.read_csv('https://media.githubusercontent.com/media/QuantEcon/high_dim_data/main/cross_section/cities_brazil.csv')
 
@@ -865,7 +865,7 @@ df_w = df_w[['country', 'realTimeWorth', 'realTimeRank']].dropna()
 df_w = df_w.astype({'realTimeRank': int})
 df_w = df_w.sort_values('realTimeRank', ascending=True).copy()
 countries = ['United States', 'Japan', 'India', 'Italy']  
-country_names = ['美国', '日本', '印度', '意大利']
+country_names = ['美国', '日本', '印度', '意大利']  # i18n
 N = len(countries)
 
 fig, axs = plt.subplots(2, 2, figsize=(8, 6))
@@ -875,11 +875,11 @@ for i, c in enumerate(countries):
     df_w_c = df_w[df_w['country'] == c].reset_index()
     z = np.asarray(df_w_c['realTimeWorth'])
     # print('number of the global richest 2000 from '+ c, len(z))
-    top = 500           # 截止数：前500名
+    top = 500           # 截止数：前500名  # i18n
     if len(z) <= top:    
         z = z[:top]
 
-    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)
+    empirical_ccdf(z[:top], axs[i], label=country_names[i], xlabel='对数财富', add_reg_line=True)  # i18n
     
 fig.tight_layout()
 
