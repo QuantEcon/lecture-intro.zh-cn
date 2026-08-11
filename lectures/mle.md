@@ -106,7 +106,7 @@ url = 'https://github.com/QuantEcon/high_dim_data/raw/main/SCF_plus/SCF_plus_min
 df = pd.read_csv(url)
 df = df.dropna()
 df = df[df['year'] == 2016]
-df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据
+df = df.loc[df['n_wealth'] > 1 ]   # 限制数据为净财富大于 1 的数据  # i18n
 rv = df['n_wealth'].sample(n=n, random_state=1234)
 rv = rv.to_numpy() / 100_000
 sample = rv
