@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.17.2
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -61,7 +61,6 @@ translation:
 
 我们首先探讨不平等的衡量标准，然后将其应用于美国和其他国家的财富和收入数据。
 
-
 ### 一些历史
 
 许多历史学家认为，在罗马共和国衰落这一历史事件中，不平等这一问题起到了重要作用（参见{cite}`levitt2019did`等）。
@@ -79,7 +78,6 @@ translation:
 当然还有其他原因使得不平等问题很关键，比如它如何影响人类福祉。
 
 基于这些原因，我们开始思考什么是不平等，以及如何量化和分析不平等。
-
 
 ### 测量
 
@@ -119,7 +117,6 @@ plt.rcParams['font.family'] = ['Source Han Serif SC']
 
 在本节中，我们将讨论洛伦兹曲线的定义和性质。
 
-
 ### 定义
 
 洛伦兹曲线选取一个样本 $w_1，\ldots，w_n$，并生成一条曲线 $L$。
@@ -155,7 +152,6 @@ $$
 * 如果 $x=0.5$，$y=0.1$，那么最底层的 50%人口拥有 10%的财富。
 
 在上面的讨论中，我们重点讨论了财富，但同样的观点也适用于收入、消费等。
-
 
 ### 洛伦兹曲线的模拟数据
 
@@ -249,8 +245,8 @@ plt.show()
 接下来，我们来看一看美国的收入数据和财富数据。
 
 (data:survey-consumer-finance)=
-下面的代码导入了2016年的`SCF_plus`数据集的一个子集，
-该数据集来源于[消费者财务调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances)（SCF）。
+下面的代码导入了 2016 年的 `SCF_plus` 数据集的一个子集，
+该数据集来源于 [消费者财务调查](https://en.wikipedia.org/wiki/Survey_of_Consumer_Finances)（SCF）。
 
 ```{code-cell} ipython3
 url = 'https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/SCF_plus_mini.csv'
@@ -421,7 +417,6 @@ plt.show()
 ```{seealso}
 在全球数据网站 (Our World in Data) 上有一个用图表阐述[洛伦兹曲线和基尼系数](https://ourworldindata.org/what-is-the-gini-coefficient)的网页
 ```
-
 
 ### 模拟数据的基尼系数
 
