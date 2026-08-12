@@ -418,12 +418,12 @@ plt.vlines(df['X'], df['Y_hat'], df['Y'], color='r');
 <iframe src="https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
 :::
 
-如果你遇到困难，可以从这里下载{download}`数据副本 <https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv>`
+如果你遇到困难，可以从这里下载{download}`数据副本 <https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/life-expectancy-vs-gdp-per-capita.csv>`
 
 **第3问：** 使用`pandas`导入`csv`格式的数据并绘制几个感兴趣的国家的图表
 
 ```{code-cell} ipython3
-data_url = "https://github.com/QuantEcon/lecture-python-intro/raw/main/lectures/_static/lecture_specific/simple_linear_regression/life-expectancy-vs-gdp-per-capita.csv"
+data_url = "https://raw.githubusercontent.com/QuantEcon/data-lectures/main/lectures/life-expectancy-vs-gdp-per-capita.csv"
 df = pd.read_csv(data_url, nrows=10)
 ```
 
