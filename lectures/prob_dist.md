@@ -13,19 +13,18 @@ translation:
   title: 概率分布
   headings:
     Outline: 概述
-    Common distributions: 常见分布
-    Common distributions::Discrete distributions: 离散分布
-    Common distributions::Discrete distributions::Uniform distribution: 均匀分布
-    Common distributions::Discrete distributions::Bernoulli distribution: 伯努利分布
-    Common distributions::Discrete distributions::Binomial distribution: 二项分布
-    Common distributions::Discrete distributions::Geometric distribution: 几何分布
-    Common distributions::Discrete distributions::Poisson distribution: 泊松分布
-    Common distributions::Continuous distributions: 连续分布
-    Common distributions::Continuous distributions::Normal distribution: 正态分布
-    Common distributions::Continuous distributions::Lognormal distribution: 对数正态分布
-    Common distributions::Continuous distributions::Exponential distribution: 指数分布
-    Common distributions::Continuous distributions::Beta distribution: 贝塔分布
-    Common distributions::Continuous distributions::Gamma distribution: 伽马分布
+    Discrete distributions: 离散分布
+    Discrete distributions::Uniform distribution: 均匀分布
+    Discrete distributions::Bernoulli distribution: 伯努利分布
+    Discrete distributions::Binomial distribution: 二项分布
+    Discrete distributions::Geometric distribution: 几何分布
+    Discrete distributions::Poisson distribution: 泊松分布
+    Continuous distributions: 连续分布
+    Continuous distributions::Normal distribution: 正态分布
+    Continuous distributions::Lognormal distribution: 对数正态分布
+    Continuous distributions::Exponential distribution: 指数分布
+    Continuous distributions::Beta distribution: 贝塔分布
+    Continuous distributions::Gamma distribution: 伽马分布
 ---
 
 # 概率分布
@@ -37,7 +36,7 @@ translation:
 
 在数据科学应用中，我们经常关注某个特定变量的数据。
 
-在本讲中，我们将使用 Python 快速介绍数据和概率分布。
+在本讲中，我们将使用 Python 快速介绍概率分布。
 
 本讲是三讲中的第一讲。
 
@@ -55,6 +54,8 @@ import scipy.stats
 FONTPATH = "fonts/SourceHanSerifSC-SemiBold.otf"
 mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
+
+np.set_printoptions(legacy='1.25')   # 以普通数字形式打印标量
 ```
 
 为了引出下文，让我们从一个真实的例子开始：美国成年男性和女性的身高。
@@ -120,13 +121,9 @@ plt.show()
 
 这也是我们研究**常见分布**的原因之一：这些是由少数几个参数控制的、已被证明对描述数据非常有用的一系列命名分布族。
 
-现在让我们来看看这些分布。
+现在让我们来研究这些分布，回顾一些著名分布的定义，并探索如何使用 SciPy 来处理它们。
 
-## 常见分布
-
-在本节中，我们将介绍几种常见概率分布的基本定义，并展示如何利用 SciPy 库来处理和分析这些分布。
-
-### 离散分布
+## 离散分布
 
 我们从离散分布开始。
 
@@ -183,13 +180,93 @@ $$
 
 我们也将这个数字称为分布（由 $p$ 表示）的均值。
 
+更一般地，如果 $f$ 是 $S$ 上的一个函数，那么 $f(X)$ 是一个随机变量，当 $X$ 取值为 $x_i$ 时，它取值为 $f(x_i)$。
+
+它的期望值是将这些值分别以其概率加权求和得到的：
+
+$$
+\mathbb{E}[f(X)] = \sum_{i=1}^n f(x_i) p(x_i)
+$$
+
+我们下面定义的每一个量，都是这种形式的期望值，只是选取了合适的 $f$。
+
 $X$ 的**方差**定义为
 
 $$ 
-\mathbb{V}[X] = \sum_{i=1}^n (x_i - \mathbb{E}[X])^2 p(x_i)
+\mathbb{V}[X] 
+    = \mathbb{E}[(X - \mathbb{E}[X])^2]
+    = \sum_{i=1}^n (x_i - \mathbb{E}[X])^2 p(x_i)
 $$
 
 方差也称为分布的*二阶中心矩*。
+
+$X$ 的**标准差**是方差的平方根：
+
+$$
+\sigma = \sqrt{\mathbb{V}[X]}
+$$
+
+我们通常更偏好使用标准差而非方差，因为标准差与 $X$ 本身的单位相同。
+
+例如，如果 $X$ 是以厘米为单位的身高，那么 $\sigma$ 的单位是厘米，而方差的单位是平方厘米。
+
+这意味着 $\sigma$ 可以直接从数据直方图的横轴上读出，作为衡量离散程度的指标。
+
+均值和方差是矩的特殊情形。
+
+记 $\mu = \mathbb{E}[X]$，$X$ 的第 $k$ **阶矩**是 $\mathbb{E}[X^k]$，而第 $k$ **阶中心矩**是 $\mathbb{E}[(X - \mu)^k]$。
+
+因此均值是一阶矩，方差是二阶中心矩。
+
+使用**标准化矩**通常更为方便：
+
+$$
+\mathbb{E} \left[ \left( \frac{X - \mu}{\sigma} \right)^k \right]
+$$
+
+当我们对 $X$ 进行平移或缩放时，标准化矩保持不变。
+
+（如果 $X$ 以厘米为单位测量，那么转换为英寸后，我们得到的标准化矩是相同的。）
+
+第三个标准化矩称为**偏度**：
+
+$$
+S = \mathbb{E} \left[ \left( \frac{X - \mu}{\sigma} \right)^3 \right]
+$$
+
+偏度衡量的是不对称性。
+
+任何关于其均值对称的分布，偏度都为零，而具有较长右尾的分布则具有正偏度。
+
+第四个标准化矩称为**峰度**：
+
+$$
+K = \mathbb{E} \left[ \left( \frac{X - \mu}{\sigma} \right)^4 \right]
+$$
+
+峰度衡量的是有多少概率质量分布在尾部远端。
+
+对于*所有*正态分布，无论 $\mu$ 和 $\sigma$ 取何值，都有 $K = 3$。
+
+由于正态分布是一个非常有用的基准，通常会将峰度减去3，得到**超额峰度**
+
+$$
+K - 3
+$$
+
+对于正态分布而言，超额峰度为零。
+
+正的超额峰度意味着尾部的概率质量比正态分布更多——极端值出现的可能性更大。
+
+```{note}
+在阅读软件文档时要小心，因为这两个名称并不总是被正确使用。
+
+例如，`scipy.stats.kurtosis` 默认返回的是超额峰度，而不是峰度。
+
+（设置 `fisher=False` 可以获得峰度。）
+```
+
+我们将在 {doc}`observed_distributions` 中使用偏度和超额峰度，来帮助判断给定的数据集是否呈现正态分布。
 
 $X$ 的**累积分布函数**（CDF）定义为
 
@@ -203,7 +280,7 @@ $$
 因此第二项取所有 $x_i \leq x$ 并求它们概率的和。
 
 
-#### 均匀分布
+### 均匀分布
 
 一个简单的例子是**均匀分布**，其中 $p(x_i) = 1/n$ 对于所有 $i$ 都成立。
 
@@ -235,6 +312,12 @@ u.pmf(2)
 以下是 PMF 的图：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 均匀分布的 PMF
+    name: fig:uniform-pmf
+---
 fig, ax = plt.subplots()
 S = np.arange(1, n+1)
 ax.plot(S, u.pmf(S), linestyle='', marker='o', alpha=0.8, ms=4)
@@ -248,6 +331,12 @@ plt.show()
 这里是 CDF 的图：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 均匀分布的 CDF
+    name: fig:uniform-cdf
+---
 fig, ax = plt.subplots()
 S = np.arange(1, n+1)
 ax.step(S, u.cdf(S))
@@ -269,7 +358,7 @@ CDF 在$x_i$处跳升$p(x_i)$。
 ```
 
 
-#### 伯努利分布
+### 伯努利分布
 
 另一个有用的分布是 $S = \{0,1\}$ 上的伯努利分布，其 PMF 是：
 
@@ -306,7 +395,7 @@ u.mean(), u.var()
 u.pmf(0), u.pmf(1)
 ```
 
-#### 二项分布
+### 二项分布
 
 另一个有用（而且更有趣）的分布是 $S=\{0, \ldots, n\}$ 上的**二项分布**，其 PMF 为：
 
@@ -349,6 +438,12 @@ u.pmf(1)
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 二项分布的 PMF
+    name: fig:binomial-pmf
+---
 fig, ax = plt.subplots()
 S = np.arange(1, n+1)
 ax.plot(S, u.pmf(S), linestyle='', marker='o', alpha=0.8, ms=4)
@@ -362,6 +457,12 @@ plt.show()
 这是 CDF：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 二项分布的 CDF
+    name: fig:binomial-cdf
+---
 fig, ax = plt.subplots()
 S = np.arange(1, n+1)
 ax.step(S, u.cdf(S))
@@ -401,7 +502,7 @@ plt.show()
 ```{solution-end}
 ```
 
-#### 几何分布
+### 几何分布
 
 几何分布具有无限支持集 $S = \{0, 1, 2, \ldots\}$，其 PMF 为
 
@@ -430,6 +531,12 @@ u.mean(), u.var()
 这里是部分PMF：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 几何分布的 PMF
+    name: fig:geometric-pmf
+---
 fig, ax = plt.subplots()
 n = 20
 S = np.arange(n)
@@ -441,7 +548,7 @@ ax.set_ylabel('PMF')
 plt.show()
 ```
 
-#### 泊松分布
+### 泊松分布
 
 参数为 $\lambda > 0$ 的 $S = \{0, 1, \ldots\}$ 上的泊松分布，其 PMF 为
 
@@ -468,6 +575,12 @@ u.pmf(1)
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 泊松分布的 PMF
+    name: fig:poisson-pmf
+---
 fig, ax = plt.subplots()
 S = np.arange(1, n+1)
 ax.plot(S, u.pmf(S), linestyle='', marker='o', alpha=0.8, ms=4)
@@ -478,7 +591,7 @@ ax.set_ylabel('PMF')
 plt.show()
 ```
 
-### 连续分布
+## 连续分布
 
 连续分布通过**概率密度函数**来描述，这是一个定义在实数集 $\mathbb R$（所有实数的集合）上的函数 $p$，对所有 $x$ 满足 $p(x) \geq 0$，且
 
@@ -494,13 +607,21 @@ $$
 
 对所有 $a \leq b$ 成立。
 
-具有分布 $p$ 的随机变量 $X$ 的均值和方差的定义与离散情形相同，只需将求和替换为积分。
+期望的定义与离散情形相同，只需将求和替换为积分。
 
 例如，$X$ 的均值是
 
 $$
 \mathbb{E}[X] = \int_{-\infty}^\infty x p(x) dx
 $$
+
+而对于函数 $f$，
+
+$$
+\mathbb{E}[f(X)] = \int_{-\infty}^\infty f(x) p(x) dx
+$$
+
+方差、标准差、矩、偏度和峰度的定义与之前完全相同。
 
 $X$ 的**累积分布函数**（CDF）定义为
 
@@ -509,8 +630,22 @@ F(x) = \mathbb P\{X \leq x\}
         = \int_{-\infty}^x p(x) dx
 $$
 
+对于我们下面研究的连续分布，$F$ 是严格递增的，因此它存在反函数 $F^{-1}$，称为**分位数函数**。
 
-#### 正态分布
+给定 $\tau \in (0,1)$，值 $q_\tau = F^{-1}(\tau)$ 称为该分布的第 $\tau$ **分位数**。
+
+它是使得 $X$ 以概率 $\tau$ 落在其下方的点。
+
+0.5 分位数称为**中位数**，它是衡量分布中心位置的另一种方法。
+
+0.25 和 0.75 分位数分别称为第一和第三**四分位数**，它们之间的距离称为**四分位距**，是衡量离散程度的另一种方法。
+
+这些替代指标之所以有用，是因为与均值和标准差不同，它们几乎不受少数极端值的影响。
+
+（我们将在 {doc}`heavy_tails` 中看到，这种稳健性对某些数据集而言非常重要。）
+
+
+### 正态分布
 
 也许最著名的分布是**正态分布**，其密度为
 
@@ -534,9 +669,33 @@ u = scipy.stats.norm(μ, σ)
 u.mean(), u.var()
 ```
 
+当我们要求矩 `'sk'` 时，`stats` 方法会返回偏度和超额峰度：
+
+```{code-cell} ipython3
+u.stats(moments='sk')
+```
+
+正如预期的那样，两者都为零。
+
+（偏度为零是因为密度关于 $\mu$ 对称。）
+
+以下是通过 `ppf` 方法（SciPy 中分位数函数的名称）获得的中位数和两个四分位数：
+
+```{code-cell} ipython3
+u.ppf(0.5), u.ppf(0.25), u.ppf(0.75)
+```
+
+由于密度是对称的，中位数等于均值。
+
 下面是密度的图像——著名的"钟形曲线"：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 正态分布的密度
+    name: fig:normal-pdf
+---
 μ_vals = [-1, 0, 1]
 σ_vals = [0.4, 1, 1.6]
 fig, ax = plt.subplots()
@@ -556,6 +715,12 @@ plt.show()
 下面是 CDF 的图像：
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 正态分布的 CDF
+    name: fig:normal-cdf
+---
 fig, ax = plt.subplots()
 for μ, σ in zip(μ_vals, σ_vals):
     u = scipy.stats.norm(μ, σ)
@@ -569,7 +734,7 @@ plt.legend()
 plt.show()
 ```
 
-#### 对数正态分布
+### 对数正态分布
 
 **对数正态分布**是一个定义在 $\left(0, \infty\right)$ 上的分布，其密度为
 
@@ -598,7 +763,27 @@ u = scipy.stats.lognorm(s=σ, scale=np.exp(μ))
 u.mean(), u.var()
 ```
 
+在高阶矩方面，对数正态分布与正态分布形成了鲜明对比：
+
 ```{code-cell} ipython3
+u.stats(moments='sk')
+```
+
+偏度较大且为正，反映出较长的右尾，而超额峰度则极其巨大。
+
+均值与中位数之间的差距也相应地很大：
+
+```{code-cell} ipython3
+u.mean(), u.ppf(0.5)
+```
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 对数正态分布的密度
+    name: fig:lognormal-pdf
+---
 μ_vals = [-1, 0, 1]
 σ_vals = [0.25, 0.5, 1]
 x_grid = np.linspace(0, 3, 200)
@@ -616,22 +801,26 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 对数正态分布的 CDF
+    name: fig:lognormal-cdf
+---
 fig, ax = plt.subplots()
-μ = 1
-for σ in σ_vals:
-    u = scipy.stats.norm(μ, σ)
+for μ, σ in zip(μ_vals, σ_vals):
+    u = scipy.stats.lognorm(σ, scale=np.exp(μ))
     ax.plot(x_grid, u.cdf(x_grid),
     alpha=0.5, lw=2,
     label=rf'$\mu={μ}, \sigma={σ}$')
     ax.set_ylim(0, 1)
-    ax.set_xlim(0, 3)
 ax.set_xlabel('x')
 ax.set_ylabel('CDF')
 plt.legend()
 plt.show()
 ```
 
-#### 指数分布
+### 指数分布
 
 **指数分布**是定义在 $\left(0, \infty\right)$ 上的分布，其密度为
 
@@ -658,6 +847,12 @@ u.mean(), u.var()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 指数分布的密度
+    name: fig:exponential-pdf
+---
 fig, ax = plt.subplots()
 λ_vals = [0.5, 1, 2]
 x_grid = np.linspace(0, 6, 200)
@@ -674,6 +869,12 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 指数分布的 CDF
+    name: fig:exponential-cdf
+---
 fig, ax = plt.subplots()
 for λ in λ_vals:
     u = scipy.stats.expon(scale=1/λ)
@@ -687,7 +888,7 @@ plt.legend()
 plt.show()
 ```
 
-#### 贝塔分布
+### 贝塔分布
 
 **贝塔分布**是定义在 $(0, 1)$ 上的分布，其密度为
 
@@ -696,7 +897,7 @@ p(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)}
     x^{\alpha - 1} (1 - x)^{\beta - 1}
 $$
 
-其中 $\Gamma$ 是[伽马函数](https://baike.baidu.com/item/%E4%BC%BD%E7%8E%9B%E5%87%BD%E6%95%B0/3540177)。
+其中 $\Gamma$ 是[伽马函数](https://en.wikipedia.org/wiki/Gamma_function)。
 
 (伽马函数的作用是使密度标准化，从而使其积分为一。)
 
@@ -716,6 +917,12 @@ u.mean(), u.var()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 贝塔分布的密度
+    name: fig:beta-pdf
+---
 α_vals = [0.5, 1, 5, 25, 3]
 β_vals = [3, 1, 10, 20, 0.5]
 x_grid = np.linspace(0, 1, 200)
@@ -733,6 +940,12 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 贝塔分布的 CDF
+    name: fig:beta-cdf
+---
 fig, ax = plt.subplots()
 for α, β in zip(α_vals, β_vals):
     u = scipy.stats.beta(α, β)
@@ -746,7 +959,7 @@ plt.legend()
 plt.show()
 ```
 
-#### 伽马分布
+### 伽马分布
 
 **伽马分布**是一种在 $\left(0, \infty\right)$ 上的分布，其密度为
 
@@ -773,6 +986,12 @@ u.mean(), u.var()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 伽马分布的密度
+    name: fig:gamma-pdf
+---
 α_vals = [1, 3, 5, 10]
 β_vals = [3, 5, 3, 3]
 x_grid = np.linspace(0, 7, 200)
@@ -790,6 +1009,12 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: 伽马分布的 CDF
+    name: fig:gamma-cdf
+---
 fig, ax = plt.subplots()
 for α, β in zip(α_vals, β_vals):
     u = scipy.stats.gamma(α, scale=1/β)
