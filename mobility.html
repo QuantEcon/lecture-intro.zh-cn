@@ -1,0 +1,2585 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>44. 测量流动性 &#8212; Python量化经济学入门</title>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=1c349b9a0045df0ce6f4a606c2cc9441cbf3bef6" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-QDS1YRJNGM"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-QDS1YRJNGM');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mobility';</script>
+    <link rel="canonical" href="https://quantecon.github.io/lecture-intro.zh-cn/mobility.html" />
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="45. 多种商品的供需关系" href="supply_demand_multiple_goods.html" />
+    <link rel="prev" title="43. 网络" href="networks.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。 />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="测量流动性"/>
+<meta name="twitter:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="测量流动性" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://quantecon.github.io/lecture-intro.zh-cn/mobility.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="本课程是由托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）设计和撰写的计算经济学入门讲座。" />
+<meta property="og:site_name" content="Python量化经济学入门" />
+<meta name="theme-color" content="#ffffff" />
+
+
+
+
+<link rel="alternate" hreflang="en" href="https://intro.quantecon.org/mobility.html" />
+
+<link rel="alternate" hreflang="zh-cn" href="https://quantecon.github.io/lecture-intro.zh-cn/mobility.html" />
+
+<link rel="alternate" hreflang="x-default" href="https://intro.quantecon.org/mobility.html" />
+
+
+  </head>
+<body>
+
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=mobility>
+
+                <div class="qe-page__toc">
+
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">44.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">44.2. 流动性矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">44.2.1. 从分位数到随机矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">44.2.2. 一个例子</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-benchmarks">44.2.3. 两个基准</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">44.3. 四种流动性度量</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shorrocks">44.3.1. Shorrocks 指数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bartholomew">44.3.2. Bartholomew 度量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-eigenvalue">44.3.3. 第二特征值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-mfp">44.3.4. 平均首达时间</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">44.3.5. 汇总各项度量</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">44.4. 这些度量遗漏了什么</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-data">44.5. 美国数据中的财富流动性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">44.5.1. 数据</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">44.5.2. 流动性随视界延长而上升</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">44.5.3. 流动性是否已经下降？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">44.5.4. 分位数链是马尔可夫的吗？</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">44.6. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">44.7. 延伸阅读</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">44.7.1. 度量理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id47">44.7.2. 代际流动性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">44.7.3. 经济模型中的流动性</a></li>
+</ul>
+</li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    <a href=https://quantecon.org><img src="_static/quantecon-logo-transparent.png" class="dark-logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            
+                            
+                            
+                        </div>
+
+                    </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">Python量化经济学入门</a></p>
+
+                    </div>
+
+                    <!-- Authors section -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>托马斯·萨金特（Thomas J. Sargent）</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>约翰·斯塔胡斯基（John Stachurski）</span></a>
+                                
+                            
+                        </p>
+
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Aug 20, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commits/main/lectures/mobility.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/d8ce61e" class="changelog-hash">d8ce61e</a>
+                                
+                                <span class="changelog-author">Matt McKay</span>
+                                <span class="changelog-time">3 hours ago</span>
+                                <span class="changelog-message">Resync prob_dist.md to source ebff90fd (recovers four sync failures) (#300)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <section class="tex2jax_ignore mathjax_ignore" id="mobility">
+<span id="id1"></span><h1><span class="section-number">44. </span>测量流动性<a class="headerlink" href="#mobility" title="Link to this heading">#</a></h1>
+<p id="index-0">除 Anaconda 中已有的库外，本讲座还需要以下库：</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>quantecon
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.4)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.65.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.4.6)
+Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.34.2)
+Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.18.0)
+Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.14.0)
+Requirement already satisfied: llvmlite&lt;0.48,&gt;=0.47.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.47.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.4.7)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.18)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.7.0)
+Requirement already satisfied: certifi&gt;=2023.5.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2026.6.17)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from sympy-&gt;quantecon) (1.3.0)
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="id2">
+<h2><span class="section-number">44.1. </span>概览<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>在 <a class="reference internal" href="inequality.html"><span class="doc">收入与财富不平等</span></a> 中，我们衡量了在某一时间点收入和财富分布的不平等程度。</p>
+<p>这类衡量方式是一种快照。</p>
+<p>虽然它们确实能提供关于富人和穷人之间差距有多大的信息，但它们无法告诉我们同样的家庭是否一直保持贫穷或富有。</p>
+<p>这一点很重要，因为两个经济体可以拥有完全相同的洛伦兹曲线和完全相同的基尼系数，但却为其公民提供完全不同的人生前景。</p>
+<p>例如，假设我们正在比较两个财富分布完全相同的经济体。</p>
+<p>进一步假设它们属于以下两种情况之一。</p>
+<ol class="arabic simple">
+<li><p>出生时地位就已固定，且永不改变。</p></li>
+<li><p>家庭地位不断起伏，今天的穷困家庭很有可能是明天的富裕家庭。</p></li>
+</ol>
+<p>这两个经济体之间的差异就是<strong>流动性</strong>：家庭在分布中改变地位的速率。</p>
+<p>流动性对政策至关重要。</p>
+<p>对再分配、税收的态度，以及我们对一个经济体能提供多少机会的判断，都取决于流动性。</p>
+<p>在本讲座中，我们研究当数据以财富分位数之间的转移矩阵形式呈现时，如何<em>测量</em>流动性。</p>
+<p>这是 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 和 <a class="reference internal" href="markov_chains_II.html"><span class="doc">马尔科夫链：不可约性与遍历性</span></a> 中所发展的马尔可夫链理论的一个自然应用，也让我们再次用到了 <a class="reference internal" href="eigen_II.html"><span class="doc">佩龙-弗罗贝尼乌斯定理</span></a>。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本讲座大量借鉴了 Daniel Carroll、Nicholas Hoffman 和 Eric R. Young 所著论文 “Mobility” <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 的前几节内容。</p>
+<p>该论文将标准的流动性度量汇总在一处，将其应用于美国财富数据，然后探讨主力宏观经济模型能否重现其发现的结果。</p>
+</div>
+<p>让我们先导入一些库。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">FONTPATH</span> <span class="o">=</span> <span class="s2">&quot;fonts/SourceHanSerifSC-SemiBold.otf&quot;</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">FONTPATH</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Source Han Serif SC&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">legacy</span><span class="o">=</span><span class="s1">&#39;1.25&#39;</span><span class="p">)</span>   <span class="c1"># print scalars as plain numbers</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">44.2. </span>流动性矩阵<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3><span class="section-number">44.2.1. </span>从分位数到随机矩阵<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>假设我们在两个日期 <span class="math notranslate nohighlight">\(s\)</span> 和 <span class="math notranslate nohighlight">\(s + t\)</span> 观测大量家庭的财富。</p>
+<p>我们在每个日期按财富对家庭排序，并将其分为 <span class="math notranslate nohighlight">\(N\)</span> 个等规模的组，即<strong>分位数</strong>。</p>
+<p>（在观察数据时，我们常常考虑 <span class="math notranslate nohighlight">\(N = 5\)</span> 的情形，此时这些分位数即为<strong>五分位数</strong>，每组包含 20% 的家庭。）</p>
+<p>现在我们询问，对每个家庭而言，它在起始时属于哪个分位数，结束时又属于哪个分位数。</p>
+<p>对所有家庭取平均，就得到一个矩阵 <span class="math notranslate nohighlight">\(M\)</span>，其典型元素为</p>
+<div class="math notranslate nohighlight">
+\[
+    m_{ij}
+    = \mathbb P \{ \text{household $h$ is in quantile } j \text{ at } s+t
+                   \mid \text{$h$ was in quantile } i \text{ at } s \}
+\]</div>
+<p><span class="math notranslate nohighlight">\(M\)</span> 的每一行都是一个概率质量函数，因此按照 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的定义，<span class="math notranslate nohighlight">\(M\)</span> 是一个随机矩阵。</p>
+<p>我们称 <span class="math notranslate nohighlight">\(M\)</span> 为<strong>流动性矩阵</strong>。</p>
+<p>有两点值得强调。</p>
+<p>第一，<span class="math notranslate nohighlight">\(M\)</span> 描述的是<em>相对</em>流动性：它记录的是家庭之间相对位置的变动，而不是财富本身的增长。</p>
+<p>在这个定义下，一个人人财富都翻倍的经济体是完全没有流动性的。</p>
+<p>第二，该链的时间单位是视界 <span class="math notranslate nohighlight">\(t\)</span>，可能是五年，也可能是二十年。</p>
+<p>这一选择会对结果产生很大影响，我们在查看数据时会再次讨论这一点。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">44.2.2. </span>一个例子<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>以下是根据美国 1984 年至 1989 年这五年间的数据估计出的一个流动性矩阵，我们将在 <a class="reference internal" href="#mobility-data"><span class="std std-ref">后面的一节</span></a> 中更详细地讨论它。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M_ex</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="mf">0.19</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这些数字发表时保留两位小数，因此各行加总起来并不完全等于一。</p>
+<p>我们需要它们完全等于一，因此让我们写一个辅助函数来重新缩放每一行。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">normalize_rows</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">M</span> <span class="o">/</span> <span class="n">M</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">M_ex</span> <span class="o">=</span> <span class="n">normalize_rows</span><span class="p">(</span><span class="n">M_ex</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>第一行表明，1984 年处于最贫穷五分位数的家庭，到 1989 年仍留在原处的概率为 70%，向上移动一个五分位数的概率为 23%，而到达最顶层的概率为零。</p>
+<p>概率质量集中在对角线附近，两个极端的五分位数最为”黏滞”。</p>
+<p>为使这一点更加具体，让我们模拟几个家庭的五分位数变化历程。</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">M_ex</span><span class="p">)</span>
+<span class="n">periods</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">periods</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>      <span class="c1"># each period of M_ex spans five years</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">styles</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;家庭 </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;年数&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;财富五分位数&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<figure class="align-default" id="fig-mobility-paths">
+<a class="reference internal image-reference" href="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png"><img alt="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png" src="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">四个家庭的模拟五分位数路径</span><a class="headerlink" href="#fig-mobility-paths" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>有些家庭走得很远，有些家庭几乎原地不动。</p>
+<p>我们的任务就是用一个单一的数字来概括这种行为。</p>
+</section>
+<section id="mobility-benchmarks">
+<span id="id7"></span><h3><span class="section-number">44.2.3. </span>两个基准<a class="headerlink" href="#mobility-benchmarks" title="Link to this heading">#</a></h3>
+<p>在选择度量方法之前，先确定任何度量方法都应参照的两个极端情形会有所帮助。</p>
+<p><strong>完全不流动</strong>对应于单位矩阵 <span class="math notranslate nohighlight">\(M = I\)</span>。</p>
+<p>每个家庭永远停留在其起始位置。</p>
+<p><strong>完全流动</strong>对应于每个元素都等于 <span class="math notranslate nohighlight">\(1/N\)</span> 的矩阵，</p>
+<div class="math notranslate nohighlight">
+\[
+    M^* = \frac{1}{N} \mathbb 1 \mathbb 1^\top
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\mathbb 1\)</span> 是一个 <span class="math notranslate nohighlight">\(N \times 1\)</span> 的全一向量。</p>
+<p>在这里，结束时的分位数与起始时的分位数无关，因此知道一个家庭起始位置对我们判断其最终归宿毫无帮助。</p>
+<p>这一性质被称为<strong>起点独立性</strong>，它是流动性的自然上限参照点：分布在每一步都被彻底重新洗牌。</p>
+<p>你或许会反对说，<span class="math notranslate nohighlight">\(M^*\)</span> 并非唯一具有该性质的矩阵。</p>
+<p>事实上，只要 <span class="math notranslate nohighlight">\(M\)</span> 的每一行都相同，即 <span class="math notranslate nohighlight">\(M = \mathbb 1 \psi^\top\)</span>（其中 <span class="math notranslate nohighlight">\(\psi\)</span> 为某概率质量函数），结束时的分位数就与起始分位数无关。</p>
+<p>那么为何单单挑出均匀分布的情形，将其称为完全流动呢？</p>
+<p>原因在于，我们构造的分位数在<em>两个</em>日期都包含相同数量的家庭。</p>
+<p>结束时落入分位数 <span class="math notranslate nohighlight">\(j\)</span> 的家庭比例为 <span class="math notranslate nohighlight">\(\sum_i (1/N) m_{ij}\)</span>，这必须等于 <span class="math notranslate nohighlight">\(1/N\)</span>，因此</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i=1}^N m_{ij} = 1
+    \qquad \text{for every } j
+\]</div>
+<p>换言之，一个基于等规模分位数构建的流动性矩阵，其列加总（与行加总一样）也等于一——它是<strong>双随机的</strong>。</p>
+<p>现在假设这样一个矩阵还具有相同的行，即 <span class="math notranslate nohighlight">\(M = \mathbb 1 \psi^\top\)</span>。</p>
+<p>其第 <span class="math notranslate nohighlight">\(j\)</span> 列加总为 <span class="math notranslate nohighlight">\(N \psi(j)\)</span>，令其等于一即得 <span class="math notranslate nohighlight">\(\psi(j) = 1/N\)</span>。</p>
+<p>因此，<span class="math notranslate nohighlight">\(M^*\)</span> 并非众多起点独立矩阵中的一个——在这种设定下，它是唯一的一个。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">M_immobile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">M_perfect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>一个好的流动性度量应该在 <span class="math notranslate nohighlight">\(M_{\text{immobile}}\)</span> 处返回 0，在 <span class="math notranslate nohighlight">\(M_{\text{perfect}}\)</span> 处返回 1。</p>
+<p>我们将看到，下面所有四种度量都是按照这一原则构造的。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>高于 1 的取值是可能出现的，并且具有实际意义。</p>
+<p>当一个链系统性地反转排名时就会出现这种情况——例如，一个以概率一将最贫穷五分位数送到最富裕位置的矩阵，其带来的移动比纯粹的随机机会更多。</p>
+<p>因此，1 标志着起点独立性，而非上限。</p>
+<p>这种系统性反转在普通市场经济中并不常见，因为财富具有持续性，估计出的流动性矩阵大部分概率质量都落在对角线上或其附近。</p>
+<p>我们下面研究的所有实证矩阵得分都远低于 1。</p>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2><span class="section-number">44.3. </span>四种流动性度量<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>将一个 <span class="math notranslate nohighlight">\(N \times N\)</span> 矩阵简化为一个单一数字会丢失信息。</p>
+<p>不同的度量方法舍弃了不同的信息，这正是通常做法要报告多个度量值的原因。</p>
+<p>我们遵循 <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 的做法，考虑四种度量，每一种都在 <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id308" title="Valentino Dardanoni. Measuring social mobility. Journal of Economic Theory, 61(2):372–394, 1993.">Dardanoni, 1993</a>]</span> 中有详细讨论。</p>
+<section id="shorrocks">
+<span id="mobility-shorrocks"></span><h3><span class="section-number">44.3.1. </span>Shorrocks 指数<a class="headerlink" href="#shorrocks" title="Link to this heading">#</a></h3>
+<p><span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id305" title="Anthony F. Shorrocks. The measurement of mobility. Econometrica, 46(5):1013–1024, 1978.">Shorrocks, 1978</a>]</span> 提出的度量只关注 <span class="math notranslate nohighlight">\(M\)</span> 的对角线，</p>
+<div class="math notranslate nohighlight" id="equation-shorrocks-def">
+<span class="eqno">(44.1)<a class="headerlink" href="#equation-shorrocks-def" title="Link to this equation">#</a></span>\[\mu_S(M) = \frac{N - \mathrm{trace}(M)}{N - 1}\]</div>
+<p>其思路是：<span class="math notranslate nohighlight">\(m_{ii}\)</span> 是分位数 <span class="math notranslate nohighlight">\(i\)</span> 中家庭留在原地的概率，因此 <span class="math notranslate nohighlight">\(1 - m_{ii}\)</span> 就是其逃离原地的概率。</p>
+<p>将 <a class="reference internal" href="#equation-shorrocks-def">(44.1)</a> 改写为</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu_S(M)
+    = \frac{N}{N-1} \cdot \frac{1}{N} \sum_{i=1}^N (1 - m_{ii})
+\]</div>
+<p>可以看出，<span class="math notranslate nohighlight">\(\mu_S\)</span> 是平均逃离概率，除以完全流动情形下的逃离概率 <span class="math notranslate nohighlight">\((N-1)/N\)</span>。</p>
+<p>从这个意义上说，<span class="math notranslate nohighlight">\(\mu_S\)</span> 衡量的是初始条件相对于起点独立性而言的黏滞程度。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shorrocks</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">M</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shorrocks</span><span class="p">(</span><span class="n">M_immobile</span><span class="p">),</span> <span class="n">shorrocks</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>该度量完全无视概率在对角线<em>之外</em>的分布方式。</p>
+<p>一个家庭一步之内从赤贫变成巨富的经济体，与一个贫困家庭只是略微不那么贫困的经济体，只要它们离开起始分位数的频率相同，得分就会相同。</p>
+</section>
+<section id="bartholomew">
+<span id="mobility-bartholomew"></span><h3><span class="section-number">44.3.2. </span>Bartholomew 度量<a class="headerlink" href="#bartholomew" title="Link to this heading">#</a></h3>
+<p><span class="bibtex-citation" id="id12">[<a class="reference internal" href="zreferences.html#id306" title="David J. Bartholomew. Stochastic Models for Social Processes. Wiley, London, 1967.">Bartholomew, 1967</a>]</span> 提出的度量则采取相反的视角，只关注非对角线元素，</p>
+<div class="math notranslate nohighlight" id="equation-bartholomew-def">
+<span class="eqno">(44.2)<a class="headerlink" href="#equation-bartholomew-def" title="Link to this equation">#</a></span>\[\mu_B(M) = \frac{1}{N-1} \sum_{i=1}^N \sum_{j=1}^N m_{ij} \, |i - j|\]</div>
+<p>权重 <span class="math notranslate nohighlight">\(|i-j|\)</span> 是跨越的分位数边界数，因此跨越多个分位数的转移比转移到相邻分位数计入更多的权重。</p>
+<p>除去因子 <span class="math notranslate nohighlight">\(1/(N-1)\)</span>，这就是每期一个家庭跨越的分位数的期望数量。</p>
+<p><span class="bibtex-citation" id="id13">[<a class="reference internal" href="zreferences.html#id309" title="Gary S. Fields and Efe A. Ok. The measurement of income mobility: an introduction to the literature. In Handbook of Income Inequality Measurement, pages 557–598. Springer, 1999.">Fields and Ok, 1999</a>]</span> 将 <span class="math notranslate nohighlight">\(\mu_B\)</span> 描述为对总<em>移动量</em>的度量。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bartholomew</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">indices</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bartholomew</span><span class="p">(</span><span class="n">M_immobile</span><span class="p">),</span> <span class="n">bartholomew</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 2.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>请注意，<span class="math notranslate nohighlight">\(\mu_B\)</span> 的标定方式与 <span class="math notranslate nohighlight">\(\mu_S\)</span> 不同：完全流动时给出的值是 2 而非 1。</p>
+<p>事实上，利用 <span class="math notranslate nohighlight">\(\sum_{i,j} |i-j| = N(N-1)(N+1)/3\)</span> 稍作计算即可得到</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu_B(M^*)
+    = \frac{1}{N-1} \cdot \frac{1}{N} \cdot \frac{N(N-1)(N+1)}{3}
+    = \frac{N+1}{3}
+\]</div>
+<p>因此，为了让 Bartholomew 度量与其他度量处于同一标准，我们进行重新缩放，</p>
+<div class="math notranslate nohighlight" id="equation-bartholomew-norm">
+<span class="eqno">(44.3)<a class="headerlink" href="#equation-bartholomew-norm" title="Link to this equation">#</a></span>\[\mu_{NB}(M) = \frac{3}{N+1} \, \mu_B(M)\]</div>
+<p>即跨越的分位数期望数量与起点独立情形下跨越数量的相对值。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bartholomew_normalized</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">bartholomew</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">bartholomew_normalized</span><span class="p">(</span><span class="n">M_immobile</span><span class="p">),</span> <span class="n">bartholomew_normalized</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>当我们想要”每期跨越的分位数”这一解释时报告 <span class="math notranslate nohighlight">\(\mu_B\)</span>，而在与其他度量进行比较时报告 <span class="math notranslate nohighlight">\(\mu_{NB}\)</span>。</p>
+</section>
+<section id="mobility-eigenvalue">
+<span id="id14"></span><h3><span class="section-number">44.3.3. </span>第二特征值<a class="headerlink" href="#mobility-eigenvalue" title="Link to this heading">#</a></h3>
+<p>我们的第三种度量来自收敛理论，而非转移次数的统计。</p>
+<p>回想一下 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的内容：当 <span class="math notranslate nohighlight">\(M\)</span> 处处为正时，分布 <span class="math notranslate nohighlight">\(\psi_t = \psi_0 M^t\)</span> 收敛于平稳分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
+<p><a class="reference internal" href="eigen_II.html"><span class="doc">佩龙-弗罗贝尼乌斯定理</span></a> 告诉我们，随机矩阵的最大特征值为 <span class="math notranslate nohighlight">\(\lambda_1 = 1\)</span>，而 <span class="math notranslate nohighlight">\(\psi_t \to \psi^*\)</span> 的<em>速率</em>则由第二大特征值 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 的模决定。</p>
+<p>一个混合得快的链会很快忘记其初始条件，这正是流动性的含义所在。</p>
+<p>这启发我们定义</p>
+<div class="math notranslate nohighlight" id="equation-eigen-def">
+<span class="eqno">(44.4)<a class="headerlink" href="#equation-eigen-def" title="Link to this equation">#</a></span>\[\mu_{2E}(M) = 1 - |\lambda_2(M)|\]</div>
+<p><span class="bibtex-citation" id="id15">[<a class="reference internal" href="zreferences.html#id310" title="Paul M. Sommers and John Conlisk. Eigenvalue immobility measures for markov chains. Journal of Mathematical Sociology, 6(2):253–276, 1979.">Sommers and Conlisk, 1979</a>]</span> 证明了 <span class="math notranslate nohighlight">\(\mu_{2E}\)</span> 度量的是 <span class="math notranslate nohighlight">\(M\)</span> 相对于完全流动矩阵的总体偏离程度。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">second_eigenvalue</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">λ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">M</span><span class="p">)))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_eigenvalue</span><span class="p">(</span><span class="n">M_immobile</span><span class="p">),</span> <span class="n">second_eigenvalue</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>单位矩阵的 <span class="math notranslate nohighlight">\(\lambda_2 = 1\)</span>，永远不会混合，而 <span class="math notranslate nohighlight">\(M^*\)</span> 的 <span class="math notranslate nohighlight">\(\lambda_2 = 0\)</span>，一步即可完成混合。</p>
+<p>这一度量还有一个额外的吸引力：对于两状态链而言，<span class="math notranslate nohighlight">\(|\lambda_2|\)</span> 恰好等于该过程的自相关系数，这一点将在下面的 <a class="reference internal" href="#mob_ex2"><span class="std std-ref">一道练习</span></a> 中要求你验证。</p>
+</section>
+<section id="mobility-mfp">
+<span id="id16"></span><h3><span class="section-number">44.3.4. </span>平均首达时间<a class="headerlink" href="#mobility-mfp" title="Link to this heading">#</a></h3>
+<p>最后一种度量提出的是关于等待时间的问题：一个家庭需要多长时间才能到达某个给定的分位数？</p>
+<p>设 <span class="math notranslate nohighlight">\(T_{ij}\)</span> 为从分位数 <span class="math notranslate nohighlight">\(i\)</span> 出发的家庭首次到达分位数 <span class="math notranslate nohighlight">\(j\)</span> 所需的期望期数。</p>
+<p>为了计算它，我们使用<strong>一步分析法</strong>：我们以链下一步的去向为条件，然后利用从那里出发的问题与原问题形式相同这一事实。</p>
+<p>固定目标 <span class="math notranslate nohighlight">\(j\)</span>，取任意起始分位数 <span class="math notranslate nohighlight">\(i \neq j\)</span>。</p>
+<p>家庭走一步，无论落到何处，都会消耗一期时间。</p>
+<p>这一步以概率 <span class="math notranslate nohighlight">\(m_{ik}\)</span> 到达分位数 <span class="math notranslate nohighlight">\(k\)</span>，此时有两种可能。</p>
+<p>若 <span class="math notranslate nohighlight">\(k = j\)</span>，家庭已到达，无需再花时间。</p>
+<p>若 <span class="math notranslate nohighlight">\(k \neq j\)</span>，家庭仍需从 <span class="math notranslate nohighlight">\(k\)</span> 前往 <span class="math notranslate nohighlight">\(j\)</span>，这段剩余旅程的期望时间为 <span class="math notranslate nohighlight">\(T_{kj}\)</span>。</p>
+<p>第二种情形正是马尔可夫性质发挥作用之处：从 <span class="math notranslate nohighlight">\(k\)</span> 出发的旅程需要多久只取决于 <span class="math notranslate nohighlight">\(k\)</span>，而与我们是经由 <span class="math notranslate nohighlight">\(i\)</span> 到达 <span class="math notranslate nohighlight">\(k\)</span> 这一事实无关。</p>
+<p>对可能的第一步取平均，得到</p>
+<div class="math notranslate nohighlight">
+\[
+    T_{ij}
+    = \underbrace{1}_{\text{the first step}}
+      + \underbrace{m_{ij} \times 0}_{\text{arrived at } j}
+      + \underbrace{\sum_{k \neq j} m_{ik} T_{kj}}_{\text{not yet arrived}}
+\]</div>
+<p>中间那一项为零，因此我们得到</p>
+<div class="math notranslate nohighlight" id="equation-mfp-recursion">
+<span class="eqno">(44.5)<a class="headerlink" href="#equation-mfp-recursion" title="Link to this equation">#</a></span>\[T_{ij} = 1 + \sum_{k \neq j} m_{ik} T_{kj}\]</div>
+<p>注意，求和中省略了 <span class="math notranslate nohighlight">\(k = j\)</span> 的情形，并非因为这种情况不可能发生，而是因为一旦家庭到达，它就不再产生任何贡献。</p>
+<p>这里是最简单的检验方式。</p>
+<p>考虑 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的两状态链，其中失业工人每月以概率 <span class="math notranslate nohighlight">\(\alpha\)</span> 找到工作，设 <span class="math notranslate nohighlight">\(i\)</span> 为失业状态，<span class="math notranslate nohighlight">\(j\)</span> 为就业状态。</p>
+<p>求和中唯一的项是 <span class="math notranslate nohighlight">\(k = i\)</span>，此时 <span class="math notranslate nohighlight">\(m_{ii} = 1 - \alpha\)</span>，因此 <a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 变为 <span class="math notranslate nohighlight">\(T_{ij} = 1 + (1 - \alpha) T_{ij}\)</span>，由此得到 <span class="math notranslate nohighlight">\(T_{ij} = 1/\alpha\)</span>。</p>
+<p>这正是正确的结果，因为等待时间是成功概率为 <span class="math notranslate nohighlight">\(\alpha\)</span> 的几何分布。</p>
+<p>现在固定 <span class="math notranslate nohighlight">\(j\)</span>，将 <a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 视为关于 <span class="math notranslate nohighlight">\(N-1\)</span> 个未知量 <span class="math notranslate nohighlight">\(\{T_{ij}\}_{i \neq j}\)</span> 的 <span class="math notranslate nohighlight">\(N-1\)</span> 个方程组成的方程组。</p>
+<p>用 <span class="math notranslate nohighlight">\(t\)</span> 表示这些未知量组成的向量，<span class="math notranslate nohighlight">\(M_{-j}\)</span> 表示删去第 <span class="math notranslate nohighlight">\(j\)</span> 行和第 <span class="math notranslate nohighlight">\(j\)</span> 列后的 <span class="math notranslate nohighlight">\(M\)</span>，则该方程组为</p>
+<div class="math notranslate nohighlight">
+\[
+    t = \mathbb 1 + M_{-j} \, t
+    \qquad \text{or} \qquad
+    (I - M_{-j}) \, t = \mathbb 1
+\]</div>
+<p>这是一个线性求解问题，也正是下面的代码对每个 <span class="math notranslate nohighlight">\(j\)</span> 依次执行的操作。</p>
+<p>在对角线上，我们使用到 <span class="math notranslate nohighlight">\(j\)</span> 的平均<em>返回</em>时间。</p>
+<p>根据 <a class="reference internal" href="markov_chains_II.html"><span class="doc">马尔科夫链：不可约性与遍历性</span></a> 中的遍历性结果，一个不可约链在分位数 <span class="math notranslate nohighlight">\(j\)</span> 中所花时间的比例为 <span class="math notranslate nohighlight">\(\psi^*(j)\)</span>，因此对 <span class="math notranslate nohighlight">\(j\)</span> 的访问平均每 <span class="math notranslate nohighlight">\(1/\psi^*(j)\)</span> 期发生一次，由此得到 <span class="math notranslate nohighlight">\(T_{jj} = 1/\psi^*(j)\)</span>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mean_first_passage</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mean first passage matrix T, where T[i, j] is the expected number of</span>
+<span class="sd">    periods to reach quantile j starting from quantile i.</span>
+
+<span class="sd">    The diagonal holds mean return times.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">ψ_star</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">stationary_distributions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">)]</span>
+        <span class="n">T</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ψ_star</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mean_first_passage</span><span class="p">(</span><span class="n">M_ex</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 4.4,  5.3,  9.2, 14.4, 22.8],
+       [10.1,  4.9,  7.1, 12.3, 20.6],
+       [14.3,  7.5,  5.2,  9.4, 17.5],
+       [17.3, 10.8,  6.9,  5.5, 12.4],
+       [19.2, 13. ,  9. ,  6.1,  5.2]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>看右上角的元素，从最贫穷五分位数出发的家庭，要等大约 23 期才能首次到达最富裕五分位数。</p>
+<p>由于这里的一期是五年，那意味着要等一个多世纪。</p>
+<p>为了得到一个单一数字，<span class="bibtex-citation" id="id17">[<a class="reference internal" href="zreferences.html#id311" title="John Conlisk. Monotone mobility matrices. Journal of Mathematical Sociology, 15(3-4):173–191, 1990.">Conlisk, 1990</a>]</span> 建议对随机抽取的一对家庭取 <span class="math notranslate nohighlight">\(T\)</span> 的平均值。</p>
+<p>由于各分位数包含相同数量的家庭，相关的权重为 <span class="math notranslate nohighlight">\(\psi = (1/N, \ldots, 1/N)\)</span>，因此</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{MFP}(M) = \psi^\top T \psi
+\]</div>
+<p>即为一个家庭到达另一随机抽取家庭所在分位数所需的期望期数。</p>
+<p>在完全流动情形下 <span class="math notranslate nohighlight">\(\text{MFP}(M^*) = N\)</span>，因此归一化的度量为</p>
+<div class="math notranslate nohighlight" id="equation-mfp-def">
+<span class="eqno">(44.6)<a class="headerlink" href="#equation-mfp-def" title="Link to this equation">#</a></span>\[\mu_{MFP}(M) = \frac{N}{\text{MFP}(M)}\]</div>
+<p>其单位为每期分位数数。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mfp_measure</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">ψ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="k">return</span> <span class="n">N</span> <span class="o">/</span> <span class="p">(</span><span class="n">ψ</span> <span class="o">@</span> <span class="n">mean_first_passage</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">@</span> <span class="n">ψ</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mfp_measure</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>与其他三种度量不同，这一度量要求不可约性。</p>
+<p>如果某个分位数无法从另一个分位数到达，那么期望等待时间为无穷大，<span class="math notranslate nohighlight">\(\mu_{MFP} = 0\)</span>，无论矩阵其他地方发生多少移动都是如此。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="bibtex-citation" id="id18">[<a class="reference internal" href="zreferences.html#id313" title="Carl D. Meyer. An alternative expression for the mean first passage matrix. Linear Algebra and its Applications, 22:41–47, 1978.">Meyer, 1978</a>]</span> 给出了 <span class="math notranslate nohighlight">\(T\)</span> 的一个基于分块矩阵求逆的闭式表达式，这正是 <span class="bibtex-citation" id="id19">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 所使用的方法。</p>
+<p><a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 中的一步分析法与之等价，且更易于记忆。</p>
+</div>
+</section>
+<section id="id20">
+<h3><span class="section-number">44.3.5. </span>汇总各项度量<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<p>让我们把这四种度量汇总到一个函数中。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mobility_measures</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="s2">&quot;Return the four mobility measures for stochastic matrix M.&quot;</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;μ_S&#39;</span><span class="p">:</span>   <span class="n">shorrocks</span><span class="p">(</span><span class="n">M</span><span class="p">),</span>
+                      <span class="s1">&#39;μ_B&#39;</span><span class="p">:</span>   <span class="n">bartholomew</span><span class="p">(</span><span class="n">M</span><span class="p">),</span>
+                      <span class="s1">&#39;μ_NB&#39;</span><span class="p">:</span>  <span class="n">bartholomew_normalized</span><span class="p">(</span><span class="n">M</span><span class="p">),</span>
+                      <span class="s1">&#39;μ_2E&#39;</span><span class="p">:</span>  <span class="n">second_eigenvalue</span><span class="p">(</span><span class="n">M</span><span class="p">),</span>
+                      <span class="s1">&#39;μ_MFP&#39;</span><span class="p">:</span> <span class="n">mfp_measure</span><span class="p">(</span><span class="n">M</span><span class="p">)})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mobility_table</span><span class="p">(</span><span class="n">matrices</span><span class="p">):</span>
+    <span class="s2">&quot;Apply the measures to a dict of labelled stochastic matrices.&quot;</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">mobility_measures</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">matrices</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>由于单位矩阵是可约的，我们只单独检验完全流动这一基准。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mobility_table</span><span class="p">({</span><span class="s1">&#39;perfect mobility&#39;</span><span class="p">:</span> <span class="n">M_perfect</span><span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>μ_S</th>
+      <th>μ_B</th>
+      <th>μ_NB</th>
+      <th>μ_2E</th>
+      <th>μ_MFP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>perfect mobility</th>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>除未归一化的 <span class="math notranslate nohighlight">\(\mu_B\)</span> 之外，其余所有度量都等于一。</p>
+</section>
+</section>
+<section id="id21">
+<h2><span class="section-number">44.4. </span>这些度量遗漏了什么<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
+<p>每种度量都会舍弃信息，而查明这一点最简洁的方式，是找出某种度量无法区分的矩阵。</p>
+<p>以下例子改编自 <span class="bibtex-citation" id="id22">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 附录 A.1，并做了轻微扰动，使三条链都具有不可约性。</p>
+<p>考虑三个具有三个财富三分位数的经济体。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ladder</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">]])</span>
+
+<span class="n">jumper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.40</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">]])</span>
+
+<span class="n">sticky</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>在<em>阶梯</em>经济体中，家庭只能移动到相邻的三分位数，因此穷人必须经过中产阶层才能变富。</p>
+<p>在<em>跳跃</em>经济体中，家庭离开其三分位数的频率相同，但当他们移动时，通常会一步到位。</p>
+<p>在<em>黏滞</em>经济体中，家庭移动很少，但一旦移动，往往会移动很远。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mobility_table</span><span class="p">({</span><span class="s1">&#39;ladder&#39;</span><span class="p">:</span> <span class="n">ladder</span><span class="p">,</span>
+                <span class="s1">&#39;jumper&#39;</span><span class="p">:</span> <span class="n">jumper</span><span class="p">,</span>
+                <span class="s1">&#39;sticky&#39;</span><span class="p">:</span> <span class="n">sticky</span><span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>μ_S</th>
+      <th>μ_B</th>
+      <th>μ_NB</th>
+      <th>μ_2E</th>
+      <th>μ_MFP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ladder</th>
+      <td>0.75</td>
+      <td>0.75</td>
+      <td>0.562</td>
+      <td>0.5</td>
+      <td>0.643</td>
+    </tr>
+    <tr>
+      <th>jumper</th>
+      <td>0.75</td>
+      <td>1.15</td>
+      <td>0.862</td>
+      <td>0.6</td>
+      <td>0.631</td>
+    </tr>
+    <tr>
+      <th>sticky</th>
+      <td>0.55</td>
+      <td>0.75</td>
+      <td>0.562</td>
+      <td>0.5</td>
+      <td>0.549</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>由此可得三点启示。</p>
+<p>阶梯经济体和跳跃经济体的 Shorrocks 指数相同，因为它们的对角线相同。</p>
+<p>Shorrocks 指数无法看出一个经济体一步就能把家庭从底层送到顶层，而另一个需要两步。</p>
+<p>阶梯经济体和黏滞经济体的 Bartholomew 度量相同，因为黏滞经济体中额外的移动距离恰好抵消了其较低的移动频率。</p>
+<p>Bartholomew 度量无法区分频繁的小幅移动与罕见的大幅移动。</p>
+<p>阶梯经济体和黏滞经济体的第二特征值也相等。</p>
+<p>最引人注目的是，这些度量<em>在排序上出现分歧</em>。</p>
+<p>Bartholomew 度量和第二特征值都将跳跃经济体排在阶梯经济体之上，认为其流动性更高，而平均首达时间则将其排为流动性略低。</p>
+<p>原因在于，跳跃经济体中想要到达中间三分位数的家庭必须等待很长时间，因为几乎所有的移动都发生在两个极端之间。</p>
+<p>简而言之，流动性矩阵之间并不存在完整的排序，而任何单一指数都是通过强行规定来施加一种排序。</p>
+<p>这正是 <span class="bibtex-citation" id="id23">[<a class="reference internal" href="zreferences.html#id309" title="Gary S. Fields and Efe A. Ok. The measurement of income mobility: an introduction to the literature. In Handbook of Income Inequality Measurement, pages 557–598. Springer, 1999.">Fields and Ok, 1999</a>]</span> 和 <span class="bibtex-citation" id="id24">[<a class="reference internal" href="zreferences.html#id308" title="Valentino Dardanoni. Measuring social mobility. Journal of Economic Theory, 61(2):372–394, 1993.">Dardanoni, 1993</a>]</span> 所要传达的核心信息，也是我们报告四个数字而非一个数字的原因。</p>
+</section>
+<section id="mobility-data">
+<span id="id25"></span><h2><span class="section-number">44.5. </span>美国数据中的财富流动性<a class="headerlink" href="#mobility-data" title="Link to this heading">#</a></h2>
+<section id="id26">
+<h3><span class="section-number">44.5.1. </span>数据<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<p>现在我们转向 <span class="bibtex-citation" id="id27">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 根据收入动态追踪调查（PSID）估计出的财富流动性矩阵。</p>
+<p>PSID 对同一批家庭进行长期跟踪，并在 1984 年至 2015 年间以不定期间隔加入财富附加调查。</p>
+<p>对每一对调查年份，家庭在起始年和结束年都会按财富被分入五分位数，从分位数 <span class="math notranslate nohighlight">\(i\)</span> 移动到分位数 <span class="math notranslate nohighlight">\(j\)</span> 的比例被记录下来。</p>
+<p>作者报告了三种视界下的矩阵：短期（5–6 年）、中期（9–10 年）和长期（19–21 年）。</p>
+<p>我们先从三个具有相同起始年份 1984 年的视界开始。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psid</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-1989&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="mf">0.19</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.70</span><span class="p">]]</span>
+
+<span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-1994&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.23</span><span class="p">,</span> <span class="mf">0.41</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.23</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">]]</span>
+
+<span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-2003&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.13</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.32</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>和之前一样，发表数据的四舍五入使各行加总略有偏差。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-2003&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.01, 1.  , 1.  , 1.01, 1.01])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psid</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">normalize_rows</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">psid</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们在前面论证过，基于等规模分位数构建的流动性矩阵应当是双随机的。</p>
+<p>让我们看看这些估计出的矩阵在多大程度上满足这一点。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">psid</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">:  </span><span class="si">{</span><span class="n">M</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1984-1989:  [1.041 0.992 0.994 0.962 1.011]
+1984-1994:  [1.023 1.036 0.978 0.961 1.001]
+1984-2003:  [1.003 1.056 0.975 0.964 1.002]
+</pre></div>
+</div>
+</div>
+</div>
+<p>各列加总大致但并不精确地等于一。</p>
+<p>有两个因素使其出现偏差。</p>
+<p>发表的数据保留两位小数，同时该面板数据并非完全平衡——家庭会在起始年和结束年之间退出样本，因此两个日期分入分位数的家庭集合并不完全相同。</p>
+<p>我们将在 <a class="reference internal" href="#mob_ex6"><span class="std std-ref">最后一道练习</span></a> 中再次看到这种偏差——那里我们会发现这些矩阵的平稳分布接近但不完全等于均匀分布。</p>
+<p>以下是这三个矩阵的呈现方式。</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">psid</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;期末五分位数&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;期初五分位数&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight normal, now using 600.
+</pre></div>
+</div>
+<figure class="align-default" id="fig-mobility-heatmaps">
+<a class="reference internal image-reference" href="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png"><img alt="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png" src="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44.2 </span><span class="caption-text">三种视界下的美国财富流动性矩阵</span><a class="headerlink" href="#fig-mobility-heatmaps" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>随着视界拉长，概率质量逐渐远离对角线扩散开来，这正是我们所预期的。</p>
+<p>即使在五年时间跨度内，也存在相当大的移动。</p>
+<p>中间三个五分位数的家庭离开起始分位数的可能性大于留在原处的可能性，而起始位于最顶层五分位数的家庭有 30% 的概率最终落到其他位置。</p>
+</section>
+<section id="id28">
+<h3><span class="section-number">44.5.2. </span>流动性随视界延长而上升<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<p>让我们应用我们的度量方法。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">horizon_table</span> <span class="o">=</span> <span class="n">mobility_table</span><span class="p">(</span><span class="n">psid</span><span class="p">)</span>
+<span class="n">horizon_table</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>μ_S</th>
+      <th>μ_B</th>
+      <th>μ_NB</th>
+      <th>μ_2E</th>
+      <th>μ_MFP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1984-1989</th>
+      <td>0.559</td>
+      <td>0.689</td>
+      <td>0.345</td>
+      <td>0.192</td>
+      <td>0.462</td>
+    </tr>
+    <tr>
+      <th>1984-1994</th>
+      <td>0.664</td>
+      <td>0.911</td>
+      <td>0.455</td>
+      <td>0.306</td>
+      <td>0.608</td>
+    </tr>
+    <tr>
+      <th>1984-2003</th>
+      <td>0.736</td>
+      <td>1.044</td>
+      <td>0.522</td>
+      <td>0.365</td>
+      <td>0.683</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;μ_S&#39;</span><span class="p">,</span> <span class="s1">&#39;μ_NB&#39;</span><span class="p">,</span> <span class="s1">&#39;μ_2E&#39;</span><span class="p">,</span> <span class="s1">&#39;μ_MFP&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">horizon_table</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;流动性&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mobility-horizon">
+<a class="reference internal image-reference" href="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png"><img alt="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png" src="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44.3 </span><span class="caption-text">三种视界下的流动性度量</span><a class="headerlink" href="#fig-mobility-horizon" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>所有四种度量都一致表明，流动性随视界延长而上升，并且它们上升的比例大致相同。</p>
+<p>这令人放心，但并不能提供多少信息：给定足够长的时间，任何不可约链都会忘记其起点，因此每种度量都必然趋近于一。</p>
+<p>其教训在于，流动性度量只能在<em>具有相同视界的矩阵之间</em>进行比较。</p>
+<p>这一警示对 <span class="math notranslate nohighlight">\(\mu_{MFP}\)</span> 尤为重要，其单位是每期分位数数——而在这里，一”期”在某一列中是五年，在另一列中是十九年。</p>
+</section>
+<section id="id29">
+<h3><span class="section-number">44.5.3. </span>流动性是否已经下降？<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
+<p>一个更有意思的比较是固定视界、改变样本时期。</p>
+<p>以下是三个长视界矩阵，每个都跨越约二十年，分别从 1984 年、1989 年和 1994 年开始。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">long_horizon</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">long_horizon</span><span class="p">[</span><span class="s1">&#39;1984-2003&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-2003&#39;</span><span class="p">]</span>
+
+<span class="n">long_horizon</span><span class="p">[</span><span class="s1">&#39;1989-2009&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize_rows</span><span class="p">(</span>
+                            <span class="p">[[</span><span class="mf">0.56</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">,</span> <span class="mf">0.32</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">]])</span>
+
+<span class="n">long_horizon</span><span class="p">[</span><span class="s1">&#39;1994-2015&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize_rows</span><span class="p">(</span>
+                            <span class="p">[[</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.28</span><span class="p">,</span> <span class="mf">0.38</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.13</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.32</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.24</span><span class="p">,</span> <span class="mf">0.34</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.58</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decline_table</span> <span class="o">=</span> <span class="n">mobility_table</span><span class="p">(</span><span class="n">long_horizon</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">decline_table</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">decline_table</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;流动性&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mobility-decline">
+<a class="reference internal image-reference" href="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png"><img alt="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png" src="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44.4 </span><span class="caption-text">三个样本期的长视界流动性</span><a class="headerlink" href="#fig-mobility-decline" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decline_table</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>μ_S</th>
+      <th>μ_B</th>
+      <th>μ_NB</th>
+      <th>μ_2E</th>
+      <th>μ_MFP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1984-2003</th>
+      <td>0.736</td>
+      <td>1.044</td>
+      <td>0.522</td>
+      <td>0.365</td>
+      <td>0.683</td>
+    </tr>
+    <tr>
+      <th>1989-2009</th>
+      <td>0.719</td>
+      <td>1.029</td>
+      <td>0.515</td>
+      <td>0.359</td>
+      <td>0.669</td>
+    </tr>
+    <tr>
+      <th>1994-2015</th>
+      <td>0.700</td>
+      <td>1.000</td>
+      <td>0.500</td>
+      <td>0.346</td>
+      <td>0.647</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>随着我们将这一二十年窗口向后推移，所有四种度量都出现下降，表明自 1980 年代中期以来，美国的财富流动性有所下降。</p>
+<p>这一下降幅度不大——<span class="math notranslate nohighlight">\(\mu_S\)</span> 从 0.74 下降到 0.70。</p>
+<p><span class="bibtex-citation" id="id30">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 对 PSID 样本进行自助法（bootstrap）以给出这些数字的置信区间，得出的结论是：这一下降在中期视界下具有统计显著性，但在此处展示的长期视界下不具有统计显著性。</p>
+</section>
+<section id="id31">
+<h3><span class="section-number">44.5.4. </span>分位数链是马尔可夫的吗？<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
+<p>数据还能让我们提出另一个问题。</p>
+<p>到目前为止，我们一直将每个矩阵视为独立的对象。</p>
+<p>但是，如果一个家庭所处的分位数真的是一条马尔可夫链，那么二十年跨度的矩阵就应当是五年跨度矩阵的四次方。</p>
+<p>让我们来检验一下。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M_short</span> <span class="o">=</span> <span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-1989&#39;</span><span class="p">]</span>
+
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">mobility_table</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;1984-1994 (data)&#39;</span><span class="p">:</span>  <span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-1994&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;M^2 (predicted)&#39;</span><span class="p">:</span>   <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">M_short</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+     <span class="s1">&#39;1984-2003 (data)&#39;</span><span class="p">:</span>  <span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-2003&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;M^4 (predicted)&#39;</span><span class="p">:</span>   <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">M_short</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+
+<span class="n">comparison</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>μ_S</th>
+      <th>μ_B</th>
+      <th>μ_NB</th>
+      <th>μ_2E</th>
+      <th>μ_MFP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1984-1994 (data)</th>
+      <td>0.664</td>
+      <td>0.911</td>
+      <td>0.455</td>
+      <td>0.306</td>
+      <td>0.608</td>
+    </tr>
+    <tr>
+      <th>M^2 (predicted)</th>
+      <td>0.743</td>
+      <td>1.043</td>
+      <td>0.522</td>
+      <td>0.347</td>
+      <td>0.680</td>
+    </tr>
+    <tr>
+      <th>1984-2003 (data)</th>
+      <td>0.736</td>
+      <td>1.044</td>
+      <td>0.522</td>
+      <td>0.365</td>
+      <td>0.683</td>
+    </tr>
+    <tr>
+      <th>M^4 (predicted)</th>
+      <td>0.873</td>
+      <td>1.431</td>
+      <td>0.716</td>
+      <td>0.574</td>
+      <td>0.856</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>对五年矩阵进行迭代，预测出的流动性比我们实际观测到的要高得多。</p>
+<p>在二十年时间跨度上，差距很大：马尔可夫预测下的 <span class="math notranslate nohighlight">\(\mu_S\)</span> 为 0.87，而数据中的实际值为 0.74。</p>
+<p>因此，家庭在长期视界下比其五年行为所暗示的更加持续稳定，这意味着当前所处的分位数本身并不足以充分预测家庭未来的地位。</p>
+<p>此外，还有一些未观测到的特征在发挥作用。</p>
+<p>例如，<span class="bibtex-citation" id="id32">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 发现，一个曾经在财富分布中经历过一次大幅跳跃的家庭，明显更有可能再次经历这样的跳跃，而持有股票或私营企业的家庭比其他家庭的流动性要高得多。</p>
+<p>这一点对建模具有重要意义。</p>
+<p>它意味着一个现实的模型，其状态变量必须包含超出财富分布位置本身之外的信息。</p>
+</section>
+</section>
+<section id="id33">
+<h2><span class="section-number">44.6. </span>练习<a class="headerlink" href="#id33" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="mob_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.1 </span></p>
+<section id="exercise-content">
+<p>本练习要求你检验 Shorrocks 指数的标定，并探索其取值范围。</p>
+<ol class="arabic simple">
+<li><p>从解析角度证明 <span class="math notranslate nohighlight">\(\mu_S(I) = 0\)</span> 且 <span class="math notranslate nohighlight">\(\mu_S(M^*) = 1\)</span>，其中 <span class="math notranslate nohighlight">\(M^* = \mathbb 1 \mathbb 1^\top / N\)</span>。</p></li>
+<li><p>证明对任意随机矩阵 <span class="math notranslate nohighlight">\(M\)</span> 都有 <span class="math notranslate nohighlight">\(\mu_S(M) \leq N/(N-1)\)</span>，当且仅当 <span class="math notranslate nohighlight">\(M\)</span> 的对角线全为零时取等号。</p></li>
+<li><p>据此找出一个满足 <span class="math notranslate nohighlight">\(\mu_S(M) &gt; 1\)</span> 的 <span class="math notranslate nohighlight">\(3 \times 3\)</span> 随机矩阵，并用代码验证你的答案。</p></li>
+<li><p>用文字解释这样的矩阵所做的事情，以及为何超过一并非该度量的缺陷。</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex1"> Exercise 44.1</a></p>
+<section id="solution-content">
+<p>对于第 1 部分，单位矩阵满足 <span class="math notranslate nohighlight">\(\mathrm{trace}(I) = N\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_S(I) = (N - N)/(N-1) = 0\)</span>。</p>
+<p>完全流动矩阵的每个对角元素都等于 <span class="math notranslate nohighlight">\(1/N\)</span>，因此 <span class="math notranslate nohighlight">\(\mathrm{trace}(M^*) = 1\)</span>，<span class="math notranslate nohighlight">\(\mu_S(M^*) = (N-1)/(N-1) = 1\)</span>。</p>
+<p>对于第 2 部分，随机矩阵的每个元素都非负，因此 <span class="math notranslate nohighlight">\(\mathrm{trace}(M) \geq 0\)</span>，由此得到 <span class="math notranslate nohighlight">\(\mu_S(M) \leq N/(N-1)\)</span>。</p>
+<p>要取等号要求 <span class="math notranslate nohighlight">\(\mathrm{trace}(M) = 0\)</span>，对于非负矩阵而言，这意味着每个对角元素都为零。</p>
+<p>对于第 3 部分，任何对角线为零的随机矩阵都满足要求，最简单的例子就是循环置换矩阵。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M_cycle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+
+<span class="n">shorrocks</span><span class="p">(</span><span class="n">M_cycle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>这个值为 <span class="math notranslate nohighlight">\(3/2\)</span>，是 <span class="math notranslate nohighlight">\(N = 3\)</span> 时的最大值。</p>
+<p>对于第 4 部分，这个矩阵以概率一将每个家庭移出其当前的三分位数，这比起点独立性带来的移动还要多——在 <span class="math notranslate nohighlight">\(M^*\)</span> 下，家庭留在原地的概率为 <span class="math notranslate nohighlight">\(1/N\)</span>。</p>
+<p>因此，超过一的取值表明的是系统性的排名反转，而非误差。</p>
+<p>请注意，这条链是周期性的，因此分布永不收敛，尽管该链是不可约的。</p>
+<p>请对照 <a class="reference internal" href="markov_chains_II.html"><span class="doc">马尔科夫链：不可约性与遍历性</span></a> 中关于周期性链的讨论。</p>
+</section>
+</div>
+<div class="exercise admonition" id="mob_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.2 </span></p>
+<section id="exercise-content">
+<p>考虑 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的两状态链，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M =
+\begin{bmatrix}
+    1 - \alpha &amp; \alpha \\
+    \beta &amp; 1 - \beta
+\end{bmatrix}
+\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\alpha, \beta \in (0,1)\)</span> 且 <span class="math notranslate nohighlight">\(\alpha + \beta \leq 1\)</span>。</p>
+<ol class="arabic">
+<li><p>证明 <span class="math notranslate nohighlight">\(\mu_S(M) = \mu_{NB}(M) = \mu_{2E}(M) = \alpha + \beta\)</span>。</p></li>
+<li><p>设 <span class="math notranslate nohighlight">\(\{X_t\}\)</span> 为以该转移矩阵定义的平稳链，取值于 <span class="math notranslate nohighlight">\(\{0, 1\}\)</span>。</p>
+<p>证明其自相关系数为 <span class="math notranslate nohighlight">\(\mathrm{corr}(X_t, X_{t+1}) = 1 - \alpha - \beta = |\lambda_2(M)|\)</span>。</p>
+</li>
+<li><p>用数值方法验证以上两个结果。</p></li>
+<li><p>说明这一结果告诉我们，在什么情况下流动性度量方法的选择才重要。</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex2"> Exercise 44.2</a></p>
+<section id="solution-content">
+<p>对于第 1 部分，矩阵的迹为 <span class="math notranslate nohighlight">\(2 - \alpha - \beta\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_S = (2 - (2 - \alpha - \beta))/1 = \alpha + \beta\)</span>。</p>
+<p>对于 Bartholomew 度量，只有两个非对角元素有贡献，且每个都满足 <span class="math notranslate nohighlight">\(|i - j| = 1\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_B = \alpha + \beta\)</span>，而当 <span class="math notranslate nohighlight">\(N = 2\)</span> 时，归一化因子 <span class="math notranslate nohighlight">\(3/(N+1)\)</span> 恰好等于一。</p>
+<p>对于特征值，由于 <span class="math notranslate nohighlight">\(M\)</span> 的行加总为一，所以 <span class="math notranslate nohighlight">\(\lambda_1 = 1\)</span>，又因为特征值之和等于迹，所以 <span class="math notranslate nohighlight">\(\lambda_2 = 1 - \alpha - \beta\)</span>，在我们的假设下这是非负的。</p>
+<p>因此 <span class="math notranslate nohighlight">\(\mu_{2E} = 1 - (1 - \alpha - \beta) = \alpha + \beta\)</span>。</p>
+<p>对于第 2 部分，平稳分布为 <span class="math notranslate nohighlight">\(\psi^* = (\beta, \alpha)/(\alpha + \beta)\)</span>，因此令 <span class="math notranslate nohighlight">\(p := \psi^*(1) = \alpha/(\alpha+\beta)\)</span>，我们有 <span class="math notranslate nohighlight">\(\mathbb E X_t = p\)</span> 以及 <span class="math notranslate nohighlight">\(\mathrm{var}(X_t) = p(1-p)\)</span>。</p>
+<p>由于 <span class="math notranslate nohighlight">\(X_t\)</span> 是取值 0 或 1 的变量，</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb E [X_t X_{t+1}]
+= \mathbb P\{X_t = 1, X_{t+1} = 1\}
+= p (1 - \beta)
+\]</div>
+<p>因此</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{cov}(X_t, X_{t+1})
+= p(1-\beta) - p^2
+= p (1 - p - \beta)
+= p(1-p)(1 - \alpha - \beta)
+\]</div>
+<p>其中最后一步用到了 <span class="math notranslate nohighlight">\(1 - p = \beta/(\alpha+\beta)\)</span>，因此 <span class="math notranslate nohighlight">\(1 - p - \beta = (1-p)(1 - \alpha - \beta)\)</span>。</p>
+<p>除以 <span class="math notranslate nohighlight">\(\mathrm{var}(X_t) = p(1-p)\)</span> 即得所需结果。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">α</span><span class="p">,</span> <span class="n">α</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">β</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;μ_S  = </span><span class="si">{</span><span class="n">shorrocks</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;μ_NB = </span><span class="si">{</span><span class="n">bartholomew_normalized</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;μ_2E = </span><span class="si">{</span><span class="n">second_eigenvalue</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;α+β  = </span><span class="si">{</span><span class="n">α</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">β</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>μ_S  = 0.5000
+μ_NB = 0.5000
+μ_2E = 0.5000
+α+β  = 0.5000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc2</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">mc2</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sample autocorrelation = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:])[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;1 - α - β              = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">β</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample autocorrelation = 0.4995
+1 - α - β              = 0.5000
+</pre></div>
+</div>
+</div>
+</div>
+<p>对于第 4 部分，只有两个状态时，离开一个状态的方式只有一种，需要走的距离也只有一种，因此各种度量不可能产生分歧。</p>
+<p>流动性度量方法只有在 <span class="math notranslate nohighlight">\(N \geq 3\)</span> 时才会开始产生分歧，因为只有那时才存在移动远与移动频繁之间的区别。</p>
+<p>请注意 <span class="math notranslate nohighlight">\(\mu_{MFP}\)</span> 是一个例外，即使在 <span class="math notranslate nohighlight">\(N = 2\)</span> 时也与其他度量不同。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mfp_measure</span><span class="p">(</span><span class="n">M2</span><span class="p">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">α</span> <span class="o">*</span> <span class="n">β</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span> <span class="o">+</span> <span class="n">β</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">α</span> <span class="o">+</span> <span class="n">β</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.64, 0.64)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="mob_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.3 </span></p>
+<section id="exercise-content">
+<p>Shorrocks 指数是对逃离概率取平均，而与之密切相关且更易于解释的一个量，是家庭在离开当前分位数之前在其中停留的期望时间。</p>
+<ol class="arabic simple">
+<li><p>解释为什么对于当前处于分位数 <span class="math notranslate nohighlight">\(i\)</span> 中的家庭，其离开所需的期数服从成功概率为 <span class="math notranslate nohighlight">\(1 - m_{ii}\)</span> 的几何分布，因此平均停留时间为 <span class="math notranslate nohighlight">\(1/(1 - m_{ii})\)</span>。</p></li>
+<li><p>针对 1984–1989 年矩阵，以年为单位计算每个五分位数中的平均停留时间。</p></li>
+<li><p>对完全流动矩阵重复上述计算，并加以评论。</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex3"> Exercise 44.3</a></p>
+<section id="solution-content">
+<p>对于第 1 部分，根据马尔可夫性质，家庭在每一期以概率 <span class="math notranslate nohighlight">\(1 - m_{ii}\)</span> 离开分位数 <span class="math notranslate nohighlight">\(i\)</span>，且这一概率与家庭已在该分位数停留的时间长短无关。</p>
+<p>因此，直到首次离开所需的期数服从几何分布，均值为 <span class="math notranslate nohighlight">\(1/(1 - m_{ii})\)</span>。</p>
+<p>对于第 2 部分，1984–1989 年矩阵中每一期为五年。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sojourn</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">psid</span><span class="p">[</span><span class="s1">&#39;1984-1989&#39;</span><span class="p">]))</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sojourn</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;五分位数 </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)],</span>
+          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;years&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>五分位数 1    16.7
+五分位数 2     9.1
+五分位数 3     9.0
+五分位数 4     9.4
+五分位数 5    16.7
+Name: years, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>家庭在最底层和最顶层五分位数中平均停留约 17 年，大约是中间三个五分位数停留时间的两倍。</p>
+<p><span class="bibtex-citation" id="id34">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 发现标准的不完全市场模型难以重现这一模式。</p>
+<p>对于第 3 部分，在完全流动情形下，每个对角元素都为 <span class="math notranslate nohighlight">\(1/N\)</span>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">M_perfect</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6.25, 6.25, 6.25, 6.25, 6.25])
+</pre></div>
+</div>
+</div>
+</div>
+<p>一个家庭停留 <span class="math notranslate nohighlight">\(N/(N-1) = 1.25\)</span> 期——即 6.25 年——这是与独立性相符的最小值，而非零。</p>
+<p>即使完全没有持续性，一个家庭仍有五分之一的概率再次抽中自己所在的五分位数。</p>
+</section>
+</div>
+<div class="exercise admonition" id="mob_ex4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.4 </span></p>
+<section id="exercise-content">
+<p>取 1984–1989 年矩阵 <span class="math notranslate nohighlight">\(M\)</span>，计算 <span class="math notranslate nohighlight">\(M^k\)</span>（<span class="math notranslate nohighlight">\(k = 1, \ldots, 20\)</span>）的全部四种流动性度量。</p>
+<p>绘制结果图，并解释你所观察到的现象。</p>
+<p>这对我们在跨视界比较流动性度量时有何启示？</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex4"> Exercise 44.4</a></p>
+<section id="solution-content">
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">mobility_measures</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">M_short</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">ks</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">paths</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;流动性&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f81095b60e0f4e80973e7ecd29456b3dd251bbde80923f82dd32aadb9fae6b03.png"><img alt="_images/f81095b60e0f4e80973e7ecd29456b3dd251bbde80923f82dd32aadb9fae6b03.png" src="_images/f81095b60e0f4e80973e7ecd29456b3dd251bbde80923f82dd32aadb9fae6b03.png" style="width: 80%;" />
+</a>
+</div>
+</div>
+<p>每种度量都单调地增加并趋近于一。</p>
+<p>这一定会发生：该矩阵是不可约且非周期的，因此根据 <a class="reference internal" href="eigen_II.html"><span class="doc">佩龙-弗罗贝尼乌斯定理</span></a>，<span class="math notranslate nohighlight">\(M^k\)</span> 的各行会收敛于平稳分布，因此 <span class="math notranslate nohighlight">\(M^k\)</span> 也就收敛于完全流动形式的矩阵。</p>
+<p>这一结果在实践中的含义是：如果不明确说明视界，流动性度量就没有意义。</p>
+<p>若报告说一个经济体的 <span class="math notranslate nohighlight">\(\mu_S = 0.75\)</span> 而另一个经济体为 <span class="math notranslate nohighlight">\(\mu_S = 0.56\)</span>，若前者覆盖二十年而后者覆盖五年，那么这一比较就毫无信息量。</p>
+</section>
+</div>
+<div class="exercise admonition" id="mob_ex5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.5 </span></p>
+<section id="exercise-content">
+<p>流动性矩阵无法进行完全排序，上面的玩具例子中就展示了一次分歧。</p>
+<p>请再寻找其他一些分歧。</p>
+<p>生成大量随机的 <span class="math notranslate nohighlight">\(5 \times 5\)</span> 随机矩阵，对每一个计算 <span class="math notranslate nohighlight">\(\mu_{NB}\)</span> 和 <span class="math notranslate nohighlight">\(\mu_{MFP}\)</span>，找出一对被这两种度量排出相反方向的矩阵。</p>
+<p>报告这一对矩阵，并解释这一分歧的原因。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex5"> Exercise 44.5</a></p>
+<section id="solution-content">
+<p>我们通过从狄利克雷分布中抽取每一行来生成随机随机矩阵。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">n_draws</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">draws</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_draws</span><span class="p">)]</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">bartholomew_normalized</span><span class="p">(</span><span class="n">M</span><span class="p">),</span> <span class="n">mfp_measure</span><span class="p">(</span><span class="n">M</span><span class="p">)]</span> <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">draws</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>有些抽样结果接近可约的情形，这会因为与我们所需比较无关的原因，将 <span class="math notranslate nohighlight">\(\mu_{MFP}\)</span> 拉向零。</p>
+<p>我们把这些结果暂时放到一边。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">scores</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">keep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>297
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在我们寻找一对被两种度量排出相反方向的矩阵。</p>
+<p>我们对每一对矩阵按两个差距中<em>较小</em>的一个打分，从而使胜出的一对在两种度量上都有实质性的分歧，而不是在其中一个上分歧巨大。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="n">keep</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">keep</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Δ_B</span> <span class="o">=</span> <span class="n">B</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">B</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">Δ_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">T</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="n">disagree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">Δ_B</span><span class="p">)</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">Δ_T</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">disagree</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Δ_B</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Δ_T</span><span class="p">)),</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">score</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">A</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">draws</span><span class="p">[</span><span class="n">keep</span><span class="p">[</span><span class="n">a</span><span class="p">]],</span> <span class="n">draws</span><span class="p">[</span><span class="n">keep</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;matrix A&#39;</span><span class="p">:</span> <span class="n">mobility_measures</span><span class="p">(</span><span class="n">A</span><span class="p">),</span>
+              <span class="s1">&#39;matrix C&#39;</span><span class="p">:</span> <span class="n">mobility_measures</span><span class="p">(</span><span class="n">C</span><span class="p">)})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>matrix A</th>
+      <th>matrix C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>μ_S</th>
+      <td>0.857</td>
+      <td>0.990</td>
+    </tr>
+    <tr>
+      <th>μ_B</th>
+      <td>1.461</td>
+      <td>2.264</td>
+    </tr>
+    <tr>
+      <th>μ_NB</th>
+      <td>0.730</td>
+      <td>1.132</td>
+    </tr>
+    <tr>
+      <th>μ_2E</th>
+      <td>0.634</td>
+      <td>0.473</td>
+    </tr>
+    <tr>
+      <th>μ_MFP</th>
+      <td>0.840</td>
+      <td>0.438</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Bartholomew 度量认为矩阵 C 比矩阵 A 流动性高得多，而平均首达时间度量则认为矩阵 C 的流动性低得多。</p>
+<p>以下是这两个矩阵。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.43, 0.31, 0.02, 0.16, 0.08],
+       [0.07, 0.36, 0.34, 0.19, 0.04],
+       [0.26, 0.07, 0.35, 0.05, 0.28],
+       [0.07, 0.01, 0.22, 0.02, 0.67],
+       [0.2 , 0.11, 0.06, 0.22, 0.42]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.31, 0.01, 0.08, 0.56, 0.04],
+       [0.12, 0.09, 0.48, 0.07, 0.24],
+       [0.52, 0.04, 0.14, 0.16, 0.14],
+       [0.74, 0.02, 0.11, 0.09, 0.04],
+       [0.14, 0.21, 0.22, 0.02, 0.41]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>其原因在矩阵 C 的第二列中可以看出。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.00933477, 0.08952768, 0.03583995, 0.02154579, 0.21255087])
+</pre></div>
+</div>
+</div>
+</div>
+<p>几乎没有概率进入分位数 2，因此一个家庭需要等待很长时间才能到达那里，平均首达时间度量因此被大幅拉低。</p>
+<p>Bartholomew 度量则完全注意不到这一点，因为它只统计所走过的距离，而矩阵 C 在其余分位数之间——包括在两个极端之间——移动了大量的概率质量。</p>
+<p>这两种度量所奖励的对象不同。</p>
+<p>Bartholomew 度量统计的是所走过的距离，因此偏好那些将概率质量转移到角落的矩阵。</p>
+<p>平均首达时间度量则询问家庭需要等待多久才能到达任意一个分位数，因此会惩罚任何使某个分位数难以进入的矩阵，无论矩阵其他地方发生了多少移动。</p>
+</section>
+</div>
+<div class="exercise admonition" id="mob_ex6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 44.6 </span></p>
+<section id="exercise-content">
+<p>我们的函数 <code class="docutils literal notranslate"><span class="pre">mean_first_passage</span></code> 通过求解线性方程组来实现。</p>
+<p>另一种方法是通过模拟来估计首达时间。</p>
+<ol class="arabic">
+<li><p>编写一个函数，通过从状态 <span class="math notranslate nohighlight">\(i\)</span> 出发模拟大量路径，并记录每条路径首次到达状态 <span class="math notranslate nohighlight">\(j\)</span> 的时刻，从而估计 <span class="math notranslate nohighlight">\(T_{ij}\)</span>。</p>
+<p>使用经过 JIT 编译的 <code class="docutils literal notranslate"><span class="pre">qe.MarkovChain.simulate</span></code>。</p>
+</li>
+<li><p>将你的估计值与 1984–1989 年矩阵的精确值进行比较。</p></li>
+<li><p>作为第二项检验，手动计算用于 <span class="math notranslate nohighlight">\(T\)</span> 对角线上的平稳分布——通过求解满足 <span class="math notranslate nohighlight">\(\psi^* \mathbb 1 = 1\)</span> 约束下的 <span class="math notranslate nohighlight">\(\psi^* (I - M) = 0\)</span>——并将结果与 <code class="docutils literal notranslate"><span class="pre">qe.MarkovChain.stationary_distributions</span></code> 进行比较。</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mobility-solution-11">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex6"> Exercise 44.6</a></p>
+<section id="solution-content">
+<p>对于第 1 部分，我们从每个起始状态模拟长路径，并记录首次命中时间。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mfp_simulated</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">num_paths</span><span class="o">=</span><span class="mi">2_000</span><span class="p">,</span> <span class="n">path_length</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">num_paths</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_paths</span><span class="p">):</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">path_length</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">first</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">hits</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">hits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>请注意，我们搜索的是 <code class="docutils literal notranslate"><span class="pre">X[1:]</span></code>，因此对角线记录的是平均<em>返回</em>时间而非零，这与 <code class="docutils literal notranslate"><span class="pre">mean_first_passage</span></code> 中的约定一致。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_exact</span> <span class="o">=</span> <span class="n">mean_first_passage</span><span class="p">(</span><span class="n">M_short</span><span class="p">)</span>
+<span class="n">T_sim</span> <span class="o">=</span> <span class="n">mfp_simulated</span><span class="p">(</span><span class="n">M_short</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;exact:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T_exact</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;simulated:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">T_sim</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exact:
+[[ 4.39  5.31  9.24 14.36 22.84]
+ [10.12  4.9   7.1  12.33 20.56]
+ [14.29  7.54  5.15  9.41 17.53]
+ [17.31 10.85  6.93  5.5  12.35]
+ [19.22 12.98  8.96  6.11  5.2 ]]
+simulated:
+[[ 4.38  5.35  8.96 14.47 22.8 ]
+ [ 9.76  5.03  7.23 12.35 20.8 ]
+ [14.37  7.5   5.34  9.73 17.48]
+ [17.34 10.94  6.75  5.77 12.54]
+ [19.17 13.02  8.66  6.13  5.64]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>估计值非常接近，剩余的差异是蒙特卡洛误差。</p>
+<p>不过有一种偏差值得留意。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">path_length</span></code> 步数内从未到达 <span class="math notranslate nohighlight">\(j\)</span> 的路径不会有任何贡献，因此如果路径长度相对于最罕见的转移而言太短，估计值就会出现向下的偏差。</p>
+<p>不妨尝试用 <code class="docutils literal notranslate"><span class="pre">path_length=30</span></code> 重新运行，以观察这一现象。</p>
+<p>对于第 3 部分，平稳分布是 <span class="math notranslate nohighlight">\(M\)</span> 的一个左特征向量。</p>
+<p>我们可以通过求解一个线性方程组来找到它，将其中一个冗余方程替换为归一化条件 <span class="math notranslate nohighlight">\(\psi^* \mathbb 1 = 1\)</span>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">stationary_by_hand</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>              <span class="c1"># replace last equation with normalisation</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">ψ_hand</span> <span class="o">=</span> <span class="n">stationary_by_hand</span><span class="p">(</span><span class="n">M_short</span><span class="p">)</span>
+<span class="n">ψ_qe</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="n">M_short</span><span class="p">)</span><span class="o">.</span><span class="n">stationary_distributions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ψ_hand</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ψ_qe</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;max abs difference = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ψ_hand</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ψ_qe</span><span class="p">))</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.227856 0.204151 0.194078 0.181753 0.192162]
+[0.227856 0.204151 0.194078 0.181753 0.192162]
+max abs difference = 1.11e-16
+</pre></div>
+</div>
+</div>
+</div>
+<p>两者在机器精度范围内完全一致。</p>
+<p>值得注意的是，尽管各五分位数在构造上包含相同数量的家庭，但平稳分布并不精确等于均匀分布。</p>
+<p>均匀分布对 <span class="math notranslate nohighlight">\(M\)</span> 而言是平稳的，当且仅当 <span class="math notranslate nohighlight">\(M\)</span> 是双随机的，因为 <span class="math notranslate nohighlight">\(\psi^* M = \psi^*\)</span> 且 <span class="math notranslate nohighlight">\(\psi^* = \mathbb 1^\top / N\)</span> 恰好说明 <span class="math notranslate nohighlight">\(M\)</span> 的每一列加总都等于一。</p>
+<p>因此这种偏差与我们之前在列加总中看到的偏差是同一回事，它有着相同的两个来源：数据发表时的四舍五入，以及 1984 年到 1989 年间面板样本的流失。</p>
+</section>
+</div>
+</section>
+<section id="id35">
+<h2><span class="section-number">44.7. </span>延伸阅读<a class="headerlink" href="#id35" title="Link to this heading">#</a></h2>
+<section id="id36">
+<h3><span class="section-number">44.7.1. </span>度量理论<a class="headerlink" href="#id36" title="Link to this heading">#</a></h3>
+<p>流动性指数的正式研究始于 <span class="bibtex-citation" id="id37">[<a class="reference internal" href="zreferences.html#id307" title="S. J. Prais. Measuring social mobility. Journal of the Royal Statistical Society. Series A (General), 118(1):56–66, 1955.">Prais, 1955</a>]</span>，该文将转移矩阵应用于英格兰的职业阶层，以及 <span class="bibtex-citation" id="id38">[<a class="reference internal" href="zreferences.html#id306" title="David J. Bartholomew. Stochastic Models for Social Processes. Wiley, London, 1967.">Bartholomew, 1967</a>]</span>。</p>
+<p><span class="bibtex-citation" id="id39">[<a class="reference internal" href="zreferences.html#id305" title="Anthony F. Shorrocks. The measurement of mobility. Econometrica, 46(5):1013–1024, 1978.">Shorrocks, 1978</a>]</span> 将该学科置于公理化的基础之上。</p>
+<p>他探讨了一个流动性指数应满足哪些性质——包括：仅在完全不流动时取零值、对重新标记具有不变性、当概率质量从对角线移出时应增大、以及在起点独立情形下应取相同的公共值——并证明了这样一份看似自然的公理清单实际上是相互矛盾的。</p>
+<p>其结论是，各种指数必然要在一个理想性质和另一个理想性质之间做出取舍，这正是我们在上面的玩具例子中所看到的那种张力。</p>
+<p><span class="bibtex-citation" id="id40">[<a class="reference internal" href="zreferences.html#id308" title="Valentino Dardanoni. Measuring social mobility. Journal of Economic Theory, 61(2):372–394, 1993.">Dardanoni, 1993</a>]</span> 发展出了应对这一不可能性结果的另一种思路：与其强行给出一个完整排序，不如去问何时一个矩阵能够无歧义地比另一个矩阵更具流动性，并接受一种偏序关系。</p>
+<p><span class="bibtex-citation" id="id41">[<a class="reference internal" href="zreferences.html#id310" title="Paul M. Sommers and John Conlisk. Eigenvalue immobility measures for markov chains. Journal of Mathematical Sociology, 6(2):253–276, 1979.">Sommers and Conlisk, 1979</a>]</span> 研究了基于特征值的度量方法，<span class="bibtex-citation" id="id42">[<a class="reference internal" href="zreferences.html#id311" title="John Conlisk. Monotone mobility matrices. Journal of Mathematical Sociology, 15(3-4):173–191, 1990.">Conlisk, 1990</a>]</span> 研究了平均首达时间方法以及单调性所起的作用，而 <span class="bibtex-citation" id="id43">[<a class="reference internal" href="zreferences.html#id312" title="John G. Kemeny and J. Laurie Snell. Finite Markov Chains. Undergraduate Texts in Mathematics. Springer, 1976.">Kemeny and Snell, 1976</a>]</span> 至今仍是关于底层马尔可夫链理论的标准参考文献。</p>
+<p><span class="bibtex-citation" id="id44">[<a class="reference internal" href="zreferences.html#id309" title="Gary S. Fields and Efe A. Ok. The measurement of income mobility: an introduction to the literature. In Handbook of Income Inequality Measurement, pages 557–598. Springer, 1999.">Fields and Ok, 1999</a>]</span> 对整个文献进行了综述，是最适合入门的读物。</p>
+<p><span class="bibtex-citation" id="id45">[<a class="reference internal" href="zreferences.html#id314" title="Frank A. Cowell and Emmanuel Flachaire. Measuring mobility. Quantitative Economics, 9(2):865–901, 2018.">Cowell and Flachaire, 2018</a>]</span> 给出了更为晚近的处理方式，直接基于底层分布本身而非离散化的转移矩阵展开分析。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本节描述的是 Shorrocks 不可能性结果的大致轮廓，而非对其进行正式陈述，因为具体的公理清单十分重要。</p>
+<p>读者应直接参阅 <span class="bibtex-citation" id="id46">[<a class="reference internal" href="zreferences.html#id305" title="Anthony F. Shorrocks. The measurement of mobility. Econometrica, 46(5):1013–1024, 1978.">Shorrocks, 1978</a>]</span> 原文。</p>
+</div>
+</section>
+<section id="id47">
+<h3><span class="section-number">44.7.2. </span>代际流动性<a class="headerlink" href="#id47" title="Link to this heading">#</a></h3>
+<p>本讲座研究的是<em>代内</em>流动性：即某一给定家庭在其自身生命周期内在分布中的移动。</p>
+<p>一个庞大的平行文献研究的是<em>代际</em>流动性，即父母的经济地位与其子女经济地位之间的关系。</p>
+<p>这一领域的核心统计量是代际弹性，即用子女的对数收入对父母的对数收入进行回归所得到的系数。</p>
+<p>其中最著名的呈现方式是<strong>了不起的盖茨比曲线</strong>（Great Gatsby curve），该名称由 Alan Krueger 于 2012 年提出，该曲线将这一弹性与各国的收入不平等程度绘制在一起 <span class="bibtex-citation" id="id48">[<a class="reference internal" href="zreferences.html#id315" title="Miles Corak. Income inequality, equality of opportunity, and intergenerational mobility. Journal of Economic Perspectives, 27(3):79–102, 2013.">Corak, 2013</a>]</span>。</p>
+<p>这条曲线呈上升趋势：不平等程度较高的国家往往代际流动性较低，丹麦和挪威位于曲线的一端，美国和英国位于另一端。</p>
+<p>对此的解读存在争议——这种关系只是几十个数据点之间的跨国相关关系，因果关系可能是双向的——但这一模式在政策辩论中影响颇大。</p>
+<p><span class="bibtex-citation" id="id49">[<a class="reference internal" href="zreferences.html#id316" title="Raj Chetty, Nathaniel Hendren, Patrick Kline, and Emmanuel Saez. Where is the land of opportunity? the geography of intergenerational mobility in the united states. The Quarterly Journal of Economics, 129(4):1553–1623, 2014.">Chetty <em>et al.</em>, 2014</a>]</span> 使用涵盖数千万家庭的美国行政税务记录，证明代际流动性在美国<em>内部</em>——跨通勤区——存在巨大差异，并将这种差异与种族隔离程度、学校质量和家庭结构联系起来。</p>
+<p>具体到财富领域，<span class="bibtex-citation" id="id50">[<a class="reference internal" href="zreferences.html#id317" title="Erik Hurst, Ming Ching Luoh, Frank P. Stafford, and William G. Gale. The wealth dynamics of american families, 1984-94. Brookings Papers on Economic Activity, 1998(1):267–337, 1998.">Hurst <em>et al.</em>, 1998</a>]</span> 和 <span class="bibtex-citation" id="id51">[<a class="reference internal" href="zreferences.html#id318" title="Nancy A. Jianakoplos and Paul L. Menchik. Wealth mobility. Review of Economics and Statistics, 79(1):18–31, 1997.">Jianakoplos and Menchik, 1997</a>]</span> 是使用 PSID 数据的早期研究，而 <span class="bibtex-citation" id="id52">[<a class="reference internal" href="zreferences.html#id278" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">Benhabib <em>et al.</em>, 2019</a>]</span> 估计了一个财富流动性模型，其转移矩阵我们已在 <a class="reference internal" href="markov_chains_II.html"><span class="doc">马尔科夫链：不可约性与遍历性</span></a> 中见过。</p>
+</section>
+<section id="id53">
+<h3><span class="section-number">44.7.3. </span>经济模型中的流动性<a class="headerlink" href="#id53" title="Link to this heading">#</a></h3>
+<p>本讲座中的所有内容都是在描述数据。</p>
+<p>自然而然的下一个问题是，我们的标准家庭储蓄模型能否重现这些数据。</p>
+<p><span class="bibtex-citation" id="id54">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 后半部分给出的答案是：基本上不能。</p>
+<p>一个按照 Bewley、Huggett 和 Aiyagari 传统构建的标准不完全市场模型，即使经过校准以匹配观测到的财富不平等水平，所产生的短期流动性也远远不足。</p>
+<p>模型中的家庭在最底层和最顶层五分位数中分别停留大约 38 年和 63 年，而数据中的对应数值大约是 15 年和 17 年，而且当他们移动时，一次只移动一个五分位数。</p>
+<p>原因在于，储蓄是一种<em>平滑</em>工具：主体积累资产正是为了缓冲收入冲击对消费的影响，而这种缓冲作用减慢了他们在财富分布中的移动速度。</p>
+<p>该论文指出，为财富的<em>回报</em>而非劳动收入引入特异性风险，才是使模型流动性与数据相符的关键——这与其实证发现一致，即进行大幅跳跃的家庭正是那些持有股票和私营企业的家庭。</p>
+<p>论文接下来说明，这一点对政策具有重要意义：在校准为具有相同财富不平等程度的各个模型经济体中，家庭所偏好的资本收入税率会随流动性水平的不同而变化。</p>
+<p>这正是应当测量流动性、而不仅仅是不平等的理由所在。</p>
+<p>对模型方面感兴趣的读者，应参阅该论文原文。</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  导言
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   1. 关于这些讲座
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  经济数据
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="long_run_growth.html">
+   2. 长期增长
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business_cycle.html">
+   3. 商业周期
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inflation_history.html">
+   4. 通货膨胀的历史
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   5. 法国大革命期间的通货膨胀
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inequality.html">
+   6. 收入与财富不平等
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   7. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   8. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   9. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   10. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   11. 现值
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   12. 消费平滑
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   13. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   14. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   15. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   16. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   17. 求解平方根
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  概率与分布
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prob_dist.html">
+   18. 概率分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observed_distributions.html">
+   19. 观测分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fitting_distributions.html">
+   20. 为数据拟合分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lln_clt.html">
+   21. 大数定律与中心极限定理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   22. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heavy_tails.html">
+   23. 重尾分布
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schelling.html">
+   24. 种族隔离
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  非线性动态
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="scalar_dynam.html">
+   25. 一维动力学
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solow.html">
+   26. 索洛-斯旺增长模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cobweb.html">
+   27. 蛛网模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="olg.html">
+   28. 世代交叠模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   29. 商品价格
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  货币政策与财政政策的相互作用
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation.html">
+   30. 通过货币资助的政府赤字和价格水平
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unpleasant.html">
+   31. 一些不愉快的货币主义算术
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="money_inflation_nonlinear.html">
+   32. 通货膨胀税的拉弗曲线
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laffer_adaptive.html">
+   33. 拉弗曲线与自适应预期
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  随机动态
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ar1_processes.html">
+   34. AR(1) 过程
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_I.html">
+   35. 马尔科夫链：基本概念
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_chains_II.html">
+   36. 马尔科夫链：不可约性与遍历性
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="time_series_with_matrices.html">
+   37. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  优化
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lp_intro.html">
+   38. 线性规划
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="short_path.html">
+   39. 最短路径
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  高维建模
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_II.html">
+   40. 佩龙-弗罗贝尼乌斯定理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="input_output.html">
+   41. 输入-输出模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lake_model.html">
+   42. 就业的湖泊模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   43. 网络
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   44. 测量流动性
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  市场与竞争性均衡
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_multiple_goods.html">
+   45. 多种商品的供需关系
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="supply_demand_heterogeneity.html">
+   46. 具有异质性的市场均衡
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   47. 简单线性回归模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mle.html">
+   48. 最大似然估计
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  其它
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   49. 故障排除
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   50. 参考文献
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   51. 执行统计数据
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="https://quantecon.github.io/lecture-intro.zh-cn/_notebooks/mobility.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn/blob/main/lectures/mobility.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-intro.zh-cn" download><i data-feather="github"></i></a></li>
+                    
+                    
+                    <li class="btn__language" data-tippy-content="Switch language">
+                        <div class="language-switcher">
+                            <button class="language-switcher__toggle" aria-label="Switch language" aria-expanded="false" aria-haspopup="true">
+                                <i data-feather="globe"></i>
+                            </button>
+                            <ul class="language-switcher__menu">
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://intro.quantecon.org/mobility.html"
+                                       hreflang="en"
+                                       >
+                                        English
+                                    </a>
+                                </li>
+                                
+                                <li role="none">
+                                    <a role="menuitem" href="https://quantecon.github.io/lecture-intro.zh-cn/mobility.html"
+                                       hreflang="zh-cn"
+                                       aria-current="true" class="active">
+                                        中文
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-intro.zh-cn.notebooks/main?urlpath=tree/mobility.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-intro.zh-cn.notebooks/blob/main/mobility.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-intro.zh-cn.notebooks" data-urlpath="tree/lecture-intro.zh-cn.notebooks/mobility.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-intro.zh-cn.notebooks/blob/main/mobility.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "mobility";
+                const repoURL = "https://github.com/QuantEcon/lecture-intro.zh-cn.notebooks";
+                const urlPath = "tree/lecture-intro.zh-cn.notebooks/mobility.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>
