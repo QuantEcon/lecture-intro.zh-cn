@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>48. 最大似然估计 &#8212; Python量化经济学入门</title>
+    <title>12. 最大似然估计 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="49. 故障排除" href="troubleshooting.html" />
-    <link rel="prev" title="47. 简单线性回归模型" href="simple_linear_regression.html" />
+    <link rel="next" title="13. 估算财富税收入" href="wealth_tax.html" />
+    <link rel="prev" title="11. 简单线性回归模型" href="simple_linear_regression.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -218,16 +218,16 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">48.1. 介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">48.2. 最大似然估计</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">48.3. 帕累托分布</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">48.4. 最好的分布是怎样的？</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">48.4.1. 用对数正态分布拟合右尾部</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">48.4.2. 用帕累托分布拟合右尾部</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">48.4.3. 到底什么才是最好的分布？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 介绍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.2. 最大似然估计</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.3. 帕累托分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.4. 最好的分布是怎样的？</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.4.1. 用对数正态分布拟合右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">12.4.2. 用帕累托分布拟合右尾部</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">12.4.3. 到底什么才是最好的分布？</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">48.5. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">12.5. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -283,7 +283,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Sep 29, 2026
+                            Last changed: Oct 06, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -294,11 +294,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/009dfd4" class="changelog-hash">009dfd4</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">6 days ago</span>
-                                <span class="changelog-message">Delete ten dataset copies the lectures now read from data-lectures (#308)</span>
+                                <span class="changelog-time">8 minutes ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
                             </li>
                             
                         </ul>
@@ -314,7 +314,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">48. </span>最大似然估计<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">12. </span>最大似然估计<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">pareto</span><span class="p">,</span> <span class="n">expon</span>
@@ -333,7 +333,7 @@
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">48.1. </span>介绍<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.1. </span>介绍<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>假设你是一位政策制定者，你想尝试估算增加财富税将带来多少收入。</p>
 <p>财富税的计算公式为：</p>
 <div class="math notranslate nohighlight">
@@ -346,7 +346,7 @@
 \end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(w\)</span> 代表财富。</p>
 <div class="proof example admonition" id="mle_ex_wt">
-<p class="admonition-title"><span class="caption-number">Example 48.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 12.1 </span></p>
 <section class="example-content" id="proof-content">
 <p>例如，如果 <span class="math notranslate nohighlight">\(a = 0.05\)</span>，<span class="math notranslate nohighlight">\(b = 0.1\)</span>，且 <span class="math notranslate nohighlight">\(\bar w = 2.5\)</span>，意味着：</p>
 <ul class="simple">
@@ -442,7 +442,7 @@
 <p>我们的计划是，假设每个人的财富是从密度为 <span class="math notranslate nohighlight">\(f\)</span> 的分布中抽取的。</p>
 <p>如果我们获得 <span class="math notranslate nohighlight">\(f\)</span> 的估计，那么我们可以按照以下方式近似 <span class="math notranslate nohighlight">\(T\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-est-rev">
-<span class="eqno">(48.1)<a class="headerlink" href="#equation-eq-est-rev" title="Link to this equation">#</a></span>\[
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-eq-est-rev" title="Link to this equation">#</a></span>\[
     T = \sum_{i=1}^{N} h(w_i) 
       = N \frac{1}{N} \sum_{i=1}^{N} h(w_i) 
       \approx N \int_{0}^{\infty} h(w)f(w) dw
@@ -451,7 +451,7 @@
 <p>现在的问题是：我们要如何估计 <span class="math notranslate nohighlight">\(f\)</span>？</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">48.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.2. </span>最大似然估计<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://baike.baidu.com/item/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/4967925">最大似然估计</a> 是一种估计未知分布的方法。</p>
 <p>最大似然估计有两个步骤：</p>
 <ol class="arabic simple">
@@ -576,7 +576,7 @@
 </div>
 </div>
 <p>我们估计的对数正态分布看起来很适合整体数据。</p>
-<p>我们现在使用方程<a class="reference internal" href="#equation-eq-est-rev">(48.1)</a>来计算总收入。</p>
+<p>我们现在使用方程<a class="reference internal" href="#equation-eq-est-rev">(12.1)</a>来计算总收入。</p>
 <p>我们将通过 <strong>SciPy</strong> 的 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">quad</a> 函数，使用数值积分的方式计算积分。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,7 +604,7 @@
 <p>（我们的单位是10万美元，这意味着实际收入是这一数字的10万倍。）</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">48.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.3. </span>帕累托分布<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>如上所示，使用最大似然估计时，我们需要先对分布做出假设。</p>
 <p>刚才我们假定这个分布是对数正态分布。</p>
 <p>如果，我们改为假设 <span class="math notranslate nohighlight">\(w_i\)</span> 抽样自参数为 <span class="math notranslate nohighlight">\(b\)</span> 和 <span class="math notranslate nohighlight">\(x_m\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E5%B8%95%E7%B4%AF%E6%89%98%E5%88%86%E5%B8%83/3344172">帕累托分布</a>。</p>
@@ -695,7 +695,7 @@
 <p>我们观察到在这种情况下，帕累托分布的拟合效果并不理想，所以我们很可能会拒绝这一假设。</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">48.4. </span>最好的分布是怎样的？<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.4. </span>最好的分布是怎样的？<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>没有“最好”的分布——我们做出的每一个选择，都只是一种假设。</p>
 <p>我们唯一能做的，就是不断尝试，选择一个能很好拟合数据的分布。</p>
 <p>上面的图表表明，对数正态分布是最佳的。</p>
@@ -736,7 +736,7 @@
 </div>
 <p>现在，我们尝试用不同的分布来拟合数据。</p>
 <section id="id6">
-<h3><span class="section-number">48.4.1. </span>用对数正态分布拟合右尾部<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.4.1. </span>用对数正态分布拟合右尾部<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>让我们从对数正态分布开始。</p>
 <p>我们重新估计参数并绘制概率密度函数，与数据进行对比。</p>
 <div class="cell docutils container">
@@ -765,7 +765,7 @@
 但它对于右尾部的拟合效果并不好。</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">48.4.2. </span>用帕累托分布拟合右尾部<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.4.2. </span>用帕累托分布拟合右尾部<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>现在假设截取的数据集符合帕累托分布。</p>
 <p>我们再次估计参数，并将概率密度函数与数据进行对比。</p>
 <div class="cell docutils container">
@@ -792,7 +792,7 @@
 <p>帕累托分布更适合数据集的右尾部。</p>
 </section>
 <section id="id8">
-<h3><span class="section-number">48.4.3. </span>到底什么才是最好的分布？<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.4.3. </span>到底什么才是最好的分布？<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>如刚才所言，没有“最好”的分布——每个选择都只是一种假设。</p>
 <p>我们只需要检验我们认为合理的分布。</p>
 <p>一种检验方法是，将数据与拟合分布进行绘图，如我们刚才所做的。</p>
@@ -801,10 +801,10 @@
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">48.5. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.5. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="mle_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 48.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 12.1 </span></p>
 <section id="exercise-content">
 <p>假设我们假设财富是以参数 <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> 的<a class="reference external" href="https://baike.baidu.com/item/%E8%B4%9F%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83/6057031">指数分布</a>。</p>
 <p><span class="math notranslate nohighlight">\(\lambda\)</span> 的最大似然估计为</p>
@@ -820,7 +820,7 @@
 </div>
 <div class="solution dropdown admonition" id="mle-solution-2">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 48.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex1"> Exercise 12.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -853,14 +853,14 @@
 </div>
 <div class="exercise admonition" id="mle_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 48.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 12.2 </span></p>
 <section id="exercise-content">
 <p>绘制指数分布曲线，与样本比较并讨论它的拟合效果。</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="mle-solution-4">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 48.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mle_ex2"> Exercise 12.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -971,89 +971,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="french_rev.html">
-   5. 法国大革命期间的通货膨胀
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. 收入与财富不平等
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基础工具
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro_supply_demand.html">
-   7. 供给与需求导论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linear_equations.html">
-   8. 线性方程和矩阵代数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="complex_and_trig.html">
-   9. 复数和三角函数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="geom_series.html">
-   10. 基础经济学中的几何级数
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：有限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="pv.html">
-   11. 现值
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cons_smooth.html">
-   12. 消费平滑
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="equalizing_difference.html">
-   13. 均衡差异模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_ree.html">
-   14. 货币主义价格水平理论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_adaptive.html">
-   15. 自适应预期下的货币主义价格水平理论
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：无限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="eigen_I.html">
-   16. 特征值和特征向量
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="greek_square.html">
-   17. 求解平方根
+   5. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -1065,37 +984,115 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 概率分布
+   6. 概率分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observed_distributions.html">
-   19. 观测分布
+   7. 观测分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="fitting_distributions.html">
-   20. 为数据拟合分布
+   8. 为数据拟合分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   21. 大数定律与中心极限定理
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="monte_carlo.html">
-   22. 蒙特卡罗方法与期权定价
+   9. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   23. 重尾分布
+   10. 重尾分布
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   11. 简单线性回归模型
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   12. 最大似然估计
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="schelling.html">
-   24. 种族隔离
+  <a class="reference internal" href="wealth_tax.html">
+   13. 估算财富税收入
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   14. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   15. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   16. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   17. 现值
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   18. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   19. 消费平滑
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   20. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   21. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   22. 求解平方根
   </a>
  </li>
 </ul>
@@ -1107,36 +1104,46 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   25. 一维动力学
+   23. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   26. 索洛-斯旺增长模型
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   27. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   28. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="commod_price.html">
-   29. 商品价格
+  <a class="reference internal" href="schelling.html">
+   27. 种族隔离
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  货币政策与财政政策的相互作用
+  货币、通货膨胀与财政政策
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   28. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   29. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
    30. 通过货币资助的政府赤字和价格水平
@@ -1157,6 +1164,11 @@
    33. 拉弗曲线与自适应预期
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   34. 法国大革命期间的通货膨胀
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1166,22 +1178,32 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   34. AR(1) 过程
+   35. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   35. 马尔科夫链：基本概念
+   36. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   36. 马尔科夫链：不可约性与遍历性
+   37. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   37. 用矩阵代数表示的单变量时间序列
+   38. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   39. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   40. 商品价格
   </a>
  </li>
 </ul>
@@ -1193,12 +1215,12 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   38. 线性规划
+   41. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   39. 最短路径
+   42. 最短路径
   </a>
  </li>
 </ul>
@@ -1210,27 +1232,27 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   40. 佩龙-弗罗贝尼乌斯定理
+   43. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   41. 输入-输出模型
+   44. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   42. 就业的湖泊模型
+   45. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   43. 网络
+   46. 网络
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mobility.html">
-   44. 测量流动性
+   47. 测量流动性
   </a>
  </li>
 </ul>
@@ -1242,29 +1264,12 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   45. 多种商品的供需关系
+   48. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   46. 具有异质性的市场均衡
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  估计
- </span>
-</p>
-<ul class="current nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="simple_linear_regression.html">
-   47. 简单线性回归模型
-  </a>
- </li>
- <li class="toctree-l1 current active active">
-  <a class="current reference internal" href="#">
-   48. 最大似然估计
+   49. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -1276,17 +1281,17 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   49. 故障排除
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   50. 参考文献
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   51. 执行统计数据
+   52. 执行统计数据
   </a>
  </li>
 </ul>

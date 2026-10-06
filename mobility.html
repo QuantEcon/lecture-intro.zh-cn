@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>44. 测量流动性 &#8212; Python量化经济学入门</title>
+    <title>47. 测量流动性 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="45. 多种商品的供需关系" href="supply_demand_multiple_goods.html" />
-    <link rel="prev" title="43. 网络" href="networks.html" />
+    <link rel="next" title="48. 多种商品的供需关系" href="supply_demand_multiple_goods.html" />
+    <link rel="prev" title="46. 网络" href="networks.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -218,34 +218,34 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">44.1. 概览</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">44.2. 流动性矩阵</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">44.2.1. 从分位数到随机矩阵</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">44.2.2. 一个例子</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-benchmarks">44.2.3. 两个基准</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">47.1. 概览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">47.2. 流动性矩阵</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">47.2.1. 从分位数到随机矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">47.2.2. 一个例子</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-benchmarks">47.2.3. 两个基准</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">44.3. 四种流动性度量</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shorrocks">44.3.1. Shorrocks 指数</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bartholomew">44.3.2. Bartholomew 度量</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-eigenvalue">44.3.3. 第二特征值</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-mfp">44.3.4. 平均首达时间</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">44.3.5. 汇总各项度量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">47.3. 四种流动性度量</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shorrocks">47.3.1. Shorrocks 指数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bartholomew">47.3.2. Bartholomew 度量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-eigenvalue">47.3.3. 第二特征值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-mfp">47.3.4. 平均首达时间</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">47.3.5. 汇总各项度量</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">44.4. 这些度量遗漏了什么</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-data">44.5. 美国数据中的财富流动性</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">44.5.1. 数据</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">44.5.2. 流动性随视界延长而上升</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">44.5.3. 流动性是否已经下降？</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">44.5.4. 分位数链是马尔可夫的吗？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">47.4. 这些度量遗漏了什么</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobility-data">47.5. 美国数据中的财富流动性</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">47.5.1. 数据</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">47.5.2. 流动性随视界延长而上升</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">47.5.3. 流动性是否已经下降？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">47.5.4. 分位数链是马尔可夫的吗？</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">44.6. 练习</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">44.7. 延伸阅读</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">44.7.1. 度量理论</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id47">44.7.2. 代际流动性</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">44.7.3. 经济模型中的流动性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">47.6. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">47.7. 延伸阅读</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">47.7.1. 度量理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id47">47.7.2. 代际流动性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">47.7.3. 经济模型中的流动性</a></li>
 </ul>
 </li>
 </ul>
@@ -303,7 +303,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Sep 29, 2026
+                            Last changed: Oct 06, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -314,11 +314,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/009dfd4" class="changelog-hash">009dfd4</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">6 days ago</span>
-                                <span class="changelog-message">Delete ten dataset copies the lectures now read from data-lectures (#308)</span>
+                                <span class="changelog-time">8 minutes ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
                             </li>
                             
                         </ul>
@@ -334,7 +334,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="mobility">
-<span id="id1"></span><h1><span class="section-number">44. </span>测量流动性<a class="headerlink" href="#mobility" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">47. </span>测量流动性<a class="headerlink" href="#mobility" title="Link to this heading">#</a></h1>
 <p id="index-0">除 Anaconda 中已有的库外，本讲座还需要以下库：</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -364,7 +364,7 @@ Requirement already satisfied: certifi&gt;=2023.5.7 in /home/runner/miniconda3/e
 </details>
 </div>
 <section id="id2">
-<h2><span class="section-number">44.1. </span>概览<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.1. </span>概览<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>在 <a class="reference internal" href="inequality.html"><span class="doc">收入与财富不平等</span></a> 中，我们衡量了在某一时间点收入和财富分布的不平等程度。</p>
 <p>这类衡量方式是一种快照。</p>
 <p>虽然它们确实能提供关于富人和穷人之间差距有多大的信息，但它们无法告诉我们同样的家庭是否一直保持贫穷或富有。</p>
@@ -405,9 +405,9 @@ Requirement already satisfied: certifi&gt;=2023.5.7 in /home/runner/miniconda3/e
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">44.2. </span>流动性矩阵<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.2. </span>流动性矩阵<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <section id="id5">
-<h3><span class="section-number">44.2.1. </span>从分位数到随机矩阵<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.2.1. </span>从分位数到随机矩阵<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>假设我们在两个日期 <span class="math notranslate nohighlight">\(s\)</span> 和 <span class="math notranslate nohighlight">\(s + t\)</span> 观测大量家庭的财富。</p>
 <p>我们在每个日期按财富对家庭排序，并将其分为 <span class="math notranslate nohighlight">\(N\)</span> 个等规模的组，即<strong>分位数</strong>。</p>
 <p>（在观察数据时，我们常常考虑 <span class="math notranslate nohighlight">\(N = 5\)</span> 的情形，此时这些分位数即为<strong>五分位数</strong>，每组包含 20% 的家庭。）</p>
@@ -428,7 +428,7 @@ Requirement already satisfied: certifi&gt;=2023.5.7 in /home/runner/miniconda3/e
 <p>这一选择会对结果产生很大影响，我们在查看数据时会再次讨论这一点。</p>
 </section>
 <section id="id6">
-<h3><span class="section-number">44.2.2. </span>一个例子<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.2.2. </span>一个例子<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>以下是根据美国 1984 年至 1989 年这五年间的数据估计出的一个流动性矩阵，我们将在 <a class="reference internal" href="#mobility-data"><span class="std std-ref">后面的一节</span></a> 中更详细地讨论它。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -494,7 +494,7 @@ findfont: Failed to find font weight normal, now using 600.
 <a class="reference internal image-reference" href="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png"><img alt="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png" src="_images/28ed6e7d36b5568825ab36b4f3bbb6039756ba1eaa54a9b7cdd20bf51c551231.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.1 </span><span class="caption-text">四个家庭的模拟五分位数路径</span><a class="headerlink" href="#fig-mobility-paths" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47.1 </span><span class="caption-text">四个家庭的模拟五分位数路径</span><a class="headerlink" href="#fig-mobility-paths" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -503,7 +503,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p>我们的任务就是用一个单一的数字来概括这种行为。</p>
 </section>
 <section id="mobility-benchmarks">
-<span id="id7"></span><h3><span class="section-number">44.2.3. </span>两个基准<a class="headerlink" href="#mobility-benchmarks" title="Link to this heading">#</a></h3>
+<span id="id7"></span><h3><span class="section-number">47.2.3. </span>两个基准<a class="headerlink" href="#mobility-benchmarks" title="Link to this heading">#</a></h3>
 <p>在选择度量方法之前，先确定任何度量方法都应参照的两个极端情形会有所帮助。</p>
 <p><strong>完全不流动</strong>对应于单位矩阵 <span class="math notranslate nohighlight">\(M = I\)</span>。</p>
 <p>每个家庭永远停留在其起始位置。</p>
@@ -551,17 +551,17 @@ findfont: Failed to find font weight normal, now using 600.
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">44.3. </span>四种流动性度量<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.3. </span>四种流动性度量<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>将一个 <span class="math notranslate nohighlight">\(N \times N\)</span> 矩阵简化为一个单一数字会丢失信息。</p>
 <p>不同的度量方法舍弃了不同的信息，这正是通常做法要报告多个度量值的原因。</p>
 <p>我们遵循 <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 的做法，考虑四种度量，每一种都在 <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id308" title="Valentino Dardanoni. Measuring social mobility. Journal of Economic Theory, 61(2):372–394, 1993.">Dardanoni, 1993</a>]</span> 中有详细讨论。</p>
 <section id="shorrocks">
-<span id="mobility-shorrocks"></span><h3><span class="section-number">44.3.1. </span>Shorrocks 指数<a class="headerlink" href="#shorrocks" title="Link to this heading">#</a></h3>
+<span id="mobility-shorrocks"></span><h3><span class="section-number">47.3.1. </span>Shorrocks 指数<a class="headerlink" href="#shorrocks" title="Link to this heading">#</a></h3>
 <p><span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id305" title="Anthony F. Shorrocks. The measurement of mobility. Econometrica, 46(5):1013–1024, 1978.">Shorrocks, 1978</a>]</span> 提出的度量只关注 <span class="math notranslate nohighlight">\(M\)</span> 的对角线，</p>
 <div class="math notranslate nohighlight" id="equation-shorrocks-def">
-<span class="eqno">(44.1)<a class="headerlink" href="#equation-shorrocks-def" title="Link to this equation">#</a></span>\[\mu_S(M) = \frac{N - \mathrm{trace}(M)}{N - 1}\]</div>
+<span class="eqno">(47.1)<a class="headerlink" href="#equation-shorrocks-def" title="Link to this equation">#</a></span>\[\mu_S(M) = \frac{N - \mathrm{trace}(M)}{N - 1}\]</div>
 <p>其思路是：<span class="math notranslate nohighlight">\(m_{ii}\)</span> 是分位数 <span class="math notranslate nohighlight">\(i\)</span> 中家庭留在原地的概率，因此 <span class="math notranslate nohighlight">\(1 - m_{ii}\)</span> 就是其逃离原地的概率。</p>
-<p>将 <a class="reference internal" href="#equation-shorrocks-def">(44.1)</a> 改写为</p>
+<p>将 <a class="reference internal" href="#equation-shorrocks-def">(47.1)</a> 改写为</p>
 <div class="math notranslate nohighlight">
 \[
     \mu_S(M)
@@ -594,10 +594,10 @@ findfont: Failed to find font weight normal, now using 600.
 <p>一个家庭一步之内从赤贫变成巨富的经济体，与一个贫困家庭只是略微不那么贫困的经济体，只要它们离开起始分位数的频率相同，得分就会相同。</p>
 </section>
 <section id="bartholomew">
-<span id="mobility-bartholomew"></span><h3><span class="section-number">44.3.2. </span>Bartholomew 度量<a class="headerlink" href="#bartholomew" title="Link to this heading">#</a></h3>
+<span id="mobility-bartholomew"></span><h3><span class="section-number">47.3.2. </span>Bartholomew 度量<a class="headerlink" href="#bartholomew" title="Link to this heading">#</a></h3>
 <p><span class="bibtex-citation" id="id12">[<a class="reference internal" href="zreferences.html#id306" title="David J. Bartholomew. Stochastic Models for Social Processes. Wiley, London, 1967.">Bartholomew, 1967</a>]</span> 提出的度量则采取相反的视角，只关注非对角线元素，</p>
 <div class="math notranslate nohighlight" id="equation-bartholomew-def">
-<span class="eqno">(44.2)<a class="headerlink" href="#equation-bartholomew-def" title="Link to this equation">#</a></span>\[\mu_B(M) = \frac{1}{N-1} \sum_{i=1}^N \sum_{j=1}^N m_{ij} \, |i - j|\]</div>
+<span class="eqno">(47.2)<a class="headerlink" href="#equation-bartholomew-def" title="Link to this equation">#</a></span>\[\mu_B(M) = \frac{1}{N-1} \sum_{i=1}^N \sum_{j=1}^N m_{ij} \, |i - j|\]</div>
 <p>权重 <span class="math notranslate nohighlight">\(|i-j|\)</span> 是跨越的分位数边界数，因此跨越多个分位数的转移比转移到相邻分位数计入更多的权重。</p>
 <p>除去因子 <span class="math notranslate nohighlight">\(1/(N-1)\)</span>，这就是每期一个家庭跨越的分位数的期望数量。</p>
 <p><span class="bibtex-citation" id="id13">[<a class="reference internal" href="zreferences.html#id309" title="Gary S. Fields and Efe A. Ok. The measurement of income mobility: an introduction to the literature. In Handbook of Income Inequality Measurement, pages 557–598. Springer, 1999.">Fields and Ok, 1999</a>]</span> 将 <span class="math notranslate nohighlight">\(\mu_B\)</span> 描述为对总<em>移动量</em>的度量。</p>
@@ -633,7 +633,7 @@ findfont: Failed to find font weight normal, now using 600.
 \]</div>
 <p>因此，为了让 Bartholomew 度量与其他度量处于同一标准，我们进行重新缩放，</p>
 <div class="math notranslate nohighlight" id="equation-bartholomew-norm">
-<span class="eqno">(44.3)<a class="headerlink" href="#equation-bartholomew-norm" title="Link to this equation">#</a></span>\[\mu_{NB}(M) = \frac{3}{N+1} \, \mu_B(M)\]</div>
+<span class="eqno">(47.3)<a class="headerlink" href="#equation-bartholomew-norm" title="Link to this equation">#</a></span>\[\mu_{NB}(M) = \frac{3}{N+1} \, \mu_B(M)\]</div>
 <p>即跨越的分位数期望数量与起点独立情形下跨越数量的相对值。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -654,14 +654,14 @@ findfont: Failed to find font weight normal, now using 600.
 <p>当我们想要”每期跨越的分位数”这一解释时报告 <span class="math notranslate nohighlight">\(\mu_B\)</span>，而在与其他度量进行比较时报告 <span class="math notranslate nohighlight">\(\mu_{NB}\)</span>。</p>
 </section>
 <section id="mobility-eigenvalue">
-<span id="id14"></span><h3><span class="section-number">44.3.3. </span>第二特征值<a class="headerlink" href="#mobility-eigenvalue" title="Link to this heading">#</a></h3>
+<span id="id14"></span><h3><span class="section-number">47.3.3. </span>第二特征值<a class="headerlink" href="#mobility-eigenvalue" title="Link to this heading">#</a></h3>
 <p>我们的第三种度量来自收敛理论，而非转移次数的统计。</p>
 <p>回想一下 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的内容：当 <span class="math notranslate nohighlight">\(M\)</span> 处处为正时，分布 <span class="math notranslate nohighlight">\(\psi_t = \psi_0 M^t\)</span> 收敛于平稳分布 <span class="math notranslate nohighlight">\(\psi^*\)</span>。</p>
 <p><a class="reference internal" href="eigen_II.html"><span class="doc">佩龙-弗罗贝尼乌斯定理</span></a> 告诉我们，随机矩阵的最大特征值为 <span class="math notranslate nohighlight">\(\lambda_1 = 1\)</span>，而 <span class="math notranslate nohighlight">\(\psi_t \to \psi^*\)</span> 的<em>速率</em>则由第二大特征值 <span class="math notranslate nohighlight">\(\lambda_2\)</span> 的模决定。</p>
 <p>一个混合得快的链会很快忘记其初始条件，这正是流动性的含义所在。</p>
 <p>这启发我们定义</p>
 <div class="math notranslate nohighlight" id="equation-eigen-def">
-<span class="eqno">(44.4)<a class="headerlink" href="#equation-eigen-def" title="Link to this equation">#</a></span>\[\mu_{2E}(M) = 1 - |\lambda_2(M)|\]</div>
+<span class="eqno">(47.4)<a class="headerlink" href="#equation-eigen-def" title="Link to this equation">#</a></span>\[\mu_{2E}(M) = 1 - |\lambda_2(M)|\]</div>
 <p><span class="bibtex-citation" id="id15">[<a class="reference internal" href="zreferences.html#id310" title="Paul M. Sommers and John Conlisk. Eigenvalue immobility measures for markov chains. Journal of Mathematical Sociology, 6(2):253–276, 1979.">Sommers and Conlisk, 1979</a>]</span> 证明了 <span class="math notranslate nohighlight">\(\mu_{2E}\)</span> 度量的是 <span class="math notranslate nohighlight">\(M\)</span> 相对于完全流动矩阵的总体偏离程度。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -688,7 +688,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p>这一度量还有一个额外的吸引力：对于两状态链而言，<span class="math notranslate nohighlight">\(|\lambda_2|\)</span> 恰好等于该过程的自相关系数，这一点将在下面的 <a class="reference internal" href="#mob_ex2"><span class="std std-ref">一道练习</span></a> 中要求你验证。</p>
 </section>
 <section id="mobility-mfp">
-<span id="id16"></span><h3><span class="section-number">44.3.4. </span>平均首达时间<a class="headerlink" href="#mobility-mfp" title="Link to this heading">#</a></h3>
+<span id="id16"></span><h3><span class="section-number">47.3.4. </span>平均首达时间<a class="headerlink" href="#mobility-mfp" title="Link to this heading">#</a></h3>
 <p>最后一种度量提出的是关于等待时间的问题：一个家庭需要多长时间才能到达某个给定的分位数？</p>
 <p>设 <span class="math notranslate nohighlight">\(T_{ij}\)</span> 为从分位数 <span class="math notranslate nohighlight">\(i\)</span> 出发的家庭首次到达分位数 <span class="math notranslate nohighlight">\(j\)</span> 所需的期望期数。</p>
 <p>为了计算它，我们使用<strong>一步分析法</strong>：我们以链下一步的去向为条件，然后利用从那里出发的问题与原问题形式相同这一事实。</p>
@@ -708,13 +708,13 @@ findfont: Failed to find font weight normal, now using 600.
 \]</div>
 <p>中间那一项为零，因此我们得到</p>
 <div class="math notranslate nohighlight" id="equation-mfp-recursion">
-<span class="eqno">(44.5)<a class="headerlink" href="#equation-mfp-recursion" title="Link to this equation">#</a></span>\[T_{ij} = 1 + \sum_{k \neq j} m_{ik} T_{kj}\]</div>
+<span class="eqno">(47.5)<a class="headerlink" href="#equation-mfp-recursion" title="Link to this equation">#</a></span>\[T_{ij} = 1 + \sum_{k \neq j} m_{ik} T_{kj}\]</div>
 <p>注意，求和中省略了 <span class="math notranslate nohighlight">\(k = j\)</span> 的情形，并非因为这种情况不可能发生，而是因为一旦家庭到达，它就不再产生任何贡献。</p>
 <p>这里是最简单的检验方式。</p>
 <p>考虑 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的两状态链，其中失业工人每月以概率 <span class="math notranslate nohighlight">\(\alpha\)</span> 找到工作，设 <span class="math notranslate nohighlight">\(i\)</span> 为失业状态，<span class="math notranslate nohighlight">\(j\)</span> 为就业状态。</p>
-<p>求和中唯一的项是 <span class="math notranslate nohighlight">\(k = i\)</span>，此时 <span class="math notranslate nohighlight">\(m_{ii} = 1 - \alpha\)</span>，因此 <a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 变为 <span class="math notranslate nohighlight">\(T_{ij} = 1 + (1 - \alpha) T_{ij}\)</span>，由此得到 <span class="math notranslate nohighlight">\(T_{ij} = 1/\alpha\)</span>。</p>
+<p>求和中唯一的项是 <span class="math notranslate nohighlight">\(k = i\)</span>，此时 <span class="math notranslate nohighlight">\(m_{ii} = 1 - \alpha\)</span>，因此 <a class="reference internal" href="#equation-mfp-recursion">(47.5)</a> 变为 <span class="math notranslate nohighlight">\(T_{ij} = 1 + (1 - \alpha) T_{ij}\)</span>，由此得到 <span class="math notranslate nohighlight">\(T_{ij} = 1/\alpha\)</span>。</p>
 <p>这正是正确的结果，因为等待时间是成功概率为 <span class="math notranslate nohighlight">\(\alpha\)</span> 的几何分布。</p>
-<p>现在固定 <span class="math notranslate nohighlight">\(j\)</span>，将 <a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 视为关于 <span class="math notranslate nohighlight">\(N-1\)</span> 个未知量 <span class="math notranslate nohighlight">\(\{T_{ij}\}_{i \neq j}\)</span> 的 <span class="math notranslate nohighlight">\(N-1\)</span> 个方程组成的方程组。</p>
+<p>现在固定 <span class="math notranslate nohighlight">\(j\)</span>，将 <a class="reference internal" href="#equation-mfp-recursion">(47.5)</a> 视为关于 <span class="math notranslate nohighlight">\(N-1\)</span> 个未知量 <span class="math notranslate nohighlight">\(\{T_{ij}\}_{i \neq j}\)</span> 的 <span class="math notranslate nohighlight">\(N-1\)</span> 个方程组成的方程组。</p>
 <p>用 <span class="math notranslate nohighlight">\(t\)</span> 表示这些未知量组成的向量，<span class="math notranslate nohighlight">\(M_{-j}\)</span> 表示删去第 <span class="math notranslate nohighlight">\(j\)</span> 行和第 <span class="math notranslate nohighlight">\(j\)</span> 列后的 <span class="math notranslate nohighlight">\(M\)</span>，则该方程组为</p>
 <div class="math notranslate nohighlight">
 \[
@@ -775,7 +775,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p>即为一个家庭到达另一随机抽取家庭所在分位数所需的期望期数。</p>
 <p>在完全流动情形下 <span class="math notranslate nohighlight">\(\text{MFP}(M^*) = N\)</span>，因此归一化的度量为</p>
 <div class="math notranslate nohighlight" id="equation-mfp-def">
-<span class="eqno">(44.6)<a class="headerlink" href="#equation-mfp-def" title="Link to this equation">#</a></span>\[\mu_{MFP}(M) = \frac{N}{\text{MFP}(M)}\]</div>
+<span class="eqno">(47.6)<a class="headerlink" href="#equation-mfp-def" title="Link to this equation">#</a></span>\[\mu_{MFP}(M) = \frac{N}{\text{MFP}(M)}\]</div>
 <p>其单位为每期分位数数。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -804,11 +804,11 @@ findfont: Failed to find font weight normal, now using 600.
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><span class="bibtex-citation" id="id18">[<a class="reference internal" href="zreferences.html#id313" title="Carl D. Meyer. An alternative expression for the mean first passage matrix. Linear Algebra and its Applications, 22:41–47, 1978.">Meyer, 1978</a>]</span> 给出了 <span class="math notranslate nohighlight">\(T\)</span> 的一个基于分块矩阵求逆的闭式表达式，这正是 <span class="bibtex-citation" id="id19">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 所使用的方法。</p>
-<p><a class="reference internal" href="#equation-mfp-recursion">(44.5)</a> 中的一步分析法与之等价，且更易于记忆。</p>
+<p><a class="reference internal" href="#equation-mfp-recursion">(47.5)</a> 中的一步分析法与之等价，且更易于记忆。</p>
 </div>
 </section>
 <section id="id20">
-<h3><span class="section-number">44.3.5. </span>汇总各项度量<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.3.5. </span>汇总各项度量<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 <p>让我们把这四种度量汇总到一个函数中。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -878,7 +878,7 @@ findfont: Failed to find font weight normal, now using 600.
 </section>
 </section>
 <section id="id21">
-<h2><span class="section-number">44.4. </span>这些度量遗漏了什么<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.4. </span>这些度量遗漏了什么<a class="headerlink" href="#id21" title="Link to this heading">#</a></h2>
 <p>每种度量都会舍弃信息，而查明这一点最简洁的方式，是找出某种度量无法区分的矩阵。</p>
 <p>以下例子改编自 <span class="bibtex-citation" id="id22">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 附录 A.1，并做了轻微扰动，使三条链都具有不可约性。</p>
 <p>考虑三个具有三个财富三分位数的经济体。</p>
@@ -978,9 +978,9 @@ findfont: Failed to find font weight normal, now using 600.
 <p>这正是 <span class="bibtex-citation" id="id23">[<a class="reference internal" href="zreferences.html#id309" title="Gary S. Fields and Efe A. Ok. The measurement of income mobility: an introduction to the literature. In Handbook of Income Inequality Measurement, pages 557–598. Springer, 1999.">Fields and Ok, 1999</a>]</span> 和 <span class="bibtex-citation" id="id24">[<a class="reference internal" href="zreferences.html#id308" title="Valentino Dardanoni. Measuring social mobility. Journal of Economic Theory, 61(2):372–394, 1993.">Dardanoni, 1993</a>]</span> 所要传达的核心信息，也是我们报告四个数字而非一个数字的原因。</p>
 </section>
 <section id="mobility-data">
-<span id="id25"></span><h2><span class="section-number">44.5. </span>美国数据中的财富流动性<a class="headerlink" href="#mobility-data" title="Link to this heading">#</a></h2>
+<span id="id25"></span><h2><span class="section-number">47.5. </span>美国数据中的财富流动性<a class="headerlink" href="#mobility-data" title="Link to this heading">#</a></h2>
 <section id="id26">
-<h3><span class="section-number">44.5.1. </span>数据<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.5.1. </span>数据<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
 <p>现在我们转向 <span class="bibtex-citation" id="id27">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 根据收入动态追踪调查（PSID）估计出的财富流动性矩阵。</p>
 <p>PSID 对同一批家庭进行长期跟踪，并在 1984 年至 2015 年间以不定期间隔加入财富附加调查。</p>
 <p>对每一对调查年份，家庭在起始年和结束年都会按财富被分入五分位数，从分位数 <span class="math notranslate nohighlight">\(i\)</span> 移动到分位数 <span class="math notranslate nohighlight">\(j\)</span> 的比例被记录下来。</p>
@@ -1082,7 +1082,7 @@ findfont: Failed to find font weight normal, now using 600.
 <a class="reference internal image-reference" href="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png"><img alt="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png" src="_images/db51f95dd2eeabb3bf65fe8b08655ea2c7a689aee7b7fe18ba9b9a39289dbb13.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.2 </span><span class="caption-text">三种视界下的美国财富流动性矩阵</span><a class="headerlink" href="#fig-mobility-heatmaps" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47.2 </span><span class="caption-text">三种视界下的美国财富流动性矩阵</span><a class="headerlink" href="#fig-mobility-heatmaps" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1092,7 +1092,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p>中间三个五分位数的家庭离开起始分位数的可能性大于留在原处的可能性，而起始位于最顶层五分位数的家庭有 30% 的概率最终落到其他位置。</p>
 </section>
 <section id="id28">
-<h3><span class="section-number">44.5.2. </span>流动性随视界延长而上升<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.5.2. </span>流动性随视界延长而上升<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
 <p>让我们应用我们的度量方法。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1179,7 +1179,7 @@ findfont: Failed to find font weight normal, now using 600.
 <a class="reference internal image-reference" href="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png"><img alt="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png" src="_images/bc653efe12da407f8e4529cb78baf6d5b81eddb88fd48f17cefbd8595cff4c2a.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.3 </span><span class="caption-text">三种视界下的流动性度量</span><a class="headerlink" href="#fig-mobility-horizon" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47.3 </span><span class="caption-text">三种视界下的流动性度量</span><a class="headerlink" href="#fig-mobility-horizon" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1190,7 +1190,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p>这一警示对 <span class="math notranslate nohighlight">\(\mu_{MFP}\)</span> 尤为重要，其单位是每期分位数数——而在这里，一”期”在某一列中是五年，在另一列中是十九年。</p>
 </section>
 <section id="id29">
-<h3><span class="section-number">44.5.3. </span>流动性是否已经下降？<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.5.3. </span>流动性是否已经下降？<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
 <p>一个更有意思的比较是固定视界、改变样本时期。</p>
 <p>以下是三个长视界矩阵，每个都跨越约二十年，分别从 1984 年、1989 年和 1994 年开始。</p>
 <div class="cell docutils container">
@@ -1241,7 +1241,7 @@ findfont: Failed to find font weight normal, now using 600.
 <a class="reference internal image-reference" href="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png"><img alt="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png" src="_images/d0c79262fb0af9aff3c1df2b04bc35a05a0e9f12b1e535249730d8c2583aa35e.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44.4 </span><span class="caption-text">三个样本期的长视界流动性</span><a class="headerlink" href="#fig-mobility-decline" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47.4 </span><span class="caption-text">三个样本期的长视界流动性</span><a class="headerlink" href="#fig-mobility-decline" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1312,7 +1312,7 @@ findfont: Failed to find font weight normal, now using 600.
 <p><span class="bibtex-citation" id="id30">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 对 PSID 样本进行自助法（bootstrap）以给出这些数字的置信区间，得出的结论是：这一下降在中期视界下具有统计显著性，但在此处展示的长期视界下不具有统计显著性。</p>
 </section>
 <section id="id31">
-<h3><span class="section-number">44.5.4. </span>分位数链是马尔可夫的吗？<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.5.4. </span>分位数链是马尔可夫的吗？<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
 <p>数据还能让我们提出另一个问题。</p>
 <p>到目前为止，我们一直将每个矩阵视为独立的对象。</p>
 <p>但是，如果一个家庭所处的分位数真的是一条马尔可夫链，那么二十年跨度的矩阵就应当是五年跨度矩阵的四次方。</p>
@@ -1404,10 +1404,10 @@ findfont: Failed to find font weight normal, now using 600.
 </section>
 </section>
 <section id="id33">
-<h2><span class="section-number">44.6. </span>练习<a class="headerlink" href="#id33" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.6. </span>练习<a class="headerlink" href="#id33" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="mob_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.1 </span></p>
 <section id="exercise-content">
 <p>本练习要求你检验 Shorrocks 指数的标定，并探索其取值范围。</p>
 <ol class="arabic simple">
@@ -1420,7 +1420,7 @@ findfont: Failed to find font weight normal, now using 600.
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex1"> Exercise 44.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex1"> Exercise 47.1</a></p>
 <section id="solution-content">
 <p>对于第 1 部分，单位矩阵满足 <span class="math notranslate nohighlight">\(\mathrm{trace}(I) = N\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_S(I) = (N - N)/(N-1) = 0\)</span>。</p>
 <p>完全流动矩阵的每个对角元素都等于 <span class="math notranslate nohighlight">\(1/N\)</span>，因此 <span class="math notranslate nohighlight">\(\mathrm{trace}(M^*) = 1\)</span>，<span class="math notranslate nohighlight">\(\mu_S(M^*) = (N-1)/(N-1) = 1\)</span>。</p>
@@ -1452,7 +1452,7 @@ findfont: Failed to find font weight normal, now using 600.
 </div>
 <div class="exercise admonition" id="mob_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.2 </span></p>
 <section id="exercise-content">
 <p>考虑 <a class="reference internal" href="markov_chains_I.html"><span class="doc">马尔科夫链：基本概念</span></a> 中的两状态链，</p>
 <div class="math notranslate nohighlight">
@@ -1476,7 +1476,7 @@ M =
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex2"> Exercise 44.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex2"> Exercise 47.2</a></p>
 <section id="solution-content">
 <p>对于第 1 部分，矩阵的迹为 <span class="math notranslate nohighlight">\(2 - \alpha - \beta\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_S = (2 - (2 - \alpha - \beta))/1 = \alpha + \beta\)</span>。</p>
 <p>对于 Bartholomew 度量，只有两个非对角元素有贡献，且每个都满足 <span class="math notranslate nohighlight">\(|i - j| = 1\)</span>，因此 <span class="math notranslate nohighlight">\(\mu_B = \alpha + \beta\)</span>，而当 <span class="math notranslate nohighlight">\(N = 2\)</span> 时，归一化因子 <span class="math notranslate nohighlight">\(3/(N+1)\)</span> 恰好等于一。</p>
@@ -1557,7 +1557,7 @@ M =
 </div>
 <div class="exercise admonition" id="mob_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.3 </span></p>
 <section id="exercise-content">
 <p>Shorrocks 指数是对逃离概率取平均，而与之密切相关且更易于解释的一个量，是家庭在离开当前分位数之前在其中停留的期望时间。</p>
 <ol class="arabic simple">
@@ -1569,7 +1569,7 @@ M =
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex3"> Exercise 44.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex3"> Exercise 47.3</a></p>
 <section id="solution-content">
 <p>对于第 1 部分，根据马尔可夫性质，家庭在每一期以概率 <span class="math notranslate nohighlight">\(1 - m_{ii}\)</span> 离开分位数 <span class="math notranslate nohighlight">\(i\)</span>，且这一概率与家庭已在该分位数停留的时间长短无关。</p>
 <p>因此，直到首次离开所需的期数服从几何分布，均值为 <span class="math notranslate nohighlight">\(1/(1 - m_{ii})\)</span>。</p>
@@ -1615,7 +1615,7 @@ Name: years, dtype: float64
 </div>
 <div class="exercise admonition" id="mob_ex4">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.4 </span></p>
 <section id="exercise-content">
 <p>取 1984–1989 年矩阵 <span class="math notranslate nohighlight">\(M\)</span>，计算 <span class="math notranslate nohighlight">\(M^k\)</span>（<span class="math notranslate nohighlight">\(k = 1, \ldots, 20\)</span>）的全部四种流动性度量。</p>
 <p>绘制结果图，并解释你所观察到的现象。</p>
@@ -1624,7 +1624,7 @@ Name: years, dtype: float64
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex4"> Exercise 44.4</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex4"> Exercise 47.4</a></p>
 <section id="solution-content">
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -1662,7 +1662,7 @@ Name: years, dtype: float64
 </div>
 <div class="exercise admonition" id="mob_ex5">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.5 </span></p>
 <section id="exercise-content">
 <p>流动性矩阵无法进行完全排序，上面的玩具例子中就展示了一次分歧。</p>
 <p>请再寻找其他一些分歧。</p>
@@ -1672,7 +1672,7 @@ Name: years, dtype: float64
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-9">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex5"> Exercise 44.5</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex5"> Exercise 47.5</a></p>
 <section id="solution-content">
 <p>我们通过从狄利克雷分布中抽取每一行来生成随机随机矩阵。</p>
 <div class="cell docutils container">
@@ -1828,7 +1828,7 @@ Name: years, dtype: float64
 </div>
 <div class="exercise admonition" id="mob_ex6">
 
-<p class="admonition-title"><span class="caption-number">Exercise 44.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 47.6 </span></p>
 <section id="exercise-content">
 <p>我们的函数 <code class="docutils literal notranslate"><span class="pre">mean_first_passage</span></code> 通过求解线性方程组来实现。</p>
 <p>另一种方法是通过模拟来估计首达时间。</p>
@@ -1843,7 +1843,7 @@ Name: years, dtype: float64
 </div>
 <div class="solution dropdown admonition" id="mobility-solution-11">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex6"> Exercise 44.6</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#mob_ex6"> Exercise 47.6</a></p>
 <section id="solution-content">
 <p>对于第 1 部分，我们从每个起始状态模拟长路径，并记录首次命中时间。</p>
 <div class="cell docutils container">
@@ -1937,9 +1937,9 @@ max abs difference = 1.11e-16
 </div>
 </section>
 <section id="id35">
-<h2><span class="section-number">44.7. </span>延伸阅读<a class="headerlink" href="#id35" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">47.7. </span>延伸阅读<a class="headerlink" href="#id35" title="Link to this heading">#</a></h2>
 <section id="id36">
-<h3><span class="section-number">44.7.1. </span>度量理论<a class="headerlink" href="#id36" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.7.1. </span>度量理论<a class="headerlink" href="#id36" title="Link to this heading">#</a></h3>
 <p>流动性指数的正式研究始于 <span class="bibtex-citation" id="id37">[<a class="reference internal" href="zreferences.html#id307" title="S. J. Prais. Measuring social mobility. Journal of the Royal Statistical Society. Series A (General), 118(1):56–66, 1955.">Prais, 1955</a>]</span>，该文将转移矩阵应用于英格兰的职业阶层，以及 <span class="bibtex-citation" id="id38">[<a class="reference internal" href="zreferences.html#id306" title="David J. Bartholomew. Stochastic Models for Social Processes. Wiley, London, 1967.">Bartholomew, 1967</a>]</span>。</p>
 <p><span class="bibtex-citation" id="id39">[<a class="reference internal" href="zreferences.html#id305" title="Anthony F. Shorrocks. The measurement of mobility. Econometrica, 46(5):1013–1024, 1978.">Shorrocks, 1978</a>]</span> 将该学科置于公理化的基础之上。</p>
 <p>他探讨了一个流动性指数应满足哪些性质——包括：仅在完全不流动时取零值、对重新标记具有不变性、当概率质量从对角线移出时应增大、以及在起点独立情形下应取相同的公共值——并证明了这样一份看似自然的公理清单实际上是相互矛盾的。</p>
@@ -1955,7 +1955,7 @@ max abs difference = 1.11e-16
 </div>
 </section>
 <section id="id47">
-<h3><span class="section-number">44.7.2. </span>代际流动性<a class="headerlink" href="#id47" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.7.2. </span>代际流动性<a class="headerlink" href="#id47" title="Link to this heading">#</a></h3>
 <p>本讲座研究的是<em>代内</em>流动性：即某一给定家庭在其自身生命周期内在分布中的移动。</p>
 <p>一个庞大的平行文献研究的是<em>代际</em>流动性，即父母的经济地位与其子女经济地位之间的关系。</p>
 <p>这一领域的核心统计量是代际弹性，即用子女的对数收入对父母的对数收入进行回归所得到的系数。</p>
@@ -1966,7 +1966,7 @@ max abs difference = 1.11e-16
 <p>具体到财富领域，<span class="bibtex-citation" id="id50">[<a class="reference internal" href="zreferences.html#id317" title="Erik Hurst, Ming Ching Luoh, Frank P. Stafford, and William G. Gale. The wealth dynamics of american families, 1984-94. Brookings Papers on Economic Activity, 1998(1):267–337, 1998.">Hurst <em>et al.</em>, 1998</a>]</span> 和 <span class="bibtex-citation" id="id51">[<a class="reference internal" href="zreferences.html#id318" title="Nancy A. Jianakoplos and Paul L. Menchik. Wealth mobility. Review of Economics and Statistics, 79(1):18–31, 1997.">Jianakoplos and Menchik, 1997</a>]</span> 是使用 PSID 数据的早期研究，而 <span class="bibtex-citation" id="id52">[<a class="reference internal" href="zreferences.html#id278" title="Jess Benhabib, Alberto Bisin, and Mi Luo. Wealth Distribution and Social Mobility in the US: A Quantitative Approach. American Economic Review, 109(5):1623–1647, May 2019.">Benhabib <em>et al.</em>, 2019</a>]</span> 估计了一个财富流动性模型，其转移矩阵我们已在 <a class="reference internal" href="markov_chains_II.html"><span class="doc">马尔科夫链：不可约性与遍历性</span></a> 中见过。</p>
 </section>
 <section id="id53">
-<h3><span class="section-number">44.7.3. </span>经济模型中的流动性<a class="headerlink" href="#id53" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">47.7.3. </span>经济模型中的流动性<a class="headerlink" href="#id53" title="Link to this heading">#</a></h3>
 <p>本讲座中的所有内容都是在描述数据。</p>
 <p>自然而然的下一个问题是，我们的标准家庭储蓄模型能否重现这些数据。</p>
 <p><span class="bibtex-citation" id="id54">[<a class="reference internal" href="zreferences.html#id304" title="Daniel R. Carroll, Nicholas Hoffman, and Eric R. Young. Mobility. Working paper, Federal Reserve Bank of Cleveland, Carnegie Mellon University and University of Virginia, 2026.">Carroll <em>et al.</em>, 2026</a>]</span> 后半部分给出的答案是：基本上不能。</p>
@@ -2066,89 +2066,8 @@ max abs difference = 1.11e-16
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="french_rev.html">
-   5. 法国大革命期间的通货膨胀
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. 收入与财富不平等
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基础工具
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro_supply_demand.html">
-   7. 供给与需求导论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linear_equations.html">
-   8. 线性方程和矩阵代数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="complex_and_trig.html">
-   9. 复数和三角函数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="geom_series.html">
-   10. 基础经济学中的几何级数
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：有限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="pv.html">
-   11. 现值
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cons_smooth.html">
-   12. 消费平滑
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="equalizing_difference.html">
-   13. 均衡差异模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_ree.html">
-   14. 货币主义价格水平理论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_adaptive.html">
-   15. 自适应预期下的货币主义价格水平理论
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：无限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="eigen_I.html">
-   16. 特征值和特征向量
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="greek_square.html">
-   17. 求解平方根
+   5. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -2160,37 +2079,115 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 概率分布
+   6. 概率分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observed_distributions.html">
-   19. 观测分布
+   7. 观测分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="fitting_distributions.html">
-   20. 为数据拟合分布
+   8. 为数据拟合分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   21. 大数定律与中心极限定理
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="monte_carlo.html">
-   22. 蒙特卡罗方法与期权定价
+   9. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   23. 重尾分布
+   10. 重尾分布
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   11. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="schelling.html">
-   24. 种族隔离
+  <a class="reference internal" href="mle.html">
+   12. 最大似然估计
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="wealth_tax.html">
+   13. 估算财富税收入
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   14. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   15. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   16. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   17. 现值
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   18. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   19. 消费平滑
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   20. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   21. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   22. 求解平方根
   </a>
  </li>
 </ul>
@@ -2202,36 +2199,46 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   25. 一维动力学
+   23. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   26. 索洛-斯旺增长模型
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   27. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   28. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="commod_price.html">
-   29. 商品价格
+  <a class="reference internal" href="schelling.html">
+   27. 种族隔离
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  货币政策与财政政策的相互作用
+  货币、通货膨胀与财政政策
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   28. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   29. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
    30. 通过货币资助的政府赤字和价格水平
@@ -2252,6 +2259,11 @@ max abs difference = 1.11e-16
    33. 拉弗曲线与自适应预期
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   34. 法国大革命期间的通货膨胀
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -2261,22 +2273,32 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   34. AR(1) 过程
+   35. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   35. 马尔科夫链：基本概念
+   36. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   36. 马尔科夫链：不可约性与遍历性
+   37. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   37. 用矩阵代数表示的单变量时间序列
+   38. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   39. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   40. 商品价格
   </a>
  </li>
 </ul>
@@ -2288,12 +2310,12 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   38. 线性规划
+   41. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   39. 最短路径
+   42. 最短路径
   </a>
  </li>
 </ul>
@@ -2305,27 +2327,27 @@ max abs difference = 1.11e-16
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   40. 佩龙-弗罗贝尼乌斯定理
+   43. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   41. 输入-输出模型
+   44. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   42. 就业的湖泊模型
+   45. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   43. 网络
+   46. 网络
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   44. 测量流动性
+   47. 测量流动性
   </a>
  </li>
 </ul>
@@ -2337,29 +2359,12 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   45. 多种商品的供需关系
+   48. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   46. 具有异质性的市场均衡
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  估计
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="simple_linear_regression.html">
-   47. 简单线性回归模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mle.html">
-   48. 最大似然估计
+   49. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -2371,17 +2376,17 @@ max abs difference = 1.11e-16
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   49. 故障排除
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   50. 参考文献
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   51. 执行统计数据
+   52. 执行统计数据
   </a>
  </li>
 </ul>

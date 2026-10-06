@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. 均衡差异模型 &#8212; Python量化经济学入门</title>
+    <title>18. 均衡差异模型 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. 货币主义价格水平理论" href="cagan_ree.html" />
-    <link rel="prev" title="12. 消费平滑" href="cons_smooth.html" />
+    <link rel="next" title="19. 消费平滑" href="cons_smooth.html" />
+    <link rel="prev" title="17. 现值" href="pv.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -218,16 +218,16 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.2. 无差异条件</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.2.1. 不上大学直接工作的现值</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.2.2. 上大学后工作的高中毕业生的现值</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">18.2. 无差异条件</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">18.2.1. 不上大学直接工作的现值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">18.2.2. 上大学后工作的高中毕业生的现值</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.3. 计算</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.4. 企业家与打工人的解读</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.5. 微积分的应用</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">18.3. 计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">18.4. 企业家与打工人的解读</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">18.5. 微积分的应用</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">18.6. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -283,7 +283,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Sep 29, 2026
+                            Last changed: Oct 06, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -294,11 +294,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/009dfd4" class="changelog-hash">009dfd4</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">6 days ago</span>
-                                <span class="changelog-message">Delete ten dataset copies the lectures now read from data-lectures (#308)</span>
+                                <span class="changelog-time">8 minutes ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
                             </li>
                             
                         </ul>
@@ -314,9 +314,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">13. </span>均衡差异模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>均衡差异模型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>本讲座介绍了一个研究大学与高中毕业生工资差距的模型，其中获得大学学历所需的时间是关键因素。</p>
 <p>这个模型最初由米尔顿·弗里德曼创建，用于研究美国牙医和医生的收入差异——他想弄清这种差异是竞争性劳动力市场的自然结果，还是源于政府与医疗专业组织设置的准入门槛。</p>
 <p>詹妮弗·伯恩斯在其著作<span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id8" title="Jennifer Burns. Milton Friedman: The Last Conservative by Jennifer Burns. Farrar, Straus, and Giroux, New York, 2023.">Burns, 2023</a>]</span>第4章中，详细描述了米尔顿·弗里德曼与西蒙·库兹涅茨的合作研究，这项研究最终促成了<span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id9" title="Simon Kuznets and Milton Friedman. Incomes from independent professional practice, 1929-1936. National Bureau of Economic Research Bulletin, 1939.">Kuznets and Friedman, 1939</a>]</span>和<span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id10" title="Milton Friedman and Simon Kuznets. Income from Independent Professional Practice. National Bureau of Economic Research, New York, 1945.">Friedman and Kuznets, 1945</a>]</span>的发表。</p>
@@ -348,7 +348,7 @@
 </div>
 </section>
 <section id="id7">
-<h2><span class="section-number">13.2. </span>无差异条件<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>无差异条件<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>这个模型的关键思想是：大学入门级工资溢价必须调整，直到具有代表性的工人在上大学和不上大学之间感到无差异。</p>
 <p>设：</p>
 <ul class="simple">
@@ -370,7 +370,7 @@
 <li><p>她上大学四年，毕业后赚取大学毕业生的工资</p></li>
 </ul>
 <section id="id8">
-<h3><span class="section-number">13.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.2.1. </span>不上大学直接工作的现值<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>如果某人高中毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=0, 1, 2, \ldots, T\)</span> 的 <span class="math notranslate nohighlight">\(T+1\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -384,7 +384,7 @@ A_h = \left[ \frac{1 - (R^{-1} \gamma_h)^{T+1} }{1 - R^{-1} \gamma_h } \right].
 <p>现值 <span class="math notranslate nohighlight">\(h_0\)</span> 是选择不上大学而是立即以高中毕业生的工资开始工作的人在时间 <span class="math notranslate nohighlight">\(0\)</span> 开始时的”人力财富”。</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">13.2.2. </span>上大学后工作的高中毕业生的现值<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.2.2. </span>上大学后工作的高中毕业生的现值<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>如果某人在 <span class="math notranslate nohighlight">\(t=0, 1, 2, 3\)</span> 的四年内上大学，期间收入为 <span class="math notranslate nohighlight">\(0\)</span>，但在大学毕业后立即工作，并在 <span class="math notranslate nohighlight">\(t=4, 5, \ldots ,T\)</span> 的 <span class="math notranslate nohighlight">\(T-3\)</span> 年内工作，她赚取的现值为：</p>
 <div class="math notranslate nohighlight">
 \[
@@ -415,13 +415,13 @@ h_0 = c_0 - D
 \]</div>
 <p>或</p>
 <div class="math notranslate nohighlight" id="equation-eq-equalize">
-<span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-equalize" title="Link to this equation">#</a></span>\[
+<span class="eqno">(18.1)<a class="headerlink" href="#equation-eq-equalize" title="Link to this equation">#</a></span>\[
 w_0^h A_h  = \phi w_0^h A_c - D .
 \]</div>
 <p>这个”无差异条件”是模型的核心。</p>
-<p>求解方程 <a class="reference internal" href="#equation-eq-equalize">(13.1)</a> 得到大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>：</p>
+<p>求解方程 <a class="reference internal" href="#equation-eq-equalize">(18.1)</a> 得到大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-eq-wagepremium">
-<span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-wagepremium" title="Link to this equation">#</a></span>\[
+<span class="eqno">(18.2)<a class="headerlink" href="#equation-eq-wagepremium" title="Link to this equation">#</a></span>\[
 \phi  = \frac{A_h}{A_c} + \frac{D}{w_0^h A_c} .
 \]</div>
 <p>在<strong>免费大学</strong>的特殊情况下，<span class="math notranslate nohighlight">\(D =0\)</span>。</p>
@@ -435,7 +435,7 @@ w_0^h A_h  = \phi w_0^h A_c - D .
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">13.3. </span>计算<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>计算<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>我们可以尝试改变各种参数，特别是 <span class="math notranslate nohighlight">\(\gamma_h, \gamma_c, R\)</span>，来构造一些有趣的例子。</p>
 <p>现在让我们编写一些 Python 代码来计算 <span class="math notranslate nohighlight">\(\phi\)</span> 并绘制其与某些决定因素的关系。</p>
 <div class="cell docutils container">
@@ -569,7 +569,7 @@ findfont: Failed to find font weight normal, now using 600.
 </div>
 </section>
 <section id="id11">
-<h2><span class="section-number">13.4. </span>企业家与打工人的解读<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.4. </span>企业家与打工人的解读<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>我们可以通过添加一个参数并重新解读变量来获得一个有关企业家和打工人的模型。</p>
 <p>现在让 <span class="math notranslate nohighlight">\(h\)</span> 表示”打工人”的现值。</p>
 <p>我们将企业家的现值定义为：</p>
@@ -655,7 +655,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <p>这个图表是不是符合你的猜想呢？</p>
 </section>
 <section id="id12">
-<h2><span class="section-number">13.5. </span>微积分的应用<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.5. </span>微积分的应用<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们只使用了线性代数，这对我们理解模型的运作原理已经足够了。</p>
 <p>然而，懂得微积分的人可能会希望我们直接求偏导数。</p>
 <p>我们现在就来做这件事。</p>
@@ -866,10 +866,10 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 <p>我们发现提高总利率 <span class="math notranslate nohighlight">\(R\)</span> 会增加初始大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span>，这也与我们之前的图形分析结果一致。</p>
 </section>
 <section id="id13">
-<h2><span class="section-number">13.6. </span>练习<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.6. </span>练习<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="eq_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 13.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 18.1 </span></p>
 <section id="exercise-content">
 <p>使用 <code class="docutils literal notranslate"><span class="pre">compute_gap</span></code>，绘制大学-高中工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随学费成本 <span class="math notranslate nohighlight">\(D \in [0, 30]\)</span> 变化的函数图，其他参数均保持默认值。</p>
 <p>a. 在 <span class="math notranslate nohighlight">\(\phi = 1\)</span> 处添加一条水平虚线，并根据免费大学公式 <span class="math notranslate nohighlight">\(\phi = A_h / A_c\)</span>，解释在这个范围内 <span class="math notranslate nohighlight">\(\phi\)</span> 是否会达到 1。</p>
@@ -878,7 +878,7 @@ c_0 = \pi \sum_{t=4}^T R^{-t} w_t^c
 </div>
 <div class="solution dropdown admonition" id="equalizing_difference-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex1"> Exercise 13.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex1"> Exercise 18.1</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -926,7 +926,7 @@ SymPy     dϕ/dD: 0.058368
 </div>
 <div class="exercise admonition" id="eq_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 13.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 18.2 </span></p>
 <section id="exercise-content">
 <p>绘制大学工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随职业生涯长度 <span class="math notranslate nohighlight">\(T \in \{10, 15, 20, \ldots, 60\}\)</span> 变化的函数图，考虑以下两种情况：</p>
 <ol class="arabic simple">
@@ -938,7 +938,7 @@ SymPy     dϕ/dD: 0.058368
 </div>
 <div class="solution dropdown admonition" id="equalizing_difference-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex2"> Exercise 13.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex2"> Exercise 18.2</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -970,7 +970,7 @@ SymPy     dϕ/dD: 0.058368
 </div>
 <div class="exercise admonition" id="eq_ex3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 13.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 18.3 </span></p>
 <section id="exercise-content">
 <p>使用<strong>中心有限差分</strong>近似方法，数值验证 SymPy 得到的偏导数 <span class="math notranslate nohighlight">\(\partial\phi/\partial R\)</span>：</p>
 <div class="math notranslate nohighlight">
@@ -983,7 +983,7 @@ SymPy     dϕ/dD: 0.058368
 </div>
 <div class="solution dropdown admonition" id="equalizing_difference-solution-5">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex3"> Exercise 13.3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex3"> Exercise 18.3</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1016,7 +1016,7 @@ SymPy    dϕ/dR: 13.264274
 </div>
 <div class="exercise admonition" id="eq_ex4">
 
-<p class="admonition-title"><span class="caption-number">Exercise 13.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 18.4 </span></p>
 <section id="exercise-content">
 <p>使用模型的企业家-打工人版本（<code class="docutils literal notranslate"><span class="pre">create_edm_π</span></code>），回答以下问题。</p>
 <p>a. 绘制成功企业家所需的工资溢价 <span class="math notranslate nohighlight">\(\phi\)</span> 随成功概率 <span class="math notranslate nohighlight">\(\pi \in [0.10, 1.00]\)</span> 变化的函数图，并用虚线标出 <span class="math notranslate nohighlight">\(\phi = 2\)</span> 的水平线。</p>
@@ -1026,7 +1026,7 @@ SymPy    dϕ/dR: 13.264274
 </div>
 <div class="solution dropdown admonition" id="equalizing_difference-solution-7">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex4"> Exercise 13.4</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#eq_ex4"> Exercise 18.4</a></p>
 <section id="solution-content">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1152,89 +1152,8 @@ SymPy    dϕ/dR: 13.264274
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="french_rev.html">
-   5. 法国大革命期间的通货膨胀
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. 收入与财富不平等
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基础工具
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro_supply_demand.html">
-   7. 供给与需求导论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linear_equations.html">
-   8. 线性方程和矩阵代数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="complex_and_trig.html">
-   9. 复数和三角函数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="geom_series.html">
-   10. 基础经济学中的几何级数
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：有限视界
- </span>
-</p>
-<ul class="current nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="pv.html">
-   11. 现值
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cons_smooth.html">
-   12. 消费平滑
-  </a>
- </li>
- <li class="toctree-l1 current active active">
-  <a class="current reference internal" href="#">
-   13. 均衡差异模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_ree.html">
-   14. 货币主义价格水平理论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_adaptive.html">
-   15. 自适应预期下的货币主义价格水平理论
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：无限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="eigen_I.html">
-   16. 特征值和特征向量
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="greek_square.html">
-   17. 求解平方根
+   5. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -1246,37 +1165,115 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 概率分布
+   6. 概率分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observed_distributions.html">
-   19. 观测分布
+   7. 观测分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="fitting_distributions.html">
-   20. 为数据拟合分布
+   8. 为数据拟合分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   21. 大数定律与中心极限定理
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="monte_carlo.html">
-   22. 蒙特卡罗方法与期权定价
+   9. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   23. 重尾分布
+   10. 重尾分布
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   11. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="schelling.html">
-   24. 种族隔离
+  <a class="reference internal" href="mle.html">
+   12. 最大似然估计
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="wealth_tax.html">
+   13. 估算财富税收入
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   14. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   15. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   16. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   17. 现值
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   18. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   19. 消费平滑
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   20. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   21. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   22. 求解平方根
   </a>
  </li>
 </ul>
@@ -1288,36 +1285,46 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   25. 一维动力学
+   23. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   26. 索洛-斯旺增长模型
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   27. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   28. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="commod_price.html">
-   29. 商品价格
+  <a class="reference internal" href="schelling.html">
+   27. 种族隔离
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  货币政策与财政政策的相互作用
+  货币、通货膨胀与财政政策
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   28. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   29. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
    30. 通过货币资助的政府赤字和价格水平
@@ -1338,6 +1345,11 @@ SymPy    dϕ/dR: 13.264274
    33. 拉弗曲线与自适应预期
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   34. 法国大革命期间的通货膨胀
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1347,22 +1359,32 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   34. AR(1) 过程
+   35. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   35. 马尔科夫链：基本概念
+   36. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   36. 马尔科夫链：不可约性与遍历性
+   37. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   37. 用矩阵代数表示的单变量时间序列
+   38. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   39. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   40. 商品价格
   </a>
  </li>
 </ul>
@@ -1374,12 +1396,12 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   38. 线性规划
+   41. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   39. 最短路径
+   42. 最短路径
   </a>
  </li>
 </ul>
@@ -1391,27 +1413,27 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   40. 佩龙-弗罗贝尼乌斯定理
+   43. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   41. 输入-输出模型
+   44. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   42. 就业的湖泊模型
+   45. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   43. 网络
+   46. 网络
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mobility.html">
-   44. 测量流动性
+   47. 测量流动性
   </a>
  </li>
 </ul>
@@ -1423,29 +1445,12 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   45. 多种商品的供需关系
+   48. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   46. 具有异质性的市场均衡
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  估计
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="simple_linear_regression.html">
-   47. 简单线性回归模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mle.html">
-   48. 最大似然估计
+   49. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -1457,17 +1462,17 @@ SymPy    dϕ/dR: 13.264274
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   49. 故障排除
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   50. 参考文献
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   51. 执行统计数据
+   52. 执行统计数据
   </a>
  </li>
 </ul>

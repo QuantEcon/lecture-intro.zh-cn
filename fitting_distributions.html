@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>20. 为数据拟合分布 &#8212; Python量化经济学入门</title>
+    <title>8. 为数据拟合分布 &#8212; Python量化经济学入门</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -133,8 +133,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="21. 大数定律与中心极限定理" href="lln_clt.html" />
-    <link rel="prev" title="19. 观测分布" href="observed_distributions.html" />
+    <link rel="next" title="9. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="prev" title="7. 观测分布" href="observed_distributions.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -218,17 +218,17 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">20.1. 概述</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">20.2. 矩方法</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-q">20.3. Q-Q 图</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">20.4. 科尔莫戈罗夫-斯米尔诺夫统计量</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-class">20.5. 选择参数类</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">20.6. 计数数据</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">20.7. 当正态分布失效时</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">20.7.1. 一个尾部更重的候选者</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#index-0">8.1. 概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.2. 矩方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-q">8.3. Q-Q 图</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.4. 科尔莫戈罗夫-斯米尔诺夫统计量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-class">8.5. 选择参数类</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">8.6. 计数数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.7. 当正态分布失效时</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.7.1. 一个尾部更重的候选者</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">20.8. 练习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">8.8. 练习</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -284,7 +284,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Sep 29, 2026
+                            Last changed: Oct 06, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -295,11 +295,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/009dfd4" class="changelog-hash">009dfd4</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">6 days ago</span>
-                                <span class="changelog-message">Delete ten dataset copies the lectures now read from data-lectures (#308)</span>
+                                <span class="changelog-time">8 minutes ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
                             </li>
                             
                         </ul>
@@ -315,9 +315,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="fitting-distributions">
-<span id="id1"></span><h1><span class="section-number">20. </span>为数据拟合分布<a class="headerlink" href="#fitting-distributions" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">8. </span>为数据拟合分布<a class="headerlink" href="#fitting-distributions" title="Link to this heading">#</a></h1>
 <section id="index-0">
-<span id="id2"></span><h2><span class="section-number">20.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h2><span class="section-number">8.1. </span>概述<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h2>
 <p>在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中，我们研究了一系列常见的概率分布。</p>
 <p>在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中，我们研究了观测数据。</p>
 <p>在本讲座中，我们将两者联系起来，探讨一个在应用工作中不断出现的问题：</p>
@@ -396,7 +396,7 @@ Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">20.2. </span>矩方法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.2. </span>矩方法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>假设我们已经确定了一个参数类，现在想选择其参数。</p>
 <p>一种简单而通用的策略是<strong>矩方法</strong>。</p>
 <p>如果该类别有 <span class="math notranslate nohighlight">\(k\)</span> 个参数，我们</p>
@@ -502,7 +502,7 @@ Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3
 <a class="reference internal image-reference" href="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png"><img alt="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png" src="_images/e79e9539eac0b04b4ad8fdce5e61078f3bfbe291ed2108754df6839628e6cbe5.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">Three fitted densities for house prices</span><a class="headerlink" href="#fig-price-densities" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Three fitted densities for house prices</span><a class="headerlink" href="#fig-price-densities" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -512,7 +512,7 @@ Requirement already satisfied: urllib3&lt;3,&gt;=1.26 in /home/runner/miniconda3
 <p>要在它们之间做出选择，我们需要比看一眼图形更精确的方法。</p>
 </section>
 <section id="q-q">
-<span id="qq-plots"></span><h2><span class="section-number">20.3. </span>Q-Q 图<a class="headerlink" href="#q-q" title="Link to this heading">#</a></h2>
+<span id="qq-plots"></span><h2><span class="section-number">8.3. </span>Q-Q 图<a class="headerlink" href="#q-q" title="Link to this heading">#</a></h2>
 <p><strong>Q-Q 图</strong>（分位数-分位数图的简称）通过将两个分布的分位数相互对照绘图来比较它们。</p>
 <p>要将样本与拟合分布进行比较，我们先对数据排序</p>
 <div class="math notranslate nohighlight">
@@ -575,7 +575,7 @@ F^{-1} \left( \frac{i - 0.5}{n} \right)
 <a class="reference internal image-reference" href="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png"><img alt="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png" src="_images/ae3ca743892f176820b046132463d940f6b9048ce13e045d9b89ce45d0047e52.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.2 </span><span class="caption-text">Female heights against a fitted normal</span><a class="headerlink" href="#fig-qq-heights" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.2 </span><span class="caption-text">Female heights against a fitted normal</span><a class="headerlink" href="#fig-qq-heights" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -595,7 +595,7 @@ F^{-1} \left( \frac{i - 0.5}{n} \right)
 <a class="reference internal image-reference" href="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png"><img alt="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png" src="_images/d0929ce52569a48ca4509c258da56eb451c6059c9891911b307770761f9b8070.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.3 </span><span class="caption-text">House prices against a fitted normal</span><a class="headerlink" href="#fig-qq-prices" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.3 </span><span class="caption-text">House prices against a fitted normal</span><a class="headerlink" href="#fig-qq-prices" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -623,7 +623,7 @@ F^{-1} \left( \frac{i - 0.5}{n} \right)
 <a class="reference internal image-reference" href="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png"><img alt="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png" src="_images/5be7d50efa1ed4ae9c7026e0024b9e700c8ad969a69a5cf2004cc22cea4e477d.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.4 </span><span class="caption-text">Log house prices against a normal</span><a class="headerlink" href="#fig-qq-log-prices" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.4 </span><span class="caption-text">Log house prices against a normal</span><a class="headerlink" href="#fig-qq-log-prices" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -636,7 +636,7 @@ F^{-1} \left( \frac{i - 0.5}{n} \right)
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">20.4. </span>科尔莫戈罗夫-斯米尔诺夫统计量<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.4. </span>科尔莫戈罗夫-斯米尔诺夫统计量<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>Q-Q 图很有信息量，但它们需要我们对图形做出判断。</p>
 <p>有时我们想要一个单一的数字来衡量数据与拟合分布之间的差距。</p>
 <p>一种自然的度量方法是，将我们在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中接触过的数据的 ECDF 与拟合分布的 CDF 进行比较。</p>
@@ -689,7 +689,7 @@ D = \max_x \, | F_n(x) - F(x) |
 <a class="reference internal image-reference" href="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png"><img alt="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png" src="_images/bc7d177eebaa602d541ed1e66b02cc50759cb7feeafc96b7e980df4c6ee88ff7.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.5 </span><span class="caption-text">Largest gap between ECDF and CDF</span><a class="headerlink" href="#fig-ks-gap" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.5 </span><span class="caption-text">Largest gap between ECDF and CDF</span><a class="headerlink" href="#fig-ks-gap" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -716,7 +716,7 @@ D = \max_x \, | F_n(x) - F(x) |
 </div>
 </section>
 <section id="choosing-class">
-<span id="id5"></span><h2><span class="section-number">20.5. </span>选择参数类<a class="headerlink" href="#choosing-class" title="Link to this heading">#</a></h2>
+<span id="id5"></span><h2><span class="section-number">8.5. </span>选择参数类<a class="headerlink" href="#choosing-class" title="Link to this heading">#</a></h2>
 <p>现在我们有了一种在候选类别之间做出选择的方法。</p>
 <p>对于每个类别，我们通过矩方法拟合参数，然后计算 <span class="math notranslate nohighlight">\(D\)</span>。</p>
 <p><span class="math notranslate nohighlight">\(D\)</span> 最小的类别就是其 CDF 最接近数据的那个。</p>
@@ -760,7 +760,7 @@ dtype: float64
 <a class="reference internal image-reference" href="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png"><img alt="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png" src="_images/b2a6f2f9576302bd8cb05affa896de692105500085ef2ac0544d87d9300d3a0a.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.6 </span><span class="caption-text">Fitted CDFs against the ECDF</span><a class="headerlink" href="#fig-price-cdfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.6 </span><span class="caption-text">Fitted CDFs against the ECDF</span><a class="headerlink" href="#fig-price-cdfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -776,7 +776,7 @@ dtype: float64
 <p>我们在下面进一步讨论这一点。</p>
 </section>
 <section id="id6">
-<h2><span class="section-number">20.6. </span>计数数据<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.6. </span>计数数据<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>到目前为止，我们的数据都是连续型的。</p>
 <p>矩方法同样适用于离散数据。</p>
 <p>考虑<strong>泊松</strong>分布，我们在 <a class="reference internal" href="prob_dist.html"><span class="doc">概率分布</span></a> 中将其作为固定时间间隔内事件数量的模型接触过。</p>
@@ -927,7 +927,7 @@ dtype: float64
 <a class="reference internal image-reference" href="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png"><img alt="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png" src="_images/cd01593fd594211564492bc310c622a09e8b8a87b8663bc6fa511e25cfdc66a1.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.7 </span><span class="caption-text">Goals per match and fitted Poisson</span><a class="headerlink" href="#fig-goals-poisson" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.7 </span><span class="caption-text">Goals per match and fitted Poisson</span><a class="headerlink" href="#fig-goals-poisson" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -937,7 +937,7 @@ dtype: float64
 <p>这些正是泊松分布产生所需要的条件。</p>
 </section>
 <section id="id7">
-<h2><span class="section-number">20.7. </span>当正态分布失效时<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.7. </span>当正态分布失效时<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>当我们在上面 <a class="reference internal" href="#choosing-class"><span class="std std-ref">比较各个类别</span></a> 时，我们列出了一系列候选类别，对每一个进行拟合，并保留 KS 距离最小的那个。</p>
 <p>这样的程序总能产生一个胜出者。</p>
 <p>但重要的是要记住，胜出者仍然可能是对数据的糟糕描述，因为它只是我们恰好尝试过的候选者中最好的一个。</p>
@@ -978,7 +978,7 @@ dtype: float64
 <a class="reference internal image-reference" href="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png"><img alt="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png" src="_images/1c3a0e5517842e0fa3c050d41a742aa36dd98733ac1c7319505ef4567e00ce2a.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.8 </span><span class="caption-text">Amazon returns against a fitted normal</span><a class="headerlink" href="#fig-qq-returns" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Amazon returns against a fitted normal</span><a class="headerlink" href="#fig-qq-returns" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1010,7 +1010,7 @@ dtype: float64
 <p>问题出在尾部，而尾部恰恰是资产收益率研究最关心的部分，因为它们包含着巨大的损失。</p>
 <p>这里的教训是，单一的汇总数字永远无法替代对数据本身的观察。</p>
 <section id="id8">
-<h3><span class="section-number">20.7.1. </span>一个尾部更重的候选者<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.7.1. </span>一个尾部更重的候选者<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>Q-Q 图不仅告诉我们正态分布失效了。</p>
 <p>它还告诉我们它<em>是如何</em>失效的：数据的尾部比拟合的正态分布更重。</p>
 <p>这指向了一个补救办法，即尝试一个尾部更重的类别。</p>
@@ -1058,7 +1058,7 @@ dtype: float64
 <a class="reference internal image-reference" href="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png"><img alt="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png" src="_images/8b1352a5018282ee775cc02841ea0d1814d660e9f3d4e54c206a09e37bef68f1.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20.9 </span><span class="caption-text">Amazon returns against a fitted t</span><a class="headerlink" href="#fig-qq-returns-t" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.9 </span><span class="caption-text">Amazon returns against a fitted t</span><a class="headerlink" href="#fig-qq-returns-t" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1090,7 +1090,7 @@ dtype: float64
 </section>
 </section>
 <section id="id9">
-<h2><span class="section-number">20.8. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.8. </span>练习<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>下一个数据集记录了 2000 年至 2024 年间日本周边地区发生的所有 5 级及以上地震，数据来源为
 <a class="reference external" href="https://earthquake.usgs.gov/earthquakes/search/">美国地质调查局</a>。</p>
 <div class="cell docutils container">
@@ -1175,7 +1175,7 @@ dtype: float64
 </div>
 <div class="exercise admonition" id="fit_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 20.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 8.1 </span></p>
 <section id="exercise-content">
 <p>地震常常被建模为以某个恒定速率随机且独立地发生。</p>
 <p>如果这是真的，那么连续两次地震之间的时间间隔应服从指数分布。</p>
@@ -1186,7 +1186,7 @@ dtype: float64
 </div>
 <div class="solution dropdown admonition" id="fitting_distributions-solution-1">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex1"> Exercise 20.1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex1"> Exercise 8.1</a></p>
 <section id="solution-content">
 <p>以下是一种解法。</p>
 <div class="cell docutils container">
@@ -1250,7 +1250,7 @@ dtype: float64
 </div>
 <div class="exercise admonition" id="fit_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 20.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 8.2 </span></p>
 <section id="exercise-content">
 <p>在 <a class="reference internal" href="observed_distributions.html"><span class="doc">观测分布</span></a> 中，我们发现日本的死亡年龄的样本偏度约为 <span class="math notranslate nohighlight">\(-1.6\)</span>。</p>
 <p>用矩方法为该数据拟合一个正态分布，并用 Q-Q 图展示其失效之处。</p>
@@ -1259,7 +1259,7 @@ dtype: float64
 </div>
 <div class="solution dropdown admonition" id="fitting_distributions-solution-3">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex2"> Exercise 20.2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#fit_ex2"> Exercise 8.2</a></p>
 <section id="solution-content">
 <p>以下是一种解法。</p>
 <div class="cell docutils container">
@@ -1375,89 +1375,8 @@ dtype: float64
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="french_rev.html">
-   5. 法国大革命期间的通货膨胀
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="inequality.html">
-   6. 收入与财富不平等
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  基础工具
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro_supply_demand.html">
-   7. 供给与需求导论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linear_equations.html">
-   8. 线性方程和矩阵代数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="complex_and_trig.html">
-   9. 复数和三角函数
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="geom_series.html">
-   10. 基础经济学中的几何级数
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：有限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="pv.html">
-   11. 现值
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cons_smooth.html">
-   12. 消费平滑
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="equalizing_difference.html">
-   13. 均衡差异模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_ree.html">
-   14. 货币主义价格水平理论
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cagan_adaptive.html">
-   15. 自适应预期下的货币主义价格水平理论
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  线性动态：无限视界
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="eigen_I.html">
-   16. 特征值和特征向量
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="greek_square.html">
-   17. 求解平方根
+   5. 收入与财富不平等
   </a>
  </li>
 </ul>
@@ -1469,37 +1388,115 @@ dtype: float64
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="prob_dist.html">
-   18. 概率分布
+   6. 概率分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observed_distributions.html">
-   19. 观测分布
+   7. 观测分布
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   20. 为数据拟合分布
+   8. 为数据拟合分布
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lln_clt.html">
-   21. 大数定律与中心极限定理
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="monte_carlo.html">
-   22. 蒙特卡罗方法与期权定价
+   9. 大数定律与中心极限定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heavy_tails.html">
-   23. 重尾分布
+   10. 重尾分布
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  估计
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple_linear_regression.html">
+   11. 简单线性回归模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="schelling.html">
-   24. 种族隔离
+  <a class="reference internal" href="mle.html">
+   12. 最大似然估计
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="wealth_tax.html">
+   13. 估算财富税收入
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  基础工具
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_supply_demand.html">
+   14. 供给与需求导论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_equations.html">
+   15. 线性方程和矩阵代数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="geom_series.html">
+   16. 基础经济学中的几何级数
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：有限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pv.html">
+   17. 现值
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="equalizing_difference.html">
+   18. 均衡差异模型
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_smooth.html">
+   19. 消费平滑
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  线性动态：无限视界
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="complex_and_trig.html">
+   20. 复数和三角函数
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eigen_I.html">
+   21. 特征值和特征向量
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="greek_square.html">
+   22. 求解平方根
   </a>
  </li>
 </ul>
@@ -1511,36 +1508,46 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="scalar_dynam.html">
-   25. 一维动力学
+   23. 一维动力学
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="solow.html">
-   26. 索洛-斯旺增长模型
+   24. 索洛-斯旺增长模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cobweb.html">
-   27. 蛛网模型
+   25. 蛛网模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="olg.html">
-   28. 世代交叠模型
+   26. 世代交叠模型
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="commod_price.html">
-   29. 商品价格
+  <a class="reference internal" href="schelling.html">
+   27. 种族隔离
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  货币政策与财政政策的相互作用
+  货币、通货膨胀与财政政策
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_ree.html">
+   28. 货币主义价格水平理论
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_adaptive.html">
+   29. 自适应预期下的货币主义价格水平理论
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="money_inflation.html">
    30. 通过货币资助的政府赤字和价格水平
@@ -1561,6 +1568,11 @@ dtype: float64
    33. 拉弗曲线与自适应预期
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="french_rev.html">
+   34. 法国大革命期间的通货膨胀
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1570,22 +1582,32 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ar1_processes.html">
-   34. AR(1) 过程
+   35. AR(1) 过程
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_I.html">
-   35. 马尔科夫链：基本概念
+   36. 马尔科夫链：基本概念
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_chains_II.html">
-   36. 马尔科夫链：不可约性与遍历性
+   37. 马尔科夫链：不可约性与遍历性
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="time_series_with_matrices.html">
-   37. 用矩阵代数表示的单变量时间序列
+   38. 用矩阵代数表示的单变量时间序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="monte_carlo.html">
+   39. 蒙特卡罗方法与期权定价
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commod_price.html">
+   40. 商品价格
   </a>
  </li>
 </ul>
@@ -1597,12 +1619,12 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lp_intro.html">
-   38. 线性规划
+   41. 线性规划
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="short_path.html">
-   39. 最短路径
+   42. 最短路径
   </a>
  </li>
 </ul>
@@ -1614,27 +1636,27 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="eigen_II.html">
-   40. 佩龙-弗罗贝尼乌斯定理
+   43. 佩龙-弗罗贝尼乌斯定理
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="input_output.html">
-   41. 输入-输出模型
+   44. 输入-输出模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lake_model.html">
-   42. 就业的湖泊模型
+   45. 就业的湖泊模型
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="networks.html">
-   43. 网络
+   46. 网络
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mobility.html">
-   44. 测量流动性
+   47. 测量流动性
   </a>
  </li>
 </ul>
@@ -1646,29 +1668,12 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_multiple_goods.html">
-   45. 多种商品的供需关系
+   48. 多种商品的供需关系
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="supply_demand_heterogeneity.html">
-   46. 具有异质性的市场均衡
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  估计
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="simple_linear_regression.html">
-   47. 简单线性回归模型
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mle.html">
-   48. 最大似然估计
+   49. 具有异质性的市场均衡
   </a>
  </li>
 </ul>
@@ -1680,17 +1685,17 @@ dtype: float64
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   49. 故障排除
+   50. 故障排除
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   50. 参考文献
+   51. 参考文献
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   51. 执行统计数据
+   52. 执行统计数据
   </a>
  </li>
 </ul>
