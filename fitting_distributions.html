@@ -80,10 +80,10 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=d33b6885fb389884ac791c8a9c6b6ea3b92d4477" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -133,7 +133,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="next" title="9. 大数定律与中心极限定理" href="lln_clt_intro.html" />
     <link rel="prev" title="7. 观测分布" href="observed_distributions.html" />
 
 <!-- Normal Meta Tags -->
@@ -284,7 +284,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Oct 06, 2026
+                            Last changed: Oct 09, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -295,11 +295,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/23df79d" class="changelog-hash">23df79d</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">8 minutes ago</span>
-                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
+                                <span class="changelog-time">2 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Rename mle to mle_intro so lecture names are unique across the published sites (#313)</span>
                             </li>
                             
                         </ul>
@@ -328,7 +328,7 @@
 <p>泊松分布族则是另一个参数类，由单一参数 <span class="math notranslate nohighlight">\(\lambda\)</span> 索引。</p>
 <p>其次，在选定一个类别之后，我们必须在其中选择使拟合尽可能接近的<strong>参数</strong>。</p>
 <p>本讲座主要讨论第一部分。</p>
-<p>对于第二部分，我们只使用一种技术，称为矩方法，更全面的处理留给 <a class="reference internal" href="mle.html"><span class="doc">最大似然估计</span></a>。</p>
+<p>对于第二部分，我们只使用一种技术，称为矩方法，更全面的处理留给 <a class="reference internal" href="mle_intro.html"><span class="doc">最大似然估计</span></a>。</p>
 <p>即便如此，我们还是从参数开始讲起，因为要评判一个类别，我们首先必须能够对其进行拟合。</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -349,7 +349,7 @@ Requirement already satisfied: lxml&gt;=4.9.0 in /home/runner/miniconda3/envs/qu
 Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (0.0.13)
 Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.4.6)
 Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (3.0.3)
-Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.5.2)
+Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.5.3)
 Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.9.4)
 Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (6.33.5)
 Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2026.5)
@@ -1083,7 +1083,7 @@ dtype: float64
 <p class="admonition-title">Note</p>
 <p>我们不应对拟合出的 <span class="math notranslate nohighlight">\(\nu\)</span> 值给予过多的重视。</p>
 <p>我们对它的估计来自样本峰度，这是一个四阶矩，而正是在尾部较重的情况下，高阶矩的估计才会变得不精确。</p>
-<p>改用最大似然法来拟合这个分布，正如我们在 <a class="reference internal" href="mle.html"><span class="doc">最大似然估计</span></a> 中所做的那样，会得到 <span class="math notranslate nohighlight">\(\nu \approx 3.6\)</span> 而不是 <span class="math notranslate nohighlight">\(5.8\)</span>，且 KS 距离会更小。</p>
+<p>改用最大似然法来拟合这个分布，正如我们在 <a class="reference internal" href="mle_intro.html"><span class="doc">最大似然估计</span></a> 中所做的那样，会得到 <span class="math notranslate nohighlight">\(\nu \approx 3.6\)</span> 而不是 <span class="math notranslate nohighlight">\(5.8\)</span>，且 KS 距离会更小。</p>
 <p>矩方法简单而通用，但它并不总是对数据的最佳利用方式。</p>
 </div>
 <p>具有重尾的分布，以及它们如何改变我们对风险的思考方式，是 <a class="reference internal" href="heavy_tails.html"><span class="doc">重尾分布</span></a> 的主题。</p>
@@ -1234,7 +1234,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6834/2771413300.py:1: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6768/2771413300.py:1: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
   monthly = times.dt.to_period(&#39;M&#39;).value_counts().sort_index()
 </pre></div>
 </div>
@@ -1402,7 +1402,7 @@ dtype: float64
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="lln_clt.html">
+  <a class="reference internal" href="lln_clt_intro.html">
    9. 大数定律与中心极限定理
   </a>
  </li>
@@ -1424,7 +1424,7 @@ dtype: float64
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mle.html">
+  <a class="reference internal" href="mle_intro.html">
    12. 最大似然估计
   </a>
  </li>
@@ -1645,7 +1645,7 @@ dtype: float64
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="lake_model.html">
+  <a class="reference internal" href="lake_model_intro.html">
    45. 就业的湖泊模型
   </a>
  </li>
@@ -1731,7 +1731,6 @@ dtype: float64
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="https://quantecon.github.io/lecture-intro.zh-cn/_notebooks/fitting_distributions.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
                     <!--

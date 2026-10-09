@@ -80,10 +80,10 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=d33b6885fb389884ac791c8a9c6b6ea3b92d4477" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -134,7 +134,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="11. 简单线性回归模型" href="simple_linear_regression.html" />
-    <link rel="prev" title="9. 大数定律与中心极限定理" href="lln_clt.html" />
+    <link rel="prev" title="9. 大数定律与中心极限定理" href="lln_clt_intro.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="托马斯·萨金特（Thomas J. Sargent）和约翰·斯塔胡斯基（John Stachurski）" />
@@ -311,7 +311,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Oct 06, 2026
+                            Last changed: Oct 09, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -322,11 +322,11 @@
                             
                             <li class="changelog-entry">
                                 
-                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/2f173d3" class="changelog-hash">2f173d3</a>
+                                <a href="https://github.com/QuantEcon/lecture-intro.zh-cn/commit/23df79d" class="changelog-hash">23df79d</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">8 minutes ago</span>
-                                <span class="changelog-message">🌐 [translation-sync] Add wealth_tax lecture: estimating wealth tax revenue (#309)</span>
+                                <span class="changelog-time">2 hours ago</span>
+                                <span class="changelog-message">🌐 [translation-sync] Rename mle to mle_intro so lecture names are unique across the published sites (#313)</span>
                             </li>
                             
                         </ul>
@@ -364,7 +364,7 @@ Requirement already satisfied: lxml&gt;=4.9.0 in /home/runner/miniconda3/envs/qu
 Requirement already satisfied: multitasking&gt;=0.0.7 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (0.0.13)
 Requirement already satisfied: numpy&gt;=1.16.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2.4.6)
 Requirement already satisfied: pandas&gt;=1.3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (3.0.3)
-Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.5.2)
+Requirement already satisfied: peewee&gt;=3.16.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.5.3)
 Requirement already satisfied: platformdirs&gt;=2.0.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (4.9.4)
 Requirement already satisfied: protobuf&gt;=3.19.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (6.33.5)
 Requirement already satisfied: pytz&gt;=2022.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from yfinance) (2026.5)
@@ -452,7 +452,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </pre></div>
 </div>
 <figure class="align-default" id="hist-obs">
-<a class="reference internal image-reference" href="_images/885f5ee2e5ed75fa6d4e3d81a92819a8279191f906255e6583bc3b8b20d22180.png"><img alt="_images/885f5ee2e5ed75fa6d4e3d81a92819a8279191f906255e6583bc3b8b20d22180.png" src="_images/885f5ee2e5ed75fa6d4e3d81a92819a8279191f906255e6583bc3b8b20d22180.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/1a197affca0dc3134389e32537fdb05661cff2d7a9e680d9da827aabe20f7232.png"><img alt="_images/1a197affca0dc3134389e32537fdb05661cff2d7a9e680d9da827aabe20f7232.png" src="_images/1a197affca0dc3134389e32537fdb05661cff2d7a9e680d9da827aabe20f7232.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 10.1 </span><span class="caption-text">观测值直方图</span><a class="headerlink" href="#hist-obs" title="Link to this image">#</a></p>
@@ -473,7 +473,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-5.037870748704369), np.float64(4.7527895022482785))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(-4.435849428227872), np.float64(4.689663187468822))
 </pre></div>
 </div>
 </div>
@@ -498,7 +498,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </pre></div>
 </div>
 <figure class="align-default" id="hist-obs2">
-<a class="reference internal image-reference" href="_images/d648a8bf5e036f59a14a5887f1cb87cf640c49e3eea72cad78fbf7eff8453110.png"><img alt="_images/d648a8bf5e036f59a14a5887f1cb87cf640c49e3eea72cad78fbf7eff8453110.png" src="_images/d648a8bf5e036f59a14a5887f1cb87cf640c49e3eea72cad78fbf7eff8453110.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/be6448ae0ceb81b01987b15052b3899b846d97cab73df10dcebf3e8a30f3157f.png"><img alt="_images/be6448ae0ceb81b01987b15052b3899b846d97cab73df10dcebf3e8a30f3157f.png" src="_images/be6448ae0ceb81b01987b15052b3899b846d97cab73df10dcebf3e8a30f3157f.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 10.2 </span><span class="caption-text">观测值的直方图</span><a class="headerlink" href="#hist-obs2" title="Link to this image">#</a></p>
@@ -652,7 +652,7 @@ f(x) = \frac{1}{\sqrt{2\pi}\sigma}
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="hist-normal-btc">
-<a class="reference internal image-reference" href="_images/c798ae1401025c7153183b8262f3290470ae56f1300f92aeb3fcdf8a855c4ca1.png"><img alt="_images/c798ae1401025c7153183b8262f3290470ae56f1300f92aeb3fcdf8a855c4ca1.png" src="_images/c798ae1401025c7153183b8262f3290470ae56f1300f92aeb3fcdf8a855c4ca1.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/28962e6314e3276f09a0a127fd4bc4b46609fbe83636458b4a570b510456ad8d.png"><img alt="_images/28962e6314e3276f09a0a127fd4bc4b46609fbe83636458b4a570b510456ad8d.png" src="_images/28962e6314e3276f09a0a127fd4bc4b46609fbe83636458b4a570b510456ad8d.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 10.5 </span><span class="caption-text">直方图（正常与比特币回报对比）</span><a class="headerlink" href="#hist-normal-btc" title="Link to this image">#</a></p>
@@ -1358,7 +1358,7 @@ G_P(x) = x^{- \alpha}
 <section id="id19">
 <h2><span class="section-number">10.4. </span>大数定律的失效<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
 <p>重尾分布的一个重要影响是样本平均值可能无法准确估计真实的总体均值。</p>
-<p>为了理解这一点，让我们回顾<a class="reference internal" href="lln_clt.html"><span class="doc">之前关于大数定律的讨论</span></a>，其中考虑了独立同分布的随机变量<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>，它们都服从同一分布<span class="math notranslate nohighlight">\(F\)</span>。</p>
+<p>为了理解这一点，让我们回顾<a class="reference internal" href="lln_clt_intro.html"><span class="doc">之前关于大数定律的讨论</span></a>，其中考虑了独立同分布的随机变量<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span>，它们都服从同一分布<span class="math notranslate nohighlight">\(F\)</span>。</p>
 <p>如果这些随机变量的绝对期望<span class="math notranslate nohighlight">\(\mathbb E |X_i|\)</span>是有限的，那么样本平均值<span class="math notranslate nohighlight">\(\bar X_n := \frac{1}{n} \sum_{i=1}^n X_i\)</span>满足</p>
 <div class="math notranslate nohighlight" id="equation-lln-as2">
 <span class="eqno">(10.3)<a class="headerlink" href="#equation-lln-as2" title="Link to this equation">#</a></span>\[\mathbb P \left\{ \bar X_n \to \mu \text{ as } n \to \infty \right\} = 1\]</div>
@@ -1870,7 +1870,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="lln_clt.html">
+  <a class="reference internal" href="lln_clt_intro.html">
    9. 大数定律与中心极限定理
   </a>
  </li>
@@ -1892,7 +1892,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mle.html">
+  <a class="reference internal" href="mle_intro.html">
    12. 最大似然估计
   </a>
  </li>
@@ -2113,7 +2113,7 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="lake_model.html">
+  <a class="reference internal" href="lake_model_intro.html">
    45. 就业的湖泊模型
   </a>
  </li>
@@ -2199,7 +2199,6 @@ r \int_0^{\bar x} x^{r-1} \mathbb P\{ X &gt; x \} dx
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="https://quantecon.github.io/lecture-intro.zh-cn/_notebooks/heavy_tails.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
                     <!--
