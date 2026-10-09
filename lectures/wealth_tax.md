@@ -45,7 +45,7 @@ translation:
 
 估计工作颇具挑战性，因为最富有的家庭在数据中的代表性不足。
 
-为了填补这一空白，我们使用帕累托分布来建模财富分布的上尾，并通过 {doc}`最大似然法 <mle>` 进行拟合。
+为了填补这一空白，我们使用帕累托分布来建模财富分布的上尾，并通过 {doc}`最大似然法 <mle_intro>` 进行拟合。
 
 我们将使用以下导入语句。
 
@@ -54,7 +54,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 ```
-
 
 ## 税收方案
 
@@ -100,7 +99,6 @@ def h(w, thresholds=thresholds, rate_increases=rate_increases):
 
 总收入是全国所有家庭的 $h(w)$ 之和。
 
-
 ## 调查估计值
 
 我们的数据来自美联储理事会运行的 2022 年 [消费者财务调查](https://www.federalreserve.gov/econres/scfindex.htm)（SCF）。
@@ -141,7 +139,6 @@ $$
 T_survey = np.sum(λ * h(w))
 print(f"survey estimate: ${T_survey / 1e9:.0f} billion per year")
 ```
-
 
 ## 缺失的富人
 
@@ -202,7 +199,6 @@ print(f"tax owed by the Forbes 400: ${forbes_tax / 1e9:.0f} billion per year")
 
 即使在调查确实包含极富有家庭的地方，其数量也非常少，因此调查对最高税档收入的估计仅依赖于少数几个观测值，具有很高的不确定性。
 
-
 ## 上尾的帕累托模型
 
 为了解决这些问题，我们需要一个财富分布上尾的模型，可以从调查观测到的尾部部分进行估计，然后推广到调查未能观测到的部分。
@@ -259,10 +255,9 @@ plt.show()
 
 因此，我们在阈值 $u = 1000$ 万美元以上拟合帕累托尾部，这也正是我们税收方案的起始点。
 
-
 ## 估计尾指数
 
-在 {doc}`mle` 中，我们发现，给定已知阈值 $u$ 以上的观测值 $x_1, \ldots, x_n$，尾指数的最大似然估计为
+在 {doc}`mle_intro` 中，我们发现，给定已知阈值 $u$ 以上的观测值 $x_1, \ldots, x_n$，尾指数的最大似然估计为
 
 $$
 \hat \alpha = \frac{n}{\sum_{i=1}^n \ln (x_i / u)}
@@ -276,7 +271,7 @@ $$
 \ell(\alpha) = \sum_{i: w_i > u} \lambda_i \ln f(w_i; \alpha)
 $$
 
-用这些权重重复 {doc}`mle` 中的计算，得到
+用这些权重重复 {doc}`mle_intro` 中的计算，得到
 
 $$
 \hat \alpha = \frac{\sum_{i: w_i > u} \lambda_i}
@@ -295,7 +290,6 @@ u = 10e6
 ```
 
 这与已发表的美国估计值相近，后者约为 1.5 {cite}`vermeulen2018fat`。
-
 
 ## 收入的帕累托估计
 
@@ -348,7 +342,6 @@ T_pareto = pareto_revenue(α_hat, u, N_u)
 print(f"Pareto estimate: ${T_pareto / 1e9:.0f} billion per year")
 ```
 
-
 ## 比较两种估计值
 
 帕累托估计值高于调查估计值。
@@ -386,7 +379,6 @@ table.loc['total'] = table.sum()
 随着我们向上移动，估计值出现分歧，而在最高税档中，帕累托估计值要大出好几倍。
 
 这正是调查数据稀疏并随后终止的地方，也正是我们对缺失家庭产生担忧的地方。
-
 
 ## 与福布斯 400 强的对照检验
 
@@ -444,7 +436,6 @@ plt.show()
 
 这一比较表明，如果说存在偏差的话，我们对收入的帕累托估计反而是保守的。
 
-
 ## α 有多重要？
 
 $\hat T_P$ 的公式中，分母包含 $\hat \alpha - 1$ 这一项。
@@ -480,7 +471,6 @@ plt.show()
 最后，我们所有的估计都是*机械式*的：它们假设家庭不会因税收而改变其行为。
 
 实际上，富裕家庭可能通过转移资产、改变资产估值方式或以其他方式规避税收来做出反应，而这些反应的大小正是政策辩论中的核心问题 {cite}`saez2019progressive`。
-
 
 ## 练习
 
