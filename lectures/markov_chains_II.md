@@ -196,7 +196,7 @@ mc.is_irreducible
 
 重要的是，这一结果对于任何 $\psi_0$ 都有效。
 
-该定理与{doc}`大数定律 <lln_clt>`相关。
+该定理与{doc}`大数定律 <lln_clt_intro>`相关。
 
 它告诉我们，在某些情况中，即使随机变量序列[不是独立同分布](iid_violation)，大数定律有时也成立。
 
@@ -605,4 +605,4 @@ for P in (P1, P2, P3):
 ```
 
 ```{solution-end}
-``` 
+```
