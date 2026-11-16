@@ -1,0 +1,27 @@
+name: State files
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  state-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: edition
+      - uses: actions/checkout@v7
+        with:
+          repository: QuantEcon/action-translation
+          ref: v0.33.0 # or a later release; v0.33.0 is the first with --require-state
+          path: action-translation
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build the translate CLI
+        working-directory: action-translation
+        run: npm ci && npm run build:cli
+      - name: Check the state files
+        run: node action-translation/dist/cli/index.js doctor -t edition --require-state
