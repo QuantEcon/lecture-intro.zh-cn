@@ -45,7 +45,7 @@ translation:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install --upgrade yfinance  
+!pip install yfinance  
 ```
 
 ```{code-cell} ipython3
