@@ -48,7 +48,7 @@ translation:
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install --upgrade yfinance wbgapi
+!pip install yfinance wbgapi
 ```
 
 我们使用以下的导入。
