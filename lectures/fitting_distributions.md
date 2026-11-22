@@ -720,7 +720,7 @@ gaps.mean(), gaps.std()
 我们可以通过统计每月的事件数直接看到这一点。
 
 ```{code-cell} ipython3
-monthly = times.dt.to_period('M').value_counts().sort_index()
+monthly = quakes.set_index(times).resample('MS').size()
 monthly.mean(), monthly.var()
 ```
 
