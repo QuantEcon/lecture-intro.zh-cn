@@ -58,7 +58,7 @@ mpl.font_manager.fontManager.addfont(FONTPATH)
 plt.rcParams['font.family'] = ['Source Han Serif SC']
 ```
 
-(lln_mr)=
+(lln_mr_intro)=
 ## 大数定律
 
 ```{index} single: Law of Large Numbers
