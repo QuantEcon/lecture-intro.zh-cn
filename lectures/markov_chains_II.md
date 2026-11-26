@@ -203,7 +203,7 @@ mc.is_irreducible
 (mc_eg1-2)=
 ### 示例：遍历性与失业
 
-回顾我们关于就业/失业模型的截面解释{ref}`之前讨论过 <mc_eg1-1>`。
+回顾我们关于就业/失业模型的截面解释{prf:ref}`之前讨论过 <cross-sectional-distributions>`。
 
 假设 $\alpha \in (0,1)$ 且 $\beta \in (0,1)$，因此不可约性成立。
 
